@@ -1,0 +1,99 @@
+{% extends "_form.njk" %}
+{% set title = "Add qualification" %}
+{% set formAction = "/application/eligibility-and-qualifications/other-qualifications" %}
+{% block fieldset %}
+  {% set internationalQualification %}
+    {{ appLocationAutocomplete({
+      label: {
+        text: "In which country did you gain this qualification?"
+      },
+      id: "qualification-country",
+      name: "qualification-country"
+    }) }}
+
+    {{ govukInput({
+      id: "qualification-naric",
+      name: "qualification-naric",
+      label: {
+        html: "Have you got a NARIC statement of comparability?"
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukInput({
+    label: {
+      text: "Type of qualification",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, BA, BSc, Masters, Phd, or other (please specify)"
+    },
+    id: "qualification-type",
+    name: "qualification-type"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Subject",
+      classes: "govuk-label--s"
+    },
+    id: "qualification-subject",
+    name: "qualification-subject"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied",
+      classes: "govuk-label--s"
+    },
+    id: "qualification-institution",
+    name: "qualification-institution"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: 'Grade'
+    },
+    id: "qualification-grade",
+    name: "qualification-grade"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded",
+      classes: "govuk-label--s"
+    },
+    id: "qualification-year",
+    name: "qualification-year",
+    classes: "govuk-input--width-4"
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this an international qualification?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "qualification-international",
+    name: "outside-eea",
+    items: [{
+      value: "yes",
+      text: "Yes",
+      conditional: {
+        html: internationalQualification
+      }
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+  <script type="text/javascript">
+    openregisterLocationPicker({
+      selectElement: document.getElementById('qualification-country'),
+      url: '/public/javascripts/location-autocomplete-graph.json'
+    })
+  </script>
+{% endblock %}

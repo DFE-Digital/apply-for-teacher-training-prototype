@@ -1,0 +1,37 @@
+{% extends "_form.njk" %}
+{% set title = "Explain gap in work history" %}
+{% set formAction = "/application/work-experience" %}
+{% block fieldset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Start of gap"
+      },
+      value: {
+        text: "05/2013"
+      }
+    },
+    {
+      key: {
+        text: "End of gap"
+      },
+      value: {
+        text: "11/2013"
+      }
+    }]
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Reason(s) for this gap in your work history",
+      classes: "govuk-label--s"
+    },
+    id: "work-gap-explaination",
+    name: "work-gap-explaination",
+    maxlength: 400
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "_content.njk" %}
+{% set title = "School experience and volunteering with children and young people" %}
+{% block primary %}
+  <p class="govuk-body">Use this section to enter any school experience or volunteering roles. Include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>school experience</li>
+    <li>one-off observations</li>
+    <li>volunteering with children in a school setting</li>
+    <li>volunteering with children outside school</li>
+  </ul>
+
+  {{ govukDetails({
+    summaryText: "I don’t have any school experience",
+    html: "You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://getintoteaching.education.gov.uk/school-experience\">Find out more</a>."
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukTable({
+    caption: "Your school experience and roles",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Dates",
+      classes: "govuk-!-width-one-quarter"
+    }, {
+      text: "Organisation"
+    }],
+    rows: [
+      [{
+        text: "09/1994 - 08/1995"
+      }, {
+        text: "Pathfield Special School, Barnstaple, North Devon"
+      }], [{
+        text: "09/1993 - 06/1994"
+      }, {
+        text: "Petroc College, Barnstaple"
+      }]
+    ]
+  }) }}
+
+  <p class="govuk-body">Start with your most recent activity or role, and work backwards. If you did more than one activity in the same period, list them both, one after the other.</p>
+
+  {{ govukButton({
+    text: "Add school experience",
+    classes: "govuk-button--secondary",
+    href: "/application/school-experience/add"
+  }) }}
+
+  <hr class="govuk-section-break">
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/references"
+  }) }}
+{% endblock %}

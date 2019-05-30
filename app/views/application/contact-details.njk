@@ -1,0 +1,55 @@
+{% extends "_form.njk" %}
+{% set title = "Contact details" %}
+{% set formAction = "/application/eligibility-and-qualifications" %}
+{% block fieldset %}
+  {{ govukInsetText({
+    text: "It’s important your contact details are correct throughout your application. Providers will use them to ask for more information and communicate their decision."
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Phone number",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For non-UK numbers, include the country code"
+    },
+    id: "phone-number",
+    name: "phone-number",
+    type: "tel"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Personal email address",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Don’t give us a work or university email address you might lose access to"
+    },
+    attributes: {
+      spellcheck: "false"
+    },
+    autocomplete: "email",
+    id: "email",
+    name: "email",
+    type: "email"
+  }) }}
+
+  {{ govukTextarea({
+    label: {
+      text: "What is your address?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to"
+    },
+    autocomplete: "street-address",
+    id: "address",
+    name: "address"
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

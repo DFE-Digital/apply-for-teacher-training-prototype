@@ -1,0 +1,80 @@
+{% extends "_form.njk" %}
+{% set title = "Personal details" %}
+{% set formAction = "/application/personal-details" %}
+{% block fieldset %}
+  {{ govukInput({
+    label: {
+      text: "Title",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "How would you like us to address you? For example, Mr, Mrs, Miss, Ms, Mx."
+    },
+    id: "title",
+    name: "title"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "First name(s)",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "given-name",
+    id: "first-name",
+    name: "first-name"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Name you prefer to be addressed by (optional)",
+      classes: "govuk-label--s"
+    },
+    id: "optional-name",
+    name: "optional-name"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Last name",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "family-name",
+    id: "last-name",
+    name: "last-name"
+  }) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "When is your date of birth?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 12 11 2007"
+    },
+    id: "date-of-birth",
+    namePrefix: "date-of-birth"
+  }) }}
+
+  {{ appLocationAutocomplete({
+    label: {
+      text: "What is your nationality?",
+      classes: "govuk-label--s"
+    },
+    id: "nationality",
+    name: "nationality"
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+
+  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+  <script type="text/javascript">
+    openregisterLocationPicker({
+      selectElement: document.getElementById('nationality'),
+      url: '/public/javascripts/location-autocomplete-graph.json'
+    })
+  </script>
+{% endblock %}

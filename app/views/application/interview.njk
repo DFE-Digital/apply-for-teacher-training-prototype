@@ -1,0 +1,40 @@
+{% extends "_form.njk" %}
+{% set title = "Interview" %}
+{% set formAction = "/application" %}
+{% block fieldset %}
+  <p class="govuk-body">Use this section to enter any information that the training provider should take into account when scheduling an interview with you.</p>
+  <p class="govuk-body">Include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>dates you are unavailable for interview</li>
+    <li>any disability, special need or other health or personal issue you feel is relevant</li>
+  </ul>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Is there anything this training provider should account for when planning your interview?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Include dates you are unavailable for interview and any disabilities, special needs or other health or personal issues you may feel are relevant."
+    },
+    id: "interview-notes",
+    name: "interview-notes",
+    maxlength: 150
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Is there anything else you would like to tell us about your application?",
+      classes: "govuk-label--s"
+    },
+    id: "interview-miscellaneous",
+    name: "interview-miscellaneous",
+    rows: 10,
+    maxlength: 600
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

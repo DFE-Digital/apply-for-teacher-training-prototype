@@ -1,0 +1,68 @@
+{% extends "_form.njk" %}
+{% set title = "Add school experience" %}
+{% set formAction = "/application/school-experience" %}
+{% block fieldset %}
+  {{ govukInput({
+    label: {
+      text: "Your role",
+      classes: "govuk-label--s"
+    },
+    id: "school-experience-role",
+    name: "school-experience-role"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Organisation where you gained experience or volunteered",
+      classes: "govuk-label--s"
+    },
+    id: "school-experience-org",
+    name: "school-experience-org"
+  }) }}
+
+  {{ govukDateInput({
+    id: "school-experience-start",
+    namePrefix: "school-experience-start",
+    fieldset: {
+      legend: {
+        text: "Start date",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2018"
+    },
+    items: [{
+      name: "month",
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukDateInput({
+    id: "school-experience-end",
+    namePrefix: "school-experience-end",
+    fieldset: {
+      legend: {
+        text: "End date (leave blank if this is your current role)",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2019"
+    },
+    items: [{
+      name: "month",
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Add experience"
+  }) }}
+{% endblock %}

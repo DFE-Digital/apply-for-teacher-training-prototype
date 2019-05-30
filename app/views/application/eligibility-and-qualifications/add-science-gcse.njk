@@ -1,0 +1,103 @@
+{% extends "_form.njk" %}
+{% set title = "Add science GCSE or equivalent" %}
+{% set formAction = "/application/eligibility-and-qualifications" %}
+{% block fieldset %}
+
+{% set internationalQualification %}
+  {{ appLocationAutocomplete({
+    label: {
+      text: "In which country did you gain this qualification?"
+    },
+    id: "science-gcse-country",
+    name: "science-gcse-country"
+  }) }}
+
+  {{ govukInput({
+    id: "science-gcse-naric",
+    name: "science-gcse-naric",
+    label: {
+      html: "Have you got a NARIC statement of comparability?"
+    }
+  }) }}
+{% endset -%}
+
+  {{ govukInsetText({
+    text: "If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section."
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Type of qualification",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "GCSE, O level, or other (please specify)"
+    },
+    id: "science-gcse-type",
+    name: "science-gcse-type"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Grade",
+      classes: "govuk-label--s"
+    },
+    id: "science-gcse-grade",
+    name: "science-gcse-grade"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded",
+      classes: "govuk-label--s"
+    },
+    id: "science-gcse-year",
+    name: "science-gcse-year",
+    classes: "govuk-input--width-4"
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this an international qualification?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "science-gcse-international",
+    name: "science-gcse-international",
+    items: [{
+      value: "yes",
+      text: "Yes",
+      conditional: {
+        html: internationalQualification
+      }
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "I don’t have this qualification yet",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Please explain how you plan to meet this requirement in time for the start of your course."
+    },
+    id: "science-gcse-missing",
+    name: "science-gcse-missing"
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+
+  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+  <script type="text/javascript">
+    openregisterLocationPicker({
+      selectElement: document.getElementById('degree-international-country'),
+      url: '/public/javascripts/location-autocomplete-graph.json'
+    })
+  </script>
+{% endblock %}

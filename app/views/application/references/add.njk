@@ -1,0 +1,64 @@
+{% extends "_form.njk" %}
+{% set title = "Add referee "%}
+{% set formAction = "/application/references" %}
+{% block fieldset %}
+  {{ govukInput({
+    label: {
+      text: "Full name",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "name",
+    id: "referee-name",
+    name: "referee-name"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Referee’s relationship to you",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, academic tutor, manager, other (please specify)"
+    },
+    id: "referee-relationship",
+    name: "referee-relationship"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--s"
+    },
+    id: "referee-email",
+    name: "referee-email",
+    type: "email"
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Type of referee",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "referee-type",
+    name: "referee-type",
+    items: [{
+      value: "academic",
+      text: "Academic"
+    }, {
+      value: "character",
+      text: "Character"
+    }, {
+      value: "professional",
+      text: "Professional"
+    }, {
+      value: "school-based",
+      text: "School senior leadership"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Add referee"
+  }) }}
+{% endblock %}

@@ -1,0 +1,8 @@
+{
+  "paths": {
+    "public": "public/",
+    "assets" : "app/assets/",
+    "nodeModules": "node_modules/",
+    "lib": "lib/"
+  }
+}

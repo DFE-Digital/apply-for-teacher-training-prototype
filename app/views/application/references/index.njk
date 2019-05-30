@@ -1,0 +1,86 @@
+{% extends "_content.njk" %}
+{% set title = "References" %}
+{% block primary %}
+  <p class="govuk-body">Good references are advocates for your:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>character</li>
+    <li>teaching vocation and potential</li>
+    <li>fitness to work with children</li>
+    <li>academic abilities (especially if your degree is ‘pending’)</li>
+    <li>reliability and professionalism</li>
+  </ul>
+
+  <h2 class="govuk-heading-m">Tips</h2>
+  <p class="govuk-body">You should aim to give contact details for 2 references. Training providers look for a combination of academic (from university) and professional (from work) referees.</p>
+  <p class="govuk-body">Particularly if you graduated less than five years ago, it will strengthen your application if one of your referees comes from university. If you are not a recent graduate, both your referees can come from work.</p>
+  <p class="govuk-body">Suitable referees include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>your university tutor or supervisor</li>
+    <li>your current line manager at work</li>
+    <li>previous employers</li>
+    <li>if you work, volunteer or have gained experience in a school, a senior leader at that school</li>
+  </ul>
+  <p class="govuk-body">Referees should not be family members, partners or friends.</p>
+  <p class="govuk-body">Contact your referees in advance to check they are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>happy to give you a reference</li>
+    <li>available to do so within a reasonable timeframe</li>
+    <li>comfortable submitting a reference online</li>
+  </ul>
+  <p class="govuk-body">Your referees will be given a short questionnaire about you and a free text box to describe you in their own words. They will not be given access to your completed application form.</p>
+
+{% set characterReference %}
+  <p class="govuk-body">You can supply a character reference if you haven’t got appropriate professional or academic references. Bear in mind this may weaken your application.</p>
+  <p class="govuk-body">Suitable character referees include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>your local doctor</li>
+    <li>your local priest, or other faith leader</li>
+    <li>your family solicitor</li>
+    <li>your former headteacher</li>
+    <li>a former mentor or probation officer</li>
+    <li>a responsible member of your community who knows you well</li>
+  </ul>
+{% endset %}
+  {{ govukDetails({
+    summaryText: "I haven’t got a professional or academic reference",
+    html: characterReference
+  }) }}
+
+  <h2 class="govuk-heading-m">What happens next</h2>
+  <p class="govuk-body">Once DfE has submitted your completed application form to your training provider, we’ll contact your referees to ask for their references.</p>
+  <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukTable({
+    caption: "Your referees",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Name",
+      classes: "govuk-!-width-one-quarter"
+    }, {
+      text: "Email address"
+    }],
+    rows: [
+      [{
+        text: "David Smith"
+      }, {
+        text: "david.smith.2@gmp.police.uk"
+      }]
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Add referee",
+    classes: "govuk-button--secondary",
+    href: "/application/references/add"
+  }) }}
+
+  <hr class="govuk-section-break">
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/motivation"
+  }) }}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "_layout.njk" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <form class="govuk-grid-column-two-thirds" action="{{ formAction | default('#') }}" method="post">
+  {% block form %}
+    {% call govukFieldset({
+      legend: {
+        text: title,
+        classes: "govuk-fieldset__legend--xl",
+        isPageHeading: true
+      }
+    }) %}
+      {% block fieldset %}
+      {% endblock %}
+    {% endcall %}
+  {% endblock %}
+  </form>
+  {% if hasSecondary %}
+  <div class="govuk-grid-column-one-third">
+{% block secondary %}
+{% endblock %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

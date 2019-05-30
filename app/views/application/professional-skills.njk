@@ -1,0 +1,104 @@
+{% extends "_form.njk" %}
+{% set title = "Professional skills" %}
+{% set formAction = "/application/work-experience" %}
+{% block fieldset %}
+  <p class="govuk-body">You will need to sit tests in literacy and numeracy before you start your teacher training. If you’ve yet to pass your skills tests, please bear in mind that:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>there is no limit to the number of times you can sit your tests, and the first 3 are free</li>
+    <li>test centres get busy, so book in advance</li>
+    <li>you can only sit the test once you’ve submitted your application, so choose a date when you’re confident you’ll have done so</li>
+  </ul>
+  <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/how-to-apply/passing-the-skills-tests">Learn more about booking and preparing for professional skills tests</a></p>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {% set skillsTestDetails %}
+  {{ govukInput({
+    label: {
+      text: "Please enter your professional skills tests candidate number"
+    },
+    id: "skillsTestNumber",
+    name: "skillsTestNumber"
+  }) }}
+
+  {{ govukDateInput({
+    id: "date-of-literacy-test",
+    namePrefix: "date-of-literacy-test",
+    fieldset: {
+      legend: {
+        text: "Date of literacy test"
+      }
+    },
+    hint: {
+      text: "For example, 28 05 2019"
+    }
+  }) }}
+
+  {{ govukDateInput({
+    id: "date-of-numeracy-test",
+    namePrefix: "date-of-numeracy-test",
+    fieldset: {
+      legend: {
+        text: "Date of numeracy test"
+      }
+    },
+    hint: {
+      text: "For example, 28 05 2019"
+    }
+  }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you passed your professional skills test?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "skills-test",
+    name: "skills-test",
+    items: [{
+      value: "yes",
+      text: "Yes",
+      conditional: {
+        html: skillsTestDetails
+      }
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {% set firstLanguage %}
+  {{ govukTextarea({
+    label: {
+      text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
+    },
+    id: "first-language",
+    name: "first-language"
+  }) }}
+  {% endset -%}
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is English your first language?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "languages",
+    name: "languages",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: firstLanguage
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

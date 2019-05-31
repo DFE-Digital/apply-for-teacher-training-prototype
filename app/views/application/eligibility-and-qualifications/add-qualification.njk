@@ -2,7 +2,7 @@
 
 {% set title = "Add qualification" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/application/eligibility-and-qualifications/other-qualifications" %}
+{% set formAction = "/application/eligibility-and-qualifications/" %}
 
 {% block primary %}
 {% set internationalQualification %}
@@ -84,6 +84,17 @@
       value: "no",
       text: "No"
     }]
+  }) }}
+
+  {{ govukInput({
+    id: "qualification-completed",
+    name: "qualification-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Add qualification"
   }) }}
 {% endblock %}
 {% block pageScripts %}

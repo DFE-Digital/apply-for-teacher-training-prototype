@@ -58,6 +58,7 @@
     <li>a responsible member of your community who knows you well</li>
   </ul>
 {% endset %}
+
   {{ govukDetails({
     summaryText: "I haven’t got a professional or academic reference",
     html: characterReference
@@ -68,6 +69,7 @@
   <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+{% if data['referee-completed'] %}
   {{ govukTable({
     caption: "Your referees",
     captionClasses: "govuk-heading-m",
@@ -81,15 +83,20 @@
     }],
     rows: [
       [{
-        text: "David Smith"
+        text: data['referee-name']
       }, {
-        text: "david.smith.2@gmp.police.uk"
+        text: data['referee-email']
       }]
     ]
   }) }}
+  {% set buttonText = "Add secondary referee" %}
+{% else %}
+  <h2 class="govuk-heading-m">Your referees</h2>
+  {% set buttonText = "Add principle referee" %}
+{% endif %}
 
   {{ govukButton({
-    text: "Add referee",
+    text: buttonText,
     classes: "govuk-button--secondary",
     href: "/application/references/add"
   }) }}

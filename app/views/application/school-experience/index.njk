@@ -33,6 +33,7 @@
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+{% if data['school-experience-completed'] %}
   {{ govukTable({
     caption: "Your school experience and roles",
     captionClasses: "govuk-heading-m",
@@ -42,25 +43,29 @@
       text: "Dates",
       classes: "govuk-!-width-one-quarter"
     }, {
+      text: "Role"
+    }, {
       text: "Organisation"
     }],
     rows: [
       [{
-        text: "09/1994 - 08/1995"
+        text: data['school-experience-start-month'] + '/' + data['school-experience-start-year'] + ' - ' + data['school-experience-end-month'] + '/' + data['school-experience-end-year']
       }, {
-        text: "Pathfield Special School, Barnstaple, North Devon"
-      }], [{
-        text: "09/1993 - 06/1994"
+        text: data['school-experience-role']
       }, {
-        text: "Petroc College, Barnstaple"
+        text: data['school-experience-org']
       }]
     ]
   }) }}
-
+  {% set buttonText = "Add another school experience" %}
+{% else %}
+  <h2 class="govuk-heading-m">Your school experience and roles</h2>
   <p class="govuk-body">Start with your most recent activity or role, and work backwards. If you did more than one activity in the same period, list them both, one after the other.</p>
+  {% set buttonText = "Add school experience" %}
+{% endif %}
 
   {{ govukButton({
-    text: "Add school experience",
+    text: buttonText,
     classes: "govuk-button--secondary",
     href: "/application/school-experience/add"
   }) }}
@@ -75,6 +80,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

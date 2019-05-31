@@ -53,11 +53,44 @@
     summaryText: "I studied for my degree(s) and/or other qualifications outside the UK",
     html: internationalQualification
   }) }}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+{% if data['degree-completed'] %}
+  {{ govukTable({
+    caption: "Degree(s)",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Qualification"
+    }, {
+      text: "Subject"
+    }, {
+      text: "Grade"
+    }, {
+      text: "Year awarded"
+    }],
+    rows: [
+      [{
+        text: data['degree-type']
+      }, {
+        text: data['degree-subject']
+      }, {
+        text: data['degree-class']
+      }, {
+        text: data['degree-year']
+      }]
+    ]
+  }) }}
+  {% set buttonText = "Add another degree" %}
+{% else %}
   <h2 class="govuk-heading-m">Degree(s)</h2>
   <p class="govuk-body">Individual training providers set specific requirements for their courses. Contact your chosen training provider to check your degree meets the standard they’ve set for your course.</p>
+  {% set buttonText = "Add a degree" %}
+{% endif %}
+
   {{ govukButton({
-    text: "Add degree",
+    text: buttonText,
     classes: "govuk-button--secondary",
     href: "/application/eligibility-and-qualifications/add-degree"
   }) }}
@@ -81,6 +114,7 @@
     href: "/application/eligibility-and-qualifications/add-science-gcse"
   }) }}
 
+{% if data['qualification-completed'] %}
   {{ govukTable({
     caption: "Other qualifications",
     captionClasses: "govuk-heading-m",
@@ -97,23 +131,27 @@
     }],
     rows: [
       [{
-        text: "O Level"
+        text: data['qualification-type']
       }, {
-        text: "English Literature"
+        text: data['qualification-subject']
       }, {
-        text: "B"
+        text: data['qualification-grade']
       }, {
-        text: "1986"
+        text: data['qualification-year']
       }]
     ]
   }) }}
-
+  {% set buttonText = "Add another qualification" %}
+{% else %}
+  <h2 class="govuk-heading-m">Other relevant qualifications</h2>
   <p class="govuk-body">Enter your remaining GCSEs, A levels, and any practical, vocational or arts-based qualifications. Providers use this information to assess your academic ability and the broader contribution you can make to a school.</p>
+  {% set buttonText = "Add a qualification" %}
+{% endif %}
 
   {{ govukButton({
-    text: "Add qualification",
+    text: buttonText,
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-other-qualification"
+    href: "/application/eligibility-and-qualifications/add-qualification"
   }) }}
 
   <hr class="govuk-section-break">

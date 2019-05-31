@@ -3,6 +3,20 @@
 {% set title = "Professional skills" %}
 {% set formAction = "/application/" %}
 
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
 {% block primary %}
   <p class="govuk-body">You will need to sit tests in literacy and numeracy before you start your teacher training. If you’ve yet to pass your skills tests, please bear in mind that:</p>
   <ul class="govuk-list govuk-list--bullet">

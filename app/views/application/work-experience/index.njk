@@ -44,7 +44,9 @@
     summaryText: "I have less than 5 years of work history",
     text: "If you are a recent graduate, tell us about your employment since leaving university."
   }) }}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+{% if data['work-experience-completed'] %}
   {{ govukTable({
     caption: "Your work history",
     captionClasses: "govuk-heading-m",
@@ -60,36 +62,28 @@
     }],
     rows: [
       [{
-        text: "05/2018 - Present"
-      }, {
-        text: "Whole School Literacy Specialist"
-      }, {
-        text: "Cheadle Hulme High School"
-      }], [{
-        text: "11/2013 - 05/2018"
-      }, {
-        text: "Teaching assistant"
-      }, {
-        text: "The Fallibroome Academy"
-      }], [{
-        text: "05/2013 - 11/2013"
+        text: data['work-experience-end-month'] + '/' + data['work-experience-end-year'] + ' - Present'
       }, {
         html: "<a href=\"/application/work-experience/explain-gap\">Explain gap</a>",
         colspan: 2
       }], [{
-        text: "09/2007 - 05/2013"
+        text: data['work-experience-start-month'] + '/' + data['work-experience-start-year'] + ' - ' + data['work-experience-end-month'] + '/' + data['work-experience-end-year']
       }, {
-        text: "Teacher of English as a Foreign Language"
+        text: data['work-experience-role']
       }, {
-        text: "Vardaki School of English, Crete"
+        text: data['work-experience-org']
       }]
     ]
   }) }}
-
+  {% set buttonText = "Add another job" %}
+{% else %}
+  <h2 class="govuk-heading-m">Your work history</h2>
   <p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
+  {% set buttonText = "Add a job" %}
+{% endif %}
 
   {{ govukButton({
-    text: "Add a job",
+    text: buttonText,
     classes: "govuk-button--secondary",
     href: "/application/work-experience/add"
   }) }}
@@ -104,6 +98,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

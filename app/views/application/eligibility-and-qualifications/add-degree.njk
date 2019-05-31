@@ -125,6 +125,13 @@
     }]
   }) }}
 
+  {{ govukInput({
+    id: "degree-completed",
+    name: "degree-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
     text: "Add degree"
   }) }}

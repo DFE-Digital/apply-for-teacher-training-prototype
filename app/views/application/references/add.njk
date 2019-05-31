@@ -61,6 +61,13 @@
     }]
   }) }}
 
+  {{ govukInput({
+    id: "referee-completed",
+    name: "referee-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
     text: "Add referee"
   }) }}

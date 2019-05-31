@@ -10,8 +10,8 @@
       text: "Job title",
       classes: "govuk-label--s"
     },
-    id: "work-experience-title",
-    name: "work-experience-title"
+    id: "work-experience-role",
+    name: "work-experience-role"
   }) }}
 
   {{ govukInput({
@@ -92,6 +92,13 @@
       value: "no",
       text: "No"
     }]
+  }) }}
+
+  {{ govukInput({
+    id: "work-experience-completed",
+    name: "work-experience-completed",
+    type: "hidden",
+    value: true
   }) }}
 
   {{ govukButton({

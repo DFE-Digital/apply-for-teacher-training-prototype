@@ -72,17 +72,6 @@ nunjucksConfig.express = app
 
 var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
-nunjucksAppEnv.addGlobal('markdown', function (text) {
-  if (text === undefined) {
-    return ''
-  }
-
-  // Ignore leading indentation
-  var t = text.replace(/^\s+/gm, '\n')
-
-  return '<div class="markdown">' + marked(t) + '</div>'
-})
-
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
 
@@ -120,6 +109,8 @@ app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
+app.locals.countries = require('./app/data/countries')
+app.locals.nationalities = require('./app/data/nationalities')
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')

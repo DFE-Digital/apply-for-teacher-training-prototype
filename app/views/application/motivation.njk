@@ -1,7 +1,9 @@
 {% extends "_form.njk" %}
+
 {% set title = "Motivation" %}
-{% set formAction = "/application/interview" %}
-{% block fieldset %}
+{% set formAction = "/application/" %}
+
+{% block primary %}
   <p class="govuk-body">Use this section of the application form to:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>convince providers of your passion for teaching</li>
@@ -22,6 +24,13 @@
     name: "motivation",
     rows: 20,
     maxlength: 600
+  }) }}
+
+  {{ govukInput({
+    id: "motivation-completed",
+    name: "motivation-completed",
+    type: "hidden",
+    value: true
   }) }}
 
   {{ govukButton({

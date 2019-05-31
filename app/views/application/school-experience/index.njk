@@ -1,5 +1,8 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
+
 {% set title = "School experience and volunteering with children and young people" %}
+{% set formAction = "/application/" %}
+
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
     items: [{
@@ -13,6 +16,7 @@
     }]
   }) }}
 {% endblock %}
+
 {% block primary %}
   <p class="govuk-body">Use this section to enter any school experience or volunteering roles. Include:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -63,8 +67,14 @@
 
   <hr class="govuk-section-break">
 
+  {{ govukInput({
+    id: "school-experience-completed",
+    name: "school-experience-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: "/application/references"
+    text: "Save and continue"
   }) }}
 {% endblock %}

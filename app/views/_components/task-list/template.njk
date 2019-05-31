@@ -1,0 +1,10 @@
+<ol class="app-task-list">
+{% for item in params.items %}
+  <li class="app-task-list__item">
+    <a class="app-task-list__task-name" href="{{ item.href }}" aria-describedby="{{ item.id }}-completed">{{ item.text | safe }}</a>
+    {% if item.completed %}
+    <strong class="govuk-tag app-task-list__task-completed" id="{{ item.id }}-completed">Completed</strong>
+    {% endif %}
+  </li>
+{% endfor %}
+</ol>

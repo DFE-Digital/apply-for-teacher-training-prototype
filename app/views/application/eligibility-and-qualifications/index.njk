@@ -1,5 +1,8 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
+
 {% set title = "Eligibility and qualifications" %}
+{% set formAction = "/application/" %}
+
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
     items: [{
@@ -13,21 +16,24 @@
     }]
   }) }}
 {% endblock %}
+
 {% set missingGCSE %}
-<p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
-<ul class="govuk-list govuk-list--bullet">
-  <li>contact your training provider for advice about getting the right qualification in time for your course</li>
-  <li>ask if your provider accepts ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE), and where they recommend you sit the test</li>
-</ul>
-<p class="govuk-body">You can also visit the <a href="https://nationalcareersservice.direct.gov.uk/course-directory/home">National Careers Service</a> to find GCSE courses for people who are over 16 and have left school.</p>
+  <p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>contact your training provider for advice about getting the right qualification in time for your course</li>
+    <li>ask if your provider accepts ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE), and where they recommend you sit the test</li>
+  </ul>
+  <p class="govuk-body">You can also visit the <a href="https://nationalcareersservice.direct.gov.uk/course-directory/home">National Careers Service</a> to find GCSE courses for people who are over 16 and have left school.</p>
 {% endset %}
+
 {% set internationalQualification %}
-<p class="govuk-body">If you studied for your degree or other qualifications overseas, you will need to check that they are valid in the UK.</p>
-<p class="govuk-body">As a first step, you should register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your international qualifications make you eligible for teacher training and how they correspond to English exam grades.</p>
-<h3 class="govuk-heading-s">Check with your provider</h3>
-<p class="govuk-body">You should also contact your chosen training provider to check their policy on international qualifications. They may ask you to sit ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE) and recommend an equivalency testing centre.</p>
-<p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your qualifications, you’ll have the opportunity to tell us below.</p>
+  <p class="govuk-body">If you studied for your degree or other qualifications overseas, you will need to check that they are valid in the UK.</p>
+  <p class="govuk-body">As a first step, you should register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your international qualifications make you eligible for teacher training and how they correspond to English exam grades.</p>
+  <h3 class="govuk-heading-s">Check with your provider</h3>
+  <p class="govuk-body">You should also contact your chosen training provider to check their policy on international qualifications. They may ask you to sit ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE) and recommend an equivalency testing centre.</p>
+  <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your qualifications, you’ll have the opportunity to tell us below.</p>
 {% endset %}
+
 {% block primary %}
   <p class="govuk-body">To be eligible for teacher training, you need a:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -112,8 +118,14 @@
 
   <hr class="govuk-section-break">
 
+  {{ govukInput({
+    id: "eligibility-and-qualifications-completed",
+    name: "eligibility-and-qualifications-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: "/application/subject-knowledge"
+    text: "Continue"
   }) }}
 {% endblock %}

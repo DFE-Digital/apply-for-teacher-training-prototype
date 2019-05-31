@@ -1,9 +1,10 @@
 {% extends "_form.njk" %}
+
 {% set title = "Add a degree" %}
 {% set parent = "Eligibility and qualifications" %}
 {% set formAction = "/application/eligibility-and-qualifications" %}
-{% block fieldset %}
 
+{% block primary %}
 {% set validateEquivalence %}
   {{ govukInput({
     label: {

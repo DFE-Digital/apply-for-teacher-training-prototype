@@ -1,7 +1,9 @@
 {% extends "_form.njk" %}
+
 {% set title = "Contact details" %}
-{% set formAction = "/application/eligibility-and-qualifications" %}
-{% block fieldset %}
+{% set formAction = "/application/" %}
+
+{% block primary %}
   {{ govukInsetText({
     text: "It’s important your contact details are correct throughout your application. Providers will use them to ask for more information and communicate their decision."
   }) }}
@@ -14,6 +16,7 @@
     hint: {
       text: "For non-UK numbers, include the country code"
     },
+    autocomplete: "tel",
     id: "phone-number",
     name: "phone-number",
     type: "tel"
@@ -50,7 +53,14 @@
     name: "address"
   }) }}
 
+  {{ govukInput({
+    id: "contact-details-completed",
+    name: "contact-details-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
-    text: "Save and continue"
+    text: "Save contact details"
   }) }}
 {% endblock %}

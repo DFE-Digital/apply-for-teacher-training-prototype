@@ -1,7 +1,9 @@
 {% extends "_form.njk" %}
+
 {% set title = "Create an account" %}
 {% set formAction = "/application" %}
-{% block fieldset %}
+
+{% block primary %}
   <p class="govuk-body">Create an account to use this service. You’ll then be able to save and return to your applications as often as you need to.</p>
 
   {{ govukInput({

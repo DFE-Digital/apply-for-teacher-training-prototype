@@ -1,7 +1,9 @@
 {% extends "_form.njk" %}
+
 {% set title = "Subject knowledge" %}
-{% set formAction = "/application/professional-skills" %}
-{% block fieldset %}
+{% set formAction = "/application/" %}
+
+{% block primary %}
   <p class="govuk-body">Use this section to give details about the knowledge and passion you bring to the subject(s) you’d like to teach. Providers look for evidence of both interest and understanding.</p>
   <p class="govuk-body">Check your provider’s course listing page on Find postgraduate teacher training for specific subject knowledge requirements.</p>
   <p class="govuk-body">Evidence can include:</p>
@@ -52,6 +54,13 @@
     name: "subject-knowledge-additional",
     maxlength: 600,
     rows: 12
+  }) }}
+
+  {{ govukInput({
+    id: "subject-knowledge-completed",
+    name: "subject-knowledge-completed",
+    type: "hidden",
+    value: true
   }) }}
 
   {{ govukButton({

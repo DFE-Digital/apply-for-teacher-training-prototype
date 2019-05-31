@@ -1,7 +1,9 @@
 {% extends "_form.njk" %}
+
 {% set title = "Professional skills" %}
-{% set formAction = "/application/work-experience" %}
-{% block fieldset %}
+{% set formAction = "/application/" %}
+
+{% block primary %}
   <p class="govuk-body">You will need to sit tests in literacy and numeracy before you start your teacher training. If you’ve yet to pass your skills tests, please bear in mind that:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>there is no limit to the number of times you can sit your tests, and the first 3 are free</li>
@@ -96,6 +98,13 @@
         html: firstLanguage
       }
     }]
+  }) }}
+
+  {{ govukInput({
+    id: "professional-skills-completed",
+    name: "professional-skills-completed",
+    type: "hidden",
+    value: true
   }) }}
 
   {{ govukButton({

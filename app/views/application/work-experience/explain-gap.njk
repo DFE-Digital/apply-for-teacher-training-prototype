@@ -1,8 +1,10 @@
 {% extends "_form.njk" %}
+
 {% set title = "Explain gap in work history" %}
 {% set parent = "Work history and relevant experience" %}
 {% set formAction = "/application/work-experience" %}
-{% block fieldset %}
+
+{% block primary %}
   {{ govukSummaryList({
     rows: [{
       key: {

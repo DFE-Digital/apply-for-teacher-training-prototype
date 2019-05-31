@@ -1,0 +1,21 @@
+{% extends "_form.njk" %}
+
+{% set title = "Clear data?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "javascript: window.history.go(-1)"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukWarningText({
+    text: "This will clear all of the data entered in this session",
+    iconFallbackText: "Warning"
+  }) }}
+
+  {{ govukButton({
+    text: "Clear the data"
+  }) }}
+{% endblock %}

@@ -1,18 +1,20 @@
 {% extends "_form.njk" %}
+
 {% set title = "Add qualification" %}
 {% set parent = "Eligibility and qualifications" %}
 {% set formAction = "/application/eligibility-and-qualifications/other-qualifications" %}
-{% block fieldset %}
-  {% set internationalQualification %}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country did you gain this qualification?"
-      },
-      id: "qualification-country",
-      name: "qualification-country",
-      items: countries
-    }) }}
-  {% endset -%}
+
+{% block primary %}
+{% set internationalQualification %}
+  {{ appAutocomplete({
+    label: {
+      text: "In which country did you gain this qualification?"
+    },
+    id: "qualification-country",
+    name: "qualification-country",
+    items: countries
+  }) }}
+{% endset -%}
 
   {{ govukInput({
     label: {

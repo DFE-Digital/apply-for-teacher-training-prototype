@@ -1,5 +1,8 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
+
 {% set title = "Work history and relevant experience" %}
+{% set formAction = "/application/" %}
+
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
     items: [{
@@ -13,6 +16,7 @@
     }]
   }) }}
 {% endblock %}
+
 {% block primary %}
   <p class="govuk-body">Use this section to enter details of your last 5 years of work history. Training providers need this information to:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -92,8 +96,14 @@
 
   <hr class="govuk-section-break">
 
+  {{ govukInput({
+    id: "work-experience-completed",
+    name: "work-experience-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: "/application/school-experience"
+    text: "Save and continue"
   }) }}
 {% endblock %}

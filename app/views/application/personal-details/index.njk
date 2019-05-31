@@ -1,6 +1,8 @@
 {% extends "_form.njk" %}
+
 {% set title = "Personal details" %}
-{% set formAction = "/application/personal-details" %}
+{% set formAction = "/application" %}
+
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
     items: [{
@@ -14,7 +16,8 @@
     }]
   }) }}
 {% endblock %}
-{% block fieldset %}
+
+{% block primary %}
   {{ govukInput({
     label: {
       text: "Title",
@@ -82,8 +85,15 @@
     items: nationalities
   }) }}
 
+  {{ govukInput({
+    id: "personal-details-completed",
+    name: "personal-details-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
   {{ govukButton({
-    text: "Save and continue"
+    text: "Save personal details"
   }) }}
 {% endblock %}
 {% block pageScripts %}

@@ -1,8 +1,10 @@
 {% extends "_form.njk" %}
+
 {% set title = "Add a job" %}
 {% set parent = "Work history and relevant experience" %}
 {% set formAction = "/application/work-experience" %}
-{% block fieldset %}
+
+{% block primary %}
   {{ govukInput({
     label: {
       text: "Job title",

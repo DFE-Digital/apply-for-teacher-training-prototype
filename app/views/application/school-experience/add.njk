@@ -1,8 +1,10 @@
 {% extends "_form.njk" %}
+
 {% set title = "Add school experience" %}
 {% set parent = "School experience and volunteering with children and young people" %}
 {% set formAction = "/application/school-experience" %}
-{% block fieldset %}
+
+{% block primary %}
   {{ govukInput({
     label: {
       text: "Your role",

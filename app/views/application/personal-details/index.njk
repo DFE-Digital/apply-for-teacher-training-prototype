@@ -1,6 +1,19 @@
 {% extends "_form.njk" %}
 {% set title = "Personal details" %}
 {% set formAction = "/application/personal-details" %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 {% block fieldset %}
   {{ govukInput({
     label: {
@@ -21,7 +34,8 @@
     },
     autocomplete: "given-name",
     id: "first-name",
-    name: "first-name"
+    name: "first-name",
+    value: data['first-name']
   }) }}
 
   {{ govukInput({
@@ -39,8 +53,9 @@
       classes: "govuk-label--s"
     },
     autocomplete: "family-name",
-    id: "last-name",
-    name: "last-name"
+    id: "family-name",
+    name: "family-name",
+    value: data['family-name']
   }) }}
 
   {{ govukDateInput({

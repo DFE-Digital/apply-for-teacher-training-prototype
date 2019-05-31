@@ -1,5 +1,18 @@
 {% extends "_content.njk" %}
 {% set title = "Eligibility and qualifications" %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 {% set missingGCSE %}
 <p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
 <ul class="govuk-list govuk-list--bullet">

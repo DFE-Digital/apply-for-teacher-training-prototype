@@ -1,6 +1,19 @@
 {% extends "_content.njk" %}
+{% set title = "Work history and relevant experience" %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 {% block primary %}
-  <h1 class="govuk-heading-xl">Work history and relevant experience</h1>
   <p class="govuk-body">Use this section to enter details of your last 5 years of work history. Training providers need this information to:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>safeguard children</li>

@@ -9,7 +9,7 @@ router.post('/application/personal-details', function (req, res) {
   if (eea.includes(nationality)) {
     res.redirect('/application/contact-details')
   } else {
-    res.redirect('/application/residency-status')
+    res.redirect('/application/personal-details/residency-status')
   }
 })
 

@@ -1,5 +1,18 @@
 {% extends "_content.njk" %}
 {% set title = "References" %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 {% block primary %}
   <p class="govuk-body">Good references are advocates for your:</p>
   <ul class="govuk-list govuk-list--bullet">

@@ -1,0 +1,60 @@
+{% extends "_form.njk" %}
+{% set title = "Create an account" %}
+{% set formAction = "/application" %}
+{% block fieldset %}
+  <p class="govuk-body">Create an account to use this service. You’ll then be able to save and return to your applications as often as you need to.</p>
+
+  {{ govukInput({
+    label: {
+      text: "First name(s)",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "given-name",
+    id: "first-name",
+    name: "first-name"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Last name",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "family-name",
+    id: "family-name",
+    name: "family-name"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "email",
+    id: "email",
+    name: "email",
+    type: "email"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Password",
+      classes: "govuk-label--s"
+    },
+    id: "password",
+    name: "password",
+    type: "password"
+  }) }}
+
+  {{ govukButton({
+    text: "Create an account"
+  }) }}
+{% endblock %}
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
+  <script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#nationality')
+    })
+  </script>
+{% endblock %}

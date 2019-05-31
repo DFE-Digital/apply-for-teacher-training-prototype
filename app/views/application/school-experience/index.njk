@@ -1,5 +1,18 @@
 {% extends "_content.njk" %}
-{% set title = "Working with children and young people" %}
+{% set title = "School experience and volunteering with children and young people" %}
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 {% block primary %}
   <p class="govuk-body">Use this section to enter any school experience or volunteering roles. Include:</p>
   <ul class="govuk-list govuk-list--bullet">

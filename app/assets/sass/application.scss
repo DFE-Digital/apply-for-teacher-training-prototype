@@ -4,10 +4,7 @@ $govuk-global-styles: true;
 // Import GOV.UK Frontend and any extension styles if extensions have been configured
 @import "lib/extensions/extensions";
 
-// Patterns that aren't in Frontend
-@import "patterns/step-by-step-navigation";
-@import "patterns/task-list";
-
 // Components that aren't in Frontend
-@import "components/cookie-banner";
 @import "components/autocomplete";
+@import "components/cookie-banner";
+@import "components/task-list";

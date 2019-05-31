@@ -4,9 +4,16 @@
 <div class="govuk-grid-row">
   <form class="govuk-grid-column-two-thirds" action="{{ formAction | default('#') }}" method="post">
   {% block form %}
+    {% set legendHtml %}
+      {% if parent %}
+        <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
+      {% else %}
+        {{ title }}
+      {% endif %}
+    {% endset %}
     {% call govukFieldset({
       legend: {
-        text: title,
+        html: legendHtml,
         classes: "govuk-fieldset__legend--xl",
         isPageHeading: true
       }

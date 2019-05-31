@@ -1,10 +1,11 @@
 {% extends "_form.njk" %}
 {% set title = "Add science GCSE or equivalent" %}
+{% set parent = "Eligibility and qualifications" %}
 {% set formAction = "/application/eligibility-and-qualifications" %}
 {% block fieldset %}
 
 {% set internationalQualification %}
-  {{ appLocationAutocomplete({
+  {{ appAutocomplete({
     label: {
       text: "In which country did you gain this qualification?"
     },
@@ -92,12 +93,13 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
-
-  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+{% endblock %}
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
   <script type="text/javascript">
-    openregisterLocationPicker({
-      selectElement: document.getElementById('degree-international-country'),
-      url: '/public/javascripts/location-autocomplete-graph.json'
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#science-gcse-country')
     })
   </script>
 {% endblock %}

@@ -1,9 +1,10 @@
 {% extends "_form.njk" %}
 {% set title = "Add qualification" %}
+{% set parent = "Eligibility and qualifications" %}
 {% set formAction = "/application/eligibility-and-qualifications/other-qualifications" %}
 {% block fieldset %}
   {% set internationalQualification %}
-    {{ appLocationAutocomplete({
+    {{ appAutocomplete({
       label: {
         text: "In which country did you gain this qualification?"
       },
@@ -88,12 +89,13 @@
       text: "No"
     }]
   }) }}
-
-  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+{% endblock %}
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
   <script type="text/javascript">
-    openregisterLocationPicker({
-      selectElement: document.getElementById('qualification-country'),
-      url: '/public/javascripts/location-autocomplete-graph.json'
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#qualification-country')
     })
   </script>
 {% endblock %}

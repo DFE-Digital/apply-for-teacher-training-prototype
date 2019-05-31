@@ -57,24 +57,26 @@
     namePrefix: "date-of-birth"
   }) }}
 
-  {{ appLocationAutocomplete({
+  {{ appAutocomplete({
     label: {
       text: "What is your nationality?",
       classes: "govuk-label--s"
     },
     id: "nationality",
-    name: "nationality"
+    name: "nationality",
+    datalist: "countries"
   }) }}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
-
-  <script type="text/javascript" src="/public/javascripts/location-autocomplete.min.js"></script>
+{% endblock %}
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
   <script type="text/javascript">
-    openregisterLocationPicker({
-      selectElement: document.getElementById('nationality'),
-      url: '/public/javascripts/location-autocomplete-graph.json'
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#nationality')
     })
   </script>
 {% endblock %}

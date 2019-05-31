@@ -4,6 +4,16 @@
 {% set formAction = "/application/eligibility-and-qualifications" %}
 {% block fieldset %}
 
+{% set validateEquivalence %}
+  {{ govukInput({
+    label: {
+      text: "Please explain how you plan to validate this qualification"
+    },
+    id: "degree-equivalence",
+    name: "degree-equivalence"
+  }) }}
+{% endset -%}
+
 {% set internationalQualification %}
   {{ appAutocomplete({
     label: {
@@ -14,12 +24,24 @@
     items: countries
   }) }}
 
-  {{ govukInput({
-    id: "degree-naric",
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you got a NARIC statement of comparability?"
+      }
+    },
+    idPrefix: "degree-naric",
     name: "degree-naric",
-    label: {
-      html: "Have you got a NARIC statement of comparability?"
-    }
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: validateEquivalence
+      }
+    }]
   }) }}
 {% endset -%}
 
@@ -103,7 +125,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Add degree"
   }) }}
 {% endblock %}
 {% block pageScripts %}

@@ -4,6 +4,16 @@
 {% set formAction = "/application/eligibility-and-qualifications" %}
 {% block fieldset %}
 
+{% set validateEquivalence %}
+  {{ govukInput({
+    label: {
+      text: "Please explain how you plan to validate this qualification"
+    },
+    id: "science-qualification-equivalence",
+    name: "science-qualification-equivalence"
+  }) }}
+{% endset -%}
+
 {% set internationalQualification %}
   {{ appAutocomplete({
     label: {
@@ -14,12 +24,24 @@
     items: countries
   }) }}
 
-  {{ govukInput({
-    id: "science-gcse-naric",
-    name: "science-gcse-naric",
-    label: {
-      html: "Have you got a NARIC statement of comparability?"
-    }
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you got a NARIC statement of comparability?"
+      }
+    },
+    idPrefix: "science-qualification-naric",
+    name: "science-qualification-naric",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: validateEquivalence
+      }
+    }]
   }) }}
 {% endset -%}
 
@@ -92,7 +114,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Add science GCSE or equivalent"
   }) }}
 {% endblock %}
 {% block pageScripts %}

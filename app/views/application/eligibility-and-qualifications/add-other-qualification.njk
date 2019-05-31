@@ -12,14 +12,6 @@
       name: "qualification-country",
       items: countries
     }) }}
-
-    {{ govukInput({
-      id: "qualification-naric",
-      name: "qualification-naric",
-      label: {
-        html: "Have you got a NARIC statement of comparability?"
-      }
-    }) }}
   {% endset -%}
 
   {{ govukInput({
@@ -54,7 +46,8 @@
 
   {{ govukInput({
     label: {
-      text: 'Grade'
+      text: 'Grade',
+      classes: "govuk-label--s"
     },
     id: "qualification-grade",
     name: "qualification-grade"

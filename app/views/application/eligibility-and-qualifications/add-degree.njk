@@ -35,6 +35,7 @@
     },
     idPrefix: "degree-naric",
     name: "degree-naric",
+    value: data["degree-naric"],
     items: [{
       value: "yes",
       text: "Yes"
@@ -111,6 +112,8 @@
     classes: "govuk-input--width-4"
   }) }}
 
+  {{ data["degree-international"] }}
+
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -144,9 +147,9 @@
     text: "Save changes"
   }) }}
 {% else %}
-{{ govukButton({
-  text: "Add degree"
-}) }}
+  {{ govukButton({
+    text: "Add degree"
+  }) }}
 {% endif %}
 
 {% endblock %}

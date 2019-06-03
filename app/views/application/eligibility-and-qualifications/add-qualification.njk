@@ -12,6 +12,7 @@
     },
     id: "qualification-country",
     name: "qualification-country",
+    value: data["qualification-country"],
     items: countries
   }) }}
 {% endset -%}
@@ -25,7 +26,8 @@
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)"
     },
     id: "qualification-type",
-    name: "qualification-type"
+    name: "qualification-type",
+    value: data["qualification-type"]
   }) }}
 
   {{ govukInput({
@@ -34,7 +36,8 @@
       classes: "govuk-label--s"
     },
     id: "qualification-subject",
-    name: "qualification-subject"
+    name: "qualification-subject",
+    value: data["qualification-subject"]
   }) }}
 
   {{ govukInput({
@@ -43,7 +46,8 @@
       classes: "govuk-label--s"
     },
     id: "qualification-institution",
-    name: "qualification-institution"
+    name: "qualification-institution",
+    value: data["qualification-institution"]
   }) }}
 
   {{ govukInput({
@@ -52,7 +56,8 @@
       classes: "govuk-label--s"
     },
     id: "qualification-grade",
-    name: "qualification-grade"
+    name: "qualification-grade",
+    value: data["qualification-grade"]
   }) }}
 
   {{ govukInput({
@@ -62,6 +67,7 @@
     },
     id: "qualification-year",
     name: "qualification-year",
+    value: data["qualification-year"],
     classes: "govuk-input--width-4"
   }) }}
 
@@ -73,7 +79,7 @@
       }
     },
     idPrefix: "qualification-international",
-    name: "outside-eea",
+    name: "qualification-international",
     items: [{
       value: "yes",
       text: "Yes",
@@ -93,9 +99,15 @@
     value: true
   }) }}
 
+{% if data["edit"] %}
+  {{ govukButton({
+    text: "Save changes"
+  }) }}
+{% else %}
   {{ govukButton({
     text: "Add qualification"
   }) }}
+{% endif %}
 {% endblock %}
 {% block pageScripts %}
   <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>

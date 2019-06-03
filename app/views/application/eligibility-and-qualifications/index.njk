@@ -59,7 +59,7 @@
   {% set qualification = data["degree-type"] + " " + data["degree-subject"] %}
   {% set qualificationHref = "/application/eligibility-and-qualifications/add-degree" %}
   {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
-  {% set qualificationLink = qualificationLink | safe%}
+  {% set qualificationLink = qualificationLink | safe %}
   {{ govukTable({
     caption: "Degree(s)",
     captionClasses: "govuk-heading-m",
@@ -119,6 +119,10 @@
   }) }}
 
 {% if data['qualification-completed'] %}
+  {% set qualification = data["qualification-type"] + " " + data["qualification-subject"] %}
+  {% set qualificationHref = "/application/eligibility-and-qualifications/add-qualification" %}
+  {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
+  {% set qualificationLink = qualificationLink | safe %}
   {{ govukTable({
     caption: "Other qualifications",
     captionClasses: "govuk-heading-m",
@@ -127,21 +131,21 @@
     head: [{
       text: "Qualification"
     }, {
-      text: "Subject"
-    }, {
       text: "Grade"
     }, {
       text: "Year awarded"
+    }, {
+      text: "Actions"
     }],
     rows: [
       [{
-        text: data['qualification-type']
-      }, {
-        text: data['qualification-subject']
+        text: qualification
       }, {
         text: data['qualification-grade']
       }, {
         text: data['qualification-year']
+      }, {
+        text: qualificationLink
       }]
     ]
   }) }}

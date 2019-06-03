@@ -11,7 +11,8 @@
       text: "Please explain how you plan to validate this qualification"
     },
     id: "degree-equivalence",
-    name: "degree-equivalence"
+    name: "degree-equivalence",
+    value: data["degree-equivalence"]
   }) }}
 {% endset -%}
 
@@ -22,6 +23,7 @@
     },
     id: "degree-country",
     name: "degree-country",
+    value: data["degree-country"],
     items: countries
   }) }}
 
@@ -61,7 +63,8 @@
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)"
     },
     id: "degree-type",
-    name: "degree-type"
+    name: "degree-type",
+    value: data["degree-type"]
   }) }}
 
   {{ govukInput({
@@ -70,7 +73,8 @@
       classes: "govuk-label--s"
     },
     id: "degree-subject",
-    name: "degree-subject"
+    name: "degree-subject",
+    value: data["degree-subject"]
   }) }}
 
   {{ govukInput({
@@ -79,7 +83,8 @@
       classes: "govuk-label--s"
     },
     id: "degree-institution",
-    name: "degree-institution"
+    name: "degree-institution",
+    value: data["degree-institution"]
   }) }}
 
   {{ govukInput({
@@ -91,7 +96,8 @@
       text: "For example, 2.1"
     },
     id: "degree-class",
-    name: "degree-class"
+    name: "degree-class",
+    value: data["degree-class"]
   }) }}
 
   {{ govukInput({
@@ -101,6 +107,7 @@
     },
     id: "degree-year",
     name: "degree-year",
+    value: data["degree-year"],
     classes: "govuk-input--width-4"
   }) }}
 
@@ -132,9 +139,16 @@
     value: true
   }) }}
 
+{% if data["edit"] %}
   {{ govukButton({
-    text: "Add degree"
+    text: "Save changes"
   }) }}
+{% else %}
+{{ govukButton({
+  text: "Add degree"
+}) }}
+{% endif %}
+
 {% endblock %}
 {% block pageScripts %}
   <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>

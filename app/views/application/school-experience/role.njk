@@ -2,7 +2,7 @@
 
 {% set title = "Add school experience" %}
 {% set parent = "School experience and volunteering with children and young people" %}
-{% set formAction = "/application/school-experience" %}
+{% set formAction = "/application/school-experience/overview" %}
 
 {% block primary %}
   {{ govukInput({
@@ -73,6 +73,10 @@
   }) }}
 
   {{ govukButton({
-    text: "Add experience"
+    text: "Save and add another role",
+    classes: "govuk-button--secondary"
+  }) }}
+  {{ govukButton({
+    text: "Save and continue"
   }) }}
 {% endblock %}

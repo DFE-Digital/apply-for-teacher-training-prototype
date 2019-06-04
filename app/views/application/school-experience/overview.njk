@@ -1,0 +1,54 @@
+{% extends "_content.njk" %}
+
+{% set title = "School experience and volunteering with children and young people" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukTable({
+    caption: "Your school experience and roles",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Dates",
+      classes: "govuk-!-width-one-quarter"
+    }, {
+      text: "Role"
+    }, {
+      text: "Organisation"
+    }, {
+      text: "Actions"
+    }],
+    rows: [
+      [{
+        text: data['school-experience-start-month'] + '/' + data['school-experience-start-year'] + ' - ' + data['school-experience-end-month'] + '/' + data['school-experience-end-year']
+      }, {
+        text: data['school-experience-role']
+      }, {
+        text: data['school-experience-org']
+      }, {
+        html: "<a aria-label=\"Edit " + data['school-experience-role'] + " at " + data['school-experience-org'] + " role\" href=\"/application/school-experience/role?action=edit\">Edit role</a>"
+      }]
+    ]
+  }) }}
+  {% set buttonText = "" %}
+
+  {{ govukButton({
+    text: "Add another role",
+    href: "/application/school-experience/role",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endblock %}

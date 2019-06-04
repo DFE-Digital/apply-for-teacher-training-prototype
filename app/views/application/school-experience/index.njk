@@ -1,7 +1,6 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
 {% set title = "School experience and volunteering with children and young people" %}
-{% set formAction = "/application/" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -26,51 +25,12 @@
     <li>volunteering with children outside school</li>
   </ul>
 
+  <p class="govuk-body">Start by adding your most recent activity or role, and work backwards. If you did more than one activity in the same period, list them both, one after the other.</p>
+
   {{ govukDetails({
     summaryText: "I don’t have any school experience",
     html: "You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://getintoteaching.education.gov.uk/school-experience\">Find out more</a>."
   }) }}
-
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-{% if data['school-experience-completed'] %}
-  {{ govukTable({
-    caption: "Your school experience and roles",
-    captionClasses: "govuk-heading-m",
-    classes: "govuk-!-font-size-16",
-    firstCellIsHeader: false,
-    head: [{
-      text: "Dates",
-      classes: "govuk-!-width-one-quarter"
-    }, {
-      text: "Role"
-    }, {
-      text: "Organisation"
-    }],
-    rows: [
-      [{
-        text: data['school-experience-start-month'] + '/' + data['school-experience-start-year'] + ' - ' + data['school-experience-end-month'] + '/' + data['school-experience-end-year']
-      }, {
-        text: data['school-experience-role']
-      }, {
-        text: data['school-experience-org']
-      }]
-    ]
-  }) }}
-  {% set buttonText = "Add another school experience" %}
-{% else %}
-  <h2 class="govuk-heading-m">Your school experience and roles</h2>
-  <p class="govuk-body">Start with your most recent activity or role, and work backwards. If you did more than one activity in the same period, list them both, one after the other.</p>
-  {% set buttonText = "Add school experience" %}
-{% endif %}
-
-  {{ govukButton({
-    text: buttonText,
-    classes: "govuk-button--secondary",
-    href: "/application/school-experience/add"
-  }) }}
-
-  <hr class="govuk-section-break">
 
   {{ govukInput({
     id: "school-experience-completed",
@@ -80,6 +40,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/application/school-experience/role"
   }) }}
 {% endblock %}

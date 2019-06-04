@@ -8,6 +8,12 @@
   {% set referencesHref = "/application/references" %}
 {% endif %}
 
+{% if data["school-experience-completed"] %}
+  {% set schoolExperienceHref = "/application/school-experience/overview" %}
+{% else %}
+  {% set schoolExperienceHref = "/application/school-experience" %}
+{% endif %}
+
 {% block primary %}
   {{ appTaskList({
     items: [{
@@ -42,7 +48,7 @@
       completed: data['employment-history-completed']
     }, {
       text: "School experience and volunteering with children and young people",
-      href: "/application/school-experience",
+      href: schoolExperienceHref,
       id: "school-experience",
       completed: data['school-experience-completed']
     }, {

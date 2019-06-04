@@ -1,6 +1,6 @@
 module.exports = [
   { value: '', text: 'Select a nationality' },
-  { value: '-', text: 'Afghan' },
+  { value: 'country:AF', text: 'Afghan' },
   { value: '-', text: 'Albanian' },
   { value: '-', text: 'Algerian' },
   { value: '-', text: 'American' },

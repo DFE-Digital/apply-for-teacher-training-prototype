@@ -18,8 +18,46 @@
 {% endblock %}
 
 {% block primary %}
+{% set internationalAddress %}
+  {{ govukTextarea({
+    label: {
+      text: "What is your address?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to"
+    },
+    autocomplete: "street-address",
+    id: "address",
+    name: "address"
+  }) }}
+{% endset %}
+
   {{ govukInsetText({
     text: "It’s important your contact details are correct throughout your application. Providers will use them to ask for more information and communicate their decision."
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "What is your address?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to"
+    },
+    autocomplete: "street-address",
+    id: "address",
+    name: "address"
+  }) }}
+
+  {{ govukButton({
+    text: "Look up address",
+    classes: "govuk-button--secondary"
+  }) }}
+
+  {{ govukDetails({
+    summaryText: "I live outside the UK",
+    html: internationalAddress
   }) }}
 
   {{ govukInput({
@@ -52,19 +90,6 @@
     name: "email",
     type: "email",
     value: data['email']
-  }) }}
-
-  {{ govukTextarea({
-    label: {
-      text: "What is your address?",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to"
-    },
-    autocomplete: "street-address",
-    id: "address",
-    name: "address"
   }) }}
 
   {{ govukInput({

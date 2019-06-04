@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Eligibility and qualifications" %}
+{% set title = "Academic qualifications" %}
 {% set formAction = "/application/" %}
 
 {% block pageNavigation %}
@@ -57,7 +57,7 @@
 
 {% if data['degree-completed'] %}
   {% set qualification = data["degree-type"] + " " + data["degree-subject"] %}
-  {% set qualificationHref = "/application/eligibility-and-qualifications/add-degree" %}
+  {% set qualificationHref = "/application/academic-qualifications/add-degree" %}
   {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
   {% set qualificationLink = qualificationLink | safe %}
   {{ govukTable({
@@ -96,31 +96,31 @@
   {{ govukButton({
     text: buttonText,
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-degree"
+    href: "/application/academic-qualifications/add-degree"
   }) }}
 
   <h2 class="govuk-heading-m">Required GCSEs</h2>
   {{ govukButton({
     text: "Add maths GCSE or equivalent",
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-maths-gcse"
+    href: "/application/academic-qualifications/add-maths-gcse"
   }) }}
 
   {{ govukButton({
     text: "Add English GCSE or equivalent",
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-english-gcse"
+    href: "/application/academic-qualifications/add-english-gcse"
   }) }}
 
   {{ govukButton({
     text: "Add science GCSE or equivalent",
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-science-gcse"
+    href: "/application/academic-qualifications/add-science-gcse"
   }) }}
 
 {% if data['qualification-completed'] %}
   {% set qualification = data["qualification-type"] + " " + data["qualification-subject"] %}
-  {% set qualificationHref = "/application/eligibility-and-qualifications/add-qualification" %}
+  {% set qualificationHref = "/application/academic-qualifications/add-qualification" %}
   {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
   {% set qualificationLink = qualificationLink | safe %}
   {{ govukTable({
@@ -159,14 +159,14 @@
   {{ govukButton({
     text: buttonText,
     classes: "govuk-button--secondary",
-    href: "/application/eligibility-and-qualifications/add-qualification"
+    href: "/application/academic-qualifications/add-qualification"
   }) }}
 
   <hr class="govuk-section-break">
 
   {{ govukInput({
-    id: "eligibility-and-qualifications-completed",
-    name: "eligibility-and-qualifications-completed",
+    id: "academic-qualifications-completed",
+    name: "academic-qualifications-completed",
     type: "hidden",
     value: true
   }) }}

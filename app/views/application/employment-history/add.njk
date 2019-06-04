@@ -1,8 +1,8 @@
 {% extends "_form.njk" %}
 
 {% set title = "Add a job" %}
-{% set parent = "Work history and relevant experience" %}
-{% set formAction = "/application/work-experience" %}
+{% set parent = "Employment history" %}
+{% set formAction = "/application/employment-history" %}
 
 {% block primary %}
   {{ govukInput({
@@ -10,8 +10,8 @@
       text: "Job title",
       classes: "govuk-label--s"
     },
-    id: "work-experience-role",
-    name: "work-experience-role"
+    id: "employment-history-role",
+    name: "employment-history-role"
   }) }}
 
   {{ govukInput({
@@ -19,8 +19,8 @@
       text: "Name of employer",
       classes: "govuk-label--s"
     },
-    id: "work-experience-org",
-    name: "work-experience-org"
+    id: "employment-history-org",
+    name: "employment-history-org"
   }) }}
 
   {{ govukDateInput({
@@ -40,8 +40,8 @@
       name: "year",
       classes: "govuk-input--width-4"
     }],
-    id: "work-experience-start",
-    namePrefix: "work-experience-start"
+    id: "employment-history-start",
+    namePrefix: "employment-history-start"
   }) }}
 
   {{ govukDateInput({
@@ -61,8 +61,8 @@
       name: "year",
       classes: "govuk-input--width-4"
     }],
-    id: "work-experience-end",
-    namePrefix: "work-experience-end"
+    id: "employment-history-end",
+    namePrefix: "employment-history-end"
   }) }}
 
   {{ govukCharacterCount({
@@ -70,8 +70,8 @@
       text: "Skills and experience relevant to teaching you gained in this role",
       classes: "govuk-label--s"
     },
-    id: "work-experience-learnt",
-    name: "work-experience-learnt",
+    id: "employment-history-learnt",
+    name: "employment-history-learnt",
     maxlength: 150
   }) }}
 
@@ -83,8 +83,8 @@
       }
     },
     classes: "govuk-radios--inline",
-    idPrefix: "work-experience-with-children",
-    name: "work-experience-with-children",
+    idPrefix: "employment-history-with-children",
+    name: "employment-history-with-children",
     items: [{
       value: "yes",
       text: "Yes"
@@ -95,8 +95,8 @@
   }) }}
 
   {{ govukInput({
-    id: "work-experience-completed",
-    name: "work-experience-completed",
+    id: "employment-history-completed",
+    name: "employment-history-completed",
     type: "hidden",
     value: true
   }) }}

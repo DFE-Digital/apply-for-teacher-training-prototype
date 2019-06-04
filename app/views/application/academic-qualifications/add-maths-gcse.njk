@@ -1,8 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add English GCSE or equivalent" %}
+{% set title = "Add maths GCSE or equivalent" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/application/eligibility-and-qualifications" %}
+{% set formAction = "/application/academic-qualifications" %}
 
 {% block primary %}
 {% set validateEquivalence %}
@@ -10,8 +10,8 @@
     label: {
       text: "Please explain how you plan to validate this qualification"
     },
-    id: "english-qualification-equivalence",
-    name: "english-qualification-equivalence"
+    id: "maths-qualification-equivalence",
+    name: "maths-qualification-equivalence"
   }) }}
 {% endset -%}
 
@@ -20,8 +20,8 @@
     label: {
       text: "In which country did you gain this qualification?"
     },
-    id: "english-qualification-country",
-    name: "english-qualification-country",
+    id: "maths-qualification-country",
+    name: "maths-qualification-country",
     items: countries
   }) }}
 
@@ -31,8 +31,8 @@
         text: "Have you got a NARIC statement of comparability?"
       }
     },
-    idPrefix: "english-qualification-naric",
-    name: "english-qualification-naric",
+    idPrefix: "maths-qualification-naric",
+    name: "maths-qualification-naric",
     items: [{
       value: "yes",
       text: "Yes"
@@ -54,8 +54,8 @@
     hint: {
       text: "GCSE, O level, or other (please specify)"
     },
-    id: "english-qualification-type",
-    name: "english-qualification-type"
+    id: "maths-qualification-type",
+    name: "maths-qualification-type"
   }) }}
 
   {{ govukInput({
@@ -63,8 +63,8 @@
       text: "Grade",
       classes: "govuk-label--s"
     },
-    id: "english-qualification-grade",
-    name: "english-qualification-grade"
+    id: "maths-qualification-grade",
+    name: "maths-qualification-grade"
   }) }}
 
   {{ govukInput({
@@ -72,8 +72,8 @@
       text: "Year qualification was awarded",
       classes: "govuk-label--s"
     },
-    id: "english-qualification-year",
-    name: "english-qualification-year",
+    id: "maths-qualification-year",
+    name: "maths-qualification-year",
     classes: "govuk-input--width-4"
   }) }}
 
@@ -84,8 +84,8 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "english-qualification-international",
-    name: "english-qualification-international",
+    idPrefix: "maths-qualification-international",
+    name: "maths-qualification-international",
     items: [{
       value: "yes",
       text: "Yes",
@@ -106,12 +106,12 @@
     hint: {
       text: "Please explain how you plan to meet this requirement in time for the start of your course."
     },
-    id: "english-qualification-missing",
-    name: "english-qualification-missing"
+    id: "maths-qualification-missing",
+    name: "maths-qualification-missing"
   }) }}
 
   {{ govukButton({
-    text: "Add English GCSE or equivalent"
+    text: "Add maths GCSE or equivalent"
   }) }}
 {% endblock %}
 {% block pageScripts %}
@@ -119,7 +119,7 @@
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
-      selectElement: document.querySelector('#english-qualification-country')
+      selectElement: document.querySelector('#maths-qualification-country')
     })
   </script>
 {% endblock %}

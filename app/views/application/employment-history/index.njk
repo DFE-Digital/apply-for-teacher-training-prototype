@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Work history and relevant experience" %}
+{% set title = "Employment history" %}
 {% set formAction = "/application/" %}
 
 {% block pageNavigation %}
@@ -36,19 +36,19 @@
   </ul>
 
   {{ govukDetails({
-    summaryText: "I have more than 5 years of work history",
-    text: "You can include your complete work history going back further than 5 years if you wish. Training providers will be interested in skills and experience you can transfer to a school setting."
+    summaryText: "I have more than 5 years of employment history",
+    text: "You can include your complete employment history going back further than 5 years if you wish. Training providers will be interested in skills and experience you can transfer to a school setting."
   }) }}
 
   {{ govukDetails({
-    summaryText: "I have less than 5 years of work history",
+    summaryText: "I have less than 5 years of employment history",
     text: "If you are a recent graduate, tell us about your employment since leaving university."
   }) }}
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-{% if data['work-experience-completed'] %}
+{% if data['employment-history-completed'] %}
   {{ govukTable({
-    caption: "Your work history",
+    caption: "Your employment history",
     captionClasses: "govuk-heading-m",
     classes: "govuk-!-font-size-16",
     firstCellIsHeader: false,
@@ -62,22 +62,22 @@
     }],
     rows: [
       [{
-        text: data['work-experience-end-month'] + '/' + data['work-experience-end-year'] + ' - Present'
+        text: data['employment-history-end-month'] + '/' + data['employment-history-end-year'] + ' - Present'
       }, {
-        html: "<a href=\"/application/work-experience/explain-gap\">Explain gap</a>",
+        html: "<a href=\"/application/employment-history/explain-gap\">Explain gap</a>",
         colspan: 2
       }], [{
-        text: data['work-experience-start-month'] + '/' + data['work-experience-start-year'] + ' - ' + data['work-experience-end-month'] + '/' + data['work-experience-end-year']
+        text: data['employment-history-start-month'] + '/' + data['employment-history-start-year'] + ' - ' + data['employment-history-end-month'] + '/' + data['employment-history-end-year']
       }, {
-        text: data['work-experience-role']
+        text: data['employment-history-role']
       }, {
-        text: data['work-experience-org']
+        text: data['employment-history-org']
       }]
     ]
   }) }}
   {% set buttonText = "Add another job" %}
 {% else %}
-  <h2 class="govuk-heading-m">Your work history</h2>
+  <h2 class="govuk-heading-m">Your employment history</h2>
   <p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
   {% set buttonText = "Add a job" %}
 {% endif %}
@@ -85,14 +85,14 @@
   {{ govukButton({
     text: buttonText,
     classes: "govuk-button--secondary",
-    href: "/application/work-experience/add"
+    href: "/application/employment-history/add"
   }) }}
 
   <hr class="govuk-section-break">
 
   {{ govukInput({
-    id: "work-experience-completed",
-    name: "work-experience-completed",
+    id: "employment-history-completed",
+    name: "employment-history-completed",
     type: "hidden",
     value: true
   }) }}

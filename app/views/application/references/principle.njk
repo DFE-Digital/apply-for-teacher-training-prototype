@@ -1,0 +1,103 @@
+{% extends "_form.njk" %}
+
+{% set title = "Add a principle referee"%}
+{% set parent = "References" %}
+
+{% if data["action"] == "edit" %}
+  {% set formAction = "/application/references/overview" %}
+  {% set formActionText = "Save changes" %}
+{% else %}
+  {% set formAction = "/application/references/secondary" %}
+  {% set formActionText = "Save and continue" %}
+{% endif %}
+
+{% block primary %}
+{% set insetHtml %}
+  <p class="govuk-body">Contact your referee in advance to check they are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>happy to give you a reference</li>
+    <li>available to do so within a reasonable timeframe</li>
+    <li>comfortable submitting a reference online</li>
+  </ul>
+  <p class="govuk-body">Your referee will be given a short questionnaire about you and a free text box to describe you in their own words. They will not be given access to your completed application form.</p>
+{% endset %}
+  {{ govukInsetText({
+    html: insetHtml
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Full name",
+      classes: "govuk-label--s"
+    },
+    id: "referee-principle-name",
+    name: "referee-principle-name",
+    value: data["referee-principle-name"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Referee’s relationship to you",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, academic tutor, manager, other (please specify)"
+    },
+    id: "referee-principle-relationship",
+    name: "referee-principle-relationship",
+    value: data["referee-principle-relationship"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--s"
+    },
+    type: "email",
+    id: "referee-principle-email",
+    name: "referee-principle-email",
+    value: data["referee-principle-email"]
+  }) }}
+
+{% set explainCharacter %}
+  {{ govukTextarea({
+    label: {
+      text: "If you are unable to provide an academic, professional or school senior leadership referee and are therefore requesting a character reference, you can explain why here (optional)."
+    },
+    id: "referee-principle-character-explaination",
+    name: "referee-principle-character-explaination",
+    value: data["referee-principle-character-explaination"]
+  }) }}
+{% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Type of referee",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "referee-principle-type",
+    name: "referee-principle-type",
+    items: [{
+      value: "academic",
+      text: "Academic"
+    }, {
+      value: "professional",
+      text: "Professional"
+    }, {
+      value: "school-based",
+      text: "School senior leadership"
+    }, {
+      value: "character",
+      text: "Character",
+      conditional: {
+        html: explainCharacter
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: formActionText
+  }) }}
+{% endblock %}

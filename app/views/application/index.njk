@@ -2,6 +2,12 @@
 
 {% set title = "Your application" %}
 
+{% if data["references-completed"] %}
+  {% set referencesHref = "/application/references/overview" %}
+{% else %}
+  {% set referencesHref = "/application/references" %}
+{% endif %}
+
 {% block primary %}
   {{ appTaskList({
     items: [{
@@ -41,7 +47,7 @@
       completed: data['school-experience-completed']
     }, {
       text: "References",
-      href: "/application/references",
+      href: referencesHref,
       id: "references",
       completed: data['references-completed']
     }, {

@@ -40,15 +40,14 @@
       }, {
         text: data['school-experience-org']
       }, {
-        html: "<a aria-label=\"Edit " + data['school-experience-role'] + " at " + data['school-experience-org'] + " role\" href=\"/application/school-experience/role?action=edit\">Edit role</a>"
+        html: "<a aria-label=\"Edit " + data['school-experience-role'] + " at " + data['school-experience-org'] + " role\" href=\"/application/school-experience/edit-role\">Edit role</a>"
       }]
     ]
   }) }}
-  {% set buttonText = "" %}
 
   {{ govukButton({
     text: "Add another role",
-    href: "/application/school-experience/role",
+    href: "/application/school-experience/add-role",
     classes: "govuk-button--secondary"
   }) }}
 {% endblock %}

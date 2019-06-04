@@ -1,6 +1,5 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add school experience" %}
 {% set parent = "School experience and volunteering with children and young people" %}
 {% set formAction = "/application/school-experience/overview" %}
 
@@ -11,7 +10,8 @@
       classes: "govuk-label--s"
     },
     id: "school-experience-role",
-    name: "school-experience-role"
+    name: "school-experience-role",
+    value: data["school-experience-role"]
   }) }}
 
   {{ govukInput({
@@ -20,7 +20,8 @@
       classes: "govuk-label--s"
     },
     id: "school-experience-org",
-    name: "school-experience-org"
+    name: "school-experience-org",
+    value: data["school-experience-org"]
   }) }}
 
   {{ govukDateInput({
@@ -72,11 +73,13 @@
     value: true
   }) }}
 
+{% if action != "edit" %}
   {{ govukButton({
     text: "Save and add another role",
     classes: "govuk-button--secondary"
   }) }}
+{% endif %}
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

@@ -1,0 +1,54 @@
+{% extends "_content.njk" %}
+
+{% set title = "Employment history" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/application"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukTable({
+    caption: "Your employment history",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Dates",
+      classes: "govuk-!-width-one-quarter"
+    }, {
+      text: "Job title"
+    }, {
+      text: "Organisation"
+    }],
+    rows: [
+      [{
+        text: data['employment-history-end-month'] + '/' + data['employment-history-end-year'] + ' - Present'
+      }, {
+        html: "<a href=\"/application/employment-history/explain-gap\">Explain gap</a>",
+        colspan: 2
+      }], [{
+        text: data['employment-history-start-month'] + '/' + data['employment-history-start-year'] + ' - ' + data['employment-history-end-month'] + '/' + data['employment-history-end-year']
+      }, {
+        text: data['employment-history-role']
+      }, {
+        text: data['employment-history-org']
+      }]
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Add another job",
+    classes: "govuk-button--secondary",
+    href: "/application/employment-history/add-job"
+  }) }}
+{% endblock %}

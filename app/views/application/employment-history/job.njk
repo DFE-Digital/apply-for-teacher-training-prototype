@@ -1,8 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add a job" %}
 {% set parent = "Employment history" %}
-{% set formAction = "/application/employment-history" %}
+{% set formAction = "/application/employment-history/overview" %}
 
 {% block primary %}
   {{ govukInput({
@@ -101,7 +100,13 @@
     value: true
   }) }}
 
+{% if action != "edit" %}
   {{ govukButton({
-    text: "Add job"
+    text: "Save and add another job",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endif %}
+  {{ govukButton({
+    text: buttonText
   }) }}
 {% endblock %}

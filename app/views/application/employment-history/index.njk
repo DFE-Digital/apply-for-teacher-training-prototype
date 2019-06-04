@@ -1,7 +1,6 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
 {% set title = "Employment history" %}
-{% set formAction = "/application/" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -35,6 +34,8 @@
     <li>short-term school experience, one-off observations and volunteering with children – we’ll ask you about this next</li>
   </ul>
 
+  <p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
+
   {{ govukDetails({
     summaryText: "I have more than 5 years of employment history",
     text: "You can include your complete employment history going back further than 5 years if you wish. Training providers will be interested in skills and experience you can transfer to a school setting."
@@ -44,60 +45,9 @@
     summaryText: "I have less than 5 years of employment history",
     text: "If you are a recent graduate, tell us about your employment since leaving university."
   }) }}
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-{% if data['employment-history-completed'] %}
-  {{ govukTable({
-    caption: "Your employment history",
-    captionClasses: "govuk-heading-m",
-    classes: "govuk-!-font-size-16",
-    firstCellIsHeader: false,
-    head: [{
-      text: "Dates",
-      classes: "govuk-!-width-one-quarter"
-    }, {
-      text: "Job title"
-    }, {
-      text: "Organisation"
-    }],
-    rows: [
-      [{
-        text: data['employment-history-end-month'] + '/' + data['employment-history-end-year'] + ' - Present'
-      }, {
-        html: "<a href=\"/application/employment-history/explain-gap\">Explain gap</a>",
-        colspan: 2
-      }], [{
-        text: data['employment-history-start-month'] + '/' + data['employment-history-start-year'] + ' - ' + data['employment-history-end-month'] + '/' + data['employment-history-end-year']
-      }, {
-        text: data['employment-history-role']
-      }, {
-        text: data['employment-history-org']
-      }]
-    ]
-  }) }}
-  {% set buttonText = "Add another job" %}
-{% else %}
-  <h2 class="govuk-heading-m">Your employment history</h2>
-  <p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
-  {% set buttonText = "Add a job" %}
-{% endif %}
 
   {{ govukButton({
-    text: buttonText,
-    classes: "govuk-button--secondary",
-    href: "/application/employment-history/add"
-  }) }}
-
-  <hr class="govuk-section-break">
-
-  {{ govukInput({
-    id: "employment-history-completed",
-    name: "employment-history-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
-  {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/application/employment-history/add-job"
   }) }}
 {% endblock %}

@@ -1,17 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add a principle referee"%}
 {% set parent = "References" %}
-
-{% if data["action"] == "edit" %}
-  {% set formAction = "/application/references/overview" %}
-  {% set formActionText = "Save changes" %}
-{% else %}
-  {% set formAction = "/application/references/secondary" %}
-  {% set formActionText = "Save and continue" %}
-{% endif %}
-
-{% block primary %}
 {% set insetHtml %}
   <p class="govuk-body">Contact your referee in advance to check they are:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -21,6 +10,8 @@
   </ul>
   <p class="govuk-body">Your referee will be given a short questionnaire about you and a free text box to describe you in their own words. They will not be given access to your completed application form.</p>
 {% endset %}
+
+{% block primary %}
   {{ govukInsetText({
     html: insetHtml
   }) }}
@@ -30,9 +21,9 @@
       text: "Full name",
       classes: "govuk-label--s"
     },
-    id: "referee-principle-name",
-    name: "referee-principle-name",
-    value: data["referee-principle-name"]
+    id: "referee-" + type + "-name",
+    name: "referee-" + type + "-name",
+    value: data["referee-" + type + "-name"]
   }) }}
 
   {{ govukInput({
@@ -43,9 +34,9 @@
     hint: {
       text: "For example, academic tutor, manager, other (please specify)"
     },
-    id: "referee-principle-relationship",
-    name: "referee-principle-relationship",
-    value: data["referee-principle-relationship"]
+    id: "referee-" + type + "-relationship",
+    name: "referee-" + type + "-relationship",
+    value: data["referee-" + type + "-relationship"]
   }) }}
 
   {{ govukInput({
@@ -54,9 +45,9 @@
       classes: "govuk-label--s"
     },
     type: "email",
-    id: "referee-principle-email",
-    name: "referee-principle-email",
-    value: data["referee-principle-email"]
+    id: "referee-" + type + "-email",
+    name: "referee-" + type + "-email",
+    value: data["referee-" + type + "-email"]
   }) }}
 
 {% set explainCharacter %}
@@ -64,9 +55,9 @@
     label: {
       text: "If you are unable to provide an academic, professional or school senior leadership referee and are therefore requesting a character reference, you can explain why here (optional)."
     },
-    id: "referee-principle-character-explaination",
-    name: "referee-principle-character-explaination",
-    value: data["referee-principle-character-explaination"]
+    id: "referee-" + type + "-character-explaination",
+    name: "referee-" + type + "-character-explaination",
+    value: data["referee-" + type + "-character-explaination"]
   }) }}
 {% endset %}
 
@@ -77,27 +68,40 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "referee-principle-type",
-    name: "referee-principle-type",
+    idPrefix: "referee-" + type + "-type",
+    name: "referee-" + type + "-type",
     items: [{
       value: "academic",
-      text: "Academic"
+      text: "Academic",
+      checked: checked("referee-" + type + "-type", "academic")
     }, {
       value: "professional",
-      text: "Professional"
+      text: "Professional",
+      checked: checked("referee-" + type + "-type", "professional")
     }, {
       value: "school-based",
-      text: "School senior leadership"
+      text: "School senior leadership",
+      checked: checked("referee-" + type + "-type", "school-based")
     }, {
       value: "character",
       text: "Character",
+      checked: checked("referee-" + type + "-type", "character"),
       conditional: {
         html: explainCharacter
       }
     }]
   }) }}
 
+{% if type == 'secondary' %}
+  {{ govukInput({
+    id: "references-completed",
+    name: "references-completed",
+    type: "hidden",
+    value: true
+  }) }}
+{% endif %}
+
   {{ govukButton({
-    text: formActionText
+    text: buttonText
   }) }}
 {% endblock %}

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.post('/application/personal-details/answer', function (req, res) {
+router.post('/application/personal-details/answer', (req, res) => {
   let nationality = req.session.data['nationality']
 
   let eea = ['country:AT', 'country:BE', 'country:BG', 'country:HR', 'country:CY', 'country:CZ', 'country:DK', 'country:EE', 'country:FI', 'country:FR', 'country:DE', 'country:GR', 'country:HU', 'country:IS', 'country:IE', 'country:IT', 'country:LV', 'country:LT', 'country:LI', 'country:LU', 'country:MT', 'country:NL', 'country:NO', 'country:PL', 'country:PT', 'country:RO', 'country:SK', 'country:SI', 'country:ES', 'country:SE', 'country:CH', 'country:GB']
@@ -13,7 +13,7 @@ router.post('/application/personal-details/answer', function (req, res) {
   }
 })
 
-router.post('/application/personal-details/answer', function (req, res) {
+router.post('/application/personal-details/answer', (req, res) => {
   let nationality = req.session.data['nationality']
 
   let eea = ['country:AT', 'country:BE', 'country:BG', 'country:HR', 'country:CY', 'country:CZ', 'country:DK', 'country:EE', 'country:FI', 'country:FR', 'country:DE', 'country:GR', 'country:HU', 'country:IS', 'country:IE', 'country:IT', 'country:LV', 'country:LT', 'country:LI', 'country:LU', 'country:MT', 'country:NL', 'country:NO', 'country:PL', 'country:PT', 'country:RO', 'country:SK', 'country:SI', 'country:ES', 'country:SE', 'country:CH', 'country:GB']
@@ -26,7 +26,7 @@ router.post('/application/personal-details/answer', function (req, res) {
 })
 
 // Application: Employment history
-router.get('/application/employment-history/add-job', function (req, res) {
+router.get('/application/employment-history/add-job', (req, res) => {
   res.render('application/employment-history/job', {
     action: 'add',
     title: 'Add job',
@@ -34,7 +34,7 @@ router.get('/application/employment-history/add-job', function (req, res) {
   })
 })
 
-router.get('/application/employment-history/edit-job', function (req, res) {
+router.get('/application/employment-history/edit-job', (req, res) => {
   res.render('application/employment-history/job', {
     action: 'edit',
     title: 'Edit job',
@@ -43,7 +43,7 @@ router.get('/application/employment-history/edit-job', function (req, res) {
 })
 
 // Application: School experience
-router.get('/application/school-experience/add-role', function (req, res) {
+router.get('/application/school-experience/add-role', (req, res) => {
   res.render('application/school-experience/role', {
     action: 'add',
     title: 'Add role',
@@ -51,10 +51,51 @@ router.get('/application/school-experience/add-role', function (req, res) {
   })
 })
 
-router.get('/application/school-experience/edit-role', function (req, res) {
+router.get('/application/school-experience/edit-role', (req, res) => {
   res.render('application/school-experience/role', {
     action: 'edit',
     title: 'Edit role',
+    buttonText: 'Save changes'
+  })
+})
+
+// Application: References
+router.get('/application/references/add-principle-referee', (req, res) => {
+  res.render('application/references/referee', {
+    action: 'add',
+    formAction: '/application/references/add-secondary-referee',
+    title: 'Add principle referee',
+    type: 'principle',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/application/references/edit-principle-referee', (req, res) => {
+  res.render('application/references/referee', {
+    action: 'edit',
+    formAction: '/application/references/overview',
+    title: 'Edit principle referee',
+    type: 'principle',
+    buttonText: 'Save changes'
+  })
+})
+
+router.get('/application/references/add-secondary-referee', (req, res) => {
+  res.render('application/references/referee', {
+    action: 'add',
+    formAction: '/application/references/overview',
+    title: 'Add secondary referee',
+    type: 'secondary',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/application/references/edit-secondary-referee', (req, res) => {
+  res.render('application/references/referee', {
+    action: 'edit',
+    formAction: '/application/references/overview',
+    title: 'Edit secondary referee',
+    type: 'secondary',
     buttonText: 'Save changes'
   })
 })

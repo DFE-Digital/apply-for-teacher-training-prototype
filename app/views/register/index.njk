@@ -26,6 +26,36 @@
     name: "family-name"
   }) }}
 
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Date of birth",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 31 03 1980"
+    },
+    id: "date-of-birth",
+    namePrefix: "date-of-birth",
+    items: [{
+      name: "day",
+      value: data["date-of-birth-day"],
+      classes: "govuk-input--width-2",
+      autocomplete: "bday-day"
+    }, {
+      name: "month",
+      value: data["date-of-birth-month"],
+      classes: "govuk-input--width-2",
+      autocomplete: "bday-month"
+    }, {
+      name: "year",
+      value: data["date-of-birth-year"],
+      classes: "govuk-input--width-4",
+      autocomplete: "bday-year"
+    }]
+  }) }}
+
   {{ govukInput({
     label: {
       text: "Email address",

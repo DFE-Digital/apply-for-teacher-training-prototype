@@ -38,9 +38,11 @@
     },
     items: [{
       name: "month",
+      value: data["school-experience-start-month"],
       classes: "govuk-input--width-2"
     }, {
       name: "year",
+      value: data["school-experience-start-year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -59,9 +61,11 @@
     },
     items: [{
       name: "month",
+      value: data["school-experience-end-month"],
       classes: "govuk-input--width-2"
     }, {
       name: "year",
+      value: data["school-experience-end-year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -73,12 +77,6 @@
     value: true
   }) }}
 
-{% if action != "edit" %}
-  {{ govukButton({
-    text: "Save and add another role",
-    classes: "govuk-button--secondary"
-  }) }}
-{% endif %}
   {{ govukButton({
     text: buttonText
   }) }}

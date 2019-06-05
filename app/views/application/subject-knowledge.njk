@@ -37,6 +37,7 @@
     },
     id: "subject-knowledge-statement",
     name: "subject-knowledge-statement",
+    value: data["subject-knowledge-statement"],
     maxlength: 600,
     rows: 12
   }) }}
@@ -52,10 +53,12 @@
     },
     items: [{
       value: "yes",
-      text: "Yes"
+      text: "Yes",
+      checked: checked("subject-knowledge-enhancement", "yes")
     }, {
       value: "no",
-      text: "No"
+      text: "No",
+      checked: checked("subject-knowledge-enhancement", "no")
     }]
   }) }}
 
@@ -66,6 +69,7 @@
     },
     id: "subject-knowledge-additional",
     name: "subject-knowledge-additional",
+    value: data["subject-knowledge-additional"],
     maxlength: 600,
     rows: 12
   }) }}

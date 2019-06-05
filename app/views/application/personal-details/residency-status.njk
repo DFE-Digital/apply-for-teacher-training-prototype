@@ -10,8 +10,9 @@
       label: {
         html: "Please give details"
       },
-      id: "right-to-work-study-details",
-      name: "right-to-work-study-details"
+      id: "residency-status-right-to-study-details",
+      name: "residency-status-right-to-study-details",
+      value: data["residency-status-right-to-study-details"]
     }) }}
   {% endset -%}
 
@@ -39,35 +40,40 @@
       label: {
         html: "Please give details"
       },
-      id: "unknown-details",
-      name: "unknown-details"
+      id: "residency-status-unknown-details",
+      name: "residency-status-unknown-details",
+      value: data["residency-status-unknown-details"]
     }) }}
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: "outside-eea",
-    name: "outside-eea",
+    idPrefix: "residency-status",
+    name: "residency-status",
     items: [{
       text: "I have the right to study and/or work in the UK",
-      value: "right-to-work-study",
+      value: "right-to-study",
+      checked: checked("residency-status", "right-to-study"),
       conditional: {
         html: rightToWorkStudy
       }
     }, {
       text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
-      value: "require-tier2",
+      value: "require-tier-2",
+      checked: checked("residency-status", "require-tier-2"),
       conditional: {
         html: requireTier2
       }
     }, {
       text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
-      value: "require-tier4",
+      value: "require-tier-4",
+      checked: checked("residency-status", "require-tier-4"),
       conditional: {
         html: requireTier4
       }
     }, {
       text: "I don’t know my residency status",
       value: "unknown",
+      checked: checked("residency-status", "unknown"),
       conditional: {
         html: unknown
       }

@@ -29,19 +29,27 @@
       text: "Job title"
     }, {
       text: "Organisation"
+    }, {
+      text: "Actions"
     }],
     rows: [
       [{
-        text: data['employment-history-end-month'] + '/' + data['employment-history-end-year'] + ' - Present'
+        text: data['employment-history-end-month'] + '/' + data['employment-history-end-year'] + ' - Present',
+        classes: "app-table__cell--muted"
+      }, {
+        classes: "app-table__cell--muted",
+        colspan: 2
       }, {
         html: "<a href=\"/application/employment-history/explain-gap\">Explain gap</a>",
-        colspan: 2
+        classes: "app-table__cell--muted"
       }], [{
         text: data['employment-history-start-month'] + '/' + data['employment-history-start-year'] + ' - ' + data['employment-history-end-month'] + '/' + data['employment-history-end-year']
       }, {
         text: data['employment-history-role']
       }, {
         text: data['employment-history-org']
+      }, {
+        html: "<a href=\"/application/employment-history/edit-job\">Edit job</a>"
       }]
     ]
   }) }}

@@ -14,6 +14,17 @@ router.post('/application/personal-details/answer', (req, res) => {
   }
 })
 
+// Application: Contact details
+router.post('/application/contact-details/address-answer', (req, res) => {
+  let location = req.session.data['address-location']
+
+  if (location === 'domestic') {
+    res.redirect('/application/contact-details/lookup-address')
+  } else {
+    res.redirect('/application/contact-details/enter-address')
+  }
+})
+
 // Application: Employment history
 router.get('/application/employment-history/add-job', (req, res) => {
   res.render('application/employment-history/job', {

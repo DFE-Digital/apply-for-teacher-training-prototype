@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Contact details" %}
-{% set formAction = "/application/" %}
+{% set formAction = "/application/contact-details/address-answer" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -18,48 +18,6 @@
 {% endblock %}
 
 {% block primary %}
-{% set internationalAddress %}
-  {{ govukTextarea({
-    label: {
-      text: "What is your address?",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to."
-    },
-    autocomplete: "street-address",
-    id: "address",
-    name: "address"
-  }) }}
-{% endset %}
-
-  {{ govukInsetText({
-    text: "It’s important your contact details are correct throughout your application. Providers will use them to ask for more information and communicate their decision."
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "What is your address?",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send letters to."
-    },
-    autocomplete: "street-address",
-    id: "address",
-    name: "address"
-  }) }}
-
-  {{ govukButton({
-    text: "Look up address",
-    classes: "govuk-button--secondary"
-  }) }}
-
-  {{ govukDetails({
-    summaryText: "I live outside the UK",
-    html: internationalAddress
-  }) }}
-
   {{ govukInput({
     label: {
       text: "Phone number",
@@ -69,14 +27,16 @@
       text: "For non-UK numbers, include the country code."
     },
     autocomplete: "tel",
+    classes: "govuk-input--width-20",
     id: "phone-number",
     name: "phone-number",
-    type: "tel"
+    type: "tel",
+    value: data["phone-number"]
   }) }}
 
   {{ govukInput({
     label: {
-      text: "Personal email address",
+      text: "Email address",
       classes: "govuk-label--s"
     },
     hint: {
@@ -89,17 +49,30 @@
     id: "email",
     name: "email",
     type: "email",
-    value: data['email']
+    value: data["email"]
   }) }}
 
-  {{ govukInput({
-    id: "contact-details-completed",
-    name: "contact-details-completed",
-    type: "hidden",
-    value: true
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Where do you live?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "address-location",
+    name: "address-location",
+    items: [{
+      text: "In the UK",
+      value: "domestic",
+      checked: checked("address-location", "domestic")
+    }, {
+      text: "Outside the UK",
+      value: "international",
+      checked: checked("address-location", "international")
+    }]
   }) }}
 
   {{ govukButton({
-    text: "Save contact details"
+    text: "Save and continue"
   }) }}
 {% endblock %}

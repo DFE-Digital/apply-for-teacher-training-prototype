@@ -2,18 +2,6 @@
 
 {% set title = "Your application" %}
 
-{% if data["references-completed"] %}
-  {% set referencesHref = "/application/references/overview" %}
-{% else %}
-  {% set referencesHref = "/application/references" %}
-{% endif %}
-
-{% if data["school-experience-completed"] %}
-  {% set schoolExperienceHref = "/application/school-experience/overview" %}
-{% else %}
-  {% set schoolExperienceHref = "/application/school-experience" %}
-{% endif %}
-
 {% block primary %}
   {{ appTaskList({
     items: [{
@@ -23,7 +11,7 @@
       completed: data['personal-details-completed']
     }, {
       text: "Contact details",
-      href: "/application/contact-details",
+      href: "/application/contact-details" + ( "/review" if data["school-experience-completed"] ),
       id: "contact-details",
       completed: data['contact-details-completed']
     }, {
@@ -48,12 +36,12 @@
       completed: data['employment-history-completed']
     }, {
       text: "School experience and volunteering with children and young people",
-      href: schoolExperienceHref,
+      href: "/application/school-experience" + ( "/overview" if data["school-experience-completed"] ),
       id: "school-experience",
       completed: data['school-experience-completed']
     }, {
       text: "References",
-      href: referencesHref,
+      href: "/application/references" + ( "/review" if data["references-completed"] ),
       id: "references",
       completed: data['references-completed']
     }, {

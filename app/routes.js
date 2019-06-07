@@ -128,7 +128,7 @@ router.get('/profile/academic-qualifications/edit-maths-gcse', (req, res) => {
 })
 
 router.get('/profile/academic-qualifications/edit-maths-equivalent', (req, res) => {
-  res.render('profile/academic-qualifications/subject-gcse', {
+  res.render('profile/academic-qualifications/subject-equivalent', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit maths GCSE equivalent qualification',
@@ -191,7 +191,7 @@ router.get('/profile/academic-qualifications/edit-english-gcse', (req, res) => {
 })
 
 router.get('/profile/academic-qualifications/edit-english-equivalent', (req, res) => {
-  res.render('profile/academic-qualifications/subject-gcse', {
+  res.render('profile/academic-qualifications/subject-equivalent', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit English GCSE equivalent qualification',
@@ -254,7 +254,7 @@ router.get('/profile/academic-qualifications/edit-science-gcse', (req, res) => {
 })
 
 router.get('/profile/academic-qualifications/edit-science-equivalent', (req, res) => {
-  res.render('profile/academic-qualifications/subject-gcse', {
+  res.render('profile/academic-qualifications/subject-equivalent', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit science GCSE equivalent qualification',

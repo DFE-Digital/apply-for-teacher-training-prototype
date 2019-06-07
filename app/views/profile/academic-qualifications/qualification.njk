@@ -52,6 +52,7 @@
       text: 'Grade',
       classes: "govuk-label--s"
     },
+    classes: "govuk-input--width-10",
     id: "qualification-grade",
     name: "qualification-grade",
     value: data["qualification-grade"]
@@ -62,10 +63,10 @@
       text: "Year qualification was awarded",
       classes: "govuk-label--s"
     },
+    classes: "govuk-input--width-4",
     id: "qualification-year",
     name: "qualification-year",
-    value: data["qualification-year"],
-    classes: "govuk-input--width-4"
+    value: data["qualification-year"]
   }) }}
 
   {{ govukRadios({
@@ -80,12 +81,14 @@
     items: [{
       value: "yes",
       text: "Yes",
+      checked: checked("qualification-international", "yes"),
       conditional: {
         html: internationalQualification
       }
     }, {
       value: "no",
-      text: "No"
+      text: "No",
+      checked: checked("qualification-international", "no")
     }]
   }) }}
 

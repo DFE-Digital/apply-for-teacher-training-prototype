@@ -1,0 +1,27 @@
+{% extends "_content.njk" %}
+
+{% set title = "Your course choice(s)" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="gov-uk-body"><mark>Section TBD, but the following pages may live somewhere within this section.</mark></p>
+
+  {{ appTaskList({
+    items: [{
+      text: "Interview",
+      href: "/courses/interview",
+      id: "interview",
+      completed: data['interview-completed']
+    }]
+  }) }}
+{% endblock %}

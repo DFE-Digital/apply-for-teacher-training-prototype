@@ -2,6 +2,17 @@
 
 {% set title = "Your teaching potential" %}
 
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
 {% block primary %}
   {{ appTaskList({
     items: [{
@@ -49,11 +60,6 @@
       href: "/profile/motivation",
       id: "motivation",
       completed: data['motivation-completed']
-    }, {
-      text: "Interview",
-      href: "/profile/interview",
-      id: "interview",
-      completed: data['interview-completed']
     }]
   }) }}
 

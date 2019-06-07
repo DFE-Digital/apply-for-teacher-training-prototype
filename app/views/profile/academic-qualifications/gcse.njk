@@ -1,8 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add English GCSE or equivalent" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/profile/academic-qualifications" %}
 
 {% block primary %}
 {% set validateEquivalence %}
@@ -10,8 +8,8 @@
     label: {
       text: "Please explain how you plan to validate this qualification"
     },
-    id: "english-qualification-equivalence",
-    name: "english-qualification-equivalence"
+    id: type + "-equivalence",
+    name: type + "-equivalence"
   }) }}
 {% endset -%}
 
@@ -20,8 +18,8 @@
     label: {
       text: "In which country did you gain this qualification?"
     },
-    id: "english-qualification-country",
-    name: "english-qualification-country",
+    id: type + "-country",
+    name: type + "-country",
     items: countries
   }) }}
 
@@ -31,8 +29,8 @@
         text: "Have you got a NARIC statement of comparability?"
       }
     },
-    idPrefix: "english-qualification-naric",
-    name: "english-qualification-naric",
+    idPrefix: type + "-naric",
+    name: type + "-naric",
     items: [{
       value: "yes",
       text: "Yes"
@@ -45,6 +43,11 @@
     }]
   }) }}
 {% endset -%}
+
+{% if type == 'science-qualification' %}
+  <p class="govuk-body">To be eligible to teach at primary level, you need one science GCSE at a minimum of grade 4 in any subject (for example, Chemistry, Physics, Biology or Double Award Science).</p>
+  <p class="govuk-body">If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section.</p>
+{% endif %}
 
 {% if international == true %}
   <p class="govuk-body">If you studied for your degree or other qualifications overseas, you will need to check that they are valid in the UK.</p>
@@ -62,8 +65,8 @@
     hint: {
       text: "GCSE, O level, or other (please specify)."
     },
-    id: "english-qualification-type",
-    name: "english-qualification-type"
+    id: type + "-type",
+    name: type + "-type"
   }) }}
 
   {{ govukInput({
@@ -71,8 +74,8 @@
       text: "Grade",
       classes: "govuk-label--s"
     },
-    id: "english-qualification-grade",
-    name: "english-qualification-grade"
+    id: type + "-grade",
+    name: type + "-grade"
   }) }}
 
   {{ govukInput({
@@ -80,8 +83,8 @@
       text: "Year qualification was awarded",
       classes: "govuk-label--s"
     },
-    id: "english-qualification-year",
-    name: "english-qualification-year",
+    id: type + "-year",
+    name: type + "-year",
     classes: "govuk-input--width-4"
   }) }}
 
@@ -92,8 +95,8 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "english-qualification-international",
-    name: "english-qualification-international",
+    idPrefix: type + "-international",
+    name: type + "-international",
     items: [{
       value: "yes",
       text: "Yes",
@@ -114,12 +117,12 @@
     hint: {
       text: "Please explain how you plan to meet this requirement in time for the start of your course."
     },
-    id: "english-qualification-missing",
-    name: "english-qualification-missing"
+    id: type + "-missing",
+    name: type + "-missing"
   }) }}
 
   {{ govukButton({
-    text: "Add English GCSE or equivalent"
+    text: buttonText
   }) }}
 {% endblock %}
 {% block pageScripts %}
@@ -127,7 +130,7 @@
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
-      selectElement: document.querySelector('#english-qualification-country')
+      selectElement: document.querySelector('#{{ type }}-country')
     })
   </script>
 {% endblock %}

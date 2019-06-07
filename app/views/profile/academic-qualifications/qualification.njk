@@ -1,8 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add qualification" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/profile/academic-qualifications/" %}
 
 {% block primary %}
 {% set internationalQualification %}
@@ -100,13 +98,13 @@
     value: true
   }) }}
 
-{% if data["edit"] %}
+{% if action == 'edit' %}
   {{ govukButton({
     text: "Save changes"
   }) }}
 {% else %}
   {{ govukButton({
-    text: "Add qualification"
+    text: "Continue"
   }) }}
 {% endif %}
 {% endblock %}

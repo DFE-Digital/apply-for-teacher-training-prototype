@@ -14,8 +14,6 @@
     items: countries
   }) }}
 {% endset -%}
-  <p class="govuk-body">Enter your remaining GCSEs, A levels, and any practical, vocational or arts-based qualifications. Providers use this information to assess your academic ability and the broader contribution you can make to a school.</p>
-
   {{ govukInput({
     label: {
       text: "Type of qualification",
@@ -98,15 +96,9 @@
     value: true
   }) }}
 
-{% if action == 'edit' %}
   {{ govukButton({
-    text: "Save changes"
+    text: buttonText
   }) }}
-{% else %}
-  {{ govukButton({
-    text: "Continue"
-  }) }}
-{% endif %}
 {% endblock %}
 {% block pageScripts %}
   <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>

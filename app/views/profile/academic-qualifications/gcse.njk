@@ -3,134 +3,49 @@
 {% set parent = "Eligibility and qualifications" %}
 
 {% block primary %}
-{% set validateEquivalence %}
+{% set missingGCSE %}
+  <p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>contact your training provider for advice about getting the right qualification in time for your course</li>
+    <li>ask if your provider accepts ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE), and where they recommend you sit the test</li>
+  </ul>
+  <p class="govuk-body">You can also visit the <a href="https://nationalcareersservice.direct.gov.uk/course-directory/home">National Careers Service</a> to find GCSE courses for people who are over 16 and have left school.</p>
+
   {{ govukInput({
     label: {
-      text: "Please explain how you plan to validate this qualification"
+      text: "Please explain how you plan to meet this requirement in time for the start of your course",
+      classes: "govuk-label--s"
     },
-    id: type + "-equivalence",
-    name: type + "-equivalence"
+    id: subject + "-qualification-missing",
+    name: subject + "-qualification-missing"
   }) }}
-{% endset -%}
-
-{% set internationalQualification %}
-  {{ appAutocomplete({
-    label: {
-      text: "In which country did you gain this qualification?"
-    },
-    id: type + "-country",
-    name: type + "-country",
-    items: countries
-  }) }}
+{% endset %}
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Have you got a NARIC statement of comparability?"
+        text: "Was this qualification awarded by an institution based in the UK?"
       }
     },
-    idPrefix: type + "-naric",
-    name: type + "-naric",
+    idPrefix: subject + "-qualification",
+    name: subject + "-qualification",
     items: [{
-      value: "yes",
-      text: "Yes"
-    }, {
-      value: "no",
-      text: "No",
-      conditional: {
-        html: validateEquivalence
-      }
-    }]
-  }) }}
-{% endset -%}
-
-{% if type == 'science-qualification' %}
-  <p class="govuk-body">To be eligible to teach at primary level, you need one science GCSE at a minimum of grade 4 in any subject (for example, Chemistry, Physics, Biology or Double Award Science).</p>
-  <p class="govuk-body">If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section.</p>
-{% endif %}
-
-{% if international == true %}
-  <p class="govuk-body">If you studied for your degree or other qualifications overseas, you will need to check that they are valid in the UK.</p>
-  <p class="govuk-body">As a first step, you should register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your international qualifications make you eligible for teacher training and how they correspond to English exam grades.</p>
-  <h3 class="govuk-heading-s">Check with your provider</h3>
-  <p class="govuk-body">You should also contact your chosen training provider to check their policy on international qualifications. They may ask you to sit ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE) and recommend an equivalency testing centre.</p>
-  <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your qualifications, you’ll have the opportunity to tell us below.</p>
-{% endif %}
-
-  {{ govukInput({
-    label: {
-      text: "Type of qualification",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "GCSE, O level, or other (please specify)."
-    },
-    id: type + "-type",
-    name: type + "-type"
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Grade",
-      classes: "govuk-label--s"
-    },
-    id: type + "-grade",
-    name: type + "-grade"
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Year qualification was awarded",
-      classes: "govuk-label--s"
-    },
-    id: type + "-year",
-    name: type + "-year",
-    classes: "govuk-input--width-4"
-  }) }}
-
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Is this an international qualification?",
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
-    idPrefix: type + "-international",
-    name: type + "-international",
-    items: [{
-      value: "yes",
+      value: "domestic",
       text: "Yes",
-      conditional: {
-        html: internationalQualification
-      }
+      checked: true
     }, {
-      value: "no",
+      value: "international",
       text: "No"
-    }]
-  }) }}
-
-  {{ govukInput({
-    label: {
+    }, {
+      value: "missing",
       text: "I don’t have this qualification yet",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "Please explain how you plan to meet this requirement in time for the start of your course."
-    },
-    id: type + "-missing",
-    name: type + "-missing"
+      conditional: {
+        html: missingGCSE
+      }
+    }]
   }) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Continue"
   }) }}
-{% endblock %}
-{% block pageScripts %}
-  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
-  <script type="text/javascript">
-    accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '',
-      selectElement: document.querySelector('#{{ type }}-country')
-    })
-  </script>
 {% endblock %}

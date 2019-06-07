@@ -1,7 +1,6 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
 {% set title = "Academic qualifications" %}
-{% set formAction = "/profile/" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -17,15 +16,6 @@
   }) }}
 {% endblock %}
 
-{% set missingGCSE %}
-  <p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>contact your training provider for advice about getting the right qualification in time for your course</li>
-    <li>ask if your provider accepts ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE), and where they recommend you sit the test</li>
-  </ul>
-  <p class="govuk-body">You can also visit the <a href="https://nationalcareersservice.direct.gov.uk/course-directory/home">National Careers Service</a> to find GCSE courses for people who are over 16 and have left school.</p>
-{% endset %}
-
 {% block primary %}
   <p class="govuk-body">To be eligible for teacher training, you need a:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -36,55 +26,8 @@
   </ul>
   <p class="govuk-body">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
 
-  {{ govukDetails({
-    summaryText: "I am missing one or more of my required GCSEs",
-    html: missingGCSE
-  }) }}
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-  <h2 class="govuk-heading-m">Degree(s)</h2>
   {{ govukButton({
-    text: "Add a degree" ,
-    classes: "govuk-button--secondary",
-    href: "/profile/academic-qualifications/degree-provenance"
-  }) }}
-
-  <h2 class="govuk-heading-m">Required GCSEs</h2>
-  {{ govukButton({
-    text: "Add maths GCSE or equivalent",
-    classes: "govuk-button--secondary",
-    href: "/profile/academic-qualifications/add-maths-gcse"
-  }) }}
-
-  {{ govukButton({
-    text: "Add English GCSE or equivalent",
-    classes: "govuk-button--secondary",
-    href: "/profile/academic-qualifications/add-english-gcse"
-  }) }}
-
-  {{ govukButton({
-    text: "Add science GCSE or equivalent",
-    classes: "govuk-button--secondary",
-    href: "/profile/academic-qualifications/add-science-gcse"
-  }) }}
-
-  <h2 class="govuk-heading-m">Other relevant qualifications</h2>
-  {{ govukButton({
-    text: "Add a qualification",
-    classes: "govuk-button--secondary",
-    href: "/profile/academic-qualifications/add-qualification"
-  }) }}
-
-  <hr class="govuk-section-break">
-
-  {{ govukInput({
-    id: "academic-qualifications-completed",
-    name: "academic-qualifications-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
-  {{ govukButton({
-    text: "Continue"
+    text: "Continue" ,
+    href: "/profile/academic-qualifications/degree"
   }) }}
 {% endblock %}

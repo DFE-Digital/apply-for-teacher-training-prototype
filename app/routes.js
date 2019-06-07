@@ -25,11 +25,11 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
   }
 })
 
-// Application: Degrees
-router.post('/profile/academic-qualifications/degree-provenance-answer', (req, res) => {
-  let provenance = req.session.data['degree-provenance']
+// Application: Degree
+router.post('/profile/academic-qualifications/degree-answer', (req, res) => {
+  let degree = req.session.data['degree']
 
-  if (provenance === 'domestic') {
+  if (degree === 'domestic') {
     res.redirect('/profile/academic-qualifications/add-degree')
   } else {
     res.redirect('/profile/academic-qualifications/add-international-degree')
@@ -37,26 +37,26 @@ router.post('/profile/academic-qualifications/degree-provenance-answer', (req, r
 })
 
 router.get('/profile/academic-qualifications/add-degree', (req, res) => {
-  res.render('profile/academic-qualifications/degree', {
+  res.render('profile/academic-qualifications/degree-details', {
     action: 'add',
-    formAction: '/profile/academic-qualifications',
+    formAction: '/profile/academic-qualifications/maths-gcse',
     title: 'Add degree',
     buttonText: 'Save and continue'
   })
 })
 
 router.get('/profile/academic-qualifications/add-international-degree', (req, res) => {
-  res.render('profile/academic-qualifications/degree', {
+  res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'add',
-    formAction: '/profile/academic-qualifications',
+    formAction: '/profile/academic-qualifications/maths-gcse',
     title: 'Add international degree',
     buttonText: 'Save and continue'
   })
 })
 
 router.get('/profile/academic-qualifications/edit-degree', (req, res) => {
-  res.render('profile/academic-qualifications/degree', {
+  res.render('profile/academic-qualifications/degree-details', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit degree',
@@ -65,7 +65,7 @@ router.get('/profile/academic-qualifications/edit-degree', (req, res) => {
 })
 
 router.get('/profile/academic-qualifications/edit-international-degree', (req, res) => {
-  res.render('profile/academic-qualifications/degree', {
+  res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
@@ -74,63 +74,191 @@ router.get('/profile/academic-qualifications/edit-international-degree', (req, r
   })
 })
 
-// Application: GCSEs
-router.get('/profile/academic-qualifications/add-maths-gcse', (req, res) => {
+// Application: Maths GCSE
+router.get('/profile/academic-qualifications/maths-gcse', (req, res) => {
   res.render('profile/academic-qualifications/gcse', {
     action: 'add',
-    formAction: '/profile/academic-qualifications/add-english-gcse',
+    formAction: '/profile/academic-qualifications/maths-gcse-answer',
     title: 'Add maths GCSE or equivalent',
-    type: 'english-qualification',
+    subject: 'maths',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.post('/profile/academic-qualifications/maths-gcse-answer', (req, res) => {
+  let gcse = req.session.data['maths-qualification']
+
+  if (gcse === 'domestic') {
+    res.redirect('/profile/academic-qualifications/add-maths-gcse')
+  } else if (gcse === 'international') {
+    res.redirect('/profile/academic-qualifications/add-maths-equivalent')
+  } else { // If qualification missing, go to next step
+    res.redirect('/profile/academic-qualifications/english-gcse')
+  }
+})
+
+router.get('/profile/academic-qualifications/add-maths-gcse', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/english-gcse',
+    title: 'Add maths GCSE',
+    subject: 'maths',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/profile/academic-qualifications/add-maths-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-equivalent', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/english-gcse',
+    title: 'Add maths GCSE equivalent qualification',
+    subject: 'maths',
     buttonText: 'Save and continue'
   })
 })
 
 router.get('/profile/academic-qualifications/edit-maths-gcse', (req, res) => {
-  res.render('profile/academic-qualifications/gcse', {
+  res.render('profile/academic-qualifications/subject-gcse', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
-    title: 'Edit maths GCSE or equivalent',
-    type: 'english-qualification',
+    title: 'Edit maths GCSE',
+    subject: 'maths',
     buttonText: 'Save changes'
   })
 })
 
-router.get('/profile/academic-qualifications/add-english-gcse', (req, res) => {
+router.get('/profile/academic-qualifications/edit-maths-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'edit',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Edit maths GCSE equivalent qualification',
+    subject: 'maths',
+    buttonText: 'Save changes'
+  })
+})
+
+// Application: English GCSE
+router.get('/profile/academic-qualifications/english-gcse', (req, res) => {
   res.render('profile/academic-qualifications/gcse', {
     action: 'add',
-    formAction: '/profile/academic-qualifications/add-science-gcse',
+    formAction: '/profile/academic-qualifications/english-gcse-answer',
     title: 'Add English GCSE or equivalent',
-    type: 'english-qualification',
+    subject: 'english',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.post('/profile/academic-qualifications/english-gcse-answer', (req, res) => {
+  let gcse = req.session.data['english-qualification']
+
+  if (gcse === 'domestic') {
+    res.redirect('/profile/academic-qualifications/add-english-gcse')
+  } else if (gcse === 'international') {
+    res.redirect('/profile/academic-qualifications/add-english-equivalent')
+  } else { // If qualification missing, go to next step
+    res.redirect('/profile/academic-qualifications/science-gcse')
+  }
+})
+
+router.get('/profile/academic-qualifications/add-english-gcse', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/science-gcse',
+    title: 'Add English GCSE',
+    subject: 'english',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/profile/academic-qualifications/add-english-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-equivalent', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/science-gcse',
+    title: 'Add English GCSE equivalent qualification',
+    subject: 'english',
     buttonText: 'Save and continue'
   })
 })
 
 router.get('/profile/academic-qualifications/edit-english-gcse', (req, res) => {
-  res.render('profile/academic-qualifications/gcse', {
+  res.render('profile/academic-qualifications/subject-gcse', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
-    title: 'Edit english GCSE or equivalent',
-    type: 'english-qualification',
+    title: 'Edit English GCSE',
+    subject: 'english',
     buttonText: 'Save changes'
   })
 })
 
-router.get('/profile/academic-qualifications/add-science-gcse', (req, res) => {
+router.get('/profile/academic-qualifications/edit-english-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'edit',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Edit English GCSE equivalent qualification',
+    subject: 'english',
+    buttonText: 'Save changes'
+  })
+})
+
+// Application: Science GCSE
+router.get('/profile/academic-qualifications/science-gcse', (req, res) => {
   res.render('profile/academic-qualifications/gcse', {
     action: 'add',
-    formAction: '/profile/academic-qualifications/add-qualification',
+    formAction: '/profile/academic-qualifications/science-gcse-answer',
     title: 'Add science GCSE or equivalent',
-    type: 'science-qualification',
+    subject: 'science',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.post('/profile/academic-qualifications/science-gcse-answer', (req, res) => {
+  let gcse = req.session.data['science-qualification']
+
+  if (gcse === 'domestic') {
+    res.redirect('/profile/academic-qualifications/add-science-gcse')
+  } else if (gcse === 'international') {
+    res.redirect('/profile/academic-qualifications/add-science-equivalent')
+  } else { // If qualification missing, go to next step
+    res.redirect('/profile/academic-qualifications/review')
+  }
+})
+
+router.get('/profile/academic-qualifications/add-science-gcse', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Add science GCSE',
+    subject: 'science',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/profile/academic-qualifications/add-science-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-equivalent', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Add science GCSE equivalent qualification',
+    subject: 'science',
     buttonText: 'Save and continue'
   })
 })
 
 router.get('/profile/academic-qualifications/edit-science-gcse', (req, res) => {
-  res.render('profile/academic-qualifications/gcse', {
+  res.render('profile/academic-qualifications/subject-gcse', {
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
-    title: 'Edit science GCSE or equivalent',
-    type: 'science-qualification',
+    title: 'Edit science GCSE',
+    subject: 'science',
+    buttonText: 'Save changes'
+  })
+})
+
+router.get('/profile/academic-qualifications/edit-science-equivalent', (req, res) => {
+  res.render('profile/academic-qualifications/subject-gcse', {
+    action: 'edit',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Edit science GCSE equivalent qualification',
+    subject: 'science',
     buttonText: 'Save changes'
   })
 })
@@ -139,7 +267,7 @@ router.get('/profile/academic-qualifications/edit-science-gcse', (req, res) => {
 router.get('/profile/academic-qualifications/add-qualification', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
     action: 'add',
-    formAction: '/profile/academic-qualifications',
+    formAction: '/profile/academic-qualifications/review',
     title: 'Add qualification',
     buttonText: 'Save and continue'
   })

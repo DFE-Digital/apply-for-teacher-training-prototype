@@ -1,0 +1,130 @@
+{% extends "_form.njk" %}
+
+{% set title = "Add science GCSE or equivalent" %}
+{% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/academic-qualifications" %}
+
+{% block primary %}
+{% set validateEquivalence %}
+  {{ govukInput({
+    label: {
+      text: "Please explain how you plan to validate this qualification"
+    },
+    id: "science-qualification-equivalence",
+    name: "science-qualification-equivalence"
+  }) }}
+{% endset -%}
+
+{% set internationalQualification %}
+  {{ appAutocomplete({
+    label: {
+      text: "In which country did you gain this qualification?"
+    },
+    id: "science-gcse-country",
+    name: "science-gcse-country",
+    items: countries
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you got a NARIC statement of comparability?"
+      }
+    },
+    idPrefix: "science-qualification-naric",
+    name: "science-qualification-naric",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: validateEquivalence
+      }
+    }]
+  }) }}
+{% endset -%}
+
+  {{ govukInsetText({
+    text: "If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section."
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Type of qualification",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "GCSE, O level, or other (please specify)."
+    },
+    id: "science-gcse-type",
+    name: "science-gcse-type"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Grade",
+      classes: "govuk-label--s"
+    },
+    id: "science-gcse-grade",
+    name: "science-gcse-grade"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded",
+      classes: "govuk-label--s"
+    },
+    id: "science-gcse-year",
+    name: "science-gcse-year",
+    classes: "govuk-input--width-4"
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this an international qualification?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "science-gcse-international",
+    name: "science-gcse-international",
+    items: [{
+      value: "yes",
+      text: "Yes",
+      conditional: {
+        html: internationalQualification
+      }
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "I don’t have this qualification yet",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Please explain how you plan to meet this requirement in time for the start of your course."
+    },
+    id: "science-gcse-missing",
+    name: "science-gcse-missing"
+  }) }}
+
+  {{ govukButton({
+    text: "Add science GCSE or equivalent"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
+  <script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#science-gcse-country')
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "_content.njk" %}
+
+{% set title = "Work history" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Use this section to enter details of your last 5 years of work history. Training providers need this information to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>safeguard children</li>
+    <li>get a more rounded sense of you as a candidate</li>
+    <li>identify areas of knowledge or expertise you could bring to teaching.</li>
+  </ul>
+  <p class="govuk-body">Include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>paid work</li>
+    <li>regular full and part-time work</li>
+    <li>work in a school (for example as a teaching assistant)</li>
+  </ul>
+  <p class="govuk-body">Don’t include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>short-term school experience, one-off observations and volunteering with children – we’ll ask you about this next</li>
+  </ul>
+
+  <p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
+
+  {{ govukDetails({
+    summaryText: "I have more than 5 years of work history",
+    text: "You can include your complete work history going back further than 5 years if you wish. Training providers will be interested in skills and experience you can transfer to a school setting."
+  }) }}
+
+  {{ govukDetails({
+    summaryText: "I have less than 5 years of work history",
+    text: "If you are a recent graduate, tell us about your employment since leaving university."
+  }) }}
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/profile/work-history/add-job"
+  }) }}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "_form.njk" %}
+
+{% set title = "Contact details" %}
+{% set formAction = "/profile/contact-details/address-answer" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: "Phone number",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For non-UK numbers, include the country code."
+    },
+    autocomplete: "tel",
+    classes: "govuk-input--width-20",
+    id: "phone-number",
+    name: "phone-number",
+    type: "tel",
+    value: data["phone-number"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Don’t give us a work or university email address you might lose access to."
+    },
+    attributes: {
+      spellcheck: "false"
+    },
+    autocomplete: "email",
+    id: "email",
+    name: "email",
+    type: "email",
+    value: data["email"]
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Where do you live?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "address-location",
+    name: "address-location",
+    items: [{
+      text: "In the UK",
+      value: "domestic",
+      checked: checked("address-location", "domestic")
+    }, {
+      text: "Outside the UK",
+      value: "international",
+      checked: checked("address-location", "international")
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

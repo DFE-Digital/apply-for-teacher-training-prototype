@@ -1,11 +1,11 @@
 {% extends "_form.njk" %}
 
 {% set title = "Sign in" %}
-{% set formAction = "/application" %}
+{% set formAction = "/dashboard" %}
 {% set hasSecondary = true %}
 
 {% block primary %}
-  <p class="govuk-body">Enter your ‘{{ serviceName }}’ account details to sign in.</p>
+  <p class="govuk-body-l">Enter your ‘{{ serviceName }}’ account details to sign in.</p>
 
   {{ govukInput({
     label: {

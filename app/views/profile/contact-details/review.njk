@@ -1,0 +1,87 @@
+{% extends "_form.njk" %}
+
+{% set formAction = "/profile/" %}
+{% set parent = "Contact details" %}
+{% set title = "Review your answers" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+{% set address %}
+  {% if data["address-line-1"] %}{{ data["address-line-1"] }}<br>{% endif %}
+  {% if data["address-line-2"] %}{{ data["address-line-2"] }}<br>{% endif %}
+  {% if data["address-level-2"] %}{{ data["address-level-2"] }}<br>{% endif %}
+  {% if data["address-level-1"] %}{{ data["address-level-1"] }}<br>{% endif %}
+  {% if data["address-postal-code"] %}{{ data["address-postal-code"] }}<br>{% endif %}
+  {% if data["address-country"] %}{{ data["address-country"] }}{% endif %}
+{% endset %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
+    rows: [{
+      key: {
+        text: "Phone number"
+      },
+      value: {
+        text: data["phone-number"]
+      },
+      actions: {
+        items: [{
+          href: "/profile/contact-details",
+          text: "Change",
+          visuallyHiddenText: "phone number"
+        }]
+      }
+    }, {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: data["email"]
+      },
+      actions: {
+        items: [{
+          href: "/profile/contact-details/",
+          text: "Change",
+          visuallyHiddenText: "email"
+        }]
+      }
+    }, {
+      key: {
+        text: "Address"
+      },
+      value: {
+        html: address
+      },
+      actions: {
+        items: [{
+          href: "/profile/contact-details/address",
+          text: "Change",
+          visuallyHiddenText: "address"
+        }]
+      }
+    }]
+  }) }}
+
+  {{ govukInput({
+    id: "contact-details-completed",
+    name: "contact-details-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

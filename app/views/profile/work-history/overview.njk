@@ -1,0 +1,62 @@
+{% extends "_content.njk" %}
+
+{% set title = "Work history" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukTable({
+    caption: "Your work history",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Dates",
+      classes: "govuk-!-width-one-quarter"
+    }, {
+      text: "Job title"
+    }, {
+      text: "Organisation"
+    }, {
+      text: "Actions"
+    }],
+    rows: [
+      [{
+        text: data['work-history-end-month'] + '/' + data['work-history-end-year'] + ' - Present',
+        classes: "app-table__cell--muted"
+      }, {
+        classes: "app-table__cell--muted",
+        colspan: 2
+      }, {
+        html: "<a href=\"/profile/work-history/explain-gap\">Explain gap</a>",
+        classes: "app-table__cell--muted"
+      }], [{
+        text: data['work-history-start-month'] + '/' + data['work-history-start-year'] + ' - ' + data['work-history-end-month'] + '/' + data['work-history-end-year']
+      }, {
+        text: data['work-history-role']
+      }, {
+        text: data['work-history-org']
+      }, {
+        html: "<a href=\"/profile/work-history/edit-job\">Edit job</a>"
+      }]
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Add another job",
+    classes: "govuk-button--secondary",
+    href: "/profile/work-history/add-job"
+  }) }}
+{% endblock %}

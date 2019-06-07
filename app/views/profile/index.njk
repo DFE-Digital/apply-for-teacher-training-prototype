@@ -1,0 +1,61 @@
+{% extends "_content.njk" %}
+
+{% set title = "Your teaching potential" %}
+
+{% block primary %}
+  {{ appTaskList({
+    items: [{
+      text: "Personal details",
+      href: "/profile/personal-details",
+      id: "personal-details",
+      completed: data['personal-details-completed']
+    }, {
+      text: "Contact details",
+      href: "/profile/contact-details" + ( "/review" if data["school-experience-completed"] ),
+      id: "contact-details",
+      completed: data['contact-details-completed']
+    }, {
+      text: "Academic qualifications",
+      href: "/profile/academic-qualifications",
+      id: "academic-qualifications",
+      completed: data['academic-qualifications-completed']
+    }, {
+      text: "Subject knowledge",
+      href: "/profile/subject-knowledge",
+      id: "subject-knowledge",
+      completed: data['subject-knowledge-completed']
+    }, {
+      text: "Literacy, numeracy and language skills",
+      href: "/profile/professional-skills",
+      id: "professional-skills",
+      completed: data['professional-skills-completed']
+    }, {
+      text: "Work history",
+      href: "/profile/work-history",
+      id: "work-history",
+      completed: data['work-history-completed']
+    }, {
+      text: "School experience and volunteering with children and young people",
+      href: "/profile/school-experience" + ( "/overview" if data["school-experience-completed"] ),
+      id: "school-experience",
+      completed: data['school-experience-completed']
+    }, {
+      text: "References",
+      href: "/profile/references" + ( "/review" if data["references-completed"] ),
+      id: "references",
+      completed: data['references-completed']
+    }, {
+      text: "Motivation",
+      href: "/profile/motivation",
+      id: "motivation",
+      completed: data['motivation-completed']
+    }, {
+      text: "Interview",
+      href: "/profile/interview",
+      id: "interview",
+      completed: data['interview-completed']
+    }]
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--l">
+{% endblock %}

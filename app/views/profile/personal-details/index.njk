@@ -1,11 +1,35 @@
 {% extends "_form.njk" %}
 
-{% set title = "Create an account" %}
-{% set formAction = "/dashboard" %}
-{% set hasSecondary = true %}
+{% set title = "Personal details" %}
+{% set formAction = "/profile/personal-details/answer" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">Create an account to use this service. You’ll then be able to save and return to your applications as often as you need to.</p>
+  {{ govukInput({
+    label: {
+      text: "Title",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "How would you like us to address you? For example, Mr, Mrs, Miss, Ms, Mx."
+    },
+    id: "title",
+    name: "title",
+    value: data["title"]
+  }) }}
 
   {{ govukInput({
     label: {
@@ -14,7 +38,18 @@
     },
     autocomplete: "given-name",
     id: "first-name",
-    name: "first-name"
+    name: "first-name",
+    value: data["first-name"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Name you prefer to be addressed by (optional)",
+      classes: "govuk-label--s"
+    },
+    id: "optional-name",
+    name: "optional-name",
+    value: data["optional-name"]
   }) }}
 
   {{ govukInput({
@@ -24,18 +59,19 @@
     },
     autocomplete: "family-name",
     id: "family-name",
-    name: "family-name"
+    name: "family-name",
+    value: data["family-name"]
   }) }}
 
   {{ govukDateInput({
     fieldset: {
       legend: {
-        text: "Date of birth",
+        text: "When is your date of birth?",
         classes: "govuk-fieldset__legend--s"
       }
     },
     hint: {
-      text: "For example, 31 03 1980"
+      text: "For example, 12 11 1997"
     },
     id: "date-of-birth",
     namePrefix: "date-of-birth",
@@ -57,67 +93,33 @@
     }]
   }) }}
 
-  {{ govukInput({
+  {{ appAutocomplete({
     label: {
-      text: "Email address",
+      text: "What is your nationality?",
       classes: "govuk-label--s"
     },
-    autocomplete: "email",
-    classes: "govuk-!-width-two-thirds",
-    id: "email",
-    name: "email",
-    type: "email"
+    id: "nationality",
+    name: "nationality",
+    value: data["nationality"],
+    items: nationalities
   }) }}
 
   {{ govukInput({
-    label: {
-      text: "Password",
-      classes: "govuk-label--s"
-    },
-    classes: "govuk-!-width-two-thirds",
-    id: "password",
-    name: "password",
-    type: "password"
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Confirm password",
-      classes: "govuk-label--s"
-    },
-    classes: "govuk-!-width-two-thirds",
-    id: "confirm-password",
-    name: "confirm-password",
-    type: "password"
+    id: "personal-details-completed",
+    name: "personal-details-completed",
+    type: "hidden",
+    value: true
   }) }}
 
   {{ govukButton({
-    text: "Create an account"
-  }) }}
-{% endblock %}
-{% block secondary %}
-  {{ appRelatedItems ({
-    title: "Forgot your passsword?",
-    name: "forgot-password",
-    items: [{
-      href: "/account/reset-password",
-      text: "Reset your password"
-    }]
-  }) }}
-  {{ appRelatedItems ({
-    title: "Already registered?",
-    name: "sign-in",
-    items: [{
-      href: "/account/sign-in",
-      text: "Sign in"
-    }]
+    text: "Save and continue"
   }) }}
 {% endblock %}
 {% block pageScripts %}
   <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '',
+      defaultValue: '{{ data["nationality"] | safe }}',
       selectElement: document.querySelector('#nationality')
     })
   </script>

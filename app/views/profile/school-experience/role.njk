@@ -1,0 +1,83 @@
+{% extends "_form.njk" %}
+
+{% set parent = "School experience and volunteering with children and young people" %}
+{% set formAction = "/profile/school-experience/overview" %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: "Your role",
+      classes: "govuk-label--s"
+    },
+    id: "school-experience-role",
+    name: "school-experience-role",
+    value: data["school-experience-role"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Organisation where you gained experience or volunteered",
+      classes: "govuk-label--s"
+    },
+    id: "school-experience-org",
+    name: "school-experience-org",
+    value: data["school-experience-org"]
+  }) }}
+
+  {{ govukDateInput({
+    id: "school-experience-start",
+    namePrefix: "school-experience-start",
+    fieldset: {
+      legend: {
+        text: "Start date",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2018"
+    },
+    items: [{
+      name: "month",
+      value: data["school-experience-start-month"],
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      value: data["school-experience-start-year"],
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukDateInput({
+    id: "school-experience-end",
+    namePrefix: "school-experience-end",
+    fieldset: {
+      legend: {
+        text: "End date (leave blank if this is your current role)",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2019"
+    },
+    items: [{
+      name: "month",
+      value: data["school-experience-end-month"],
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      value: data["school-experience-end-year"],
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukInput({
+    id: "school-experience-completed",
+    name: "school-experience-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

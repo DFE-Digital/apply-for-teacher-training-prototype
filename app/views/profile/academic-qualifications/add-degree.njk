@@ -1,0 +1,164 @@
+{% extends "_form.njk" %}
+
+{% set title = "Add a degree" %}
+{% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/academic-qualifications" %}
+
+{% block primary %}
+{% set validateEquivalence %}
+  {{ govukInput({
+    label: {
+      text: "Please explain how you plan to validate this qualification"
+    },
+    id: "degree-equivalence",
+    name: "degree-equivalence",
+    value: data["degree-equivalence"]
+  }) }}
+{% endset -%}
+
+{% set internationalQualification %}
+  {{ appAutocomplete({
+    label: {
+      text: "In which country did you gain this qualification?"
+    },
+    id: "degree-country",
+    name: "degree-country",
+    value: data["degree-country"],
+    items: countries
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Have you got a NARIC statement of comparability?"
+      }
+    },
+    idPrefix: "degree-naric",
+    name: "degree-naric",
+    value: data["degree-naric"],
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: validateEquivalence
+      }
+    }]
+  }) }}
+{% endset -%}
+
+  {{ govukDetails({
+    summaryText: "I haven't completed my degree",
+    text: "If you are still studying, give us your predicted grade and date of graduation. You must have successfully graduated by the time you start your course. If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who will be able to validate it."
+  }) }}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukInput({
+    label: {
+      text: "Type of degree",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
+    },
+    id: "degree-type",
+    name: "degree-type",
+    value: data["degree-type"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Subject of degree",
+      classes: "govuk-label--s"
+    },
+    id: "degree-subject",
+    name: "degree-subject",
+    value: data["degree-subject"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied",
+      classes: "govuk-label--s"
+    },
+    id: "degree-institution",
+    name: "degree-institution",
+    value: data["degree-institution"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Class of degree",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, 2.1"
+    },
+    id: "degree-class",
+    name: "degree-class",
+    value: data["degree-class"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded",
+      classes: "govuk-label--s"
+    },
+    id: "degree-year",
+    name: "degree-year",
+    value: data["degree-year"],
+    classes: "govuk-input--width-4"
+  }) }}
+
+  {{ data["degree-international"] }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this an international qualification?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    idPrefix: "degree-international",
+    name: "degree-international",
+    items: [{
+      value: "yes",
+      text: "Yes",
+      conditional: {
+        html: internationalQualification
+      }
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukInput({
+    id: "degree-completed",
+    name: "degree-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+{% if data["edit"] %}
+  {{ govukButton({
+    text: "Save changes"
+  }) }}
+{% else %}
+  {{ govukButton({
+    text: "Add degree"
+  }) }}
+{% endif %}
+
+{% endblock %}
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
+  <script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#degree-country')
+    })
+  </script>
+{% endblock %}

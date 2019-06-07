@@ -1,0 +1,112 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Work history" %}
+{% set formAction = "/profile/work-history/overview" %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: "Job title",
+      classes: "govuk-label--s"
+    },
+    id: "work-history-role",
+    name: "work-history-role"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Name of employer",
+      classes: "govuk-label--s"
+    },
+    id: "work-history-org",
+    name: "work-history-org"
+  }) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Start date",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2018"
+    },
+    items: [{
+      name: "month",
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      classes: "govuk-input--width-4"
+    }],
+    id: "work-history-start",
+    namePrefix: "work-history-start"
+  }) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "End date (leave blank if this is your current role)",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2019"
+    },
+    items: [{
+      name: "month",
+      classes: "govuk-input--width-2"
+    }, {
+      name: "year",
+      classes: "govuk-input--width-4"
+    }],
+    id: "work-history-end",
+    namePrefix: "work-history-end"
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Skills and experience relevant to teaching you gained in this role",
+      classes: "govuk-label--s"
+    },
+    id: "work-history-learnt",
+    name: "work-history-learnt",
+    maxlength: 150
+  }) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Did this job involve working in a school or with children?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    classes: "govuk-radios--inline",
+    idPrefix: "work-history-with-children",
+    name: "work-history-with-children",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukInput({
+    id: "work-history-completed",
+    name: "work-history-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+{% if action != "edit" %}
+  {{ govukButton({
+    text: "Save and add another job",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endif %}
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

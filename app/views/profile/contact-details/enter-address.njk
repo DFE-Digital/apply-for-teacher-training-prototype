@@ -1,0 +1,112 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Contact details" %}
+{% set title = "What is your address?" %}
+{% set formAction = "/profile/contact-details/review" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-line1",
+    id: "address-line-1",
+    name: "address-line-1",
+    value: data["address-line-1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-line2",
+    id: "address-line-2",
+    name: "address-line-2",
+    value: data["address-line-2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Town or city",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-level2",
+    classes: "govuk-!-width-two-thirds",
+    id: "address-level-2",
+    name: "address-level-2",
+    value: data["address-level-2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "County or state",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-level1",
+    classes: "govuk-!-width-two-thirds",
+    id: "address-level-1",
+    name: "address-level-1",
+    value: data["address-level-1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Zip or postal code",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "postal-code",
+    classes: "govuk-input--width-10",
+    id: "address-postal-code",
+    name: "address-postal-code",
+    value: data["address-postal-code"]
+  }) }}
+
+  {{ appAutocomplete({
+    label: {
+      text: "Country",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "country-name",
+    id: "address-country",
+    name: "address-country",
+    value: data["address-country"],
+    items: countries
+  }) }}
+
+  {{ govukInput({
+    id: "contact-details-completed",
+    name: "contact-details-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
+  <script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '',
+      selectElement: document.querySelector('#address-country')
+    })
+  </script>
+{% endblock %}

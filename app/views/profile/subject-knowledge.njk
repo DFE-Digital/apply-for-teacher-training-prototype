@@ -1,0 +1,87 @@
+{% extends "_form.njk" %}
+
+{% set title = "Subject knowledge" %}
+{% set formAction = "/profile/" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/"
+    }, {
+      text: "Application",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Use this section to give details about the knowledge and passion you bring to the subject(s) you’d like to teach. Providers look for evidence of both interest and understanding.</p>
+  <p class="govuk-body">Check your provider’s course listing page on Find postgraduate teacher training for specific subject knowledge requirements.</p>
+  <p class="govuk-body">Evidence can include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>modules you studied as part of your undergraduate degree</li>
+    <li>other tertiary qualifications (for example a Masters or Phd)</li>
+    <li>your A level subjects</li>
+    <li>expertise you’ve gained at work</li>
+  </ul>
+  <p class="govuk-body">If you want to teach a subject different from that of your degree, providers may ask you to sit a <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses\">subject knowledge enhancement</a> (SKE) course. If you are not a recent graduate, a SKE course could also help you update your subject knowledge. Learn more at <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses\">Get into Teaching</a>.</p>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Give details of the knowledge and passion you bring to the subject(s) you’d like to teach.",
+      classes: "govuk-label--s"
+    },
+    id: "subject-knowledge-statement",
+    name: "subject-knowledge-statement",
+    value: data["subject-knowledge-statement"],
+    maxlength: 600,
+    rows: 12
+  }) }}
+
+  {{ govukRadios({
+    idPrefix: "subject-knowledge-enhancement",
+    name: "subject-knowledge-enhancement",
+    fieldset: {
+      legend: {
+        text: "Would you be interested in taking a subject knowledge enhancement (SKE) course?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes",
+      checked: checked("subject-knowledge-enhancement", "yes")
+    }, {
+      value: "no",
+      text: "No",
+      checked: checked("subject-knowledge-enhancement", "no")
+    }]
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Is there anything you’d like to tell us about your qualifications?",
+      classes: "govuk-label--s"
+    },
+    id: "subject-knowledge-additional",
+    name: "subject-knowledge-additional",
+    value: data["subject-knowledge-additional"],
+    maxlength: 600,
+    rows: 12
+  }) }}
+
+  {{ govukInput({
+    id: "subject-knowledge-completed",
+    name: "subject-knowledge-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

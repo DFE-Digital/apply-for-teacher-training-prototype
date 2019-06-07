@@ -1,0 +1,86 @@
+{% extends "_form.njk" %}
+
+{% set title = "What is your status regarding your ability to work and study in the UK?" %}
+{% set parent = "Personal details" %}
+{% set formAction = "/profile/" %}
+
+{% block primary %}
+  {% set rightToWorkStudy %}
+    {{ govukInput({
+      label: {
+        html: "Please give details"
+      },
+      id: "residency-status-right-to-study-details",
+      name: "residency-status-right-to-study-details",
+      value: data["residency-status-right-to-study-details"]
+    }) }}
+  {% endset -%}
+
+  {% set requireTier2 %}
+    <p>Bear in mind that:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you must be offered a salaried place on a course before you apply for a Tier 2 visa</li>
+      <li>the earliest you can apply for a visa is 3 months before you start your course</li>
+    </ul>
+    <p><a href="https://www.gov.uk/tier-2-general">Learn more about Tier 2 visas</a>.</p>
+  {% endset -%}
+
+  {% set requireTier4 %}
+    <p>Bear in mind that:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you must be accepted onto a course before you apply for a Tier 4 visa</li>
+      <li>the earliest you can apply for a visa is 3 months before you start your course</li>
+      <li>Tier 4 visa holders are not eligible for public funds, including bursaries and student loans</li>
+    </ul>
+    <p><a href="https://www.gov.uk/tier-4-general-visa">Learn more about Tier 4 visas</a>.</p>
+  {% endset -%}
+
+  {% set unknown %}
+    {{ govukInput({
+      label: {
+        html: "Please give details"
+      },
+      id: "residency-status-unknown-details",
+      name: "residency-status-unknown-details",
+      value: data["residency-status-unknown-details"]
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: "residency-status",
+    name: "residency-status",
+    items: [{
+      text: "I have the right to study and/or work in the UK",
+      value: "right-to-study",
+      checked: checked("residency-status", "right-to-study"),
+      conditional: {
+        html: rightToWorkStudy
+      }
+    }, {
+      text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
+      value: "require-tier-2",
+      checked: checked("residency-status", "require-tier-2"),
+      conditional: {
+        html: requireTier2
+      }
+    }, {
+      text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
+      value: "require-tier-4",
+      checked: checked("residency-status", "require-tier-4"),
+      conditional: {
+        html: requireTier4
+      }
+    }, {
+      text: "I don’t know my residency status",
+      value: "unknown",
+      checked: checked("residency-status", "unknown"),
+      conditional: {
+        html: unknown
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

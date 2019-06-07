@@ -27,24 +27,40 @@
 {% endset %}
 
 {% block primary %}
-  <p class="govuk-body">To be eligible for teacher training, you need a:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>UK degree (or international equivalent)</li>
-    <li>GCSE in maths, grade 4 (previously grade C)</li>
-    <li>GCSE in English, grade 4 (previously grade C)</li>
-    <li>To teach at primary school, you also need a minimum grade 4 GCSE in science.</li>
-  </ul>
-  <p class="govuk-body">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
 
-  {{ govukDetails({
-    summaryText: "I am missing one or more of my required GCSEs",
-    html: missingGCSE
+  {% set qualification = data["degree-type"] + " " + data["degree-subject"] %}
+  {% set qualificationHref = "/profile/academic-qualifications/add-degree" %}
+  {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
+  {% set qualificationLink = qualificationLink | safe %}
+  {{ govukTable({
+    caption: "Degree(s)",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Qualification"
+    }, {
+      text: "Grade"
+    }, {
+      text: "Year awarded"
+    }, {
+      text: "Actions"
+    }],
+    rows: [
+      [{
+        text: qualification
+      }, {
+        text: data["degree-class"]
+      }, {
+        text: data["degree-year"]
+      }, {
+        html: qualificationLink
+      }]
+    ]
   }) }}
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-  <h2 class="govuk-heading-m">Degree(s)</h2>
   {{ govukButton({
-    text: "Add a degree" ,
+    text: "Add another degree",
     classes: "govuk-button--secondary",
     href: "/profile/academic-qualifications/degree-provenance"
   }) }}
@@ -68,9 +84,40 @@
     href: "/profile/academic-qualifications/add-science-gcse"
   }) }}
 
-  <h2 class="govuk-heading-m">Other relevant qualifications</h2>
+  {% set qualification = data["qualification-type"] + " " + data["qualification-subject"] %}
+  {% set qualificationHref = "/profile/academic-qualifications/add-qualification" %}
+  {% set qualificationLink = "<a href=\"" + qualificationHref + "?edit=true\" aria-label=\"Edit " + qualification + "\">Edit</a>" %}
+  {% set qualificationLink = qualificationLink | safe %}
+  {{ govukTable({
+    caption: "Other qualifications",
+    captionClasses: "govuk-heading-m",
+    classes: "govuk-!-font-size-16",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Qualification"
+    }, {
+      text: "Grade"
+    }, {
+      text: "Year awarded"
+    }, {
+      text: "Actions"
+    }],
+    rows: [
+      [{
+        text: qualification
+      }, {
+        text: data['qualification-grade']
+      }, {
+        text: data['qualification-year']
+      }, {
+        text: qualificationLink
+      }]
+    ]
+  }) }}
+  {% set buttonText = "Add another qualification" %}
+
   {{ govukButton({
-    text: "Add a qualification",
+    text: "Add another qualification",
     classes: "govuk-button--secondary",
     href: "/profile/academic-qualifications/add-qualification"
   }) }}

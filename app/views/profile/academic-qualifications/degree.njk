@@ -1,8 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add a degree" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/profile/academic-qualifications" %}
 
 {% block primary %}
 {% set validateEquivalence %}
@@ -15,45 +13,14 @@
     value: data["degree-equivalence"]
   }) }}
 {% endset -%}
-
-{% set internationalQualification %}
-  {{ appAutocomplete({
-    label: {
-      text: "In which country did you gain this qualification?"
-    },
-    id: "degree-country",
-    name: "degree-country",
-    value: data["degree-country"],
-    items: countries
-  }) }}
-
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Have you got a NARIC statement of comparability?"
-      }
-    },
-    idPrefix: "degree-naric",
-    name: "degree-naric",
-    value: data["degree-naric"],
-    items: [{
-      value: "yes",
-      text: "Yes"
-    }, {
-      value: "no",
-      text: "No",
-      conditional: {
-        html: validateEquivalence
-      }
-    }]
-  }) }}
-{% endset -%}
-
-  {{ govukDetails({
-    summaryText: "I haven't completed my degree",
-    text: "If you are still studying, give us your predicted grade and date of graduation. You must have successfully graduated by the time you start your course. If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who will be able to validate it."
-  }) }}
+{% if international == true %}
+  <p class="govuk-body-l">If you studied for your degree overseas, you will need to check that it is valid in the UK.</p>
+  <p class="govuk-body">As a first step, you should register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your international degree makes you eligible for teacher training and how it corresponds to an English degree.</p>
+  <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your degree, you’ll have the opportunity to tell us below.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+{% else %}
+  <p class="govuk-body">Individual training providers set specific requirements for their courses. Contact your chosen training provider to check your degree meets the standard they’ve set for your course.</p>
+{% endif %}
 
   {{ govukInput({
     label: {
@@ -88,13 +55,26 @@
     value: data["degree-institution"]
   }) }}
 
+{% if international == true %}
+  {{ appAutocomplete({
+    label: {
+      text: "In which country did you gain this degree?",
+      classes: "govuk-label--s"
+    },
+    id: "degree-country",
+    name: "degree-country",
+    value: data["degree-country"],
+    items: countries
+  }) }}
+{% endif %}
+
   {{ govukInput({
     label: {
       text: "Class of degree",
       classes: "govuk-label--s"
     },
     hint: {
-      text: "For example, 2.1"
+      text: "For example, 2.1. If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
     },
     id: "degree-class",
     name: "degree-class",
@@ -106,34 +86,38 @@
       text: "Year qualification was awarded",
       classes: "govuk-label--s"
     },
+    hint: {
+      text: "If you are still studying, give us your predicted grade and date of graduation. You must have successfully graduated by the time you start your course."
+    },
     id: "degree-year",
     name: "degree-year",
     value: data["degree-year"],
     classes: "govuk-input--width-4"
   }) }}
 
-  {{ data["degree-international"] }}
-
+{% if international == true %}
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Is this an international qualification?",
+        text: "Have you got a NARIC statement of comparability?",
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "degree-international",
-    name: "degree-international",
+    idPrefix: "degree-naric",
+    name: "degree-naric",
+    value: data["degree-naric"],
     items: [{
       value: "yes",
-      text: "Yes",
-      conditional: {
-        html: internationalQualification
-      }
+      text: "Yes"
     }, {
       value: "no",
-      text: "No"
+      text: "No",
+      conditional: {
+        html: validateEquivalence
+      }
     }]
   }) }}
+{% endif %}
 
   {{ govukInput({
     id: "degree-completed",
@@ -142,18 +126,19 @@
     value: true
   }) }}
 
-{% if data["edit"] %}
+{% if action == 'edit' %}
   {{ govukButton({
     text: "Save changes"
   }) }}
 {% else %}
   {{ govukButton({
-    text: "Add degree"
+    text: "Continue"
   }) }}
 {% endif %}
 
 {% endblock %}
 {% block pageScripts %}
+{% if international == true %}
   <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
@@ -161,4 +146,5 @@
       selectElement: document.querySelector('#degree-country')
     })
   </script>
+{% endif %}
 {% endblock %}

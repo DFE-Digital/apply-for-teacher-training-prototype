@@ -25,6 +25,55 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
   }
 })
 
+// Application: Degrees
+router.post('/profile/academic-qualifications/degree-provenance-answer', (req, res) => {
+  let provenance = req.session.data['degree-provenance']
+
+  if (provenance === 'domestic') {
+    res.redirect('/profile/academic-qualifications/add-degree')
+  } else {
+    res.redirect('/profile/academic-qualifications/add-international-degree')
+  }
+})
+
+router.get('/profile/academic-qualifications/add-degree', (req, res) => {
+  res.render('profile/academic-qualifications/degree', {
+    action: 'add',
+    formAction: '/profile/academic-qualifications',
+    title: 'Add degree',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/profile/academic-qualifications/add-international-degree', (req, res) => {
+  res.render('profile/academic-qualifications/degree', {
+    international: true,
+    action: 'add',
+    formAction: '/profile/academic-qualifications',
+    title: 'Add international degree',
+    buttonText: 'Save and continue'
+  })
+})
+
+router.get('/profile/academic-qualifications/edit-degree', (req, res) => {
+  res.render('profile/academic-qualifications/degree', {
+    action: 'edit',
+    formAction: '/profile/academic-qualifications',
+    title: 'Edit degree',
+    buttonText: 'Save changes'
+  })
+})
+
+router.get('/profile/academic-qualifications/edit-international-degree', (req, res) => {
+  res.render('profile/academic-qualifications/degree', {
+    international: true,
+    action: 'edit',
+    formAction: '/profile/academic-qualifications',
+    title: 'Edit international degree',
+    buttonText: 'Save changes'
+  })
+})
+
 // Application: Work history
 router.get('/profile/work-history/add-job', (req, res) => {
   res.render('profile/work-history/job', {

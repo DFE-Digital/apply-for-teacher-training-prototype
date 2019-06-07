@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+
+{% set title = "Add a degree" %}
+{% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/academic-qualifications/degree-provenance-answer" %}
+
+{% block primary %}
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Was this degree awarded by an institution based in the UK?"
+      }
+    },
+    idPrefix: "degree-provenance",
+    name: "degree-provenance",
+    items: [{
+      value: "domestic",
+      text: "Yes",
+      checked: true
+    }, {
+      value: "international",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

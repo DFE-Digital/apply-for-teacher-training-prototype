@@ -49,15 +49,4 @@
   <h2 class="govuk-heading-m">What happens next</h2>
   <p class="govuk-body">Once DfE has submitted your completed application form to your training provider, we’ll contact your referees to ask for their references.</p>
   <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
-
-  {{ govukInput({
-    id: "references-completed",
-    name: "references-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
-  {{ govukButton({
-    text: "Continue"
-  }) }}
 {% endblock %}

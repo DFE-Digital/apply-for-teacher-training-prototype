@@ -77,6 +77,12 @@
     value: true
   }) }}
 
+{% if action != "edit" %}
+  {{ govukButton({
+    html: "<s>Save and add another role</s>",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endif %}
   {{ govukButton({
     text: buttonText
   }) }}

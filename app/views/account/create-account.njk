@@ -2,6 +2,7 @@
 
 {% set title = "Create an account" %}
 {% set formAction = "/application" %}
+{% set hasSecondary = true %}
 
 {% block primary %}
   <p class="govuk-body">Create an account to use this service. You’ll then be able to save and return to your applications as often as you need to.</p>
@@ -62,6 +63,7 @@
       classes: "govuk-label--s"
     },
     autocomplete: "email",
+    classes: "govuk-!-width-two-thirds",
     id: "email",
     name: "email",
     type: "email"
@@ -72,13 +74,43 @@
       text: "Password",
       classes: "govuk-label--s"
     },
+    classes: "govuk-!-width-two-thirds",
     id: "password",
     name: "password",
     type: "password"
   }) }}
 
+  {{ govukInput({
+    label: {
+      text: "Confirm password",
+      classes: "govuk-label--s"
+    },
+    classes: "govuk-!-width-two-thirds",
+    id: "confirm-password",
+    name: "confirm-password",
+    type: "password"
+  }) }}
+
   {{ govukButton({
     text: "Create an account"
+  }) }}
+{% endblock %}
+{% block secondary %}
+  {{ appRelatedItems ({
+    title: "Forgot your passsword?",
+    name: "forgot-password",
+    items: [{
+      href: "/account/reset-password",
+      text: "Reset your password"
+    }]
+  }) }}
+  {{ appRelatedItems ({
+    title: "Already registered?",
+    name: "sign-in",
+    items: [{
+      href: "/account/sign-in",
+      text: "Sign in"
+    }]
   }) }}
 {% endblock %}
 {% block pageScripts %}

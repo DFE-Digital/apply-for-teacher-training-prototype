@@ -1,0 +1,54 @@
+{% extends "_form.njk" %}
+
+{% set title = "Sign in" %}
+{% set formAction = "/application" %}
+{% set hasSecondary = true %}
+
+{% block primary %}
+  <p class="govuk-body">Enter your ‘{{ serviceName }}’ account details to sign in.</p>
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "email",
+    classes: "govuk-!-width-two-thirds",
+    id: "email",
+    name: "email",
+    type: "email"
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Password",
+      classes: "govuk-label--s"
+    },
+    classes: "govuk-!-width-two-thirds",
+    id: "password",
+    name: "password",
+    type: "password"
+  }) }}
+
+  {{ govukButton({
+    text: "Sign in"
+  }) }}
+{% endblock %}
+{% block secondary %}
+  {{ appRelatedItems ({
+    title: "Forgot your passsword?",
+    name: "forgot-password",
+    items: [{
+      href: "/account/reset-password",
+      text: "Reset your password"
+    }]
+  }) }}
+  {{ appRelatedItems ({
+    title: "Don’t have an account?",
+    name: "create-account",
+    items: [{
+      href: "/account/create-account",
+      text: "Create an account"
+    }]
+  }) }}
+{% endblock %}

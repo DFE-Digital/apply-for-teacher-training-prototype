@@ -1,0 +1,17 @@
+<aside class="app-related-items{%- if params.classes %} {{ params.classes }}{% endif %}" role="complementary">
+  <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="{{ params.name }}-title">{{ params.title }}</h2>
+  <nav role="navigation" aria-labelledby="{{ params.name }}-title">
+    <ul class="govuk-list govuk-!-font-size-16">
+    {% for item in params.items %}
+      <li>
+        <a class="govuk-link" href="{{ item.href }}">{{ item.text }}</a>
+      </li>
+    {% endfor %}
+    {% if params.more %}
+      <li>
+        <a href="{{ params.more.href }}" class="govuk-link govuk-!-font-weight-bold">More <span class="govuk-visually-hidden">in {{ params.title }}</span></a>
+      </li>
+    {% endif %}
+    </ul>
+  </nav>
+</aside>

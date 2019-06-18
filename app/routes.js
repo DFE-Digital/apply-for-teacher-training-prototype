@@ -50,7 +50,7 @@ router.get('/profile/academic-qualifications/add-international-degree', (req, re
     international: true,
     action: 'add',
     formAction: '/profile/academic-qualifications/maths-gcse',
-    title: 'Add international degree',
+    title: 'Add non-UK degree',
     buttonText: 'Save and continue'
   })
 })
@@ -69,7 +69,7 @@ router.get('/profile/academic-qualifications/edit-international-degree', (req, r
     international: true,
     action: 'edit',
     formAction: '/profile/academic-qualifications/review',
-    title: 'Edit international degree',
+    title: 'Edit non-UK degree',
     buttonText: 'Save changes'
   })
 })

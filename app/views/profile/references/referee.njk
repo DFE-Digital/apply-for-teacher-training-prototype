@@ -92,15 +92,6 @@
     }]
   }) }}
 
-{% if type == 'secondary' %}
-  {{ govukInput({
-    id: "references-completed",
-    name: "references-completed",
-    type: "hidden",
-    value: true
-  }) }}
-{% endif %}
-
   {{ govukButton({
     text: buttonText
   }) }}

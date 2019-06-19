@@ -17,7 +17,7 @@
   {{ appTaskList({
     items: [{
       text: "Personal details",
-      href: "/profile/personal-details",
+      href: "/profile/personal-details" + ( "/review" if data["personal-details-completed"] ),
       id: "personal-details",
       completed: data['personal-details-completed']
     }, {

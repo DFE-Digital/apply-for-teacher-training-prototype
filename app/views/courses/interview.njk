@@ -4,8 +4,8 @@
 {% set formAction = "/profile/" %}
 
 {% block primary %}
-  <p class="govuk-body-l">Enter any information that the training provider should take into account when scheduling an interview with you.</p>
-  <p class="govuk-body">Include:</p>
+  <p class="govuk-body-l">Is there anything your training provider should consider when scheduling an interview?</p>
+  <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Please give details of:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>dates you are unavailable for interview</li>
     <li>any disability, special need or other health or personal issue you feel is relevant</li>
@@ -14,7 +14,7 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Is there anything this training provider should account for when planning your interview?",
+      text: "Enter details relevant to your interview arrangements",
       classes: "govuk-label--s"
     },
     id: "interview-notes",

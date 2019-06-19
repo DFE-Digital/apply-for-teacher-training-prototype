@@ -22,14 +22,14 @@
       completed: data['personal-details-completed']
     }, {
       text: "Contact details",
-      href: "/profile/contact-details" + ( "/review" if data["school-experience-completed"] ),
+      href: "/profile/contact-details" + ( "/review" if data["contact-details-completed"] ),
       id: "contact-details",
-      completed: data['contact-details-completed']
+      completed: data["contact-details-completed"]
     }, {
       text: "Academic qualifications",
-      href: "/profile/academic-qualifications",
+      href: "/profile/academic-qualifications" + ( "/review" if data["academic-qualifications-completed"] ),
       id: "academic-qualifications",
-      completed: data['academic-qualifications-completed']
+      completed: data["academic-qualifications-completed"]
     }, {
       text: "Subject knowledge",
       href: "/profile/subject-knowledge",
@@ -42,12 +42,12 @@
       completed: data['professional-skills-completed']
     }, {
       text: "Work history",
-      href: "/profile/work-history",
+      href: "/profile/work-history" + ( "/review" if data["work-history-completed"] ),
       id: "work-history",
       completed: data['work-history-completed']
     }, {
       text: "School experience and volunteering with children and young people",
-      href: "/profile/school-experience" + ( "/overview" if data["school-experience-completed"] ),
+      href: "/profile/school-experience" + ( "/review" if data["school-experience-completed"] ),
       id: "school-experience",
       completed: data['school-experience-completed']
     }, {

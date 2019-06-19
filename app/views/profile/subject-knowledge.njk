@@ -31,13 +31,15 @@
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 {% set skeExplanation %}
-  {{ govukTextarea({
+  {{ govukCharacterCount({
     label: {
       html: "Explain why you believe a SKE would benefit you (optional)"
     },
     id: "subject-knowledge-enhancement-details",
     name: "subject-knowledge-enhancement-",
-    value: data["subject-knowledge-enhancement-"]
+    value: data["subject-knowledge-enhancement-"],
+    maxlength: 300,
+    rows: 6
   }) }}
 {% endset -%}
 
@@ -74,18 +76,6 @@
       text: "No",
       checked: checked("subject-knowledge-enhancement", "no")
     }]
-  }) }}
-
-  {{ govukCharacterCount({
-    label: {
-      text: "Is there anything you’d like to tell us about your qualifications?",
-      classes: "govuk-label--s"
-    },
-    id: "subject-knowledge-additional",
-    name: "subject-knowledge-additional",
-    value: data["subject-knowledge-additional"],
-    maxlength: 600,
-    rows: 12
   }) }}
 
   {{ govukInput({

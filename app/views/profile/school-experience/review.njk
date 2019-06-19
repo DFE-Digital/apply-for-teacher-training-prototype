@@ -1,6 +1,7 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
 {% set title = "School experience and volunteering with children and young people" %}
+{% set formAction = "/profile/" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -49,5 +50,31 @@
     text: "Add another role",
     href: "/profile/school-experience/add-role",
     classes: "govuk-button--secondary"
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Summarise what your experience in school has taught you about teaching",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, behaviour management, lesson planning, learning objectives, communicating verbally and non-verbally, supporting more and less able children"
+    },
+    id: "subject-knowledge-additional",
+    name: "subject-knowledge-additional",
+    value: data["subject-knowledge-additional"],
+    maxlength: 600,
+    rows: 12
+  }) }}
+
+  {{ govukInput({
+    id: "school-experience-completed",
+    name: "school-experience-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
   }) }}
 {% endblock %}

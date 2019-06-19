@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "School experience and volunteering with children and young people" %}
-{% set formAction = "/profile/school-experience/overview" %}
+{% set formAction = "/profile/school-experience/review" %}
 
 {% block primary %}
   {{ govukInput({
@@ -37,6 +37,10 @@
       text: "For example, 05 2018"
     },
     items: [{
+      name: "day",
+      value: data["school-experience-start-day"],
+      classes: "govuk-input--width-2"
+    }, {
       name: "month",
       value: data["school-experience-start-month"],
       classes: "govuk-input--width-2"
@@ -60,6 +64,10 @@
       text: "For example, 05 2019"
     },
     items: [{
+      name: "day",
+      value: data["school-experience-end-day"],
+      classes: "govuk-input--width-2"
+    }, {
       name: "month",
       value: data["school-experience-end-month"],
       classes: "govuk-input--width-2"
@@ -68,13 +76,6 @@
       value: data["school-experience-end-year"],
       classes: "govuk-input--width-4"
     }]
-  }) }}
-
-  {{ govukInput({
-    id: "school-experience-completed",
-    name: "school-experience-completed",
-    type: "hidden",
-    value: true
   }) }}
 
 {% if action != "edit" %}

@@ -135,4 +135,27 @@
     classes: "govuk-button--secondary",
     href: "/profile/academic-qualifications/add-qualification"
   }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Is there anything you’d like to tell us about your qualifications?",
+      classes: "govuk-label--m"
+    },
+    id: "subject-knowledge-additional",
+    name: "subject-knowledge-additional",
+    value: data["subject-knowledge-additional"],
+    maxlength: 600,
+    rows: 12
+  }) }}
+
+  {{ govukInput({
+    id: "academic-qualifications-completed",
+    name: "academic-qualifications-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
 {% endblock %}

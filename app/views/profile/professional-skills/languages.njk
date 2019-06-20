@@ -2,7 +2,7 @@
 
 {% set parent = "Literacy, numeracy and language skills" %}
 {% set title = "Is English your first language?" %}
-{% set formAction = "/profile/" %}
+{% set formAction = "/profile/professional-skills/review" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -45,13 +45,6 @@
         html: firstLanguage
       }
     }]
-  }) }}
-
-  {{ govukInput({
-    id: "professional-skills-completed",
-    name: "professional-skills-completed",
-    type: "hidden",
-    value: true
   }) }}
 
   {{ govukButton({

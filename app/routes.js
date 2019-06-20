@@ -8,7 +8,7 @@ router.post('/profile/personal-details/answer', (req, res) => {
   let eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 
   if (eea.includes(nationality)) {
-    res.redirect('/profile')
+    res.redirect('/profile/personal-details/review')
   } else {
     res.redirect('/profile/personal-details/residency-status')
   }

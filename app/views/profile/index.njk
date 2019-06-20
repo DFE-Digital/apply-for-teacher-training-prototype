@@ -17,7 +17,7 @@
   {{ appTaskList({
     items: [{
       text: "Personal details",
-      href: "/profile/personal-details",
+      href: "/profile/personal-details" + ( "/review" if data["personal-details-completed"] ),
       id: "personal-details",
       completed: data['personal-details-completed']
     }, {
@@ -37,7 +37,7 @@
       completed: data['subject-knowledge-completed']
     }, {
       text: "Literacy, numeracy and language skills",
-      href: "/profile/professional-skills",
+      href: "/profile/professional-skills" + ( "/review" if data["professional-skills-completed"] ),
       id: "professional-skills",
       completed: data['professional-skills-completed']
     }, {

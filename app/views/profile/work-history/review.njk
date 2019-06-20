@@ -55,8 +55,19 @@
   }) }}
 
   {{ govukButton({
-    text: "Add another job",
+    html: "<s>Add another job</s>",
     classes: "govuk-button--secondary",
     href: "/profile/work-history/add-job"
+  }) }}
+
+  {{ govukInput({
+    id: "work-history-completed",
+    name: "work-history-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
   }) }}
 {% endblock %}

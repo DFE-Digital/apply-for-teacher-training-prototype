@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+
+{% set title = "Which features do you enable in the prototype?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "javascript: window.history.go(-1)"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukCheckboxes({
+    idPrefix: "settings",
+    name: "settings",
+    hint: {
+      text: "Select all that apply."
+    },
+    items: [{
+      value: "primary-application",
+      text: "Show primary course application",
+      checked: checked("settings", "primary-application")
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Update"
+  }) }}
+{% endblock %}

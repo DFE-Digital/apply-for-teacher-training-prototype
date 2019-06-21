@@ -1,0 +1,57 @@
+{% extends "_form.njk" %}
+
+{% set title = "Subject knowledge" %}
+{% set formAction = "/profile/" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: "Your details",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body-l">This section is optional for candidates applying to primary courses.</p>
+  <p class="govuk-body">However, you can use it to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>give an overview of subject knowledge you bring to the primary curriculum</li>
+    <li>showcase the abilities and skills you can contribute</li>
+  </ul>
+  <p class="govuk-body">You can include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>your A level subjects</li>
+    <li>expertise you’ve gained at work</li>
+    <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
+  </ul>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Give detailed evidence of your subject knowledge.",
+      classes: "govuk-label--s"
+    },
+    id: "subject-knowledge-statement",
+    name: "subject-knowledge-statement",
+    value: data["subject-knowledge-statement"],
+    maxwords: 600,
+    rows: 12
+  }) }}
+
+  {{ govukInput({
+    id: "subject-knowledge-completed",
+    name: "subject-knowledge-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

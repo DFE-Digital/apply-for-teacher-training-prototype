@@ -32,7 +32,7 @@
       completed: data["academic-qualifications-completed"]
     }, {
       text: "Subject knowledge",
-      href: "/profile/subject-knowledge",
+      href: "/profile/subject-knowledge" + ( "/primary" if checked("settings", "primary-application")),
       id: "subject-knowledge",
       completed: data['subject-knowledge-completed']
     }, {

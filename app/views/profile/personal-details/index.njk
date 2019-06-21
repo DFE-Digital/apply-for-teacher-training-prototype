@@ -18,6 +18,18 @@
 {% endblock %}
 
 {% block primary %}
+{% set dualNationality %}
+  {{ appAutocomplete({
+    label: {
+      text: "What is your second nationality?"
+    },
+    id: "second-nationality",
+    name: "second-nationality",
+    value: data["second-nationality"],
+    items: nationalities
+  }) }}
+{% endset -%}
+
   {{ govukInput({
     label: {
       text: "Title",
@@ -104,6 +116,12 @@
     items: nationalities
   }) }}
 
+  {{ govukDetails({
+    summaryText: "I have dual nationality",
+    html: dualNationality,
+    open: data["second-nationality"]
+  }) }}
+
   {{ govukButton({
     text: "Save and continue"
   }) }}
@@ -114,6 +132,10 @@
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '{{ data["nationality"] | safe }}',
       selectElement: document.querySelector('#nationality')
+    })
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ data["second-nationality"] | safe }}',
+      selectElement: document.querySelector('#second-nationality')
     })
   </script>
 {% endblock %}

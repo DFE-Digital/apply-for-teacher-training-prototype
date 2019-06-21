@@ -85,7 +85,7 @@
         text: "Nationality"
       },
       value: {
-        html: data["nationality"]
+        html: data["nationality"] + ( " and " + data["second-nationality"] if data["second-nationality"])
       },
       actions: {
         items: [{

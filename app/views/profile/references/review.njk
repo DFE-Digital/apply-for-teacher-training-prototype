@@ -19,32 +19,7 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukTable({
-    classes: "govuk-!-font-size-16",
-    firstCellIsHeader: true,
-    head: [{
-      text: "Name"
-    }, {
-      text: "Email"
-    }, {
-      text: "Actions"
-    }],
-    rows: [
-      [{
-        text: data["referee-principle-name"]
-      }, {
-        text: data["referee-principle-email"]
-      }, {
-        html: "<a href=\"/profile/references/edit-principle-referee\">Edit principle referee</a>"
-      }], [{
-        text: data["referee-secondary-name"]
-      }, {
-        text: data["referee-secondary-email"]
-      }, {
-        html: "<a href=\"/profile/references/edit-secondary-referee\">Edit secondary referee</a>"
-      }]
-    ]
-  }) }}
+  {% include "_includes/review-references.njk" %}
 
   <h2 class="govuk-heading-m">What happens next</h2>
   <p class="govuk-body">Once DfE has submitted your completed application form to your training provider, we’ll contact your referees to ask for their references.</p>

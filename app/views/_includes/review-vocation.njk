@@ -1,0 +1,18 @@
+{{ govukSummaryList({
+  classes: "govuk-!-font-size-16 govuk-summary-list--no-border",
+  rows: [{
+    key: {
+      text: "Vocation"
+    },
+    value: {
+      text: data["vocation"]
+    },
+    actions: {
+      items: [{
+        href: "/profile/vocation",
+        text: "Change",
+        visuallyHiddenText: "teaching vocation"
+      }]
+    }
+  }]
+}) }}

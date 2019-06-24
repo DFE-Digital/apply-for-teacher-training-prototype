@@ -1,0 +1,93 @@
+{% extends "_content.njk" %}
+
+{% set title = "Your details" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+{% set personalDetails %}
+  {% include "_includes/review-personal-details.njk" %}
+{% endset %}
+
+{% set contactDetails %}
+  {% include "_includes/review-contact-details.njk" %}
+{% endset %}
+
+{% set subjectKnowledge %}
+  {% include "_includes/review-subject-knowledge.njk" %}
+{% endset %}
+
+{% set references %}
+  {% include "_includes/review-references.njk" %}
+{% endset %}
+
+{% set vocation %}
+  {% include "_includes/review-vocation.njk" %}
+{% endset %}
+
+  {{ govukAccordion({
+    id: "review",
+    items: [{
+      expanded: true,
+      heading: {
+        text: "Personal details"
+      },
+      content: {
+        html: personalDetails
+      }
+    }, {
+      heading: {
+        text: "Contact details"
+      },
+      content: {
+        html: contactDetails
+      }
+    }, {
+      heading: {
+        text: "Academic qualifications"
+      }
+    }, {
+      heading: {
+        text: "Subject knowledge"
+      },
+      content: {
+        html: subjectKnowledge
+      }
+    }, {
+      heading: {
+        text: "Literacy, numeracy and language skills"
+      }
+    }, {
+      heading: {
+        text: "Work history"
+      }
+    }, {
+      heading: {
+        text: "School experience and volunteering with children and young people"
+      }
+    }, {
+      heading: {
+        text: "References"
+      },
+      content: {
+        html: references
+      }
+    }, {
+      heading: {
+        text: "Your teaching vocation"
+      },
+      content: {
+        html: vocation
+      }
+    }]
+  }) }}
+{% endblock %}

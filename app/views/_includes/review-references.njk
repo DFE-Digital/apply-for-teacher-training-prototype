@@ -1,0 +1,26 @@
+{{ govukTable({
+  classes: "govuk-!-font-size-16",
+  firstCellIsHeader: true,
+  head: [{
+    text: "Name"
+  }, {
+    text: "Email"
+  }, {
+    text: "Actions"
+  }],
+  rows: [
+    [{
+      text: data["referee-principle-name"]
+    }, {
+      text: data["referee-principle-email"]
+    }, {
+      html: "<a href=\"/profile/references/edit-principle-referee\">Edit principle referee</a>"
+    }], [{
+      text: data["referee-secondary-name"]
+    }, {
+      text: data["referee-secondary-email"]
+    }, {
+      html: "<a href=\"/profile/references/edit-secondary-referee\">Edit secondary referee</a>"
+    }]
+  ]
+}) }}

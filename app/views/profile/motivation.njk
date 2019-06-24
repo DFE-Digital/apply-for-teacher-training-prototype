@@ -1,0 +1,54 @@
+{% extends "_form.njk" %}
+
+{% set title = "Motivation" %}
+{% set formAction = "/profile/" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: "Your details",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Use this section of the application form to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>convince providers of your passion for teaching</li>
+    <li>explain why you want to work with your chosen age group</li>
+    <li>make the case for your teaching potential</li>
+  </ul>
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Why do you want to become a teacher?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Use specific examples drawn from your work history, interactions with children or life experience to back up your answer. Draft your answer, proofread it carefully and ask someone you trust for their opinion before you submit."
+    },
+    id: "motivation",
+    name: "motivation",
+    value: data["motivation"],
+    rows: 20,
+    maxlength: 600
+  }) }}
+
+  {{ govukInput({
+    id: "motivation-completed",
+    name: "motivation-completed",
+    type: "hidden",
+    value: true
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

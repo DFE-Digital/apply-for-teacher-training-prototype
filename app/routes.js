@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
+// Utils
+const generateRandomString = () => {
+  return (Number(new Date())).toString(36).slice(-5);
+};
+
 // Application: Personal details
 router.post('/profile/personal-details/answer', (req, res) => {
   let nationality = req.session.data['nationality']
@@ -284,18 +289,26 @@ router.get('/profile/academic-qualifications/edit-qualification', (req, res) => 
 
 // Application: Work history
 router.get('/profile/work-history/add-job', (req, res) => {
+  let code = generateRandomString()
+
+  res.redirect(`/profile/work-history/add-job/${code}`)
+})
+
+router.get('/profile/work-history/add-job/:code', (req, res) => {
   res.render('profile/work-history/job', {
     action: 'add',
-    title: 'Add job',
-    buttonText: 'Save and continue'
+    code: req.params.code,
+    buttonText: 'Save and continue',
+    title: 'Add job'
   })
 })
 
-router.get('/profile/work-history/edit-job', (req, res) => {
+router.get('/profile/work-history/edit-job/:code', (req, res) => {
   res.render('profile/work-history/job', {
     action: 'edit',
-    title: 'Edit job',
-    buttonText: 'Save changes'
+    code: req.params.code,
+    buttonText: 'Save changes',
+    title: 'Edit job'
   })
 })
 

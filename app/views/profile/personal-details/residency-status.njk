@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "What is your status regarding your ability to work and study in the UK?" %}
+{% set title = "What is your residency status?" %}
 {% set parent = "Personal details" %}
 {% set formAction = "/profile/personal-details/review" %}
 
@@ -38,7 +38,7 @@
   {% set unknown %}
     {{ govukInput({
       label: {
-        html: "Please give details"
+        html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration.</a>"
       },
       id: "residency-status-unknown-details",
       name: "residency-status-unknown-details",

@@ -8,9 +8,9 @@
     label: {
       text: "Please explain how you plan to validate this qualification"
     },
-    id: "degree-equivalence",
-    name: "degree-equivalence",
-    value: data["degree-equivalence"]
+    id: "degrees["+code+"][equivalence]",
+    name: "degrees["+code+"][equivalence]",
+    value: data["degrees"][code].equivalence
   }) }}
 {% endset -%}
 {% if international == true %}
@@ -31,9 +31,9 @@
     hint: {
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
     },
-    id: "degree-type",
-    name: "degree-type",
-    value: data["degree-type"]
+    id: "degrees["+code+"][type]",
+    name: "degrees["+code+"][type]",
+    value: data["degrees"][code].type
   }) }}
 
   {{ govukInput({
@@ -41,9 +41,9 @@
       text: "Subject of degree",
       classes: "govuk-label--s"
     },
-    id: "degree-subject",
-    name: "degree-subject",
-    value: data["degree-subject"]
+    id: "degrees["+code+"][subject]",
+    name: "degrees["+code+"][subject]",
+    value: data["degrees"][code].subject
   }) }}
 
   {{ govukInput({
@@ -51,9 +51,9 @@
       text: "Institution where you studied",
       classes: "govuk-label--s"
     },
-    id: "degree-institution",
-    name: "degree-institution",
-    value: data["degree-institution"]
+    id: "degrees["+code+"][institution]",
+    name: "degrees["+code+"][institution]",
+    value: data["degrees"][code].institution
   }) }}
 
 {% if international == true %}
@@ -62,9 +62,9 @@
       text: "In which country did you gain this degree?",
       classes: "govuk-label--s"
     },
-    id: "degree-country",
-    name: "degree-country",
-    value: data["degree-country"],
+    id: "degrees-"+code+"-country",
+    name: "degrees["+code+"][country]",
+    value: data["degrees"][code].country,
     items: countries
   }) }}
 {% endif %}
@@ -78,9 +78,9 @@
       text: "If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
     },
     classes: "govuk-!-width-one-third",
-    id: "degree-class",
-    name: "degree-class",
-    value: data["degree-class"]
+    id: "degrees["+code+"][grade]",
+    name: "degrees["+code+"][grade]",
+    value: data["degrees"][code].grade
   }) }}
 
   {{ govukInput({
@@ -91,10 +91,10 @@
     hint: {
       text: "If you are still studying, give us your predicted grade and date of graduation. You must have successfully graduated by the time you start your course."
     },
-    id: "degree-year",
-    name: "degree-year",
-    value: data["degree-year"],
-    classes: "govuk-input--width-4"
+    classes: "govuk-input--width-4",
+    id: "degrees["+code+"][year]",
+    name: "degrees["+code+"][year]",
+    value: data["degrees"][code].year
   }) }}
 
 {% if international == true %}
@@ -105,17 +105,16 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "degree-naric",
-    name: "degree-naric",
-    value: data["degree-naric"],
+    idPrefix: "degrees["+code+"][naric]",
+    name: "degrees["+code+"][naric]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("degree-naric", "yes")
+      checked: checked("['degrees']['"+code+"']['naric']", "yes")
     }, {
       value: "no",
       text: "No",
-      checked: checked("degree-naric", "no"),
+      checked: checked("['degrees']['"+code+"']['naric']", "no"),
       conditional: {
         html: validateEquivalence
       }
@@ -130,6 +129,15 @@
     value: true
   }) }}
 
+{% if action != "edit" %}
+  {{ govukButton({
+    html: "Save and add another degree",
+    classes: "govuk-button--secondary",
+    attributes: {
+      formaction: "/profile/academic-qualifications/degree"
+    }
+  }) }}
+{% endif %}
   {{ govukButton({
     text: buttonText
   }) }}
@@ -140,7 +148,7 @@
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
-      selectElement: document.querySelector('#degree-country')
+      selectElement: document.querySelector('#degrees-{{ code }}-country')
     })
   </script>
 {% endif %}

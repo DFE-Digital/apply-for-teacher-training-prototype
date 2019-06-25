@@ -270,20 +270,26 @@ router.get('/profile/academic-qualifications/edit-science-equivalent', (req, res
 
 // Application: Other qualifications
 router.get('/profile/academic-qualifications/add-qualification', (req, res) => {
+  let code = generateRandomString()
+
+  res.redirect(`/profile/academic-qualifications/add-qualification/${code}`)
+})
+
+router.get('/profile/academic-qualifications/add-qualification/:code', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
     action: 'add',
-    formAction: '/profile/academic-qualifications/review',
-    title: 'Add qualification',
-    buttonText: 'Save and continue'
+    code: req.params.code,
+    buttonText: 'Save and continue',
+    title: 'Add qualification'
   })
 })
 
-router.get('/profile/academic-qualifications/edit-qualification', (req, res) => {
+router.get('/profile/academic-qualifications/edit-qualification/:code', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
     action: 'edit',
-    formAction: '/profile/academic-qualifications/review',
-    title: 'Edit qualification',
-    buttonText: 'Save changes'
+    code: req.params.code,
+    buttonText: 'Save changes',
+    title: 'Edit qualification'
   })
 })
 

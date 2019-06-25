@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/academic-qualifications/review" %}
 
 {% block primary %}
 {% set internationalQualification %}
@@ -8,9 +9,9 @@
     label: {
       text: "In which country did you gain this qualification?"
     },
-    id: "qualification-country",
-    name: "qualification-country",
-    value: data["qualification-country"],
+    id: "qualifications["+code+"][country]",
+    name: "qualifications["+code+"][country]",
+    value: data["qualifications"][code].country,
     items: countries
   }) }}
 {% endset -%}
@@ -22,9 +23,9 @@
     hint: {
       text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
     },
-    id: "qualification-type",
-    name: "qualification-type",
-    value: data["qualification-type"]
+    id: "qualifications["+code+"][type]",
+    name: "qualifications["+code+"][type]",
+    value: data["qualifications"][code].type
   }) }}
 
   {{ govukInput({
@@ -32,9 +33,9 @@
       text: "Subject",
       classes: "govuk-label--s"
     },
-    id: "qualification-subject",
-    name: "qualification-subject",
-    value: data["qualification-subject"]
+    id: "qualifications["+code+"][subject]",
+    name: "qualifications["+code+"][subject]",
+    value: data["qualifications"][code].subject
   }) }}
 
   {{ govukInput({
@@ -42,9 +43,9 @@
       text: "Institution where you studied",
       classes: "govuk-label--s"
     },
-    id: "qualification-institution",
-    name: "qualification-institution",
-    value: data["qualification-institution"]
+    id: "qualifications["+code+"][institution]",
+    name: "qualifications["+code+"][institution]",
+    value: data["qualifications"][code].institution
   }) }}
 
   {{ govukInput({
@@ -53,9 +54,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-10",
-    id: "qualification-grade",
-    name: "qualification-grade",
-    value: data["qualification-grade"]
+    id: "qualifications["+code+"][grade]",
+    name: "qualifications["+code+"][grade]",
+    value: data["qualifications"][code].grade
   }) }}
 
   {{ govukInput({
@@ -64,9 +65,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: "qualification-year",
-    name: "qualification-year",
-    value: data["qualification-year"]
+    id: "qualifications["+code+"][year]",
+    name: "qualifications["+code+"][year]",
+    value: data["qualifications"][code].year
   }) }}
 
   {{ govukRadios({
@@ -76,28 +77,38 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "qualification-international",
-    name: "qualification-international",
+    idPrefix: "qualifications["+code+"][international]",
+    name: "qualifications["+code+"][international]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("qualification-international", "yes"),
+      checked: checked("['qualifications']['"+code+"']['international']", "yes"),
       conditional: {
         html: internationalQualification
       }
     }, {
       value: "no",
       text: "No",
-      checked: checked("qualification-international", "no")
+      checked: checked("['qualifications']['"+code+"']['international']", "no")
     }]
   }) }}
 
   {{ govukInput({
-    id: "qualification-completed",
-    name: "qualification-completed",
+    id: "qualifications-completed",
+    name: "qualifications-completed",
     type: "hidden",
     value: true
   }) }}
+
+{% if action != "edit" %}
+  {{ govukButton({
+    html: "Save and add another qualification",
+    classes: "govuk-button--secondary",
+    attributes: {
+      formaction: "/profile/academic-qualifications/add-qualification"
+    }
+  }) }}
+{% endif %}
 
   {{ govukButton({
     text: buttonText

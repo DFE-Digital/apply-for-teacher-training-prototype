@@ -30,7 +30,7 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
   }
 })
 
-// Application: Degree
+// Application: Degree provenance
 router.post('/profile/academic-qualifications/degree-answer', (req, res) => {
   let degree = req.session.data['degree']
 
@@ -41,41 +41,59 @@ router.post('/profile/academic-qualifications/degree-answer', (req, res) => {
   }
 })
 
+// Application: UK degree
 router.get('/profile/academic-qualifications/add-degree', (req, res) => {
+  let code = generateRandomString()
+
+  res.redirect(`/profile/academic-qualifications/add-degree/${code}`)
+})
+
+router.get('/profile/academic-qualifications/add-degree/:code', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     action: 'add',
+    code: req.params.code,
+    buttonText: 'Save and continue',
     formAction: '/profile/academic-qualifications/maths-gcse',
-    title: 'Add degree',
-    buttonText: 'Save and continue'
+    title: 'Add degree'
   })
 })
 
+router.get('/profile/academic-qualifications/edit-degree/:code', (req, res) => {
+  res.render('profile/academic-qualifications/degree-details', {
+    action: 'edit',
+    code: req.params.code,
+    buttonText: 'Save changes',
+    formAction: '/profile/academic-qualifications/review',
+    title: 'Edit degree'
+  })
+})
+
+// Application: International degree
 router.get('/profile/academic-qualifications/add-international-degree', (req, res) => {
+  let code = generateRandomString()
+
+  res.redirect(`/profile/academic-qualifications/add-international-degree/${code}`)
+})
+
+router.get('/profile/academic-qualifications/add-international-degree/:code', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'add',
+    code: req.params.code,
+    buttonText: 'Save and continue',
     formAction: '/profile/academic-qualifications/maths-gcse',
-    title: 'Add non-UK degree',
-    buttonText: 'Save and continue'
+    title: 'Add non-UK degree'
   })
 })
 
-router.get('/profile/academic-qualifications/edit-degree', (req, res) => {
-  res.render('profile/academic-qualifications/degree-details', {
-    action: 'edit',
-    formAction: '/profile/academic-qualifications/review',
-    title: 'Edit degree',
-    buttonText: 'Save changes'
-  })
-})
-
-router.get('/profile/academic-qualifications/edit-international-degree', (req, res) => {
+router.get('/profile/academic-qualifications/edit-international-degree/:code', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'edit',
+    code: req.params.code,
+    buttonText: 'Save changes',
     formAction: '/profile/academic-qualifications/review',
-    title: 'Edit non-UK degree',
-    buttonText: 'Save changes'
+    title: 'Edit non-UK degree'
   })
 })
 

@@ -34,6 +34,7 @@
     hint: {
       text: "For example, 05 2018"
     },
+    id: "work_history["+code+"][start]",
     items: [{
       label: "Month",
       name: "work_history["+code+"][start_month]",
@@ -44,8 +45,7 @@
       name: "work_history["+code+"][start_year]",
       value: data["work_history"][code]["start_year"],
       classes: "govuk-input--width-4"
-    }],
-    id: "work_history["+code+"][start]"
+    }]
   }) }}
 
   {{ govukDateInput({
@@ -58,6 +58,7 @@
     hint: {
       text: "For example, 05 2019"
     },
+    id: "work_history["+code+"][end]",
     items: [{
       label: "Month",
       name: "work_history["+code+"][end_month]",
@@ -68,8 +69,7 @@
       name: "work_history["+code+"][end_year]",
       value: data["work_history"][code][end_year],
       classes: "govuk-input--width-4"
-    }],
-    id: "work_history["+code+"][end]"
+    }]
   }) }}
 
   {{ govukCharacterCount({

@@ -9,9 +9,9 @@
       text: "Your role",
       classes: "govuk-label--s"
     },
-    id: "school-experience-role",
-    name: "school-experience-role",
-    value: data["school-experience-role"]
+    id: "school_experience["+code+"][role]",
+    name: "school_experience["+code+"][role]",
+    value: data["school_experience"][code].role
   }) }}
 
   {{ govukInput({
@@ -19,14 +19,12 @@
       text: "Organisation where you gained experience or volunteered",
       classes: "govuk-label--s"
     },
-    id: "school-experience-org",
-    name: "school-experience-org",
-    value: data["school-experience-org"]
+    id: "school_experience["+code+"][org]",
+    name: "school_experience["+code+"][org]",
+    value: data["school_experience"][code].org
   }) }}
 
   {{ govukDateInput({
-    id: "school-experience-start",
-    namePrefix: "school-experience-start",
     fieldset: {
       legend: {
         text: "Start date",
@@ -36,24 +34,26 @@
     hint: {
       text: "For example, 05 2018"
     },
+    id: "school_experience["+code+"][start]",
     items: [{
-      name: "day",
-      value: data["school-experience-start-day"],
+      label: "Day",
+      name: "school_experience["+code+"][start_day]",
+      value: data["school_experience"][code]["start_day"],
       classes: "govuk-input--width-2"
     }, {
-      name: "month",
-      value: data["school-experience-start-month"],
+      label: "Month",
+      name: "school_experience["+code+"][start_month]",
+      value: data["school_experience"][code]["start_month"],
       classes: "govuk-input--width-2"
     }, {
-      name: "year",
-      value: data["school-experience-start-year"],
+      label: "Year",
+      name: "school_experience["+code+"][start_year]",
+      value: data["school_experience"][code]["start_year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
 
   {{ govukDateInput({
-    id: "school-experience-end",
-    namePrefix: "school-experience-end",
     fieldset: {
       legend: {
         text: "End date (leave blank if this is your current role)",
@@ -63,25 +63,32 @@
     hint: {
       text: "For example, 05 2019"
     },
+    id: "school_experience["+code+"][end]",
     items: [{
-      name: "day",
-      value: data["school-experience-end-day"],
+      label: "Day",
+      name: "school_experience["+code+"][end_day]",
+      value: data["school_experience"][code]["end_day"],
       classes: "govuk-input--width-2"
     }, {
-      name: "month",
-      value: data["school-experience-end-month"],
+      label: "Month",
+      name: "school_experience["+code+"][end_month]",
+      value: data["school_experience"][code]["end_month"],
       classes: "govuk-input--width-2"
     }, {
-      name: "year",
-      value: data["school-experience-end-year"],
+      label: "Year",
+      name: "school_experience["+code+"][end_year]",
+      value: data["school_experience"][code]["end_year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
 
 {% if action != "edit" %}
   {{ govukButton({
-    html: "<s>Save and add another role</s>",
-    classes: "govuk-button--secondary"
+    html: "Save and add another role",
+    classes: "govuk-button--secondary",
+    attributes: {
+      formaction: "/profile/school-experience/add-role"
+    }
   }) }}
 {% endif %}
   {{ govukButton({

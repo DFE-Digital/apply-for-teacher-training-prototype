@@ -18,36 +18,37 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukTable({
-    caption: "Your school experience and roles",
-    captionClasses: "govuk-heading-m",
-    classes: "govuk-!-font-size-16",
-    firstCellIsHeader: false,
-    head: [{
-      text: "Dates",
-      classes: "govuk-!-width-one-quarter"
-    }, {
-      text: "Role"
-    }, {
-      text: "Organisation"
-    }, {
-      text: "Actions"
-    }],
-    rows: [
-      [{
-        text: data['school-experience-start-month'] + '/' + data['school-experience-start-year'] + ' - ' + data['school-experience-end-month'] + '/' + data['school-experience-end-year']
-      }, {
-        text: data['school-experience-role']
-      }, {
-        text: data['school-experience-org']
-      }, {
-        html: "<a href=\"/profile/school-experience/edit-role\">Edit role</a>"
-      }]
-    ]
-  }) }}
+  {% set school_experience = data['school_experience'] | toArray %}
+  <table class="govuk-table govuk-!-font-size-16">
+    <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
+        <th class="govuk-table__header" scope="col">Role</th>
+        <th class="govuk-table__header" scope="col">Organisation</th>
+        <th class="govuk-table__header" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      {% for item in school_experience %}
+      {% set start_date = item.start_day + '/' + item.start_month + '/' + item.start_year %}
+      {% if item.end_year != "" %}
+        {% set end_date = item.end_day + '/' + item.end_month + '/' + item.end_year %}
+      {% else %}
+        {% set end_date = 'Present' %}
+      {% endif %}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{ start_date }} - {{ end_date }}</td>
+        <td class="govuk-table__cell">{{ item.role }}</td>
+        <td class="govuk-table__cell">{{ item.org }}</td>
+        <td class="govuk-table__cell"><a href="/profile/school-experience/edit-role/{{ item.id }}">Edit role</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
   {{ govukButton({
-    html: "<s>Add another role</s>",
+    html: "Add another role",
     href: "/profile/school-experience/add-role",
     classes: "govuk-button--secondary"
   }) }}

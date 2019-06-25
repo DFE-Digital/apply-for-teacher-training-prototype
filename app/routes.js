@@ -3,8 +3,8 @@ const router = express.Router()
 
 // Utils
 const generateRandomString = () => {
-  return (Number(new Date())).toString(36).slice(-5);
-};
+  return (Number(new Date())).toString(36).slice(-5)
+}
 
 // Application: Personal details
 router.post('/profile/personal-details/answer', (req, res) => {
@@ -314,18 +314,26 @@ router.get('/profile/work-history/edit-job/:code', (req, res) => {
 
 // Application: School experience
 router.get('/profile/school-experience/add-role', (req, res) => {
+  let code = generateRandomString()
+
+  res.redirect(`/profile/school-experience/add-role/${code}`)
+})
+
+router.get('/profile/school-experience/add-role/:code', (req, res) => {
   res.render('profile/school-experience/role', {
     action: 'add',
-    title: 'Add role',
-    buttonText: 'Save and continue'
+    code: req.params.code,
+    buttonText: 'Save and continue',
+    title: 'Add role'
   })
 })
 
-router.get('/profile/school-experience/edit-role', (req, res) => {
+router.get('/profile/school-experience/edit-role/:code', (req, res) => {
   res.render('profile/school-experience/role', {
     action: 'edit',
-    title: 'Edit role',
-    buttonText: 'Save changes'
+    code: req.params.code,
+    buttonText: 'Save changes',
+    title: 'Edit role'
   })
 })
 

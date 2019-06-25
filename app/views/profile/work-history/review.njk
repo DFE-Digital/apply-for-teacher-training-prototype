@@ -17,45 +17,41 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukTable({
-    caption: "Your work history",
-    captionClasses: "govuk-heading-m",
-    classes: "govuk-!-font-size-16",
-    firstCellIsHeader: false,
-    head: [{
-      text: "Dates",
-      classes: "govuk-!-width-one-quarter"
-    }, {
-      text: "Job title"
-    }, {
-      text: "Organisation"
-    }, {
-      text: "Actions"
-    }],
-    rows: [
-      [{
-        text: data['work-history-end-month'] + '/' + data['work-history-end-year'] + ' - Present',
-        classes: "app-table__cell--muted"
-      }, {
-        classes: "app-table__cell--muted",
-        colspan: 2
-      }, {
-        html: "<a href=\"/profile/work-history/explain-gap\">Explain gap</a>",
-        classes: "app-table__cell--muted"
-      }], [{
-        text: data['work-history-start-month'] + '/' + data['work-history-start-year'] + ' - ' + data['work-history-end-month'] + '/' + data['work-history-end-year']
-      }, {
-        text: data['work-history-role']
-      }, {
-        text: data['work-history-org']
-      }, {
-        html: "<a href=\"/profile/work-history/edit-job\">Edit job</a>"
-      }]
-    ]
-  }) }}
+{% set work_history = data['work_history'] | toArray %}
+  <table class="govuk-table govuk-!-font-size-16">
+    <caption class="govuk-table__caption govuk-heading-m">Your work history</caption>
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
+        <th class="govuk-table__header" scope="col">Job title</th>
+        <th class="govuk-table__header" scope="col">Organisation</th>
+        <th class="govuk-table__header" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      {% for item in work_history %}
+      {% set start_date = item.start_month + '/' + item.start_year %}
+      {% if item.end_year != "" %}
+        {% set end_date = item.end_month + '/' + item.end_year %}
+      {% else %}
+        {% set end_date = 'Present' %}
+      {% endif %}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{ start_date }} - {{ end_date }}</td>
+        <td class="govuk-table__cell">{{ item.role }}</td>
+        <td class="govuk-table__cell">{{ item.org }}</td>
+        <td class="govuk-table__cell"><a href="/profile/work-history/edit-job/{{ item.id }}">Edit job</a></td>
+      </tr>
+      {% endfor %}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell app-table__cell--muted" colspan="3">Unexplained gap</td>
+        <td class="govuk-table__cell app-table__cell--muted"><a href="/profile/work-history/explain-gap/{{ item.code }}">Explain gap</a></td>
+      </tr>
+    </tbody>
+  </table>
 
   {{ govukButton({
-    html: "<s>Add another job</s>",
+    html: "Add another job",
     classes: "govuk-button--secondary",
     href: "/profile/work-history/add-job"
   }) }}

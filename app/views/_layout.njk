@@ -85,6 +85,7 @@
 
 {% block bodyEnd %}
   {% block scripts %}
+    {{ data | log }}
     {% include "_includes/scripts.njk" %}
     {% block pageScripts %}{% endblock %}
   {% endblock %}

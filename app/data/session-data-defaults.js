@@ -18,7 +18,21 @@ Example usage:
 */
 
 module.exports = {
-
-  // Insert values here
-
+  // work_history: [{
+  //   id: 'fdg',
+  //   employer_name: 'Cheadle Hulme High School',
+  //   start_date: '2018-05-01',
+  //   end_date: '2019-04-01',
+  //   job_title: 'Whole School Literacy Specialist',
+  //   job_description: 'I lead, develop and enhance the literacy teaching…',
+  //   worked_with_children: true
+  // }, {
+  //   id: 'fdg',
+  //   employer_name: 'Greater Manchester Police',
+  //   start_date: '1995-09-01',
+  //   end_date: '2007-08-01',
+  //   job_title: 'Police officer',
+  //   job_description: 'As a Police Officer in Manchester…',
+  //   worked_with_children: true
+  // }]
 }

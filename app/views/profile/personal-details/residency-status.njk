@@ -36,13 +36,15 @@
   {% endset -%}
 
   {% set unknown %}
-    {{ govukInput({
+    {{ govukCharacterCount({
       label: {
-        html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration.</a>"
+        html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration</a>."
       },
       id: "residency-status-unknown-details",
       name: "residency-status-unknown-details",
-      value: data["residency-status-unknown-details"]
+      value: data["residency-status-unknown-details"],
+      rows: 5,
+      maxwords: 200
     }) }}
   {% endset -%}
 

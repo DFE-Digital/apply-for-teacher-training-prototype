@@ -8,9 +8,9 @@
     label: {
       text: "Please explain how you plan to validate this qualification"
     },
-    id: "degrees["+code+"][equivalence]",
-    name: "degrees["+code+"][equivalence]",
-    value: data["degrees"][code].equivalence
+    id: "degrees[" + id + "][equivalence]",
+    name: "degrees[" + id + "][equivalence]",
+    value: data["degrees"][id].equivalence
   }) }}
 {% endset -%}
 {% if international == true %}
@@ -31,9 +31,9 @@
     hint: {
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
     },
-    id: "degrees["+code+"][type]",
-    name: "degrees["+code+"][type]",
-    value: data["degrees"][code].type
+    id: "degrees[" + id + "][type]",
+    name: "degrees[" + id + "][type]",
+    value: data["degrees"][id].type
   }) }}
 
   {{ govukInput({
@@ -41,9 +41,9 @@
       text: "Subject of degree",
       classes: "govuk-label--s"
     },
-    id: "degrees["+code+"][subject]",
-    name: "degrees["+code+"][subject]",
-    value: data["degrees"][code].subject
+    id: "degrees[" + id + "][subject]",
+    name: "degrees[" + id + "][subject]",
+    value: data["degrees"][id].subject
   }) }}
 
   {{ govukInput({
@@ -51,9 +51,9 @@
       text: "Institution where you studied",
       classes: "govuk-label--s"
     },
-    id: "degrees["+code+"][institution]",
-    name: "degrees["+code+"][institution]",
-    value: data["degrees"][code].institution
+    id: "degrees[" + id + "][institution]",
+    name: "degrees[" + id + "][institution]",
+    value: data["degrees"][id].institution
   }) }}
 
 {% if international == true %}
@@ -62,9 +62,9 @@
       text: "In which country did you gain this degree?",
       classes: "govuk-label--s"
     },
-    id: "degrees-"+code+"-country",
-    name: "degrees["+code+"][country]",
-    value: data["degrees"][code].country,
+    id: "degrees-" + id + "-country",
+    name: "degrees[" + id + "][country]",
+    value: data["degrees"][id].country,
     items: countries
   }) }}
 {% endif %}
@@ -78,9 +78,9 @@
       text: "If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
     },
     classes: "govuk-!-width-one-third",
-    id: "degrees["+code+"][grade]",
-    name: "degrees["+code+"][grade]",
-    value: data["degrees"][code].grade
+    id: "degrees[" + id + "][grade]",
+    name: "degrees[" + id + "][grade]",
+    value: data["degrees"][id].grade
   }) }}
 
   {{ govukInput({
@@ -92,9 +92,9 @@
       text: "If you are still studying, give us your predicted grade and date of graduation. You must have successfully graduated by the time you start your course."
     },
     classes: "govuk-input--width-4",
-    id: "degrees["+code+"][year]",
-    name: "degrees["+code+"][year]",
-    value: data["degrees"][code].year
+    id: "degrees[" + id + "][year]",
+    name: "degrees[" + id + "][year]",
+    value: data["degrees"][id].year
   }) }}
 
 {% if international == true %}
@@ -105,16 +105,16 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "degrees["+code+"][naric]",
-    name: "degrees["+code+"][naric]",
+    idPrefix: "degrees[" + id + "][naric]",
+    name: "degrees[" + id + "][naric]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['degrees']['"+code+"']['naric']", "yes")
+      checked: checked("['degrees']['" + id + "']['naric']", "yes")
     }, {
       value: "no",
       text: "No",
-      checked: checked("['degrees']['"+code+"']['naric']", "no"),
+      checked: checked("['degrees']['" + id + "']['naric']", "no"),
       conditional: {
         html: validateEquivalence
       }

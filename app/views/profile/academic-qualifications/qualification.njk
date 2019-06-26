@@ -9,9 +9,9 @@
     label: {
       text: "In which country did you gain this qualification?"
     },
-    id: "qualifications["+code+"][country]",
-    name: "qualifications["+code+"][country]",
-    value: data["qualifications"][code].country,
+    id: "qualifications[" + id + "][country]",
+    name: "qualifications[" + id + "][country]",
+    value: data["qualifications"][id].country,
     items: countries
   }) }}
 {% endset -%}
@@ -23,9 +23,9 @@
     hint: {
       text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
     },
-    id: "qualifications["+code+"][type]",
-    name: "qualifications["+code+"][type]",
-    value: data["qualifications"][code].type
+    id: "qualifications[" + id + "][type]",
+    name: "qualifications[" + id + "][type]",
+    value: data["qualifications"][id].type
   }) }}
 
   {{ govukInput({
@@ -33,9 +33,9 @@
       text: "Subject",
       classes: "govuk-label--s"
     },
-    id: "qualifications["+code+"][subject]",
-    name: "qualifications["+code+"][subject]",
-    value: data["qualifications"][code].subject
+    id: "qualifications[" + id + "][subject]",
+    name: "qualifications[" + id + "][subject]",
+    value: data["qualifications"][id].subject
   }) }}
 
   {{ govukInput({
@@ -43,9 +43,9 @@
       text: "Institution where you studied",
       classes: "govuk-label--s"
     },
-    id: "qualifications["+code+"][institution]",
-    name: "qualifications["+code+"][institution]",
-    value: data["qualifications"][code].institution
+    id: "qualifications[" + id + "][institution]",
+    name: "qualifications[" + id + "][institution]",
+    value: data["qualifications"][id].institution
   }) }}
 
   {{ govukInput({
@@ -54,9 +54,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-10",
-    id: "qualifications["+code+"][grade]",
-    name: "qualifications["+code+"][grade]",
-    value: data["qualifications"][code].grade
+    id: "qualifications[" + id + "][grade]",
+    name: "qualifications[" + id + "][grade]",
+    value: data["qualifications"][id].grade
   }) }}
 
   {{ govukInput({
@@ -65,9 +65,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: "qualifications["+code+"][year]",
-    name: "qualifications["+code+"][year]",
-    value: data["qualifications"][code].year
+    id: "qualifications[" + id + "][year]",
+    name: "qualifications[" + id + "][year]",
+    value: data["qualifications"][id].year
   }) }}
 
   {{ govukRadios({
@@ -77,19 +77,19 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "qualifications["+code+"][international]",
-    name: "qualifications["+code+"][international]",
+    idPrefix: "qualifications[" + id + "][international]",
+    name: "qualifications[" + id + "][international]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['qualifications']['"+code+"']['international']", "yes"),
+      checked: checked("['qualifications']['" + id + "']['international']", "yes"),
       conditional: {
         html: internationalQualification
       }
     }, {
       value: "no",
       text: "No",
-      checked: checked("['qualifications']['"+code+"']['international']", "no")
+      checked: checked("['qualifications']['" + id + "']['international']", "no")
     }]
   }) }}
 

@@ -9,9 +9,9 @@
       text: "Your role",
       classes: "govuk-label--s"
     },
-    id: "school_experience["+code+"][role]",
-    name: "school_experience["+code+"][role]",
-    value: data["school_experience"][code].role
+    id: "school_experience[" + id + "][role]",
+    name: "school_experience[" + id + "][role]",
+    value: data["school_experience"][id].role
   }) }}
 
   {{ govukInput({
@@ -19,9 +19,9 @@
       text: "Organisation where you gained experience or volunteered",
       classes: "govuk-label--s"
     },
-    id: "school_experience["+code+"][org]",
-    name: "school_experience["+code+"][org]",
-    value: data["school_experience"][code].org
+    id: "school_experience[" + id + "][org]",
+    name: "school_experience[" + id + "][org]",
+    value: data["school_experience"][id].org
   }) }}
 
   {{ govukDateInput({
@@ -34,21 +34,21 @@
     hint: {
       text: "For example, 05 2018"
     },
-    id: "school_experience["+code+"][start]",
+    id: "school_experience[" + id + "][start]",
     items: [{
       label: "Day",
-      name: "school_experience["+code+"][start_day]",
-      value: data["school_experience"][code]["start_day"],
+      name: "school_experience[" + id + "][start_day]",
+      value: data["school_experience"][id]["start_day"],
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
-      name: "school_experience["+code+"][start_month]",
-      value: data["school_experience"][code]["start_month"],
+      name: "school_experience[" + id + "][start_month]",
+      value: data["school_experience"][id]["start_month"],
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      name: "school_experience["+code+"][start_year]",
-      value: data["school_experience"][code]["start_year"],
+      name: "school_experience[" + id + "][start_year]",
+      value: data["school_experience"][id]["start_year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -63,21 +63,21 @@
     hint: {
       text: "For example, 05 2019"
     },
-    id: "school_experience["+code+"][end]",
+    id: "school_experience[" + id + "][end]",
     items: [{
       label: "Day",
-      name: "school_experience["+code+"][end_day]",
-      value: data["school_experience"][code]["end_day"],
+      name: "school_experience[" + id + "][end_day]",
+      value: data["school_experience"][id]["end_day"],
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
-      name: "school_experience["+code+"][end_month]",
-      value: data["school_experience"][code]["end_month"],
+      name: "school_experience[" + id + "][end_month]",
+      value: data["school_experience"][id]["end_month"],
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      name: "school_experience["+code+"][end_year]",
-      value: data["school_experience"][code]["end_year"],
+      name: "school_experience[" + id + "][end_year]",
+      value: data["school_experience"][id]["end_year"],
       classes: "govuk-input--width-4"
     }]
   }) }}

@@ -21,9 +21,9 @@
       text: "Full name",
       classes: "govuk-label--s"
     },
-    id: "referee-" + type + "-name",
-    name: "referee-" + type + "-name",
-    value: data["referee-" + type + "-name"]
+    id: "referees-" + id + "-name",
+    name: "referees[" + id + "][name]",
+    value: data["referees"][id].name
   }) }}
 
   {{ govukInput({
@@ -34,9 +34,9 @@
     hint: {
       text: "For example, academic tutor, manager, other (please specify)."
     },
-    id: "referee-" + type + "-relationship",
-    name: "referee-" + type + "-relationship",
-    value: data["referee-" + type + "-relationship"]
+    id: "referees-" + id + "-relationship",
+    name: "referees[" + id + "][relationship]",
+    value: data["referees"][id].relationship
   }) }}
 
   {{ govukInput({
@@ -44,10 +44,9 @@
       text: "Email address",
       classes: "govuk-label--s"
     },
-    type: "email",
-    id: "referee-" + type + "-email",
-    name: "referee-" + type + "-email",
-    value: data["referee-" + type + "-email"]
+    id: "referees-" + id + "-email",
+    name: "referees[" + id + "][email]",
+    value: data["referees"][id].email
   }) }}
 
 {% set explainCharacter %}
@@ -55,9 +54,9 @@
     label: {
       text: "If you are unable to provide an academic, professional or school senior leadership referee and are therefore requesting a character reference, you can explain why here (optional)."
     },
-    id: "referee-" + type + "-character-explaination",
-    name: "referee-" + type + "-character-explaination",
-    value: data["referee-" + type + "-character-explaination"]
+    id: "referees-" + id + "-character_explaination",
+    name: "referees[" + id + "][character_explaination]",
+    value: data["referees"][id].character_explaination
   }) }}
 {% endset %}
 
@@ -68,24 +67,24 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "referee-" + type + "-type",
-    name: "referee-" + type + "-type",
+    idPrefix: "referees-" + id + "-type",
+    name: "referees[" + id + "][type]",
     items: [{
       value: "academic",
       text: "Academic",
-      checked: checked("referee-" + type + "-type", "academic")
+      checked: checked("['referees']['" + id + "']['type']", "academic")
     }, {
       value: "professional",
       text: "Professional",
-      checked: checked("referee-" + type + "-type", "professional")
+      checked: checked("['referees']['" + id + "']['type']", "professional")
     }, {
       value: "school-based",
       text: "School senior leadership",
-      checked: checked("referee-" + type + "-type", "school-based")
+      checked: checked("['referees']['" + id + "']['type']", "school-based")
     }, {
       value: "character",
       text: "Character",
-      checked: checked("referee-" + type + "-type", "character"),
+      checked: checked("['referees']['" + id + "']['type']", "character"),
       conditional: {
         html: explainCharacter
       }

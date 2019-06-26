@@ -43,25 +43,25 @@ router.post('/profile/academic-qualifications/degree-answer', (req, res) => {
 
 // Application: UK degree
 router.get('/profile/academic-qualifications/add-degree', (req, res) => {
-  let code = generateRandomString()
+  let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-degree/${code}`)
+  res.redirect(`/profile/academic-qualifications/add-degree/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-degree/:code', (req, res) => {
+router.get('/profile/academic-qualifications/add-degree/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     action: 'add',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save and continue',
     formAction: '/profile/academic-qualifications/maths-gcse',
     title: 'Add degree'
   })
 })
 
-router.get('/profile/academic-qualifications/edit-degree/:code', (req, res) => {
+router.get('/profile/academic-qualifications/edit-degree/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     action: 'edit',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save changes',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit degree'
@@ -70,27 +70,27 @@ router.get('/profile/academic-qualifications/edit-degree/:code', (req, res) => {
 
 // Application: International degree
 router.get('/profile/academic-qualifications/add-international-degree', (req, res) => {
-  let code = generateRandomString()
+  let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-international-degree/${code}`)
+  res.redirect(`/profile/academic-qualifications/add-international-degree/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-international-degree/:code', (req, res) => {
+router.get('/profile/academic-qualifications/add-international-degree/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'add',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save and continue',
     formAction: '/profile/academic-qualifications/maths-gcse',
     title: 'Add non-UK degree'
   })
 })
 
-router.get('/profile/academic-qualifications/edit-international-degree/:code', (req, res) => {
+router.get('/profile/academic-qualifications/edit-international-degree/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     international: true,
     action: 'edit',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save changes',
     formAction: '/profile/academic-qualifications/review',
     title: 'Edit non-UK degree'
@@ -288,24 +288,24 @@ router.get('/profile/academic-qualifications/edit-science-equivalent', (req, res
 
 // Application: Other qualifications
 router.get('/profile/academic-qualifications/add-qualification', (req, res) => {
-  let code = generateRandomString()
+  let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-qualification/${code}`)
+  res.redirect(`/profile/academic-qualifications/add-qualification/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-qualification/:code', (req, res) => {
+router.get('/profile/academic-qualifications/add-qualification/:id', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
     action: 'add',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save and continue',
     title: 'Add qualification'
   })
 })
 
-router.get('/profile/academic-qualifications/edit-qualification/:code', (req, res) => {
+router.get('/profile/academic-qualifications/edit-qualification/:id', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
     action: 'edit',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save changes',
     title: 'Edit qualification'
   })
@@ -313,24 +313,24 @@ router.get('/profile/academic-qualifications/edit-qualification/:code', (req, re
 
 // Application: Work history
 router.get('/profile/work-history/add-job', (req, res) => {
-  let code = generateRandomString()
+  let id = generateRandomString()
 
-  res.redirect(`/profile/work-history/add-job/${code}`)
+  res.redirect(`/profile/work-history/add-job/${id}`)
 })
 
-router.get('/profile/work-history/add-job/:code', (req, res) => {
+router.get('/profile/work-history/add-job/:id', (req, res) => {
   res.render('profile/work-history/job', {
     action: 'add',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save and continue',
     title: 'Add job'
   })
 })
 
-router.get('/profile/work-history/edit-job/:code', (req, res) => {
+router.get('/profile/work-history/edit-job/:id', (req, res) => {
   res.render('profile/work-history/job', {
     action: 'edit',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save changes',
     title: 'Edit job'
   })
@@ -338,67 +338,49 @@ router.get('/profile/work-history/edit-job/:code', (req, res) => {
 
 // Application: School experience
 router.get('/profile/school-experience/add-role', (req, res) => {
-  let code = generateRandomString()
+  let id = generateRandomString()
 
-  res.redirect(`/profile/school-experience/add-role/${code}`)
+  res.redirect(`/profile/school-experience/add-role/${id}`)
 })
 
-router.get('/profile/school-experience/add-role/:code', (req, res) => {
+router.get('/profile/school-experience/add-role/:id', (req, res) => {
   res.render('profile/school-experience/role', {
     action: 'add',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save and continue',
     title: 'Add role'
   })
 })
 
-router.get('/profile/school-experience/edit-role/:code', (req, res) => {
+router.get('/profile/school-experience/edit-role/:id', (req, res) => {
   res.render('profile/school-experience/role', {
     action: 'edit',
-    code: req.params.code,
+    id: req.params.id,
     buttonText: 'Save changes',
     title: 'Edit role'
   })
 })
 
 // Application: References
-router.get('/profile/references/add-principle-referee', (req, res) => {
+router.get('/profile/references/add-referee/:id', (req, res) => {
+  const id = req.params.id
+
   res.render('profile/references/referee', {
     action: 'add',
-    formAction: '/profile/references/add-secondary-referee',
-    title: 'Add principle referee',
-    type: 'principle',
-    buttonText: 'Save and continue'
+    buttonText: 'Save and continue',
+    formAction: (id === 'principle') ? '/profile/references/add-referee/secondary' : '/profile/references/review',
+    id,
+    title: 'Add principle referee'
   })
 })
 
-router.get('/profile/references/edit-principle-referee', (req, res) => {
+router.get('/profile/references/edit-referee/:id', (req, res) => {
   res.render('profile/references/referee', {
     action: 'edit',
+    buttonText: 'Save changes',
     formAction: '/profile/references/review',
-    title: 'Edit principle referee',
-    type: 'principle',
-    buttonText: 'Save changes'
-  })
-})
-
-router.get('/profile/references/add-secondary-referee', (req, res) => {
-  res.render('profile/references/referee', {
-    action: 'add',
-    formAction: '/profile/references/review',
-    title: 'Add secondary referee',
-    type: 'secondary',
-    buttonText: 'Save and continue'
-  })
-})
-
-router.get('/profile/references/edit-secondary-referee', (req, res) => {
-  res.render('profile/references/referee', {
-    action: 'edit',
-    formAction: '/profile/references/review',
-    title: 'Edit secondary referee',
-    type: 'secondary',
-    buttonText: 'Save changes'
+    id: req.params.id,
+    title: 'Edit principle referee'
   })
 })
 

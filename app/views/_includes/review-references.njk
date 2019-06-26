@@ -1,26 +1,20 @@
-{{ govukTable({
-  classes: "govuk-!-font-size-16",
-  firstCellIsHeader: true,
-  head: [{
-    text: "Name"
-  }, {
-    text: "Email"
-  }, {
-    text: "Actions"
-  }],
-  rows: [
-    [{
-      text: data["referee-principle-name"]
-    }, {
-      text: data["referee-principle-email"]
-    }, {
-      html: "<a href=\"/profile/references/edit-principle-referee\">Edit principle referee</a>"
-    }], [{
-      text: data["referee-secondary-name"]
-    }, {
-      text: data["referee-secondary-email"]
-    }, {
-      html: "<a href=\"/profile/references/edit-secondary-referee\">Edit secondary referee</a>"
-    }]
-  ]
-}) }}
+{% set references = data['referees'] | toArray %}
+<table class="govuk-table govuk-!-font-size-16">
+  <caption class="govuk-table__caption govuk-heading-m">Your work history</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="col">Name</th>
+      <th class="govuk-table__header" scope="col">Email</th>
+      <th class="govuk-table__header" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for item in references %}
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">{{ item.name }}</td>
+      <td class="govuk-table__cell">{{ item.email }}</td>
+      <td class="govuk-table__cell"><a href="/profile/references/edit-referee/{{ item.id }}">Edit referee</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

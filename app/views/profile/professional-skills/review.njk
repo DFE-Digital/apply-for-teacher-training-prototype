@@ -19,50 +19,7 @@
 {% endblock %}
 
 {% block primary %}
-{% set skillsTestHTML %}
-  <p class="govuk-body govuk-!-font-size-16">
-    Candidate number: {{ data["skills-test-number"] }}<br>
-    Date of litracy test: {{ data["skills-test-literacy-date-day"] }}/{{ data["skills-test-literacy-date-month"] }}/{{ data["skills-test-literacy-date-year"] }}<br>
-    Date of numeracy test: {{ data["skills-test-numeracy-date-day"] }}/{{ data["skills-test-numeracy-date-month"] }}/{{ data["skills-test-numeracy-date-year"] }}
-  </p>
-{% endset %}
-
-{% set skillsTest = {
-  key: {
-    text: "Professional skills test"
-  },
-  value: {
-    html: (skillsTestHTML if data["skills-test"] == "yes" else "Not passed")
-  },
-  actions: {
-    items: [{
-      href: "/profile/professional-skills/",
-      text: "Change",
-      visuallyHiddenText: "professional skills test details"
-    }]
-  }
-} %}
-
-{% set languages = {
-  key: {
-    text: "Is English your first language?"
-  },
-  value: {
-    text: ("Yes" if data["languages"] == "yes" else "No: " + data["languages-first"])
-  },
-  actions: {
-    items: [{
-      href: "/profile/professional-skills/languages",
-      text: "Change",
-      visuallyHiddenText: "English language qualifications"
-    }]
-  }
-} %}
-
-  {{ govukSummaryList({
-    classes: "govuk-!-font-size-16",
-    rows: [skillsTest, languages]
-  }) }}
+  {% include "_includes/review-professional-skills.njk" %}
 
   {{ govukInput({
     id: "professional-skills-completed",

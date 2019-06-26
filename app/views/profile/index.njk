@@ -37,22 +37,22 @@
       completed: data['subject-knowledge-completed']
     }, {
       text: "Literacy, numeracy and language skills",
-      href: "/profile/professional-skills" + ( "/review" if data["professional-skills-completed"] ),
+      href: "/profile/professional-skills" + ( "/review" if data["professional-skills"] ),
       id: "professional-skills",
-      completed: data['professional-skills-completed']
+      completed: data['professional-skills']
     }, {
       text: "Work history",
-      href: "/profile/work-history" + ( "/review" if data["work-history-completed"] ),
+      href: "/profile/work-history" + ( "/review" if data["work-history"] ),
       id: "work-history",
       completed: data['work-history']
     }, {
       text: "School experience and volunteering with children and young people",
-      href: "/profile/school-experience" + ( "/review" if data["school-experience-completed"] ),
+      href: "/profile/school-experience" + ( "/review" if data["school-experience"] ),
       id: "school-experience",
       completed: data['school-experience']
     }, {
       text: "References",
-      href: "/profile/references" + ( "/review" if data["references-completed"] ),
+      href: "/profile/references" + ( "/review" if data["referees"] ),
       id: "references",
       completed: data['referees']
     }, {

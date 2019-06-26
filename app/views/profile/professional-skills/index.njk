@@ -34,14 +34,12 @@
     label: {
       text: "Please enter your professional skills tests candidate number"
     },
-    id: "skills-test-number",
-    name: "skills-test-number",
-    value: data["skills-test-number"]
+    id: "professional-skills-test-candidate-number",
+    name: "professional-skills[test][candidate-number]",
+    value: data["professional-skills"]["test"]["candidate-number"]
   }) }}
 
   {{ govukDateInput({
-    id: "skills-test-literacy-date",
-    namePrefix: "skills-test-literacy-date",
     fieldset: {
       legend: {
         text: "Date of literacy test"
@@ -50,24 +48,29 @@
     hint: {
       text: "For example, 28 05 2019"
     },
+    id: "professional-skills-test-literacy-date",
     items: [{
-      name: "day",
-      value: data["skills-test-literacy-date-day"],
+      label: "Day",
+      id: "professional-skills-test-literacy-date-day",
+      name: "professional-skills[test][literacy-date][day]",
+      value: data["professional-skills"]["test"]["literacy-date"]["day"],
       classes: "govuk-input--width-2"
     }, {
-      name: "month",
-      value: data["skills-test-literacy-date-month"],
+      label: "Month",
+      id: "professional-skills-test-literacy-date-month",
+      name: "professional-skills[test][literacy-date][month]",
+      value: data["professional-skills"]["test"]["literacy-date"]["month"],
       classes: "govuk-input--width-2"
     }, {
-      name: "year",
-      value: data["skills-test-literacy-date-year"],
+      label: "Year",
+      id: "professional-skills-test-literacy-date-year",
+      name: "professional-skills[test][literacy-date][year]",
+      value: data["professional-skills"]["test"]["literacy-date"]["year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
 
   {{ govukDateInput({
-    id: "skills-test-numeracy-date",
-    namePrefix: "skills-test-numeracy-date",
     fieldset: {
       legend: {
         text: "Date of numeracy test"
@@ -76,17 +79,24 @@
     hint: {
       text: "For example, 28 05 2019"
     },
+    id: "professional-skills-test-numeracy-date",
     items: [{
-      name: "day",
-      value: data["skills-test-numeracy-date-day"],
+      label: "Day",
+      id: "professional-skills-test-numeracy-date-day",
+      name: "professional-skills[test][numeracy-date][day]",
+      value: data["professional-skills"]["test"]["numeracy-date"]["day"],
       classes: "govuk-input--width-2"
     }, {
-      name: "month",
-      value: data["skills-test-numeracy-date-month"],
+      label: "Month",
+      id: "professional-skills-test-numeracy-date-month",
+      name: "professional-skills[test][numeracy-date][month]",
+      value: data["professional-skills"]["test"]["numeracy-date"]["month"],
       classes: "govuk-input--width-2"
     }, {
-      name: "year",
-      value: data["skills-test-numeracy-date-year"],
+      label: "Year",
+      id: "professional-skills-test-numeracy-date-year",
+      name: "professional-skills[test][numeracy-date][year]",
+      value: data["professional-skills"]["test"]["numeracy-date"]["year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -99,19 +109,19 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "skills-test",
-    name: "skills-test",
+    idPrefix: "professional-skills-test-completed",
+    name: "professional-skills[test][completed]",
     items: [{
-      value: "yes",
+      value: "true",
       text: "Yes",
-      checked: checked("skills-test", "yes"),
+      checked: checked("['professional-skills']['test']['completed']", "true"),
       conditional: {
         html: skillsTestDetails
       }
     }, {
-      value: "no",
+      value: "false",
       text: "No",
-      checked: checked("skills-test", "no")
+      checked: checked("['professional-skills']['test']['completed']", "false")
     }]
   }) }}
 

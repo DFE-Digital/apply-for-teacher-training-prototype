@@ -26,6 +26,10 @@
   {% include "_includes/review-subject-knowledge.njk" %}
 {% endset %}
 
+{% set professionalSkills %}
+  {% include "_includes/review-professional-skills.njk" %}
+{% endset %}
+
 {% set workHistory %}
   {% include "_includes/review-work-history.njk" %}
 {% endset %}
@@ -69,6 +73,9 @@
     }, {
       heading: {
         text: "Literacy, numeracy and language skills"
+      },
+      content: {
+        html: professionalSkills
       }
     }, {
       heading: {

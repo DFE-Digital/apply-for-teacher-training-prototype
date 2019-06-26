@@ -370,17 +370,19 @@ router.get('/profile/references/add-referee/:id', (req, res) => {
     buttonText: 'Save and continue',
     formAction: (id === 'principle') ? '/profile/references/add-referee/secondary' : '/profile/references/review',
     id,
-    title: 'Add principle referee'
+    title: `Add ${id} referee`
   })
 })
 
 router.get('/profile/references/edit-referee/:id', (req, res) => {
+  const id = req.params.id
+
   res.render('profile/references/referee', {
     action: 'edit',
     buttonText: 'Save changes',
     formAction: '/profile/references/review',
-    id: req.params.id,
-    title: 'Edit principle referee'
+    id,
+    title: `Edit ${id} referee`
   })
 })
 

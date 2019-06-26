@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set school_experience = data['school_experience'] | toArray %}
+  {% set schoolExperience = data['school-experience'] | toArray %}
   <table class="govuk-table govuk-!-font-size-16">
     <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
     <thead class="govuk-table__head">
@@ -30,15 +30,15 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      {% for item in school_experience %}
-      {% set start_date = item.start-day + '/' + item.start-month + '/' + item.start-year %}
+      {% for item in schoolExperience %}
+      {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
       {% if item.end-year != "" %}
-        {% set end_date = item.end-day + '/' + item.end-month + '/' + item.end-year %}
+        {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
       {% else %}
-        {% set end_date = 'Present' %}
+        {% set endDate = 'Present' %}
       {% endif %}
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ start_date }} - {{ end_date }}</td>
+        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
         <td class="govuk-table__cell">{{ item.role }}</td>
         <td class="govuk-table__cell">{{ item.org }}</td>
         <td class="govuk-table__cell"><a href="/profile/school-experience/edit-role/{{ item.id }}">Edit role</a></td>
@@ -51,13 +51,6 @@
     html: "Add another role",
     href: "/profile/school-experience/add-role",
     classes: "govuk-button--secondary"
-  }) }}
-
-  {{ govukInput({
-    id: "school-experience-completed",
-    name: "school-experience-completed",
-    type: "hidden",
-    value: true
   }) }}
 
   {{ govukButton({

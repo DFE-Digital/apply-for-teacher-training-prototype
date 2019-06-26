@@ -13,8 +13,8 @@
       classes: "govuk-label--s"
     },
     autocomplete: "given-name",
-    id: "first-name",
-    name: "first-name"
+    id: "candidate-first-name",
+    name: "candidate[first-name]"
   }) }}
 
   {{ govukInput({
@@ -23,8 +23,8 @@
       classes: "govuk-label--s"
     },
     autocomplete: "family-name",
-    id: "family-name",
-    name: "family-name"
+    id: "candidate-family-name",
+    name: "candidate[family-name]"
   }) }}
 
   {{ govukDateInput({
@@ -37,21 +37,23 @@
     hint: {
       text: "For example, 31 03 1980"
     },
-    id: "date-of-birth",
-    namePrefix: "date-of-birth",
+    id: "candidate-date-of-birth",
     items: [{
-      name: "day",
-      value: data["date-of-birth-day"],
+      label: "Day",
+      name: "candidate[date-of-birth][day]",
+      value: data["candidate"]["date-of-birth"]["day"],
       classes: "govuk-input--width-2",
       autocomplete: "bday-day"
     }, {
-      name: "month",
-      value: data["date-of-birth-month"],
+      label: "Month",
+      name: "candidate[date-of-birth][month]",
+      value: data["candidate"]["date-of-birth"]["month"],
       classes: "govuk-input--width-2",
       autocomplete: "bday-month"
     }, {
-      name: "year",
-      value: data["date-of-birth-year"],
+      label: "Year",
+      name: "candidate[date-of-birth][year]",
+      value: data["candidate"]["date-of-birth"]["year"],
       classes: "govuk-input--width-4",
       autocomplete: "bday-year"
     }]
@@ -63,10 +65,10 @@
       classes: "govuk-label--s"
     },
     autocomplete: "email",
+    type: "email",
     classes: "govuk-!-width-two-thirds",
-    id: "email",
-    name: "email",
-    type: "email"
+    id: "candidate-email",
+    name: "candidate[email]"
   }) }}
 
   {{ govukInput({
@@ -75,9 +77,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-!-width-two-thirds",
-    id: "password",
-    name: "password",
-    type: "password"
+    type: "password",
+    id: "account-password",
+    name: "account[password]"
   }) }}
 
   {{ govukInput({
@@ -86,9 +88,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-!-width-two-thirds",
-    id: "confirm-password",
-    name: "confirm-password",
-    type: "password"
+    type: "password",
+    id: "account-confirm-password",
+    name: "account[confirm-password]"
   }) }}
 
   {{ govukButton({
@@ -112,13 +114,4 @@
       text: "Sign in"
     }]
   }) }}
-{% endblock %}
-{% block pageScripts %}
-  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
-  <script type="text/javascript">
-    accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '',
-      selectElement: document.querySelector('#nationality')
-    })
-  </script>
 {% endblock %}

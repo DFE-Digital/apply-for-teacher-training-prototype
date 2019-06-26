@@ -13,10 +13,10 @@
       classes: "govuk-label--s"
     },
     autocomplete: "email",
+    type: "email",
     classes: "govuk-!-width-two-thirds",
-    id: "email",
-    name: "email",
-    type: "email"
+    id: "candidate-email",
+    name: "candidate[email]"
   }) }}
 
   {{ govukInput({
@@ -25,9 +25,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-!-width-two-thirds",
-    id: "password",
-    name: "password",
-    type: "password"
+    type: "password",
+    id: "account-password",
+    name: "account[password]"
   }) }}
 
   {{ govukButton({

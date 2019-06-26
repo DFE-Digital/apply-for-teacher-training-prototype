@@ -10,9 +10,9 @@
       label: {
         html: "Please give details"
       },
-      id: "residency-status-right-to-study-details",
-      name: "residency-status-right-to-study-details",
-      value: data["residency-status-right-to-study-details"]
+      id: "candidate-residency-status-right-to-study",
+      name: "candidate[residency-status-right-to-study]",
+      value: data["candidate"]["residency-status-right-to-study"]
     }) }}
   {% endset -%}
 
@@ -40,42 +40,42 @@
       label: {
         html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration</a>."
       },
-      id: "residency-status-unknown-details",
-      name: "residency-status-unknown-details",
-      value: data["residency-status-unknown-details"],
+      id: "candidate-residency-status-unknown",
+      name: "candidate[residency-status-unknown]",
+      value: data["candidate"]["residency-status-unknown"],
       rows: 5,
       maxwords: 200
     }) }}
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: "residency-status",
-    name: "residency-status",
+    idPrefix: "candidate-residency-status",
+    name: "candidate[residency-status]",
     items: [{
       text: "I have the right to study and/or work in the UK",
       value: "right-to-study",
-      checked: checked("residency-status", "right-to-study"),
+      checked: checked("['candidate']['residency-status']", "right-to-study"),
       conditional: {
         html: rightToWorkStudy
       }
     }, {
       text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
       value: "require-tier-2",
-      checked: checked("residency-status", "require-tier-2"),
+      checked: checked("['candidate']['residency-status']", "require-tier-2"),
       conditional: {
         html: requireTier2
       }
     }, {
       text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
       value: "require-tier-4",
-      checked: checked("residency-status", "require-tier-4"),
+      checked: checked("['candidate']['residency-status']", "require-tier-4"),
       conditional: {
         html: requireTier4
       }
     }, {
       text: "I don’t know my residency status",
       value: "unknown",
-      checked: checked("residency-status", "unknown"),
+      checked: checked("['candidate']['residency-status']", "unknown"),
       conditional: {
         html: unknown
       }

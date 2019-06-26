@@ -8,7 +8,7 @@ const generateRandomString = () => {
 
 // Application: Personal details
 router.post('/profile/personal-details/answer', (req, res) => {
-  let nationality = req.session.data['nationality']
+  let nationality = req.session.data['candidate']['nationality']
 
   let eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 

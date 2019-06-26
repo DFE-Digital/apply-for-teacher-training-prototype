@@ -1,91 +1,68 @@
-{% set name %}{{ data["title"] + " " + data["first-name"] + " " + data["family-name"] }}{{ " (" + data["optional-name"] + ")" if data["optional-name"] }}{% endset %}
-{% set name = name | safe %}
+<dl class="govuk-summary-list govuk-!-font-size-16 govuk-summary-list--no-border">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Name</dt>
+    <dd class="govuk-summary-list__value">
+      {{ data["candidate"]["title"] }}
+      {{ data["candidate"]["first-name"] }}
+      {{ data["candidate"]["family-name"] }}
+      {% if data["candidate"]["optional-name"] %}
+        ({{ data["candidate"]["optional-name"] }})
+      {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="/profile/personal-details">
+        Change<span class="govuk-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
 
-{% set dob %}{{ data["date-of-birth-day"] + "/" + data["date-of-birth-month"] + "/" + data["date-of-birth-year"] }}{% endset %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Date of birth</dt>
+    <dd class="govuk-summary-list__value">
+      {{ data["candidate"]["date-of-birth"]["day"] }}/{{ data["candidate"]["date-of-birth"]["month"] }}/{{ data["candidate"]["date-of-birth"]["year"] }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="/profile/personal-details">
+        Change<span class="govuk-visually-hidden"> date of birth</span>
+      </a>
+    </dd>
+  </div>
 
-{% if data["residency-status"] == "right-to-study" %}
-  {% set residencyStatus %}
-    I have the right to study and/or work in the UK{{ ": “" + data["residency-status-right-to-study-details"] + "”" if data["residency-status-right-to-study-details"] }}
-  {% endset %}
-  {% set residencyStatus = residencyStatus | safe %}
-{% endif %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Nationality</dt>
+    <dd class="govuk-summary-list__value">
+      {{ data["candidate"]["nationality"] }}
+      {% if data["candidate"]["second-nationality"] %}
+        and {{ data["candidate"]["second-nationality"] }}
+      {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="/profile/personal-details">
+        Change<span class="govuk-visually-hidden"> nationality</span>
+      </a>
+    </dd>
+  </div>
 
-{% if data["residency-status"] == "require-tier-2" %}
-  {% set residencyStatus = "I will need to apply for a general work visa (Tier 2) to work in the UK" %}
-{% endif %}
-
-{% if data["residency-status"] == "require-tier-4" %}
-  {% set residencyStatus = "I will need to apply for a general student visa (Tier 4) to study in the UK" %}
-{% endif %}
-
-{% if data["residency-status"] == "unknown" %}
-  {% set residencyStatus %}
-    I don’t know my residency status{{ ": “" + data["residency-status-unknown-details"] + "”" if data["residency-status-unknown-details"] }}
-  {% endset %}
-  {% set residencyStatus = residencyStatus | safe %}
-{% endif %}
-
-{% if data["residency-status"] != true %}
-  {% set residencyStatus = "UK citizen" %}
-{% endif %}
-
-{{ govukSummaryList({
-  classes: "govuk-!-font-size-16 govuk-summary-list--no-border",
-  rows: [{
-    key: {
-      text: "Name"
-    },
-    value: {
-      text: name
-    },
-    actions: {
-      items: [{
-        href: "/profile/personal-details",
-        text: "Change",
-        visuallyHiddenText: "name"
-      }]
-    }
-  }, {
-    key: {
-      text: "Date of birth"
-    },
-    value: {
-      text: dob
-    },
-    actions: {
-      items: [{
-        href: "/profile/personal-details",
-        text: "Change",
-        visuallyHiddenText: "date of birth"
-      }]
-    }
-  }, {
-    key: {
-      text: "Nationality"
-    },
-    value: {
-      html: data["nationality"] + ( " and " + data["second-nationality"] if data["second-nationality"])
-    },
-    actions: {
-      items: [{
-        href: "/profile/personal-details",
-        text: "Change",
-        visuallyHiddenText: "nationality"
-      }]
-    }
-  }, {
-    key: {
-      text: "Residency status"
-    },
-    value: {
-      html: residencyStatus
-    },
-    actions: {
-      items: [{
-        href: "/profile/personal-details" + ( "/residency-status" if data["residency-status"] ),
-        text: "Change",
-        visuallyHiddenText: "residency status"
-      }]
-    }
-  }]
-}) }}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Residency status</dt>
+    <dd class="govuk-summary-list__value">
+    {% set residencyStatus = data["candidate"]["residency-status"] %}
+    {% if residencyStatus == "right-to-study" %}
+      I have the right to study and/or work in the&nbsp;UK{{ ': ' + data["candidate"]["residency-status-right-to-study"] if data["candidate"]["residency-status-right-to-study"] }}
+    {% elif residencyStatus == "require-tier-2" %}
+      I will need to apply for a general work visa (Tier 2) to work in the&nbsp;UK
+    {% elif residencyStatus == "require-tier-4" %}
+      I will need to apply for a general student visa (Tier 4) to study in the&nbsp;UK
+    {% elif residencyStatus == "unknown" %}
+      I don’t know my residency status{{ ': ' + data["candidate"]["residency-status-unknown"] if data["candidate"]["residency-status-unknown"] }}
+    {% else %}
+      UK citizen
+    {% endif %}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="/profile/personal-details/residency-status">
+        Change<span class="govuk-visually-hidden"> residency status</span>
+      </a>
+    </dd>
+  </div>
+</dl>

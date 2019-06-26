@@ -1,5 +1,6 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
+{% set formAction = "/profile/" %}
 {% set title = "Work history" %}
 
 {% block pageNavigation %}
@@ -17,38 +18,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set work_history = data['work_history'] | toArray %}
-  <table class="govuk-table govuk-!-font-size-16">
-    <caption class="govuk-table__caption govuk-heading-m">Your work history</caption>
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-        <th class="govuk-table__header" scope="col">Job title</th>
-        <th class="govuk-table__header" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      {% for item in work_history %}
-      {% set start_date = item.start_month + '/' + item.start_year %}
-      {% if item.end_year != "" %}
-        {% set end_date = item.end_month + '/' + item.end_year %}
-      {% else %}
-        {% set end_date = 'Present' %}
-      {% endif %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ start_date }} - {{ end_date }}</td>
-        <td class="govuk-table__cell">{{ item.role }}</td>
-        <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell"><a href="/profile/work-history/edit-job/{{ item.id }}">Edit job</a></td>
-      </tr>
-      {% endfor %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell app-table__cell--muted" colspan="3">Unexplained gap</td>
-        <td class="govuk-table__cell app-table__cell--muted"><a href="/profile/work-history/explain-gap/{{ item.id }}">Explain gap</a></td>
-      </tr>
-    </tbody>
-  </table>
+  {% include "_includes/review-work-history.njk" %}
 
   {{ govukButton({
     html: "Add another job",

@@ -26,6 +26,10 @@
   {% include "_includes/review-subject-knowledge.njk" %}
 {% endset %}
 
+{% set workHistory %}
+  {% include "_includes/review-work-history.njk" %}
+{% endset %}
+
 {% set references %}
   {% include "_includes/review-references.njk" %}
 {% endset %}
@@ -69,6 +73,9 @@
     }, {
       heading: {
         text: "Work history"
+      },
+      content: {
+        html: workHistory
       }
     }, {
       heading: {

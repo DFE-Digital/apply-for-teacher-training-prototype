@@ -31,9 +31,9 @@
     </thead>
     <tbody class="govuk-table__body">
       {% for item in school_experience %}
-      {% set start_date = item.start_day + '/' + item.start_month + '/' + item.start_year %}
-      {% if item.end_year != "" %}
-        {% set end_date = item.end_day + '/' + item.end_month + '/' + item.end_year %}
+      {% set start_date = item.start-day + '/' + item.start-month + '/' + item.start-year %}
+      {% if item.end-year != "" %}
+        {% set end_date = item.end-day + '/' + item.end-month + '/' + item.end-year %}
       {% else %}
         {% set end_date = 'Present' %}
       {% endif %}

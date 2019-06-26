@@ -18,7 +18,7 @@ Example usage:
 */
 
 module.exports = {
-  // work_history: [{
+  // work-history: [{
   //   id: 'fdg',
   //   employer_name: 'Cheadle Hulme High School',
   //   start_date: '2018-05-01',

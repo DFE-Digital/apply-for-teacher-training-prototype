@@ -9,9 +9,9 @@
       text: "Job title",
       classes: "govuk-label--s"
     },
-    id: "work_history[" + id + "][role]",
-    name: "work_history[" + id + "][role]",
-    value: data["work_history"][id].role
+    id: "work-history-" + id + "-role",
+    name: "work-history[" + id + "][role]",
+    value: data["work-history"][id]["role"]
   }) }}
 
   {{ govukInput({
@@ -19,9 +19,9 @@
       text: "Name of employer",
       classes: "govuk-label--s"
     },
-    id: "work_history[" + id + "][org]",
-    name: "work_history[" + id + "][org]",
-    value: data["work_history"][id].org
+    id: "work-history-" + id + "-org",
+    name: "work-history[" + id + "][org]",
+    value: data["work-history"][id]["org"]
   }) }}
 
   {{ govukDateInput({
@@ -34,16 +34,18 @@
     hint: {
       text: "For example, 05 2018"
     },
-    id: "work_history[" + id + "][start]",
+    id: "work-history-" + id + "-start",
     items: [{
       label: "Month",
-      name: "work_history[" + id + "][start_month]",
-      value: data["work_history"][id]["start_month"],
+      id: "work-history-" + id + "-start-month",
+      name: "work-history[" + id + "][start-month]",
+      value: data["work-history"][id]["start-month"],
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      name: "work_history[" + id + "][start_year]",
-      value: data["work_history"][id]["start_year"],
+      id: "work-history-" + id + "-start-year",
+      name: "work-history[" + id + "][start-year]",
+      value: data["work-history"][id]["start-year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -58,16 +60,18 @@
     hint: {
       text: "For example, 05 2019"
     },
-    id: "work_history[" + id + "][end]",
+    id: "work-history-" + id + "-end",
     items: [{
       label: "Month",
-      name: "work_history[" + id + "][end_month]",
-      value: data["work_history"][id][end_month],
+      id: "work-history-" + id + "-end-month",
+      name: "work-history[" + id + "][end-month]",
+      value: data["work-history"][id]["end-month"],
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      name: "work_history[" + id + "][end_year]",
-      value: data["work_history"][id][end_year],
+      id: "work-history-" + id + "-end-month",
+      name: "work-history[" + id + "][end-year]",
+      value: data["work-history"][id]["end-year"],
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -80,9 +84,9 @@
     hint: {
       text: "Give examples showing how you developed transferrable skills like communication, creativity and organisation. Enter experience relevant to your subject in the subject knowledge section"
     },
-    id: "work_history[" + id + "][job_description]",
-    name: "work_history[" + id + "][job_description]",
-    value: data["work_history"][id].job_description,
+    id: "work-history-" + id + "-job_description",
+    name: "work-history[" + id + "][job_description]",
+    value: data["work-history"][id]["job_description"],
     maxwords: 150
   }) }}
 
@@ -94,16 +98,16 @@
       }
     },
     classes: "govuk-radios--inline",
-    idPrefix: "work_history[" + id + "][worked_with_children]",
-    name: "work_history[" + id + "][worked_with_children]",
+    idPrefix: "work-history-" + id + "-worked_with_children",
+    name: "work-history[" + id + "][worked_with_children]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['work_history']['" + id + "']['worked_with_children']", "yes")
+      checked: checked("['work-history']['" + id + "']['worked_with_children']", "yes")
     }, {
       value: "no",
       text: "No",
-      checked: checked("['work_history']['" + id + "']['worked_with_children']", "no")
+      checked: checked("['work-history']['" + id + "']['worked_with_children']", "no")
     }]
   }) }}
 

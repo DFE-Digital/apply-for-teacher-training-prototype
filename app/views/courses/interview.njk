@@ -17,10 +17,10 @@
       text: "Enter details relevant to your interview arrangements",
       classes: "govuk-label--s"
     },
+    maxwords: 150,
     id: "interview-notes",
-    name: "interview-notes",
-    value: data["interview-notes"],
-    maxwords: 150
+    name: "interview[notes]",
+    value: data["interview"]["notes"]
   }) }}
 
   {{ govukCharacterCount({
@@ -28,11 +28,11 @@
       text: "Is there anything else you would like to tell us about your application?",
       classes: "govuk-label--s"
     },
-    id: "interview-miscellaneous",
-    name: "interview-miscellaneous",
-    value: data["interview-miscellaneous"],
     rows: 10,
-    maxwords: 600
+    maxwords: 600,
+    id: "interview-miscellaneous",
+    name: "interview[miscellaneous]",
+    value: data["interview"]["miscellaneous"]
   }) }}
 
   {{ govukButton({

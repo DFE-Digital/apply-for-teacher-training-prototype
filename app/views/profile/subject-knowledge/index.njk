@@ -35,11 +35,11 @@
     label: {
       html: "Explain why you believe a SKE would benefit you (optional)"
     },
-    id: "subject-knowledge-enhancement-details",
-    name: "subject-knowledge-enhancement-details",
-    value: data["subject-knowledge-enhancement-details"],
     maxwords: 300,
-    rows: 6
+    rows: 6,
+    id: "subject-knowledge-enhancement-details",
+    name: "subject-knowledge[enhancement-details]",
+    value: data["subject-knowledge"]["enhancement-details"]
   }) }}
 {% endset -%}
 
@@ -48,16 +48,16 @@
       text: "Give detailed evidence of your subject knowledge.",
       classes: "govuk-label--s"
     },
-    id: "subject-knowledge-statement",
-    name: "subject-knowledge-statement",
-    value: data["subject-knowledge-statement"],
     maxwords: 600,
-    rows: 12
+    rows: 12,
+    id: "subject-knowledge-statement",
+    name: "subject-knowledge[statement]",
+    value: data["subject-knowledge"]["statement"]
   }) }}
 
   {{ govukRadios({
     idPrefix: "subject-knowledge-enhancement",
-    name: "subject-knowledge-enhancement",
+    name: "subject-knowledge[enhancement]",
     fieldset: {
       legend: {
         text: "Would you be interested in taking a subject knowledge enhancement (SKE) course?",
@@ -67,22 +67,15 @@
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("subject-knowledge-enhancement", "yes"),
+      checked: checked("['subject-knowledge']['enhancement']", "yes"),
       conditional: {
         html: skeExplanation
       }
     }, {
       value: "no",
       text: "No",
-      checked: checked("subject-knowledge-enhancement", "no")
+      checked: checked("['subject-knowledge']['enhancement']", "no")
     }]
-  }) }}
-
-  {{ govukInput({
-    id: "subject-knowledge-completed",
-    name: "subject-knowledge-completed",
-    type: "hidden",
-    value: true
   }) }}
 
   {{ govukButton({

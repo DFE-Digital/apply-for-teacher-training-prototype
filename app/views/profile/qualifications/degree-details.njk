@@ -2,11 +2,11 @@
 
 {% set parent = "Eligibility and qualifications" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/academic-qualifications/review" %}
+  {% set formAction = "/profile/qualifications/review" %}
   {% set title %}Edit{{ " non-UK " if international }}degree{% endset %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/academic-qualifications/maths-gcse" %}
+  {% set formAction = "/profile/qualifications/maths-gcse" %}
   {% set title %}Add{{ " non-UK " if international }}degree{% endset %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
@@ -136,7 +136,7 @@
     html: "Save and add another degree",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/academic-qualifications/degree"
+      formaction: "/profile/qualifications/degree"
     }
   }) }}
 {% endif %}

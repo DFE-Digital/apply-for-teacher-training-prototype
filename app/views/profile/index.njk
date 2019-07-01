@@ -27,9 +27,9 @@
       completed: data["contact-details"]["address"]
     }, {
       text: "Academic qualifications",
-      href: "/profile/academic-qualifications" + ( "/review" if data["academic-qualifications-completed"] ),
-      id: "academic-qualifications",
-      completed: data["academic-qualifications-completed"]
+      href: "/profile/qualifications" + ( "/review" if data["qualifications-completed"] ),
+      id: "qualifications",
+      completed: data["qualifications-completed"]
     }, {
       text: "Subject knowledge",
       href: "/profile/subject-knowledge" + ( "/primary" if checked("settings", "primary-application")),

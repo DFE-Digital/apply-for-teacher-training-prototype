@@ -266,14 +266,14 @@ router.get('/profile/qualifications/edit-science-equivalent', (req, res) => {
 })
 
 // Application: Other qualifications
-router.get('/profile/qualifications/qualification/add', (req, res) => {
+router.get('/profile/qualifications/other/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/qualifications/qualification/add/${id}`)
+  res.redirect(`/profile/qualifications/other/add/${id}`)
 })
 
-router.get('/profile/qualifications/qualification/:action/:id', (req, res) => {
-  res.render('profile/qualifications/qualification', {
+router.get('/profile/qualifications/other/:action/:id', (req, res) => {
+  res.render('profile/qualifications/other', {
     action: req.params.action,
     id: req.params.id
   })

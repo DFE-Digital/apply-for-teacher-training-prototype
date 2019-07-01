@@ -3,11 +3,11 @@
 {% set parent = "Eligibility and qualifications" %}
 {% if action == "edit" %}
   {% set formAction = "/profile/qualifications/review" %}
-  {% set title %}Edit{{ " non-UK " if international }}degree{% endset %}
+  {% set title %}Edit {{ "non-UK " if international }}degree{% endset %}
   {% set buttonText = "Save changes" %}
 {% else %}
   {% set formAction = "/profile/qualifications/maths-gcse" %}
-  {% set title %}Add{{ " non-UK " if international }}degree{% endset %}
+  {% set title %}Add {{ "non-UK " if international }}degree{% endset %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 

@@ -116,7 +116,7 @@
         <td class="govuk-table__cell">{{ item.type }} {{ item.subject }}</td>
         <td class="govuk-table__cell">{{ item.grade }}</td>
         <td class="govuk-table__cell">{{ item.year }}</td>
-        <td class="govuk-table__cell"><a href="/profile/qualifications/edit-qualification/{{ item.id }}">Edit qualification</a></td>
+        <td class="govuk-table__cell"><a href="/profile/qualifications/other/edit/{{ item.id }}">Edit qualification</a></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -124,7 +124,7 @@
   {{ govukButton({
     html: "Add another qualification",
     classes: "govuk-button--secondary",
-    href: "/profile/qualifications/qualification/add"
+    href: "/profile/qualifications/other/add"
   }) }}
 {% else %}
   <h2 class="govuk-heading-m">Other relevant qualifications</h2>
@@ -132,7 +132,7 @@
   {{ govukButton({
     html: "Add qualification",
     classes: "govuk-button--secondary",
-    href: "/profile/qualifications/qualification/add"
+    href: "/profile/qualifications/other/add"
   }) }}
 {% endif %}
 

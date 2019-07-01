@@ -100,6 +100,12 @@
     }]
   }) }}
 
+  {{ govukInput({
+    type: "hidden",
+    name: "qualifications[" + id + "][category]",
+    value: "other"
+  }) }}
+
 {% if action != "edit" %}
   {{ govukButton({
     html: "Save and add another qualification",

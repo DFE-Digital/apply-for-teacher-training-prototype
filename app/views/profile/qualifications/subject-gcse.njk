@@ -1,9 +1,22 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/qualifications/review" %}
+{% if action == "edit" %}
+  {% set title = "Edit " + subject + " GCSE" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% if subject == "maths" %}
+    {% set formAction = "/profile/qualifications/subject/add/english" %}
+  {% elif subject == "english" %}
+    {% set formAction = "/profile/qualifications/subject/add/science" %}
+  {% endif %}
+  {% set title = "Add " + subject + " GCSE" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block primary %}
-{% if subject == 'science' %}
+{% if subject == "science" %}
   <p class="govuk-body">To be eligible to teach at primary level, you need one science GCSE at a minimum of grade 4 in any subject (for example, Chemistry, Physics, Biology or Double Award Science).</p>
   <p class="govuk-body">If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -17,9 +30,9 @@
     hint: {
       text: "GCSE, O level, or other (please specify)."
     },
-    id: subject + "-qualification-type",
-    name: subject + "-qualification-type",
-    value: data[subject + "-qualification-type"]
+    id: "qualifications-" + subject + "-type",
+    name: "qualifications[" + subject + "][type]",
+    value: data["qualifications"][subject]["type"]
   }) }}
 
   {{ govukInput({
@@ -28,9 +41,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: subject + "-qualification-grade",
-    name: subject + "-qualification-grade",
-    value: data[subject + "-qualification-grade"]
+    id: "qualifications-" + subject + "-grade",
+    name: "qualifications[" + subject + "][grade]",
+    value: data["qualifications"][subject]["grade"]
   }) }}
 
   {{ govukInput({
@@ -39,16 +52,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: subject + "-qualification-year",
-    name: subject + "-qualification-year",
-    value: data[subject + "-qualification-year"]
-  }) }}
-
-  {{ govukInput({
-    id: subject + "-qualification-completed",
-    name: subject + "-qualification-completed",
-    type: "hidden",
-    value: true
+    id: "qualifications-" + subject + "-year",
+    name: "qualifications[" + subject + "][year]",
+    value: data["qualifications"][subject]["year"]
   }) }}
 
   {{ govukButton({

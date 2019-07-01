@@ -1,6 +1,14 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
+{% if action == "edit" %}
+  {% set formAction = "/profile/qualifications/subject/" + action + "/" + subject + "/answer" %}
+  {% set title = "Edit " + subject + " GCSE or equivalent" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Add " + subject + " GCSE or equivalent" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block primary %}
 {% set missingGCSE %}
@@ -16,8 +24,9 @@
       text: "Please explain how you plan to meet this requirement in time for the start of your course",
       classes: "govuk-label--s"
     },
-    id: subject + "-qualification-missing",
-    name: subject + "-qualification-missing"
+    id: "qualifications-" + subject + "-missing",
+    name: "qualifications[" + subject + "][missing]",
+    value: data["qualifications"][subject]["missing"]
   }) }}
 {% endset %}
 
@@ -27,22 +36,37 @@
         text: "Was this qualification awarded by an institution based in the UK?"
       }
     },
-    idPrefix: subject + "-qualification",
-    name: subject + "-qualification",
     items: [{
       value: "domestic",
       text: "Yes",
-      checked: true
+      checked: checked("['branch']['" + subject + "']", "domestic")
     }, {
       value: "international",
-      text: "No"
+      text: "No",
+      checked: checked("['branch']['" + subject + "']", "international")
     }, {
       value: "missing",
       text: "I don’t have this qualification yet",
+      checked: checked("['branch']['" + subject + "']", "missing"),
       conditional: {
         html: missingGCSE
       }
-    }]
+    }],
+    idPrefix: "branch-" + subject,
+    name: "branch[" + subject + "]"
+  }) }}
+
+  {{ govukInput({
+    type: "hidden",
+    name: "qualifications[" + subject + "][category]",
+    value: "subject"
+  }) }}
+
+  {% set subjectName = subject | capitalize %}
+  {{ govukInput({
+    type: "hidden",
+    name: "qualifications[" + subject + "][subject]",
+    value: subjectName
   }) }}
 
   {{ govukButton({

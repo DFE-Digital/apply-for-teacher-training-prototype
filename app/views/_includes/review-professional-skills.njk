@@ -1,8 +1,8 @@
 {% set skillsTestHTML %}
   <p class="govuk-body govuk-!-font-size-16">
-    Candidate number: {{ data["skills-test-number"] }}<br>
-    Date of litracy test: {{ data["skills-test-literacy-date-day"] }}/{{ data["skills-test-literacy-date-month"] }}/{{ data["skills-test-literacy-date-year"] }}<br>
-    Date of numeracy test: {{ data["skills-test-numeracy-date-day"] }}/{{ data["skills-test-numeracy-date-month"] }}/{{ data["skills-test-numeracy-date-year"] }}
+    Candidate number: {{ data["professional-skills"]["test"]["candidate-number"] }}<br>
+    Date of litracy test: {{ data["professional-skills"]["test"]["literacy-date"]["day"] }}/{{ data["professional-skills"]["test"]["literacy-date"]["month"] }}/{{ data["professional-skills"]["test"]["literacy-date"]["year"] }}<br>
+    Date of numeracy test: {{ data["professional-skills"]["test"]["numeracy-date"]["day"] }}/{{ data["professional-skills"]["test"]["numeracy-date"]["month"] }}/{{ data["professional-skills"]["test"]["numeracy-date"]["year"] }}
   </p>
 {% endset %}
 
@@ -11,7 +11,7 @@
     text: "Professional skills test"
   },
   value: {
-    html: (skillsTestHTML if data["skills-test"] == "yes" else "Not passed")
+    html: (skillsTestHTML if data["professional-skills"]["test"]["completed"] == "true" else "Not passed")
   },
   actions: {
     items: [{
@@ -27,7 +27,7 @@
     text: "Is English your first language?"
   },
   value: {
-    text: ("Yes" if data["languages"] == "yes" else "No: " + data["languages-first"])
+    text: ("Yes" if data["professional-skills"]["languages"]["first"] == "english" else "No: " + data["professional-skills"]["languages"]["detail"])
   },
   actions: {
     items: [{

@@ -11,8 +11,6 @@
         text: "Was this degree awarded by an institution based in the UK?"
       }
     },
-    idPrefix: "degree",
-    name: "degree",
     items: [{
       value: "domestic",
       text: "Yes",
@@ -20,7 +18,9 @@
     }, {
       value: "international",
       text: "No"
-    }]
+    }],
+    idPrefix: "branch-degree",
+    name: "branch[degree]"
   }) }}
 
   {{ govukButton({

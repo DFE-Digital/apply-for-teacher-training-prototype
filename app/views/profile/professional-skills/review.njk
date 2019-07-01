@@ -21,14 +21,7 @@
 {% block primary %}
   {% include "_includes/review-professional-skills.njk" %}
 
-  {{ govukInput({
-    id: "professional-skills-completed",
-    name: "professional-skills-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

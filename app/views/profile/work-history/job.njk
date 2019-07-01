@@ -2,6 +2,13 @@
 
 {% set parent = "Work history" %}
 {% set formAction = "/profile/work-history/review" %}
+{% if action == "edit" %}
+  {% set title = "Edit job" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Add job" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block primary %}
   {{ govukInput({
@@ -116,7 +123,7 @@
     html: "Save and add another job",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/work-history/add-job"
+      formaction: "/profile/work-history/job/add"
     }
   }) }}
 {% endif %}

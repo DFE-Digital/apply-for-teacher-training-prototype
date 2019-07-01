@@ -318,52 +318,30 @@ router.get('/profile/academic-qualifications/edit-qualification/:id', (req, res)
 })
 
 // Application: Work history
-router.get('/profile/work-history/add-job', (req, res) => {
+router.get('/profile/work-history/job/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/work-history/add-job/${id}`)
+  res.redirect(`/profile/work-history/job/add/${id}`)
 })
 
-router.get('/profile/work-history/add-job/:id', (req, res) => {
+router.get('/profile/work-history/job/:action/:id', (req, res) => {
   res.render('profile/work-history/job', {
-    action: 'add',
-    id: req.params.id,
-    buttonText: 'Save and continue',
-    title: 'Add job'
-  })
-})
-
-router.get('/profile/work-history/edit-job/:id', (req, res) => {
-  res.render('profile/work-history/job', {
-    action: 'edit',
-    id: req.params.id,
-    buttonText: 'Save changes',
-    title: 'Edit job'
+    action: req.params.action,
+    id: req.params.id
   })
 })
 
 // Application: School experience
-router.get('/profile/school-experience/add-role', (req, res) => {
+router.get('/profile/school-experience/role/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/school-experience/add-role/${id}`)
+  res.redirect(`/profile/school-experience/role/add/${id}`)
 })
 
-router.get('/profile/school-experience/add-role/:id', (req, res) => {
+router.get('/profile/school-experience/role/:action/:id', (req, res) => {
   res.render('profile/school-experience/role', {
-    action: 'add',
-    id: req.params.id,
-    buttonText: 'Save and continue',
-    title: 'Add role'
-  })
-})
-
-router.get('/profile/school-experience/edit-role/:id', (req, res) => {
-  res.render('profile/school-experience/role', {
-    action: 'edit',
-    id: req.params.id,
-    buttonText: 'Save changes',
-    title: 'Edit role'
+    action: req.params.action,
+    id: req.params.id
   })
 })
 

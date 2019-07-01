@@ -18,42 +18,15 @@
 {% endblock %}
 
 {% block primary %}
-  {% set schoolExperience = data['school-experience'] | toArray %}
-  <table class="govuk-table govuk-!-font-size-16">
-    <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-        <th class="govuk-table__header" scope="col">Role</th>
-        <th class="govuk-table__header" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      {% for item in schoolExperience %}
-      {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
-      {% if item.end-year != "" %}
-        {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
-      {% else %}
-        {% set endDate = 'Present' %}
-      {% endif %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-        <td class="govuk-table__cell">{{ item.role }}</td>
-        <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell"><a href="/profile/school-experience/edit-role/{{ item.id }}">Edit role</a></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% include "_includes/review-school-experience.njk" %}
 
   {{ govukButton({
     html: "Add another role",
-    href: "/profile/school-experience/add-role",
+    href: "/profile/school-experience/role/add",
     classes: "govuk-button--secondary"
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

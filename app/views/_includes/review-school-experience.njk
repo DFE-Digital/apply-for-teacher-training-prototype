@@ -1,19 +1,19 @@
-{% set workHistory = data['work-history'] | toArray %}
+{% set schoolExperience = data['school-experience'] | toArray %}
 <table class="govuk-table govuk-!-font-size-16">
-  <caption class="govuk-table__caption govuk-heading-m">Your work history</caption>
+  <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-      <th class="govuk-table__header" scope="col">Job title</th>
+      <th class="govuk-table__header" scope="col">Role</th>
       <th class="govuk-table__header" scope="col">Organisation</th>
       <th class="govuk-table__header" scope="col">Actions</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    {% for item in workHistory %}
-    {% set startDate = item["start-month"] + "/" + item["start-year"] %}
+    {% for item in schoolExperience %}
+    {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
     {% if item.end-year != "" %}
-      {% set endDate = item["end-month"] + "/" + item["end-year"] %}
+      {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
     {% else %}
       {% set endDate = 'Present' %}
     {% endif %}
@@ -21,12 +21,8 @@
       <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
       <td class="govuk-table__cell">{{ item.role }}</td>
       <td class="govuk-table__cell">{{ item.org }}</td>
-      <td class="govuk-table__cell"><a href="/profile/work-history/job/edit/{{ item.id }}">Edit job</a></td>
+      <td class="govuk-table__cell"><a href="/profile/school-experience/role/edit/{{ item.id }}">Edit role</a></td>
     </tr>
     {% endfor %}
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell app-table__cell--muted" colspan="3">Unexplained gap</td>
-      <td class="govuk-table__cell app-table__cell--muted"><a href="/profile/work-history/explain-gap">Explain gap</a></td>
-    </tr>
   </tbody>
 </table>

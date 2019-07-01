@@ -122,13 +122,6 @@
   }) }}
 {% endif %}
 
-  {{ govukInput({
-    id: "degree-completed",
-    name: "degree-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
 {% if action != "edit" %}
   {{ govukButton({
     html: "Save and add another degree",

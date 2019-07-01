@@ -93,13 +93,6 @@
     }]
   }) }}
 
-  {{ govukInput({
-    id: "qualifications-completed",
-    name: "qualifications-completed",
-    type: "hidden",
-    value: true
-  }) }}
-
 {% if action != "edit" %}
   {{ govukButton({
     html: "Save and add another qualification",

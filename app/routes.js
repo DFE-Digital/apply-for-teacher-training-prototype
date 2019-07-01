@@ -41,65 +41,38 @@ router.post('/profile/academic-qualifications/degree-answer', (req, res) => {
   let degree = req.session.data['degree']
 
   if (degree === 'domestic') {
-    res.redirect('/profile/academic-qualifications/add-degree')
+    res.redirect('/profile/academic-qualifications/degree/add')
   } else {
-    res.redirect('/profile/academic-qualifications/add-international-degree')
+    res.redirect('/profile/academic-qualifications/international-degree/add')
   }
 })
 
 // Application: UK degree
-router.get('/profile/academic-qualifications/add-degree', (req, res) => {
+router.get('/profile/academic-qualifications/degree/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-degree/${id}`)
+  res.redirect(`/profile/academic-qualifications/degree/add/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-degree/:id', (req, res) => {
+router.get('/profile/academic-qualifications/degree/:action/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
-    action: 'add',
-    id: req.params.id,
-    buttonText: 'Save and continue',
-    formAction: '/profile/academic-qualifications/maths-gcse',
-    title: 'Add degree'
-  })
-})
-
-router.get('/profile/academic-qualifications/edit-degree/:id', (req, res) => {
-  res.render('profile/academic-qualifications/degree-details', {
-    action: 'edit',
-    id: req.params.id,
-    buttonText: 'Save changes',
-    formAction: '/profile/academic-qualifications/review',
-    title: 'Edit degree'
+    action: req.params.action,
+    id: req.params.id
   })
 })
 
 // Application: International degree
-router.get('/profile/academic-qualifications/add-international-degree', (req, res) => {
+router.get('/profile/academic-qualifications/international-degree/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-international-degree/${id}`)
+  res.redirect(`/profile/academic-qualifications/international-degree/add/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-international-degree/:id', (req, res) => {
+router.get('/profile/academic-qualifications/international-degree/:action/:id', (req, res) => {
   res.render('profile/academic-qualifications/degree-details', {
     international: true,
-    action: 'add',
-    id: req.params.id,
-    buttonText: 'Save and continue',
-    formAction: '/profile/academic-qualifications/maths-gcse',
-    title: 'Add non-UK degree'
-  })
-})
-
-router.get('/profile/academic-qualifications/edit-international-degree/:id', (req, res) => {
-  res.render('profile/academic-qualifications/degree-details', {
-    international: true,
-    action: 'edit',
-    id: req.params.id,
-    buttonText: 'Save changes',
-    formAction: '/profile/academic-qualifications/review',
-    title: 'Edit non-UK degree'
+    action: req.params.action,
+    id: req.params.id
   })
 })
 
@@ -293,27 +266,16 @@ router.get('/profile/academic-qualifications/edit-science-equivalent', (req, res
 })
 
 // Application: Other qualifications
-router.get('/profile/academic-qualifications/add-qualification', (req, res) => {
+router.get('/profile/academic-qualifications/qualification/add', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/academic-qualifications/add-qualification/${id}`)
+  res.redirect(`/profile/academic-qualifications/qualification/add/${id}`)
 })
 
-router.get('/profile/academic-qualifications/add-qualification/:id', (req, res) => {
+router.get('/profile/academic-qualifications/qualification/:action/:id', (req, res) => {
   res.render('profile/academic-qualifications/qualification', {
-    action: 'add',
-    id: req.params.id,
-    buttonText: 'Save and continue',
-    title: 'Add qualification'
-  })
-})
-
-router.get('/profile/academic-qualifications/edit-qualification/:id', (req, res) => {
-  res.render('profile/academic-qualifications/qualification', {
-    action: 'edit',
-    id: req.params.id,
-    buttonText: 'Save changes',
-    title: 'Edit qualification'
+    action: req.params.action,
+    id: req.params.id
   })
 })
 

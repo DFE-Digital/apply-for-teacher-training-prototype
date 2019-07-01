@@ -308,27 +308,10 @@ router.get('/profile/school-experience/role/:action/:id', (req, res) => {
 })
 
 // Application: References
-router.get('/profile/references/add-referee/:id', (req, res) => {
-  const id = req.params.id
-
+router.get('/profile/references/referee/:action/:id', (req, res) => {
   res.render('profile/references/referee', {
-    action: 'add',
-    buttonText: 'Save and continue',
-    formAction: (id === 'principle') ? '/profile/references/add-referee/secondary' : '/profile/references/review',
-    id,
-    title: `Add ${id} referee`
-  })
-})
-
-router.get('/profile/references/edit-referee/:id', (req, res) => {
-  const id = req.params.id
-
-  res.render('profile/references/referee', {
-    action: 'edit',
-    buttonText: 'Save changes',
-    formAction: '/profile/references/review',
-    id,
-    title: `Edit ${id} referee`
+    action: req.params.action,
+    id: req.params.id
   })
 })
 

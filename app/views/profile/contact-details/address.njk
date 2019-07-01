@@ -1,0 +1,89 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Contact details" %}
+{% set formAction = "/profile/contact-details/review" %}
+{% if action == "edit" %}
+  {% set title = "Edit address" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "What is your address?" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: "Your details",
+      href: "/profile"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-line1",
+    id: "contact-details-address-line1",
+    name: "contact-details[address][line1]",
+    value: data["contact-details"]["address"]["line1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-line2",
+    id: "contact-details-address-line2",
+    name: "contact-details[address][line2]",
+    value: data["contact-details"]["address"]["line2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Town or city",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-level2",
+    classes: "govuk-!-width-two-thirds",
+    id: "contact-details-address-level2",
+    name: "contact-details[address][level2]",
+    value: data["contact-details"]["address"]["level2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "County",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "address-level1",
+    classes: "govuk-!-width-two-thirds",
+    id: "contact-details-address-level1",
+    name: "contact-details[address][level1]",
+    value: data["contact-details"]["address"]["level1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Postal code",
+      classes: "govuk-label--s"
+    },
+    autocomplete: "postal-code",
+    classes: "govuk-input--width-10",
+    id: "contact-details-address-postal-code",
+    name: "contact-details[address][postal-code]",
+    value: data["contact-details"]["address"]["postal-code"]
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

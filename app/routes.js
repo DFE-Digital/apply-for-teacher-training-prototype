@@ -21,13 +21,19 @@ router.post('/profile/personal-details/answer', (req, res) => {
 
 // Application: Contact details
 router.post('/profile/contact-details/address-answer', (req, res) => {
-  let location = req.session.data['address-location']
+  let location = req.session.data['contact-details']['address-type']
 
   if (location === 'domestic') {
     res.redirect('/profile/contact-details/lookup-address')
   } else {
-    res.redirect('/profile/contact-details/enter-address')
+    res.redirect('/profile/contact-details/review')
   }
+})
+
+router.get('/profile/contact-details/address/:action', (req, res) => {
+  res.render('profile/contact-details/address', {
+    action: req.params.action
+  })
 })
 
 // Application: Degree provenance

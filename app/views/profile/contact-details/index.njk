@@ -28,10 +28,10 @@
     },
     autocomplete: "tel",
     classes: "govuk-input--width-20",
-    id: "phone-number",
-    name: "phone-number",
     type: "tel",
-    value: data["phone-number"]
+    id: "contact-details-phone-number",
+    name: "contact-details[phone-number]",
+    value: data["contact-details"]["phone-number"]
   }) }}
 
   {{ govukInput({
@@ -46,11 +46,23 @@
       spellcheck: "false"
     },
     autocomplete: "email",
-    id: "email",
-    name: "email",
     type: "email",
-    value: data["email"]
+    id: "contact-details-email",
+    name: "contact-details[email]",
+    value: data["contact-details"]["email"]
   }) }}
+
+{% set internationalAddressHtml %}
+  {{ govukTextarea({
+    label: {
+      text: "Enter your address"
+    },
+    autocomplete: "street-address",
+    id: "contact-details-address",
+    name: "contact-details[address][street-address]",
+    value: data["contact-details"]["address"]["street-address"]
+  }) }}
+{% endset %}
 
   {{ govukRadios({
     fieldset: {
@@ -59,16 +71,19 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "address-location",
-    name: "address-location",
+    idPrefix: "candidate-address-type",
+    name: "contact-details[address-type]",
     items: [{
       text: "In the UK",
       value: "domestic",
-      checked: checked("address-location", "domestic")
+      checked: checked("['contact-details']['address-type']", "domestic")
     }, {
       text: "Outside the UK",
       value: "international",
-      checked: checked("address-location", "international")
+      checked: checked("['contact-details']['address-type']", "international"),
+      conditional: {
+        html: internationalAddressHtml
+      }
     }]
   }) }}
 

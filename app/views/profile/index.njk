@@ -17,14 +17,14 @@
   {{ appTaskList({
     items: [{
       text: "Personal details",
-      href: "/profile/personal-details" + ( "/review" if data["personal-details-completed"] ),
+      href: "/profile/personal-details" + ( "/review" if data["candidate"]["nationality"] ),
       id: "personal-details",
-      completed: data['personal-details-completed']
+      completed: data["candidate"]["nationality"]
     }, {
       text: "Contact details",
-      href: "/profile/contact-details" + ( "/review" if data["contact-details-completed"] ),
+      href: "/profile/contact-details" + ( "/review" if data["contact-details"]["address"] ),
       id: "contact-details",
-      completed: data["contact-details-completed"]
+      completed: data["contact-details"]["address"]
     }, {
       text: "Academic qualifications",
       href: "/profile/academic-qualifications" + ( "/review" if data["academic-qualifications-completed"] ),
@@ -34,32 +34,32 @@
       text: "Subject knowledge",
       href: "/profile/subject-knowledge" + ( "/primary" if checked("settings", "primary-application")),
       id: "subject-knowledge",
-      completed: data['subject-knowledge-completed']
+      completed: data["subject-knowledge-completed"]
     }, {
       text: "Literacy, numeracy and language skills",
       href: "/profile/professional-skills" + ( "/review" if data["professional-skills"] ),
       id: "professional-skills",
-      completed: data['professional-skills']
+      completed: data["professional-skills"]
     }, {
       text: "Work history",
       href: "/profile/work-history" + ( "/review" if data["work-history"] ),
       id: "work-history",
-      completed: data['work-history']
+      completed: data["work-history"]
     }, {
       text: "School experience and volunteering with children and young people",
       href: "/profile/school-experience" + ( "/review" if data["school-experience"] ),
       id: "school-experience",
-      completed: data['school-experience']
+      completed: data["school-experience"]
     }, {
       text: "References",
       href: "/profile/references" + ( "/review" if data["referees"] ),
       id: "references",
-      completed: data['referees']
+      completed: data["referees"]
     }, {
       text: "Your teaching vocation",
       href: "/profile/vocation",
       id: "vocation",
-      completed: data['vocation']
+      completed: data["vocation"]
     }]
   }) }}
 

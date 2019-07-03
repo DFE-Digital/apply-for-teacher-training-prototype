@@ -1,13 +1,11 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
+{% set formAction = "/profile/qualifications/gcse/" + action + "/" + id + "/answer" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/qualifications/subject-answer/" + action + "/" + subject %}
-  {% set title = "Edit " + subject + " GCSE or equivalent" %}
-  {% set buttonText = "Save changes" %}
+  {% set title = "Edit " + id + " GCSE or equivalent" %}
 {% else %}
-  {% set title = "Add " + subject + " GCSE or equivalent" %}
-  {% set buttonText = "Save and continue" %}
+  {% set title = "Add " + id + " GCSE or equivalent" %}
 {% endif %}
 
 {% block primary %}
@@ -24,9 +22,9 @@
       text: "Please explain how you plan to meet this requirement in time for the start of your course",
       classes: "govuk-label--s"
     },
-    id: "qualifications-" + subject + "-missing",
-    name: "qualifications[" + subject + "][missing]",
-    value: data["qualifications"][subject]["missing"]
+    id: "qualifications-" + id + "-missing",
+    name: "qualifications[" + id + "][missing]",
+    value: data["qualifications"][id]["missing"]
   }) }}
 {% endset %}
 
@@ -39,32 +37,32 @@
     items: [{
       value: "domestic",
       text: "Yes",
-      checked: checked("['branch']['" + subject + "']", "domestic")
+      checked: checked("['qualifications']['" + id + "']['provenance']", "domestic")
     }, {
       value: "international",
       text: "No",
-      checked: checked("['branch']['" + subject + "']", "international")
+      checked: checked("['qualifications']['" + id + "']['provenance']", "international")
     }, {
       value: "missing",
       text: "I don’t have this qualification yet",
-      checked: checked("['branch']['" + subject + "']", "missing"),
+      checked: checked("['qualifications']['" + id + "']['provenance']", "missing"),
       conditional: {
         html: missingGCSE
       }
     }],
-    idPrefix: "branch-" + subject,
-    name: "branch[" + subject + "]"
+    idPrefix: "qualifications-" + id + "-provenance",
+    name: "qualifications[" + id + "][provenance]"
   }) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + subject + "][category]",
-    value: "subject"
+    name: "qualifications[" + id + "][category]",
+    value: "gcse"
   }) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + subject + "][subject]",
+    name: "qualifications[" + id + "][subject]",
     value: subject | capitalize
   }) }}
 

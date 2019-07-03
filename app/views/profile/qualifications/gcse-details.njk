@@ -4,10 +4,11 @@
 {% set qualType = "GCSE equivalent" if international else "GCSE" %}
 {% if action == "edit" %}
   {% set formAction = "/profile/qualifications/review" %}
-  {% set title = "Edit " + subject + " " + qualType %}
+  {% set title = "Edit " + id + " " + qualType %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Add " + subject + " " + qualType %}
+  {% set formAction = "/profile/qualifications/gcse/next/" + id %}
+  {% set title = "Add " + id + " " + qualType %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
@@ -34,9 +35,9 @@
     hint: {
       text: false if international else "GCSE, O level, or other (please specify)."
     },
-    id: "qualifications-" + subject + "-type",
-    name: "qualifications[" + subject + "][type]",
-    value: data["qualifications"][subject]["type"]
+    id: "qualifications-" + id + "-type",
+    name: "qualifications[" + id + "][type]",
+    value: data["qualifications"][id]["type"]
   }) }}
 
   {{ govukInput({
@@ -45,9 +46,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: "qualifications-" + subject + "-grade",
-    name: "qualifications[" + subject + "][grade]",
-    value: data["qualifications"][subject]["grade"]
+    id: "qualifications-" + id + "-grade",
+    name: "qualifications[" + id + "][grade]",
+    value: data["qualifications"][id]["grade"]
   }) }}
 
   {{ govukInput({
@@ -56,9 +57,9 @@
       classes: "govuk-label--s"
     },
     classes: "govuk-input--width-4",
-    id: "qualifications-" + subject + "-year",
-    name: "qualifications[" + subject + "][year]",
-    value: data["qualifications"][subject]["year"]
+    id: "qualifications-" + id + "-year",
+    name: "qualifications[" + id + "][year]",
+    value: data["qualifications"][id]["year"]
   }) }}
 
 {% if international == true %}
@@ -68,14 +69,14 @@
       classes: "govuk-label--s"
     },
     items: countries,
-    id: "qualifications-" + subject + "-country",
-    name: "qualifications[" + subject + "][country]",
-    value: data["qualifications"][subject]["country"]
+    id: "qualifications-" + id + "-country",
+    name: "qualifications[" + id + "][country]",
+    value: data["qualifications"][id]["country"]
   }) }}
 {% else %}
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + subject + "][country]",
+    name: "qualifications[" + id + "][country]",
     value: "United Kingdom"
   }) }}
 {% endif %}
@@ -86,9 +87,9 @@
       text: "Awarding organisation?",
       classes: "govuk-label--s"
     },
-    id: "qualifications-" + subject + "-award-org",
-    name: "qualifications[" + subject + "][award-org]",
-    value: data["qualifications"][subject]["award-org"]
+    id: "qualifications-" + id + "-award-org",
+    name: "qualifications[" + id + "][award-org]",
+    value: data["qualifications"][id]["award-org"]
   }) }}
 
 {% set validateEquivalence %}
@@ -96,9 +97,9 @@
     label: {
       text: "Please explain how you plan to validate this qualification"
     },
-    id: "qualifications-" + subject + "-equivalence",
-    name: "qualifications[" + subject + "][equivalence]",
-    value: data["qualifications"][subject]["equivalence"]
+    id: "qualifications-" + id + "-equivalence",
+    name: "qualifications[" + id + "][equivalence]",
+    value: data["qualifications"][id]["equivalence"]
   }) }}
 {% endset -%}
 
@@ -109,16 +110,16 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "qualifications-" + subject + "-naric",
-    name: "qualifications[" + subject + "][naric]",
+    idPrefix: "qualifications-" + id + "-naric",
+    name: "qualifications[" + id + "][naric]",
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['qualifications']['" + subject + "']['naric']", "yes")
+      checked: checked("['qualifications']['" + id + "']['naric']", "yes")
     }, {
       value: "no",
       text: "No",
-      checked: checked("['qualifications']['" + subject + "']['naric']", "no"),
+      checked: checked("['qualifications']['" + id + "']['naric']", "no"),
       conditional: {
         html: validateEquivalence
       }
@@ -129,7 +130,7 @@
   {# Override ‘missing’ subject #}
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + subject + "][missing]",
+    name: "qualifications[" + id + "][missing]",
     value: ""
   }) }}
 
@@ -144,7 +145,7 @@
   <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
-      selectElement: document.querySelector('#qualifications-{{ subject }}-country')
+      selectElement: document.querySelector('#qualifications-{{ id }}-country')
     })
   </script>
 {% endblock %}

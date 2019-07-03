@@ -6,13 +6,12 @@
   {% set title = "Edit non-UK degree" if international else "Edit degree" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/qualifications/degree/" + action + "/" + id + "/next" %}
+  {% set formAction = "/profile/qualifications/degree/next/" + id %}
   {% set title = "Add non-UK degree" if international else "Add degree" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
 {% block primary %}
-{{ id }}
 {% set validateEquivalence %}
   {{ govukInput({
     label: {
@@ -137,12 +136,6 @@
     }]
   }) }}
 {% endif %}
-
-  {{ govukInput({
-    type: "hidden",
-    name: "qualifications[" + id + "][category]",
-    value: "degree"
-  }) }}
 
 {% if action != "edit" %}
   {{ govukButton({

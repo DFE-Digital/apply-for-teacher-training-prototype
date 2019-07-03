@@ -28,6 +28,12 @@
     name: "qualifications[" + id + "][provenance]"
   }) }}
 
+  {{ govukInput({
+    type: "hidden",
+    name: "qualifications[" + id + "][category]",
+    value: "degree"
+  }) }}
+
   {{ govukButton({
     text: "Continue"
   }) }}

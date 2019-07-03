@@ -24,10 +24,10 @@
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",
-    href: "/profile/qualifications/degree"
+    href: "/profile/qualifications/degree/add"
   }) }}
 
-  {% set category = "subject" %}
+  {% set category = "gcse" %}
   {% set categoryTitle = "Required subjects" %}
   {% include "_includes/review-qualifications.njk" %}
 

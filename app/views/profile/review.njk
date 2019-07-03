@@ -22,6 +22,20 @@
   {% include "_includes/review-contact-details.njk" %}
 {% endset %}
 
+{% set qualifications %}
+  {% set category = "degree" %}
+  {% set categoryTitle = "Degree(s)" %}
+  {% include "_includes/review-qualifications.njk" %}
+
+  {% set category = "gcse" %}
+  {% set categoryTitle = "Required subjects" %}
+  {% include "_includes/review-qualifications.njk" %}
+
+  {% set category = "other" %}
+  {% set categoryTitle = "Other relevant qualifications" %}
+  {% include "_includes/review-qualifications.njk" %}
+{% endset %}
+
 {% set subjectKnowledge %}
   {% include "_includes/review-subject-knowledge.njk" %}
 {% endset %}
@@ -32,6 +46,10 @@
 
 {% set workHistory %}
   {% include "_includes/review-work-history.njk" %}
+{% endset %}
+
+{% set schoolExperience %}
+  {% include "_includes/review-school-experience.njk" %}
 {% endset %}
 
 {% set references %}
@@ -62,6 +80,9 @@
     }, {
       heading: {
         text: "Academic qualifications"
+      },
+      content: {
+        html: qualifications
       }
     }, {
       heading: {
@@ -87,6 +108,9 @@
     }, {
       heading: {
         text: "School experience and volunteering with children and young people"
+      },
+      content: {
+        html: schoolExperience
       }
     }, {
       heading: {

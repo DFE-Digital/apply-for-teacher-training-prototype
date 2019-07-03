@@ -55,18 +55,11 @@
       text: "Is there anything you’d like to tell us about your qualifications?",
       classes: "govuk-label--m"
     },
+    maxwords: 600,
+    rows: 12,
     id: "subject-knowledge-additional",
     name: "subject-knowledge-additional",
-    value: data["subject-knowledge-additional"],
-    maxwords: 600,
-    rows: 12
-  }) }}
-
-  {{ govukInput({
-    id: "qualifications-completed",
-    name: "qualifications-completed",
-    type: "hidden",
-    value: true
+    value: data["subject-knowledge-additional"]
   }) }}
 
   {{ govukButton({

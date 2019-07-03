@@ -1,6 +1,5 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
-{% set formAction = "/profile/" %}
 {% set parent = "Contact details" %}
 {% set title = "Review your answers" %}
 
@@ -22,6 +21,7 @@
   {% include "_includes/review-contact-details.njk" %}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/profile"
   }) }}
 {% endblock %}

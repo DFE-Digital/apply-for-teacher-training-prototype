@@ -1,6 +1,5 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
-{% set formAction = "/profile/" %}
 {% set parent = "Literacy, numeracy and language skills" %}
 {% set title = "Review your answers" %}
 
@@ -22,6 +21,7 @@
   {% include "_includes/review-professional-skills.njk" %}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/profile/"
   }) }}
 {% endblock %}

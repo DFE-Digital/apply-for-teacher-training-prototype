@@ -1,7 +1,6 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
 {% set title = "School experience and volunteering with children and young people" %}
-{% set formAction = "/profile/" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -19,7 +18,6 @@
 
 {% block primary %}
   {% include "_includes/review-school-experience.njk" %}
-
   {{ govukButton({
     html: "Add another role",
     href: "/profile/school-experience/role/add",
@@ -27,6 +25,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/profile/"
   }) }}
 {% endblock %}

@@ -1,6 +1,5 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
-{% set formAction = "/profile/" %}
 {% set parent = "References" %}
 {% set title = "Review your answers" %}
 
@@ -26,6 +25,7 @@
   <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/profile/"
   }) }}
 {% endblock %}

@@ -1,6 +1,5 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
-{% set formAction = "/profile/" %}
 {% set title = "Work history" %}
 
 {% block pageNavigation %}
@@ -19,7 +18,6 @@
 
 {% block primary %}
   {% include "_includes/review-work-history.njk" %}
-
   {{ govukButton({
     html: "Add another job",
     classes: "govuk-button--secondary",
@@ -27,6 +25,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/profile/"
   }) }}
 {% endblock %}

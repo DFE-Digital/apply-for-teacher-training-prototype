@@ -98,7 +98,7 @@ router.post('/profile/qualifications/:category/:action/:id/answer', (req, res) =
     } else if (provenance === 'international') {
       res.redirect(`/profile/qualifications/gcse-equivalent/${action}/${id}`)
     } else { // If qualification missing, go to next step
-      res.redirect(`/profile/qualifications/gcse/${id}/next`)
+      res.redirect(`/profile/qualifications/gcse/next/${id}`)
     }
   }
 })
@@ -122,10 +122,10 @@ router.post('/profile/qualifications/:category/next/:id', (req, res) => {
   if (category === 'gcse') {
     if (id === 'maths' && english !== true) {
       path = 'gcse/add/english'
-    }
-
-    if (id === 'english' && science !== true) {
+    } else if (id === 'english' && science !== true) {
       path = 'gcse/add/science'
+    } else {
+      path = 'review'
     }
   }
 

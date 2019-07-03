@@ -3,15 +3,16 @@
 {% set parent = "Eligibility and qualifications" %}
 {% if action == "edit" %}
   {% set formAction = "/profile/qualifications/review" %}
-  {% set title %}Edit {{ "non-UK " if international }}degree{% endset %}
+  {% set title = "Edit non-UK degree" if international else "Edit degree" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/qualifications/subject/add/maths" %}
-  {% set title %}Add {{ "non-UK " if international }}degree{% endset %}
+  {% set formAction = "/profile/qualifications/degree/" + action + "/" + id + "/next" %}
+  {% set title = "Add non-UK degree" if international else "Add degree" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
 {% block primary %}
+{{ id }}
 {% set validateEquivalence %}
   {{ govukInput({
     label: {
@@ -76,6 +77,12 @@
     name: "qualifications[" + id + "][country]",
     value: data["qualifications"][id]["country"]
   }) }}
+{% else %}
+  {{ govukInput({
+    type: "hidden",
+    name: "qualifications[" + id + "][country]",
+    value: "United Kingdom"
+  }) }}
 {% endif %}
 
   {{ govukInput({
@@ -86,7 +93,7 @@
     hint: {
       text: "If you enter a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
     },
-    classes: "govuk-!-width-one-third",
+    classes: "govuk-input--width-10",
     id: "qualifications-" + id + "-grade",
     name: "qualifications[" + id + "][grade]",
     value: data["qualifications"][id]["grade"]
@@ -142,7 +149,7 @@
     html: "Save and add another degree",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/qualifications/degree"
+      formaction: "/profile/qualifications/degree/add"
     }
   }) }}
 {% endif %}

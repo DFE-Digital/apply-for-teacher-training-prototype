@@ -106,6 +106,12 @@
     value: "other"
   }) }}
 
+  {{ govukInput({
+    type: "hidden",
+    name: "branch[other-qualifications]",
+    value: "true"
+  }) }}
+
 {% if action != "edit" %}
   {{ govukButton({
     html: "Save and add another qualification",

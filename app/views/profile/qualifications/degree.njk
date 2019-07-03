@@ -1,8 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add a degree" %}
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/profile/qualifications/degree-answer" %}
+{% set formAction = "/profile/qualifications/degree/" + action + "/" + id + "/answer" %}
+{% if action == "edit" %}
+  {% set title = "Edit degree" %}
+{% else %}
+  {% set title = "Add a degree" %}
+{% endif %}
 
 {% block primary %}
   {{ govukRadios({
@@ -14,13 +18,14 @@
     items: [{
       value: "domestic",
       text: "Yes",
-      checked: true
+      checked: checked("['qualifications']['" + id + "']['provenance']", "domestic")
     }, {
       value: "international",
-      text: "No"
+      text: "No",
+      checked: checked("['qualifications']['" + id + "']['provenance']", "international")
     }],
-    idPrefix: "branch-degree",
-    name: "branch[degree]"
+    idPrefix: "qualifications-" + id + "-provenance",
+    name: "qualifications[" + id + "][provenance]"
   }) }}
 
   {{ govukButton({

@@ -36,44 +36,52 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
   })
 })
 
-// Application: Degree branch (UK or international)
-router.post('/profile/qualifications/degree-answer', (req, res) => {
-  let degree = req.session.data['branch']['degree']
-
-  if (degree === 'domestic') {
-    res.redirect('/profile/qualifications/degree/add')
-  } else {
-    res.redirect('/profile/qualifications/international-degree/add')
-  }
-})
-
-// Application: UK degree
+// Application: Degrees
+// Redirect to ‘Add a degree’ page using generated ID
 router.get('/profile/qualifications/degree/add', (req, res) => {
   let id = generateRandomString()
 
   res.redirect(`/profile/qualifications/degree/add/${id}`)
 })
 
+// Render (add/edit) degree page
 router.get('/profile/qualifications/degree/:action/:id', (req, res) => {
-  res.render('profile/qualifications/degree-details', {
+  res.render('profile/qualifications/degree', {
     action: req.params.action,
     id: req.params.id
   })
 })
 
-// Application: International degree
-router.get('/profile/qualifications/international-degree/add', (req, res) => {
-  let id = generateRandomString()
+// Redirect to (add/edit) degree details based on degree provenance
+router.post('/profile/qualifications/degree/:action/:id/answer', (req, res) => {
+  const id = req.params.id
+  let provenance = req.session.data['qualifications'][id]['provenance']
 
-  res.redirect(`/profile/qualifications/international-degree/add/${id}`)
+  if (provenance === 'domestic') {
+    res.redirect(`/profile/qualifications/uk-degree/add/${id}`)
+  } else {
+    res.redirect(`/profile/qualifications/international-degree/add/${id}`)
+  }
 })
 
-router.get('/profile/qualifications/international-degree/:action/:id', (req, res) => {
+// Render (add/edit) (UK/international) degree details page
+router.get('/profile/qualifications/:provenance/:action/:id', (req, res) => {
   res.render('profile/qualifications/degree-details', {
     action: req.params.action,
     id: req.params.id,
-    international: true
+    international: (req.params.provenance === 'international-degree')
   })
+})
+
+// Redirect to next step based on application completion
+router.post('/profile/qualifications/degree/add/:id/next', (req, res) => {
+  let maths = req.session.data['qualifications']['maths']
+
+  if (maths !== true) {
+    res.redirect('/profile/qualifications/subject/add/maths')
+  } else {
+    res.redirect('/profile/qualifications/review')
+  }
 })
 
 // Application: Subject branch (GCSE or equivalent)
@@ -83,12 +91,12 @@ router.get('/profile/qualifications/subject/:action/:subject', (req, res) => {
 
   res.render('profile/qualifications/subject', {
     action,
-    formAction: `/profile/qualifications/${subject}/${action}/answer`,
+    formAction: `/profile/qualifications/subject-answer/${subject}/${action}`,
     subject
   })
 })
 
-router.post('/profile/qualifications/:subject/:action/answer', (req, res) => {
+router.post('/profile/qualifications/subject-answer/:action/:subject', (req, res) => {
   const action = req.params.action
   const subject = req.params.subject
   let gcse = req.session.data['branch'][subject]

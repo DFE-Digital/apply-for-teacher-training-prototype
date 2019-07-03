@@ -2,7 +2,7 @@
 
 {% set parent = "Eligibility and qualifications" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/qualifications/subject/" + action + "/" + subject + "/answer" %}
+  {% set formAction = "/profile/qualifications/subject-answer/" + action + "/" + subject %}
   {% set title = "Edit " + subject + " GCSE or equivalent" %}
   {% set buttonText = "Save changes" %}
 {% else %}
@@ -62,11 +62,10 @@
     value: "subject"
   }) }}
 
-  {% set subjectName = subject | capitalize %}
   {{ govukInput({
     type: "hidden",
     name: "qualifications[" + subject + "][subject]",
-    value: subjectName
+    value: subject | capitalize
   }) }}
 
   {{ govukButton({

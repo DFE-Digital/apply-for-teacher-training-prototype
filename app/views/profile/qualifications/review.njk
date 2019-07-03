@@ -31,7 +31,7 @@
   {% set categoryTitle = "Required subjects" %}
   {% include "_includes/review-qualifications.njk" %}
 
-{% if data["qualifications-completed"] %}
+{% if data["branch"]["other-qualifications"] %}
   {% set category = "other" %}
   {% set categoryTitle = "Other relevant qualifications" %}
   {% include "_includes/review-qualifications.njk" %}

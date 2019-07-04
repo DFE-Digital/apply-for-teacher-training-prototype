@@ -150,14 +150,15 @@
     text: buttonText
   }) }}
 {% endblock %}
-{% block pageScripts %}
+
 {% if international == true %}
-  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
-  <script type="text/javascript">
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
       selectElement: document.querySelector('#qualifications-{{ id }}-country')
     })
   </script>
-{% endif %}
 {% endblock %}
+{% endif %}

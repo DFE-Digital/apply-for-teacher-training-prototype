@@ -127,11 +127,11 @@
   }) }}
 {% endblock %}
 {% block pageScripts %}
-  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
-  <script type="text/javascript">
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
-      selectElement: document.querySelector('#qualification-country')
+      selectElement: document.querySelector('#qualifications-{{ id }}-country')
     })
   </script>
 {% endblock %}

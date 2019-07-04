@@ -1,11 +1,12 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
+{% set idTitle = "English" if (id === "english") else id %}
 {% set formAction = "/profile/qualifications/gcse/" + action + "/" + id + "/answer" %}
 {% if action == "edit" %}
-  {% set title = "Edit " + id + " GCSE or equivalent" %}
+  {% set title = "Edit " + idTitle + " GCSE or equivalent" %}
 {% else %}
-  {% set title = "Add " + id + " GCSE or equivalent" %}
+  {% set title = "Add " + idTitle + " GCSE or equivalent" %}
 {% endif %}
 
 {% block primary %}

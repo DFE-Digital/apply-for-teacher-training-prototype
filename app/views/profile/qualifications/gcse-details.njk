@@ -1,14 +1,15 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
-{% set qualType = "GCSE equivalent" if international else "GCSE" %}
+{% set idTitle = "English" if (id === "english") else id %}
+{% set qualTitle = "GCSE equivalent" if international else "GCSE" %}
 {% if action == "edit" %}
   {% set formAction = "/profile/qualifications/review" %}
-  {% set title = "Edit " + id + " " + qualType %}
+  {% set title = "Edit " + idTitle + " " + qualTitle %}
   {% set buttonText = "Save changes" %}
 {% else %}
   {% set formAction = "/profile/qualifications/gcse/next/" + id %}
-  {% set title = "Add " + id + " " + qualType %}
+  {% set title = "Add " + idTitle + " " + qualTitle %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
@@ -141,8 +142,8 @@
 
 {% if international == true %}
 {% block pageScripts %}
-  <script type="text/javascript" src="/public/javascripts/autocomplete.min.js"></script>
-  <script type="text/javascript">
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '',
       selectElement: document.querySelector('#qualifications-{{ id }}-country')

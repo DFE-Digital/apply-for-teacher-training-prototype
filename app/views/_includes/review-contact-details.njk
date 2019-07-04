@@ -24,7 +24,7 @@
 {% endset %}
 {% set addressEditHref = "/profile/contact-details" if data["contact-details"]["address"]["street-address"] else "/profile/contact-details/address/edit" %}
 {{ govukSummaryList({
-  classes: "govuk-!-font-size-16 govuk-summary-list--no-border",
+  classes: "govuk-!-font-size-16",
   rows: [{
     key: {
       text: "Phone number"

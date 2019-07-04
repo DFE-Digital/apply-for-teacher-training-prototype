@@ -1,11 +1,11 @@
 {{ govukSummaryList({
-  classes: "govuk-!-font-size-16 govuk-summary-list--no-border",
+  classes: "govuk-!-font-size-16",
   rows: [{
     key: {
       text: "Evidence of subject knowledge"
     },
     value: {
-      text: data["subject-knowledge-statement"]
+      text: data["subject-knowledge"]["statement"]
     },
     actions: {
       items: [{
@@ -19,7 +19,7 @@
       text: "Would you be interested in taking a subject knowledge enhancement (SKE) course?"
     },
     value: {
-      text: checked("subject-knowledge-enhancement", "yes")
+      text: data["subject-knowledge"]["enhancement"] | capitalize
     },
     actions: {
       items: [{
@@ -33,7 +33,7 @@
       text: "Explain why you believe a SKE would benefit you"
     },
     value: {
-      text: data["subject-knowledge-enhancement-details"]
+      text: data["subject-knowledge"]["enhancement-details"]
     },
     actions: {
       items: [{

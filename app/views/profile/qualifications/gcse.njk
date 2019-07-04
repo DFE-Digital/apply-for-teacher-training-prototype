@@ -63,7 +63,7 @@
   {{ govukInput({
     type: "hidden",
     name: "qualifications[" + id + "][subject]",
-    value: subject | capitalize
+    value: (id | capitalize)
   }) }}
 
   {{ govukButton({

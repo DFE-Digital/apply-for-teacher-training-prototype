@@ -14,15 +14,12 @@
 {% endblock %}
 
 {% block primary %}
-{% set personalDetails %}
+  <h2 class="govuk-heading-m">Personal details</h2>
   {% include "_includes/review-personal-details.njk" %}
-{% endset %}
 
-{% set contactDetails %}
+  <h2 class="govuk-heading-m">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
-{% endset %}
 
-{% set qualifications %}
   {% set category = "degree" %}
   {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}
@@ -34,98 +31,19 @@
   {% set category = "other" %}
   {% set categoryTitle = "Other relevant qualifications" %}
   {% include "_includes/review-qualifications.njk" %}
-{% endset %}
 
-{% set subjectKnowledge %}
+  <h2 class="govuk-heading-m">Subject knowledge</h2>
   {% include "_includes/review-subject-knowledge.njk" %}
-{% endset %}
 
-{% set professionalSkills %}
+  <h2 class="govuk-heading-m">Literacy, numeracy and language skills</h2>
   {% include "_includes/review-professional-skills.njk" %}
-{% endset %}
 
-{% set workHistory %}
   {% include "_includes/review-work-history.njk" %}
-{% endset %}
 
-{% set schoolExperience %}
   {% include "_includes/review-school-experience.njk" %}
-{% endset %}
 
-{% set references %}
   {% include "_includes/review-references.njk" %}
-{% endset %}
 
-{% set vocation %}
+  <h2 class="govuk-heading-m">Your teaching vocation</h2>
   {% include "_includes/review-vocation.njk" %}
-{% endset %}
-
-  {{ govukAccordion({
-    id: "review",
-    items: [{
-      expanded: true,
-      heading: {
-        text: "Personal details"
-      },
-      content: {
-        html: personalDetails
-      }
-    }, {
-      heading: {
-        text: "Contact details"
-      },
-      content: {
-        html: contactDetails
-      }
-    }, {
-      heading: {
-        text: "Academic qualifications"
-      },
-      content: {
-        html: qualifications
-      }
-    }, {
-      heading: {
-        text: "Subject knowledge"
-      },
-      content: {
-        html: subjectKnowledge
-      }
-    }, {
-      heading: {
-        text: "Literacy, numeracy and language skills"
-      },
-      content: {
-        html: professionalSkills
-      }
-    }, {
-      heading: {
-        text: "Work history"
-      },
-      content: {
-        html: workHistory
-      }
-    }, {
-      heading: {
-        text: "School experience and volunteering with children and young people"
-      },
-      content: {
-        html: schoolExperience
-      }
-    }, {
-      heading: {
-        text: "References"
-      },
-      content: {
-        html: references
-      }
-    }, {
-      heading: {
-        text: "Your teaching vocation"
-      },
-      content: {
-        html: vocation
-      }
-    }]
-  }) }}
 {% endblock %}

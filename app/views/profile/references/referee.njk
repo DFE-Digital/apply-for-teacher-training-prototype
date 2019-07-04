@@ -28,7 +28,7 @@
 
   {{ govukInput({
     label: {
-      text: "Full name",
+      text: "Full name of referee",
       classes: "govuk-label--s"
     },
     id: "referees-" + id + "-name",
@@ -51,7 +51,20 @@
 
   {{ govukInput({
     label: {
-      text: "Email address",
+      text: "Over what time period has this person known you?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
+    },
+    id: "referees-" + id + "-relationship",
+    name: "referees[" + id + "][relationship]",
+    value: data["referees"][id].relationship
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address of referee",
       classes: "govuk-label--s"
     },
     id: "referees-" + id + "-email",

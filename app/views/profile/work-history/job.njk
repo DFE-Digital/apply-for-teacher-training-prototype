@@ -11,6 +11,7 @@
 {% endif %}
 
 {% block primary %}
+<p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
   {{ govukInput({
     label: {
       text: "Job title",
@@ -89,7 +90,7 @@
       classes: "govuk-label--s"
     },
     hint: {
-      text: "Give examples showing how you developed transferrable skills like communication, creativity and organisation. Enter experience relevant to your subject in the subject knowledge section"
+      text: "Give examples showing how you developed transferable skills like communication, creativity and organisation. Enter experience relevant to your subject in the subject knowledge section"
     },
     id: "work-history-" + id + "-job_description",
     name: "work-history[" + id + "][job_description]",

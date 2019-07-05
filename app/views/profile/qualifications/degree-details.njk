@@ -12,16 +12,6 @@
 {% endif %}
 
 {% block primary %}
-{% set validateEquivalence %}
-  {{ govukInput({
-    label: {
-      text: "Please explain how you plan to validate this qualification"
-    },
-    id: "qualifications-" + id + "-equivalence",
-    name: "qualifications[" + id + "][equivalence]",
-    value: data["qualifications"][id]["equivalence"]
-  }) }}
-{% endset -%}
 {% if international == true %}
   <p class="govuk-body-l">If you studied for your degree overseas, you will need to check that it is valid in the UK.</p>
   <p class="govuk-body">Enter an English translation of the details of your degree as they appear on your certificate.</p>
@@ -84,6 +74,7 @@
   }) }}
 {% endif %}
 
+{% if international == true %}
   {{ govukInput({
     label: {
       text: "Degree grade",
@@ -97,6 +88,56 @@
     name: "qualifications[" + id + "][grade]",
     value: data["qualifications"][id]["grade"]
   }) }}
+{% else %}
+  {% set otherGradeHtml %}
+    {{ govukInput({
+      label: {
+        text: "Class of degree"
+      },
+      id: "qualifications-" + id + "-grade-other",
+      name: "qualifications[" + id + "][grade-other]",
+      value: data["qualifications"][id]["grade-other"]
+    }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Degree grade",
+        classes: "govuk-label--s"
+      }
+    },
+    hint: {
+      text: "If you provide a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
+    },
+    idPrefix: "qualifications-" + id + "-grade",
+    name: "qualifications[" + id + "][grade]",
+    items: [{
+      value: "First",
+      text: "First",
+      checked: checked("['qualifications']['" + id + "']['grade']", "First")
+    }, {
+      value: "Upper second (2:1)",
+      text: "Upper second (2:1)",
+      checked: checked("['qualifications']['" + id + "']['grade']", "Upper second (2:1)")
+    }, {
+      value: "Lower second (2:2)",
+      text: "Lower second (2:2)",
+      checked: checked("['qualifications']['" + id + "']['grade']", "Lower second (2:2)")
+    }, {
+      value: "Third",
+      text: "Third",
+      checked: checked("['qualifications']['" + id + "']['grade']", "Third")
+    }, {
+      value: "Other",
+      text: "Other",
+      checked: checked("['qualifications']['" + id + "']['grade']", "Other"),
+      conditional: {
+        html: otherGradeHtml
+      }
+    }]
+  }) }}
+{% endif %}
 
   {{ govukInput({
     label: {
@@ -113,6 +154,17 @@
   }) }}
 
 {% if international == true %}
+  {% set validateEquivalenceHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please explain how you plan to validate this qualification"
+      },
+      id: "qualifications-" + id + "-equivalence",
+      name: "qualifications[" + id + "][equivalence]",
+      value: data["qualifications"][id]["equivalence"]
+    }) }}
+  {% endset -%}
+
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -131,7 +183,7 @@
       text: "No",
       checked: checked("['qualifications']['" + id + "']['naric']", "no"),
       conditional: {
-        html: validateEquivalence
+        html: validateEquivalenceHtml
       }
     }]
   }) }}

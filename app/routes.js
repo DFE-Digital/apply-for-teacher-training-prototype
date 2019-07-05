@@ -158,16 +158,17 @@ router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer',
 router.all('/profile/qualifications/next', (req, res) => {
   const prev = req.query.prev
 
-  let maths = req.session.data['qualifications']['maths']
-  let english = req.session.data['qualifications']['english']
-  let science = req.session.data['qualifications']['science']
+  let mathsCompleted = req.session.data['qualifications']['maths']
+  let englishCompleted = req.session.data['qualifications']['english']
+  let scienceCompleted = req.session.data['qualifications']['science']
+  let primaryApplication = req.session.data['settings']['primary-application']
   let path
 
-  if (prev === 'degree' && maths !== true) {
+  if (prev === 'degree' && mathsCompleted !== true) {
     path = 'add/gcse/maths'
-  } else if (prev === 'maths' && english !== true) {
+  } else if (prev === 'maths' && englishCompleted !== true) {
     path = 'add/gcse/english'
-  } else if (prev === 'english' && science !== true) {
+  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === false) {
     path = 'add/gcse/science'
   } else {
     path = 'review'

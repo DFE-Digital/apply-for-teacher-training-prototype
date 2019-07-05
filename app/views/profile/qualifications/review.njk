@@ -24,7 +24,7 @@
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",
-    href: "/profile/qualifications/degree/add"
+    href: "/profile/qualifications/add/degree"
   }) }}
 
   {% set category = "gcse" %}
@@ -35,18 +35,13 @@
   {% set category = "other" %}
   {% set categoryTitle = "Other relevant qualifications" %}
   {% include "_includes/review-qualifications.njk" %}
-  {{ govukButton({
-    html: "Add another qualification",
-    classes: "govuk-button--secondary",
-    href: "/profile/qualifications/other/add"
-  }) }}
 {% else %}
   <h2 class="govuk-heading-m">Other relevant qualifications</h2>
   <p class="govuk-body">Enter your remaining GCSEs, A levels, and any practical, vocational or arts-based qualifications. Providers use this information to assess your academic ability and the broader contribution you can make to a school.</p>
   {{ govukButton({
     html: "Add qualification",
     classes: "govuk-button--secondary",
-    href: "/profile/qualifications/other/add"
+    href: "/profile/qualifications/add/other"
   }) }}
 {% endif %}
 

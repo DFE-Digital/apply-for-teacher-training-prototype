@@ -2,11 +2,9 @@
 
 {% set parent = "Eligibility and qualifications" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/qualifications/review" %}
   {% set title = "Edit non-UK degree" if international else "Edit degree" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/qualifications/degree/next/" + id %}
   {% set title = "Add non-UK degree" if international else "Add degree" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
@@ -194,7 +192,7 @@
     html: "Save and add another degree",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/qualifications/degree/add"
+      formaction: "/profile/qualifications/add/degree"
     }
   }) }}
 {% endif %}

@@ -1,7 +1,6 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Eligibility and qualifications" %}
-{% set formAction = "/profile/qualifications/review" %}
 {% if action == "edit" %}
   {% set title = "Edit qualification" %}
   {% set buttonText = "Save changes" %}
@@ -117,7 +116,7 @@
     html: "Save and add another qualification",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/qualifications/other/add"
+      formaction: "/profile/qualifications/add/other"
     }
   }) }}
 {% endif %}

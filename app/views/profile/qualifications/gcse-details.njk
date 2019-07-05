@@ -4,11 +4,9 @@
 {% set idTitle = "English" if (id === "english") else id %}
 {% set qualTitle = "GCSE equivalent" if international else "GCSE" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/qualifications/review" %}
   {% set title = "Edit " + idTitle + " " + qualTitle %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/qualifications/gcse/next/" + id %}
   {% set title = "Add " + idTitle + " " + qualTitle %}
   {% set buttonText = "Save and continue" %}
 {% endif %}

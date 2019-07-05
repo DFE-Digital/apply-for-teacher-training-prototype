@@ -6,7 +6,23 @@ const generateRandomString = () => {
   return (Number(new Date())).toString(36).slice(-5)
 }
 
-// Application: Personal details
+/**
+  * Profile: Generate ID to add new thing
+  *
+  * @param {String} section Section of the profile application
+  * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
+  */
+router.get('/profile/:section/add/:thing', (req, res) => {
+  const section = req.params.section
+  const thing = req.params.thing
+  let id = generateRandomString()
+
+  res.redirect(`/profile/${section}/add/${thing}/${id}`)
+})
+
+/**
+  * Profile: Personal details
+  */
 router.post('/profile/personal-details/answer', (req, res) => {
   let nationality = req.session.data['candidate']['nationality']
 
@@ -19,7 +35,9 @@ router.post('/profile/personal-details/answer', (req, res) => {
   }
 })
 
-// Application: Contact details
+/**
+  * Profile: Contact details
+  */
 router.post('/profile/contact-details/address-answer', (req, res) => {
   let location = req.session.data['contact-details']['address-type']
 
@@ -36,134 +54,195 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
   })
 })
 
-// Application: Qualifications
-// Redirect to add qualification page using a generated ID
-router.get('/profile/qualifications/:category/add', (req, res) => {
+/**
+  * Profile: Qualifications - Add/edit degree or GCSE
+  *
+  * @param {String} action add || edit
+  * @param {String} category degree || gcse
+  * @param {String} id Qualification ID
+  *
+  */
+router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, res) => {
+  const action = req.params.action
   const category = req.params.category
-  const id = generateRandomString()
+  const id = req.params.id
 
-  res.redirect(`/profile/qualifications/${category}/add/${id}`)
-})
-
-// Render qualification(-detail) page
-router.get('/profile/qualifications/:category/:action/:id', (req, res) => {
-  const category = req.params.category
-  let template
-  let international
-
-  switch (category) {
-    case 'uk-degree':
-      template = 'degree-details'
-      break
-    case 'international-degree':
-      template = 'degree-details'
-      international = true
-      break
-    case 'gcse-subject':
-      template = 'gcse-details'
-      break
-    case 'gcse-equivalent':
-      template = 'gcse-details'
-      international = true
-      break
-    default:
-      template = category
-  }
-
-  res.render(`profile/qualifications/${template}`, {
-    action: req.params.action,
-    id: req.params.id,
-    international
+  res.render(`profile/qualifications/${category}`, {
+    action,
+    formAction: `/profile/qualifications/${action}/${category}/${id}/answer`,
+    id
   })
 })
 
-// Redirect to (add/edit) qualification details based on its provenance
-router.post('/profile/qualifications/:category/:action/:id/answer', (req, res) => {
-  const category = req.params.category
+/**
+  * Profile: Qualifications - Add/edit UK/international degree details
+  *
+  * @param {String} action add || edit
+  * @param {String} id Qualification ID
+  *
+  */
+router.get('/profile/qualifications/:action/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
+  const formActionPath = (action === 'add') ? 'next?prev=degree' : 'review'
   const id = req.params.id
-  let provenance = req.session.data['qualifications'][id]['provenance']
 
-  if (category === 'degree') {
-    if (provenance === 'domestic') {
-      res.redirect(`/profile/qualifications/uk-degree/${action}/${id}`)
-    } else {
-      res.redirect(`/profile/qualifications/international-degree/${action}/${id}`)
-    }
-  }
-
-  if (category === 'gcse') {
-    if (provenance === 'domestic') {
-      res.redirect(`/profile/qualifications/gcse-subject/${action}/${id}`)
-    } else if (provenance === 'international') {
-      res.redirect(`/profile/qualifications/gcse-equivalent/${action}/${id}`)
-    } else { // If qualification missing, go to next step
-      res.redirect(`/profile/qualifications/gcse/next/${id}`)
-    }
-  }
+  res.render('profile/qualifications/degree-details', {
+    action,
+    formAction: `/profile/qualifications/${formActionPath}`,
+    id,
+    international: req.params.type === 'international-degree'
+  })
 })
 
-// Redirect to next step based on required qualifications already entered
-router.post('/profile/qualifications/:category/next/:id', (req, res) => {
+/**
+  * Profile: Qualifications - Add/edit GCSE subject details
+  *
+  * @param {String} action add || edit
+  * @param {String} id maths || english || science
+  *
+  */
+router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
+  const action = req.params.action
   const id = req.params.id
-  const category = req.params.category
+  const formActionPath = (action === 'add') ? `next?prev=${id}` : 'review'
 
-  let maths = req.session.data['qualifications']['maths']
-  let english = req.session.data['qualifications']['english']
-  let science = req.session.data['qualifications']['science']
-  let path = 'review'
+  res.render('profile/qualifications/gcse-details', {
+    action,
+    formAction: `/profile/qualifications/${formActionPath}`,
+    id,
+    international: req.params.type === 'gcse-equivalent'
+  })
+})
+
+/**
+  * Profile: Qualifications - Degree/GCSE branch logic
+  *
+  * @param {String} action add || edit
+  * @param {String} category degree || gcse
+  * @param {String} id Qualification ID
+  *
+  */
+router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer', (req, res) => {
+  const action = req.params.action
+  const category = req.params.category
+  const id = req.params.id
+
+  let provenance = req.session.data['qualifications'][id]['provenance']
+  let path
 
   if (category === 'degree') {
-    if (maths !== true) {
-      path = 'gcse/add/maths'
+    if (provenance === 'domestic') {
+      path = `${action}/uk-degree/${id}`
+    } else {
+      path = `${action}/international-degree/${id}`
     }
   }
 
   if (category === 'gcse') {
-    if (id === 'maths' && english !== true) {
-      path = 'gcse/add/english'
-    } else if (id === 'english' && science !== true) {
-      path = 'gcse/add/science'
-    } else {
-      path = 'review'
+    if (provenance === 'domestic') {
+      path = `${action}/gcse-subject/${id}`
+    } else if (provenance === 'international') {
+      path = `${action}/gcse-equivalent/${id}`
+    } else { // If qualification missing, go to next step
+      path = `next?prev=${id}`
     }
   }
 
   res.redirect(`/profile/qualifications/${path}`)
 })
 
-// Application: Work history
-router.get('/profile/work-history/job/add', (req, res) => {
-  let id = generateRandomString()
+/**
+  * Profile: Qualifications - Degree/GCSE next step logic
+  * Redirect to next step based on qualifications already entered
+  */
+router.all('/profile/qualifications/next', (req, res) => {
+  const prev = req.query.prev
 
-  res.redirect(`/profile/work-history/job/add/${id}`)
+  let mathsCompleted = req.session.data['qualifications']['maths']
+  let englishCompleted = req.session.data['qualifications']['english']
+  let scienceCompleted = req.session.data['qualifications']['science']
+  let primaryApplication = req.session.data['settings']['primary-application']
+  let path
+
+  if (prev === 'degree' && mathsCompleted !== true) {
+    path = 'add/gcse/maths'
+  } else if (prev === 'maths' && englishCompleted !== true) {
+    path = 'add/gcse/english'
+  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === false) {
+    path = 'add/gcse/science'
+  } else {
+    path = 'review'
+  }
+
+  res.redirect(`/profile/qualifications/${path}`)
 })
 
-router.get('/profile/work-history/job/:action/:id', (req, res) => {
+/**
+  * Profile: Qualifications - Add/edit other qualification
+  *
+  * @param {String} action add || edit
+  * @param {String} id Qualification ID
+  *
+  */
+router.get('/profile/qualifications/:action/other/:id', (req, res) => {
+  res.render('profile/qualifications/other', {
+    action: req.params.action,
+    formAction: '/profile/qualifications/review',
+    id: req.params.id
+  })
+})
+
+/**
+  * Profile: Work history - Add/edit job
+  *
+  * @param {String} action add || edit
+  * @param {String} id Job ID
+  *
+  */
+router.get('/profile/work-history/:action/job/:id', (req, res) => {
   res.render('profile/work-history/job', {
     action: req.params.action,
+    formAction: '/profile/work-history/review',
     id: req.params.id
   })
 })
 
-// Application: School experience
-router.get('/profile/school-experience/role/add', (req, res) => {
-  let id = generateRandomString()
-
-  res.redirect(`/profile/school-experience/role/add/${id}`)
-})
-
-router.get('/profile/school-experience/role/:action/:id', (req, res) => {
+/**
+  * Profile: School experience - Add/edit role
+  *
+  * @param {String} action add || edit
+  * @param {String} id Role ID
+  *
+  */
+router.get('/profile/school-experience/:action/role/:id', (req, res) => {
   res.render('profile/school-experience/role', {
     action: req.params.action,
+    formAction: '/profile/school-experience/review',
     id: req.params.id
   })
 })
 
-// Application: References
-router.get('/profile/references/referee/:action/:id', (req, res) => {
+/**
+  * Profile: References - Add/edit referee
+  *
+  * @param {String} action add || edit
+  * @param {String} id principle || secondary
+  *
+  */
+router.get('/profile/references/:action/referee/:id', (req, res) => {
+  const action = req.params.action
+  const id = req.params.id
+
+  let formActionPath
+  if (action === 'add') {
+    formActionPath = (id === 'principle') ? 'add/referee/secondary' : 'review'
+  } else {
+    formActionPath = 'review'
+  }
+
   res.render('profile/references/referee', {
     action: req.params.action,
+    formAction: `/profile/references/${formActionPath}`,
     id: req.params.id
   })
 })

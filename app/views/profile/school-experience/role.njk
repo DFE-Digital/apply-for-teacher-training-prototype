@@ -1,7 +1,6 @@
 {% extends "_form.njk" %}
 
 {% set parent = "School experience and volunteering with children and young people" %}
-{% set formAction = "/profile/school-experience/review" %}
 {% if action == "edit" %}
   {% set title = "Edit role" %}
   {% set buttonText = "Save changes" %}
@@ -100,7 +99,7 @@
     html: "Save and add another role",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/school-experience/role/add"
+      formaction: "/profile/school-experience/add/role"
     }
   }) }}
 {% endif %}

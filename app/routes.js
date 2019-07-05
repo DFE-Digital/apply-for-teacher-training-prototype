@@ -7,7 +7,21 @@ const generateRandomString = () => {
 }
 
 /**
-  * Application: Personal details
+  * Profile: Generate ID to add new thing
+  *
+  * @param {String} section Section of the profile application
+  * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
+  */
+router.get('/profile/:section/add/:thing', (req, res) => {
+  const section = req.params.section
+  const thing = req.params.thing
+  let id = generateRandomString()
+
+  res.redirect(`/profile/${section}/add/${thing}/${id}`)
+})
+
+/**
+  * Profile: Personal details
   */
 router.post('/profile/personal-details/answer', (req, res) => {
   let nationality = req.session.data['candidate']['nationality']
@@ -22,7 +36,7 @@ router.post('/profile/personal-details/answer', (req, res) => {
 })
 
 /**
-  * Application: Contact details
+  * Profile: Contact details
   */
 router.post('/profile/contact-details/address-answer', (req, res) => {
   let location = req.session.data['contact-details']['address-type']
@@ -41,20 +55,7 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Generate new qualification ID
-  *
-  * @param {String} category degree || gcse
-  *
-  */
-router.get('/profile/qualifications/add/:category', (req, res) => {
-  const category = req.params.category
-  const id = generateRandomString()
-
-  res.redirect(`/profile/qualifications/add/${category}/${id}`)
-})
-
-/**
-  * Application: Qualifications - Add/edit degree
+  * Profile: Qualifications - Add/edit degree
   *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
@@ -72,7 +73,7 @@ router.get('/profile/qualifications/:action/degree/:id', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Add/edit UK degree details
+  * Profile: Qualifications - Add/edit UK degree details
   *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
@@ -91,7 +92,7 @@ router.get('/profile/qualifications/:action/uk-degree/:id', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Add/edit international degree details
+  * Profile: Qualifications - Add/edit international degree details
   *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
@@ -111,7 +112,7 @@ router.get('/profile/qualifications/:action/international-degree/:id', (req, res
 })
 
 /**
-  * Application: Qualifications - Add/edit GCSE subject
+  * Profile: Qualifications - Add/edit GCSE subject
   *
   * @param {String} action add || edit
   * @param {String} id maths || english || science
@@ -129,7 +130,7 @@ router.get('/profile/qualifications/:action/gcse/:id', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Add/edit GCSE subject details
+  * Profile: Qualifications - Add/edit GCSE subject details
   *
   * @param {String} action add || edit
   * @param {String} id maths || english || science
@@ -148,7 +149,7 @@ router.get('/profile/qualifications/:action/gcse-subject/:id', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Add/edit GCSE equivalent details
+  * Profile: Qualifications - Add/edit GCSE equivalent details
   *
   * @param {String} action add || edit
   * @param {String} id maths || english || science
@@ -168,7 +169,7 @@ router.get('/profile/qualifications/:action/gcse-equivalent/:id', (req, res) => 
 })
 
 /**
-  * Application: Qualifications - Add/edit other qualification details
+  * Profile: Qualifications - Add/edit other qualification details
   *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
@@ -183,7 +184,7 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 })
 
 /**
-  * Application: Qualifications - Degree/GCSE branch logic
+  * Profile: Qualifications - Degree/GCSE branch logic
   *
   * @param {String} action add || edit
   * @param {String} category degree || gcse
@@ -220,7 +221,7 @@ router.post('/profile/qualifications/:action/:category/:id/answer', (req, res) =
 })
 
 /**
-  * Application: Qualifications - Degree/GCSE next step logic
+  * Profile: Qualifications - Degree/GCSE next step logic
   * Redirect to next step based on qualifications already entered
   */
 router.all('/profile/qualifications/next', (req, res) => {
@@ -245,16 +246,7 @@ router.all('/profile/qualifications/next', (req, res) => {
 })
 
 /**
-  * Application: Work history - Generate new job ID
-  */
-router.get('/profile/work-history/add/job', (req, res) => {
-  let id = generateRandomString()
-
-  res.redirect(`/profile/work-history/add/job/${id}`)
-})
-
-/**
-  * Application: Work history - Add/edit job
+  * Profile: Work history - Add/edit job
   *
   * @param {String} action add || edit
   * @param {String} id Job ID
@@ -269,16 +261,7 @@ router.get('/profile/work-history/:action/job/:id', (req, res) => {
 })
 
 /**
-  * Application: School experience - Generate new role ID
-  */
-router.get('/profile/school-experience/add/role', (req, res) => {
-  let id = generateRandomString()
-
-  res.redirect(`/profile/school-experience/add/role/${id}`)
-})
-
-/**
-  * Application: School experience - Add/edit role
+  * Profile: School experience - Add/edit role
   *
   * @param {String} action add || edit
   * @param {String} id Role ID
@@ -293,7 +276,7 @@ router.get('/profile/school-experience/:action/role/:id', (req, res) => {
 })
 
 /**
-  * Application: References - Add/edit referee
+  * Profile: References - Add/edit referee
   *
   * @param {String} action add || edit
   * @param {String} id principle || secondary

@@ -23,7 +23,7 @@
     {% else %}
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
-        {{ item.type }} {{ item.subject }}
+        {{ item["type-other"] if item["type-other"] else item.type }} {{ item.subject }}
         {% if item.country != "United Kingdom" %}
           <br>{{ item.institution }}
         {% endif %}

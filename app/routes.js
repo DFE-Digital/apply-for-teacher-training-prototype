@@ -208,22 +208,32 @@ router.all('/profile/qualifications/next', (req, res) => {
   res.redirect(`/profile/qualifications/${path}`)
 })
 
-// Application: Work history
-router.get('/profile/work-history/job/add', (req, res) => {
+/**
+  * Application: Work history - Generate new job ID
+  */
+router.get('/profile/work-history/add/job', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/work-history/job/add/${id}`)
+  res.redirect(`/profile/work-history/add/job/${id}`)
 })
 
-router.get('/profile/work-history/job/:action/:id', (req, res) => {
+/**
+  * Application: Work history - Add/edit job
+  *
+  * @param {String} action Add/edit page function
+  * @param {String} id Job ID
+  *
+  */
+router.get('/profile/work-history/:action/job/:id', (req, res) => {
   res.render('profile/work-history/job', {
     action: req.params.action,
+    formAction: '/profile/work-history/review',
     id: req.params.id
   })
 })
 
 /**
-  * Application: School experience - Generate new id
+  * Application: School experience - Generate new role ID
   */
 router.get('/profile/school-experience/add/role', (req, res) => {
   let id = generateRandomString()
@@ -234,8 +244,8 @@ router.get('/profile/school-experience/add/role', (req, res) => {
 /**
   * Application: School experience - Add/edit role
   *
-  * @param {String} action add/edit
-  * @param {String} id principle/secondary
+  * @param {String} action Add/edit page function
+  * @param {String} id Role ID
   *
   */
 router.get('/profile/school-experience/:action/role/:id', (req, res) => {
@@ -249,8 +259,8 @@ router.get('/profile/school-experience/:action/role/:id', (req, res) => {
 /**
   * Application: References - Add/edit referee
   *
-  * @param {String} action add/edit
-  * @param {String} id principle/secondary
+  * @param {String} action Add/edit page function
+  * @param {String} id principle || secondary
   *
   */
 router.get('/profile/references/:action/referee/:id', (req, res) => {

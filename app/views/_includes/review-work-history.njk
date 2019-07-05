@@ -10,10 +10,10 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-  {% for item in workHistory %}
-    {% set startDate = item["start-month"] + "/" + item["start-year"] %}
-    {% if item.end-year != "" %}
-      {% set endDate = item["end-month"] + "/" + item["end-year"] %}
+  {% for item in workHistory | sort(attribute='start-date') %}
+    {% set startDate = item["start-date"] | date('LL/yyyy') %}
+    {% if item["end-date"] != "-" %}
+      {% set endDate = item["end-date"] | date('LL/yyyy') %}
     {% else %}
       {% set endDate = 'Present' %}
     {% endif %}

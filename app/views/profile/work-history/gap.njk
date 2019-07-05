@@ -1,8 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Explain gap in work history" %}
 {% set parent = "Work history" %}
-{% set formAction = "/profile/work-history/review" %}
+{% set title = "Explain gap in work history" %}
+{% if action == "edit" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block primary %}
   {{ govukDateInput({
@@ -15,18 +19,17 @@
     hint: {
       text: "For example, 01 2018"
     },
-    id: "work-history-" + id + "-start",
+    id: "work-history-" + id + "-start-date",
+    namePrefix: "start-date",
     items: [{
       label: "Month",
-      id: "work-history-" + id + "-start-month",
-      name: "work-history[" + id + "][start-month]",
-      value: start | date('LL'),
+      name: "month",
+      value: data["work-history"][id]["start-date"] | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      id: "work-history-" + id + "-start-year",
-      name: "work-history[" + id + "][start-year]",
-      value: start | date('yyyy'),
+      name: "year",
+      value: data["work-history"][id]["start-date"] | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -41,18 +44,17 @@
     hint: {
       text: "For example, 05 2018"
     },
-    id: "work-history-" + id + "-end",
+    id: "work-history-" + id + "-end-date",
+    namePrefix: "end-date",
     items: [{
       label: "Month",
-      id: "work-history-" + id + "-end-month",
-      name: "work-history[" + id + "][end-month]",
-      value: end | date('LL'),
+      name: "month",
+      value: data["work-history"][id]["end-date"] | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      id: "work-history-" + id + "-end-month",
-      name: "work-history[" + id + "][end-year]",
-      value: end | date('yyyy'),
+      name: "year",
+      value: data["work-history"][id]["end-date"] | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -75,6 +77,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

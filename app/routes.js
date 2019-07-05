@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { DateTime } = require('luxon')
 
 // Utils
 const generateRandomString = () => {
@@ -193,35 +194,49 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 })
 
 /**
-  * Profile: Work history - Add/edit job
+  * Profile: Work history - Add/edit job/gap
   *
   * @param {String} action add || edit
+  * @param {String} type job || gap
   * @param {String} id Job ID
   *
   */
-router.get('/profile/work-history/:action/job/:id', (req, res) => {
-  res.render('profile/work-history/job', {
+router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
+  const id = req.params.id
+  const type = req.params.type
+
+  res.render(`profile/work-history/${type}`, {
     action: req.params.action,
-    formAction: '/profile/work-history/review',
-    id: req.params.id
+    formAction: `/profile/work-history/update/${type}/${id}`,
+    id,
+    start: `${req.query.start}`,
+    end: `${req.query.end}`
   })
 })
 
 /**
-  * Profile: Work history - Add/edit gap
+  * Profile: Work history - Update job/gap data
+  * Convert individual date components into ISO 8601 date strings
   *
-  * @param {String} action add || edit
-  * @param {String} id Gap ID
+  * @param {String} type job || gap
+  * @param {String} id Job/gap ID
   *
   */
-router.get('/profile/work-history/:action/gap/:id', (req, res) => {
-  res.render('profile/work-history/gap', {
-    action: req.params.action,
-    formAction: '/profile/work-history/review',
-    id: req.params.id,
-    start: `${req.query.start}`,
-    end: `${req.query.end}`
-  })
+router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
+  const id = req.params.id
+
+  const startMonth = req.body['start-date-month']
+  const startYear = req.body['start-date-year']
+  const startDate = `${startYear}-${startMonth}`
+
+  const endMonth = req.body['end-date-month']
+  const endYear = req.body['end-date-year']
+  const endDate = `${endYear}-${endMonth}`
+
+  req.session.data['work-history'][id]['start-date'] = startDate
+  req.session.data['work-history'][id]['end-date'] = endDate
+
+  res.redirect('/profile/work-history/review')
 })
 
 /**

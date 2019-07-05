@@ -55,19 +55,21 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
 })
 
 /**
-  * Profile: Qualifications - Add/edit degree
+  * Profile: Qualifications - Add/edit degree or GCSE
   *
   * @param {String} action add || edit
+  * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   *
   */
-router.get('/profile/qualifications/:action/degree/:id', (req, res) => {
+router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, res) => {
   const action = req.params.action
+  const category = req.params.category
   const id = req.params.id
 
-  res.render('profile/qualifications/degree', {
+  res.render(`profile/qualifications/${category}`, {
     action,
-    formAction: `/profile/qualifications/${action}/degree/${id}/answer`,
+    formAction: `/profile/qualifications/${action}/${category}/${id}/answer`,
     id
   })
 })
@@ -93,24 +95,6 @@ router.get('/profile/qualifications/:action/:type(uk-degree|international-degree
 })
 
 /**
-  * Profile: Qualifications - Add/edit GCSE subject
-  *
-  * @param {String} action add || edit
-  * @param {String} id maths || english || science
-  *
-  */
-router.get('/profile/qualifications/:action/gcse/:id', (req, res) => {
-  const action = req.params.action
-  const id = req.params.id
-
-  res.render('profile/qualifications/gcse', {
-    action,
-    formAction: `/profile/qualifications/${action}/gcse/${id}/answer`,
-    id
-  })
-})
-
-/**
   * Profile: Qualifications - Add/edit GCSE subject details
   *
   * @param {String} action add || edit
@@ -131,21 +115,6 @@ router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/
 })
 
 /**
-  * Profile: Qualifications - Add/edit other qualification details
-  *
-  * @param {String} action add || edit
-  * @param {String} id Qualification ID
-  *
-  */
-router.get('/profile/qualifications/:action/other/:id', (req, res) => {
-  res.render('profile/qualifications/other', {
-    action: req.params.action,
-    formAction: '/profile/qualifications/review',
-    id: req.params.id
-  })
-})
-
-/**
   * Profile: Qualifications - Degree/GCSE branch logic
   *
   * @param {String} action add || edit
@@ -153,7 +122,7 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
   * @param {String} id Qualification ID
   *
   */
-router.post('/profile/qualifications/:action/:category/:id/answer', (req, res) => {
+router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer', (req, res) => {
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
@@ -205,6 +174,21 @@ router.all('/profile/qualifications/next', (req, res) => {
   }
 
   res.redirect(`/profile/qualifications/${path}`)
+})
+
+/**
+  * Profile: Qualifications - Add/edit other qualification
+  *
+  * @param {String} action add || edit
+  * @param {String} id Qualification ID
+  *
+  */
+router.get('/profile/qualifications/:action/other/:id', (req, res) => {
+  res.render('profile/qualifications/other', {
+    action: req.params.action,
+    formAction: '/profile/qualifications/review',
+    id: req.params.id
+  })
 })
 
 /**

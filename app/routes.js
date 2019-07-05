@@ -73,32 +73,13 @@ router.get('/profile/qualifications/:action/degree/:id', (req, res) => {
 })
 
 /**
-  * Profile: Qualifications - Add/edit UK degree details
+  * Profile: Qualifications - Add/edit UK/international degree details
   *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   *
   */
-router.get('/profile/qualifications/:action/uk-degree/:id', (req, res) => {
-  const action = req.params.action
-  const formActionPath = (action === 'add') ? 'next?prev=degree' : 'review'
-  const id = req.params.id
-
-  res.render('profile/qualifications/degree-details', {
-    action,
-    formAction: `/profile/qualifications/${formActionPath}`,
-    id
-  })
-})
-
-/**
-  * Profile: Qualifications - Add/edit international degree details
-  *
-  * @param {String} action add || edit
-  * @param {String} id Qualification ID
-  *
-  */
-router.get('/profile/qualifications/:action/international-degree/:id', (req, res) => {
+router.get('/profile/qualifications/:action/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
   const formActionPath = (action === 'add') ? 'next?prev=degree' : 'review'
   const id = req.params.id
@@ -107,7 +88,7 @@ router.get('/profile/qualifications/:action/international-degree/:id', (req, res
     action,
     formAction: `/profile/qualifications/${formActionPath}`,
     id,
-    international: true
+    international: req.params.type === 'international-degree'
   })
 })
 
@@ -136,26 +117,7 @@ router.get('/profile/qualifications/:action/gcse/:id', (req, res) => {
   * @param {String} id maths || english || science
   *
   */
-router.get('/profile/qualifications/:action/gcse-subject/:id', (req, res) => {
-  const action = req.params.action
-  const id = req.params.id
-  const formActionPath = (action === 'add') ? `next?prev=${id}` : 'review'
-
-  res.render('profile/qualifications/gcse-details', {
-    action,
-    formAction: `/profile/qualifications/${formActionPath}`,
-    id
-  })
-})
-
-/**
-  * Profile: Qualifications - Add/edit GCSE equivalent details
-  *
-  * @param {String} action add || edit
-  * @param {String} id maths || english || science
-  *
-  */
-router.get('/profile/qualifications/:action/gcse-equivalent/:id', (req, res) => {
+router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
   const formActionPath = (action === 'add') ? `next?prev=${id}` : 'review'
@@ -164,7 +126,7 @@ router.get('/profile/qualifications/:action/gcse-equivalent/:id', (req, res) => 
     action,
     formAction: `/profile/qualifications/${formActionPath}`,
     id,
-    international: true
+    international: req.params.type === 'gcse-equivalent'
   })
 })
 

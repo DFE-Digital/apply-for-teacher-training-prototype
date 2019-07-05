@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% set title = "Your details" %}
+{% set title = "Personal teaching profile" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -15,6 +15,7 @@
 
 {% block primary %}
   {{ appTaskList({
+    classes: "govuk-!-margin-bottom-4",
     items: [{
       text: "Personal details",
       href: "/profile/personal-details" + ( "/review" if data["candidate"]["nationality"] ),
@@ -61,5 +62,10 @@
       id: "vocation",
       completed: data["vocation"]
     }]
+  }) }}
+
+  {{ govukButton({
+    text: "Review your answers" ,
+    href: "/profile/review"
   }) }}
 {% endblock %}

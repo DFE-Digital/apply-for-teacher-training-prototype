@@ -1,3 +1,5 @@
+const { DateTime } = require('luxon')
+
 module.exports = function (env) {
   /**
    * Instantiate object used to store the methods registered as a
@@ -7,7 +9,26 @@ module.exports = function (env) {
    */
   const filters = {}
 
-  // Convert object to array
+  /**
+   * Convert object to array
+   * @type {String} str
+   *
+  */
+  filters.date = (str, format) => {
+    if (str) {
+      var date = DateTime.fromISO(str, {
+        locale: 'en-GB'
+      }).toFormat(format)
+
+      return date
+    }
+  }
+
+  /**
+   * Convert object to array
+   * @type {Object} obj
+   *
+  */
   filters.toArray = (obj) => {
     if (obj) {
       const arr = []

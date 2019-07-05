@@ -41,18 +41,17 @@
     hint: {
       text: "For example, 05 2018"
     },
-    id: "work-history-" + id + "-start",
+    id: "work-history-" + id + "-start-date",
+    namePrefix: "start-date",
     items: [{
       label: "Month",
-      id: "work-history-" + id + "-start-month",
-      name: "work-history[" + id + "][start-month]",
-      value: data["work-history"][id]["start-month"],
+      name: "month",
+      value: data["work-history"][id]["start-date"] | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      id: "work-history-" + id + "-start-year",
-      name: "work-history[" + id + "][start-year]",
-      value: data["work-history"][id]["start-year"],
+      name: "year",
+      value: data["work-history"][id]["start-date"] | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -67,18 +66,17 @@
     hint: {
       text: "For example, 05 2019"
     },
-    id: "work-history-" + id + "-end",
+    id: "work-history-" + id + "-end-date",
+    namePrefix: "end-date",
     items: [{
       label: "Month",
-      id: "work-history-" + id + "-end-month",
-      name: "work-history[" + id + "][end-month]",
-      value: data["work-history"][id]["end-month"],
+      name: "month",
+      value: data["work-history"][id]["end-date"] | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
-      id: "work-history-" + id + "-end-month",
-      name: "work-history[" + id + "][end-year]",
-      value: data["work-history"][id]["end-year"],
+      name: "year",
+      value: data["work-history"][id]["end-date"] | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   }) }}
@@ -91,9 +89,9 @@
     hint: {
       text: "Give examples showing how you developed transferable skills like communication, creativity and organisation. Enter experience relevant to your subject in the subject knowledge section"
     },
-    id: "work-history-" + id + "-job_description",
-    name: "work-history[" + id + "][job_description]",
-    value: data["work-history"][id]["job_description"],
+    id: "work-history-" + id + "-description",
+    name: "work-history[" + id + "][description]",
+    value: data["work-history"][id]["description"],
     maxwords: 150
   }) }}
 

@@ -1,12 +1,16 @@
 {% extends "_content.njk" %}
 
-{% set title = "Your details" %}
+{% set parent = "Personal teaching profile" %}
+{% set title = "Review your answers" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
     items: [{
       text: "Home",
       href: "/dashboard"
+    }, {
+      text: "Personal teaching profile",
+      href: "/profile"
     }, {
       text: title
     }]

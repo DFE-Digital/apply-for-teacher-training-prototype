@@ -1,0 +1,80 @@
+{% extends "_form.njk" %}
+
+{% set title = "Explain gap in work history" %}
+{% set parent = "Work history" %}
+{% set formAction = "/profile/work-history/review" %}
+
+{% block primary %}
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Start of gap",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 01 2018"
+    },
+    id: "work-history-" + id + "-start",
+    items: [{
+      label: "Month",
+      id: "work-history-" + id + "-start-month",
+      name: "work-history[" + id + "][start-month]",
+      value: start | date('LL'),
+      classes: "govuk-input--width-2"
+    }, {
+      label: "Year",
+      id: "work-history-" + id + "-start-year",
+      name: "work-history[" + id + "][start-year]",
+      value: start | date('yyyy'),
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "End of gap",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "For example, 05 2018"
+    },
+    id: "work-history-" + id + "-end",
+    items: [{
+      label: "Month",
+      id: "work-history-" + id + "-end-month",
+      name: "work-history[" + id + "][end-month]",
+      value: end | date('LL'),
+      classes: "govuk-input--width-2"
+    }, {
+      label: "Year",
+      id: "work-history-" + id + "-end-month",
+      name: "work-history[" + id + "][end-year]",
+      value: end | date('yyyy'),
+      classes: "govuk-input--width-4"
+    }]
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Reason(s) for this gap in your work history",
+      classes: "govuk-label--s"
+    },
+    maxwords: 400,
+    id: "work-history-" + id + "-description",
+    name: "work-history[" + id + "][description]",
+    value: data["work-history"][id]["description"]
+  }) }}
+
+  {{ govukInput({
+    type: "hidden",
+    name: "work-history[" + id + "][gap]",
+    value: "true"
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

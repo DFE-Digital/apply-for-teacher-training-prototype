@@ -208,6 +208,23 @@ router.get('/profile/work-history/:action/job/:id', (req, res) => {
 })
 
 /**
+  * Profile: Work history - Add/edit gap
+  *
+  * @param {String} action add || edit
+  * @param {String} id Gap ID
+  *
+  */
+router.get('/profile/work-history/:action/gap/:id', (req, res) => {
+  res.render('profile/work-history/gap', {
+    action: req.params.action,
+    formAction: '/profile/work-history/review',
+    id: req.params.id,
+    start: `${req.query.start}`,
+    end: `${req.query.end}`
+  })
+})
+
+/**
   * Profile: School experience - Add/edit role
   *
   * @param {String} action add || edit

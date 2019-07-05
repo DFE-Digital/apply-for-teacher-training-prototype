@@ -2,11 +2,9 @@
 
 {% set parent = "References" %}
 {% if action == "edit" %}
-  {% set formAction = "/profile/references/review" %}
   {% set title = "Edit " + id + " referee" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set formAction = "/profile/references/referee/add/secondary" if (id === "principle") else "/profile/references/review" %}
   {% set title = "Add " + id + " referee" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}

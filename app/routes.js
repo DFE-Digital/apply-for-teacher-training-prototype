@@ -236,10 +236,27 @@ router.get('/profile/school-experience/role/:action/:id', (req, res) => {
   })
 })
 
-// Application: References
-router.get('/profile/references/referee/:action/:id', (req, res) => {
+/**
+  * Application: References
+  *
+  * @param {String} action add/edit
+  * @param {String} id principle/secondary
+  *
+  */
+router.get('/profile/references/:action/referee/:id', (req, res) => {
+  const action = req.params.action
+  const id = req.params.id
+
+  let formActionPath
+  if (action === 'add') {
+    formActionPath = (id === 'principle') ? 'add/referee/secondary' : 'review'
+  } else {
+    formActionPath = 'review'
+  }
+
   res.render('profile/references/referee', {
     action: req.params.action,
+    formAction: `/profile/references/${formActionPath}`,
     id: req.params.id
   })
 })

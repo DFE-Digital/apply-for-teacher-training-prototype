@@ -1,4 +1,4 @@
-<ol class="app-task-list">
+<ol class="app-task-list {%- if params.classes %} {{ params.classes }}{% endif %}">
 {% for item in params.items %}
   <li class="app-task-list__item">
     <a class="app-task-list__task-name" href="{{ item.href }}" aria-describedby="{{ item.id }}-completed">{{ item.text | safe }}</a>

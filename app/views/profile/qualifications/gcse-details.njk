@@ -134,16 +134,16 @@
     value: data["qualifications"][id]["award-org"]
   }) }}
 
-{% set validateEquivalence %}
-  {{ govukInput({
-    label: {
-      text: "Please explain how you plan to validate this qualification"
-    },
-    id: "qualifications-" + id + "-equivalence",
-    name: "qualifications[" + id + "][equivalence]",
-    value: data["qualifications"][id]["equivalence"]
-  }) }}
-{% endset -%}
+  {% set validateEquivalenceHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please explain how you plan to validate this qualification"
+      },
+      id: "qualifications-" + id + "-equivalence",
+      name: "qualifications[" + id + "][equivalence]",
+      value: data["qualifications"][id]["equivalence"]
+    }) }}
+  {% endset -%}
 
   {{ govukRadios({
     fieldset: {
@@ -163,7 +163,7 @@
       text: "No",
       checked: checked("['qualifications']['" + id + "']['naric']", "no"),
       conditional: {
-        html: validateEquivalence
+        html: validateEquivalenceHtml
       }
     }]
   }) }}

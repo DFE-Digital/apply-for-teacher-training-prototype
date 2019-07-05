@@ -222,22 +222,32 @@ router.get('/profile/work-history/job/:action/:id', (req, res) => {
   })
 })
 
-// Application: School experience
-router.get('/profile/school-experience/role/add', (req, res) => {
+/**
+  * Application: School experience - Generate new id
+  */
+router.get('/profile/school-experience/add/role', (req, res) => {
   let id = generateRandomString()
 
-  res.redirect(`/profile/school-experience/role/add/${id}`)
+  res.redirect(`/profile/school-experience/add/role/${id}`)
 })
 
-router.get('/profile/school-experience/role/:action/:id', (req, res) => {
+/**
+  * Application: School experience - Add/edit role
+  *
+  * @param {String} action add/edit
+  * @param {String} id principle/secondary
+  *
+  */
+router.get('/profile/school-experience/:action/role/:id', (req, res) => {
   res.render('profile/school-experience/role', {
     action: req.params.action,
+    formAction: '/profile/school-experience/review',
     id: req.params.id
   })
 })
 
 /**
-  * Application: References
+  * Application: References - Add/edit referee
   *
   * @param {String} action add/edit
   * @param {String} id principle/secondary

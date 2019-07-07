@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const { DateTime } = require('luxon')
 
 // Utils
 const generateRandomString = () => {
@@ -163,13 +162,13 @@ router.all('/profile/qualifications/next', (req, res) => {
   let englishCompleted = req.session.data['qualifications']['english']
   let scienceCompleted = req.session.data['qualifications']['science']
   let primaryApplication = req.session.data['settings']['primary-application']
-  let path
 
+  let path
   if (prev === 'degree' && mathsCompleted !== true) {
     path = 'add/gcse/maths'
   } else if (prev === 'maths' && englishCompleted !== true) {
     path = 'add/gcse/english'
-  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === false) {
+  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === 'false') {
     path = 'add/gcse/science'
   } else {
     path = 'review'

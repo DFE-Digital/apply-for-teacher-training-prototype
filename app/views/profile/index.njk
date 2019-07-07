@@ -33,7 +33,7 @@
       completed: data["qualifications"]
     }, {
       text: "Subject knowledge",
-      href: "/profile/subject-knowledge" + ( "/primary" if checked("settings", "primary-application")),
+      href: "/profile/subject-knowledge" + ( "/primary" if checked("['settings']['primary-application']", "true")),
       id: "subject-knowledge",
       completed: data["subject-knowledge"]
     }, {

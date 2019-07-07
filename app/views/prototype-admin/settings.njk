@@ -10,16 +10,24 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukCheckboxes({
-    idPrefix: "settings",
-    name: "settings",
-    hint: {
-      text: "Select all that apply."
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Mimic primary course application",
+        classes: "govuk-fieldset__legend--s"
+      }
     },
+    classes: "govuk-radios--inline",
+    idPrefix: "settings-primary-application",
+    name: "settings[primary-application]",
     items: [{
-      value: "primary-application",
-      text: "Show primary course application",
-      checked: checked("settings", "primary-application")
+      value: "true",
+      text: "Yes",
+      checked: checked("['settings']['primary-application']", "true")
+    }, {
+      value: "false",
+      text: "No",
+      checked: checked("['settings']['primary-application']", "false")
     }]
   }) }}
 

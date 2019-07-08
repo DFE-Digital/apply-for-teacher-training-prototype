@@ -12,10 +12,10 @@
   <tbody class="govuk-table__body">
 {% for item in qualifications %}
   {% if item.category == category %}
-    {% if item.missing %}
+    {% if item.provenance == "missing" %}
     <tr class="govuk-table__row app-table__cell--muted">
-      <td class="govuk-table__cell">{{ item.subject }}</td>
-      <td class="govuk-table__cell" colspan="2">Missing: {{ item.missing }}</td>
+      <td class="govuk-table__cell">{{ item.subject }} (Missing)</td>
+      <td class="govuk-table__cell" colspan="2">Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
       <td class="govuk-table__cell">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>

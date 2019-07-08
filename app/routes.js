@@ -29,7 +29,7 @@ router.post('/profile/personal-details/answer', (req, res) => {
   let eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 
   if (eea.includes(nationality)) {
-    res.redirect('/profile/personal-details/review')
+    res.redirect('/profile')
   } else {
     res.redirect('/profile/personal-details/residency-status')
   }
@@ -44,7 +44,7 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
   if (location === 'domestic') {
     res.redirect('/profile/contact-details/lookup-address')
   } else {
-    res.redirect('/profile/contact-details/review')
+    res.redirect('/profile')
   }
 })
 

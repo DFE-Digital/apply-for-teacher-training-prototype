@@ -1,4 +1,4 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
 {% set parent = "Personal teaching profile" %}
 {% set title = "Review your answers" %}
@@ -24,17 +24,36 @@
   <h2 class="govuk-heading-m">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
 
+  <h2 class="govuk-heading-m">Qualifications</h2>
   {% set category = "degree" %}
-  {% set categoryTitle = "Degree(s)" %}
+  {% set categoryTitle = "Degree" %}
   {% include "_includes/review-qualifications.njk" %}
 
   {% set category = "gcse" %}
-  {% set categoryTitle = "Required subjects" %}
+  {% set categoryTitle = "Required subject" %}
   {% include "_includes/review-qualifications.njk" %}
 
   {% set category = "other" %}
-  {% set categoryTitle = "Other relevant qualifications" %}
+  {% set categoryTitle = "Other relevant qualification" %}
   {% include "_includes/review-qualifications.njk" %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
+    rows: [{
+      key: {
+        text: "Is there anything you’d like to tell us about your qualifications?"
+      },
+      value: {
+        text: data["qualifications"]["additional"]
+      },
+      actions: {
+        items: [{
+          href: "/profile/qualifications/review",
+          text: "Change",
+          visuallyHiddenText: "additional detail"
+        }]
+      }
+    }]
+  }) }}
 
   <h2 class="govuk-heading-m">Subject knowledge</h2>
   {% include "_includes/review-subject-knowledge.njk" %}

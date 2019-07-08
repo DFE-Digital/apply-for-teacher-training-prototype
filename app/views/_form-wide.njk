@@ -1,0 +1,23 @@
+{% extends "_layout.njk" %}
+
+{% block content %}
+  <form action="{{ formAction | default('#') }}" method="post">
+  {% set legendHtml %}
+    {% if parent %}
+      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
+    {% else %}
+      {{ title }}
+    {% endif %}
+  {% endset %}
+  {% call govukFieldset({
+    legend: {
+      html: legendHtml,
+      classes: "govuk-fieldset__legend--xl",
+      isPageHeading: true
+    }
+  }) %}
+    {% block primary %}
+    {% endblock %}
+  {% endcall %}
+  </form>
+{% endblock %}

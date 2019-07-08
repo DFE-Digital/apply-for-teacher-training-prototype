@@ -3,8 +3,8 @@
   <caption class="govuk-table__caption govuk-heading-m">Your referees</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th class="govuk-table__header" scope="col">Name</th>
-      <th class="govuk-table__header" scope="col">Email</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Name</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Email</th>
       <th class="govuk-table__header" scope="col">Actions</th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">{{ item.name }}</td>
       <td class="govuk-table__cell">{{ item.email }}</td>
-      <td class="govuk-table__cell"><a href="/profile/references/edit/referee/{{ item.id }}">Edit referee</a></td>
+      <td class="govuk-table__cell"><a href="/profile/references/edit/referee/{{ item.id }}">Change<span class="govuk-visually-hidden"> referee</span></a></td>
     </tr>
     {% endfor %}
   </tbody>

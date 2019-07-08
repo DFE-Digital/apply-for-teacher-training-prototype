@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set title = "Academic qualifications" %}
 {% set formAction = "/profile/" %}
@@ -45,20 +45,24 @@
   }) }}
 {% endif %}
 
-  {{ govukCharacterCount({
-    label: {
-      text: "Is there anything you’d like to tell us about your qualifications?",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "For example, you can tell us how you plan to fill any gaps in your eligibility requirements, or validate non-UK qualifications."
-    },
-    maxwords: 600,
-    rows: 12,
-    id: "qualifications-additional",
-    name: "qualifications[additional]",
-    value: data["qualifications"]["additional"]
-  }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukCharacterCount({
+        label: {
+          text: "Is there anything you’d like to tell us about your qualifications?",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "For example, you can tell us how you plan to fill any gaps in your eligibility requirements, or validate non-UK qualifications."
+        },
+        maxwords: 600,
+        rows: 12,
+        id: "qualifications-additional",
+        name: "qualifications[additional]",
+        value: data["qualifications"]["additional"]
+      }) }}
+    </div>
+  </div>
 
   {{ govukButton({
     text: "Save and continue"

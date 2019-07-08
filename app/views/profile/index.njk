@@ -20,12 +20,12 @@
     classes: "govuk-!-margin-bottom-4",
     items: [{
       text: "Personal details",
-      href: "/profile/personal-details" + ( "/review" if data["candidate"]["nationality"] ),
+      href: "/profile/personal-details",
       id: "personal-details",
       completed: data["candidate"]["nationality"]
     }, {
       text: "Contact details",
-      href: "/profile/contact-details" + ( "/review" if data["contact-details"]["address"] ),
+      href: "/profile/contact-details",
       id: "contact-details",
       completed: data["contact-details"]["address"]
     }, {
@@ -35,12 +35,12 @@
       completed: data["qualifications"]
     }, {
       text: "Subject knowledge",
-      href: "/profile/subject-knowledge" + ( "/primary" if checked("['settings']['primary-application']", "true")),
+      href: "/profile/subject-knowledge",
       id: "subject-knowledge",
       completed: data["subject-knowledge"]
     }, {
       text: "Literacy, numeracy and language skills",
-      href: "/profile/professional-skills" + ( "/review" if data["professional-skills"] ),
+      href: "/profile/professional-skills",
       id: "professional-skills",
       completed: data["professional-skills"]
     }, {

@@ -14,6 +14,8 @@
         text: "Was this degree awarded by an institution based in the UK?"
       }
     },
+    idPrefix: "qualifications-" + id + "-provenance",
+    name: "qualifications[" + id + "][provenance]",
     items: [{
       value: "domestic",
       text: "Yes",
@@ -22,9 +24,7 @@
       value: "international",
       text: "No",
       checked: checked("['qualifications']['" + id + "']['provenance']", "international")
-    }],
-    idPrefix: "qualifications-" + id + "-provenance",
-    name: "qualifications[" + id + "][provenance]"
+    }]
   }) }}
 
   {{ govukInput({

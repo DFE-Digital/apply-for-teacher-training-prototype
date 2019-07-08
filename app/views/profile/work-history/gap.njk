@@ -22,15 +22,15 @@
     id: "work-history-" + id + "-start-date",
     namePrefix: "start-date",
     items: [{
+      classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: data["work-history"][id]["start-date"] | date('LL'),
-      classes: "govuk-input--width-2"
+      value: data["work-history"][id]["start-date"] | date('LL')
     }, {
+      classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: data["work-history"][id]["start-date"] | date('yyyy'),
-      classes: "govuk-input--width-4"
+      value: data["work-history"][id]["start-date"] | date('yyyy')
     }]
   }) }}
 
@@ -47,15 +47,15 @@
     id: "work-history-" + id + "-end-date",
     namePrefix: "end-date",
     items: [{
+      classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: data["work-history"][id]["end-date"] | date('LL'),
-      classes: "govuk-input--width-2"
+      value: data["work-history"][id]["end-date"] | date('LL')
     }, {
+      classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: data["work-history"][id]["end-date"] | date('yyyy'),
-      classes: "govuk-input--width-4"
+      value: data["work-history"][id]["end-date"] | date('yyyy')
     }]
   }) }}
 

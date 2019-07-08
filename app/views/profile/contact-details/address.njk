@@ -30,10 +30,10 @@
       html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
       classes: "govuk-label--s"
     },
-    autocomplete: "address-line1",
     id: "contact-details-address-line1",
     name: "contact-details[address][line1]",
-    value: data["contact-details"]["address"]["line1"]
+    value: data["contact-details"]["address"]["line1"],
+    autocomplete: "address-line1"
   }) }}
 
   {{ govukInput({
@@ -41,10 +41,10 @@
       html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
       classes: "govuk-label--s"
     },
-    autocomplete: "address-line2",
     id: "contact-details-address-line2",
     name: "contact-details[address][line2]",
-    value: data["contact-details"]["address"]["line2"]
+    value: data["contact-details"]["address"]["line2"],
+    autocomplete: "address-line2"
   }) }}
 
   {{ govukInput({
@@ -52,11 +52,11 @@
       text: "Town or city",
       classes: "govuk-label--s"
     },
-    autocomplete: "address-level2",
     classes: "govuk-!-width-two-thirds",
     id: "contact-details-address-level2",
     name: "contact-details[address][level2]",
-    value: data["contact-details"]["address"]["level2"]
+    value: data["contact-details"]["address"]["level2"],
+    autocomplete: "address-level2"
   }) }}
 
   {{ govukInput({
@@ -64,11 +64,11 @@
       text: "County",
       classes: "govuk-label--s"
     },
-    autocomplete: "address-level1",
     classes: "govuk-!-width-two-thirds",
     id: "contact-details-address-level1",
     name: "contact-details[address][level1]",
-    value: data["contact-details"]["address"]["level1"]
+    value: data["contact-details"]["address"]["level1"],
+    autocomplete: "address-level1"
   }) }}
 
   {{ govukInput({
@@ -76,11 +76,11 @@
       text: "Postal code",
       classes: "govuk-label--s"
     },
-    autocomplete: "postal-code",
     classes: "govuk-input--width-10",
     id: "contact-details-address-postal-code",
     name: "contact-details[address][postal-code]",
-    value: data["contact-details"]["address"]["postal-code"]
+    value: data["contact-details"]["address"]["postal-code"],
+    autocomplete: "postal-code"
   }) }}
 
   {{ govukButton({

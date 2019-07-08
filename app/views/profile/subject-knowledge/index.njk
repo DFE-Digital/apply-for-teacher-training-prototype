@@ -56,14 +56,14 @@
   }) }}
 
   {{ govukRadios({
-    idPrefix: "subject-knowledge-enhancement",
-    name: "subject-knowledge[enhancement]",
     fieldset: {
       legend: {
         text: "Would you be interested in taking a subject knowledge enhancement (SKE) course?",
         classes: "govuk-fieldset__legend--s"
       }
     },
+    idPrefix: "subject-knowledge-enhancement",
+    name: "subject-knowledge[enhancement]",
     items: [{
       value: "yes",
       text: "Yes",

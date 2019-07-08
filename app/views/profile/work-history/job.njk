@@ -89,10 +89,10 @@
     hint: {
       text: "Give examples showing how you developed transferable skills like communication, creativity and organisation. Enter experience relevant to your subject in the subject knowledge section"
     },
+    maxwords: 150,
     id: "work-history-" + id + "-description",
     name: "work-history[" + id + "][description]",
-    value: data["work-history"][id]["description"],
-    maxwords: 150
+    value: data["work-history"][id]["description"]
   }) }}
 
   {{ govukRadios({
@@ -118,7 +118,7 @@
 
 {% if action != "edit" %}
   {{ govukButton({
-    html: "Save and add another job",
+    text: "Save and add another job",
     classes: "govuk-button--secondary",
     attributes: {
       formaction: "/profile/work-history/add/job"

@@ -19,12 +19,13 @@
 {% block primary %}
   {% include "_includes/review-work-history.njk" %}
   {{ govukButton({
-    html: "Add another job",
+    text: "Add another job",
     classes: "govuk-button--secondary",
     href: "/profile/work-history/add/job"
   }) }}
+
   {{ govukButton({
-    html: "Explain gap",
+    text: "Explain gap",
     classes: "govuk-button--secondary",
     href: "/profile/work-history/add/gap"
   }) }}

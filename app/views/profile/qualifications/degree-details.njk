@@ -90,23 +90,33 @@
   {% set otherGradeHtml %}
     {{ govukInput({
       label: {
-        text: "Class of degree"
+        text: "Please specify class of degree"
       },
       id: "qualifications-" + id + "-grade-other",
       name: "qualifications[" + id + "][grade-other]",
       value: data["qualifications"][id]["grade-other"]
     }) }}
   {% endset %}
+  {% set predictedGradeHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please give details of your predicted grade"
+      },
+      hint: {
+        text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
+      },
+      id: "qualifications-" + id + "-grade-predicted",
+      name: "qualifications[" + id + "][grade-predicted]",
+      value: data["qualifications"][id]["grade-predicted"]
+    }) }}
+  {% endset %}
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Degree grade",
+        text: "Class of degree",
         classes: "govuk-label--s"
       }
-    },
-    hint: {
-      text: "If you provide a predicted grade, you must choose an academic referee (in the ‘References’ section) who can validate it."
     },
     idPrefix: "qualifications-" + id + "-grade",
     name: "qualifications[" + id + "][grade]",
@@ -132,6 +142,15 @@
       checked: checked("['qualifications']['" + id + "']['grade']", "Other"),
       conditional: {
         html: otherGradeHtml
+      }
+    }, {
+      divider: "or"
+    }, {
+      value: "Pending",
+      text: "I am still studying for my degree",
+      checked: checked("['qualifications']['" + id + "']['grade']", "Pending"),
+      conditional: {
+        html: predictedGradeHtml
       }
     }]
   }) }}

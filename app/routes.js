@@ -7,6 +7,22 @@ const generateRandomString = () => {
 }
 
 /**
+  * Apply: Populate pages with course and provider details
+  *
+  * @param {String} provider Provider code
+  * @param {String} course Course code
+  * @param {String} course Page to render
+  */
+router.get('/apply/:provider/:course/:page', (req, res) => {
+  const page = req.params.page
+
+  res.render(`apply/${page}`, {
+    provider: req.params.provider,
+    course: req.params.course
+  })
+})
+
+/**
   * Profile: Generate ID to add new thing
   *
   * @param {String} section Section of the profile application

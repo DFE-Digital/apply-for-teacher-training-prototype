@@ -1,0 +1,50 @@
+{% extends "_content.njk" %}
+
+{% set title = "Submit your application" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        text: providers[provider].courses[course].name
+      }
+    }, {
+      key: {
+        text: "Qualification"
+      },
+      value: {
+        text: providers[provider].courses[course].qualification
+      }
+    }, {
+      key: {
+        text: "Training provider"
+      },
+      value: {
+        text: providers[provider].name
+      }
+    }]
+  }) }}
+
+  <p class="gov-uk-body"><s>Your course details are prefilled with the selection you made in Find postgraduate teacher training. You can change your choice of provider by going back to Find and searching again. Or, you can enter new details yourself.</s></p>
+  <p class="gov-uk-body"><s>When you’ve submitted your first application, you can apply to up to X other providers using this service, as long as they are opted in to our trial. For most providers, you’ll still need to apply through UCAS. When you search on Find, you’ll be guided through this process.</s></p>
+  <p class="gov-uk-body"><mark>Some ability to review and edit teaching profile here?</mark></p>
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/apply/" + provider + "/" + course + "/interview"
+  }) }}
+{% endblock %}

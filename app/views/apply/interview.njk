@@ -1,7 +1,14 @@
 {% extends "_form.njk" %}
 
 {% set title = "Interview" %}
-{% set formAction = "/profile/" %}
+{% set formAction = "/apply/" + provider + "/" + course + "/submit" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "/apply"
+  }) }}
+{% endblock %}
 
 {% block primary %}
   <p class="govuk-body-l">Is there anything your training provider should consider when scheduling an interview?</p>
@@ -18,21 +25,9 @@
       classes: "govuk-label--s"
     },
     maxwords: 150,
-    id: "interview-notes",
-    name: "interview[notes]",
-    value: data["interview"]["notes"]
-  }) }}
-
-  {{ govukCharacterCount({
-    label: {
-      text: "Is there anything else you would like to tell us about your application?",
-      classes: "govuk-label--s"
-    },
-    rows: 10,
-    maxwords: 600,
-    id: "interview-miscellaneous",
-    name: "interview[miscellaneous]",
-    value: data["interview"]["miscellaneous"]
+    id: "application-interview",
+    name: "application[interview]",
+    value: data["application"]["interview"]
   }) }}
 
   {{ govukButton({

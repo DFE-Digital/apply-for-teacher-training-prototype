@@ -90,7 +90,7 @@
   {% set otherGradeHtml %}
     {{ govukInput({
       label: {
-        text: "Class of degree"
+        text: "Please specify class of degree"
       },
       id: "qualifications-" + id + "-grade-other",
       name: "qualifications[" + id + "][grade-other]",
@@ -114,7 +114,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Degree grade",
+        text: "Class of degree",
         classes: "govuk-label--s"
       }
     },

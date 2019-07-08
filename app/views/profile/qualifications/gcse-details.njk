@@ -2,7 +2,7 @@
 
 {% set parent = "Eligibility and qualifications" %}
 {% set idTitle = "English" if (id === "english") else id %}
-{% set qualTitle = "GCSE equivalent" if international else "GCSE" %}
+{% set qualTitle = "GCSE equivalent" if international else "GCSE or equivalent" %}
 {% if action == "edit" %}
   {% set title = "Edit " + idTitle + " " + qualTitle %}
   {% set buttonText = "Save changes" %}
@@ -41,7 +41,7 @@
   {% set otherTypeHtml %}
     {{ govukInput({
       label: {
-        text: "Qualification name"
+        text: "Please specify type of qualification"
       },
       id: "qualifications-" + id + "-type-other",
       name: "qualifications[" + id + "][type-other]",

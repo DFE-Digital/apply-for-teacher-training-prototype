@@ -1,5 +1,8 @@
-<aside class="app-related-items{%- if params.classes %} {{ params.classes }}{% endif %}" role="complementary">
+<aside class="app-related{%- if params.classes %} {{ params.classes }}{% endif %}" role="complementary">
   <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="{{ params.name }}-title">{{ params.title }}</h2>
+  {% if params.content.html or params.content.text %}
+    {{ params.content.html | safe if params.content.html else params.content.text }}
+  {% endif %}
   <nav role="navigation" aria-labelledby="{{ params.name }}-title">
     <ul class="govuk-list govuk-!-font-size-16">
     {% for item in params.items %}

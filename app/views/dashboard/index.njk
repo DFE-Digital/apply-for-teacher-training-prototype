@@ -1,20 +1,29 @@
 {% extends "_content.njk" %}
 
 {% set title = "Your application for teacher training" %}
+{% set hasSecondary = true %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m">Eligibility</h2>
-  <p class="govuk-body">To be eligible for teacher training, you need a:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>UK degree (or non-UK equivalent)</li>
-    <li>GCSE in maths, grade 4 (previously grade C)</li>
-    <li>GCSE in English, grade 4 (previously grade C)</li>
-    <li>To teach at primary school, you also need a minimum grade 4 GCSE in science.</li>
-  </ul>
-  <p class="govuk-body">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
   <h2 class="govuk-heading-m"><a href="/courses">Course details</a></h2>
-
-
   <h2 class="govuk-heading-m"><a href="/profile">Personal teaching profile</a></h2>
-  
+{% endblock %}
+
+{% block secondary %}
+  {% set eligibilityHTML %}
+    <p class="govuk-body-s">To be eligible for teacher training, you need a:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body-s">UK degree (or non-UK equivalent)</li>
+      <li class="govuk-body-s">GCSE in maths, grade 4 (previously grade C)</li>
+      <li class="govuk-body-s">GCSE in English, grade 4 (previously grade C)</li>
+      <li class="govuk-body-s">To teach at primary school, you also need a minimum grade 4 GCSE in science.</li>
+    </ul>
+    <p class="govuk-body-s">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
+  {% endset %}
+  {{ appRelated ({
+    title: "Eligibility",
+    name: "eligibility",
+    content: {
+      html: eligibilityHTML
+    }
+  }) }}
 {% endblock %}

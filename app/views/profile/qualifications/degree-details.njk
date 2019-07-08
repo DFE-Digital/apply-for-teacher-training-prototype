@@ -11,8 +11,8 @@
 
 {% block primary %}
 {% if international == true %}
-  <p class="govuk-body-l">If you studied for your degree overseas, you will need to check that it is valid in the UK.</p>
-  <p class="govuk-body">Enter an English translation of the details of your degree as they appear on your certificate.</p>
+  <p class="govuk-body-l">If you studied for your degree outside the UK, you will need to check that it is valid here.</p>
+  <p class="govuk-body">Enter the details of your degree as they appear on your certificate, in English.</p>
   <p class="govuk-body">Next, register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your non-UK degree makes you eligible for teacher training and how it corresponds to an English degree.</p>
   <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your degree, you’ll have the opportunity to tell us below.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -152,14 +152,14 @@
   }) }}
 
 {% if international == true %}
-  {% set validateEquivalenceHtml %}
+  {% set validateNaricHtml %}
     {{ govukInput({
       label: {
-        text: "Please explain how you plan to validate this qualification"
+        text: "Please give details"
       },
-      id: "qualifications-" + id + "-equivalence",
-      name: "qualifications[" + id + "][equivalence]",
-      value: data["qualifications"][id]["equivalence"]
+      id: "qualifications-" + id + "-naric-details",
+      name: "qualifications[" + id + "][naric-details]",
+      value: data["qualifications"][id]["naric-details"]
     }) }}
   {% endset -%}
 
@@ -175,14 +175,14 @@
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['qualifications']['" + id + "']['naric']", "yes")
+      checked: checked("['qualifications']['" + id + "']['naric']", "yes"),
+      conditional: {
+        html: validateNaricHtml
+      }
     }, {
       value: "no",
       text: "No",
-      checked: checked("['qualifications']['" + id + "']['naric']", "no"),
-      conditional: {
-        html: validateEquivalenceHtml
-      }
+      checked: checked("['qualifications']['" + id + "']['naric']", "no")
     }]
   }) }}
 {% endif %}

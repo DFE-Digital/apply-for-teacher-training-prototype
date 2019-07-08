@@ -3,22 +3,22 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-  {% if title %}
-    <h1 class="govuk-heading-xl">
-    {% if parent %}
-      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
-    {% else %}
-      {{ title }}
+    {% if title %}
+      <h1 class="govuk-heading-xl">
+      {% if parent %}
+        <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
+      {% else %}
+        {{ title }}
+      {% endif %}
+      </h1>
     {% endif %}
-    </h1>
-  {% endif %}
-{% block primary %}
-{% endblock %}
+    {% block primary %}
+    {% endblock %}
   </div>
   {% if hasSecondary %}
   <div class="govuk-grid-column-one-third">
-{% block secondary %}
-{% endblock %}
+    {% block secondary %}
+    {% endblock %}
   </div>
   {% endif %}
 </div>

@@ -1,29 +1,38 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
 {% set title = "Your application for teacher training" %}
-{% set hasSecondary = true %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m"><a href="/courses">Course details</a></h2>
-  <h2 class="govuk-heading-m"><a href="/profile">Personal teaching profile</a></h2>
-{% endblock %}
+  {{ govukTable({
+    caption: "Courses you are applying for",
+    captionClasses: "govuk-heading-m",
+    head: [{
+      text: "Course"
+    }, {
+      text: "Training provider"
+    }, {
+      text: "Starts"
+    }, {
+      text: "Actions"
+    }],
+    rows: [
+      [{
+        html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/G56/W1X1\" class=\"govuk-heading-s govuk-!-margin-0\">Art and Design (W1X1)</a><span class=\"govuk-body-s\">PGCE with QTS full time</span>"
+      }, {
+        text: "Goldsmiths, University of London"
+      }, {
+        text: "September 2019"
+      }, {
+        html: "<a href=\"/courses/\">Edit</a>"
+      }]
+    ]
+  }) }}
 
-{% block secondary %}
-  {% set eligibilityHTML %}
-    <p class="govuk-body-s">To be eligible for teacher training, you need a:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li class="govuk-body-s">UK degree (or non-UK equivalent)</li>
-      <li class="govuk-body-s">GCSE in maths, grade 4 (previously grade C)</li>
-      <li class="govuk-body-s">GCSE in English, grade 4 (previously grade C)</li>
-      <li class="govuk-body-s">To teach at primary school, you also need a minimum grade 4 GCSE in science.</li>
-    </ul>
-    <p class="govuk-body-s">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
-  {% endset %}
-  {{ appRelated ({
-    title: "Eligibility",
-    name: "eligibility",
-    content: {
-      html: eligibilityHTML
-    }
+  <h2 class="govuk-heading-m">Your personal teaching profile</h2>
+  <p class="govuk-body">Content TBD</p>
+  {{ govukButton({
+    text: "Start",
+    href: "/profile",
+    classes: "govuk-button--start"
   }) }}
 {% endblock %}

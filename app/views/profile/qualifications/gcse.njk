@@ -9,25 +9,6 @@
 {% endif %}
 
 {% block primary %}
-{% set missingGCSE %}
-  <p class="govuk-body">You can still apply for teacher training if you are missing a maths, English or science (for primary) GCSE at the right grade. But you should:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>contact your training provider for advice about getting the right qualification in time for your course</li>
-    <li>ask if your provider accepts ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE), and where they recommend you sit the test</li>
-  </ul>
-  <p class="govuk-body">You can also visit the <a href="https://nationalcareersservice.direct.gov.uk/course-directory/home">National Careers Service</a> to find GCSE courses for people who are over 16 and have left school.</p>
-
-  {{ govukInput({
-    label: {
-      text: "Please explain how you plan to meet this requirement in time for the start of your course",
-      classes: "govuk-label--s"
-    },
-    id: "qualifications-" + id + "-missing",
-    name: "qualifications[" + id + "][missing]",
-    value: data["qualifications"][id]["missing"]
-  }) }}
-{% endset %}
-
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -47,10 +28,7 @@
     }, {
       value: "missing",
       text: "I don’t have this qualification yet",
-      checked: checked("['qualifications']['" + id + "']['provenance']", "missing"),
-      conditional: {
-        html: missingGCSE
-      }
+      checked: checked("['qualifications']['" + id + "']['provenance']", "missing")
     }]
   }) }}
 

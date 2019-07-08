@@ -6,10 +6,12 @@
 
 {% block primary %}
   {% set rightToWorkStudy %}
-    {{ govukInput({
+    {{ govukCharacterCount({
       label: {
         html: "Please give details of your visa type, status or circumstances"
       },
+      maxwords: 200,
+      rows: 5,
       id: "candidate-residency-status-right-to-study",
       name: "candidate[residency-status-right-to-study]",
       value: data["candidate"]["residency-status-right-to-study"]
@@ -40,8 +42,8 @@
       label: {
         html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration</a>."
       },
-      rows: 5,
       maxwords: 200,
+      rows: 5,
       id: "candidate-residency-status-unknown",
       name: "candidate[residency-status-unknown]",
       value: data["candidate"]["residency-status-unknown"]

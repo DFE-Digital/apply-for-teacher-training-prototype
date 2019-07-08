@@ -133,14 +133,14 @@
     value: data["qualifications"][id]["award-org"]
   }) }}
 
-  {% set validateEquivalenceHtml %}
+  {% set validateNaricHtml %}
     {{ govukInput({
       label: {
-        text: "Please explain how you plan to validate this qualification"
+        text: "Please give details"
       },
-      id: "qualifications-" + id + "-equivalence",
-      name: "qualifications[" + id + "][equivalence]",
-      value: data["qualifications"][id]["equivalence"]
+      id: "qualifications-" + id + "-naric-details",
+      name: "qualifications[" + id + "][naric-details]",
+      value: data["qualifications"][id]["naric-details"]
     }) }}
   {% endset -%}
 
@@ -156,14 +156,14 @@
     items: [{
       value: "yes",
       text: "Yes",
-      checked: checked("['qualifications']['" + id + "']['naric']", "yes")
+      checked: checked("['qualifications']['" + id + "']['naric']", "yes"),
+      conditional: {
+        html: validateNaricHtml
+      }
     }, {
       value: "no",
       text: "No",
-      checked: checked("['qualifications']['" + id + "']['naric']", "no"),
-      conditional: {
-        html: validateEquivalenceHtml
-      }
+      checked: checked("['qualifications']['" + id + "']['naric']", "no")
     }]
   }) }}
 {% endif %}

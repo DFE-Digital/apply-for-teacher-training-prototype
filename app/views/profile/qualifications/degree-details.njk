@@ -152,15 +152,14 @@
   }) }}
 
 {% if international == true %}
-  {% set validateEquivalenceHtml %}
+  {% set validateNaricHtml %}
     {{ govukInput({
       label: {
         text: "Please give details"
       },
-
-      id: "qualifications-" + id + "-equivalence",
-      name: "qualifications[" + id + "][equivalence]",
-      value: data["qualifications"][id]["equivalence"]
+      id: "qualifications-" + id + "-naric-details",
+      name: "qualifications[" + id + "][naric-details]",
+      value: data["qualifications"][id]["naric-details"]
     }) }}
   {% endset -%}
 
@@ -178,7 +177,7 @@
       text: "Yes",
       checked: checked("['qualifications']['" + id + "']['naric']", "yes"),
       conditional: {
-        html: validateEquivalenceHtml
+        html: validateNaricHtml
       }
     }, {
       value: "no",

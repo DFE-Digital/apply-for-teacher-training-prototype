@@ -1,8 +1,8 @@
-.app-related-items {
+.app-related {
   border-top: 2px solid govuk-colour("blue");
   padding-top: govuk-spacing(3);
 }
 
-.app-related-items + .app-related-items {
+.app-related + .app-related {
   border-top-color: transparent;
 }

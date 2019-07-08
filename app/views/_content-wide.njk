@@ -1,0 +1,16 @@
+{% extends "_layout.njk" %}
+
+{% block content %}
+  {% if title %}
+    <h1 class="govuk-heading-xl">
+    {% if parent %}
+      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
+    {% else %}
+      {{ title }}
+    {% endif %}
+    </h1>
+  {% endif %}
+
+  {% block primary %}
+  {% endblock %}
+{% endblock %}

@@ -184,7 +184,7 @@ router.all('/profile/qualifications/next', (req, res) => {
     path = 'add/gcse/maths'
   } else if (prev === 'maths' && englishCompleted !== true) {
     path = 'add/gcse/english'
-  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === 'false') {
+  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === 'true') {
     path = 'add/gcse/science'
   } else {
     path = 'review'

@@ -4,8 +4,8 @@
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-      <th class="govuk-table__header" scope="col">Job title</th>
-      <th class="govuk-table__header" scope="col">Organisation</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Job title</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
       <th class="govuk-table__header" scope="col">Actions</th>
     </tr>
   </thead>
@@ -22,7 +22,7 @@
       <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
       <td class="govuk-table__cell" colspan="2">Gap: {{ item.description }}</td>
       <td class="govuk-table__cell">
-        <a href="/profile/work-history/edit/gap/{{ item.id }}">Edit gap</a>
+        <a href="/profile/work-history/edit/gap/{{ item.id }}">Change<span class="govuk-visually-hidden"> gap</span></a>
       </td>
     </tr>
     {% else %}
@@ -31,7 +31,7 @@
       <td class="govuk-table__cell">{{ item.role }}</td>
       <td class="govuk-table__cell">{{ item.org }}</td>
       <td class="govuk-table__cell">
-        <a href="/profile/work-history/edit/job/{{ item.id }}">Edit job</a>
+        <a href="/profile/work-history/edit/job/{{ item.id }}">Change<span class="govuk-visually-hidden"> job</span></a>
       </td>
     </tr>
     {% endif %}

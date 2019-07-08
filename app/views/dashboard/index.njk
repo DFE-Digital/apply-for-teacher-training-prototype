@@ -3,8 +3,9 @@
 {% set title = "Your application for teacher training" %}
 
 {% block primary %}
+  <h2 class="govuk-heading-m">Personal teaching profile</h2>
+  <p class="govuk-body">Check your selection of provider and course.</p>
   {{ govukTable({
-    caption: "Course choices",
     captionClasses: "govuk-heading-m",
     head: [{
       text: "Course"
@@ -29,7 +30,7 @@
   }) }}
 
   <h2 class="govuk-heading-m">Personal teaching profile</h2>
-  <p class="govuk-body">Content TBD</p>
+  <p class="govuk-body">Enter your qualifications and work history and tell us about your subject knowledge and teaching vocation.</p>
   {{ govukButton({
     text: "Start",
     href: "/profile",

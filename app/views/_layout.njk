@@ -45,11 +45,17 @@
     text: cookieText
   })}}
   {% endif %}
+
+  {% set candidateName = data.candidate["first-name"] + " " + data.candidate["family-name"] %}
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk",
     serviceName: serviceName,
     serviceUrl: "/",
-    containerClasses: "govuk-width-container"
+    containerClasses: "govuk-width-container",
+    navigation: (([{
+      href: "/",
+      text: "Sign out (" + candidateName + ")"
+    }] if data.candidate) if isExternal != true)
   }) }}
 {% endblock %}
 

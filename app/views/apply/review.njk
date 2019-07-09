@@ -12,7 +12,7 @@
 {% block primary %}
   <p class="gov-uk-body">Check your course choice and review your teacher training profile. If everything is in order, continue to submission.</p>
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Course details</h2>
+{% set courseDetailsHtml %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16",
     rows: [{
@@ -38,25 +38,23 @@
       }
     }]
   }) }}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Personal details</h2>
+{% set personalDetailsHtml %}
   {% include "_includes/review-personal-details.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Contact details</h2>
+{% set contactDetailsHtml %}
   {% include "_includes/review-contact-details.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Academic qualifications</h2>
+{% set qualificationsHtml %}
   {% set category = "degree" %}
   {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}
-
   {% set category = "gcse" %}
   {% set categoryTitle = "Required subjects" %}
   {% include "_includes/review-qualifications.njk" %}
-
   {% set category = "other" %}
   {% set categoryTitle = "Other relevant qualifications" %}
   {% include "_includes/review-qualifications.njk" %}
@@ -78,33 +76,109 @@
       }
     }]
   }) }}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Subject knowledge</h2>
+{% set subjectKnowledgeHtml %}
   {% include "_includes/review-subject-knowledge.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Literacy, numeracy and language skills</h2>
+{% set professionalSkillsHtml %}
   {% include "_includes/review-professional-skills.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Work history</h2>
+{% set workHistoryHtml %}
   {% include "_includes/review-work-history.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">School experience and volunteering with children and young people</h2>
+{% set schoolExperienceHtml %}
   {% include "_includes/review-school-experience.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">References</h2>
+{% set referencesHtml %}
   {% include "_includes/review-references.njk" %}
-  <hr class="govuk-section-break govuk-section-break--xl">
+{% endset %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Your teaching vocation</h2>
+{% set vocationHtml %}
   {% include "_includes/review-vocation.njk" %}
+{% endset %}
+
+  {{ govukAccordion({
+    id: "review",
+    items: [{
+      heading: {
+        text: "Course details"
+      },
+      content: {
+        html: courseDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Personal details"
+      },
+      content: {
+        html: personalDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Contact details"
+      },
+      content: {
+        html: contactDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Academic qualifications"
+      },
+      content: {
+        html: qualificationsHtml
+      }
+    }, {
+      heading: {
+        text: "Subject knowledge"
+      },
+      content: {
+        html: subjectKnowledgeHtml
+      }
+    }, {
+      heading: {
+        text: "Literacy, numeracy and language skills"
+      },
+      content: {
+        html: professionalSkillsHtml
+      }
+    }, {
+      heading: {
+        text: "Work history"
+      },
+      content: {
+        html: workHistoryHtml
+      }
+    }, {
+      heading: {
+        text: "School experience and volunteering with children and young people"
+      },
+      content: {
+        html: schoolExperienceHtml
+      }
+    }, {
+      heading: {
+        text: "References"
+      },
+      content: {
+        html: referencesHtml
+      }
+    }, {
+      heading: {
+        text: "Your teaching vocation"
+      },
+      content: {
+        html: vocationHtml
+      }
+    }]
+  }) }}
 
   {{ govukButton({
     text: "Continue",
     href: "/apply/" + provider + "/" + course + "/interview"
-}) }}
+  }) }}
 {% endblock %}

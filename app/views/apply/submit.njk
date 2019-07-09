@@ -28,9 +28,9 @@
       },
       rows: 10,
       maxwords: 600,
-      id: "application-miscellaneous",
-      name: "application[miscellaneous]",
-      value: data["application"]["miscellaneous"]
+      id: "application-" + provider + "-" + course + "-miscellaneous",
+      name: "application[" + provider + "-" + course + "][miscellaneous]",
+      value: data["application"][provider + "-" + course]["miscellaneous"]
     }) }}
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">

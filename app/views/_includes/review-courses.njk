@@ -1,0 +1,25 @@
+{% set courses = courses | toArray %}
+{% set providers = providers | toArray %}
+<table class="govuk-table govuk-!-font-size-16">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Course</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Training provider</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Starts</th>
+      <th class="govuk-table__header" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+  {% for item in courses %}
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        <a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/{{ item.provider }}/{{ item.course }}\" class=\"govuk-heading-s govuk-!-margin-0\">{{ item.name }} ({{ item.code }})</a><span class=\"govuk-body-s\">{{ item.qualification }}</span>
+      </td>
+      <td class="govuk-table__cell" colspan="2">{{ item.name }}</td>
+      <td class="govuk-table__cell">
+        <a href="/apply/{{ item.provider }}/{{ item.course }}/review">Apply</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

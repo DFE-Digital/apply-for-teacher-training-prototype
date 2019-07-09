@@ -5,29 +5,7 @@
 {% block primary %}
   <h2 class="govuk-heading-m">Course selection</h2>
   <p class="govuk-body">Check your selection of provider and course.</p>
-  {{ govukTable({
-    captionClasses: "govuk-heading-m",
-    head: [{
-      text: "Course"
-    }, {
-      text: "Training provider"
-    }, {
-      text: "Starts"
-    }, {
-      text: "Actions"
-    }],
-    rows: [
-      [{
-        html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/G56/W1X1\" class=\"govuk-heading-s govuk-!-margin-0\">Art and Design (W1X1)</a><span class=\"govuk-body-s\">PGCE with QTS full time</span>"
-      }, {
-        text: "Goldsmiths, University of London"
-      }, {
-        text: "September 2019"
-      }, {
-        html: "<a href=\"/apply/G56/W1X1/review\">Apply</a>"
-      }]
-    ]
-  }) }}
+  {% include "_includes/review-courses.njk" %}
 
   <h2 class="govuk-heading-m">Personal teaching profile</h2>
   <p class="govuk-body">Enter your qualifications and work history and tell us about your subject knowledge and teaching vocation.</p>

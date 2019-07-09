@@ -3,15 +3,35 @@
 {% set title = "Your application for teacher training" %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m">Course selection</h2>
-  <p class="govuk-body">Check your selection of provider and course.</p>
-  {% include "_includes/review-courses.njk" %}
+  {% set coursesHtml %}
+    <h2 class="govuk-heading-m">Course selection</h2>
+    <p class="govuk-body">Check your selection of provider and course.</p>
+    {% include "_includes/review-courses.njk" %}
+  {% endset %}
 
-  <h2 class="govuk-heading-m">Personal teaching profile</h2>
-  <p class="govuk-body">Enter your qualifications and work history and tell us about your subject knowledge and teaching vocation.</p>
-  {{ govukButton({
-    text: "Start",
-    href: "/profile",
-    classes: "govuk-button--start"
+  {% set profileHtml %}
+    <h2 class="govuk-heading-m">Personal teaching profile</h2>
+    <p class="govuk-body">Enter your qualifications and work history and tell us about your subject knowledge and teaching vocation.</p>
+    {{ govukButton({
+      text: "Start",
+      href: "/profile",
+      classes: "govuk-button--start"
+    }) }}
+  {% endset %}
+
+  {{ govukTabs({
+    items: [{
+      label: "Personal teaching profile",
+      id: "profile",
+      panel: {
+        html: profileHtml
+      }
+    }, {
+      label: "Course selection",
+      id: "courses",
+      panel: {
+        html: coursesHtml
+      }
+    }]
   }) }}
 {% endblock %}

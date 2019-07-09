@@ -1,5 +1,4 @@
 {% set courses = courses | toArray %}
-{% set providers = providers | toArray %}
 <table class="govuk-table govuk-!-font-size-16">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
@@ -10,14 +9,20 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-  {% for item in courses %}
+  {% for course in courses %}
+    {% set provider = providers[course.provider] %}
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
-        <a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/{{ item.provider }}/{{ item.course }}\" class=\"govuk-heading-s govuk-!-margin-0\">{{ item.name }} ({{ item.code }})</a><span class=\"govuk-body-s\">{{ item.qualification }}</span>
+        <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/{{ provider.code }}/{{ course.code }}" class="govuk-heading-s govuk-!-margin-0">{{ course.name }} ({{ course.code }})</a><span class="govuk-body-s">{{ course.qualification }}</span>
       </td>
-      <td class="govuk-table__cell" colspan="2">{{ item.name }}</td>
+      <td class="govuk-table__cell">{{ provider.name }}</td>
+      <td class="govuk-table__cell">{{ course.startDate | date("LLLL yyyy") }}</td>
       <td class="govuk-table__cell">
-        <a href="/apply/{{ item.provider }}/{{ item.course }}/review">Apply</a>
+      {% if data["application"][provider.code + "-" + course.code] %}
+        <strong class="govuk-tag" id="{{ item.id }}-completed">Submitted</strong>
+      {% else %}
+        <a href="/apply/{{ provider.code }}/{{ course.code }}/review">Apply</a>
+      {% endif %}
       </td>
     </tr>
   {% endfor %}

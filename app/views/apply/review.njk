@@ -1,21 +1,20 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
-{% set title = "Ready to submit?" %}
+{% set title = "Review your application" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: [{
-      text: "Home",
-      href: "/dashboard"
-    }, {
-      text: title
-    }]
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "/dashboard#courses"
   }) }}
 {% endblock %}
 
 {% block primary %}
-<p class="gov-uk-body">Please check your course choice and teacher training profile.</p>
+  <p class="gov-uk-body">Please check your course choice and teacher training profile.</p>
+
+{% set courseDetailsHtml %}
   {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
     rows: [{
       key: {
         text: "Course"
@@ -39,10 +38,143 @@
       }
     }]
   }) }}
+{% endset %}
 
+{% set personalDetailsHtml %}
+  {% include "_includes/review-personal-details.njk" %}
+{% endset %}
 
-  {{ govukInsetText({
-    html: "<a href=\"/profile/review\">Review and edit your teacher training profile</a>"
+{% set contactDetailsHtml %}
+  {% include "_includes/review-contact-details.njk" %}
+{% endset %}
+
+{% set qualificationsHtml %}
+  {% set category = "degree" %}
+  {% set categoryTitle = "Degree(s)" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {% set category = "gcse" %}
+  {% set categoryTitle = "Required subjects" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {% set category = "other" %}
+  {% set categoryTitle = "Other relevant qualifications" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
+    rows: [{
+      key: {
+        text: "Is there anything you’d like to tell us about your qualifications?"
+      },
+      value: {
+        text: (data["qualifications"]["additional"] | default("Not entered"))
+      },
+      actions: {
+        items: [{
+          href: "/profile/qualifications/review",
+          text: "Edit",
+          visuallyHiddenText: "additional detail"
+        }]
+      }
+    }]
+  }) }}
+{% endset %}
+
+{% set subjectKnowledgeHtml %}
+  {% include "_includes/review-subject-knowledge.njk" %}
+{% endset %}
+
+{% set professionalSkillsHtml %}
+  {% include "_includes/review-professional-skills.njk" %}
+{% endset %}
+
+{% set workHistoryHtml %}
+  {% include "_includes/review-work-history.njk" %}
+{% endset %}
+
+{% set schoolExperienceHtml %}
+  {% include "_includes/review-school-experience.njk" %}
+{% endset %}
+
+{% set referencesHtml %}
+  {% include "_includes/review-references.njk" %}
+{% endset %}
+
+{% set vocationHtml %}
+  {% include "_includes/review-vocation.njk" %}
+{% endset %}
+
+  {{ govukAccordion({
+    id: "review",
+    items: [{
+      heading: {
+        text: "Course details"
+      },
+      content: {
+        html: courseDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Personal details"
+      },
+      content: {
+        html: personalDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Contact details"
+      },
+      content: {
+        html: contactDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Academic qualifications"
+      },
+      content: {
+        html: qualificationsHtml
+      }
+    }, {
+      heading: {
+        text: "Subject knowledge"
+      },
+      content: {
+        html: subjectKnowledgeHtml
+      }
+    }, {
+      heading: {
+        text: "Literacy, numeracy and language skills"
+      },
+      content: {
+        html: professionalSkillsHtml
+      }
+    }, {
+      heading: {
+        text: "Work history"
+      },
+      content: {
+        html: workHistoryHtml
+      }
+    }, {
+      heading: {
+        text: "School experience and volunteering with children and young people"
+      },
+      content: {
+        html: schoolExperienceHtml
+      }
+    }, {
+      heading: {
+        text: "References"
+      },
+      content: {
+        html: referencesHtml
+      }
+    }, {
+      heading: {
+        text: "Your teaching vocation"
+      },
+      content: {
+        html: vocationHtml
+      }
+    }]
   }) }}
 
   {{ govukButton({

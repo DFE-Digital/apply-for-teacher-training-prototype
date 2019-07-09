@@ -6,17 +6,17 @@
         <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Job title</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col">Actions</th>
+        <th class="govuk-table__header" scope="col"><span class="govuk-visually-hidden">Actions</span></th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
     {% if data["work-history"]["missing"] %}
       <tr class="govuk-table__row app-table__cell--muted">
         <td class="govuk-table__cell" colspan="3">
-          No work history: {{ data["work-history"]["missing"] }}
+          <strong>No work history</strong>. {{ data["work-history"]["missing"] }}
         </td>
         <td class="govuk-table__cell">
-          <a href="/profile/work-history/edit/missing">Change<span class="govuk-visually-hidden"> missing</span></a>
+          <a href="/profile/work-history/edit/missing">Edit<span class="govuk-visually-hidden"> missing</span></a>
         </td>
       </tr>
     {% endif %}
@@ -32,7 +32,7 @@
           <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
           <td class="govuk-table__cell" colspan="2">Gap: {{ item.description }}</td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/gap/{{ item.id }}">Change<span class="govuk-visually-hidden"> gap</span></a>
+            <a href="/profile/work-history/edit/gap/{{ item.id }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
           </td>
         </tr>
       {% elif item.job %}
@@ -41,7 +41,7 @@
           <td class="govuk-table__cell">{{ item.role }}</td>
           <td class="govuk-table__cell">{{ item.org }}</td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/job/{{ item.id }}">Change<span class="govuk-visually-hidden"> job</span></a>
+            <a href="/profile/work-history/edit/job/{{ item.id }}">Edit<span class="govuk-visually-hidden"> job</span></a>
           </td>
         </tr>
       {% endif %}

@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% set title = "Submit your application" %}
+{% set title = "Ready to submit?" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block primary %}
+<p class="gov-uk-body">Please check your course choice and teacher training profile.</p>
   {{ govukSummaryList({
     rows: [{
       key: {
@@ -39,9 +40,9 @@
     }]
   }) }}
 
-  <p class="gov-uk-body">Check your course choice and review your teacher training profile. If everything is in order, continue to submission.</p>
+
   {{ govukInsetText({
-    html: "<a href=\"/profile/review\">You can go back and edit your profile</a> before applying to this course."
+    html: "<a href=\"/profile/review\">Review and edit your teacher training profile</a>"
   }) }}
 
   {{ govukButton({

@@ -1,0 +1,30 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Work history" %}
+{% set formaction = "/profile" %}
+{% if action == "edit" %}
+  {% set title = "Edit explaination of no work history" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Add explaination of no work history" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+
+{% block primary %}
+  <p class="govuk-body">Something</p>
+  {{ govukCharacterCount({
+    label: {
+      text: "Please explain why you have no work history",
+      classes: "govuk-label--s"
+    },
+    rows: 20,
+    maxwords: 600,
+    id: "work-history-missing",
+    name: "work-history[missing]",
+    value: data["work-history"]["missing"]
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

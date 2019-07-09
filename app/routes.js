@@ -23,6 +23,19 @@ router.get('/apply/:provider/:course/:page', (req, res) => {
 })
 
 /**
+  * Profile: Work history - Add/edit missing work history
+  * Note: Must be defined before next route declaration
+  *
+  * @param {String} action add || edit
+  *
+  */
+router.get('/profile/work-history/:action/missing', (req, res) => {
+  res.render(`profile/work-history/missing`, {
+    action: req.params.action
+  })
+})
+
+/**
   * Profile: Generate ID to add new thing
   *
   * @param {String} section Section of the profile application

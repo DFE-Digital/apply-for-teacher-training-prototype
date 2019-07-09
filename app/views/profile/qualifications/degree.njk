@@ -1,11 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Academic qualifications" %}
-{% if action == "edit" %}
-  {% set title = "Edit degree" %}
-{% else %}
-  {% set title = "Add a degree" %}
-{% endif %}
+{% set title = "Degree" %}
 
 {% block primary %}
   {{ govukRadios({

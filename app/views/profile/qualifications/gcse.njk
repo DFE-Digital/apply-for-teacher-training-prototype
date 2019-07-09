@@ -1,12 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Academic qualifications" %}
-{% set idTitle = "English" if (id === "english") else id %}
-{% if action == "edit" %}
-  {% set title = "Edit " + idTitle + " GCSE or equivalent" %}
-{% else %}
-  {% set title = "Add " + idTitle + " GCSE or equivalent" %}
-{% endif %}
+{% set title = (id | capitalize) + " GCSE or equivalent" %}
 
 {% block primary %}
   {{ govukRadios({

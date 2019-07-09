@@ -6,7 +6,7 @@
 {% set isExternal = true %}
 
 {% block primary %}
-  <p class="govuk-body-l">Create an account to use this service. You’ll then be able to save and return to your applications as often as you need to.</p>
+  <p class="govuk-body-l">You’ll be able to save and return to your applications as often as you need to.</p>
 
   {{ govukInput({
     label: {
@@ -62,8 +62,12 @@
 
   {{ govukInput({
     label: {
-      text: "Email address",
+      text: "Email address
+    ",
       classes: "govuk-label--s"
+    },
+    hint: {
+      text: "Don’t use a work or university email address you might lose access to"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "email",

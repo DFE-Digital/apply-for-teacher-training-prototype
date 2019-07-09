@@ -12,9 +12,9 @@
 {% block primary %}
 {% if international == true %}
   <p class="govuk-body-l">If you studied for your degree outside the UK, you will need to check that it is valid here.</p>
-  <p class="govuk-body">Enter the details of your degree as they appear on your certificate, in English.</p>
-  <p class="govuk-body">Next, register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your non-UK degree makes you eligible for teacher training and how it corresponds to an English degree.</p>
-  <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your degree, you’ll have the opportunity to tell us below.</p>
+  <p class="govuk-body">Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
+  <p class="govuk-body">Before you submit your application, contact your chosen training provider to check their policy on non-UK qualifications.</p>
+  <p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK degree.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 {% else %}
   <p class="govuk-body">Individual training providers set specific requirements for their courses. Contact your chosen training provider to check your degree meets the standard they’ve set for your course.</p>
@@ -174,7 +174,7 @@
   {% set validateNaricHtml %}
     {{ govukInput({
       label: {
-        text: "Please give details"
+        text: "To what UK degree does NARIC state your degree is comparable?"
       },
       id: "qualifications-" + id + "-naric-details",
       name: "qualifications[" + id + "][naric-details]",
@@ -188,6 +188,9 @@
         text: "Have you got a NARIC statement of comparability?",
         classes: "govuk-fieldset__legend--s"
       }
+    },
+    hint: {
+      html: "<a href=\"https://www.naric.org.uk/naric/Default.aspx/\">UK NARIC</a> gives advice on non-UK academic, vocational and professional qualifications. If you have applied to UK NARIC for a <a href=\"https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx/\">statement of comparability</a>, give details here."
     },
     idPrefix: "qualifications-" + id + "-naric",
     name: "qualifications[" + id + "][naric]",

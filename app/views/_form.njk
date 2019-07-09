@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <form class="govuk-grid-column-two-thirds" action="{{ formAction | default('#') }}" method="post">
+  <form class="govuk-grid-column-two-thirds" action="{{ formaction | default('#') }}" method="post">
   {% set legendHtml %}
     {% if parent %}
       <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}

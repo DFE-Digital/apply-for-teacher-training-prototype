@@ -16,6 +16,7 @@
   <p class="govuk-body">We’ll save all your personal, academic and professional details, so that you can complete your application in your own time.</p>
   <p class="govuk-body">After you’ve submitted your first application, you’ll be able to tailor your details to suit subsequent applications.</p>
 
+  {% set hasSchoolExperience = data["school-experience"] != "missing" %}
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-4",
     items: [{
@@ -30,7 +31,7 @@
       completed: data["contact-details"]["address"]
     }, {
       text: "Academic qualifications",
-      href: "/profile/qualifications" + ( "/review" if data["qualifications"] ),
+      href: "/profile/qualifications" + ("/review" if data["qualifications"]),
       id: "qualifications",
       completed: data["qualifications"]
     }, {
@@ -45,17 +46,17 @@
       completed: data["professional-skills"]
     }, {
       text: "Work history",
-      href: "/profile/work-history" + ( "/review" if data["work-history"] ),
+      href: "/profile/work-history" + ("/review" if data["work-history"]),
       id: "work-history",
       completed: data["work-history"]
     }, {
       text: "School experience and volunteering with children and young people",
-      href: "/profile/school-experience" + ( "/review" if data["school-experience"] ),
+      href: "/profile/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
       id: "school-experience",
       completed: data["school-experience"]
     }, {
       text: "References",
-      href: "/profile/references" + ( "/review" if data["referees"] ),
+      href: "/profile/references" + ("/review" if data["referees"]),
       id: "references",
       completed: data["referees"]
     }, {

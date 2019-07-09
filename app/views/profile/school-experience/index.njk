@@ -1,6 +1,7 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
 {% set title = "School experience and volunteering" %}
+{% set formaction = "/profile/school-experience/add/role" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -39,7 +40,16 @@
   }) }}
 
   {{ govukButton({
-    text: "Continue",
-    href: "/profile/school-experience/add/role"
+    text: "Add school experience or role"
+  }) }}
+
+  {{ govukButton({
+    text: "Continue without adding experience",
+    classes: "govuk-button--secondary",
+    name: "school-experience",
+    value: "missing",
+    attributes: {
+      formaction: "/profile"
+    }
   }) }}
 {% endblock %}

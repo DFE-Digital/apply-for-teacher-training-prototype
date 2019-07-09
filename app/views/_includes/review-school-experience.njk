@@ -1,6 +1,5 @@
 {% set schoolExperience = data['school-experience'] | toArray %}
 <table class="govuk-table govuk-!-font-size-16">
-  <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
@@ -10,6 +9,15 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
+  {% if data['school-experience'] == "missing" %}
+    <tr class="govuk-table__row app-table__cell--muted">
+      <td class="govuk-table__cell" colspan="3">
+        You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.</td>
+      <td class="govuk-table__cell">
+        <a href="/profile/school-experience">Add<span class="govuk-visually-hidden"> {{ category}} experience or role</span></a>
+      </td>
+    </tr>
+  {% else %}
     {% for item in schoolExperience %}
     {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
     {% if item.end-year != "" %}
@@ -24,5 +32,6 @@
       <td class="govuk-table__cell"><a href="/profile/school-experience/edit/role/{{ item.id }}">Change<span class="govuk-visually-hidden"> role</span></a></td>
     </tr>
     {% endfor %}
+  {% endif %}
   </tbody>
 </table>

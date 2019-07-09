@@ -3,18 +3,22 @@
 {% set parent = "Work history" %}
 {% set formaction = "/profile" %}
 {% if action == "edit" %}
-  {% set title = "Edit explaination of no work history" %}
+  {% set title = "Edit explanation of why you've been out of the workplace" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Add explaination of no work history" %}
+  {% set title = "Explain why you've been out of the workplace" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
 {% block primary %}
-  <p class="govuk-body">Something</p>
+  {% set labelHtml %}
+    <p class="govuk-label govuk-label--s"><strong>If you are returning to work for the first time in more than 5 years, please give details (for example, tell us about your parental or other caring responsibilities).</strong></p>
+    <p class="govuk-label">You can also include relevant work history from more than 5 years ago. Providers will be interested in skills and experience you could transfer to a school setting.</p>
+  {% endset %}
+
   {{ govukCharacterCount({
     label: {
-      text: "Please explain why you have no work history",
+      html: labelHtml,
       classes: "govuk-label--s"
     },
     rows: 20,

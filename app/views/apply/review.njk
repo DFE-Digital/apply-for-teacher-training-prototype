@@ -20,14 +20,14 @@
         text: "Course"
       },
       value: {
-        text: providers[provider].courses[course].name
+        text: courses[course].name
       }
     }, {
       key: {
         text: "Qualification"
       },
       value: {
-        text: providers[provider].courses[course].qualification
+        text: courses[course].qualification
       }
     }, {
       key: {
@@ -39,10 +39,10 @@
     }]
   }) }}
 
-  <p class="gov-uk-body">Check your course choice and review your teacher training profile.</p>
-  <p class="gov-uk-body">If everything is in order, continue to submission.</p>
-  <p class="gov-uk-body">You can go back and edit your profile if you need to.</p>
-  <p class="gov-uk-body"><mark>Some ability to review and edit teaching profile here?YES</mark></p>
+  <p class="gov-uk-body">Check your course choice and review your teacher training profile. If everything is in order, continue to submission.</p>
+  {{ govukInsetText({
+    html: "<a href=\"/profile/review\">You can go back and edit your profile</a> before applying to this course."
+  }) }}
 
   {{ govukButton({
     text: "Continue",

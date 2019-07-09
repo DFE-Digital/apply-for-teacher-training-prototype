@@ -18,13 +18,15 @@
 {% endblock %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m">Personal details</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Personal details</h2>
   {% include "_includes/review-personal-details.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Contact details</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Academic qualifications</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Academic qualifications</h2>
   {% set category = "degree" %}
   {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}
@@ -54,22 +56,28 @@
       }
     }]
   }) }}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Subject knowledge</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Subject knowledge</h2>
   {% include "_includes/review-subject-knowledge.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Literacy, numeracy and language skills</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Literacy, numeracy and language skills</h2>
   {% include "_includes/review-professional-skills.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Work history</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Work history</h2>
   {% include "_includes/review-work-history.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">School experience and volunteering with children and young people</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">School experience and volunteering with children and young people</h2>
   {% include "_includes/review-school-experience.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">References</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">References</h2>
   {% include "_includes/review-references.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <h2 class="govuk-heading-m">Your teaching vocation</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Your teaching vocation</h2>
   {% include "_includes/review-vocation.njk" %}
 {% endblock %}

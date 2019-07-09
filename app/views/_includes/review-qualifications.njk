@@ -1,5 +1,6 @@
 {% set qualifications = data["qualifications"] | toArray %}
-<table class="govuk-table govuk-!-font-size-16">  <caption class="govuk-table__caption govuk-heading-{{ categoryCaptionSize | default("s") }}">{{ categoryTitle }}</caption>
+<table class="govuk-table govuk-!-font-size-16">
+  <caption class="govuk-table__caption govuk-heading-{{ categoryCaptionSize | default("s") }} govuk-!-margin-bottom-1 govuk-!-margin-top-2">{{ categoryTitle }}</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th class="govuk-table__header govuk-!-width-one-half" scope="col">Qualification</th>

@@ -13,7 +13,8 @@
 {% if international == true %}
   <p class="govuk-body-l">If you studied for your degree outside the UK, you will need to check that it is valid here.</p>
   <p class="govuk-body">Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
-  <p class="govuk-body">Before you submit your application, contact your chosen training provider to check their policy on non-UK qualifications.</p>
+  <h3 class="govuk-heading-s">Before you submit your application</h3>
+  <p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications.</p>
   <p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK degree.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 {% else %}
@@ -174,7 +175,7 @@
   {% set validateNaricHtml %}
     {{ govukInput({
       label: {
-        text: "To what UK degree does NARIC state your degree is comparable?"
+        text: "What UK degree is your degree comparable to?"
       },
       id: "qualifications-" + id + "-naric-details",
       name: "qualifications[" + id + "][naric-details]",

@@ -13,11 +13,11 @@
 
 {% block primary %}
 {% if international == true %}
-  <p class="govuk-body">If you studied for your qualifications overseas, you will need to check that they are valid in the UK.</p>
-  <p class="govuk-body">As a first step, you should register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA will be able to tell you if your non-UK qualifications make you eligible for teacher training and how they correspond to English exam grades.</p>
-  <h3 class="govuk-heading-s">Check with your provider</h3>
-  <p class="govuk-body">You should also contact your chosen training provider to check their policy on non-UK qualifications. They may ask you to sit ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE) and recommend an equivalency testing centre.</p>
-  <p class="govuk-body">If you have already been in touch with <a href="https://www.naric.org.uk/naric/Individuals/Default.aspx">UK NARIC</a> and have a <a href="https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx">statement of comparability</a> for your qualifications, you’ll have the opportunity to tell us below.</p>
+<p class="govuk-body-l">If you studied for this qualification outside the UK, you will need to check that it is valid here.</p>
+<p class="govuk-body">Enter the details of your qualification as they appear on your certificate, translating them into English if necessary.</p>
+<h3 class="govuk-heading-s">Before you submit your application</h3>
+<p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications. They may ask you to sit ‘equivalency tests’ (exams which are the equivalent of an English, maths or science GCSE) and recommend an equivalency testing centre.</p>
+<p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your qualifications make you eligible for teacher training and how they corresponds to UK qualifications.</p>
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 {% endif %}
 
@@ -136,7 +136,7 @@
   {% set validateNaricHtml %}
     {{ govukInput({
       label: {
-        text: "Please give details"
+        text: "What UK qualification is your qualification comparable to?"
       },
       id: "qualifications-" + id + "-naric-details",
       name: "qualifications[" + id + "][naric-details]",
@@ -150,6 +150,9 @@
         text: "Have you got a NARIC statement of comparability?",
         classes: "govuk-fieldset__legend--s"
       }
+    },
+    hint: {
+      html: "<a href=\"https://www.naric.org.uk/naric/Default.aspx/\">UK NARIC</a> gives advice on non-UK academic, vocational and professional qualifications. If you have applied to UK NARIC for a <a href=\"https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx/\">statement of comparability</a>, give details here."
     },
     idPrefix: "qualifications-" + id + "-naric",
     name: "qualifications[" + id + "][naric]",

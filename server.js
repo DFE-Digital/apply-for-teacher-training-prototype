@@ -109,6 +109,7 @@ app.locals.serviceName = config.serviceName
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 app.locals.countries = require('./app/data/countries')
+app.locals.courses = require('./app/data/courses')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')
 

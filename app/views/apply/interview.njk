@@ -25,9 +25,9 @@
       classes: "govuk-label--s"
     },
     maxwords: 150,
-    id: "application-interview",
-    name: "application[interview]",
-    value: data["application"]["interview"]
+    id: "application-" + provider + "-" + course + "-interview",
+    name: "application[" + provider + "-" + course + "][interview]",
+    value: data["application"][provider + "-" + course]["interview"]
   }) }}
 
   {{ govukButton({

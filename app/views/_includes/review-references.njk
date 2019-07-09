@@ -1,19 +1,23 @@
 {% set references = data['referees'] | toArray %}
-<table class="govuk-table govuk-!-font-size-16">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Name</th>
-      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Email</th>
-      <th class="govuk-table__header" scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-    {% for item in references %}
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">{{ item.name }}</td>
-      <td class="govuk-table__cell">{{ item.email }}</td>
-      <td class="govuk-table__cell"><a href="/profile/references/edit/referee/{{ item.id }}">Change<span class="govuk-visually-hidden"> referee</span></a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% if references.length >= 1 %}
+  <table class="govuk-table govuk-!-font-size-16">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Name</th>
+        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Email</th>
+        <th class="govuk-table__header" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      {% for item in references %}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{ item.name }}</td>
+        <td class="govuk-table__cell">{{ item.email }}</td>
+        <td class="govuk-table__cell"><a href="/profile/references/edit/referee/{{ item.id }}">Change<span class="govuk-visually-hidden"> referee</span></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="govuk-body-s">No references entered</p>
+{% endif %}

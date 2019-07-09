@@ -1,0 +1,34 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Work history" %}
+{% set formaction = "/profile" %}
+{% if action == "edit" %}
+  {% set title = "Edit explanation of why you've been out of the workplace" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Explain why you've been out of the workplace" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+
+{% block primary %}
+  {% set labelHtml %}
+    <p class="govuk-label govuk-label--s"><strong>If you are returning to work for the first time in more than 5 years, please give details (for example, tell us about your parental or other caring responsibilities).</strong></p>
+    <p class="govuk-label">You can also include relevant work history from more than 5 years ago. Providers will be interested in skills and experience you could transfer to a school setting.</p>
+  {% endset %}
+
+  {{ govukCharacterCount({
+    label: {
+      html: labelHtml,
+      classes: "govuk-label--s"
+    },
+    rows: 20,
+    maxwords: 600,
+    id: "work-history-missing",
+    name: "work-history[missing]",
+    value: data["work-history"]["missing"]
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

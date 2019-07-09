@@ -1,38 +1,37 @@
-  {% set schoolExperience = data['school-experience'] | toArray %}
-  <table class="govuk-table govuk-!-font-size-16">
-    <caption class="govuk-table__caption govuk-heading-m">Your school experience and roles</caption>
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Role</th>
-        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-    {% if data['school-experience'] == "missing" %}
-      <tr class="govuk-table__row app-table__cell--muted">
-        <td class="govuk-table__cell" colspan="3">
-          You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.</td>
-        <td class="govuk-table__cell">
-          <a href="/profile/school-experience">Add<span class="govuk-visually-hidden"> {{ category}} experience or role</span></a>
-        </td>
-      </tr>
+{% set schoolExperience = data['school-experience'] | toArray %}
+<table class="govuk-table govuk-!-font-size-16">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Role</th>
+      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
+      <th class="govuk-table__header" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+  {% if data['school-experience'] == "missing" %}
+    <tr class="govuk-table__row app-table__cell--muted">
+      <td class="govuk-table__cell" colspan="3">
+        You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.</td>
+      <td class="govuk-table__cell">
+        <a href="/profile/school-experience">Add<span class="govuk-visually-hidden"> {{ category}} experience or role</span></a>
+      </td>
+    </tr>
+  {% else %}
+    {% for item in schoolExperience %}
+    {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
+    {% if item.end-year != "" %}
+      {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
     {% else %}
-      {% for item in schoolExperience %}
-      {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
-      {% if item.end-year != "" %}
-        {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
-      {% else %}
-        {% set endDate = 'Present' %}
-      {% endif %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-        <td class="govuk-table__cell">{{ item.role }}</td>
-        <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell"><a href="/profile/school-experience/edit/role/{{ item.id }}">Change<span class="govuk-visually-hidden"> role</span></a></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endif %}
+      {% set endDate = 'Present' %}
+    {% endif %}
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+      <td class="govuk-table__cell">{{ item.role }}</td>
+      <td class="govuk-table__cell">{{ item.org }}</td>
+      <td class="govuk-table__cell"><a href="/profile/school-experience/edit/role/{{ item.id }}">Change<span class="govuk-visually-hidden"> role</span></a></td>
+    </tr>
+    {% endfor %}
+  {% endif %}
+  </tbody>
+</table>

@@ -24,17 +24,17 @@
   <h2 class="govuk-heading-m">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
 
-  <h2 class="govuk-heading-m">Qualifications</h2>
+  <h2 class="govuk-heading-m">Academic qualifications</h2>
   {% set category = "degree" %}
-  {% set categoryTitle = "Degree" %}
+  {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}
 
   {% set category = "gcse" %}
-  {% set categoryTitle = "Required subject" %}
+  {% set categoryTitle = "Required subjects" %}
   {% include "_includes/review-qualifications.njk" %}
 
   {% set category = "other" %}
-  {% set categoryTitle = "Other relevant qualification" %}
+  {% set categoryTitle = "Other relevant qualifications" %}
   {% include "_includes/review-qualifications.njk" %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16",
@@ -61,10 +61,13 @@
   <h2 class="govuk-heading-m">Literacy, numeracy and language skills</h2>
   {% include "_includes/review-professional-skills.njk" %}
 
+  <h2 class="govuk-heading-m">Work history</h2>
   {% include "_includes/review-work-history.njk" %}
 
+  <h2 class="govuk-heading-m">School experience and volunteering with children and young people</h2>
   {% include "_includes/review-school-experience.njk" %}
 
+  <h2 class="govuk-heading-m">References</h2>
   {% include "_includes/review-references.njk" %}
 
   <h2 class="govuk-heading-m">Your teaching vocation</h2>

@@ -1,26 +1,30 @@
 {% set addressHtml %}
-{% if data["contact-details"]["address"]["street-address"] %}
-  {{ data["contact-details"]["address"]["street-address"] | nl2br | safe }}
-{% else %}
-  {% if data["contact-details"]["address"]["line1"] %}
-    {{ data["contact-details"]["address"]["line1"] }}<br>
+  {% if data["contact-details"]["address"] %}
+    {% if data["contact-details"]["address"]["street-address"] %}
+      {{ data["contact-details"]["address"]["street-address"] | nl2br | safe }}
+    {% else %}
+      {% if data["contact-details"]["address"]["line1"] %}
+        {{ data["contact-details"]["address"]["line1"] }}<br>
+      {% endif %}
+      {% if data["contact-details"]["address"]["line2"] %}
+        {{ data["contact-details"]["address"]["line2"] }}<br>
+      {% endif %}
+      {% if data["contact-details"]["address"]["level2"] %}
+        {{ data["contact-details"]["address"]["level2"] }}<br>
+      {% endif %}
+      {% if data["contact-details"]["address"]["level1"] %}
+        {{ data["contact-details"]["address"]["level1"] }}<br>
+      {% endif %}
+      {% if data["contact-details"]["address"]["postal-code"] %}
+        {{ data["contact-details"]["address"]["postal-code"] }}<br>
+      {% endif %}
+      {% if data["contact-details"]["address"]["country"] %}
+        {{ data["contact-details"]["address"]["country"] }}
+      {% endif %}
+    {% endif %}
+  {% else %}
+    Not entered
   {% endif %}
-  {% if data["contact-details"]["address"]["line2"] %}
-    {{ data["contact-details"]["address"]["line2"] }}<br>
-  {% endif %}
-  {% if data["contact-details"]["address"]["level2"] %}
-    {{ data["contact-details"]["address"]["level2"] }}<br>
-  {% endif %}
-  {% if data["contact-details"]["address"]["level1"] %}
-    {{ data["contact-details"]["address"]["level1"] }}<br>
-  {% endif %}
-  {% if data["contact-details"]["address"]["postal-code"] %}
-    {{ data["contact-details"]["address"]["postal-code"] }}<br>
-  {% endif %}
-  {% if data["contact-details"]["address"]["country"] %}
-    {{ data["contact-details"]["address"]["country"] }}
-  {% endif %}
-{% endif %}
 {% endset %}
 {% set addressEditHref = "/profile/contact-details" if data["contact-details"]["address"]["street-address"] else "/profile/contact-details/address/edit" %}
 {{ govukSummaryList({
@@ -30,7 +34,7 @@
       text: "Phone number"
     },
     value: {
-      text: data["contact-details"]["phone-number"]
+      text: (data["contact-details"]["phone-number"] | default("Not entered"))
     },
     actions: {
       items: [{
@@ -44,7 +48,7 @@
       text: "Email address"
     },
     value: {
-      text: data["contact-details"]["email"]
+      text: (data["contact-details"]["email"] | default("Not entered"))
     },
     actions: {
       items: [{

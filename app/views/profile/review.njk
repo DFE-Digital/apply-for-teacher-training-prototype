@@ -43,7 +43,7 @@
         text: "Is there anything you’d like to tell us about your qualifications?"
       },
       value: {
-        text: data["qualifications"]["additional"]
+        text: (data["qualifications"]["additional"] | default("Not entered"))
       },
       actions: {
         items: [{

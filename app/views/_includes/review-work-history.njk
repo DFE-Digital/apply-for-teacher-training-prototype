@@ -1,22 +1,25 @@
 {% set workHistory = data["work-history"] | toArray %}
-<table class="govuk-table govuk-!-font-size-16">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
-      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Job title</th>
-      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
-      <th class="govuk-table__header" scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-  {% if data["work-history"]["missing"] %}
-    <tr class="govuk-table__row app-table__cell--muted">
-      <td class="govuk-table__cell" colspan="3">{{ data["work-history"]["missing"] }}</td>
-      <td class="govuk-table__cell">
-        <a href="/profile/work-history/edit/missing">Change<span class="govuk-visually-hidden"> missing</span></a>
-      </td>
-    </tr>
-  {% else %}
+{% if workHistory.length >= 1 %}
+  <table class="govuk-table govuk-!-font-size-16">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
+        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Job title</th>
+        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
+        <th class="govuk-table__header" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+    {% if data["work-history"]["missing"] %}
+      <tr class="govuk-table__row app-table__cell--muted">
+        <td class="govuk-table__cell" colspan="3">
+          No work history: {{ data["work-history"]["missing"] }}
+        </td>
+        <td class="govuk-table__cell">
+          <a href="/profile/work-history/edit/missing">Change<span class="govuk-visually-hidden"> missing</span></a>
+        </td>
+      </tr>
+    {% endif %}
     {% for item in workHistory | sort(attribute="start-date") %}
       {% set startDate = item["start-date"] | date("LL/yyyy") %}
       {% if item["end-date"] != "-" %}
@@ -25,24 +28,26 @@
         {% set endDate = "Present" %}
       {% endif %}
       {% if item.gap %}
-      <tr class="govuk-table__row app-table__cell--muted">
-        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-        <td class="govuk-table__cell" colspan="2">Gap: {{ item.description }}</td>
-        <td class="govuk-table__cell">
-          <a href="/profile/work-history/edit/gap/{{ item.id }}">Change<span class="govuk-visually-hidden"> gap</span></a>
-        </td>
-      </tr>
-      {% else %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-        <td class="govuk-table__cell">{{ item.role }}</td>
-        <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell">
-          <a href="/profile/work-history/edit/job/{{ item.id }}">Change<span class="govuk-visually-hidden"> job</span></a>
-        </td>
-      </tr>
+        <tr class="govuk-table__row app-table__cell--muted">
+          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+          <td class="govuk-table__cell" colspan="2">Gap: {{ item.description }}</td>
+          <td class="govuk-table__cell">
+            <a href="/profile/work-history/edit/gap/{{ item.id }}">Change<span class="govuk-visually-hidden"> gap</span></a>
+          </td>
+        </tr>
+      {% elif item.job %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+          <td class="govuk-table__cell">{{ item.role }}</td>
+          <td class="govuk-table__cell">{{ item.org }}</td>
+          <td class="govuk-table__cell">
+            <a href="/profile/work-history/edit/job/{{ item.id }}">Change<span class="govuk-visually-hidden"> job</span></a>
+          </td>
+        </tr>
       {% endif %}
     {% endfor %}
-  {% endif %}
-  </tbody>
-</table>
+    </tbody>
+  </table>
+{% else %}
+  <p class="govuk-body-s">No work history entered</p>
+{% endif %}

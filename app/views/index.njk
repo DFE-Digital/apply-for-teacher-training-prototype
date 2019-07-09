@@ -28,10 +28,10 @@
     <p class="govuk-body-s">To be eligible for teacher training, you need&nbsp;a:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li class="govuk-body-s">UK degree (or non-UK equivalent)</li>
-      <li class="govuk-body-s">GCSE in maths, grade 4 (previously grade C)</li>
-      <li class="govuk-body-s">GCSE in English, grade 4 (previously grade C)</li>
+      <li class="govuk-body-s">GCSE in maths, grade 4/grade C</li>
+      <li class="govuk-body-s">GCSE in English, grade 4/grade C</li>
     </ul>
-    <p class="govuk-body-s">To teach at primary school, you also need a minimum grade 4 GCSE in science.</p>
+    <p class="govuk-body-s">To teach at primary school, you also need a GCSE in science, grade 4/grade C.</p>
     <p class="govuk-body-s">You can learn more about eligibility at <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Get into Teaching</a>.</p>
   {% endset %}
   {{ appRelated ({
@@ -39,6 +39,17 @@
     name: "eligibility",
     content: {
       html: eligibilityHtml
+    }
+  }) }}
+
+  {% set schoolExperienceHtml %}
+    <p class="govuk-body-s">A new GOV.UK service is now available to help you <a href="https://schoolexperience.education.gov.uk">get school experience</a>. School experience is recommended by many training providers.</p>
+  {% endset %}
+  {{ appRelated ({
+    title: "School experience",
+    name: "eligibility",
+    content: {
+      html: schoolExperienceHtml
     }
   }) }}
 {% endblock %}

@@ -1,20 +1,20 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
-{% set title = "Submit your application" %}
+{% set title = "Review your application" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: [{
-      text: "Home",
-      href: "/dashboard"
-    }, {
-      text: title
-    }]
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "/apply"
   }) }}
 {% endblock %}
 
 {% block primary %}
+  <p class="gov-uk-body">Check your course choice and review your teacher training profile. If everything is in order, continue to submission.</p>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Course details</h2>
   {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
     rows: [{
       key: {
         text: "Course"
@@ -38,14 +38,73 @@
       }
     }]
   }) }}
+  <hr class="govuk-section-break govuk-section-break--xl">
 
-  <p class="gov-uk-body">Check your course choice and review your teacher training profile. If everything is in order, continue to submission.</p>
-  {{ govukInsetText({
-    html: "<a href=\"/profile/review\">You can go back and edit your profile</a> before applying to this course."
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Personal details</h2>
+  {% include "_includes/review-personal-details.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Contact details</h2>
+  {% include "_includes/review-contact-details.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Academic qualifications</h2>
+  {% set category = "degree" %}
+  {% set categoryTitle = "Degree(s)" %}
+  {% include "_includes/review-qualifications.njk" %}
+
+  {% set category = "gcse" %}
+  {% set categoryTitle = "Required subjects" %}
+  {% include "_includes/review-qualifications.njk" %}
+
+  {% set category = "other" %}
+  {% set categoryTitle = "Other relevant qualifications" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
+    rows: [{
+      key: {
+        text: "Is there anything you’d like to tell us about your qualifications?"
+      },
+      value: {
+        text: (data["qualifications"]["additional"] | default("Not entered"))
+      },
+      actions: {
+        items: [{
+          href: "/profile/qualifications/review",
+          text: "Edit",
+          visuallyHiddenText: "additional detail"
+        }]
+      }
+    }]
   }) }}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Subject knowledge</h2>
+  {% include "_includes/review-subject-knowledge.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Literacy, numeracy and language skills</h2>
+  {% include "_includes/review-professional-skills.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Work history</h2>
+  {% include "_includes/review-work-history.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">School experience and volunteering with children and young people</h2>
+  {% include "_includes/review-school-experience.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">References</h2>
+  {% include "_includes/review-references.njk" %}
+  <hr class="govuk-section-break govuk-section-break--xl">
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Your teaching vocation</h2>
+  {% include "_includes/review-vocation.njk" %}
 
   {{ govukButton({
     text: "Continue",
     href: "/apply/" + provider + "/" + course + "/interview"
-  }) }}
+}) }}
 {% endblock %}

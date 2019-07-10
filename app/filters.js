@@ -14,13 +14,15 @@ module.exports = function (env) {
    * @type {String} str
    *
   */
-  filters.date = (str, format) => {
+  filters.date = (str, format = 'yyyy-LL-dd') => {
     if (str) {
-      var date = DateTime.fromISO(str, {
+      const date = (str === 'now') ? DateTime.local() : str
+
+      const datetime = DateTime.fromISO(date, {
         locale: 'en-GB'
       }).toFormat(format)
 
-      return date
+      return datetime
     }
   }
 

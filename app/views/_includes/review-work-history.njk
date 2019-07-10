@@ -20,25 +20,55 @@
         </td>
       </tr>
     {% endif %}
+
+    {# Calculate start of 5 year work history period #}
+    {% set nowDate = "now" | date %}
+    {% set nowYear = "now" | date("yyyy") %}
+    {% set prevEndDate = nowDate | replace(nowYear, nowYear - 5) %}
+
     {% for item in workHistory | sort(attribute="start-date") %}
-      {{ item.job }}
-      {% set startDate = item["start-date"] | date("LL/yyyy") %}
+      {% set startDate = item["start-date"] %}
+      {% set nextStartDate = workHistory[loop.index - 1]["start-date"] %}
+
       {% if item["end-date"] != "-" %}
-        {% set endDate = item["end-date"] | date("LL/yyyy") %}
+        {% set endDate = item["end-date"] %}
       {% else %}
         {% set endDate = "Present" %}
       {% endif %}
-      {% if item.gap %}
+
+      {# Automatically added unexplained gap #}
+      {% if startDate > prevEndDate %}
         <tr class="govuk-table__row app-table__cell--muted">
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-          <td class="govuk-table__cell" colspan="2">Gap: {{ item.description }}</td>
+          <td class="govuk-table__cell">
+            {{ prevEndDate | date("MMM yyyy") }} -
+            {{ nextStartDate | date("MMM yyyy") }}
+          </td>
+          <td class="govuk-table__cell" colspan="2">Unexplained gap</td>
+          <td class="govuk-table__cell">
+            <a href="/profile/work-history/add/gap">Explain&nbsp;gap</a>
+          </td>
+        </tr>
+      {% endif %}
+
+      {% if item.description %}
+        <tr class="govuk-table__row app-table__cell--muted">
+          <td class="govuk-table__cell">
+            {{ startDate | date("MMM yyyy") }} -
+            {{ endDate | date("MMM yyyy") }}
+          </td>
+          <td class="govuk-table__cell" colspan="2">
+            Gap: {{ item.description }}
+          </td>
           <td class="govuk-table__cell">
             <a href="/profile/work-history/edit/gap/{{ item.id }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
           </td>
         </tr>
       {% else %}
         <tr class="govuk-table__row">
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+          <td class="govuk-table__cell">
+            {{ startDate | date("MMM yyyy") }} -
+            {{ endDate | date("MMM yyyy") }}
+          </td>
           <td class="govuk-table__cell">{{ item.role }}</td>
           <td class="govuk-table__cell">{{ item.org }}</td>
           <td class="govuk-table__cell">
@@ -46,6 +76,8 @@
           </td>
         </tr>
       {% endif %}
+
+      {% set prevEndDate = endDate %}
     {% endfor %}
     </tbody>
   </table>

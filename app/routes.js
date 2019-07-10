@@ -253,12 +253,12 @@ router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
 router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
   const id = req.params.id
 
-  const startMonth = req.body['start-date-month']
-  const startYear = req.body['start-date-year']
+  const startMonth = req.body[`${id}-start-date-month`]
+  const startYear = req.body[`${id}-start-date-year`]
   const startDate = `${startYear}-${startMonth}`
 
-  const endMonth = req.body['end-date-month']
-  const endYear = req.body['end-date-year']
+  const endMonth = req.body[`${id}-end-date-month`]
+  const endYear = req.body[`${id}-end-date-year`]
   const endDate = `${endYear}-${endMonth}`
 
   req.session.data['work-history'][id]['start-date'] = startDate

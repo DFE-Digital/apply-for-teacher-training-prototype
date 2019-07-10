@@ -34,7 +34,7 @@
       {% if startDate > prevEndDate %}
         <tr class="govuk-table__row app-table__cell--muted">
           <td class="govuk-table__cell">
-            {{ prevEndDate | date("LL/yyyy") }} -
+            {{ prevEndDate }} -
             {{ nextStartDate | date("LL/yyyy") }}
           </td>
           <td class="govuk-table__cell" colspan="2">Unexplained gap</td>

@@ -242,6 +242,19 @@ router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
   })
 })
 
+router.post('/profile/work-history/add/:type(job|gap)/:id', (req, res) => {
+  const id = req.params.id
+  const type = req.params.type
+
+  res.render(`profile/work-history/${type}`, {
+    action: req.params.action,
+    formaction: `/profile/work-history/update/${type}/${id}`,
+    id,
+    start: `${req.query.start}`,
+    end: `${req.query.end}`
+  })
+})
+
 /**
   * Profile: Work history - Update job/gap data
   * Convert individual date components into ISO 8601 date strings
@@ -264,7 +277,7 @@ router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
   req.session.data['work-history'][id]['start-date'] = startDate
   req.session.data['work-history'][id]['end-date'] = endDate
 
-  res.redirect('/profile/work-history/review')
+  res.redirect(req.query.next || '/profile/work-history/review')
 })
 
 /**

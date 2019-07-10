@@ -24,12 +24,8 @@
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
         {{ item["type-other"] if item["type-other"] else item.type }} {{ item.subject }}
-        {% if item.country != "United Kingdom" %}
-          <br>{{ item.institution }}
-        {% endif %}
-        {% if item.country != "United Kingdom" %}
-          <br>{{ item.country }}
-        {% endif %}
+        {% if item.institution %}<br>{{ item.institution }}{% endif %}
+        {%- if item.country != "United Kingdom" and item.country != "" %}, {{ item.country }}{% endif %}
       </td>
       <td class="govuk-table__cell">{{ item["grade-other"] if item["grade-other"] else item.grade }}</td>
       <td class="govuk-table__cell">{{ item.year }}</td>

@@ -1,10 +1,10 @@
 module.exports = {
-  'G56': {
-    name: 'Goldsmiths, University of London',
-    code: 'G56'
+  '2HN': {
+    name: 'Bristol Cathedral',
+    code: '2HN'
   },
-  'B72': {
-    name: 'University of Brighton',
-    code: 'B72'
+  'B78': {
+    name: 'University of Bristol',
+    code: 'B78'
   }
 }

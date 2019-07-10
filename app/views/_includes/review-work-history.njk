@@ -21,6 +21,7 @@
       </tr>
     {% endif %}
     {% for item in workHistory | sort(attribute="start-date") %}
+      {{ item.job }}
       {% set startDate = item["start-date"] | date("LL/yyyy") %}
       {% if item["end-date"] != "-" %}
         {% set endDate = item["end-date"] | date("LL/yyyy") %}
@@ -35,7 +36,7 @@
             <a href="/profile/work-history/edit/gap/{{ item.id }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
           </td>
         </tr>
-      {% elif item.job %}
+      {% else %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
           <td class="govuk-table__cell">{{ item.role }}</td>

@@ -6,14 +6,14 @@
   {% set title = "Edit explanation of why you've been out of the workplace" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Explain why you've been out of the workplace" %}
+  {% set title = "Tell us why you've been out of the workplace" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
 {% block primary %}
   {% set labelHtml %}
-    <p class="govuk-label govuk-label--s"><strong>If you are returning to work for the first time in more than 5 years, please give details (for example, tell us about your parental or other caring responsibilities).</strong></p>
-    <p class="govuk-label">You can also include relevant work history from more than 5 years ago. Providers will be interested in skills and experience you could transfer to a school setting.</p>
+    <p class="govuk-label govuk-label--s"><strong>If you are returning to work for the first time in 5 or more years, please give details.</strong></p>
+    <p class="govuk-label">For example, explain your parental or caring responsibilities (or any other reason why you haven't been employed).</p> <p class="govuk-label">You can also include relevant work history from more than 5 years ago. Providers will be interested in skills and experience you could transfer to a school setting.</p>
   {% endset %}
 
   {{ govukCharacterCount({

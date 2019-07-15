@@ -42,11 +42,16 @@ router.get('/profile/work-history/:action/missing', (req, res) => {
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
 router.get('/profile/:section/add/:thing', (req, res) => {
+  const referrer = req.query.referrer
   const section = req.params.section
   const thing = req.params.thing
   let id = generateRandomString()
 
-  res.redirect(`/profile/${section}/add/${thing}/${id}`)
+  if (referrer) {
+    res.redirect(`/profile/${section}/add/${thing}/${id}?referrer=${referrer}`)
+  } else {
+    res.redirect(`/profile/${section}/add/${thing}/${id}`)
+  }
 })
 
 /**

@@ -9,6 +9,8 @@
 {% endif %}
 
 {% block primary %}
+  {{ start }}
+
   {{ govukDateInput({
     fieldset: {
       legend: {
@@ -72,8 +74,8 @@
 
   {{ govukInput({
     type: "hidden",
-    name: "work-history[" + id + "][gap]",
-    value: "true"
+    name: "work-history[" + id + "][category]",
+    value: "gap"
   }) }}
 
   {{ govukButton({

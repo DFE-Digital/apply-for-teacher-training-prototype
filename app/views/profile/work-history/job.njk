@@ -116,6 +116,12 @@
     }]
   }) }}
 
+  {{ govukInput({
+    type: "hidden",
+    name: "work-history[" + id + "][category]",
+    value: "job"
+  }) }}
+
 {% if action != "edit" %}
   {{ govukButton({
     text: "Save and add another job",

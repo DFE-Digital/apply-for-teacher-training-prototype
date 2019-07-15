@@ -92,6 +92,7 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
   *
   */
 router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, res) => {
+  const referrer = req.query.referrer
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
@@ -99,7 +100,8 @@ router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, r
   res.render(`profile/qualifications/${category}`, {
     action,
     formaction: `/profile/qualifications/${action}/${category}/${id}/answer`,
-    id
+    id,
+    referrer
   })
 })
 
@@ -112,12 +114,16 @@ router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, r
   */
 router.get('/profile/qualifications/:action/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
-  const formactionPath = (action === 'add') ? 'next?prev=degree' : 'review'
   const id = req.params.id
+
+  let formaction = req.session.data.referrer
+  if (action === 'add') {
+    formaction = '/profile/qualifications/next?prev=degree'
+  }
 
   res.render('profile/qualifications/degree-details', {
     action,
-    formaction: `/profile/qualifications/${formactionPath}`,
+    formaction,
     id,
     international: req.params.type === 'international-degree'
   })
@@ -133,11 +139,15 @@ router.get('/profile/qualifications/:action/:type(uk-degree|international-degree
 router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
-  const formactionPath = (action === 'add') ? `next?prev=${id}` : 'review'
+
+  let formaction = req.session.data.referrer
+  if (action === 'add') {
+    formaction = `/profile/qualifications/next?prev=${id}`
+  }
 
   res.render('profile/qualifications/gcse-details', {
     action,
-    formaction: `/profile/qualifications/${formactionPath}`,
+    formaction,
     id,
     international: req.params.type === 'gcse-equivalent'
   })
@@ -214,9 +224,11 @@ router.all('/profile/qualifications/next', (req, res) => {
   *
   */
 router.get('/profile/qualifications/:action/other/:id', (req, res) => {
+  const referrer = req.query.referrer
+
   res.render('profile/qualifications/other', {
     action: req.params.action,
-    formaction: '/profile/qualifications/review',
+    formaction: referrer || '/profile/qualifications/review',
     id: req.params.id
   })
 })
@@ -288,9 +300,11 @@ router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
   *
   */
 router.get('/profile/school-experience/:action/role/:id', (req, res) => {
+  const referrer = req.query.referrer
+
   res.render('profile/school-experience/role', {
     action: req.params.action,
-    formaction: '/profile/school-experience/review',
+    formaction: referrer || '/profile/school-experience/review',
     id: req.params.id
   })
 })
@@ -306,16 +320,18 @@ router.get('/profile/references/:action/referee/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
-  let formactionPath
+  let formaction = req.session.data.referrer
   if (action === 'add') {
-    formactionPath = (id === 'principle') ? 'add/referee/secondary' : 'review'
-  } else {
-    formactionPath = 'review'
+    if (id === 'principle') {
+      formaction = '/profile/references/add/referee/secondary'
+    } else {
+      formaction = '/profile/references/review'
+    }
   }
 
   res.render('profile/references/referee', {
-    action: req.params.action,
-    formaction: `/profile/references/${formactionPath}`,
+    action,
+    formaction,
     id: req.params.id
   })
 })

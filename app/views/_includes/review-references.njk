@@ -5,7 +5,9 @@
       <tr class="govuk-table__row">
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Name</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Email</th>
-        <th class="govuk-table__header" scope="col"><span class="govuk-visually-hidden">Actions</span></th>
+        <th class="govuk-table__header" scope="col">
+          <span class="govuk-visually-hidden">Actions</span>
+        </th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -13,7 +15,9 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">{{ item.name }}</td>
         <td class="govuk-table__cell">{{ item.email }}</td>
-        <td class="govuk-table__cell"><a href="/profile/references/edit/referee/{{ item.id }}">Edit<span class="govuk-visually-hidden"> referee</span></a></td>
+        <td class="govuk-table__cell">
+          <a href="/profile/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

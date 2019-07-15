@@ -31,7 +31,7 @@
     },
     id: "referees-" + id + "-name",
     name: "referees[" + id + "][name]",
-    value: data["referees"][id].name
+    value: data["referees"][id]["name"]
   }) }}
 
   {{ govukInput({
@@ -44,7 +44,7 @@
     },
     id: "referees-" + id + "-relationship",
     name: "referees[" + id + "][relationship]",
-    value: data["referees"][id].relationship
+    value: data["referees"][id]["relationship"]
   }) }}
 
   {{ govukInput({
@@ -55,9 +55,9 @@
     hint: {
       text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
     },
-    id: "referees-" + id + "-relationship",
-    name: "referees[" + id + "][relationship]",
-    value: data["referees"][id].relationship
+    id: "referees-" + id + "-timespan",
+    name: "referees[" + id + "][timespan]",
+    value: data["referees"][id]["timespan"]
   }) }}
 
   {{ govukInput({
@@ -67,7 +67,7 @@
     },
     id: "referees-" + id + "-email",
     name: "referees[" + id + "][email]",
-    value: data["referees"][id].email
+    value: data["referees"][id]["email"]
   }) }}
 
 {% set explainCharacter %}
@@ -75,9 +75,9 @@
     label: {
       text: "If you are unable to provide an academic, professional or school senior leadership referee and are therefore requesting a character reference, you can explain why here (optional)."
     },
-    id: "referees-" + id + "-character_explaination",
-    name: "referees[" + id + "][character_explaination]",
-    value: data["referees"][id].character_explaination
+    id: "referees-" + id + "-character-explaination",
+    name: "referees[" + id + "][character-explaination]",
+    value: data["referees"][id]["character-explaination"]
   }) }}
 {% endset %}
 

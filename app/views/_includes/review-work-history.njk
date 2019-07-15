@@ -6,7 +6,9 @@
         <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Job title</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col"><span class="govuk-visually-hidden">Actions</span></th>
+        <th class="govuk-table__header" scope="col">
+          <span class="govuk-visually-hidden">Actions</span>
+        </th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -16,7 +18,7 @@
           <strong>No work history</strong>. {{ data["work-history"]["missing"] }}
         </td>
         <td class="govuk-table__cell">
-          <a href="/profile/work-history/edit/missing">Edit<span class="govuk-visually-hidden"> missing</span></a>
+          <a href="/profile/work-history/edit/missing?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> missing</span></a>
         </td>
       </tr>
     {% endif %}
@@ -55,7 +57,7 @@
             Gap: {{ item.description }}
           </td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/gap/{{ item.id }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
+            <a href="/profile/work-history/edit/gap/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
           </td>
         </tr>
 
@@ -74,7 +76,7 @@
           <td class="govuk-table__cell">{{ item.role }}</td>
           <td class="govuk-table__cell">{{ item.org }}</td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/job/{{ item.id }}">Edit<span class="govuk-visually-hidden"> job</span></a>
+            <a href="/profile/work-history/edit/job/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> job</span></a>
           </td>
         </tr>
       {% endif %}

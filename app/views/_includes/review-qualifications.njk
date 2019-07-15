@@ -6,7 +6,9 @@
       <th class="govuk-table__header govuk-!-width-one-half" scope="col">Qualification</th>
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Grade</th>
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Year awarded</th>
-      <th class="govuk-table__header" scope="col"><span class="govuk-visually-hidden">Actions</span></th>
+      <th class="govuk-table__header" scope="col">
+        <span class="govuk-visually-hidden">Actions</span>
+      </th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
@@ -17,7 +19,7 @@
       <td class="govuk-table__cell">{{ item.subject }} (Missing)</td>
       <td class="govuk-table__cell" colspan="2">Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
       <td class="govuk-table__cell">
-        <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
+        <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>
     </tr>
     {% else %}
@@ -29,7 +31,10 @@
       </td>
       <td class="govuk-table__cell">{{ item["grade-other"] if item["grade-other"] else item.grade }}</td>
       <td class="govuk-table__cell">{{ item.year }}</td>
-      <td class="govuk-table__cell"><a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a></td>
+      <td class="govuk-table__cell">
+        <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>
+        </a>
+      </td>
     </tr>
     {% endif %}
   {% endif %}

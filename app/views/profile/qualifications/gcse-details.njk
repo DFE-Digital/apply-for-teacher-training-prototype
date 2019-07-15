@@ -61,19 +61,19 @@
     items: [{
       value: "GCSE",
       text: "GCSE",
-      checked: checked("['qualifications']['" + id + "']['type']", "gcse")
+      checked: checked("['qualifications']['" + id + "']['type']", "GCSE")
     }, {
       value: "GCE O Level",
       text: "GCE O Level",
       checked: checked("['qualifications']['" + id + "']['type']", "GCE O Level")
     }, {
-      value: "Scottish Highers",
+      value: "Scottish Higher",
       text: "Scottish Higher",
-      checked: checked("['qualifications']['" + id + "']['type']", "Scottish Highers")
+      checked: checked("['qualifications']['" + id + "']['type']", "Scottish Higher")
     }, {
       value: "Other",
       text: "Other",
-      checked: checked("['qualifications']['" + id + "']['type']", "other"),
+      checked: checked("['qualifications']['" + id + "']['type']", "Other"),
       conditional: {
         html: otherTypeHtml
       }

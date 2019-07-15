@@ -11,7 +11,7 @@ const generateRandomString = () => {
   *
   * @param {String} provider Provider code
   * @param {String} course Course code
-  * @param {String} course Page to render
+  * @param {String} page Page to render
   */
 router.get('/apply/:provider/:course/:page', (req, res) => {
   const page = req.params.page

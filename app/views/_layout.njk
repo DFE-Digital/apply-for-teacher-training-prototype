@@ -31,6 +31,32 @@
 {% from "_components/related/macro.njk" import appRelated %}
 {% from "_components/task-list/macro.njk" import appTaskList %}
 
+{% if data["candidate"]["nationality"] and
+  data["contact-details"]["address"] and
+  data["qualifications"] and
+  data["subject-knowledge"] and
+  data["professional-skills"] and
+  data["work-history"] and
+  data["school-experience"] and
+  data["referees"] and
+  data["vocation"]
+%}
+  {% set applicationStatus = "complete" %}
+{% elif data["candidate"]["nationality"] or
+  data["contact-details"]["address"] or
+  data["qualifications"] or
+  data["subject-knowledge"] or
+  data["professional-skills"] or
+  data["work-history"] or
+  data["school-experience"] or
+  data["referees"] or
+  data["vocation"] == true
+%}
+  {% set applicationStatus = "incomplete" %}
+{% else %}
+  {% set applicationStatus = "unbegun" %}
+{% endif %}
+
 {% block head %}
   {% include "_includes/head.njk" %}
 {% endblock %}

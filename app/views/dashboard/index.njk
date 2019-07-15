@@ -10,31 +10,10 @@
   {% endset %}
 
   {% set profileHtml %}
-    {# Profile has been completed #}
-    {% if data["candidate"]["nationality"] and
-      data["contact-details"]["address"] and
-      data["qualifications"] and
-      data["subject-knowledge"] and
-      data["professional-skills"] and
-      data["work-history"] and
-      data["school-experience"] and
-      data["referees"] and
-      data["vocation"]
-    %}
+    {% if applicationStatus == "complete" %}
       {% set buttonText = "Edit" %}
-    {# Profile has been partially completed #}
-    {% elif data["candidate"]["nationality"] or
-      data["contact-details"]["address"] or
-      data["qualifications"] or
-      data["subject-knowledge"] or
-      data["professional-skills"] or
-      data["work-history"] or
-      data["school-experience"] or
-      data["referees"] or
-      data["vocation"] == true
-    %}
+    {% elif applicationStatus == "incomplete" %}
       {% set buttonText = "Continue" %}
-    {# Profile has yet to be completed #}
     {% else %}
       {% set buttonText = "Start" %}
     {% endif %}

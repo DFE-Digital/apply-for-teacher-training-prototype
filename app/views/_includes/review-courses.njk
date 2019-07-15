@@ -5,7 +5,7 @@
       <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Course</th>
       <th class="govuk-table__header govuk-!-width-one-half" scope="col">Training provider</th>
       <th class="govuk-table__header govuk-!-width-one-half" scope="col">Starts</th>
-      <th class="govuk-table__header" scope="col">Actions</th>
+      <th class="govuk-table__header" scope="col"><span class="govuk-visually-hidden">Actions</span></th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
@@ -20,7 +20,7 @@
       <td class="govuk-table__cell">
       {% if data["application"][provider.code + "-" + course.code] %}
         <strong class="govuk-tag" id="{{ item.id }}-completed">Submitted</strong>
-      {% else %}
+      {% elif applicationStatus == "complete" %}
         <a href="/apply/{{ provider.code }}/{{ course.code }}/review">Apply</a>
       {% endif %}
       </td>

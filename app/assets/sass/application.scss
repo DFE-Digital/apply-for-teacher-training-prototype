@@ -24,3 +24,11 @@ $govuk-global-styles: true;
     border-bottom: 0;
   }
 }
+
+// Align table and summary list action links with accordian controls
+.govuk-table__header:last-child,
+.govuk-table__cell:last-child,
+.govuk-summary-list__actions {
+  left: govuk-spacing(2);
+  padding-right: govuk-spacing(2);
+}

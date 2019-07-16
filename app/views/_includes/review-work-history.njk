@@ -13,7 +13,7 @@
     </thead>
     <tbody class="govuk-table__body">
     {% if data["work-history"]["missing"] %}
-      <tr class="govuk-table__row app-table__cell--muted">
+      <tr class="govuk-table__row app-table__row--muted">
         <td class="govuk-table__cell" colspan="3">
           <strong>No work history</strong>. {{ data["work-history"]["missing"] }}
         </td>
@@ -34,7 +34,7 @@
 
       {# Unexplained gap #}
       {% if startDate > prevEndDate %}
-        <tr class="govuk-table__row app-table__cell--muted">
+        <tr class="govuk-table__row app-table__row--muted">
           <td class="govuk-table__cell">
             {{ prevEndDate }} -
             {{ nextStartDate | date("LL/yyyy") }}
@@ -48,7 +48,7 @@
 
       {# Explained gap #}
       {% if item.category == "gap" %}
-        <tr class="govuk-table__row app-table__cell--muted">
+        <tr class="govuk-table__row app-table__row--muted">
           <td class="govuk-table__cell">
             {{ startDate | date("LL/yyyy") }} -
             {{ endDate | date("LL/yyyy") }}

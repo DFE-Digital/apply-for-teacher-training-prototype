@@ -5,7 +5,7 @@
       text: "Evidence of subject knowledge"
     },
     value: {
-      text: (data["subject-knowledge"]["statement"] | default("Not entered"))
+      text: (data["subject-knowledge"]["statement"] | default("Not entered")) | nl2br | safe
     },
     actions: {
       items: [{

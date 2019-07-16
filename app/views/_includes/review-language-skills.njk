@@ -5,7 +5,7 @@
       text: "Is English your first language?"
     },
     value: {
-      text: ("Yes" if data["language-skills"]["first"] == "english" else "No: " + data["language-skills"]["detail"])
+      text: ("Yes" if data["language-skills"]["first"] == "english" else "No: " + data["language-skills"]["detail"]) | nl2br | safe
     },
     actions: {
       items: [{

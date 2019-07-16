@@ -5,7 +5,7 @@
       text: "Vocation"
     },
     value: {
-      text: (data["vocation"] | default("Not entered"))
+      text: (data["vocation"] | default("Not entered")) | nl2br | safe
     },
     actions: {
       items: [{

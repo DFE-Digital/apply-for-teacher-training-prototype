@@ -83,8 +83,8 @@
   {% include "_includes/review-subject-knowledge.njk" %}
 {% endset %}
 
-{% set professionalSkillsHtml %}
-  {% include "_includes/review-professional-skills.njk" %}
+{% set languageSkillsHtml %}
+  {% include "_includes/review-language-skills.njk" %}
 {% endset %}
 
 {% set workHistoryHtml %}
@@ -142,10 +142,10 @@
       }
     }, {
       heading: {
-        text: "Literacy, numeracy and language skills"
+        text: "Language skills"
       },
       content: {
-        html: professionalSkillsHtml
+        html: languageSkillsHtml
       }
     }, {
       heading: {

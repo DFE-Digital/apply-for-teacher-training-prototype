@@ -1,0 +1,18 @@
+{{ govukSummaryList({
+  classes: "govuk-!-font-size-16",
+  rows: [{
+    key: {
+      text: "Is English your first language?"
+    },
+    value: {
+      text: ("Yes" if data["language-skills"]["first"] == "english" else "No: " + data["language-skills"]["detail"])
+    },
+    actions: {
+      items: [{
+        href: "/profile/language-skills/?referrer=" + referrer,
+        text: "Edit",
+        visuallyHiddenText: "English language qualifications"
+      }]
+    }
+  }]
+}) }}

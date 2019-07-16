@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set parent = "Literacy, numeracy and language skills" %}
+{% set parent = "Language skills" %}
 {% set title = "Is English your first language?" %}
 {% set formaction = "/profile" %}
 
@@ -24,23 +24,23 @@
     label: {
       text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
     },
-    id: "professional-skills-languages-detail",
-    name: "professional-skills[languages][detail]",
-    value: data["professional-skills"]["languages"]["detail"]
+    id: "language-skills-detail",
+    name: "language-skills[detail]",
+    value: data["language-skills"]["detail"]
   }) }}
 {% endset -%}
 
   {{ govukRadios({
-    idPrefix: "professional-skills-languages-first",
-    name: "professional-skills[languages][first]",
+    idPrefix: "language-skills-first",
+    name: "language-skills[first]",
     items: [{
       value: "english",
       text: "Yes",
-      checked: checked("['professional-skills']['languages']['first']", "english")
+      checked: checked("['language-skills']['first']", "english")
     }, {
       value: "other",
       text: "No",
-      checked: checked("['professional-skills']['languages']['first']", "other"),
+      checked: checked("['language-skills']['first']", "other"),
       conditional: {
         html: firstLanguage
       }

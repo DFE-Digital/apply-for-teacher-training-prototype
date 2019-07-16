@@ -188,7 +188,7 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '',
+      defaultValue: '{{ data["qualifications"][id]["country"] }}',
       selectElement: document.querySelector('#qualifications-{{ id }}-country')
     })
   </script>

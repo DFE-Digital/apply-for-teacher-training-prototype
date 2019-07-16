@@ -120,11 +120,11 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["candidate"]["nationality"] | safe }}',
+      defaultValue: '{{ data["candidate"]["nationality"] }}',
       selectElement: document.querySelector('#candidate-nationality')
     })
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["candidate"]["second-nationality"] | safe }}',
+      defaultValue: '{{ data["candidate"]["second-nationality"] }}',
       selectElement: document.querySelector('#candidate-second-nationality')
     })
   </script>

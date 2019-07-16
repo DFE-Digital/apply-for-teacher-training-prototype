@@ -1,11 +1,13 @@
 {% set qualifications = data["qualifications"] | toArray %}
 <table class="govuk-table govuk-!-font-size-16">
-  <caption class="govuk-table__caption govuk-heading-{{ categoryCaptionSize | default("s") }} govuk-!-margin-bottom-1 govuk-!-margin-top-2">{{ categoryTitle }}</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th class="govuk-table__header govuk-!-width-one-half" scope="col">Qualification</th>
-      <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Grade</th>
-      <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Year awarded</th>
+      <th class="govuk-table__header" scope="col" width="30%">{{ categoryTitle }}</th>
+      <th class="govuk-table__header" scope="col" width="10%">Grade</th>
+    {% if category != "gcse" %}
+      <th class="govuk-table__header" scope="col">Institution</th>
+    {% endif %}
+      <th class="govuk-table__header" scope="col">Year awarded</th>
       <th class="govuk-table__header" scope="col">
         <span class="govuk-visually-hidden">Actions</span>
       </th>
@@ -16,20 +18,22 @@
   {% if item.category == category %}
     {% if item.provenance == "missing" %}
     <tr class="govuk-table__row app-table__row--muted">
-      <td class="govuk-table__cell">{{ item.subject }} (Missing)</td>
-      <td class="govuk-table__cell" colspan="2">Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
+      <td class="govuk-table__cell">{{ item.subject }}</td>
+      <td class="govuk-table__cell">Missing</td>
+      <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
       <td class="govuk-table__cell">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>
     </tr>
     {% else %}
     <tr class="govuk-table__row">
+      <td class="govuk-table__cell">{{ item.type }} {{ item.subject }}</td>
+      <td class="govuk-table__cell">{{ item.grade }}</td>
+    {% if category != "gcse" %}
       <td class="govuk-table__cell">
-        {{ item["type-other"] if item["type-other"] else item.type }} {{ item.subject }}
-        {%- if item.institution %}<br>{{ item.institution }}{% endif -%}
-        {%- if item.country != "United Kingdom" and item.country != "" %}, {{ item.country }}{% endif %}
+        {{ [item.institution, item.country] | join("<br>") | safe }}
       </td>
-      <td class="govuk-table__cell">{{ item["grade-other"] if item["grade-other"] else item.grade }}</td>
+    {% endif %}
       <td class="govuk-table__cell">{{ item.year }}</td>
       <td class="govuk-table__cell">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>

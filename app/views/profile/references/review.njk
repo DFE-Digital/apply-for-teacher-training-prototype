@@ -1,4 +1,4 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
 {% set title = "References" %}
 {% set referrer = "/profile/references/review" %}
@@ -20,12 +20,15 @@
 {% block primary %}
   {% include "_includes/review-references.njk" %}
 
-  <h2 class="govuk-heading-m">What happens next</h2>
-  <p class="govuk-body">Once DfE has submitted your completed application form to your training provider, we’ll contact your referees to ask for their references.</p>
-  <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
-
-  {{ govukButton({
-    text: "Continue",
-    href: "/profile/"
-  }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">What happens next</h2>
+      <p class="govuk-body">Once DfE has submitted your completed application form to your training provider, we’ll contact your referees to ask for their references.</p>
+      <p class="govuk-body">We’ll let you know if they can’t or won’t supply a reference, so you have the opportunity to choose a new referee.</p>
+      {{ govukButton({
+        text: "Continue",
+        href: "/profile/"
+      }) }}
+    </div>
+  </div>
 {% endblock %}

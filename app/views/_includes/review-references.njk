@@ -3,8 +3,9 @@
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Name</th>
-        <th class="govuk-table__header govuk-!-width-one-half" scope="col">Email</th>
+        <th class="govuk-table__header" scope="col">Referee name</th>
+        <th class="govuk-table__header" scope="col">Type</th>
+        <th class="govuk-table__header" scope="col">Email</th>
         <th class="govuk-table__header" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
         </th>
@@ -13,7 +14,13 @@
     <tbody class="govuk-table__body">
       {% for item in references %}
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{ item.name }}</td>
+        <th class="govuk-table__header">{{ item.name }}</th>
+        <td class="govuk-table__cell">
+          {{ item.type }} ({{ item.relationship }})
+        {% if item["character-explanation"] %}
+          <br>{{ item["character-explanation"] }}
+        {% endif %}
+        </td>
         <td class="govuk-table__cell">{{ item.email }}</td>
         <td class="govuk-table__cell">
           <a href="/profile/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>

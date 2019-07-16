@@ -163,17 +163,17 @@ module.exports = {
       relationship: 'Tutor',
       timespan: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
-      type: 'academic',
+      type: 'Academic',
       'character-explaination': ''
     },
     secondary: {
       id: 'secondary',
       name: 'Jane Doe',
-      relationship: 'Manager',
-      timespan: 'I have been employed by them since January 2018',
+      relationship: 'Faith leader',
+      timespan: 'I have known Jane since January 2018',
       email: 'jane.doe@example.com',
-      type: 'professional',
-      'character-explaination': ''
+      type: 'Character',
+      'character-explanation': 'Jane is the faith leader at my local church.'
     }
   }
 }

@@ -20,6 +20,7 @@ $govuk-global-styles: true;
   }
 
   .govuk-accordion__section-content .govuk-summary-list__row:last-child > *,
+  .govuk-table__row:last-child .govuk-table__header,
   .govuk-table__row:last-child .govuk-table__cell {
     border-bottom: 0;
   }

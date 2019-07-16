@@ -1,5 +1,19 @@
 {% set schoolExperience = data['school-experience'] | toArray %}
-{% if schoolExperience.length >= 1 %}
+{% if data['school-experience'] == "missing" %}
+  {% set insetTextHtml %}
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-1">No school experience</h2>
+    <p class="govuk-body-s">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.</p>
+  {% endset %}
+  {{ govukInsetText({
+    classes: "govuk-!-width-two-thirds govuk-!-margin-top-0 govuk-!-margin-bottom-3",
+    html: insetTextHtml
+  }) }}
+  {{ govukButton({
+    text: "Add school experience or role",
+    classes: "govuk-button--secondary",
+    href: "/profile/school-experience/add/role"
+  }) }}
+{% elif schoolExperience.length >= 1 %}
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -12,17 +26,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-    {% if data['school-experience'] == "missing" %}
-      <tr class="govuk-table__row app-table__row--muted">
-        <td class="govuk-table__cell" colspan="3">
-          <strong>No school experience</strong>. You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.
-        </td>
-        <td class="govuk-table__cell">
-          <a href="/profile/school-experience">Add<span class="govuk-visually-hidden"> {{ category}} experience or role</span></a>
-        </td>
-      </tr>
-    {% else %}
-      {% for item in schoolExperience %}
+    {% for item in schoolExperience %}
       {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
       {% if item.end-year != "" %}
         {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
@@ -37,8 +41,7 @@
           <a href="/profile/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
         </td>
       </tr>
-      {% endfor %}
-    {% endif %}
+    {% endfor %}
     </tbody>
   </table>
 {% else %}

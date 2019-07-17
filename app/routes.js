@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const querystring = require('querystring')
 
 // Utils
 const generateRandomString = () => {
@@ -42,25 +43,21 @@ router.get('/profile/work-history/:action/missing', (req, res) => {
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
 router.get('/profile/:section/add/:thing', (req, res) => {
-  const referrer = req.query.referrer
   const section = req.params.section
   const thing = req.params.thing
-  let id = generateRandomString()
+  const id = generateRandomString()
+  const queryString = querystring.stringify(req.query)
 
-  if (referrer) {
-    res.redirect(`/profile/${section}/add/${thing}/${id}?referrer=${referrer}`)
-  } else {
-    res.redirect(`/profile/${section}/add/${thing}/${id}`)
-  }
+  res.redirect(`/profile/${section}/add/${thing}/${id}?${queryString}`)
 })
 
 /**
   * Profile: Personal details
   */
 router.post('/profile/personal-details/answer', (req, res) => {
-  let nationality = req.session.data['candidate']['nationality']
+  const nationality = req.session.data['candidate']['nationality']
 
-  let eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
+  const eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 
   if (eea.includes(nationality)) {
     res.redirect('/profile')
@@ -73,7 +70,7 @@ router.post('/profile/personal-details/answer', (req, res) => {
   * Profile: Contact details
   */
 router.post('/profile/contact-details/address-answer', (req, res) => {
-  let location = req.session.data['contact-details']['address-type']
+  const location = req.session.data['contact-details']['address-type']
 
   if (location === 'domestic') {
     res.redirect('/profile/contact-details/lookup-address')
@@ -170,10 +167,9 @@ router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer',
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
+  const provenance = req.session.data['qualifications'][id]['provenance']
 
-  let provenance = req.session.data['qualifications'][id]['provenance']
   let path
-
   if (category === 'degree') {
     if (provenance === 'domestic') {
       path = `${action}/uk-degree/${id}`
@@ -202,10 +198,10 @@ router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer',
 router.all('/profile/qualifications/next', (req, res) => {
   const prev = req.query.prev
 
-  let mathsCompleted = req.session.data['qualifications']['maths']
-  let englishCompleted = req.session.data['qualifications']['english']
-  let scienceCompleted = req.session.data['qualifications']['science']
-  let primaryApplication = req.session.data['settings']['primary-application']
+  const mathsCompleted = req.session.data['qualifications']['maths']
+  const englishCompleted = req.session.data['qualifications']['english']
+  const scienceCompleted = req.session.data['qualifications']['science']
+  const primaryApplication = req.session.data['settings']['primary-application']
 
   let path
   if (prev === 'degree' && mathsCompleted !== true) {
@@ -247,19 +243,6 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
   *
   */
 router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
-  const id = req.params.id
-  const type = req.params.type
-
-  res.render(`profile/work-history/${type}`, {
-    action: req.params.action,
-    formaction: `/profile/work-history/update/${type}/${id}`,
-    id,
-    start: `${req.query.start}`,
-    end: `${req.query.end}`
-  })
-})
-
-router.post('/profile/work-history/add/:type(job|gap)/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
 

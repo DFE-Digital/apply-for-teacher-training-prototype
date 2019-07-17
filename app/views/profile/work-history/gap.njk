@@ -9,6 +9,9 @@
 {% endif %}
 
 {% block primary %}
+  start {{ (data["work-history"][id]["start-date"] or start) | date('LL') }}<br>
+  end {{ (data["work-history"][id]["end-date"] or end) | date('LL') }}
+
   {{ govukDateInput({
     fieldset: {
       legend: {
@@ -20,17 +23,17 @@
       text: "For example, 01 2018"
     },
     id: "work-history-" + id + "-start-date",
-    namePrefix: "start-date",
+    namePrefix: id + "-start-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: data["work-history"][id]["start-date"] | date('LL')
+      value: (data["work-history"][id]["start-date"] or start) | date('LL')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: data["work-history"][id]["start-date"] | date('yyyy')
+      value: (data["work-history"][id]["start-date"] or start) | date('yyyy')
     }]
   }) }}
 
@@ -45,17 +48,17 @@
       text: "For example, 05 2018"
     },
     id: "work-history-" + id + "-end-date",
-    namePrefix: "end-date",
+    namePrefix: id + "-end-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: data["work-history"][id]["end-date"] | date('LL')
+      value: (data["work-history"][id]["end-date"] or end) | date('LL')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: data["work-history"][id]["end-date"] | date('yyyy')
+      value: (data["work-history"][id]["end-date"] or end) | date('yyyy')
     }]
   }) }}
 

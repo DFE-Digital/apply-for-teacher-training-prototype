@@ -35,11 +35,13 @@
       {% if loop.first and firstStartEpoch > periodStartEpoch %}
         {# Gap starts at start of work history period #}
         {% set gapStartEpoch = periodStart | date("X") %}
-        {% set startDate = periodStart | date("LL/yyyy") %}
+        {% set gapStartDate = periodStart | date("LL/yyyy") %}
+        {% set gapStartIso = periodStart | date("yyyy-LL") %}
 
         {# Gap ends with start date of current item in loop #}
         {% set gapEndEpoch = firstStart | date("X") %}
-        {% set endDate = firstStart | date("LL/yyyy") %}
+        {% set gapEndDate = firstStart | date("LL/yyyy") %}
+        {% set gapEndIso = firstStart | date("yyyy-LL") %}
 
         {# Gap length #}
         {% set gapDuration = gapEndEpoch - gapStartEpoch %}
@@ -47,9 +49,9 @@
         <tr class="govuk-table__row app-table__row--muted">
           <td class="govuk-table__cell">Unexplained gap ({{ gapMonths }} months)</td>
           <td class="govuk-table__cell"></td>
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+          <td class="govuk-table__cell">{{ gapStartDate }} - {{ gapEndDate }}</td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/add/gap">Explain&nbsp;gap</a>
+            <a href="/profile/work-history/add/gap?start={{ gapStartIso }}&end={{ gapEndIso }}">Explain&nbsp;gap</a>
           </td>
         </tr>
       {% endif %}
@@ -90,16 +92,19 @@
 
       {# Gap starts with end date of current item in loop #}
       {% set gapStartEpoch = item["end-date"] | date("X") %}
-      {% set startDate = item["end-date"] | date("LL/yyyy") %}
+      {% set gapStartDate = item["end-date"] | date("LL/yyyy") %}
+      {% set gapStartIso = item["end-date"] | date("yyyy-LL") %}
 
       {# Gap ends with start date of next item in loop else today’s date #}
       {% set nextItem = workHistory[loop.index] %}
       {% if nextItem %}
         {% set gapEndEpoch = nextItem["start-date"] | date("X") %}
-        {% set endDate = nextItem["start-date"] | date("LL/yyyy") %}
+        {% set gapEndDate = nextItem["start-date"] | date("LL/yyyy") %}
+        {% set gapEndIso = nextItem["start-date"] | date("yyyy-LL") %}
       {% else %}
         {% set gapEndEpoch = "now" | date("X") %}
-        {% set endDate = "Present" %}
+        {% set gapEndDate = "Present" %}
+        {% set gapEndIso = "now" | date("yyyy-LL") %}
       {% endif %}
 
       {# Gap length #}
@@ -110,9 +115,9 @@
         <tr class="govuk-table__row app-table__row--muted">
           <td class="govuk-table__cell">Unexplained gap ({{ gapMonths }} months)</td>
           <td class="govuk-table__cell"></td>
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+          <td class="govuk-table__cell">{{ gapStartDate }} - {{ gapEndDate }}</td>
           <td class="govuk-table__cell">
-            <a href="/profile/work-history/add/gap">Explain&nbsp;gap</a>
+            <a href="/profile/work-history/add/gap?start={{ gapStartIso }}&end={{ gapEndIso }}">Explain&nbsp;gap</a>
           </td>
         </tr>
       {% endif %}

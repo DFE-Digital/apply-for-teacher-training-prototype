@@ -103,6 +103,36 @@ module.exports = {
     detail: 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'
   },
   'work-history': {
+    n7901: {
+      id: 'n7901',
+      category: 'job',
+      role: 'Undergraduate teaching assistant',
+      org: 'Minnesota State University Moorhead',
+      description: 'Leveraged exceptional communication skills to improve student performance in the Department of Physics and Astronomy. Provided comprehensive support for Introductory astronomy, analog electronics, and experimental physics courses. Tutored students and answered questions during lectures and lab sessions. Instructed students, assessed grades, and assisted with observation projects at the planetarium and the Paul P. Feder Observatory.',
+      worked_with_children: 'yes',
+      'start-date': '2010-01',
+      'end-date': '2013-05'
+    },
+    n8dh6: {
+      id: 'n8dh6',
+      category: 'job',
+      role: 'Summer intern',
+      org: 'American Association of Variable Star Observers',
+      description: 'Maintained the APASS and the NAPASS database and kept it up to date with new observed data using the UNIX shell scripting. Ran photometry and astrometry programs (based on UNIX shell scripting) written by Dr. Arne Henden to calibrate observed APASS and NAPASS.',
+      worked_with_children: 'no',
+      'start-date': '2013-06',
+      'end-date': '2013-08'
+    },
+    n99sp: {
+      id: 'n99sp',
+      category: 'job',
+      role: 'Graduate teaching assistant',
+      org: 'Creighton University',
+      description: 'Taught the lab sections of General Physics 1 & General Physics 2. Assessed and graded the lab journals and exams. Guided students to solve physics problems on their own.',
+      worked_with_children: 'yes',
+      'start-date': '2013-08',
+      'end-date': '2016-11'
+    },
     na7w4: {
       id: 'na7w4',
       category: 'job',
@@ -124,7 +154,9 @@ module.exports = {
       'end-date': false
     }
   },
-  'school-experience': 'missing',
+  'school-experience': {
+    missing: 'true'
+  },
   vocation: 'I am confident that I will be successful in the PGCE programme because I have a passion for teaching.\r\n\r\nMy collaboration and communication skills developed through my undergraduate research. I honed my public speaking skills by presenting the results at the MSUM Student Academic Conference as well as two professional meetings. I presented a poster of my senior project at the American Physical Society’s (APS) Annual March Meeting in 2013 where I also served as the Society of Physics Students (SPS) student reporter.\r\n\r\nIn 2012, I was selected as an SPS summer intern and spent the summer working on American Institute of Physics’ (AIP) Career Pathways Project, which aims to better prepare students with a bachelor’s degree in physics for the Science, Technology, Engineering, and Mathematics (STEM) workforce. Under the supervision of Dr. Thomas Olsen, Kendra Redmond, Roman Czujko, and other collaborators at the American Center for Physics, I experienced how teamwork is valued in a professional setting.\r\n\r\nThis internship opportunity also opened my eyes to scientific and professional communication. I gave a talk about my summer internship at the 221st winter meeting of American Astronomical Society (AAS) in Long Beach, CA.\r\n\r\nAfter defending my master’s thesis at Strathclyde, I worked as a private tutor and taught the students physics and mathematics for four months, who were taking the Scottish Qualification Authority (SQA) designed curricula. As a teaching and a planetarium assistant for introductory astronomy, analog electronics, and experimental physics courses, I learnt to communicate science effectively with the students. As a teaching assistant for introductory astronomy courses, I taught and assessed students on names of constellations and stars. My job was to lead students to critically think and find answers independently before asking for direction. Altogether I am confident that my strong research, work, and academic background will help me to succeed in the PGCE programme.',
   referees: {
     principle: {

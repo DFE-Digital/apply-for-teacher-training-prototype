@@ -1,4 +1,9 @@
-{% set workHistory = data["work-history"] | toArray | sort(attribute="start-date") %}
+{% set workHistory = data["work-history"]
+  | toArray
+  | sort(attribute="start-date")
+  | selectattr("id")
+%}
+
 {% if workHistory.length >= 1 %}
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
@@ -12,18 +17,6 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-    {# Candidate has no work history #}
-    {% if data["work-history"]["missing"] %}
-      <tr class="govuk-table__row app-table__row--muted">
-        <td class="govuk-table__cell" colspan="3">
-          <strong>No work history</strong>. {{ data["work-history"]["missing"] }}
-        </td>
-        <td class="govuk-table__cell">
-          <a href="/profile/work-history/edit/missing?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> missing</span></a>
-        </td>
-      </tr>
-    {% endif %}
-
     {% for item in workHistory %}
       {# periodStart = Earliest date in required work history period #}
       {% set periodStart = "now" | date | replace("2019", "2014") %}
@@ -107,5 +100,31 @@
     </tbody>
   </table>
 {% else %}
-  <p class="govuk-body-s">No work history entered</p>
+  <h2 class="govuk-heading-s govuk-!-margin-bottom-2">No work history entered</h2>
+{% endif %}
+
+{% if data["work-history"]["missing"] and not workHistory.length %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16 govuk-!-margin-bottom-3",
+    rows: [{
+      key: {
+        text: "Explanation of why you’ve been out of the workplace"
+      },
+      value: {
+        text: data["work-history"]["missing"] | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: "/profile/work-history/edit/missing?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "explanation"
+        }]
+      }
+    }]
+  }) }}
+  {{ govukButton({
+    text: "Add job",
+    classes: "govuk-button--secondary",
+    href: "/profile/work-history/add/job"
+  }) }}
 {% endif %}

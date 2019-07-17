@@ -1,19 +1,10 @@
-{% set schoolExperience = data['school-experience'] | toArray %}
-{% if data['school-experience'] == "missing" %}
-  {% set insetTextHtml %}
-    <h2 class="govuk-heading-s govuk-!-margin-bottom-1">No school experience</h2>
-    <p class="govuk-body-s">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>.</p>
-  {% endset %}
-  {{ govukInsetText({
-    classes: "govuk-!-width-two-thirds govuk-!-margin-top-0 govuk-!-margin-bottom-3",
-    html: insetTextHtml
-  }) }}
-  {{ govukButton({
-    text: "Add school experience or role",
-    classes: "govuk-button--secondary",
-    href: "/profile/school-experience/add/role"
-  }) }}
-{% elif schoolExperience.length >= 1 %}
+{% set schoolExperience = data["school-experience"]
+  | toArray
+  | sort(attribute="start-date")
+  | selectattr("id")
+%}
+
+{% if schoolExperience.length >= 1 %}
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -45,5 +36,14 @@
     </tbody>
   </table>
 {% else %}
-  <p class="govuk-body-s">No school experiences entered</p>
+  <h2 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h2>
+{% endif %}
+
+{% if data["school-experience"]["missing"] and not schoolExperience.length %}
+  <p class="govuk-body-s govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
+  {{ govukButton({
+    text: "Add school experience or role",
+    classes: "govuk-button--secondary",
+    href: "/profile/school-experience/add/role"
+  }) }}
 {% endif %}

@@ -103,36 +103,6 @@ module.exports = {
     detail: 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'
   },
   'work-history': {
-    n7901: {
-      id: 'n7901',
-      category: 'job',
-      role: 'Undergraduate teaching assistant',
-      org: 'Minnesota State University Moorhead',
-      description: 'Leveraged exceptional communication skills to improve student performance in the Department of Physics and Astronomy. Provided comprehensive support for Introductory astronomy, analog electronics, and experimental physics courses. Tutored students and answered questions during lectures and lab sessions. Instructed students, assessed grades, and assisted with observation projects at the planetarium and the Paul P. Feder Observatory.',
-      worked_with_children: 'yes',
-      'start-date': '2010-01',
-      'end-date': '2013-05'
-    },
-    n8dh6: {
-      id: 'n8dh6',
-      category: 'job',
-      role: 'Summer intern',
-      org: 'American Association of Variable Star Observers',
-      description: 'Maintained the APASS and the NAPASS database and kept it up to date with new observed data using the UNIX shell scripting. Ran photometry and astrometry programs (based on UNIX shell scripting) written by Dr. Arne Henden to calibrate observed APASS and NAPASS.',
-      worked_with_children: 'no',
-      'start-date': '2013-06',
-      'end-date': '2013-08'
-    },
-    n99sp: {
-      id: 'n99sp',
-      category: 'job',
-      role: 'Graduate teaching assistant',
-      org: 'Creighton University',
-      description: 'Taught the lab sections of General Physics 1 & General Physics 2. Assessed and graded the lab journals and exams. Guided students to solve physics problems on their own.',
-      worked_with_children: 'yes',
-      'start-date': '2013-08',
-      'end-date': '2016-11'
-    },
     na7w4: {
       id: 'na7w4',
       category: 'job',
@@ -151,7 +121,7 @@ module.exports = {
       description: 'Taught Mathematics and Physics content covered in the Scottish National 5, the Higher and the Advanced Higher curricula. Assessed, graded and tracked individual’s progress in the above-mentioned subjects. Guided students to perform better in the exam by offering them mock exams and giving adequate scientific feedback.',
       worked_with_children: 'yes',
       'start-date': '2017-09',
-      'end-date': '-'
+      'end-date': false
     }
   },
   'school-experience': 'missing',

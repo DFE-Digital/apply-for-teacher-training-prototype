@@ -265,17 +265,25 @@ router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
   */
 router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
   const id = req.params.id
+  const data = req.session.data['work-history'][id]
 
+  // Create ISO 8601 start date
   const startMonth = req.body[`${id}-start-date-month`]
   const startYear = req.body[`${id}-start-date-year`]
-  const startDate = `${startYear}-${startMonth}`
+  data['start-date'] = false
 
+  if (startMonth && startYear) {
+    data['start-date'] = `${startYear}-${startMonth}`
+  }
+
+  // Create ISO 8601 end date
   const endMonth = req.body[`${id}-end-date-month`]
   const endYear = req.body[`${id}-end-date-year`]
-  const endDate = `${endYear}-${endMonth}`
+  data['end-date'] = false
 
-  req.session.data['work-history'][id]['start-date'] = startDate
-  req.session.data['work-history'][id]['end-date'] = endDate
+  if (endMonth && endYear) {
+    data['end-date'] = `${endYear}-${endMonth}`
+  }
 
   res.redirect(req.query.next || '/profile/work-history/review')
 })

@@ -1,4 +1,4 @@
-{% set workHistory = data["work-history"] | toArray %}
+{% set workHistory = data["work-history"] | toArray | sort(attribute="start-date") %}
 {% if workHistory.length >= 1 %}
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
@@ -24,7 +24,9 @@
       </tr>
     {% endif %}
 
-    {% for item in workHistory | sort(attribute="start-date") %}
+    {% for item in workHistory %}
+      {% set nextItem = workHistory[loop.index] %}
+
       {# Unexplained gap (before work history commences) #}
       {% set periodStart = "now" | date | replace("2019", "2014") %}
       {% set periodStartEpoch = periodStart | date("X") %}
@@ -56,37 +58,35 @@
         </tr>
       {% endif %}
 
-      {# Formatted display dates #}
-      {% set startDate = item["start-date"] | date("LL/yyyy") %}
+      {# Job/gap item #}
+      {% set itemStartEpoch = item["start-date"] | date("X") %}
+      {% set itemStartDate = item["start-date"] | date("LL/yyyy") %}
       {% if item["end-date"] != "-" %}
-        {% set endDate = item["end-date"] | date("LL/yyyy") %}
+        {% set itemEndEpoch = item["end-date"] | date("X") %}
+        {% set itemEndDate = item["end-date"] | date("LL/yyyy") %}
       {% else %}
-        {% set endDate = "Present" %}
+        {% set itemEndEpoch = "now" | date("X") %}
+        {% set itemEndDate = "Present" %}
       {% endif %}
 
-      {# Gap #}
-      {% if item.category == "gap" %}
-        <tr class="govuk-table__row app-table__row--muted">
-          <th class="govuk-table__header">Gap</td>
-          <td class="govuk-table__cell">{{ item.description }}</td>
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-          <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/gap/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> gap</span></a>
-          </td>
-        </tr>
-      {% endif %}
+      {# Item duration #}
+      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+      {% set itemMonths = (itemDuration / 2678400) | round %}
 
-      {# Job #}
-      {% if item.category == "job" %}
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header">{{ item.role }}</th>
-          <td class="govuk-table__cell">{{ item.org }}</td>
-          <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
-          <td class="govuk-table__cell">
-            <a href="/profile/work-history/edit/job/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> job</span></a>
-          </td>
-        </tr>
-      {% endif %}
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">
+        {% if item.category == "job" %}
+          {{ item.role }}
+        {% elif item.category == "gap" %}
+          <span class="govuk-!-font-weight-regular">{{ itemMonths }} month gap</span>
+        {% endif %}
+        </th>
+        <td class="govuk-table__cell">{{ item.org or item.description }}</td>
+        <td class="govuk-table__cell">{{ itemStartDate }} - {{ itemEndDate }}</td>
+        <td class="govuk-table__cell">
+          <a href="/profile/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
+        </td>
+      </tr>
 
       {# Unexplained gaps (during work history) #}
 
@@ -96,7 +96,6 @@
       {% set gapStartIso = item["end-date"] | date("yyyy-LL") %}
 
       {# Gap ends with start date of next item in loop else today’s date #}
-      {% set nextItem = workHistory[loop.index] %}
       {% if nextItem %}
         {% set gapEndEpoch = nextItem["start-date"] | date("X") %}
         {% set gapEndDate = nextItem["start-date"] | date("LL/yyyy") %}
@@ -107,14 +106,16 @@
         {% set gapEndIso = "now" | date("yyyy-LL") %}
       {% endif %}
 
-      {# Gap length #}
+      {# Gap duration #}
       {% set gapDuration = gapEndEpoch - gapStartEpoch %}
       {% set gapMonths = (gapDuration / 2678400) | round %}
 
       {% if gapEndEpoch > gapStartEpoch and gapMonths > 1 %}
         <tr class="govuk-table__row app-table__row--muted">
-          <td class="govuk-table__cell">Unexplained gap ({{ gapMonths }} months)</td>
-          <td class="govuk-table__cell"></td>
+          <th class="govuk-table__cell">
+            <span class="govuk-!-font-weight-regular">{{ gapMonths }} month gap</span>
+          </th>
+          <td class="govuk-table__cell">–</td>
           <td class="govuk-table__cell">{{ gapStartDate }} - {{ gapEndDate }}</td>
           <td class="govuk-table__cell">
             <a href="/profile/work-history/add/gap?start={{ gapStartIso }}&end={{ gapEndIso }}">Explain&nbsp;gap</a>

@@ -9,9 +9,6 @@
 {% endif %}
 
 {% block primary %}
-  start {{ (data["work-history"][id]["start-date"] or start) | date('LL') }}<br>
-  end {{ (data["work-history"][id]["end-date"] or end) | date('LL') }}
-
   {{ govukDateInput({
     fieldset: {
       legend: {

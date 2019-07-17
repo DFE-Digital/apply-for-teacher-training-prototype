@@ -34,7 +34,9 @@ $govuk-global-styles: true;
   padding-right: govuk-spacing(2);
 }
 
-// Align table cell content to top of row
+// Align content to top of table cell
+// Use tabular numbers in table cell
 .govuk-table__cell {
+  @include govuk-font($size: false, $tabular: true);
   vertical-align: top;
 }

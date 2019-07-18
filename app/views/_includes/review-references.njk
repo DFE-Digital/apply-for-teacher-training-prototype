@@ -3,8 +3,8 @@
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col" width="30%">Referee name</th>
-        <th class="govuk-table__header" scope="col">Type</th>
+        <th class="govuk-table__header" scope="col" width="30%">Referee</th>
+        <th class="govuk-table__header" scope="col">Relationship</th>
         <th class="govuk-table__header" scope="col">Email</th>
         <th class="govuk-table__header govuk-!-padding-right-1" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
@@ -14,9 +14,12 @@
     <tbody class="govuk-table__body">
       {% for item in references %}
       <tr class="govuk-table__row">
-        <th class="govuk-table__header">{{ item.name }}</th>
+        <th class="govuk-table__header">
+          <h3 class="app-heading-xs govuk-!-margin-0">{{ item.name }}</h3>
+          <p class="app-caption-xs">{{ item.type }} referee</p>
+        </th>
         <td class="govuk-table__cell">
-          {{ item.type }} ({{ item.relationship }})
+          {{ item.relationship }}
         {% if item["character-explanation"] %}
           <br>{{ item["character-explanation"] }}
         {% endif %}

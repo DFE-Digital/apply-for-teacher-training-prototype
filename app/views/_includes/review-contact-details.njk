@@ -37,6 +37,7 @@
       text: (data["contact-details"]["phone-number"] | default("Not entered"))
     },
     actions: {
+      classes: "govuk-!-padding-right-2",
       items: [{
         href: "/profile/contact-details?referrer=" + referrer,
         text: "Edit",
@@ -51,6 +52,7 @@
       text: (data["contact-details"]["email"] | default("Not entered"))
     },
     actions: {
+      classes: "govuk-!-padding-right-2",
       items: [{
         href: "/profile/contact-details?referrer=" + referrer,
         text: "Edit",
@@ -65,6 +67,7 @@
       html: addressHtml
     },
     actions: {
+      classes: "govuk-!-padding-right-2",
       items: [{
         href: addressEditHref + "?referrer=" + referrer,
         text: "Edit",

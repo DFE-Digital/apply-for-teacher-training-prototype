@@ -8,7 +8,7 @@
       <th class="govuk-table__header" scope="col">Institution</th>
     {% endif %}
       <th class="govuk-table__header" scope="col">Year awarded</th>
-      <th class="govuk-table__header" scope="col">
+      <th class="govuk-table__header govuk-!-padding-right-2" scope="col">
         <span class="govuk-visually-hidden">Actions</span>
       </th>
     </tr>
@@ -21,7 +21,7 @@
       <td class="govuk-table__cell">{{ item.subject }}</td>
       <td class="govuk-table__cell">Missing</td>
       <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
-      <td class="govuk-table__cell">
+      <td class="govuk-table__cell govuk-!-padding-right-2">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>
     </tr>
@@ -35,7 +35,7 @@
       </td>
     {% endif %}
       <td class="govuk-table__cell">{{ item.year }}</td>
-      <td class="govuk-table__cell">
+      <td class="govuk-table__cell govuk-!-padding-right-2">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>
         </a>
       </td>

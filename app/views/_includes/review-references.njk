@@ -6,7 +6,7 @@
         <th class="govuk-table__header" scope="col" width="30%">Referee name</th>
         <th class="govuk-table__header" scope="col">Type</th>
         <th class="govuk-table__header" scope="col">Email</th>
-        <th class="govuk-table__header" scope="col">
+        <th class="govuk-table__header govuk-!-padding-right-1" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
         </th>
       </tr>
@@ -22,7 +22,7 @@
         {% endif %}
         </td>
         <td class="govuk-table__cell">{{ item.email }}</td>
-        <td class="govuk-table__cell">
+        <td class="govuk-table__cell govuk-!-padding-right-1">
           <a href="/profile/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>
         </td>
       </tr>

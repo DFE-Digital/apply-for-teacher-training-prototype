@@ -11,7 +11,7 @@
         <th class="govuk-table__header" scope="col" width="30%">Job title</th>
         <th class="govuk-table__header" scope="col">Organisation</th>
         <th class="govuk-table__header" scope="col">Dates</th>
-        <th class="govuk-table__header" scope="col">
+        <th class="govuk-table__header govuk-!-padding-right-2" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
         </th>
       </tr>
@@ -41,7 +41,7 @@
             {{ gapStart | date("LL/yyyy") }} -
             {{ gapEnd | date("LL/yyyy") }}
           </td>
-          <td class="govuk-table__cell">
+          <td class="govuk-table__cell govuk-!-padding-right-2">
             <a href="/profile/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}">Explain&nbsp;gap</a>
           </td>
         </tr>
@@ -67,7 +67,7 @@
           {{ itemStart | date("LL/yyyy") }} -
           {{ itemEnd | date("LL/yyyy") if item["end-date"] else "Present" }}
         </td>
-        <td class="govuk-table__cell">
+        <td class="govuk-table__cell govuk-!-padding-right-2">
           <a href="/profile/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
         </td>
       </tr>
@@ -91,7 +91,7 @@
             {{ gapStart | date("LL/yyyy") }} -
             {{ gapEnd | date("LL/yyyy") if nextItem else "Present" }}
           </td>
-          <td class="govuk-table__cell">
+          <td class="govuk-table__cell govuk-!-padding-right-2">
             <a href="/profile/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}">Explain&nbsp;gap</a>
           </td>
         </tr>
@@ -114,6 +114,7 @@
         text: data["work-history"]["missing"] | nl2br | safe
       },
       actions: {
+        classes: "govuk-!-padding-right-2",
         items: [{
           href: "/profile/work-history/edit/missing?referrer=" + referrer,
           text: "Edit",

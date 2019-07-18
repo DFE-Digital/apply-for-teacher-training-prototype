@@ -11,7 +11,7 @@
         <th class="govuk-table__header govuk-!-width-one-quarter" scope="col">Dates</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Role</th>
         <th class="govuk-table__header govuk-!-width-one-half" scope="col">Organisation</th>
-        <th class="govuk-table__header" scope="col">
+        <th class="govuk-table__header govuk-!-padding-right-2" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
         </th>
       </tr>
@@ -28,7 +28,7 @@
         <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
         <td class="govuk-table__cell">{{ item.role }}</td>
         <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell">
+        <td class="govuk-table__cell govuk-!-padding-right-2">
           <a href="/profile/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
         </td>
       </tr>

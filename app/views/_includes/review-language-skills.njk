@@ -8,6 +8,7 @@
       text: ("Yes" if data["language-skills"]["first"] == "english" else "No: " + data["language-skills"]["detail"]) | nl2br | safe
     },
     actions: {
+      classes: "govuk-!-padding-right-2",
       items: [{
         href: "/profile/language-skills/?referrer=" + referrer,
         text: "Edit",

@@ -8,8 +8,8 @@
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col" width="30%">Job title</th>
-        <th class="govuk-table__header" scope="col">Organisation</th>
+        <th class="govuk-table__header" scope="col" width="30%">Job</th>
+        <th class="govuk-table__header" scope="col">Description</th>
         <th class="govuk-table__header" scope="col">Dates</th>
         <th class="govuk-table__header govuk-!-padding-right-2" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
@@ -38,7 +38,7 @@
           <td class="govuk-table__cell">{{ gapMonths }} month gap</td>
           <td class="govuk-table__cell">–</td>
           <td class="govuk-table__cell">
-            {{ gapStart | date("LL/yyyy") }} -
+            {{ gapStart | date("LL/yyyy") }}&nbsp;-
             {{ gapEnd | date("LL/yyyy") }}
           </td>
           <td class="govuk-table__cell govuk-!-padding-right-2">
@@ -57,14 +57,22 @@
       <tr class="govuk-table__row">
         <th class="govuk-table__header">
         {% if item.category == "job" %}
-          {{ item.role }}
+          <h3 class="app-heading-xs govuk-!-margin-0">{{ item.role }}</h3>
+          <p class="app-caption-xs">
+            <span class="govuk-visually-hidden">at</span>{{ item.org }}
+          </p>
         {% elif item.category == "gap" %}
-          <span class="govuk-!-font-weight-regular">{{ itemMonths }} month gap</span>
+          <p class="govuk-body-s">{{ itemMonths }} month gap</p>
         {% endif %}
         </th>
-        <td class="govuk-table__cell">{{ item.org or item.description }}</td>
         <td class="govuk-table__cell">
-          {{ itemStart | date("LL/yyyy") }} -
+          <p class="govuk-body-s">{{ item.description | nl2br | safe }}</p>
+        {% if item["worked-with-children"] == "Yes" %}
+          <p class="govuk-body-s">Role involve working with children</p>
+        {% endif %}
+        </td>
+        <td class="govuk-table__cell">
+          {{ itemStart | date("LL/yyyy") }}&nbsp;-
           {{ itemEnd | date("LL/yyyy") if item["end-date"] else "Present" }}
         </td>
         <td class="govuk-table__cell govuk-!-padding-right-2">
@@ -88,7 +96,7 @@
           </th>
           <td class="govuk-table__cell">–</td>
           <td class="govuk-table__cell">
-            {{ gapStart | date("LL/yyyy") }} -
+            {{ gapStart | date("LL/yyyy") }}&nbsp;-
             {{ gapEnd | date("LL/yyyy") if nextItem else "Present" }}
           </td>
           <td class="govuk-table__cell govuk-!-padding-right-2">

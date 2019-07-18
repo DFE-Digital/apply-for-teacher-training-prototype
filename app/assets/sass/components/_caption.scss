@@ -1,0 +1,5 @@
+.app-caption-xs {
+  @include govuk-font($size: 16);
+  display: block;
+  color: $govuk-secondary-text-colour;
+}

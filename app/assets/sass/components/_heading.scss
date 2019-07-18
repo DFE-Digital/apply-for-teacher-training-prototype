@@ -1,0 +1,7 @@
+.app-heading-xs {
+  @include govuk-text-colour;
+  @include govuk-font($weight: bold, $size: 16);
+  display: block;
+  margin-top: 0;
+  @include govuk-responsive-margin(4, "bottom");
+}

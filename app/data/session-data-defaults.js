@@ -175,7 +175,7 @@ module.exports = {
       timespan: 'I have known Jane since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
-      'character-explanation': 'Jane is the faith leader at my local church.'
+      'character-explanation': 'I haven’t been in the workplace since having a baby, and left university in 2000, so can no longer contact any of my previous tutors.'
     }
   }
 }

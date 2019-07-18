@@ -16,13 +16,13 @@
       <tr class="govuk-table__row">
         <th class="govuk-table__header">
           <h3 class="app-heading-xs govuk-!-margin-0">{{ item.name }}</h3>
-          <p class="app-caption-xs">{{ item.type }} referee</p>
+          <p class="app-caption-xs">{{ item.relationship }}</p>
         </th>
         <td class="govuk-table__cell">
-          {{ item.relationship }}
-        {% if item["character-explanation"] %}
-          <br>{{ item["character-explanation"] }}
-        {% endif %}
+          <p class="govuk-body-s">{{ item.timespan }}</p>
+          <p class="govuk-body-s">
+            {{ "This is a character reference – " + item["character-explanation"] if item["character-explanation"] }}
+          </p>
         </td>
         <td class="govuk-table__cell">{{ item.email }}</td>
         <td class="govuk-table__cell govuk-!-padding-right-1">

@@ -80,8 +80,11 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
 })
 
 router.get('/profile/contact-details/address/:action', (req, res) => {
+  const referrer = req.query.referrer
+
   res.render('profile/contact-details/address', {
-    action: req.params.action
+    action: req.params.action,
+    formaction: referrer || '/profile/contact-details/review'
   })
 })
 

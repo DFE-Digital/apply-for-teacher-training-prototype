@@ -18,16 +18,15 @@
     </thead>
     <tbody class="govuk-table__body">
     {% for item in schoolExperience %}
-      {% set startDate = item["start-day"] + "/" + item["start-month"] + "/" + item["start-year"] %}
-      {% if item.end-year != "" %}
-        {% set endDate = item["end-day"] + "/" + item["end-month"] + "/" + item["end-year"] %}
-      {% else %}
-        {% set endDate = 'Present' %}
-      {% endif %}
+      {% set itemStart = item["start-date"] %}
+      {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
       <tr class="govuk-table__row">
         <th class="govuk-table__header">{{ item.role }}</th>
         <td class="govuk-table__cell">{{ item.org }}</td>
-        <td class="govuk-table__cell">{{ startDate }} - {{ endDate }}</td>
+        <td class="govuk-table__cell">
+          {{ itemStart | date("dd/LL/yyyy") }}&nbsp;-
+          {{ itemEnd | date("dd/LL/yyyy") if item["end-date"] else "Present" }}
+        </td>
         <td class="govuk-table__cell govuk-!-padding-right-2">
           <a href="/profile/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
         </td>

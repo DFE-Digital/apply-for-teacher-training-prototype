@@ -40,25 +40,23 @@
     hint: {
       text: "For example, 01 05 2018"
     },
-    id: "school-experience-" + id + "-start",
+    id: "school-experience-" + id + "-start-date",
+    namePrefix: id + "-start-date",
     items: [{
-      classes: "govuk-input--width-2",
       label: "Day",
-      id: "school-experience-" + id + "-start-day",
-      name: "school-experience[" + id + "][start-day]",
-      value: data["school-experience"][id]["start-day"]
+      name: "day",
+      value: data["school-experience"][id]["start-date"] | date('LL'),
+      classes: "govuk-input--width-2"
     }, {
-      classes: "govuk-input--width-2",
       label: "Month",
-      id: "school-experience-" + id + "-start-month",
-      name: "school-experience[" + id + "][start-month]",
-      value: data["school-experience"][id]["start-month"]
+      name: "month",
+      value: data["school-experience"][id]["start-date"] | date('LL'),
+      classes: "govuk-input--width-2"
     }, {
-      classes: "govuk-input--width-4",
       label: "Year",
-      id: "school-experience-" + id + "-start-year",
-      name: "school-experience[" + id + "][start-year]",
-      value: data["school-experience"][id]["start-year"]
+      name: "year",
+      value: data["school-experience"][id]["start-date"] | date('yyyy'),
+      classes: "govuk-input--width-4"
     }]
   }) }}
 
@@ -72,25 +70,23 @@
     hint: {
       text: "For example, 01 05 2019"
     },
-    id: "school-experience-" + id + "-end",
+    id: "school-experience-" + id + "-end-date",
+    namePrefix: id + "-end-date",
     items: [{
-      classes: "govuk-input--width-2",
       label: "Day",
-      id: "school-experience-" + id + "-end-day",
-      name: "school-experience[" + id + "][end-day]",
-      value: data["school-experience"][id]["end-day"]
+      name: "day",
+      value: data["school-experience"][id]["end-date"] | date('LL'),
+      classes: "govuk-input--width-2"
     }, {
-      classes: "govuk-input--width-2",
       label: "Month",
-      id: "school-experience-" + id + "-end-month",
-      name: "school-experience[" + id + "][end-month]",
-      value: data["school-experience"][id]["end-month"]
+      name: "month",
+      value: data["school-experience"][id]["end-date"] | date('LL'),
+      classes: "govuk-input--width-2"
     }, {
-      classes: "govuk-input--width-4",
       label: "Year",
-      id: "school-experience-" + id + "-end-year",
-      name: "school-experience[" + id + "][end-year]",
-      value: data["school-experience"][id]["end-year"]
+      name: "year",
+      value: data["school-experience"][id]["end-date"] | date('yyyy'),
+      classes: "govuk-input--width-4"
     }]
   }) }}
 
@@ -99,7 +95,7 @@
     text: "Save and add another role",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/profile/school-experience/add/role"
+      formaction: "/profile/school-experience/update/role/"+ id + "?next=/profile/school-experience/add/role"
     }
   }) }}
 {% endif %}

@@ -238,21 +238,22 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 })
 
 /**
-  * Profile: Work history - Add/edit job/gap
+  * Profile: Work history and school experience - Add/edit job/gap/role
   *
   * @param {String} action add || edit
-  * @param {String} type job || gap
-  * @param {String} id Job ID
+  * @param {String} type job || gap || role
+  * @param {String} id ID
   *
   */
-router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
+router.get('/profile/:section(work-history|school-experience)/:action/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
+  const section = req.params.section
   const queryString = querystring.stringify(req.query)
 
-  res.render(`profile/work-history/${type}`, {
+  res.render(`profile/${section}/${type}`, {
     action: req.params.action,
-    formaction: `/profile/work-history/update/${type}/${id}?${queryString}`,
+    formaction: `/profile/${section}/update/${type}/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,
     end: `${req.query.end}`
@@ -267,46 +268,32 @@ router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
   * @param {String} id Job/gap ID
   *
   */
-router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
+router.post('/profile/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
-  const data = req.session.data['work-history'][id]
+  const section = req.params.section
+  const data = req.session.data[section][id]
 
   // Create ISO 8601 start date
+  const startDay = req.body[`${id}-start-date-day`] || '01'
   const startMonth = req.body[`${id}-start-date-month`]
   const startYear = req.body[`${id}-start-date-year`]
   data['start-date'] = false
 
   if (startMonth && startYear) {
-    data['start-date'] = `${startYear}-${startMonth}`
+    data['start-date'] = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
+  const endDay = req.body[`${id}-end-date-day`] || '01'
   const endMonth = req.body[`${id}-end-date-month`]
   const endYear = req.body[`${id}-end-date-year`]
   data['end-date'] = false
 
   if (endMonth && endYear) {
-    data['end-date'] = `${endYear}-${endMonth}`
+    data['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
 
-  res.redirect(req.query.referrer || '/profile/work-history/review')
-})
-
-/**
-  * Profile: School experience - Add/edit role
-  *
-  * @param {String} action add || edit
-  * @param {String} id Role ID
-  *
-  */
-router.get('/profile/school-experience/:action/role/:id', (req, res) => {
-  const referrer = req.query.referrer
-
-  res.render('profile/school-experience/role', {
-    action: req.params.action,
-    formaction: referrer || '/profile/school-experience/review',
-    id: req.params.id
-  })
+  res.redirect(req.query.referrer || `/profile/${section}/review`)
 })
 
 /**

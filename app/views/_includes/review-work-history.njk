@@ -51,7 +51,7 @@
       {% set itemStart = item["start-date"] %}
       {% set itemStartEpoch = itemStart | date("X") %}
       {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
-      {% set itemEndEpoch = "now" | date("X") %}
+      {% set itemEndEpoch = itemEnd | date("X") %}
       {% set itemDuration = itemEndEpoch - itemStartEpoch %}
       {% set itemMonths = (itemDuration / 2678400) | round %}
       <tr class="govuk-table__row">

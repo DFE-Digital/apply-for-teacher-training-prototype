@@ -245,10 +245,11 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 router.get('/profile/work-history/:action/:type(job|gap)/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
+  const queryString = querystring.stringify(req.query)
 
   res.render(`profile/work-history/${type}`, {
     action: req.params.action,
-    formaction: `/profile/work-history/update/${type}/${id}`,
+    formaction: `/profile/work-history/update/${type}/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,
     end: `${req.query.end}`
@@ -285,7 +286,7 @@ router.post('/profile/work-history/update/:type(job|gap)/:id', (req, res) => {
     data['end-date'] = `${endYear}-${endMonth}`
   }
 
-  res.redirect(req.query.next || '/profile/work-history/review')
+  res.redirect(req.query.referrer || '/profile/work-history/review')
 })
 
 /**

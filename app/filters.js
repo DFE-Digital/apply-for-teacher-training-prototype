@@ -1,4 +1,5 @@
 const { DateTime } = require('luxon')
+const humanizeDuration = require('humanize-duration')
 
 module.exports = function (env) {
   /**
@@ -23,6 +24,24 @@ module.exports = function (env) {
       }).toFormat(format)
 
       return datetime
+    }
+  }
+
+  /**
+   * Convert milliseconds to readable duration
+   * @type {String} str
+   *
+  */
+  filters.duration = (int) => {
+    if (!isNaN(int)) {
+      const duration = humanizeDuration(int, {
+        delimiter: ' and ',
+        largest: 2,
+        round: true,
+        units: ['y', 'mo']
+      })
+
+      return duration
     }
   }
 

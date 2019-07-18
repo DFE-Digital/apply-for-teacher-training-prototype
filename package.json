@@ -32,6 +32,7 @@
     "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.0",
+    "humanize-duration": "^3.20.0",
     "keypather": "^3.0.0",
     "luxon": "^1.17.1",
     "marked": "^0.7.0",

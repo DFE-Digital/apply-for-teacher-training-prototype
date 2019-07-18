@@ -20,22 +20,23 @@
     {% for item in workHistory %}
       {# periodStart = Earliest date in required work history period #}
       {% set periodStart = "now" | date | replace("2019", "2014") %}
-      {% set periodStartEpoch = periodStart | date("X") %}
+      {% set periodStartEpoch = periodStart | date("x") %}
 
       {# firstStart = Start date of first item in work history #}
       {% set firstStart = item["start-date"] %}
-      {% set firstStartEpoch = firstStart | date("X") %}
+      {% set firstStartEpoch = firstStart | date("x") %}
 
       {% if loop.first and firstStartEpoch > periodStartEpoch %}
         {# Unexplained gap (prior to work history commencing #}
         {% set gapStart = periodStart %}
-        {% set gapStartEpoch = gapStart | date("X") %}
+        {% set gapStartEpoch = gapStart | date("x") %}
         {% set gapEnd = firstStart %}
-        {% set gapEndEpoch = gapEnd | date("X") %}
+        {% set gapEndEpoch = gapEnd | date("x") %}
         {% set gapDuration = gapEndEpoch - gapStartEpoch %}
-        {% set gapMonths = (gapDuration / 2678400) | round %}
         <tr class="govuk-table__row app-table__row--muted">
-          <td class="govuk-table__cell">{{ gapMonths }} month gap</td>
+          <th class="govuk-table__cell">
+            <span class="govuk-!-font-weight-regular">Gap ({{ gapDuration | duration }})</span>
+          </th>
           <td class="govuk-table__cell">–</td>
           <td class="govuk-table__cell">
             {{ gapStart | date("LL/yyyy") }}&nbsp;-
@@ -49,11 +50,10 @@
 
       {# Job/gap item #}
       {% set itemStart = item["start-date"] %}
-      {% set itemStartEpoch = itemStart | date("X") %}
+      {% set itemStartEpoch = itemStart | date("x") %}
       {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
-      {% set itemEndEpoch = itemEnd | date("X") %}
+      {% set itemEndEpoch = itemEnd | date("x") %}
       {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-      {% set itemMonths = (itemDuration / 2678400) | round %}
       <tr class="govuk-table__row">
         <th class="govuk-table__header">
         {% if item.category == "job" %}
@@ -62,7 +62,7 @@
             <span class="govuk-visually-hidden">at</span>{{ item.org }}
           </p>
         {% elif item.category == "gap" %}
-          <p class="govuk-body-s">{{ itemMonths }} month gap</p>
+          <p class="govuk-body-s">Gap ({{ itemDuration | duration }})</p>
         {% endif %}
         </th>
         <td class="govuk-table__cell">
@@ -83,16 +83,14 @@
       {# Unexplained gap (during work history) #}
       {% set nextItem = workHistory[loop.index] %}
       {% set gapStart = item["end-date"] %}
-      {% set gapStartEpoch = gapStart | date("X") %}
+      {% set gapStartEpoch = gapStart | date("x") %}
       {% set gapEnd = nextItem["start-date"] if nextItem else "now" %}
-      {% set gapEndEpoch = gapEnd | date("X") %}
+      {% set gapEndEpoch = gapEnd | date("x") %}
       {% set gapDuration = gapEndEpoch - gapStartEpoch %}
-      {% set gapMonths = (gapDuration / 2678400) | round %}
-
-      {% if gapEndEpoch > gapStartEpoch and gapMonths > 1 %}
+      {% if gapEndEpoch > gapStartEpoch and gapDuration > 2678400000 %}
         <tr class="govuk-table__row app-table__row--muted">
           <th class="govuk-table__cell">
-            <span class="govuk-!-font-weight-regular">{{ gapMonths }} month gap</span>
+            <span class="govuk-!-font-weight-regular">Gap ({{ gapDuration | duration }})</span>
           </th>
           <td class="govuk-table__cell">–</td>
           <td class="govuk-table__cell">

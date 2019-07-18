@@ -115,7 +115,7 @@ app.locals.providers = require('./app/data/providers')
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')
-let sessionOptions = {
+const sessionOptions = {
   secret: sessionName,
   cookie: {
     maxAge: 1000 * 60 * 60 * 4, // 4 hours
@@ -194,9 +194,8 @@ app.post(/^\/([^.]+)$/, function (req, res) {
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error(`Page not found: ${req.path}`)
-  err.status = 404
-  next(err)
+  res.status(404)
+  res.render('404')
 })
 
 // Display error

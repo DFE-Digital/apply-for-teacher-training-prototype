@@ -50,6 +50,19 @@ router.get('/profile/:section/add/:thing', (req, res) => {
 /**
   * Profile: Personal details
   */
+router.get('/profile/personal-details/:action', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/personal-details/index', {
+    action,
+    formaction: referrer || '/profile/personal-details/answer'
+  })
+})
+
+/**
+  * Profile: Personal details - answer branching
+  */
 router.post('/profile/personal-details/answer', (req, res) => {
   const nationality = req.session.data['candidate']['nationality']
 
@@ -58,12 +71,25 @@ router.post('/profile/personal-details/answer', (req, res) => {
   if (eea.includes(nationality)) {
     res.redirect('/profile')
   } else {
-    res.redirect('/profile/personal-details/residency-status')
+    res.redirect('/profile/personal-details/residency-status/add')
   }
 })
 
 /**
-  * Profile: Contact details
+  * Profile: Residency status
+  */
+router.get('/profile/personal-details/residency-status/:action', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/personal-details/residency-status', {
+    action,
+    formaction: referrer || '/profile/'
+  })
+})
+
+/**
+  * Profile: Contact details - answer branching
   */
 router.post('/profile/contact-details/address-answer', (req, res) => {
   const location = req.session.data['contact-details']['address-type']
@@ -149,7 +175,7 @@ router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/
 })
 
 /**
-  * Profile: Qualifications - Degree/GCSE branch logic
+  * Profile: Qualifications - Degree/GCSE answer branching
   * @param {String} action add || edit
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID

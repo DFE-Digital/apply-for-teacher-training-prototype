@@ -1,7 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Personal details" %}
-{% set formaction = "/profile/personal-details/answer" %}
+{% if action == "edit" %}
+  {% set title = "Edit personal details" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Personal details" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -112,7 +117,7 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}
 

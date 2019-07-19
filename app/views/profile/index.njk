@@ -21,7 +21,7 @@
     classes: "govuk-!-margin-bottom-4",
     items: [{
       text: "Personal details",
-      href: "/profile/personal-details",
+      href: "/profile/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
       id: "personal-details",
       completed: data["candidate"]["nationality"]
     }, {

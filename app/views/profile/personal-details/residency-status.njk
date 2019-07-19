@@ -1,8 +1,13 @@
 {% extends "_form.njk" %}
 
-{% set title = "What is your residency status?" %}
 {% set parent = "Personal details" %}
-{% set formaction = "/profile" %}
+{% if action == "edit" %}
+  {% set title = "Edit your residency status" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "What is your residency status?" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block primary %}
   {% set rightToWorkStudy %}
@@ -85,6 +90,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

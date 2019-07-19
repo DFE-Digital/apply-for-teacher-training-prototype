@@ -1,7 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set parent = "Language skills" %}
-{% set title = "Is English your first language?" %}
+{% set title = "Language skills" %}
 {% set formaction = "/profile" %}
 
 {% block pageNavigation %}
@@ -31,6 +30,12 @@
 {% endset -%}
 
   {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is English your first language?",
+        classes: "govuk-label--s"
+      }
+    },
     idPrefix: "language-skills-first",
     name: "language-skills[first]",
     items: [{

@@ -1,7 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Your teaching vocation" %}
-{% set formaction = "/profile/" %}
+{% if action == "edit" %}
+  {% set title = "Edit your teaching vocation" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Your teaching vocation" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -19,25 +24,36 @@
 
 {% block primary %}
   <p class="govuk-body-l">Use this section to showcase your motivation, commitment and teaching potential, backing up your answer with specific examples.</p>
-  <p class="govuk-body">Give providers an insight into your personality and character by writing honestly and thoughtfully. Avoid cliché and write in clear, correct, concise English.</p>
-  <p class="govuk-body">You can ask your training provider for examples written by successful applicants, or register with <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a> for help from a teacher training advisor.</p>
-  <p class="govuk-body">Suggested topics to cover include:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>reflections on why you want to be a teacher</li>
-    <li>your passion for your subject and the age group you’ve chosen to teach</li>
-    <li>your engagement with the welfare and education of children and/or young people</li>
-    <li>an understanding of the demands and rewards of the profession</li>
-    <li>the personal qualities that will make you a good teacher</li>
-    <li>your contribution to the life of the school outside the classroom  – for example, running extra-curricular activities and clubs</li>
-    <li>if you have school experience or have worked as a volunteer with children or young people, give details of what this has taught you</li>
-  </ul>
-  <p class="govuk-body">You should:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>draft your answer and check it’s not over the 500 word limit</li>
-    <li>proofread it carefully for spelling and grammar</li>
-    <li>ask someone you trust for their opinion before you submit</li>
-    <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
-  </ul>
+  {% set guidanceHtml %}
+    <p class="govuk-body">Give providers an insight into your personality and character by writing honestly and thoughtfully. Avoid cliché and write in clear, correct, concise English.</p>
+    <p class="govuk-body">You can ask your training provider for examples written by successful applicants, or register with <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a> for help from a teacher training advisor.</p>
+    <p class="govuk-body">Suggested topics to cover include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>reflections on why you want to be a teacher</li>
+      <li>your passion for your subject and the age group you’ve chosen to teach</li>
+      <li>your engagement with the welfare and education of children and/or young people</li>
+      <li>an understanding of the demands and rewards of the profession</li>
+      <li>the personal qualities that will make you a good teacher</li>
+      <li>your contribution to the life of the school outside the classroom  – for example, running extra-curricular activities and clubs</li>
+      <li>if you have school experience or have worked as a volunteer with children or young people, give details of what this has taught you</li>
+    </ul>
+    <p class="govuk-body">You should:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>draft your answer and check it’s not over the 500 word limit</li>
+      <li>proofread it carefully for spelling and grammar</li>
+      <li>ask someone you trust for their opinion before you submit</li>
+      <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
+    </ul>
+  {% endset %}
+
+  {% if action == "edit" %}
+    {{ govukDetails({
+      summaryText: "Help completing this question",
+      html: guidanceHtml
+    }) }}
+  {% else %}
+    {{ guidanceHtml | safe }}
+  {% endif %}
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
@@ -54,6 +70,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

@@ -61,7 +61,7 @@
       completed: data["referees"]
     }, {
       text: "Your teaching vocation",
-      href: "/profile/vocation",
+      href: "/profile/vocation" + ("/edit" if data["vocation"] else "/add"),
       id: "vocation",
       completed: data["vocation"]
     }]

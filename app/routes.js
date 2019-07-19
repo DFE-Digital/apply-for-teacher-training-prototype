@@ -323,4 +323,21 @@ router.get('/profile/references/:action/referee/:id', (req, res) => {
   })
 })
 
+/**
+  * Profile: Vocation - Add/edit vocation statement
+  *
+  * @param {String} action add || edit
+  * @param {String} id principle || secondary
+  *
+  */
+router.get('/profile/vocation/:action', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/vocation/index', {
+    action,
+    formaction: referrer || '/profile/'
+  })
+})
+
 module.exports = router

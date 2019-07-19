@@ -41,7 +41,7 @@
       completed: data["subject-knowledge"]
     }, {
       text: "Language skills",
-      href: "/profile/language-skills",
+      href: "/profile/language-skills" + ("/edit" if data["language-skills"] else "/add"),
       id: "language-skills",
       completed: data["language-skills"]
     }, {

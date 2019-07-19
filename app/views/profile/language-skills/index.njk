@@ -1,7 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Language skills" %}
-{% set formaction = "/profile" %}
+{% if action == "edit" %}
+  {% set title = "Edit your language skills" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Language skills" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -53,6 +58,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

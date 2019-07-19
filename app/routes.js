@@ -9,7 +9,6 @@ const generateRandomString = () => {
 
 /**
   * Apply: Populate pages with course and provider details
-  *
   * @param {String} provider Provider code
   * @param {String} course Course code
   * @param {String} page Page to render
@@ -26,9 +25,7 @@ router.get('/apply/:provider/:course/:page', (req, res) => {
 /**
   * Profile: Work history - Add/edit missing work history
   * Note: Must be defined before next route declaration
-  *
   * @param {String} action add || edit
-  *
   */
 router.get('/profile/work-history/:action/missing', (req, res) => {
   res.render(`profile/work-history/missing`, {
@@ -38,7 +35,6 @@ router.get('/profile/work-history/:action/missing', (req, res) => {
 
 /**
   * Profile: Generate ID to add new thing
-  *
   * @param {String} section Section of the profile application
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
@@ -90,11 +86,9 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
 
 /**
   * Profile: Qualifications - Add/edit degree or GCSE
-  *
   * @param {String} action add || edit
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
-  *
   */
 router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, res) => {
   const referrer = req.query.referrer
@@ -112,10 +106,8 @@ router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, r
 
 /**
   * Profile: Qualifications - Add/edit UK/international degree details
-  *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
-  *
   */
 router.get('/profile/qualifications/:action/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
@@ -136,10 +128,8 @@ router.get('/profile/qualifications/:action/:type(uk-degree|international-degree
 
 /**
   * Profile: Qualifications - Add/edit GCSE subject details
-  *
   * @param {String} action add || edit
   * @param {String} id maths || english || science
-  *
   */
 router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
@@ -160,11 +150,9 @@ router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/
 
 /**
   * Profile: Qualifications - Degree/GCSE branch logic
-  *
   * @param {String} action add || edit
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
-  *
   */
 router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer', (req, res) => {
   const action = req.params.action
@@ -222,10 +210,8 @@ router.all('/profile/qualifications/next', (req, res) => {
 
 /**
   * Profile: Qualifications - Add/edit other qualification
-  *
   * @param {String} action add || edit
   * @param {String} id Qualification ID
-  *
   */
 router.get('/profile/qualifications/:action/other/:id', (req, res) => {
   const referrer = req.query.referrer
@@ -238,12 +224,24 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 })
 
 /**
+  * Profile: Language skills - Add/edit question
+  * @param {String} action add || edit
+  */
+router.get('/profile/language-skills/:action', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/language-skills/index', {
+    action,
+    formaction: referrer || '/profile/'
+  })
+})
+
+/**
   * Profile: Work history and school experience - Add/edit job/gap/role
-  *
   * @param {String} action add || edit
   * @param {String} type job || gap || role
   * @param {String} id ID
-  *
   */
 router.get('/profile/:section(work-history|school-experience)/:action/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
@@ -263,10 +261,8 @@ router.get('/profile/:section(work-history|school-experience)/:action/:type(job|
 /**
   * Profile: Work history - Update job/gap data
   * Convert individual date components into ISO 8601 date strings
-  *
   * @param {String} type job || gap
   * @param {String} id Job/gap ID
-  *
   */
 router.post('/profile/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
@@ -298,10 +294,8 @@ router.post('/profile/:section(work-history|school-experience)/update/:type(job|
 
 /**
   * Profile: References - Add/edit referee
-  *
   * @param {String} action add || edit
   * @param {String} id principle || secondary
-  *
   */
 router.get('/profile/references/:action/referee/:id', (req, res) => {
   const action = req.params.action
@@ -325,10 +319,7 @@ router.get('/profile/references/:action/referee/:id', (req, res) => {
 
 /**
   * Profile: Vocation - Add/edit vocation statement
-  *
   * @param {String} action add || edit
-  * @param {String} id principle || secondary
-  *
   */
 router.get('/profile/vocation/:action', (req, res) => {
   const action = req.params.action

@@ -36,7 +36,7 @@
       completed: data["qualifications"]
     }, {
       text: "Subject knowledge",
-      href: "/profile/subject-knowledge",
+      href: "/profile/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
       id: "subject-knowledge",
       completed: data["subject-knowledge"]
     }, {

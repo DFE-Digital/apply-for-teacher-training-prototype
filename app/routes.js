@@ -224,6 +224,20 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
 })
 
 /**
+  * Profile: Subject knowledge - Add/edit subject knowledge statement
+  * @param {String} action add || edit
+  */
+router.get('/profile/subject-knowledge/:action', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/subject-knowledge/index', {
+    action,
+    formaction: referrer || '/profile/'
+  })
+})
+
+/**
   * Profile: Language skills - Add/edit question
   * @param {String} action add || edit
   */

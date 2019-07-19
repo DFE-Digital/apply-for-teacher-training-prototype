@@ -380,7 +380,8 @@ router.get('/profile/vocation/:action(add|edit)', (req, res) => {
 
   res.render('profile/vocation/index', {
     action,
-    formaction: referrer || '/profile/'
+    formaction: referrer || '/profile/',
+    referrer
   })
 })
 

@@ -13,7 +13,6 @@ module.exports = function (env) {
   /**
    * Convert object to array
    * @type {String} str
-   *
   */
   filters.date = (str, format = 'yyyy-LL-dd') => {
     if (str) {
@@ -30,7 +29,6 @@ module.exports = function (env) {
   /**
    * Convert milliseconds to readable duration
    * @type {String} str
-   *
   */
   filters.duration = (int) => {
     if (!isNaN(int)) {
@@ -49,6 +47,18 @@ module.exports = function (env) {
    * Convert object to array
    * @type {Object} obj
    *
+  */
+  filters.includes = (str, searchString) => {
+    if (str) {
+      if (str.includes(searchString)) {
+        return true
+      }
+    }
+  }
+
+  /**
+   * Convert object to array
+   * @type {Object} obj
   */
   filters.toArray = (obj) => {
     if (obj) {

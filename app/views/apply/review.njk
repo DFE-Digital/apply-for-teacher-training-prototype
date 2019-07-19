@@ -4,9 +4,13 @@
 {% set referrer = "/apply/" + provider + "/" + course + "/review" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    "text": "Back",
-    "href": "/dashboard#courses"
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Home",
+      href: "/dashboard#courses"
+    }, {
+      text: title
+    }]
   }) }}
 {% endblock %}
 

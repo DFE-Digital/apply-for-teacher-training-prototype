@@ -31,6 +31,7 @@
 {% from "_components/related/macro.njk" import appRelated %}
 {% from "_components/task-list/macro.njk" import appTaskList %}
 
+{# Set application status based on question completion #}
 {% if data["candidate"]["nationality"] and
   data["contact-details"]["address"] and
   data["qualifications"] and
@@ -56,6 +57,25 @@
 {% else %}
   {% set applicationStatus = "unbegun" %}
 {% endif %}
+
+{# Set breadcrumbs for profile question pages #}
+{% set profileBreadcrumbItems = [{
+  text: "Home",
+  href: "/dashboard"
+}, {
+  text: "Review your application",
+  href: referrer
+}, {
+  text: title
+}] if referrer else [{
+  text: "Home",
+  href: "/dashboard"
+}, {
+  text: "Personal teaching profile",
+  href: "/profile"
+}, {
+  text: title
+}] %}
 
 {% block head %}
   {% include "_includes/head.njk" %}

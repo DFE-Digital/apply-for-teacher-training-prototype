@@ -1,7 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Contact details" %}
-{% set formaction = "/profile/contact-details/address-answer" %}
+{% if action == "edit" %}
+  {% set title = "Edit contact details" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Contact details" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -39,7 +44,7 @@
       text: "Email address",
       classes: "govuk-label--s"
     },
-  
+
     attributes: {
       spellcheck: "false"
     },
@@ -62,6 +67,7 @@
   }) }}
 {% endset %}
 
+{% if referrer != true %}
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -84,8 +90,9 @@
       }
     }]
   }) }}
+{% endif %}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: buttonText
   }) }}
 {% endblock %}

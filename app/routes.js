@@ -27,7 +27,7 @@ router.get('/apply/:provider/:course/:page', (req, res) => {
   * Note: Must be defined before next route declaration
   * @param {String} action add || edit
   */
-router.get('/profile/work-history/:action/missing', (req, res) => {
+router.get('/profile/work-history/:action(add|edit)/missing', (req, res) => {
   res.render(`profile/work-history/missing`, {
     action: req.params.action
   })
@@ -50,7 +50,7 @@ router.get('/profile/:section/add/:thing', (req, res) => {
 /**
   * Profile: Personal details
   */
-router.get('/profile/personal-details/:action', (req, res) => {
+router.get('/profile/personal-details/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
@@ -78,13 +78,26 @@ router.post('/profile/personal-details/answer', (req, res) => {
 /**
   * Profile: Residency status
   */
-router.get('/profile/personal-details/residency-status/:action', (req, res) => {
+router.get('/profile/personal-details/residency-status/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
   res.render('profile/personal-details/residency-status', {
     action,
     formaction: referrer || '/profile/'
+  })
+})
+
+/**
+  * Profile: Contact details
+  */
+router.get('/profile/contact-details/:action(add|edit)', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('profile/contact-details/index', {
+    action,
+    formaction: referrer || '/profile/contact-details/address-answer'
   })
 })
 
@@ -101,7 +114,7 @@ router.post('/profile/contact-details/address-answer', (req, res) => {
   }
 })
 
-router.get('/profile/contact-details/address/:action', (req, res) => {
+router.get('/profile/contact-details/address/:action(add|edit)', (req, res) => {
   const referrer = req.query.referrer
 
   res.render('profile/contact-details/address', {
@@ -116,7 +129,7 @@ router.get('/profile/contact-details/address/:action', (req, res) => {
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, res) => {
+router.get('/profile/qualifications/:action(add|edit)/:category(degree|gcse)/:id', (req, res) => {
   const referrer = req.query.referrer
   const action = req.params.action
   const category = req.params.category
@@ -135,7 +148,7 @@ router.get('/profile/qualifications/:action/:category(degree|gcse)/:id', (req, r
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action/:type(uk-degree|international-degree)/:id', (req, res) => {
+router.get('/profile/qualifications/:action(add|edit)/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
@@ -157,7 +170,7 @@ router.get('/profile/qualifications/:action/:type(uk-degree|international-degree
   * @param {String} action add || edit
   * @param {String} id maths || english || science
   */
-router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
+router.get('/profile/qualifications/:action(add|edit)/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
@@ -180,7 +193,7 @@ router.get('/profile/qualifications/:action/:type(gcse-subject|gcse-equivalent)/
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   */
-router.post('/profile/qualifications/:action/:category(degree|gcse)/:id/answer', (req, res) => {
+router.post('/profile/qualifications/:action(add|edit)/:category(degree|gcse)/:id/answer', (req, res) => {
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
@@ -239,7 +252,7 @@ router.all('/profile/qualifications/next', (req, res) => {
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action/other/:id', (req, res) => {
+router.get('/profile/qualifications/:action(add|edit)/other/:id', (req, res) => {
   const referrer = req.query.referrer
 
   res.render('profile/qualifications/other', {
@@ -253,7 +266,7 @@ router.get('/profile/qualifications/:action/other/:id', (req, res) => {
   * Profile: Subject knowledge - Add/edit subject knowledge statement
   * @param {String} action add || edit
   */
-router.get('/profile/subject-knowledge/:action', (req, res) => {
+router.get('/profile/subject-knowledge/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
@@ -267,7 +280,7 @@ router.get('/profile/subject-knowledge/:action', (req, res) => {
   * Profile: Language skills - Add/edit question
   * @param {String} action add || edit
   */
-router.get('/profile/language-skills/:action', (req, res) => {
+router.get('/profile/language-skills/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
@@ -283,7 +296,7 @@ router.get('/profile/language-skills/:action', (req, res) => {
   * @param {String} type job || gap || role
   * @param {String} id ID
   */
-router.get('/profile/:section(work-history|school-experience)/:action/:type(job|gap|role)/:id', (req, res) => {
+router.get('/profile/:section(work-history|school-experience)/:action(add|edit)/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
   const section = req.params.section
@@ -337,7 +350,7 @@ router.post('/profile/:section(work-history|school-experience)/update/:type(job|
   * @param {String} action add || edit
   * @param {String} id principle || secondary
   */
-router.get('/profile/references/:action/referee/:id', (req, res) => {
+router.get('/profile/references/:action(add|edit)/referee/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
@@ -361,7 +374,7 @@ router.get('/profile/references/:action/referee/:id', (req, res) => {
   * Profile: Vocation - Add/edit vocation statement
   * @param {String} action add || edit
   */
-router.get('/profile/vocation/:action', (req, res) => {
+router.get('/profile/vocation/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 

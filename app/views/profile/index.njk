@@ -26,7 +26,7 @@
       completed: data["candidate"]["nationality"]
     }, {
       text: "Contact details",
-      href: "/profile/contact-details",
+      href: "/profile/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
       id: "contact-details",
       completed: data["contact-details"]["address"]
     }, {

@@ -26,7 +26,7 @@
     Not entered
   {% endif %}
 {% endset %}
-{% set addressEditHref = "/profile/contact-details" if data["contact-details"]["address"]["street-address"] else "/profile/contact-details/address/edit" %}
+{% set addressEditHref = "/profile/contact-details" if data["contact-details"]["address"]["street-address"] else "/profile/contact-details/address" %}
 {{ govukSummaryList({
   classes: "govuk-!-font-size-16",
   rows: [{
@@ -39,7 +39,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: "/profile/contact-details?referrer=" + referrer,
+        href: "/profile/contact-details/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "phone number"
       }]
@@ -54,7 +54,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: "/profile/contact-details?referrer=" + referrer,
+        href: "/profile/contact-details/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "email"
       }]
@@ -69,7 +69,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: addressEditHref + "?referrer=" + referrer,
+        href: addressEditHref + "/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "address"
       }]

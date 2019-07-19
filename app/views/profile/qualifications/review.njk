@@ -1,25 +1,16 @@
 {% extends "_form-wide.njk" %}
 
 {% set title = "Academic qualifications" %}
-{% set formaction = "/profile/" %}
-{% set referrer = "/profile/qualifications/review" %}
 {% set categoryCaptionSize = "m" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
-    items: [{
-      text: "Home",
-      href: "/dashboard"
-    }, {
-      text: "Personal teaching profile",
-      href: "/profile"
-    }, {
-      text: title
-    }]
+    items: profileBreadcrumbItems
   }) }}
 {% endblock %}
 
 {% block primary %}
+  {% set referrer = "/profile/qualifications/review" %}
   {% set category = "degree" %}
   {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}

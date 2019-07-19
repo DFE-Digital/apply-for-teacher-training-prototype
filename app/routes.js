@@ -56,7 +56,8 @@ router.get('/profile/personal-details/:action(add|edit)', (req, res) => {
 
   res.render('profile/personal-details/index', {
     action,
-    formaction: referrer || '/profile/personal-details/answer'
+    formaction: referrer || '/profile/personal-details/answer',
+    referrer
   })
 })
 
@@ -84,7 +85,8 @@ router.get('/profile/personal-details/residency-status/:action(add|edit)', (req,
 
   res.render('profile/personal-details/residency-status', {
     action,
-    formaction: referrer || '/profile/'
+    formaction: referrer || '/profile/',
+    referrer
   })
 })
 
@@ -97,7 +99,8 @@ router.get('/profile/contact-details/:action(add|edit)', (req, res) => {
 
   res.render('profile/contact-details/index', {
     action,
-    formaction: referrer || '/profile/contact-details/address-answer'
+    formaction: referrer || '/profile/contact-details/address-answer',
+    referrer
   })
 })
 
@@ -119,7 +122,20 @@ router.get('/profile/contact-details/address/:action(add|edit)', (req, res) => {
 
   res.render('profile/contact-details/address', {
     action: req.params.action,
-    formaction: referrer || '/profile/contact-details/review'
+    formaction: referrer || '/profile/contact-details/review',
+    referrer
+  })
+})
+
+/**
+  * Profile: Qualifications review
+  */
+router.get('/profile/qualifications/review', (req, res) => {
+  const referrer = req.query.referrer
+
+  res.render('profile/qualifications/review', {
+    formaction: referrer || '/profile',
+    referrer
   })
 })
 
@@ -272,7 +288,8 @@ router.get('/profile/subject-knowledge/:action(add|edit)', (req, res) => {
 
   res.render('profile/subject-knowledge/index', {
     action,
-    formaction: referrer || '/profile/'
+    formaction: referrer || '/profile/',
+    referrer
   })
 })
 
@@ -286,7 +303,8 @@ router.get('/profile/language-skills/:action(add|edit)', (req, res) => {
 
   res.render('profile/language-skills/index', {
     action,
-    formaction: referrer || '/profile/'
+    formaction: referrer || '/profile/',
+    referrer
   })
 })
 

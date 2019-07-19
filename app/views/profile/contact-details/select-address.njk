@@ -4,20 +4,6 @@
 {% set title = "What is your address?" %}
 {% set formaction = "/profile" %}
 
-{% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: [{
-      text: "Home",
-      href: "/dashboard"
-    }, {
-      text: "Personal teaching profile",
-      href: "/profile"
-    }, {
-      text: title
-    }]
-  }) }}
-{% endblock %}
-
 {% block primary %}
   <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Postcode</h2>
   <p class="govuk-body">{{ data["contact-details"]["address"]["postal-code"] }} &nbsp; <a href="/profile/contact-details/address">Change</a></p>

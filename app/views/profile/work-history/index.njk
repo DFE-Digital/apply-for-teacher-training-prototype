@@ -4,15 +4,7 @@
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
-    items: [{
-      text: "Home",
-      href: "/dashboard"
-    }, {
-      text: "Personal teaching profile",
-      href: "/profile"
-    }, {
-      text: title
-    }]
+    items: profileBreadcrumbItems
   }) }}
 {% endblock %}
 

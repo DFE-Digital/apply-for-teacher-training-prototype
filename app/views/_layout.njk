@@ -67,7 +67,7 @@
   href: referrer
 }, {
   text: title
-}] if referrer else [{
+}] if referrer | includes('/apply/') else [{
   text: "Home",
   href: "/dashboard"
 }, {

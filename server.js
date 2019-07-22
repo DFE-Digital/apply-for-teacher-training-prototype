@@ -53,6 +53,7 @@ middleware.forEach(func => app.use(func))
 
 // Set up App
 var appViews = extensions.getAppViews([
+  path.join(__dirname, '/app/components/'),
   path.join(__dirname, '/app/views/'),
   path.join(__dirname, '/lib/')
 ])

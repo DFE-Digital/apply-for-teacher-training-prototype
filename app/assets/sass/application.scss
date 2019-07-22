@@ -1,20 +1,15 @@
 // global styles for <a> and <p> tags
 $govuk-global-styles: true;
 
-// Import GOV.UK Frontend and any extension styles if extensions have been configured
-@import "lib/extensions/extensions";
+// Import GOV.UK Frontend and app-specific components
+@import "app/components/all";
 
-// Components that aren't in Frontend
-@import "components/autocomplete";
+// Components that aren't in GOV.UK Frontend
 @import "components/caption";
-@import "components/cookie-banner";
 @import "components/heading";
-@import "components/icon";
-@import "components/related";
 @import "components/table";
-@import "components/task-list";
 
-// Temporary component overrides
+// GOV.UK Frontend component overrides
 // TODO: Move into dedicated app styles if required
 #review.govuk-accordion {
   .govuk-accordion__section-content {

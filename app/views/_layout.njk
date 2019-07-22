@@ -1,5 +1,6 @@
 {% extends "template.njk" %}
 
+{# GOV.UK Frontend components #}
 {% from "accordion/macro.njk"        import govukAccordion %}
 {% from "back-link/macro.njk"        import govukBackLink %}
 {% from "breadcrumbs/macro.njk"      import govukBreadcrumbs %}
@@ -26,11 +27,12 @@
 {% from "textarea/macro.njk"         import govukTextarea %}
 {% from "warning-text/macro.njk"     import govukWarningText %}
 
-{% from "_components/autocomplete/macro.njk" import appAutocomplete %}
-{% from "_components/cookie-banner/macro.njk" import appCookieBanner %}
-{% from "_components/icon/macro.njk" import appIcon %}
-{% from "_components/related/macro.njk" import appRelated %}
-{% from "_components/task-list/macro.njk" import appTaskList %}
+{# App-specific components #}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+{% from "cookie-banner/macro.njk" import appCookieBanner %}
+{% from "icon/macro.njk" import appIcon %}
+{% from "related/macro.njk" import appRelated %}
+{% from "task-list/macro.njk" import appTaskList %}
 
 {# Set application status based on question completion #}
 {% if data["candidate"]["nationality"] and

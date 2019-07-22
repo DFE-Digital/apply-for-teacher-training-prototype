@@ -68,7 +68,14 @@
         <td class="govuk-table__cell">
           <p class="govuk-body-s">{{ item.description | nl2br | safe }}</p>
         {% if item["worked-with-children"] == "Yes" %}
-          <p class="govuk-body-s">Role involve working with children</p>
+          <p class="govuk-body-s">
+            {{ appIcon({
+              classes: "govuk-!-margin-right-1",
+              icon: "tick",
+              hidden: true
+            }) }}
+            This role involved working with children.
+          </p>
         {% endif %}
         </td>
         <td class="govuk-table__cell">

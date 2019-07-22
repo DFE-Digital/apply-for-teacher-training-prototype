@@ -11,11 +11,14 @@
 
 {% block primary %}
   {% include "_includes/review-work-history.njk" %}
+
+{% if not data["work-history"]["missing"] %}
   {{ govukButton({
     text: "Add another job",
     classes: "govuk-button--secondary",
     href: "/profile/work-history/add/job"
   }) }}
+{% endif %}
 
   {{ govukButton({
     text: "Continue",

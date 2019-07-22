@@ -366,7 +366,7 @@ router.post('/profile/:section(work-history|school-experience)/update/:type(job|
 /**
   * Profile: References - Add/edit referee
   * @param {String} action add || edit
-  * @param {String} id principle || secondary
+  * @param {String} id first || second
   */
 router.get('/profile/references/:action(add|edit)/referee/:id', (req, res) => {
   const action = req.params.action
@@ -374,8 +374,8 @@ router.get('/profile/references/:action(add|edit)/referee/:id', (req, res) => {
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
-    if (id === 'principle') {
-      formaction = '/profile/references/add/referee/secondary'
+    if (id === 'first') {
+      formaction = '/profile/references/add/referee/second'
     } else {
       formaction = '/profile/references/review'
     }

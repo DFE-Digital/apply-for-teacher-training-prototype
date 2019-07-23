@@ -66,4 +66,10 @@
       completed: data["vocation"]
     }]
   }) }}
+  {% if applicationStatus == "complete" %}
+    {{ govukButton({
+      text: "Continue",
+      href: "/dashboard"
+    }) }}
+  {% endif %}
 {% endblock %}

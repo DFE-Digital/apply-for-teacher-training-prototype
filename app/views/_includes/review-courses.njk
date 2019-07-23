@@ -23,7 +23,11 @@
       {% if data["application"][provider.code + "-" + course.code] %}
         <strong class="govuk-tag" id="{{ item.id }}-completed">Submitted</strong>
       {% elif applicationStatus == "complete" %}
-        <a href="/apply/{{ provider.code }}/{{ course.code }}/review">Apply</a>
+        {{ govukButton({
+          classes: "govuk-!-font-size-16",
+          text: "Apply",
+          href: "/apply/" + provider.code + "/" + course.code + "/review"
+        }) }}
       {% endif %}
       </td>
     </tr>

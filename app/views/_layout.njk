@@ -61,7 +61,7 @@
 
 {# Set breadcrumbs for profile question pages #}
 {% set profileBreadcrumbItems = [{
-  text: "Home",
+  text: "Dashboard",
   href: "/dashboard"
 }, {
   text: "Review your application",
@@ -69,7 +69,7 @@
 }, {
   text: title
 }] if referrer | includes('/apply/') else [{
-  text: "Home",
+  text: "Dashboard",
   href: "/dashboard"
 }, {
   text: "Personal teaching profile",

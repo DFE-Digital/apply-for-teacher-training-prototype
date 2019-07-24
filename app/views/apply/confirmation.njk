@@ -2,25 +2,20 @@
 
 {% set title = "Submit application" %}
 
-{% block pageNavigation %}
-  {{ govukBackLink({
-    "text": "Back",
-    "href": "/dashboard#courses"
-  }) }}
-{% endblock %}
-
 {% block content %}
+  {% set panelText %}Thank you for applying for postgraduate teacher training in {{ courses[course].name }} ({{ courses[course].code }}) at {{ providers[provider].name }}{% endset %}
+  {{ govukPanel({
+    classes: "govuk-!-margin-bottom-8",
+    titleText: "Application submitted",
+    text: panelText
+  }) }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      {{ govukPanel({
-        titleText: "Application submitted",
-        text: "Thank you for submitting your application for postgraduate teacher training."
-      }) }}
-
-      <p class="govuk-body"><strong>What happens next</strong></p>
+      <h2 class="govuk-heading-m">What happens next</h2>
       <p class="govuk-body">The Apply for postgraduate teacher training service will contact your referees to ask for your references. When we receive them, we will send them to your training provider. Your provider then has 10 working days to respond to your application.</p>
       <p class="govuk-body">If they decide to offer you an interview, they will get in touch directly to organise a date and give you all the information you need.</p>
-      <p class="govuk-body"><strong>Want to apply to more training providers?</strong></p>
+      <h2 class="govuk-heading-m">Want to apply to more training providers?</h2>
 
       <p class="govuk-body">Go to <a href="https://find-postgraduate-teacher-training.education.gov.uk/">Find postgraduate teacher training</a> to search providers.</p>
       <p class="govuk-body"><a href="/dashboard#courses">Return to your dashboard</a> to tailor your application to suit different providers.</p>

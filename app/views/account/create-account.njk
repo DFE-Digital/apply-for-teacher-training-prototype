@@ -10,22 +10,12 @@
 
   {{ govukInput({
     label: {
-      text: "First name(s)",
+      text: "Full name",
       classes: "govuk-label--s"
     },
-    autocomplete: "given-name",
-    id: "candidate-first-name",
-    name: "candidate[first-name]"
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Last name",
-      classes: "govuk-label--s"
-    },
-    autocomplete: "family-name",
-    id: "candidate-family-name",
-    name: "candidate[family-name]"
+    autocomplete: "name",
+    id: "candidate-name",
+    name: "candidate[name]"
   }) }}
 
   {{ govukDateInput({

@@ -15,36 +15,49 @@
 {% endblock %}
 
 {% block primary %}
-{% set firstLanguage %}
+{% set englishDetailHtml %}
+  {{ govukTextarea({
+    label: {
+      text: "If you are bilingual or very familiar with other languages, you can tell us about them here."
+    },
+    id: "language-skills-english",
+    name: "language-skills[english]",
+    value: data["language-skills"]["english"]
+  }) }}
+{% endset -%}
+{% set otherDetailHtml %}
   {{ govukTextarea({
     label: {
       text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
     },
-    id: "language-skills-detail",
-    name: "language-skills[detail]",
-    value: data["language-skills"]["detail"]
+    id: "language-skills-other",
+    name: "language-skills[other]",
+    value: data["language-skills"]["other"]
   }) }}
 {% endset -%}
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Is English your first language?",
+        text: "Is English your main language?",
         classes: "govuk-label--s"
       }
     },
-    idPrefix: "language-skills-first",
-    name: "language-skills[first]",
+    idPrefix: "language-skills-main",
+    name: "language-skills[main]",
     items: [{
-      value: "english",
+      value: "Yes",
       text: "Yes",
-      checked: checked("['language-skills']['first']", "english")
-    }, {
-      value: "other",
-      text: "No",
-      checked: checked("['language-skills']['first']", "other"),
+      checked: checked("['language-skills']['main']", "Yes"),
       conditional: {
-        html: firstLanguage
+        html: englishDetailHtml
+      }
+    }, {
+      value: "No",
+      text: "No",
+      checked: checked("['language-skills']['main']", "No"),
+      conditional: {
+        html: otherDetailHtml
       }
     }]
   }) }}

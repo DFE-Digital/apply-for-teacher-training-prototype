@@ -1,3 +1,16 @@
+{% set textContent %}
+  {% if data["language-skills"]["main"] %}
+    {{ data["language-skills"]["main"] }}.
+    {% if data["language-skills"]["english"] %}
+      {{ data["language-skills"]["english"] }}
+    {% elif data["language-skills"]["other"] %}
+      {{ data["language-skills"]["other"] }}
+    {% endif %}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   classes: "govuk-!-font-size-16",
   rows: [{
@@ -5,7 +18,7 @@
       text: "Is English your first language?"
     },
     value: {
-      text: ("Yes" if data["language-skills"]["first"] == "english" else "No: " + data["language-skills"]["detail"]) | nl2br | safe
+      text: textContent
     },
     actions: {
       classes: "govuk-!-padding-right-2",

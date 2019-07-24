@@ -20,7 +20,7 @@
     <tr class="govuk-table__row app-table__row--muted">
       <td class="govuk-table__cell">{{ item.subject }}</td>
       <td class="govuk-table__cell">Missing</td>
-      <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? You can’t enrol without it. Contact your training provider for advice on missing qualifications.</td>
+      <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a>.</td>
       <td class="govuk-table__cell govuk-!-padding-right-2">
         <a href="/profile/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>

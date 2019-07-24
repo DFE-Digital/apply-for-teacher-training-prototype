@@ -4,9 +4,8 @@ module.exports = {
   },
   candidates: [{
     candidate: {
-      'first-name': 'Priti',
+      name: 'Priti Patel',
       'optional-name': '',
-      'family-name': 'Patel',
       'date-of-birth': {
         day: '09',
         month: '02',

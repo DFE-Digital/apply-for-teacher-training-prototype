@@ -93,7 +93,7 @@
   })}}
   {% endif %}
 
-  {% set candidateName = data.candidate["first-name"] + " " + data.candidate["family-name"] %}
+  {% set candidateName = data.candidate["name"] %}
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk",
     serviceName: serviceName,

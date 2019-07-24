@@ -1,7 +1,6 @@
 {% set nameText %}
-  {% if data["candidate"]["first-name"] or data["candidate"]["family-name"] %}
-    {{ data["candidate"]["first-name"] }}
-    {{ data["candidate"]["family-name"] }}
+  {% if data["candidate"]["name"] %}
+    {{ data["candidate"]["name"] }}
     {% if data["candidate"]["optional-name"] %}
       ({{ data["candidate"]["optional-name"] }})
     {% endif %}

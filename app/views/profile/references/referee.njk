@@ -73,7 +73,7 @@
 {% set explainCharacter %}
   {{ govukTextarea({
     label: {
-      text: "If you are unable to provide an academic, professional or school senior leadership referee and are therefore requesting a character reference, you can explain why here (optional)."
+      text: "Explain why you’ve chosen a character referee (optional)."
     },
     id: "referees-" + id + "-character-explanation",
     name: "referees[" + id + "][character-explanation]",
@@ -103,8 +103,13 @@
       text: "Teacher at a school where you work or volunteer",
       checked: checked("['referees']['" + id + "']['type']", "School senior leadership")
     }, {
+      divider: "or"
+    }, {
       value: "Character",
       text: "Character",
+      hint: {
+        text: "If you are having difficulty providing an academic, professional or school referee, you can give us a character referee (a responsible person who will confirm you are suitable for teaching)."
+      },
       checked: checked("['referees']['" + id + "']['type']", "Character"),
       conditional: {
         html: explainCharacter

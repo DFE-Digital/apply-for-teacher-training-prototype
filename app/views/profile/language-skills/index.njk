@@ -16,20 +16,22 @@
 
 {% block primary %}
 {% set englishDetailHtml %}
-  {{ govukTextarea({
+  {{ govukCharacterCount({
     label: {
       text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
     },
+    maxwords: 200,
     id: "language-skills-english",
     name: "language-skills[english]",
     value: data["language-skills"]["english"]
   }) }}
 {% endset -%}
 {% set otherDetailHtml %}
-  {{ govukTextarea({
+  {{ govukCharacterCount({
     label: {
       text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
     },
+    maxwords: 200,
     id: "language-skills-other",
     name: "language-skills[other]",
     value: data["language-skills"]["other"]

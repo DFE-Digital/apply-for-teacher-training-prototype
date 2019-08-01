@@ -279,7 +279,7 @@ router.get('/profile/qualifications/:action(add|edit)/other/:id', (req, res) => 
 })
 
 /**
-  * Profile: Subject knowledge - Add/edit subject knowledge statement
+  * Profile: Your knowledge about the subject you want to teach - Add/edit subject knowledge statement
   * @param {String} action add || edit
   */
 router.get('/profile/subject-knowledge/:action(add|edit)', (req, res) => {

@@ -4,7 +4,7 @@
   {% set title = "Edit subject knowledge" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Subject knowledge" %}
+  {% set title = "Your knowledge about the subject you want to teach" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
@@ -30,15 +30,8 @@
         <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
       </ul>
     {% else %}
-      <p class="govuk-body">Use this section to give evidence of the knowledge and interest you bring to the subject(s) you’d like to teach.</p>
+      <p class="govuk-body">Use this section to give evidence of the knowledge and interest you bring to the subject(s) you’re applying to teach.</p>
       <p class="govuk-body">This is particularly important if your choice of subject is different from that of your degree. Check your provider’s course listing page on <a href="https://find-postgraduate-teacher-training.education.gov.uk/">Find postgraduate teacher training</a> for their specific subject knowledge requirements.</p>
-      <p class="govuk-body">Evidence can include:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>modules you studied as part of your undergraduate degree</li>
-        <li>postgraduate degrees (for example, a Masters or Phd)</li>
-        <li>your A level subjects</li>
-        <li>expertise you’ve gained at work</li>
-      </ul>
       <p class="govuk-body">Providers may ask you to sit a <a href="https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses/">subject knowledge enhancement</a> (SKE) course to top up your subject knowledge. If you are not a recent graduate, a SKE course could also help you update your knowledge of the curriculum. Learn more at <a href="https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses/">Get into Teaching</a>.</p>
     {% endif %}
   {% endset %}
@@ -57,6 +50,9 @@
     label: {
       text: "Give detailed evidence of your subject knowledge",
       classes: "govuk-label--s"
+    },
+    hint: {
+      html: "Evidence can include: modules you studied as part of your undergraduate degree; postgraduate degrees (for example, a Masters or Phd); your A level subjects; or expertise you’ve gained at work."
     },
     maxwords: 400,
     rows: 12,

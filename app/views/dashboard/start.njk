@@ -1,5 +1,6 @@
-{% extends "_content-wide.njk" %}
+{% extends "_content.njk" %}
 
+{% set hasSecondary = true %}
 {% set title = "Dashboard" %}
 
 {% block primary %}
@@ -33,5 +34,26 @@
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
   <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="courses">Course selection</h2>
   <p class="govuk-body">Check and edit your choice of training provider and course.</p>
-  {% include "_includes/review-courses.njk" %}
+  {{ govukButton({
+    text: "Find a course",
+    href: "https://find-postgraduate-teacher-training.education.gov.uk"
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="courses">Applications</h2>
+  <p class="govuk-body">Check the status of your applications once they have been submitted</p>
+{% endblock %}
+
+{% block secondary %}
+  {{ appRelated ({
+    title: "Account",
+    name: "account",
+    content: {
+      text: "Create an account, to save, return and customise your application for different training providers"
+    },
+    items: [{
+      text: "Create an account",
+      href: "/account/create-account"
+    }]
+  }) }}
 {% endblock %}

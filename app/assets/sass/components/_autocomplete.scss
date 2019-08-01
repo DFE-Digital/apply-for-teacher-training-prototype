@@ -20,7 +20,7 @@
 }
 
 .autocomplete__hint {
-  color: govuk-colour("grey-2");
+  color: govuk-colour("mid-grey");
   position: absolute;
 }
 
@@ -77,7 +77,7 @@
 }
 
 .autocomplete__option {
-  border-bottom: solid govuk-colour("grey-2");
+  border-bottom: solid govuk-colour("mid-grey");
   border-width: 1px 0;
   cursor: pointer;
   display: block;
@@ -97,7 +97,7 @@
 }
 
 .autocomplete__option--odd {
-  background-color: govuk-colour("grey-4");
+  background-color: govuk-colour("light-grey");
 }
 
 .autocomplete__option--focused,
@@ -109,8 +109,8 @@
 }
 
 .autocomplete__option--no-results {
-  background-color: govuk-colour("grey-4");
-  color: govuk-colour("grey-1");
+  background-color: govuk-colour("light-grey");
+  color: govuk-colour("dark-grey");
   cursor: not-allowed;
 }
 

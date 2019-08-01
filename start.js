@@ -12,7 +12,7 @@ const usageDataConfig = usageData.getUsageDataConfig()
 
 if (usageDataConfig.collectUsageData === undefined) {
   // No recorded answer, so ask for permission
-  let promptPromise = usageData.askForUsageDataPermission()
+  const promptPromise = usageData.askForUsageDataPermission()
   promptPromise.then(function (answer) {
     if (answer === 'yes') {
       usageDataConfig.collectUsageData = true

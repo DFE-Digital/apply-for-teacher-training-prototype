@@ -8,6 +8,30 @@ const generateRandomString = () => {
 }
 
 /**
+  * Account: Check email
+  * @param {String} page Page to render
+  * @param {String} action Confirmation action
+  */
+router.get('/account/check-email/:action', (req, res) => {
+  res.render(`account/check-email`, {
+    action: req.params.action
+  })
+})
+
+/**
+  * Email: Confirm address
+  * @param {String} page Page to render
+  * @param {String} action Confirmation action
+  */
+router.get('/email/:page/:action', (req, res) => {
+  const page = req.params.page
+
+  res.render(`email/${page}`, {
+    action: req.params.action
+  })
+})
+
+/**
   * Apply: Populate pages with course and provider details
   * @param {String} provider Provider code
   * @param {String} course Course code

@@ -1,10 +1,8 @@
-// global styles for <a> and <p> tags
+// GOV.UK Frontend settings
+$govuk-assets-path: "/govuk/assets/";
 $govuk-global-styles: true;
 
-// We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework.
-$govuk-assets-path: '/govuk/assets/';
-
-// Import GOV.UK Frontend and any extension styles if extensions have been configured
+// Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";
 
 // Components that aren't in Frontend
@@ -12,6 +10,7 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/caption";
 @import "components/cookie-banner";
 @import "components/heading";
+@import "components/hidden-link";
 @import "components/icon";
 @import "components/related";
 @import "components/table";

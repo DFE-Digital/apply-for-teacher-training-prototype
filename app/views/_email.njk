@@ -1,0 +1,42 @@
+{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
+{% set assetPath = "/govuk/assets" %}
+{% set htmlClasses = "govuk-email" %}
+{% set bodyClasses = "govuk-email__body" %}
+
+{% extends "govuk/template.njk" %}
+
+{% block skipLink %}{% endblock %}
+
+{% block head %}
+  {% include "_includes/head.njk" %}
+  <link href="/public/stylesheets/email.css" media="all" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block bodyStart %}
+  <dl class="govuk-email__header">
+    <div class="govuk-email__header-from">
+      <dt class="govuk-visually-hidden">From:</dt>
+      <dd><b>{{ from }}</b><dd>
+    </div>
+    <div class="govuk-email__header-subject">
+      <dt class="govuk-visually-hidden">Subject:</dt>
+      <dd>{{ title }}</dd>
+    </div>
+    <div class="govuk-email__header-to">
+      <dt>To:</dt>
+      <dd>{{ to }}</dd>
+    </div>
+    <div class="govuk-email__header-date">
+      <dt class="govuk-visually-hidden">Date:</dt>
+      <dd>{{ "now" | date("DDD 'at' T") }}<dd>
+    </div>
+  </dl>
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    containerClasses: "govuk-width-container"
+  }) }}
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "_content.njk" %}
+
+{% set title = "Please check your email" %}
+{% set isSignedOut = true %}
+
+{% block primary %}
+  <p class="govuk-body-l"><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent you an email</a>. Please click on the link in the email to confirm your address.</p>
+{% endblock %}

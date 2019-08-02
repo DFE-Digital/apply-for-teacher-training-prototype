@@ -1,0 +1,51 @@
+// GOV.UK Frontend settings
+$govuk-assets-path: "/govuk/assets/";
+$govuk-global-styles: true;
+$govuk-page-width: 560px;
+$govuk-font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+// Import GOV.UK Frontend and any extension styles if configured
+@import "lib/extensions/extensions";
+
+// Email styles
+.govuk-email__body {
+  outline: 1px solid lighten(govuk-colour("mid-grey"), 20%);
+  min-height: 90vh;
+}
+
+.govuk-email__header {
+  font: caption;
+  background-color: govuk-colour("white");
+  margin: govuk-spacing(0);
+  padding: govuk-spacing(2);
+  position: relative;
+
+  div {
+    display: block;
+    margin-bottom: govuk-spacing(1);
+  }
+
+  dt {
+    color: govuk-colour("dark-grey");
+    display: inline-block;
+    margin-right: govuk-spacing(1);
+  }
+
+  dd {
+    display: inline-block;
+    margin-left: 0;
+  }
+}
+
+.govuk-email__header-date {
+  color: govuk-colour("dark-grey");
+  margin: govuk-spacing(2);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.govuk-email__body {
+  max-width: 600px;
+  margin: govuk-spacing(6) auto;
+}

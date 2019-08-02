@@ -1,17 +1,15 @@
 {% extends "_form.njk" %}
 
 {% set title = "Sign in" %}
-{% set formaction = "/dashboard" %}
-{% set hasSecondary = true %}
-{% set isExternal = true %}
+{% set formaction = "/account/check-email/sign-in" %}
+{% set isSignedOut = true %}
 
 {% block primary %}
-  <p class="govuk-body-l">Enter your ‘{{ serviceName }}’ account details to sign in.</p>
+  <p class="govuk-body-l">Enter the email address you used to register with, and we will send you a link to sign in.</p>
 
   {{ govukInput({
     label: {
-      text: "Email address",
-      classes: "govuk-label--s"
+      text: "Email address"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "email",
@@ -20,36 +18,7 @@
     name: "candidate[email]"
   }) }}
 
-  {{ govukInput({
-    label: {
-      text: "Password",
-      classes: "govuk-label--s"
-    },
-    classes: "govuk-!-width-two-thirds",
-    type: "password",
-    id: "account-password",
-    name: "account[password]"
-  }) }}
-
   {{ govukButton({
-    text: "Sign in"
-  }) }}
-{% endblock %}
-{% block secondary %}
-  {{ appRelated ({
-    title: "Forgot your passsword?",
-    name: "forgot-password",
-    items: [{
-      href: "/account/reset-password",
-      text: "Reset your password"
-    }]
-  }) }}
-  {{ appRelated ({
-    title: "Don’t have an account?",
-    name: "create-account",
-    items: [{
-      href: "/account/create-account",
-      text: "Create an account"
-    }]
+    text: "Continue"
   }) }}
 {% endblock %}

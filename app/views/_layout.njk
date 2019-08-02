@@ -1,5 +1,5 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{%- set assetPath = '/govuk/assets' -%}
+{%- set assetPath = "/govuk/assets" -%}
 
 {% extends "govuk/template.njk" %}
 
@@ -96,7 +96,12 @@
   })}}
   {% endif %}
 
-  {% set candidateName = data.candidate["name"] %}
+  {% if data.candidate["name"] %}
+    {% set signOutText = "Sign out (" + data.candidate["name"] + ")" %}
+  {% else %}
+    {% set signOutText = "Sign out" %}
+  {% endif %}
+
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk",
     serviceName: serviceName,
@@ -104,8 +109,8 @@
     containerClasses: "govuk-width-container",
     navigation: (([{
       href: "/",
-      text: "Sign out (" + candidateName + ")"
-    }] if data.candidate) if isExternal != true)
+      text: signOutText
+    }] if data.candidate) if isSignedOut != true)
   }) }}
 {% endblock %}
 

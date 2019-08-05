@@ -31,13 +31,6 @@ $govuk-global-styles: true;
   }
 }
 
-// Align table and summary list action links with accordian controls
-.govuk-table__header:last-child,
-.govuk-table__cell:last-child,
-.govuk-summary-list__actions {
-  text-align: right;
-}
-
 // Align content to top of table cell
 // Use tabular numbers in table cell
 .govuk-table__header,

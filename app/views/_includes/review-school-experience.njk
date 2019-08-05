@@ -28,7 +28,7 @@
           {{ itemEnd | date("dd/LL/yyyy") if item["end-date"] else "Present" }}
         </td>
         <td class="govuk-table__cell govuk-!-padding-right-2">
-          <a href="/profile/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
+          <a href="/application/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
         </td>
       </tr>
     {% endfor %}
@@ -38,11 +38,13 @@
   <h2 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h2>
 {% endif %}
 
-{% if data["school-experience"]["missing"] and not schoolExperience.length %}
-  <p class="govuk-body-s govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
-  {{ govukButton({
-    text: "Add school experience or role",
-    classes: "govuk-button--secondary",
-    href: "/profile/school-experience/add/role?referrer=" + referrer
-  }) }}
+{% if review != true %}
+  {% if data["school-experience"]["missing"] and not schoolExperience.length %}
+    <p class="govuk-body-s govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
+    {{ govukButton({
+      text: "Add school experience or role",
+      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
+      href: "/application/school-experience/add/role?referrer=" + referrer
+    }) }}
+  {% endif %}
 {% endif %}

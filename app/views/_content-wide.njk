@@ -6,7 +6,7 @@
     {% if parent %}
       <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
     {% else %}
-      {{ title }}
+      {{ title | safe }}
     {% endif %}
     </h1>
   {% endif %}

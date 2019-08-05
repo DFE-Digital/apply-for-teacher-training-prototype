@@ -24,14 +24,11 @@
   }
 }
 
-.app-task-list__items {
+.app-task-list {
   @include govuk-font($size: 19);
   @include govuk-responsive-margin(9, "bottom");
   list-style: none;
   padding-left: 0;
-  @include govuk-media-query($from: tablet) {
-    padding-left: govuk-spacing(6);
-  }
 }
 
 .app-task-list__item {

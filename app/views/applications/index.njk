@@ -1,0 +1,15 @@
+{% extends "_content.njk" %}
+
+{% set title = "Your applications" %}
+
+{% block primary %}
+  {% if data["courses"] %}
+    {% include "_includes/review-applications.njk" %}
+  {% endif %}
+  {% if data["courses"] | length <= 3 %}
+    {{ govukButton({
+      text: "Start a new application",
+      href: "/application"
+    }) }}
+  {% endif %}
+{% endblock %}

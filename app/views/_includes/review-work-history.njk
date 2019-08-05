@@ -11,9 +11,11 @@
         <th class="govuk-table__header" scope="col" width="30%">Job</th>
         <th class="govuk-table__header" scope="col">Description</th>
         <th class="govuk-table__header" scope="col">Dates</th>
-        <th class="govuk-table__header govuk-!-padding-right-2" scope="col">
+        {% if review != true %}
+        <th class="govuk-table__header app-table__cell--action" scope="col">
           <span class="govuk-visually-hidden">Actions</span>
         </th>
+        {% endif %}
       </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -42,9 +44,11 @@
             {{ gapStart | date("LL/yyyy") }}&nbsp;-
             {{ gapEnd | date("LL/yyyy") }}
           </td>
-          <td class="govuk-table__cell govuk-!-padding-right-2">
-            <a href="/profile/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
+          {% if review != true %}
+          <td class="govuk-table__cell app-table__cell--action">
+            <a href="/application/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
           </td>
+          {% endif %}
         </tr>
       {% endif %}
 
@@ -58,7 +62,7 @@
         <th class="govuk-table__header">
         {% if item.category == "job" %}
           <h3 class="app-heading-xs govuk-!-margin-0">{{ item.role }}</h3>
-          <p class="app-caption-xs">
+          <p class="app-caption-xs govuk-!-margin-0">
             <span class="govuk-visually-hidden">at</span>{{ item.org }}
           </p>
         {% elif item.category == "gap" %}
@@ -82,9 +86,11 @@
           {{ itemStart | date("LL/yyyy") }}&nbsp;-
           {{ itemEnd | date("LL/yyyy") if item["end-date"] else "Present" }}
         </td>
-        <td class="govuk-table__cell govuk-!-padding-right-2">
-          <a href="/profile/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
+        {% if review != true %}
+        <td class="govuk-table__cell app-table__cell--action">
+          <a href="/application/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
         </td>
+        {% endif %}
       </tr>
 
       {# Unexplained gap (during work history) #}
@@ -104,9 +110,11 @@
             {{ gapStart | date("LL/yyyy") }}&nbsp;-
             {{ gapEnd | date("LL/yyyy") if nextItem else "Present" }}
           </td>
-          <td class="govuk-table__cell govuk-!-padding-right-2">
-            <a href="/profile/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
+          {% if review != true %}
+          <td class="govuk-table__cell app-table__cell--action">
+            <a href="/application/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
           </td>
+          {% endif %}
         </tr>
       {% endif %}
     {% endfor %}
@@ -129,7 +137,7 @@
       actions: {
         classes: "govuk-!-padding-right-2",
         items: [{
-          href: "/profile/work-history/edit/missing?referrer=" + referrer,
+          href: "/application/work-history/edit/missing?referrer=" + referrer,
           text: "Edit",
           visuallyHiddenText: "explanation"
         }]
@@ -138,7 +146,7 @@
   }) }}
   {{ govukButton({
     text: "Add job",
-    classes: "govuk-button--secondary",
-    href: "/profile/work-history/add/job"
+    classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
+    href: "/application/work-history/add/job"
   }) }}
 {% endif %}

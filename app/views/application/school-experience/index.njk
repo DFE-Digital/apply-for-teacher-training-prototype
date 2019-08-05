@@ -1,0 +1,47 @@
+{% extends "_form.njk" %}
+
+{% set title = "School experience and volunteering with young people" %}
+{% set formaction = "/application/school-experience/add/role" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: applicationBreadcrumbItems
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Use this section to enter any school experience or volunteering roles with children and young people.</p>
+  <p class="govuk-body">Include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>school experience</li>
+    <li>one-off observations</li>
+    <li>volunteering with children or young people in a school setting</li>
+    <li>volunteering with children or young people outside school</li>
+  </ul>
+  <p class="govuk-body">Don't include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>regular, paid, full or part-time work in a school (this should be entered in ‘Work history’)</li>
+  </ul>
+
+  <p class="govuk-body">Start by adding your most recent activity or role, and work backwards. If you did more than one activity in the same period, list them both, one after the other.</p>
+  <p class="govuk-body">We'll ask you to write in detail about what you’ve learnt through your school experience and volunteering in ‘Your teaching vocation’.</p>
+
+  {{ govukDetails({
+    summaryText: "I don’t have any school experience",
+    html: "You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href=\"https://schoolexperience.education.gov.uk/\">Get school experience</a>."
+  }) }}
+
+  {{ govukButton({
+    text: "Add school experience or role"
+  }) }}
+
+  {{ govukButton({
+    text: "Continue without adding experience",
+    classes: "govuk-button--secondary",
+    name: "school-experience[missing]",
+    value: "true",
+    attributes: {
+      formaction: "/application"
+    }
+  }) }}
+{% endblock %}

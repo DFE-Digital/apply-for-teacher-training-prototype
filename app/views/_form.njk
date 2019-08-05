@@ -7,7 +7,7 @@
     {% if parent %}
       <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
     {% else %}
-      {{ title }}
+      {{ title | safe }}
     {% endif %}
   {% endset %}
   {% call govukFieldset({

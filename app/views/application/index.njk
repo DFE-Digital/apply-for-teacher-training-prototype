@@ -1,0 +1,115 @@
+{% extends "_content.njk" %}
+
+{% set title = "Your application for postgraduate teacher&nbsp;training" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Applications",
+      href: "/applications"
+    }, {
+      text: title | safe
+    }]
+  }) }}
+{% endblock %}
+{% block primary %}
+  {% set hasSchoolExperience = data["school-experience"]["missing"] != "true" %}
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Courses</h2>
+  <p class="govuk-body">You can apply for up to 3 courses at a time.</p>
+
+  {% if data["courses"] %}
+    {% include "_includes/review-courses.njk" %}
+    {% if data["courses"] | length <= 3 %}
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Add another course",
+        href: "#"
+      }) }}
+    {% endif %}
+  {% else %}
+    {{ govukButton({
+      text: "Add course",
+      href: "#"
+    }) }}
+  {% endif %}
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-4">About you</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Personal details",
+      href: "/application/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
+      id: "personal-details",
+      completed: data["candidate"]["nationality"]
+    }, {
+      text: "Contact details",
+      href: "/application/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
+      id: "contact-details",
+      completed: data["contact-details"]["address"]
+    }, {
+      text: "Academic qualifications",
+      href: "/application/qualifications" + ("/review" if data["qualifications"]),
+      id: "qualifications",
+      completed: data["qualifications"]
+    }, {
+      text: "Your knowledge about the subject you want to teach",
+      href: "/application/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
+      id: "subject-knowledge",
+      completed: data["subject-knowledge"]
+    }, {
+      text: "Language skills",
+      href: "/application/language-skills" + ("/edit" if data["language-skills"] else "/add"),
+      id: "language-skills",
+      completed: data["language-skills"]
+    }, {
+      text: "Work history",
+      href: "/application/work-history" + ("/review" if data["work-history"]),
+      id: "work-history",
+      completed: data["work-history"]
+    }, {
+      text: "School experience and volunteering with young people",
+      href: "/application/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
+      id: "school-experience",
+      completed: data["school-experience"]
+    }, {
+      text: "Why you want to be a teacher",
+      href: "/application/vocation" + ("/edit" if data["vocation"] else "/add"),
+      id: "vocation",
+      completed: data["vocation"]
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m">References</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "References",
+      href: "/application/references" + ("/review" if data["referees"]),
+      id: "references",
+      completed: data["referees"]
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m">Interview</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Interview preferences",
+      href: "/application/interview",
+      id: "interview",
+      completed: data["interview"]
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m">Review and submit</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Check your answers before submitting",
+      href: "/application/review",
+      id: "review",
+      completed: data["review"]
+    }]
+  }) }}
+{% endblock %}

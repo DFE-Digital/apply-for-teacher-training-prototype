@@ -26,7 +26,7 @@
     Not entered
   {% endif %}
 {% endset %}
-{% set addressEditHref = "/profile/contact-details" if data["contact-details"]["address"]["street-address"] else "/profile/contact-details/address" %}
+{% set addressEditHref = "/application/contact-details" if data["contact-details"]["address"]["street-address"] else "/application/contact-details/address" %}
 {{ govukSummaryList({
   classes: "govuk-!-font-size-16",
   rows: [{
@@ -39,11 +39,11 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: "/profile/contact-details/edit?referrer=" + referrer,
+        href: "/application/contact-details/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "phone number"
       }]
-    }
+    } if review != true
   }, {
     key: {
       text: "Email address"
@@ -54,11 +54,11 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: "/profile/contact-details/edit?referrer=" + referrer,
+        href: "/application/contact-details/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "email"
       }]
-    }
+    } if review != true
   }, {
     key: {
       text: "Address"
@@ -73,6 +73,6 @@
         text: "Edit",
         visuallyHiddenText: "address"
       }]
-    }
+    } if review != true
   }]
 }) }}

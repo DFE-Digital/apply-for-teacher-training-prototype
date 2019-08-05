@@ -1,0 +1,21 @@
+{% extends "_content.njk" %}
+
+{% set title = "Submit application" %}
+
+{% block content %}
+  {% set panelText %}Thank you for applying for postgraduate teacher training{% endset %}
+  {{ govukPanel({
+    classes: "govuk-!-margin-bottom-8",
+    titleText: "Application submitted",
+    text: panelText
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">What happens next</h2>
+      <p class="govuk-body">The Apply for postgraduate teacher training service will contact your referees to ask for your references. When we receive them, we will send them to your training provider. Your provider then has 10 working days to respond to your application.</p>
+      <p class="govuk-body">If they decide to offer you an interview, they will get in touch directly to organise a date and give you all the information you need.</p>
+      <p class="govuk-body"><a href="/applications">Track the progress of your applications.</p>
+    </div>
+  </div>
+{% endblock %}

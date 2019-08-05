@@ -1,3 +1,8 @@
 .app-table__row--muted {
   background-color: govuk-colour("light-grey");
 }
+
+.app-table__cell--action {
+  padding-right: govuk-spacing(2);
+  text-align: right;
+}

@@ -1,0 +1,70 @@
+{% extends "_form.njk" %}
+
+{% if action == "edit" %}
+  {% set title = "Edit language skills" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Language skills" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: applicationBreadcrumbItems
+  }) }}
+{% endblock %}
+
+{% block primary %}
+{% set englishDetailHtml %}
+  {{ govukCharacterCount({
+    label: {
+      text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
+    },
+    maxwords: 200,
+    id: "language-skills-english",
+    name: "language-skills[english]",
+    value: data["language-skills"]["english"]
+  }) }}
+{% endset -%}
+{% set otherDetailHtml %}
+  {{ govukCharacterCount({
+    label: {
+      text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
+    },
+    maxwords: 200,
+    id: "language-skills-other",
+    name: "language-skills[other]",
+    value: data["language-skills"]["other"]
+  }) }}
+{% endset -%}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is English your main language?",
+        classes: "govuk-label--s"
+      }
+    },
+    idPrefix: "language-skills-main",
+    name: "language-skills[main]",
+    items: [{
+      value: "Yes",
+      text: "Yes",
+      checked: checked("['language-skills']['main']", "Yes"),
+      conditional: {
+        html: englishDetailHtml
+      }
+    }, {
+      value: "No",
+      text: "No",
+      checked: checked("['language-skills']['main']", "No"),
+      conditional: {
+        html: otherDetailHtml
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

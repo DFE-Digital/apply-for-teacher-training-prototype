@@ -1,0 +1,152 @@
+{% extends "_content-wide.njk" %}
+
+{% set parent = "Your application for" %}
+{% set title = courses[course].name + " (" + courses[course].code + ") at " + providers[provider].name %}
+{% set referrer = "/apply/" + provider + "/" + course + "/review" %}
+{% set review = true %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: [{
+      text: "Applications",
+      href: "/applications"
+    }, {
+      text: title
+    }]
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body-l">{{ courses[course].qualification }}</p>
+
+{% set personalDetailsHtml %}
+  {% include "_includes/review-personal-details.njk" %}
+{% endset %}
+
+{% set contactDetailsHtml %}
+  {% include "_includes/review-contact-details.njk" %}
+{% endset %}
+
+{% set qualificationsHtml %}
+  {% set category = "degree" %}
+  {% set categoryTitle = "Degree(s)" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {% set category = "gcse" %}
+  {% set categoryTitle = "Required subjects" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {% set category = "other" %}
+  {% set categoryTitle = "Other relevant qualifications" %}
+  {% include "_includes/review-qualifications.njk" %}
+  {{ govukSummaryList({
+    classes: "govuk-!-font-size-16",
+    rows: [{
+      key: {
+        text: "Is there anything you’d like to tell us about your qualifications?"
+      },
+      value: {
+        text: (data["qualifications"]["additional"] | default("Not entered")) | nl2br | safe
+      },
+      actions: {
+        classes: "govuk-!-padding-right-2",
+        items: [{
+          href: "/application/qualifications/review?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "additional detail"
+        }]
+      } if review != true
+    }]
+  }) }}
+{% endset %}
+
+{% set subjectKnowledgeHtml %}
+  {% include "_includes/review-subject-knowledge.njk" %}
+{% endset %}
+
+{% set languageSkillsHtml %}
+  {% include "_includes/review-language-skills.njk" %}
+{% endset %}
+
+{% set workHistoryHtml %}
+  {% include "_includes/review-work-history.njk" %}
+{% endset %}
+
+{% set schoolExperienceHtml %}
+  {% include "_includes/review-school-experience.njk" %}
+{% endset %}
+
+{% set referencesHtml %}
+  {% include "_includes/review-references.njk" %}
+{% endset %}
+
+{% set vocationHtml %}
+  {% include "_includes/review-vocation.njk" %}
+{% endset %}
+
+  {{ govukAccordion({
+    id: "review",
+    items: [{
+      heading: {
+        text: "Personal details"
+      },
+      content: {
+        html: personalDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Contact details"
+      },
+      content: {
+        html: contactDetailsHtml
+      }
+    }, {
+      heading: {
+        text: "Academic qualifications"
+      },
+      content: {
+        html: qualificationsHtml
+      }
+    }, {
+      heading: {
+        text: "Subject knowledge"
+      },
+      content: {
+        html: subjectKnowledgeHtml
+      }
+    }, {
+      heading: {
+        text: "Language skills"
+      },
+      content: {
+        html: languageSkillsHtml
+      }
+    }, {
+      heading: {
+        text: "Work history"
+      },
+      content: {
+        html: workHistoryHtml
+      }
+    }, {
+      heading: {
+        text: "School experience and volunteering with children and young people"
+      },
+      content: {
+        html: schoolExperienceHtml
+      }
+    }, {
+      heading: {
+        text: "References"
+      },
+      content: {
+        html: referencesHtml
+      }
+    }, {
+      heading: {
+        text: "Why you want to be a teacher"
+      },
+      content: {
+        html: vocationHtml
+      }
+    }]
+  }) }}
+{% endblock %}

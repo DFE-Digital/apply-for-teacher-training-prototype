@@ -37,167 +37,167 @@ router.get('/email/:page/:action', (req, res) => {
   * @param {String} course Course code
   * @param {String} page Page to render
   */
-router.get('/apply/:provider/:course/:page', (req, res) => {
+router.get('/applications/:provider/:course/:page', (req, res) => {
   const page = req.params.page
 
-  res.render(`apply/${page}`, {
+  res.render(`applications/${page}`, {
     provider: req.params.provider,
     course: req.params.course
   })
 })
 
 /**
-  * Profile: Work history - Add/edit missing work history
+  * Application: Work history - Add/edit missing work history
   * Note: Must be defined before next route declaration
   * @param {String} action add || edit
   */
-router.get('/profile/work-history/:action(add|edit)/missing', (req, res) => {
-  res.render(`profile/work-history/missing`, {
+router.get('/application/work-history/:action(add|edit)/missing', (req, res) => {
+  res.render(`application/work-history/missing`, {
     action: req.params.action
   })
 })
 
 /**
-  * Profile: Generate ID to add new thing
-  * @param {String} section Section of the profile application
+  * Application: Generate ID to add new thing
+  * @param {String} section Section of the application
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
-router.get('/profile/:section/add/:thing', (req, res) => {
+router.get('/application/:section/add/:thing', (req, res) => {
   const section = req.params.section
   const thing = req.params.thing
   const id = generateRandomString()
   const queryString = querystring.stringify(req.query)
 
-  res.redirect(`/profile/${section}/add/${thing}/${id}?${queryString}`)
+  res.redirect(`/application/${section}/add/${thing}/${id}?${queryString}`)
 })
 
 /**
-  * Profile: Personal details
+  * Application: Personal details
   */
-router.get('/profile/personal-details/:action(add|edit)', (req, res) => {
+router.get('/application/personal-details/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/personal-details/index', {
+  res.render('application/personal-details/index', {
     action,
-    formaction: referrer || '/profile/personal-details/answer',
+    formaction: referrer || '/application/personal-details/answer',
     referrer
   })
 })
 
 /**
-  * Profile: Personal details - answer branching
+  * Application: Personal details - answer branching
   */
-router.post('/profile/personal-details/answer', (req, res) => {
+router.post('/application/personal-details/answer', (req, res) => {
   const nationality = req.session.data['candidate']['nationality']
 
   const eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 
   if (eea.includes(nationality)) {
-    res.redirect('/profile')
+    res.redirect('/application')
   } else {
-    res.redirect('/profile/personal-details/residency-status/add')
+    res.redirect('/application/personal-details/residency-status/add')
   }
 })
 
 /**
-  * Profile: Residency status
+  * Application: Residency status
   */
-router.get('/profile/personal-details/residency-status/:action(add|edit)', (req, res) => {
+router.get('/application/personal-details/residency-status/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/personal-details/residency-status', {
+  res.render('application/personal-details/residency-status', {
     action,
-    formaction: referrer || '/profile/',
+    formaction: referrer || '/application/',
     referrer
   })
 })
 
 /**
-  * Profile: Contact details
+  * Application: Contact details
   */
-router.get('/profile/contact-details/:action(add|edit)', (req, res) => {
+router.get('/application/contact-details/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/contact-details/index', {
+  res.render('application/contact-details/index', {
     action,
-    formaction: referrer || '/profile/contact-details/address-answer',
+    formaction: referrer || '/application/contact-details/address-answer',
     referrer
   })
 })
 
 /**
-  * Profile: Contact details - answer branching
+  * Application: Contact details - answer branching
   */
-router.post('/profile/contact-details/address-answer', (req, res) => {
+router.post('/application/contact-details/address-answer', (req, res) => {
   const location = req.session.data['contact-details']['address-type']
 
   if (location === 'domestic') {
-    res.redirect('/profile/contact-details/lookup-address')
+    res.redirect('/application/contact-details/lookup-address')
   } else {
-    res.redirect('/profile')
+    res.redirect('/application')
   }
 })
 
-router.get('/profile/contact-details/address/:action(add|edit)', (req, res) => {
+router.get('/application/contact-details/address/:action(add|edit)', (req, res) => {
   const referrer = req.query.referrer
 
-  res.render('profile/contact-details/address', {
+  res.render('application/contact-details/address', {
     action: req.params.action,
-    formaction: referrer || '/profile/contact-details/review',
+    formaction: referrer || '/application/contact-details/review',
     referrer
   })
 })
 
 /**
-  * Profile: Qualifications review
+  * Application: Qualifications review
   */
-router.get('/profile/qualifications/review', (req, res) => {
+router.get('/application/qualifications/review', (req, res) => {
   const referrer = req.query.referrer
 
-  res.render('profile/qualifications/review', {
-    formaction: referrer || '/profile',
+  res.render('application/qualifications/review', {
+    formaction: referrer || '/application',
     referrer
   })
 })
 
 /**
-  * Profile: Qualifications - Add/edit degree or GCSE
+  * Application: Qualifications - Add/edit degree or GCSE
   * @param {String} action add || edit
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action(add|edit)/:category(degree|gcse)/:id', (req, res) => {
+router.get('/application/qualifications/:action(add|edit)/:category(degree|gcse)/:id', (req, res) => {
   const referrer = req.query.referrer
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
 
-  res.render(`profile/qualifications/${category}`, {
+  res.render(`application/qualifications/${category}`, {
     action,
-    formaction: `/profile/qualifications/${action}/${category}/${id}/answer`,
+    formaction: `/application/qualifications/${action}/${category}/${id}/answer`,
     id,
     referrer
   })
 })
 
 /**
-  * Profile: Qualifications - Add/edit UK/international degree details
+  * Application: Qualifications - Add/edit UK/international degree details
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action(add|edit)/:type(uk-degree|international-degree)/:id', (req, res) => {
+router.get('/application/qualifications/:action(add|edit)/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
-    formaction = '/profile/qualifications/next?prev=degree'
+    formaction = '/application/qualifications/next?prev=degree'
   }
 
-  res.render('profile/qualifications/degree-details', {
+  res.render('application/qualifications/degree-details', {
     action,
     formaction,
     id,
@@ -206,20 +206,20 @@ router.get('/profile/qualifications/:action(add|edit)/:type(uk-degree|internatio
 })
 
 /**
-  * Profile: Qualifications - Add/edit GCSE subject details
+  * Application: Qualifications - Add/edit GCSE subject details
   * @param {String} action add || edit
   * @param {String} id maths || english || science
   */
-router.get('/profile/qualifications/:action(add|edit)/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
+router.get('/application/qualifications/:action(add|edit)/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
-    formaction = `/profile/qualifications/next?prev=${id}`
+    formaction = `/application/qualifications/next?prev=${id}`
   }
 
-  res.render('profile/qualifications/gcse-details', {
+  res.render('application/qualifications/gcse-details', {
     action,
     formaction,
     id,
@@ -228,12 +228,12 @@ router.get('/profile/qualifications/:action(add|edit)/:type(gcse-subject|gcse-eq
 })
 
 /**
-  * Profile: Qualifications - Degree/GCSE answer branching
+  * Application: Qualifications - Degree/GCSE answer branching
   * @param {String} action add || edit
   * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   */
-router.post('/profile/qualifications/:action(add|edit)/:category(degree|gcse)/:id/answer', (req, res) => {
+router.post('/application/qualifications/:action(add|edit)/:category(degree|gcse)/:id/answer', (req, res) => {
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
@@ -258,14 +258,14 @@ router.post('/profile/qualifications/:action(add|edit)/:category(degree|gcse)/:i
     }
   }
 
-  res.redirect(`/profile/qualifications/${path}`)
+  res.redirect(`/application/qualifications/${path}`)
 })
 
 /**
-  * Profile: Qualifications - Degree/GCSE next step logic
+  * Application: Qualifications - Degree/GCSE next step logic
   * Redirect to next step based on qualifications already entered
   */
-router.all('/profile/qualifications/next', (req, res) => {
+router.all('/application/qualifications/next', (req, res) => {
   const prev = req.query.prev
 
   const mathsCompleted = req.session.data['qualifications']['maths']
@@ -284,69 +284,69 @@ router.all('/profile/qualifications/next', (req, res) => {
     path = 'review'
   }
 
-  res.redirect(`/profile/qualifications/${path}`)
+  res.redirect(`/application/qualifications/${path}`)
 })
 
 /**
-  * Profile: Qualifications - Add/edit other qualification
+  * Application: Qualifications - Add/edit other qualification
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   */
-router.get('/profile/qualifications/:action(add|edit)/other/:id', (req, res) => {
+router.get('/application/qualifications/:action(add|edit)/other/:id', (req, res) => {
   const referrer = req.query.referrer
 
-  res.render('profile/qualifications/other', {
+  res.render('application/qualifications/other', {
     action: req.params.action,
-    formaction: referrer || '/profile/qualifications/review',
+    formaction: referrer || '/application/qualifications/review',
     id: req.params.id
   })
 })
 
 /**
-  * Profile: Your knowledge about the subject you want to teach - Add/edit subject knowledge statement
+  * Application: Your knowledge about the subject you want to teach - Add/edit subject knowledge statement
   * @param {String} action add || edit
   */
-router.get('/profile/subject-knowledge/:action(add|edit)', (req, res) => {
+router.get('/application/subject-knowledge/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/subject-knowledge/index', {
+  res.render('application/subject-knowledge/index', {
     action,
-    formaction: referrer || '/profile/',
+    formaction: referrer || '/application/',
     referrer
   })
 })
 
 /**
-  * Profile: Language skills - Add/edit question
+  * Application: Language skills - Add/edit question
   * @param {String} action add || edit
   */
-router.get('/profile/language-skills/:action(add|edit)', (req, res) => {
+router.get('/application/language-skills/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/language-skills/index', {
+  res.render('application/language-skills/index', {
     action,
-    formaction: referrer || '/profile/',
+    formaction: referrer || '/application/',
     referrer
   })
 })
 
 /**
-  * Profile: Work history and school experience - Add/edit job/gap/role
+  * Application: Work history and school experience - Add/edit job/gap/role
   * @param {String} action add || edit
   * @param {String} type job || gap || role
   * @param {String} id ID
   */
-router.get('/profile/:section(work-history|school-experience)/:action(add|edit)/:type(job|gap|role)/:id', (req, res) => {
+router.get('/application/:section(work-history|school-experience)/:action(add|edit)/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
   const section = req.params.section
   const queryString = querystring.stringify(req.query)
 
-  res.render(`profile/${section}/${type}`, {
+  res.render(`application/${section}/${type}`, {
     action: req.params.action,
-    formaction: `/profile/${section}/update/${type}/${id}?${queryString}`,
+    formaction: `/application/${section}/update/${type}/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,
     end: `${req.query.end}`
@@ -354,12 +354,12 @@ router.get('/profile/:section(work-history|school-experience)/:action(add|edit)/
 })
 
 /**
-  * Profile: Work history - Update job/gap data
+  * Application: Work history - Update job/gap data
   * Convert individual date components into ISO 8601 date strings
   * @param {String} type job || gap
   * @param {String} id Job/gap ID
   */
-router.post('/profile/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
+router.post('/application/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
   const section = req.params.section
   const data = req.session.data[section][id]
@@ -384,28 +384,28 @@ router.post('/profile/:section(work-history|school-experience)/update/:type(job|
     data['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
 
-  res.redirect(req.query.referrer || `/profile/${section}/review`)
+  res.redirect(req.query.referrer || `/application/${section}/review`)
 })
 
 /**
-  * Profile: References - Add/edit referee
+  * Application: References - Add/edit referee
   * @param {String} action add || edit
   * @param {String} id first || second
   */
-router.get('/profile/references/:action(add|edit)/referee/:id', (req, res) => {
+router.get('/application/references/:action(add|edit)/referee/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
     if (id === 'first') {
-      formaction = '/profile/references/add/referee/second'
+      formaction = '/application/references/add/referee/second'
     } else {
-      formaction = '/profile/references/review'
+      formaction = '/application/references/review'
     }
   }
 
-  res.render('profile/references/referee', {
+  res.render('application/references/referee', {
     action,
     formaction,
     id: req.params.id
@@ -413,16 +413,31 @@ router.get('/profile/references/:action(add|edit)/referee/:id', (req, res) => {
 })
 
 /**
-  * Profile: Vocation - Add/edit vocation statement
+  * Application: Vocation - Add/edit vocation statement
   * @param {String} action add || edit
   */
-router.get('/profile/vocation/:action(add|edit)', (req, res) => {
+router.get('/application/vocation/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
 
-  res.render('profile/vocation/index', {
+  res.render('application/vocation/index', {
     action,
-    formaction: referrer || '/profile/',
+    formaction: referrer || '/application/',
+    referrer
+  })
+})
+
+/**
+  * Application: Interview - Add/edit interview preferences
+  * @param {String} action add || edit
+  */
+router.get('/application/interview/:action(add|edit)', (req, res) => {
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('application/interview/index', {
+    action,
+    formaction: referrer || '/application/',
     referrer
   })
 })

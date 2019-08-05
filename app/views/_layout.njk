@@ -62,21 +62,21 @@
   {% set applicationStatus = "unbegun" %}
 {% endif %}
 
-{# Set breadcrumbs for profile question pages #}
-{% set profileBreadcrumbItems = [{
-  text: "Dashboard",
-  href: "/dashboard"
+{# Set breadcrumbs for application question pages #}
+{% set applicationBreadcrumbItems = [{
+  text: "Your applications",
+  href: "/applications"
 }, {
   text: "Review your application",
   href: referrer
 }, {
   text: title
 }] if referrer | includes('/apply/') else [{
-  text: "Dashboard",
-  href: "/dashboard"
+  text: "Your applications",
+  href: "/applications"
 }, {
-  text: "Personal teaching profile",
-  href: "/profile"
+  text: "Your application for postgraduate teacher training",
+  href: "/application"
 }, {
   text: title
 }] %}

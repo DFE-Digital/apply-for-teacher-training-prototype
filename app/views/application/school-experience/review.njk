@@ -1,0 +1,27 @@
+{% extends "_content-wide.njk" %}
+
+{% set title = "School experience and volunteering with young people" %}
+{% set referrer = "/application/school-experience/review" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: applicationBreadcrumbItems
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review-school-experience.njk" %}
+
+{% if data["school-experience"]["missing"] != "true" %}
+  {{ govukButton({
+    text: "Add another role",
+    href: "/application/school-experience/add/role",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endif %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/"
+  }) }}
+{% endblock %}

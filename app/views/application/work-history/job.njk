@@ -5,12 +5,28 @@
   {% set title = "Edit job" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Add job" %}
+  {% set title = "Add a job" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
 
 {% block primary %}
-<p class="govuk-body">Start with your most recent position, and work backwards. If you did more than one job in the same period, list them both.</p>
+  {% set detailsHtml %}
+    <p class="govuk-body">Include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>paid work</li>
+      <li>regular full and part-time work</li>
+      <li>work in a school (for example as a teaching assistant)</li>
+    </ul>
+    <p class="govuk-body">Don’t include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>short-term school experience, one-off observations and volunteering with children – we’ll ask you about this next</li>
+    </ul>
+  {% endset %}
+  {{ govukDetails({
+    summaryText: "Help with what to include",
+    html: detailsHtml
+  }) }}
+
   {{ govukInput({
     label: {
       text: "Job title",

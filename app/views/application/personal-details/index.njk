@@ -15,23 +15,10 @@
 {% endblock %}
 
 {% block primary %}
-{% set dualNationality %}
-  {{ appAutocomplete({
-    label: {
-      text: "What is your second nationality?",
-      classes: "govuk-label--s"
-    },
-    id: "candidate-second-nationality",
-    name: "candidate[second-nationality]",
-    value: data["candidate"]["second-nationality"],
-    items: nationalities
-  }) }}
-{% endset -%}
-
   {{ govukInput({
     label: {
       text: "Full name",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     },
     autocomplete: "name",
     id: "candidate-name",
@@ -42,14 +29,14 @@
   {# {{ govukInput({
     label: {
       text: "Name you prefer to be addressed by (optional)",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     },
     id: "candidate-optional-name",
     name: "candidate[optional-name]",
     value: data["candidate"]["optional-name"]
   }) }} #}
 
-  {{ govukDateInput({
+  {# {{ govukDateInput({
     fieldset: {
       legend: {
         text: "Date of birth",
@@ -79,12 +66,12 @@
       value: data["candidate"]["date-of-birth"]["year"],
       autocomplete: "bday-year"
     }]
-  }) }}
+  }) }} #}
 
   {{ appAutocomplete({
     label: {
-      text: "What is your nationality?",
-      classes: "govuk-label--s"
+      text: "Nationality",
+      classes: "govuk-label--m"
     },
     id: "candidate-nationality",
     name: "candidate[nationality]",
@@ -92,11 +79,72 @@
     items: nationalities
   }) }}
 
+  {% set anotherNationality %}
+    {{ appAutocomplete({
+      label: {
+        text: "Second nationality"
+      },
+      id: "candidate-second-nationality",
+      name: "candidate[second-nationality]",
+      value: data["candidate"]["second-nationality"],
+      items: nationalities
+    }) }}
+  {% endset -%}
+
   {{ govukDetails({
     summaryText: "Add another nationality",
-    html: dualNationality,
+    html: anotherNationality,
     open: data["candidate"]["second-nationality"]
   }) }}
+
+  {% set englishDetailHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
+      },
+      maxwords: 200,
+      id: "language-skills-english",
+      name: "language-skills[english]",
+      value: data["language-skills"]["english"]
+    }) }}
+  {% endset -%}
+  {% set otherDetailHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
+      },
+      maxwords: 200,
+      id: "language-skills-other",
+      name: "language-skills[other]",
+      value: data["language-skills"]["other"]
+    }) }}
+  {% endset -%}
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Is English your main language?",
+          classes: "govuk-label--m"
+        }
+      },
+      idPrefix: "language-skills-main",
+      name: "language-skills[main]",
+      items: [{
+        value: "Yes",
+        text: "Yes",
+        checked: checked("['language-skills']['main']", "Yes"),
+        conditional: {
+          html: englishDetailHtml
+        }
+      }, {
+        value: "No",
+        text: "No",
+        checked: checked("['language-skills']['main']", "No"),
+        conditional: {
+          html: otherDetailHtml
+        }
+      }]
+    }) }}
 
   {{ govukButton({
     text: buttonText

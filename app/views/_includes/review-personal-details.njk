@@ -9,13 +9,13 @@
   {% endif %}
 {% endset %}
 
-{% set dateOfBirth = data["candidate"]["date-of-birth"] %}
+{# {% set dateOfBirth = data["candidate"]["date-of-birth"] %}
 {% if dateOfBirth %}
   {% set dob = dateOfBirth.year+"-"+dateOfBirth.month+"-"+dateOfBirth.day %}
   {% set dateOfBirthText = dob | date("DDD") %}
 {% else %}
   {% set dateOfBirthText = "Not entered" %}
-{% endif %}
+{% endif %} #}
 
 {% set nationalityText %}
   {% if data["candidate"]["nationality"] %}
@@ -60,7 +60,7 @@
   } if review != true
 } %}
 
-{% set dateOfBirthRow = {
+{# {% set dateOfBirthRow = {
   key: {
     text: "Date of birth"
   },
@@ -75,7 +75,7 @@
       visuallyHiddenText: "date of birth"
     }]
   } if review != true
-} %}
+} %} #}
 
 {% set nationalityRow = {
   key: {
@@ -111,14 +111,44 @@
   } if review != true
 } %}
 
+{% set textContent %}
+  {% if data["language-skills"]["main"] %}
+    {{ data["language-skills"]["main"] }}
+    {% if data["language-skills"]["english"] %}
+      {{ data["language-skills"]["english"] }}
+    {% elif data["language-skills"]["other"] %}
+      {{ data["language-skills"]["other"] }}
+    {% endif %}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set languageRow  = {
+  key: {
+    text: "Is English your first language?"
+  },
+  value: {
+    text: textContent
+  },
+  actions: {
+    classes: "govuk-!-padding-right-2",
+    items: [{
+      href: "/application/personal-details/edit?referrer=" + referrer,
+      text: "Edit",
+      visuallyHiddenText: "English language qualifications"
+    }]
+  } if review != true
+} %}
+
 {% if residencyStatus %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16",
-    rows: [nameRow, dateOfBirthRow, nationalityRow, residencyStatusRow]
+    rows: [nameRow, nationalityRow, residencyStatusRow, languageRow]
   }) }}
 {% else %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16",
-    rows: [nameRow, dateOfBirthRow, nationalityRow]
+    rows: [nameRow, nationalityRow, languageRow]
   }) }}
 {% endif %}

@@ -38,7 +38,7 @@
     value: data["candidate"]["name"]
   }) }}
 
-  {{ govukInput({
+  {# {{ govukInput({
     label: {
       text: "Name you prefer to be addressed by (optional)",
       classes: "govuk-label--s"
@@ -46,7 +46,7 @@
     id: "candidate-optional-name",
     name: "candidate[optional-name]",
     value: data["candidate"]["optional-name"]
-  }) }}
+  }) }} #}
 
   {{ govukDateInput({
     fieldset: {

@@ -1,9 +1,9 @@
 {% set nameText %}
   {% if data["candidate"]["name"] %}
     {{ data["candidate"]["name"] }}
-    {% if data["candidate"]["optional-name"] %}
+    {# {% if data["candidate"]["optional-name"] %}
       ({{ data["candidate"]["optional-name"] }})
-    {% endif %}
+    {% endif %} #}
   {% else %}
     Not entered
   {% endif %}

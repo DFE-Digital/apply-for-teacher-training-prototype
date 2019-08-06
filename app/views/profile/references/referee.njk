@@ -33,23 +33,9 @@
     name: "referees[" + id + "][name]",
     value: data["referees"][id]["name"]
   }) }}
-
   {{ govukInput({
     label: {
-      text: "Referee’s relationship to you",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "For example, academic tutor, manager, other (please specify)"
-    },
-    id: "referees-" + id + "-relationship",
-    name: "referees[" + id + "][relationship]",
-    value: data["referees"][id]["relationship"]
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Over what time period has this person known you?",
+      text: "What is your relationship to this referee and how long have you known them?",
       classes: "govuk-label--s"
     },
     hint: {

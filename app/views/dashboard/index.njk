@@ -1,6 +1,6 @@
 {% extends "_content-wide.njk" %}
 
-{% set title = "Dashboard" %}
+{% set title = "Welcome to Apply for postgraduate teacher training" %}
 
 {% block primary %}
   {% if applicationStatus == "complete" %}
@@ -13,15 +13,18 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="profile">Personal teaching profile</h2>
-      <p class="govuk-body">Create a personal teaching profile listing your:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>qualifications</li>
-        <li>work history</li>
-        <li>experience with young people</li>
-        <li>knowledge about the subject you want to teach</li>
-        <li>reasons for wanting to be a teacher</li>
-      </ul>
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="profile">Your teacher training application</h2>
+      <p class="govuk-body">Your application is made up of 2 sections.</p>
+      <p class="govuk-body">In 'About you' we'll ask you to create a personal teaching profile listing your qualifications, skill and experience. We'll save all your details, so that you can complete your application in your own time.
+      <p class="govuk-body">After you’ve submitted your first application, you’ll be able to tailor your details to suit subsequent applications to other training providers.</p>
+      <p class="govuk-body">Your 'Course selection' is pre-filled using your choices from Find postgraduate teacher training. You can check, edit and add to your choices.</p>
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="profile">About you</h2>
+      <p class="govuk-body">Start your personal teacher training profile.</p>
+
+
+
+
+
       {{ govukButton({
         text: buttonText,
         href: "/profile",
@@ -32,6 +35,6 @@
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
   <h2 class="govuk-heading-m govuk-!-margin-bottom-1" id="courses">Course selection</h2>
-  <p class="govuk-body">Check and edit your choice of training provider and course.</p>
+  <p class="govuk-body">Your selection of course and training provider is pre-filled using your choices from Find postgraduate teacher training. You can check, edit and update your choices.</p>
   {% include "_includes/review-courses.njk" %}
 {% endblock %}

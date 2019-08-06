@@ -3,14 +3,15 @@
 {% set title = "Please confirm your email address" %}
 {% set from = "becomingateacher@digital.education.gov.uk" %}
 {% set to = data.candidate["email"] %}
-{% if action == "create-account" %}
-  {% set purpose = "create an account" %}
-{% else %}
-  {% set purpose = "sign back into your account" %}
-{% endif %}
 
 {% block content %}
   <h1 class="govuk-heading-m">Please confirm your email address</h1>
-  <p class="govuk-body">Click the link below to {{ purpose }} on the <b>Apply for postgraduate teacher training</b> service.</p>
-  <p><a href="/applications">https://apply-for-postgraduate-teacher-training.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+  {% if action == "create-account" %}
+    <p class="govuk-body">Click the link below to confirm your email address and return to the <b>Apply for postgraduate teacher training</b> service.</p>
+    <p><a href="/dashboard">https://apply-for-postgraduate-teacher training.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+    <p>Your information will then be automatically saved as you enter it.</p>
+  {% else %}
+    <p class="govuk-body">Click the link below to sign in to the <b>Apply for postgraduate teacher training</b> service.</p>
+    <p><a href="/dashboard">https://apply-for-postgraduate-teacher training.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+  {% endif %}
 {% endblock %}

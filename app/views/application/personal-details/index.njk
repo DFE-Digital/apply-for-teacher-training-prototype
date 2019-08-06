@@ -18,7 +18,8 @@
 {% set dualNationality %}
   {{ appAutocomplete({
     label: {
-      text: "What is your second nationality?"
+      text: "What is your second nationality?",
+      classes: "govuk-label--s"
     },
     id: "candidate-second-nationality",
     name: "candidate[second-nationality]",
@@ -92,7 +93,7 @@
   }) }}
 
   {{ govukDetails({
-    summaryText: "I have dual nationality",
+    summaryText: "Add another nationality",
     html: dualNationality,
     open: data["candidate"]["second-nationality"]
   }) }}

@@ -333,6 +333,19 @@ router.get('/application/language-skills/:action(add|edit)', (req, res) => {
 })
 
 /**
+  * Application: Work history - answer branching
+  */
+router.post('/application/work-history/answer', (req, res) => {
+  const length = req.session.data['work-history']['length']
+
+  if (length === 'none') {
+    res.redirect('/application/work-history/missing')
+  } else {
+    res.redirect('/application/work-history/add/job')
+  }
+})
+
+/**
   * Application: Work history and school experience - Add/edit job/gap/role
   * @param {String} action add || edit
   * @param {String} type job || gap || role

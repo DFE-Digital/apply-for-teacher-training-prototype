@@ -2,29 +2,20 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <form class="govuk-grid-column-two-thirds" action="{{ formaction | default('#') }}" method="post">
-  {% set legendHtml %}
+  <div class="govuk-grid-column-two-thirds">
     {% if parent %}
-      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
-    {% else %}
-      {{ title | safe }}
+      <span class="govuk-caption-xl">{{ parent }}</span>
     {% endif %}
-  {% endset %}
-  {% call govukFieldset({
-    legend: {
-      html: legendHtml,
-      classes: "govuk-fieldset__legend--xl",
-      isPageHeading: true
-    }
-  }) %}
-    {% block primary %}
-    {% endblock %}
-  {% endcall %}
-  </form>
+    <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
+    <form action="{{ formaction | default('#') }}" method="post">
+    {% call govukFieldset() %}
+      {% block primary %}{% endblock %}
+    {% endcall %}
+    </form>
+  </div>
   {% if hasSecondary %}
   <div class="govuk-grid-column-one-third">
-    {% block secondary %}
-    {% endblock %}
+    {% block secondary %}{% endblock %}
   </div>
   {% endif %}
 </div>

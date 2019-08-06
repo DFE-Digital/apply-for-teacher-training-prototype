@@ -36,38 +36,26 @@
 
   {{ govukInput({
     label: {
-      text: "Referee’s relationship to you",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "For example, academic tutor, manager, other (please specify)"
-    },
-    id: "referees-" + id + "-relationship",
-    name: "referees[" + id + "][relationship]",
-    value: data["referees"][id]["relationship"]
-  }) }}
-
-  {{ govukInput({
-    label: {
-      text: "Over what time period has this person known you?",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
-    },
-    id: "referees-" + id + "-timespan",
-    name: "referees[" + id + "][timespan]",
-    value: data["referees"][id]["timespan"]
-  }) }}
-
-  {{ govukInput({
-    label: {
       text: "Email address of referee",
       classes: "govuk-label--s"
     },
     id: "referees-" + id + "-email",
     name: "referees[" + id + "][email]",
     value: data["referees"][id]["email"]
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "What is your relationship to this referee and how long have you known them?",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
+    },
+    maxwords: 50,
+    id: "referees-" + id + "-relationship",
+    name: "referees[" + id + "][relationship]",
+    value: data["referees"][id]["relationship"]
   }) }}
 
 {% set explainCharacter %}

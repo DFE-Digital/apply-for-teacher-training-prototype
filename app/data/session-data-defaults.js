@@ -176,8 +176,7 @@ module.exports = {
     first: {
       id: 'first',
       name: 'Joesph Bloggs',
-      relationship: 'Tutor',
-      timespan: 'They were my tutor at university from 2011 to 2013',
+      relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
       type: 'Academic',
       'character-explaination': ''
@@ -185,8 +184,7 @@ module.exports = {
     second: {
       id: 'second',
       name: 'Jane Doe',
-      relationship: 'Faith leader',
-      timespan: 'I have known Jane since January 2018',
+      relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
       'character-explanation': 'I haven’t been in the workplace since having a baby, and left university in 2000, so can no longer contact any of my previous tutors.'

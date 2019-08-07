@@ -50,7 +50,7 @@ module.exports = {
           country: 'United States',
           grade: '2:2',
           year: '2013',
-          naric: 'yes',
+          naric: 'Yes',
           'naric-details': 'BSc Physics'
         },
         kr525: {
@@ -98,7 +98,7 @@ module.exports = {
           year: '2004',
           country: 'India',
           'award-org': 'WBBSE',
-          naric: 'no',
+          naric: 'No',
           'naric-details': '',
           missing: ''
         },

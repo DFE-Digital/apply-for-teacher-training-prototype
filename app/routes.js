@@ -207,7 +207,7 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:catego
   const id = req.params.id
   const applicationId = req.params.applicationId
 
-  res.render(`application/${applicationId}/qualifications/${category}`, {
+  res.render(`application/qualifications/${category}`, {
     applicationId,
     action,
     formaction: `/application/${applicationId}/qualifications/${action}/${category}/${id}/answer`,
@@ -273,9 +273,10 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(g
 router.post('/application/:applicationId/qualifications/:action(add|edit)/:category(degree|gcse)/:id/answer', (req, res) => {
   const action = req.params.action
   const category = req.params.category
+  const data = req.session.data
   const id = req.params.id
-  const provenance = req.session.data['qualifications'][id]['provenance']
   const applicationId = req.params.applicationId
+  const provenance = data.applications[applicationId]['qualifications'][id]['provenance']
 
   let path
   if (category === 'degree') {
@@ -305,12 +306,13 @@ router.post('/application/:applicationId/qualifications/:action(add|edit)/:categ
   */
 router.all('/application/:applicationId/qualifications/next', (req, res) => {
   const prev = req.query.prev
-
-  const mathsCompleted = req.session.data['qualifications']['maths']
-  const englishCompleted = req.session.data['qualifications']['english']
-  const scienceCompleted = req.session.data['qualifications']['science']
-  const primaryApplication = req.session.data['settings']['primary-application']
   const applicationId = req.params.applicationId
+  const applicationData = req.session.data.applications[applicationId]
+
+  const mathsCompleted = applicationData['qualifications']['maths']
+  const englishCompleted = applicationData['qualifications']['english']
+  const scienceCompleted = applicationData['qualifications']['science']
+  const primaryApplication = req.session.data['settings']['primary-application']
 
   let path
   if (prev === 'degree' && mathsCompleted !== true) {

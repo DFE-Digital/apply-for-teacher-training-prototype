@@ -28,31 +28,22 @@
     },
     hint: {
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
-    },
-    id: "qualifications-" + id + "-type",
-    name: "qualifications[" + id + "][type]",
-    value: data["qualifications"][id]["type"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['qualifications', id, "type"])) }}
 
   {{ govukInput({
     label: {
       text: "Subject of degree",
       classes: "govuk-label--s"
-    },
-    id: "qualifications-" + id + "-subject",
-    name: "qualifications[" + id + "][subject]",
-    value: data["qualifications"][id]["subject"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['qualifications', id, "subject"])) }}
 
   {{ govukInput({
     label: {
       text: "Institution where you studied",
       classes: "govuk-label--s"
-    },
-    id: "qualifications-" + id + "-institution",
-    name: "qualifications[" + id + "][institution]",
-    value: data["qualifications"][id]["institution"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['qualifications', id, "institution"])) }}
 
 {% if international == true %}
   {{ appAutocomplete({
@@ -60,15 +51,12 @@
       text: "In which country did you gain this degree?",
       classes: "govuk-label--s"
     },
-    id: "qualifications-" + id + "-country",
-    name: "qualifications[" + id + "][country]",
-    value: data["qualifications"][id]["country"],
     items: countries
-  }) }}
+  } | decorateApplicationAttributes(['qualifications', id, "country"])) }}
 {% else %}
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + id + "][country]",
+    name: "applications[" + applicationId + "][qualifications][" + id + "][country]",
     value: "United Kingdom"
   }) }}
 {% endif %}
@@ -82,21 +70,15 @@
     hint: {
       text: "If you are still studying, give us your predicted grade. Predicted grades must be validated by an academic referee (see ‘References’)."
     },
-    classes: "govuk-input--width-10",
-    id: "qualifications-" + id + "-grade",
-    name: "qualifications[" + id + "][grade]",
-    value: data["qualifications"][id]["grade"]
-  }) }}
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(['qualifications', id, "grade"])) }}
 {% else %}
   {% set otherGradeHtml %}
     {{ govukInput({
       label: {
         text: "Please specify class of degree"
-      },
-      id: "qualifications-" + id + "-grade-other",
-      name: "qualifications[" + id + "][grade-other]",
-      value: data["qualifications"][id]["grade-other"]
-    }) }}
+      }
+    } | decorateApplicationAttributes(['qualifications', id, "grade-other"])) }}
   {% endset %}
   {% set predictedGradeHtml %}
     {{ govukInput({
@@ -105,11 +87,8 @@
       },
       hint: {
         text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
-      },
-      id: "qualifications-" + id + "-grade-predicted",
-      name: "qualifications[" + id + "][grade-predicted]",
-      value: data["qualifications"][id]["grade-predicted"]
-    }) }}
+      }
+    } | decorateApplicationAttributes(['qualifications', id, "grade-predicted"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -119,28 +98,16 @@
         classes: "govuk-label--s"
       }
     },
-    idPrefix: "qualifications-" + id + "-grade",
-    name: "qualifications[" + id + "][grade]",
     items: [{
-      value: "First",
-      text: "First",
-      checked: checked("['qualifications']['" + id + "']['grade']", "First")
+      text: "First"
     }, {
-      value: "Upper second (2:1)",
-      text: "Upper second (2:1)",
-      checked: checked("['qualifications']['" + id + "']['grade']", "Upper second (2:1)")
+      text: "Upper second (2:1)"
     }, {
-      value: "Lower second (2:2)",
-      text: "Lower second (2:2)",
-      checked: checked("['qualifications']['" + id + "']['grade']", "Lower second (2:2)")
+      text: "Lower second (2:2)"
     }, {
-      value: "Third",
-      text: "Third",
-      checked: checked("['qualifications']['" + id + "']['grade']", "Third")
+      text: "Third"
     }, {
-      value: "Other",
       text: "Other",
-      checked: checked("['qualifications']['" + id + "']['grade']", "Other"),
       conditional: {
         html: otherGradeHtml
       }
@@ -149,12 +116,11 @@
     }, {
       value: "Pending",
       text: "I am still studying for my degree",
-      checked: checked("['qualifications']['" + id + "']['grade']", "Pending"),
       conditional: {
         html: predictedGradeHtml
       }
     }]
-  }) }}
+  } | decorateApplicationAttributes(['qualifications', id, "grade"])) }}
 {% endif %}
 
   {{ govukInput({
@@ -165,11 +131,8 @@
     hint: {
       text: "If you are still studying, give us the date of your graduation. You must have successfully graduated by the time you start your course."
     },
-    classes: "govuk-input--width-4",
-    id: "qualifications-" + id + "-year",
-    name: "qualifications[" + id + "][year]",
-    value: data["qualifications"][id]["year"]
-  }) }}
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(['qualifications', id, "year"])) }}
 
 {% if international == true %}
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -177,11 +140,8 @@
     {{ govukInput({
       label: {
         text: "What UK degree is your degree comparable to?"
-      },
-      id: "qualifications-" + id + "-naric-details",
-      name: "qualifications[" + id + "][naric-details]",
-      value: data["qualifications"][id]["naric-details"]
-    }) }}
+      }
+    } | decorateApplicationAttributes(['qualifications', id, "naric-details"])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -194,21 +154,15 @@
     hint: {
       html: "<a href=\"https://www.naric.org.uk/naric/Default.aspx/\">UK NARIC</a> gives advice on non-UK academic, vocational and professional qualifications. If you have applied to UK NARIC for a <a href=\"https://www.naric.org.uk/naric/Individuals/Compare%20Qualifications/Statement%20of%20Comparability.aspx/\">statement of comparability</a>, give details here."
     },
-    idPrefix: "qualifications-" + id + "-naric",
-    name: "qualifications[" + id + "][naric]",
     items: [{
-      value: "yes",
       text: "Yes",
-      checked: checked("['qualifications']['" + id + "']['naric']", "yes"),
       conditional: {
         html: validateNaricHtml
       }
     }, {
-      value: "no",
-      text: "No",
-      checked: checked("['qualifications']['" + id + "']['naric']", "no")
+      text: "No"
     }]
-  }) }}
+  } | decorateApplicationAttributes(['qualifications', id, "naric"])) }}
 {% endif %}
 
 {% if action != "edit" %}
@@ -216,7 +170,7 @@
     text: "Save and add another degree",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/application/qualifications/add/degree"
+      formaction: "/application/" + applicationId + "/qualifications/add/degree"
     }
   }) }}
 {% endif %}
@@ -226,14 +180,14 @@
 {% endblock %}
 
 {% if international == true %}
-{% block pageScripts %}
-  {% set defaultValue = data["qualifications"][id]["country"] %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["qualifications"][id]["country"] }}',
-      selectElement: document.querySelector('#qualifications-{{ id }}-country')
-    })
-  </script>
-{% endblock %}
+  {% block pageScripts %}
+    {% set defaultValue = data.applications[applicationId]["qualifications"][id]["country"] %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete.enhanceSelectElement({
+        defaultValue: '{{ data.applications[applicationid]["qualifications"][id]["country"] }}',
+        selectElement: document.querySelector('#qualifications-{{ id }}-country')
+      })
+    </script>
+  {% endblock %}
 {% endif %}

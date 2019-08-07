@@ -10,32 +10,27 @@
         text: "Was this qualification awarded by an institution based in the UK?"
       }
     },
-    idPrefix: "qualifications-" + id + "-provenance",
-    name: "qualifications[" + id + "][provenance]",
     items: [{
       value: "domestic",
-      text: "Yes",
-      checked: checked("['qualifications']['" + id + "']['provenance']", "domestic")
+      text: "Yes"
     }, {
       value: "international",
-      text: "No",
-      checked: checked("['qualifications']['" + id + "']['provenance']", "international")
+      text: "No"
     }, {
       value: "missing",
-      text: "I don’t have this qualification yet",
-      checked: checked("['qualifications']['" + id + "']['provenance']", "missing")
+      text: "I don’t have this qualification yet"
     }]
-  }) }}
+  } | decorateApplicationAttributes(['qualifications', id, "provenance"])) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + id + "][category]",
+    name: "applications[" + applicationId + "][qualifications][" + id + "][category]",
     value: "gcse"
   }) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "qualifications[" + id + "][subject]",
+    name: "applications[" + applicationId + "][qualifications][" + id + "][subject]",
     value: (id | capitalize)
   }) }}
 

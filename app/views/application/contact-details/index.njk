@@ -25,38 +25,28 @@
     },
     classes: "govuk-input--width-20",
     autocomplete: "tel",
-    type: "tel",
-    id: "contact-details-phone-number",
-    name: "contact-details[phone-number]",
-    value: data["contact-details"]["phone-number"]
-  }) }}
+    type: "tel"
+  } | decorateApplicationAttributes(['contact-details', 'phone-number'])) }}
 
   {{ govukInput({
     label: {
       text: "Email address",
       classes: "govuk-label--s"
     },
-
     attributes: {
       spellcheck: "false"
     },
     autocomplete: "email",
-    type: "email",
-    id: "contact-details-email",
-    name: "contact-details[email]",
-    value: data["contact-details"]["email"]
-  }) }}
+    type: "email"
+  } | decorateApplicationAttributes(['contact-details', 'email'])) }}
 
 {% set internationalAddressHtml %}
   {{ govukTextarea({
     label: {
       text: "Enter your address"
     },
-    autocomplete: "street-address",
-    id: "contact-details-address",
-    name: "contact-details[address][street-address]",
-    value: data["contact-details"]["address"]["street-address"]
-  }) }}
+    autocomplete: "street-address"
+  } | decorateApplicationAttributes(['contact-details', 'street-address'])) }}
 {% endset %}
 
 {% if referrer != true %}
@@ -67,21 +57,15 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "candidate-address-type",
-    name: "contact-details[address-type]",
     items: [{
-      text: "In the UK",
-      value: "domestic",
-      checked: checked("['contact-details']['address-type']", "domestic")
+      text: "In the UK"
     }, {
       text: "Outside the UK",
-      value: "international",
-      checked: checked("['contact-details']['address-type']", "international"),
       conditional: {
         html: internationalAddressHtml
       }
     }]
-  }) }}
+  } | decorateApplicationAttributes(['contact-details', 'address-type'])) }}
 {% endif %}
 
   {{ govukButton({

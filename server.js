@@ -76,7 +76,7 @@ var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 utils.addNunjucksFilters(nunjucksAppEnv)
 
 app.use(function (req, res, next) {
-  nunjucksAppEnv.addFilter('decorateForApplication', function (obj, sections) {
+  nunjucksAppEnv.addFilter('decorateApplicationAttributes', function (obj, sections) {
     const id = req.params.applicationId
     var path = ["applications", id]
     sections = sections || []
@@ -106,12 +106,20 @@ app.use(function (req, res, next) {
 
       obj.idPrefix = sections.join('-')
     } else {
-      obj.id = sections.join('-')
       obj.value = storedValue
     }
 
+    obj.id = sections.join('-')
     obj.name = `applications[${id}]${sections.map(s => `[${s}]`).join('')}`
     return obj
+  })
+
+  nunjucksAppEnv.addFilter('ifSetForApplication', function (sections) {
+    const id = req.params.applicationId
+    var path = ["applications", id]
+    sections = sections || []
+    path.push(...sections)
+    return !!getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
   })
 
   next()

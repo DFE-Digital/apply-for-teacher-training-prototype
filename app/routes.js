@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const querystring = require('querystring')
+const {
+  pickCoursePaths
+} = require('./utils/journeys')
 
 // Utils
 const generateRandomString = () => {
@@ -453,6 +456,10 @@ router.get('/application/interview/:action(add|edit)', (req, res) => {
     formaction: referrer || '/application/',
     referrer
   })
+})
+
+router.all('/course/:view', function (req, res) {
+  res.render(`course/${req.params.view}`, { paths: pickCoursePaths(req) })
 })
 
 module.exports = router

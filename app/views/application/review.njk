@@ -77,10 +77,6 @@
   {% include "_includes/review-subject-knowledge.njk" %}
 {% endset %}
 
-{% set languageSkillsHtml %}
-  {% include "_includes/review-language-skills.njk" %}
-{% endset %}
-
 {% set workHistoryHtml %}
   {% include "_includes/review-work-history.njk" %}
 {% endset %}
@@ -137,13 +133,6 @@
       },
       content: {
         html: subjectKnowledgeHtml
-      }
-    }, {
-      heading: {
-        text: "Language skills"
-      },
-      content: {
-        html: languageSkillsHtml
       }
     }, {
       heading: {

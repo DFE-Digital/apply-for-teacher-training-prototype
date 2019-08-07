@@ -1,5 +1,5 @@
 {% extends "_content.njk" %}
-
+{% set applicationPath = '/application/' + applicationId %}
 {% set title = "Your application for postgraduate teacher&nbsp;training" %}
 
 {% block pageNavigation %}
@@ -39,37 +39,37 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: "/application/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
+      href: applicationPath + "/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
       id: "personal-details",
       completed: data["candidate"]["nationality"]
     }, {
       text: "Contact details",
-      href: "/application/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
+      href: applicationPath + "/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
       id: "contact-details",
       completed: data["contact-details"]["address"]
     }, {
       text: "Academic qualifications",
-      href: "/application/qualifications" + ("/review" if data["qualifications"]),
+      href: applicationPath + "/qualifications" + ("/review" if data["qualifications"]),
       id: "qualifications",
       completed: data["qualifications"]
     }, {
       text: "Your knowledge about the subject you want to teach",
-      href: "/application/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
+      href: applicationPath + "/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
       id: "subject-knowledge",
       completed: data["subject-knowledge"]
     }, {
       text: "Work history",
-      href: "/application/work-history" + ("/review" if data["work-history"]),
+      href: applicationPath + "/work-history" + ("/review" if data["work-history"]),
       id: "work-history",
       completed: data["work-history"]
     }, {
       text: "School experience and volunteering with young people",
-      href: "/application/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
+      href: applicationPath + "/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
       id: "school-experience",
       completed: data["school-experience"]
     }, {
       text: "Why you want to be a teacher",
-      href: "/application/vocation" + ("/edit" if data["vocation"] else "/add"),
+      href: applicationPath + "/vocation" + ("/edit" if data["vocation"] else "/add"),
       id: "vocation",
       completed: data["vocation"]
     }]
@@ -80,7 +80,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "References",
-      href: "/application/references" + ("/review" if data["referees"]),
+      href: applicationPath + "/references" + ("/review" if data["referees"]),
       id: "references",
       completed: data["referees"]
     }]
@@ -91,7 +91,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Interview preferences",
-      href: "/application/interview",
+      href: applicationPath + "/interview",
       id: "interview",
       completed: data["interview"]
     }]
@@ -102,7 +102,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Check your answers before submitting",
-      href: "/application/review",
+      href: applicationPath + "/review",
       id: "review",
       completed: data["review"]
     }]

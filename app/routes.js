@@ -158,8 +158,9 @@ router.get('/application/:applicationId/contact-details/:action(add|edit)', (req
   * Application: Contact details - answer branching
   */
 router.post('/application/:applicationId/contact-details/address-answer', (req, res) => {
-  const location = req.session.data['contact-details']['address-type']
   const applicationId = req.params.applicationId
+  const applicationData = req.session.data.applications[applicationId]
+  const location = applicationData['contact-details']['address-type']
 
   if (location === 'domestic') {
     res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
@@ -178,6 +179,11 @@ router.get('/application/:applicationId/contact-details/address/:action(add|edit
     formaction: referrer || `/application/${applicationId}/contact-details/review`,
     referrer
   })
+})
+
+router.get('/application/:applicationId/contact-details/:view', (req, res) => {
+  const applicationId = req.params.applicationId
+  res.render(`application/contact-details/${req.params.view}`, { applicationId })
 })
 
 /**

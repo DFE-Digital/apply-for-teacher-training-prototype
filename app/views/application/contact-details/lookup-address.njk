@@ -2,7 +2,7 @@
 
 {% set parent = "Contact details" %}
 {% set title = "What is your address?" %}
-{% set formaction = "/application/contact-details/select-address" %}
+{% set formaction = "/application/" + applicationId + "/contact-details/select-address" %}
 
 {% block primary %}
   <p class="govuk-body">If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send important letters to.</p>
@@ -13,15 +13,14 @@
       classes: "govuk-label--s"
     },
     autocomplete: "postal-code",
-    classes: "govuk-input--width-5",
-    id: "contact-details-address-postal-code",
-    name: "contact-details[address][postal-code]",
-    value: data["contact-details"]["address"]["postal-code"]
-  }) }}
+    classes: "govuk-input--width-5"
+  } | decorateApplicationAttributes(['contact-details', 'address', 'postal-code'])) }}
 
   {{ govukButton({
     text: "Look up address"
   }) }}
 
-  <p class="govuk-body"><a href="/application/contact-details/address">I live outside the UK</a></p>
+  <p class="govuk-body">
+    <a href="/application/{{ applicationId }}/contact-details/address">I live outside the UK</a>
+  </p>
 {% endblock %}

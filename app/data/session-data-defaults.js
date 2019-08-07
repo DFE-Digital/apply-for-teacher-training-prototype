@@ -31,7 +31,7 @@ module.exports = {
       'contact-details': {
         'phone-number': '07944 386555',
         email: 'priti.patel@example.com',
-        'address-type': 'In the UK',
+        'address-type': 'domestic',
         address: {
           'postal-code': 'G1 3AH',
           line1: '5 Royal Exchange Square',

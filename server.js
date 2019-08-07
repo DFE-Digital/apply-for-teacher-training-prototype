@@ -9,6 +9,7 @@ const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
 const cookieParser = require('cookie-parser')
+const getKeypath = require('keypather/get')
 
 // Run before other code to make sure variables from .env are available
 dotenv.config()
@@ -73,6 +74,48 @@ var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
+
+app.use(function (req, res, next) {
+  nunjucksAppEnv.addFilter('decorateForApplication', function (obj, sections) {
+    const id = req.params.applicationId
+    var path = ["applications", id]
+    sections = sections || []
+    path.push(...sections)
+    const storedValue = getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
+
+    if (obj.items !== undefined) {
+      obj.items = obj.items.map(item => {
+        var checked = ''
+        item.value = item.text
+
+        // If data is an array, check it exists in the array
+        if (Array.isArray(storedValue)) {
+          if (storedValue.indexOf(item.value) !== -1) {
+            checked = 'checked'
+          }
+        } else {
+          // The data is just a simple value, check it matches
+          if (storedValue === item.value) {
+            checked = 'checked'
+          }
+        }
+
+        item.checked = checked
+        return item
+      })
+
+      obj.idPrefix = sections.join('-')
+    } else {
+      obj.id = sections.join('-')
+      obj.value = storedValue
+    }
+
+    obj.name = `applications[${id}]${sections.map(s => `[${s}]`).join('')}`
+    return obj
+  })
+
+  next()
+})
 
 // Set views engine
 app.set('view engine', 'njk')

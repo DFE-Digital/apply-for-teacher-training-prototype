@@ -37,6 +37,11 @@ router.get('/email/:page/:action', (req, res) => {
 router.get('/application/start', function (req, res) {
   var code = generateRandomString();
   var data = req.session.data;
+
+  if (typeof data.applications === 'undefined') {
+    data.applications = {};
+  }
+
   data.applications[code] = { started: true };
   res.redirect(`/application/${code}`);
 })

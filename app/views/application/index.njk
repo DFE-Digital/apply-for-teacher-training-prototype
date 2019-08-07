@@ -41,37 +41,37 @@
       text: "Personal details",
       href: applicationPath + "/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
       id: "personal-details",
-      completed: data["candidate"]["nationality"]
+      completed: applicationValue(["candidate", "nationality"])
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
       id: "contact-details",
-      completed: data["contact-details"]["address"]
+      completed: applicationValue(["contact-details", "address"])
     }, {
       text: "Academic qualifications",
       href: applicationPath + "/qualifications" + ("/review" if data["qualifications"]),
       id: "qualifications",
-      completed: data["qualifications"]
+      completed: applicationValue("qualifications")
     }, {
       text: "Your knowledge about the subject you want to teach",
       href: applicationPath + "/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
       id: "subject-knowledge",
-      completed: data["subject-knowledge"]
+      completed: applicationValue("subject-knowledge")
     }, {
       text: "Work history",
       href: applicationPath + "/work-history" + ("/review" if data["work-history"]),
       id: "work-history",
-      completed: data["work-history"]
+      completed: applicationValue("work-history")
     }, {
       text: "School experience and volunteering with young people",
       href: applicationPath + "/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
       id: "school-experience",
-      completed: data["school-experience"]
+      completed: applicationValue("school-experience")
     }, {
       text: "Why you want to be a teacher",
       href: applicationPath + "/vocation" + ("/edit" if data["vocation"] else "/add"),
       id: "vocation",
-      completed: data["vocation"]
+      completed: applicationValue("vocation")
     }]
   }) }}
 
@@ -82,7 +82,7 @@
       text: "References",
       href: applicationPath + "/references" + ("/review" if data["referees"]),
       id: "references",
-      completed: data["referees"]
+      completed: applicationValue("referees")
     }]
   }) }}
 
@@ -93,7 +93,7 @@
       text: "Interview preferences",
       href: applicationPath + "/interview",
       id: "interview",
-      completed: data["interview"]
+      completed: applicationValue("interview")
     }]
   }) }}
 
@@ -104,7 +104,7 @@
       text: "Check your answers before submitting",
       href: applicationPath + "/review",
       id: "review",
-      completed: data["review"]
+      completed: applicationValue("review")
     }]
   }) }}
 {% endblock %}

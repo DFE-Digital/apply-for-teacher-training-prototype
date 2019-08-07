@@ -128,7 +128,11 @@ app.use(function (req, res, next) {
     return !!getApplicationValue(sections)
   })
 
-  nunjucksAppEnv.addFilter('applicationValue', function (sections) {
+  nunjucksAppEnv.addGlobal('applicationValue', function (sections) {
+    if (sections && !Array.isArray(sections)) {
+      sections = [sections]
+    }
+
     return getApplicationValue(sections)
   })
 

@@ -86,7 +86,9 @@ app.use(function (req, res, next) {
     if (obj.items !== undefined) {
       obj.items = obj.items.map(item => {
         var checked = ''
-        item.value = item.text
+        if (typeof item.value === 'undefined') {
+          item.value = item.text
+        }
 
         // If data is an array, check it exists in the array
         if (Array.isArray(storedValue)) {

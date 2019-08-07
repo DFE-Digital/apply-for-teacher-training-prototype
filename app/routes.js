@@ -50,10 +50,6 @@ router.all('/application/:applicationId', function (req, res) {
   res.render('application/index', { applicationId: req.params.applicationId })
 })
 
-router.all('/application/:applicationId/:view', function (req, res) {
-  res.render(`application/${req.params.view}`, { applicationId: req.params.applicationId })
-})
-
 /**
   * Apply: Populate pages with course and provider details
   * @param {String} provider Provider code
@@ -512,6 +508,23 @@ router.get('/application/:applicationId/interview/:action(add|edit)', (req, res)
     formaction: referrer || `/application/${applicationId}`,
     referrer
   })
+})
+
+router.all('/application/:applicationId/:view', function (req, res) {
+  res.render(
+    `application/${req.params.view}`,
+    { applicationId: req.params.applicationId },
+    function(err, html) {
+      if (err.message.includes('template not found')) {
+        res.render(
+          `application/${req.params.view}/index`,
+          { applicationId: req.params.applicationId })
+      } else {
+        res.status(500)
+        res.send(err.message)
+      }
+    }
+  )
 })
 
 router.all('/course/:view', function (req, res) {

@@ -1,4 +1,5 @@
-{% set workHistory = data["work-history"]
+{% set applicationPath = "/application/" + applicationId %}
+{% set workHistory = applicationValue("work-history")
   | toArray
   | sort(attribute="start-date")
   | selectattr("id")
@@ -46,7 +47,7 @@
           </td>
           {% if review != true %}
           <td class="govuk-table__cell app-table__cell--action">
-            <a href="/application/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
+            <a href="{{ applicationPath }}/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
           </td>
           {% endif %}
         </tr>
@@ -88,7 +89,7 @@
         </td>
         {% if review != true %}
         <td class="govuk-table__cell app-table__cell--action">
-          <a href="/application/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
+          <a href="{{ applicationPath }}/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
         </td>
         {% endif %}
       </tr>
@@ -112,7 +113,7 @@
           </td>
           {% if review != true %}
           <td class="govuk-table__cell app-table__cell--action">
-            <a href="/application/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
+            <a href="{{ applicationPath }}/work-history/add/gap?start={{ gapStart | date("yyyy-LL") }}&end={{ gapEnd | date("yyyy-LL") }}&referrer={{ referrer }}">Explain&nbsp;gap</a>
           </td>
           {% endif %}
         </tr>
@@ -124,7 +125,7 @@
   <h2 class="govuk-heading-s govuk-!-margin-bottom-2">No work history entered</h2>
 {% endif %}
 
-{% if data["work-history"]["missing"] and not workHistory.length %}
+{% if applicationValue(["work-history", "missing"]) and not workHistory.length %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16 govuk-!-margin-bottom-3",
     rows: [{
@@ -132,12 +133,12 @@
         text: "Explanation of why you’ve been out of the workplace"
       },
       value: {
-        text: data["work-history"]["missing"] | nl2br | safe
+        text: applicationValue(["work-history", "missing"]) | nl2br | safe
       },
       actions: {
         classes: "govuk-!-padding-right-2",
         items: [{
-          href: "/application/work-history/edit/missing?referrer=" + referrer,
+          href: "{{ applicationPath }}/work-history/edit/missing?referrer=" + referrer,
           text: "Edit",
           visuallyHiddenText: "explanation"
         }]
@@ -147,6 +148,6 @@
   {{ govukButton({
     text: "Add job",
     classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
-    href: "/application/work-history/add/job"
+    href: "{{ applicationPath }}/work-history/add/job"
   }) }}
 {% endif %}

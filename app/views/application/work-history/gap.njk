@@ -19,20 +19,19 @@
     hint: {
       text: "For example, 01 2018"
     },
-    id: "work-history-" + id + "-start-date",
     namePrefix: id + "-start-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (data["work-history"][id]["start-date"] or start) | date('LL')
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('LL')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (data["work-history"][id]["start-date"] or start) | date('yyyy')
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('yyyy')
     }]
-  }) }}
+  } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -44,35 +43,31 @@
     hint: {
       text: "For example, 05 2018"
     },
-    id: "work-history-" + id + "-end-date",
     namePrefix: id + "-end-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (data["work-history"][id]["end-date"] or end) | date('LL')
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('LL')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (data["work-history"][id]["end-date"] or end) | date('yyyy')
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('yyyy')
     }]
-  }) }}
+  } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
 
   {{ govukCharacterCount({
     label: {
       text: "Reason(s) for this gap in your work history",
       classes: "govuk-label--s"
     },
-    maxwords: 400,
-    id: "work-history-" + id + "-description",
-    name: "work-history[" + id + "][description]",
-    value: data["work-history"][id]["description"]
-  }) }}
+    maxwords: 400
+  } | decorateApplicationAttributes(["work-history", id, "description"])) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "work-history[" + id + "][category]",
+    name: "applications[" + applicationId + "][work-history][" + id + "][category]",
     value: "gap"
   }) }}
 

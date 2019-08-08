@@ -13,7 +13,7 @@
   }) }}
 {% endblock %}
 {% block primary %}
-  {% set hasSchoolExperience = data["school-experience"]["missing"] != "true" %}
+  {% set hasSchoolExperience = applicationValue(["school-experience", "missing"]) != "true" %}
 
   <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Courses</h2>
   <p class="govuk-body">You can apply for up to 3 courses at a time.</p>

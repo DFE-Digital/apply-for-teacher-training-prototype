@@ -372,8 +372,8 @@ router.get('/application/:applicationId/subject-knowledge/:action(add|edit)', (r
   * Application: Work history - answer branching
   */
 router.post('/application/:applicationId/work-history/answer', (req, res) => {
-  const length = req.session.data['work-history']['length']
   const applicationId = req.params.applicationId
+  const length = req.session.data.applications[applicationId]['work-history']['length']
 
   if (length === 'none') {
     res.redirect(`/application/${applicationId}/work-history/missing`)

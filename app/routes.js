@@ -512,17 +512,18 @@ router.get('/application/:applicationId/interview/:action(add|edit)', (req, res)
 })
 
 router.all('/application/:applicationId/:view', function (req, res) {
+  const applicationId = req.params.applicationId
+
   res.render(
     `application/${req.params.view}`,
-    { applicationId: req.params.applicationId },
+    { applicationId },
     function(err, html) {
       if (err && err.message.includes('template not found')) {
         res.render(
           `application/${req.params.view}/index`,
-          { applicationId: req.params.applicationId })
+          { applicationId })
       } else {
-        res.status(500)
-        res.send(err)
+        res.send(html)
       }
     }
   )

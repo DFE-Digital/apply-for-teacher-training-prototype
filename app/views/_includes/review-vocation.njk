@@ -1,3 +1,4 @@
+{% set applicationPath = '/application/' + applicationId %}
 {{ govukSummaryList({
   classes: "govuk-!-font-size-16",
   rows: [{
@@ -5,12 +6,12 @@
       text: "Tell us why you want to be a teacher"
     },
     value: {
-      text: (data["vocation"]["statement"] | default("Not entered")) | nl2br | safe
+      text: (applicationValue(["vocation", "statement"]) | default("Not entered")) | nl2br | safe
     },
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: "/application/vocation/edit?referrer=" + referrer,
+        href: applicationPath + "/vocation/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "teaching vocation"
       }]

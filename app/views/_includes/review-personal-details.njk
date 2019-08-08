@@ -1,43 +1,33 @@
+{% set applicationPath = '/application/' + applicationId %}
 {% set nameText %}
-  {% if data["candidate"]["name"] %}
-    {{ data["candidate"]["name"] }}
-    {# {% if data["candidate"]["optional-name"] %}
-      ({{ data["candidate"]["optional-name"] }})
-    {% endif %} #}
+  {% if applicationValue(["candidate", "name"]) %}
+    {{ applicationValue(["candidate", "name"]) }}
   {% else %}
     Not entered
   {% endif %}
 {% endset %}
 
-{# {% set dateOfBirth = data["candidate"]["date-of-birth"] %}
-{% if dateOfBirth %}
-  {% set dob = dateOfBirth.year+"-"+dateOfBirth.month+"-"+dateOfBirth.day %}
-  {% set dateOfBirthText = dob | date("DDD") %}
-{% else %}
-  {% set dateOfBirthText = "Not entered" %}
-{% endif %} #}
-
 {% set nationalityText %}
-  {% if data["candidate"]["nationality"] %}
-    {{ data["candidate"]["nationality"] }}
-    {% if data["candidate"]["second-nationality"] %}
-      and {{ data["candidate"]["second-nationality"] }}
+  {% if applicationValue(["candidate", "nationality"]) %}
+    {{ applicationValue(["candidate", "nationality"]) }}
+    {% if applicationValue(["candidate", "second-nationality"]) %}
+      and {{ applicationValue(["candidate", "second-nationality"]) }}
     {% endif %}
   {% else %}
     Not entered
   {% endif %}
 {% endset %}
 
-{% set residencyStatus = data["candidate"]["residency-status"] %}
+{% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
 {% set residencyStatusText %}
   {% if residencyStatus == "right-to-study" %}
-    I have the right to study and/or work in the&nbsp;UK{{ ': ' + data["candidate"]["residency-status-right-to-study"] if data["candidate"]["residency-status-right-to-study"] }}
+    I have the right to study and/or work in the&nbsp;UK{{ ': ' + applicationValue(["candidate", "residency-status-right-to-study"]) if applicationValue(["candidate", "residency-status-right-to-study"]) }}
   {% elif residencyStatus == "require-tier-2" %}
     I will need to apply for a general work visa (Tier 2) to work in the&nbsp;UK
   {% elif residencyStatus == "require-tier-4" %}
     I will need to apply for a general student visa (Tier 4) to study in the&nbsp;UK
   {% elif residencyStatus == "unknown" %}
-    I don’t know my residency status{{ ': ' + data["candidate"]["residency-status-unknown"] if data["candidate"]["residency-status-unknown"] }}
+    I don’t know my residency status{{ ': ' + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
   {% else %}
     UK citizen
   {% endif %}
@@ -53,29 +43,12 @@
   actions: {
     classes: "govuk-!-padding-right-2",
     items: [{
-      href: "/application/personal-details/edit?referrer=" + referrer,
+      href: applicationPath + "/personal-details/edit?referrer=" + referrer,
       text: "Edit",
       visuallyHiddenText: "name"
     }]
   } if review != true
 } %}
-
-{# {% set dateOfBirthRow = {
-  key: {
-    text: "Date of birth"
-  },
-  value: {
-    text: dateOfBirthText
-  },
-  actions: {
-    classes: "govuk-!-padding-right-2",
-    items: [{
-      href: "/application/personal-details/edit?referrer=" + referrer,
-      text: "Edit",
-      visuallyHiddenText: "date of birth"
-    }]
-  } if review != true
-} %} #}
 
 {% set nationalityRow = {
   key: {
@@ -87,7 +60,7 @@
   actions: {
     classes: "govuk-!-padding-right-2",
     items: [{
-      href: "/application/personal-details/edit?referrer=" + referrer,
+      href: applicationPath + "/personal-details/edit?referrer=" + referrer,
       text: "Edit",
       visuallyHiddenText: "nationality"
     }]
@@ -104,7 +77,7 @@
   actions: {
     classes: "govuk-!-padding-right-2",
     items: [{
-      href: "/application/personal-details/residency-status/edit?referrer=" + referrer,
+      href: applicationPath + "/personal-details/residency-status/edit?referrer=" + referrer,
       text: "Edit",
       visuallyHiddenText: "residency status"
     }]
@@ -112,12 +85,12 @@
 } %}
 
 {% set textContent %}
-  {% if data["language-skills"]["main"] %}
-    {{ data["language-skills"]["main"] }}
-    {% if data["language-skills"]["english"] %}
-      {{ data["language-skills"]["english"] }}
-    {% elif data["language-skills"]["other"] %}
-      {{ data["language-skills"]["other"] }}
+  {% if applicationValue(["language-skills", "main"]) %}
+    {{ applicationValue(["language-skills", "main"]) }}
+    {% if applicationValue(["language-skills", "english"]) %}
+      {{ applicationValue(["language-skills", "english"]) }}
+    {% elif applicationValue(["language-skills", "other"]) %}
+      {{ applicationValue(["language-skills", "other"]) }}
     {% endif %}
   {% else %}
     Not entered
@@ -134,7 +107,7 @@
   actions: {
     classes: "govuk-!-padding-right-2",
     items: [{
-      href: "/application/personal-details/edit?referrer=" + referrer,
+      href: applicationPath + "/personal-details/edit?referrer=" + referrer,
       text: "Edit",
       visuallyHiddenText: "English language qualifications"
     }]

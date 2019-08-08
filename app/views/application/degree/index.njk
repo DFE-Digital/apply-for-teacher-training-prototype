@@ -1,0 +1,82 @@
+{% extends "_form.njk" %}
+
+{% if action == "edit" %}
+  {% set title = "Edit degree" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Add a degree" %}
+  {% set buttonText = "Continue" %}
+{% endif %}
+
+{% block primary %}
+  <p class="govuk-body">Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
+
+  {{ govukInput({
+    label: {
+      text: "Type of degree"
+    },
+    hint: {
+      text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
+    }
+  } | decorateApplicationAttributes(["degree", degreeId, "type"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Subject of degree"
+    }
+  } | decorateApplicationAttributes(["degree", degreeId, "subject"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied"
+    }
+  } | decorateApplicationAttributes(["degree", degreeId, "institution"])) }}
+
+  {% set internationalConditionalHtml %}
+    {{ appAutocomplete({
+      label: {
+        text: "Which country?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["degree", degreeId, "country"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "This institution is based in:"
+      }
+    },
+    items: [{
+      value: "domestic",
+      text: "United Kngdom"
+    }, {
+      value: "international",
+      text: "Another country",
+      conditional: {
+        html: internationalConditionalHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["degree", degreeId, "provenance"])) }}
+
+  {{ govukInput({
+    type: "hidden",
+    name: "applications[" + applicationId + "][degree][" + degreeId + "][category]",
+    value: "degree"
+  }) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  {% set defaultValue = data.applications[applicationId]["degree"][degreeId]["country"] %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ data.applications[applicationid]["degree"][degreeId]["country"] }}',
+      selectElement: document.querySelector('#degree-{{ degreeId }}-country')
+    })
+  </script>
+{% endblock %}

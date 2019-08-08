@@ -39,10 +39,9 @@ module.exports = {
           country: 'United Kingdom'
         }
       },
-      qualifications: {
+      degree: {
         kq19m: {
           id: 'kq19m',
-          category: 'degree',
           provenance: 'international',
           type: 'BS',
           subject: 'Physics with emphasis in Astronomy',
@@ -55,7 +54,6 @@ module.exports = {
         },
         kr525: {
           id: 'kr525',
-          category: 'degree',
           provenance: 'domestic',
           type: 'MSc',
           subject: 'Applied Physics',
@@ -65,7 +63,9 @@ module.exports = {
           'grade-other': 'Pass',
           'grade-predicted': '',
           year: '2017'
-        },
+        }
+      },
+      qualifications: {
         ksufp: {
           id: 'ksufp',
           category: 'other',

@@ -1,0 +1,96 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/degree/" + degreeId + "/" + action + "/year" %}
+{% if applicationValue(["qualifications", degreeId, "provenance"]) == "international" %}
+  {% set international = true %}
+{% endif %}
+{% if action == "edit" %}
+  {% set parent = "Edit degree" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set parent = "Add a degree" %}
+  {% set buttonText = "Continue" %}
+{% endif %}
+{% set title = "What grade is your degree?" %}
+
+{% block primary %}
+  {% set predictedGradeHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please give details of your predicted grade"
+      },
+      hint: {
+        text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
+      }
+    } | decorateApplicationAttributes(["degree", degreeId, "grade-predicted"])) }}
+  {% endset %}
+
+  {% set otherGradeHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please specify the grade of your degree"
+      }
+    } | decorateApplicationAttributes(["degree", degreeId, "grade-other"])) }}
+  {% endset %}
+
+  {% if international == true %}
+    {{ govukRadios({
+      items: [{
+        text: "I completed my degree",
+        label: {
+          classes: "govuk-label--s"
+        },
+        conditional: {
+          html: otherGradeHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        value: "Pending",
+        text: "I am still studying for my degree",
+        label: {
+          classes: "govuk-label--s"
+        },
+        conditional: {
+          html: predictedGradeHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["degree", degreeId, "grade"])) }}
+  {% else %}
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Class of degree",
+          classes: "govuk-label--m"
+        }
+      },
+      items: [{
+        text: "First"
+      }, {
+        text: "Upper second (2:1)"
+      }, {
+        text: "Lower second (2:2)"
+      }, {
+        text: "Third"
+      }, {
+        text: "Other",
+        conditional: {
+          html: otherGradeHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        value: "Pending",
+        text: "I am still studying for my degree",
+        conditional: {
+          html: predictedGradeHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["degree", degreeId, "grade"])) }}
+  {% endif %}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends "_form-wide.njk" %}
-
+{% set applicationPath = '/application/' + applicationId %}
 {% set title = "Academic qualifications" %}
 {% set categoryCaptionSize = "m" %}
 
@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block primary %}
-  {% set referrer = "/application/qualifications/review" %}
+  {% set referrer = applicationPath + "/qualifications/review" %}
   {% set category = "degree" %}
   {% set categoryTitle = "Degree(s)" %}
   {% include "_includes/review-qualifications.njk" %}
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",
-    href: "/application/qualifications/add/degree"
+    href: applicationPath + "/qualifications/add/degree"
   }) }}
 
   {% set category = "gcse" %}
@@ -31,7 +31,7 @@
   {{ govukButton({
     text: "Add another qualification",
     classes: "govuk-button--secondary",
-    href: "/application/qualifications/add/other"
+    href: applicationPath + "/qualifications/add/other"
   }) }}
 {% else %}
   <h2 class="govuk-heading-m">Other relevant qualifications</h2>
@@ -39,7 +39,7 @@
   {{ govukButton({
     text: "Add qualification",
     classes: "govuk-button--secondary",
-    href: "/application/qualifications/add/other"
+    href: applicationPath + "/qualifications/add/other"
   }) }}
 {% endif %}
 
@@ -54,11 +54,8 @@
           html: "Tell us about any special circumstances related to your qualifications here. For example, you can explain how you plan to fill any gaps in your eligibility requirements or validate non-UK qualifications. For advice on missing qualifications, contact your chosen training provider or <a href=\"https://getintoteaching.education.gov.uk/get-help-and-support/\">Get into Teaching</a>."
         },
         maxwords: 200,
-        rows: 12,
-        id: "qualifications-additional",
-        name: "qualifications[additional]",
-        value: data["qualifications"]["additional"]
-      }) }}
+        rows: 12
+      } | decorateApplicationAttributes(['qualifications', 'additional'])) }}
     </div>
   </div>
 

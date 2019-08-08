@@ -1,5 +1,5 @@
 {% extends "_form.njk" %}
-
+{% set applicationPath = "/application/" + applicationId %}
 {% set parent = "School experience and volunteering with young people" %}
 {% if action == "edit" %}
   {% set title = "Edit role" %}
@@ -14,21 +14,18 @@
     label: {
       text: "Your role",
       classes: "govuk-label--s"
-    },
-    id: "school-experience-" + id + "-role",
-    name: "school-experience[" + id + "][role]",
-    value: data["school-experience"][id]["role"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['school-experience', id, 'role'])) }}
 
   {{ govukInput({
     label: {
       text: "Organisation where you gained experience or volunteered",
       classes: "govuk-label--s"
-    },
-    id: "school-experience-" + id + "-org",
-    name: "school-experience[" + id + "][org]",
-    value: data["school-experience"][id]["org"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['school-experience', id, 'org'])) }}
+
+  {% set startDate = applicationValue(['school-experience', id, 'start-date']) %}
+  {% set endDate = applicationValue(['school-experience', id, 'end-date']) %}
 
   {{ govukDateInput({
     fieldset: {
@@ -40,25 +37,24 @@
     hint: {
       text: "For example, 01 05 2018"
     },
-    id: "school-experience-" + id + "-start-date",
     namePrefix: id + "-start-date",
     items: [{
       label: "Day",
       name: "day",
-      value: data["school-experience"][id]["start-date"] | date('LL'),
+      value: startDate | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
       name: "month",
-      value: data["school-experience"][id]["start-date"] | date('LL'),
+      value: startDate | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: data["school-experience"][id]["start-date"] | date('yyyy'),
+      value: startDate | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
-  }) }}
+  } | decorateApplicationAttributes(['school-experience', id, 'start-date'])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -70,32 +66,31 @@
     hint: {
       text: "For example, 01 05 2019"
     },
-    id: "school-experience-" + id + "-end-date",
     namePrefix: id + "-end-date",
     items: [{
       label: "Day",
       name: "day",
-      value: data["school-experience"][id]["end-date"] | date('LL'),
+      value: endDate | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
       name: "month",
-      value: data["school-experience"][id]["end-date"] | date('LL'),
+      value: endDate | date('LL'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: data["school-experience"][id]["end-date"] | date('yyyy'),
+      value: endDate | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
-  }) }}
+  } | decorateApplicationAttributes(['school-experience', id, 'end-date'])) }}
 
 {% if action != "edit" %}
   {{ govukButton({
     text: "Save and add another role",
     classes: "govuk-button--secondary",
     attributes: {
-      formaction: "/application/school-experience/update/role/"+ id + "?next=/application/school-experience/add/role"
+      formaction: applicationPath + "/school-experience/update/role/"+ id + "?referrer=" + applicationPath + "/school-experience/add/role"
     }
   }) }}
 {% endif %}

@@ -1,0 +1,24 @@
+{% extends "_form.njk" %}
+
+{% set title = "Which provider are you applying to?" %}
+{% set formaction = paths.next %}
+{% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
+
+{% block primary %}
+  {# Paragraph font size class suffixes: -xl, -l or -m #}
+  <div class="govuk-!-margin-top-4">
+  {{ govukInput({
+    label: {
+      text: 'Provider name'
+    },
+    autocomplete: "name",
+    id: "candidate-name",
+    name: "candidate[name]",
+    value: data["candidate"]["name"]
+  }) }}
+  </div>
+
+  {{ govukButton({
+    text: 'Continue'
+  }) }}
+{% endblock %}

@@ -1,4 +1,6 @@
-{% set qualifications = data["qualifications"] | toArray %}
+{% set qualifications = data.applications[applicationId]["qualifications"] | toArray %}
+{% set applicationPath = '/application/' + applicationId %}
+
 <table class="govuk-table govuk-!-font-size-16">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
@@ -25,7 +27,7 @@
       <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a>.</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="/application/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
+        <a href="{{ applicationPath }}/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>
       {% endif %}
     </tr>
@@ -41,7 +43,7 @@
       <td class="govuk-table__cell">{{ item.year }}</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="/application/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>
+        <a href="{{ applicationPath }}/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>
         </a>
       </td>
       {% endif %}

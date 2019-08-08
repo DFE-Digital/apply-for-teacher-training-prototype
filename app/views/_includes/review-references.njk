@@ -1,4 +1,5 @@
-{% set references = data['referees'] | toArray %}
+{% set references = applicationValue('referees') | toArray %}
+{% set applicationPath = '/application/' + applicationId %}
 {% if references.length >= 1 %}
   <table class="govuk-table govuk-!-font-size-16">
     <thead class="govuk-table__head">
@@ -30,7 +31,7 @@
         <td class="govuk-table__cell">{{ item.email }}</td>
         {% if review != true %}
         <td class="govuk-table__cell app-table__cell--action">
-          <a href="/application/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>
+          <a href="{{ applicationPath }}/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>
         </td>
         {% endif %}
       </tr>

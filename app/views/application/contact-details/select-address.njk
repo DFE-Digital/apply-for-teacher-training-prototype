@@ -1,12 +1,13 @@
 {% extends "_form.njk" %}
 
+{% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Contact details" %}
 {% set title = "What is your address?" %}
-{% set formaction = "/application" %}
+{% set formaction = applicationPath %}
 
 {% block primary %}
   <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Postcode</h2>
-  <p class="govuk-body">{{ data["contact-details"]["address"]["postal-code"] }} &nbsp; <a href="/application/contact-details/address">Change</a></p>
+  <p class="govuk-body">{{ data.applications[applicationId]["contact-details"]["address"]["postal-code"] }} &nbsp; <a href="{{ applicationPath }}/contact-details/address">Change</a></p>
 
   {{ govukRadios({
     fieldset: {
@@ -40,7 +41,7 @@
     ]
   }) }}
 
-  <p class="govuk-body"><a href="/application/contact-details/address/add">I can’t find my address in the list</a></p>
+  <p class="govuk-body"><a href="{{ applicationPath }}/contact-details/address/add">I can’t find my address in the list</a></p>
 
   {{ govukInput({
     name: "contact-details[address][line1]",

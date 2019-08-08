@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Work history" %}
-{% set formaction = "/application" %}
+{% set formaction = "/application/" + applicationId %}
 {% if action == "edit" %}
   {% set title = "Edit explanation of why you’ve been out of the workplace" %}
   {% set buttonText = "Save changes" %}
@@ -22,11 +22,8 @@
       classes: "govuk-label--s"
     },
     rows: 20,
-    maxwords: 600,
-    id: "work-history-missing",
-    name: "work-history[missing]",
-    value: data["work-history"]["missing"]
-  }) }}
+    maxwords: 600
+  } | decorateApplicationAttributes(["work-history", "missing"])) }}
 
   {{ govukButton({
     text: buttonText

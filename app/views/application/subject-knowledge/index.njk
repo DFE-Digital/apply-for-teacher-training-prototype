@@ -55,11 +55,8 @@
       html: "Evidence can include: modules you studied as part of your undergraduate degree; postgraduate degrees (for example, a Masters or Phd); your A level subjects; or expertise you’ve gained at work."
     },
     maxwords: 400,
-    rows: 12,
-    id: "subject-knowledge-statement",
-    name: "subject-knowledge[statement]",
-    value: data["subject-knowledge"]["statement"]
-  }) }}
+    rows: 12
+  } | decorateApplicationAttributes(['subject-knowledge', 'statement'])) }}
 
   {{ govukButton({
     text: buttonText

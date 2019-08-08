@@ -9,6 +9,7 @@ const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
 const cookieParser = require('cookie-parser')
+const getKeypath = require('keypather/get')
 
 // Run before other code to make sure variables from .env are available
 dotenv.config()
@@ -73,6 +74,70 @@ var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
+
+app.use(function (req, res, next) {
+  function applicationId() {
+    return req.params.applicationId
+  }
+
+  function getApplicationValue(sections) {
+    var path = ["applications", applicationId()]
+    sections = sections || []
+    path.push(...sections)
+    return getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
+  }
+
+  nunjucksAppEnv.addFilter('decorateApplicationAttributes', function (obj, sections) {
+    sections = sections || []
+    const storedValue = getApplicationValue(sections)
+
+    if (obj.items !== undefined) {
+      obj.items = obj.items.map(item => {
+        var checked = ''
+        if (typeof item.value === 'undefined') {
+          item.value = item.text
+        }
+
+        // If data is an array, check it exists in the array
+        if (Array.isArray(storedValue)) {
+          if (storedValue.indexOf(item.value) !== -1) {
+            checked = 'checked'
+          }
+        } else {
+          // The data is just a simple value, check it matches
+          if (storedValue === item.value) {
+            checked = 'checked'
+          }
+        }
+
+        item.checked = checked
+        return item
+      })
+
+      obj.idPrefix = sections.join('-')
+    } else {
+      obj.value = storedValue
+    }
+
+    obj.id = sections.join('-')
+    obj.name = `applications[${applicationId()}]${sections.map(s => `[${s}]`).join('')}`
+    return obj
+  })
+
+  nunjucksAppEnv.addFilter('ifSetForApplication', function (sections) {
+    return !!getApplicationValue(sections)
+  })
+
+  nunjucksAppEnv.addGlobal('applicationValue', function (sections) {
+    if (sections && !Array.isArray(sections)) {
+      sections = [sections]
+    }
+
+    return getApplicationValue(sections)
+  })
+
+  next()
+})
 
 // Set views engine
 app.set('view engine', 'njk')

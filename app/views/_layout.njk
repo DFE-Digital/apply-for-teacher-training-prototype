@@ -35,33 +35,6 @@
 {% from "_components/related/macro.njk" import appRelated %}
 {% from "_components/task-list/macro.njk" import appTaskList %}
 
-{# Set application status based on question completion #}
-{% if data["candidate"]["nationality"] and
-  data["contact-details"]["address"] and
-  data["qualifications"] and
-  data["subject-knowledge"] and
-  data["language-skills"] and
-  data["work-history"] and
-  data["school-experience"] and
-  data["referees"] and
-  data["vocation"]
-%}
-  {% set applicationStatus = "complete" %}
-{% elif data["candidate"]["nationality"] or
-  data["contact-details"]["address"] or
-  data["qualifications"] or
-  data["subject-knowledge"] or
-  data["language-skills"] or
-  data["work-history"] or
-  data["school-experience"] or
-  data["referees"] or
-  data["vocation"] == true
-%}
-  {% set applicationStatus = "incomplete" %}
-{% else %}
-  {% set applicationStatus = "unbegun" %}
-{% endif %}
-
 {# Set breadcrumbs for application question pages #}
 {% set applicationBreadcrumbItems = [{
   text: "Your applications",

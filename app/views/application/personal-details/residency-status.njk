@@ -16,11 +16,8 @@
         html: "Please give details of your visa type, status or circumstances"
       },
       maxwords: 200,
-      rows: 5,
-      id: "candidate-residency-status-right-to-study",
-      name: "candidate[residency-status-right-to-study]",
-      value: data["candidate"]["residency-status-right-to-study"]
-    }) }}
+      rows: 5
+    } | decorateApplicationAttributes(['candidate', 'residency-status-right-to-study'])) }}
   {% endset -%}
 
   {% set requireTier2 %}
@@ -48,11 +45,8 @@
         html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration</a>."
       },
       maxwords: 200,
-      rows: 5,
-      id: "candidate-residency-status-unknown",
-      name: "candidate[residency-status-unknown]",
-      value: data["candidate"]["residency-status-unknown"]
-    }) }}
+      rows: 5
+    } | decorateApplicationAttributes(['candidate', 'residency-status-unknown'])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -61,33 +55,29 @@
     items: [{
       text: "I have the right to study and/or work in the UK",
       value: "right-to-study",
-      checked: checked("['candidate']['residency-status']", "right-to-study"),
       conditional: {
         html: rightToWorkStudy
       }
     }, {
       text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
       value: "require-tier-2",
-      checked: checked("['candidate']['residency-status']", "require-tier-2"),
       conditional: {
         html: requireTier2
       }
     }, {
       text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
       value: "require-tier-4",
-      checked: checked("['candidate']['residency-status']", "require-tier-4"),
       conditional: {
         html: requireTier4
       }
     }, {
       text: "I don’t know my residency status",
       value: "unknown",
-      checked: checked("['candidate']['residency-status']", "unknown"),
       conditional: {
         html: unknown
       }
     }]
-  }) }}
+  } | decorateApplicationAttributes(['candidate', 'residency-status'])) }}
 
   {{ govukButton({
     text: buttonText

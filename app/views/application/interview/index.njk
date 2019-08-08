@@ -28,11 +28,8 @@
       text: "Enter details relevant to your interview arrangements",
       classes: "govuk-label--s"
     },
-    maxwords: 150,
-    id: "interview",
-    name: "interview",
-    value: data["interview"]
-  }) }}
+    maxwords: 150
+  } | decorateApplicationAttributes(["interview"])) }}
 
   {{ govukButton({
     text: buttonText

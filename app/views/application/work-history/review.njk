@@ -1,7 +1,7 @@
 {% extends "_content-wide.njk" %}
-
+{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Work history" %}
-{% set referrer = "/application/work-history/review" %}
+{% set referrer = applicationPath + "/work-history/review" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -16,12 +16,12 @@
   {{ govukButton({
     text: "Add another job",
     classes: "govuk-button--secondary",
-    href: "/application/work-history/add/job"
+    href: applicationPath + "/work-history/add/job"
   }) }}
 {% endif %}
 
   {{ govukButton({
     text: "Continue",
-    href: "/application/"
+    href: applicationPath
   }) }}
 {% endblock %}

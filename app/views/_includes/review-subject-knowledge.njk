@@ -1,3 +1,4 @@
+{% set applicationPath = '/application/' + applicationId %}
 {{ govukSummaryList({
   classes: "govuk-!-font-size-16",
   rows: [{
@@ -5,12 +6,12 @@
       text: "Evidence of subject knowledge"
     },
     value: {
-      text: (data["subject-knowledge"]["statement"] | default("Not entered")) | nl2br | safe
+      text: (applicationValue(["subject-knowledge", "statement"]) | default("Not entered")) | nl2br | safe
     },
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: "/application/subject-knowledge/edit?referrer=" + referrer,
+        href: applicationPath + "/subject-knowledge/edit?referrer=" + referrer,
         text: "Edit",
         visuallyHiddenText: "evidence of subject knowledge"
       }]

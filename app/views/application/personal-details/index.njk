@@ -20,81 +20,30 @@
       text: "Full name",
       classes: "govuk-label--m"
     },
-    autocomplete: "name",
-    id: "candidate-name",
-    name: "candidate[name]",
-    value: data["candidate"]["name"]
-  }) }}
-
-  {# {{ govukInput({
-    label: {
-      text: "Name you prefer to be addressed by (optional)",
-      classes: "govuk-label--m"
-    },
-    id: "candidate-optional-name",
-    name: "candidate[optional-name]",
-    value: data["candidate"]["optional-name"]
-  }) }} #}
-
-  {# {{ govukDateInput({
-    fieldset: {
-      legend: {
-        text: "Date of birth",
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
-    hint: {
-      text: "For example, 31 3 1980"
-    },
-    id: "candidate-date-of-birth",
-    items: [{
-      classes: "govuk-input--width-2",
-      label: "Day",
-      name: "candidate[date-of-birth][day]",
-      value: data["candidate"]["date-of-birth"]["day"],
-      autocomplete: "bday-day"
-    }, {
-      classes: "govuk-input--width-2",
-      label: "Month",
-      name: "candidate[date-of-birth][month]",
-      value: data["candidate"]["date-of-birth"]["month"],
-      autocomplete: "bday-month"
-    }, {
-      classes: "govuk-input--width-4",
-      label: "Year",
-      name: "candidate[date-of-birth][year]",
-      value: data["candidate"]["date-of-birth"]["year"],
-      autocomplete: "bday-year"
-    }]
-  }) }} #}
+    autocomplete: "name"
+  } | decorateApplicationAttributes(['candidate', 'name'])) }}
 
   {{ appAutocomplete({
     label: {
       text: "Nationality",
       classes: "govuk-label--m"
     },
-    id: "candidate-nationality",
-    name: "candidate[nationality]",
-    value: data["candidate"]["nationality"],
     items: nationalities
-  }) }}
+  } | decorateApplicationAttributes(['candidate', 'nationality'])) }}
 
   {% set anotherNationality %}
     {{ appAutocomplete({
       label: {
         text: "Second nationality"
       },
-      id: "candidate-second-nationality",
-      name: "candidate[second-nationality]",
-      value: data["candidate"]["second-nationality"],
       items: nationalities
-    }) }}
+    } | decorateApplicationAttributes(['candidate', 'second-nationality'])) }}
   {% endset -%}
 
   {{ govukDetails({
     summaryText: "Add another nationality",
     html: anotherNationality,
-    open: data["candidate"]["second-nationality"]
+    open: ['candidate', 'second-nationality'] | ifSetForApplication
   }) }}
 
   {% set englishDetailHtml %}
@@ -102,22 +51,16 @@
       label: {
         text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
       },
-      maxwords: 200,
-      id: "language-skills-english",
-      name: "language-skills[english]",
-      value: data["language-skills"]["english"]
-    }) }}
+      maxwords: 200
+    } | decorateApplicationAttributes(['language-skills', 'english'])) }}
   {% endset -%}
   {% set otherDetailHtml %}
     {{ govukCharacterCount({
       label: {
         text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
       },
-      maxwords: 200,
-      id: "language-skills-other",
-      name: "language-skills[other]",
-      value: data["language-skills"]["other"]
-    }) }}
+      maxwords: 200
+    } | decorateApplicationAttributes(['language-skills', 'other'])) }}
   {% endset -%}
 
     {{ govukRadios({
@@ -127,24 +70,18 @@
           classes: "govuk-label--m"
         }
       },
-      idPrefix: "language-skills-main",
-      name: "language-skills[main]",
       items: [{
-        value: "Yes",
         text: "Yes",
-        checked: checked("['language-skills']['main']", "Yes"),
         conditional: {
           html: englishDetailHtml
         }
       }, {
-        value: "No",
         text: "No",
-        checked: checked("['language-skills']['main']", "No"),
         conditional: {
           html: otherDetailHtml
         }
       }]
-    }) }}
+    } | decorateApplicationAttributes(['language-skills', 'main'])) }}
 
   {{ govukButton({
     text: buttonText
@@ -155,11 +92,11 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["candidate"]["nationality"] }}',
+      defaultValue: '{{ data.applications[applicationId]["candidate"]["nationality"] }}',
       selectElement: document.querySelector('#candidate-nationality')
     })
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["candidate"]["second-nationality"] }}',
+      defaultValue: '{{ data.applications[applicationId]["candidate"]["second-nationality"] }}',
       selectElement: document.querySelector('#candidate-second-nationality')
     })
   </script>

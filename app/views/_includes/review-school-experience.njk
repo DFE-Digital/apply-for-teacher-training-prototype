@@ -1,4 +1,5 @@
-{% set schoolExperience = data["school-experience"]
+{% set applicationPath = "/application/" + applicationId %}
+{% set schoolExperience = applicationValue("school-experience")
   | toArray
   | sort(attribute="start-date")
   | selectattr("id")
@@ -28,7 +29,7 @@
           {{ itemEnd | date("dd/LL/yyyy") if item["end-date"] else "Present" }}
         </td>
         <td class="govuk-table__cell govuk-!-padding-right-2">
-          <a href="/application/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
+          <a href="{{ applicationPath }}/school-experience/edit/role/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> role</span></a>
         </td>
       </tr>
     {% endfor %}
@@ -44,7 +45,7 @@
     {{ govukButton({
       text: "Add school experience or role",
       classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
-      href: "/application/school-experience/add/role?referrer=" + referrer
+      href: applicationPath + "/school-experience/add/role?referrer=" + referrer
     }) }}
   {% endif %}
 {% endif %}

@@ -54,11 +54,8 @@
       classes: "govuk-label--s"
     },
     rows: 20,
-    maxwords: 600,
-    id: "vocation-statement",
-    name: "vocation[statement]",
-    value: data["vocation"]["statement"]
-  }) }}
+    maxwords: 600
+  } | decorateApplicationAttributes(['vocation', 'statement'])) }}
 
   {{ govukButton({
     text: buttonText

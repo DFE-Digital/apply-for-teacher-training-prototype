@@ -1,12 +1,12 @@
 {% extends "_form.njk" %}
-
+{% set applicationPath = '/application/' + applicationId %}
 {% set title = "Submit application" %}
-{% set formaction = "/application/confirmation" %}
+{% set formaction = applicationPath + "/confirmation" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
     "text": "Back",
-    "href": "/application/review"
+    "href": applicationPath + "/review"
   }) }}
 {% endblock %}
 
@@ -28,11 +28,8 @@
         classes: "govuk-label--s"
       },
       rows: 10,
-      maxwords: 600,
-      id: "application-" + provider + "-" + course + "-miscellaneous",
-      name: "application[" + provider + "-" + course + "][miscellaneous]",
-      value: data["application"][provider + "-" + course]["miscellaneous"]
-    }) }}
+      maxwords: 600
+    } | decorateApplicationAttributes(['application', provider + "-" + course, 'miscellaneous'])) }}
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
     <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate and I agree to the <a href="#">terms and conditions</a> of the ‘{{ serviceName }}’ service.</p>

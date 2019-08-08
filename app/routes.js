@@ -369,23 +369,6 @@ router.get('/application/:applicationId/subject-knowledge/:action(add|edit)', (r
 })
 
 /**
-  * Application: Language skills - Add/edit question
-  * @param {String} action add || edit
-  */
-router.get('/application/:applicationId/language-skills/:action(add|edit)', (req, res) => {
-  const action = req.params.action
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/language-skills/index', {
-    applicationId,
-    action,
-    formaction: referrer || `/application/${applicationId}`,
-    referrer
-  })
-})
-
-/**
   * Application: Work history - answer branching
   */
 router.post('/application/:applicationId/work-history/answer', (req, res) => {
@@ -431,30 +414,35 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
 router.post('/application/:applicationId/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
   const id = req.params.id
   const section = req.params.section
-  const data = req.session.data[section][id]
   const applicationId = req.params.applicationId
+  const applicationData = req.session.data.applications[applicationId][section][id]
 
   // Create ISO 8601 start date
   const startDay = req.body[`${id}-start-date-day`] || '01'
   const startMonth = req.body[`${id}-start-date-month`]
   const startYear = req.body[`${id}-start-date-year`]
-  data['start-date'] = false
+  applicationData['start-date'] = false
 
   if (startMonth && startYear) {
-    data['start-date'] = `${startYear}-${startMonth}-${startDay}`
+    applicationData['start-date'] = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
   const endDay = req.body[`${id}-end-date-day`] || '01'
   const endMonth = req.body[`${id}-end-date-month`]
   const endYear = req.body[`${id}-end-date-year`]
-  data['end-date'] = false
+  applicationData['end-date'] = false
 
   if (endMonth && endYear) {
-    data['end-date'] = `${endYear}-${endMonth}-${endDay}`
+    applicationData['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
 
   res.redirect(req.query.referrer || `/application/${applicationId}/${section}/review`)
+})
+
+router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
+  const applicationId = req.params.applicationId
+  res.render(`application/${req.params.section}/${req.params.view}`, { applicationId })
 })
 
 /**
@@ -523,13 +511,13 @@ router.all('/application/:applicationId/:view', function (req, res) {
     `application/${req.params.view}`,
     { applicationId: req.params.applicationId },
     function(err, html) {
-      if (err.message.includes('template not found')) {
+      if (err && err.message.includes('template not found')) {
         res.render(
           `application/${req.params.view}/index`,
           { applicationId: req.params.applicationId })
       } else {
         res.status(500)
-        res.send(err.message)
+        res.send(err)
       }
     }
   )

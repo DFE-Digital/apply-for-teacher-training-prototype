@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
-
+{% set applicationPath = "/application/" + applicationId %}
 {% set title = "School experience and volunteering with young people" %}
-{% set formaction = "/application/school-experience/add/role" %}
+{% set formaction = applicationPath + "/school-experience/add/role" %}
 
 {% block pageNavigation %}
   {{ govukBreadcrumbs({
@@ -41,7 +41,7 @@
     name: "school-experience[missing]",
     value: "true",
     attributes: {
-      formaction: "/application"
+      formaction: applicationPath
     }
   }) }}
 {% endblock %}

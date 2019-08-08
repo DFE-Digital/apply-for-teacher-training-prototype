@@ -9,6 +9,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node start.js",
+    "s": "node start.js",
     "lint": "standard",
     "test": "npm run lint && gulp generate-assets && jest"
   },

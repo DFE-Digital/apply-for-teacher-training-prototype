@@ -39,32 +39,32 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details" + ("/edit" if data["candidate"]["nationality"] else "/add"),
+      href: applicationPath + "/personal-details" + ("/edit" if applicationValue(["candidate", "nationality"]) else "/add"),
       id: "personal-details",
       completed: applicationValue(["candidate", "nationality"])
     }, {
       text: "Contact details",
-      href: applicationPath + "/contact-details" + ("/edit" if data["contact-details"]["address"] else "/add"),
+      href: applicationPath + "/contact-details" + ("/edit" if applicationValue(["contact-details", "address"]) else "/add"),
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {
       text: "Academic qualifications",
-      href: applicationPath + "/qualifications" + ("/review" if data["qualifications"]),
+      href: applicationPath + "/qualifications" + ("/review" if applicationValue("qualifications")),
       id: "qualifications",
       completed: applicationValue("qualifications")
     }, {
       text: "Your knowledge about the subject you want to teach",
-      href: applicationPath + "/subject-knowledge" + ("/edit" if data["subject-knowledge"] else "/add"),
+      href: applicationPath + "/subject-knowledge" + ("/edit" if applicationValue("subject-knowledge") else "/add"),
       id: "subject-knowledge",
       completed: applicationValue("subject-knowledge")
     }, {
       text: "Work history",
-      href: applicationPath + "/work-history" + ("/review" if data["work-history"]),
+      href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history")),
       id: "work-history",
       completed: applicationValue("work-history")
     }, {
       text: "School experience and volunteering with young people",
-      href: applicationPath + "/school-experience" + ("/review" if data["school-experience"] and hasSchoolExperience),
+      href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience") and hasSchoolExperience),
       id: "school-experience",
       completed: applicationValue("school-experience")
     }, {
@@ -80,7 +80,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "References",
-      href: applicationPath + "/references" + ("/review" if data["referees"]),
+      href: applicationPath + "/references" + ("/review" if applicationValue("referees")),
       id: "references",
       completed: applicationValue("referees")
     }]
@@ -91,7 +91,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Interview preferences",
-      href: applicationPath + "/interview",
+      href: applicationPath + "/interview" + ("/edit" if applicationValue("interview") else "/add"),
       id: "interview",
       completed: applicationValue("interview")
     }]

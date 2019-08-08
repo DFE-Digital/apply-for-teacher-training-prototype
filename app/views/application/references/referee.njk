@@ -28,21 +28,15 @@
     label: {
       text: "Full name of referee",
       classes: "govuk-label--s"
-    },
-    id: "referees-" + id + "-name",
-    name: "referees[" + id + "][name]",
-    value: data["referees"][id]["name"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['referees', id, 'name'])) }}
 
   {{ govukInput({
     label: {
       text: "Email address of referee",
       classes: "govuk-label--s"
-    },
-    id: "referees-" + id + "-email",
-    name: "referees[" + id + "][email]",
-    value: data["referees"][id]["email"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['referees', id, 'email'])) }}
 
   {{ govukCharacterCount({
     label: {
@@ -52,21 +46,15 @@
     hint: {
       text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
     },
-    maxwords: 50,
-    id: "referees-" + id + "-relationship",
-    name: "referees[" + id + "][relationship]",
-    value: data["referees"][id]["relationship"]
-  }) }}
+    maxwords: 50
+  } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
 
 {% set explainCharacter %}
   {{ govukTextarea({
     label: {
       text: "Explain why you’ve chosen a character referee (optional)."
-    },
-    id: "referees-" + id + "-character-explanation",
-    name: "referees[" + id + "][character-explanation]",
-    value: data["referees"][id]["character-explanation"]
-  }) }}
+    }
+  } | decorateApplicationAttributes(['referees', id, 'character-explanation'])) }}
 {% endset %}
 
   {{ govukRadios({
@@ -76,34 +64,25 @@
         classes: "govuk-fieldset__legend--s"
       }
     },
-    idPrefix: "referees-" + id + "-type",
-    name: "referees[" + id + "][type]",
     items: [{
-      value: "Academic",
-      text: "Academic",
-      checked: checked("['referees']['" + id + "']['type']", "Academic")
+      text: "Academic"
     }, {
-      value: "Professional",
-      text: "Professional",
-      checked: checked("['referees']['" + id + "']['type']", "Professional")
+      text: "Professional"
     }, {
       value: "School senior leadership",
-      text: "Teacher at a school where you work or volunteer",
-      checked: checked("['referees']['" + id + "']['type']", "School senior leadership")
+      text: "Teacher at a school where you work or volunteer"
     }, {
       divider: "or"
     }, {
-      value: "Character",
       text: "Character",
       hint: {
         text: "If you are having difficulty providing an academic, professional or school referee, you can give us a character referee (a responsible person who will confirm you are suitable for teaching)."
       },
-      checked: checked("['referees']['" + id + "']['type']", "Character"),
       conditional: {
         html: explainCharacter
       }
     }]
-  }) }}
+  } | decorateApplicationAttributes(['referees', id, 'type'])) }}
 
   {{ govukButton({
     text: buttonText

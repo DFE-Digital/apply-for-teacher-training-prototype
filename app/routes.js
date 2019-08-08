@@ -472,6 +472,11 @@ router.get('/application/:applicationId/references/:action(add|edit)/referee/:id
   })
 })
 
+router.get('/application/:applicationId/references/:view', (req, res) => {
+  const applicationId = req.params.applicationId
+  res.render(`application/references/${req.params.view}`, { applicationId })
+})
+
 /**
   * Application: Vocation - Add/edit vocation statement
   * @param {String} action add || edit

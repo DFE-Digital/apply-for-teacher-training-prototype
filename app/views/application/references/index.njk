@@ -1,5 +1,5 @@
 {% extends "_content.njk" %}
-
+{% set applicationPath = '/application/' + applicationId %}
 {% set title = "References" %}
 
 {% block pageNavigation %}
@@ -48,6 +48,6 @@
 
   {{ govukButton({
     text: "Continue",
-    href: "/application/references/add/referee/first"
+    href: applicationPath + "/references/add/referee/first"
   }) }}
 {% endblock %}

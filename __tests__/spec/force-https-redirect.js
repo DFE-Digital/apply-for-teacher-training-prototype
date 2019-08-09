@@ -1,11 +1,10 @@
 /* eslint-env jest */
 const request = require('supertest')
-let app
 
 /* Setup Environment Variables before setting App */
 process.env.NODE_ENV = 'production'
 process.env.USE_HTTPS = 'true'
-app = require('../../server.js')
+const app = require('../../server.js')
 
 describe('The Prototype Kit - force HTTPS redirect functionality', () => {
   describe('should in a production environment', () => {

@@ -76,12 +76,12 @@ var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 utils.addNunjucksFilters(nunjucksAppEnv)
 
 app.use(function (req, res, next) {
-  function applicationId() {
+  function applicationId () {
     return req.params.applicationId
   }
 
-  function getApplicationValue(sections) {
-    var path = ["applications", applicationId()]
+  function getApplicationValue (sections) {
+    var path = ['applications', applicationId()]
     sections = sections || []
     path.push(...sections)
     return getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))

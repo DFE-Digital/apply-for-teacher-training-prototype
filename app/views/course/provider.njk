@@ -5,20 +5,27 @@
 {% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
 {% block primary %}
-  {# Paragraph font size class suffixes: -xl, -l or -m #}
-  <div class="govuk-!-margin-top-4">
-  {{ govukInput({
-    label: {
-      text: 'Provider name'
-    },
-    autocomplete: "name",
-    id: "candidate-name",
-    name: "candidate[name]",
-    value: data["candidate"]["name"]
-  }) }}
+  <div class="govuk-form-group">
+    <label for="courses-{{ courseId }}-provider" class="govuk-label">Provider name</label>
+    <div id="provider-autocomplete-containter"></div>
   </div>
 
   {{ govukButton({
     text: 'Continue'
   }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete({
+      defaultValue: '{{ courseValue("provider") }}',
+      name: "applications[{{ applicationId }}][courses][{{ courseId }}][provider]",
+      element: document.querySelector('#provider-autocomplete-containter'),
+      id: '#courses-{{ courseId }}-provider',
+      source: [
+        {% for id, item in providers %}"{{ item.name_and_code }}",{% endfor %}
+      ]
+    })
+  </script>
 {% endblock %}

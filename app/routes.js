@@ -35,15 +35,15 @@ router.get('/email/:page/:action', (req, res) => {
 })
 
 router.get('/application/start', function (req, res) {
-  var code = generateRandomString();
-  var data = req.session.data;
+  var code = generateRandomString()
+  var data = req.session.data
 
   if (typeof data.applications === 'undefined') {
-    data.applications = {};
+    data.applications = {}
   }
 
-  data.applications[code] = { started: true };
-  res.redirect(`/application/${code}`);
+  data.applications[code] = { started: true }
+  res.redirect(`/application/${code}`)
 })
 
 router.all('/application/:applicationId', function (req, res) {
@@ -517,8 +517,8 @@ router.all('/application/:applicationId/:view', function (req, res) {
   res.render(
     `application/${req.params.view}`,
     { applicationId },
-    function(err, html) {
-      if (err && err.message.includes('template not found')) {
+    function (error, html) {
+      if (error && error.message.includes('template not found')) {
         res.render(
           `application/${req.params.view}/index`,
           { applicationId })

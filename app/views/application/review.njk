@@ -16,20 +16,20 @@
 
 {% block primary %}
 {% set courseDetailsHtml %}
-  {% if courses %}
+  {% if applicationValue("courses") %}
     {% include "_includes/review-courses.njk" %}
     {% if courses | length <= 3 %}
       {{ govukButton({
         classes: "govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1 govuk-button--secondary",
         text: "Add another course",
-        href: "#"
+        href: applicationPath + "/course/add"
       }) }}
     {% endif %}
   {% else %}
     {{ govukButton({
       classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
       text: "Add course",
-      href: "#"
+      href: applicationPath + "/course/add"
     }) }}
   {% endif %}
 {% endset %}

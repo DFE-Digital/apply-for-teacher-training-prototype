@@ -1,4 +1,4 @@
-{% set courses = data["courses"] | toArray %}
+{% set courses = applicationValue("courses") | toArray %}
 <table class="govuk-table govuk-!-font-size-16 govuk-!-margin-bottom-3">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
@@ -9,12 +9,14 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-  {% for course in courses %}
-    {% set provider = providers[course.provider] %}
+  {% for c in courses %}
+    {% set provider = providers[c.providerCode] %}
+    {% set course = provider.courses[c.courseCode] %}
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
-        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">{{ course.name }} ({{ course.code }}) with {{ provider.name }}</h3>
-        <p class="app-caption-xs govuk-!-margin-0">{{ course.qualification }}</p>
+        <span>{{ provider.name }}</span>
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">{{ course.name_and_code }}</h3>
+        <p class="app-caption-xs govuk-!-margin-0">{{ course.description }}</p>
       </td>
       <td class="govuk-table__cell app-table__cell--action">
         <a href="#">Remove</a>

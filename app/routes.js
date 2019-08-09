@@ -529,8 +529,52 @@ router.all('/application/:applicationId/:view', function (req, res) {
   )
 })
 
-router.all('/course/:view', function (req, res) {
-  res.render(`course/${req.params.view}`, { paths: pickCoursePaths(req) })
+router.all('/application/:applicationId/course/add', function (req, res) {
+  const applicationId = req.params.applicationId
+  const courseId = generateRandomString();
+  var data = req.session.data;
+
+  if (typeof data.applications[applicationId]['temporaryCourses'] === 'undefined') {
+    data.applications[applicationId]['temporaryCourses'] = {};
+  }
+
+  data.applications[applicationId].temporaryCourses[courseId] = { started: true };
+  res.redirect(`/application/${applicationId}/course/${courseId}/found`);
+})
+
+router.post('/application/:applicationId/course/:courseId/create', function (req, res) {
+  const applicationId = req.params.applicationId
+  const applicationData = req.session.data.applications[applicationId]
+  const courseId = req.params.courseId
+  const temporaryCourse = applicationData['temporaryCourses'][courseId]
+  const paths = pickCoursePaths(req)
+  const regExp = /\(([^)]+)\)$/;
+  const providerCode = regExp.exec(temporaryCourse.provider)[1];
+  const courseCode = regExp.exec(temporaryCourse.course)[1];
+
+  if (typeof applicationData['courses'] === 'undefined') {
+    applicationData['courses'] = {};
+  }
+
+  applicationData['courses'][courseId] = {
+    providerCode,
+    courseCode
+  }
+
+  delete applicationData['temporaryCourses']
+
+  res.redirect(paths.next);
+})
+
+router.all('/application/:applicationId/course/:courseId/:view', function (req, res) {
+  const applicationId = req.params.applicationId
+  const courseId = req.params.courseId
+
+  res.render(`course/${req.params.view}`, {
+    applicationId,
+    courseId,
+    paths: pickCoursePaths(req)
+  })
 })
 
 module.exports = router

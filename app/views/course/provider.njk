@@ -19,8 +19,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete({
-      defaultValue: '{{ courseValue("provider") }}',
-      name: "applications[{{ applicationId }}][courses][{{ courseId }}][provider]",
+      defaultValue: '{{ applicationValue(["temporaryCourses", courseId, "provider"]) }}',
+      name: "applications[{{ applicationId }}][temporaryCourses][{{ courseId }}][provider]",
       element: document.querySelector('#provider-autocomplete-containter'),
       id: '#courses-{{ courseId }}-provider',
       source: [

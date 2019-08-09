@@ -451,24 +451,34 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
   * @param {String} id first || second
   */
 router.get('/application/:applicationId/references/:action(add|edit)/referee/:id', (req, res) => {
-  const action = req.params.action
-  const id = req.params.id
   const applicationId = req.params.applicationId
-
-  let formaction = req.session.data.referrer
-  if (action === 'add') {
-    if (id === 'first') {
-      formaction = `/application/${applicationId}/references/add/referee/second`
-    } else {
-      formaction = `/application/${applicationId}/references/review`
-    }
-  }
+  const id = req.params.id
+  const action = req.params.action
 
   res.render('application/references/referee', {
     applicationId,
+    id,
     action,
-    formaction,
-    id: req.params.id
+    formaction: `/application/${applicationId}/references/${action}/referee-details/${id}`
+  })
+})
+
+/**
+  * Application: References - Add/edit referee details
+  * @param {String} action add || edit
+  * @param {String} id first || second
+  */
+router.get('/application/:applicationId/references/:action(add|edit)/referee-details/:id', (req, res) => {
+  const applicationId = req.params.applicationId
+  const id = req.params.id
+  const action = req.params.action
+  const referrer = req.query.referrer
+
+  res.render('application/references/referee-details', {
+    applicationId,
+    id,
+    action,
+    formaction: referrer || `/application/${applicationId}`
   })
 })
 

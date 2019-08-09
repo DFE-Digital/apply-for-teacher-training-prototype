@@ -1,0 +1,72 @@
+{% extends "_form.njk" %}
+
+{% set type = applicationValue(["referees", id, "type"]) | lower %}
+{% set parent = "References" %}
+{% if action == "edit" %}
+  {% set parent = "Edit " + id + " referee" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set parent = "Add " + id + " referee" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+{% set title = "Details of " + type + " referee" %}
+
+{% block primary %}
+  <p class="govuk-body">You should contact your referee in advance to check they are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>happy to give you a reference</li>
+    <li>available to do so within a reasonable timeframe</li>
+    <li>comfortable submitting a reference online</li>
+  </ul>
+
+  {{ govukInput({
+    label: {
+      text: "Full name",
+      classes: "govuk-label--m govuk-!-margin-top-6"
+    }
+  } | decorateApplicationAttributes(['referees', id, 'name'])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Referees are not contacted until you submit your application."
+    }
+  } | decorateApplicationAttributes(['referees', id, 'email'])) }}
+
+{% if type == "academic" %}
+  {% set relationshipExample = "They were my tutor at university from 2000 to 2003" %}
+{% elif type == "professional" %}
+  {% set relationshipExample = "I have been employed by them since January 2018" %}
+{% elif type == "school-based" %}
+  {% set relationshipExample = "I spent 2 weeks volunteering at their school in May 2019" %}
+{% else %}
+  {% set relationshipExample = "They were the headteacher at my secondary school between 2003 and 2005" %}
+{% endif %}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "What is your relationship to this referee and how long have you known them?",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, ‘" + relationshipExample + "’"
+    },
+    maxwords: 50
+  } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
+
+{% if type == "character" %}
+  {{ govukTextarea({
+    label: {
+      text: "Explain why you’ve chosen a character referee (optional).",
+      classes: "govuk-label--m"
+    }
+  } | decorateApplicationAttributes(['referees', id, 'character-explanation'])) }}
+{% endif %}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

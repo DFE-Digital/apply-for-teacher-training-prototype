@@ -2,13 +2,24 @@ const express = require('express')
 const router = express.Router()
 const querystring = require('querystring')
 const {
-  pickCoursePaths
+  pickCoursePaths,
+  findCoursePaths
 } = require('./utils/journeys')
 
 // Utils
 const generateRandomString = () => {
   return (Number(new Date())).toString(36).slice(-5).toUpperCase()
 }
+
+router.all(['/application/:applicationId', '/application/:applicationId/*'], function(req, res, next) {
+  res.locals.applicationId = req.params.applicationId
+  next()
+})
+
+router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function(req, res, next) {
+  res.locals.courseId = req.params.courseId
+  next()
+})
 
 /**
   * Account: Check email
@@ -47,7 +58,7 @@ router.get('/application/start', function (req, res) {
 })
 
 router.all('/application/:applicationId', function (req, res) {
-  res.render('application/index', { applicationId: req.params.applicationId })
+  res.render('application/index')
 })
 
 /**
@@ -72,8 +83,7 @@ router.get('/applications/:provider/:course/:page', (req, res) => {
   */
 router.get('/application/:applicationId/work-history/:action(add|edit)/missing', (req, res) => {
   res.render(`application/work-history/missing`, {
-    action: req.params.action,
-    applicationId: req.params.applicationId
+    action: req.params.action
   })
 })
 
@@ -100,7 +110,6 @@ router.get('/application/:applicationId/personal-details/:action(add|edit)', (re
   const applicationId = req.params.applicationId
 
   res.render('application/personal-details/index', {
-    applicationId,
     action,
     formaction: referrer || `/application/${applicationId}/personal-details/answer`,
     referrer
@@ -132,7 +141,6 @@ router.get('/application/:applicationId/personal-details/residency-status/:actio
   const applicationId = req.params.applicationId
 
   res.render('application/personal-details/residency-status', {
-    applicationId,
     action,
     formaction: referrer || `/application/${applicationId}`,
     referrer
@@ -174,7 +182,6 @@ router.get('/application/:applicationId/contact-details/address/:action(add|edit
   const applicationId = req.params.applicationId
 
   res.render('application/contact-details/address', {
-    applicationId,
     action: req.params.action,
     formaction: referrer || `/application/${applicationId}/contact-details/review`,
     referrer
@@ -182,8 +189,7 @@ router.get('/application/:applicationId/contact-details/address/:action(add|edit
 })
 
 router.get('/application/:applicationId/contact-details/:view', (req, res) => {
-  const applicationId = req.params.applicationId
-  res.render(`application/contact-details/${req.params.view}`, { applicationId })
+  res.render(`application/contact-details/${req.params.view}`)
 })
 
 /**
@@ -191,11 +197,8 @@ router.get('/application/:applicationId/contact-details/:view', (req, res) => {
   */
 router.get('/application/:applicationId/qualifications/review', (req, res) => {
   const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
   res.render('application/qualifications/review', {
-    applicationId,
-    formaction: referrer || `/application/${applicationId}`,
+    formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })
 })
@@ -211,12 +214,10 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:catego
   const action = req.params.action
   const category = req.params.category
   const id = req.params.id
-  const applicationId = req.params.applicationId
 
   res.render(`application/qualifications/${category}`, {
-    applicationId,
     action,
-    formaction: `/application/${applicationId}/qualifications/${action}/${category}/${id}/answer`,
+    formaction: `/application/${req.params.applicationId}/qualifications/${action}/${category}/${id}/answer`,
     id,
     referrer
   })
@@ -230,15 +231,13 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:catego
 router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(uk-degree|international-degree)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
-  const applicationId = req.params.applicationId
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
-    formaction = `/application/${applicationId}/qualifications/next?prev=degree`
+    formaction = `/application/${req.params.applicationId}/qualifications/next?prev=degree`
   }
 
   res.render('application/qualifications/degree-details', {
-    applicationId,
     action,
     formaction,
     id,
@@ -254,15 +253,13 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(u
 router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
   const action = req.params.action
   const id = req.params.id
-  const applicationId = req.params.applicationId
 
   let formaction = req.session.data.referrer
   if (action === 'add') {
-    formaction = `/application/${applicationId}/qualifications/next?prev=${id}`
+    formaction = `/application/${req.params.applicationId}/qualifications/next?prev=${id}`
   }
 
   res.render('application/qualifications/gcse-details', {
-    applicationId,
     action,
     formaction,
     id,
@@ -341,12 +338,10 @@ router.all('/application/:applicationId/qualifications/next', (req, res) => {
   */
 router.get('/application/:applicationId/qualifications/:action(add|edit)/other/:id', (req, res) => {
   const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
 
   res.render('application/qualifications/other', {
-    applicationId,
     action: req.params.action,
-    formaction: referrer || `/application/${applicationId}/qualifications/review`,
+    formaction: referrer || `/application/${req.params.applicationId}/qualifications/review`,
     id: req.params.id
   })
 })
@@ -358,12 +353,10 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/other/:
 router.get('/application/:applicationId/subject-knowledge/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
 
   res.render('application/subject-knowledge/index', {
-    applicationId,
     action,
-    formaction: referrer || `/application/${applicationId}`,
+    formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })
 })
@@ -393,12 +386,10 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
   const type = req.params.type
   const section = req.params.section
   const queryString = querystring.stringify(req.query)
-  const applicationId = req.params.applicationId
 
   res.render(`application/${section}/${type}`, {
-    applicationId,
     action: req.params.action,
-    formaction: `/application/${applicationId}/${section}/update/${type}/${id}?${queryString}`,
+    formaction: `/application/${req.params.applicationId}/${section}/update/${type}/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,
     end: `${req.query.end}`
@@ -441,8 +432,7 @@ router.post('/application/:applicationId/:section(work-history|school-experience
 })
 
 router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
-  const applicationId = req.params.applicationId
-  res.render(`application/${req.params.section}/${req.params.view}`, { applicationId })
+  res.render(`application/${req.params.section}/${req.params.view}`)
 })
 
 /**
@@ -483,8 +473,7 @@ router.get('/application/:applicationId/references/:action(add|edit)/referee-det
 })
 
 router.get('/application/:applicationId/references/:view', (req, res) => {
-  const applicationId = req.params.applicationId
-  res.render(`application/references/${req.params.view}`, { applicationId })
+  res.render(`application/references/${req.params.view}`)
 })
 
 /**
@@ -494,12 +483,10 @@ router.get('/application/:applicationId/references/:view', (req, res) => {
 router.get('/application/:applicationId/vocation/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
 
   res.render('application/vocation/index', {
-    applicationId,
     action,
-    formaction: referrer || `/application/${applicationId}`,
+    formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })
 })
@@ -511,27 +498,21 @@ router.get('/application/:applicationId/vocation/:action(add|edit)', (req, res) 
 router.get('/application/:applicationId/interview/:action(add|edit)', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
 
   res.render('application/interview/index', {
-    applicationId,
     action,
-    formaction: referrer || `/application/${applicationId}`,
+    formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })
 })
 
 router.all('/application/:applicationId/:view', function (req, res) {
-  const applicationId = req.params.applicationId
-
   res.render(
     `application/${req.params.view}`,
-    { applicationId },
+    {},
     function (error, html) {
       if (error && error.message.includes('template not found')) {
-        res.render(
-          `application/${req.params.view}/index`,
-          { applicationId })
+        res.render(`application/${req.params.view}/index`)
       } else {
         res.send(html)
       }
@@ -576,15 +557,18 @@ router.post('/application/:applicationId/course/:courseId/create', function (req
   res.redirect(paths.next)
 })
 
-router.all('/application/:applicationId/course/:courseId/:view', function (req, res) {
-  const applicationId = req.params.applicationId
-  const courseId = req.params.courseId
+router.post('/application/:applicationId/course/:courseId/found', function (req, res) {
+  const found = req.body.applications[req.params.applicationId]['temporaryCourses'][req.params.courseId].found
+  const paths = (found && found == 'know') ? pickCoursePaths(req) : findCoursePaths(req)
+  res.redirect(paths.next)
+})
 
-  res.render(`course/${req.params.view}`, {
-    applicationId,
-    courseId,
-    paths: pickCoursePaths(req)
-  })
+router.all('/application/:applicationId/course/:courseId/find', function (req, res) {
+  res.render(`course/find`, { paths: findCoursePaths(req) })
+})
+
+router.all('/application/:applicationId/course/:courseId/:view', function (req, res) {
+  res.render(`course/${req.params.view}`, { paths: pickCoursePaths(req) })
 })
 
 module.exports = router

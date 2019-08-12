@@ -9,9 +9,9 @@ function nextAndBackPaths (paths, currentPath, query) {
   var back = paths[index - 1] || ''
 
   return {
-    next: /confirm|edit/.test(next) ? next : next + query,
-    back: /confirm|edit/.test(back) ? back : back + query,
-    current: /confirm|edit/.test(back) ? currentPath : currentPath + query
+    next: next + query,
+    back: back + query,
+    current: currentPath + query
   }
 }
 
@@ -31,6 +31,20 @@ function pickCoursePaths(req) {
   return nextAndBackPaths(paths, req.path, originalQuery(req))
 }
 
+function findCoursePaths(req) {
+  const applicationId = req.params.applicationId
+  const courseId = req.params.courseId
+
+  var paths = [
+    `/application/${applicationId}`,
+    `/application/${applicationId}/course/${courseId}/found`,
+    `/application/${applicationId}/course/${courseId}/find`
+  ]
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req))
+}
+
 module.exports = {
-  pickCoursePaths
+  pickCoursePaths,
+  findCoursePaths
 }

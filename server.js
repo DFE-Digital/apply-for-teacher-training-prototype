@@ -165,6 +165,16 @@ app.get('/robots.txt', function (req, res) {
   res.send('User-agent: *\nDisallow: /')
 })
 
+app.all(['/application/:applicationId', '/application/:applicationId/*'], function(req, res, next) {
+  app.locals.applicationId = req.params.applicationId
+  next();
+});
+
+app.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function(req, res, next) {
+  app.locals.courseId = req.params.courseId
+  next();
+});
+
 // Load routes (found in app/routes.js)
 if (typeof (routes) !== 'function') {
   console.log(routes.bind)

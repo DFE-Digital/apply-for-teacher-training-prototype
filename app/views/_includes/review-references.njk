@@ -1,43 +1,93 @@
 {% set references = applicationValue('referees') | toArray %}
 {% set applicationPath = '/application/' + applicationId %}
 {% if references.length >= 1 %}
-  <table class="govuk-table govuk-!-font-size-16">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col" width="30%">Referee</th>
-        <th class="govuk-table__header" scope="col">Relationship</th>
-        <th class="govuk-table__header" scope="col">Email</th>
-        {% if review != true %}
-        <th class="govuk-table__header app-table__cell--action" scope="col">
-          <span class="govuk-visually-hidden">Actions</span>
-        </th>
-        {% endif %}
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      {% for item in references %}
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header">
-          <h3 class="app-heading-xs govuk-!-margin-0">{{ item.name }}</h3>
-          <p class="app-caption-xs govuk-!-margin-0">{{ item.type }} referee</p>
-        </th>
-        <td class="govuk-table__cell">
-          <p class="govuk-body-s">{{ item.relationship }}</p>
-          {% if item["character-explanation"] %}
-          <h3 class="app-heading-xs govuk-!-margin-0">Reason for providing a character reference</h3>
-          <p class="govuk-body-s">{{ item["character-explanation"] }}</p>
-          {% endif %}
-        </td>
-        <td class="govuk-table__cell">{{ item.email }}</td>
-        {% if review != true %}
-        <td class="govuk-table__cell app-table__cell--action">
-          <a href="{{ applicationPath }}/references/edit/referee/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> referee</span></a>
-        </td>
-        {% endif %}
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% for item in references %}
+    {% set typeRow = {
+      key: {
+        text: "Referee type"
+      },
+      value: {
+        text: item.type
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/references/edit/referee/" + item.id + "?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "referee"
+        }]
+      }
+    } %}
+    {% set nameRow = {
+      key: {
+        text: "Name"
+      },
+      value: {
+        text: item.name
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/references/edit/referee-details/" + item.id + "?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "referee"
+        }]
+      }
+    } %}
+    {% set emailRow = {
+      key: {
+        text: "Email"
+      },
+      value: {
+        text: item.email
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/references/edit/referee-details/" + item.id + "?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "referee"
+        }]
+      }
+    } %}
+    {% set relationshipRow = {
+      key: {
+        text: "Relationship"
+      },
+      value: {
+        text: item.relationship
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/references/edit/referee-details/" + item.id + "?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "referee"
+        }]
+      }
+    } %}
+    {% set characterRow = {
+      key: {
+        text: "Reason for providing a character reference"
+      },
+      value: {
+        text: item["character-explanation"]
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/references/edit/referee-details/" + item.id + "?referrer=" + referrer,
+          text: "Edit",
+          visuallyHiddenText: "referee"
+        }]
+      }
+    } %}
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-2">{{ item.id | capitalize }} referee</h3>
+    {% if item["character-explanation"] %}
+      {{ govukSummaryList({
+        rows: [typeRow, nameRow, emailRow, relationshipRow, characterRow]
+      }) }}
+    {% else %}
+      {{ govukSummaryList({
+        rows: [typeRow, nameRow, emailRow, relationshipRow]
+      }) }}
+    {% endif %}
+  {% endfor %}
 {% else %}
-  <p class="govuk-body-s">No references entered</p>
+  <p class="govuk-body">No references entered</p>
 {% endif %}

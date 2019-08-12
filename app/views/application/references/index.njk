@@ -1,5 +1,5 @@
 {% extends "_content.njk" %}
-{% set applicationPath = '/application/' + applicationId %}
+
 {% set title = "References" %}
 
 {% block pageNavigation %}
@@ -9,45 +9,38 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body govuk-!-font-weight-bold">Good references are advocates for your:</p>
+  <p class="govuk-body">Good referees are advocates for your:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>teaching passion and potential</li>
     <li>fitness to work with children</li>
     <li>academic abilities</li>
     <li>reliability and professionalism</li>
   </ul>
-  <p class="govuk-body govuk-!-font-weight-bold">You should aim to give contact details for 2 references.</p>
-  <p class="govuk-body">Training providers look for a combination of academic (from university) and professional (from work) referees.</p>
+  <p class="govuk-body">You should aim to give contact details for 2 references. Training providers look for a combination of academic (from university) and professional (from work) referees.</p>
   <p class="govuk-body">If you are not a recent graduate, both your referees can come from work. If you graduated less than five years ago, it will strengthen your application if one of your referees comes from university.</p>
-  <p class="govuk-body govuk-!-font-weight-bold">Suitable referees include:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>your university tutor or supervisor (especially if you have given a predicted grade for your degree)</li>
-    <li>your current line manager at work</li>
-    <li>previous employers</li>
-    <li>if you work, volunteer or have gained experience in a school, a teacher at that school</li>
-  </ul>
-  <p class="govuk-body govuk-!-font-weight-bold">Referees should not be family members, partners or friends.</p>
+  <p class="govuk-body">Referees should not be family members, partners or friends.</p>
 
-{% set characterReference %}
-  <p class="govuk-body">If you are finding it very difficult to supply appropriate professional or academic references, you can give a character reference.</p>
-  <p class="govuk-body">Suitable character referees include:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>your local doctor</li>
-    <li>your local priest, or other faith leader</li>
-    <li>your family solicitor</li>
-    <li>your former headteacher</li>
-    <li>a former mentor or probation officer</li>
-    <li>a responsible member of your community who knows you well</li>
-  </ul>
-{% endset %}
+  {% set CharacterRefereeHintHtml %}
+    <p class="govuk-hint">If you are finding it difficult to supply an appropriate professional or academic reference, you can give us details of a responsible person who will confirm you are suitable for teaching.</p>
+    {% set suitableCharacterRefereesHtml %}
+      <ul class="govuk-hint govuk-list govuk-list--bullet">
+        <li>your local doctor</li>
+        <li>your local priest, or other faith leader</li>
+        <li>your family solicitor</li>
+        <li>your former headteacher</li>
+        <li>a former mentor or probation officer</li>
+        <li>a responsible member of your community who knows you well</li>
+      </ul>
+    {% endset %}
 
-  {{ govukDetails({
-    summaryText: "I haven’t got a professional or academic reference",
-    html: characterReference
-  }) }}
+    {{ govukDetails({
+      summaryText: "Examples of suitable character referees",
+      html: suitableCharacterRefereesHtml
+    }) }}
+  {% endset %}
 
   {{ govukButton({
     text: "Continue",
-    href: applicationPath + "/references/add/referee/first"
+    href: "/application/" + applicationId + "/references/add/referee/first"
   }) }}
 {% endblock %}

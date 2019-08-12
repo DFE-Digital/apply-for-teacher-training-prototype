@@ -1,88 +1,71 @@
 {% extends "_form.njk" %}
 
-{% set parent = "References" %}
 {% if action == "edit" %}
-  {% set title = "Edit " + id + " referee" %}
+  {% set parent = "Edit " + id + " referee" %}
   {% set buttonText = "Save changes" %}
 {% else %}
-  {% set title = "Add " + id + " referee" %}
+  {% set parent = "Add " + id + " referee" %}
   {% set buttonText = "Save and continue" %}
 {% endif %}
-
-{% set insetHtml %}
-  <p class="govuk-body">Contact your referee in advance to check they are:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>happy to give you a reference</li>
-    <li>available to do so within a reasonable timeframe</li>
-    <li>comfortable submitting a reference online</li>
-  </ul>
-  <p class="govuk-body">Your referee will be given a short questionnaire about you and a free text box to describe you in their own words. They will not be given access to your completed application form.</p>
-{% endset %}
+{% set title = "What type of referee do you want to give?" %}
 
 {% block primary %}
-  {{ govukInsetText({
-    html: insetHtml
-  }) }}
+  {% set CharacterRefereeHintHtml %}
+    <p class="govuk-hint">If you are finding it difficult to supply an appropriate professional or academic reference, you can give us details of a responsible person who will confirm you are suitable for teaching.</p>
+    {% set suitableCharacterRefereesHtml %}
+      <ul class="govuk-hint govuk-list govuk-list--bullet">
+        <li>your local doctor</li>
+        <li>your local priest, or other faith leader</li>
+        <li>your family solicitor</li>
+        <li>your former headteacher</li>
+        <li>a former mentor or probation officer</li>
+        <li>a responsible member of your community who knows you well</li>
+      </ul>
+    {% endset %}
 
-  {{ govukInput({
-    label: {
-      text: "Full name of referee",
-      classes: "govuk-label--s"
-    }
-  } | decorateApplicationAttributes(['referees', id, 'name'])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Email address of referee",
-      classes: "govuk-label--s"
-    }
-  } | decorateApplicationAttributes(['referees', id, 'email'])) }}
-
-  {{ govukCharacterCount({
-    label: {
-      text: "What is your relationship to this referee and how long have you known them?",
-      classes: "govuk-label--s"
-    },
-    hint: {
-      text: "For example, ‘They were my tutor at university from 2000 to 2003’, ‘I have been employed by them since January 2018’, ‘I spent 2 weeks volunteering at their school in May 2019’"
-    },
-    maxwords: 50
-  } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
-
-{% set explainCharacter %}
-  {{ govukTextarea({
-    label: {
-      text: "Explain why you’ve chosen a character referee (optional)."
-    }
-  } | decorateApplicationAttributes(['referees', id, 'character-explanation'])) }}
-{% endset %}
+    {{ govukDetails({
+      summaryText: "Examples of suitable character referees",
+      html: suitableCharacterRefereesHtml
+    }) }}
+  {% endset %}
 
   {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Type of referee",
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
     items: [{
-      text: "Academic"
+      text: "Academic",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example your tutor or supervisor. This type of reference is recommended if you are giving a predicted grade for your degree."
+      }
     }, {
-      text: "Professional"
+      text: "Professional",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example your current line manager or a previous employer."
+      }
     }, {
-      value: "School senior leadership",
-      text: "Teacher at a school where you work or volunteer"
+      text: "School based",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example a teacher at a school you volunteered at."
+      }
     }, {
       divider: "or"
     }, {
       text: "Character",
-      hint: {
-        text: "If you are having difficulty providing an academic, professional or school referee, you can give us a character referee (a responsible person who will confirm you are suitable for teaching)."
+      label: {
+        classes: "govuk-label--s"
       },
-      conditional: {
-        html: explainCharacter
+      hint: {
+        html: CharacterRefereeHintHtml
       }
     }]
-  } | decorateApplicationAttributes(['referees', id, 'type'])) }}
+  } | decorateApplicationAttributes(["referees", id, "type"])) }}
 
   {{ govukButton({
     text: buttonText

@@ -11,6 +11,16 @@ const generateRandomString = () => {
   return (Number(new Date())).toString(36).slice(-5).toUpperCase()
 }
 
+router.all(['/application/:applicationId', '/application/:applicationId/*'], function(req, res, next) {
+  res.locals.applicationId = req.params.applicationId
+  next()
+})
+
+router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function(req, res, next) {
+  res.locals.courseId = req.params.courseId
+  next()
+})
+
 /**
   * Account: Check email
   * @param {String} page Page to render

@@ -18,19 +18,19 @@
   <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Courses</h2>
   <p class="govuk-body">You can apply for up to 3 courses at a time.</p>
 
-  {% if data["courses"] %}
+  {% if applicationValue("courses") %}
     {% include "_includes/review-courses.njk" %}
-    {% if data["courses"] | length <= 3 %}
+    {% if applicationValue("courses") | length <= 3 %}
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another course",
-        href: "#"
+        href: applicationPath + "/course/add"
       }) }}
     {% endif %}
   {% else %}
     {{ govukButton({
       text: "Add course",
-      href: "#"
+      href: applicationPath + "/course/add"
     }) }}
   {% endif %}
 

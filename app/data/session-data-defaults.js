@@ -18,7 +18,7 @@ module.exports = {
         provider: 'B78'
       }],
       candidate: {
-        name: 'Priti Patel',
+        name: 'Janina Doe',
         'optional-name': '',
         'date-of-birth': {
           day: '09',
@@ -30,7 +30,7 @@ module.exports = {
       },
       'contact-details': {
         'phone-number': '07944 386555',
-        email: 'priti.patel@example.com',
+        email: 'janina.doe@example.com',
         'address-type': 'domestic',
         address: {
           'postal-code': 'G1 3AH',

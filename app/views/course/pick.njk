@@ -2,23 +2,32 @@
 
 {% set title = "Which course are you applying to?" %}
 {% set formaction = paths.next %}
+{% set providerCode = applicationValue(['temporaryCourses', courseId, 'provider']) | providerCode %}
 {% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
 {% block primary %}
-  {# Paragraph font size class suffixes: -xl, -l or -m #}
-  <div class="govuk-!-margin-top-4">
-  {{ govukInput({
-    label: {
-      text: 'Course name and code'
-    },
-    autocomplete: "name",
-    id: "candidate-name",
-    name: "candidate[name]",
-    value: data["candidate"]["name"]
-  }) }}
+  <div class="govuk-form-group">
+    <label for="courses-{{ courseId }}-course" class="govuk-label">Course name and code</label>
+    <div id="course-autocomplete-containter"></div>
   </div>
 
   {{ govukButton({
     text: 'Continue'
   }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete({
+      defaultValue: '{{ applicationValue(["temporaryCourses", courseId, "course"]) }}',
+      name: "applications[{{ applicationId }}][temporaryCourses][{{ courseId }}][course]",
+      element: document.querySelector('#course-autocomplete-containter'),
+      id: '#courses-{{ courseId }}-course',
+      showAllValues: true,
+      source: [
+        {% for id, item in providers[providerCode].courses %}"{{ item.name_and_code }}",{% endfor %}
+      ]
+    })
+  </script>
 {% endblock %}

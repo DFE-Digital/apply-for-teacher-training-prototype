@@ -71,5 +71,10 @@ module.exports = function (env) {
     }
   }
 
+  filters.providerCode = (providerAndCode) => {
+    const regExp = /\(([^)]+)\)$/;
+    return regExp.exec(providerAndCode)[1]
+  }
+
   return filters
 }

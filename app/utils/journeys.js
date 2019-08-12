@@ -15,13 +15,17 @@ function nextAndBackPaths (paths, currentPath, query) {
   }
 }
 
-function pickCoursePaths (req) {
+function pickCoursePaths(req) {
+  const applicationId = req.params.applicationId
+  const courseId = req.params.courseId
+
   var paths = [
-    '/application',
-    '/course/found',
-    '/course/provider',
-    '/course/pick',
-    '/application'
+    `/application/${applicationId}`,
+    `/application/${applicationId}/course/${courseId}/found`,
+    `/application/${applicationId}/course/${courseId}/provider`,
+    `/application/${applicationId}/course/${courseId}/pick`,
+    `/application/${applicationId}/course/${courseId}/create`,
+    `/application/${applicationId}`
   ]
 
   return nextAndBackPaths(paths, req.path, originalQuery(req))

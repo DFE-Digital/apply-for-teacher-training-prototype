@@ -87,6 +87,10 @@
   }) }}
 {% endblock %}
 
+{% block bodyStart %}
+  <div data-module="edge">
+{% endblock %}
+
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
@@ -120,6 +124,8 @@
 {% endif %}
 
 {% block bodyEnd %}
+  </div>
+
   {% block scripts %}
     {{ data | log }}
     {% include "_includes/scripts.njk" %}

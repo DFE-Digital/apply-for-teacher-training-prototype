@@ -1,0 +1,29 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "description": "Prototype for the ‘Apply for postgraduate teacher training’ service",
+  "env": {
+    "PASSWORD": {
+      "required": true
+    },
+    "USERNAME": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "Apply (Prototype)",
+  "scripts": {
+    "postdeploy": "node start.js"
+  },
+  "stack": "heroku-18"
+}

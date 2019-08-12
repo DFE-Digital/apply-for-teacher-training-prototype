@@ -13,13 +13,13 @@
   {% include "_includes/review-references.njk" %}
   {% if not applicationValue(["referees", "second"]) %}
     {{ govukButton({
-      text: "Add a second referee",
+      text: "Add a second referee (recommended)",
       href: applicationPath + "/references/add/referee/second",
       classes: "govuk-button--secondary"
     }) }}
   {% endif %}
   {{ govukButton({
-    text: "Continue",
+    text: "Continue without adding second referee",
     href: applicationPath
   }) }}
 {% endblock %}

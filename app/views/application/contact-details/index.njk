@@ -18,7 +18,7 @@
   {{ govukInput({
     label: {
       text: "Phone number",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     },
     hint: {
       text: "For non-UK numbers, include the country code"
@@ -31,7 +31,10 @@
   {{ govukInput({
     label: {
       text: "Email address",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Don’t use a work or university email address you might lose access to"
     },
     attributes: {
       spellcheck: "false"
@@ -54,7 +57,7 @@
     fieldset: {
       legend: {
         text: "Where do you live?",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     items: [{

@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const querystring = require('querystring')
 const {
-  pickCoursePaths
+  pickCoursePaths,
+  findCoursePaths
 } = require('./utils/journeys')
 
 // Utils

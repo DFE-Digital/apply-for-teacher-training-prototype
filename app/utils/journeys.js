@@ -31,6 +31,20 @@ function pickCoursePaths(req) {
   return nextAndBackPaths(paths, req.path, originalQuery(req))
 }
 
+function findCoursePaths(req) {
+  const applicationId = req.params.applicationId
+  const courseId = req.params.courseId
+
+  var paths = [
+    `/application/${applicationId}`,
+    `/application/${applicationId}/course/${courseId}/found`,
+    `/application/${applicationId}/course/${courseId}/find`
+  ]
+
+  return nextAndBackPaths(paths, req.path, originalQuery(req))
+}
+
 module.exports = {
-  pickCoursePaths
+  pickCoursePaths,
+  findCoursePaths
 }

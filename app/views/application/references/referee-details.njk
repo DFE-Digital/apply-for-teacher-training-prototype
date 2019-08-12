@@ -12,10 +12,10 @@
 {% set title = "Details of " + type + " referee" %}
 
 {% block primary %}
-  <p class="govuk-body">You should contact your referee in advance to check they are:</p>
+  <p class="govuk-body">Contact your referee in advance to check they are:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>happy to give you a reference</li>
-    <li>available to do so within a reasonable timeframe</li>
+    <li>able to submit the reference within a reasonable timeframe</li>
     <li>comfortable submitting a reference online</li>
   </ul>
 
@@ -32,7 +32,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "Referees are not contacted until you submit your application."
+      text: "We won't contact your referees until you submit your application"
     }
   } | decorateApplicationAttributes(['referees', id, 'email'])) }}
 
@@ -56,16 +56,6 @@
     },
     maxwords: 50
   } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
-
-{% if type == "character" %}
-  {{ govukTextarea({
-    label: {
-      text: "Explain why you’ve chosen a character referee (optional).",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(['referees', id, 'character-explanation'])) }}
-{% endif %}
-
   {{ govukButton({
     text: buttonText
   }) }}

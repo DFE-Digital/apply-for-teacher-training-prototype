@@ -9,9 +9,9 @@ function nextAndBackPaths (paths, currentPath, query) {
   var back = paths[index - 1] || ''
 
   return {
-    next: /confirm|edit/.test(next) ? next : next + query,
-    back: /confirm|edit/.test(back) ? back : back + query,
-    current: /confirm|edit/.test(back) ? currentPath : currentPath + query
+    next: next + query,
+    back: back + query,
+    current: currentPath + query
   }
 }
 

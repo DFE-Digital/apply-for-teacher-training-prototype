@@ -18,24 +18,21 @@
 {% block primary %}
   {{ govukInput({
     label: {
-      html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
-      classes: "govuk-label--s"
+      html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>'
     },
     autocomplete: "address-line1"
   } | decorateApplicationAttributes(['contact-details', 'address', 'line1'])) }}
 
   {{ govukInput({
     label: {
-      html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
-      classes: "govuk-label--s"
+      html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>'
     },
     autocomplete: "address-line2"
   } | decorateApplicationAttributes(['contact-details', 'address', 'line2'])) }}
 
   {{ govukInput({
     label: {
-      text: "Town or city",
-      classes: "govuk-label--s"
+      text: "Town or city"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level2"
@@ -43,8 +40,7 @@
 
   {{ govukInput({
     label: {
-      text: "County",
-      classes: "govuk-label--s"
+      text: "County"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level1"
@@ -52,8 +48,7 @@
 
   {{ govukInput({
     label: {
-      text: "Postal code",
-      classes: "govuk-label--s"
+      text: "Postal code"
     },
     classes: "govuk-input--width-10",
     autocomplete: "postal-code"

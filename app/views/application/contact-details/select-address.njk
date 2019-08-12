@@ -6,14 +6,14 @@
 {% set formaction = applicationPath %}
 
 {% block primary %}
-  <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Postcode</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
   <p class="govuk-body">{{ data.applications[applicationId]["contact-details"]["address"]["postal-code"] }} &nbsp; <a href="{{ applicationPath }}/contact-details/address">Change</a></p>
 
   {{ govukRadios({
     fieldset: {
       legend: {
         text: "Select an address",
-        classes: "govuk-label--s"
+        classes: "govuk-label--m"
       }
     },
     id: "contact-details-address",

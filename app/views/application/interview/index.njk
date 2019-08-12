@@ -15,18 +15,17 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">Is there anything your training provider should consider when scheduling an interview?</p>
+  <p class="govuk-body">Is there anything your training provider should consider when scheduling an interview?</p>
   <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Please give details of:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>dates you are unavailable for interview</li>
     <li>any disability, special need or other health or personal issue you feel is relevant</li>
   </ul>
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
   {{ govukCharacterCount({
     label: {
       text: "Enter details relevant to your interview arrangements",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m govuk-!-margin-top-6"
     },
     maxwords: 150
   } | decorateApplicationAttributes(["interview"])) }}

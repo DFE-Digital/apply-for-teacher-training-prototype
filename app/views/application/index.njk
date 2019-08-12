@@ -76,20 +76,13 @@
   }) }}
 
   <h2 class="govuk-heading-m">References</h2>
-  <p class="govuk-body">You should aim to give contact details for 2 references.</p>
-
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "First referee",
-      href: applicationPath + "/references/" + ("edit" if applicationValue(["referees", "second"]) else "add") + "/referee/first",
+      text: "Referees",
+      href: applicationPath + "/references/" + ("review" if applicationValue(["referees"])),
       id: "references",
-      completed: applicationValue(["referees", "first"])
-    }, {
-      text: "Second referee",
-      href: applicationPath + "/references/" + ("edit" if applicationValue(["referees", "second"]) else "add") + "/referee/second",
-      id: "references",
-      completed: applicationValue(["referees", "second"])
+      completed: applicationValue(["referees"])
     }]
   }) }}
 

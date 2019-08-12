@@ -478,7 +478,7 @@ router.get('/application/:applicationId/references/:action(add|edit)/referee-det
     applicationId,
     id,
     action,
-    formaction: referrer || `/application/${applicationId}`
+    formaction: referrer || `/application/${applicationId}/references/review`
   })
 })
 
@@ -541,15 +541,15 @@ router.all('/application/:applicationId/:view', function (req, res) {
 
 router.all('/application/:applicationId/course/add', function (req, res) {
   const applicationId = req.params.applicationId
-  const courseId = generateRandomString();
-  var data = req.session.data;
+  const courseId = generateRandomString()
+  var data = req.session.data
 
   if (typeof data.applications[applicationId]['temporaryCourses'] === 'undefined') {
-    data.applications[applicationId]['temporaryCourses'] = {};
+    data.applications[applicationId]['temporaryCourses'] = {}
   }
 
-  data.applications[applicationId].temporaryCourses[courseId] = { started: true };
-  res.redirect(`/application/${applicationId}/course/${courseId}/found`);
+  data.applications[applicationId].temporaryCourses[courseId] = { started: true }
+  res.redirect(`/application/${applicationId}/course/${courseId}/found`)
 })
 
 router.post('/application/:applicationId/course/:courseId/create', function (req, res) {
@@ -558,12 +558,12 @@ router.post('/application/:applicationId/course/:courseId/create', function (req
   const courseId = req.params.courseId
   const temporaryCourse = applicationData['temporaryCourses'][courseId]
   const paths = pickCoursePaths(req)
-  const regExp = /\(([^)]+)\)$/;
-  const providerCode = regExp.exec(temporaryCourse.provider)[1];
-  const courseCode = regExp.exec(temporaryCourse.course)[1];
+  const regExp = /\(([^)]+)\)$/
+  const providerCode = regExp.exec(temporaryCourse.provider)[1]
+  const courseCode = regExp.exec(temporaryCourse.course)[1]
 
   if (typeof applicationData['courses'] === 'undefined') {
-    applicationData['courses'] = {};
+    applicationData['courses'] = {}
   }
 
   applicationData['courses'][courseId] = {
@@ -573,7 +573,7 @@ router.post('/application/:applicationId/course/:courseId/create', function (req
 
   delete applicationData['temporaryCourses']
 
-  res.redirect(paths.next);
+  res.redirect(paths.next)
 })
 
 router.all('/application/:applicationId/course/:courseId/:view', function (req, res) {

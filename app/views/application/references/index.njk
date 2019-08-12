@@ -1,0 +1,46 @@
+{% extends "_content.njk" %}
+
+{% set title = "References" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: applicationBreadcrumbItems
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Good referees are advocates for your:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>teaching passion and potential</li>
+    <li>fitness to work with children</li>
+    <li>academic abilities</li>
+    <li>reliability and professionalism</li>
+  </ul>
+  <p class="govuk-body">You should aim to give contact details for 2 references. Training providers look for a combination of academic (from university) and professional (from work) referees.</p>
+  <p class="govuk-body">If you are not a recent graduate, both your referees can come from work. If you graduated less than five years ago, it will strengthen your application if one of your referees comes from university.</p>
+  <p class="govuk-body">Referees should not be family members, partners or friends.</p>
+
+  {% set CharacterRefereeHintHtml %}
+    <p class="govuk-hint">If you are finding it difficult to supply an appropriate professional or academic reference, you can give us details of a responsible person who will confirm you are suitable for teaching.</p>
+    {% set suitableCharacterRefereesHtml %}
+      <ul class="govuk-hint govuk-list govuk-list--bullet">
+        <li>your local doctor</li>
+        <li>your local priest, or other faith leader</li>
+        <li>your family solicitor</li>
+        <li>your former headteacher</li>
+        <li>a former mentor or probation officer</li>
+        <li>a responsible member of your community who knows you well</li>
+      </ul>
+    {% endset %}
+
+    {{ govukDetails({
+      summaryText: "Examples of suitable character referees",
+      html: suitableCharacterRefereesHtml
+    }) }}
+  {% endset %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/" + applicationId + "/references/add/referee/first"
+  }) }}
+{% endblock %}

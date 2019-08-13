@@ -1,0 +1,26 @@
+{% extends "_form-wide.njk" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "Degree" %}
+{% set categoryCaptionSize = "m" %}
+
+{% block pageNavigation %}
+  {{ govukBreadcrumbs({
+    items: applicationBreadcrumbItems
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set referrer = applicationPath + "/degree/review" %}
+  {% set categoryTitle = "Degree(s)" %}
+  {% include "_includes/review-degree.njk" %}
+  {{ govukButton({
+    text: "Add another degree",
+    classes: "govuk-button--secondary",
+    href: applicationPath + "/degree/add"
+  }) }}
+
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

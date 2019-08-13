@@ -75,6 +75,17 @@
     }]
   }) }}
 
+  <h2 class="govuk-heading-m">Qualifications</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Degree",
+      href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
+      id: "degree",
+      completed: applicationValue(["degree"])
+    }]
+  }) }}
+
   <h2 class="govuk-heading-m">References</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",

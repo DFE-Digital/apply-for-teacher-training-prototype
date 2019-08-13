@@ -1,0 +1,36 @@
+{% set degrees = data.applications[applicationId]["degree"] | toArray %}
+{% set applicationPath = '/application/' + applicationId %}
+
+<table class="govuk-table govuk-!-font-size-16">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="col" width="30%">Degree</th>
+      <th class="govuk-table__header" scope="col" width="10%">Grade</th>
+      <th class="govuk-table__header" scope="col">Institution</th>
+      <th class="govuk-table__header" scope="col">Year awarded</th>
+    {% if review != true %}
+      <th class="govuk-table__header app-table__cell--action" scope="col">
+        <span class="govuk-visually-hidden">Actions</span>
+      </th>
+    {% endif %}
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+{% for item in degrees %}
+  <tr class="govuk-table__row">
+    <td class="govuk-table__cell">{{ item.type }} {{ item.subject }}</td>
+    <td class="govuk-table__cell">{{ item.grade }}</td>
+    <td class="govuk-table__cell">
+      {{ [item.institution, item.country] | join("<br>") | safe }}
+    </td>
+    <td class="govuk-table__cell">{{ item.year }}</td>
+    {% if review != true %}
+    <td class="govuk-table__cell app-table__cell--action">
+      <a href="{{ applicationPath }}/degree/{{ item.id }}/edit?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> degree</span>
+      </a>
+    </td>
+    {% endif %}
+  </tr>
+{% endfor %}
+  </tbody>
+</table>

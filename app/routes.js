@@ -1,22 +1,22 @@
 const express = require('express')
 const router = express.Router()
 const querystring = require('querystring')
+const utils = require('./utils')
 const {
   pickCoursePaths,
   findCoursePaths
 } = require('./utils/journeys')
 
-// Utils
-const generateRandomString = () => {
-  return (Number(new Date())).toString(36).slice(-5).toUpperCase()
-}
-
-router.all(['/application/:applicationId', '/application/:applicationId/*'], function(req, res, next) {
+/**
+  * Applications
+  * @param {String} applicationId Application ID
+  */
+router.all(['/application/:applicationId', '/application/:applicationId/*'], function (req, res, next) {
   res.locals.applicationId = req.params.applicationId
   next()
 })
 
-router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function(req, res, next) {
+router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function (req, res, next) {
   res.locals.courseId = req.params.courseId
   next()
 })
@@ -46,7 +46,7 @@ router.get('/email/:page/:action', (req, res) => {
 })
 
 router.get('/application/start', function (req, res) {
-  var code = generateRandomString()
+  var code = utils.generateRandomString()
   var data = req.session.data
 
   if (typeof data.applications === 'undefined') {
@@ -92,10 +92,10 @@ router.get('/application/:applicationId/work-history/:action(add|edit)/missing',
   * @param {String} section Section of the application
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
-router.get('/application/:applicationId/:section/add/:thing', (req, res) => {
+router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gcse-equivalent|other)', (req, res) => {
   const section = req.params.section
   const thing = req.params.thing
-  const id = generateRandomString()
+  const id = utils.generateRandomString()
   const queryString = querystring.stringify(req.query)
 
   res.redirect(`/application/${req.params.applicationId}/${section}/add/${thing}/${id}?${queryString}`)
@@ -192,56 +192,23 @@ router.get('/application/:applicationId/contact-details/:view', (req, res) => {
   res.render(`application/contact-details/${req.params.view}`)
 })
 
-/**
-  * Application: Qualifications review
-  */
-router.get('/application/:applicationId/qualifications/review', (req, res) => {
-  const referrer = req.query.referrer
-  res.render('application/qualifications/review', {
-    formaction: referrer || `/application/${req.params.applicationId}`,
-    referrer
-  })
-})
+require('./routes/degree')(router)
 
 /**
-  * Application: Qualifications - Add/edit degree or GCSE
-  * @param {String} action add || edit
-  * @param {String} category degree || gcse
-  * @param {String} id Qualification ID
-  */
-router.get('/application/:applicationId/qualifications/:action(add|edit)/:category(degree|gcse)/:id', (req, res) => {
-  const referrer = req.query.referrer
-  const action = req.params.action
-  const category = req.params.category
-  const id = req.params.id
-
-  res.render(`application/qualifications/${category}`, {
-    action,
-    formaction: `/application/${req.params.applicationId}/qualifications/${action}/${category}/${id}/answer`,
-    id,
-    referrer
-  })
-})
-
-/**
-  * Application: Qualifications - Add/edit UK/international degree details
+  * Application: Qualifications - Add/edit GCSE
   * @param {String} action add || edit
   * @param {String} id Qualification ID
   */
-router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(uk-degree|international-degree)/:id', (req, res) => {
+router.get('/application/:applicationId/qualifications/:action(add|edit)/gcse/:id', (req, res) => {
+  const referrer = req.query.referrer
   const action = req.params.action
   const id = req.params.id
 
-  let formaction = req.session.data.referrer
-  if (action === 'add') {
-    formaction = `/application/${req.params.applicationId}/qualifications/next?prev=degree`
-  }
-
-  res.render('application/qualifications/degree-details', {
+  res.render('application/qualifications/gcse', {
     action,
-    formaction,
+    formaction: `/application/${req.query.applicationId}/qualifications/${action}/gcse/${id}/answer`,
     id,
-    international: req.params.type === 'international-degree'
+    referrer
   })
 })
 
@@ -268,43 +235,32 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(g
 })
 
 /**
-  * Application: Qualifications - Degree/GCSE answer branching
+  * Application: Qualifications - GCSE answer branching
   * @param {String} action add || edit
-  * @param {String} category degree || gcse
   * @param {String} id Qualification ID
   */
-router.post('/application/:applicationId/qualifications/:action(add|edit)/:category(degree|gcse)/:id/answer', (req, res) => {
+router.post('/application/:applicationId/qualifications/:action(add|edit)/gcse/:id/answer', (req, res) => {
   const action = req.params.action
-  const category = req.params.category
   const data = req.session.data
   const id = req.params.id
   const applicationId = req.params.applicationId
   const provenance = data.applications[applicationId]['qualifications'][id]['provenance']
 
   let path
-  if (category === 'degree') {
-    if (provenance === 'domestic') {
-      path = `${action}/uk-degree/${id}`
-    } else {
-      path = `${action}/international-degree/${id}`
-    }
-  }
 
-  if (category === 'gcse') {
-    if (provenance === 'domestic') {
-      path = `${action}/gcse-subject/${id}`
-    } else if (provenance === 'international') {
-      path = `${action}/gcse-equivalent/${id}`
-    } else { // If qualification missing, go to next step
-      path = `next?prev=${id}`
-    }
+  if (provenance === 'domestic') {
+    path = `${action}/gcse-subject/${id}`
+  } else if (provenance === 'international') {
+    path = `${action}/gcse-equivalent/${id}`
+  } else { // If qualification missing, go to next step
+    path = `next?prev=${id}`
   }
 
   res.redirect(`/application/${applicationId}/qualifications/${path}`)
 })
 
 /**
-  * Application: Qualifications - Degree/GCSE next step logic
+  * Application: Qualifications - GCSE next step logic
   * Redirect to next step based on qualifications already entered
   */
 router.all('/application/:applicationId/qualifications/next', (req, res) => {
@@ -312,15 +268,12 @@ router.all('/application/:applicationId/qualifications/next', (req, res) => {
   const applicationId = req.params.applicationId
   const applicationData = req.session.data.applications[applicationId]
 
-  const mathsCompleted = applicationData['qualifications']['maths']
   const englishCompleted = applicationData['qualifications']['english']
   const scienceCompleted = applicationData['qualifications']['science']
   const primaryApplication = req.session.data['settings']['primary-application']
 
   let path
-  if (prev === 'degree' && mathsCompleted !== true) {
-    path = 'add/gcse/maths'
-  } else if (prev === 'maths' && englishCompleted !== true) {
+  if (prev === 'maths' && englishCompleted !== true) {
     path = 'add/gcse/english'
   } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === 'true') {
     path = 'add/gcse/science'
@@ -343,6 +296,20 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/other/:
     action: req.params.action,
     formaction: referrer || `/application/${req.params.applicationId}/qualifications/review`,
     id: req.params.id
+  })
+})
+
+/**
+  * Application: Qualifications - Review
+  */
+router.get('/application/:applicationId/qualifications/review', (req, res) => {
+  const referrer = req.query.referrer
+  const applicationId = req.params.applicationId
+
+  res.render('application/qualifications/review', {
+    applicationId,
+    formaction: referrer || `/application/${applicationId}`,
+    referrer
   })
 })
 
@@ -522,7 +489,7 @@ router.all('/application/:applicationId/:view', function (req, res) {
 
 router.all('/application/:applicationId/course/add', function (req, res) {
   const applicationId = req.params.applicationId
-  const courseId = generateRandomString()
+  const courseId = utils.generateRandomString()
   var data = req.session.data
 
   if (typeof data.applications[applicationId]['temporaryCourses'] === 'undefined') {
@@ -559,7 +526,7 @@ router.post('/application/:applicationId/course/:courseId/create', function (req
 
 router.post('/application/:applicationId/course/:courseId/found', function (req, res) {
   const found = req.body.applications[req.params.applicationId]['temporaryCourses'][req.params.courseId].found
-  const paths = (found && found == 'know') ? pickCoursePaths(req) : findCoursePaths(req)
+  const paths = (found && found === 'know') ? pickCoursePaths(req) : findCoursePaths(req)
   res.redirect(paths.next)
 })
 

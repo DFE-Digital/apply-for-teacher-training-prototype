@@ -1,0 +1,39 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/degree/review" %}
+
+{% if action == "edit" %}
+  {% set parent = "Edit degree" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set parent = "Add a degree" %}
+  {% set buttonText = "Continue" %}
+{% endif %}
+
+{% if applicationValue(["degree", degreeId, "grade"]) == "Pending" %}
+  {% set pending = true %}
+{% endif %}
+{% if pending %}
+  {% set title = "When will you graduate?" %}
+{% else %}
+  {% set title = "What year did you graduate?" %}
+{% endif %}
+
+{% block primary %}
+  {% if pending %}
+    <p class="govuk-body">You must have successfully graduated by the time you start your course.</p>
+  {% endif %}
+
+  {{ govukInput({
+    label: {
+      text: "Year",
+      classes: "govuk-label--m"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["degree", degreeId, "year"])) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}

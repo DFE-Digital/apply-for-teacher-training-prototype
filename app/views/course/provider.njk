@@ -1,12 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set title = "Which provider are you applying to?" %}
+{% set title = "Which training provider are you applying to?" %}
 {% set formaction = paths.next %}
 {% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
 {% block primary %}
   <div class="govuk-form-group">
-    <label for="courses-{{ courseId }}-provider" class="govuk-label">Provider name</label>
+    <label for="courses-{{ courseId }}-provider" class="govuk-label">Enter training provider name</label>
     <div id="provider-autocomplete-containter"></div>
   </div>
 

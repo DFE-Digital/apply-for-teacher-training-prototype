@@ -1,16 +1,9 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/degree/" + degreeId + "/" + action + "/year" %}
+{% set formaction = applicationPath + "/degree/" + degreeId + "/year" %}
 {% if applicationValue(["qualifications", degreeId, "provenance"]) == "international" %}
   {% set international = true %}
-{% endif %}
-{% if action == "edit" %}
-  {% set parent = "Edit degree" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set parent = "Add a degree" %}
-  {% set buttonText = "Continue" %}
 {% endif %}
 {% set title = "What grade is your degree?" %}
 
@@ -91,6 +84,6 @@
   {% endif %}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

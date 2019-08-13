@@ -3,14 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath + "/degree/review" %}
 
-{% if action == "edit" %}
-  {% set parent = "Edit degree" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set parent = "Add a degree" %}
-  {% set buttonText = "Continue" %}
-{% endif %}
-
+{% set parent = "Add a degree" %}
 {% if applicationValue(["degree", degreeId, "grade"]) == "Pending" %}
   {% set pending = true %}
 {% endif %}
@@ -34,6 +27,6 @@
   } | decorateApplicationAttributes(["degree", degreeId, "year"])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

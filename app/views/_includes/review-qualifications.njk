@@ -27,7 +27,7 @@
       <td class="govuk-table__cell"{{ " colspan=\"2\"" if category != "gcse" }}>Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a>.</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
+        <a href="{{ applicationPath }}/qualifications/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> {{ category}} qualification</span></a>
       </td>
       {% endif %}
     </tr>
@@ -43,7 +43,7 @@
       <td class="govuk-table__cell">{{ item.year }}</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/qualifications/edit/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ category}} qualification</span>
+        <a href="{{ applicationPath }}/qualifications/{{ category }}/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> {{ category}} qualification</span>
         </a>
       </td>
       {% endif %}

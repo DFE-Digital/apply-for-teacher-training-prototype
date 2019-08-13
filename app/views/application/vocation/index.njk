@@ -1,12 +1,6 @@
 {% extends "_form.njk" %}
 
-{% if action == "edit" %}
-  {% set title = "Edit why you want to be a teacher" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Why you want to be a teacher" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Why you want to be a teacher" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
@@ -48,6 +42,6 @@
   } | decorateApplicationAttributes(['vocation', 'statement'])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

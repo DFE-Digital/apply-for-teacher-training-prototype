@@ -1,14 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/degree/" + degreeId + "/" + action + "/grade" %}
-{% if action == "edit" %}
-  {% set parent = "Edit degree" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set parent = "Add a degree" %}
-  {% set buttonText = "Continue" %}
-{% endif %}
+{% set formaction = applicationPath + "/degree/" + degreeId + "/grade" %}
 {% set title = "If you studied for your degree outside the UK, you will need to check that it is valid" %}
 
 {% block primary %}
@@ -50,6 +43,6 @@
   } | decorateApplicationAttributes(["degree", degreeId, "naric"])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

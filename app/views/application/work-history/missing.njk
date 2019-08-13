@@ -1,14 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set parent = "Work history" %}
 {% set formaction = "/application/" + applicationId %}
-{% if action == "edit" %}
-  {% set title = "Edit explanation of why you’ve been out of the workplace" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Tell us why you’ve been out of the workplace" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set parent = "Work history" %}
+{% set title = "Tell us why you’ve been out of the workplace" %}
 
 {% block primary %}
   {% set labelHtml %}
@@ -25,6 +19,6 @@
   } | decorateApplicationAttributes(["work-history", "missing"])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

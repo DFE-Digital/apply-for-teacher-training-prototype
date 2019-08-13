@@ -1,5 +1,4 @@
 {% extends "_form.njk" %}
-
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Contact details" %}
 {% set title = "What is your address?" %}
@@ -62,6 +61,6 @@
   }) }}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Save and continue"
   }) }}
 {% endblock %}

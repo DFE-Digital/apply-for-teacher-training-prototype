@@ -40,8 +40,8 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/contact-details/edit?referrer=" + referrer,
-        text: "Edit",
+        href: applicationPath + "/contact-details?referrer=" + referrer,
+        text: "Change",
         visuallyHiddenText: "phone number"
       }]
     } if review != true
@@ -55,8 +55,8 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/contact-details/edit?referrer=" + referrer,
-        text: "Edit",
+        href: applicationPath + "/contact-details?referrer=" + referrer,
+        text: "Change",
         visuallyHiddenText: "email"
       }]
     } if review != true
@@ -70,8 +70,8 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: addressEditHref + "/edit?referrer=" + referrer,
-        text: "Edit",
+        href: addressEditHref + "?referrer=" + referrer,
+        text: "Change",
         visuallyHiddenText: "address"
       }]
     } if review != true

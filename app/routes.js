@@ -146,7 +146,7 @@ router.get('/application/:applicationId/personal-details/residency-status', (req
 /**
   * Application: Contact details
   */
-router.get('/application/:applicationId/contact-details/:action(add|edit)', (req, res) => {
+router.get('/application/:applicationId/contact-details', (req, res) => {
   const action = req.params.action
   const referrer = req.query.referrer
   const applicationId = req.params.applicationId
@@ -173,7 +173,7 @@ router.post('/application/:applicationId/contact-details/address-answer', (req, 
   }
 })
 
-router.get('/application/:applicationId/contact-details/address/:action(add|edit)', (req, res) => {
+router.get('/application/:applicationId/contact-details/address', (req, res) => {
   const referrer = req.query.referrer
   const applicationId = req.params.applicationId
 

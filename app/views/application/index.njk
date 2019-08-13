@@ -15,7 +15,7 @@
 {% block primary %}
   {% set hasSchoolExperience = applicationValue(["school-experience", "missing"]) != "true" %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">Courses</h2>
+  <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Courses</h2>
   <p class="govuk-body">You can apply for up to 3 courses at a time.</p>
 
   {% if applicationValue("courses") %}
@@ -34,7 +34,7 @@
     }) }}
   {% endif %}
 
-  <h2 class="govuk-heading-m govuk-!-margin-top-4">About you</h2>
+  <h2 class="govuk-heading-l govuk-!-margin-top-4">About you</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -70,7 +70,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m">Qualifications</h2>
+  <h2 class="govuk-heading-l">Qualifications</h2>
   <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
   {# TODO: Show ‘Science GCSE or equivalent’ option if primary course #}
   {{ appTaskList({
@@ -103,7 +103,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m">References</h2>
+  <h2 class="govuk-heading-l">References</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -114,7 +114,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m">Interview</h2>
+  <h2 class="govuk-heading-l">Interview</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -125,7 +125,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m">Review and submit</h2>
+  <h2 class="govuk-heading-l">Review and submit</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{

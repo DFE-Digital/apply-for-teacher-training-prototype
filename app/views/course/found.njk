@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Have you found a course to apply to?" %}
+{% set title = "Have you chosen a course to apply to?" %}
 {% set formaction = paths.current %}
 {% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
@@ -8,7 +8,7 @@
   {{ govukRadios({
     items: [{
       value: "know",
-      text: "Yes, I know who I want to apply to"
+      text: "Yes, I know where I want to apply"
     }, {
       value: "need",
       text: "No, I need to find a course"

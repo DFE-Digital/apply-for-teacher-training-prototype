@@ -36,15 +36,14 @@
 {% endset %}
 
 {% set qualificationsHtml %}
-  {% set category = "degree" %}
-  {% set categoryTitle = "Degree(s)" %}
-  {% include "_includes/review-qualifications.njk" %}
-  {% set category = "gcse" %}
-  {% set categoryTitle = "Required subjects" %}
-  {% include "_includes/review-qualifications.njk" %}
-  {% set category = "other" %}
-  {% set categoryTitle = "Other relevant qualifications" %}
-  {% include "_includes/review-qualifications.njk" %}
+  <h3 class="govuk-heading-s">Degree(s)</h3>
+  {% include "_includes/review-degree.njk" %}
+
+  <h3 class="govuk-heading-s">Subject GCSEs</h3>
+  {% include "_includes/review-gcse.njk" %}
+
+  <h3 class="govuk-heading-s">Other relevant qualifications</h3>
+  {% include "_includes/review-other-qualifications.njk" %}
   {{ govukSummaryList({
     classes: "govuk-!-font-size-16",
     rows: [{
@@ -57,7 +56,7 @@
       actions: {
         classes: "govuk-!-padding-right-2",
         items: [{
-          href: applicationPath + "/qualifications/review?referrer=" + referrer,
+          href: applicationPath + "/qualifications?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "additional detail"
         }]

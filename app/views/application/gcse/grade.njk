@@ -1,0 +1,35 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/gcse/" + gcseId + "/year" %}
+{% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
+{% set title = "What grade is your qualification?" %}
+
+{% block primary %}
+  {% set otherGradeHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please specify the grade"
+      },
+      classes: "govuk-input--width-10"
+    } | decorateApplicationAttributes(["gcse", gcseId, "grade-other"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    items: [{
+      text: "I completed my qualification",
+      conditional: {
+        html: otherGradeHtml
+      }
+    }, {
+      divider: "or"
+    }, {
+      value: "Pending",
+      text: "I am still studying for my qualification"
+    }]
+  } | decorateApplicationAttributes(["gcse", gcseId, "grade"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

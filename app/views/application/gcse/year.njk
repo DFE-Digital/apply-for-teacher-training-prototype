@@ -1,0 +1,27 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = referrer or applicationPath %}
+
+{% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
+{% if applicationValue(["gcse", gcseId, "grade"]) == "Pending" %}
+  {% set pending = true %}
+{% endif %}
+{% if pending %}
+  {% set title = "When will you get your qualification?" %}
+{% else %}
+  {% set title = "When was your qualification awarded?" %}
+{% endif %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: "Enter year"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["gcse", gcseId, "year"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

@@ -38,4 +38,11 @@ module.exports = router => {
   router.get('/application/:applicationId/other-qualifications/review', (req, res) => {
     res.render('application/other-qualifications/review')
   })
+
+  /**
+    * Application: Review
+    */
+  router.get('/application/:applicationId/review', (req, res) => {
+    res.render('application/review')
+  })
 }

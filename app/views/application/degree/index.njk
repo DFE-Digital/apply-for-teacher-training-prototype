@@ -2,6 +2,10 @@
 
 {% set title = "Degree" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+{% endblock %}
+
 {% block primary %}
   <p class="govuk-body">Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
 

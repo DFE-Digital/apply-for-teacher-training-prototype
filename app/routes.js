@@ -95,7 +95,7 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
   const id = utils.generateRandomString()
   const queryString = querystring.stringify(req.query)
 
-  res.redirect(`/application/${req.params.applicationId}/${section}/add/${thing}/${id}?${queryString}`)
+  res.redirect(`/application/${req.params.applicationId}/${section}/${thing}/${id}?${queryString}`)
 })
 
 /**

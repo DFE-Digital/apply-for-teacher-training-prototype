@@ -147,12 +147,10 @@ router.get('/application/:applicationId/personal-details/residency-status', (req
   * Application: Contact details
   */
 router.get('/application/:applicationId/contact-details', (req, res) => {
-  const action = req.params.action
   const referrer = req.query.referrer
   const applicationId = req.params.applicationId
 
   res.render('application/contact-details/index', {
-    action,
     formaction: referrer || `/application/${applicationId}/contact-details/address-answer`,
     referrer
   })
@@ -297,15 +295,12 @@ router.get('/application/:applicationId/qualifications/review', (req, res) => {
 })
 
 /**
-  * Application: Your knowledge about the subject you want to teach - Add/edit subject knowledge statement
-  * @param {String} action add || edit
+  * Application: Your knowledge about the subject you want to teach
   */
-router.get('/application/:applicationId/subject-knowledge/:action(add|edit)', (req, res) => {
-  const action = req.params.action
+router.get('/application/:applicationId/subject-knowledge', (req, res) => {
   const referrer = req.query.referrer
 
   res.render('application/subject-knowledge/index', {
-    action,
     formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })
@@ -430,12 +425,10 @@ router.get('/application/:applicationId/references/:view', (req, res) => {
   * Application: Vocation - Add/edit vocation statement
   * @param {String} action add || edit
   */
-router.get('/application/:applicationId/vocation/:action(add|edit)', (req, res) => {
-  const action = req.params.action
+router.get('/application/:applicationId/vocation', (req, res) => {
   const referrer = req.query.referrer
 
   res.render('application/vocation/index', {
-    action,
     formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })

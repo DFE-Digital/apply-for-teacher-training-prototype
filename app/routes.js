@@ -200,15 +200,13 @@ require('./routes/degree')(router)
   * @param {String} id Qualification ID
   */
 router.get('/application/:applicationId/qualifications/:action(add|edit)/gcse/:id', (req, res) => {
-  const applicationId = req.query.applicationId
   const referrer = req.query.referrer
   const action = req.params.action
   const id = req.params.id
 
   res.render('application/qualifications/gcse', {
-    applicationId,
     action,
-    formaction: `/application/${applicationId}/qualifications/${action}/gcse/${id}/answer`,
+    formaction: `/application/${req.query.applicationId}/qualifications/${action}/gcse/${id}/answer`,
     id,
     referrer
   })

@@ -1,9 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Academic qualifications" %}
-{% set idTitle = "English" if (id === "english") else id %}
-{% set qualTitle = "GCSE equivalent" if international else "GCSE or equivalent" %}
-{% set title = idTitle + " " + qualTitle %}
+{% set title = (id | capitalize) + " GCSE or equivalent" %}
 
 {% block primary %}
 {% if international == true %}

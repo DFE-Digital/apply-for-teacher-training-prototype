@@ -104,13 +104,11 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
 /**
   * Application: Personal details
   */
-router.get('/application/:applicationId/personal-details/:action(add|edit)', (req, res) => {
-  const action = req.params.action
+router.get('/application/:applicationId/personal-details', (req, res) => {
   const referrer = req.query.referrer
   const applicationId = req.params.applicationId
 
   res.render('application/personal-details/index', {
-    action,
     formaction: referrer || `/application/${applicationId}/personal-details/answer`,
     referrer
   })
@@ -128,20 +126,18 @@ router.post('/application/:applicationId/personal-details/answer', (req, res) =>
   if (eea.includes(nationality)) {
     res.redirect(`/application/${applicationId}`)
   } else {
-    res.redirect(`/application/${applicationId}/personal-details/residency-status/add`)
+    res.redirect(`/application/${applicationId}/personal-details/residency-status`)
   }
 })
 
 /**
   * Application: Residency status
   */
-router.get('/application/:applicationId/personal-details/residency-status/:action(add|edit)', (req, res) => {
-  const action = req.params.action
+router.get('/application/:applicationId/personal-details/residency-status', (req, res) => {
   const referrer = req.query.referrer
   const applicationId = req.params.applicationId
 
   res.render('application/personal-details/residency-status', {
-    action,
     formaction: referrer || `/application/${applicationId}`,
     referrer
   })

@@ -39,9 +39,9 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details/" + ("edit" if applicationValue(["candidate", "nationality"]) else "add"),
+      href: applicationPath + "/personal-details/",
       id: "personal-details",
-      completed: applicationValue(["candidate", "nationality"])
+      completed: applicationValue("candidate")
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details/" + ("edit" if applicationValue(["contact-details", "address"]) else "add"),

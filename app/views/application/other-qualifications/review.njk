@@ -1,6 +1,6 @@
 {% extends "_content-wide.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Degree" %}
+{% set title = "Other qualifications" %}
 {% set categoryCaptionSize = "m" %}
 
 {% block pageNavigation %}
@@ -12,11 +12,11 @@
 {% block primary %}
   {% set referrer = applicationPath + "/degree/review" %}
   {% set categoryTitle = "Degree(s)" %}
-  {% include "_includes/review-degree.njk" %}
+  {% include "_includes/review-other-qualifications.njk" %}
   {{ govukButton({
-    text: "Add another degree",
+    text: "Add another qualification",
     classes: "govuk-button--secondary",
-    href: applicationPath + "/degree/add"
+    href: applicationPath + "/other-qualification/add"
   }) }}
 
   {{ govukButton({

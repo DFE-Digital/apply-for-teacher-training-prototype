@@ -92,7 +92,7 @@ router.get('/application/:applicationId/work-history/:action(add|edit)/missing',
   * @param {String} section Section of the application
   * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
   */
-router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gcse-equivalent|other)', (req, res) => {
+router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gcse-equivalent)', (req, res) => {
   const section = req.params.section
   const thing = req.params.thing
   const id = utils.generateRandomString()
@@ -193,6 +193,7 @@ router.get('/application/:applicationId/contact-details/:view', (req, res) => {
 })
 
 require('./routes/degree')(router)
+require('./routes/other-qualifications')(router)
 
 /**
   * Application: Qualifications - Add/edit GCSE
@@ -206,7 +207,7 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/gcse/:i
 
   res.render('application/qualifications/gcse', {
     action,
-    formaction: `/application/${req.query.applicationId}/qualifications/${action}/gcse/${id}/answer`,
+    formaction: `/application/${req.params.applicationId}/qualifications/${action}/gcse/${id}/answer`,
     id,
     referrer
   })
@@ -240,11 +241,12 @@ router.get('/application/:applicationId/qualifications/:action(add|edit)/:type(g
   * @param {String} id Qualification ID
   */
 router.post('/application/:applicationId/qualifications/:action(add|edit)/gcse/:id/answer', (req, res) => {
-  const action = req.params.action
-  const data = req.session.data
-  const id = req.params.id
   const applicationId = req.params.applicationId
-  const provenance = data.applications[applicationId]['qualifications'][id]['provenance']
+  const applicationData = req.session.data.applications[applicationId]
+
+  const action = req.params.action
+  const id = req.params.id
+  const provenance = applicationData['qualifications'][id]['provenance']
 
   let path
 
@@ -282,21 +284,6 @@ router.all('/application/:applicationId/qualifications/next', (req, res) => {
   }
 
   res.redirect(`/application/${applicationId}/qualifications/${path}`)
-})
-
-/**
-  * Application: Qualifications - Add/edit other qualification
-  * @param {String} action add || edit
-  * @param {String} id Qualification ID
-  */
-router.get('/application/:applicationId/qualifications/:action(add|edit)/other/:id', (req, res) => {
-  const referrer = req.query.referrer
-
-  res.render('application/qualifications/other', {
-    action: req.params.action,
-    formaction: referrer || `/application/${req.params.applicationId}/qualifications/review`,
-    id: req.params.id
-  })
 })
 
 /**

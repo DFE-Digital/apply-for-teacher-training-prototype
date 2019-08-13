@@ -65,10 +65,9 @@ module.exports = {
           year: '2017'
         }
       },
-      qualifications: {
+      'other-qualifications': {
         ksufp: {
           id: 'ksufp',
-          category: 'other',
           type: 'GCSE(A*-G)',
           subject: 'Science',
           institution: 'Juliet High School',
@@ -79,7 +78,6 @@ module.exports = {
         },
         kv0y7: {
           id: 'kv0y7',
-          category: 'other',
           type: 'Higher Secondary School Certificate',
           subject: '',
           institution: 'Juliet High School',
@@ -87,7 +85,9 @@ module.exports = {
           year: '2008',
           international: 'yes',
           country: 'India'
-        },
+        }
+      },
+      qualifications: {
         maths: {
           id: 'maths',
           category: 'gcse',

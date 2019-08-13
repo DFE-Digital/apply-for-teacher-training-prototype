@@ -25,14 +25,7 @@
     {% endif %}
   {% endset %}
 
-  {% if action == "edit" %}
-    {{ govukDetails({
-      summaryText: "Help completing this question",
-      html: guidanceHtml
-    }) }}
-  {% else %}
-    {{ guidanceHtml | safe }}
-  {% endif %}
+  {{ guidanceHtml | safe }}
 
   {{ govukCharacterCount({
     label: {

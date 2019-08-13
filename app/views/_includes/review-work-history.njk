@@ -89,7 +89,7 @@
         </td>
         {% if review != true %}
         <td class="govuk-table__cell app-table__cell--action">
-          <a href="{{ applicationPath }}/work-history/edit/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
+          <a href="{{ applicationPath }}/work-history/{{ item.category }}/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> {{ item.category }}</span></a>
         </td>
         {% endif %}
       </tr>
@@ -138,8 +138,8 @@
       actions: {
         classes: "govuk-!-padding-right-2",
         items: [{
-          href: "{{ applicationPath }}/work-history/edit/missing?referrer=" + referrer,
-          text: "Edit",
+          href: "{{ applicationPath }}/work-history/missing?referrer=" + referrer,
+          text: "Change",
           visuallyHiddenText: "explanation"
         }]
       }

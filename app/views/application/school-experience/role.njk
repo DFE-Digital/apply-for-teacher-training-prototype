@@ -1,13 +1,8 @@
 {% extends "_form.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "School experience and volunteering with young people" %}
-{% if action == "edit" %}
-  {% set title = "Edit role" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Add role" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Role" %}
 
 {% block primary %}
   {{ govukInput({
@@ -85,16 +80,7 @@
     }]
   } | decorateApplicationAttributes(['school-experience', id, 'end-date'])) }}
 
-{% if action != "edit" %}
   {{ govukButton({
-    text: "Save and add another role",
-    classes: "govuk-button--secondary",
-    attributes: {
-      formaction: applicationPath + "/school-experience/update/role/"+ id + "?referrer=" + applicationPath + "/school-experience/add/role"
-    }
-  }) }}
-{% endif %}
-  {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

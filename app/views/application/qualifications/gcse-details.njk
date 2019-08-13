@@ -3,13 +3,7 @@
 {% set parent = "Academic qualifications" %}
 {% set idTitle = "English" if (id === "english") else id %}
 {% set qualTitle = "GCSE equivalent" if international else "GCSE or equivalent" %}
-{% if action == "edit" %}
-  {% set title = "Edit " + idTitle + " " + qualTitle %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Add " + idTitle + " " + qualTitle %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = idTitle + " " + qualTitle %}
 
 {% block primary %}
 {% if international == true %}
@@ -143,7 +137,7 @@
   }) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}
 

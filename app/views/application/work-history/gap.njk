@@ -2,11 +2,6 @@
 
 {% set parent = "Work history" %}
 {% set title = "Explain gap in work history" %}
-{% if action == "edit" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
 
 {% block primary %}
   {{ govukDateInput({
@@ -72,6 +67,6 @@
   }) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

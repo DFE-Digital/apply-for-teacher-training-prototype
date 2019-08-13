@@ -1,14 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set type = applicationValue(["referees", id, "type"]) | lower %}
-{% set parent = "References" %}
-{% if action == "edit" %}
-  {% set parent = "Edit " + id + " referee" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set parent = "Add " + id + " referee" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set parent = (id | capitalize) + " referee" %}
 {% set title = "Details of " + type + " referee" %}
 
 {% block primary %}
@@ -57,6 +50,6 @@
     maxwords: 50
   } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

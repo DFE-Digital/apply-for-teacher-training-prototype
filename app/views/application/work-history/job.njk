@@ -1,13 +1,8 @@
 {% extends "_form.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
-{% if action == "edit" %}
-  {% set title = "Edit job" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Add a job" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Job" %}
 
 {% block primary %}
   {% set detailsHtml %}
@@ -121,16 +116,7 @@
     value: "job"
   }) }}
 
-{% if action != "edit" %}
   {{ govukButton({
-    text: "Save and add another job",
-    classes: "govuk-button--secondary",
-    attributes: {
-      formaction: applicationPath + "/work-history/update/job/"+ id + "?next=" + applicationPath + "/work-history/add/job"
-    }
-  }) }}
-{% endif %}
-  {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

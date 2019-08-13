@@ -26,7 +26,7 @@
     <td class="govuk-table__cell">{{ item.year }}</td>
     {% if review != true %}
     <td class="govuk-table__cell app-table__cell--action">
-      <a href="{{ applicationPath }}/other-qualifications/{{ item.id }}/edit?referrer={{ referrer }}">Edit<span class="govuk-visually-hidden"> qualification</span>
+      <a href="{{ applicationPath }}/other-qualifications/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> qualification</span>
       </a>
     </td>
     {% endif %}

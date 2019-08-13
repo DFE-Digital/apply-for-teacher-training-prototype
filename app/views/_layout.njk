@@ -35,25 +35,6 @@
 {% from "_components/related/macro.njk" import appRelated %}
 {% from "_components/task-list/macro.njk" import appTaskList %}
 
-{# Set breadcrumbs for application question pages #}
-{% set applicationBreadcrumbItems = [{
-  text: "Your applications",
-  href: "/applications"
-}, {
-  text: "Review your application",
-  href: referrer
-}, {
-  text: title
-}] if referrer | includes('/apply/') else [{
-  text: "Your applications",
-  href: "/applications"
-}, {
-  text: "Your application for postgraduate teacher training",
-  href: "/application"
-}, {
-  text: title
-}] %}
-
 {% block head %}
   {% include "_includes/head.njk" %}
 {% endblock %}

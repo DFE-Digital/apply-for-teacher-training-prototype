@@ -9,9 +9,7 @@
 {% endif %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}
@@ -38,14 +36,7 @@
     </ul>
   {% endset %}
 
-  {% if action == "edit" %}
-    {{ govukDetails({
-      summaryText: "Help completing this question",
-      html: guidanceHtml
-    }) }}
-  {% else %}
-    {{ guidanceHtml | safe }}
-  {% endif %}
+  {{ guidanceHtml | safe }}
 
   {{ govukCharacterCount({
     label: {

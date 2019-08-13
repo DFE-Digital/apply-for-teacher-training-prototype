@@ -1,17 +1,9 @@
 {% extends "_form.njk" %}
 
-{% if action == "edit" %}
-  {% set title = "Edit personal details" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Personal details" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Personal details" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}
@@ -84,7 +76,7 @@
     } | decorateApplicationAttributes(['language-skills', 'main'])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}
 

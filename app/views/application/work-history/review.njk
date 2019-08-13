@@ -4,9 +4,7 @@
 {% set referrer = applicationPath + "/work-history/review" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}

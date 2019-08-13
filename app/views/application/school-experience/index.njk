@@ -4,9 +4,7 @@
 {% set formaction = applicationPath + "/school-experience/add/role" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}

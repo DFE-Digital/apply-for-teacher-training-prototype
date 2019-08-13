@@ -4,9 +4,7 @@
 {% set categoryCaptionSize = "m" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}

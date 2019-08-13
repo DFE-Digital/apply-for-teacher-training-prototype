@@ -1,17 +1,9 @@
 {% extends "_form.njk" %}
 
-{% if action == "edit" %}
-  {% set title = "Edit contact details" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Contact details" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Contact details" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
+  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}
@@ -74,6 +66,6 @@
 {% endif %}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

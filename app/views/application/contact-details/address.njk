@@ -1,19 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Contact details" %}
-{% if action == "edit" %}
-  {% set title = "Edit address" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "What is your address?" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
-
-{% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: applicationBreadcrumbItems
-  }) }}
-{% endblock %}
+{% set title = "What is your address?" %}
 
 {% block primary %}
   {{ govukInput({
@@ -55,6 +43,6 @@
   } | decorateApplicationAttributes(['contact-details', 'address', 'postal-code'])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

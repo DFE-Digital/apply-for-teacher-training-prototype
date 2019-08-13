@@ -1,13 +1,10 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Personal details" %}
-{% if action == "edit" %}
-  {% set title = "Edit your residency status" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "What is your residence status?" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "What is your residence status?" %}
+{% block pageNavigation %}
+  {{ govukBackLink({ href: "/application/" + applicationId + "/personal-details", text: 'Back' }) }}
+{% endblock %}
 
 {% block primary %}
   {% set rightToWorkStudy %}
@@ -80,6 +77,6 @@
   } | decorateApplicationAttributes(['candidate', 'residency-status'])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

@@ -39,12 +39,12 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details/" + ("edit" if applicationValue(["candidate", "nationality"]) else "add"),
+      href: applicationPath + "/personal-details/",
       id: "personal-details",
-      completed: applicationValue(["candidate", "nationality"])
+      completed: applicationValue("candidate")
     }, {
       text: "Contact details",
-      href: applicationPath + "/contact-details/" + ("edit" if applicationValue(["contact-details", "address"]) else "add"),
+      href: applicationPath + "/contact-details",
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {
@@ -54,7 +54,7 @@
       completed: applicationValue("qualifications")
     }, {
       text: "Your knowledge about the subject you want to teach",
-      href: applicationPath + "/subject-knowledge/" + ("edit" if applicationValue("subject-knowledge") else "add"),
+      href: applicationPath + "/subject-knowledge",
       id: "subject-knowledge",
       completed: applicationValue("subject-knowledge")
     }, {
@@ -69,7 +69,7 @@
       completed: applicationValue("school-experience")
     }, {
       text: "Why you want to be a teacher",
-      href: applicationPath + "/vocation/" + ("edit" if applicationValue("vocation") else "add"),
+      href: applicationPath + "/vocation",
       id: "vocation",
       completed: applicationValue("vocation")
     }]
@@ -107,7 +107,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Interview preferences",
-      href: applicationPath + "/interview" + ("/edit" if applicationValue("interview") else "/add"),
+      href: applicationPath + "/interview",
       id: "interview",
       completed: applicationValue("interview")
     }]

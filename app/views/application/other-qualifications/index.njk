@@ -1,0 +1,88 @@
+{% extends "_form.njk" %}
+
+{% if action == "edit" %}
+  {% set title = "Edit qualification" %}
+  {% set buttonText = "Save changes" %}
+{% else %}
+  {% set title = "Add qualification" %}
+  {% set buttonText = "Save and continue" %}
+{% endif %}
+
+{% block primary %}
+  **{{ applicationValue("other-qualifications") | dump }}**
+
+  {{ govukInput({
+    label: {
+      text: "Type of qualification"
+    },
+    hint: {
+      text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
+    }
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "type"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Subject"
+    }
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "subject"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied"
+    }
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "institution"])) }}
+
+  {% set internationalConditionalHtml %}
+    {{ appAutocomplete({
+      label: {
+        text: "Which country?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["other-qualifications", qualificationId, "country"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "This institution is based in:"
+      }
+    },
+    items: [{
+      value: "domestic",
+      text: "United Kngdom"
+    }, {
+      value: "international",
+      text: "Another country",
+      conditional: {
+        html: internationalConditionalHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "provenance"])) }}
+
+  {{ govukInput({
+    label: {
+      text: 'Grade'
+    },
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "grade"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "year"])) }}
+
+  {{ govukButton({
+    text: buttonText
+  }) }}
+{% endblock %}
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ data["other-qualifications"][qualificationId]["country"] }}',
+      selectElement: document.querySelector('#other-qualifications-{{ qualificationId }}-country')
+    })
+  </script>
+{% endblock %}

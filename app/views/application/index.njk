@@ -83,6 +83,11 @@
       href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
       id: "degree",
       completed: applicationValue(["degree"])
+    }, {
+      text: "Other relevant qualifications",
+      href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
+      id: "other-qualifications",
+      completed: applicationValue(["other-qualifications"])
     }]
   }) }}
 

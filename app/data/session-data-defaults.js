@@ -4,19 +4,16 @@ module.exports = {
   },
   applications: {
     12345: {
-      courses: [{
-        name: 'English',
-        code: 'Q3CT',
-        qualification: 'QTS full time',
-        startDate: '2019-09-01',
-        provider: '2HN'
-      }, {
-        name: 'English',
-        code: 'Q3X1',
-        qualification: 'PGCE with QTS full time',
-        startDate: '2019-09-01',
-        provider: 'B78'
-      }],
+      courses: {
+        'ABCDE': {
+          courseCode: '38G9',
+          providerCode: 'G50'
+        },
+        'ZYXWV': {
+          courseCode: 'Q3X1',
+          providerCode: 'B78'
+        }
+      },
       candidate: {
         name: 'Janina Doe',
         'optional-name': '',

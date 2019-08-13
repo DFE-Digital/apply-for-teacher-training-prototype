@@ -1,12 +1,5 @@
 {% extends "_form.njk" %}
-
-{% if action == "edit" %}
-  {% set title = "Edit interview preferences" %}
-  {% set buttonText = "Save changes" %}
-{% else %}
-  {% set title = "Interview preferences" %}
-  {% set buttonText = "Save and continue" %}
-{% endif %}
+{% set title = "Interview preferences" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
@@ -29,6 +22,6 @@
   } | decorateApplicationAttributes(["interview"])) }}
 
   {{ govukButton({
-    text: buttonText
+    text: "Save and continue"
   }) }}
 {% endblock %}

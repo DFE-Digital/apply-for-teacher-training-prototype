@@ -435,15 +435,12 @@ router.get('/application/:applicationId/vocation', (req, res) => {
 })
 
 /**
-  * Application: Interview - Add/edit interview preferences
-  * @param {String} action add || edit
+  * Application: Interview
   */
-router.get('/application/:applicationId/interview/:action(add|edit)', (req, res) => {
-  const action = req.params.action
+router.get('/application/:applicationId/interview', (req, res) => {
   const referrer = req.query.referrer
 
   res.render('application/interview/index', {
-    action,
     formaction: referrer || `/application/${req.params.applicationId}`,
     referrer
   })

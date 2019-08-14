@@ -1,5 +1,32 @@
+const journeys = require('../utils/journeys')
 const querystring = require('querystring')
 const utils = require('./../utils')
+
+function getQueryString(req) {
+  return querystring.stringify(req.query)
+}
+
+function degreeData(req) {
+  const applicationData = utils.applicationData(req)
+  return applicationData.degree[req.params.degreeId]
+}
+
+function degreePaths(req) {
+  const applicationId = req.params.applicationId
+  const data = degreeData(req)
+  const international = data.provenance && data.provenance == 'international'
+  const basePath = `/application/${applicationId}/degree/${req.params.degreeId}`
+
+  var paths = [
+    basePath,
+    ...(international ? [`${basePath}/naric`] : []),
+    `${basePath}/grade`,
+    `${basePath}/year`,
+    `/application/${applicationId}/degree/review`,
+  ]
+
+  return journeys.nextAndBackPaths(paths, req)
+}
 
 module.exports = router => {
   /**
@@ -7,9 +34,7 @@ module.exports = router => {
     */
   router.get('/application/:applicationId/degree/add', (req, res) => {
     const degreeId = utils.generateRandomString()
-    const queryString = querystring.stringify(req.query)
-
-    res.redirect(`/application/${req.params.applicationId}/degree/${degreeId}?${queryString}`)
+    res.redirect(`/application/${req.params.applicationId}/degree/${degreeId}?${getQueryString(req)}`)
   })
 
   /**
@@ -30,7 +55,7 @@ module.exports = router => {
 
     res.render('application/degree/index', {
       applicationId,
-      formaction: `/application/${applicationId}/degree/${degreeId}/answer`,
+      formaction: `/application/${applicationId}/degree/${degreeId}/answer?${getQueryString(req)}`,
       degreeId,
       referrer
     })
@@ -40,20 +65,18 @@ module.exports = router => {
     * Application: Degree(s) - Add/edit details
     * @param {String} degreeId Qualification ID
     */
-  router.get('/application/:applicationId/degree/:degreeId/:template(naric|grade|year)', (req, res) => {
+  router.all('/application/:applicationId/degree/:degreeId/:template(naric|grade|year)', (req, res) => {
     const applicationId = req.params.applicationId
     const degreeId = req.params.degreeId
     const referrer = req.query.referrer
     const template = req.params.template
-
-    let formaction
-    if (template === 'index') {
-      formaction = `/application/${applicationId}/degree/${degreeId}/answer`
-    }
+    const paths = degreePaths(req)
+    // formaction = `/application/${applicationId}/degree/${degreeId}/${nextPage}?${getQueryString(req)}`
 
     res.render(`application/degree/${template}`, {
       applicationId,
-      formaction,
+      formaction: paths.next,
+      paths,
       degreeId,
       referrer
     })
@@ -76,6 +99,6 @@ module.exports = router => {
       path = `${degreeId}/naric`
     }
 
-    res.redirect(`/application/${applicationId}/degree/${path}`)
+    res.redirect(`/application/${applicationId}/degree/${path}?${getQueryString(req)}`)
   })
 }

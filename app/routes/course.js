@@ -1,4 +1,4 @@
-const { nextAndBackPaths } = require('../utils/journeys')
+const journeys = require('../utils/journeys')
 const utils = require('../utils')
 
 function pickCoursePaths(req) {
@@ -14,7 +14,7 @@ function pickCoursePaths(req) {
     `/application/${applicationId}`
   ]
 
-  return nextAndBackPaths(paths, req)
+  return journeys.nextAndBackPaths(paths, req)
 }
 
 function findCoursePaths(req) {
@@ -27,7 +27,7 @@ function findCoursePaths(req) {
     `/application/${applicationId}/course/${courseId}/find`
   ]
 
-  return nextAndBackPaths(paths, req)
+  return journeys.nextAndBackPaths(paths, req)
 }
 
 module.exports = router => {

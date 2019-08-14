@@ -1,8 +1,11 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/degree/" + degreeId + "/grade" %}
 {% set title = "If you studied for your degree outside the UK, you will need to check that it is valid" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({ href: paths.back }) }}
+{% endblock %}
 
 {% block primary %}
   {% set yesConditionalHtml %}

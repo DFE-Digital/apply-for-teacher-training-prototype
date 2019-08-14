@@ -1,11 +1,14 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/degree/" + degreeId + "/year" %}
-{% if applicationValue(["qualifications", degreeId, "provenance"]) == "international" %}
+{% if applicationValue(["degree", degreeId, "provenance"]) == "international" %}
   {% set international = true %}
 {% endif %}
 {% set title = "What grade is your degree?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({ href: paths.back }) }}
+{% endblock %}
 
 {% block primary %}
   {% set predictedGradeHtml %}

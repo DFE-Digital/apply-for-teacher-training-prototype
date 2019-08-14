@@ -116,12 +116,10 @@
 
 {% if residencyStatus %}
   {{ govukSummaryList({
-    classes: "govuk-!-font-size-16",
     rows: [nameRow, nationalityRow, residencyStatusRow, languageRow]
   }) }}
 {% else %}
   {{ govukSummaryList({
-    classes: "govuk-!-font-size-16",
     rows: [nameRow, nationalityRow, languageRow]
   }) }}
 {% endif %}

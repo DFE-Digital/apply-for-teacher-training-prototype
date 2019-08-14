@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
-{% if applicationValue(["gcse", gcseId, "grade"]) == "Pending" %}
-  {% set pending = true %}
-{% endif %}
-{% if pending %}
+{% if applicationValue(["gcse", gcseId, "completed"]) == "false" %}
   {% set title = "When will you get your qualification?" %}
 {% else %}
   {% set title = "When was your qualification awarded?" %}

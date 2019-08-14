@@ -87,7 +87,7 @@ module.exports = router => {
     let path
     if (isInternational(req)) {
       path = `/application/${applicationId}/gcse/${gcseId}/naric`
-    } else if (type == 'Missing') {
+    } else if (type == 'I don’t have an equivalent qualification yet') {
       path = referrer || `/application/${applicationId}`
     } else {
       path = `/application/${applicationId}/gcse/${gcseId}/grade`
@@ -99,7 +99,9 @@ module.exports = router => {
   /**
     * Application: GCSE(s) - Review
     */
-  router.get('/application/:applicationId/gcse/review', (req, res) => {
-    res.render('application/gcse/review')
+  router.get('/application/:applicationId/gcse/:gcseId/review', (req, res) => {
+    res.render('application/gcse/review', {
+      gcseId: req.params.gcseId
+    })
   })
 }

@@ -17,6 +17,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 
 require('./routes/application')(router)
 require('./routes/application/personal-details')(router)
+require('./routes/application/contact-details')(router)
 require('./routes/email')(router)
 
 /**
@@ -39,49 +40,6 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
   const queryString = querystring.stringify(req.query)
 
   res.redirect(`/application/${req.params.applicationId}/${section}/${thing}/${id}?${queryString}`)
-})
-
-/**
-  * Application: Contact details
-  */
-router.get('/application/:applicationId/contact-details', (req, res) => {
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/contact-details/index', {
-    formaction: referrer || `/application/${applicationId}/contact-details/address-answer`,
-    referrer
-  })
-})
-
-/**
-  * Application: Contact details - answer branching
-  */
-router.post('/application/:applicationId/contact-details/address-answer', (req, res) => {
-  const applicationId = req.params.applicationId
-  const applicationData = req.session.data.applications[applicationId]
-  const location = applicationData['contact-details']['address-type']
-
-  if (location === 'domestic') {
-    res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
-  } else {
-    res.redirect(`/application/${applicationId}`)
-  }
-})
-
-router.get('/application/:applicationId/contact-details/address', (req, res) => {
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/contact-details/address', {
-    action: req.params.action,
-    formaction: referrer || `/application/${applicationId}/contact-details/review`,
-    referrer
-  })
-})
-
-router.get('/application/:applicationId/contact-details/:view', (req, res) => {
-  res.render(`application/contact-details/${req.params.view}`)
 })
 
 require('./routes/degree')(router)

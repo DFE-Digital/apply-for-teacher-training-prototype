@@ -127,7 +127,7 @@
 
 {% if applicationValue(["work-history", "missing"]) and not workHistory.length %}
   {{ govukSummaryList({
-    classes: "govuk-!-font-size-16 govuk-!-margin-bottom-3",
+    classes: "govuk-!-margin-bottom-3",
     rows: [{
       key: {
         text: "Explanation of why you’ve been out of the workplace"
@@ -138,7 +138,7 @@
       actions: {
         classes: "govuk-!-padding-right-2",
         items: [{
-          href: "{{ applicationPath }}/work-history/missing?referrer=" + referrer,
+          href: applicationPath + "/work-history/missing?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
@@ -147,7 +147,7 @@
   }) }}
   {{ govukButton({
     text: "Add job",
-    classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
-    href: "{{ applicationPath }}/work-history/add/job"
+    classes: "govuk-button--secondary",
+    href: applicationPath + "/work-history/add/job?referrer="  + referrer
   }) }}
 {% endif %}

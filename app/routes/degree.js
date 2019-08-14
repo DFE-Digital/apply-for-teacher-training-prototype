@@ -1,5 +1,28 @@
-const querystring = require('querystring')
+const journeys = require('../utils/journeys')
 const utils = require('./../utils')
+
+function degreeData(req) {
+  const applicationData = utils.applicationData(req)
+  return applicationData.degree[req.params.degreeId]
+}
+
+function degreePaths(req) {
+  const applicationId = req.params.applicationId
+  const data = degreeData(req)
+  const international = data.provenance && data.provenance == 'international'
+  const basePath = `/application/${applicationId}/degree/${req.params.degreeId}`
+  const referrer = req.query.referrer
+
+  var paths = [
+    basePath,
+    ...(international ? [`${basePath}/naric`] : []),
+    `${basePath}/grade`,
+    `${basePath}/year`,
+    ...(referrer ? [referrer] : [`/application/${applicationId}/degree/review`])
+  ]
+
+  return journeys.nextAndBackPaths(paths, req)
+}
 
 module.exports = router => {
   /**
@@ -7,77 +30,7 @@ module.exports = router => {
     */
   router.get('/application/:applicationId/degree/add', (req, res) => {
     const degreeId = utils.generateRandomString()
-    const queryString = querystring.stringify(req.query)
-
-    res.redirect(`/application/${req.params.applicationId}/degree/${degreeId}/add?${queryString}`)
-  })
-
-  /**
-    * Application: Degree(s) - Add/edit
-    * @param {String} action add || edit
-    * @param {String} degreeId Qualification ID
-    */
-  router.get('/application/:applicationId/degree/:degreeId/:action(add|edit)', (req, res) => {
-    const action = req.params.action
-    const applicationId = req.params.applicationId
-    const degreeId = req.params.degreeId
-    const referrer = req.query.referrer
-
-    res.render('application/degree/index', {
-      applicationId,
-      action,
-      formaction: `/application/${applicationId}/degree/${degreeId}/${action}/answer`,
-      degreeId,
-      referrer
-    })
-  })
-
-  /**
-    * Application: Degree(s) - Add/edit details
-    * @param {String} action add || edit
-    * @param {String} degreeId Qualification ID
-    */
-  router.get('/application/:applicationId/degree/:degreeId/:action(add|edit)/:template(naric|grade|year)', (req, res) => {
-    const action = req.params.action
-    const applicationId = req.params.applicationId
-    const degreeId = req.params.degreeId
-    const referrer = req.query.referrer
-    const template = req.params.template
-
-    let formaction
-    if (template === 'index') {
-      formaction = `/application/${applicationId}/degree/${degreeId}/${action}/answer`
-    }
-
-    res.render(`application/degree/${template}`, {
-      applicationId,
-      action,
-      formaction,
-      degreeId,
-      referrer
-    })
-  })
-
-  /**
-    * Application: Degree(s) - Answer branching
-    * @param {String} action add || edit
-    * @param {String} degreeId Qualification ID
-    */
-  router.post('/application/:applicationId/degree/:degreeId/:action(add|edit)/answer', (req, res) => {
-    const action = req.params.action
-    const data = req.session.data
-    const degreeId = req.params.degreeId
-    const applicationId = req.params.applicationId
-    const provenance = data.applications[applicationId]['degree'][degreeId]['provenance']
-
-    let path
-    if (provenance === 'domestic') {
-      path = `${degreeId}/${action}/grade`
-    } else {
-      path = `${degreeId}/${action}/naric`
-    }
-
-    res.redirect(`/application/${applicationId}/degree/${path}`)
+    res.redirect(`/application/${req.params.applicationId}/degree/${degreeId}?${utils.queryString(req)}`)
   })
 
   /**
@@ -85,5 +38,62 @@ module.exports = router => {
     */
   router.get('/application/:applicationId/degree/review', (req, res) => {
     res.render('application/degree/review')
+  })
+
+  /**
+    * Application: Degree(s) - Add/edit
+    * @param {String} degreeId Qualification ID
+    */
+  router.get('/application/:applicationId/degree/:degreeId', (req, res) => {
+    const applicationId = req.params.applicationId
+    const degreeId = req.params.degreeId
+    const referrer = req.query.referrer
+
+    res.render('application/degree/index', {
+      applicationId,
+      formaction: `/application/${applicationId}/degree/${degreeId}/answer?${utils.queryString(req)}`,
+      degreeId,
+      referrer
+    })
+  })
+
+  /**
+    * Application: Degree(s) - Add/edit details
+    * @param {String} degreeId Qualification ID
+    */
+  router.all('/application/:applicationId/degree/:degreeId/:template(naric|grade|year)', (req, res) => {
+    const applicationId = req.params.applicationId
+    const degreeId = req.params.degreeId
+    const referrer = req.query.referrer
+    const template = req.params.template
+    const paths = degreePaths(req)
+
+    res.render(`application/degree/${template}`, {
+      applicationId,
+      formaction: paths.next,
+      paths,
+      degreeId,
+      referrer
+    })
+  })
+
+  /**
+    * Application: Degree(s) - Answer branching
+    * @param {String} degreeId Qualification ID
+    */
+  router.post('/application/:applicationId/degree/:degreeId/answer', (req, res) => {
+    const data = req.session.data
+    const degreeId = req.params.degreeId
+    const applicationId = req.params.applicationId
+    const provenance = data.applications[applicationId]['degree'][degreeId]['provenance']
+
+    let path
+    if (provenance === 'domestic') {
+      path = `${degreeId}/grade`
+    } else {
+      path = `${degreeId}/naric`
+    }
+
+    res.redirect(`/application/${applicationId}/degree/${path}?${utils.queryString(req)}`)
   })
 }

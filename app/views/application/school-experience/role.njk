@@ -4,6 +4,14 @@
 {% set parent = "School experience and volunteering with young people" %}
 {% set title = "Role" %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: applicationPath + "/school-experience" }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {{ govukInput({
     label: {

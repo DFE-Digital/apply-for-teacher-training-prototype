@@ -1,8 +1,17 @@
 {% extends "_form.njk" %}
 
-{% set formaction = "/application/" + applicationId %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/work-history/review" %}
 {% set parent = "Work history" %}
 {% set title = "Tell us why you’ve been out of the workplace" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: applicationPath + "/work-history" }) }}
+  {% endif %}
+{% endblock %}
 
 {% block primary %}
   {% set labelHtml %}

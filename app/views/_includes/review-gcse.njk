@@ -23,7 +23,7 @@
       <td class="govuk-table__cell">Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a>.</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/qualifications/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span></a>
+        <a href="{{ applicationPath }}/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span></a>
       </td>
       {% endif %}
     </tr>
@@ -34,7 +34,7 @@
       <td class="govuk-table__cell">{{ item.year }}</td>
       {% if review != true %}
       <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/qualifications/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span>
+        <a href="{{ applicationPath }}/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span>
         </a>
       </td>
       {% endif %}

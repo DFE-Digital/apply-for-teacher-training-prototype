@@ -1,8 +1,6 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/degree/review" %}
-
 {% set parent = "Add a degree" %}
 {% if applicationValue(["degree", degreeId, "grade"]) == "Pending" %}
   {% set pending = true %}
@@ -12,6 +10,10 @@
 {% else %}
   {% set title = "What year did you graduate?" %}
 {% endif %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({ href: paths.back }) }}
+{% endblock %}
 
 {% block primary %}
   {% if pending %}

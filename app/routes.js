@@ -21,6 +21,7 @@ require('./routes/application/contact-details')(router)
 require('./routes/application/subject-knowledge')(router)
 require('./routes/application/vocation')(router)
 require('./routes/application/degree')(router)
+require('./routes/application/qualifications')(router)
 require('./routes/application/references')(router)
 require('./routes/email')(router)
 
@@ -48,7 +49,6 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
 
 require('./routes/gcse')(router)
 require('./routes/other-qualifications')(router)
-require('./routes/qualifications')(router)
 
 /**
   * Application: Review

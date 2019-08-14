@@ -1,5 +1,30 @@
-const querystring = require('querystring')
+const journeys = require('../utils/journeys')
 const utils = require('./../utils')
+
+function gcseData(req) {
+  const applicationData = utils.applicationData(req)
+  return applicationData.gcse[req.params.gcseId]
+}
+
+function isInternational(req) {
+  return gcseData(req)['type'] == 'Non-UK qualification'
+}
+
+function gcsePaths(req) {
+  const applicationId = req.params.applicationId
+  const basePath = `/application/${applicationId}/gcse/${req.params.gcseId}`
+  const referrer = req.query.referrer
+
+  var paths = [
+    basePath,
+    ...(isInternational(req) ? [`${basePath}/naric`] : []),
+    `${basePath}/grade`,
+    `${basePath}/year`,
+    ...(referrer ? [referrer] : [`/application/${applicationId}`])
+  ]
+
+  return journeys.nextAndBackPaths(paths, req)
+}
 
 module.exports = router => {
   /**
@@ -7,9 +32,7 @@ module.exports = router => {
     */
   router.get('/application/:applicationId/gcse/add', (req, res) => {
     const gcseId = utils.generateRandomString()
-    const queryString = querystring.stringify(req.query)
-
-    res.redirect(`/application/${req.params.applicationId}/gcse/${gcseId}/add?${queryString}`)
+    res.redirect(`/application/${req.params.applicationId}/gcse/${gcseId}/add?${utils.queryString(req)}`)
   })
 
   /**
@@ -20,10 +43,11 @@ module.exports = router => {
     const applicationId = req.params.applicationId
     const gcseId = req.params.gcseId
     const referrer = req.query.referrer
+    const referrerPath = referrer ? `?referrer=${referrer}` : ''
 
     res.render('application/gcse/index', {
       applicationId,
-      formaction: `/application/${applicationId}/gcse/${gcseId}/answer`,
+      formaction: `/application/${applicationId}/gcse/${gcseId}/answer${referrerPath}`,
       gcseId,
       referrer
     })
@@ -33,20 +57,17 @@ module.exports = router => {
     * Application: GCSE(s) - Add/edit details
     * @param {String} gcseId Qualification ID
     */
-  router.get('/application/:applicationId/gcse/:gcseId/:template(details|naric|grade|year)', (req, res) => {
+  router.all('/application/:applicationId/gcse/:gcseId/:template(naric|grade|year)', (req, res) => {
     const applicationId = req.params.applicationId
     const gcseId = req.params.gcseId
     const referrer = req.query.referrer
     const template = req.params.template
-
-    let formaction
-    if (template === 'index') {
-      formaction = `/application/${applicationId}/gcse/${gcseId}/answer`
-    }
+    const paths = gcsePaths(req)
 
     res.render(`application/gcse/${template}`, {
       applicationId,
-      formaction,
+      formaction: paths.next,
+      paths,
       gcseId,
       referrer
     })
@@ -61,18 +82,18 @@ module.exports = router => {
     const gcseId = req.params.gcseId
     const applicationId = req.params.applicationId
     const referrer = req.query.referrer
-    const type = data.applications[applicationId]['gcse'][gcseId]['type']
+    const type = gcseData(req)['type']
 
     let path
-    if (type === 'Non-UK qualification') {
+    if (isInternational(req)) {
       path = `/application/${applicationId}/gcse/${gcseId}/naric`
-    } if (type === 'Missing') {
+    } else if (type == 'Missing') {
       path = referrer || `/application/${applicationId}`
     } else {
       path = `/application/${applicationId}/gcse/${gcseId}/grade`
     }
 
-    res.redirect(path)
+    res.redirect(`${path}?${utils.queryString(req)}`)
   })
 
   /**

@@ -1,7 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = referrer or applicationPath %}
+{% block pageNavigation %}
+  {{ govukBackLink({ href: paths.back }) }}
+{% endblock %}
 
 {% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
 {% if applicationValue(["gcse", gcseId, "grade"]) == "Pending" %}

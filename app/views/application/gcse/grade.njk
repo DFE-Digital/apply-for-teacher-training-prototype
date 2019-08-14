@@ -1,9 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/gcse/" + gcseId + "/year" %}
 {% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
 {% set title = "What grade is your qualification?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({ href: paths.back }) }}
+{% endblock %}
 
 {% block primary %}
   {% set otherGradeHtml %}

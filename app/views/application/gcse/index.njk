@@ -2,6 +2,14 @@
 
 {% set title = (gcseId | capitalize) + " GCSE or equivalent" %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {% set otherUkConditionalHtml %}
     {{ govukInput({

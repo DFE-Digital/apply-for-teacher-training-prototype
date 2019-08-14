@@ -24,11 +24,20 @@ function degreePaths (req) {
   return journeys.nextAndBackPaths(paths, req)
 }
 
+/**
+ * Application: Degree routes
+ */
 module.exports = router => {
   // Generate new degreeID and redirect to that degree
   router.get('/application/:applicationId/degree/add', (req, res) => {
     const degreeId = utils.generateRandomString()
     res.redirect(`/application/${req.params.applicationId}/degree/${degreeId}?${utils.queryString(req)}`)
+  })
+
+  // Render degree review page
+  // Note: Must be defined before next route declaration
+  router.get('/application/:applicationId/degree/review', (req, res) => {
+    res.render('application/degree/review')
   })
 
   // Render first page
@@ -73,10 +82,5 @@ module.exports = router => {
       degreeId,
       referrer
     })
-  })
-
-  // Render degree review page
-  router.get('/application/:applicationId/degree/review', (req, res) => {
-    res.render('application/degree/review')
   })
 }

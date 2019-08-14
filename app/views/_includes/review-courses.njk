@@ -16,16 +16,16 @@
     {% set course = provider.courses[c.courseCode] %}
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
-        <h3 class="govuk-heading-m govuk-!-padding-top-0 govuk-!-margin-bottom-1">
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-1">
           <a href="#" style="text-decoration: none">
             <span class="govuk-!-font-size-19">{{ provider.name }}</span><br />
             <span style="text-decoration: underline">{{ course.name_and_code }}</span>
           </a>
         </h3>
-        <p class="app-caption-xs govuk-!-margin-0">{{ course.description }}</p>
+        <p class="govuk-body-s govuk-!-margin-0">{{ course.description }}</p>
       </td>
       <td class="govuk-table__cell app-table__cell--action">
-        <p><a href="#">Remove</a></p>
+        <p class="govuk-!-margin-top-1"><a href="#">Remove</a></p>
       </td>
     </tr>
   {% endfor %}

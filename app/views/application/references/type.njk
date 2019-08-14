@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = (id | capitalize) + " referee" %}
+{% set title = (refereeId | capitalize) + " referee" %}
 
 {% block primary %}
   {% set CharacterRefereeHintHtml %}
@@ -64,7 +64,7 @@
         html: CharacterRefereeHintHtml
       }
     }]
-  } | decorateApplicationAttributes(["referees", id, "type"])) }}
+  } | decorateApplicationAttributes(["referees", refereeId, "type"])) }}
 
   {{ govukButton({
     text: "Save and continue"

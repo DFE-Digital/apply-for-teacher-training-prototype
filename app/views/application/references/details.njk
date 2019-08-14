@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set type = applicationValue(["referees", id, "type"]) | lower %}
-{% set parent = (id | capitalize) + " referee" %}
+{% set type = applicationValue(["referees", refereeId, "type"]) | lower %}
+{% set parent = (refereeId | capitalize) + " referee" %}
 {% set title = "Details of " + type + " referee" %}
 
 {% block primary %}
@@ -17,7 +17,7 @@
       text: "Full name",
       classes: "govuk-label--m govuk-!-margin-top-6"
     }
-  } | decorateApplicationAttributes(['referees', id, 'name'])) }}
+  } | decorateApplicationAttributes(['referees', refereeId, 'name'])) }}
 
   {{ govukInput({
     label: {
@@ -27,7 +27,7 @@
     hint: {
       text: "We won't contact your referees until you submit your application"
     }
-  } | decorateApplicationAttributes(['referees', id, 'email'])) }}
+  } | decorateApplicationAttributes(['referees', refereeId, 'email'])) }}
 
 {% if type == "academic" %}
   {% set relationshipExample = "They were my tutor at university from 2000 to 2003" %}
@@ -48,7 +48,7 @@
       text: "For example, ‘" + relationshipExample + "’"
     },
     maxwords: 50
-  } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
+  } | decorateApplicationAttributes(['referees', refereeId, 'relationship'])) }}
   {{ govukButton({
     text: "Save and continue"
   }) }}

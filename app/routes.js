@@ -19,6 +19,7 @@ require('./routes/application')(router)
 require('./routes/application/personal-details')(router)
 require('./routes/application/contact-details')(router)
 require('./routes/application/subject-knowledge')(router)
+require('./routes/application/references')(router)
 require('./routes/email')(router)
 
 /**
@@ -127,41 +128,6 @@ router.post('/application/:applicationId/:section(work-history|school-experience
 
 router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
   res.render(`application/${req.params.section}/${req.params.view}`)
-})
-
-/**
-  * Application: References - Referee
-  * @param {String} id first || second
-  */
-router.get('/application/:applicationId/references/referee/:id', (req, res) => {
-  const applicationId = req.params.applicationId
-  const id = req.params.id
-
-  res.render('application/references/referee', {
-    applicationId,
-    id,
-    formaction: `/application/${applicationId}/references/referee-details/${id}`
-  })
-})
-
-/**
-  * Application: References - Referee details
-  * @param {String} id first || second
-  */
-router.get('/application/:applicationId/references/referee-details/:id', (req, res) => {
-  const applicationId = req.params.applicationId
-  const id = req.params.id
-  const referrer = req.query.referrer
-
-  res.render('application/references/referee-details', {
-    applicationId,
-    id,
-    formaction: referrer || `/application/${applicationId}/references/review`
-  })
-})
-
-router.get('/application/:applicationId/references/:view', (req, res) => {
-  res.render(`application/references/${req.params.view}`)
 })
 
 /**

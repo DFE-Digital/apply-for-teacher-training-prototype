@@ -18,6 +18,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 require('./routes/application')(router)
 require('./routes/application/personal-details')(router)
 require('./routes/application/contact-details')(router)
+require('./routes/application/subject-knowledge')(router)
 require('./routes/email')(router)
 
 /**
@@ -52,18 +53,6 @@ require('./routes/qualifications')(router)
   */
 router.get('/application/:applicationId/review', (req, res) => {
   res.render('application/review')
-})
-
-/**
-  * Application: Your knowledge about the subject you want to teach - Statement
-  */
-router.get('/application/:applicationId/subject-knowledge', (req, res) => {
-  const referrer = req.query.referrer
-
-  res.render('application/subject-knowledge/index', {
-    formaction: referrer || `/application/${req.params.applicationId}`,
-    referrer
-  })
 })
 
 /**

@@ -6,7 +6,7 @@
 %}
 
 {% if workHistory.length >= 1 %}
-  <table class="govuk-table govuk-!-font-size-16">
+  <table class="govuk-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="col" width="30%">Job</th>
@@ -62,18 +62,18 @@
       <tr class="govuk-table__row">
         <th class="govuk-table__header">
         {% if item.category == "job" %}
-          <h3 class="app-heading-xs govuk-!-margin-0">{{ item.role }}</h3>
-          <p class="app-caption-xs govuk-!-margin-0">
+          <h3 class="govuk-heading-s govuk-!-margin-0">{{ item.role }}</h3>
+          <p class="app-caption-s govuk-!-margin-0">
             <span class="govuk-visually-hidden">at</span>{{ item.org }}
           </p>
         {% elif item.category == "gap" %}
-          <p class="govuk-body-s">Gap ({{ itemDuration | duration }})</p>
+          <p>Gap ({{ itemDuration | duration }})</p>
         {% endif %}
         </th>
         <td class="govuk-table__cell">
-          <p class="govuk-body-s">{{ item.description | nl2br | safe }}</p>
+          <p>{{ item.description | nl2br | safe }}</p>
         {% if item["worked-with-children"] == "Yes" %}
-          <p class="govuk-body-s">
+          <p>
             {{ appIcon({
               classes: "govuk-!-margin-right-1",
               icon: "tick",

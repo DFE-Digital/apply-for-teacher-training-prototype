@@ -16,30 +16,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 })
 
 require('./routes/application')(router)
-
-/**
-  * Account: Check email
-  * @param {String} page Page to render
-  * @param {String} action Confirmation action
-  */
-router.get('/account/check-email/:action', (req, res) => {
-  res.render(`account/check-email`, {
-    action: req.params.action
-  })
-})
-
-/**
-  * Email: Confirm address
-  * @param {String} page Page to render
-  * @param {String} action Confirmation action
-  */
-router.get('/email/:page/:action', (req, res) => {
-  const page = req.params.page
-
-  res.render(`email/${page}`, {
-    action: req.params.action
-  })
-})
+require('./routes/email')(router)
 
 /**
   * Application: Work history - Missing work history

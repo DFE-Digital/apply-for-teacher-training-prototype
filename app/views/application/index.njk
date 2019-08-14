@@ -48,11 +48,6 @@
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {
-      text: "Academic qualifications",
-      href: applicationPath + "/qualifications/" + ("review" if applicationValue("qualifications")),
-      id: "qualifications",
-      completed: applicationValue("qualifications")
-    }, {
       text: "Your knowledge about the subject you want to teach",
       href: applicationPath + "/subject-knowledge",
       id: "subject-knowledge",
@@ -76,6 +71,8 @@
   }) }}
 
   <h2 class="govuk-heading-m">Qualifications</h2>
+  <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
+  {# TODO: Show ‘Science GCSE or equivalent’ option if primary course #}
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -84,10 +81,25 @@
       id: "degree",
       completed: applicationValue(["degree"])
     }, {
+      text: "Maths GCSE or equivalent",
+      href: applicationPath + "/gcse/maths",
+      id: "maths-gcse",
+      completed: applicationValue(["gcse", "maths"])
+    }, {
+      text: "English GCSE or equivalent",
+      href: applicationPath + "/gcse/english",
+      id: "english-gcse",
+      completed: applicationValue(["gcse", "english"])
+    }, {
       text: "Other relevant qualifications",
       href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
       id: "other-qualifications",
       completed: applicationValue(["other-qualifications"])
+    }, {
+      text: "Anything else?",
+      href: applicationPath + "/qualifications",
+      id: "qualifications-additional",
+      completed: applicationValue(["qualifications"])
     }]
   }) }}
 

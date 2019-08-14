@@ -5,11 +5,11 @@ module.exports = {
   applications: {
     12345: {
       courses: {
-        'ABCDE': {
+        ABCDE: {
           courseCode: '38G9',
           providerCode: 'G50'
         },
-        'ZYXWV': {
+        ZYXWV: {
           courseCode: 'Q3X1',
           providerCode: 'B78'
         }
@@ -84,25 +84,21 @@ module.exports = {
           country: 'India'
         }
       },
-      qualifications: {
+      gcse: {
         maths: {
           id: 'maths',
-          category: 'gcse',
-          provenance: 'international',
+          type: 'GCSE',
           subject: 'Maths',
-          type: 'GCSE(A*-G)',
           grade: '92',
           year: '2004',
           country: 'India',
           'award-org': 'WBBSE',
           naric: 'No',
-          'naric-details': '',
           missing: ''
         },
         english: {
           id: 'english',
-          category: 'gcse',
-          provenance: 'missing',
+          type: 'Missing',
           subject: 'English'
         }
       },

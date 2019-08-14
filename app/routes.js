@@ -87,7 +87,7 @@ router.get('/application/:applicationId/work-history/missing', (req, res) => {
 /**
   * Application: Generate ID to add new thing
   * @param {String} section Section of the application
-  * @param {String} thing Thing to add (i.e. qualification, job, role, etc.)
+  * @param {String} thing Thing to add (i.e. job, role, etc.)
   */
 router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gcse-equivalent)', (req, res) => {
   const section = req.params.section
@@ -184,100 +184,12 @@ router.get('/application/:applicationId/contact-details/:view', (req, res) => {
 })
 
 require('./routes/degree')(router)
+require('./routes/gcse')(router)
 require('./routes/other-qualifications')(router)
+require('./routes/qualifications')(router)
 
 /**
-  * Application: Qualifications - GCSE
-  * @param {String} id Qualification ID
-  */
-router.get('/application/:applicationId/qualifications/gcse/:id', (req, res) => {
-  const referrer = req.query.referrer
-  const id = req.params.id
-
-  res.render('application/qualifications/gcse', {
-    formaction: `/application/${req.params.applicationId}/qualifications/gcse/${id}/answer`,
-    id,
-    referrer
-  })
-})
-
-/**
-  * Application: Qualifications - GCSE subject details
-  * @param {String} id maths || english || science
-  */
-router.get('/application/:applicationId/qualifications/:type(gcse-subject|gcse-equivalent)/:id', (req, res) => {
-  res.render('application/qualifications/gcse-details', {
-    formaction: req.session.data.referrer,
-    id: req.params.id,
-    international: req.params.type === 'gcse-equivalent'
-  })
-})
-
-/**
-  * Application: Qualifications - GCSE answer branching
-  * @param {String} id Qualification ID
-  */
-router.post('/application/:applicationId/qualifications/gcse/:id/answer', (req, res) => {
-  const applicationId = req.params.applicationId
-  const applicationData = req.session.data.applications[applicationId]
-
-  const id = req.params.id
-  const provenance = applicationData['qualifications'][id]['provenance']
-
-  let path
-
-  if (provenance === 'domestic') {
-    path = `gcse-subject/${id}`
-  } else if (provenance === 'international') {
-    path = `gcse-equivalent/${id}`
-  } else { // If qualification missing, go to next step
-    path = `next?prev=${id}`
-  }
-
-  res.redirect(`/application/${applicationId}/qualifications/${path}`)
-})
-
-/**
-  * Application: Qualifications - GCSE next step logic
-  * Redirect to next step based on qualifications already entered
-  */
-router.all('/application/:applicationId/qualifications/next', (req, res) => {
-  const prev = req.query.prev
-  const applicationId = req.params.applicationId
-  const applicationData = req.session.data.applications[applicationId]
-
-  const englishCompleted = applicationData['qualifications']['english']
-  const scienceCompleted = applicationData['qualifications']['science']
-  const primaryApplication = req.session.data['settings']['primary-application']
-
-  let path
-  if (prev === 'maths' && englishCompleted !== true) {
-    path = 'gcse/english'
-  } else if (prev === 'english' && scienceCompleted !== true && primaryApplication === 'true') {
-    path = 'gcse/science'
-  } else {
-    path = 'review'
-  }
-
-  res.redirect(`/application/${applicationId}/qualifications/${path}`)
-})
-
-/**
-  * Application: Qualifications - Review
-  */
-router.get('/application/:applicationId/qualifications/review', (req, res) => {
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/qualifications/review', {
-    applicationId,
-    formaction: referrer || `/application/${applicationId}`,
-    referrer
-  })
-})
-
-/**
-  * Application: Your knowledge about the subject you want to teach
+  * Application: Your knowledge about the subject you want to teach - Statement
   */
 router.get('/application/:applicationId/subject-knowledge', (req, res) => {
   const referrer = req.query.referrer

@@ -1,22 +1,22 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
-{% set title = "Academic qualifications" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "Is there anything you’d like to tell us about your qualifications (optional)?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees. You’ll be asked to:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>confirm your basic eligibility for teacher training</li>
-    <li>if you are still studying, give a predicted grade for your degree</li>
-    <li>tell us about your other academic, vocational, practical and creative qualifications</li>
-  </ul>
-  <p class="govuk-body">Providers use this information to build a picture of your academic strengths and the broader contribution you’ll make to the school.</p>
+  {{ govukCharacterCount({
+    label: {
+      html: "Tell us about any special circumstances related to your qualifications here. For example, you can explain how you plan to fill any gaps in your eligibility requirements or validate non-UK qualifications. For advice on missing qualifications, contact your chosen training provider or <a href=\"https://getintoteaching.education.gov.uk/get-help-and-support/\">Get into Teaching</a>."
+    },
+    maxwords: 200,
+    rows: 12
+  } | decorateApplicationAttributes(['qualifications', 'additional'])) }}
 
   {{ govukButton({
-    text: "Continue" ,
-    href: "/application/" + applicationId + "/qualifications/gcse/maths"
+    text: "Save and continue"
   }) }}
 {% endblock %}

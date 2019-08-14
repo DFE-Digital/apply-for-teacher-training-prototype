@@ -1,0 +1,83 @@
+{% extends "_form.njk" %}
+
+{% set title = (gcseId | capitalize) + " GCSE or equivalent" %}
+
+{% block primary %}
+  {% set otherUkConditionalHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please specify type of qualification"
+      }
+    } | decorateApplicationAttributes(["gcse", gcseId, "type-other"])) }}
+  {% endset %}
+  {% set nonUkConditionalHtml %}
+    {{ govukInput({
+      label: {
+        text: "Please specify type of qualification"
+      }
+    } | decorateApplicationAttributes(["gcse", gcseId, "type-other"])) }}
+    {{ appAutocomplete({
+      label: {
+        text: "In which country did you gain this qualification?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["gcse", gcseId, "country"])) }}
+    {{ govukInput({
+      label: {
+        text: "Awarding organisation?"
+      }
+    } | decorateApplicationAttributes(["gcse", gcseId, "award-org"])) }}
+  {% endset %}
+  {% set missingConditionalHtml %}
+    <p class="govuk-body">Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a></p>
+  {% endset -%}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Type of qualification",
+        classes: "govuk-label--s"
+      }
+    },
+    items: [{
+      text: "GCSE"
+    }, {
+      text: "GCE O Level"
+    }, {
+      text: "Scottish Higher"
+    }, {
+      text: "Other UK qualification",
+      conditional: {
+        html: otherUkConditionalHtml
+      }
+    }, {
+      text: "Non-UK qualification",
+      conditional: {
+        html: nonUkConditionalHtml
+      }
+    }, {
+      divider: "or"
+    }, {
+      value: "Missing",
+      text: "I don’t have an equivalent qualification yet",
+      conditional: {
+        html: missingConditionalHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["gcse", gcseId, "type"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  {% set defaultValue = data.applications[applicationId]["gcse"][gcseId]["country"] %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ data.applications[applicationid]["gcse"][gcseId]["country"] }}',
+      selectElement: document.querySelector('#gcse-{{ gcseId }}-country')
+    })
+  </script>
+{% endblock %}

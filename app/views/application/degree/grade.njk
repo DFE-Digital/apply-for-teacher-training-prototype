@@ -15,7 +15,8 @@
       },
       hint: {
         text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
-      }
+      },
+      classes: "govuk-input--width-10"
     } | decorateApplicationAttributes(["degree", degreeId, "grade-predicted"])) }}
   {% endset %}
 
@@ -23,7 +24,8 @@
     {{ govukInput({
       label: {
         text: "Please specify the grade of your degree"
-      }
+      },
+      classes: "govuk-input--width-10"
     } | decorateApplicationAttributes(["degree", degreeId, "grade-other"])) }}
   {% endset %}
 

@@ -10,13 +10,13 @@
 {% block primary %}
   {% include "_includes/review-school-experience.njk" %}
 
-{% if applicationValue(["school-experience", "missing"]) != "true" %}
-  {{ govukButton({
-    text: "Add another role",
-    href: applicationPath + "/school-experience/add/role",
-    classes: "govuk-button--secondary"
-  }) }}
-{% endif %}
+  {% if applicationValue(["school-experience", "missing"]) != "true" %}
+    {{ govukButton({
+      text: "Add another role",
+      href: applicationPath + "/school-experience/add/role?referrer=" + referrer,
+      classes: "govuk-button--secondary"
+    }) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue",

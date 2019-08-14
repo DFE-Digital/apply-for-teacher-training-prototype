@@ -40,11 +40,11 @@
 {% endif %}
 
 {% if review != true %}
-  {% if data["school-experience"]["missing"] and not schoolExperience.length %}
-    <p class="govuk-body-s govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
+  {% if applicationValue(["school-experience","missing"]) and not schoolExperience.length %}
+    <p class="govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
     {{ govukButton({
       text: "Add school experience or role",
-      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
+      classes: "govuk-button--secondary",
       href: applicationPath + "/school-experience/add/role?referrer=" + referrer
     }) }}
   {% endif %}

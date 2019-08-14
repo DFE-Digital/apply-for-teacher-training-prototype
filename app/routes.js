@@ -3,19 +3,19 @@ const router = express.Router()
 const querystring = require('querystring')
 const utils = require('./utils')
 
-/**
-  * Applications
-  * @param {String} applicationId Application ID
-  */
+// Make `applicationId` available as local variable
 router.all(['/application/:applicationId', '/application/:applicationId/*'], function (req, res, next) {
   res.locals.applicationId = req.params.applicationId
   next()
 })
 
+// Make `courseId` available as local variable
 router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], function (req, res, next) {
   res.locals.courseId = req.params.courseId
   next()
 })
+
+require('./routes/application')(router)
 
 /**
   * Account: Check email
@@ -38,37 +38,6 @@ router.get('/email/:page/:action', (req, res) => {
 
   res.render(`email/${page}`, {
     action: req.params.action
-  })
-})
-
-router.get('/application/start', function (req, res) {
-  var code = utils.generateRandomString()
-  var data = req.session.data
-
-  if (typeof data.applications === 'undefined') {
-    data.applications = {}
-  }
-
-  data.applications[code] = { started: true }
-  res.redirect(`/application/${code}`)
-})
-
-router.all('/application/:applicationId', function (req, res) {
-  res.render('application/index')
-})
-
-/**
-  * Apply: Populate pages with course and provider details
-  * @param {String} provider Provider code
-  * @param {String} course Course code
-  * @param {String} page Page to render
-  */
-router.get('/applications/:provider/:course/:page', (req, res) => {
-  const page = req.params.page
-
-  res.render(`applications/${page}`, {
-    provider: req.params.provider,
-    course: req.params.course
   })
 })
 

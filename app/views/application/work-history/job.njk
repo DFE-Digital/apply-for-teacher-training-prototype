@@ -4,6 +4,14 @@
 {% set parent = "Work history" %}
 {% set title = "Job" %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: applicationPath + "/work-history" }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {% set detailsHtml %}
     <p class="govuk-body">Include:</p>

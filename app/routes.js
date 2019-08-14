@@ -81,7 +81,7 @@ router.get('/applications/:provider/:course/:page', (req, res) => {
   * Note: Must be defined before next route declaration
   */
 router.get('/application/:applicationId/work-history/missing', (req, res) => {
-  res.render(`application/work-history/missing`)
+  res.render(`application/work-history/missing`, { referrer: req.query.referrer })
 })
 
 /**
@@ -224,8 +224,10 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
   const type = req.params.type
   const section = req.params.section
   const queryString = querystring.stringify(req.query)
+  const referrer = req.query.referrer
 
   res.render(`application/${section}/${type}`, {
+    referrer,
     formaction: `/application/${req.params.applicationId}/${section}/update/${type}/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,

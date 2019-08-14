@@ -11,13 +11,14 @@ function degreePaths(req) {
   const data = degreeData(req)
   const international = data.provenance && data.provenance == 'international'
   const basePath = `/application/${applicationId}/degree/${req.params.degreeId}`
+  const referrer = req.query.referrer
 
   var paths = [
     basePath,
     ...(international ? [`${basePath}/naric`] : []),
     `${basePath}/grade`,
     `${basePath}/year`,
-    `/application/${applicationId}/degree/review`,
+    ...(referrer ? [referrer] : [`/application/${applicationId}/degree/review`])
   ]
 
   return journeys.nextAndBackPaths(paths, req)

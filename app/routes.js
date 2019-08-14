@@ -185,6 +185,13 @@ require('./routes/other-qualifications')(router)
 require('./routes/qualifications')(router)
 
 /**
+  * Application: Review
+  */
+router.get('/application/:applicationId/review', (req, res) => {
+  res.render('application/review')
+})
+
+/**
   * Application: Your knowledge about the subject you want to teach - Statement
   */
 router.get('/application/:applicationId/subject-knowledge', (req, res) => {

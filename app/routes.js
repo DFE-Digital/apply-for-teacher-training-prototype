@@ -19,6 +19,7 @@ require('./routes/application')(router)
 require('./routes/application/personal-details')(router)
 require('./routes/application/contact-details')(router)
 require('./routes/application/subject-knowledge')(router)
+require('./routes/application/vocation')(router)
 require('./routes/application/references')(router)
 require('./routes/email')(router)
 
@@ -128,18 +129,6 @@ router.post('/application/:applicationId/:section(work-history|school-experience
 
 router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
   res.render(`application/${req.params.section}/${req.params.view}`)
-})
-
-/**
-  * Application: Vocation - Vocation statement
-  */
-router.get('/application/:applicationId/vocation', (req, res) => {
-  const referrer = req.query.referrer
-
-  res.render('application/vocation/index', {
-    formaction: referrer || `/application/${req.params.applicationId}`,
-    referrer
-  })
 })
 
 /**

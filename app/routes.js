@@ -16,6 +16,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 })
 
 require('./routes/application')(router)
+require('./routes/application/personal-details')(router)
 require('./routes/email')(router)
 
 /**
@@ -38,48 +39,6 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
   const queryString = querystring.stringify(req.query)
 
   res.redirect(`/application/${req.params.applicationId}/${section}/${thing}/${id}?${queryString}`)
-})
-
-/**
-  * Application: Personal details
-  */
-router.get('/application/:applicationId/personal-details', (req, res) => {
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/personal-details/index', {
-    formaction: referrer || `/application/${applicationId}/personal-details/answer`,
-    referrer
-  })
-})
-
-/**
-  * Application: Personal details - answer branching
-  */
-router.post('/application/:applicationId/personal-details/answer', (req, res) => {
-  const applicationId = req.params.applicationId
-  const nationality = req.session.data.applications[applicationId]['candidate']['nationality']
-
-  const eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
-
-  if (eea.includes(nationality)) {
-    res.redirect(`/application/${applicationId}`)
-  } else {
-    res.redirect(`/application/${applicationId}/personal-details/residency-status`)
-  }
-})
-
-/**
-  * Application: Residency status
-  */
-router.get('/application/:applicationId/personal-details/residency-status', (req, res) => {
-  const referrer = req.query.referrer
-  const applicationId = req.params.applicationId
-
-  res.render('application/personal-details/residency-status', {
-    formaction: referrer || `/application/${applicationId}`,
-    referrer
-  })
 })
 
 /**

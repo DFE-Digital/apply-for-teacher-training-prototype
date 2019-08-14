@@ -82,12 +82,12 @@
       completed: applicationValue(["degree"])
     }, {
       text: "Maths GCSE or equivalent",
-      href: applicationPath + "/gcse/maths",
+      href: applicationPath + "/gcse/maths/" + ("review" if applicationValue(["gcse", "maths"])),
       id: "maths-gcse",
       completed: applicationValue(["gcse", "maths"])
     }, {
       text: "English GCSE or equivalent",
-      href: applicationPath + "/gcse/english",
+      href: applicationPath + "/gcse/english/" + ("review" if applicationValue(["gcse", "english"])),
       id: "english-gcse",
       completed: applicationValue(["gcse", "english"])
     }, {

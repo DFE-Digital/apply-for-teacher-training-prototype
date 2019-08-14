@@ -1,45 +1,84 @@
-{% set gcses = data.applications[applicationId]["gcse"] | toArray %}
 {% set applicationPath = '/application/' + applicationId %}
 
-<table class="govuk-table">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header" scope="col" width="30%">Type</th>
-      <th class="govuk-table__header" scope="col" width="10%">Grade</th>
-      <th class="govuk-table__header" scope="col">Year awarded</th>
-    {% if review != true %}
-      <th class="govuk-table__header app-table__cell--action" scope="col">
-        <span class="govuk-visually-hidden">Actions</span>
-      </th>
-    {% endif %}
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-  {% for item in gcses %}
-    {% if item.type == "Missing" %}
-    <tr class="govuk-table__row app-table__row--muted">
-      <td class="govuk-table__cell">{{ item.subject }}</td>
-      <td class="govuk-table__cell">Missing</td>
-      <td class="govuk-table__cell">Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a>.</td>
-      {% if review != true %}
-      <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span></a>
-      </td>
-      {% endif %}
-    </tr>
-    {% else %}
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">{{ item.type }} {{ item.subject }}</td>
-      <td class="govuk-table__cell">{{ item.grade }}</td>
-      <td class="govuk-table__cell">{{ item.year }}</td>
-      {% if review != true %}
-      <td class="govuk-table__cell app-table__cell--action">
-        <a href="{{ applicationPath }}/gcse/{{ item.id }}?referrer={{ referrer }}">Change<span class="govuk-visually-hidden"> GCSE qualification</span>
-        </a>
-      </td>
-      {% endif %}
-    </tr>
-    {% endif %}
-  {% endfor %}
-  </tbody>
-</table>
+{% set type -%}
+  {%- if gcse.type == "Other UK qualification" -%}
+    {{ gcse["type-uk"] | default("Not entered") }}
+  {%- elif gcse.type == "Non-UK qualification" -%}
+    {{ gcse["type-non-uk"] | default("Not entered") }}
+    {{ gcse["award-org"] }}, {{ gcse.country }}
+  {%- else -%}
+    {{ gcse.type | default("Not entered") }}
+  {%- endif %}
+{%- endset %}
+
+{% set grade = gcse.grade if gcse.grade else "Pending" %}
+
+{% if gcse.type == "I don’t have an equivalent qualification yet" %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Type of qualification"
+      },
+      value: {
+        html: "<strong>I don’t have an equivalent qualification yet</strong>.<br>Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a>"
+      },
+      actions: {
+        classes: "govuk-!-padding-right-2",
+        items: [{
+          href: applicationPath + "/gcse/" + gcseId + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if review != true
+    }]
+  }) }}
+{% else %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Type of qualification"
+      },
+      value: {
+        text: type | nl2br | safe
+      },
+      actions: {
+        classes: "govuk-!-padding-right-2",
+        items: [{
+          href: applicationPath + "/gcse/" + gcseId + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if review != true
+    }, {
+      key: {
+        text: "Year awarded"
+      },
+      value: {
+        text: (gcse.year | default("Not entered")) | nl2br | safe
+      },
+      actions: {
+        classes: "govuk-!-padding-right-2",
+        items: [{
+          href: applicationPath + "/gcse/" + gcseId + "/year?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if review != true
+    }, {
+      key: {
+        text: "Grade"
+      },
+      value: {
+        text: (grade | default("Not entered")) | nl2br | safe
+      },
+      actions: {
+        classes: "govuk-!-padding-right-2",
+        items: [{
+          href: applicationPath + "/gcse/" + gcseId + "/grade?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "grade"
+        }]
+      } if review != true
+    }]
+  }) }}
+{% endif %}

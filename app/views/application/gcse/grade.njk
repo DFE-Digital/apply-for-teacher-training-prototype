@@ -14,11 +14,12 @@
         text: "Please specify the grade"
       },
       classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["gcse", gcseId, "grade-other"])) }}
+    } | decorateApplicationAttributes(["gcse", gcseId, "grade"])) }}
   {% endset %}
 
   {{ govukRadios({
     items: [{
+      value: "true",
       text: "I completed my qualification",
       conditional: {
         html: otherGradeHtml
@@ -26,10 +27,10 @@
     }, {
       divider: "or"
     }, {
-      value: "Pending",
+      value: "false",
       text: "I am still studying for my qualification"
     }]
-  } | decorateApplicationAttributes(["gcse", gcseId, "grade"])) }}
+  } | decorateApplicationAttributes(["gcse", gcseId, "completed"])) }}
 
   {{ govukButton({
     text: "Save and continue"

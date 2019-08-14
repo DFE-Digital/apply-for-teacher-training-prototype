@@ -87,8 +87,9 @@ module.exports = {
       gcse: {
         maths: {
           id: 'maths',
-          type: 'GCSE',
-          subject: 'Maths',
+          type: 'Non-UK qualification',
+          'type-non-uk': 'GCSE(A*-G)',
+          completed: 'true',
           grade: '92',
           year: '2004',
           country: 'India',
@@ -98,8 +99,7 @@ module.exports = {
         },
         english: {
           id: 'english',
-          type: 'Missing',
-          subject: 'English'
+          type: 'I don’t have an equivalent qualification yet'
         }
       },
       'subject-knowledge': {

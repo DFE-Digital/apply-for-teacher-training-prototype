@@ -36,13 +36,16 @@
 {% endset %}
 
 {% set qualificationsHtml %}
-  <h3 class="govuk-heading-s">Degree(s)</h3>
+  <h3 class="govuk-heading-m">Degree(s)</h3>
   {% include "_includes/review-degree.njk" %}
 
-  <h3 class="govuk-heading-s">Subject GCSEs</h3>
-  {% include "_includes/review-gcse.njk" %}
+  {% set gcses = data.applications[applicationId]["gcse"] | toArray %}
+  {% for gcse in gcses %}
+    <h3 class="govuk-heading-m">{{ gcse.id | capitalize }} GCSE or equivalent</h3>
+    {% include "_includes/review-gcse.njk" %}
+  {% endfor %}
 
-  <h3 class="govuk-heading-s">Other relevant qualifications</h3>
+  <h3 class="govuk-heading-m">Other relevant qualifications</h3>
   {% include "_includes/review-other-qualifications.njk" %}
   {{ govukSummaryList({
     rows: [{

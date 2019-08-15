@@ -6,7 +6,7 @@
 %}
 
 {% if schoolExperience.length >= 1 %}
-  <table class="govuk-table">
+  <table class="govuk-table app-summary">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="col" width="30%">Role</th>
@@ -36,16 +36,17 @@
     </tbody>
   </table>
 {% else %}
-  <p class="govuk-!-margin-bottom-2">No school experiences entered</p>
-{% endif %}
-
-{% if review != true %}
-  {% if applicationValue(["school-experience","missing"]) and not schoolExperience.length %}
-    <p class="govuk-!-width-two-thirds">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
-    {{ govukButton({
-      text: "Add school experience or role",
-      classes: "govuk-button--secondary",
-      href: applicationPath + "/school-experience/add/role?referrer=" + referrer
-    }) }}
-  {% endif %}
+  <div class="app-summary">
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h3>
+    {% if review != true %}
+      {% if applicationValue(["school-experience","missing"]) and not schoolExperience.length %}
+        <p class="govuk-body">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
+        {{ govukButton({
+          text: "Add school experience or role",
+          classes: "govuk-button--secondary govuk-!-margin-bottom-0",
+          href: applicationPath + "/school-experience/add/role?referrer=" + referrer
+        }) }}
+      {% endif %}
+    {% endif %}
+  </div>
 {% endif %}

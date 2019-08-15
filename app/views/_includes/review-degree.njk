@@ -20,9 +20,10 @@
 {% set grade = degree.grade if degree.grade else "Pending" %}
 
 {{ govukSummaryList({
+  classes: "app-summary",
   rows: [{
     key: {
-      text: "Degree"
+      text: "Qualification"
     },
     value: {
       text: type | nl2br | safe

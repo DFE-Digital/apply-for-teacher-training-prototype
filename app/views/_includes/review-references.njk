@@ -4,7 +4,7 @@
   {% for item in references %}
     {% set typeRow = {
       key: {
-        text: "Referee type"
+        text: "Reference type"
       },
       value: {
         text: item.type
@@ -19,7 +19,7 @@
     } %}
     {% set nameRow = {
       key: {
-        text: "Name"
+        text: (item.id | capitalize) + " referee"
       },
       value: {
         text: item.name
@@ -77,14 +77,15 @@
         }]
       }
     } %}
-    <h3 class="govuk-heading-m govuk-!-margin-bottom-2">{{ item.id | capitalize }} referee</h3>
     {% if item["character-explanation"] %}
       {{ govukSummaryList({
-        rows: [typeRow, nameRow, emailRow, relationshipRow, characterRow]
+        classes: "app-summary",
+        rows: [nameRow, emailRow, typeRow, relationshipRow, characterRow]
       }) }}
     {% else %}
       {{ govukSummaryList({
-        rows: [typeRow, nameRow, emailRow, relationshipRow]
+        classes: "app-summary",
+        rows: [nameRow, emailRow, typeRow, relationshipRow]
       }) }}
     {% endif %}
   {% endfor %}

@@ -25,6 +25,7 @@ require('./routes/application/gcse')(router)
 require('./routes/application/qualifications')(router)
 require('./routes/application/other-qualifications')(router)
 require('./routes/application/references')(router)
+require('./routes/application/interview')(router)
 require('./routes/email')(router)
 
 /**
@@ -121,18 +122,6 @@ router.post('/application/:applicationId/:section(work-history|school-experience
 
 router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
   res.render(`application/${req.params.section}/${req.params.view}`)
-})
-
-/**
-  * Application: Interview
-  */
-router.get('/application/:applicationId/interview', (req, res) => {
-  const referrer = req.query.referrer
-
-  res.render('application/interview/index', {
-    formaction: referrer || `/application/${req.params.applicationId}`,
-    referrer
-  })
 })
 
 router.all('/application/:applicationId/:view', function (req, res) {

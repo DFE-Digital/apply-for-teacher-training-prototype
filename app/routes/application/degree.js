@@ -1,12 +1,12 @@
 const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
-function degreeData (req) {
+const degreeData = (req) => {
   const applicationData = utils.applicationData(req)
   return applicationData.degree[req.params.id]
 }
 
-function degreePaths (req) {
+const degreePaths = (req) => {
   const applicationId = req.params.applicationId
   const data = degreeData(req)
   const international = data.provenance && data.provenance === 'international'

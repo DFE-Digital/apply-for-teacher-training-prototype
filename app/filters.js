@@ -1,7 +1,7 @@
 const { DateTime } = require('luxon')
 const humanizeDuration = require('humanize-duration')
 
-module.exports = function (env) {
+module.exports = (env) => {
   /**
    * Instantiate object used to store the methods registered as a
    * 'filter' (of the same name) within nunjucks. You can override
@@ -13,7 +13,7 @@ module.exports = function (env) {
   /**
    * Convert object to array
    * @type {String} str
-  */
+   */
   filters.date = (str, format = 'yyyy-LL-dd') => {
     if (str) {
       const date = (str === 'now') ? DateTime.local() : str
@@ -29,7 +29,7 @@ module.exports = function (env) {
   /**
    * Convert milliseconds to readable duration
    * @type {String} str
-  */
+   */
   filters.duration = (int) => {
     if (!isNaN(int)) {
       const duration = humanizeDuration(int, {
@@ -47,7 +47,7 @@ module.exports = function (env) {
    * Convert object to array
    * @type {Object} obj
    *
-  */
+   */
   filters.includes = (str, searchString) => {
     if (str) {
       if (str.includes(searchString)) {
@@ -59,7 +59,7 @@ module.exports = function (env) {
   /**
    * Convert object to array
    * @type {Object} obj
-  */
+   */
   filters.toArray = (obj) => {
     if (obj) {
       const arr = []
@@ -72,7 +72,7 @@ module.exports = function (env) {
   }
 
   filters.providerCode = (providerAndCode) => {
-    const regExp = /\(([^)]+)\)$/;
+    const regExp = /\(([^)]+)\)$/
     return regExp.exec(providerAndCode)[1]
   }
 

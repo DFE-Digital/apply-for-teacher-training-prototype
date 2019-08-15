@@ -1,14 +1,14 @@
 const getKeypath = require('keypather/get')
 
 // Add Nunjucks filters with access to app, req and res
-module.exports = function (nunjucksAppEnv, app) {
-  app.use(function (req, res, next) {
-    function applicationId() {
+module.exports = (nunjucksAppEnv, app) => {
+  app.use((req, res, next) => {
+    const applicationId = () => {
       return req.params.applicationId
     }
 
-    function getApplicationValue(sections) {
-      var path = ["applications", applicationId()]
+    const getApplicationValue = (sections) => {
+      var path = ['applications', applicationId()]
       sections = sections || []
       path.push(...sections)
       return getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
@@ -16,7 +16,7 @@ module.exports = function (nunjucksAppEnv, app) {
 
     // Add name, value, id, idPrefix and checked attributes to GOVUK form inputs
     // Generate the attributes based on the application ID and the section they’re in
-    nunjucksAppEnv.addFilter('decorateApplicationAttributes', function (obj, sections) {
+    nunjucksAppEnv.addFilter('decorateApplicationAttributes', (obj, sections) => {
       sections = sections || []
       const storedValue = getApplicationValue(sections)
 
@@ -54,13 +54,13 @@ module.exports = function (nunjucksAppEnv, app) {
     })
 
     // Check if something is set in the current application
-    nunjucksAppEnv.addFilter('ifSetForApplication', function (sections) {
+    nunjucksAppEnv.addFilter('ifSetForApplication', (sections) => {
       return !!getApplicationValue(sections)
     })
 
     // Retrieve the value of something in the current application
     // Designed as a replacement to `data[thing][thing]`
-    nunjucksAppEnv.addGlobal('applicationValue', function (sections) {
+    nunjucksAppEnv.addGlobal('applicationValue', (sections) => {
       if (sections && !Array.isArray(sections)) {
         sections = [sections]
       }

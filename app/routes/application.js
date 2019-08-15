@@ -5,7 +5,7 @@ const utils = require('./../utils')
  */
 module.exports = router => {
   // Generate new applicationID and redirect to that application
-  router.get('/application/start', function (req, res) {
+  router.get('/application/start', (req, res) => {
     var code = utils.generateRandomString()
     var data = req.session.data
 
@@ -18,7 +18,7 @@ module.exports = router => {
   })
 
   // Render application page
-  router.all('/application/:applicationId', function (req, res) {
+  router.all('/application/:applicationId', (req, res) => {
     res.render('application/index')
   })
 
@@ -41,11 +41,11 @@ module.exports = router => {
   require('./application/interview')(router)
 
   // Render provided view, or index template for that view if not found
-  router.all('/application/:applicationId/:view', function (req, res) {
+  router.all('/application/:applicationId/:view', (req, res) => {
     res.render(
       `application/${req.params.view}`,
       {},
-      function (error, html) {
+      (error, html) => {
         if (error && error.message.includes('template not found')) {
           res.render(`application/${req.params.view}/index`)
         } else {

@@ -19,6 +19,7 @@ require('./routes/application')(router)
 require('./routes/application/personal-details')(router)
 require('./routes/application/contact-details')(router)
 require('./routes/application/subject-knowledge')(router)
+require('./routes/application/work-history')(router)
 require('./routes/application/vocation')(router)
 require('./routes/application/degree')(router)
 require('./routes/application/gcse')(router)
@@ -29,47 +30,22 @@ require('./routes/application/interview')(router)
 require('./routes/email')(router)
 
 /**
-  * Application: Work history - Missing work history
-  * Note: Must be defined before next route declaration
-  */
-router.get('/application/:applicationId/work-history/missing', (req, res) => {
-  res.render(`application/work-history/missing`, { referrer: req.query.referrer })
-})
-
-/**
   * Application: Generate ID to add new thing
   * @param {String} section Section of the application
   * @param {String} thing Thing to add (i.e. job, role, etc.)
   */
-router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gcse-equivalent)', (req, res) => {
-  const section = req.params.section
-  const thing = req.params.thing
+router.get('/application/:applicationId/school-experience/add/role', (req, res) => {
   const id = utils.generateRandomString()
   const queryString = querystring.stringify(req.query)
 
-  res.redirect(`/application/${req.params.applicationId}/${section}/${thing}/${id}?${queryString}`)
+  res.redirect(`/application/${req.params.applicationId}/school-experience/role/${id}?${queryString}`)
 })
 
 /**
-  * Application: Work history - answer branching
-  */
-router.post('/application/:applicationId/work-history/answer', (req, res) => {
-  const applicationId = req.params.applicationId
-  const length = req.session.data.applications[applicationId]['work-history']['length']
-
-  if (length === 'none') {
-    res.redirect(`/application/${applicationId}/work-history/missing`)
-  } else {
-    res.redirect(`/application/${applicationId}/work-history/add/job`)
-  }
-})
-
-/**
-  * Application: Work history and school experience - Job/gap/role
-  * @param {String} type job || gap || role
+  * Application: School experience role
   * @param {String} id ID
   */
-router.get('/application/:applicationId/:section(work-history|school-experience)/:type(job|gap|role)/:id', (req, res) => {
+router.get('/application/:applicationId/school-experience/role/:id', (req, res) => {
   const id = req.params.id
   const type = req.params.type
   const section = req.params.section
@@ -78,7 +54,7 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
 
   res.render(`application/${section}/${type}`, {
     referrer,
-    formaction: `/application/${req.params.applicationId}/${section}/update/${type}/${id}?${queryString}`,
+    formaction: `/application/${req.params.applicationId}/school-experience/update/role/${id}?${queryString}`,
     id,
     start: `${req.query.start}`,
     end: `${req.query.end}`
@@ -86,16 +62,15 @@ router.get('/application/:applicationId/:section(work-history|school-experience)
 })
 
 /**
-  * Application: Work history - Update job/gap data
+  * Application: School experience - Update job/gap data
   * Convert individual date components into ISO 8601 date strings
   * @param {String} type job || gap
   * @param {String} id Job/gap ID
   */
-router.post('/application/:applicationId/:section(work-history|school-experience)/update/:type(job|gap|role)/:id', (req, res) => {
+router.post('/application/:applicationId/school-experience/update/role/:id', (req, res) => {
   const id = req.params.id
-  const section = req.params.section
   const applicationId = req.params.applicationId
-  const applicationData = req.session.data.applications[applicationId][section][id]
+  const applicationData = req.session.data.applications[applicationId]['school-experience'][id]
 
   // Create ISO 8601 start date
   const startDay = req.body[`${id}-start-date-day`] || '01'
@@ -117,11 +92,11 @@ router.post('/application/:applicationId/:section(work-history|school-experience
     applicationData['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
 
-  res.redirect(req.query.referrer || `/application/${applicationId}/${section}/review`)
+  res.redirect(req.query.referrer || `/application/${applicationId}/school-experience/review`)
 })
 
-router.get('/application/:applicationId/:section(work-history|school-experience)/:view', (req, res) => {
-  res.render(`application/${req.params.section}/${req.params.view}`)
+router.get('/application/:applicationId/school-experience/:view', (req, res) => {
+  res.render(`application/school-experience/${req.params.view}`)
 })
 
 router.all('/application/:applicationId/:view', function (req, res) {

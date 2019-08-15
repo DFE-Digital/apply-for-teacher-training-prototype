@@ -8,22 +8,22 @@ module.exports = router => {
   })
 
   // Render referee type page
-  router.get('/application/:applicationId/references/type/:refereeId', (req, res) => {
-    const refereeId = req.params.refereeId
+  router.get('/application/:applicationId/references/type/:id', (req, res) => {
+    const id = req.params.id
 
     res.render('application/references/type', {
-      refereeId,
-      formaction: `/application/${req.params.applicationId}/references/details/${refereeId}`
+      id,
+      formaction: `/application/${req.params.applicationId}/references/details/${id}`
     })
   })
 
   // Render referee details page
-  router.get('/application/:applicationId/references/details/:refereeId', (req, res) => {
-    const refereeId = req.params.refereeId
+  router.get('/application/:applicationId/references/details/:id', (req, res) => {
+    const id = req.params.id
     const referrer = req.query.referrer
 
     res.render('application/references/details', {
-      refereeId,
+      id,
       formaction: referrer || `/application/${req.params.applicationId}/references/review`
     })
   })

@@ -16,11 +16,10 @@ module.exports = router => {
   // Render role page
   router.get('/application/:applicationId/school-experience/role/:id', (req, res) => {
     const id = req.params.id
-    const type = req.params.type
     const queryString = querystring.stringify(req.query)
     const referrer = req.query.referrer
 
-    res.render(`application/school-experience/${type}`, {
+    res.render(`application/school-experience/role`, {
       referrer,
       formaction: `/application/${req.params.applicationId}/school-experience/update/role/${id}?${queryString}`,
       id,

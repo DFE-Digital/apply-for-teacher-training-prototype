@@ -20,19 +20,19 @@
     hint: {
       text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
     }
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "type"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "type"])) }}
 
   {{ govukInput({
     label: {
       text: "Subject"
     }
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "subject"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
 
   {{ govukInput({
     label: {
       text: "Institution where you studied"
     }
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "institution"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "institution"])) }}
 
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
@@ -40,7 +40,7 @@
         text: "Which country?"
       },
       items: countries
-    } | decorateApplicationAttributes(["other-qualifications", qualificationId, "country"])) }}
+    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -59,21 +59,21 @@
         html: internationalConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "provenance"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "provenance"])) }}
 
   {{ govukInput({
     label: {
       text: 'Grade'
     },
     classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "grade"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
 
   {{ govukInput({
     label: {
       text: "Year qualification was awarded"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["other-qualifications", qualificationId, "year"])) }}
+  } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
 
   {{ govukButton({
     text: "Save and continue"
@@ -83,8 +83,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["other-qualifications"][qualificationId]["country"] }}',
-      selectElement: document.querySelector('#other-qualifications-{{ qualificationId }}-country')
+      defaultValue: '{{ data["other-qualifications"][id]["country"] }}',
+      selectElement: document.querySelector('#other-qualifications-{{ id }}-country')
     })
   </script>
 {% endblock %}

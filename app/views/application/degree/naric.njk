@@ -16,7 +16,7 @@
       hint: {
         text: "For example, ‘My degree is equivalent to a UK BA. I have a NARIC statement of comparability, UK NARIC reference 0000000000’"
       }
-    } | decorateApplicationAttributes(["degree", degreeId, "naric-details"])) }}
+    } | decorateApplicationAttributes(["degree", id, "naric-details"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
@@ -43,7 +43,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["degree", degreeId, "naric"])) }}
+  } | decorateApplicationAttributes(["degree", id, "naric"])) }}
 
   {{ govukButton({
     text: "Save and continue"

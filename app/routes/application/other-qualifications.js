@@ -4,10 +4,10 @@ const utils = require('./../../utils')
  * Application: Other relevant qualifications routes
  */
 module.exports = router => {
-  // Generate new qualificationId and redirect to that qualification
+  // Generate new id and redirect to that qualification
   router.get('/application/:applicationId/other-qualifications/add', (req, res) => {
-    const qualificationId = utils.generateRandomString()
-    res.redirect(`/application/${req.params.applicationId}/other-qualifications/${qualificationId}?${utils.queryString(req)}`)
+    const id = utils.generateRandomString()
+    res.redirect(`/application/${req.params.applicationId}/other-qualifications/${id}?${utils.queryString(req)}`)
   })
 
   // Render review page
@@ -17,13 +17,13 @@ module.exports = router => {
   })
 
   // Render details page
-  router.get('/application/:applicationId/other-qualifications/:qualificationId', (req, res) => {
-    const qualificationId = req.params.qualificationId
+  router.get('/application/:applicationId/other-qualifications/:id', (req, res) => {
+    const id = req.params.id
     const referrer = req.query.referrer
 
     res.render('application/other-qualifications/index', {
       formaction: referrer || `/application/${req.params.applicationId}/other-qualifications/review`,
-      qualificationId,
+      id,
       referrer
     })
   })

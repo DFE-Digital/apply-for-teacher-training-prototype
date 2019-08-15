@@ -4,8 +4,8 @@
   {{ govukBackLink({ href: paths.back }) }}
 {% endblock %}
 
-{% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
-{% if applicationValue(["gcse", gcseId, "completed"]) == "false" %}
+{% set parent = (id | capitalize) + " GCSE or equivalent" %}
+{% if applicationValue(["gcse", id, "completed"]) == "false" %}
   {% set title = "When will you get your qualification?" %}
 {% else %}
   {% set title = "When was your qualification awarded?" %}
@@ -17,7 +17,7 @@
       text: "Enter year"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["gcse", gcseId, "year"])) }}
+  } | decorateApplicationAttributes(["gcse", id, "year"])) }}
 
   {{ govukButton({
     text: "Save and continue"

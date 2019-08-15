@@ -9,8 +9,10 @@
 
 {% block primary %}
   {% set referrer = applicationPath + "/degree/review" %}
-  {% set categoryTitle = "Degree(s)" %}
-  {% include "_includes/review-degree.njk" %}
+  {% set degrees = data.applications[applicationId]["degree"] | toArray %}
+  {% for degree in degrees %}
+    {% include "_includes/review-degree.njk" %}
+  {% endfor %}
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",

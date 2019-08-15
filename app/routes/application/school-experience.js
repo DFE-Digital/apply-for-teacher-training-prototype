@@ -35,25 +35,7 @@ module.exports = router => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]['school-experience'][id]
 
-    // Create ISO 8601 start date
-    const startDay = req.body[`${id}-start-date-day`] || '01'
-    const startMonth = req.body[`${id}-start-date-month`]
-    const startYear = req.body[`${id}-start-date-year`]
-    applicationData['start-date'] = false
-
-    if (startMonth && startYear) {
-      applicationData['start-date'] = `${startYear}-${startMonth}-${startDay}`
-    }
-
-    // Create ISO 8601 end date
-    const endDay = req.body[`${id}-end-date-day`] || '01'
-    const endMonth = req.body[`${id}-end-date-month`]
-    const endYear = req.body[`${id}-end-date-year`]
-    applicationData['end-date'] = false
-
-    if (endMonth && endYear) {
-      applicationData['end-date'] = `${endYear}-${endMonth}-${endDay}`
-    }
+    utils.saveIsoDate(req, applicationData, id)
 
     res.redirect(req.query.referrer || `/application/${applicationId}/school-experience/review`)
   })

@@ -36,10 +36,10 @@
   {{ govukButton({
     text: "Continue without adding experience",
     classes: "govuk-button--secondary",
-    name: "school-experience[missing]",
-    value: "true",
     attributes: {
       formaction: applicationPath
-    }
+    },
+    name: "applications[" + applicationId + "][school-experience][missing]",
+    value: "true"
   }) }}
 {% endblock %}

@@ -49,7 +49,10 @@
   {% endfor %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% include "_includes/review-other-qualifications.njk" %}
+  {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
+  {% for qualification in qualifications %}
+    {% include "_includes/review-other-qualification.njk" %}
+  {% endfor %}
   {{ govukSummaryList({
     rows: [{
       key: {

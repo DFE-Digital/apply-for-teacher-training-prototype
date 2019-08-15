@@ -1,0 +1,75 @@
+{% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
+{% set applicationPath = '/application/' + applicationId %}
+
+{% set institution -%}
+  {%- if qualification.institution -%}
+    {{ qualification.institution }}
+    {{ qualification.country }}
+  {%- else -%}
+    Not entered
+  {%- endif %}
+{%- endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Qualification"
+    },
+    value: {
+      text: (qualification.type | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/other-qualifications/" + qualification.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Institution"
+    },
+    value: {
+      text: institution | nl2br | safe
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/other-qualifications/" + qualification.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Year awarded"
+    },
+    value: {
+      text: (qualification.year | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/other-qualifications/" + qualification.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Grade"
+    },
+    value: {
+      text: (qualification.grade | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/other-qualifications/" + qualification.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "grade"
+      }]
+    } if review != true
+  }]
+}) }}

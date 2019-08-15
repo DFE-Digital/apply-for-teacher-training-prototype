@@ -26,4 +26,19 @@ module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
     res.render('application/review')
   })
+
+  // Render provided view, or index template for that view if not found
+  router.all('/application/:applicationId/:view', function (req, res) {
+    res.render(
+      `application/${req.params.view}`,
+      {},
+      function (error, html) {
+        if (error && error.message.includes('template not found')) {
+          res.render(`application/${req.params.view}/index`)
+        } else {
+          res.send(html)
+        }
+      }
+    )
+  })
 }

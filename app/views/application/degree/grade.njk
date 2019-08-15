@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% if applicationValue(["degree", degreeId, "provenance"]) == "international" %}
+{% if applicationValue(["degree", id, "provenance"]) == "international" %}
   {% set international = true %}
 {% endif %}
 {% set title = "What grade is your degree?" %}
@@ -20,7 +20,7 @@
         text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
       },
       classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["degree", degreeId, "grade-predicted"])) }}
+    } | decorateApplicationAttributes(["degree", id, "grade-predicted"])) }}
   {% endset %}
 
   {% set otherGradeHtml %}
@@ -29,7 +29,7 @@
         text: "Please specify the grade of your degree"
       },
       classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["degree", degreeId, "grade-other"])) }}
+    } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
   {% endset %}
 
   {% if international == true %}
@@ -54,7 +54,7 @@
           html: predictedGradeHtml
         }
       }]
-    } | decorateApplicationAttributes(["degree", degreeId, "grade"])) }}
+    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
   {% else %}
     {{ govukRadios({
       fieldset: {
@@ -85,7 +85,7 @@
           html: predictedGradeHtml
         }
       }]
-    } | decorateApplicationAttributes(["degree", degreeId, "grade"])) }}
+    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
   {% endif %}
 
   {{ govukButton({

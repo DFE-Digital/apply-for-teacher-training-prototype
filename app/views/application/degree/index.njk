@@ -20,19 +20,19 @@
     hint: {
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
     }
-  } | decorateApplicationAttributes(["degree", degreeId, "type"])) }}
+  } | decorateApplicationAttributes(["degree", id, "type"])) }}
 
   {{ govukInput({
     label: {
       text: "Subject of degree"
     }
-  } | decorateApplicationAttributes(["degree", degreeId, "subject"])) }}
+  } | decorateApplicationAttributes(["degree", id, "subject"])) }}
 
   {{ govukInput({
     label: {
       text: "Institution where you studied"
     }
-  } | decorateApplicationAttributes(["degree", degreeId, "institution"])) }}
+  } | decorateApplicationAttributes(["degree", id, "institution"])) }}
 
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
@@ -40,7 +40,7 @@
         text: "Which country?"
       },
       items: countries
-    } | decorateApplicationAttributes(["degree", degreeId, "country"])) }}
+    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -59,11 +59,11 @@
         html: internationalConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["degree", degreeId, "provenance"])) }}
+  } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "applications[" + applicationId + "][degree][" + degreeId + "][category]",
+    name: "applications[" + applicationId + "][degree][" + id + "][category]",
     value: "degree"
   }) }}
 
@@ -73,12 +73,12 @@
 {% endblock %}
 
 {% block pageScripts %}
-  {% set defaultValue = data.applications[applicationId]["degree"][degreeId]["country"] %}
+  {% set defaultValue = data.applications[applicationId]["degree"][id]["country"] %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data.applications[applicationid]["degree"][degreeId]["country"] }}',
-      selectElement: document.querySelector('#degree-{{ degreeId }}-country')
+      defaultValue: '{{ data.applications[applicationid]["degree"][id]["country"] }}',
+      selectElement: document.querySelector('#degree-{{ id }}-country')
     })
   </script>
 {% endblock %}

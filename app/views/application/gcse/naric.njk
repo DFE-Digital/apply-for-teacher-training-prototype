@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
+{% set parent = (id | capitalize) + " GCSE or equivalent" %}
 {% set title = "If you studied for this qualification outside the UK, you will need to check that it is valid" %}
 
 {% block pageNavigation %}
@@ -16,7 +16,7 @@
       hint: {
         text: "For example, ‘My qualification is equivalent to a UK GCSE. I have a NARIC statement of comparability, UK NARIC reference 0000000000’"
       }
-    } | decorateApplicationAttributes(["gcse", gcseId, "naric-details"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "naric-details"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}

@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set parent = (gcseId | capitalize) + " GCSE or equivalent" %}
+{% set parent = (id | capitalize) + " GCSE or equivalent" %}
 {% set title = "What grade is your qualification?" %}
 
 {% block pageNavigation %}
@@ -14,7 +14,7 @@
         text: "Please specify the grade"
       },
       classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["gcse", gcseId, "grade"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -30,7 +30,7 @@
       value: "false",
       text: "I am still studying for my qualification"
     }]
-  } | decorateApplicationAttributes(["gcse", gcseId, "completed"])) }}
+  } | decorateApplicationAttributes(["gcse", id, "completed"])) }}
 
   {{ govukButton({
     text: "Save and continue"

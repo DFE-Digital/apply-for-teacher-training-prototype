@@ -50,13 +50,6 @@ router.get('/application/:applicationId/:section/add/:thing(job|role|gap|gcse|gc
 })
 
 /**
-  * Application: Review
-  */
-router.get('/application/:applicationId/review', (req, res) => {
-  res.render('application/review')
-})
-
-/**
   * Application: Work history - answer branching
   */
 router.post('/application/:applicationId/work-history/answer', (req, res) => {

@@ -21,4 +21,9 @@ module.exports = router => {
   router.all('/application/:applicationId', function (req, res) {
     res.render('application/index')
   })
+
+  // Render review page
+  router.get('/application/:applicationId/review', (req, res) => {
+    res.render('application/review')
+  })
 }

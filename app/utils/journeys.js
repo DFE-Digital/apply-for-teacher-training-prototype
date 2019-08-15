@@ -1,9 +1,9 @@
-function originalQuery (req) {
+const originalQuery = (req) => {
   var originalQueryString = req.originalUrl.split('?')[1]
   return originalQueryString ? `?${originalQueryString}` : ''
 }
 
-function nextAndBackPaths (paths, req) {
+const nextAndBackPaths = (paths, req) => {
   var currentPath = req.path
   var query = originalQuery(req)
 
@@ -18,4 +18,6 @@ function nextAndBackPaths (paths, req) {
   }
 }
 
-module.exports = { nextAndBackPaths }
+module.exports = {
+  nextAndBackPaths
+}

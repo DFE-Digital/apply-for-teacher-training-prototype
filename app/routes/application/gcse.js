@@ -1,16 +1,16 @@
 const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
-function gcseData (req) {
+const gcseData = (req) => {
   const applicationData = utils.applicationData(req)
   return applicationData.gcse[req.params.id]
 }
 
-function isInternational (req) {
+const isInternational = (req) => {
   return gcseData(req)['type'] === 'Non-UK qualification'
 }
 
-function gcsePaths (req) {
+const gcsePaths = (req) => {
   const applicationId = req.params.applicationId
   const basePath = `/application/${applicationId}/gcse/${req.params.id}`
   const referrer = req.query.referrer

@@ -116,10 +116,12 @@
 
 {% if residencyStatus %}
   {{ govukSummaryList({
+    classes: "app-summary",
     rows: [nameRow, nationalityRow, residencyStatusRow, languageRow]
   }) }}
 {% else %}
   {{ govukSummaryList({
+    classes: "app-summary",
     rows: [nameRow, nationalityRow, languageRow]
   }) }}
 {% endif %}

@@ -29,6 +29,7 @@
 {% endset %}
 {% set addressEditHref = applicationPath + "/contact-details" if data["contact-details"]["address"]["street-address"] else applicationPath + "/contact-details/address" %}
 {{ govukSummaryList({
+  classes: "app-summary",
   rows: [{
     key: {
       text: "Phone number"

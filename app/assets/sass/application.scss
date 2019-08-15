@@ -13,27 +13,6 @@ $govuk-global-styles: true;
 @import "components/hidden-link";
 @import "components/icon";
 @import "components/related";
+@import "components/summary";
 @import "components/table";
 @import "components/task-list";
-
-// Temporary component overrides
-// TODO: Move into dedicated app styles if required
-#review.govuk-accordion {
-  .govuk-accordion__section-content {
-    padding-top: govuk-spacing(2) !important;
-    padding-bottom: govuk-spacing(6) !important;
-  }
-
-  .govuk-accordion__section-content .govuk-summary-list__row:last-child > *,
-  tbody .govuk-table__row:last-child .govuk-table__header,
-  .govuk-table__row:last-child .govuk-table__cell {
-    border-bottom: 0;
-  }
-}
-
-// Align content to top of table cell
-// Use tabular numbers in table cell
-.govuk-table__header,
-.govuk-table__cell {
-  @include govuk-font($weight: false, $size: false, $tabular: true);
-}

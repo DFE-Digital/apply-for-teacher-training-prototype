@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block primary %}
-{% set courseDetailsHtml %}
   {% if applicationValue("courses") %}
     {% include "_includes/review-courses.njk" %}
     {% if courses | length <= 3 %}
@@ -25,17 +24,27 @@
       href: applicationPath + "/course/add"
     }) }}
   {% endif %}
-{% endset %}
 
-{% set personalDetailsHtml %}
+  <h2 class="govuk-heading-l">About you</h2>
+  <h2 class="govuk-heading-m">Personal details</h2>
   {% include "_includes/review-personal-details.njk" %}
-{% endset %}
 
-{% set contactDetailsHtml %}
+  <h2 class="govuk-heading-m">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
-{% endset %}
 
-{% set qualificationsHtml %}
+  <h2 class="govuk-heading-m">Knowledge about the subject you want to teach</h2>
+  {% include "_includes/review-subject-knowledge.njk" %}
+
+  <h2 class="govuk-heading-m">Work history</h2>
+  {% include "_includes/review-work-history.njk" %}
+
+  <h2 class="govuk-heading-m">School experience and volunteering with young people</h2>
+  {% include "_includes/review-school-experience.njk" %}
+
+  <h2 class="govuk-heading-m">Why you want to be a teacher</h2>
+  {% include "_includes/review-vocation.njk" %}
+
+  <h2 class="govuk-heading-l">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
   {% set degrees = data.applications[applicationId]["degree"] | toArray %}
   {% for degree in degrees %}
@@ -53,7 +62,10 @@
   {% for qualification in qualifications %}
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
+
+  <h3 class="govuk-heading-m">Anything else?</h3>
   {{ govukSummaryList({
+    classes: "app-summary",
     rows: [{
       key: {
         text: "Is there anything you’d like to tell us about your qualifications?"
@@ -71,106 +83,12 @@
       }
     }]
   }) }}
-{% endset %}
 
-{% set subjectKnowledgeHtml %}
-  {% include "_includes/review-subject-knowledge.njk" %}
-{% endset %}
-
-{% set workHistoryHtml %}
-  {% include "_includes/review-work-history.njk" %}
-{% endset %}
-
-{% set schoolExperienceHtml %}
-  {% include "_includes/review-school-experience.njk" %}
-{% endset %}
-
-{% set referencesHtml %}
+  <h2 class="govuk-heading-l">References</h2>
   {% include "_includes/review-references.njk" %}
-{% endset %}
 
-{% set vocationHtml %}
-  {% include "_includes/review-vocation.njk" %}
-{% endset %}
-
-{% set interviewHtml %}
+  <h2 class="govuk-heading-l">Interview preferences</h2>
   {% include "_includes/review-interview.njk" %}
-{% endset %}
-
-  {{ govukAccordion({
-    id: "review",
-    items: [{
-      heading: {
-        text: "Courses"
-      },
-      content: {
-        html: courseDetailsHtml
-      }
-    }, {
-      heading: {
-        text: "Personal details"
-      },
-      content: {
-        html: personalDetailsHtml
-      }
-    }, {
-      heading: {
-        text: "Contact details"
-      },
-      content: {
-        html: contactDetailsHtml
-      }
-    }, {
-      heading: {
-        text: "Academic qualifications"
-      },
-      content: {
-        html: qualificationsHtml
-      }
-    }, {
-      heading: {
-        text: "Knowledge about the subject you want to teach"
-      },
-      content: {
-        html: subjectKnowledgeHtml
-      }
-    }, {
-      heading: {
-        text: "Work history"
-      },
-      content: {
-        html: workHistoryHtml
-      }
-    }, {
-      heading: {
-        text: "School experience and volunteering with young people"
-      },
-      content: {
-        html: schoolExperienceHtml
-      }
-    }, {
-      heading: {
-        text: "Why you want to be a teacher"
-      },
-      content: {
-        html: vocationHtml
-      }
-    }, {
-      heading: {
-        text: "References"
-      },
-      content: {
-        html: referencesHtml
-      }
-    }, {
-      heading: {
-        text: "Interview preferences"
-      },
-      content: {
-        html: interviewHtml
-      }
-    }]
-  }) }}
 
   {{ govukButton({
     text: "Continue",

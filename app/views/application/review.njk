@@ -37,7 +37,10 @@
 
 {% set qualificationsHtml %}
   <h3 class="govuk-heading-m">Degree(s)</h3>
-  {% include "_includes/review-degree.njk" %}
+  {% set degrees = data.applications[applicationId]["degree"] | toArray %}
+  {% for degree in degrees %}
+    {% include "_includes/review-degree.njk" %}
+  {% endfor %}
 
   {% set gcses = data.applications[applicationId]["gcse"] | toArray %}
   {% for gcse in gcses %}

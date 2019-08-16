@@ -1,10 +1,14 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = '/application/' + applicationId %}
 {% set title = "References" %}
 {% set referrer = applicationPath + "/references/review" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}

@@ -1,8 +1,7 @@
 {% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = referrer or applicationPath %}
-
+{% set referrer = applicationPath + "/interview/review" %}
 {% set title = "Interview preferences" %}
 
 {% block pageNavigation %}
@@ -13,7 +12,6 @@
 {% endblock %}
 
 {% block primary %}
-  {% set referrer = applicationPath + "/interview/review" %}
   {% include "_includes/review-interview.njk" %}
   {{ govukButton({
     text: "Continue",

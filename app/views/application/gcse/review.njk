@@ -1,16 +1,17 @@
 {% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = referrer or applicationPath %}
-
+{% set referrer = applicationPath + "/gcse/" + id + "/review" %}
 {% set title = (id | capitalize) + " GCSE or equivalent" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
-  {% set referrer = applicationPath + "/gcse/" + id + "/review" %}
   {% set gcse = applicationValue(["gcse", id]) %}
   {% include "_includes/review-gcse.njk" %}
   {{ govukButton({

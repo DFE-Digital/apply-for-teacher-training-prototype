@@ -1,14 +1,17 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/degree/review" %}
 {% set title = "Degree" %}
-{% set categoryCaptionSize = "m" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
-  {% set referrer = applicationPath + "/degree/review" %}
   {% set degrees = data.applications[applicationId]["degree"] | toArray %}
   {% for degree in degrees %}
     {% include "_includes/review-degree.njk" %}

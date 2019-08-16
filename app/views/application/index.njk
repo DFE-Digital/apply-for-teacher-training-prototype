@@ -21,7 +21,7 @@
   <p class="govuk-body">You can apply for up to 3 courses at a time.</p>
 
   {% if applicationValue("courses") %}
-    {% include "_includes/review-courses.njk" %}
+    {% include "_includes/application-courses.njk" %}
     {% if applicationValue("courses") | length <= 3 %}
       {{ govukButton({
         classes: "govuk-button--secondary",

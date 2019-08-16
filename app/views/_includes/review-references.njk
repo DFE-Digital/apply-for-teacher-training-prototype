@@ -15,7 +15,7 @@
           text: "Change",
           visuallyHiddenText: "referee"
         }]
-      }
+      } if review != true
     } %}
     {% set nameRow = {
       key: {
@@ -30,7 +30,7 @@
           text: "Change",
           visuallyHiddenText: "referee"
         }]
-      }
+      } if review != true
     } %}
     {% set emailRow = {
       key: {
@@ -45,7 +45,7 @@
           text: "Change",
           visuallyHiddenText: "referee"
         }]
-      }
+      } if review != true
     } %}
     {% set relationshipRow = {
       key: {
@@ -60,7 +60,7 @@
           text: "Change",
           visuallyHiddenText: "referee"
         }]
-      }
+      } if review != true
     } %}
     {% set characterRow = {
       key: {
@@ -75,7 +75,7 @@
           text: "Change",
           visuallyHiddenText: "referee"
         }]
-      }
+      } if review != true
     } %}
     {% if item["character-explanation"] %}
       {{ govukSummaryList({

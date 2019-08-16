@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Contact details" %}
-{% set formaction = "/application/" + applicationId + "/contact-details/where-do-you-live" %}
+{% set formaction = referrer or "/application/" + applicationId + "/contact-details/where-do-you-live" %}
 
 {% block pageNavigation %}
   {% if referrer %}

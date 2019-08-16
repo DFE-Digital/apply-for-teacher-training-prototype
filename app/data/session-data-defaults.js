@@ -4,6 +4,7 @@ module.exports = {
   },
   applications: {
     12345: {
+      status: 'submitted',
       courses: {
         ABCDE: {
           courseCode: '38G9',

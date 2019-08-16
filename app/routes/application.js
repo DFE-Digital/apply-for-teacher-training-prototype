@@ -1,31 +1,29 @@
 const utils = require('./../utils')
 
+function createNewApplication(req) {
+  var code = utils.generateRandomString()
+  var data = req.session.data
+
+  if (typeof data.applications === 'undefined') {
+    data.applications = {}
+  }
+
+  data.applications[code] = { status: 'started' }
+  return code;
+}
+
 /**
  * Application routes
  */
 module.exports = router => {
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
-    var code = utils.generateRandomString()
-    var data = req.session.data
-
-    if (typeof data.applications === 'undefined') {
-      data.applications = {}
-    }
-
-    data.applications[code] = { started: true }
+    var code = createNewApplication(req)
     res.redirect(`/application/${code}`)
   })
 
   router.get('/application/start/course', (req, res) => {
-    var code = utils.generateRandomString()
-    var data = req.session.data
-
-    if (typeof data.applications === 'undefined') {
-      data.applications = {}
-    }
-
-    data.applications[code] = { started: true }
+    var code = createNewApplication(req)
     res.redirect(`/application/${code}/course/add`)
   })
 

@@ -121,7 +121,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Interview preferences",
-      href: applicationPath + "/interview",
+      href: applicationPath + "/interview/" + ("review" if applicationValue("interview")),
       id: "interview",
       completed: applicationValue("interview")
     }]

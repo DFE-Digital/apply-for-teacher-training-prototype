@@ -25,7 +25,7 @@
 
   {% for applicationId, application in data.applications %}
     {% if application.status == 'submitted' %}
-      <h3 class="govuk-heading-l">Application submitted 10 May 2019</h3>
+      <h3 class="govuk-heading-l">Application submitted {{ 'now' | date("d MMMM yyyy") }}</h3>
       <p>
         <a href="/application/{{ applicationId }}/review">View application</a>
       </p>

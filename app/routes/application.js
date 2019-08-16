@@ -68,6 +68,12 @@ module.exports = router => {
   require('./application/references')(router)
   require('./application/interview')(router)
 
+  // Change status of a course to submitted
+  router.all('/application/:applicationId/confirmation', (req, res) => {
+    req.session.data.applications[req.params.applicationId].status = 'submitted'
+    res.render(`application/confirmation`)
+  })
+
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
     res.render(

@@ -37,7 +37,16 @@
     } | decorateApplicationAttributes(["gcse", id, "award-org"])) }}
   {% endset %}
   {% set missingConditionalHtml %}
-    <p class="govuk-body">Have you considered how you will meet this requirement in time for the start of your course? Get advice from a training provider or <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a></p>
+    {{ govukCharacterCount({
+      label: {
+        html: "Explain how you plan to meet this eligibility requirement"
+      },
+      hint: {
+        html: "For advice on missing qualifications, contact your chosen training provider or <a href=\"https://getintoteaching.education.gov.uk/get-help-and-support/\">Get into Teaching</a>."
+      },
+      maxwords: 200,
+      rows: 12
+    } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
   {% endset -%}
 
   {{ govukRadios({

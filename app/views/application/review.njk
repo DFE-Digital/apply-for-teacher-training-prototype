@@ -57,27 +57,6 @@
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
 
-  <h3 class="govuk-heading-m">Anything else?</h3>
-  {{ govukSummaryList({
-    classes: "app-summary",
-    rows: [{
-      key: {
-        text: "Is there anything you’d like to tell us about your qualifications?"
-      },
-      value: {
-        text: (applicationValue(["qualifications", "additional"]) | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/qualifications?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "additional detail"
-        }]
-      }
-    }]
-  }) }}
-
   <h2 class="govuk-heading-l">References</h2>
   {% include "_includes/review-references.njk" %}
 

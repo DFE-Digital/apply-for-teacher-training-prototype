@@ -3,14 +3,16 @@
 {% set title = "Your application" %}
 
 {% block pageNavigation %}
-  {{ govukBreadcrumbs({
-    items: [{
-      text: "Applications",
-      href: "/applications"
-    }, {
-      text: title | safe
-    }]
-  }) }}
+  {% if hasSubmittedApplications() %}
+    {{ govukBreadcrumbs({
+      items: [{
+        text: "Applications",
+        href: "/applications"
+      }, {
+        text: title | safe
+      }]
+    }) }}
+  {% endif %}
 {% endblock %}
 {% block primary %}
   {% set hasSchoolExperience = applicationValue(["school-experience", "missing"]) != "true" %}

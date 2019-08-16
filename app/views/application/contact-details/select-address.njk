@@ -3,7 +3,14 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Contact details" %}
 {% set title = "What is your address?" %}
-{% set formaction = applicationPath %}
+{% set formaction = "/application/" + applicationId + "/contact-details/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId + "/contact-details/lookup-address",
+    text: "Back"
+  }) }}
+{% endblock %}
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
@@ -16,49 +23,85 @@
         classes: "govuk-label--m"
       }
     },
-    id: "contact-details-address",
-    name: "contact-details[address][street-address]",
-    items: [
-      { text: "Flat 1, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 2, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 3, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 4, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 5, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 6, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 7, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "Flat 8, Park View Residence, 219 Baker Street, London", value: "" },
-      { text: "221B Baker Street, London", value: "" },
-      { text: "Flat 1, 241-243, Baker Street, London", value: "" },
-      { text: "Flat 1A, 241-243, Baker Street, London", value: "" },
-      { text: "Flat 1B, 241-243, Baker Street, London", value: "" },
-      { text: "Flat 2, 241-243, Baker Street, London", value: "" },
-      { text: "Flat 3, 241-243, Baker Street, London", value: "" },
-      { text: "Flat 1, 245-247, Baker Street, London", value: "" },
-      { text: "Flat 2, 245-247, Baker Street, London", value: "" },
-      { text: "Flat 3, 245-247, Baker Street, London", value: "" },
-      { text: "Flat 4, 245-247, Baker Street, London", value: "" },
-      { text: "Flat 5, 245-247, Baker Street, London", value: "" }
-    ]
-  }) }}
+    items: [{
+      text: "Flat 1, Park View Residence, 219 Baker Street, London",
+      value: "Flat 1, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 2, Park View Residence, 219 Baker Street, London",
+      value: "Flat 2, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 3, Park View Residence, 219 Baker Street, London",
+      value: "Flat 3, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 4, Park View Residence, 219 Baker Street, London",
+      value: "Flat 4, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 5, Park View Residence, 219 Baker Street, London",
+      value: "Flat 5, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 6, Park View Residence, 219 Baker Street, London",
+      value: "Flat 6, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 7, Park View Residence, 219 Baker Street, London",
+      value: "Flat 7, Park View Residence, 219 Baker Street"
+    }, {
+      text: "Flat 8, Park View Residence, 219 Baker Street, London",
+      value: "Flat 8, Park View Residence, 219 Baker Street"
+    }, {
+      text: "221B Baker Street, London",
+      value: "221B Baker Street"
+    }, {
+      text: "Flat 1, 241-243 Baker Street, London",
+      value: "Flat 1, 241-243 Baker Street"
+    }, {
+      text: "Flat 1A, 241-243 Baker Street, London",
+      value: "Flat 1A, 241-243 Baker Street"
+    }, {
+      text: "Flat 1B, 241-243 Baker Street, London",
+      value: "Flat 1B, 241-243 Baker Street"
+    }, {
+      text: "Flat 2, 241-243 Baker Street, London",
+      value: "Flat 2, 241-243 Baker Street"
+    }, {
+      text: "Flat 3, 241-243 Baker Street, London",
+      value: "Flat 3, 241-243 Baker Street"
+    }, {
+      text: "Flat 1, 245-247 Baker Street, London",
+      value: "Flat 1, 245-247 Baker Street"
+    }, {
+      text: "Flat 2, 245-247 Baker Street, London",
+      value: "Flat 2, 245-247 Baker Street"
+    }, {
+      text: "Flat 3, 245-247 Baker Street, London",
+      value: "Flat 3, 245-247 Baker Street"
+    }, {
+      text: "Flat 4, 245-247 Baker Street, London",
+      value: "Flat 4, 245-247 Baker Street"
+    }, {
+      text: "Flat 5, 245-247 Baker Street, London",
+      value: "Flat 5, 245-247 Baker Street"
+    }]
+  } | decorateApplicationAttributes(["contact-details", "address", "line1"])) }}
 
-  <p class="govuk-body"><a href="{{ applicationPath }}/contact-details/address/add">I can’t find my address in the list</a></p>
+  <p class="govuk-body"><a href="{{ applicationPath }}/contact-details/uk-address">I can’t find my address in the list</a></p>
 
   {{ govukInput({
-    name: "contact-details[address][line1]",
-    type: "hidden",
-    value: "221B Baker Street"
-  }) }}
-
-  {{ govukInput({
-    name: "contact-details[address][level2]",
+    name: "applications[" + applicationId + "][contact-details][address][line2]",
     type: "hidden",
     value: "London"
   }) }}
 
   {{ govukInput({
-    name: "contact-details[address][country]",
+    name: "applications[" + applicationId + "][contact-details][address][country]",
     type: "hidden",
     value: "United Kingdom"
+  }) }}
+
+  {# Remove international address if previously entered #}
+  {{ govukInput({
+    name: "applications[" + applicationId + "][contact-details][address][street-address]",
+    type: "hidden",
+    value: ""
   }) }}
 
   {{ govukButton({

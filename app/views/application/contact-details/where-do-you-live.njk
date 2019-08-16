@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Contact details" %}
+{% set title = "Where do you live?" %}
+{% set formaction = "/application/" + applicationId + "/contact-details/where-do-you-live/answer" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/contact-details/"),
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "In the UK",
+      value: "domestic"
+    }, {
+      text: "Outside the UK",
+      value: "international"
+    }]
+  } | decorateApplicationAttributes(["contact-details", "address-type"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

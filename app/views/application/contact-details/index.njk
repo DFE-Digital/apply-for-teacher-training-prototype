@@ -1,9 +1,20 @@
 {% extends "_form.njk" %}
 
 {% set title = "Contact details" %}
+{% set formaction = "/application/" + applicationId + "/contact-details/where-do-you-live" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer,
+      text: "Back"
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
@@ -18,7 +29,7 @@
     classes: "govuk-input--width-20",
     autocomplete: "tel",
     type: "tel"
-  } | decorateApplicationAttributes(['contact-details', 'phone-number'])) }}
+  } | decorateApplicationAttributes(["contact-details", "phone-number"])) }}
 
   {{ govukInput({
     label: {
@@ -33,37 +44,7 @@
     },
     autocomplete: "email",
     type: "email"
-  } | decorateApplicationAttributes(['contact-details', 'email'])) }}
-
-{% set internationalAddressHtml %}
-  {{ govukTextarea({
-    label: {
-      text: "Enter your address"
-    },
-    autocomplete: "street-address"
-  } | decorateApplicationAttributes(['contact-details', 'street-address'])) }}
-{% endset %}
-
-{% if referrer != true %}
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Where do you live?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      text: "In the UK",
-      value: "domestic"
-    }, {
-      text: "Outside the UK",
-      value: "international",
-      conditional: {
-        html: internationalAddressHtml
-      }
-    }]
-  } | decorateApplicationAttributes(['contact-details', 'address-type'])) }}
-{% endif %}
+  } | decorateApplicationAttributes(["contact-details", "email"])) }}
 
   {{ govukButton({
     text: "Save and continue"

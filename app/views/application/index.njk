@@ -44,7 +44,7 @@
       completed: applicationValue("candidate")
     }, {
       text: "Contact details",
-      href: applicationPath + "/contact-details",
+      href: applicationPath + "/contact-details/" + ("review" if applicationValue(["contact-details", "address"])),
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {

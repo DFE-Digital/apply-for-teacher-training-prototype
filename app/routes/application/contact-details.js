@@ -2,18 +2,8 @@
  * Application: Contact details routes
  */
 module.exports = router => {
-  // Render first page
-  router.get('/application/:applicationId/contact-details', (req, res) => {
-    const referrer = req.query.referrer
-
-    res.render('application/contact-details/index', {
-      formaction: referrer || `/application/${req.params.applicationId}/contact-details/address-answer`,
-      referrer
-    })
-  })
-
   // Address type answer branching
-  router.post('/application/:applicationId/contact-details/address-answer', (req, res) => {
+  router.post('/application/:applicationId/contact-details/where-do-you-live/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const location = applicationData['contact-details']['address-type']
@@ -21,15 +11,16 @@ module.exports = router => {
     if (location === 'domestic') {
       res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
     } else {
-      res.redirect(`/application/${applicationId}`)
+      res.redirect(`/application/${applicationId}/contact-details/international-address`)
     }
   })
 
   // Render address page
-  router.get('/application/:applicationId/contact-details/address', (req, res) => {
+  router.get('/application/:applicationId/contact-details/:view(uk-address|international-address)', (req, res) => {
     const referrer = req.query.referrer
+    const view = req.params.view
 
-    res.render('application/contact-details/address', {
+    res.render(`application/contact-details/${view}`, {
       formaction: referrer || `/application/${req.params.applicationId}/contact-details/review`,
       referrer
     })
@@ -37,6 +28,10 @@ module.exports = router => {
 
   // Render other contact pages
   router.get('/application/:applicationId/contact-details/:view', (req, res) => {
-    res.render(`application/contact-details/${req.params.view}`)
+    const referrer = req.query.referrer
+
+    res.render(`application/contact-details/${req.params.view}`, {
+      referrer
+    })
   })
 }

@@ -76,12 +76,16 @@ module.exports = router => {
 
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
+    const referrer = req.query.referrer
+
     res.render(
       `application/${req.params.view}`,
       {},
       (error, html) => {
         if (error && error.message.includes('template not found')) {
-          res.render(`application/${req.params.view}/index`)
+          res.render(`application/${req.params.view}/index`, {
+            referrer
+          })
         } else {
           res.send(html)
         }

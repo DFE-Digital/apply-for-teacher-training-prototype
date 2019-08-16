@@ -1,33 +1,33 @@
-{% set applicationPath = '/application/' + applicationId %}
-{% set addressHtml %}
-  {% if applicationValue(["contact-details", "address"]) %}
-    {% if applicationValue(["contact-details", "address", "street-address"]) %}
-      {{ applicationValue(["contact-details", "address", "street-address"]) | nl2br | safe }}
-    {% else %}
-      {% if applicationValue(["contact-details", "address", "line1"]) %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set addressHtml -%}
+  {%- if applicationValue(["contact-details", "address"]) -%}
+    {%- if applicationValue(["contact-details", "address", "street-address"]) -%}
+      {{ applicationValue(["contact-details", "address", "street-address"]) }}
+    {%- else -%}
+      {%- if applicationValue(["contact-details", "address", "line1"]) -%}
         {{ applicationValue(["contact-details", "address", "line1"]) }}<br>
-      {% endif %}
-      {% if applicationValue(["contact-details", "address", "line2"]) %}
+      {%- endif -%}
+      {%- if applicationValue(["contact-details", "address", "line2"]) -%}
         {{ applicationValue(["contact-details", "address", "line2"]) }}<br>
-      {% endif %}
-      {% if applicationValue(["contact-details", "address", "level2"]) %}
+      {%- endif -%}
+      {%- if applicationValue(["contact-details", "address", "level2"]) -%}
         {{ applicationValue(["contact-details", "address", "level2"]) }}<br>
-      {% endif %}
-      {% if applicationValue(["contact-details", "address", "level1"]) %}
+      {%- endif -%}
+      {%- if applicationValue(["contact-details", "address", "level1"]) -%}
         {{ applicationValue(["contact-details", "address", "level1"]) }}<br>
-      {% endif %}
-      {% if applicationValue(["contact-details", "address", "postal-code"]) %}
+      {%- endif -%}
+      {%- if applicationValue(["contact-details", "address", "postal-code"]) -%}
         {{ applicationValue(["contact-details", "address", "postal-code"]) }}<br>
-      {% endif %}
-      {% if applicationValue(["contact-details", "address", "country"]) %}
+      {%- endif -%}
+      {%- if applicationValue(["contact-details", "address", "country"]) -%}
         {{ applicationValue(["contact-details", "address", "country"]) }}
-      {% endif %}
-    {% endif %}
-  {% else %}
+      {%- endif -%}
+    {%- endif -%}
+  {%- else -%}
     Not entered
-  {% endif %}
-{% endset %}
-{% set addressEditHref = applicationPath + "/contact-details" if data["contact-details"]["address"]["street-address"] else applicationPath + "/contact-details/address" %}
+  {%- endif %}
+{%- endset %}
+
 {{ govukSummaryList({
   classes: "app-summary",
   rows: [{
@@ -65,12 +65,12 @@
       text: "Address"
     },
     value: {
-      html: addressHtml
+      html: addressHtml | nl2br | safe
     },
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: addressEditHref + "?referrer=" + referrer,
+        href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "address"
       }]

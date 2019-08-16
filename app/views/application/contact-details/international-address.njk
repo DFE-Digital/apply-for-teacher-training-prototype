@@ -1,0 +1,31 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Contact details" %}
+{% set title = "What is your address?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId + "/contact-details/where-do-you-live",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukTextarea({
+    label: {
+      text: "Enter your address"
+    },
+    autocomplete: "street-address"
+  } | decorateApplicationAttributes(["contact-details", "address", "street-address"])) }}
+
+  {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where do you live’ page #}
+  {{ govukInput({
+    name: "applications[" + applicationId + "][contact-details][address-type]",
+    type: "hidden",
+    value: "international"
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

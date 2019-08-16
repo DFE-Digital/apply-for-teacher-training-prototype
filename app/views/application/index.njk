@@ -41,7 +41,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details/",
+      href: applicationPath + "/personal-details/" + ("review" if applicationValue(["candidate"])),
       id: "personal-details",
       completed: applicationValue("candidate")
     }, {

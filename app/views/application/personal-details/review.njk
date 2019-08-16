@@ -1,0 +1,23 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = referrer or applicationPath %}
+
+{% set parent = "Personal details" %}
+{% set title = "Check your answers" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set referrer = applicationPath + "/personal-details/review" %}
+  {% include "_includes/review-personal-details.njk" %}
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

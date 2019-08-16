@@ -1,0 +1,22 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = referrer or applicationPath %}
+
+{% set title = "Why you want to be a teacher" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set referrer = applicationPath + "/vocation/review" %}
+  {% include "_includes/review-vocation.njk" %}
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

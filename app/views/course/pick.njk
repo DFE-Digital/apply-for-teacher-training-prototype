@@ -2,8 +2,13 @@
 
 {% set title = "Which course are you applying to?" %}
 {% set formaction = paths.next %}
-{% set providerCode = applicationValue(['temporaryCourses', courseId, 'provider']) | providerCode %}
-{% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
+{% set providerCode = applicationValue(["temporaryCourses", courseId, "provider"]) | providerCode %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
 
 {% block primary %}
   <div class="govuk-form-group">
@@ -12,7 +17,7 @@
   </div>
 
   {{ govukButton({
-    text: 'Continue'
+    text: "Continue"
   }) }}
 {% endblock %}
 

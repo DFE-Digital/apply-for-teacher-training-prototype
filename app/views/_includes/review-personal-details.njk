@@ -21,13 +21,13 @@
 {% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
 {% set residencyStatusText %}
   {% if residencyStatus == "right-to-study" %}
-    I have the right to study and/or work in the&nbsp;UK{{ ': ' + applicationValue(["candidate", "residency-status-right-to-study"]) if applicationValue(["candidate", "residency-status-right-to-study"]) }}
+    I have the right to study and/or work in the&nbsp;UK{{ ": " + applicationValue(["candidate", "residency-status-right-to-study"]) if applicationValue(["candidate", "residency-status-right-to-study"]) }}
   {% elif residencyStatus == "require-tier-2" %}
     I will need to apply for a general work visa (Tier 2) to work in the&nbsp;UK
   {% elif residencyStatus == "require-tier-4" %}
     I will need to apply for a general student visa (Tier 4) to study in the&nbsp;UK
   {% elif residencyStatus == "unknown" %}
-    I don’t know my residency status{{ ': ' + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
+    I don’t know my residency status{{ ": " + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
   {% else %}
     UK citizen
   {% endif %}

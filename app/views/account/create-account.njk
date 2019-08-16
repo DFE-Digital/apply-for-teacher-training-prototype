@@ -3,7 +3,12 @@
 {% set title = "Before you begin" %}
 {% set formaction = "/account/check-email/create-account" %}
 {% set isSignedOut = true %}
-{% block pageNavigation %}{{ govukBackLink({ href: '/' }) }}{% endblock %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/"
+  }) }}
+{% endblock %}
 
 {% block primary %}
   <p class="govuk-body-l">Please give us your email address so that you can save and return to your application.</p>

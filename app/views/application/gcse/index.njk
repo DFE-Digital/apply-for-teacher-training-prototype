@@ -4,9 +4,14 @@
 
 {% block pageNavigation %}
   {% if referrer %}
-    {{ govukBackLink({ href: referrer }) }}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
   {% else %}
-    {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
   {% endif %}
 {% endblock %}
 

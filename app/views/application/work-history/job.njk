@@ -35,14 +35,14 @@
       text: "Job title",
       classes: "govuk-label--s"
     }
-  } | decorateApplicationAttributes(['work-history', id, 'role'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Name of employer",
       classes: "govuk-label--s"
     }
-  } | decorateApplicationAttributes(['work-history', id, 'org'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -58,15 +58,15 @@
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(['work-history', id, 'start-date']) | date('LL'),
+      value: applicationValue(["work-history", id, "start-date"]) | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: applicationValue(['work-history', id, 'start-date']) | date('yyyy'),
+      value: applicationValue(["work-history", id, "start-date"]) | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(['work-history', id, 'start-date'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -82,15 +82,15 @@
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(['work-history', id, 'end-date']) | date('LL'),
+      value: applicationValue(["work-history", id, "end-date"]) | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: applicationValue(['work-history', id, 'end-date']) | date('yyyy'),
+      value: applicationValue(["work-history", id, "end-date"]) | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(['work-history', id, 'end-date'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
 
   {{ govukCharacterCount({
     label: {
@@ -101,7 +101,7 @@
       text: "Give examples showing how you developed transferable skills like communication, creativity and organisation. Enter experience relevant to your subject in ‘Knowledge about the subject you want to teach’."
     },
     maxwords: 150
-  } | decorateApplicationAttributes(['work-history', id, 'description'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "description"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -116,7 +116,7 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(['work-history', id, 'worked-with-children'])) }}
+  } | decorateApplicationAttributes(["work-history", id, "worked-with-children"])) }}
 
   {{ govukInput({
     type: "hidden",

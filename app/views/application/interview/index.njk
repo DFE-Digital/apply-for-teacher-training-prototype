@@ -6,8 +6,7 @@
 {% block pageNavigation %}
   {% if referrer %}
     {{ govukBackLink({
-      href: referrer,
-      text: "Back"
+      href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({

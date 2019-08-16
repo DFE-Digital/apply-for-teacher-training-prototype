@@ -5,8 +5,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/"),
-    text: "Back"
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/")
   }) }}
 {% endblock %}
 
@@ -18,7 +17,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(['candidate', 'residency-status-right-to-study'])) }}
+    } | decorateApplicationAttributes(["candidate", "residency-status-right-to-study"])) }}
   {% endset -%}
 
   {% set requireTier2 %}
@@ -47,7 +46,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(['candidate', 'residency-status-unknown'])) }}
+    } | decorateApplicationAttributes(["candidate", "residency-status-unknown"])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -78,7 +77,7 @@
         html: unknown
       }
     }]
-  } | decorateApplicationAttributes(['candidate', 'residency-status'])) }}
+  } | decorateApplicationAttributes(["candidate", "residency-status"])) }}
 
   {{ govukButton({
     text: "Save and continue"

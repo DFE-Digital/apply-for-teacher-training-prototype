@@ -35,4 +35,13 @@ module.exports = router => {
       referrer
     })
   })
+
+  // Render other personal details pages
+  router.get('/application/:applicationId/personal-details/:view', (req, res) => {
+    const referrer = req.query.referrer
+
+    res.render(`application/personal-details/${req.params.view}`, {
+      referrer
+    })
+  })
 }

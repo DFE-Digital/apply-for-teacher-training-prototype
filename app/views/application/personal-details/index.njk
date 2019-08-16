@@ -3,7 +3,17 @@
 {% set title = "Personal details" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer,
+      text: "Back"
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}

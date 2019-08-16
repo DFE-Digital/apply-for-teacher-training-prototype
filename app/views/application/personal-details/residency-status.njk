@@ -4,7 +4,10 @@
 {% set title = "What is your residence status?" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId + "/personal-details", text: 'Back' }) }}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/"),
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block primary %}

@@ -66,7 +66,7 @@
       completed: applicationValue("school-experience")
     }, {
       text: "Why you want to be a teacher",
-      href: applicationPath + "/vocation",
+      href: applicationPath + "/vocation/" + ("review" if applicationValue("vocation")),
       id: "vocation",
       completed: applicationValue("vocation")
     }]

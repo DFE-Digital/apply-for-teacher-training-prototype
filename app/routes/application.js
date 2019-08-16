@@ -16,6 +16,16 @@ function createNewApplication(req) {
  * Application routes
  */
 module.exports = router => {
+  router.all('/applications', (req, res) => {
+    if (utils.hasSubmittedApplications(req)) {
+      res.render('applications/index')
+    } else if (utils.hasStartedApplications(req)) {
+      res.redirect('/application/started')
+    } else {
+      res.redirect('/application/start')
+    }
+  })
+
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
     var code = createNewApplication(req)
@@ -38,21 +48,6 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     res.render('application/index')
-  })
-
-  router.all('/application', (req, res) => {
-    if (utils.hasSubmittedApplications(req)) {
-      res.redirect('/applications')
-    } else if (utils.hasStartedApplications(req)) {
-      // Redirect to the first started application
-      var applications = req.session.data.applications
-      var applicationId = Object.entries(applications).filter(a => a[1].status == 'started')[0][0];
-      if (applicationId) {
-        res.redirect('/application/' + applicationId)
-      }
-    } else {
-      res.redirect('/application/start')
-    }
   })
 
   // Render review page

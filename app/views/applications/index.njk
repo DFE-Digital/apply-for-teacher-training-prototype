@@ -4,64 +4,69 @@
 
 {% block primary %}
 
+  {% if hasStartedApplications() %}
+    <p>You have started a new application.</p>
 
-  {# {{ govukButton({
-    text: "Start a new application",
-    href: "/application/start/course",
-    isStartButton: true
-  }) }} #}
+    {{ govukButton({
+      text: "Edit current application",
+      href: "/application/started"
+    }) }}
+  {% else %}
+    <p>Start a new application and we’ll copy everything from your last application to get you started.</p>
 
-  <p>You have started a new application.</p>
-
-  {{ govukButton({
-    text: "Edit current application",
-    href: "/application/start/course"
-  }) }}
+    {{ govukButton({
+      text: "Start a new application",
+      href: "/application/start/course",
+      isStartButton: true
+    }) }}
+  {% endif %}
 
   <hr class="govuk-section-break govuk-section-break--m">
 
-  <h3 class="govuk-heading-l">Application submitted 10 May 2019</h3>
-  <p>
-    <a href="#">View application</a>
-  </p>
-
-  <p>Training providers must respond by 29 July.</p>
-
   {% for applicationId, application in data.applications %}
-    {% for id, c in application.courses %}
-      {% set provider = providers[c.providerCode] %}
-      {% set course = provider.courses[c.courseCode] %}
+    {% if application.status == 'submitted' %}
+      <h3 class="govuk-heading-l">Application submitted 10 May 2019</h3>
+      <p>
+        <a href="/application/{{ applicationId }}/review">View application</a>
+      </p>
 
-      <h4 class="govuk-heading-m">{{ provider.name }}</h4>
-      {{ govukSummaryList({
-        classes: "app-summary",
-        rows: [
-          {
-            key: {
-              text: "Course"
+      <p>Training providers must respond by 29 July.</p>
+
+      {% for id, c in application.courses %}
+        {% set provider = providers[c.providerCode] %}
+        {% set course = provider.courses[c.courseCode] %}
+
+        <h4 class="govuk-heading-m">{{ provider.name }}</h4>
+        {{ govukSummaryList({
+          classes: "app-summary",
+          rows: [
+            {
+              key: {
+                text: "Course"
+              },
+              value: {
+                html: '<a href="#">' + course.name_and_code + '</a>'
+              }
             },
-            value: {
-              html: '<a href="#">' + course.name_and_code + '</a>'
-            }
-          },
-          {
-            key: {
-              text: "Description"
+            {
+              key: {
+                text: "Description"
+              },
+              value: {
+                html: course.description
+              }
             },
-            value: {
-              html: course.description
+            {
+              key: {
+                text: "Response"
+              },
+              value: {
+                html: 'No response yet'
+              }
             }
-          },
-          {
-            key: {
-              text: "Response"
-            },
-            value: {
-              html: 'No response yet'
-            }
-          }
-        ]
-      }) }}
-    {% endfor %}
+          ]
+        }) }}
+      {% endfor %}
+    {% endif %}
   {% endfor %}
 {% endblock %}

@@ -1,6 +1,6 @@
 const utils = require('./../utils')
 
-function createNewApplication(req) {
+function createNewApplication (req) {
   var code = utils.generateRandomString()
   var data = req.session.data
 
@@ -9,7 +9,7 @@ function createNewApplication(req) {
   }
 
   data.applications[code] = { status: 'started' }
-  return code;
+  return code
 }
 
 /**
@@ -39,7 +39,7 @@ module.exports = router => {
 
   router.all('/application/started', (req, res) => {
     var applications = req.session.data.applications
-    var applicationId = Object.entries(applications).filter(a => a[1].status == 'started')[0][0];
+    var applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
     if (applicationId) {
       res.redirect('/application/' + applicationId)
     }
@@ -63,7 +63,6 @@ module.exports = router => {
   require('./application/vocation')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)
-  require('./application/qualifications')(router)
   require('./application/other-qualifications')(router)
   require('./application/references')(router)
   require('./application/interview')(router)

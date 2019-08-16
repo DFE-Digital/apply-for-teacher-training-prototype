@@ -51,7 +51,7 @@
       completed: applicationValue(["contact-details", "address"])
     }, {
       text: "Knowledge about the subject you want to teach",
-      href: applicationPath + "/subject-knowledge",
+      href: applicationPath + "/subject-knowledge/" + ("review" if applicationValue("subject-knowledge")),
       id: "subject-knowledge",
       completed: applicationValue("subject-knowledge")
     }, {

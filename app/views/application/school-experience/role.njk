@@ -18,17 +18,17 @@
       text: "Your role",
       classes: "govuk-label--s"
     }
-  } | decorateApplicationAttributes(['school-experience', id, 'role'])) }}
+  } | decorateApplicationAttributes(["school-experience", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Organisation where you gained experience or volunteered",
       classes: "govuk-label--s"
     }
-  } | decorateApplicationAttributes(['school-experience', id, 'org'])) }}
+  } | decorateApplicationAttributes(["school-experience", id, "org"])) }}
 
-  {% set startDate = applicationValue(['school-experience', id, 'start-date']) %}
-  {% set endDate = applicationValue(['school-experience', id, 'end-date']) %}
+  {% set startDate = applicationValue(["school-experience", id, "start-date"]) %}
+  {% set endDate = applicationValue(["school-experience", id, "end-date"]) %}
 
   {{ govukDateInput({
     fieldset: {
@@ -44,20 +44,20 @@
     items: [{
       label: "Day",
       name: "day",
-      value: startDate | date('LL'),
+      value: startDate | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
       name: "month",
-      value: startDate | date('LL'),
+      value: startDate | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: startDate | date('yyyy'),
+      value: startDate | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(['school-experience', id, 'start-date'])) }}
+  } | decorateApplicationAttributes(["school-experience", id, "start-date"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -73,20 +73,20 @@
     items: [{
       label: "Day",
       name: "day",
-      value: endDate | date('LL'),
+      value: endDate | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Month",
       name: "month",
-      value: endDate | date('LL'),
+      value: endDate | date("LL"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: endDate | date('yyyy'),
+      value: endDate | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(['school-experience', id, 'end-date'])) }}
+  } | decorateApplicationAttributes(["school-experience", id, "end-date"])) }}
 
   {{ govukButton({
     text: "Save and continue"

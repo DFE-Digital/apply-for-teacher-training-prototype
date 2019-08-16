@@ -4,7 +4,10 @@
 {% set formaction = applicationPath + "/work-history/answer" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
@@ -48,7 +51,7 @@
         html: "<p class=\"govuk-body\">You’ll be able to explain why you’ve been out of the workplace.</p>"
       }
     }]
-  } | decorateApplicationAttributes(['work-history', 'length'])) }}
+  } | decorateApplicationAttributes(["work-history", "length"])) }}
 
   {{ govukButton({
     text: "Continue"

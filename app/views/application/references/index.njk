@@ -3,7 +3,10 @@
 {% set title = "Choosing your referees" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}

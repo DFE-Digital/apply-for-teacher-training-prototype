@@ -17,7 +17,7 @@
       text: "Full name",
       classes: "govuk-label--m govuk-!-margin-top-6"
     }
-  } | decorateApplicationAttributes(['referees', id, 'name'])) }}
+  } | decorateApplicationAttributes(["referees", id, "name"])) }}
 
   {{ govukInput({
     label: {
@@ -25,9 +25,9 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "We won't contact your referees until you submit your application"
+      text: "We won’t contact your referees until you submit your application"
     }
-  } | decorateApplicationAttributes(['referees', id, 'email'])) }}
+  } | decorateApplicationAttributes(["referees", id, "email"])) }}
 
 {% if type == "academic" %}
   {% set relationshipExample = "They were my tutor at university from 2000 to 2003" %}
@@ -48,7 +48,7 @@
       text: "For example, ‘" + relationshipExample + "’"
     },
     maxwords: 50
-  } | decorateApplicationAttributes(['referees', id, 'relationship'])) }}
+  } | decorateApplicationAttributes(["referees", id, "relationship"])) }}
   {{ govukButton({
     text: "Save and continue"
   }) }}

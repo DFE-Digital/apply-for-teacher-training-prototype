@@ -6,8 +6,7 @@
 {% block pageNavigation %}
   {% if referrer %}
     {{ govukBackLink({
-      href: referrer,
-      text: "Back"
+      href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
@@ -49,7 +48,7 @@
     },
     maxwords: 400,
     rows: 12
-  } | decorateApplicationAttributes(['subject-knowledge', 'statement'])) }}
+  } | decorateApplicationAttributes(["subject-knowledge", "statement"])) }}
 
   {{ govukButton({
     text: "Save and continue"

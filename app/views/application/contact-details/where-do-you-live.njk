@@ -6,8 +6,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/contact-details/"),
-    text: "Back"
+    href: (referrer if referrer else "/application/" + applicationId + "/contact-details/")
   }) }}
 {% endblock %}
 

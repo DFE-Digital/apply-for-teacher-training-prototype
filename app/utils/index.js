@@ -34,9 +34,21 @@ const saveIsoDate = (req, data, id) => {
   }
 }
 
+const hasSubmittedApplications = (req) => {
+  var applications = req.session.data.applications
+  return Object.values(applications).map(a => a.status).includes('submitted');
+}
+
+const hasStartedApplications = (req) => {
+  var applications = req.session.data.applications
+  return Object.values(applications).map(a => a.status).includes('started');
+}
+
 module.exports = {
   applicationData,
   generateRandomString,
   queryString: getQueryString,
-  saveIsoDate
+  saveIsoDate,
+  hasSubmittedApplications,
+  hasStartedApplications
 }

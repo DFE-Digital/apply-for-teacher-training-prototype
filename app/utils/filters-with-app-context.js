@@ -1,4 +1,5 @@
 const getKeypath = require('keypather/get')
+const utils = require('./../utils')
 
 // Add Nunjucks filters with access to app, req and res
 module.exports = (nunjucksAppEnv, app) => {
@@ -66,6 +67,14 @@ module.exports = (nunjucksAppEnv, app) => {
       }
 
       return getApplicationValue(sections)
+    })
+
+    nunjucksAppEnv.addGlobal('hasSubmittedApplications', () => {
+      return utils.hasSubmittedApplications(req)
+    })
+
+    nunjucksAppEnv.addGlobal('hasStartedApplications', () => {
+      return utils.hasStartedApplications(req)
     })
 
     next()

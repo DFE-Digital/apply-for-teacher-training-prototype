@@ -37,16 +37,20 @@
   </table>
 {% else %}
   <div class="app-summary">
-    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h3>
     {% if review != true %}
       {% if applicationValue(["school-experience","missing"]) and not schoolExperience.length %}
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h3>
         <p class="govuk-body">You can still submit an application without school experience but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>
         {{ govukButton({
           text: "Add school experience or role",
           classes: "govuk-button--secondary govuk-!-margin-bottom-0",
           href: applicationPath + "/school-experience/add/role?referrer=" + referrer
         }) }}
+      {% else %}
+        <p class="govuk-body govuk-!-margin-bottom-0">No school experiences entered</p>
       {% endif %}
+    {% else %}
+      <p class="govuk-body govuk-!-margin-bottom-0">No school experiences entered</p>
     {% endif %}
   </div>
 {% endif %}

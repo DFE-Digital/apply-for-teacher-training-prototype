@@ -27,6 +27,14 @@ module.exports = router => {
     res.redirect(`/application/${code}/course/add`)
   })
 
+  router.all('/application/started', (req, res) => {
+    var applications = req.session.data.applications
+    var applicationId = Object.entries(applications).filter(a => a[1].status == 'started')[0][0];
+    if (applicationId) {
+      res.redirect('/application/' + applicationId)
+    }
+  })
+
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     res.render('application/index')

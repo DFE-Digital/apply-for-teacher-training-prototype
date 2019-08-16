@@ -1,0 +1,22 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = referrer or applicationPath %}
+
+{% set title = "Subject knowledge" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set referrer = applicationPath + "/subject-knowledge/review" %}
+  {% include "_includes/review-subject-knowledge.njk" %}
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

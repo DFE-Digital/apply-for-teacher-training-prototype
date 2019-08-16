@@ -17,6 +17,18 @@ module.exports = router => {
     res.redirect(`/application/${code}`)
   })
 
+  router.get('/application/start/course', (req, res) => {
+    var code = utils.generateRandomString()
+    var data = req.session.data
+
+    if (typeof data.applications === 'undefined') {
+      data.applications = {}
+    }
+
+    data.applications[code] = { started: true }
+    res.redirect(`/application/${code}/course/add`)
+  })
+
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     res.render('application/index')

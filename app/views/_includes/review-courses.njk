@@ -7,23 +7,20 @@
   <h4 class="govuk-heading-m">{{ provider.name }}</h4>
   {{ govukSummaryList({
     classes: "app-summary",
-    rows: [
-      {
-        key: {
-          text: "Course"
-        },
-        value: {
-          html: '<a href="#">' + course.name_and_code + '</a>'
-        }
+    rows: [{
+      key: {
+        text: "Course"
       },
-      {
-        key: {
-          text: "Description"
-        },
-        value: {
-          html: course.description
-        }
+      value: {
+        html: "<a href=\"#\">" + course.name_and_code + "</a>"
       }
-    ]
+    }, {
+      key: {
+        text: "Description"
+      },
+      value: {
+        html: course.description
+      }
+    }]
   }) }}
 {% endfor %}

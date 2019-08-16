@@ -32,6 +32,21 @@ module.exports = router => {
     res.render('application/index')
   })
 
+  router.all('/application', (req, res) => {
+    if (utils.hasSubmittedApplications(req)) {
+      res.redirect('/applications')
+    } else if (utils.hasStartedApplications(req)) {
+      // Redirect to the first started application
+      var applications = req.session.data.applications
+      var applicationId = Object.entries(applications).filter(a => a[1].status == 'started')[0][0];
+      if (applicationId) {
+        res.redirect('/application/' + applicationId)
+      }
+    } else {
+      res.redirect('/application/start')
+    }
+  })
+
   // Render review page
   router.get('/application/:applicationId/review', (req, res) => {
     res.render('application/review')

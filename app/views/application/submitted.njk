@@ -1,26 +1,27 @@
 {% extends "_content-wide.njk" %}
-{% set applicationPath = '/application/' + applicationId %}
+{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Your submitted application" %}
 {% set referrer = applicationPath + "/review" %}
 {% set review = true %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/applications", text: 'Back to your applications' }) }}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your applications"
+  }) }}
 {% endblock %}
 
 {% block primary %}
   {{ govukSummaryList({
     classes: "app-summary",
-    rows: [
-      {
-        key: {
-          text: "Date submitted"
-        },
-        value: {
-          html: 'now' | date('d MMMM yyyy')
-        }
+    rows: [{
+      key: {
+        text: "Date submitted"
+      },
+      value: {
+        html: 'now' | date('d MMMM yyyy')
       }
-    ]
+    }]
   }) }}
 
   <h2 class="govuk-heading-l">Courses</h2>

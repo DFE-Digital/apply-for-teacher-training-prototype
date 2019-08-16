@@ -3,17 +3,14 @@
 {% set title = "Applications" %}
 
 {% block primary %}
-
   {% if hasStartedApplications() %}
     <p>You have started a new application.</p>
-
     {{ govukButton({
       text: "Edit current application",
       href: "/application/started"
     }) }}
   {% else %}
     <p>Start a new application and we’ll copy everything from your last application to get you started.</p>
-
     {{ govukButton({
       text: "Start a new application",
       href: "/application/start/course",
@@ -25,46 +22,38 @@
 
   {% for applicationId, application in data.applications %}
     {% if application.status == 'submitted' %}
-      <h3 class="govuk-heading-l">Application submitted {{ 'now' | date("d MMMM yyyy") }}</h3>
-      <p>
-        <a href="/application/{{ applicationId }}/submitted">View application</a>
-      </p>
-
+      <h3 class="govuk-heading-l">Application submitted {{ "now" | date("d MMMM yyyy") }}</h3>
+      <p><a href="/application/{{ applicationId }}/submitted">View application</a></p>
       <p>Training providers must respond by 29 July.</p>
 
       {% for id, c in application.courses %}
         {% set provider = providers[c.providerCode] %}
         {% set course = provider.courses[c.courseCode] %}
-
         <h4 class="govuk-heading-m">{{ provider.name }}</h4>
         {{ govukSummaryList({
           classes: "app-summary",
-          rows: [
-            {
-              key: {
-                text: "Course"
-              },
-              value: {
-                html: '<a href="#">' + course.name_and_code + '</a>'
-              }
+          rows: [{
+            key: {
+              text: "Course"
             },
-            {
-              key: {
-                text: "Description"
-              },
-              value: {
-                html: course.description
-              }
-            },
-            {
-              key: {
-                text: "Response"
-              },
-              value: {
-                html: 'No response yet'
-              }
+            value: {
+              html: "<a href=\"#\">" + course.name_and_code + "</a>"
             }
-          ]
+          }, {
+            key: {
+              text: "Description"
+            },
+            value: {
+              html: course.description
+            }
+          }, {
+            key: {
+              text: "Response"
+            },
+            value: {
+              html: "No response yet"
+            }
+          }]
         }) }}
       {% endfor %}
     {% endif %}

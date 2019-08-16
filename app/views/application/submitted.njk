@@ -1,23 +1,16 @@
 {% extends "_content-wide.njk" %}
 {% set applicationPath = '/application/' + applicationId %}
-{% set title = "Review your application" %}
+{% set title = "Your submitted application" %}
 {% set referrer = applicationPath + "/review" %}
+{% set review = true %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({ href: "/applications", text: 'Back to your applications' }) }}
 {% endblock %}
 
 {% block primary %}
   <h2 class="govuk-heading-l">Courses</h2>
-  {% if applicationValue("courses") %}
-    {% include "_includes/review-courses.njk" %}
-  {% else %}
-    {{ govukButton({
-      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
-      text: "Add a course",
-      href: applicationPath + "/course/add"
-    }) }}
-  {% endif %}
+  {% include "_includes/review-courses.njk" %}
 
   <h2 class="govuk-heading-l">About you</h2>
   <h2 class="govuk-heading-m">Personal details</h2>
@@ -74,7 +67,7 @@
           text: "Change",
           visuallyHiddenText: "additional detail"
         }]
-      }
+      } if review != true
     }]
   }) }}
 
@@ -83,9 +76,4 @@
 
   <h2 class="govuk-heading-l">Interview preferences</h2>
   {% include "_includes/review-interview.njk" %}
-
-  {{ govukButton({
-    text: "Continue",
-    href: applicationPath + "/submit"
-  }) }}
 {% endblock %}

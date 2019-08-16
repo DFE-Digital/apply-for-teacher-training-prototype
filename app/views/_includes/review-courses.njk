@@ -1,33 +1,29 @@
 {% set courses = applicationValue("courses") | toArray %}
-<table class="govuk-table govuk-!-margin-bottom-5">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header govuk-!-font-size-27" scope="col">
-        Courses
-      </th>
-      <th class="govuk-table__header app-table__cell--action" scope="col">
-        <span class="govuk-visually-hidden">Actions</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-  {% for c in courses %}
-    {% set provider = providers[c.providerCode] %}
-    {% set course = provider.courses[c.courseCode] %}
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-1">
-          <a href="#" style="text-decoration: none">
-            <span class="govuk-!-font-size-19">{{ provider.name }}</span><br />
-            <span style="text-decoration: underline">{{ course.name_and_code }}</span>
-          </a>
-        </h3>
-        <p class="govuk-body-s govuk-!-margin-0">{{ course.description }}</p>
-      </td>
-      <td class="govuk-table__cell app-table__cell--action">
-        <p class="govuk-!-margin-top-1"><a href="#">Remove</a></p>
-      </td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+
+{% for c in courses %}
+  {% set provider = providers[c.providerCode] %}
+  {% set course = provider.courses[c.courseCode] %}
+
+  <h4 class="govuk-heading-m">{{ provider.name }}</h4>
+  {{ govukSummaryList({
+    classes: "app-summary",
+    rows: [
+      {
+        key: {
+          text: "Course"
+        },
+        value: {
+          html: '<a href="#">' + course.name_and_code + '</a>'
+        }
+      },
+      {
+        key: {
+          text: "Description"
+        },
+        value: {
+          html: course.description
+        }
+      }
+    ]
+  }) }}
+{% endfor %}

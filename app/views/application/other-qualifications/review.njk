@@ -1,14 +1,17 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set title = "Other qualifications" %}
-{% set categoryCaptionSize = "m" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
-  {% set referrer = applicationPath + "/other-qualifications/review" %}
   {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
   {% for qualification in qualifications %}
     {% include "_includes/review-other-qualification.njk" %}

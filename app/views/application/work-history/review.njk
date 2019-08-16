@@ -1,15 +1,18 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Work history" %}
 {% set referrer = applicationPath + "/work-history/review" %}
+{% set title = "Work history" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
   {% include "_includes/review-work-history.njk" %}
-
   {% if not applicationValue(["work-history","missing"]) %}
     {{ govukButton({
       text: "Add another job",

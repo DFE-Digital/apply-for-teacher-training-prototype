@@ -1,15 +1,18 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "School experience and volunteering with young people" %}
 {% set referrer = applicationPath + "/school-experience/review" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: "/application/" + applicationId, text: 'Back to application' }) }}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block primary %}
   {% include "_includes/review-school-experience.njk" %}
-
   {% if applicationValue(["school-experience", "missing"]) != "true" %}
     {{ govukButton({
       text: "Add another role",

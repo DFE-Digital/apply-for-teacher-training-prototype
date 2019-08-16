@@ -14,7 +14,7 @@
     "test": "npm run lint && gulp generate-assets && jest"
   },
   "dependencies": {
-    "acorn": "^6.2.1",
+    "acorn": "^6.3.0",
     "ansi-colors": "^4.0.0",
     "basic-auth": "^2.0.0",
     "basic-auth-connect": "^1.0.0",
@@ -54,7 +54,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "standard": "^13.1.0",
     "supertest": "^4.0.0"
   }

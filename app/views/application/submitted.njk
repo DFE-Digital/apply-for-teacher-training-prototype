@@ -9,6 +9,20 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukSummaryList({
+    classes: "app-summary",
+    rows: [
+      {
+        key: {
+          text: "Date submitted"
+        },
+        value: {
+          html: 'now' | date('d MMMM yyyy')
+        }
+      }
+    ]
+  }) }}
+
   <h2 class="govuk-heading-l">Courses</h2>
   {% include "_includes/review-courses.njk" %}
 

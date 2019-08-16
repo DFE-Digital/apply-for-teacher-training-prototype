@@ -19,9 +19,14 @@
       href: applicationPath + "/references/add/referee/second",
       classes: "govuk-button--secondary"
     }) }}
+    {{ govukButton({
+      text: "Continue without adding second referee",
+      href: applicationPath
+    }) }}
+  {% else %}
+    {{ govukButton({
+      text: "Continue",
+      href: applicationPath
+    }) }}
   {% endif %}
-  {{ govukButton({
-    text: "Continue without adding second referee",
-    href: applicationPath
-  }) }}
 {% endblock %}

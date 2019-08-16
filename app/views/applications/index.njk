@@ -1,15 +1,67 @@
 {% extends "_content.njk" %}
 
-{% set title = "Your applications" %}
+{% set title = "Applications" %}
 
 {% block primary %}
-  {% if data["courses"] %}
-    {% include "_includes/review-applications.njk" %}
-  {% endif %}
-  {% if data["courses"] | length <= 3 %}
-    {{ govukButton({
-      text: "Start a new application",
-      href: "/application"
-    }) }}
-  {% endif %}
+
+
+  {# {{ govukButton({
+    text: "Start a new application",
+    href: "/application/start/course",
+    isStartButton: true
+  }) }} #}
+
+  <p>You have started a new application.</p>
+
+  {{ govukButton({
+    text: "Edit current application",
+    href: "/application/start/course"
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--m">
+
+  <h3 class="govuk-heading-l">Application submitted 10 May 2019</h3>
+  <p>
+    <a href="#">View application</a>
+  </p>
+
+  <p>Training providers must respond by 29 July.</p>
+
+  {% for applicationId, application in data.applications %}
+    {% for id, c in application.courses %}
+      {% set provider = providers[c.providerCode] %}
+      {% set course = provider.courses[c.courseCode] %}
+
+      <h4 class="govuk-heading-m">{{ provider.name }}</h4>
+      {{ govukSummaryList({
+        classes: "app-summary",
+        rows: [
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: '<a href="#">' + course.name_and_code + '</a>'
+            }
+          },
+          {
+            key: {
+              text: "Description"
+            },
+            value: {
+              html: course.description
+            }
+          },
+          {
+            key: {
+              text: "Response"
+            },
+            value: {
+              html: 'No response yet'
+            }
+          }
+        ]
+      }) }}
+    {% endfor %}
+  {% endfor %}
 {% endblock %}

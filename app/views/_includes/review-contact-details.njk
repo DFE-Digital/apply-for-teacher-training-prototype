@@ -50,7 +50,7 @@
       text: "Email address"
     },
     value: {
-      text: (applicationValue(["contact-details", "email"]) | default("Not entered"))
+      text: data["account"]["email"] | default("Not entered")
     },
     actions: {
       classes: "govuk-!-padding-right-2",

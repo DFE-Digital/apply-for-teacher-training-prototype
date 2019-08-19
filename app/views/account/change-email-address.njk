@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "Before you begin" %}
-{% set formaction = "/account/check-email/create-account" %}
+{% set title = "Change your email address" %}
+{% set formaction = "/account/check-email/change-email-address" %}
 {% set isSignedOut = true %}
 
 {% block pageNavigation %}
@@ -11,11 +11,11 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">Please give us your email address so that you can save and return to your application.</p>
+  <p class="govuk-body-l">Update the email address you want to use to access this service.</p>
 
   {{ govukInput({
     label: {
-      text: "Email address",
+      text: "New email address",
       classes: "govuk-label--m"
     },
     hint: {

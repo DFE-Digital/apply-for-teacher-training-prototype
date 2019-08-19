@@ -29,17 +29,11 @@
   <h2 class="govuk-heading-m">Contact details</h2>
   {% include "_includes/review-contact-details.njk" %}
 
-  <h2 class="govuk-heading-m">Your choice of teaching subject</h2>
-  {% include "_includes/review-subject-knowledge.njk" %}
-
   <h2 class="govuk-heading-m">Work history</h2>
   {% include "_includes/review-work-history.njk" %}
 
   <h2 class="govuk-heading-m">School experience and volunteering with young people</h2>
   {% include "_includes/review-school-experience.njk" %}
-
-  <h2 class="govuk-heading-m">Why you want to be a teacher</h2>
-  {% include "_includes/review-vocation.njk" %}
 
   <h2 class="govuk-heading-l">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
@@ -59,6 +53,13 @@
   {% for qualification in qualifications %}
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
+
+  <h2 class="govuk-heading-l">Personal statement</h2>
+  <h3 class="govuk-heading-m">Your choice of teaching subject</h3>
+  {% include "_includes/review-subject-knowledge.njk" %}
+
+  <h3 class="govuk-heading-m">Why you want to be a teacher</h3>
+  {% include "_includes/review-vocation.njk" %}
 
   <h2 class="govuk-heading-l">References</h2>
   {% include "_includes/review-references.njk" %}

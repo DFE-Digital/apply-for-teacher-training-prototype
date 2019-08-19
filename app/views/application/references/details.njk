@@ -4,7 +4,20 @@
 {% set parent = (id | capitalize) + " referee" %}
 {% set title = "Details of " + type + " referee" %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/type/" + id
+    }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
+  <mark>{{ referrer }}</mark>
   <p class="govuk-body">Contact your referee in advance to check they are:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>happy to give you a reference</li>

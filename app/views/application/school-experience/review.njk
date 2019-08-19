@@ -3,6 +3,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "School experience and volunteering with young people" %}
 {% set referrer = applicationPath + "/school-experience/review" %}
+{% set schoolExperience = applicationValue("school-experience") | toArray | selectattr("id") %}
+{% set addButtonText = "Add another role" if schoolExperience.length >= 1 else "Add a role" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -15,7 +17,7 @@
   {% include "_includes/review-school-experience.njk" %}
   {% if applicationValue(["school-experience", "missing"]) != "true" %}
     {{ govukButton({
-      text: "Add another role",
+      text: addButtonText,
       href: applicationPath + "/school-experience/add/role?referrer=" + referrer,
       classes: "govuk-button--secondary"
     }) }}

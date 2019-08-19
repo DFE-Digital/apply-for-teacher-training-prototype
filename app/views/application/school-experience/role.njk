@@ -7,13 +7,36 @@
 
 {% block pageNavigation %}
   {% if referrer %}
-    {{ govukBackLink({ href: referrer }) }}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
   {% else %}
-    {{ govukBackLink({ href: applicationPath + "/school-experience" }) }}
+    {{ govukBackLink({
+      href: applicationPath + "/school-experience"
+    }) }}
   {% endif %}
 {% endblock %}
 
 {% block primary %}
+  {% set detailsHtml %}
+    <p class="govuk-body govuk-!-font-weight-bold">Include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>school experience</li>
+      <li>one-off observations</li>
+      <li>volunteering with children or young people in a school setting</li>
+      <li>volunteering with children or young people outside school</li>
+    </ul>
+    <p class="govuk-body govuk-!-font-weight-bold">Don't include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>regular, paid, full or part-time work in a school (this should be entered in ‘Work history’)</li>
+    </ul>
+    <p class="govuk-body">We’ll ask you to write in detail about what you’ve learnt through your school experience and volunteering in ‘Why you want to be a teacher’.</p>
+  {% endset %}
+  {{ govukDetails({
+    summaryText: "Help with what to include",
+    html: detailsHtml
+  }) }}
+
   {{ govukInput({
     label: {
       text: "Your role",

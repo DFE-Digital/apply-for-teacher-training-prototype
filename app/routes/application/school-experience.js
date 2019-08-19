@@ -5,6 +5,14 @@ const utils = require('./../../utils')
  * Application: School experience routes
  */
 module.exports = router => {
+  // Render missing school experience page
+  // Note: Must be defined before next route declaration
+  router.get('/application/:applicationId/school-experience/missing', (req, res) => {
+    res.render(`application/school-experience/missing`, {
+      referrer: req.query.referrer
+    })
+  })
+
   // Generate ID to add new thing
   router.get('/application/:applicationId/school-experience/add/role', (req, res) => {
     const id = utils.generateRandomString()
@@ -37,6 +45,19 @@ module.exports = router => {
     utils.saveIsoDate(req, applicationData, id)
 
     res.redirect(req.query.referrer || `/application/${applicationId}/school-experience/review`)
+  })
+
+  // School-experience completed answer branching
+  router.post('/application/:applicationId/school-experience/answer', (req, res) => {
+    const applicationId = req.params.applicationId
+    const applicationData = req.session.data.applications[applicationId]
+    const attained = applicationData['school-experience']['attained']
+
+    if (attained === 'false') {
+      res.redirect(`/application/${applicationId}/school-experience/review`)
+    } else {
+      res.redirect(`/application/${applicationId}/school-experience/add/role`)
+    }
   })
 
   // Render other school experience pages

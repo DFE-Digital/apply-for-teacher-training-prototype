@@ -14,12 +14,12 @@ module.exports = router => {
   })
 
   // Generate new ID and redirect to that item
-  router.get('/application/:applicationId/work-history/add/:thing(job|gap)', (req, res) => {
-    const thing = req.params.thing
+  router.get('/application/:applicationId/work-history/add/:type(job|gap)', (req, res) => {
+    const type = req.params.type
     const id = utils.generateRandomString()
     const queryString = querystring.stringify(req.query)
 
-    res.redirect(`/application/${req.params.applicationId}/work-history/${thing}/${id}?${queryString}`)
+    res.redirect(`/application/${req.params.applicationId}/work-history/${type}/${id}?${queryString}`)
   })
 
   // Render job/gap page
@@ -52,7 +52,8 @@ module.exports = router => {
   // Work history length answer branching
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const applicationId = req.params.applicationId
-    const length = req.session.data.applications[applicationId]['work-history']['length']
+    const applicationData = req.session.data.applications[applicationId]
+    const length = applicationData['work-history']['length']
 
     if (length === 'none') {
       res.redirect(`/application/${applicationId}/work-history/missing`)

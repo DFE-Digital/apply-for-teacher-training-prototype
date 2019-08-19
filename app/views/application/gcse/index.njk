@@ -1,6 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set title = (id | capitalize) + " GCSE or equivalent" %}
+{% set action = "edit" if applicationValue(["gcse", id, "type"]) else "add" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = (action | capitalize) + " " + subject + " GCSE or equivalent" %}
 
 {% block pageNavigation %}
   {% if referrer %}

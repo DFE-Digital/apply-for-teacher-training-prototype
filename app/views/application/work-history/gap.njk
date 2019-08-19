@@ -3,6 +3,14 @@
 {% set parent = "Work history" %}
 {% set title = "Explain gap in work history" %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: applicationPath + "/work-history" }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {{ govukDateInput({
     fieldset: {

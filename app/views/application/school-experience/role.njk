@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "School experience and volunteering with young people" %}
-{% set title = "Role" %}
+{% set action = "edit" if applicationValue(["school-experience", id, "role"]) else "add" %}
+{% set title = (action | capitalize) + " role" %}
 
 {% block pageNavigation %}
   {% if referrer %}

@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "Add degree" %}
+{% set action = "edit" if applicationValue(["degree", id, "type"]) else "add" %}
+{% set title = (action | capitalize) + " degree" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -68,12 +69,6 @@
       }
     }]
   } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
-
-  {{ govukInput({
-    type: "hidden",
-    name: "applications[" + applicationId + "][degree][" + id + "][category]",
-    value: "degree"
-  }) }}
 
   {{ govukButton({
     text: "Save and continue"

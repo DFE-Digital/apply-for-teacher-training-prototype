@@ -11,15 +11,12 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">Update the email address you want to use to access this service.</p>
+  <p class="govuk-body-l">Your new email will become the address you use to sign in to the service.</p>
 
   {{ govukInput({
     label: {
-      text: "New email address",
+      text: "Enter new email",
       classes: "govuk-label--m"
-    },
-    hint: {
-      text: "Don’t use a work or university email address you might lose access to"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "email",

@@ -15,10 +15,8 @@
   {% endif %}
 {% endblock %}
 {% block primary %}
-  {% set hasSchoolExperience = applicationValue(["school-experience", "missing"]) != "true" %}
-
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
-  <p class="govuk-body">You can apply for up to 3 courses at a time.</p>
+  <p class="govuk-body govuk-!-margin-bottom-0">You can apply for up to 3 courses at a time.</p>
 
   {% if applicationValue("courses") %}
     {% include "_includes/application-courses.njk" %}
@@ -50,11 +48,6 @@
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {
-      text: "Your choice of teaching subject",
-      href: applicationPath + "/subject-knowledge/" + ("review" if applicationValue("subject-knowledge")),
-      id: "subject-knowledge",
-      completed: applicationValue("subject-knowledge")
-    }, {
       text: "Work history",
       href: applicationPath + "/work-history/" + ("review" if applicationValue("work-history")),
       id: "work-history",
@@ -64,15 +57,10 @@
       href: applicationPath + "/school-experience/" + ("review" if applicationValue("school-experience") and hasSchoolExperience),
       id: "school-experience",
       completed: applicationValue("school-experience")
-    }, {
-      text: "Why you want to be a teacher",
-      href: applicationPath + "/vocation/" + ("review" if applicationValue("vocation")),
-      id: "vocation",
-      completed: applicationValue("vocation")
     }]
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>
   <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
   {# TODO: Show ‘Science GCSE or equivalent’ option if primary course #}
   {{ appTaskList({
@@ -97,6 +85,22 @@
       href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
       id: "other-qualifications",
       completed: applicationValue(["other-qualifications"])
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">Personal statement</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Your choice of teaching subject",
+      href: applicationPath + "/subject-knowledge/" + ("review" if applicationValue("subject-knowledge")),
+      id: "subject-knowledge",
+      completed: applicationValue("subject-knowledge")
+    }, {
+      text: "Why you want to be a teacher",
+      href: applicationPath + "/vocation/" + ("review" if applicationValue("vocation")),
+      id: "vocation",
+      completed: applicationValue("vocation")
     }]
   }) }}
 

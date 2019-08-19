@@ -35,4 +35,9 @@
     padding-left: govuk-spacing(2);
     padding-right: govuk-spacing(2);
   }
+
+  .govuk-table__row:last-child .govuk-table__header,
+  .govuk-table__row:last-child .govuk-table__cell {
+    border-bottom: 0 none;
+  }
 }

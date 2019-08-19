@@ -10,10 +10,12 @@ module.exports = router => {
   // Render referee type page
   router.get('/application/:applicationId/references/type/:id', (req, res) => {
     const id = req.params.id
+    const referrer = req.query.referrer
 
     res.render('application/references/type', {
       id,
-      formaction: `/application/${req.params.applicationId}/references/details/${id}`
+      formaction: `/application/${req.params.applicationId}/references/details/${id}`,
+      referrer
     })
   })
 
@@ -24,7 +26,8 @@ module.exports = router => {
 
     res.render('application/references/details', {
       id,
-      formaction: referrer || `/application/${req.params.applicationId}/references/review`
+      formaction: referrer || `/application/${req.params.applicationId}/references/review`,
+      referrer
     })
   })
 }

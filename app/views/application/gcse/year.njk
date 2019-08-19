@@ -1,15 +1,17 @@
 {% extends "_form.njk" %}
 
-{% block pageNavigation %}
-  {{ govukBackLink({ href: paths.back }) }}
-{% endblock %}
-
-{% set parent = (id | capitalize) + " GCSE or equivalent" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
 {% if applicationValue(["gcse", id, "completed"]) == "false" %}
-  {% set title = "When will you get your qualification?" %}
+  {% set title = "When will you get your " + subject + " qualification?" %}
 {% else %}
   {% set title = "When was your qualification awarded?" %}
 {% endif %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
 
 {% block primary %}
   {{ govukInput({

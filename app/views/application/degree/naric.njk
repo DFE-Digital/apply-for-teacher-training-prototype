@@ -1,10 +1,12 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "If you studied for your degree outside the UK, you will need to check that it is valid" %}
+{% set title = "Do you know what UK degree your degree is equivalent to?" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: paths.back }) }}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
 {% endblock %}
 
 {% block primary %}
@@ -20,18 +22,12 @@
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <h3 class="govuk-heading-s">Before you submit your application</h3>
+    <p class="govuk-body"><strong>If you studied for your degree outside the UK, you will need to check that it is valid.</strong></p>
     <p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications.</p>
     <p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK degree.</p>
   {% endset %}
 
   {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Do you know what UK degree your degree is equivalent to?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
     items: [{
       text: "Yes",
       conditional: {

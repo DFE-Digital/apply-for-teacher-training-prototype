@@ -20,7 +20,8 @@
 
   {{ govukInput({
     label: {
-      text: "Type of qualification"
+      text: "Type of qualification",
+      classes: "govuk-label--m"
     },
     hint: {
       text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
@@ -29,13 +30,15 @@
 
   {{ govukInput({
     label: {
-      text: "Subject"
+      text: "Subject",
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
 
   {{ govukInput({
     label: {
-      text: "Institution where you studied"
+      text: "Institution where you studied",
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["other-qualifications", id, "institution"])) }}
 
@@ -68,14 +71,16 @@
 
   {{ govukInput({
     label: {
-      text: "Grade"
+      text: "Grade",
+      classes: "govuk-label--m"
     },
     classes: "govuk-input--width-10"
   } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
 
   {{ govukInput({
     label: {
-      text: "Year qualification was awarded"
+      text: "Year qualification was awarded",
+      classes: "govuk-label--m"
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}

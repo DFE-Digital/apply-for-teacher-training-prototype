@@ -1,10 +1,12 @@
 {% extends "_form.njk" %}
 
-{% set parent = (id | capitalize) + " GCSE or equivalent" %}
-{% set title = "What grade is your qualification?" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = "What grade is your " + subject + " qualification?" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: paths.back }) }}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
 {% endblock %}
 
 {% block primary %}

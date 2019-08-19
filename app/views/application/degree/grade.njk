@@ -7,7 +7,9 @@
 {% set title = "What grade is your degree?" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({ href: paths.back }) }}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
 {% endblock %}
 
 {% block primary %}
@@ -36,9 +38,6 @@
     {{ govukRadios({
       items: [{
         text: "I completed my degree",
-        label: {
-          classes: "govuk-label--s"
-        },
         conditional: {
           html: otherGradeHtml
         }
@@ -47,9 +46,6 @@
       }, {
         value: "Pending",
         text: "I am still studying for my degree",
-        label: {
-          classes: "govuk-label--s"
-        },
         conditional: {
           html: predictedGradeHtml
         }

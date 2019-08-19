@@ -20,7 +20,8 @@
 
   {{ govukInput({
     label: {
-      text: "Type of degree"
+      text: "Type of degree",
+      classes: "govuk-label--m"
     },
     hint: {
       text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
@@ -29,13 +30,15 @@
 
   {{ govukInput({
     label: {
-      text: "Subject of degree"
+      text: "Subject of degree",
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["degree", id, "subject"])) }}
 
   {{ govukInput({
     label: {
-      text: "Institution where you studied"
+      text: "Institution where you studied",
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["degree", id, "institution"])) }}
 

@@ -16,14 +16,14 @@
   {{ govukInput({
     label: {
       text: "Your role",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["school-experience", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Organisation where you gained experience or volunteered",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["school-experience", id, "org"])) }}
 
@@ -34,7 +34,7 @@
     fieldset: {
       legend: {
         text: "Start date",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -63,7 +63,7 @@
     fieldset: {
       legend: {
         text: "End date (leave blank if this is your current role)",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {

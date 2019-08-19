@@ -8,7 +8,7 @@
     fieldset: {
       legend: {
         text: "Start of gap",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -32,7 +32,7 @@
     fieldset: {
       legend: {
         text: "End of gap",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -55,7 +55,7 @@
   {{ govukCharacterCount({
     label: {
       text: "Reason(s) for this gap in your work history",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     },
     maxwords: 400
   } | decorateApplicationAttributes(["work-history", id, "description"])) }}

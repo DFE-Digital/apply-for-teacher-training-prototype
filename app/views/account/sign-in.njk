@@ -4,12 +4,19 @@
 {% set formaction = "/account/check-email/sign-in" %}
 {% set isSignedOut = true %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/"
+  }) }}
+{% endblock %}
+
 {% block primary %}
   <p class="govuk-body-l">Enter the email address you used to register with, and we will send you a link to sign in.</p>
 
   {{ govukInput({
     label: {
-      text: "Email address"
+      text: "Email address",
+    classes: "govuk-label--m"
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "email",

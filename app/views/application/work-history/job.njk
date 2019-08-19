@@ -33,14 +33,14 @@
   {{ govukInput({
     label: {
       text: "Job title",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["work-history", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Name of employer",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 
@@ -48,7 +48,7 @@
     fieldset: {
       legend: {
         text: "Start date",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -72,7 +72,7 @@
     fieldset: {
       legend: {
         text: "End date (leave blank if this is your current role)",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -95,7 +95,7 @@
   {{ govukCharacterCount({
     label: {
       text: "Skills and experience relevant to teaching you gained in this role",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     },
     hint: {
       text: "Give examples showing how you developed transferable skills like communication, creativity and organisation. Enter experience relevant to your subject in ‘Knowledge about the subject you want to teach’."
@@ -106,8 +106,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Did this job involve working in a school or with children?",
-        classes: "govuk-fieldset__legend--s"
+        text: "Did this job involve working in a school or with children?"
       }
     },
     classes: "govuk-radios--inline",

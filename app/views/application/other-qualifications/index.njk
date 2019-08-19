@@ -45,7 +45,7 @@
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
       label: {
-        text: "Which country?"
+        text: "Enter the country where your institution is based"
       },
       items: countries
     } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
@@ -59,10 +59,10 @@
     },
     items: [{
       value: "domestic",
-      text: "United Kngdom"
+      text: "The UK"
     }, {
       value: "international",
-      text: "Another country",
+      text: "Outside the UK",
       conditional: {
         html: internationalConditionalHtml
       }

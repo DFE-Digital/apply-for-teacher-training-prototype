@@ -13,7 +13,7 @@
   {% set yesConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Enter details here. If you have it, give us evidence."
+        text: "Enter details here, giving evidence if you have it."
       },
       hint: {
         text: "For example, ‘My qualification is equivalent to a UK GCSE. I have a NARIC statement of comparability, UK NARIC reference 0000000000’"
@@ -24,7 +24,7 @@
   {% set noConditionalHtml %}
     <p class="govuk-body"><strong>If you studied for this qualification outside the UK, you will need to check that it is valid.</strong></p>
     <p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications.</p>
-    <p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK GCSE.</p>
+    <p class="govuk-body">Register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a>. Registration will give you access to phone and email support from a teacher training advisor (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK GCSE.</p>
   {% endset %}
 
   {{ govukRadios({

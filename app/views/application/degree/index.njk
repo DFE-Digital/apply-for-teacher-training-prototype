@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Degree" %}
+{% set title = "Add degree" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -24,7 +24,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "For example, BA, BSc, Masters, Phd, or other (please specify)."
+      text: "For example, BA, BSc, Masters, Phd, or other (please specify)"
     }
   } | decorateApplicationAttributes(["degree", id, "type"])) }}
 
@@ -45,7 +45,7 @@
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
       label: {
-        text: "Which country?"
+        text: "Enter the country where your institution is based"
       },
       items: countries
     } | decorateApplicationAttributes(["degree", id, "country"])) }}
@@ -59,10 +59,10 @@
     },
     items: [{
       value: "domestic",
-      text: "United Kngdom"
+      text: "The UK"
     }, {
       value: "international",
-      text: "Another country",
+      text: "Outside the UK",
       conditional: {
         html: internationalConditionalHtml
       }

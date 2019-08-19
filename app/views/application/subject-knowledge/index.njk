@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
-{% set title = "Knowledge about the subject you want to teach" %}
+{% set title = "Your choice of teaching subject" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -32,20 +32,27 @@
         <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
       </ul>
     {% else %}
-      <p class="govuk-body">Give us detailed evidence for the knowledge and interest you bring to the subject(s) you’re applying to teach.</p>
+      <p class="govuk-body"></p>
     {% endif %}
   {% endset %}
 
   {{ guidanceHtml | safe }}
 
+  <p class="govuk-body govuk-!-font-weight-bold">Give us detailed evidence for the knowledge and interest you bring to the subject(s) you’re applying to teach.</p>
+  <p class="govuk-body">Evidence can include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the subject of your undergraduate degree</li>
+    <li>modules you studied as part of your degree</li>
+    <li>postgraduate degrees (for example, a Masters or Phd)</li>
+    <li>your A level subjects</li>
+    <li>expertise you’ve gained at work</li>
+  </ul>
   {{ govukCharacterCount({
     label: {
-      text: "Enter your knowledge about the subject you want to teach",
+      text: "Enter your subject knowledge",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
-    hint: {
-      html: "Evidence can include: modules you studied as part of your undergraduate degree; postgraduate degrees (for example, a Masters or Phd); your A level subjects; or expertise you’ve gained at work."
-    },
+    
     maxwords: 400,
     rows: 12
   } | decorateApplicationAttributes(["subject-knowledge", "statement"])) }}

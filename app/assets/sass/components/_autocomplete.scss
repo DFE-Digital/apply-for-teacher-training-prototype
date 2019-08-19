@@ -129,3 +129,8 @@
 .autocomplete__option {
   padding: govuk-spacing(1);
 }
+
+// https://github.com/alphagov/accessible-autocomplete/issues/202
+.autocomplete__dropdown-arrow-down {
+  pointer-events: none;
+}

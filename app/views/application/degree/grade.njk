@@ -3,8 +3,11 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% if applicationValue(["degree", id, "provenance"]) == "international" %}
   {% set international = true %}
+  {% set title = "What grade is your degree?" %}
+{% else %}
+  {% set title = "What class is your degree?" %}
 {% endif %}
-{% set title = "What grade is your degree?" %}
+
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -16,7 +19,7 @@
   {% set predictedGradeHtml %}
     {{ govukInput({
       label: {
-        text: "Please give details of your predicted grade"
+        text: "Please give details of your predicted grade."
       },
       hint: {
         text: "You must choose an academic referee (in the ‘References’ section) who can validate it."
@@ -53,12 +56,6 @@
     } | decorateApplicationAttributes(["degree", id, "grade"])) }}
   {% else %}
     {{ govukRadios({
-      fieldset: {
-        legend: {
-          text: "Class of degree",
-          classes: "govuk-label--m"
-        }
-      },
       items: [{
         text: "First"
       }, {

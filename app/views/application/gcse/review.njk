@@ -12,8 +12,12 @@
 {% endblock %}
 
 {% block primary %}
-  {% set gcse = applicationValue(["gcse", id]) %}
-  {% include "_includes/review-gcse.njk" %}
+  {% set gcses = data.applications[applicationId]["gcse"] | toArray %}
+  {% for gcse in gcses %}
+    {% if gcse.id == applicationValue(['gcse', id, "id"]) %}
+      {% include "_includes/review-gcse.njk" %}
+    {% endif %}
+  {% endfor %}
   {{ govukButton({
     text: "Continue",
     href: applicationPath

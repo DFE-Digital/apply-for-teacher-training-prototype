@@ -14,13 +14,14 @@ const gcsePaths = (req) => {
   const applicationId = req.params.applicationId
   const basePath = `/application/${applicationId}/gcse/${req.params.id}`
   const referrer = req.query.referrer
+  const id = req.params.id
 
   var paths = [
     basePath,
     ...(isInternational(req) ? [`${basePath}/naric`] : []),
     `${basePath}/grade`,
     `${basePath}/year`,
-    ...(referrer ? [referrer] : [`/application/${applicationId}`])
+    ...(referrer ? [referrer] : [`/application/${applicationId}/gcse/${id}/review`])
   ]
 
   return journeys.nextAndBackPaths(paths, req)

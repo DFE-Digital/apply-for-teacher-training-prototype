@@ -49,14 +49,18 @@ const hasStartedApplications = (req) => {
 }
 
 const hasPrimaryCourses = (req) => {
-  var courses = req.session.data.applications[req.params.applicationId].courses
+  try {
+    var courses = req.session.data.applications[req.params.applicationId].courses
 
-  return Object.values(courses).map((a) => {
-    const providerCode = a.providerCode
-    const courseCode = a.courseCode
-    const course = req.app.locals.providers[providerCode].courses[courseCode]
-    return course.name.toLowerCase().includes('primary')
-  })
+    return Object.values(courses).map((a) => {
+      const providerCode = a.providerCode
+      const courseCode = a.courseCode
+      const course = req.app.locals.providers[providerCode].courses[courseCode]
+      return course.name.toLowerCase().includes('primary')
+    })
+  } catch (error) {
+    return false
+  }
 }
 
 module.exports = {

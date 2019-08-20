@@ -3,11 +3,14 @@
 {% set title = "Application submitted" %}
 
 {% block content %}
-  {% set panelText %}Thank you for applying for postgraduate teacher training{% endset %}
+  {% set panelText %}
+    <a class="app-hidden-link" href="/application/{{ applicationId }}/submitted">Thank you for applying for postgraduate teacher training</a>
+  {% endset %}
+
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
     titleText: "Application submitted",
-    text: panelText
+    html: panelText
   }) }}
 
   <div class="govuk-grid-row">

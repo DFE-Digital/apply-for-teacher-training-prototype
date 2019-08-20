@@ -8,6 +8,8 @@
 {% block content %}
   <h1 class="govuk-heading-m">Thank you for completing your teacher training application</h1>
 
+  <p class="govuk-body"><strong>Your application reference is #{{ applicationId }}.</strong></p>
+
   <p>You have successfully submitted an application to:</p>
   <ul class="govuk-list govuk-list--bullet">
   {% for c in courses %}

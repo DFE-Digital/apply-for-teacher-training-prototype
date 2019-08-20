@@ -73,6 +73,10 @@ module.exports = router => {
     res.render(`application/confirmation`)
   })
 
+  router.all('/application/:applicationId/submitted', (req, res) => {
+    res.render(`email/application-submitted`)
+  })
+
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
     const referrer = req.query.referrer

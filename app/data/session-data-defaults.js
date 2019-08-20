@@ -97,7 +97,7 @@ module.exports = {
         },
         english: {
           id: 'english',
-          type: 'I don’t have an equivalent qualification yet'
+          type: 'I don’t have this qualification yet'
         }
       },
       'subject-knowledge': {

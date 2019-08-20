@@ -18,6 +18,11 @@
 {% endblock %}
 
 {% block primary %}
+  {{ applicationValue(["gcse", "id"]) }}
+  {% if id == "science" %}
+    <p class="givuk-body">If you have more than one science GCSE, choose one of your highest graded to enter here and add the rest in the ‘Other relevant qualifications’ section.</p>
+  {% endif %}
+
   {% set otherUkConditionalHtml %}
     {{ govukInput({
       label: {

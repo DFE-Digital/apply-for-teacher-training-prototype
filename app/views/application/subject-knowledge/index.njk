@@ -17,34 +17,31 @@
 {% endblock %}
 
 {% block primary %}
-  {% set guidanceHtml %}
-    {% if data["settings"]["primary-application"] == "true" %}
-      <p class="govuk-body">This section is optional for candidates applying to primary courses.</p>
-      <p class="govuk-body">However, you can use it to:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>give an overview of subject knowledge you bring to the primary curriculum</li>
-        <li>showcase the abilities and skills you would contribute</li>
-      </ul>
-      <p class="govuk-body">You can include:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>your A level subjects</li>
-        <li>expertise you’ve gained at work</li>
-        <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
-      </ul>
-    {% endif %}
-  {% endset %}
+  {% if hasPrimaryCourses() %}
+    <p class="govuk-body">This section is optional for candidates applying to primary courses.</p>
+    <p class="govuk-body">However, you can use it to:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>give an overview of subject knowledge you bring to the primary curriculum</li>
+      <li>showcase the abilities and skills you would contribute</li>
+    </ul>
+    <p class="govuk-body">You can include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your A level subjects</li>
+      <li>expertise you’ve gained at work</li>
+      <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
+    </ul>
+  {% else %}
+    <p class="govuk-body govuk-!-font-weight-bold">Give us detailed evidence for the knowledge and interest you bring to the subject(s) you’re applying to teach.</p>
+    <p class="govuk-body">Evidence can include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>the subject of your undergraduate degree</li>
+      <li>modules you studied as part of your degree</li>
+      <li>postgraduate degrees (for example, a Masters or Phd)</li>
+      <li>your A level subjects</li>
+      <li>expertise you’ve gained at work</li>
+    </ul>
+  {% endif %}
 
-  {{ guidanceHtml | safe }}
-
-  <p class="govuk-body govuk-!-font-weight-bold">Give us detailed evidence for the knowledge and interest you bring to the subject(s) you’re applying to teach.</p>
-  <p class="govuk-body">Evidence can include:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>the subject of your undergraduate degree</li>
-    <li>modules you studied as part of your degree</li>
-    <li>postgraduate degrees (for example, a Masters or Phd)</li>
-    <li>your A level subjects</li>
-    <li>expertise you’ve gained at work</li>
-  </ul>
   {{ govukCharacterCount({
     label: {
       text: "Enter your subject knowledge",

@@ -40,12 +40,23 @@ const hasApplications = (req) => {
 
 const hasSubmittedApplications = (req) => {
   var applications = req.session.data.applications
-  return Object.values(applications).map(a => a.status).includes('submitted');
+  return Object.values(applications).map(a => a.status).includes('submitted')
 }
 
 const hasStartedApplications = (req) => {
   var applications = req.session.data.applications
-  return Object.values(applications).map(a => a.status).includes('started');
+  return Object.values(applications).map(a => a.status).includes('started')
+}
+
+const hasPrimaryCourses = (req) => {
+  var courses = req.session.data.applications[req.params.applicationId].courses
+
+  return Object.values(courses).map((a) => {
+    const providerCode = a.providerCode
+    const courseCode = a.courseCode
+    const course = req.app.locals.providers[providerCode].courses[courseCode]
+    return course.name.toLowerCase().includes('primary')
+  })
 }
 
 module.exports = {
@@ -54,6 +65,7 @@ module.exports = {
   queryString: getQueryString,
   saveIsoDate,
   hasApplications,
+  hasPrimaryCourses,
   hasSubmittedApplications,
   hasStartedApplications
 }

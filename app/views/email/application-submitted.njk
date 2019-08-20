@@ -1,7 +1,7 @@
 {% extends "_email.njk" %}
 
 {% set title = "Thank you for submitting your teacher training application" %}
-{% set from = "noreply@apply-for-teacher-training.service.gov.uk" %}
+{% set from = "apply-for-teacher-training@education.gov.uk" %}
 {% set to = data.candidate["email"] %}
 {% set courses = applicationValue("courses") | toArray %}
 
@@ -9,11 +9,16 @@
   <h1 class="govuk-heading-m">Thank you for completing your teacher training application</h1>
 
   <p>You have successfully submitted an application to:</p>
+  <ul class="govuk-list govuk-list--bullet">
   {% for c in courses %}
     {% set provider = providers[c.providerCode] %}
     {% set course = provider.courses[c.courseCode] %}
-    <p>{{ provider.name }}<br />{{ course.name_and_code }}</p>
+    <li class="govuk-body">
+      <strong>{{ provider.name }}</strong><br>
+      {{ course.name_and_code }}
+    </li>
   {% endfor %}
+  </ul>
 
   <p>You can track the progress of your application here:<br /><a href="/applications">https://apply-for-postgraduate-teacher-training.service.gov.uk/applications</a></p>
 

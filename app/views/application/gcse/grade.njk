@@ -10,29 +10,12 @@
 {% endblock %}
 
 {% block primary %}
-  {% set otherGradeHtml %}
-    {{ govukInput({
-      label: {
-        text: "Please specify the grade"
-      },
-      classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
-  {% endset %}
-
-  {{ govukRadios({
-    items: [{
-      value: "true",
-      text: "I completed my qualification",
-      conditional: {
-        html: otherGradeHtml
-      }
-    }, {
-      divider: "or"
-    }, {
-      value: "false",
-      text: "I am still studying for my qualification"
-    }]
-  } | decorateApplicationAttributes(["gcse", id, "completed"])) }}
+  {{ govukInput({
+    label: {
+      text: "Please specify your grade"
+    },
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
 
   {{ govukButton({
     text: "Continue"

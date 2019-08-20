@@ -46,7 +46,7 @@
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
       label: {
-        text: "Enter the country where your institution is based"
+        text: "In which country is your institution based?"
       },
       items: countries
     } | decorateApplicationAttributes(["degree", id, "country"])) }}

@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Tell us about your other academic, vocational, practical and creative qualifications</p>
+  <p class="govuk-body">Tell us about your other academic, vocational, practical and creative qualifications.</p>
 
   {{ govukInput({
     label: {
@@ -45,7 +45,7 @@
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
       label: {
-        text: "Enter the country where your institution is based"
+        text: "In which country is your institution based?"
       },
       items: countries
     } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}

@@ -3,7 +3,7 @@
 {% set awardOrg = gcse["award-org"] + "\n" + gcse.country %}
 {% set grade = gcse.grade if gcse.grade else "Pending" %}
 
-{% if gcse.type == "I don’t have an equivalent qualification yet" %}
+{% if gcse.type == "I don’t have this qualification yet" %}
   {{ govukSummaryList({
     classes: "app-summary",
     rows: [{

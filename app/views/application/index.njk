@@ -62,31 +62,47 @@
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>
   <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
-  {# TODO: Show ‘Science GCSE or equivalent’ option if primary course #}
-  {{ appTaskList({
-    classes: "govuk-!-margin-bottom-8",
-    items: [{
-      text: "Degree",
-      href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
-      id: "degree",
-      completed: applicationValue(["degree"])
-    }, {
-      text: "Maths GCSE or equivalent",
-      href: applicationPath + "/gcse/maths/" + ("review" if applicationValue(["gcse", "maths"])),
-      id: "maths-gcse",
-      completed: applicationValue(["gcse", "maths"])
-    }, {
-      text: "English GCSE or equivalent",
-      href: applicationPath + "/gcse/english/" + ("review" if applicationValue(["gcse", "english"])),
-      id: "english-gcse",
-      completed: applicationValue(["gcse", "english"])
-    }, {
-      text: "Other relevant qualifications",
-      href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
-      id: "other-qualifications",
-      completed: applicationValue(["other-qualifications"])
-    }]
-  }) }}
+  {% set degree = {
+    text: "Degree",
+    href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
+    id: "degree",
+    completed: applicationValue(["degree"])
+  } %}
+  {% set mathsGcse = {
+    text: "Maths GCSE or equivalent",
+    href: applicationPath + "/gcse/maths/" + ("review" if applicationValue(["gcse", "maths"])),
+    id: "maths-gcse",
+    completed: applicationValue(["gcse", "maths"])
+  } %}
+  {% set englishGcse = {
+    text: "English GCSE or equivalent",
+    href: applicationPath + "/gcse/english/" + ("review" if applicationValue(["gcse", "english"])),
+    id: "english-gcse",
+    completed: applicationValue(["gcse", "english"])
+  } %}
+  {% set scienceGcse = {
+    text: "Science GCSE or equivalent",
+    href: applicationPath + "/gcse/science/" + ("review" if applicationValue(["gcse", "science"])),
+    id: "science-gcse",
+    completed: applicationValue(["gcse", "science"])
+  } %}
+  {% set otherQualifications = {
+    text: "Other relevant qualifications",
+    href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
+    id: "other-qualifications",
+    completed: applicationValue(["other-qualifications"])
+  } %}
+  {% if hasPrimaryCourses() or applicationValue(["gcse", "science"]) %}
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-8",
+      items: [degree, mathsGcse, englishGcse, scienceGcse, otherQualifications]
+    }) }}
+  {% else %}
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-8",
+      items: [degree, mathsGcse, englishGcse, otherQualifications]
+    }) }}
+  {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">Personal statement</h2>
   {{ appTaskList({

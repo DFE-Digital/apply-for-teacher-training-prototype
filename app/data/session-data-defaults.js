@@ -1,7 +1,4 @@
 module.exports = {
-  settings: {
-    'primary-application': 'false'
-  },
   applications: {
     12345: {
       status: 'started',

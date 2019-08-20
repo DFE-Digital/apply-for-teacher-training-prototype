@@ -6,7 +6,7 @@
 {% set courses = applicationValue("courses") | toArray %}
 
 {% block content %}
-  <h1 class="govuk-heading-m">Thank you for submitting your teacher training application</h1>
+  <h1 class="govuk-heading-m">Thank you for completing your teacher training application</h1>
 
   <p>You have successfully submitted an application to:</p>
   {% for c in courses %}
@@ -19,5 +19,5 @@
 
   <p>Your training provider will respond to your application within 40 working days via email. If they decide to progress your application, they will communicate with you directly to organise an interview date and give you all the information you need.</p>
 
-  <p>You can apply to as many different training providers as you like. If you’re ready to apply to another training provider, visit the <a href="/applications">Applications</a> page to start a new application.</p>
+  <p>You can apply to 3 different training providers. If you’re ready to apply to another training provider, visit the <a href="/applications">Applications</a> page to start a new application.</p>
 {% endblock %}

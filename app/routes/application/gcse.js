@@ -68,7 +68,7 @@ module.exports = router => {
     let path
     if (isInternational(req)) {
       path = `/application/${applicationId}/gcse/${id}/naric`
-    } else if (type === 'I don’t have an equivalent qualification yet') {
+    } else if (type === 'I don’t have this qualification yet') {
       path = referrer || `/application/${applicationId}`
     } else {
       path = `/application/${applicationId}/gcse/${id}/grade`

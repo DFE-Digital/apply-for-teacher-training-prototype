@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/vocation/review" %}
-{% set title = "Why you want to be a teacher" %}
+{% set title = "Why do you want to be a teacher?" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -19,15 +19,15 @@
 {% block primary %}
   {% set guidanceHtml %}
     <p class="govuk-body">Use this section to showcase your motivation, commitment and teaching potential, backing up your answer with specific examples.</p>
-    <p class="govuk-body">Give providers an insight into your personality and character by writing honestly and thoughtfully. Avoid cliché and write in clear, correct, concise English.</p>
+    <p class="govuk-body">Give providers an insight into your personality by writing honestly and thoughtfully. Avoid cliché and write in clear, correct, concise English.</p>
     <p class="govuk-body">You can ask your training provider for examples written by successful applicants, or register with <a href="https://getintoteaching.education.gov.uk/">Get into Teaching</a> for help from a teacher training advisor.</p>
     <p class="govuk-body govuk-!-font-weight-bold">Suggested topics to cover include:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>reflections on why you want to be a teacher</li>
+      <li>Why do you want to be a teacher?</li>
       <li>your passion for your subject and the age group you’ve chosen to teach</li>
-      <li>your engagement with the welfare and education of children and/or young people</li>
-      <li>an understanding of the demands and rewards of the profession</li>
-      <li>the personal qualities that will make you a good teacher</li>
+      <li>the welfare and education of children and/or young people</li>
+      <li>the demands and rewards of the profession</li>
+      <li>personal qualities that will make you a good teacher</li>
       <li>your contribution to the life of the school outside the classroom  – for example, running extra-curricular activities and clubs</li>
       <li>if you have school experience or have worked as a volunteer with children or young people, give details of what this has taught you</li>
     </ul>

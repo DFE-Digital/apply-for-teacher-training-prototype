@@ -56,7 +56,6 @@ module.exports = {
           country: 'United Kingdom',
           grade: 'Other',
           'grade-other': 'Pass',
-          'grade-predicted': '',
           year: '2017'
         }
       },

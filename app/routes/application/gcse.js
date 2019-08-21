@@ -52,7 +52,7 @@ module.exports = router => {
     const referrerPath = referrer ? `?referrer=${referrer}` : ''
 
     res.render('application/gcse/index', {
-      formaction: `/application/${req.params.applicationId}/gcse/${id}/answer${referrerPath}`,
+      formaction: referrer || `/application/${req.params.applicationId}/gcse/${id}/answer${referrerPath}`,
       id,
       referrer
     })
@@ -85,7 +85,7 @@ module.exports = router => {
     const paths = gcsePaths(req)
 
     res.render(`application/gcse/${template}`, {
-      formaction: paths.next,
+      formaction: referrer || paths.next,
       paths,
       id,
       referrer

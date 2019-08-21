@@ -46,7 +46,7 @@ module.exports = router => {
     const referrer = req.query.referrer
 
     res.render('application/degree/index', {
-      formaction: `/application/${req.params.applicationId}/degree/${id}/answer?${utils.queryString(req)}`,
+      formaction: referrer || `/application/${req.params.applicationId}/degree/${id}/answer?${utils.queryString(req)}`,
       id,
       referrer
     })
@@ -77,7 +77,7 @@ module.exports = router => {
     const paths = degreePaths(req)
 
     res.render(`application/degree/${template}`, {
-      formaction: paths.next,
+      formaction: referrer || paths.next,
       paths,
       id,
       referrer

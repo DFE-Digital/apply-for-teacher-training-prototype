@@ -17,7 +17,9 @@
   {%- endif %}
 {%- endset %}
 
-{% set grade = degree.grade if degree.grade else "Pending" %}
+{% set grade = "Pending: " + degree["grade-predicted"] if degree["grade"] == "Pending" else degree["grade-other"] or degree.grade %}
+
+{{ degree["grade-pending"] }}
 
 {{ govukSummaryList({
   classes: "app-summary",

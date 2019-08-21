@@ -50,8 +50,8 @@
   })}}
   {% endif %}
 
-  {% if data.candidate["name"] %}
-    {% set signOutText = "Sign out (" + data.candidate["name"] + ")" %}
+  {% if applicationValue(["candidate", "name"]) %}
+    {% set signOutText = "Sign out (" + applicationValue(["candidate", "name"]) + ")" %}
   {% else %}
     {% set signOutText = "Sign out" %}
   {% endif %}
@@ -64,7 +64,7 @@
     navigation: (([{
       href: "/",
       text: signOutText
-    }] if data.candidate) if isSignedOut != true)
+    }] if data.account) if isSignedOut != true)
   }) }}
 {% endblock %}
 

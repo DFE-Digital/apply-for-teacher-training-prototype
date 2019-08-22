@@ -2,7 +2,7 @@
 
 {% set title = "Thank you for submitting your teacher training application" %}
 {% set from = "apply-for-teacher-training@education.gov.uk" %}
-{% set to = data.candidate["email"] %}
+{% set to = data.account.email %}
 {% set courses = applicationValue("courses") | toArray %}
 
 {% block content %}

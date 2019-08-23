@@ -22,16 +22,33 @@
       html: dbsCheckHtml
     }) }}
 
-    {{ govukCharacterCount({
-      label: {
-        text: "Is there anything else you would like to tell us about your application?",
-        classes: "govuk-label--m govuk-!-margin-top-6"
-      },
-      rows: 10,
-      maxwords: 600
-    } | decorateApplicationAttributes(["application", provider + "-" + course, "miscellaneous"])) }}
+    {% set miscellaneousHtml %}
+      {{ govukCharacterCount({
+        label: {
+          text: "Please provide details"
+        },
+        rows: 10,
+        maxwords: 300
+      } | decorateApplicationAttributes(["application", provider + "-" + course, "miscellaneous"])) }}
+    {% endset %}
 
-    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Is there anything else you would like to tell us about your application?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        text: "Yes",
+        conditional: {
+          html: miscellaneousHtml
+        }
+      }, {
+        text: "No"
+      }]
+    } | decorateApplicationAttributes(["application", provider + "-" + course, "miscellaneous-choice"])) }}
+
     <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate and I agree to the <a href="#">terms and conditions</a> of the ‘{{ serviceName }}’ service.</p>
 
     {{ govukButton({

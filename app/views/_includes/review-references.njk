@@ -1,6 +1,7 @@
 {% set references = applicationValue('referees') | toArray %}
 {% set applicationPath = '/application/' + applicationId %}
 {% if references.length >= 1 %}
+  <p>We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
   {% for item in references %}
     {% set typeRow = {
       key: {

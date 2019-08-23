@@ -61,7 +61,6 @@
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>
-  <p class="govuk-body">Enter your qualifications as completely as you can, including your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
   {% set degree = {
     text: "Degree",
     href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
@@ -87,7 +86,7 @@
     completed: applicationValue(["gcse", "science"])
   } %}
   {% set otherQualifications = {
-    text: "Other relevant qualifications",
+    text: "Other relevant academic and non-academic qualifications",
     href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
     id: "other-qualifications",
     completed: applicationValue(["other-qualifications"])
@@ -108,7 +107,7 @@
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Your choice of teaching subject",
+      text: "What do you know about the subject you want to teach?",
       href: applicationPath + "/subject-knowledge/" + ("review" if applicationValue("subject-knowledge")),
       id: "subject-knowledge",
       completed: applicationValue("subject-knowledge")

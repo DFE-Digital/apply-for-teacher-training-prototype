@@ -18,22 +18,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set detailsHtml %}
-    <p class="govuk-body">Include:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>paid work</li>
-      <li>regular full and part-time work</li>
-      <li>work in a school (for example as a teaching assistant)</li>
-    </ul>
-    <p class="govuk-body">Don’t include:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>short-term school experience, one-off observations and volunteering with children – we’ll ask you about this next</li>
-    </ul>
-  {% endset %}
-  {{ govukDetails({
-    summaryText: "Help with what to include",
-    html: detailsHtml
-  }) }}
+  <p class="govuk-body">Don’t include voluntary or unpaid experience – we’ll ask you about this in ‘School experience and volunteering with young people’.</li>
 
   {{ govukInput({
     label: {
@@ -48,6 +33,20 @@
       classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Was this job full-time or part-time?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      text: "Full-time"
+    }, {
+      text: "Part-time"
+    }]
+  } | decorateApplicationAttributes(["work-history", id, "type"])) }}
 
   {{ govukDateInput({
     fieldset: {

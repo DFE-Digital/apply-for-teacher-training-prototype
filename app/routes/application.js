@@ -73,7 +73,7 @@ module.exports = router => {
     res.render(`application/confirmation`)
   })
 
-  router.all('/application/:applicationId/submitted', (req, res) => {
+  router.all('/application/:applicationId/email/submitted', (req, res) => {
     res.render(`email/application-submitted`)
   })
 

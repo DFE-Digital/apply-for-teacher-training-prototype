@@ -12,8 +12,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set degrees = data.applications[applicationId]["degree"] | toArray %}
-  {% for degree in degrees %}
+  {% for degree in applicationValue(["degree"]) | toArray %}
     {% include "_includes/review-degree.njk" %}
   {% endfor %}
   {{ govukButton({

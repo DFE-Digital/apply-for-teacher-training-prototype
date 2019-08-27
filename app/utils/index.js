@@ -63,6 +63,17 @@ const hasPrimaryCourses = (req) => {
   }
 }
 
+const toArray = (obj) => {
+  if (obj) {
+    const arr = []
+    for (const [key, value] of Object.entries(obj)) {
+      value.id = key
+      arr.push(value)
+    }
+    return arr
+  }
+}
+
 module.exports = {
   applicationData,
   generateRandomString,
@@ -71,5 +82,6 @@ module.exports = {
   hasApplications,
   hasPrimaryCourses,
   hasSubmittedApplications,
-  hasStartedApplications
+  hasStartedApplications,
+  toArray
 }

@@ -11,15 +11,19 @@
     border-bottom: 0;
   }
 
-  .govuk-summary-list__key {
-    padding-left: govuk-spacing(2);
-    background-color: govuk-colour("light-grey");
+  .govuk-summary-list__row {
+    margin: 0;
   }
 
-  .govuk-summary-list__actions,
-  .govuk-summary-list__value {
-    padding-left: govuk-spacing(2);
-    padding-right: govuk-spacing(2);
+  .govuk-summary-list__key,
+  .govuk-summary-list__value,
+  .govuk-summary-list__actions {
+    padding: govuk-spacing(2);
+    margin: 0;
+  }
+
+  .govuk-summary-list__key {
+    background-color: govuk-colour("light-grey");
   }
 
   .govuk-table__head {
@@ -36,6 +40,7 @@
     padding-right: govuk-spacing(2);
   }
 
+  .govuk-summary-list__row:last-of-type,
   .govuk-table__row:last-child .govuk-table__header,
   .govuk-table__row:last-child .govuk-table__cell {
     border-bottom: 0 none;

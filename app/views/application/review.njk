@@ -12,7 +12,7 @@
 
 {% block primary %}
   <h2 class="govuk-heading-l">Courses</h2>
-  {% if applicationValue("courses") %}
+  {% if applicationValue(["courses"]) %}
     {% include "_includes/review-courses.njk" %}
   {% else %}
     {{ govukButton({
@@ -37,35 +37,31 @@
 
   <h2 class="govuk-heading-l">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
-  {% set degrees = data.applications[applicationId]["degree"] | toArray %}
-  {% for degree in degrees %}
+  {% for degree in applicationValue(["degree"]) | toArray %}
     {% include "_includes/review-degree.njk" %}
   {% endfor %}
 
-  {% set gcses = data.applications[applicationId]["gcse"] | toArray %}
-  {% for gcse in gcses %}
+  {% for gcse in applicationValue(["gcse"]) | toArray %}
     <h3 class="govuk-heading-m">{{ gcse.id | capitalize }} GCSE or equivalent</h3>
     {% include "_includes/review-gcse.njk" %}
   {% endfor %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
-  {% for qualification in qualifications %}
+  {% for qualification in applicationValue(["other-qualifications"]) | toArray %}
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
 
   <h2 class="govuk-heading-l">Personal statement</h2>
-  <h3 class="govuk-heading-m">What do you know about the subject you want to teach?</h3>
-  {% include "_includes/review-subject-knowledge.njk" %}
-
-  <h3 class="govuk-heading-m">Why do you want to be a teacher?</h3>
   {% include "_includes/review-vocation.njk" %}
+
+  <h2 class="govuk-heading-l">Cover letters</h2>
+  {% for coverLetter in applicationValue(["cover-letters"]) | toArray %}
+    <h3 class="govuk-heading-m">{{ coverLetter.provider }}</h3>
+    {% include "_includes/review-cover-letter.njk" %}
+  {% endfor %}
 
   <h2 class="govuk-heading-l">References</h2>
   {% include "_includes/review-references.njk" %}
-
-  <h2 class="govuk-heading-l">Interview preferences</h2>
-  {% include "_includes/review-interview.njk" %}
 
   {{ govukButton({
     text: "Continue",

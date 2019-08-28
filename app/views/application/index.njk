@@ -39,22 +39,22 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details/" + ("review" if applicationValue(["candidate"])),
+      href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"])),
       id: "personal-details",
       completed: applicationValue("candidate")
     }, {
       text: "Contact details",
-      href: applicationPath + "/contact-details/" + ("review" if applicationValue(["contact-details", "address"])),
+      href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
       id: "contact-details",
       completed: applicationValue(["contact-details", "address"])
     }, {
       text: "Work history",
-      href: applicationPath + "/work-history/" + ("review" if applicationValue("work-history")),
+      href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history")),
       id: "work-history",
       completed: applicationValue("work-history")
     }, {
       text: "School experience and volunteering with young people",
-      href: applicationPath + "/school-experience/" + ("review" if applicationValue("school-experience") and hasSchoolExperience),
+      href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience")),
       id: "school-experience",
       completed: applicationValue("school-experience")
     }]
@@ -63,31 +63,31 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>
   {% set degree = {
     text: "Degree",
-    href: applicationPath + "/degree/" + ("review" if applicationValue(["degree"]) else "add"),
+    href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "add"),
     id: "degree",
     completed: applicationValue(["degree"])
   } %}
   {% set mathsGcse = {
     text: "Maths GCSE or equivalent",
-    href: applicationPath + "/gcse/maths/" + ("review" if applicationValue(["gcse", "maths"])),
+    href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"])),
     id: "maths-gcse",
     completed: applicationValue(["gcse", "maths"])
   } %}
   {% set englishGcse = {
     text: "English GCSE or equivalent",
-    href: applicationPath + "/gcse/english/" + ("review" if applicationValue(["gcse", "english"])),
+    href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"])),
     id: "english-gcse",
     completed: applicationValue(["gcse", "english"])
   } %}
   {% set scienceGcse = {
     text: "Science GCSE or equivalent",
-    href: applicationPath + "/gcse/science/" + ("review" if applicationValue(["gcse", "science"])),
+    href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"])),
     id: "science-gcse",
     completed: applicationValue(["gcse", "science"])
   } %}
   {% set otherQualifications = {
     text: "Other relevant academic and non-academic qualifications",
-    href: applicationPath + "/other-qualifications/" + ("review" if applicationValue(["other-qualifications"]) else "add"),
+    href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "add"),
     id: "other-qualifications",
     completed: applicationValue(["other-qualifications"])
   } %}
@@ -107,37 +107,64 @@
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "What do you know about the subject you want to teach?",
-      href: applicationPath + "/subject-knowledge/" + ("review" if applicationValue("subject-knowledge")),
-      id: "subject-knowledge",
-      completed: applicationValue("subject-knowledge")
-    }, {
       text: "Why do you want to be a teacher?",
-      href: applicationPath + "/vocation/" + ("review" if applicationValue("vocation")),
+      href: applicationPath + "/vocation" + ("/review" if applicationValue("vocation")),
       id: "vocation",
       completed: applicationValue("vocation")
     }]
   }) }}
+
+  {% set courses = applicationValue("courses") | toArray %}
+  {% if courses | length == 0 %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letter</h2>
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-8",
+      items: [{
+        classes: "govuk-hint",
+        text: "Choose a course before adding a cover letter"
+      }]
+    }) }}
+  {% elif courses | length > 1 %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-1">Cover letters</h2>
+    <p class="govuk-body">Tell each provider why you are applying to their course.</p>
+    {% set providerItems = [] %}
+    {% for c in courses %}
+      {% set provider = providers[c.providerCode] %}
+      {% set items = providerItems.push({
+        text: provider.name,
+        href: applicationPath + "/cover-letter/" + provider.code + ("/review" if applicationValue(["cover-letters", provider.code])),
+        id: "cover-letter-" + provider.code,
+        completed: applicationValue(["cover-letters", provider.code])
+      }) %}
+    {% endfor %}
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-8",
+      items: providerItems
+    }) }}
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letter</h2>
+    {% for c in courses %}
+      {% set provider = providers[c.providerCode] %}
+      {{ appTaskList({
+        classes: "govuk-!-margin-bottom-8",
+        items: [{
+          text: "Why do you want to study at " + provider.name + "?",
+          href: applicationPath + "/cover-letter/" + provider.code + ("/review" if applicationValue(["cover-letters", provider.code])),
+          id: "cover-letter-" + provider.code,
+          completed: applicationValue(["cover-letters", provider.code])
+        }]
+      }) }}
+    {% endfor %}
+  {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Referees",
-      href: applicationPath + "/references/" + ("review" if applicationValue(["referees"])),
+      href: applicationPath + "/references" + ("/review" if applicationValue(["referees"])),
       id: "references",
       completed: applicationValue(["referees"])
-    }]
-  }) }}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Interview</h2>
-  {{ appTaskList({
-    classes: "govuk-!-margin-bottom-8",
-    items: [{
-      text: "Interview preferences",
-      href: applicationPath + "/interview/" + ("review" if applicationValue("interview")),
-      id: "interview",
-      completed: applicationValue("interview")
     }]
   }) }}
 

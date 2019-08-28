@@ -1,8 +1,9 @@
 {% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set referrer = applicationPath + "/gcse/" + id + "/review" %}
-{% set title = (id | capitalize) + " GCSE or equivalent" %}
+{% set referrer = applicationPath + "/cover-letter/" + providerCode + "/review" %}
+{% set parent = provider.name %}
+{% set title = "Cover letter" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -12,9 +13,9 @@
 {% endblock %}
 
 {% block primary %}
-  {% for gcse in applicationValue(["gcse"]) | toArray %}
-    {% if gcse.id == applicationValue(["gcse", id, "id"]) %}
-      {% include "_includes/review-gcse.njk" %}
+  {% for coverLetter in applicationValue(["cover-letters"]) | toArray %}
+    {% if coverLetter.id == applicationValue(["cover-letters", providerCode, "id"]) %}
+      {% include "_includes/review-cover-letter.njk" %}
     {% endif %}
   {% endfor %}
   {{ govukButton({

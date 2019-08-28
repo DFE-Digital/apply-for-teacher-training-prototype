@@ -12,8 +12,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
-  {% for qualification in qualifications %}
+  {% for qualification in applicationValue(["other-qualifications"]) | toArray %}
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
   {{ govukButton({

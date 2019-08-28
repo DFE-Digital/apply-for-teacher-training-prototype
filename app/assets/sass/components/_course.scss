@@ -1,0 +1,28 @@
+.app-course__title {
+  margin: 0;
+}
+
+.app-course__link {
+  text-decoration: none;
+  padding-bottom: govuk-spacing(1);
+
+}
+
+.app-course__provider {
+  @include govuk-font($size: 19, $weight: "bold");
+  display: block;
+  margin-bottom: govuk-spacing(1);
+  margin-top: govuk-spacing(1);
+}
+
+.app-course__name {
+  @include govuk-font($size: 24, $weight: "bold");
+  display: inline-block;
+  margin-bottom: govuk-spacing(2);
+  text-decoration: underline;
+}
+
+.app-course__description {
+  @include govuk-font($size: 16);
+  margin-bottom: govuk-spacing(0);
+}

@@ -1,4 +1,5 @@
 const getKeypath = require('keypather/get')
+const providers = require('../data/providers')
 const utils = require('./../utils')
 
 // Add Nunjucks filters with access to app, req and res
@@ -67,6 +68,12 @@ module.exports = (nunjucksAppEnv, app) => {
       }
 
       return getApplicationValue(sections)
+    })
+
+    nunjucksAppEnv.addFilter('getCourseFromProviderCode', providerCode => {
+      const courses = getApplicationValue(['courses'])
+      const course = Object.values(courses).find(course => course.providerCode == providerCode)
+      return course ? providers[providerCode].courses[course.courseCode] : false
     })
 
     nunjucksAppEnv.addGlobal('hasSubmittedApplications', () => {

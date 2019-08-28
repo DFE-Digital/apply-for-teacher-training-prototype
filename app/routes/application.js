@@ -57,15 +57,14 @@ module.exports = router => {
 
   require('./application/personal-details')(router)
   require('./application/contact-details')(router)
-  require('./application/subject-knowledge')(router)
   require('./application/work-history')(router)
   require('./application/school-experience')(router)
   require('./application/vocation')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
+  require('./application/cover-letter')(router)
   require('./application/references')(router)
-  require('./application/interview')(router)
 
   // Change status of a course to submitted
   router.all('/application/:applicationId/confirmation', (req, res) => {

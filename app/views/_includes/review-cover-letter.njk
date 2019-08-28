@@ -1,0 +1,35 @@
+{% set applicationPath = '/application/' + applicationId %}
+{{ govukSummaryList({
+  classes: "app-summary",
+  rows: [{
+    key: {
+      text: "Cover letter"
+    },
+    value: {
+      text: (coverLetter["subject-knowledge"] | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      items: [{
+        classes: "govuk-!-padding-right-2",
+        href: applicationPath + "/cover-letter/" + coverLetter.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "evidence of subject knowledge"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Interview preferences"
+    },
+    value: {
+      text: (coverLetter["interview"] | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      items: [{
+        classes: "govuk-!-padding-right-2",
+        href: applicationPath + "/cover-letter/" + coverLetter.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "evidence of subject knowledge"
+      }]
+    } if review != true
+  }]
+}) }}

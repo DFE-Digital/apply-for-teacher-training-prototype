@@ -5,11 +5,15 @@ module.exports = {
       courses: {
         ABCDE: {
           courseCode: '38G9',
-          providerCode: 'G50'
+          providerCode: 'G50',
+          locationName: 'School name',
+          locationAddress: 'Road, City, SW1 1AA'
         },
         ZYXWV: {
           courseCode: 'Q3X1',
-          providerCode: 'B78'
+          providerCode: 'B78',
+          locationName: 'Academy name',
+          locationAddress: 'Road, City, SW2 1AA'
         }
       },
       candidate: {

@@ -1,0 +1,54 @@
+{% extends "_form.njk" %}
+
+{% set title = "Pick a course location" %}
+{% set formaction = paths.next %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p>This course is offered in different locations. Pick the location you would prefer to be based in.</p>
+
+  {{ govukRadios({
+    items: [{
+      text: "Barnfield School",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Silkstream Road, Edgware HA8 0DA"
+      }
+    }, {
+      text: "Broadfields Primary School",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Roseberry Drive, Edgware HA8 8JP"
+      }
+    }, {
+      text: "London Academy",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Spur Road, Edgware, London HA8 8DE"
+      }
+    }, {
+      text: "Watling Park",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Pavillion Way, Edgware HA8 9YR"
+      }
+    }]
+  } | decorateApplicationAttributes(["temporaryCourses", courseId, "location"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

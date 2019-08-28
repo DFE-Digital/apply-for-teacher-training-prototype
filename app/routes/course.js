@@ -10,6 +10,7 @@ const pickCoursePaths = (req) => {
     `/application/${applicationId}/course/${courseId}/found`,
     `/application/${applicationId}/course/${courseId}/provider`,
     `/application/${applicationId}/course/${courseId}/pick`,
+    `/application/${applicationId}/course/${courseId}/location`,
     `/application/${applicationId}/course/${courseId}/create`,
     `/application/${applicationId}`
   ]
@@ -60,7 +61,9 @@ module.exports = router => {
 
     applicationData['courses'][courseId] = {
       providerCode,
-      courseCode
+      courseCode,
+      locationName: temporaryCourse.location,
+      locationAddress: 'Pavillion Way, Edgware HA8 9YR'
     }
 
     delete applicationData['temporaryCourses']

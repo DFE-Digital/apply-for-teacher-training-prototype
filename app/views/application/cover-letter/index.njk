@@ -18,8 +18,8 @@
 {% endblock %}
 
 {% block primary %}
-  {% set course = providerCode | getCourse %}
-  {% if course.name.includes("Primary") %}
+  {% set course = providerCode | getCourseFromProviderCode %}
+  {% if course and course.name.includes("Primary") %}
     <p class="govuk-body">Tell this provider why you want to study with them and why you are a suitable candidate for teaching the primary curriculum.</p>
     <p class="govuk-body">You can include:</p>
     <ul class="govuk-list govuk-list--bullet">

@@ -70,20 +70,10 @@ module.exports = (nunjucksAppEnv, app) => {
       return getApplicationValue(sections)
     })
 
-    nunjucksAppEnv.addFilter('getCourse', providerCode => {
-      const application = utils.applicationData(req)
-      const applicationCourses = utils.toArray(application.courses)
-      const provider = providers[providerCode]
-      for (const applicationCourse of applicationCourses) {
-        if (applicationCourse.providerCode === providerCode) {
-          const providerCourses = utils.toArray(provider.courses)
-          for (const providerCourse of providerCourses) {
-            if (providerCourse.code === applicationCourse.courseCode) {
-              return providerCourse
-            }
-          }
-        }
-      }
+    nunjucksAppEnv.addFilter('getCourseFromProviderCode', providerCode => {
+      const courses = getApplicationValue(['courses'])
+      const course = Object.values(courses).find(course => course.providerCode == providerCode)
+      return course ? providers[providerCode].courses[course.courseCode] : false
     })
 
     nunjucksAppEnv.addGlobal('hasSubmittedApplications', () => {

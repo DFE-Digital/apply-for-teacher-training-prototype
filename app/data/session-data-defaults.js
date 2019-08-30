@@ -113,7 +113,7 @@ module.exports = {
       },
       'language-skills': {
         main: 'No',
-        other: 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'
+        'no-details': 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'
       },
       'work-history': {
         n7901: {

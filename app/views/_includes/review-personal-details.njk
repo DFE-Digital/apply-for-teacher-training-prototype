@@ -84,32 +84,22 @@
   } if review != true
 } %}
 
-{% set textContent %}
-  {% if applicationValue(["language-skills", "main"]) %}
-    {{ applicationValue(["language-skills", "main"]) }}
-    {% if applicationValue(["language-skills", "english"]) %}
-      {{ applicationValue(["language-skills", "english"]) }}
-    {% elif applicationValue(["language-skills", "other"]) %}
-      {{ applicationValue(["language-skills", "other"]) }}
-    {% endif %}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
+{% set englishIsMain = applicationValue(["language-skills", "main"]) == "Yes" and applicationValue(["language-skills", "yes-details"]) %}
+{% set englishIsOther = applicationValue(["language-skills", "main"]) == "No" and applicationValue(["language-skills", "no-details"]) %}
 
 {% set languageRow  = {
   key: {
     text: "Is English your main language?"
   },
   value: {
-    text: textContent
+    html: "<p>" + applicationValue(["language-skills", "main"]) + "</p>" + ("<p>Other languages spoken: " + applicationValue(["language-skills", "yes-details"]) + "</p>" if englishIsMain) + ("<p>English language qualifications: " + applicationValue(["language-skills", "no-details"]) + "</p>" if englishIsOther)
   },
   actions: {
     classes: "govuk-!-padding-right-2",
     items: [{
       href: applicationPath + "/personal-details?referrer=" + referrer,
       text: "Change",
-      visuallyHiddenText: "English language qualifications"
+      visuallyHiddenText: "if English is your main language"
     }]
   } if review != true
 } %}

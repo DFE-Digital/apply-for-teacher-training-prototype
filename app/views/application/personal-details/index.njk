@@ -53,7 +53,7 @@
         text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
       },
       maxwords: 200
-    } | decorateApplicationAttributes(["language-skills", "english"])) }}
+    } | decorateApplicationAttributes(["language-skills", "yes-details"])) }}
   {% endset -%}
   {% set otherDetailHtml %}
     {{ govukCharacterCount({
@@ -61,7 +61,7 @@
         text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
       },
       maxwords: 200
-    } | decorateApplicationAttributes(["language-skills", "other"])) }}
+    } | decorateApplicationAttributes(["language-skills", "no-details"])) }}
   {% endset -%}
 
     {{ govukRadios({

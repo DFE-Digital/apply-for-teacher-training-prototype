@@ -52,12 +52,14 @@ const hasPrimaryCourses = (req) => {
   try {
     var courses = req.session.data.applications[req.params.applicationId].courses
 
-    return Object.values(courses).map((a) => {
+    const result = Object.values(courses).map((a) => {
       const providerCode = a.providerCode
       const courseCode = a.courseCode
       const course = req.app.locals.providers[providerCode].courses[courseCode]
       return course.name.toLowerCase().includes('primary')
     })
+
+    return result.includes(true)
   } catch (error) {
     return false
   }

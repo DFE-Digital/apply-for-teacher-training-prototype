@@ -30,10 +30,6 @@
     background-color: govuk-colour("light-grey");
   }
 
-  .govuk-table__head .govuk-table__header {
-    border-bottom: 0 none;
-  }
-
   .govuk-table__header,
   .govuk-table__cell {
     padding-left: govuk-spacing(2);
@@ -41,7 +37,6 @@
   }
 
   .govuk-summary-list__row:last-of-type,
-  .govuk-table__row:last-child .govuk-table__header,
   .govuk-table__row:last-child .govuk-table__cell {
     border-bottom: 0 none;
   }

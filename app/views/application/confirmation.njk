@@ -4,7 +4,7 @@
 
 {% block content %}
   {% set panelText %}
-    <a class="app-hidden-link" href="/application/{{ applicationId }}/email/submitted">Your application number is: #{{ applicationId }}</a>
+    <a class="app-hidden-link" href="/application/{{ applicationId }}/email/submitted">Your application number is {{ applicationId }}</a>
   {% endset %}
 
   {{ govukPanel({

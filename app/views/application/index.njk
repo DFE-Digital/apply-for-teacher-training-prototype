@@ -124,9 +124,9 @@
         text: "Choose a course before adding a cover letter"
       }]
     }) }}
-  {% elif courses | length > 1 %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-1">Cover letters</h2>
-    <p class="govuk-body">Tell each provider why you are applying to their course.</p>
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letters</h2>
+    {# <p class="govuk-body">Tell each provider why you are applying to their course.</p> #}
     {% set providerItems = [] %}
     {% for c in courses %}
       {% set provider = providers[c.providerCode] %}
@@ -141,20 +141,6 @@
       classes: "govuk-!-margin-bottom-8",
       items: providerItems
     }) }}
-  {% else %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letter</h2>
-    {% for c in courses %}
-      {% set provider = providers[c.providerCode] %}
-      {{ appTaskList({
-        classes: "govuk-!-margin-bottom-8",
-        items: [{
-          text: "Why do you want to study at " + provider.name + "?",
-          href: applicationPath + "/cover-letter/" + provider.code + ("/review" if applicationValue(["cover-letters", provider.code])),
-          id: "cover-letter-" + provider.code,
-          completed: applicationValue(["cover-letters", provider.code])
-        }]
-      }) }}
-    {% endfor %}
   {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>

@@ -63,7 +63,7 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>
   {% set degree = {
     text: "Degree",
-    href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "add"),
+    href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "/add"),
     id: "degree",
     completed: applicationValue(["degree"])
   } %}
@@ -87,7 +87,7 @@
   } %}
   {% set otherQualifications = {
     text: "Other relevant academic and non-academic qualifications",
-    href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "add"),
+    href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
     id: "other-qualifications",
     completed: applicationValue(["other-qualifications"])
   } %}

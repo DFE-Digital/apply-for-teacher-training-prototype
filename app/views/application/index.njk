@@ -16,23 +16,16 @@
 {% endblock %}
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
-  <p class="govuk-body">You can apply for up to 3 courses.</p>
-
-  {% if applicationValue("courses") %}
-    {% include "_includes/application-courses.njk" %}
-    {% if applicationValue("courses") | length < 3 %}
-      {{ govukButton({
-        text: "Add another course",
-        classes: "govuk-button--secondary",
-        href: applicationPath + "/course/add"
-      }) }}
-    {% endif %}
-  {% else %}
-    {{ govukButton({
-      text: "Add course",
-      href: applicationPath + "/course/add"
-    }) }}
-  {% endif %}
+  <p class="govuk-body">You can apply for up to 3 courses</p>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Courses",
+      href: applicationPath + "/courses",
+      id: "personal-details",
+      completed: applicationValue("courses")
+    }]
+  }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">About you</h2>
   {{ appTaskList({

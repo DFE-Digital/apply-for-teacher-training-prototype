@@ -6,13 +6,13 @@ const pickCoursePaths = (req) => {
   const courseId = req.params.courseId
 
   var paths = [
-    `/application/${applicationId}`,
+    `/application/${applicationId}/courses`,
     `/application/${applicationId}/course/${courseId}/found`,
     `/application/${applicationId}/course/${courseId}/provider`,
     `/application/${applicationId}/course/${courseId}/pick`,
     `/application/${applicationId}/course/${courseId}/location`,
     `/application/${applicationId}/course/${courseId}/create`,
-    `/application/${applicationId}`
+    `/application/${applicationId}/courses`
   ]
 
   return journeys.nextAndBackPaths(paths, req)

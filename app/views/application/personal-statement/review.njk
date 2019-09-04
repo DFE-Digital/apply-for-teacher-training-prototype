@@ -7,21 +7,15 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: applicationPath,
     text: "Back to application"
   }) }}
 {% endblock %}
 
 {% block primary %}
-  {% if not applicationValue(["personal-statements", providerCode]) %}
-    {% include "_includes/review-personal-statement.njk" %}
-  {% else %}
-    {% for statement in applicationValue(["personal-statements"]) | toArray %}
-      {% if statement.id == applicationValue(["personal-statements", providerCode, "id"]) %}
-        {% include "_includes/review-personal-statement.njk" %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
+  {% set statement = applicationValue(["personal-statements", providerCode]) %}
+  {% set statementId = providerCode %}
+  {% include "_includes/review-personal-statement.njk" %}
 
   {{ govukButton({
     text: "Continue",

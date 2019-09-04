@@ -60,8 +60,9 @@
   {% include "_includes/review-vocation.njk" %}
 
   <h2 class="govuk-heading-l">Personal statements</h2>
-  {% for statement in applicationValue(["personal-statements"]) | toArray %}
-    <h3 class="govuk-heading-m">{{ statement.provider }}</h3>
+  {% for statementId, statement in applicationValue(["personal-statements"]) %}
+    {% set provider = providers[statementId] %}
+    <h3 class="govuk-heading-m">{{ provider.name }}</h3>
     {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 

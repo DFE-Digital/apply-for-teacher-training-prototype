@@ -1,0 +1,50 @@
+{% set applicationPath = '/application/' + applicationId %}
+{{ govukSummaryList({
+  classes: "app-summary",
+  rows: [{
+    key: {
+      text: "Why do you want to be a teacher?"
+    },
+    value: {
+      text: (statement["vocation"] | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      items: [{
+        classes: "govuk-!-padding-right-2",
+        href: applicationPath + "/personal-statement/" + statement.id + "/vocation?referrer=" + referrer,
+        text: "Change" if statement["vocation"] else "Add",
+        visuallyHiddenText: "why you want to be a teacher"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Subject knowledge"
+    },
+    value: {
+      text: (statement["subject-knowledge"] | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      items: [{
+        classes: "govuk-!-padding-right-2",
+        href: applicationPath + "/personal-statement/" + statement.id + "/subject-knowledge?referrer=" + referrer,
+        text: "Change" if statement["vocation"] else "Add",
+        visuallyHiddenText: "evidence of subject knowledge"
+      }]
+    } if review != true
+  }, {
+    key: {
+      text: "Interview preferences"
+    },
+    value: {
+      text: (statement["interview"] | default("Not entered")) | nl2br | safe
+    },
+    actions: {
+      items: [{
+        classes: "govuk-!-padding-right-2",
+        href: applicationPath + "/personal-statement/" + statement.id + "/interview?referrer=" + referrer,
+        text: "Change" if statement["vocation"] else "Add",
+        visuallyHiddenText: "evidence of subject knowledge"
+      }]
+    } if review != true
+  }]
+}) }}

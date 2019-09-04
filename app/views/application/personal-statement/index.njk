@@ -1,0 +1,72 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
+{% set parent = provider.name %}
+{% set title = "Personal statement" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% set course = providerCode | getCourseFromProviderCode %}
+  <p class="govuk-body">Tell this provider:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>why you are a suitable candidate</li>
+    <li>why you want to be a teacher</li>
+  </ul>
+
+  <p class="govuk-body">Suggested topics to cover include:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>why you want to be a teacher</li>
+    <li>your passion for your subject and the age group you’ve chosen to teach</li>
+    <li>personal qualities that will make you a good teacher</li>
+    <li>your contribution to the life of the school outside the classroom  – for example, running extra-curricular activities and clubs</li>
+    <li>if you have school experience or have worked as a volunteer with children or young people, give details of what this has taught you</li>
+    <li>the abilities and skills you would contribute</li>
+    <li>expertise you’ve gained at work</li>
+    <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
+  </ul>
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Your personal statement",
+      classes: "govuk-label--m govuk-!-margin-top-6"
+    },
+    classes: "govuk-!-font-size-24 govuk-!-padding-4",
+    maxwords: 1000,
+    rows: 48
+  } | decorateApplicationAttributes(["personal-statements", providerCode, "subject-knowledge"])) }}
+
+  {% set hintHtml %}
+    <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Let this provider know:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>dates you are unavailable for interview</li>
+      <li>any disability, health or personal issue you feel is relevant</li>
+    </ul>
+  {% endset %}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Interview preferences",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      html: hintHtml
+    },
+    maxwords: 150
+  } | decorateApplicationAttributes(["personal-statements", providerCode, "interview"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

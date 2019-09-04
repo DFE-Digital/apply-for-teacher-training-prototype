@@ -1,0 +1,40 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
+{% set parent = provider.name %}
+{% set title = "Interview preferences" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Let this provider know:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>dates you are unavailable for interview</li>
+    <li>any disability, health or personal issue you feel is relevant</li>
+  </ul>
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Interview preferences",
+      classes: "govuk-label--m"
+    },
+    maxwords: 150,
+    threshold: 75,
+    rows: 6
+  } | decorateApplicationAttributes(["personal-statements", providerCode, "interview"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

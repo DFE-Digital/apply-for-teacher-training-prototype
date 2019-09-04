@@ -60,9 +60,9 @@
   {% include "_includes/review-vocation.njk" %}
 
   <h2 class="govuk-heading-l">Cover letters</h2>
-  {% for coverLetter in applicationValue(["cover-letters"]) | toArray %}
+  {% for coverLetter in applicationValue(["personal-statements"]) | toArray %}
     <h3 class="govuk-heading-m">{{ coverLetter.provider }}</h3>
-    {% include "_includes/review-cover-letter.njk" %}
+    {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 
   <h2 class="govuk-heading-l">References</h2>

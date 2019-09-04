@@ -1,0 +1,30 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/personal-statement/" + providerCode + "/review" %}
+{% set parent = provider.name %}
+{% set title = "Personal statement" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if not applicationValue(["personal-statements", providerCode]) %}
+    {% include "_includes/review-personal-statement.njk" %}
+  {% else %}
+    {% for statement in applicationValue(["personal-statements"]) | toArray %}
+      {% if statement.id == applicationValue(["personal-statements", providerCode, "id"]) %}
+        {% include "_includes/review-personal-statement.njk" %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

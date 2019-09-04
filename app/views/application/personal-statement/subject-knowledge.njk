@@ -1,8 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/cover-letter/" + providerCode + "/review" %}
+{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
 {% set parent = provider.name %}
-{% set title = "Cover letter" %}
+{% set title = "Subject knowledge" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -20,7 +20,7 @@
 {% block primary %}
   {% set course = providerCode | getCourseFromProviderCode %}
   {% if course and course.name.includes("Primary") %}
-    <p class="govuk-body">Tell this provider why you want to study with them and why you are a suitable candidate for teaching the primary curriculum.</p>
+    <p class="govuk-body">Tell this provider why you are a suitable candidate for teaching the primary curriculum.</p>
     <p class="govuk-body">You can include:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>the abilities and skills you would contribute</li>
@@ -29,7 +29,7 @@
       <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
     </ul>
   {% else %}
-    <p class="govuk-body">Tell this provider why you want to study with them and why you are a suitable candidate for teaching {{ course.name }}.</p>
+    <p class="govuk-body">Tell this provider why you are a suitable candidate for teaching {{ course.name }}.</p>
     <p class="govuk-body">Evidence can include:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>the subject of your undergraduate degree</li>
@@ -42,32 +42,13 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Your cover letter",
+      text: "Evidence of subject knowledge",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
 
     maxwords: 400,
-    rows: 12
-  } | decorateApplicationAttributes(["cover-letters", providerCode, "subject-knowledge"])) }}
-
-  {% set hintHtml %}
-    <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Let this provider know:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>dates you are unavailable for interview</li>
-      <li>any disability, health or personal issue you feel is relevant</li>
-    </ul>
-  {% endset %}
-
-  {{ govukCharacterCount({
-    label: {
-      text: "Interview preferences",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      html: hintHtml
-    },
-    maxwords: 150
-  } | decorateApplicationAttributes(["cover-letters", providerCode, "interview"])) }}
+    rows: 24
+  } | decorateApplicationAttributes(["personal-statements", providerCode, "subject-knowledge"])) }}
 
   {{ govukButton({
     text: "Continue"

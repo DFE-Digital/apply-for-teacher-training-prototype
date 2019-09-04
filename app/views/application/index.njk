@@ -128,7 +128,7 @@
       {% set items = providerItems.push({
         text: provider.name,
         href: applicationPath + "/personal-statement/" + provider.code + "/review",
-        id: "cover-letter-" + provider.code,
+        id: "personal-statement-" + provider.code,
         completed: applicationValue(["personal-statements", provider.code])
       }) %}
     {% endfor %}

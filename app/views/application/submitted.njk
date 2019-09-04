@@ -59,9 +59,9 @@
   <h2 class="govuk-heading-l">Personal statement</h2>
   {% include "_includes/review-vocation.njk" %}
 
-  <h2 class="govuk-heading-l">Cover letters</h2>
-  {% for coverLetter in applicationValue(["personal-statements"]) | toArray %}
-    <h3 class="govuk-heading-m">{{ coverLetter.provider }}</h3>
+  <h2 class="govuk-heading-l">Personal statements</h2>
+  {% for statement in applicationValue(["personal-statements"]) | toArray %}
+    <h3 class="govuk-heading-m">{{ statement.provider }}</h3>
     {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 

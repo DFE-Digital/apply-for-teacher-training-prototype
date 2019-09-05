@@ -7,7 +7,13 @@
     {% if application.status == 'submitted' %}
       <p>You submitted your application on {{ "now" | date("d MMMM yyyy") }}. Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
 
+      {% if true or (notAlreadyEdited and within1WeekOfSubmitting) %}
       <div class="govuk-inset-text">
+        {# {{ govukWarningText({
+          text: "You’ve edited your application but your changes haven’t been submitted yet",
+          iconFallbackText: "Warning"
+        }) }} #}
+
         <p>You can make changes to your application for 1 week (until {{ 7 | nowPlusDays("d MMMM yyyy") }}). After you’ve edited your application and submitted it for the second time, you won’t be able to make any further changes.</p>
 
         {{ govukButton({
@@ -15,13 +21,20 @@
           href: "/application/start/course"
         }) }}
       </div>
+      {% else %}
+        <p>
+          <a href="/application/{{ applicationId }}/submitted">View your application</a>
+        </p>
+      {% endif %}
 
-      {# <p><a href="/application/{{ applicationId }}/submitted">View application</a></p> #}
+      <hr class="govuk-section-break govuk-section-break--l">
+
+      <h2 class="govuk-heading-l">Courses you’ve applied to</h2>
 
       {% for id, c in application.courses %}
         {% set provider = providers[c.providerCode] %}
         {% set course = provider.courses[c.courseCode] %}
-        <h4 class="govuk-heading-m">{{ provider.name }}</h4>
+        <h3 class="govuk-heading-m">{{ provider.name }}</h3>
         {{ govukSummaryList({
           classes: "app-summary",
           rows: [{
@@ -40,7 +53,14 @@
             }
           }, {
             key: {
-              text: "Response"
+              text: "Location"
+            },
+            value: {
+              html: c.locationName + "<br />" + c.locationAddress
+            }
+          }, {
+            key: {
+              text: "Provider response"
             },
             value: {
               html: "No response yet"
@@ -48,6 +68,21 @@
           }]
         }) }}
       {% endfor %}
+
+      <hr class="govuk-section-break govuk-section-break--m">
+
+      <h2 class="govuk-heading-l">Your references</h2>
+      <p>We’ve contacted your references.</p>
+      <ul class="govuk-list">
+      {% for id, referee in application.referees %}
+        <li>{{ referee.name }} has not yet responded</li>
+        {# Examples:
+        [name] has responded
+        [name] has been sent a reminder email
+        [name] has declined to give a reference
+        [name] has failed to respond before the 10-day deadline #}
+      {% endfor %}
+      </ul>
     {% endif %}
   {% endfor %}
 {% endblock %}

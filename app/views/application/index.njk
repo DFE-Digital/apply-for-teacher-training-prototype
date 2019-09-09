@@ -105,17 +105,8 @@
 
   {% set courses = applicationValue("courses") | toArray %}
   {% if courses | length == 0 %}
-<<<<<<< Updated upstream
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement</h2>
     <p class="govuk-body">You can write different personal statements for each provider</p>
-=======
-<<<<<<< Updated upstream
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letter</h2>
-=======
-    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement</h2>
-    <p class="govuk-body">You can tailor your personal statement to suit different providers</p>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     {{ appTaskList({
       classes: "govuk-!-margin-bottom-8",
       items: [{
@@ -124,23 +115,12 @@
       }]
     }) }}
   {% else %}
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Cover letters</h2>
-=======
->>>>>>> Stashed changes
     {% if courses | length == 1 %}
       <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement</h2>
     {% else %}
       <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statements</h2>
     {% endif %}
-<<<<<<< Updated upstream
     <p class="govuk-body">You can write different personal statements for each course</p>
-=======
-    <p class="govuk-body">You can tailor your personal statement to suit different courses</p>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     {# <p class="govuk-body">Tell each provider why you are applying to their course.</p> #}
     {% set providerItems = [] %}
     {% for c in courses %}

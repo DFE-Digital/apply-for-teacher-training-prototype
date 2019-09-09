@@ -63,7 +63,7 @@ module.exports = router => {
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
-  require('./application/cover-letter')(router)
+  require('./application/personal-statement')(router)
   require('./application/references')(router)
 
   // Change status of a course to submitted

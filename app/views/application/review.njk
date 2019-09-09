@@ -51,13 +51,11 @@
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
 
-  <h2 class="govuk-heading-l">Personal statement</h2>
-  {% include "_includes/review-vocation.njk" %}
-
-  <h2 class="govuk-heading-l">Cover letters</h2>
-  {% for coverLetter in applicationValue(["cover-letters"]) | toArray %}
-    <h3 class="govuk-heading-m">{{ coverLetter.provider }}</h3>
-    {% include "_includes/review-cover-letter.njk" %}
+  <h2 class="govuk-heading-l">Personal statements</h2>
+  {% for statementId, statement in applicationValue(["personal-statements"]) %}
+    {% set provider = providers[statementId] %}
+    <h3 class="govuk-heading-m">{{ provider.name }}</h3>
+    {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 
   <h2 class="govuk-heading-l">References</h2>

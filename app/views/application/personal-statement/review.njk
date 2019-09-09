@@ -1,0 +1,24 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/personal-statement/" + providerCode + "/review" %}
+{% set parent = provider.name %}
+{% set title = "Personal statement" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set statement = applicationValue(["personal-statements", providerCode]) %}
+  {% set statementId = providerCode %}
+  {% include "_includes/review-personal-statement.njk" %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

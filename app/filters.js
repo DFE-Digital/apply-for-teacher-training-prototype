@@ -44,6 +44,26 @@ module.exports = (env) => {
   }
 
   /**
+   * Add days to a date
+   * @type {String} str
+   */
+  filters.addDays = (date, days) => {
+    return DateTime.fromISO(date).plus({ days }).toISODate()
+  }
+
+  /**
+   * Get number of days from today’s date
+   * @type {String} str
+   */
+  filters.daysFromNow = (start) => {
+    start = DateTime.fromISO(start)
+
+    const diff = start.diffNow('days').toObject()
+
+    return Math.round(diff.days)
+  }
+
+  /**
    * Convert object to array
    * @type {Object} obj
    *

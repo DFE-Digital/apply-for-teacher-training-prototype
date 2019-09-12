@@ -51,7 +51,7 @@
     {% include "_includes/review-other-qualification.njk" %}
   {% endfor %}
 
-  <h2 class="govuk-heading-l">Personal statements</h2>
+  <h2 class="govuk-heading-l">Personal statement and interview</h2>
   {% for statementId, statement in applicationValue(["personal-statements"]) %}
     {% set provider = providers[statementId] %}
     <h3 class="govuk-heading-m">{{ provider.name }}</h3>

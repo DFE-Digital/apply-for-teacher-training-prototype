@@ -44,6 +44,38 @@
     }
   } | decorateApplicationAttributes(["candidate", "family-name"])) }}
 
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Date of birth",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "For example, 31 3 1980"
+    },
+    id: "candidate-date-of-birth",
+    items: [{
+      classes: "govuk-input--width-2",
+      label: "Day",
+      name: "applications[" + applicationId + "][candidate][date-of-birth][day]",
+      value: applicationValue(["candidate", "date-of-birth", "day"]),
+      autocomplete: "bday-day"
+    }, {
+      classes: "govuk-input--width-2",
+      label: "Month",
+      name: "applications[" + applicationId + "][candidate][date-of-birth][month]",
+      value: applicationValue(["candidate", "date-of-birth", "month"]),
+      autocomplete: "bday-month"
+    }, {
+      classes: "govuk-input--width-4",
+      label: "Year",
+      name: "applications[" + applicationId + "][candidate][date-of-birth][year]",
+      value: applicationValue(["candidate", "date-of-birth", "year"]),
+      autocomplete: "bday-year"
+    }]
+  }) }}
+
   {{ appAutocomplete({
     label: {
       text: "Nationality",

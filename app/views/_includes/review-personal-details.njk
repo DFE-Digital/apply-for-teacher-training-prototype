@@ -7,6 +7,12 @@
   {% endif %}
 {% endset %}
 
+{% set dateOfBirthDay = applicationValue(["candidate", "date-of-birth", "day"]).padStart(2, '0') %}
+{% set dateOfBirthMonth = applicationValue(["candidate", "date-of-birth", "month"]).padStart(2, '0') %}
+{% set dateOfBirthYear = applicationValue(["candidate", "date-of-birth", "year"]) %}
+{% set dateOfBirth = dateOfBirthYear + "-" + dateOfBirthMonth + "-" + dateOfBirthDay %}
+{% set dateOfBirthText = dateOfBirth | date("d MMMM yyyy") %}
+
 {% set nationalityText %}
   {% if applicationValue(["candidate", "nationality"]) %}
     {{ applicationValue(["candidate", "nationality"]) }}
@@ -46,6 +52,23 @@
       href: applicationPath + "/personal-details?referrer=" + referrer,
       text: "Change",
       visuallyHiddenText: "name"
+    }]
+  } if review != true
+} %}
+
+{% set dateofBirthRow = {
+  key: {
+    text: "Date of birth"
+  },
+  value: {
+    text: dateOfBirthText
+  },
+  actions: {
+    classes: "govuk-!-padding-right-2",
+    items: [{
+      href: applicationPath + "/personal-details?referrer=" + referrer,
+      text: "Change",
+      visuallyHiddenText: "date of birth"
     }]
   } if review != true
 } %}
@@ -107,11 +130,11 @@
 {% if residencyStatus %}
   {{ govukSummaryList({
     classes: "app-summary",
-    rows: [nameRow, nationalityRow, residencyStatusRow, languageRow]
+    rows: [nameRow, dateofBirthRow, nationalityRow, residencyStatusRow, languageRow]
   }) }}
 {% else %}
   {{ govukSummaryList({
     classes: "app-summary",
-    rows: [nameRow, nationalityRow, languageRow]
+    rows: [nameRow, dateofBirthRow, nationalityRow, languageRow]
   }) }}
 {% endif %}

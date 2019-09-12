@@ -24,7 +24,7 @@
     {% if application.status == 'submitted' %}
       <h3 class="govuk-heading-l">Application submitted {{ "now" | date("d MMMM yyyy") }}</h3>
       <p><a href="/application/{{ applicationId }}/submitted">View application</a></p>
-      <p>Training providers must respond by 29 July 2020.</p>
+      <p>Training providers must respond by {{ "now" | date | addDays("40") | date("d MMMM yyyy") }}.</p>
 
       {% for id, c in application.courses %}
         {% set provider = providers[c.providerCode] %}

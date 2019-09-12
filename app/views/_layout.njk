@@ -29,11 +29,11 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
-{% from "_components/autocomplete/macro.njk" import appAutocomplete %}
-{% from "_components/cookie-banner/macro.njk" import appCookieBanner %}
-{% from "_components/icon/macro.njk" import appIcon %}
-{% from "_components/related/macro.njk" import appRelated %}
-{% from "_components/task-list/macro.njk" import appTaskList %}
+{% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
+{% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
+{% from "_components/icon/macro.njk"           import appIcon %}
+{% from "_components/related/macro.njk"        import appRelated %}
+{% from "_components/task-list/macro.njk"      import appTaskList %}
 
 {% block head %}
   {% include "_includes/head.njk" %}
@@ -56,10 +56,20 @@
     {% set signOutText = "Sign out" %}
   {% endif %}
 
+  {% if isSignedOut != true %}
+    {% if applicationValue(["status"]) == "started" %}
+      {% set serviceUrl = "/application/" + applicationId %}
+    {% else %}
+      {% set serviceUrl = "/applications" %}
+    {% endif %}
+  {% else %}
+    {% set serviceUrl = "/" %}
+  {% endif %}
+
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk",
     serviceName: serviceName,
-    serviceUrl: "/",
+    serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: (([{
       href: "/",

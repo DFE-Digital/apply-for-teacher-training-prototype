@@ -50,8 +50,8 @@
   })}}
   {% endif %}
 
-  {% if applicationValue(["candidate", "name"]) %}
-    {% set signOutText = "Sign out (" + applicationValue(["candidate", "name"]) + ")" %}
+  {% if applicationValue(["candidate", "given-name"]) %}
+    {% set signOutText = "Sign out (" + applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) + ")" %}
   {% else %}
     {% set signOutText = "Sign out" %}
   {% endif %}

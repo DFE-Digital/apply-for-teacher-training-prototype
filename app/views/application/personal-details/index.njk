@@ -18,11 +18,31 @@
 {% block primary %}
   {{ govukInput({
     label: {
-      text: "Full name",
+      text: "First name",
       classes: "govuk-label--m"
     },
-    autocomplete: "name"
-  } | decorateApplicationAttributes(["candidate", "name"])) }}
+    hint: {
+      text: "Or given names"
+    },
+    autocomplete: "given-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "given-name"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Last name",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Or family name"
+    },
+    autocomplete: "family-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "family-name"])) }}
 
   {{ appAutocomplete({
     label: {

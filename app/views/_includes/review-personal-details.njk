@@ -1,7 +1,7 @@
 {% set applicationPath = '/application/' + applicationId %}
 {% set nameText %}
-  {% if applicationValue(["candidate", "name"]) %}
-    {{ applicationValue(["candidate", "name"]) }}
+  {% if applicationValue(["candidate", "given-name"]) or applicationValue(["candidate", "family-name"]) %}
+    {{ applicationValue(["candidate", "given-name"]) }} {{ applicationValue(["candidate", "family-name"]) }}
   {% else %}
     Not entered
   {% endif %}

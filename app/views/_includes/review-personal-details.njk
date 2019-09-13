@@ -1,4 +1,5 @@
 {% set applicationPath = '/application/' + applicationId %}
+
 {% set nameText %}
   {% if applicationValue(["candidate", "given-name"]) or applicationValue(["candidate", "family-name"]) %}
     {{ applicationValue(["candidate", "given-name"]) }} {{ applicationValue(["candidate", "family-name"]) }}
@@ -7,11 +8,16 @@
   {% endif %}
 {% endset %}
 
-{% set dateOfBirthDay = applicationValue(["candidate", "date-of-birth", "day"]).padStart(2, '0') %}
-{% set dateOfBirthMonth = applicationValue(["candidate", "date-of-birth", "month"]).padStart(2, '0') %}
-{% set dateOfBirthYear = applicationValue(["candidate", "date-of-birth", "year"]) %}
-{% set dateOfBirth = dateOfBirthYear + "-" + dateOfBirthMonth + "-" + dateOfBirthDay %}
-{% set dateOfBirthText = dateOfBirth | date("d MMMM yyyy") %}
+{% set dateOfBirthText %}
+  {% if applicationValue(["candidate", "date-of-birth"]) %}
+    {% set day = applicationValue(["candidate", "date-of-birth", "day"]).padStart(2, '0') %}
+    {% set month = applicationValue(["candidate", "date-of-birth", "month"]).padStart(2, '0') %}
+    {% set year = applicationValue(["candidate", "date-of-birth", "year"]) %}
+    {{ (year + "-" + month + "-" + day) | date("d MMMM yyyy") }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
 
 {% set nationalityText %}
   {% if applicationValue(["candidate", "nationality"]) %}
@@ -24,8 +30,8 @@
   {% endif %}
 {% endset %}
 
-{% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
 {% set residencyStatusText %}
+  {% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
   {% if residencyStatus == "right-to-study" %}
     I have the right to study and/or work in the&nbsp;UK{{ ": " + applicationValue(["candidate", "residency-status-right-to-study"]) if applicationValue(["candidate", "residency-status-right-to-study"]) }}
   {% elif residencyStatus == "require-tier-2" %}
@@ -36,6 +42,19 @@
     I don’t know my residency status{{ ": " + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
   {% else %}
     UK citizen
+  {% endif %}
+{% endset %}
+
+{% set languageHtml %}
+  {% if applicationValue(["language-skills"]) %}
+    <p>{{ applicationValue(["language-skills", "main"]) }}</p>
+    {% if applicationValue(["language-skills", "main"]) == "Yes" and applicationValue(["language-skills", "yes-details"]) %}
+      <p>Other languages spoken: {{ applicationValue(["language-skills", "yes-details"]) }}</p>
+    {% elif applicationValue(["language-skills", "main"]) == "No" and applicationValue(["language-skills", "no-details"]) %}
+      <p>English language qualifications: {{ applicationValue(["language-skills", "no-details"]) }}</p>
+    {% endif %}
+  {% else %}
+    Not entered
   {% endif %}
 {% endset %}
 
@@ -107,15 +126,12 @@
   } if review != true
 } %}
 
-{% set englishIsMain = applicationValue(["language-skills", "main"]) == "Yes" and applicationValue(["language-skills", "yes-details"]) %}
-{% set englishIsOther = applicationValue(["language-skills", "main"]) == "No" and applicationValue(["language-skills", "no-details"]) %}
-
 {% set languageRow  = {
   key: {
     text: "Is English your main language?"
   },
   value: {
-    html: "<p>" + applicationValue(["language-skills", "main"]) + "</p>" + ("<p>Other languages spoken: " + applicationValue(["language-skills", "yes-details"]) + "</p>" if englishIsMain) + ("<p>English language qualifications: " + applicationValue(["language-skills", "no-details"]) + "</p>" if englishIsOther)
+    html: languageHtml
   },
   actions: {
     classes: "govuk-!-padding-right-2",

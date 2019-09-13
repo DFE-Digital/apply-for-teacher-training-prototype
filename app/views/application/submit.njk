@@ -1,12 +1,11 @@
 {% extends "_form.njk" %}
-{% set applicationPath = '/application/' + applicationId %}
+{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Submit application" %}
 {% set formaction = applicationPath + "/confirmation" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    "text": "Back",
-    "href": applicationPath + "/review"
+    "href": applicationPath + "/equality-monitoring/review"
   }) }}
 {% endblock %}
 

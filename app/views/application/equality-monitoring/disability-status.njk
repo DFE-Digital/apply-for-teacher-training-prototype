@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+{% set parent = "Equality monitoring" %}
+{% set title = "Are your day-to-day activities limited because of a long term health problem or disability?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Yes, limited a little"
+    }, {
+      text: "Yes, limited a lot"
+    }, {
+      text: "No"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "disability-status"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

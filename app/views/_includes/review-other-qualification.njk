@@ -1,5 +1,5 @@
 {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
-{% set applicationPath = '/application/' + applicationId %}
+{% set applicationPath = "/application/" + applicationId %}
 
 {% set institution -%}
   {%- if qualification.institution -%}

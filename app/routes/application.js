@@ -65,15 +65,16 @@ module.exports = router => {
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
   require('./application/references')(router)
+  require('./application/equality-monitoring')(router)
 
   // Change status of a course to submitted
   router.all('/application/:applicationId/confirmation', (req, res) => {
     req.session.data.applications[req.params.applicationId].status = 'submitted'
-    res.render(`application/confirmation`)
+    res.render('application/confirmation')
   })
 
   router.all('/application/:applicationId/email/submitted', (req, res) => {
-    res.render(`email/application-submitted`)
+    res.render('email/application-submitted')
   })
 
   // Render provided view, or index template for that view if not found

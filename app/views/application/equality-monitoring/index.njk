@@ -1,0 +1,20 @@
+{% extends "_content.njk" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "Equality monitoring" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath + "/review"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">The Department for Education collects data from teacher training applicants for equality monitoring. Equality monitoring helps us ensure that the application process is fair and doesn’t discriminate on the basis of a candidate’s sex, ethnicity, sexual orientation, religious belief or disability.
+  <p class="govuk-body">None of this information is shared with training providers until after the application process is over.</p>
+  <p class="govuk-body">This section is optional. If you choose not to complete it, this will have no effect on the progress of your application.</p>
+
+  {{ govukButton({
+    text: "Continue",
+    href: paths.next
+  }) }}
+{% endblock %}

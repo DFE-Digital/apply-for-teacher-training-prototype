@@ -1,0 +1,21 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set parent = "Equality monitoring" %}
+{% set title = "Check your answers" %}
+{% set referrer = applicationPath + "/equality-monitoring/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath + "/review"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review-equality-monitoring.njk" %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath + "/submit"
+  }) }}
+{% endblock %}

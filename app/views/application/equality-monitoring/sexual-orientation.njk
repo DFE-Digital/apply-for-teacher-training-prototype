@@ -1,0 +1,33 @@
+{% extends "_form.njk" %}
+{% set parent = "Equality monitoring" %}
+{% set title = "Which of the following best describes your sexual orientation?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Bisexual"
+    }, {
+      text: "Gay"
+    }, {
+      text: "Heterosexual (straight)"
+    }, {
+      text: "Lesbian"
+    }, {
+      text: "Other"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "sexual-orientation"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

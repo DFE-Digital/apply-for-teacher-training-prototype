@@ -1,4 +1,4 @@
-/* global GOVUK */
+/* global GOVUK, $ */
 
 // Warn about using the kit in production
 if (window.console && window.console.info) {

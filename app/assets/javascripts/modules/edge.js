@@ -1,3 +1,5 @@
+/* global $ */
+
 ;(function (global) {
   'use strict'
 
@@ -6,14 +8,14 @@
 
   GOVUK.Modules.Edge = function () {
     this.start = function (element) {
-      element.on('click', 'a[href="#"], .js-edge', alertUser);
+      element.on('click', 'a[href="#"], .js-edge', alertUser)
 
-      function alertUser(evt) {
-        evt.preventDefault();
-        var target = $(evt.target);
+      function alertUser (e) {
+        e.preventDefault()
+        var target = $(e.target)
         var message = target.data('message') || 'Sorry, this hasn’t been built yet'
 
-        alert(message);
+        window.alert(message)
       }
     }
   }

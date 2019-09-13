@@ -1,0 +1,183 @@
+{% extends "_form.njk" %}
+{% set parent = "Equality monitoring" %}
+{% if applicationValue(["equality-monitoring", "ethnic-group"]) == "Another ethnic group" %}
+  {% set title = "Which of the following best describes your background?" %}
+{% else %}
+  {% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
+  {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}
+{% endif %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set asianOtherHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Your Asian background (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+  {% endset -%}
+
+  {% set blackOtherHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Your Black background (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+  {% endset -%}
+
+  {% set mixedOtherHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Your Mixed background (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+  {% endset -%}
+
+  {% set whiteOtherHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Your White background (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+  {% endset -%}
+
+  {% set otherOtherHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Your ethnic background (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
+  {% endset -%}
+
+  {% if ethnicGroup == "Asian or Asian British" %}
+    {{ govukRadios({
+      fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      },
+      items: [{
+        text: "Bangladeshi"
+      }, {
+        text: "Chinese"
+      }, {
+        text: "Indian"
+      }, {
+        text: "Pakistani"
+      }, {
+        text: "Another Asian background",
+        conditional: {
+          html: asianOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
+  {% elif ethnicGroup == "Black, African, Black British or Caribbean" %}
+    {{ govukRadios({
+      fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      },
+      items: [{
+        text: "African"
+      }, {
+        text: "Caribbean"
+      }, {
+        text: "Another Black background",
+        conditional: {
+          html: blackOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
+  {% elif ethnicGroup == "Mixed or multiple ethnic groups" %}
+    {{ govukRadios({
+      fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      },
+      items: [{
+        text: "Asian and White"
+      }, {
+        text: "Black African and White"
+      }, {
+        text: "Black Caribbean and White"
+      }, {
+        text: "Another Mixed background",
+        conditional: {
+          html: mixedOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
+  {% elif ethnicGroup == "White" %}
+    {{ govukRadios({
+      fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      },
+      items: [{
+        text: "British, English, Northern Irish, Scottish, or Welsh"
+      }, {
+        text: "Irish"
+      }, {
+        text: "Irish Traveller or Gypsy"
+      }, {
+        text: "Another White background",
+        conditional: {
+          html: whiteOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
+  {% else %}
+    {{ govukRadios({
+      fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      },
+      items: [{
+        text: "Arab"
+      }, {
+        text: "Another ethnic background",
+        conditional: {
+          html: otherOtherHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

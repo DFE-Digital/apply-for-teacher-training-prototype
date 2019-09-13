@@ -72,7 +72,7 @@ module.exports = (nunjucksAppEnv, app) => {
 
     nunjucksAppEnv.addFilter('getCourseFromProviderCode', providerCode => {
       const courses = getApplicationValue(['courses'])
-      const course = Object.values(courses).find(course => course.providerCode == providerCode)
+      const course = Object.values(courses).find(course => course.providerCode === providerCode)
       return course ? providers[providerCode].courses[course.courseCode] : false
     })
 

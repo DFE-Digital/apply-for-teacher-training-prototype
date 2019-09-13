@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+{% set parent = "Equality monitoring" %}
+{% set title = "What is your sex?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Female"
+    }, {
+      text: "Intersex"
+    }, {
+      text: "Male"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "sex"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

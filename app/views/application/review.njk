@@ -1,5 +1,5 @@
 {% extends "_content-wide.njk" %}
-{% set applicationPath = '/application/' + applicationId %}
+{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Review your application" %}
 {% set referrer = applicationPath + "/review" %}
 
@@ -63,6 +63,6 @@
 
   {{ govukButton({
     text: "Continue",
-    href: applicationPath + "/submit"
+    href: applicationPath + "/equality-monitoring"
   }) }}
 {% endblock %}

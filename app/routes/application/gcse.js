@@ -7,7 +7,7 @@ const gcseData = (req) => {
 }
 
 const isInternational = (req) => {
-  return gcseData(req)['type'] === 'Non-UK qualification'
+  return gcseData(req).type === 'Non-UK qualification'
 }
 
 const gcsePaths = (req) => {
@@ -63,7 +63,7 @@ module.exports = router => {
     const id = req.params.id
     const applicationId = req.params.applicationId
     const referrer = req.query.referrer
-    const type = gcseData(req)['type']
+    const type = gcseData(req).type
 
     let path
     if (isInternational(req)) {

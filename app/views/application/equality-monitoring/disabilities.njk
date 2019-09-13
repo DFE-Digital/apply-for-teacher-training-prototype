@@ -1,0 +1,88 @@
+{% extends "_form.njk" %}
+{% set parent = "Equality monitoring" %}
+{% set title = "Do you have any health problems or disabilities?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set otherDisabilityHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Other impairment (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "disabilities-other"])) }}
+  {% endset -%}
+
+  {{ govukCheckboxes({
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      text: "Vision",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example due to blindness or partial sight"
+      }
+    }, {
+      text: "Hearing",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example due to deafness or partial hearing"
+      }
+    }, {
+      text: "Mobility",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example difficulty walking short distances, climbing stairs, lifting and carrying objects"
+      }
+    }, {
+      text: "Learning or difficulty concentrating or remembering",
+      label: {
+        classes: "govuk-label--s"
+      }
+    }, {
+      text: "Mental health",
+      label: {
+        classes: "govuk-label--s"
+      }
+    }, {
+      text: "Stamina or breathing difficulty",
+      label: {
+        classes: "govuk-label--s"
+      }
+    }, {
+      text: "Social or behavioural issues",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example a neuro diverse condition such as Autism, Attention Deficit Disorder or Asperger’s Syndrome"
+      }
+    }, {
+      text: "Other",
+      label: {
+        classes: "govuk-label--s"
+      },
+      conditional: {
+        html: otherDisabilityHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "disabilities"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

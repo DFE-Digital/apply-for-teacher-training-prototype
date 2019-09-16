@@ -15,7 +15,7 @@
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "why you want to be a teacher"
       }]
-    } if review != true
+    } if review == true
   }, {
     key: {
       text: "Your knowledge about the subject you want to teach"
@@ -30,7 +30,7 @@
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
-    } if review != true
+    } if review == true
   }, {
     key: {
       text: "Interview preferences"
@@ -45,6 +45,6 @@
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
-    } if review != true
+    } if review == true
   }]
 }) }}

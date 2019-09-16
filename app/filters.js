@@ -26,6 +26,14 @@ module.exports = (env) => {
     }
   }
 
+  filters.nowPlusDays = (days, format = 'yyyy-LL-dd') => {
+    const date = DateTime.local().plus({ days: days })
+
+    return DateTime.fromISO(date, {
+      locale: 'en-GB'
+    }).toFormat(format)
+  }
+
   /**
    * Convert milliseconds to readable duration
    * @type {String} str
@@ -41,26 +49,6 @@ module.exports = (env) => {
 
       return duration
     }
-  }
-
-  /**
-   * Add days to a date
-   * @type {String} str
-   */
-  filters.addDays = (date, days) => {
-    return DateTime.fromISO(date).plus({ days }).toISODate()
-  }
-
-  /**
-   * Get number of days from today’s date
-   * @type {String} str
-   */
-  filters.daysFromNow = (start) => {
-    start = DateTime.fromISO(start)
-
-    const diff = start.diffNow('days').toObject()
-
-    return Math.round(diff.days)
   }
 
   /**

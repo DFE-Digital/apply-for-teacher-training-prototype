@@ -19,8 +19,6 @@
 
 {% set grade = "Pending: " + degree["grade-predicted"] if degree["grade"] == "Pending" else degree["grade-other"] or degree.grade %}
 
-{{ degree["grade-pending"] }}
-
 {{ govukSummaryList({
   classes: "app-summary",
   rows: [{
@@ -37,7 +35,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review != true
+    } if review == true
   }, {
     key: {
       text: "Institution"
@@ -52,7 +50,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review != true
+    } if review == true
   }, {
     key: {
       text: "Year awarded"
@@ -67,7 +65,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review != true
+    } if review == true
   }, {
     key: {
       text: "Grade"
@@ -82,6 +80,6 @@
         text: "Change",
         visuallyHiddenText: "grade"
       }]
-    } if review != true
+    } if review == true
   }]
 }) }}

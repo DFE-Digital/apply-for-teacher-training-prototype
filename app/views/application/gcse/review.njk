@@ -3,6 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set referrer = applicationPath + "/gcse/" + id + "/review" %}
 {% set title = (id | capitalize) + " GCSE or equivalent" %}
+{% set review = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

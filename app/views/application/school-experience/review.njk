@@ -3,6 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "School experience and volunteering with young people" %}
 {% set referrer = applicationPath + "/school-experience/review" %}
+{% set review = true %}
 {% set schoolExperience = applicationValue("school-experience") | toArray | selectattr("id") %}
 {% set addButtonText = "Add another role" if schoolExperience.length >= 1 else "Add a role" %}
 

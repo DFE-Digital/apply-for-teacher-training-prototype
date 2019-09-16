@@ -37,7 +37,7 @@
   </table>
 {% else %}
   <div class="app-summary">
-    {% if review != true %}
+    {% if review == true %}
       {% if applicationValue(["school-experience","attained"] == "false") and not schoolExperience.length %}
         <h3 class="govuk-heading-s govuk-!-margin-bottom-2">No school experiences entered</h3>
         <p class="govuk-body govuk-!-margin-bottom-0">You can still submit an application without school experience, but a few days observing in a school will help you decide if teaching is for you. <a href="https://schoolexperience.education.gov.uk/">Get school experience</a>.</p>

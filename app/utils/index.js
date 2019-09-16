@@ -40,12 +40,16 @@ const hasApplications = (req) => {
 
 const hasSubmittedApplications = (req) => {
   var applications = req.session.data.applications
-  return Object.values(applications).map(a => a.status).includes('submitted')
+  if (applications) {
+    return Object.values(applications).map(a => a.status).includes('submitted')
+  }
 }
 
 const hasStartedApplications = (req) => {
   var applications = req.session.data.applications
-  return Object.values(applications).map(a => a.status).includes('started')
+  if (applications) {
+    return Object.values(applications).map(a => a.status).includes('started')
+  }
 }
 
 const hasPrimaryCourses = (req) => {

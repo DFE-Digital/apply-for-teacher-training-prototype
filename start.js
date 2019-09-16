@@ -70,7 +70,7 @@ if (!sessionDataDefaultsFileExists) {
 function runGulp () {
   const spawn = require('cross-spawn')
 
-  process.env['FORCE_COLOR'] = 1
+  process.env.FORCE_COLOR = 1
   var gulp = spawn('./node_modules/.bin/gulp')
   gulp.stdout.pipe(process.stdout)
   gulp.stderr.pipe(process.stderr)

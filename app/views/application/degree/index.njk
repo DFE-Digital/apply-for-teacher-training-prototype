@@ -1,7 +1,20 @@
 {% extends "_form.njk" %}
 
 {% set action = "edit" if applicationValue(["degree", id, "type"]) else "add" %}
-{% set title = (action | capitalize) + " degree" %}
+{% set degreeCount = applicationValue(["degree"]) | length %}
+{% if degreeCount >= 1 and action == "add" %}
+  {% set title = (action | capitalize) + " another degree" %}
+{% else %}
+  {% set title = (action | capitalize) + " degree" %}
+{% endif %}
+
+{% if degreeCount >= 1 and action == "add" %}
+  {% set hintText = "For example, Masters, PhD, or other (please specify)" %}
+{% elif degreeCount < 1 and action == "add" %}
+  {% set hintText = "For example, BA, BSc or other (please specify)" %}
+{% else %}
+  {% set hintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+{% endif %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -17,8 +30,10 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">First, give us your undergraduate degree. This confirms your eligibility to teach. Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
-  <p class="govuk-body">If you have further, postgraduate degrees, you’ll be able to add them next.</p>
+  {% if degreeCount < 1 %}
+    <p class="govuk-body">First, give us your undergraduate degree. This confirms your eligibility to teach. Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
+    <p class="govuk-body">If you have further, postgraduate degrees, you’ll be able to add them next.</p>
+  {% endif %}
 
   {{ govukInput({
     label: {
@@ -26,7 +41,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "For example, BA, BSc, Masters, PhD, or other (please specify)"
+      text: hintText
     }
   } | decorateApplicationAttributes(["degree", id, "type"])) }}
 

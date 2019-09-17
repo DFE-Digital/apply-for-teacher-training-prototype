@@ -1,94 +1,68 @@
-{% set references = applicationValue('referees') | toArray %}
+{% set references = applicationValue("referees") | toArray %}
 {% set applicationPath = "/application/" + applicationId %}
 {% if references.length >= 1 %}
   <p>We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
   {% for item in references %}
-    {% set typeRow = {
-      key: {
-        text: "Reference type"
-      },
-      value: {
-        text: item.type
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "referee"
-        }]
-      } if review == true
-    } %}
-    {% set nameRow = {
-      key: {
-        text: (item.id | capitalize) + " referee"
-      },
-      value: {
-        text: item.name
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "referee"
-        }]
-      } if review == true
-    } %}
-    {% set emailRow = {
-      key: {
-        text: "Email"
-      },
-      value: {
-        text: item.email
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "referee"
-        }]
-      } if review == true
-    } %}
-    {% set relationshipRow = {
-      key: {
-        text: "Relationship"
-      },
-      value: {
-        text: item.relationship
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "referee"
-        }]
-      } if review == true
-    } %}
-    {% set characterRow = {
-      key: {
-        text: "Reason for providing a character reference"
-      },
-      value: {
-        text: item["character-explanation"]
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "referee"
-        }]
-      } if review == true
-    } %}
-    {% if item["character-explanation"] %}
-      {{ govukSummaryList({
-        classes: "app-summary",
-        rows: [nameRow, emailRow, typeRow, relationshipRow, characterRow]
-      }) }}
-    {% else %}
-      {{ govukSummaryList({
-        classes: "app-summary",
-        rows: [nameRow, emailRow, typeRow, relationshipRow]
-      }) }}
-    {% endif %}
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: (item.id | capitalize) + " referee"
+        },
+        value: {
+          text: item.name or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        } if review == true
+      }, {
+        key: {
+          text: "Email"
+        },
+        value: {
+          text: item.email or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        } if review == true
+      }, {
+        key: {
+          text: "Reference type"
+        },
+        value: {
+          text: item.type or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        } if review == true
+      }, {
+        key: {
+          text: "Relationship"
+        },
+        value: {
+          text: (item.relationship or "Not entered") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        } if review == true
+      }]
+    }) }}
   {% endfor %}
 {% else %}
   <div class="app-summary">

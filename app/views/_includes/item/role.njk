@@ -1,0 +1,56 @@
+{% set applicationPath = "/application/" + applicationId %}
+
+{% set itemStart = item["start-date"] %}
+{% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
+
+{% set datesText %}
+  {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
+{% endset %}
+
+{% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Role"
+    },
+    value: {
+      text: item.role or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "role"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Organisation"
+    },
+    value: {
+      text: item.org or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "organisation"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Dates"
+    },
+    value: {
+      text: datesText
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "dates"
+      }]
+    } if review == true
+  }]
+}) }}

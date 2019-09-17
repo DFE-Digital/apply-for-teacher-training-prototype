@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review-references.njk" %}
+  {% include "_includes/review/references.njk" %}
   {% if not applicationValue(["referees", "second"]) %}
     {{ govukButton({
       text: "Add a second referee (recommended)",

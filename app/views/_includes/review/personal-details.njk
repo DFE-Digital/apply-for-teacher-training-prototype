@@ -1,0 +1,155 @@
+{% set applicationPath = "/application/" + applicationId %}
+
+{% set nameText %}
+  {% if applicationValue(["candidate", "given-name"]) or applicationValue(["candidate", "family-name"]) %}
+    {{ applicationValue(["candidate", "given-name"]) }} {{ applicationValue(["candidate", "family-name"]) }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set dateOfBirthText %}
+  {% if applicationValue(["candidate", "date-of-birth"]) %}
+    {% set day = applicationValue(["candidate", "date-of-birth", "day"]).padStart(2, '0') %}
+    {% set month = applicationValue(["candidate", "date-of-birth", "month"]).padStart(2, '0') %}
+    {% set year = applicationValue(["candidate", "date-of-birth", "year"]) %}
+    {{ (year + "-" + month + "-" + day) | date("d MMMM yyyy") }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set nationalityText %}
+  {% if applicationValue(["candidate", "nationality"]) %}
+    {{ applicationValue(["candidate", "nationality"]) }}
+    {% if applicationValue(["candidate", "second-nationality"]) %}
+      and {{ applicationValue(["candidate", "second-nationality"]) }}
+    {% endif %}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set residencyStatusText %}
+  {% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
+  {% if residencyStatus %}
+    {{ applicationValue(["candidate", "residency-status"]) }}
+    {{- ": " + applicationValue(["candidate", "residency-status-right-to-work"]) if applicationValue(["candidate", "residency-status-right-to-work"]) }}
+    {{- ": " + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
+  {% else %}
+    UK citizen
+  {% endif %}
+{% endset %}
+
+{% set personalDetailsHtml %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Name"
+      },
+      value: {
+        text: nameText
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "name"
+        }]
+      } if review
+    }, {
+      key: {
+        text: "Date of birth"
+      },
+      value: {
+        text: dateOfBirthText
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "date of birth"
+        }]
+      } if review
+    }, {
+      key: {
+        text: "Nationality"
+      },
+      value: {
+        html: nationalityText
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "nationality"
+        }]
+      } if review
+    }, {
+      key: {
+        text: "Residency status"
+      },
+      value: {
+        html: residencyStatusText
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details/residency-status?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "residency status"
+        }]
+      } if review
+    } if residencyStatus, {
+      key: {
+        text: "Is English your main language?"
+      },
+      value: {
+        html: applicationValue(["candidate", "language-skills", "english-is-main"]) or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "if English is your main language"
+        }]
+      } if review
+    }, {
+      key: {
+        text: "Other languages spoken"
+      },
+      value: {
+        html: applicationValue(["candidate", "language-skills", "other"])
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "other languages"
+        }]
+      } if review
+    } if applicationValue(["candidate", "language-skills", "other"]), {
+      key: {
+        text: "English language qualifications and other languages spoken"
+      },
+      value: {
+        html: applicationValue(["candidate", "language-skills", "english-qualifications"])
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "english languages qualifications"
+        }]
+      } if review
+    } if applicationValue(["candidate", "language-skills", "english-qualifications"])]
+  }) }}
+{% endset %}
+
+{% if applicationValue("candidate") %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: personalDetailsHtml
+  }) }}
+{% else %}
+  <p class="govuk-body">No personal details entered.</p>
+{% endif %}

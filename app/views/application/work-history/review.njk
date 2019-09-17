@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review-work-history.njk" %}
+  {% include "_includes/review/work-history.njk" %}
   {% if not applicationValue(["work-history","missing"]) %}
     {{ govukButton({
       text: "Add another job",

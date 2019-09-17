@@ -28,52 +28,59 @@
   {%- endif %}
 {%- endset %}
 
-{{ govukSummaryList({
-  classes: "app-summary",
-  rows: [{
-    key: {
-      text: "Phone number"
-    },
-    value: {
-      text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/contact-details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "phone number"
-      }]
-    } if review == true
-  }, {
-    key: {
-      text: "Email address"
-    },
-    value: {
-      text: data["account"]["email"] or "Not entered"
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/contact-details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "email"
-      }]
-    } if review == true
-  }, {
-    key: {
-      text: "Address"
-    },
-    value: {
-      html: addressHtml | nl2br | safe
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + ("/contact-details/where-do-you-live" if data.flags.international_address else "/contact-details/uk-address") + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "address"
-      }]
-    } if review == true
-  }]
-}) }}
+{% set contactDetailsHtml %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Phone number"
+      },
+      value: {
+        text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/contact-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "phone number"
+        }]
+      } if review == true
+    }, {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: data["account"]["email"] or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/contact-details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "email"
+        }]
+      } if review == true
+    }, {
+      key: {
+        text: "Address"
+      },
+      value: {
+        html: addressHtml | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "address"
+        }]
+      } if review == true
+    }]
+  }) }}
+{% endset %}
+
+{% if applicationValue("contact-details") %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: contactDetailsHtml
+  }) }}
+{% else %}
+  <p class="govuk-body">No contact details entered.</p>
+{% endif %}

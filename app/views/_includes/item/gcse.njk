@@ -1,0 +1,70 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set missing = item.type == "I don’t have this qualification yet" %}
+{% set nonUK = item.type == "Non-UK qualification" %}
+
+{% set qualificationText -%}
+  {{- (item["type-uk"] if item["type-uk"]) or (item["type-non-uk"] if item["type-non-uk"]) or item.type }}
+  {%- if nonUK %}
+    {{ item["award-org"] + ", " + item.country if item["award-org"] }}
+  {% endif %}
+{%- endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+    text: "How I expect to gain this qualification"
+    },
+    value: {
+      html: (item.missing or "No reason given") | nl2br | safe
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing == true, {
+    key: {
+      text: "Qualification"
+    },
+    value: {
+      text: (qualificationText | nl2br | safe) or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing != true, {
+    key: {
+      text: "Year awarded"
+    },
+    value: {
+      text: item.year or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + item.id + "/year?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing != true, {
+    key: {
+      text: "Grade"
+    },
+    value: {
+      text: item.grade or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + item.id + "/grade?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "grade"
+      }]
+    } if review == true
+  } if missing != true]
+}) }}

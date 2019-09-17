@@ -13,11 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% for gcse in applicationValue(["gcse"]) | toArray %}
-    {% if gcse.id == applicationValue(["gcse", id, "id"]) %}
-      {% include "_includes/review-gcse.njk" %}
-    {% endif %}
-  {% endfor %}
+  {% include "_includes/review/gcse.njk" %}
   {{ govukButton({
     text: "Continue",
     href: applicationPath

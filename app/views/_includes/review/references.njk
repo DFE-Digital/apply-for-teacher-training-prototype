@@ -1,0 +1,24 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set references = applicationValue("referees") | toArray %}
+{% if references.length >= 1 %}
+  <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
+  {% for item in references %}
+    {% set refereeHtml %}
+      {% include "_includes/item/reference.njk" %}
+    {% endset %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: item.id | capitalize + " referee",
+      actions: {
+        items: [{
+          href: "#",
+          text: "Remove referee"
+        }]
+      } if review == true,
+      html: refereeHtml
+    }) }}
+  {% endfor %}
+{% else %}
+  <p class="govuk-body">No references entered.</p>
+{% endif %}

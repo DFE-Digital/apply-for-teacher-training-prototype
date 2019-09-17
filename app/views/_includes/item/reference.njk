@@ -1,0 +1,60 @@
+{% set applicationPath = "/application/" + applicationId %}
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Name"
+    },
+    value: {
+      text: item.name or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "referee"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Email"
+    },
+    value: {
+      text: item.email or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "referee"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Reference type"
+    },
+    value: {
+      text: item.type or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "referee"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Relationship"
+    },
+    value: {
+      text: (item.relationship or "Not entered") | nl2br | safe
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "referee"
+      }]
+    } if review == true
+  }]
+}) }}

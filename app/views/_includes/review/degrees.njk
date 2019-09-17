@@ -1,0 +1,23 @@
+{% set degrees = applicationValue(["degree"]) | toArray %}
+{% set applicationPath = "/application/" + applicationId %}
+{% if degrees.length >= 1 %}
+  {% for item in degrees %}
+    {% set degreeHtml %}
+      {% include "_includes/item/degree.njk" %}
+    {% endset %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: item.type + " " + item.subject,
+      actions: {
+        items: [{
+          href: "#",
+          text: "Remove degree"
+        }]
+      } if review == true,
+      html: degreeHtml
+    }) }}
+  {% endfor %}
+{% else %}
+  <p class="govuk-body">No degrees entered.</p>
+{% endif %}

@@ -22,8 +22,14 @@
       <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
     </ul>
   {% endif %}
-  {% set statement = applicationValue(["personal-statements", providerCode]) %}
-  {% include "_includes/review-personal-statement.njk" %}
+  {% set item = applicationValue(["personal-statements", providerCode]) %}
+  {% set statementHtml %}
+    {% include "_includes/item/personal-statement.njk" %}
+  {% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: statementHtml
+  }) }}
 
   {{ govukButton({
     text: "Continue",

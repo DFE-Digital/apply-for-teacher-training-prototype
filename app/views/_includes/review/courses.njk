@@ -1,0 +1,21 @@
+{% set courses = applicationValue("courses") | toArray %}
+
+{% for course in courses %}
+  {% set provider = providers[course.providerCode] %}
+  {% set item = provider.courses[course.courseCode] %}
+  {% set courseHtml %}
+    {% include "_includes/item/course.njk" %}
+  {% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: provider.name,
+    actions: {
+      items: [{
+        href: "#",
+        text: "Remove choice"
+      }]
+    } if review == true,
+    html: courseHtml
+  }) }}
+{% endfor %}

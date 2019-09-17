@@ -1,13 +1,16 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% if applicationValue(["degree", id, "provenance"]) == "international" %}
-  {% set international = true %}
+{% set degrees = applicationValue(["degree"]) | toArray %}
+{% set firstDegree = degrees[0].id == id %}
+{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
+{% if international and firstDegree == true %}
   {% set title = "Have you completed your degree?" %}
+{% elif firstDegree == false %}
+  {% set title = "Have you completed this degree?" %}
 {% else %}
   {% set title = "What class is your degree?" %}
 {% endif %}
-
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -37,7 +40,7 @@
     } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
   {% endset %}
 
-  {% if international == true %}
+  {% if international == true or firstDegree == false %}
     {{ govukRadios({
       items: [{
         text: "Yes",
@@ -48,7 +51,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: "I am still studying for my degree",
+        text: ("I am still studying for my degree" if firstDegree else "I am still studying for this degree"),
         conditional: {
           html: predictedGradeHtml
         }

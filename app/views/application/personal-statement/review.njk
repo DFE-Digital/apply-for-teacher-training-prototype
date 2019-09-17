@@ -14,6 +14,14 @@
 {% endblock %}
 
 {% block primary %}
+  {% if applicationValue(["personal-statements", providerCode, "vocation"]) and applicationValue(["personal-statements", providerCode, "subject-knowledge"]) %}
+    <p class="govuk-body govuk-!-font-weight-bold">Before you submit your application:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>proofread your answer carefully for spelling and grammar</li>
+      <li>ask someone you trust for their opinion</li>
+      <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
+    </ul>
+  {% endif %}
   {% set statement = applicationValue(["personal-statements", providerCode]) %}
   {% set statementId = providerCode %}
   {% include "_includes/review-personal-statement.njk" %}

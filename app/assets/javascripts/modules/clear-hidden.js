@@ -16,19 +16,20 @@
       };
 
       const form = getClosest($(element).get(0), 'form')
-      console.log('form', form)
 
       form.addEventListener('submit', function (e) {
         e.preventDefault()
 
-        const textInputs = form.querySelectorAll('input[type=text]')
-        for (const textInput of textInputs) {
-          const conditional = getClosest(textInput, '.govuk-radios__conditional') || getClosest(textInput, '.govuk-checkboxes__conditional')
-          const controller = this.querySelector(`[aria-controls=${conditional.id}]`)
-          console.log('controller', controller)
+        const inputs = form.querySelectorAll('input, textarea')
+        for (const input of inputs) {
+          const conditional = getClosest(input, '.govuk-radios__conditional') || getClosest(input, '.govuk-checkboxes__conditional')
+          console.log('conditional', conditional)
+          if (conditional && conditional.id) {
+            const controller = this.querySelector(`[aria-controls=${conditional.id}]`)
 
-          if (!controller.checked) {
-            textInput.value = ''
+            if (!controller.checked) {
+              input.value = ''
+            }
           }
 
           this.submit()

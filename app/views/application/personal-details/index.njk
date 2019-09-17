@@ -105,7 +105,7 @@
         text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
       },
       maxwords: 200
-    } | decorateApplicationAttributes(["language-skills", "yes-details"])) }}
+    } | decorateApplicationAttributes(["candidate", "language-skills", "other"])) }}
   {% endset -%}
   {% set otherDetailHtml %}
     {{ govukCharacterCount({
@@ -113,11 +113,14 @@
         text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
       },
       maxwords: 200
-    } | decorateApplicationAttributes(["language-skills", "no-details"])) }}
+    } | decorateApplicationAttributes(["candidate", "language-skills", "english-qualifications"])) }}
   {% endset -%}
 
     {{ govukRadios({
       fieldset: {
+        attributes: {
+          "data-module": "clear-hidden"
+        },
         legend: {
           text: "Is English your main language?",
           classes: "govuk-label--m"
@@ -134,7 +137,7 @@
           html: otherDetailHtml
         }
       }]
-    } | decorateApplicationAttributes(["language-skills", "main"])) }}
+    } | decorateApplicationAttributes(["candidate", "language-skills", "english-is-main"])) }}
 
   {{ govukButton({
     text: "Continue"

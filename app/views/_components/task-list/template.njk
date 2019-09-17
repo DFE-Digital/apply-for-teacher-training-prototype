@@ -1,13 +1,15 @@
 <ol class="app-task-list {%- if params.classes %} {{ params.classes }}{% endif %}">
 {% for item in params.items %}
-  <li class="app-task-list__item{%- if item.classes %} {{ item.classes }}{% endif %}">
-  {% if item.href %}
-    <a class="app-task-list__task-name" href="{{ item.href }}" aria-describedby="{{ item.id }}-completed">{{ item.text | safe }}</a>
-  {% else %}
-    <span class="app-task-list__task-name">{{ item.text | safe }}</span>
-  {% endif %}
-  {% if item.completed %}
-    <strong class="govuk-tag app-task-list__task-completed" id="{{ item.id }}-completed">Completed</strong>
+  {% if item %}
+    <li class="app-task-list__item{%- if item.classes %} {{ item.classes }}{% endif %}">
+    {% if item.href %}
+      <a class="app-task-list__task-name" href="{{ item.href }}" aria-describedby="{{ item.id }}-completed">{{ item.text | safe }}</a>
+    {% else %}
+      <span class="app-task-list__task-name">{{ item.text | safe }}</span>
+    {% endif %}
+    {% if item.completed %}
+      <strong class="govuk-tag app-task-list__task-completed" id="{{ item.id }}-completed">Completed</strong>
+    {% endif %}
   {% endif %}
   </li>
 {% endfor %}

@@ -38,24 +38,28 @@
 
   <h2 class="govuk-heading-l">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
-  {% for degree in applicationValue(["degree"]) | toArray %}
-    {% include "_includes/review-degree.njk" %}
-  {% endfor %}
+  {% include "_includes/review-degrees.njk" %}
 
-  {% for gcse in applicationValue(["gcse"]) | toArray %}
-    <h3 class="govuk-heading-m">{{ gcse.id | capitalize }} GCSE or equivalent</h3>
+  {% set gcse = applicationValue(["gcse", "maths"]) | toArray %}
+  <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
+  {% include "_includes/review-gcse.njk" %}
+
+  {% set gcse = applicationValue(["gcse", "english"]) | toArray %}
+  <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
+  {% include "_includes/review-gcse.njk" %}
+
+  {% if hasPrimaryCourses() or applicationValue(["gcse", "science"]) %}
+    {% set gcse = applicationValue(["gcse", "science"]) | toArray %}
+    <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
     {% include "_includes/review-gcse.njk" %}
-  {% endfor %}
+  {% endif %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% for qualification in applicationValue(["other-qualifications"]) | toArray %}
-    {% include "_includes/review-other-qualification.njk" %}
-  {% endfor %}
+  {% include "_includes/review-other-qualifications.njk" %}
 
   <h2 class="govuk-heading-l">Personal statement and interview</h2>
-  {% for statementId, statement in applicationValue(["personal-statements"]) %}
-    {% set provider = providers[statementId] %}
-    <h3 class="govuk-heading-m">{{ provider.name }}</h3>
+  {% for statement in applicationValue(["personal-statements"]) | toArray %}
+    <h3 class="govuk-heading-m">{{ providers[statement.id].name }}</h3>
     {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 

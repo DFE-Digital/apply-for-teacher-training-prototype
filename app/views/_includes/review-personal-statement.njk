@@ -6,12 +6,12 @@
       text: "Why do you want to be a teacher?"
     },
     value: {
-      text: (statement["vocation"] | default("Not entered")) | nl2br | safe
+      text: (statement["vocation"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statementId + "/vocation?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + statement.id + "/vocation?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "why you want to be a teacher"
       }]
@@ -21,12 +21,12 @@
       text: "Your knowledge about the subject you want to teach"
     },
     value: {
-      text: (statement["subject-knowledge"] | default("Not entered")) | nl2br | safe
+      text: (statement["subject-knowledge"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statementId + "/subject-knowledge?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + statement.id + "/subject-knowledge?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
@@ -36,12 +36,12 @@
       text: "Interview preferences"
     },
     value: {
-      text: (statement["interview"] | default("Not entered")) | nl2br | safe
+      text: (statement["interview"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statementId + "/interview?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + statement.id + "/interview?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]

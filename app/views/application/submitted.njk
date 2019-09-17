@@ -42,9 +42,7 @@
 
   <h2 class="govuk-heading-l">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
-  {% for degree in applicationValue(["degree"]) | toArray %}
-    {% include "_includes/review-degree.njk" %}
-  {% endfor %}
+  {% include "_includes/review-degrees.njk" %}
 
   {% for gcse in applicationValue(["gcse"]) | toArray %}
     <h3 class="govuk-heading-m">{{ gcse.id | capitalize }} GCSE or equivalent</h3>

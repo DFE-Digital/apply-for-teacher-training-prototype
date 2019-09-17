@@ -13,9 +13,8 @@
 {% endblock %}
 
 {% block primary %}
-  {% for degree in applicationValue(["degree"]) | toArray %}
-    {% include "_includes/review-degree.njk" %}
-  {% endfor %}
+  {% include "_includes/review-degrees.njk" %}
+
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",

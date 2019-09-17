@@ -58,9 +58,8 @@
   {% include "_includes/review-other-qualifications.njk" %}
 
   <h2 class="govuk-heading-l">Personal statement and interview</h2>
-  {% for statementId, statement in applicationValue(["personal-statements"]) %}
-    {% set provider = providers[statementId] %}
-    <h3 class="govuk-heading-m">{{ provider.name }}</h3>
+  {% for statement in applicationValue(["personal-statements"]) | toArray %}
+    <h3 class="govuk-heading-m">{{ providers[statement.id].name }}</h3>
     {% include "_includes/review-personal-statement.njk" %}
   {% endfor %}
 

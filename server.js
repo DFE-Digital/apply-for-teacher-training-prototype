@@ -2,7 +2,6 @@
 const path = require('path')
 
 // NPM dependencies
-const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 const express = require('express')
 const nunjucks = require('nunjucks')
@@ -91,8 +90,8 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 app.use('/node_modules/govuk-frontend', express.static(path.join(__dirname, '/node_modules/govuk-frontend')))
 
 // Support for parsing data in POSTs
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
+app.use(express.json())
+app.use(express.urlencoded({
   extended: true
 }))
 

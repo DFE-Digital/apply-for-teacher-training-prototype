@@ -48,9 +48,7 @@
   {% endfor %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% for qualification in applicationValue(["other-qualifications"]) | toArray %}
-    {% include "_includes/review-other-qualification.njk" %}
-  {% endfor %}
+  {% include "_includes/review-other-qualifications.njk" %}
 
   <h2 class="govuk-heading-l">Personal statement and interview</h2>
   {% for statementId, statement in applicationValue(["personal-statements"]) %}

@@ -1,15 +1,6 @@
 {% set qualifications = data.applications[applicationId]["other-qualifications"] | toArray %}
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set institution -%}
-  {%- if qualification.institution -%}
-    {{ qualification.institution }}
-    {{ qualification.country }}
-  {%- else -%}
-    Not entered
-  {%- endif %}
-{%- endset %}
-
 {{ govukSummaryList({
   classes: "app-summary",
   rows: [{
@@ -17,7 +8,7 @@
       text: "Qualification"
     },
     value: {
-      text: (qualification.type | default("Not entered")) | nl2br | safe
+      text: qualification.type or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",
@@ -32,7 +23,7 @@
       text: "Institution"
     },
     value: {
-      text: institution | nl2br | safe
+      text: (qualification.org + " " + qualification.country if qualification.org) or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",
@@ -47,7 +38,7 @@
       text: "Year awarded"
     },
     value: {
-      text: (qualification.year | default("Not entered")) | nl2br | safe
+      text: qualification.year or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",
@@ -62,7 +53,7 @@
       text: "Grade"
     },
     value: {
-      text: (qualification.grade | default("Not entered")) | nl2br | safe
+      text: qualification.grade  or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",

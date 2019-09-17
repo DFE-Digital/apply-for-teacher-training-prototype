@@ -6,7 +6,7 @@
       text: "Why do you want to be a teacher?"
     },
     value: {
-      text: (statement["vocation"] | default("Not entered")) | nl2br | safe
+      text: (statement["vocation"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
@@ -21,7 +21,7 @@
       text: "Your knowledge about the subject you want to teach"
     },
     value: {
-      text: (statement["subject-knowledge"] | default("Not entered")) | nl2br | safe
+      text: (statement["subject-knowledge"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
@@ -36,7 +36,7 @@
       text: "Interview preferences"
     },
     value: {
-      text: (statement["interview"] | default("Not entered")) | nl2br | safe
+      text: (statement["interview"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{

@@ -9,7 +9,7 @@
 {% endset %}
 
 {% set dateOfBirthText %}
-  {% if applicationValue(["candidate", "date-of-birth", "day"]) != "" %}
+  {% if applicationValue(["candidate", "date-of-birth"]) %}
     {% set day = applicationValue(["candidate", "date-of-birth", "day"]).padStart(2, '0') %}
     {% set month = applicationValue(["candidate", "date-of-birth", "month"]).padStart(2, '0') %}
     {% set year = applicationValue(["candidate", "date-of-birth", "year"]) %}

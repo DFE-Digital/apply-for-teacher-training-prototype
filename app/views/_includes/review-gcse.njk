@@ -1,141 +1,83 @@
 {% set applicationPath = "/application/" + applicationId %}
+{% set missing = gcse.type == "I don’t have this qualification yet" %}
+{% set nonUK = gcse.type == "Non-UK qualification" %}
 
-{% set awardOrg = gcse["award-org"] + "\n" + gcse.country %}
-{% set grade = gcse.grade if gcse.grade else "Pending" %}
-
-{% if gcse.type == "I don’t have this qualification yet" %}
-  {{ govukSummaryList({
-    classes: "app-summary",
-    rows: [{
-      key: {
-        text: "I don't have this qualification yet"
-      },
-      value: {
-        html: (gcse.missing | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }]
-  }) }}
-{% elif gcse.type == "Non-UK qualification" %}
-  {{ govukSummaryList({
-    classes: "app-summary",
-    rows: [{
-      key: {
-        text: "Qualification"
-      },
-      value: {
-        text: (gcse["type-non-uk"] | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }, {
-      key: {
-        text: "Awarding body"
-      },
-      value: {
-        text: (awardOrg | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }, {
-      key: {
-        text: "Year awarded"
-      },
-      value: {
-        text: (gcse.year | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "/year?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }, {
-      key: {
-        text: "Grade"
-      },
-      value: {
-        text: (grade | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "/grade?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "grade"
-        }]
-      } if review == true
-    }]
-  }) }}
-{% else %}
-  {{ govukSummaryList({
-    classes: "app-summary",
-    rows: [{
-      key: {
-        text: "Qualification"
-      },
-      value: {
-        text: (gcse.type | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }, {
-      key: {
-        text: "Year awarded"
-      },
-      value: {
-        text: (gcse.year | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "/year?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if review == true
-    }, {
-      key: {
-        text: "Grade"
-      },
-      value: {
-        text: (grade | default("Not entered")) | nl2br | safe
-      },
-      actions: {
-        classes: "govuk-!-padding-right-2",
-        items: [{
-          href: applicationPath + "/gcse/" + gcse.id + "/grade?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "grade"
-        }]
-      } if review == true
-    }]
-  }) }}
-{% endif %}
+{{ govukSummaryList({
+  classes: "app-summary",
+  rows: [{
+    key: {
+      text: "I don't have this qualification yet"
+    },
+    value: {
+      html: (gcse.missing or "Not entered") | nl2br | safe
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing == true, {
+    key: {
+      text: "Qualification"
+    },
+    value: {
+      text: (gcse["type-uk"] if gcse["type-uk"]) or (gcse["type-non-uk"] if gcse["type-non-uk"]) or gcse.type or "Not entered"
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing != true, {
+    key: {
+      text: "Awarding body"
+    },
+    value: {
+      text: (gcse["award-org"] + " " + gcse.country if gcse["award-org"]) or "Not entered"
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/gcse/" + gcse.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if nonUK, {
+    key: {
+      text: "Year awarded"
+    },
+    value: {
+      text: gcse.year or "Not entered"
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/gcse/" + gcse.id + "/year?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  } if missing != true, {
+    key: {
+      text: "Grade"
+    },
+    value: {
+      text: gcse.grade or "Not entered"
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/gcse/" + gcse.id + "/grade?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "grade"
+      }]
+    } if review == true
+  } if missing != true]
+}) }}

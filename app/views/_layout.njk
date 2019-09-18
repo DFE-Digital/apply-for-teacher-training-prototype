@@ -85,9 +85,9 @@
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
-      text: "prototype"
+      text: "Prototype"
     },
-    html: "This is a prototype of a new service. Some parts of this prototype do not work yet."
+    html: "This is a prototype of a new service. Some parts may not work yet."
   }) }}
   {% block pageNavigation %}
   {% endblock %}
@@ -100,12 +100,12 @@
     {{ govukFooter({
       meta: {
         items: [{
-          href: "https://govuk-prototype-kit.herokuapp.com/",
-          text: "GOV.UK Prototype Kit " + releaseVersion
+          href: "mailto:becomingateacher@digital.education.gov.uk",
+          text: "Give feedback or report a problem"
         }, {
           href: "/prototype-admin/clear-data",
           text: "Clear data"
-        }]
+        } if urStudy != true ]
       }
     }) }}
   {% endblock %}

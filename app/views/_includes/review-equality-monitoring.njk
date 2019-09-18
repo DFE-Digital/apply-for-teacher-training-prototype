@@ -3,13 +3,16 @@
 {% set disabilityText %}
   {% if applicationValue(["equality-monitoring", "disability-status"]).includes("Yes") %}
     {{ applicationValue(["equality-monitoring", "disability-status"]) }}
-    ({%- for item in applicationValue(["equality-monitoring", "disabilities"]) -%}
-      {{ (" and " if loop.last else ", ") if not loop.first }}{%- if item == "Other" %}
-        {{ applicationValue(["equality-monitoring", "disabilities-other"]) }}
-      {%- else -%}
-        {{ item }}
-      {%- endif -%}
-    {%- endfor -%})
+    {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) %}
+    {% if disabilities.length >= 1 %}
+      ({%- for disability in disabilities -%}
+        {{ (" and " if loop.last else ", ") if not loop.first }}{%- if disability == "Other" %}
+          {{ applicationValue(["equality-monitoring", "disabilities-other"]) }}
+        {%- else -%}
+          {{ disability }}
+        {%- endif -%}
+      {%- endfor -%})
+    {% endif %}
   {% else %}
     {{ applicationValue(["equality-monitoring", "disability-status"]) }}
   {% endif %}
@@ -22,20 +25,13 @@
   {% endif %}
 {% endset %}
 
-{% set religionText %}
-  {{ applicationValue(["equality-monitoring", "religious-belief"]) }}
-  {% if applicationValue(["equality-monitoring", "religious-belief-other"]) %}
-    ({{ applicationValue(["equality-monitoring", "religious-belief-other"]) }})
-  {% endif %}
-{% endset %}
-
 {{ govukSummaryList({
   rows: [{
     key: {
       text: "Sex"
     },
     value: {
-      text: applicationValue(["equality-monitoring", "sex"])
+      text: applicationValue(["equality-monitoring", "sex"]) or "Not entered"
     },
     actions: {
       items: [{
@@ -46,21 +42,7 @@
     }
   }, {
     key: {
-      text: "Sexual orientation"
-    },
-    value: {
-      text: applicationValue(["equality-monitoring", "sexual-orientation"])
-    },
-    actions: {
-      items: [{
-        href: path + "sexual-orientation?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "sexual orientation"
-      }]
-    }
-  }, {
-    key: {
-      text: "Health problems or disabilities"
+      text: "Disability(s)"
     },
     value: {
       text: disabilityText | safe
@@ -84,20 +66,6 @@
         href: path + "ethnic-group?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "ethnic group?"
-      }]
-    }
-  }, {
-    key: {
-      text: "Religion"
-    },
-    value: {
-      text: religionText
-    },
-    actions: {
-      items: [{
-        href: path + "religious-belief?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "religious belief?"
       }]
     }
   }]

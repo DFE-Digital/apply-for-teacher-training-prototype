@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 {% set parent = "Equality monitoring" %}
-{% set title = "Are your day-to-day activities limited because of a long term health problem or disability?" %}
+{% set title = "Are you disabled?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -11,9 +11,7 @@
 {% block primary %}
   {{ govukRadios({
     items: [{
-      text: "Yes, limited a little"
-    }, {
-      text: "Yes, limited a lot"
+      text: "Yes"
     }, {
       text: "No"
     }, {

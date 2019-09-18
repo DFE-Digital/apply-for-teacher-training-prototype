@@ -1,5 +1,5 @@
 module.exports = {
-  applications: {
+  disabled_applications: {
     12345: {
       status: 'started',
       courses: {

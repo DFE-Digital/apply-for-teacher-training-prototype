@@ -4,7 +4,7 @@
 
 {% block primary %}
   {% for applicationId, application in data.applications %}
-    {% if application.status == 'submitted' %}
+    {% if application.status == "submitted" %}
       <p>You submitted your application on {{ "now" | date("d MMMM yyyy") }}. Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
 
       {% if true or (notAlreadyEdited and within1WeekOfSubmitting) %}

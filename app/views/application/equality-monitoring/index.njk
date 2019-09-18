@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Equality and diversity" %}
+{% set title = "Your application is now ready to submit. Before you do so, will you complete a 3-minute questionnaire?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,10 +9,11 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">The Department for Education collects data from teacher training candidates to help make the application process fair for all candidates.</p>
-  <p class="govuk-body">We try to ensure candidates are not discriminated against on the basis of their sex, age, ethnicity, sexual orientation, religious belief or disability.</p>
-  <p class="govuk-body">The information you give us will not be shared with training providers until after the application process is over.</p>
   <p class="govuk-body">This section is entirely optional and has no impact on the progress of your application.</p>
+  <p class="govuk-body">If you choose to answer our questions, the information you give us will help make the teacher training application process fair for all candidates.</p>
+  <p class="govuk-body">We collect this data to ensure candidates are not discriminated against on the basis of their sex, age, ethnicity, sexual orientation, religious belief or disability.</p>
+  <p class="govuk-body">Your data will not be shared with training providers unless you are enrolled on a course, when it will be used to monitor equality and diversity in their organisation.</p>
+
 
   {{ govukButton({
     text: "Continue",

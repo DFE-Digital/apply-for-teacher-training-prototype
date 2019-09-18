@@ -19,12 +19,31 @@
   <h2 class="govuk-heading-m">If you don’t have a degree</h2>
   <p class="govuk-body">You can teach in further education (age 14 to adult), or study for a degree leading to qualified teacher status. <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Learn more</a>.</p>
 
+{% if urStudy %}
+  {{ govukWarningText({
+    text: "Please remember to record your session using Lookback.",
+    iconFallbackText: "Warning"
+  }) }}
+  {% if data.applications[urStudy] %}
+    {{ govukButton({
+      text: "Return to application",
+      href: "/application/" + urStudy,
+      isStartButton: true
+    }) }}
+  {% else %}
+    {{ govukButton({
+      text: "Start now",
+      href: "/application/" + urStudy,
+      isStartButton: true
+    }) }}
+  {% endif %}
+{% else %}
   {{ govukButton({
     text: "Start now",
     href: "/account/create-account",
     isStartButton: true,
     classes: "govuk-!-margin-top-4 govuk-!-margin-bottom-3"
   }) }}
-
   <p class="govuk-body">If you have teacher training applications in progress, please <a href="/account/sign-in">sign in</a></p>
+{% endif %}
 {% endblock %}

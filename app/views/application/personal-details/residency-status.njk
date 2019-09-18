@@ -17,7 +17,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(["candidate", "residency-status-right-to-study"])) }}
+    } | decorateApplicationAttributes(["candidate", "residency-status-right-to-work"])) }}
   {% endset -%}
 
   {% set requireTier2 %}
@@ -50,29 +50,28 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: "candidate-residency-status",
-    name: "candidate[residency-status]",
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
     items: [{
       text: "I have the right to study and/or work in the UK",
-      value: "right-to-study",
       conditional: {
         html: rightToWorkStudy
       }
     }, {
       text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
-      value: "require-tier-2",
       conditional: {
         html: requireTier2
       }
     }, {
       text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
-      value: "require-tier-4",
       conditional: {
         html: requireTier4
       }
     }, {
       text: "I don’t know my residency status",
-      value: "unknown",
       conditional: {
         html: unknown
       }

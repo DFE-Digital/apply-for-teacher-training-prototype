@@ -29,6 +29,7 @@
       }
     } | decorateApplicationAttributes(["gcse", id, "type-uk"])) }}
   {% endset %}
+
   {% set nonUkConditionalHtml %}
     {{ govukInput({
       label: {
@@ -47,6 +48,7 @@
       }
     } | decorateApplicationAttributes(["gcse", id, "award-org"])) }}
   {% endset %}
+
   {% set missingConditionalHtml %}
     {{ govukCharacterCount({
       label: {
@@ -65,6 +67,9 @@
       legend: {
         text: "Type of qualification",
         classes: "govuk-label--m"
+      },
+      attributes: {
+        "data-module": "clear-hidden"
       }
     },
     items: [{

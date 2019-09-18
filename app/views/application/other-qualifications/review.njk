@@ -13,13 +13,11 @@
 {% endblock %}
 
 {% block primary %}
-  {% for qualification in applicationValue(["other-qualifications"]) | toArray %}
-    {% include "_includes/review-other-qualification.njk" %}
-  {% endfor %}
+  {% include "_includes/review-other-qualifications.njk" %}
   {{ govukButton({
     text: "Add another qualification",
     classes: "govuk-button--secondary",
-    href: applicationPath + "/other-qualifications/add?referrer=" + referrer
+    href: applicationPath + "/other-qualifications/add"
   }) }}
 
   {{ govukButton({

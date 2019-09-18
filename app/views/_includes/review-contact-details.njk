@@ -35,7 +35,7 @@
       text: "Phone number"
     },
     value: {
-      text: (applicationValue(["contact-details", "phone-number"]) | default("Not entered"))
+      text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",
@@ -50,7 +50,7 @@
       text: "Email address"
     },
     value: {
-      text: data["account"]["email"] | default("Not entered")
+      text: data["account"]["email"] or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",

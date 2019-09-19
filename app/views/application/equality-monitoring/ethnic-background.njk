@@ -1,5 +1,5 @@
 {% extends "_form.njk" %}
-{% set parent = "Equality monitoring" %}
+{% set parent = "Equality and diversity" %}
 {% if applicationValue(["equality-monitoring", "ethnic-group"]) == "Another ethnic group" %}
   {% set title = "Which of the following best describes your background?" %}
 {% else %}
@@ -54,7 +54,7 @@
     {{ govukInput({
       classes: "govuk-!-width-two-thirds",
       label: {
-        text: "Your ethnic background (optional)"
+        text: "Describe your ethnic background (optional)"
       }
     } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
   {% endset -%}

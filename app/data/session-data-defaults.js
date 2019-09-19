@@ -1,4 +1,9 @@
 module.exports = {
+  flags: {
+    nationality: false,
+    international_address: true,
+    international_qualifications: true
+  },
   disabled_account: {
     email: 'janina.doe@example.com'
   },

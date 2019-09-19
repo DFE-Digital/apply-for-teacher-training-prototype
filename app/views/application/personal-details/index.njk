@@ -76,28 +76,30 @@
     }]
   }) }}
 
-  {{ appAutocomplete({
-    label: {
-      text: "Nationality",
-      classes: "govuk-label--m"
-    },
-    items: nationalities
-  } | decorateApplicationAttributes(["candidate", "nationality"])) }}
-
-  {% set anotherNationality %}
+  {% if data.flags.nationality %}
     {{ appAutocomplete({
       label: {
-        text: "Second nationality"
+        text: "Nationality",
+        classes: "govuk-label--m"
       },
       items: nationalities
-    } | decorateApplicationAttributes(["candidate", "second-nationality"])) }}
-  {% endset -%}
+    } | decorateApplicationAttributes(["candidate", "nationality"])) }}
 
-  {{ govukDetails({
-    summaryText: "Add another nationality",
-    html: anotherNationality,
-    open: ["candidate", "second-nationality"] | ifSetForApplication
-  }) }}
+    {% set anotherNationality %}
+      {{ appAutocomplete({
+        label: {
+          text: "Second nationality"
+        },
+        items: nationalities
+      } | decorateApplicationAttributes(["candidate", "second-nationality"])) }}
+    {% endset -%}
+
+    {{ govukDetails({
+      summaryText: "Add another nationality",
+      html: anotherNationality,
+      open: ["candidate", "second-nationality"] | ifSetForApplication
+    }) }}
+  {% endif %}
 
   {% set englishDetailHtml %}
     {{ govukCharacterCount({

@@ -1,9 +1,9 @@
 module.exports = {
   flags: {
-    nationality: false,
-    address_lookup: false,
+    nationality: true,
+    address_lookup: true,
     international_address: true,
-    international_qualifications: false
+    international_qualifications: true
   },
   disabled_account: {
     email: 'janina.doe@example.com'

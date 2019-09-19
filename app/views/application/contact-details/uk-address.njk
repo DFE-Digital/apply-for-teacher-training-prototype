@@ -5,9 +5,15 @@
 {% set international = applicationValue(["contact-details", "address-type"]) == "international" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/application/" + applicationId + "/contact-details/where-do-you-live"
-  }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/contact-details/where-do-you-live" if data.flags.international_address else "/application/" + applicationId + "/contact-details"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}

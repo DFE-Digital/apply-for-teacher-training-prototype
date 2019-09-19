@@ -3,7 +3,7 @@ module.exports = {
     nationality: false,
     address_lookup: false,
     international_address: true,
-    international_qualifications: true
+    international_qualifications: false
   },
   disabled_account: {
     email: 'janina.doe@example.com'

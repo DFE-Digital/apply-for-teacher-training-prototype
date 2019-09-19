@@ -24,7 +24,7 @@
           text: "Institution"
         },
         value: {
-          text: (degree.org + " " + degree.country if degree.org) or "Not entered"
+          text: (degree.org + " " + (degree.country if degree.country) if degree.org) or "Not entered"
         },
         actions: {
           classes: "govuk-!-padding-right-2",

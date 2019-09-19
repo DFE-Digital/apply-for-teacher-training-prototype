@@ -59,32 +59,34 @@
     }
   } | decorateApplicationAttributes(["degree", id, "org"])) }}
 
-  {% set internationalConditionalHtml %}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is your institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["degree", id, "country"])) }}
-  {% endset %}
+  {% if data.flags.international_qualifications %}
+    {% set internationalConditionalHtml %}
+      {{ appAutocomplete({
+        label: {
+          text: "In which country is your institution based?"
+        },
+        items: countries
+      } | decorateApplicationAttributes(["degree", id, "country"])) }}
+    {% endset %}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "This institution is based:"
-      }
-    },
-    items: [{
-      value: "domestic",
-      text: "In the UK"
-    }, {
-      value: "international",
-      text: "Outside the UK",
-      conditional: {
-        html: internationalConditionalHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "This institution is based:"
+        }
+      },
+      items: [{
+        value: "domestic",
+        text: "In the UK"
+      }, {
+        value: "international",
+        text: "Outside the UK",
+        conditional: {
+          html: internationalConditionalHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"

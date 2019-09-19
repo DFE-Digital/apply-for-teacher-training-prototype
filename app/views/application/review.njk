@@ -40,16 +40,16 @@
   <h3 class="govuk-heading-m">Degree(s)</h3>
   {% include "_includes/review-degrees.njk" %}
 
-  {% set gcse = applicationValue(["gcse", "maths"]) | toArray %}
+  {% set gcse = applicationValue(["gcse", "maths"]) %}
   <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
   {% include "_includes/review-gcse.njk" %}
 
-  {% set gcse = applicationValue(["gcse", "english"]) | toArray %}
+  {% set gcse = applicationValue(["gcse", "english"]) %}
   <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
   {% include "_includes/review-gcse.njk" %}
 
   {% if hasPrimaryCourses() or applicationValue(["gcse", "science"]) %}
-    {% set gcse = applicationValue(["gcse", "science"]) | toArray %}
+    {% set gcse = applicationValue(["gcse", "science"]) %}
     <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
     {% include "_includes/review-gcse.njk" %}
   {% endif %}

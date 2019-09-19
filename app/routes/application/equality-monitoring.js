@@ -76,7 +76,7 @@ module.exports = router => {
     if (hasDisclosedEthnicity(req)) {
       path = `${basePath}/ethnic-background`
     } else {
-      path = referrer || `${basePath}/religious-belief`
+      path = referrer || `${basePath}/review`
     }
 
     res.redirect(`${path}?${utils.queryString(req)}`)

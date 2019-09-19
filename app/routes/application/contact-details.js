@@ -7,9 +7,14 @@ module.exports = router => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const location = applicationData['contact-details']['address-type']
+    const address_lookup_feature_enabled = req.session.data.flags.address_lookup
 
     if (location === 'domestic') {
-      res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
+      if (address_lookup_feature_enabled) {
+        res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
+      } else {
+        res.redirect(`/application/${applicationId}/contact-details/uk-address`)
+      }
     } else {
       res.redirect(`/application/${applicationId}/contact-details/international-address`)
     }

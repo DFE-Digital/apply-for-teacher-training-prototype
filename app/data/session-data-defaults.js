@@ -1,4 +1,7 @@
 module.exports = {
+  disabled_account: {
+    email: 'janina.doe@example.com'
+  },
   disabled_applications: {
     12345: {
       status: 'started',
@@ -17,14 +20,15 @@ module.exports = {
         }
       },
       candidate: {
-        name: 'Janina Doe',
+        'given-name': 'Janina',
+        'family-name': 'Doe',
         'optional-name': '',
         'date-of-birth': {
           day: '09',
           month: '02',
           year: '1988'
         },
-        nationality: 'Indian',
+        nationality: ['Indian'],
         'residency-status': 'I will need to apply for a general work visa (Tier 2) to work in the UK',
         'language-skills': {
           'english-is-main': 'No',

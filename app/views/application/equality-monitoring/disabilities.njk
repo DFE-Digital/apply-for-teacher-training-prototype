@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
-{% set parent = "Equality monitoring" %}
-{% set title = "Do you have any health problems or disabilities?" %}
+{% set parent = "Equality and diversity" %}
+{% set title = "Please tick all that apply to you" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -13,7 +13,7 @@
     {{ govukInput({
       classes: "govuk-!-width-two-thirds",
       label: {
-        text: "Other impairment (optional)"
+        text: "Describe your disability (optional)"
       }
     } | decorateApplicationAttributes(["equality-monitoring", "disabilities-other"])) }}
   {% endset -%}
@@ -25,51 +25,60 @@
       }
     },
     items: [{
-      text: "Vision",
+      text: "Blind",
       label: {
         classes: "govuk-label--s"
       },
       hint: {
-        text: "For example due to blindness or partial sight"
+        text: "(or a serious visual impairment which is not corrected by glasses)"
       }
     }, {
-      text: "Hearing",
+      text: "Deaf",
       label: {
         classes: "govuk-label--s"
       },
       hint: {
-        text: "For example due to deafness or partial hearing"
+        text: "(or a serious hearing impairment)"
       }
     }, {
-      text: "Mobility",
+      text: "Learning difficulty",
       label: {
         classes: "govuk-label--s"
       },
       hint: {
-        text: "For example difficulty walking short distances, climbing stairs, lifting and carrying objects"
+        text: "(for example, dyslexia, dyspraxia or ADHD)"
       }
     }, {
-      text: "Learning or difficulty concentrating or remembering",
-      label: {
-        classes: "govuk-label--s"
-      }
-    }, {
-      text: "Mental health",
-      label: {
-        classes: "govuk-label--s"
-      }
-    }, {
-      text: "Stamina or breathing difficulty",
-      label: {
-        classes: "govuk-label--s"
-      }
-    }, {
-      text: "Social or behavioural issues",
+      text: "Long-standing illness",
       label: {
         classes: "govuk-label--s"
       },
       hint: {
-        text: "For example a neuro diverse condition such as Autism, Attention Deficit Disorder or Asperger’s Syndrome"
+        text: "(for example, cancer, HIV, diabetes, chronic heart disease or epilepsy)"
+      }
+    }, {
+      text: "Mental health condition",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "(for example, depression, schizophrenia or anxiety disorder)"
+      }
+    }, {
+      text: "Physical disability or mobility issue",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "(for example,impaired use of arms or legs, use of a wheelchair or crutches)"
+      }
+    }, {
+      text: "Social or communication impairment",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "(for example Asperger’s, or another autistic spectrum disorder)"
       }
     }, {
       text: "Other",

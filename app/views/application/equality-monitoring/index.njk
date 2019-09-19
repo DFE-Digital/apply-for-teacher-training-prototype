@@ -9,13 +9,16 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">The Department for Education collects data from teacher training candidates to help make the application process fair for all candidates.</p>
-  <p class="govuk-body">We try to ensure candidates are not discriminated against on the basis of their sex, age, ethnicity, sexual orientation, religious belief or disability.</p>
-  <p class="govuk-body">The information you give us will not be shared with training providers until after the application process is over.</p>
-  <p class="govuk-body">This section is entirely optional and has no impact on the progress of your application.</p>
+  <p class="govuk-body-l">Your application is now ready to submit. Before you do so, will you complete a 3-minute questionnaire?</p>
+  <p class="govuk-body">This questionnaire is optional and has no impact on the progress of your application.</p>
+  <p class="govuk-body">We collect this data to reduce discrimination on the basis of sex, age, ethnicity, sexual orientation, religious belief or disability.</p>
+  <p class="govuk-body">If you choose to answer our questions, the information you give us will help make the teacher training application process fair for all candidates.</p>
+  <p class="govuk-body">Your data will only be shared with training providers when you are enrolled on a course.</p>
 
   {{ govukButton({
     text: "Continue",
     href: paths.next
   }) }}
+
+  <p class="govuk-body"><a href="{{ applicationPath }}/submit">Continue without completing questionnaire</a></p>
 {% endblock %}

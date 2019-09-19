@@ -15,7 +15,7 @@ const hasDisclosedDisability = (req) => {
 
   if (applicationData['equality-monitoring'] && applicationData['equality-monitoring']['disability-status']) {
     const answer = applicationData['equality-monitoring']['disability-status']
-    return answer.includes('Yes')
+    return answer === 'Yes'
   }
 }
 
@@ -26,12 +26,12 @@ const questionPaths = (req) => {
   const paths = [
     basePath,
     `${basePath}/sex`,
-    `${basePath}/sexual-orientation`,
+    // `${basePath}/sexual-orientation`,
     `${basePath}/disability-status`,
     ...(hasDisclosedDisability(req) ? [`${basePath}/disabilities`] : []),
     `${basePath}/ethnic-group`,
     ...(hasDisclosedEthnicity(req) ? [`${basePath}/ethnic-background`] : []),
-    `${basePath}/religious-belief`,
+    // `${basePath}/religious-belief`,
     `${basePath}/review`
   ]
 
@@ -76,7 +76,7 @@ module.exports = router => {
     if (hasDisclosedEthnicity(req)) {
       path = `${basePath}/ethnic-background`
     } else {
-      path = referrer || `${basePath}/religious-belief`
+      path = referrer || `${basePath}/review`
     }
 
     res.redirect(`${path}?${utils.queryString(req)}`)

@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 {% set parent = "Equality and diversity" %}
 {% if applicationValue(["equality-monitoring", "ethnic-group"]) == "Another ethnic group" %}
-  {% set title = "Which of the following best describes your background?" %}
+  {% set title = "Which of the following best describes your ethnicity?" %}
 {% else %}
   {% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
   {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}

@@ -2,14 +2,35 @@
  * Application: Contact details routes
  */
 module.exports = router => {
+  // Render other contact pages
+  router.get('/application/:applicationId/contact-details/where-do-you-live', (req, res) => {
+    const referrer = req.query.referrer
+    const applicationId = req.params.applicationId
+    const international_address_feature_enabled = req.session.data.flags.international_address
+
+    if (!international_address_feature_enabled) {
+      res.redirect(`/application/${applicationId}/contact-details/where-do-you-live/answer`)
+    } else {
+      res.render(`application/contact-details/where-do-you-live`, {
+        referrer
+      })
+    }
+  })
+
   // Address type answer branching
-  router.post('/application/:applicationId/contact-details/where-do-you-live/answer', (req, res) => {
+  router.all('/application/:applicationId/contact-details/where-do-you-live/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const location = applicationData['contact-details']['address-type']
+    const address_lookup_feature_enabled = req.session.data.flags.address_lookup
+    const international_address_feature_enabled = req.session.data.flags.international_address
 
-    if (location === 'domestic') {
-      res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
+    if (location === 'domestic' || !international_address_feature_enabled) {
+      if (address_lookup_feature_enabled) {
+        res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
+      } else {
+        res.redirect(`/application/${applicationId}/contact-details/uk-address`)
+      }
     } else {
       res.redirect(`/application/${applicationId}/contact-details/international-address`)
     }

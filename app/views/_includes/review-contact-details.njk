@@ -70,7 +70,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+        href: applicationPath + ("/contact-details/where-do-you-live" if data.flags.international_address else "/contact-details/uk-address") + "?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "address"
       }]

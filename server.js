@@ -123,7 +123,9 @@ app.locals.providers = require('./app/data/providers')
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')
 const sessionOptions = {
-  genid: urStudy,
+  genid: function () {
+    return urStudy || 1 // Use same ID for every session
+  },
   secret: sessionName,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days

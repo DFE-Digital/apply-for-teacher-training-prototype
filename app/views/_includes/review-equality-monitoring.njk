@@ -1,7 +1,7 @@
 {% set path = "/application/" + applicationId + "/equality-monitoring/" %}
 
 {% set disabilityText %}
-  {% if applicationValue(["equality-monitoring", "disability-status"]).includes("Yes") %}
+  {% if applicationValue(["equality-monitoring", "disability-status"]) == "Yes" %}
     {{ applicationValue(["equality-monitoring", "disability-status"]) }}
     {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) %}
     {% if disabilities.length >= 1 %}
@@ -13,15 +13,23 @@
         {%- endif -%}
       {%- endfor -%})
     {% endif %}
-  {% else %}
+  {% elif applicationValue(["equality-monitoring", "disability-status"]) %}
     {{ applicationValue(["equality-monitoring", "disability-status"]) }}
+  {% else %}
+    Not entered
   {% endif %}
 {% endset %}
 
 {% set ethnicGroupText %}
-  {{ applicationValue(["equality-monitoring", "ethnic-group"]) }}
-  {% if not applicationValue(["equality-monitoring", "ethnic-group"]).includes("Prefer not to say") %}
-    ({{ applicationValue(["equality-monitoring", "ethnic-background-other"]) or applicationValue(["equality-monitoring", "ethnic-background"]) }})
+  {% if applicationValue(["equality-monitoring", "ethnic-group"]) %}
+    {{ applicationValue(["equality-monitoring", "ethnic-group"]) }}
+    {% if applicationValue(["equality-monitoring", "ethnic-group"]) != "Prefer not to say" %}
+      {% if applicationValue(["equality-monitoring", "ethnic-background"]) != "Prefer not to say" %}
+        ({{ applicationValue(["equality-monitoring", "ethnic-background-other"]) or applicationValue(["equality-monitoring", "ethnic-background"]) }})
+      {% endif %}
+    {% endif %}
+  {% else %}
+    Not entered
   {% endif %}
 {% endset %}
 

@@ -1,7 +1,7 @@
 module.exports = {
   flags: {
     nationality: true,
-    address_lookup: true,
+    address_lookup: false,
     international_address: true,
     international_qualifications: true
   },

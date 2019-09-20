@@ -123,13 +123,21 @@ app.locals.providers = require('./app/data/providers')
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')
 const sessionOptions = {
-  genid: function () {
-    return urStudy || 1 // Use same ID for every session
-  },
   secret: sessionName,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
     secure: isSecure
+  }
+}
+
+// Allow research users to open prototype in new browsers/sessions
+// and return to their original session and filled in data
+// This is only ok if content is on a unique URL and behind basic auth
+// NOTE: genid must always return a STRING
+// https://github.com/expressjs/session#genid
+if (urStudy && typeof urStudy === "string") {
+  sessionOptions.genid = function() {
+    return urStudy
   }
 }
 

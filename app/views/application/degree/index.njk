@@ -94,11 +94,10 @@
 {% endblock %}
 
 {% block pageScripts %}
-  {% set defaultValue = data.applications[applicationId]["degree"][id]["country"] %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data.applications[applicationid]["degree"][id]["country"] }}',
+      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}',
       selectElement: document.querySelector('#degree-{{ id }}-country')
     })
   </script>

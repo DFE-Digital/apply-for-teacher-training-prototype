@@ -4,7 +4,7 @@
 {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
 
 {% set jobHtml -%}
-  {{ item.role }} ({{ item.type }})
+  {{ item.role }}
   {%- if item.org %}
     <br><span class="govuk-visually-hidden">at</span>{{ item.org }}
   {% endif %}
@@ -34,6 +34,20 @@
     },
     value: {
       html: jobHtml | safe
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "job"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Type"
+    },
+    value: {
+      html: item.type or "Not entered"
     },
     actions: {
       items: [{

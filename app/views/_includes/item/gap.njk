@@ -10,15 +10,11 @@
   Gap ({{ itemDuration | duration }})
 {%- endset %}
 
-{% set descriptionText -%}
-  {{ item.description }}
-{%- endset %}
-
 {% set datesText %}
   {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
 {% endset %}
 
-{% set changeHref = applicationPath + "/work-history/job/" + item.id + "?referrer=" + referrer %}
+{% set changeHref = applicationPath + "/work-history/gap/" + item.id + "?referrer=" + referrer %}
 
 {{ govukSummaryList({
   rows: [{
@@ -26,7 +22,7 @@
       text: "Description"
     },
     value: {
-      text: descriptionText
+      text: item.description or "Not entered"
     },
     actions: {
       items: [{

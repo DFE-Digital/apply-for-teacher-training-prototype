@@ -1,0 +1,17 @@
+{% extends "_content.njk" %}
+
+{% set title = "Are you sure you want to remove this " + type + "?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukButton({
+    text: "Yes I’m sure - remove this " + type,
+    classes: "govuk-button--warning"
+  }) }}
+  <p class="govuk-body"><a href="{{ referrer }}">Cancel</a></p>
+{% endblock %}

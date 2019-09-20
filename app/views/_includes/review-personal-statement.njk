@@ -11,7 +11,7 @@
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statement.id + "/vocation?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + providerCode + "/vocation?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "why you want to be a teacher"
       }]
@@ -26,7 +26,7 @@
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statement.id + "/subject-knowledge?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + providerCode + "/subject-knowledge?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
@@ -41,7 +41,7 @@
     actions: {
       items: [{
         classes: "govuk-!-padding-right-2",
-        href: applicationPath + "/personal-statement/" + statement.id + "/interview?referrer=" + referrer,
+        href: applicationPath + "/personal-statement/" + providerCode + "/interview?referrer=" + referrer,
         text: "Change" if statement["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]

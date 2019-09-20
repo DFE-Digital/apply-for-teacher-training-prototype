@@ -23,7 +23,6 @@
     </ul>
   {% endif %}
   {% set statement = applicationValue(["personal-statements", providerCode]) %}
-  {% set statementId = providerCode %}
   {% include "_includes/review-personal-statement.njk" %}
 
   {{ govukButton({

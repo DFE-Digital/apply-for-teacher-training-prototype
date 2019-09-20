@@ -90,11 +90,12 @@
     text: "Continue"
   }) }}
 {% endblock %}
+
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ data["other-qualifications"][id]["country"] }}',
+      defaultValue: '{{ applicationValue(["other-qualifications", id, "country"]) }}',
       selectElement: document.querySelector('#other-qualifications-{{ id }}-country')
     })
   </script>

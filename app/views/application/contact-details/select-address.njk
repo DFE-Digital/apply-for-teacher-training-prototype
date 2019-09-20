@@ -13,7 +13,7 @@
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
-  <p class="govuk-body">{{ data.applications[applicationId]["contact-details"]["address"]["postal-code"] }} &nbsp; <a href="{{ applicationPath }}/contact-details/lookup-address">Change</a></p>
+  <p class="govuk-body">{{ applicationValue(["contact-details", "address", "postal-code"]) }} &nbsp; <a href="{{ applicationPath }}/contact-details/lookup-address">Change</a></p>
 
   {{ govukRadios({
     fieldset: {

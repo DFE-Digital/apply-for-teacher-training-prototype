@@ -8,7 +8,10 @@ function createNewApplication (req) {
     data.applications = {}
   }
 
-  data.applications[code] = { status: 'started' }
+  if (typeof data.applications[code] === 'undefined') {
+    data.applications[code] = { status: 'started' }
+  }
+
   return code
 }
 

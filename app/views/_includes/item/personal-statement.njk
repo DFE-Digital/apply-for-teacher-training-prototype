@@ -1,18 +1,16 @@
 {% set applicationPath = "/application/" + applicationId %}
 {{ govukSummaryList({
-  classes: "app-summary",
   rows: [{
     key: {
       text: "Why do you want to be a teacher?"
     },
     value: {
-      text: (statement["vocation"] or "Not entered") | nl2br | safe
+      text: (item["vocation"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
-        classes: "govuk-!-padding-right-2",
         href: applicationPath + "/personal-statement/" + providerCode + "/vocation?referrer=" + referrer,
-        text: "Change" if statement["vocation"] else "Add",
+        text: "Change" if item["vocation"] else "Add",
         visuallyHiddenText: "why you want to be a teacher"
       }]
     } if review == true
@@ -21,13 +19,12 @@
       text: "Your knowledge about the subject you want to teach"
     },
     value: {
-      text: (statement["subject-knowledge"] or "Not entered") | nl2br | safe
+      text: (item["subject-knowledge"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
-        classes: "govuk-!-padding-right-2",
         href: applicationPath + "/personal-statement/" + providerCode + "/subject-knowledge?referrer=" + referrer,
-        text: "Change" if statement["vocation"] else "Add",
+        text: "Change" if item["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
     } if review == true
@@ -36,13 +33,12 @@
       text: "Interview preferences"
     },
     value: {
-      text: (statement["interview"] or "Not entered") | nl2br | safe
+      text: (item["interview"] or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
-        classes: "govuk-!-padding-right-2",
         href: applicationPath + "/personal-statement/" + providerCode + "/interview?referrer=" + referrer,
-        text: "Change" if statement["vocation"] else "Add",
+        text: "Change" if item["vocation"] else "Add",
         visuallyHiddenText: "evidence of subject knowledge"
       }]
     } if review == true

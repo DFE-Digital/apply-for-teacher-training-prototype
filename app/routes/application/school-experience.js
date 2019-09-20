@@ -8,7 +8,7 @@ module.exports = router => {
   // Render missing school experience page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/school-experience/missing', (req, res) => {
-    res.render(`application/school-experience/missing`, {
+    res.render('application/school-experience/missing', {
       referrer: req.query.referrer
     })
   })

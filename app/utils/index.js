@@ -14,8 +14,8 @@ const getQueryString = (req) => {
 
 const saveIsoDate = (req, data, id) => {
   // Create ISO 8601 start date
-  const startDay = req.body[`${id}-start-date-day`] || '01'
-  const startMonth = req.body[`${id}-start-date-month`]
+  const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
+  const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')
   const startYear = req.body[`${id}-start-date-year`]
   data['start-date'] = false
 
@@ -24,8 +24,8 @@ const saveIsoDate = (req, data, id) => {
   }
 
   // Create ISO 8601 end date
-  const endDay = req.body[`${id}-end-date-day`] || '01'
-  const endMonth = req.body[`${id}-end-date-month`]
+  const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
+  const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
   const endYear = req.body[`${id}-end-date-year`]
   data['end-date'] = false
 

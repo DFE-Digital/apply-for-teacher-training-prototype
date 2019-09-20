@@ -1,0 +1,31 @@
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Course"
+    },
+    value: {
+      html: "<a href=\"#\">" + item.name_and_code + "</a><br>" + item.description
+    },
+    actions: {
+      items: [{
+        href: "#",
+        text: "Change",
+        visuallyHiddenText: "course"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Location"
+    },
+    value: {
+      html: course.locationName + "<br>" + course.locationAddress
+    },
+    actions: {
+      items: [{
+        href: "#",
+        text: "Change",
+        visuallyHiddenText: "course location"
+      }]
+    } if review == true
+  }]
+}) }}

@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review-school-experience.njk" %}
+  {% include "_includes/review/school-experience.njk" %}
   {% if applicationValue(["school-experience", "missing"]) != "true" %}
     {{ govukButton({
       text: addButtonText,
@@ -23,7 +23,6 @@
       classes: "govuk-button--secondary"
     }) }}
   {% endif %}
-
   {{ govukButton({
     text: "Continue",
     href: applicationPath

@@ -1,0 +1,52 @@
+{% set applicationPath = "/application/" + applicationId %}
+
+{% set qualificationText -%}
+  {{- item.type + " " + item.subject if item.type }}
+  {{ item.org + ", " + item.country if item.org }}
+{%- endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Qualification"
+    },
+    value: {
+      text: (qualificationText | nl2br | safe) or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Year awarded"
+    },
+    value: {
+      text: item.year or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/year?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if review == true
+  }, {
+    key: {
+      text: "Grade"
+    },
+    value: {
+      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item["grade-other"] or item.grade or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "grade"
+      }]
+    } if review == true
+  }]
+}) }}

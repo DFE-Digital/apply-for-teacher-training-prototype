@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block primary %}
-  <h2 class="govuk-heading-l">Courses</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% if applicationValue(["courses"]) %}
-    {% include "_includes/review-courses.njk" %}
+    {% include "_includes/review/courses.njk" %}
   {% else %}
     {{ govukButton({
       classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
@@ -23,48 +23,45 @@
     }) }}
   {% endif %}
 
-  <h2 class="govuk-heading-l">About you</h2>
-  <h2 class="govuk-heading-m">Personal details</h2>
-  {% include "_includes/review-personal-details.njk" %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
+  <h3 class="govuk-heading-m">Personal details</h3>
+  {% include "_includes/review/personal-details.njk" %}
 
-  <h2 class="govuk-heading-m">Contact details</h2>
-  {% include "_includes/review-contact-details.njk" %}
+  <h3 class="govuk-heading-m">Contact details</h3>
+  {% include "_includes/review/contact-details.njk" %}
 
-  <h2 class="govuk-heading-m">Work history</h2>
-  {% include "_includes/review-work-history.njk" %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Work history</h2>
+  {% include "_includes/review/work-history.njk" %}
 
-  <h2 class="govuk-heading-m">School experience and volunteering with young people</h2>
-  {% include "_includes/review-school-experience.njk" %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">School experience and volunteering with young people</h2>
+  {% include "_includes/review/school-experience.njk" %}
 
-  <h2 class="govuk-heading-l">Qualifications</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
-  {% include "_includes/review-degrees.njk" %}
+  {% include "_includes/review/degrees.njk" %}
 
-  {% set gcse = applicationValue(["gcse", "maths"]) %}
   <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
-  {% include "_includes/review-gcse.njk" %}
+  {% set id = "maths" %}
+  {% include "_includes/review/gcse.njk" %}
 
-  {% set gcse = applicationValue(["gcse", "english"]) %}
   <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
-  {% include "_includes/review-gcse.njk" %}
+  {% set id = "english" %}
+  {% include "_includes/review/gcse.njk" %}
 
   {% if hasPrimaryCourses() or applicationValue(["gcse", "science"]) %}
-    {% set gcse = applicationValue(["gcse", "science"]) %}
     <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
-    {% include "_includes/review-gcse.njk" %}
+    {% set id = "science" %}
+    {% include "_includes/review/gcse.njk" %}
   {% endif %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% include "_includes/review-other-qualifications.njk" %}
+  {% include "_includes/review/other-qualifications.njk" %}
 
-  <h2 class="govuk-heading-l">Personal statement and interview</h2>
-  {% for providerCode, statement in applicationValue(["personal-statements"]) %}
-    <h3 class="govuk-heading-m">{{ providers[providerCode].name }}</h3>
-    {% include "_includes/review-personal-statement.njk" %}
-  {% endfor %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement and interview</h2>
+  {% include "_includes/review/personal-statements.njk" %}
 
-  <h2 class="govuk-heading-l">References</h2>
-  {% include "_includes/review-references.njk" %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% include "_includes/review/references.njk" %}
 
   {{ govukButton({
     text: "Continue",

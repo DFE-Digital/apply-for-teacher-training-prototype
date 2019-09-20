@@ -1,0 +1,14 @@
+{% set item = applicationValue(["gcse", id]) %}
+{% if item %}
+  {% set gcseHtml %}
+    {% include "_includes/item/gcse.njk" %}
+  {% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: item.type,
+    html: gcseHtml
+  }) }}
+{% else %}
+  <p class="govuk-body">Not entered.</p>
+{% endif %}

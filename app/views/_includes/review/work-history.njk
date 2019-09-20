@@ -1,0 +1,128 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set workHistory = applicationValue("work-history")
+  | toArray
+  | sort(attribute="start-date")
+  | selectattr("id")
+%}
+
+{% if workHistory.length >= 1 %}
+  {% for item in workHistory %}
+    {% set jobHtml %}
+      {% include "_includes/item/job.njk" %}
+    {% endset %}
+
+    {% set gapHtml %}
+      {% include "_includes/item/gap.njk" %}
+    {% endset %}
+
+    {# periodStart = Earliest date in required work history period #}
+    {% set periodStart = "now" | date | replace("2019", "2014") %}
+    {% set periodStartEpoch = periodStart | date("x") %}
+
+    {# firstStart = Start date of first item in work history #}
+    {% set firstStart = item["start-date"] %}
+    {% set firstStartEpoch = firstStart | date("x") %}
+
+    {% if loop.first and firstStartEpoch > periodStartEpoch %}
+      {# Unexplained gap (prior to work history commencing) #}
+      {% set itemStart = periodStart %}
+      {% set itemStartEpoch = itemStart | date("x") %}
+      {% set itemEnd = firstStart %}
+      {% set itemEndEpoch = itemEnd | date("x") %}
+      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+            text: "Explain gap"
+          }]
+        } if review == true
+      }) }}
+    {% endif %}
+
+    {% if item.category == "gap" %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: "Gap (" + (itemDuration | duration) + ")",
+        actions: {
+          items: [{
+            href: "#",
+            text: "Remove gap"
+          }]
+        } if review == true,
+        html: gapHtml
+      }) }}
+    {% else %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: item.role + " (" + item.type + ")",
+        actions: {
+          items: [{
+            href: "#",
+            text: "Remove job"
+          }]
+        } if review == true,
+        html: jobHtml
+      }) }}
+    {% endif %}
+
+    {# Unexplained gap (during work history) #}
+    {% set nextItem = workHistory[loop.index] %}
+    {% set itemStart = item["end-date"] %}
+    {% set itemStartEpoch = itemStart | date("x") %}
+    {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+    {% set itemEndEpoch = itemEnd | date("x") %}
+    {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+    {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+            text: "Explain gap"
+          }]
+        } if review == true
+      }) }}
+    {% endif %}
+  {% endfor %}
+{% elif applicationValue(["work-history", "missing"]) and not workHistory.length %}
+  {% set outofWorkHtml %}
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Explanation of why you’ve been out of the workplace"
+        },
+        value: {
+          text: applicationValue(["work-history", "missing"]) | nl2br | safe
+        },
+        actions: {
+          classes: "govuk-!-padding-right-2",
+          items: [{
+            href: applicationPath + "/work-history/missing?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
+    }) }}
+  {% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: outofWorkHtml
+  }) }}
+  {{ govukButton({
+    text: "Add job",
+    classes: "govuk-button--secondary",
+    href: applicationPath + "/work-history/add/job?referrer="  + referrer
+  }) }}
+{% else %}
+  <p class="govuk-body">No work history entered.</p>
+{% endif %}

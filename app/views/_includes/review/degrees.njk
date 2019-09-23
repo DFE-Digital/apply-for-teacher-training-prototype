@@ -11,7 +11,7 @@
       titleText: item.type + " " + item.subject,
       actions: {
         items: [{
-          href: "#",
+          href: applicationPath + "/degree/" + item.id + "/remove?referrer=" + referrer,
           text: "Remove degree"
         }]
       } if review == true,

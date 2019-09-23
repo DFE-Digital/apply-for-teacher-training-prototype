@@ -12,7 +12,7 @@
       titleText: item.id | capitalize + " referee",
       actions: {
         items: [{
-          href: "#",
+          href: applicationPath + "/referees/" + item.id + "/remove?referrer=" + referrer,
           text: "Remove referee"
         }]
       } if review == true,

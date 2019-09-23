@@ -51,13 +51,18 @@
     {% endif %}
 
     {% if item.category == "gap" %}
+      {% set itemStart = item["start-date"] %}
+      {% set itemStartEpoch = itemStart | date("x") %}
+      {% set itemEnd = item["end-date"] %}
+      {% set itemEndEpoch = itemEnd | date("x") %}
+      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
       {{ appSummaryCard({
         classes: "govuk-!-margin-bottom-6",
         headingLevel: 3,
         titleText: "Gap (" + (itemDuration | duration) + ")",
         actions: {
           items: [{
-            href: "#",
+            href: applicationPath + "/work-history/" + item.id + "/remove?referrer=" + referrer,
             text: "Remove gap"
           }]
         } if review == true,
@@ -67,10 +72,10 @@
       {{ appSummaryCard({
         classes: "govuk-!-margin-bottom-6",
         headingLevel: 3,
-        titleText: item.role + " (" + item.type + ")",
+        titleText: item.role,
         actions: {
           items: [{
-            href: "#",
+            href: applicationPath + "/work-history/" + item.id + "/remove?referrer=" + referrer,
             text: "Remove job"
           }]
         } if review == true,

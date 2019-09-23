@@ -16,5 +16,6 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 require('./routes/application')(router)
 require('./routes/course')(router)
 require('./routes/email')(router)
+require('./routes/remove')(router)
 
 module.exports = router

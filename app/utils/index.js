@@ -4,6 +4,10 @@ const applicationData = (req) => {
   return req.session.data.applications[req.params.applicationId]
 }
 
+const capitaliseFirstLetter = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 const generateRandomString = () => {
   return (Number(new Date())).toString(36).slice(-5).toUpperCase()
 }
@@ -82,6 +86,7 @@ const toArray = (obj) => {
 
 module.exports = {
   applicationData,
+  capitaliseFirstLetter,
   generateRandomString,
   queryString: getQueryString,
   saveIsoDate,

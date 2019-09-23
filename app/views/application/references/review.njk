@@ -17,7 +17,7 @@
   {% if not applicationValue(["referees", "second"]) %}
     {{ govukButton({
       text: "Add a second referee (recommended)",
-      href: applicationPath + "/references/type/second",
+      href: "/application/" + applicationId + "/references/" + ("type" if data.flags.referee_types else "details") + "/second?referrer=" + referrer,
       classes: "govuk-button--secondary"
     }) }}
     {{ govukButton({

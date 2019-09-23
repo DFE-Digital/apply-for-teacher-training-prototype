@@ -1,11 +1,16 @@
 {% set applicationPath = "/application/" + applicationId %}
+
 {% set workHistory = applicationValue("work-history")
   | toArray
   | sort(attribute="start-date")
   | selectattr("id")
 %}
 
-{% if workHistory.length >= 1 %}
+{% set hasHistory = workHistory | toArray | length >= 1 %}
+{% set hasMissing = applicationValue(["work-history", "length"]) == "none" and not hasHistory %}
+{% set hasAutomaticGaps = data.flags.automatic_gaps == true %}
+
+{% if hasHistory and not hasMissing %}
   {% for item in workHistory %}
     {% set jobHtml %}
       {% include "_includes/item/job.njk" %}
@@ -15,32 +20,34 @@
       {% include "_includes/item/gap.njk" %}
     {% endset %}
 
-    {# periodStart = Earliest date in required work history period #}
-    {% set periodStart = "now" | date | replace("2019", "2014") %}
-    {% set periodStartEpoch = periodStart | date("x") %}
+    {% if hasAutomaticGaps %}
+      {# periodStart = Earliest date in required work history period #}
+      {% set periodStart = "now" | date | replace("2019", "2014") %}
+      {% set periodStartEpoch = periodStart | date("x") %}
 
-    {# firstStart = Start date of first item in work history #}
-    {% set firstStart = item["start-date"] %}
-    {% set firstStartEpoch = firstStart | date("x") %}
+      {# firstStart = Start date of first item in work history #}
+      {% set firstStart = item["start-date"] %}
+      {% set firstStartEpoch = firstStart | date("x") %}
 
-    {% if loop.first and firstStartEpoch > periodStartEpoch %}
-      {# Unexplained gap (prior to work history commencing) #}
-      {% set itemStart = periodStart %}
-      {% set itemStartEpoch = itemStart | date("x") %}
-      {% set itemEnd = firstStart %}
-      {% set itemEndEpoch = itemEnd | date("x") %}
-      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
-        actions: {
-          items: [{
-            href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-            text: "Explain gap"
-          }]
-        } if review == true
-      }) }}
+      {% if loop.first and firstStartEpoch > periodStartEpoch %}
+        {# Unexplained gap (prior to work history commencing) #}
+        {% set itemStart = periodStart %}
+        {% set itemStartEpoch = itemStart | date("x") %}
+        {% set itemEnd = firstStart %}
+        {% set itemEndEpoch = itemEnd | date("x") %}
+        {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+        {{ appSummaryCard({
+          classes: "govuk-!-margin-bottom-6",
+          headingLevel: 3,
+          titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+          actions: {
+            items: [{
+              href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+              text: "Explain gap"
+            }]
+          } if review == true
+        }) }}
+      {% endif %}
     {% endif %}
 
     {% if item.category == "gap" %}
@@ -71,28 +78,56 @@
       }) }}
     {% endif %}
 
-    {# Unexplained gap (during work history) #}
-    {% set nextItem = workHistory[loop.index] %}
-    {% set itemStart = item["end-date"] %}
-    {% set itemStartEpoch = itemStart | date("x") %}
-    {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
-    {% set itemEndEpoch = itemEnd | date("x") %}
-    {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-    {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
-        actions: {
-          items: [{
-            href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-            text: "Explain gap"
-          }]
-        } if review == true
-      }) }}
+    {% if hasAutomaticGaps %}
+      {# Unexplained gap (during work history) #}
+      {% set nextItem = workHistory[loop.index] %}
+      {% set itemStart = item["end-date"] %}
+      {% set itemStartEpoch = itemStart | date("x") %}
+      {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+      {% set itemEndEpoch = itemEnd | date("x") %}
+      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+      {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+        {{ appSummaryCard({
+          classes: "govuk-!-margin-bottom-6",
+          headingLevel: 3,
+          titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+          actions: {
+            items: [{
+              href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+              text: "Explain gap"
+            }]
+          } if review == true
+        }) }}
+      {% endif %}
     {% endif %}
   {% endfor %}
-{% elif applicationValue(["work-history", "missing"]) and not workHistory.length %}
+  {% if not hasAutomaticGaps %}
+    {% set gapsHtml %}
+      {{ govukSummaryList({
+        classes: "app-summary",
+        rows: [{
+          key: {
+            text: "Reasons for any gaps in your work history"
+          },
+          value: {
+            text: applicationValue(["work-history", "gaps"]) or "None provided" | nl2br | safe
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/work-history/explain-gaps?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "reasons"
+            }]
+          }
+        }]
+      }) }}
+    {% endset %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      html: gapsHtml
+    }) }}
+  {% endif %}
+{% elif hasMissing %}
   {% set outofWorkHtml %}
     {{ govukSummaryList({
       classes: "app-summary",
@@ -101,10 +136,9 @@
           text: "Explanation of why you’ve been out of the workplace"
         },
         value: {
-          text: applicationValue(["work-history", "missing"]) | nl2br | safe
+          text: applicationValue(["work-history", "missing"]) or "Not entered" | nl2br | safe
         },
         actions: {
-          classes: "govuk-!-padding-right-2",
           items: [{
             href: applicationPath + "/work-history/missing?referrer=" + referrer,
             text: "Change",

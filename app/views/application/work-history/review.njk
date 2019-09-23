@@ -14,7 +14,7 @@
 
 {% block primary %}
   {% include "_includes/review/work-history.njk" %}
-  {% if not applicationValue(["work-history","missing"]) %}
+  {% if applicationValue(["work-history", "length"]) != "none" %}
     {{ govukButton({
       text: "Add another job",
       classes: "govuk-button--secondary",

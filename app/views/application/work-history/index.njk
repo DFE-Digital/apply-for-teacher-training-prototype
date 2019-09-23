@@ -44,7 +44,7 @@
       conditional: {
         html: "<p class=\"govuk-body\">You’ll be able to give details once you’ve entered your employment history. We’ll ask you to explain any gap longer than a month.</p>"
       }
-    }, {
+    } if data.flags.automatic_gaps, {
       value: "none",
       text: "I have not worked in the last 5 years",
       conditional: {

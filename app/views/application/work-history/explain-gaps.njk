@@ -1,0 +1,37 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% if referrer %}
+  {% set formaction = referrer %}
+{% else %}
+  {% set formaction = applicationPath + "/work-history/review" %}
+{% endif %}
+{% set parent = "Work history" %}
+{% set title = "Explain gaps in work history" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({ href: referrer }) }}
+  {% else %}
+    {{ govukBackLink({ href: applicationPath + "/work-history" }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ referrer }}
+  {{ govukCharacterCount({
+    label: {
+        text: "Gaps in work history",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Have you taken time off work for any reason? (Examples might include study, caring responsibilities, travel, a career break or health.) If so, please give us details. You should explain any gap longer than a month."
+    },
+    rows: 10,
+    maxwords: 400
+  } | decorateApplicationAttributes(["work-history", "gaps"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

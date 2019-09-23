@@ -3,9 +3,9 @@ const utils = require('./../utils')
 module.exports = router => {
   router.get('/application/:applicationId/:section/:id/remove', (req, res) => {
     const applicationData = utils.applicationData(req)
-    const section = req.params.section
-    const referrer = req.query.referrer
     const id = req.params.id
+    const referrer = req.query.referrer
+    const section = req.params.section
     const item = applicationData[section][id]
 
     let parent
@@ -50,5 +50,16 @@ module.exports = router => {
       section,
       type
     })
+  })
+
+  router.post('/application/:applicationId/:section/:id/remove', (req, res) => {
+    const applicationData = utils.applicationData(req)
+    const id = req.params.id
+    const referrer = req.query.referrer
+    const section = req.params.section
+
+    delete applicationData[section][id]
+
+    res.redirect(referrer)
   })
 }

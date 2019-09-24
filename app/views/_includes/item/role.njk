@@ -4,7 +4,7 @@
 {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
 
 {% set datesText %}
-  {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
+  {{ itemStart | date("d MMMM yyyy") }} - {{ itemEnd | date("d MMMM yyyy") if item["end-date"] else "Present" }}
 {% endset %}
 
 {% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}

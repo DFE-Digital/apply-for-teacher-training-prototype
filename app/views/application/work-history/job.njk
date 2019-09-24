@@ -56,13 +56,13 @@
       }
     },
     hint: {
-      text: "For example, 05 2018"
+      text: "For example, 5 2018"
     },
     namePrefix: id + "-start-date",
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(["work-history", id, "start-date"]) | date("LL"),
+      value: applicationValue(["work-history", id, "start-date"]) | date("L"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
@@ -80,13 +80,13 @@
       }
     },
     hint: {
-      text: "For example, 05 2019"
+      text: "For example, 5 2019"
     },
     namePrefix: id + "-end-date",
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(["work-history", id, "end-date"]) | date("LL"),
+      value: applicationValue(["work-history", id, "end-date"]) | date("L"),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",

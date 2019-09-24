@@ -28,7 +28,7 @@
         },
         rows: 10,
         maxwords: 300
-      } | decorateApplicationAttributes(["application", provider + "-" + course, "miscellaneous"])) }}
+      } | decorateApplicationAttributes(["miscellaneous"])) }}
     {% endset %}
 
     {{ govukRadios({
@@ -46,7 +46,7 @@
       }, {
         text: "No"
       }]
-    } | decorateApplicationAttributes(["application", provider + "-" + course, "miscellaneous-choice"])) }}
+    } | decorateApplicationAttributes(["miscellaneous-choice"])) }}
 
     <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate and I agree to the <a href="#">terms and conditions</a> of the ‘{{ serviceName }}’ service.</p>
 

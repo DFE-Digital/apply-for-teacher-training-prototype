@@ -58,6 +58,12 @@ module.exports = router => {
     res.render('application/review')
   })
 
+  // Export data
+  router.get('/application/:applicationId/export', (req, res) => {
+    const applicationId = req.params.applicationId
+    res.json(req.session.data.applications[applicationId])
+  })
+
   require('./application/personal-details')(router)
   require('./application/contact-details')(router)
   require('./application/work-history')(router)

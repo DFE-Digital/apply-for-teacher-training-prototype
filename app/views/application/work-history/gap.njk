@@ -20,14 +20,14 @@
       }
     },
     hint: {
-      text: "For example, 01 2018"
+      text: "For example, 5 2018"
     },
     namePrefix: id + "-start-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('LL')
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
@@ -44,14 +44,14 @@
       }
     },
     hint: {
-      text: "For example, 05 2018"
+      text: "For example, 8 2018"
     },
     namePrefix: id + "-end-date",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('LL')
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",

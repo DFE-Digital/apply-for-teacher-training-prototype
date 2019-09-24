@@ -37,8 +37,8 @@ module.exports = router => {
     const courseId = utils.generateRandomString()
     var data = req.session.data
 
-    if (typeof data.applications[applicationId]['temporaryCourses'] === 'undefined') {
-      data.applications[applicationId]['temporaryCourses'] = {}
+    if (typeof data.applications[applicationId].temporaryCourses === 'undefined') {
+      data.applications[applicationId].temporaryCourses = {}
     }
 
     data.applications[applicationId].temporaryCourses[courseId] = { started: true }
@@ -49,30 +49,30 @@ module.exports = router => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const courseId = req.params.courseId
-    const temporaryCourse = applicationData['temporaryCourses'][courseId]
+    const temporaryCourse = applicationData.temporaryCourses[courseId]
     const paths = pickCoursePaths(req)
     const regExp = /\(([^)]+)\)$/
     const providerCode = regExp.exec(temporaryCourse.provider)[1]
     const courseCode = regExp.exec(temporaryCourse.course)[1]
 
-    if (typeof applicationData['courses'] === 'undefined') {
-      applicationData['courses'] = {}
+    if (typeof applicationData.courses === 'undefined') {
+      applicationData.courses = {}
     }
 
-    applicationData['courses'][courseId] = {
+    applicationData.courses[courseId] = {
       providerCode,
       courseCode,
       locationName: temporaryCourse.location,
       locationAddress: 'Pavillion Way, Edgware HA8 9YR'
     }
 
-    delete applicationData['temporaryCourses']
+    delete applicationData.temporaryCourses
 
     res.redirect(paths.next)
   })
 
   router.post('/application/:applicationId/course/:courseId/found', (req, res) => {
-    const found = req.body.applications[req.params.applicationId]['temporaryCourses'][req.params.courseId].found
+    const found = req.body.applications[req.params.applicationId].temporaryCourses[req.params.courseId].found
     const paths = (found && found === 'know')
       ? pickCoursePaths(req)
       : findCoursePaths(req)
@@ -80,7 +80,7 @@ module.exports = router => {
   })
 
   router.all('/application/:applicationId/course/:courseId/find', (req, res) => {
-    res.render(`course/find`, {
+    res.render('course/find', {
       paths: findCoursePaths(req)
     })
   })

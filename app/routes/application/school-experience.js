@@ -27,7 +27,7 @@ module.exports = router => {
     const queryString = querystring.stringify(req.query)
     const referrer = req.query.referrer
 
-    res.render(`application/school-experience/role`, {
+    res.render('application/school-experience/role', {
       referrer,
       formaction: `/application/${req.params.applicationId}/school-experience/update/role/${id}?${queryString}`,
       id,
@@ -51,7 +51,7 @@ module.exports = router => {
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
-    const attained = applicationData['school-experience']['attained']
+    const attained = applicationData['school-experience'].attained
 
     if (attained === 'false') {
       res.redirect(`/application/${applicationId}/school-experience/review`)

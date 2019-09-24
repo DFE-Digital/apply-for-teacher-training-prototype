@@ -4,7 +4,7 @@
 module.exports = router => {
   // Check email
   router.get('/account/check-email/:action', (req, res) => {
-    res.render(`account/check-email`, {
+    res.render('account/check-email', {
       action: req.params.action
     })
   })

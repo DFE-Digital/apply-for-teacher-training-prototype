@@ -2,9 +2,9 @@ module.exports = {
   flags: {
     address_lookup: false,
     automatic_gaps: false,
-    international_address: true,
-    international_qualifications: true,
-    nationality: true,
+    international_address: false,
+    international_qualifications: false,
+    nationality: false,
     referee_types: false
   },
   disabled_account: {

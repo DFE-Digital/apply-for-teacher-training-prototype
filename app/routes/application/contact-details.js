@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 /**
  * Application: Contact details routes
  */
@@ -11,7 +13,7 @@ module.exports = router => {
     if (!international_address_feature_enabled) {
       res.redirect(`/application/${applicationId}/contact-details/where-do-you-live/answer`)
     } else {
-      res.render(`application/contact-details/where-do-you-live`, {
+      res.render('application/contact-details/where-do-you-live', {
         referrer
       })
     }

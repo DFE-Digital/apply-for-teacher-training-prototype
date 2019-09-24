@@ -7,7 +7,7 @@
 {% block primary %}
   <div class="govuk-form-group">
     <label for="courses-{{ courseId }}-provider" class="govuk-label">Enter training provider name</label>
-    <div id="provider-autocomplete-containter"></div>
+    <div id="provider-autocomplete-container"></div>
   </div>
 
   {{ govukButton({
@@ -21,8 +21,9 @@
     accessibleAutocomplete({
       defaultValue: '{{ applicationValue(["temporaryCourses", courseId, "provider"]) }}',
       name: "applications[{{ applicationId }}][temporaryCourses][{{ courseId }}][provider]",
-      element: document.querySelector('#provider-autocomplete-containter'),
-      id: '#courses-{{ courseId }}-provider',
+      minLength: 2,
+      element: document.querySelector('#provider-autocomplete-container'),
+      id: 'courses-{{ courseId }}-provider',
       source: [
         {% for id, item in providers %}"{{ item.name_and_code }}",{% endfor %}
       ]

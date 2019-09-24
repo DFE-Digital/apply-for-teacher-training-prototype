@@ -4,7 +4,7 @@ module.exports = {
     automatic_gaps: false,
     international_address: true,
     international_qualifications: true,
-    nationality: false,
+    nationality: true,
     referee_types: false
   },
   disabled_account: {

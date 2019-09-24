@@ -16,9 +16,12 @@
   {{ govukInput({
     label: {
       text: "Email address",
-    classes: "govuk-label--m"
+      classes: "govuk-label--m"
     },
     classes: "govuk-!-width-two-thirds",
+    attributes: {
+      spellcheck: "false"
+    },
     autocomplete: "email",
     type: "email",
     id: "account-email",

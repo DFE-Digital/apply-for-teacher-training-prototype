@@ -26,3 +26,9 @@
   @include govuk-font($size: 16);
   margin-bottom: govuk-spacing(0);
 }
+
+@media print {
+  .app-course a::after {
+    display: none;
+  }
+}

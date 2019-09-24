@@ -50,6 +50,12 @@
   }
 }
 
+@media print {
+  .app-task-list__task-name::after {
+    display: none;
+  }
+}
+
 .app-task-list__task-completed {
   margin-top: govuk-spacing(2);
   margin-bottom: govuk-spacing(1);

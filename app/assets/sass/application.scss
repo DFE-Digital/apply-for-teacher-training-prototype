@@ -5,7 +5,7 @@ $govuk-global-styles: true;
 // Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";
 
-// Components that aren't in Frontend
+// Components that aren’t in Frontend
 @import "components/autocomplete";
 @import "components/caption";
 @import "components/course";
@@ -18,3 +18,24 @@ $govuk-global-styles: true;
 @import "components/table";
 @import "components/task-list";
 @import "components/tag";
+
+// Override GOV.UK Frontend print styles
+@media print {
+  .govuk-template {
+    background-color: transparent;
+  }
+
+  .govuk-width-container {
+    max-width: 95%;
+  }
+
+  .govuk-button,
+  .govuk-back-link,
+  .govuk-footer,
+  .govuk-header__menu-button,
+  .govuk-header__navigation,
+  .govuk-phase-banner,
+  .govuk-summary-list__actions {
+    display: none !important;
+  }
+}

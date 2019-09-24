@@ -8,7 +8,7 @@ module.exports = router => {
   // Render missing work history page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/work-history/missing', (req, res) => {
-    res.render(`application/work-history/missing`, {
+    res.render('application/work-history/missing', {
       referrer: req.query.referrer
     })
   })
@@ -53,7 +53,7 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
-    const length = applicationData['work-history']['length']
+    const length = applicationData['work-history'].length
 
     if (length === 'none') {
       res.redirect(`/application/${applicationId}/work-history/missing`)

@@ -57,7 +57,7 @@ module.exports = router => {
     const data = req.session.data
     const id = req.params.id
     const applicationId = req.params.applicationId
-    const provenance = data.applications[applicationId]['degree'][id]['provenance']
+    const provenance = data.applications[applicationId].degree[id].provenance
 
     let path
     if (provenance === 'domestic' || !req.session.data.flags.international_qualifications) {

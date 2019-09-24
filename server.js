@@ -135,8 +135,8 @@ const sessionOptions = {
 // This is only ok if content is on a unique URL and behind basic auth
 // NOTE: genid must always return a STRING
 // https://github.com/expressjs/session#genid
-if (urStudy && typeof urStudy === "string") {
-  sessionOptions.genid = function() {
+if (urStudy && typeof urStudy === 'string') {
+  sessionOptions.genid = function () {
     return urStudy
   }
 }

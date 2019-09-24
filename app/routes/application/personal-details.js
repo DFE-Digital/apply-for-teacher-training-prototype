@@ -15,13 +15,13 @@ module.exports = router => {
   router.post('/application/:applicationId/personal-details/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
-    const nationality = applicationData['candidate']['nationality']
+    const nationality = applicationData.candidate.nationality
 
     const eea = ['Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Dutch', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Icelandic', 'Irish', 'Italian', 'Latvian', 'Liechtenstein citizen', 'Lithuanian', 'Luxembourger', 'Maltese', 'Norwegian', 'Polish', 'Portuguese', 'Romanian', 'Slovak', 'Slovenian', 'Spanish', 'Swedish', 'Swiss', 'British']
 
     if (eea.includes(nationality)) {
       // Delete residency status if previously entered
-      delete applicationData['candidate']['residency-status']
+      delete applicationData.candidate['residency-status']
       res.redirect(`/application/${applicationId}/personal-details/review`)
     } else {
       res.redirect(`/application/${applicationId}/personal-details/residency-status?${utils.queryString(req)}`)

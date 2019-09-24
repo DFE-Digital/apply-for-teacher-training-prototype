@@ -10,12 +10,12 @@ describe('The Prototype Kit - force HTTPS redirect functionality', () => {
   describe('should in a production environment', () => {
     it('have HTTP header "location" field that begins with https', async () => {
       const response = await request(app).get('/docs')
-      expect(response.header['location'].startsWith('https://')).toBeTruthy()
+      expect(response.header.location.startsWith('https://')).toBeTruthy()
     })
 
     it('redirect to the same HTTPS url', async () => {
       const response = await request(app).get('/docs')
-      expect(response.header['location'].endsWith('/docs')).toBeTruthy()
+      expect(response.header.location.endsWith('/docs')).toBeTruthy()
     })
 
     it('have HTTP header "status" field that indicates a redirect', async () => {

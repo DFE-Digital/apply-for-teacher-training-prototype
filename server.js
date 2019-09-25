@@ -21,7 +21,7 @@ const middleware = [
   require('./lib/middleware/extensions/extensions.js')
 ]
 const config = require('./app/config.js')
-const packageJson = require('./package.json')
+const pkg = require('./package.json')
 const routes = require('./app/routes.js')
 const utils = require('./lib/utils.js')
 const extensions = require('./lib/extensions/extensions.js')
@@ -34,7 +34,7 @@ const handleCookies = utils.handleCookies(app)
 app.use(handleCookies)
 
 // Set up configuration variables
-var releaseVersion = packageJson.version
+var releaseVersion = pkg.version
 var env = (process.env.NODE_ENV || 'development').toLowerCase()
 var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
@@ -113,6 +113,7 @@ app.locals.useCookieSessionStore = (useCookieSessionStore === 'true')
 app.locals.cookieText = config.cookieText
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
+app.locals.serviceSlug = pkg.name
 app.locals.urStudy = urStudy
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()

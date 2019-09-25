@@ -1,8 +1,9 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set referrer = applicationPath + "/work-history/review" %}
+{% set formaction = applicationPath %}
 {% set title = "Work history" %}
+{% set referrer = applicationPath + "/work-history/review" %}
 {% set review = true %}
 
 {% block pageNavigation %}
@@ -22,8 +23,14 @@
     }) }}
   {% endif %}
 
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "work-history"])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

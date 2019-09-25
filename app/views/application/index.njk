@@ -51,12 +51,12 @@
       text: "Work history",
       href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history")),
       id: "work-history",
-      completed: applicationValue("work-history")
+      completed: applicationValue(["completed", "work-history"])
     }, {
       text: "School experience and volunteering with young people",
       href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience")),
       id: "school-experience",
-      completed: applicationValue("school-experience")
+      completed: applicationValue(["completed", "school-experience"])
     }]
   }) }}
 
@@ -67,7 +67,7 @@
       text: "Degree",
       href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "/add"),
       id: "degree",
-      completed: applicationValue(["degree"])
+      completed: applicationValue(["completed", "degree"])
     }, {
       text: "Maths GCSE or equivalent",
       href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"])),
@@ -87,7 +87,7 @@
       text: "Other relevant academic and non-academic qualifications",
       href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
       id: "other-qualifications",
-      completed: applicationValue(["other-qualifications"])
+      completed: applicationValue(["completed", "other-qualifications"])
     }]
   }) }}
 

@@ -104,7 +104,10 @@
           href: "mailto:becomingateacher@digital.education.gov.uk",
           text: "Give feedback or report a problem"
         }, {
-          href: "/prototype-admin/clear-data",
+          href: "/admin/flags",
+          text: "Feature flags"
+        } if not urStudy, {
+          href: "/admin/clear-data",
           text: "Clear data"
         } if not urStudy]
       }

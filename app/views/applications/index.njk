@@ -14,7 +14,8 @@
           iconFallbackText: "Warning"
         }) }} #}
 
-        <p>You can make changes to your application for 1 week (until {{ 7 | nowPlusDays("d MMMM yyyy") }}). After you’ve edited your application and submitted it for the second time, you won’t be able to make any further changes.</p>
+        <p>You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to withdraw an application and resubmit it to a different course or provider. When you withdraw, you’ll be able to edit your application before you resubmit.</p>
+        <p>You can withdraw each of your 3 applications no more than once.</p>
 
         {{ govukButton({
           text: "Edit your application",

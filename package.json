@@ -14,7 +14,7 @@
     "test": "npm run lint && gulp generate-assets && jest"
   },
   "dependencies": {
-    "acorn": "^7.0.0",
+    "acorn": "^7.1.0",
     "ansi-colors": "^4.0.0",
     "basic-auth": "^2.0.0",
     "basic-auth-connect": "^1.0.0",
@@ -36,7 +36,7 @@
     "gulp-sourcemaps": "^2.6.0",
     "humanize-duration": "^3.20.1",
     "keypather": "^3.0.0",
-    "luxon": "^1.17.3",
+    "luxon": "^1.19.3",
     "marked": "^0.7.0",
     "mongoose": "^5.7.1",
     "notifications-node-client": "^4.1.0",
@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "jest": "^24.9.0",
-    "standard": "^14.3.0",
+    "standard": "^14.3.1",
     "supertest": "^4.0.0"
   }
 }

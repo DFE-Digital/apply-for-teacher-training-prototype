@@ -2,8 +2,8 @@
 
 {% set itemStart = item["start-date"] %}
 {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
-{% set itemStartEpoch = itemStart | date("x") %}
-{% set itemEndEpoch = itemEnd | date("x") %}
+{% set itemStartEpoch = itemStart | date("x") | int %}
+{% set itemEndEpoch = itemEnd | date("x") | int %}
 {% set itemDuration = itemEndEpoch - itemStartEpoch %}
 
 {% set gapText -%}

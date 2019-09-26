@@ -1,5 +1,5 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set schoolExperience = applicationValue("school-experience")
+{% set schoolExperience = applicationValue(["school-experience"])
   | toArray
   | sort(attribute="start-date")
   | selectattr("id")

@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set title = "School experience and volunteering with young people" %}
 {% set referrer = applicationPath + "/school-experience/review" %}
 {% set review = true %}
@@ -22,9 +23,16 @@
       href: applicationPath + "/school-experience/add/role?referrer=" + referrer,
       classes: "govuk-button--secondary"
     }) }}
+
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "school-experience"])) }}
   {% endif %}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

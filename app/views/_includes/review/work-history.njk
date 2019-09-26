@@ -62,8 +62,8 @@
         titleText: "Gap (" + (itemDuration | duration) + ")",
         actions: {
           items: [{
-            href: applicationPath + "/work-history/" + item.id + "/remove?referrer=" + referrer,
-            text: "Remove gap"
+            href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete gap entry"
           }]
         } if review == true,
         html: gapHtml
@@ -75,8 +75,8 @@
         titleText: item.role,
         actions: {
           items: [{
-            href: applicationPath + "/work-history/" + item.id + "/remove?referrer=" + referrer,
-            text: "Remove job"
+            href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete job"
           }]
         } if review == true,
         html: jobHtml
@@ -95,11 +95,14 @@
         {{ appSummaryCard({
           classes: "govuk-!-margin-bottom-6",
           headingLevel: 3,
-          titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+          titleText: "You have a gap in your work history (" + (itemDuration | duration) + ")",
           actions: {
             items: [{
               href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-              text: "Explain gap"
+              text: "Please explain gap"
+            }, {
+              href: applicationPath + "/work-history/add/job?referrer="  + referrer,
+              text: "Add job"
             }]
           } if review == true
         }) }}

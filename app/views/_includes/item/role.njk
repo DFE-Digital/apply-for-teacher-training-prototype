@@ -3,8 +3,11 @@
 {% set itemStart = item["start-date"] %}
 {% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
 
-{% set datesText %}
-  {{ itemStart | date("d MMMM yyyy") }} - {{ itemEnd | date("d MMMM yyyy") if item["end-date"] else "Present" }}
+{% set datesHtml -%}
+  {{- itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
+  {%- if item["time-commitment"] -%}
+    <br>{{ item["time-commitment"] | nl2br | safe }}
+  {%- endif %}
 {% endset %}
 
 {% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}
@@ -40,10 +43,10 @@
     } if review == true
   }, {
     key: {
-      text: "Dates"
+      text: "Time commitment"
     },
     value: {
-      text: datesText
+      text: datesHtml | nl2br | safe
     },
     actions: {
       items: [{

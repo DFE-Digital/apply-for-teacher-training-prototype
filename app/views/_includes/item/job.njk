@@ -10,17 +10,6 @@
   {% endif %}
 {%- endset %}
 
-{% set descriptionHtml -%}
-  <p>{{ item.description | nl2br | safe }}</p>
-  {%- if item["worked-with-children"] == "Yes" %}
-  <p>{{ appIcon({
-      classes: "govuk-!-margin-right-1",
-      icon: "tick",
-      hidden: true
-    }) }} This role involved working with children.</p>
-  {% endif %}
-{%- endset %}
-
 {% set datesText %}
   {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
 {% endset %}
@@ -61,7 +50,7 @@
       text: "Description"
     },
     value: {
-      text: descriptionHtml | safe
+      text: (item.description | nl2br | safe) or "Not entered"
     },
     actions: {
       items: [{

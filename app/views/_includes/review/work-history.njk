@@ -69,10 +69,20 @@
         html: gapHtml
       }) }}
     {% else %}
+      {% set titleHtml %}
+        {{ item.role }}
+        {%- if item["worked-with-children"] == "Yes" %}
+        <span class="app-summary-card__meta">{{ appIcon({
+            classes: "govuk-!-margin-right-1",
+            icon: "tick",
+            hidden: true
+          }) }} This role involved working with children</span>
+        {%- endif %}
+      {% endset %}
       {{ appSummaryCard({
         classes: "govuk-!-margin-bottom-6",
         headingLevel: 3,
-        titleText: item.role,
+        titleHtml: titleHtml,
         actions: {
           items: [{
             href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
@@ -102,7 +112,7 @@
               text: "Please explain gap"
             }, {
               href: applicationPath + "/work-history/add/job?referrer="  + referrer,
-              text: "Add job"
+              text: "Add another job"
             }]
           } if review == true
         }) }}

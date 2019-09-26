@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "School experience and volunteering with young people" %}
+{% set title = "School experience and unpaid volunteering" %}
 {% set formaction = applicationPath + "/school-experience/answer" %}
 
 {% block pageNavigation %}
@@ -12,12 +12,13 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Use this section to enter any school experience or volunteering roles with children and young people. This can include:</p>
+  <p class="govuk-body">Use this section to enter any school experience or volunteering roles. This can include:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>school experience</li>
-    <li>one-off observations</li>
+    <li>one-off observations in school</li>
     <li>volunteering with children or young people in a school setting</li>
     <li>volunteering with children or young people outside school</li>
+    <li>volunteering with other age groups outside school</li>
   </ul>
 
   {{ govukRadios({

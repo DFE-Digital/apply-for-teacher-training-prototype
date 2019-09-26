@@ -6,7 +6,7 @@
   | selectattr("id")
 %}
 
-{% set hasHistory = workHistory | toArray | length >= 1 %}
+{% set hasHistory = workHistory | length >= 1 %}
 {% set hasMissing = applicationValue(["work-history", "length"]) == "none" and not hasHistory %}
 {% set hasAutomaticGaps = data.flags.automatic_gaps == true %}
 

@@ -1,7 +1,7 @@
 const utils = require('./../utils')
 
 module.exports = router => {
-  router.get('/application/:applicationId/:section/:id/remove', (req, res) => {
+  router.get('/application/:applicationId/:section/:id/delete', (req, res) => {
     const applicationData = utils.applicationData(req)
     const id = req.params.id
     const referrer = req.query.referrer
@@ -42,7 +42,7 @@ module.exports = router => {
       }
     }
 
-    res.render('application/remove', {
+    res.render('application/delete', {
       id,
       item,
       parent,
@@ -52,7 +52,7 @@ module.exports = router => {
     })
   })
 
-  router.post('/application/:applicationId/:section/:id/remove', (req, res) => {
+  router.post('/application/:applicationId/:section/:id/delete', (req, res) => {
     const applicationData = utils.applicationData(req)
     const id = req.params.id
     const referrer = req.query.referrer

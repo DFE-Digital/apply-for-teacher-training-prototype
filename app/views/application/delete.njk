@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Are you sure you want to remove this " + type + "?" %}
+{% set title = "Are you sure you want to delete this " + type + "?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,7 +10,7 @@
 
 {% block primary %}
   {{ govukButton({
-    text: "Yes I’m sure - remove this " + type,
+    text: "Yes I’m sure - delete this " + type,
     classes: "govuk-button--warning"
   }) }}
   <p class="govuk-body"><a href="{{ referrer }}">Cancel</a></p>

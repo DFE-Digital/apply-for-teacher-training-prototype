@@ -15,8 +15,8 @@
       titleText: item.type + " " + item.subject,
       actions: {
         items: [{
-          href: applicationPath + "/other-qualifications/" + item.id + "/remove?referrer=" + referrer,
-          text: "Remove qualification"
+          href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete qualification"
         }]
       } if review == true,
       html: qualificationHtml

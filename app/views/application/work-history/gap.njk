@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = "Work history" %}
-{% set title = "Explain gap in work history" %}
+{% set title = "Please tell us what you were doing over this period" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -18,9 +18,6 @@
         text: "Start of gap",
         classes: "govuk-fieldset__legend--m"
       }
-    },
-    hint: {
-      text: "For example, 5 2018"
     },
     namePrefix: id + "-start-date",
     items: [{
@@ -43,9 +40,6 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
-    hint: {
-      text: "For example, 8 2018"
-    },
     namePrefix: id + "-end-date",
     items: [{
       classes: "govuk-input--width-2",
@@ -62,8 +56,11 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Reason(s) for this gap in your work history",
+      text: "Enter reasons for gap in work history",
       classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, unemployment, travel, caring responsibilities"
     },
     maxwords: 400
   } | decorateApplicationAttributes(["work-history", id, "description"])) }}

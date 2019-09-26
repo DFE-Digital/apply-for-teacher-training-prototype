@@ -16,7 +16,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
 require('./routes/application')(router)
 require('./routes/course')(router)
 require('./routes/email')(router)
-require('./routes/remove')(router)
+require('./routes/delete')(router)
 
 // Clear all data in session if you open /prototype-admin/clear-data
 router.post('/admin/clear-data', function (req, res) {

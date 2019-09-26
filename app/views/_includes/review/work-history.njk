@@ -23,18 +23,18 @@
     {% if hasAutomaticGaps %}
       {# periodStart = Earliest date in required work history period #}
       {% set periodStart = "now" | date | replace("2019", "2014") %}
-      {% set periodStartEpoch = periodStart | date("x") %}
+      {% set periodStartEpoch = periodStart | date("x") | int %}
 
       {# firstStart = Start date of first item in work history #}
       {% set firstStart = item["start-date"] %}
-      {% set firstStartEpoch = firstStart | date("x") %}
+      {% set firstStartEpoch = firstStart | date("x") | int %}
 
       {% if loop.first and firstStartEpoch > periodStartEpoch %}
         {# Unexplained gap (prior to work history commencing) #}
         {% set itemStart = periodStart %}
-        {% set itemStartEpoch = itemStart | date("x") %}
+        {% set itemStartEpoch = itemStart | date("x") | int %}
         {% set itemEnd = firstStart %}
-        {% set itemEndEpoch = itemEnd | date("x") %}
+        {% set itemEndEpoch = itemEnd | date("x") | int %}
         {% set itemDuration = itemEndEpoch - itemStartEpoch %}
         {{ appSummaryCard({
           classes: "govuk-!-margin-bottom-6",
@@ -52,9 +52,9 @@
 
     {% if item.category == "gap" %}
       {% set itemStart = item["start-date"] %}
-      {% set itemStartEpoch = itemStart | date("x") %}
+      {% set itemStartEpoch = itemStart | date("x") | int %}
       {% set itemEnd = item["end-date"] %}
-      {% set itemEndEpoch = itemEnd | date("x") %}
+      {% set itemEndEpoch = itemEnd | date("x") | int %}
       {% set itemDuration = itemEndEpoch - itemStartEpoch %}
       {{ appSummaryCard({
         classes: "govuk-!-margin-bottom-6",
@@ -87,9 +87,9 @@
       {# Unexplained gap (during work history) #}
       {% set nextItem = workHistory[loop.index] %}
       {% set itemStart = item["end-date"] %}
-      {% set itemStartEpoch = itemStart | date("x") %}
+      {% set itemStartEpoch = itemStart | date("x") | int %}
       {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
-      {% set itemEndEpoch = itemEnd | date("x") %}
+      {% set itemEndEpoch = itemEnd | date("x") | int %}
       {% set itemDuration = itemEndEpoch - itemStartEpoch %}
       {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
         {{ appSummaryCard({

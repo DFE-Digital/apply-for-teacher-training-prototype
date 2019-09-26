@@ -72,8 +72,6 @@ module.exports = (env) => {
     if (obj) {
       const arr = []
       for (const [key, value] of Object.entries(obj)) {
-        console.log('key', key)
-        console.log('value', value)
         value.id = key
         arr.push(value)
       }

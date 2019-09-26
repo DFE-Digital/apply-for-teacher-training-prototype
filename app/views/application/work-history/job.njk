@@ -18,8 +18,6 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Don’t include voluntary or unpaid experience – we’ll ask you about this in ‘School experience and volunteering’.</li>
-
   {{ govukInput({
     label: {
       text: "Job title",
@@ -31,6 +29,9 @@
     label: {
       text: "Name of employer",
       classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Don’t include voluntary or unpaid experience – we’ll ask you about this in ‘School experience and volunteering’."
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 

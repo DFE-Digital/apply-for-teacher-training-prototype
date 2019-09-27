@@ -1,10 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set degrees = applicationValue(["degree"])
-  | toArray
-  | selectattr("id")
-%}
+{% set degrees = applicationValue(["degrees"]) %}
 
-{% if degrees.length >= 1 %}
+{% if degrees %}
+  {% set degrees = degrees | toArray | selectattr("id") %}
   {% for item in degrees %}
     {% set degreeHtml %}
       {% include "_includes/item/degree.njk" %}

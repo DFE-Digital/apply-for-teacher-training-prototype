@@ -17,6 +17,11 @@ const getQueryString = (req) => {
 }
 
 const saveIsoDate = (req, data, id) => {
+  // If no ID, we won’t have any dates to convert
+  if (!id) {
+    return
+  }
+
   // Create ISO 8601 start date
   const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
   const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')

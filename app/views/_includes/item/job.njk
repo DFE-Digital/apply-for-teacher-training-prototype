@@ -1,9 +1,13 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% set jobHtml -%}
-  {{ item.role }}
-  {%- if item.org %}
-    <br><span class="govuk-visually-hidden">at</span>{{ item.org }}
+  {% if item.role %}
+    {{ item.role }}
+    {%- if item.org %}
+      <br><span class="govuk-visually-hidden">at</span>{{ item.org }}
+    {% endif %}
+  {% else %}
+    Not entered
   {% endif %}
 {%- endset %}
 
@@ -47,7 +51,7 @@
       text: "Description"
     },
     value: {
-      text: (item.description | nl2br | safe) or "Not entered"
+      text: (item.description or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{

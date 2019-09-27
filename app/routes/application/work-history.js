@@ -30,9 +30,16 @@ module.exports = router => {
     const id = req.params.id
     const referrer = req.query.referrer
 
+    let formaction
+    if (referrer) {
+      formaction = `${referrer}?update=${id}`
+    } else {
+      formaction = `/application/${applicationId}/work-history/review?update=${id}`
+    }
+
     res.render(`application/work-history/${type}`, {
       referrer,
-      formaction: `/application/${applicationId}/work-history/review?update=${id}`,
+      formaction,
       id,
       start: `${req.query.start}`,
       end: `${req.query.end}`
@@ -62,7 +69,12 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = utils.applicationData(req)
-    const length = applicationData['work-history'].length
+    const workHistory = applicationData['work-history']
+
+    let length
+    if (workHistory) {
+      length = applicationData['work-history'].length
+    }
 
     if (length === 'none') {
       res.redirect(`/application/${applicationId}/work-history/missing`)

@@ -1,10 +1,14 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% set datesHtml -%}
-  {{- item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
-  {%- if item["time-commitment"] -%}
-    <br>{{ item["time-commitment"] | nl2br | safe }}
-  {%- endif %}
+  {%- if item["start-date"] or item["time-commitment"] -%}
+    {{- item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
+    {%- if item["time-commitment"] -%}
+      <br>{{ item["time-commitment"] | nl2br | safe }}
+    {%- endif -%}
+  {%- else -%}
+    Not entered
+  {%- endif -%}
 {% endset %}
 
 {% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}

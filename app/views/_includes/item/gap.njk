@@ -22,7 +22,7 @@
       text: "Description"
     },
     value: {
-      text: item.description or "Not entered"
+      text: (item.description or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{

@@ -3,10 +3,14 @@
 {% set nonUK = item.type == "Non-UK qualification" %}
 
 {% set qualificationText -%}
-  {{- (item["type-uk"] if item["type-uk"]) or (item["type-non-uk"] if item["type-non-uk"]) or item.type }}
-  {%- if nonUK %}
-    {{ item["award-org"] + ", " + item.country if item["award-org"] }}
-  {% endif %}
+  {%- if item["type-uk"] or item["type-non-uk"] or item.type %}
+    {{- (item["type-uk"] if item["type-uk"]) or (item["type-non-uk"] if item["type-non-uk"]) or item.type }}
+    {%- if nonUK -%}
+      {{ item["award-org"] + ", " + item.country if item["award-org"] }}
+    {%- endif %}
+  {%- else -%}
+    Not entered
+  {%- endif -%}
 {%- endset %}
 
 {{ govukSummaryList({
@@ -29,7 +33,7 @@
       text: "Qualification"
     },
     value: {
-      text: (qualificationText | nl2br | safe) or "Not entered"
+      text: qualificationText | nl2br | safe
     },
     actions: {
       items: [{

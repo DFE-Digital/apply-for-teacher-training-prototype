@@ -111,7 +111,7 @@
               href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
               text: "Please explain gap"
             }, {
-              href: applicationPath + "/work-history/add/job?referrer="  + referrer,
+              href: applicationPath + "/work-history/add/job?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
               text: "Add another job"
             }]
           } if review == true

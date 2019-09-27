@@ -23,34 +23,39 @@ module.exports = router => {
 
   // Render role page
   router.get('/application/:applicationId/school-experience/role/:id', (req, res) => {
+    const applicationId = req.params.applicationId
     const id = req.params.id
-    const queryString = querystring.stringify(req.query)
     const referrer = req.query.referrer
 
     res.render('application/school-experience/role', {
       referrer,
-      formaction: `/application/${req.params.applicationId}/school-experience/update/role/${id}?${queryString}`,
-      id,
-      start: `${req.query.start}`,
-      end: `${req.query.end}`
+      formaction: `/application/${applicationId}/school-experience/review?update=${id}`,
+      id
     })
   })
 
-  // Convert individual date components into ISO 8601 date strings
-  router.post('/application/:applicationId/school-experience/update/role/:id', (req, res) => {
-    const id = req.params.id
+  // Convert individual date components into single ISO 8601 date string before
+  // proceeding to next page (reviewing all or adding another)
+  router.post('/application/:applicationId/school-experience/:next(review|add)', (req, res) => {
     const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]['school-experience'][id]
+    const next = req.params.next
 
-    utils.saveIsoDate(req, applicationData, id)
+    const id = req.query.update
+    const applicationData = utils.applicationData(req)
+    const schoolExperience = applicationData['school-experience']
+    utils.saveIsoDate(req, schoolExperience, id)
 
-    res.redirect(req.query.referrer || `/application/${applicationId}/school-experience/review`)
+    if (next === 'review') {
+      res.redirect(`/application/${applicationId}/school-experience/review`)
+    } else {
+      res.redirect(`/application/${applicationId}/school-experience/add/role`)
+    }
   })
 
   // School-experience completed answer branching
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
     const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]
+    const applicationData = utils.applicationData(req)
     const attained = applicationData['school-experience'].attained
 
     if (attained === 'false') {

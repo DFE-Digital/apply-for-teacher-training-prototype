@@ -180,7 +180,7 @@ module.exports = {
           description: 'Taught Mathematics and Physics content covered in the Scottish National 5, the Higher and the Advanced Higher curricula. Assessed, graded and tracked individual’s progress in the above-mentioned subjects. Guided students to perform better in the exam by offering them mock exams and giving adequate scientific feedback.',
           'worked-with-children': 'Yes',
           'start-date': '2017-09-01',
-          'end-date': false
+          'end-date': 'now'
         }
       },
       'school-experience': {

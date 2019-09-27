@@ -17,9 +17,9 @@
     {% include "_includes/review/courses.njk" %}
   {% else %}
     {{ govukButton({
-      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1",
       text: "Add a course",
-      href: applicationPath + "/course/add"
+      href: applicationPath + "/course/add",
+      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1"
     }) }}
   {% endif %}
 

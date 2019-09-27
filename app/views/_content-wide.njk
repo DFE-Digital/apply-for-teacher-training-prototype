@@ -3,14 +3,10 @@
 {% block content %}
   {% if title %}
     <h1 class="govuk-heading-xl">
-    {% if parent %}
-      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
-    {% else %}
+      {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
       {{ title | safe }}
-    {% endif %}
     </h1>
   {% endif %}
-
   {% block primary %}
   {% endblock %}
 {% endblock %}

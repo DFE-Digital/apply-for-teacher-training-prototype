@@ -18,8 +18,8 @@
   {% if applicationValue(["work-history", "length"]) != "none" %}
     {{ govukButton({
       text: "Add another job",
-      classes: "govuk-button--secondary",
-      href: applicationPath + "/work-history/add/job?referrer=" + referrer
+      href: applicationPath + "/work-history/add/job?referrer=" + referrer,
+      classes: "govuk-button--secondary"
     }) }}
   {% endif %}
 

@@ -23,7 +23,6 @@
         const inputs = form.querySelectorAll('input, textarea')
         for (const input of inputs) {
           const conditional = getClosest(input, '.govuk-radios__conditional') || getClosest(input, '.govuk-checkboxes__conditional')
-          console.log('conditional', conditional)
           if (conditional && conditional.id) {
             const controller = this.querySelector(`[aria-controls=${conditional.id}]`)
 

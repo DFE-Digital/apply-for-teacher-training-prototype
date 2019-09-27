@@ -1,7 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% set itemStart = item["start-date"] %}
-{% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
+{% set itemEnd = item["end-date"] %}
 {% set itemStartEpoch = itemStart | date("x") | int %}
 {% set itemEndEpoch = itemEnd | date("x") | int %}
 {% set itemDuration = itemEndEpoch - itemStartEpoch %}
@@ -11,7 +11,7 @@
 {%- endset %}
 
 {% set datesText %}
-  {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
+  {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}
 
 {% set changeHref = applicationPath + "/work-history/gap/" + item.id + "?referrer=" + referrer %}

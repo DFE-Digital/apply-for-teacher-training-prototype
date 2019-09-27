@@ -113,6 +113,20 @@
     maxwords: 150
   } | decorateApplicationAttributes(["school-experience", id, "time-commitment"])) }}
 
+  {# Only show ‘Add another…’ button if:
+      * not editing an existing item
+      * not referred from a review page (which also has an ‘Add another…’ button)
+  #}
+  {% if action != "edit" and not referrer %}
+    {{ govukButton({
+      text: "Add another role",
+      classes: "govuk-button--secondary",
+      attributes: {
+        formaction: applicationPath + "/school-experience/add/role?update=" + id
+      }
+    }) }}
+  {% endif %}
+
   {{ govukButton({
     text: "Continue"
   }) }}

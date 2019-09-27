@@ -15,44 +15,53 @@ module.exports = router => {
 
   // Generate new ID and redirect to that item
   router.get('/application/:applicationId/work-history/add/:type(job|gap)', (req, res) => {
+    const applicationId = req.params.applicationId
     const type = req.params.type
     const id = utils.generateRandomString()
     const queryString = querystring.stringify(req.query)
 
-    res.redirect(`/application/${req.params.applicationId}/work-history/${type}/${id}?${queryString}`)
+    res.redirect(`/application/${applicationId}/work-history/${type}/${id}?${queryString}`)
   })
 
   // Render job/gap page
   router.get('/application/:applicationId/work-history/:type(job|gap)/:id', (req, res) => {
-    const id = req.params.id
+    const applicationId = req.params.applicationId
     const type = req.params.type
-    const queryString = querystring.stringify(req.query)
+    const id = req.params.id
     const referrer = req.query.referrer
 
     res.render(`application/work-history/${type}`, {
       referrer,
-      formaction: `/application/${req.params.applicationId}/work-history/update/${type}/${id}?${queryString}`,
+      formaction: `/application/${applicationId}/work-history/review?update=${id}`,
       id,
       start: `${req.query.start}`,
       end: `${req.query.end}`
     })
   })
 
-  // Convert individual date components into ISO 8601 date strings
-  router.post('/application/:applicationId/work-history/update/:type(job|gap)/:id', (req, res) => {
-    const id = req.params.id
+  // Convert individual date components into single ISO 8601 date string before
+  // proceeding to next page (reviewing all or adding another)
+  router.post('/application/:applicationId/work-history/:next(review|add)/:type?', (req, res) => {
     const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]['work-history'][id]
+    const next = req.params.next
+    const type = req.params.type
 
-    utils.saveIsoDate(req, applicationData, id)
+    const id = req.query.update
+    const applicationData = utils.applicationData(req)
+    const workHistory = applicationData['work-history']
+    utils.saveIsoDate(req, workHistory, id)
 
-    res.redirect(req.query.referrer || `/application/${applicationId}/work-history/review`)
+    if (next === 'review') {
+      res.redirect(`/application/${applicationId}/work-history/review`)
+    } else {
+      res.redirect(`/application/${applicationId}/work-history/add/${type}`)
+    }
   })
 
   // Work history length answer branching
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]
+    const applicationData = utils.applicationData(req)
     const length = applicationData['work-history'].length
 
     if (length === 'none') {

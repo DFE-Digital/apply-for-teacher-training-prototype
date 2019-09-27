@@ -22,8 +22,8 @@
     {% include "_includes/application-courses.njk" %}
     {% if applicationValue("courses") | length < 3 %}
       {{ govukButton({
-        classes: "govuk-button--secondary",
         text: "Add another course",
+        classes: "govuk-button--secondary",
         href: applicationPath + "/course/add"
       }) }}
     {% endif %}

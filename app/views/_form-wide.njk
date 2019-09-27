@@ -1,23 +1,20 @@
 {% extends "_layout.njk" %}
 
 {% block content %}
-  <form action="{{ formaction | default('#') }}" method="post">
+<form action="{{ formaction | default('#') }}" method="post">
   {% set legendHtml %}
-    {% if parent %}
-      <span class="govuk-caption-xl">{{ parent }}</span> {{ title }}
-    {% else %}
-      {{ title | safe }}
-    {% endif %}
+    {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
+    {{ title | safe }}
   {% endset %}
   {% call govukFieldset({
     legend: {
       html: legendHtml,
-      classes: "govuk-fieldset__legend--xl",
+      classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
       isPageHeading: true
     }
   }) %}
     {% block primary %}
     {% endblock %}
   {% endcall %}
-  </form>
+</form>
 {% endblock %}

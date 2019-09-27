@@ -1,10 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set itemStart = item["start-date"] %}
-{% set itemEnd = item["end-date"] if item["end-date"] else "now" %}
-
 {% set datesHtml -%}
-  {{- itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] else "Present" }}
+  {{- item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
   {%- if item["time-commitment"] -%}
     <br>{{ item["time-commitment"] | nl2br | safe }}
   {%- endif %}

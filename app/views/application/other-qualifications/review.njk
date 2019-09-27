@@ -17,8 +17,8 @@
   {% include "_includes/review/other-qualifications.njk" %}
   {{ govukButton({
     text: "Add another qualification",
-    classes: "govuk-button--secondary",
-    href: applicationPath + "/other-qualifications/add"
+    href: applicationPath + "/other-qualifications/add?referrer=" + referrer,
+    classes: "govuk-button--secondary"
   }) }}
 
   {{ govukCheckboxes({

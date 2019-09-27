@@ -1,7 +1,9 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set references = applicationValue("referees") | toArray %}
-{% if references.length >= 1 %}
+{% set references = applicationValue(["referees"]) %}
+
+{% if references %}
   <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
+  {% set references = references | toArray %}
   {% for item in references %}
     {% set refereeHtml %}
       {% include "_includes/item/reference.njk" %}

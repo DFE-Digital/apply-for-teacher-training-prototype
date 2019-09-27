@@ -58,7 +58,7 @@
     {% set signOutText = "Sign out" %}
   {% endif %}
 
-  {% if isSignedOut != true %}
+  {% if not isSignedOut %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
     {% else %}

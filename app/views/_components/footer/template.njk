@@ -1,8 +1,8 @@
 {#
   Extends and modifies the footer component from GOV.UK Frontend by:
-   * Removing licensing information
-   * Providing params.meta.title (shows params.meta.visuallyHiddenTitle if not set)
-   * Moving meta.text/meta.html above meta.items
+    * Removing licensing information
+    * Providing params.meta.title (shows params.meta.visuallyHiddenTitle if not set)
+    * Moving meta.text/meta.html above meta.items
 #}
 <footer class="govuk-footer {{ params.classes if params.classes }}" role="contentinfo"
         {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>

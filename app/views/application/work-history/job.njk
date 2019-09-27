@@ -63,12 +63,12 @@
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(["work-history", id, "start-date"]) | date("L"),
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('L'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: applicationValue(["work-history", id, "start-date"]) | date("yyyy"),
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
@@ -87,12 +87,12 @@
     items: [{
       label: "Month",
       name: "month",
-      value: applicationValue(["work-history", id, "end-date"]) | date("L"),
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('L'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: applicationValue(["work-history", id, "end-date"]) | date("yyyy"),
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
@@ -127,6 +127,20 @@
     name: "applications[" + applicationId + "][work-history][" + id + "][category]",
     value: "job"
   }) }}
+
+  {# Only show ‘Add another…’ button if:
+      * not editing an existing item
+      * not referred from a review page (which also has an ‘Add another…’ button)
+  #}
+  {% if action != "edit" and not referrer %}
+    {{ govukButton({
+      text: "Add another job",
+      classes: "govuk-button--secondary govuk-!-display-block",
+      attributes: {
+        formaction: applicationPath + "/work-history/add/job?update=" + id
+      }
+    }) }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"

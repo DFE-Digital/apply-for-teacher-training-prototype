@@ -86,6 +86,20 @@
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
 
+  {# Only show ‘Add another…’ button if:
+      * not editing an existing item
+      * not referred from a review page (which also has an ‘Add another…’ button)
+  #}
+  {% if action != "edit" and not referrer %}
+    {{ govukButton({
+      text: "Add another qualification",
+      classes: "govuk-button--secondary govuk-!-display-block",
+      attributes: {
+        formaction: applicationPath + "/other-qualifications/add"
+      }
+    }) }}
+  {% endif %}
+
   {{ govukButton({
     text: "Continue"
   }) }}

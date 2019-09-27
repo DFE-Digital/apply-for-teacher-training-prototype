@@ -17,24 +17,29 @@ const getQueryString = (req) => {
 }
 
 const saveIsoDate = (req, data, id) => {
+  // If no ID, we won’t have any dates to convert
+  if (!id) {
+    return
+  }
+
   // Create ISO 8601 start date
   const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
   const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')
   const startYear = req.body[`${id}-start-date-year`]
-  data['start-date'] = false
+  data[id]['start-date'] = false
 
   if (startMonth && startYear) {
-    data['start-date'] = `${startYear}-${startMonth}-${startDay}`
+    data[id]['start-date'] = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
   const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
   const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
   const endYear = req.body[`${id}-end-date-year`]
-  data['end-date'] = false
+  data[id]['end-date'] = 'now' // No date indicates today
 
   if (endMonth && endYear) {
-    data['end-date'] = `${endYear}-${endMonth}-${endDay}`
+    data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
 }
 

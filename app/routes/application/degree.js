@@ -54,10 +54,10 @@ module.exports = router => {
 
   // Degree provenance answer branching
   router.post('/application/:applicationId/degree/:id/answer', (req, res) => {
-    const data = req.session.data
-    const id = req.params.id
     const applicationId = req.params.applicationId
-    const provenance = data.applications[applicationId].degree[id].provenance
+    const applicationData = utils.applicationData(req)
+    const id = req.params.id
+    const provenance = applicationData.degree[id].provenance || 'domestic'
 
     let path
     if (provenance === 'domestic' || !req.session.data.flags.international_qualifications) {

@@ -1,5 +1,5 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set degrees = applicationValue(["degrees"]) %}
+{% set degrees = applicationValue(["degree"]) %}
 
 {% if degrees %}
   {% set degrees = degrees | toArray | selectattr("id") %}

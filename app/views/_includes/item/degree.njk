@@ -1,8 +1,12 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% set qualificationText -%}
-  {{- item.type + " " + item.subject if item.type }}
-  {{ item.org + ", " + item.country if item.org }}
+  {%- if item.type -%}
+    {{- item.type + " " + item.subject if item.type }}
+    {{ item.org + ", " + item.country if item.org }}
+  {%- else -%}
+    Not entered
+  {%- endif -%}
 {%- endset %}
 
 {{ govukSummaryList({
@@ -11,7 +15,7 @@
       text: "Qualification"
     },
     value: {
-      text: (qualificationText | nl2br | safe) or "Not entered"
+      text: qualificationText | nl2br | safe
     },
     actions: {
       items: [{

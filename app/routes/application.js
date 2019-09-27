@@ -58,6 +58,25 @@ module.exports = router => {
     res.render('application/review')
   })
 
+  router.post('/application/:applicationId/review', (req, res) => {
+    // If updating jobs or roles, ensure dates are saved using ISO 8601 format
+    const id = req.query.update
+    const applicationData = utils.applicationData(req)
+    const workHistory = applicationData['work-history']
+    const schoolExperience = applicationData['school-experience']
+    const referer = req.get('referer')
+
+    if (id && referer.includes('work-history')) {
+      utils.saveIsoDate(req, workHistory, id)
+    }
+
+    if (id && referer.includes('school-experience')) {
+      utils.saveIsoDate(req, schoolExperience, id)
+    }
+
+    res.render('application/review')
+  })
+
   // Export data
   router.get('/application/:applicationId/export', (req, res) => {
     const applicationId = req.params.applicationId

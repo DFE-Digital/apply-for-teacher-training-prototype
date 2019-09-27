@@ -27,9 +27,16 @@ module.exports = router => {
     const id = req.params.id
     const referrer = req.query.referrer
 
+    let formaction
+    if (referrer) {
+      formaction = `${referrer}?update=${id}`
+    } else {
+      formaction = `/application/${applicationId}/school-experience/review?update=${id}`
+    }
+
     res.render('application/school-experience/role', {
       referrer,
-      formaction: `/application/${applicationId}/school-experience/review?update=${id}`,
+      formaction,
       id
     })
   })
@@ -56,7 +63,12 @@ module.exports = router => {
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = utils.applicationData(req)
-    const attained = applicationData['school-experience'].attained
+    const schoolExperience = applicationData['school-experience']
+
+    let attained
+    if (schoolExperience) {
+      attained = applicationData['school-experience'].attained
+    }
 
     if (attained === 'false') {
       res.redirect(`/application/${applicationId}/school-experience/review`)

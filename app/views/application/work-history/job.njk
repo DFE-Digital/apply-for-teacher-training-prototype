@@ -135,7 +135,7 @@
   {% if action != "edit" and not referrer %}
     {{ govukButton({
       text: "Add another job",
-      classes: "govuk-button--secondary",
+      classes: "govuk-button--secondary govuk-!-display-block",
       attributes: {
         formaction: applicationPath + "/work-history/add/job?update=" + id
       }

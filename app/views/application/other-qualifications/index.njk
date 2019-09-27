@@ -93,7 +93,7 @@
   {% if action != "edit" and not referrer %}
     {{ govukButton({
       text: "Add another qualification",
-      classes: "govuk-button--secondary",
+      classes: "govuk-button--secondary govuk-!-display-block",
       attributes: {
         formaction: applicationPath + "/other-qualifications/add"
       }

@@ -65,6 +65,19 @@ module.exports = (env) => {
   }
 
   /**
+   * Convert string into an array
+   * @type {String} str
+   *
+   */
+  filters.split = (str) => {
+    if (str && !Array.isArray(str)) {
+      return str.split()
+    }
+
+    return str
+  }
+
+  /**
    * Convert object to array
    * @type {Object} obj
    */

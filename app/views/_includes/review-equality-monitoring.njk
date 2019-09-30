@@ -3,7 +3,7 @@
 {% set disabilityText %}
   {% if applicationValue(["equality-monitoring", "disability-status"]) == "Yes" %}
     {{ applicationValue(["equality-monitoring", "disability-status"]) }}
-    {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) %}
+    {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) | split %}
     {% if disabilities.length >= 1 %}
       ({%- for disability in disabilities -%}
         {{ (" and " if loop.last else ", ") if not loop.first }}{%- if disability == "Other" %}

@@ -1,0 +1,9 @@
+.app-offset-text {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(4);
+  margin: govuk-spacing(4) 0;
+}
+
+.app-offset-text > *:last-child {
+  margin-bottom: 0;
+}

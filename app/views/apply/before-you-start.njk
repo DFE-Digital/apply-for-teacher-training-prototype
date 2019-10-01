@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+
+{% set course = providerCode | getCourse(courseCode) %}
+{% if course %}
+  {% set title = "Apply for this course" %}
+  {% set parent = course.name_and_code %}
+{% else %}
+  {% set title = serviceName %}
+{% endif %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if course %}
+    <p class="govuk-body"><mark>Why you should/shouldn’t use the Apply for teacher training service.</mark></p>
+
+    {{ govukButton({
+      text: "Apply",
+      href: "/",
+      isStartButton: true
+    }) }}
+
+    <p class="govuk-body"><a href="https://2019.teachertraining.apply.ucas.com/apply/student/login.do">Apply for this course on the UCAS website</a></p>
+  {% endif %}
+{% endblock %}

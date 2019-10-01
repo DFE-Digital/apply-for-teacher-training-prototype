@@ -5,4 +5,5 @@
 
 {% block primary %}
   <p class="govuk-body-l"><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent you an email</a>. Click on the link to confirm your {{ "new " if action == "change-email-address" }}address and return to this service.</p>
+  <p class="govuk-body">If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/create-account">try again</a>.</p>
 {% endblock %}

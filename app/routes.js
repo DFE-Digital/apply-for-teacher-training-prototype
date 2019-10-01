@@ -13,6 +13,7 @@ router.all(['/application/:applicationId/course/:courseId', '/application/:appli
   next()
 })
 
+require('./routes/apply')(router)
 require('./routes/application')(router)
 require('./routes/course')(router)
 require('./routes/email')(router)

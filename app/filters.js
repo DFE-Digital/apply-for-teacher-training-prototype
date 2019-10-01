@@ -1,5 +1,6 @@
 const { DateTime } = require('luxon')
 const humanizeDuration = require('humanize-duration')
+const providers = require('./data/providers')
 
 module.exports = (env) => {
   /**
@@ -90,6 +91,15 @@ module.exports = (env) => {
       }
       return arr
     }
+  }
+
+  /**
+   * Get course information
+   * @type {String} providerCode
+   * @type {String} courseCode
+   */
+  filters.getCourse = (providerCode, courseCode) => {
+    return providers[providerCode].courses[courseCode]
   }
 
   filters.providerCode = (providerAndCode) => {

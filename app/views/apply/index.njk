@@ -1,0 +1,47 @@
+{% extends "_form.njk" %}
+
+{% set course = providerCode | getCourse(courseCode) %}
+{% if course %}
+  {% set title = "Apply for this course" %}
+  {% set parent = course.name_and_code %}
+{% else %}
+  {% set title = "We couldn’t find the course you were looking for" %}
+{% endif %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    "href": "javascript: window.history.go(-1)"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if course %}
+    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply. Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply/apply">guidance on applying for teacher training</a>.</p>
+    <p class="govuk-body">When you apply you’ll need these codes for the Choices section of your application form:</p>
+
+    <div class="govuk-inset-text">
+      <ul class="govuk-list">
+        <li class="govuk-!-margin-bottom-2">
+          Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
+        </li>
+        <li>
+          Training programme code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
+        </li>
+      </ul>
+    </div>
+
+    {{ govukButton({
+      text: "Apply through UCAS",
+      href: "#",
+      isStartButton: true
+    }) }}
+  {% else %}
+    <p class="govuk-body">There’s a problem with the training provider and/or course code(s) in your choice of course.</p>
+    <p class="govuk-body">Go back to Find postgraduate teacher training and try selecting your course again, or choose a different course.</p>
+    {{ govukButton({
+      text: "Find postgraduate teacher training",
+      href: "https://find-postgraduate-teacher-training.education.gov.uk",
+      isStartButton: true
+    }) }}
+  {% endif %}
+{% endblock %}

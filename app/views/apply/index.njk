@@ -2,11 +2,12 @@
 
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
-  {% set title = "Apply for this course" %}
+  {% set title = "Choose how to apply" if dualRunning else "Apply for this course" %}
   {% set parent = course.name_and_code %}
 {% else %}
   {% set title = serviceName %}
 {% endif %}
+{% set isSignedOut = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -16,51 +17,64 @@
 
 {% block primary %}
   {% set courseCodeHtml %}
-    <div class="app-offset-text">
-      <p class="govuk-body govuk-!-font-weight-bold">When you apply you’ll need these codes for the Choices section of your application form:</p>
-      <ul class="govuk-list">
-        <li class="govuk-!-margin-bottom-2">
-          Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
-        </li>
-        <li>
-          Training programme code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
-        </li>
-      </ul>
-    </div>
+    <p class="govuk-body">When you apply you’ll need these codes for the Choices section of your application form:</p>
+    <ul class="govuk-list">
+      <li class="govuk-!-margin-bottom-2">
+        Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
+      </li>
+      <li>
+        Training programme code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
+      </li>
+    </ul>
+    <p>Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply/apply">guidance on applying for teacher training</a>.</p>
   {% endset %}
 
   {% if course and dualRunning %}
-    <p class="govuk-body">You can apply for this course through UCAS or by using Apply for teacher training, a new service being trialled by the Department for Education.</p>
+    <p class="govuk-body-l">The training provider you have chosen is participating in a trial of a new GOV.UK service: {{ serviceName }}.</p>
+    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is <a href="/apply/providers">limited to just a few courses</a>.</p>
+    <p class="govuk-body">You can apply to your chosen provider using this service. But if you choose other training providers who are not participating in the trial, you will need to apply to them using UCAS.</p>
+
+    {% set govukHtml %}
+      <p class="govuk-body">Use GOV.UK if:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>for now, this is the only training provider on your shortlist</li>
+        <li>you want to trial a more user-friendly, GOV.UK service with personalised support</li>
+      </ul>
+    {% endset %}
+
+    {% set ucasHtml %}
+      <p class="govuk-body">Use UCAS if:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>you have an application underway with UCAS</li>
+        <li>you are in the Apply 2 stage of your application</li>
+        <li>you already know your other training providers are not participants in the trial</li>
+      </ul>
+    {% endset %}
 
     {{ govukRadios({
+      classes: "govuk-!-margin-top-8",
       idPrefix: "apply-route",
       name: "apply-route",
-      fieldset: {
-        legend: {
-          text: "Choose how to apply",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
       items: [{
-        value: "ucas",
-        text: "Apply on the UCAS website",
+        value: "dfe",
+        text: "Apply for this course using GOV.UK",
         label: {
-          classes: "govuk-label--s"
+          classes: "govuk-label--m"
         },
         hint: {
-          text: "You’ll need to register with UCAS before you can apply."
+          html: govukHtml
+        }
+      }, {
+        value: "ucas",
+        text: "Apply for this course using UCAS",
+        label: {
+          classes: "govuk-label--m"
+        },
+        hint: {
+          html: ucasHtml
         },
         conditional: {
           html: courseCodeHtml
-        }
-      }, {
-        value: "dfe",
-        text: "Try out the new GOV.UK service",
-        label: {
-          classes: "govuk-label--s"
-        },
-        hint: {
-          text: "It’s easier to use but limited to just a few providers."
         }
       }]
     }) }}
@@ -70,7 +84,7 @@
       isStartButton: true
     }) }}
   {% elif course and not dualRunning %}
-    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply. Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply/apply">guidance on applying for teacher training</a>.</p>
+    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
     {{ courseCodeHtml | safe }}
 
     {{ govukButton({

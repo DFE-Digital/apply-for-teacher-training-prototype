@@ -1,0 +1,54 @@
+{% extends "_form.njk" %}
+
+{% set title = "Participating providers" %}
+{% set isSignedOut = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">The following training providers and courses are opted-in to the {{ serviceName }} pilot.</p>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">ACME Alliance Schools</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Art and Design (W1X1)</li>
+    <li>Primary (3-7) (3D8T)</li>
+    <li>Primary (Special Educational Needs) (2DBB)</li>
+    <li>History (3CXH)</li>
+  </ul>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Dunder Mifflin Primary Academy</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Art and Design (W1X1)</li>
+    <li>Primary (3-7) (3D8T)</li>
+    <li>Primary (Special Educational Needs) (2DBB)</li>
+    <li>History (3CXH)</li>
+  </ul>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Globex Teacher Training Partnership (GTTP)</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Art and Design (W1X1)</li>
+    <li>Primary (3-7) (3D8T)</li>
+    <li>Primary (Special Educational Needs) (2DBB)</li>
+    <li>History (3CXH)</li>
+  </ul>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Hooli Teaching Alliance (North)</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Art and Design (W1X1)</li>
+    <li>Primary (3-7) (3D8T)</li>
+    <li>Primary (Special Educational Needs) (2DBB)</li>
+    <li>History (3CXH)</li>
+  </ul>
+
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Wernham Hogg Schools Partnership</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Art and Design (W1X1)</li>
+    <li>Primary (3-7) (3D8T)</li>
+    <li>Primary (Special Educational Needs) (2DBB)</li>
+    <li>History (3CXH)</li>
+  </ul>
+{% endblock %}

@@ -7,6 +7,7 @@ $govuk-global-styles: true;
 
 // Components that aren’t in Frontend
 @import "components/autocomplete";
+@import "components/banner";
 @import "components/course";
 @import "components/cookie-banner";
 @import "components/footer";
@@ -29,6 +30,7 @@ $govuk-global-styles: true;
     max-width: 95%;
   }
 
+  .govuk-breadcrumbs,
   .govuk-button,
   .govuk-back-link,
   .govuk-footer,

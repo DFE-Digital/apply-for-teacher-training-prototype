@@ -1,0 +1,57 @@
+{% extends "_form.njk" %}
+
+{% set title = "Check your eligibility" %}
+{% set isSignedOut = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">The {{ serviceName }} service is currently in pilot, and for this reason, we need to limit the number of candidate participants.</p>
+  <p class="govuk-body">Please answer the following questions to check your eligibility.</p>
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    idPrefix: "eligibile-nationality",
+    name: "eligibile-nationality",
+    fieldset: {
+      legend: {
+        text: "Are you a citizen of the UK/EU/EEA?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    idPrefix: "eligibile-equivalencies",
+    name: "eligibile-equivalencies",
+    fieldset: {
+      legend: {
+        text: "Did you gain all your qualifications at institutions based in the UK?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

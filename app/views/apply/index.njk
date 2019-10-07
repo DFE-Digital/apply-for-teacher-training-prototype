@@ -80,7 +80,20 @@
     }) }}
 
     {{ govukButton({
-      text: "Apply",
+      text: "Continue"
+    }) }}
+  {% elif course and ineligible %}
+    {{ appBanner({
+      type: "information",
+      html: "<h2 class=\"govuk-heading-s\">Sorry, you are not eligible for the pilot at this time. You should apply for this course on UCAS.</h2>",
+      iconFallbackText: "Information"
+    }) }}
+
+    {{ courseCodeHtml | safe }}
+
+    {{ govukButton({
+      text: "Apply through UCAS",
+      href: "https://2019.teachertraining.apply.ucas.com/apply/student/login.do",
       isStartButton: true
     }) }}
   {% elif course and not dualRunning %}

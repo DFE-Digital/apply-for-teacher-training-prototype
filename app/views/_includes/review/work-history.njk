@@ -119,16 +119,15 @@
           classes: "app-summary",
           rows: [{
             key: {
-              text: "Reasons for any gaps in your work history"
+              text: "Please explain any breaks in your work history"
             },
             value: {
-              text: applicationValue(["work-history", "gaps"]) or "None provided" | nl2br | safe
+              text: applicationValue(["work-history", "gaps"]) | nl2br | safe
             },
             actions: {
               items: [{
                 href: applicationPath + "/work-history/explain-gaps?referrer=" + referrer,
-                text: "Change",
-                visuallyHiddenText: "reasons"
+                text: "Enter explanation"
               }]
             }
           }]

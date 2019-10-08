@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">We’ll ask you to enter your last 5 years of paid work, explaining any gaps in your employment.</p>
-  <p class="govuk-body">Training providers use this information to safeguard children and get a rounded picture of you as a candidate.</p>
+  <p class="govuk-body">Training providers need a complete picture of the last 5 years of of your work history, including time out of the workplace, to safeguard children.</p>
+
 
   {{ govukRadios({
     fieldset: {
@@ -36,9 +36,9 @@
       }
     }, {
       value: "gaps",
-      text: "More than 5 years, but with gaps",
+      text: "More than 5 years, but with breaks",
       conditional: {
-        html: "<p class=\"govuk-body\">You’ll be able to give details once you’ve entered your employment history. We’ll ask you to explain any gap longer than a month.</p>"
+        html: "<p class=\"govuk-body\">You’ll be able to give details once you’ve entered your employment history. Please explain any break longer than a month.</p>"
       }
     }, {
       value: "none",

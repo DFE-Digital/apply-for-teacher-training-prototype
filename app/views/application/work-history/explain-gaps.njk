@@ -7,7 +7,7 @@
   {% set formaction = applicationPath + "/work-history/review" %}
 {% endif %}
 {% set parent = "Work history" %}
-{% set title = "Explain gaps in work history" %}
+{% set title = "Please explain any breaks in your work history" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -18,15 +18,14 @@
 {% endblock %}
 
 {% block primary %}
+
+<p class="govuk-body">For example, reasons for a break in employment might include parenting or caring responsibilities, study, travel, unemployment, a career break or health.</p> <p class="govuk-body">For safeguarding reasons, you should explain any break longer than a month.</p>
   {{ referrer }}
   {{ govukCharacterCount({
-    label: {
-        text: "Gaps in work history",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "Have you taken time off work for any reason? (Examples might include study, caring responsibilities, travel, a career break or health.) If so, please give us details. You should explain any gap longer than a month."
-    },
+
+
+
+
     rows: 10,
     maxwords: 400
   } | decorateApplicationAttributes(["work-history", "gaps"])) }}

@@ -1,5 +1,5 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{%- set assetPath = "/govuk/assets" -%}
+{% set assetPath = "/govuk/assets" %}
 
 {% extends "govuk/template.njk" %}
 
@@ -100,7 +100,6 @@
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
-{% if useAutoStoreData %}
   {% block footer %}
     {{ appFooter({
       classes: "govuk-footer--app",
@@ -120,7 +119,6 @@
       }
     }) }}
   {% endblock %}
-{% endif %}
 
 {% block bodyEnd %}
   </div>

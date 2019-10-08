@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Check your eligibility" %}
+{% set title = "Answer these questions to check you can use the Apply service" %}
 {% set isSignedOut = true %}
 
 {% block pageNavigation %}
@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">The {{ serviceName }} service is currently in pilot, and for this reason, we need to limit the number of candidate participants.</p>
-  <p class="govuk-body">Please answer the following questions to check your eligibility.</p>
+
+
 
   {{ govukRadios({
     classes: "govuk-radios--inline",

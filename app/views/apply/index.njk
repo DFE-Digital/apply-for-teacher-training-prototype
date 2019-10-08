@@ -2,7 +2,13 @@
 
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
-  {% set title = "Choose how to apply" if dualRunning else "Apply for this course" %}
+  {% if dualRunning %}
+    {% set title = "Choose how to apply" %}
+  {% elif ineligible %}
+    {% set title = "Please continue your application using UCAS" %}
+  {% else %}
+    {% set title = "Apply for this course" %}
+  {% endif %}
   {% set parent = course.name_and_code %}
 {% else %}
   {% set title = serviceName %}
@@ -30,24 +36,23 @@
   {% endset %}
 
   {% if course and dualRunning %}
-    <p class="govuk-body-l">The training provider you have chosen is participating in a trial of a new GOV.UK service: {{ serviceName }}.</p>
+    <p class="govuk-body-l">The training provider you have chosen is participating in a trial of a new GOV.UK service called &lsquo;{{ serviceName }}&rsquo;.</p>
     <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is <a href="/apply/providers">limited to just a few courses</a>.</p>
-    <p class="govuk-body">You can apply to your chosen provider using this service. But if you choose other training providers who are not participating in the trial, you will need to apply to them using UCAS.</p>
 
     {% set govukHtml %}
       <p class="govuk-body">Use GOV.UK if:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>for now, this is the only training provider on your shortlist</li>
-        <li>you want to trial a more user-friendly, GOV.UK service with personalised support</li>
+        <li>you want to trial a streamlined, modern GOV.UK service with personalised support</li>
       </ul>
     {% endset %}
 
     {% set ucasHtml %}
       <p class="govuk-body">Use UCAS if:</p>
       <ul class="govuk-list govuk-list--bullet">
+        <li>you've chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
         <li>you have an application underway with UCAS</li>
         <li>you are in the Apply 2 stage of your application</li>
-        <li>you already know your other training providers are not participants in the trial</li>
       </ul>
     {% endset %}
 
@@ -85,7 +90,7 @@
   {% elif course and ineligible %}
     {{ appBanner({
       type: "information",
-      html: "<h2 class=\"govuk-heading-s\">Sorry, you are not eligible for the pilot at this time. You should apply for this course on UCAS.</h2>",
+      html: "<h2 class=\"govuk-heading-s\">We’re sorry, but you're not eligible to use the Apply for teacher training service. It's still in development, so we have to limit candidate numbers. You can apply to your chosen teacher training course using UCAS.</h2>",
       iconFallbackText: "Information"
     }) }}
 

@@ -21,9 +21,20 @@
   }) }}
 {% endblock %}
 
+{% block pageBanner %}
+  {% if ineligible %}
+    {{ appBanner({
+      classes: "govuk-!-margin-bottom-0",
+      type: "information",
+      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use the Apply for teacher training service.</h2><p class=\"govuk-body\">It’s still in development, so we have to limit candidate numbers.</p>",
+      iconFallbackText: "Information"
+    }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {% set courseCodeHtml %}
-    <p class="govuk-body">When you apply you’ll need these codes for the Choices section of your application form:</p>
+    <p class="govuk-body">When you apply, you’ll need these codes for the Choices section of your application form:</p>
     <ul class="govuk-list">
       <li class="govuk-!-margin-bottom-2">
         Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
@@ -37,10 +48,10 @@
 
   {% if course and dualRunning %}
     <p class="govuk-body-l">The training provider you have chosen is participating in a trial of a new GOV.UK service called &lsquo;{{ serviceName }}&rsquo;.</p>
-    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is <a href="/apply/providers">limited to just a few courses</a>.</p>
+    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is limited to just a few courses.</p>
+    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about upcoming changes</a>.</p>
 
     {% set govukHtml %}
-      <p class="govuk-body">Use GOV.UK if:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>for now, this is the only training provider on your shortlist</li>
         <li>you want to trial a streamlined, modern GOV.UK service with personalised support</li>
@@ -48,9 +59,8 @@
     {% endset %}
 
     {% set ucasHtml %}
-      <p class="govuk-body">Use UCAS if:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>you've chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
+        <li>you’ve chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
         <li>you have an application underway with UCAS</li>
         <li>you are in the Apply 2 stage of your application</li>
       </ul>
@@ -62,7 +72,7 @@
       name: "apply-route",
       items: [{
         value: "dfe",
-        text: "Apply for this course using GOV.UK",
+        text: "Apply for this course using GOV.UK if:",
         label: {
           classes: "govuk-label--m"
         },
@@ -71,7 +81,7 @@
         }
       }, {
         value: "ucas",
-        text: "Apply for this course using UCAS",
+        text: "Apply for this course using UCAS if:",
         label: {
           classes: "govuk-label--m"
         },
@@ -88,17 +98,11 @@
       text: "Continue"
     }) }}
   {% elif course and ineligible %}
-    {{ appBanner({
-      type: "information",
-      html: "<h2 class=\"govuk-heading-s\">We’re sorry, but you're not eligible to use the Apply for teacher training service. It's still in development, so we have to limit candidate numbers. You can apply to your chosen teacher training course using UCAS.</h2>",
-      iconFallbackText: "Information"
-    }) }}
-
     {{ courseCodeHtml | safe }}
 
     {{ govukButton({
       text: "Apply through UCAS",
-      href: "https://2019.teachertraining.apply.ucas.com/apply/student/login.do",
+      href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do",
       isStartButton: true
     }) }}
   {% elif course and not dualRunning %}
@@ -107,7 +111,7 @@
 
     {{ govukButton({
       text: "Apply through UCAS",
-      href: "https://2019.teachertraining.apply.ucas.com/apply/student/login.do",
+      href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do",
       isStartButton: true
     }) }}
   {% else %}

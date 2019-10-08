@@ -19,7 +19,7 @@ require('./routes/course')(router)
 require('./routes/email')(router)
 require('./routes/delete')(router)
 
-// Clear all data in session if you open /prototype-admin/clear-data
+// Clear all data in session if you open /admin/clear-data
 router.post('/admin/clear-data', function (req, res) {
   req.session.data = {}
   res.render('admin/clear-data-success')

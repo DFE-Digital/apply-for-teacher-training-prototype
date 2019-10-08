@@ -20,7 +20,7 @@ module.exports = router => {
 
     const route = req.session.data['apply-route']
     if (route === 'ucas') {
-      res.redirect('https://2019.teachertraining.apply.ucas.com/apply/student/login.do')
+      res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do')
     } else {
       res.redirect(`/apply/${providerCode}/${courseCode}/eligibility`)
     }

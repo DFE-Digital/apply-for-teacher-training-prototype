@@ -15,7 +15,7 @@
   {{ govukDateInput({
     fieldset: {
       legend: {
-        text: "Start of gap",
+        text: "Start of break",
         classes: "govuk-fieldset__legend--m"
       }
     },
@@ -36,7 +36,7 @@
   {{ govukDateInput({
     fieldset: {
       legend: {
-        text: "End of gap",
+        text: "End of break",
         classes: "govuk-fieldset__legend--m"
       }
     },
@@ -68,7 +68,7 @@
   {{ govukInput({
     type: "hidden",
     name: "applications[" + applicationId + "][work-history][" + id + "][category]",
-    value: "gap"
+    value: "break"
   }) }}
 
   {{ govukButton({

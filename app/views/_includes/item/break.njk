@@ -1,20 +1,10 @@
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set itemStart = item["start-date"] %}
-{% set itemEnd = item["end-date"] %}
-{% set itemStartEpoch = itemStart | date("x") | int %}
-{% set itemEndEpoch = itemEnd | date("x") | int %}
-{% set itemDuration = itemEndEpoch - itemStartEpoch %}
-
-{% set gapText -%}
-  Gap ({{ itemDuration | duration }})
-{%- endset %}
-
 {% set datesText %}
-  {{ itemStart | date("MMMM yyyy") }} - {{ itemEnd | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
+  {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}
 
-{% set changeHref = applicationPath + "/work-history/gap/" + item.id + "?referrer=" + referrer %}
+{% set changeHref = applicationPath + "/work-history/break/" + item.id + "?referrer=" + referrer %}
 
 {{ govukSummaryList({
   rows: [{

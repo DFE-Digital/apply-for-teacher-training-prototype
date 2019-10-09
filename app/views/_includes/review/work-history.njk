@@ -4,17 +4,17 @@
 {% if workHistory %}
   {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
   {% if history.length >= 1 %}
-    {% set hasAutomaticGaps = data.flags.automatic_gaps == true %}
+    {% set hasAutomaticBreaks = data.flags.automatic_breaks == true %}
     {% for item in history %}
       {% set jobHtml %}
         {% include "_includes/item/job.njk" %}
       {% endset %}
 
-      {% set gapHtml %}
-        {% include "_includes/item/gap.njk" %}
+      {% set breakHtml %}
+        {% include "_includes/item/break.njk" %}
       {% endset %}
 
-      {% if hasAutomaticGaps %}
+      {% if hasAutomaticBreaks %}
         {# periodStart = Earliest date in required work history period #}
         {% set periodStart = "now" | date | replace("2019", "2014") %}
         {% set periodStartEpoch = periodStart | date("x") | int %}
@@ -24,7 +24,7 @@
         {% set firstStartEpoch = firstStart | date("x") | int %}
 
         {% if loop.first and firstStartEpoch > periodStartEpoch %}
-          {# Unexplained gap (prior to work history commencing) #}
+          {# Unexplained break (prior to work history commencing) #}
           {% set itemStart = periodStart %}
           {% set itemStartEpoch = itemStart | date("x") | int %}
           {% set itemEnd = firstStart %}
@@ -33,18 +33,18 @@
           {{ appSummaryCard({
             classes: "govuk-!-margin-bottom-6",
             headingLevel: 3,
-            titleText: "Unexplained gap (" + (itemDuration | duration) + ")",
+            titleText: "Break in work history (" + (itemDuration | duration) + ")",
             actions: {
               items: [{
-                href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-                text: "Explain gap"
+                href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+                text: "Explain break"
               }]
             } if review == true
           }) }}
         {% endif %}
       {% endif %}
 
-      {% if item.category == "gap" %}
+      {% if item.category == "break" %}
         {% set itemStart = item["start-date"] %}
         {% set itemStartEpoch = itemStart | date("x") | int %}
         {% set itemEnd = item["end-date"] %}
@@ -53,14 +53,14 @@
         {{ appSummaryCard({
           classes: "govuk-!-margin-bottom-6",
           headingLevel: 3,
-          titleText: "Gap (" + (itemDuration | duration) + ")",
+          titleText: "Break in work history (" + (itemDuration | duration) + ")",
           actions: {
             items: [{
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete gap entry"
+              text: "Delete entry"
             }]
           } if review == true,
-          html: gapHtml
+          html: breakHtml
         }) }}
       {% else %}
         {% set titleHtml %}
@@ -80,15 +80,15 @@
           actions: {
             items: [{
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete job"
+              text: "Delete entry"
             }]
           } if review == true,
           html: jobHtml
         }) }}
       {% endif %}
 
-      {% if hasAutomaticGaps %}
-        {# Unexplained gap (during work history) #}
+      {% if hasAutomaticBreaks %}
+        {# Unexplained break (during work history) #}
         {% set nextItem = history[loop.index] %}
         {% set itemStart = item["end-date"] %}
         {% set itemStartEpoch = itemStart | date("x") | int %}
@@ -99,11 +99,11 @@
           {{ appSummaryCard({
             classes: "govuk-!-margin-bottom-6",
             headingLevel: 3,
-            titleText: "You have a gap in your work history (" + (itemDuration | duration) + ")",
+            titleText: "You have a break in your work history (" + (itemDuration | duration) + ")",
             actions: {
               items: [{
-                href: applicationPath + "/work-history/add/gap?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-                text: "Please explain gap"
+                href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
+                text: "Please explain break"
               }, {
                 href: applicationPath + "/work-history/add/job?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
                 text: "Add another job"
@@ -113,8 +113,8 @@
         {% endif %}
       {% endif %}
     {% endfor %}
-    {% if not hasAutomaticGaps %}
-      {% set gapsHtml %}
+    {% if not hasAutomaticBreaks %}
+      {% set breaksHtml %}
         {{ govukSummaryList({
           classes: "app-summary",
           rows: [{
@@ -122,12 +122,12 @@
               text: "Please explain any breaks in your work history"
             },
             value: {
-              text: applicationValue(["work-history", "gaps"]) | nl2br | safe
+              text: applicationValue(["work-history", "breaks"]) | nl2br | safe
             },
             actions: {
               items: [{
-                href: applicationPath + "/work-history/explain-gaps?referrer=" + referrer,
-                text: "Enter explanation"
+                href: applicationPath + "/work-history/explain-breaks?referrer=" + referrer,
+                text: "Change" if applicationValue(["work-history", "breaks"]) else "Enter explanation"
               }]
             }
           }]
@@ -135,7 +135,7 @@
       {% endset %}
       {{ appSummaryCard({
         classes: "govuk-!-margin-bottom-6",
-        html: gapsHtml
+        html: breaksHtml
       }) }}
     {% endif %}
   {% else %}

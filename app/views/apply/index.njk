@@ -26,7 +26,7 @@
     {{ appBanner({
       classes: "govuk-!-margin-bottom-0",
       type: "information",
-      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use the Apply for teacher training service.</h2><p class=\"govuk-body\">It’s still in development, so we have to limit candidate numbers.</p>",
+      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use DfE Apply.</h2><p class=\"govuk-body\">The service is still in development, so we have to limit candidate numbers.</p>",
       iconFallbackText: "Information"
     }) }}
   {% endif %}
@@ -34,7 +34,7 @@
 
 {% block primary %}
   {% set courseCodeHtml %}
-    <p class="govuk-body">When you apply, you’ll need these codes for the Choices section of your application form:</p>
+    <p class="govuk-body">When you apply using UCAS, you’ll need these codes for the Choices section of your application form:</p>
     <ul class="govuk-list">
       <li class="govuk-!-margin-bottom-2">
         Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
@@ -47,8 +47,8 @@
   {% endset %}
 
   {% if course and dualRunning %}
-    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service called &lsquo;{{ serviceName }}&rsquo;.</p>
-    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is limited to just a few courses.</p>
+    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service called {{ serviceName }} (&lsquo;DfE Apply&rsquo;).</p>
+    <p class="govuk-body">DfE Apply will eventually replace UCAS. However, for now, the service is limited to just a few courses.</p>
     <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
 
     {% set govukHtml %}
@@ -72,7 +72,7 @@
       name: "apply-route",
       items: [{
         value: "dfe",
-        text: "Apply for this course using GOV.UK if:",
+        text: "Apply for this course using DfE Apply if:",
         label: {
           classes: "govuk-label--m"
         },

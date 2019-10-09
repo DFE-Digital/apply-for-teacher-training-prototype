@@ -10,7 +10,7 @@ module.exports = {
   disabled_account: {
     email: 'janina.doe@example.com'
   },
-  applications: {
+  disabled_applications: {
     12345: {
       status: 'started',
       courses: {

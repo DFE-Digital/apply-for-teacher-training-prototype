@@ -1,5 +1,5 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{%- set assetPath = "/govuk/assets" -%}
+{% set assetPath = "/govuk/assets" %}
 
 {% extends "govuk/template.njk" %}
 
@@ -30,6 +30,7 @@
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
 {% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
+{% from "_components/banner/macro.njk"         import appBanner %}
 {% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
 {% from "_components/footer/macro.njk"         import appFooter %}
 {% from "_components/icon/macro.njk"           import appIcon %}
@@ -93,31 +94,31 @@
   }) }}
   {% block pageNavigation %}
   {% endblock %}
+  {% block pageBanner %}
+  {% endblock %}
 {% endblock %}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
-{% if useAutoStoreData %}
-  {% block footer %}
-    {{ appFooter({
-      classes: "govuk-footer--app",
-      meta: {
-        title: "Need help?",
-        html: "Call <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a> on Freephone 0800 389 2500 or chat to an adviser using their <a href=\"https://ta-chat.education.gov.uk/chat/chatstart.aspx?domain=www.education.gov.uk&department=GetIntoTeaching%27,%27new_win%27,%27width=0,height=0%27);return%20false;%22&SID=1\">online chat service</a> between 8am and 8pm, Monday to Friday",
-        items: [{
-          href: "mailto:becomingateacher@digital.education.gov.uk",
-          text: "Give feedback or report a problem"
-        }, {
-          href: "/admin/flags",
-          text: "Feature flags"
-        } if not urStudy, {
-          href: "/admin/clear-data",
-          text: "Clear data"
-        } if not urStudy]
-      }
-    }) }}
-  {% endblock %}
-{% endif %}
+{% block footer %}
+  {{ appFooter({
+    classes: "govuk-footer--app",
+    meta: {
+      title: "Need help?",
+      html: "Call <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a> on Freephone 0800 389 2500 or chat to an adviser using their <a href=\"https://ta-chat.education.gov.uk/chat/chatstart.aspx?domain=www.education.gov.uk&department=GetIntoTeaching%27,%27new_win%27,%27width=0,height=0%27);return%20false;%22&SID=1\">online chat service</a> between 8am and 8pm, Monday to Friday",
+      items: [{
+        href: "mailto:becomingateacher@digital.education.gov.uk",
+        text: "Give feedback or report a problem"
+      }, {
+        href: "/admin/flags",
+        text: "Feature flags"
+      } if not urStudy, {
+        href: "/admin/clear-data",
+        text: "Clear data"
+      } if not urStudy]
+    }
+  }) }}
+{% endblock %}
 
 {% block bodyEnd %}
   </div>

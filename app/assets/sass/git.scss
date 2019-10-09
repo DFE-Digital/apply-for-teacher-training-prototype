@@ -1,0 +1,90 @@
+@import "node_modules/govuk-frontend/govuk/settings/colours-palette";
+@import "node_modules/govuk-frontend/govuk/settings/colours-applied";
+
+$govuk-global-styles: true;
+$govuk-page-width: 1340px;
+$govuk-font-family: "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+// Override the canvas background colour, which is normally grey to blend with
+// the GOV.UK footer.
+$govuk-canvas-background-colour: $govuk-body-background-colour;
+
+@import "node_modules/govuk-frontend/govuk/all";
+
+.git-header {
+  align-items: center;
+  border-bottom: 1px solid govuk-colour("light-grey");
+  display: flex;
+  padding: govuk-spacing(5) 0;
+
+  @include govuk-media-query($from: "desktop") {
+    padding: govuk-spacing(5);
+  }
+
+  svg {
+    margin-right: govuk-spacing(5);
+  }
+}
+
+.git-header__tagline {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.git-navigation {
+  ul {
+    display: none;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 govuk-spacing(5);
+
+    @include govuk-media-query($from: "desktop") {
+      display: flex;
+    }
+  }
+
+  li {
+    align-items: center;
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    max-width: 90px;
+    text-align: center;
+    padding: govuk-spacing(5) 0;
+
+    @include govuk-media-query($from: "desktop") {
+      font-size: 1rem;
+    }
+  }
+}
+
+.git-main-wrapper {
+  padding-top: 0;
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.git-content {
+  margin: 0 auto;
+
+  @include govuk-media-query($from: "desktop") {
+    width: 75%;
+  }
+
+  a {
+    color: inherit;
+    font-weight: bold;
+  }
+
+  p, ul {
+    font-weight: 300;
+    letter-spacing: 0.0125em;
+  }
+}

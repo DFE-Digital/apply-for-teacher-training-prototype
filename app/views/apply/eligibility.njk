@@ -1,0 +1,57 @@
+{% extends "_form.njk" %}
+
+{% set title = "Check you can use DfE Apply" %}
+{% set isSignedOut = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    idPrefix: "eligibile-nationality",
+    name: "eligibile-nationality",
+    fieldset: {
+      legend: {
+        text: "Are you a citizen of the UK/EU/EEA?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    idPrefix: "eligibile-equivalencies",
+    name: "eligibile-equivalencies",
+    fieldset: {
+      legend: {
+        text: "Did you gain all your qualifications at institutions based in the UK?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set parent = "School experience and volunteering" %}
+{% set parent = "Children and young people" %}
 {% set action = "edit" if applicationValue(["school-experience", id, "role"]) else "add" %}
 {% set title = (action | capitalize) + " role" %}
 
@@ -48,7 +48,7 @@
     }]
   } | decorateApplicationAttributes(["school-experience", id, "worked-with-children"])) }}
 
-  <h2 class="govuk-heading-m">Time commitment</h2>
+  <h2 class="govuk-heading-m">How long have you been in this role and what does it involve?</h2>
   {% set startDate = applicationValue(["school-experience", id, "start-date"]) %}
   {% set endDate = applicationValue(["school-experience", id, "end-date"]) %}
 
@@ -102,11 +102,11 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Enter details of the time commitment involved in this role",
+      text: "Enter details of your time commitment and responsibilities",
       classes: "govuk-label--s"
     },
     hint: {
-      text: "For example, ‘I volunteer every Friday morning’ or ‘I spent 1 day observing in this school’ or ‘I am a Scout Leader involved in activities throughout the year’"
+      text: "For example, ‘I volunteer in the classroom every Friday morning’ or ‘I spent 1 day observing in this school’ or ‘I am a Scout Leader involved in activities throughout the year’"
     },
     maxwords: 150
   } | decorateApplicationAttributes(["school-experience", id, "time-commitment"])) }}

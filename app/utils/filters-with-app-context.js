@@ -38,7 +38,15 @@ module.exports = (nunjucksAppEnv, app) => {
     // Generate the attributes based on the application ID and the section they’re in
     nunjucksAppEnv.addFilter('decorateApplicationAttributes', (obj, sections) => {
       sections = sections || []
-      const storedValue = getApplicationValue(sections)
+      var storedValue = getApplicationValue(sections)
+
+      // Prefill qualification values based on previous answers
+      if (!storedValue
+            && !sections.includes('completed')
+            && sections.includes('other-qualifications')) {
+
+        storedValue = prefillPreviousQualificationValues(sections)
+      }
 
       if (obj.items !== undefined) {
         obj.items = obj.items.map(item => {
@@ -68,14 +76,6 @@ module.exports = (nunjucksAppEnv, app) => {
         obj.value = storedValue
       }
 
-      // Prefill qualification values based on previous answers
-      if (!obj.value
-            && !sections.includes('completed')
-            && sections.includes('other-qualifications')) {
-
-        obj.value = prefillPreviousQualificationValues(sections)
-      }
-
       obj.id = sections.join('-')
       obj.name = `applications[${applicationId()}]${sections.map(s => `[${s}]`).join('')}`
       return obj
@@ -94,6 +94,14 @@ module.exports = (nunjucksAppEnv, app) => {
       }
 
       return getApplicationValue(sections)
+    })
+
+    nunjucksAppEnv.addGlobal('valueOrPreviousQualificationValue', (sections) => {
+      if (sections && !Array.isArray(sections)) {
+        sections = [sections]
+      }
+
+      return getApplicationValue(sections) || prefillPreviousQualificationValues(sections)
     })
 
     nunjucksAppEnv.addFilter('getCourseFromProviderCode', providerCode => {

@@ -16,6 +16,24 @@ module.exports = (nunjucksAppEnv, app) => {
       return getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
     }
 
+    const prefillPreviousQualificationValues = (sections) => {
+      if (sections.includes('subject') || sections.includes('grade')) {
+        return null
+      }
+
+      // Get the most recently added qualification
+      var qualifications = getApplicationValue(sections.slice(0,1))
+
+      if (!qualifications || qualifications.length == 0) {
+        return null
+      }
+
+      var latest_qualification = Object.values(qualifications).slice(-1)[0]
+
+      // Return value from previously added qualification
+      return latest_qualification[sections.slice(-1)[0]]
+    }
+
     // Add name, value, id, idPrefix and checked attributes to GOVUK form inputs
     // Generate the attributes based on the application ID and the section they’re in
     nunjucksAppEnv.addFilter('decorateApplicationAttributes', (obj, sections) => {
@@ -48,6 +66,14 @@ module.exports = (nunjucksAppEnv, app) => {
         obj.idPrefix = sections.join('-')
       } else {
         obj.value = storedValue
+      }
+
+      // Prefill qualification values based on previous answers
+      if (!obj.value
+            && !sections.includes('completed')
+            && sections.includes('other-qualifications')) {
+
+        obj.value = prefillPreviousQualificationValues(sections)
       }
 
       obj.id = sections.join('-')

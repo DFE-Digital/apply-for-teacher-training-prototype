@@ -33,11 +33,11 @@
           {{ appSummaryCard({
             classes: "govuk-!-margin-bottom-6",
             headingLevel: 3,
-            titleText: "Break in work history (" + (itemDuration | duration) + ")",
+            titleText: "You have a break in your work history (" + (itemDuration | duration) + ")",
             actions: {
               items: [{
                 href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-                text: "Explain break"
+                text: "Please explain break"
               }]
             } if review == true
           }) }}

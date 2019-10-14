@@ -2,12 +2,12 @@
 
 {% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
 {% set parent = provider.name %}
-
 {% if hasPrimaryCourses() %}
-{% set title = "What knowledge and experience will you bring to teaching primary school?" %}
+  {% set title = "What knowledge and experience will you bring to teaching primary school?" %}
 {% else %}
-{% set title = "What do you know about the subject you want to teach?" %}
+  {% set title = "What do you know about the subject you want to teach?" %}
 {% endif %}
+
 {% block pageNavigation %}
   {% if referrer %}
     {{ govukBackLink({
@@ -22,9 +22,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% set course = providerCode | getCourseFromProviderCode %}
-  {% if course and course.name.includes("Primary") %}
-
+  {% if hasPrimaryCourses() %}
     <p class="govuk-body">You can include:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>the abilities and skills you would contribute</li>

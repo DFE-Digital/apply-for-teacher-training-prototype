@@ -24,7 +24,7 @@ module.exports = (nunjucksAppEnv, app) => {
       // Get the most recently added qualification
       var qualifications = getApplicationValue(sections.slice(0,1))
 
-      if (!qualifications || qualifications.length == 0) {
+      if (!qualifications || Object.values(qualifications).length == 0) {
         return null
       }
 

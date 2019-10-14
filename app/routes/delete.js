@@ -30,7 +30,7 @@ module.exports = router => {
       }
 
       case 'school-experience': {
-        parent = item.role ? item.role : 'School experience and volunteering'
+        parent = item.role ? item.role : 'Volunteering with children and young people'
         type = 'role'
         break
       }

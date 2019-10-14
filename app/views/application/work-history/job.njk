@@ -18,7 +18,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Don’t include voluntary or unpaid experience – we’ll ask you about this in ‘Children and young people: volunteering and experience in school’.</p>
+  <p class="govuk-body">Please include all your paid work in school (for example as a teaching assistant) in this section.</p>
+  <p class="govuk-body">Don’t include voluntary or unpaid experience – we’ll ask you about this in ‘Volunteering with children and young people’.</p>
   {{ govukInput({
     label: {
       text: "Job title",
@@ -101,7 +102,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "Give examples showing how you developed transferable skills like communication, creativity and organisation."
+      text: "Give a brief overview of your role and explain how you developed transferable skills like communication, creativity and organisation"
     },
     maxwords: 150
   } | decorateApplicationAttributes(["work-history", id, "description"])) }}

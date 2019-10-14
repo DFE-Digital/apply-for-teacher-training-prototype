@@ -18,13 +18,11 @@
 {% endblock %}
 
 {% block primary %}
+  <p class="govuk-body">Don’t include paid work in a school – enter these roles in ‘Work history’.</p>
   {{ govukInput({
     label: {
       text: "Your role",
       classes: "govuk-label--m"
-    },
-    hint: {
-      text: "Don’t include paid work in a school – enter these roles in ‘Work history’."
     }
   } | decorateApplicationAttributes(["school-experience", id, "role"])) }}
 

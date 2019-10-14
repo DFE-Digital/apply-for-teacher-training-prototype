@@ -1,7 +1,7 @@
 module.exports = {
   flags: {
     address_lookup: true,
-    automatic_gaps: true,
+    automatic_breaks: true,
     international_address: true,
     international_qualifications: true,
     nationality: true,

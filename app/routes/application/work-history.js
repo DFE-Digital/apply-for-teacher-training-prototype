@@ -14,7 +14,7 @@ module.exports = router => {
   })
 
   // Generate new ID and redirect to that item
-  router.get('/application/:applicationId/work-history/add/:type(job|gap)', (req, res) => {
+  router.get('/application/:applicationId/work-history/add/:type(job|break)', (req, res) => {
     const applicationId = req.params.applicationId
     const type = req.params.type
     const id = utils.generateRandomString()
@@ -23,8 +23,8 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/work-history/${type}/${id}?${queryString}`)
   })
 
-  // Render job/gap page
-  router.get('/application/:applicationId/work-history/:type(job|gap)/:id', (req, res) => {
+  // Render job/break page
+  router.get('/application/:applicationId/work-history/:type(job|break)/:id', (req, res) => {
     const applicationId = req.params.applicationId
     const type = req.params.type
     const id = req.params.id

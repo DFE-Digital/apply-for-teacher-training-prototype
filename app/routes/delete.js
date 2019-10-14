@@ -37,7 +37,7 @@ module.exports = router => {
 
       case 'work-history': {
         parent = item.role ? item.role : 'Work history'
-        type = item.role ? 'job' : 'gap entry'
+        type = 'entry'
         break
       }
     }

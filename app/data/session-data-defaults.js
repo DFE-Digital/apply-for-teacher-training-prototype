@@ -87,7 +87,7 @@ module.exports = {
           org: 'Juliet High School',
           grade: '173',
           year: '2004',
-          international: 'yes',
+          provenance: 'international',
           country: 'India'
         },
         kv0y7: {
@@ -97,7 +97,7 @@ module.exports = {
           org: 'Juliet High School',
           grade: '647',
           year: '2008',
-          international: 'yes',
+          provenance: 'international',
           country: 'India'
         }
       },

@@ -2,8 +2,12 @@
 
 {% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
 {% set parent = provider.name %}
-{% set title = "What do you know about the subject you want to teach?" %}
 
+{% if hasPrimaryCourses() %}
+{% set title = "What knowledge and experience will you bring to teaching primary school?" %}
+{% else %}
+{% set title = "What do you know about the subject you want to teach?" %}
+{% endif %}
 {% block pageNavigation %}
   {% if referrer %}
     {{ govukBackLink({
@@ -20,13 +24,14 @@
 {% block primary %}
   {% set course = providerCode | getCourseFromProviderCode %}
   {% if course and course.name.includes("Primary") %}
-    <p class="govuk-body">Tell this provider why you are a suitable candidate for teaching the primary curriculum.</p>
+
     <p class="govuk-body">You can include:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>the abilities and skills you would contribute</li>
       <li>your A level subjects</li>
       <li>expertise you’ve gained at work</li>
       <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
+      <li>any familiarity you have with the primary curriculum</li>
     </ul>
   {% else %}
     <p class="govuk-body">Give us detailed evidence for the knowledge and interest you bring to {{ course.name }}.</p>
@@ -42,7 +47,7 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Enter your subject knowledge",
+      text: "Enter knowledge and experience" if hasPrimaryCourses() else "Enter your subject knowledge",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
 

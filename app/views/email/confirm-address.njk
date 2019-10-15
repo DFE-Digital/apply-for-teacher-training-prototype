@@ -12,17 +12,17 @@
 {% block content %}
   {% if action == "create-account" %}
     <h1 class="govuk-heading-m">{{ title }}</h1>
-    <p>Click the link below to confirm your email address and go back to the <b>{{ serviceName }}</b> service.</p>
-    <p><a href="/application/start">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
-    <p>You will then be able to save and return to your application.</p>
-    <p>By signing in, you also agree to the <a href="#">terms and conditions</a> of the {{ serviceName }} service.
+    <p class="govuk-body">Click the link below to confirm your email address and go back to the <b>{{ serviceName }}</b> service.</p>
+    <p class="govuk-body"><a href="/application/start">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+    <p class="govuk-body">You will then be able to save and return to your application.</p>
+    <p class="govuk-body">By signing in, you also agree to the <a href="#">terms and conditions</a> of the {{ serviceName }} service.
   {% elif action == "change-email-address" %}
     <h1 class="govuk-heading-m">{{ title }}</h1>
-    <p>Click the link below to confirm your new email address and go back to the <b>{{ serviceName }}</b> service.</p>
-    <p><a href="/applications">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+    <p class="govuk-body">Click the link below to confirm your new email address and go back to the <b>{{ serviceName }}</b> service.</p>
+    <p class="govuk-body"><a href="/applications">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
   {% else %}
     <h1 class="govuk-heading-m">{{ title }}</h1>
-    <p>Click the link below to sign in to the <b>{{ serviceName }}</b> service.</p>
-    <p><a href="/applications">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
+    <p class="govuk-body">Click the link below to sign in to the <b>{{ serviceName }}</b> service.</p>
+    <p class="govuk-body"><a href="/applications">https://{{ serviceSlug }}.service.gov.uk/verify?token=wCsix7SbCR9e9Pv2SQ3Q</a></p>
   {% endif %}
 {% endblock %}

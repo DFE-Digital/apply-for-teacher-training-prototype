@@ -1,4 +1,5 @@
 module.exports = {
+  visits_from_find: 0,
   flags: {
     address_lookup: true,
     automatic_breaks: true,

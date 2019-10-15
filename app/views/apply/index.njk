@@ -116,11 +116,11 @@
     }) }}
   {% else %}
     <p class="govuk-body">We couldn’t find the course you’re looking for – there may be a problem with the training provider and/or course code(s).</p>
-    <p class="govuk-body">Go back to <a href="https://find-postgraduate-teacher-training.education.gov.uk">Find postgraduate teacher training</a> and try selecting your course again, or choose a different course.</p>
+    <p class="govuk-body">Go back to <a href="{{ data['find_url'] }}">Find postgraduate teacher training</a> and try selecting your course again, or choose a different course.</p>
 
     {{ govukButton({
       text: "Find postgraduate teacher training",
-      href: "https://find-postgraduate-teacher-training.education.gov.uk",
+      href: data['find_url'],
       isStartButton: true
     }) }}
   {% endif %}

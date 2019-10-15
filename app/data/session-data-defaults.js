@@ -1,4 +1,6 @@
 module.exports = {
+  visits_from_find: 0,
+  find_url: "http://search-and-compare-ui-pr-442.herokuapp.com",
   flags: {
     address_lookup: true,
     automatic_breaks: true,

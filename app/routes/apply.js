@@ -14,6 +14,17 @@ module.exports = router => {
     })
   })
 
+  router.get('/apply/from-find', (req, res) => {
+    const providerCode = req.query.provider
+    const courseCode = req.query.course
+
+    // Count this so we can act on the data
+    // eg We show them a course that's only on UCAS the second time around
+    req.session.data['visits_from_find'] = req.session.data['visits_from_find'] + 1
+
+    res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
+  })
+
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {
     const providerCode = req.params.providerCode
     const courseCode = req.params.courseCode

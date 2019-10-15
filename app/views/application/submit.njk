@@ -24,18 +24,21 @@
     {% set miscellaneousHtml %}
       {{ govukCharacterCount({
         label: {
-          text: "Examples of further information include any disability, health or other personal or professional issue you feel is relevant to your application"
+          text: "Enter further information"
         },
         rows: 10,
         maxwords: 300
       } | decorateApplicationAttributes(["miscellaneous"])) }}
     {% endset %}
 
+    {% set legendHtml %}
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Is there anything else you would like to tell us about your application?</h2>
+      <p class="govuk-body">Examples of further information include any disability, health or other personal or professional issue you feel is relevant to your application</p>
+    {% endset %}
     {{ govukRadios({
       fieldset: {
         legend: {
-          text: "Is there anything else you would like to tell us about your application?",
-          classes: "govuk-fieldset__legend--m"
+          html: legendHtml
         }
       },
       items: [{

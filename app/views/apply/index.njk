@@ -26,7 +26,7 @@
     {{ appBanner({
       classes: "govuk-!-margin-bottom-0",
       type: "information",
-      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use DfE Apply.</h2><p class=\"govuk-body\">The service is still in development, so we have to limit candidate numbers.</p>",
+      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use GOV.UK Apply.</h2><p class=\"govuk-body\">The service is still in development, so we have to limit candidate numbers.</p>",
       iconFallbackText: "Information"
     }) }}
   {% endif %}
@@ -47,8 +47,8 @@
   {% endset %}
 
   {% if course and dualRunning %}
-    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service built by the Department for Education (DfE).</p>
-    <p class="govuk-body">{{ serviceName }} (&lsquo;DfE Apply&rsquo;) will eventually replace UCAS. However, for now, the service is limited to just a few courses. </p>
+    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service, {{ serviceName }} (‘GOV.UK Apply’).</p>
+    <p class="govuk-body">GOV.UK Apply will eventually replace UCAS. However, for now, the service is limited to just a few courses. </p>
     <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
 
     {% set govukHtml %}
@@ -72,7 +72,7 @@
       name: "apply-route",
       items: [{
         value: "dfe",
-        text: "Apply for this course using DfE Apply if:",
+        text: "Apply for this course using GOV.UK Apply if:",
         label: {
           classes: "govuk-label--m"
         },

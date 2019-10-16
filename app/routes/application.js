@@ -35,9 +35,9 @@ module.exports = router => {
     res.redirect(`/application/${code}`)
   })
 
-  router.get('/application/start/course', (req, res) => {
+  router.get('/application/start/choice', (req, res) => {
     var code = createNewApplication(req)
-    res.redirect(`/application/${code}/course/add`)
+    res.redirect(`/application/${code}/choices/add`)
   })
 
   router.all('/application/started', (req, res) => {
@@ -83,6 +83,7 @@ module.exports = router => {
     res.json(req.session.data.applications[applicationId])
   })
 
+  require('./application/choices')(router)
   require('./application/personal-details')(router)
   require('./application/contact-details')(router)
   require('./application/work-history')(router)
@@ -95,7 +96,7 @@ module.exports = router => {
   require('./application/references')(router)
   require('./application/equality-monitoring')(router)
 
-  // Change status of a course to submitted
+  // Change status of an application to submitted
   router.all('/application/:applicationId/confirmation', (req, res) => {
     req.session.data.applications[req.params.applicationId].status = 'submitted'
     res.render('application/confirmation')

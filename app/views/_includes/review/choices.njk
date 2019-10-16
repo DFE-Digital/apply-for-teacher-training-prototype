@@ -1,0 +1,21 @@
+{% set choices = applicationValue("choices") | toArray %}
+{% for choice in choices %}
+  {% set provider = providers[choice.providerCode] %}
+  {% set course = provider.courses[choice.courseCode] %}
+  {% set item = choice %}
+  {% set courseHtml %}
+    {% include "_includes/item/choice.njk" %}
+  {% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: loop.index + ". " + provider.name,
+    actions: {
+      items: [{
+        href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+        text: "Delete choice"
+      }]
+    } if review == true,
+    html: courseHtml
+  }) }}
+{% endfor %}

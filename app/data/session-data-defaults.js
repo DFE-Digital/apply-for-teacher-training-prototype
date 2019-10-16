@@ -15,7 +15,7 @@ module.exports = {
   disabled_applications: {
     12345: {
       status: 'started',
-      courses: {
+      choices: {
         ABCDE: {
           courseCode: '38G9',
           providerCode: 'G50',

@@ -51,7 +51,12 @@
       href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience")),
       id: "school-experience",
       completed: applicationValue(["completed", "school-experience"])
-    }]
+    }, {
+     text: "Training with a disability",
+     href: applicationPath + "/disability" + ("/review" if applicationValue("disability")),
+     id: "disability",
+     completed: applicationValue("disability")
+   }]
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>

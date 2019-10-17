@@ -1,0 +1,59 @@
+{% extends "_form.njk" %}
+
+{% set title = "Training with a disability" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p>It’s a personal choice if you want to inform your training provider of your disability.</p>
+
+  <p>The advantage of disclosure is that it enables support and reasonable adjustments to be put in place. In addition, specialist equipment, extra funding and support, can help you achieve your ambition of becoming a teacher.</p>
+
+  <p><a href="https://www.gov.uk/guidance/equality-act-2010-guidance">The Equality Act 2010</a> and Special Educational Needs and Disability Act 2001, require teacher training providers to ensure they are not discriminating against applicants with disabilities or special educational needs (SEN).</p>
+
+  {# <p>Schools have a duty to make reasonable adjustments to avoid putting disabled at a substantial disadvantage compared to non-disabled pupils</p> #}
+
+  {% set disabilityConditional %}
+    {{ govukCharacterCount({
+      label: {
+        text: "Tell us about your disability",
+        classes: "govuk-label--s"
+      },
+      maxwords: 400,
+      rows: 24
+    } | decorateApplicationAttributes(["disability", "about-disability"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "Do you want to disclose a disability?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      text: "Yes",
+      conditional: {
+        html: disabilityConditional
+      }
+    }, {
+      text: "No"
+    }]
+  } | decorateApplicationAttributes(["disability", "disclose"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

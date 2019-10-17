@@ -3,16 +3,16 @@
 {% set title = "Thank you for submitting your teacher training application" %}
 {% set from = "apply-for-teacher-training@education.gov.uk" %}
 {% set to = data.account.email %}
-{% set courses = applicationValue("courses") | toArray %}
+{% set choices = applicationValue("choices") | toArray %}
 
 {% block content %}
   <h1 class="govuk-heading-l">Thank you for completing your teacher training application</h1>
 
   <p class="govuk-body">You have submitted an application to:</p>
   <ul class="govuk-list govuk-list--bullet">
-  {% for c in courses %}
-    {% set provider = providers[c.providerCode] %}
-    {% set course = provider.courses[c.courseCode] %}
+  {% for choice in choices %}
+    {% set provider = providers[choice.providerCode] %}
+    {% set course = provider.courses[choice.courseCode] %}
     <li class="govuk-body">
       <strong>{{ provider.name }}</strong><br>
       {{ course.name_and_code }}

@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
 {% set parent = provider.name %}
-{% if hasPrimaryCourses() %}
+{% if hasPrimaryChoices() %}
   {% set title = "What knowledge and experience will you bring to teaching primary school?" %}
 {% else %}
   {% set title = "What do you know about the subject you want to teach?" %}
@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% if hasPrimaryCourses() %}
+  {% if hasPrimaryChoices() %}
     <p class="govuk-body">You can include:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>the abilities and skills you would contribute</li>
@@ -45,7 +45,7 @@
 
   {{ govukCharacterCount({
     label: {
-      text: "Enter knowledge and experience" if hasPrimaryCourses() else "Enter your subject knowledge",
+      text: "Enter knowledge and experience" if hasPrimaryChoices() else "Enter your subject knowledge",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
 

@@ -32,9 +32,9 @@
 
       <h2 class="govuk-heading-l">Courses you’ve applied to</h2>
 
-      {% for id, c in application.courses %}
-        {% set provider = providers[c.providerCode] %}
-        {% set course = provider.courses[c.courseCode] %}
+      {% for id, choice in application.choices %}
+        {% set provider = providers[choice.providerCode] %}
+        {% set course = provider.courses[choice.courseCode] %}
         <h3 class="govuk-heading-m">{{ provider.name }}</h3>
         {{ govukSummaryList({
           classes: "app-summary",

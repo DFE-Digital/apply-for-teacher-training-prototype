@@ -7,17 +7,19 @@ router.all(['/application/:applicationId', '/application/:applicationId/*'], (re
   next()
 })
 
-// Make `courseId` available as local variable
-router.all(['/application/:applicationId/course/:courseId', '/application/:applicationId/course/:courseId/*'], (req, res, next) => {
-  res.locals.courseId = req.params.courseId
+// Make `choiceId` available as local variable
+router.all([
+  '/application/:applicationId/choices/:choiceId',
+  '/application/:applicationId/choices/:choiceId/*'
+], (req, res, next) => {
+  res.locals.choiceId = req.params.choiceId
   next()
 })
 
+require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)
 require('./routes/application')(router)
-require('./routes/course')(router)
 require('./routes/email')(router)
-require('./routes/delete')(router)
 
 // Clear all data in session if you open /admin/clear-data
 router.post('/admin/clear-data', function (req, res) {

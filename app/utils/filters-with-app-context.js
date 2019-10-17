@@ -118,8 +118,8 @@ module.exports = (nunjucksAppEnv, app) => {
       return utils.hasStartedApplications(req)
     })
 
-    nunjucksAppEnv.addGlobal('hasPrimaryCourses', () => {
-      return utils.hasPrimaryCourses(req)
+    nunjucksAppEnv.addGlobal('hasPrimaryChoices', () => {
+      return utils.hasPrimaryChoices(req)
     })
 
     next()

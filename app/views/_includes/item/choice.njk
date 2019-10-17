@@ -4,11 +4,12 @@
       text: "Course"
     },
     value: {
-      html: "<a href=\"#\">" + item.name_and_code + "</a><br>" + item.description
+      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
     },
     actions: {
       items: [{
         href: "#",
+        href: applicationPath + "/choices/" + item.id + "/pick?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "course"
       }]
@@ -18,11 +19,11 @@
       text: "Location"
     },
     value: {
-      html: course.locationName + "<br>" + course.locationAddress
+      html: item.locationName + "<br>" + item.locationAddress
     },
     actions: {
       items: [{
-        href: "#",
+        href: applicationPath + "/choices/" + item.id + "/location?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "course location"
       }]

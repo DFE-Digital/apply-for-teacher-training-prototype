@@ -1,0 +1,51 @@
+{% extends "_form-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
+{% set choices = applicationValue("choices") %}
+{% set title = "Course choices" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">You can apply for up to 3 courses.</p>
+
+  {% if choices %}
+    {% set referrer = applicationPath + "/choices" %}
+    {% set review = true %}
+    {% include "_includes/review/choices.njk" %}
+    {% if choices | length < 3 %}
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Add another course",
+        href: applicationPath + "/choices/add"
+      }) }}
+    {% endif %}
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "choices"])) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  {% else %}
+    {{ govukButton({
+      text: "Add course",
+      href: applicationPath + "/choices/add"
+    }) }}
+  {% endif %}
+{% endblock %}

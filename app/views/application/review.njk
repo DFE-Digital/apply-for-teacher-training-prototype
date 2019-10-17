@@ -13,12 +13,12 @@
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-  {% if applicationValue(["courses"]) %}
-    {% include "_includes/review/courses.njk" %}
+  {% if applicationValue(["choices"]) %}
+    {% include "_includes/review/choices.njk" %}
   {% else %}
     {{ govukButton({
       text: "Add a course",
-      href: applicationPath + "/course/add",
+      href: applicationPath + "/choices/add",
       classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1"
     }) }}
   {% endif %}
@@ -48,7 +48,7 @@
   {% set id = "english" %}
   {% include "_includes/review/gcse.njk" %}
 
-  {% if hasPrimaryCourses() or applicationValue(["gcse", "science"]) %}
+  {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
     <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
     {% set id = "science" %}
     {% include "_includes/review/gcse.njk" %}

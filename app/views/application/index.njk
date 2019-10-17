@@ -14,25 +14,18 @@
     }) }}
   {% endif %}
 {% endblock %}
-{% block primary %}
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
-  <p class="govuk-body">You can apply for up to 3 courses.</p>
 
-  {% if applicationValue("courses") %}
-    {% include "_includes/application-courses.njk" %}
-    {% if applicationValue("courses") | length < 3 %}
-      {{ govukButton({
-        text: "Add another course",
-        classes: "govuk-button--secondary",
-        href: applicationPath + "/course/add"
-      }) }}
-    {% endif %}
-  {% else %}
-    {{ govukButton({
-      text: "Add course",
-      href: applicationPath + "/course/add"
-    }) }}
-  {% endif %}
+{% block primary %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Courses",
+      href: applicationPath + "/choices",
+      id: "personal-details",
+      completed: applicationValue(["completed", "choices"])
+    }]
+  }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">About you</h2>
   {{ appTaskList({
@@ -83,7 +76,7 @@
       href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"])),
       id: "science-gcse",
       completed: applicationValue(["gcse", "science"])
-    } if hasPrimaryCourses() or applicationValue(["gcse", "science"]), {
+    } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Other relevant academic and non-academic qualifications",
       href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
       id: "other-qualifications",
@@ -93,8 +86,8 @@
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement and interview</h2>
   <p class="govuk-body">You can tailor your personal statement to suit different providers and courses</p>
-  {% set courses = applicationValue("courses") | toArray %}
-  {% if courses | length == 0 %}
+  {% set choices = applicationValue("choices") | toArray %}
+  {% if choices | length == 0 %}
     {{ appTaskList({
       classes: "govuk-!-margin-bottom-8",
       items: [{
@@ -104,8 +97,8 @@
     }) }}
   {% else %}
     {% set providerItems = [] %}
-    {% for c in courses %}
-      {% set provider = providers[c.providerCode] %}
+    {% for choice in choices %}
+      {% set provider = providers[choice.providerCode] %}
       {% set items = providerItems.push({
         text: provider.name,
         href: applicationPath + "/personal-statement/" + provider.code + "/review",

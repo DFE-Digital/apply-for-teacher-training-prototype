@@ -61,11 +61,11 @@ const hasStartedApplications = (req) => {
   }
 }
 
-const hasPrimaryCourses = (req) => {
+const hasPrimaryChoices = (req) => {
   try {
-    var courses = req.session.data.applications[req.params.applicationId].courses
+    var choices = req.session.data.applications[req.params.applicationId].choices
 
-    const result = Object.values(courses).map((a) => {
+    const result = Object.values(choices).map((a) => {
       const providerCode = a.providerCode
       const courseCode = a.courseCode
       const course = req.app.locals.providers[providerCode].courses[courseCode]
@@ -96,7 +96,7 @@ module.exports = {
   queryString: getQueryString,
   saveIsoDate,
   hasApplications,
-  hasPrimaryCourses,
+  hasPrimaryChoices,
   hasSubmittedApplications,
   hasStartedApplications,
   toArray

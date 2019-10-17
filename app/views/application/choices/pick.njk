@@ -1,15 +1,15 @@
 {% extends "_form.njk" %}
 
-{% set providerOnDfEApply = true %}
-{% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply on UCAS" %}
-{% set formaction = paths.next %}
-{% set applicationPath = "/application/" + applicationId %}
 {% set editing = applicationValue(["choices", choiceId]) %}
 {% if editing %}
   {% set providerCode = applicationValue(["choices", choiceId, "providerCode"]) %}
 {% else %}
   {% set providerCode = applicationValue(["temporaryChoices", choiceId, "provider"]) | providerCode %}
 {% endif %}
+{% set providerOnDfEApply = false if providerCode == 'B20' else true %}
+{% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply on UCAS" %}
+{% set formaction = paths.next %}
+{% set applicationPath = "/application/" + applicationId %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

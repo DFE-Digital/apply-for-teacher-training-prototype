@@ -2,7 +2,12 @@
 
 {% set title = "Which course are you applying to?" %}
 {% set formaction = paths.next %}
-{% set providerCode = applicationValue(["temporaryChoices", choiceId, "provider"]) | providerCode %}
+{% set editing = applicationValue(["choices", choiceId]) %}
+{% if editing %}
+  {% set providerCode = applicationValue(["choices", choiceId, "providerCode"]) %}
+{% else %}
+  {% set providerCode = applicationValue(["temporaryChoices", choiceId, "provider"]) | providerCode %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -24,15 +29,31 @@
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
-    accessibleAutocomplete({
-      defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "course"]) }}',
-      name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
-      element: document.querySelector('#course-autocomplete-container'),
-      id: 'courses-{{ choiceId }}-course',
-      showAllValues: true,
-      source: [
-        {% for id, item in providers[providerCode].courses %}"{{ item.name_and_code }}",{% endfor %}
-      ]
-    })
+    {% set provider = providers[providerCode] %}
+    {% if editing %}
+      {% set defaultValue = provider.courses[applicationValue(["choices", choiceId, "courseCode"])].name_and_code %}
+
+      accessibleAutocomplete({
+        defaultValue: "",
+        name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
+        element: document.querySelector('#course-autocomplete-container'),
+        id: 'courses-{{ choiceId }}-course',
+        showAllValues: true,
+        source: [
+          {% for id, item in provider.courses %}"{{ item.name_and_code }}",{% endfor %}
+        ]
+      })
+    {% else %}
+      accessibleAutocomplete({
+        defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "course"]) }}',
+        name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
+        element: document.querySelector('#course-autocomplete-container'),
+        id: 'courses-{{ choiceId }}-course',
+        showAllValues: true,
+        source: [
+          {% for id, item in provider.courses %}"{{ item.name_and_code }}",{% endfor %}
+        ]
+      })
+    {% endif %}
   </script>
 {% endblock %}

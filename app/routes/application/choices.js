@@ -56,22 +56,15 @@ module.exports = router => {
     const regExp = /\(([^)]+)\)$/
     const referrer = req.params.referrer
 
-    let choice
-    let providerCode
-    let courseCode
-    let locationName
     if (typeof applicationData.choices === 'undefined') {
       applicationData.choices = {}
-      choice = applicationData.temporaryChoices[choiceId]
-      providerCode = regExp.exec(choice.provider)[1]
-      courseCode = regExp.exec(choice.course)[1]
-      locationName = choice.location
-    } else {
-      choice = applicationData.choices[choiceId]
-      providerCode = choice.providerCode
-      courseCode = choice.courseCode
-      locationName = choice.locationName
     }
+
+    let existingChoice = applicationData.choices[choiceId]
+    let choice = applicationData.temporaryChoices[choiceId]
+    let providerCode = choice.provider ? regExp.exec(choice.provider)[1] : existingChoice.providerCode
+    let courseCode = choice.course ? regExp.exec(choice.course)[1] : existingChoice.courseCode
+    let locationName = choice.location ? choice.location : existingChoice.locationName
 
     applicationData.choices[choiceId] = {
       providerCode,

@@ -4,8 +4,6 @@
 {% if course %}
   {% if dualRunning %}
     {% set title = "Choose how to apply" %}
-  {% elif ineligible %}
-    {% set title = "Please continue your application using UCAS" %}
   {% else %}
     {% set title = "Apply for this course" %}
   {% endif %}
@@ -19,17 +17,6 @@
   {{ govukBackLink({
     "href": "javascript: window.history.go(-1)"
   }) }}
-{% endblock %}
-
-{% block pageBanner %}
-  {% if ineligible %}
-    {{ appBanner({
-      classes: "govuk-!-margin-bottom-0",
-      type: "information",
-      html: "<h2 class=\"govuk-heading-s govuk-!-margin-bottom-0\">We’re sorry, but you’re not eligible to use GOV.UK Apply.</h2><p class=\"govuk-body\">The service is still in development, so we have to limit candidate numbers.</p>",
-      iconFallbackText: "Information"
-    }) }}
-  {% endif %}
 {% endblock %}
 
 {% block primary %}
@@ -96,14 +83,6 @@
 
     {{ govukButton({
       text: "Continue"
-    }) }}
-  {% elif course and ineligible %}
-    {{ courseCodeHtml | safe }}
-
-    {{ govukButton({
-      text: "Apply through UCAS",
-      href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do",
-      isStartButton: true
     }) }}
   {% elif course and not dualRunning %}
     <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>

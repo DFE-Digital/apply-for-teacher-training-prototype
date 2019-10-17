@@ -16,6 +16,7 @@ router.all([
   next()
 })
 
+require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)
 require('./routes/application')(router)

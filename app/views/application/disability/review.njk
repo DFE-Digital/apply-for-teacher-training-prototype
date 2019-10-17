@@ -1,0 +1,21 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/disabilities/review" %}
+{% set title = "Training with a disability" %}
+{% set review = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review/disability.njk" %}
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
+{% endblock %}

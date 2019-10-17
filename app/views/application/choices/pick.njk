@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set providerOnDfEApply = true %}
-{% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply for this course on UCAS" %}
+{% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply on UCAS" %}
 {% set formaction = paths.next %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set editing = applicationValue(["choices", choiceId]) %}
@@ -29,18 +29,24 @@
     }) }}
   {% else %}
     <p>For now, the Department for Education’s Apply for teacher training service is limited to just a few training providers.</p>
-    <p>The course you’ve chosen is not signed up to the new service. This means you must apply for it using UCAS.</p>
+    <p>The training provider you’ve chosen is not signed up to the new service. This means you must apply for it using UCAS.</p>
     <p>You’ll need to register with UCAS before you can apply.</p>
 
     {# <p>Visit Get into Teaching for <a href="/apply/get-into-teaching">guidance on applying for teacher training through UCAS</a>. #}
+
+    <p class="govuk-body">You can also:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></li>
+      <li><a href="/apply/providers">Check the list of training providers</a> signed up to Apply for teacher training</li>
+    </ul>
+
+    <hr class="govuk-section-break govuk-section-break--l">
 
     <p>
       <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a>
     </p>
 
-    <p class="govuk-body govuk-!-font-weight-bold">You can also:</p>
-    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
-    <p class="govuk-body"><a href="/apply/providers">Check the list of training providers</a> signed up to Apply for teacher training</p>
+    <p>or</p>
 
     <p class="govuk-body">
       <a href="{{ applicationPath }}" class="govuk-button govuk-button--secondary">Return to your application</a>

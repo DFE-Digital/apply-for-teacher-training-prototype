@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Before you begin" %}
+{% set title = "Please give us your email address" %}
 {% set formaction = "/account/check-email/create-account" %}
 {% set isSignedOut = true %}
 
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">Please give us your email address so that you can save and return to your application.</p>
+  <p class="govuk-body-l">You'll then be able to save and return to your application.</p>
 
   {{ govukInput({
     label: {

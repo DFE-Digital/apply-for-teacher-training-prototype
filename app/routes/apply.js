@@ -19,45 +19,18 @@ module.exports = router => {
     const courseCode = req.query.course
 
     // Count this so we can act on the data
-    // eg We show them a course that's only on UCAS the second time around
-    req.session.data['visits_from_find'] = req.session.data['visits_from_find'] + 1
+    // eg We show them a course that’s only on UCAS the second time around
+    req.session.data.visits_from_find = req.session.data.visits_from_find + 1
 
     res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
   })
 
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
-
     const route = req.session.data['apply-route']
     if (route === 'ucas') {
-      res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do')
+      res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do') // Go to UCAS
     } else {
-      res.redirect(`/apply/${providerCode}/${courseCode}/eligibility`)
-    }
-  })
-
-  router.get('/apply/:providerCode/:courseCode/eligibility', (req, res) => {
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
-
-    res.render('apply/eligibility', {
-      formaction: `/apply/${providerCode}/${courseCode}/eligibility/answer`,
-      providerCode,
-      courseCode
-    })
-  })
-
-  router.get('/apply/:providerCode/:courseCode/eligibility/answer', (req, res) => {
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
-
-    const eligibileNationality = req.session.data['eligibile-nationality']
-    const eligibileEquivalencies = req.session.data['eligibile-equivalencies']
-    if (eligibileNationality === 'no' || eligibileEquivalencies === 'no') {
-      res.redirect(`/apply/${providerCode}/${courseCode}/?ineligible=true`) // Show UCAS apply information
-    } else {
-      res.redirect('/') // Apply for teacher training service
+      res.redirect('/') // Go to Apply
     }
   })
 

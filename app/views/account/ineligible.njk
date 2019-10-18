@@ -1,6 +1,6 @@
 {% extends "_guidance.njk" %}
 
-{% set title = "We’re sorry, but you’re not eligible to use this service" %}
+{% set title = "We’re sorry, but you’re not eligible to use GOV.UK Apply" %}
 {% set isSignedOut = true %}
 {% set hasSecondary = true %}
 
@@ -11,7 +11,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">The service is still in development, so we have to limit candidate numbers. This means you must apply for it using UCAS.</p>
+  <p class="govuk-body">This service is still in development, so we have to limit candidate numbers.</p>
+  <p class="govuk-body govuk-!-font-weight-bold">You can apply for all teacher training courses and providers using UCAS.</p>
   <p class="govuk-body">You’ll need to register with UCAS before you can apply.</p>
   <p><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
 {% endblock %}

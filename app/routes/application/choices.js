@@ -1,4 +1,5 @@
 const journeys = require('../../utils/journeys')
+const providers = require('../../data/providers')
 const utils = require('../../utils')
 
 const pickPaths = (req) => {
@@ -79,46 +80,30 @@ module.exports = router => {
     res.redirect(referrer || paths.next)
   })
 
-  router.post('/application/:applicationId/choices/:choiceId/pick', (req, res) => {
-    const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]
-    const choiceId = req.params.choiceId
-    const temporaryChoice = applicationData.temporaryChoices[choiceId]
-
-    if (temporaryChoice.providerFromFind && temporaryChoice.providerFromFind != "another") {
-      temporaryChoice.provider = temporaryChoice.providerFromFind
-      delete temporaryChoice.providerFromFind
-    }
-
-    res.render(`application/choices/pick`, {
-      paths: pickPaths(req)
-    })
-  })
-
-  router.post('/application/:applicationId/choices/:choiceId/location', (req, res) => {
-    const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]
-    const choiceId = req.params.choiceId
-    const temporaryChoice = applicationData.temporaryChoices[choiceId]
-
-    if (temporaryChoice.courseFromFind && temporaryChoice.courseFromFind != "another") {
-      temporaryChoice.course = temporaryChoice.courseFromFind
-      delete temporaryChoice.courseFromFind
-    }
-
-    res.render(`application/choices/location`, {
-      paths: pickPaths(req)
-    })
-  })
-
   router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {
-    const found = req.body.applications[req.params.applicationId].temporaryChoices[req.params.choiceId].found
+    const data = req.session.data
+    const applicationId = req.params.applicationId
+    const applicationData = data.applications[applicationId]
+    const choiceId = req.params.choiceId
+    const temporaryChoice = applicationData.temporaryChoices[choiceId]
 
-    const paths = (found && found === 'know')
-      ? pickPaths(req)
-      : findPaths(req)
+    if (temporaryChoice.fromFind && temporaryChoice.fromFind == "yes") {
+      let provider = providers[data.course_from_find.providerCode]
+      temporaryChoice.provider = provider.name_and_code
+      temporaryChoice.course = provider.courses[data.course_from_find.courseCode].name_and_code
+      res.redirect(`/application/${applicationId}/choices/${choiceId}/location`)
+    } else if (temporaryChoice.fromFind && temporaryChoice.fromFind == "no") {
+      delete data.course_from_find
+      delete temporaryChoice.fromFind
+      res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
+    } else {
+      const found = temporaryChoice.found
+      const paths = (found && found === 'know')
+        ? pickPaths(req)
+        : findPaths(req)
 
-    res.redirect(paths.next)
+      res.redirect(paths.next)
+    }
   })
 
   router.all('/application/:applicationId/choices/:choiceId/:view', (req, res) => {

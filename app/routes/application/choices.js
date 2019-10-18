@@ -73,9 +73,42 @@ module.exports = router => {
       locationAddress: 'Pavillion Way, Edgware HA8 9YR'
     }
 
+    delete req.session.data.course_from_find
     delete applicationData.temporaryChoices
 
     res.redirect(referrer || paths.next)
+  })
+
+  router.post('/application/:applicationId/choices/:choiceId/pick', (req, res) => {
+    const applicationId = req.params.applicationId
+    const applicationData = req.session.data.applications[applicationId]
+    const choiceId = req.params.choiceId
+    const temporaryChoice = applicationData.temporaryChoices[choiceId]
+
+    if (temporaryChoice.providerFromFind && temporaryChoice.providerFromFind != "another") {
+      temporaryChoice.provider = temporaryChoice.providerFromFind
+      delete temporaryChoice.providerFromFind
+    }
+
+    res.render(`application/choices/pick`, {
+      paths: pickPaths(req)
+    })
+  })
+
+  router.post('/application/:applicationId/choices/:choiceId/location', (req, res) => {
+    const applicationId = req.params.applicationId
+    const applicationData = req.session.data.applications[applicationId]
+    const choiceId = req.params.choiceId
+    const temporaryChoice = applicationData.temporaryChoices[choiceId]
+
+    if (temporaryChoice.courseFromFind && temporaryChoice.courseFromFind != "another") {
+      temporaryChoice.course = temporaryChoice.courseFromFind
+      delete temporaryChoice.courseFromFind
+    }
+
+    res.render(`application/choices/location`, {
+      paths: pickPaths(req)
+    })
   })
 
   router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {

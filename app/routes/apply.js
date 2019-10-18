@@ -22,6 +22,12 @@ module.exports = router => {
     // eg We show them a course that’s only on UCAS the second time around
     req.session.data.visits_from_find = req.session.data.visits_from_find + 1
 
+    // Copy course for reuse once an application is created
+    req.session.data.course_from_find = {
+      providerCode,
+      courseCode
+    }
+
     res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
   })
 

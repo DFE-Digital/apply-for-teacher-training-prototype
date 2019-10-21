@@ -22,20 +22,22 @@ module.exports = router => {
     // eg We show them a course that’s only on UCAS the second time around
     req.session.data.visits_from_find = req.session.data.visits_from_find + 1
 
-    // Copy course for reuse once an application is created
-    req.session.data.course_from_find = {
-      providerCode,
-      courseCode
-    }
-
     res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
   })
 
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {
+    const providerCode = req.params.providerCode
+    const courseCode = req.params.courseCode
     const route = req.session.data['apply-route']
     if (route === 'ucas') {
       res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do') // Go to UCAS
     } else {
+      // Copy course for reuse once an application is created
+      req.session.data.course_from_find = {
+        providerCode,
+        courseCode
+      }
+
       res.redirect('/') // Go to Apply
     }
   })

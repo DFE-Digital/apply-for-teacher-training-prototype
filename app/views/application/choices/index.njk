@@ -19,18 +19,22 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You can apply for up to 3 courses at this stage of your application.</p>
-  <p class="govuk-body">Once you’ve chosen your courses, you’ll be able to tailor your application to suit different courses and training providers.</p>
-  <p class="govuk-body">Bear in mind that not all courses and training providers are signed up to GOV.UK Apply.</p>
-  <p class="govuk-body">If you choose a course that isn’t signed up to the service, you’ll be directed back to UCAS to continue your application.</p>
-
   {% if choices %}
     {% set referrer = applicationPath + "/choices" %}
     {% set review = true %}
     {% include "_includes/review/choices.njk" %}
     {% if choices | length < 3 %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m">Apply for up to 3 courses</h2>
+          <p class="govuk-body">You can apply for up to 3 courses at this stage of your application.</p>
+          {# <p class="govuk-body">Once you’ve chosen your courses, you’ll be able to tailor your application to suit different courses and training providers.</p> #}
+          <p class="govuk-body">Not all courses and training providers are signed up to GOV.UK Apply. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>
+        </div>
+      </div>
+
       {{ govukButton({
-        classes: "govuk-button--secondary",
+        classes: "govuk-button--secondary govuk-!-margin-bottom-9",
         text: "Add another course",
         href: applicationPath + "/choices/add"
       }) }}

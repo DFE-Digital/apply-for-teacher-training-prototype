@@ -9,7 +9,7 @@
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,
-    titleText: loop.index + ". " + provider.name,
+    titleText: provider.name,
     actions: {
       items: [{
         href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,

@@ -32,7 +32,8 @@ module.exports = router => {
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
     var code = createNewApplication(req)
-    res.redirect(`/application/${code}`)
+    req.session.data.applications[code].welcomeFlow = true
+    res.redirect(`/application/${code}/choices/add`)
   })
 
   router.get('/application/start/choice', (req, res) => {
@@ -50,6 +51,7 @@ module.exports = router => {
 
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
+    req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index')
   })
 

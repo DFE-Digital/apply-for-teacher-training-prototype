@@ -8,7 +8,12 @@
   {% set title = "Have you chosen a course to apply to?" %}
 {% endif %}
 {% set formaction = paths.current %}
-{% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
+
+{% block pageNavigation %}
+  {% if not applicationValue('welcomeFlow') %}
+    {{ govukBackLink({ href: paths.back }) }}
+  {% endif %}
+{% endblock %}
 
 {% block primary %}
   {% if hasCourseFromFind %}

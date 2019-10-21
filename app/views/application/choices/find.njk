@@ -10,8 +10,13 @@
   {{ govukButton({
     text: "Start now",
     href: data['find_url'],
-    isStartButton: true
+    isStartButton: true,
+    classes: "govuk-!-margin-bottom-5"
   }) }}
 
-  <p><a href="/application/{{ applicationId }}">Return to your application</a></p>
+  {% if not applicationValue('welcomeFlow') %}
+    <p>
+      <a href="/application/{{ applicationId }}">Return to your application</a>
+    </p>
+  {% endif %}
 {% endblock %}

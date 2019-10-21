@@ -6,15 +6,17 @@
 {% set title = "Course choices" %}
 
 {% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
+  {% if not applicationValue('welcomeFlow') %}
+    {% if referrer %}
+      {{ govukBackLink({
+        href: referrer
+      }) }}
+    {% else %}
+      {{ govukBackLink({
+        href: "/application/" + applicationId,
+        text: "Back to application"
+      }) }}
+    {% endif %}
   {% endif %}
 {% endblock %}
 

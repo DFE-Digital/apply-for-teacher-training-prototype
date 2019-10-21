@@ -26,10 +26,18 @@ module.exports = router => {
   })
 
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {
+    const providerCode = req.params.providerCode
+    const courseCode = req.params.courseCode
     const route = req.session.data['apply-route']
     if (route === 'ucas') {
       res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do') // Go to UCAS
     } else {
+      // Copy course for reuse once an application is created
+      req.session.data.course_from_find = {
+        providerCode,
+        courseCode
+      }
+
       res.redirect('/') // Go to Apply
     }
   })

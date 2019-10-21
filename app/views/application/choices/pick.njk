@@ -6,6 +6,7 @@
 {% else %}
   {% set providerCode = applicationValue(["temporaryChoices", choiceId, "provider"]) | providerCode %}
 {% endif %}
+{% set provider = providers[providerCode] %}
 {% set providerOnDfEApply = false if providerCode == 'B20' else true %}
 {% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply on UCAS" %}
 {% set formaction = paths.next %}
@@ -19,10 +20,32 @@
 
 {% block primary %}
   {% if providerOnDfEApply %}
-    <div class="govuk-form-group">
-      <label for="courses-{{ choiceId }}-course" class="govuk-label">Enter course name and code</label>
-      <div id="course-autocomplete-container"></div>
-    </div>
+    {% set courseAutocompleteHtml %}
+      <div class="govuk-form-group">
+        <label for="courses-{{ choiceId }}-course" class="govuk-label">Enter course name and code</label>
+        <div id="course-autocomplete-container"></div>
+      </div>
+    {% endset %}
+
+    {% if data.course_from_find and providerCode == data.course_from_find.providerCode %}
+      {% set course = provider.courses[data.course_from_find.courseCode] %}
+
+      {{ govukRadios({
+        items: [{
+          text: course.name_and_code
+        }, {
+          divider: "or"
+        }, {
+          text: "Another course",
+          value: "another",
+          conditional: {
+            html: courseAutocompleteHtml
+          }
+        }]
+      } | decorateApplicationAttributes(["temporaryChoices", choiceId, "courseFromFind"])) }}
+    {% else %}
+      {{ courseAutocompleteHtml | safe }}
+    {% endif %}
 
     {{ govukButton({
       text: "Continue"
@@ -31,8 +54,6 @@
     <p>For now, the Department for Education’s Apply for teacher training service is limited to just a few training providers.</p>
     <p>The training provider you’ve chosen is not signed up to the new service. This means you must apply for it using UCAS.</p>
     <p>You’ll need to register with UCAS before you can apply.</p>
-
-    {# <p>Visit Get into Teaching for <a href="/apply/get-into-teaching">guidance on applying for teacher training through UCAS</a>. #}
 
     <p class="govuk-body">You can also:</p>
     <ul class="govuk-list govuk-list--bullet">
@@ -52,7 +73,6 @@
   {% if providerOnDfEApply %}
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>
-      {% set provider = providers[providerCode] %}
       {% if editing %}
         {% set defaultValue = provider.courses[applicationValue(["choices", choiceId, "courseCode"])].name_and_code %}
 

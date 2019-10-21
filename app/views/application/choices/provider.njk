@@ -5,10 +5,32 @@
 {% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
 {% block primary %}
-  <div class="govuk-form-group">
-    <label for="courses-{{ choiceId }}-provider" class="govuk-label">Enter training provider name</label>
-    <div id="provider-autocomplete-container"></div>
-  </div>
+  {% set providerAutocompleteHTML %}
+    <div class="govuk-form-group">
+      <label for="courses-{{ choiceId }}-provider" class="govuk-label">Enter training provider name</label>
+      <div id="provider-autocomplete-container"></div>
+    </div>
+  {% endset %}
+
+  {% if data.course_from_find and providers[data.course_from_find.providerCode] %}
+    {% set provider = providers[data.course_from_find.providerCode] %}
+
+    {{ govukRadios({
+      items: [{
+        text: provider.name_and_code
+      }, {
+        divider: "or"
+      }, {
+        text: "Another provider",
+        value: "another",
+        conditional: {
+          html: providerAutocompleteHTML
+        }
+      }]
+    } | decorateApplicationAttributes(["temporaryChoices", choiceId, "providerFromFind"])) }}
+  {% else %}
+    {{ providerAutocompleteHTML | safe }}
+  {% endif %}
 
   {{ govukButton({
     text: "Continue"
@@ -19,7 +41,6 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete({
-      defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "provider"]) }}',
       name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][provider]",
       minLength: 2,
       element: document.querySelector('#provider-autocomplete-container'),

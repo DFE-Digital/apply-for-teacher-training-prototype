@@ -62,10 +62,13 @@
     </ul>
     <hr class="govuk-section-break govuk-section-break--l">
     <p class="govuk-body"><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
-    <p class="govuk-body">or</p>
-    <p class="govuk-body">
-      <a href="{{ applicationPath }}" class="govuk-button govuk-button--secondary">Return to your application</a>
-    </p>
+
+    {% if not applicationValue('welcomeFlow') %}
+      <p class="govuk-body">or</p>
+      <p class="govuk-body">
+        <a href="{{ applicationPath }}" class="govuk-button govuk-button--secondary">Return to your application</a>
+      </p>
+    {% endif %}
   {% endif %}
 {% endblock %}
 

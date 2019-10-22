@@ -117,7 +117,7 @@
   #}
   {% if action != "edit" and not referrer %}
     {{ govukButton({
-      text: "Add another role",
+      text: "Save and add another role",
       classes: "govuk-button--secondary",
       attributes: {
         formaction: applicationPath + "/school-experience/add/role?update=" + id
@@ -128,6 +128,6 @@
   {% endif %}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Save and continue"
   }) }}
 {% endblock %}

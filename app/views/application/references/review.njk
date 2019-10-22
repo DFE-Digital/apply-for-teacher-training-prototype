@@ -20,6 +20,9 @@
       href: "/application/" + applicationId + "/references/" + ("type" if data.flags.referee_types else "details") + "/second?referrer=" + referrer,
       classes: "govuk-button--secondary"
     }) }}
+
+    <p>or</p>
+
     {{ govukButton({
       text: "Continue without adding second referee",
       href: applicationPath

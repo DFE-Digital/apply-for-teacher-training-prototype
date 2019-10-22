@@ -1,0 +1,13 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Are you sure you want to withdraw your application?" %}
+
+{% block primary %}
+  <p class="govuk-body">We’ll inform your training provider and send you an email confirming the withdrawal. This action can not be undone</p>
+  <p class="govuk-body">You will not be penalised for withdrawing an application, but you will not be able to <mark>[consequences]</mark></p>
+  {{ govukButton({
+    classes: "govuk-button--warning",
+    text: "Withdraw application"
+  }) }}
+{% endblock %}

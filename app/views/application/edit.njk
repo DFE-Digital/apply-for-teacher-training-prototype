@@ -1,0 +1,12 @@
+{% extends "_form.njk" %}
+
+{% set title = "Edit your application" %}
+
+{% block primary %}
+  <p class="govuk-body">You have 5 working days after submission to edit sections within your application, or your choice of provider, course or training location.</p>
+  <p class="govuk-body">Your application can only be opened for editing once.</p>
+  <p class="govuk-body">Similarly, if you have applied to more than one provider, you can change each of the applications only once.</p>
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

@@ -13,8 +13,11 @@
       items: [{
         href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
         text: "Delete choice"
-      }]
-    } if review == true,
+      } if review == true, {
+        href: applicationPath + "/" + item.id + "/withdraw?referrer=" + referrer,
+        text: "Withdraw choice"
+      } if canWithdraw == true and item.status != "withdrawn"]
+    } if review or withdraw,
     html: courseHtml
   }) }}
 {% endfor %}

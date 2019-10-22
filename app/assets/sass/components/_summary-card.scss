@@ -55,7 +55,7 @@
 
   .app-summary-card__body {
     @include govuk-font($size: 19);
-    padding: govuk-spacing(2) govuk-spacing(3);
+    padding: 0 govuk-spacing(3);
   }
 
   // Summary list component overrides

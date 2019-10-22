@@ -7,7 +7,7 @@
   {% if hasSubmittedApplications() %}
     {{ govukBreadcrumbs({
       items: [{
-        text: "Applications",
+        text: "Application dashboard",
         href: "/applications"
       }, {
         text: title | safe
@@ -17,6 +17,10 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukWarningText({
+    text: "You’ve edited your application but your changes haven’t been submitted yet",
+    iconFallbackText: "Warning"
+  }) if applicationValue(["status"]) == "amending" }}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",

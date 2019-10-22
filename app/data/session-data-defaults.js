@@ -16,9 +16,9 @@ module.exports = {
   disabled_account: {
     email: 'janina.doe@example.com'
   },
-  disabled_applications: {
+  applications: {
     12345: {
-      status: 'started',
+      status: 'submitted',
       choices: {
         ABCDE: {
           courseCode: '38G9',
@@ -32,6 +32,13 @@ module.exports = {
           locationName: 'Academy name',
           locationAddress: 'Road, City, SW2 1AA'
         }
+      },
+      completed: {
+        choices: ['true'],
+        degree: ['true'],
+        'other-qualifications': ['true'],
+        'school-experience': ['true'],
+        'work-history': ['true']
       },
       candidate: {
         'given-name': 'Janina',
@@ -59,6 +66,9 @@ module.exports = {
           level2: 'Glasgow',
           country: 'United Kingdom'
         }
+      },
+      disability: {
+        disclose: 'No'
       },
       degree: {
         kq19m: {

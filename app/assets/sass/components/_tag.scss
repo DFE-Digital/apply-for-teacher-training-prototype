@@ -1,5 +1,31 @@
-.app-tag-empty {
-  background: govuk-colour('white');
-  border: 3px solid $govuk-border-colour;
-  color: govuk-colour('dark-grey');
+@mixin tag($color: "blue", $filled: true) {
+  white-space: nowrap;
+
+  @if $filled {
+    background-color: govuk-colour($color);
+    color: govuk-colour("white");
+  } @else {
+    background-color: govuk-colour("white");
+    border: 3px solid govuk-colour($color);
+    color: govuk-colour($color);
+    margin-top: -3px;
+    margin-bottom: -3px;
+  }
+}
+
+.app-tag--offer {
+  @include tag("turquoise", $filled: false);
+}
+
+.app-tag--accepted {
+  @include tag("turquoise");
+}
+
+.app-tag--declined {
+  @include tag("orange");
+}
+
+.app-tag--rejected,
+.app-tag--withdrawn {
+  @include tag($color: "red");
 }

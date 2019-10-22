@@ -20,8 +20,12 @@ function createNewApplication (req) {
  */
 module.exports = router => {
   router.all('/applications', (req, res) => {
+    const { state } = req.query
+
     if (utils.hasSubmittedApplications(req)) {
-      res.render('applications/index')
+      res.render('applications/index', {
+        state
+      })
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
     } else {
@@ -98,6 +102,8 @@ module.exports = router => {
   require('./application/personal-statement')(router)
   require('./application/references')(router)
   require('./application/equality-monitoring')(router)
+  require('./application/edit')(router)
+  require('./application/withdraw')(router)
 
   // Change status of an application to submitted
   router.all('/application/:applicationId/confirmation', (req, res) => {

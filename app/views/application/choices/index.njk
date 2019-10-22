@@ -3,7 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set choices = applicationValue("choices") %}
-{% set title = "Course choices" %}
+{% set title = "Course choices review" %}
 
 {% block pageNavigation %}
   {% if not applicationValue('welcomeFlow') %}
@@ -28,7 +28,11 @@
     {% if choices | length < 3 %}
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
+          <p class="govuk-body">Your answers have been saved. You can also edit and add to them.</p>
+          <p class="govuk-body">When you’re happy with this section, tick the box to mark it as completed.</p>
+          <p class="govuk-body">You can still return to edit it before you submit.</p>
           <h2 class="govuk-heading-m">Apply for up to 3 courses</h2>
+
           <p class="govuk-body">You can apply for up to 3 courses at this stage of your application.</p>
           {# <p class="govuk-body">Once you’ve chosen your courses, you’ll be able to tailor your application to suit different courses and training providers.</p> #}
           <p class="govuk-body">Not all courses and training providers are signed up to GOV.UK Apply. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>

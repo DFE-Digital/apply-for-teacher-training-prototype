@@ -17,4 +17,9 @@ module.exports = router => {
       action: req.params.action
     })
   })
+
+  // Account created
+  router.get('/account/account-created', (req, res) => {
+    res.render('account/account-created')
+  })
 }

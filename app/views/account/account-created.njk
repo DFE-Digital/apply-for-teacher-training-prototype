@@ -1,0 +1,15 @@
+{% extends "_content.njk" %}
+
+{% set title = "Account created" %}
+
+{% block primary %}
+  <p>You have successfully created an account on GOV.UK Apply for teacher training.</p>
+  <p>Your information will be saved as you enter it. You can leave and return to the service as often as you like to complete the application in your own time.</p>
+  <p>For security, each time you return to the service you’ll be asked to sign in using your email.</p>
+
+  <hr class="govuk-section-break govuk-section-break--m">
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/start"
+  }) }}
+{% endblock %}

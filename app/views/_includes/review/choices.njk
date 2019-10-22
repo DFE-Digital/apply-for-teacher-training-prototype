@@ -1,4 +1,3 @@
-{% set choices = applicationValue("choices") | toArray %}
 {% for choice in choices %}
   {% set provider = providers[choice.providerCode] %}
   {% set course = provider.courses[choice.courseCode] %}

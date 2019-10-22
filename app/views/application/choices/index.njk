@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set choices = applicationValue("choices") %}
+{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Course choices" %}
 
 {% block pageNavigation %}

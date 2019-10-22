@@ -1,5 +1,6 @@
 {% extends "_content-wide.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
+{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Review your application" %}
 {% set review = true %}
 {% set referrer = applicationPath + "/review" %}
@@ -13,7 +14,7 @@
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-  {% if applicationValue(["choices"]) %}
+  {% if choices %}
     {% include "_includes/review/choices.njk" %}
   {% else %}
     {{ govukButton({

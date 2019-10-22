@@ -2,9 +2,11 @@
 
 {% set title = "Your application" %}
 {% set hasSecondary = true %}
+{% set referrer = "/applications" %}
 
 {% block primary %}
   {% for applicationId, application in data.applications %}
+    {% set applicationPath = "/application/" + applicationId %}
     {% if application.status == "submitted" %}
       <p>You submitted your application on {{ "now" | date("d MMMM yyyy") }}. Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
 
@@ -15,7 +17,7 @@
           iconFallbackText: "Warning"
         }) }} #}
 
-        <p>You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to withdraw your application and resubmit it to a different course or provider. You’ll be able to edit your application before you resubmit.</p>
+        <p>You have 5 working days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to withdraw your application and resubmit it to a different course or provider. You’ll be able to edit your application before you resubmit.</p>
         <p>You can only resubmit each application once.</p>
 
         {{ govukButton({
@@ -24,52 +26,14 @@
         }) }}
       </div>
       {% else %}
-        <p>
-          <a href="/application/{{ applicationId }}/submitted">View your application</a>
-        </p>
+        <p><a href="/application/{{ applicationId }}/submitted">View your application</a></p>
       {% endif %}
 
       <hr class="govuk-section-break govuk-section-break--l">
 
       <h2 class="govuk-heading-l">Courses you’ve applied to</h2>
-
-      {% for id, choice in application.choices %}
-        {% set provider = providers[choice.providerCode] %}
-        {% set course = provider.courses[choice.courseCode] %}
-        <h3 class="govuk-heading-m">{{ provider.name }}</h3>
-        {{ govukSummaryList({
-          classes: "app-summary",
-          rows: [{
-            key: {
-              text: "Course"
-            },
-            value: {
-              html: "<a href=\"#\">" + course.name_and_code + "</a>"
-            }
-          }, {
-            key: {
-              text: "Description"
-            },
-            value: {
-              html: course.description
-            }
-          }, {
-            key: {
-              text: "Location"
-            },
-            value: {
-              html: c.locationName + "<br />" + c.locationAddress
-            }
-          }, {
-            key: {
-              text: "Provider response"
-            },
-            value: {
-              html: "No response yet"
-            }
-          }]
-        }) }}
-      {% endfor %}
+      {% set choices = application.choices | toArray %}
+      {% include "_includes/review/choices.njk" %}
 
       <hr class="govuk-section-break govuk-section-break--m">
 

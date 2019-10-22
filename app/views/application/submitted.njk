@@ -1,5 +1,6 @@
 {% extends "_content-wide.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
+{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Your submitted application" %}
 {% set referrer = applicationPath + "/review" %}
 {% set review = false %}

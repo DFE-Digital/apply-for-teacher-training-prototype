@@ -32,6 +32,40 @@ const findPaths = (req) => {
   return journeys.nextAndBackPaths(paths, req)
 }
 
+const temporaryAndSavedChoices = (req) => {
+  const data = req.session.data
+  const applicationData = data.applications[req.params.applicationId]
+  const choiceId = req.params.choiceId
+
+  if (typeof applicationData.choices === 'undefined') {
+    applicationData.choices = {}
+  }
+
+  let existingChoice = applicationData.choices[choiceId]
+  let temporaryChoice = applicationData.temporaryChoices[choiceId]
+
+  return [existingChoice, temporaryChoice]
+}
+
+const temporaryChoice = (req) => {
+  return temporaryAndSavedChoices(req)[1]
+}
+
+const providerCode = (req) => {
+  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  return temporaryChoice.provider ? /\(([^)]+)\)$/.exec(temporaryChoice.provider)[1] : existingChoice.providerCode
+}
+
+const courseCode = (req) => {
+  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  return temporaryChoice.course ? /\(([^)]+)\)$/.exec(temporaryChoice.course)[1] : existingChoice.courseCode
+}
+
+const locationName = (req) => {
+  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  return temporaryChoice.location ? temporaryChoice.location : existingChoice.locationName
+}
+
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const applicationId = req.params.applicationId
@@ -54,35 +88,46 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
   })
 
-  router.post('/application/:applicationId/choices/:choiceId/create', (req, res) => {
-    const applicationId = req.params.applicationId
-    const applicationData = req.session.data.applications[applicationId]
+  router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
+    const applicationData = req.session.data.applications[req.params.applicationId]
     const choiceId = req.params.choiceId
     const paths = pickPaths(req)
-    const regExp = /\(([^)]+)\)$/
     const referrer = req.params.referrer
 
-    if (typeof applicationData.choices === 'undefined') {
-      applicationData.choices = {}
-    }
-
-    let existingChoice = applicationData.choices[choiceId]
-    let choice = applicationData.temporaryChoices[choiceId]
-    let providerCode = choice.provider ? regExp.exec(choice.provider)[1] : existingChoice.providerCode
-    let courseCode = choice.course ? regExp.exec(choice.course)[1] : existingChoice.courseCode
-    let locationName = choice.location ? choice.location : existingChoice.locationName
-
     applicationData.choices[choiceId] = {
-      providerCode,
-      courseCode,
-      locationName,
-      locationAddress: 'Pavillion Way, Edgware HA8 9YR'
+      providerCode: providerCode(req),
+      courseCode: courseCode(req),
+      locationName: locationName(req),
+      locationAddress: '123 Address, Town, HA8 9YR'
     }
 
     delete req.session.data.course_from_find
     delete applicationData.temporaryChoices
 
     res.redirect(referrer || paths.next)
+  })
+
+  router.post('/application/:applicationId/choices/:choiceId/location', (req, res) => {
+    const paths = pickPaths(req)
+    let locations = providers[providerCode(req)].courses[courseCode(req)].locations
+
+    if (locations.length == 1) {
+      temporaryChoice(req).location = locations[0].name
+      res.redirect(paths.next)
+    } else {
+      let locationOptions = locations.map(function(loc) {
+                              let l = {}
+                              l.text = loc.name
+                              l.hint = { text: loc.address }
+                              l.label = { classes: 'govuk-label--s'}
+                              return l
+                            });
+
+      res.render(`application/choices/location`, {
+        locationOptions,
+        paths: paths
+      })
+    }
   })
 
   router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {

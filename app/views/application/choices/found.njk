@@ -3,7 +3,7 @@
 {% if hasCourseFromFind %}
   {% set provider = providers[data.course_from_find.providerCode] %}
   {% set course = provider.courses[data.course_from_find.courseCode] %}
-  {% set title = "You’ve selected a course" %}
+  {% set title = "You selected a course" %}
 {% else %}
   {% set title = "Have you chosen a course to apply to?" %}
 {% endif %}
@@ -17,8 +17,20 @@
 
 {% block primary %}
   {% if hasCourseFromFind %}
+    {% set courseHtml %}
+      <a href="{{ data.find_url }}/course/T92/X130" target="_blank" class="govuk-!-font-weight-bold" style="text-decoration: none">
+        <span class="govuk-!-font-size-19">
+          {{ provider.name }}
+        </span><br>
+        <span class="search-result-link-name govuk-!-font-size-24" style="text-decoration: underline">
+          {{ course.name_and_code }}
+        </span>
+      </a>
+    {% endset %}
+
+
     {{ govukInsetText({
-        html: "<span class='govuk-!-font-weight-bold'>" + provider.name_and_code + "</span><br />" + course.name_and_code,
+        html: courseHtml,
         classes: "govuk-!-margin-top-0"
     }) }}
 

@@ -38,7 +38,7 @@ module.exports = router => {
         courseCode
       }
 
-      res.redirect('/') // Go to Apply
+      res.redirect('/account/eligibility') // Go to Apply
     }
   })
 

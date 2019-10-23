@@ -3,6 +3,7 @@
 {% set title = "Application dashboard" %}
 {% set hasSecondary = true %}
 {% set referrer = "/applications" %}
+{% set state = state or "isAfterAmendPeriod" %}
 
 {% block primary %}
   {% for applicationId, application in data.applications %}
@@ -12,16 +13,17 @@
     <p class="govuk-body"><a href="/application/{{ applicationId }}/submitted">View your application</a></p>
 
     {# Amending an application #}
-    {% if state == "isWithinAmendPeriod" %}
+    {% if state == "isWithinAmendPeriod" and application.status != "amended" %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
       {% if application.status == "submitted" %}
         <p class="govuk-body">You have 5 working days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+
         {{ govukButton({
           text: "Edit your application",
           href: "/application/" + applicationId + "/edit"
         }) }}
       {% elif application.status == "amending" %}
-        <p class="govuk-body">You have 2 working days remaining (until {{ 52 | nowPlusDays("d MMMM yyyy")}}) to edit your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 2 working days remaining (until {{ 52 | nowPlusDays("d MMMM yyyy")}}) to submit edits to your application or change your choice of provider, course or training location."</p>
         {{ govukButton({
           text: "Continue editing application",
           href: "/application/" + applicationId
@@ -32,7 +34,8 @@
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
     {% set choices = application.choices | toArray %}
-    {% set canWithdraw = (state != "isWithinAmendPeriod") %}
+    {# Can only withdraw choice(s) after amend period #}
+    {% set canWithdraw = (state == "isAfterAmendPeriod") %}
     {% include "_includes/review/choices.njk" %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>

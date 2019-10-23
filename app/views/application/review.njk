@@ -66,6 +66,8 @@
   {% include "_includes/review/personal-statements.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {# You can’t change your referees once application has been submitted #}
+  {% set review = true if not hasSubmittedApplications() %}
   {% include "_includes/review/references.njk" %}
 
   {{ govukButton({

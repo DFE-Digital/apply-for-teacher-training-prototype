@@ -18,7 +18,7 @@ module.exports = {
   },
   applications: {
     12345: {
-      status: 'submitted',
+      status: 'started',
       choices: {
         ABCDE: {
           courseCode: '38G9',

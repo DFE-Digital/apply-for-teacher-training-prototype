@@ -17,7 +17,7 @@
         href: applicationPath + "/" + item.id + "/withdraw?referrer=" + referrer,
         text: "Withdraw choice"
       } if canWithdraw == true and item.status != "withdrawn"]
-    } if review or withdraw,
+    } if review or canWithdraw,
     html: courseHtml
   }) }}
 {% endfor %}

@@ -41,8 +41,12 @@ const temporaryAndSavedChoices = (req) => {
     applicationData.choices = {}
   }
 
-  let existingChoice = applicationData.choices[choiceId]
-  let temporaryChoice = applicationData.temporaryChoices[choiceId]
+  if (typeof applicationData.temporaryChoices === 'undefined') {
+    applicationData.temporaryChoices = {}
+  }
+
+  let existingChoice = applicationData.choices[choiceId] || {}
+  let temporaryChoice = applicationData.temporaryChoices[choiceId] || {}
 
   return [existingChoice, temporaryChoice]
 }
@@ -107,7 +111,7 @@ module.exports = router => {
     res.redirect(referrer || paths.next)
   })
 
-  router.post('/application/:applicationId/choices/:choiceId/location', (req, res) => {
+  router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {
     const paths = pickPaths(req)
     let locations = providers[providerCode(req)].courses[courseCode(req)].locations
 

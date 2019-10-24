@@ -16,14 +16,14 @@
     {% if state == "isWithinAmendPeriod" and application.status != "amended" %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
       {% if application.status == "submitted" %}
-        <p class="govuk-body">You have 5 working days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
 
         {{ govukButton({
           text: "Edit your application",
           href: "/application/" + applicationId + "/edit"
         }) }}
       {% elif application.status == "amending" %}
-        <p class="govuk-body">You have 2 working days remaining (until {{ 52 | nowPlusDays("d MMMM yyyy")}}) to submit edits to your application or change your choice of provider, course or training location."</p>
+        <p class="govuk-body">You have 2 working days remaining (until {{ 52 | nowPlusDays("d MMMM yyyy")}}) to submit edits to your application or change your choice of provider, course or training location.</p>
         {{ govukButton({
           text: "Continue editing application",
           href: "/application/" + applicationId

@@ -1,6 +1,7 @@
 {% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
 {% set choices = applicationValue("choices") | toArray %}
 {% set title = "Review your application" %}
 {% set review = true %}
@@ -16,6 +17,10 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukWarningText({
+    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once.",
+    iconFallbackText: "Warning"
+  }) if status == "amending" }}
   <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
   {% if choices %}
     {% include "_includes/review/choices.njk" %}

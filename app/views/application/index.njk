@@ -19,7 +19,7 @@
     {{ govukBreadcrumbs({
       items: [{
         text: "Application dashboard",
-        href: "/applications"
+        href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending")
       }, {
         text: title | safe
       }]

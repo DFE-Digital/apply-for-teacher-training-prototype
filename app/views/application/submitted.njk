@@ -1,5 +1,7 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
 {% set choices = applicationValue("choices") | toArray %}
 {% set title = "Your submitted application" %}
 {% set referrer = applicationPath + "/review" %}
@@ -7,7 +9,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/applications",
+    href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending"),
     text: "Back to application dashboard"
   }) }}
 {% endblock %}

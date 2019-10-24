@@ -1,6 +1,13 @@
 {% extends "_content.njk" %}
 
-{% set title = "Application submitted" %}
+{% set status = applicationValue(["status"]) %}
+{% if status == "submitted" %}
+  {% set title = "Application successfully submitted" %}
+  {% set nextHref = "/applications?state=isWithinAmendPeriod" %}
+{% elif status == "amended" %}
+  {% set title = "Application successfully resubmitted" %}
+  {% set nextHref = "/applications" %}
+{% endif %}
 
 {% block content %}
   {% set panelText %}
@@ -9,7 +16,7 @@
 
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
-    titleText: "Application successfully submitted",
+    titleText: title,
     html: panelText
   }) }}
 
@@ -22,7 +29,7 @@
       <h2 class="govuk-heading-m">Interview</h2>
       <p class="govuk-body">If your training provider decides to offer you an interview, they will get in touch directly via email to organise a date and give you all the information you need.</p>
       <h2 class="govuk-heading-m">Track, edit or withdraw</h2>
-      <p class="govuk-body">To make changes to a submitted application, return to your <a href="/applications">Application dashboard.</a> </p>
+      <p class="govuk-body">To make changes to a submitted application, return to your <a href="{{ nextHref }}">Application dashboard.</a> </p>
     </div>
   </div>
 {% endblock %}

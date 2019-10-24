@@ -23,7 +23,7 @@
           href: "/application/" + applicationId + "/edit"
         }) }}
       {% elif application.status == "amending" %}
-        <p class="govuk-body">You have 2 working days remaining (until {{ 2 | nowPlusDays("d MMMM yyyy")}}) to submit edits to your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 days remaining (until {{ 5 | nowPlusDays("d MMMM yyyy")}}) to submit the edits to your application or change your choice of provider, course or training location.</p>
         {{ govukButton({
           text: "Continue editing application",
           href: "/application/" + applicationId

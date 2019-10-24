@@ -13,6 +13,7 @@
   }
 }
 
+// Course decision statuses
 .app-tag--offer {
   @include tag("turquoise", $filled: false);
 }
@@ -28,4 +29,14 @@
 .app-tag--rejected,
 .app-tag--withdrawn {
   @include tag($color: "red");
+}
+
+// Section completion statuses
+.app-tag--unamended {
+  @include tag("light-grey", $filled: true);
+  color: govuk-colour("dark-grey");
+}
+
+.app-tag--submitted {
+  @include tag("dark-grey", $filled: true);
 }

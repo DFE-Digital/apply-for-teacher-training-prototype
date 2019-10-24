@@ -5,10 +5,12 @@
   {% set title = "Your application" %}
   {% set tagClass = "app-tag--completed" %}
   {% set tagText = "Completed" %}
+  {% set reviewText = "Check your answers before submitting" %}
 {% elif status == "amending" %}
   {% set title = "Edit your application" %}
   {% set tagClass = "app-tag--unamended" %}
   {% set tagText = "Unedited" %}
+  {% set reviewText = "Check your changes before submitting" %}
 {% endif %}
 {% set hasSecondary = true %}
 
@@ -52,8 +54,8 @@
       href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"])),
       id: "personal-details",
       tag: {
-        classes: "app-tag--amended",
-        text: "Edited"
+        classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
+        text: "Edited" if status == "amending" else "Completed"
       } if applicationValue("candidate")
     }, {
       text: "Contact details",
@@ -188,7 +190,7 @@
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Check your answers before submitting",
+      text: reviewText,
       href: applicationPath + "/review",
       id: "review"
     }]

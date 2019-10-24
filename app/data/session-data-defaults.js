@@ -13,12 +13,12 @@ module.exports = {
     nationality: true,
     referee_types: true
   },
-  disabled_account: {
+  account: {
     email: 'janina.doe@example.com'
   },
   applications: {
     12345: {
-      status: 'submitted',
+      status: 'started',
       choices: {
         ABCDE: {
           courseCode: '3DMD',

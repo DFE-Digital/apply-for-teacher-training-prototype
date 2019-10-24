@@ -29,7 +29,7 @@
 
 {% block primary %}
   {{ govukWarningText({
-    text: "You have 5 days remaining to resubmit your edited application",
+    text: "You have 5 days remaining (until " + (5 | nowPlusDays("d MMMM yyyy")) + ") to resubmit your edited application",
     iconFallbackText: "Warning"
   }) if status == "amending" }}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>

@@ -5,6 +5,8 @@
 {% set title = "Review your application" %}
 {% set review = true %}
 {% set referrer = applicationPath + "/review" %}
+{# Skip equality monitoring questions if amending application #}
+{% set nextHref = applicationPath + ("/submit" if applicationValue(["status"]) == "amending" else "/equality-monitoring") %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -72,6 +74,6 @@
 
   {{ govukButton({
     text: "Continue",
-    href: applicationPath + "/equality-monitoring"
+    href: nextHref
   }) }}
 {% endblock %}

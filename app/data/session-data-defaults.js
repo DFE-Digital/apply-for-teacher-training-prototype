@@ -21,7 +21,7 @@ module.exports = {
       status: 'submitted',
       choices: {
         ABCDE: {
-          courseCode: '38G9',
+          courseCode: '3DMD',
           providerCode: 'G50',
           locationName: 'School name',
           locationAddress: 'Road, City, SW1 1AA'

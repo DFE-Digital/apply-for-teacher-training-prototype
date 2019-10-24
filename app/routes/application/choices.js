@@ -70,6 +70,17 @@ const locationName = (req) => {
   return temporaryChoice.location ? temporaryChoice.location : existingChoice.locationName
 }
 
+const locationAddress = (req) => {
+  let locations = providers[providerCode(req)].courses[courseCode(req)].locations
+  let location = locations.filter(l => { return l.name === locationName(req) })
+  return location[0].address || ""
+}
+
+const singleLocationCourse = (req) => {
+  let locations = providers[providerCode(req)].courses[courseCode(req)].locations
+  return locations.length == 1
+}
+
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const applicationId = req.params.applicationId
@@ -96,19 +107,19 @@ module.exports = router => {
     const applicationData = req.session.data.applications[req.params.applicationId]
     const choiceId = req.params.choiceId
     const paths = pickPaths(req)
-    const referrer = req.params.referrer
 
     applicationData.choices[choiceId] = {
       providerCode: providerCode(req),
       courseCode: courseCode(req),
       locationName: locationName(req),
-      locationAddress: '123 Address, Town, HA8 9YR'
+      locationAddress: locationAddress(req),
+      singleLocationCourse: singleLocationCourse(req)
     }
 
     delete req.session.data.course_from_find
     delete applicationData.temporaryChoices
 
-    res.redirect(referrer || paths.next)
+    res.redirect(req.params.referrer || paths.next)
   })
 
   router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {

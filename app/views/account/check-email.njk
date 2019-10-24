@@ -4,8 +4,8 @@
 {% set isSignedOut = true %}
 
 {% block primary %}
-  <p class="govuk-body-l"><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent an email to {{ data.account.email }}</a>.</p>
+  <p><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent an email to {{ data.account.email or 'your-email@domain.com' }}</a>.</p>
 
-  <p class="govuk-body-l">Click on the link to confirm your {{ "new " if action == "change-email-address" }}address and return to this service.</p>
-  <p class="govuk-body-l">If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/create-account">try again</a>.</p>
+  <p>Click on the link to confirm your {{ "new " if action == "change-email-address" }}address and return to this service.</p>
+  <p>If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/create-account">try again</a>.</p>
 {% endblock %}

@@ -2,17 +2,16 @@ const NotifyClient = require('notifications-node-client').NotifyClient
 const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 
 // Emails will only send if the email address has been whitelisted
-const sendEmail = (req, template) => {
+const sendEmail = (req, template, personalisation) => {
   const email = req.session.data.account && req.session.data.account.email
+  personalisation = personalisation || {}
+  personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
+
   if (email) {
     notify.sendEmail(
       template,
       email,
-      {
-        personalisation: {
-          url: req.get('origin') || `${req.protocol}://${req.get('host')}`
-        }
-      }
+      { personalisation }
     )
   }
 }
@@ -55,5 +54,13 @@ module.exports = router => {
   router.post('/send-email/sign-in', (req, res) => {
     sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
     res.redirect('/account/check-email/sign-in')
+  })
+
+  router.post('/send-email/:applicationId/application-submitted', (req, res) => {
+    const applicationId = req.params.applicationId
+    sendEmail(req, '99a20df5-564d-4612-810e-3788edf7285e', {
+      reference: applicationId
+    })
+    res.redirect(`/application/${ applicationId }/confirmation`)
   })
 }

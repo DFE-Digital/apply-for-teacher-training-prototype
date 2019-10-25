@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Submit application" %}
-{% set formaction = applicationPath + "/confirmation" %}
+{% set formaction = "/send-email/" + applicationId + "/application-submitted" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

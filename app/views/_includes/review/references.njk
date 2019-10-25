@@ -2,7 +2,11 @@
 {% set references = applicationValue(["referees"]) %}
 
 {% if references %}
-  <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
+  {% if applicationValue(["status"]) == "amending" %}
+    <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t supply a reference.</p>
+  {% else %}
+    <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
+  {% endif %}
   {% set references = references | toArray %}
   {% for item in references %}
     {% set refereeHtml %}

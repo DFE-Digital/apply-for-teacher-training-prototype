@@ -1,91 +1,58 @@
 {% extends "_content.njk" %}
 
-{% set title = "Your application" %}
+{% set title = "Application dashboard" %}
 {% set hasSecondary = true %}
+{% set referrer = "/applications" %}
+{% set state = state or "isAfterAmendPeriod" %}
+{# Can only withdraw choice(s) after amend period #}
+{% set canWithdraw = (state == "isAfterAmendPeriod") %}
 
 {% block primary %}
   {% for applicationId, application in data.applications %}
-    {% if application.status == "submitted" %}
-      <p>You submitted your application on {{ "now" | date("d MMMM yyyy") }}. Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
+    {% set applicationPath = "/application/" + applicationId %}
+    {# Submitted application #}
+    <p class="govuk-body">You submitted your application on {{ "now" | date("d MMMM yyyy") }}. Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
+    <p class="govuk-body"><a href="/application/{{ applicationId }}/submitted">View your application</a></p>
 
-      {% if true or (notAlreadyEdited and within1WeekOfSubmitting) %}
-      <div class="govuk-inset-text">
-        {# {{ govukWarningText({
-          text: "You’ve edited your application but your changes haven’t been submitted yet",
-          iconFallbackText: "Warning"
-        }) }} #}
-
-        <p>You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to withdraw your application and resubmit it to a different course or provider. You’ll be able to edit your application before you resubmit.</p>
-        <p>You can only resubmit each application once.</p>
+    {# Amending an application #}
+    {% if state == "isWithinAmendPeriod" and application.status != "amended" %}
+      <div class="govuk-inset-text govuk-!-margin-top-0">
+      {% if application.status == "submitted" %}
+        <p class="govuk-body">You have 5 days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
 
         {{ govukButton({
           text: "Edit your application",
+          href: "/application/" + applicationId + "/edit"
+        }) }}
+      {% elif application.status == "amending" %}
+        <p class="govuk-body">You have 5 days remaining (until {{ 5 | nowPlusDays("d MMMM yyyy")}}) to submit the edits to your application or change your choice of provider, course or training location.</p>
+        {{ govukButton({
+          text: "Continue editing application",
           href: "/application/" + applicationId
         }) }}
-      </div>
-      {% else %}
-        <p>
-          <a href="/application/{{ applicationId }}/submitted">View your application</a>
-        </p>
       {% endif %}
-
-      <hr class="govuk-section-break govuk-section-break--l">
-
-      <h2 class="govuk-heading-l">Courses you’ve applied to</h2>
-
-      {% for id, choice in application.choices %}
-        {% set provider = providers[choice.providerCode] %}
-        {% set course = provider.courses[choice.courseCode] %}
-        <h3 class="govuk-heading-m">{{ provider.name }}</h3>
-        {{ govukSummaryList({
-          classes: "app-summary",
-          rows: [{
-            key: {
-              text: "Course"
-            },
-            value: {
-              html: "<a href=\"#\">" + course.name_and_code + "</a>"
-            }
-          }, {
-            key: {
-              text: "Description"
-            },
-            value: {
-              html: course.description
-            }
-          }, {
-            key: {
-              text: "Location"
-            },
-            value: {
-              html: c.locationName + "<br />" + c.locationAddress
-            }
-          }, {
-            key: {
-              text: "Provider response"
-            },
-            value: {
-              html: "No response yet"
-            }
-          }]
-        }) }}
-      {% endfor %}
-
-      <hr class="govuk-section-break govuk-section-break--m">
-
-      <h2 class="govuk-heading-l">Your references</h2>
-      <p>We’ve contacted your references.</p>
-      <ul class="govuk-list">
-      {% for id, referee in application.referees %}
-        <li>{{ referee.name }} has not yet responded</li>
-        {# Examples:
-        [name] has responded
-        [name] has been sent a reminder email
-        [name] has declined to give a reference
-        [name] has failed to respond before the 10-day deadline #}
-      {% endfor %}
-      </ul>
+      </div>
     {% endif %}
+
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+    {% if canWithdraw %}
+      <p class="govuk-body"><mark>[You can withdraw one or more application(s) at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.]</mark></p>
+    {% endif %}
+    {% set choices = application.choices | toArray %}
+    {% include "_includes/review/choices.njk" %}
+
+    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+    <p>We’ve contacted your references.</p>
+    <ul class="govuk-list">
+    {% for id, referee in application.referees %}
+      <li>{{ referee.name }} has not yet responded</li>
+      {# Examples:
+      [name] has responded
+      [name] has been sent a reminder email
+      [name] has declined to give a reference
+      [name] has failed to respond before the 10-day deadline #}
+    {% endfor %}
+    </ul>
   {% endfor %}
 {% endblock %}
 

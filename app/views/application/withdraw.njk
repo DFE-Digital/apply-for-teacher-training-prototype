@@ -1,0 +1,14 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Withdrawing your application" %}
+
+{% block primary %}
+  <p class="govuk-body">You can also withdraw one or more application(s) at any point during the application process. You won’t be penalised, but after the 5-day editing period is up, you can’t substitute a different provider.</p>
+  <p class="govuk-body">To withdraw, please email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+  <p class="govuk-body"> You can learn more  about applying to different providers after this first round of applications by visiting <a href="https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training/applying-through-ucas-teacher-training/">Get into Teaching</a>.</p>
+  {# govukButton({
+    classes: "govuk-button--warning",
+    text: "Withdraw application"
+  }) #}
+{% endblock %}

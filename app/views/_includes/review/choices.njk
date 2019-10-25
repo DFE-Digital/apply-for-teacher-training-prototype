@@ -1,4 +1,3 @@
-{% set choices = applicationValue("choices") | toArray %}
 {% for choice in choices %}
   {% set provider = providers[choice.providerCode] %}
   {% set course = provider.courses[choice.courseCode] %}
@@ -14,8 +13,11 @@
       items: [{
         href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
         text: "Delete choice"
-      }]
-    } if review == true,
+      } if review == true, {
+        href: applicationPath + "/" + item.id + "/withdraw?referrer=" + referrer,
+        text: "Withdraw"
+      } if canWithdraw == true and item.status != "withdrawn"]
+    } if review or canWithdraw,
     html: courseHtml
   }) }}
 {% endfor %}

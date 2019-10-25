@@ -1,13 +1,16 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
+{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Your submitted application" %}
 {% set referrer = applicationPath + "/review" %}
 {% set review = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/applications",
-    text: "Back to your applications"
+    href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending"),
+    text: "Back to application dashboard"
   }) }}
 {% endblock %}
 
@@ -24,7 +27,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
   {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>

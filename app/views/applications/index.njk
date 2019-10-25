@@ -4,6 +4,8 @@
 {% set hasSecondary = true %}
 {% set referrer = "/applications" %}
 {% set state = state or "isAfterAmendPeriod" %}
+{# Can only withdraw choice(s) after amend period #}
+{% set canWithdraw = (state == "isAfterAmendPeriod") %}
 
 {% block primary %}
   {% for applicationId, application in data.applications %}
@@ -33,9 +35,10 @@
     {% endif %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+    {% if canWithdraw %}
+      <p class="govuk-body"><mark>[You can withdraw one or more application(s) at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.]</mark></p>
+    {% endif %}
     {% set choices = application.choices | toArray %}
-    {# Can only withdraw choice(s) after amend period #}
-    {% set canWithdraw = (state == "isAfterAmendPeriod") %}
     {% include "_includes/review/choices.njk" %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>

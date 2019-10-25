@@ -46,4 +46,9 @@ module.exports = router => {
     sendEmail(req, 'd19c241f-73f9-45da-a9cc-6613f9b3d2da')
     res.redirect('/account/check-email/create-account')
   })
+
+  router.post('/send-email/sign-in', (req, res) => {
+    sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
+    res.redirect('/account/check-email/sign-in')
+  })
 }

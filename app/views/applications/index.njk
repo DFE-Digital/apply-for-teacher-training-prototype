@@ -35,11 +35,13 @@
     {% endif %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
-    {% if canWithdraw %}
-      <p class="govuk-body"><mark>[You can withdraw one or more application(s) at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.]</mark></p>
-    {% endif %}
     {% set choices = application.choices | toArray %}
     {% include "_includes/review/choices.njk" %}
+    {% if canWithdraw %}
+      <h3 class="govuk-heading-s">Withdrawing an application</h3>
+      <p class="govuk-body">You can withdraw an application from your chosen training providers at any point during the application process. You won’t be penalised, but at this stage, you can’t substitute a different provider.</p>
+      <p class="govuk-body"> You can learn more  about applying to different providers after this first round of applications by visiting <a href=\"https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training/applying-through-ucas-teacher-training/\">Get into Teaching.</a></p>
+    {% endif %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
     <p>We’ve contacted your references.</p>

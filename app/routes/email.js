@@ -3,14 +3,14 @@ const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 
 // Emails will only send if the email address has been whitelisted
 const sendEmail = (req, template) => {
-  const email = req.session.data.account.email
+  const email = req.session.data.account && req.session.data.account.email
   if (email) {
     notify.sendEmail(
       template,
       email,
       {
         personalisation: {
-          url: req.get('origin')
+          url: req.get('origin') || `${req.protocol}://${req.get('host')}`
         }
       }
     )
@@ -39,6 +39,11 @@ module.exports = router => {
 
   // Account created
   router.get('/account/account-created', (req, res) => {
+    if (!req.session.data.welcomeEmailSent) {
+      sendEmail(req, '8aa601b6-9985-471e-bd28-5fe0697820e5')
+    }
+
+    req.session.data.welcomeEmailSent = true
     res.render('account/account-created')
   })
 

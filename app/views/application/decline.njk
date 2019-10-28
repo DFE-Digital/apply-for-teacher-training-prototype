@@ -1,0 +1,17 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Decline offer" %}
+
+{% block primary %}
+  <p class="govuk-body">{{ provider.name }} has offered you a place on the <strong>{{ course.name_and_code }}</strong> course, with the following conditions:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Completion of a fitness to teach check</li>
+    <li>Disclosure and barring service check</li>
+  </ul>
+  <h2 class="govuk-heading-m">Next steps</h2>
+  <p class="govuk-body"><mark>Guidance on next steps.</mark></p>
+  {{ govukButton({
+    text: "Decline offer"
+  }) }}
+{% endblock %}

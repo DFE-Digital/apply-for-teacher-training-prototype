@@ -113,7 +113,7 @@ module.exports = router => {
   require('./application/equality-monitoring')(router)
   require('./application/submit')(router)
   require('./application/edit')(router)
-  require('./application/withdraw')(router)
+  require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {

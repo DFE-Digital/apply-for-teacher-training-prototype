@@ -34,7 +34,7 @@
       </div>
     {% endif %}
 
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
     {% set choices = application.choices | toArray %}
     {% include "_includes/review/choices.njk" %}
     {% if canWithdraw %}

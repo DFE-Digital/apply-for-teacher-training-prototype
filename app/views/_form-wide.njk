@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% block content %}
-<form action="{{ formaction | default('#') }}" method="post">
+<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
   {% set legendHtml %}
     {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
     {{ title | safe }}

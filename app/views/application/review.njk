@@ -1,8 +1,13 @@
 {% extends "_content-wide.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
+{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Review your application" %}
 {% set review = true %}
 {% set referrer = applicationPath + "/review" %}
+{# Skip equality monitoring questions if amending application #}
+{% set nextHref = applicationPath + ("/submit" if applicationValue(["status"]) == "amending" else "/equality-monitoring") %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -12,8 +17,12 @@
 {% endblock %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-  {% if applicationValue(["choices"]) %}
+  {{ govukWarningText({
+    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once.",
+    iconFallbackText: "Warning"
+  }) if status == "amending" }}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+  {% if choices %}
     {% include "_includes/review/choices.njk" %}
   {% else %}
     {{ govukButton({
@@ -64,10 +73,12 @@
   {% include "_includes/review/personal-statements.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {# You can’t change your referees once application has been submitted #}
+  {% set review = true if not hasSubmittedApplications() %}
   {% include "_includes/review/references.njk" %}
 
   {{ govukButton({
     text: "Continue",
-    href: applicationPath + "/equality-monitoring"
+    href: nextHref
   }) }}
 {% endblock %}

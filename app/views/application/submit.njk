@@ -1,5 +1,7 @@
 {% extends "_form.njk" %}
+
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
 {% set title = "Submit application" %}
 {% set formaction = "/send-email/" + applicationId + "/application-submitted" %}
 

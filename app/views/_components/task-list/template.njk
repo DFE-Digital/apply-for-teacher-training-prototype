@@ -3,12 +3,12 @@
   {% if item %}
     <li class="app-task-list__item{%- if item.classes %} {{ item.classes }}{% endif %}">
     {% if item.href %}
-      <a class="app-task-list__task-name" href="{{ item.href }}"{% if item.completed %} aria-describedby="{{ item.id }}-completed"{% endif %}>{{ item.text | safe }}</a>
+      <a class="app-task-list__task-name" href="{{ item.href }}"{% if item.completed %} aria-describedby="{{ item.id }}-tag"{% endif %}>{{ item.text | safe }}</a>
     {% else %}
       <span class="app-task-list__task-name">{{ item.text | safe }}</span>
     {% endif %}
-    {% if item.completed %}
-      <strong class="govuk-tag app-task-list__task-completed" id="{{ item.id }}-completed">Completed</strong>
+    {% if item.tag %}
+      <strong class="govuk-tag{% if item.tag.classes %} {{ item.tag.classes }}{% endif %}" id="{{ item.id }}-tag">{{ item.tag.text }}</strong>
     {% endif %}
   {% endif %}
   </li>

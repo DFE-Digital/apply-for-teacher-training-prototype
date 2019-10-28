@@ -1,6 +1,11 @@
 {% extends "_content.njk" %}
 
-{% set title = "Application submitted" %}
+{% set status = applicationValue(["status"]) %}
+{% if status == "submitted" %}
+  {% set title = "Application successfully submitted" %}
+{% elif status == "amended" %}
+  {% set title = "Application successfully resubmitted" %}
+{% endif %}
 
 {% block content %}
   {% set panelText %}
@@ -9,20 +14,25 @@
 
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
-    titleText: "Application successfully submitted",
+    titleText: title,
     html: panelText
   }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-m">What happens next</h2>
-      <p class="govuk-body">You will receive an email from the Apply for postgraduate teacher training service to confirm the successful submission of your application.</p>
+      <p class="govuk-body">The Apply for teacher training service will send you an email to confirm the successful submission of your application.</p>
       <h2 class="govuk-heading-m">References</h2>
       <p class="govuk-body"> We will also contact your referees to ask for your references. When we receive them, we will send them to your training provider. Your provider then has 40 working days to respond to your application.</p>
       <h2 class="govuk-heading-m">Interview</h2>
       <p class="govuk-body">If your training provider decides to offer you an interview, they will get in touch directly via email to organise a date and give you all the information you need.</p>
+{% if status == "submitted" %}
       <h2 class="govuk-heading-m">Track, edit or withdraw</h2>
-      <p class="govuk-body">To make changes to a submitted application, return to the <a href="/applications">applications dashboard.</a> </p>
+      <p class="govuk-body">You have 5 working days to make changes to a submitted application. To edit, return to your <a href="/applications?state=isWithinAmendPeriod">Application dashboard</a>.</p>
+{% elif status == "amended" %}
+      <h2 class="govuk-heading-m">Track or withdraw</h2>
+      <p class="govuk-body">Visit your <a href="/applications">Application dashboard</a> to check the status of an application, or withdraw a course choice. You can update your contact details, but you won’t be able to edit other sections.</p>
+{% endif %}
     </div>
   </div>
 {% endblock %}

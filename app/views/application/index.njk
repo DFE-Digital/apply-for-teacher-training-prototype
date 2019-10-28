@@ -1,14 +1,25 @@
 {% extends "_content.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Your application" %}
+{% set status = applicationValue(["status"]) %}
+{% if status == "started" %}
+  {% set title = "Your application" %}
+  {% set tagClass = "app-tag--completed" %}
+  {% set tagText = "Completed" %}
+  {% set reviewText = "Check your answers before submitting" %}
+{% elif status == "amending" %}
+  {% set title = "Edit your application" %}
+  {% set tagClass = "app-tag--unamended" %}
+  {% set tagText = "Unedited" %}
+  {% set reviewText = "Check your changes before submitting" %}
+{% endif %}
 {% set hasSecondary = true %}
 
 {% block pageNavigation %}
   {% if hasSubmittedApplications() %}
     {{ govukBreadcrumbs({
       items: [{
-        text: "Applications",
-        href: "/applications"
+        text: "Application dashboard",
+        href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending")
       }, {
         text: title | safe
       }]
@@ -17,14 +28,21 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukWarningText({
+    text: "You have 5 days remaining (until " + (5 | nowPlusDays("d MMMM yyyy")) + ") to resubmit your edited application",
+    iconFallbackText: "Warning"
+  }) if status == "amending" }}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Courses",
+      text: "Course choices",
       href: applicationPath + "/choices",
       id: "personal-details",
-      completed: applicationValue(["completed", "choices"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["completed", "choices"])
     }]
   }) }}
 
@@ -35,27 +53,42 @@
       text: "Personal details",
       href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"])),
       id: "personal-details",
-      completed: applicationValue("candidate")
+      tag: {
+        classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
+        text: "Edited" if status == "amending" else "Completed"
+      } if applicationValue("candidate")
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
       id: "contact-details",
-      completed: applicationValue(["contact-details", "address"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["contact-details", "address"])
     }, {
       text: "Work history",
       href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history")),
       id: "work-history",
-      completed: applicationValue(["completed", "work-history"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["completed", "work-history"])
     }, {
       text: "Volunteering with children and young people",
       href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience")),
       id: "school-experience",
-      completed: applicationValue(["completed", "school-experience"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["completed", "school-experience"])
     }, {
      text: "Training with a disability",
      href: applicationPath + "/disability" + ("/review" if applicationValue("disability")),
      id: "disability",
-     completed: applicationValue("disability")
+     tag: {
+       classes: tagClass,
+       text: tagText
+     } if applicationValue("disability")
    }]
   }) }}
 
@@ -66,27 +99,42 @@
       text: "Degree",
       href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "/add"),
       id: "degree",
-      completed: applicationValue(["completed", "degree"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["completed", "degree"])
     }, {
       text: "Maths GCSE or equivalent",
       href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"])),
       id: "maths-gcse",
-      completed: applicationValue(["gcse", "maths"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["gcse", "maths"])
     }, {
       text: "English GCSE or equivalent",
       href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"])),
       id: "english-gcse",
-      completed: applicationValue(["gcse", "english"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["gcse", "english"])
     }, {
       text: "Science GCSE or equivalent",
       href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"])),
       id: "science-gcse",
-      completed: applicationValue(["gcse", "science"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["gcse", "science"])
     } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Other relevant academic and non-academic qualifications",
       href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
       id: "other-qualifications",
-      completed: applicationValue(["completed", "other-qualifications"])
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["completed", "other-qualifications"])
     }]
   }) }}
 
@@ -109,7 +157,10 @@
         text: provider.name,
         href: applicationPath + "/personal-statement/" + provider.code + "/review",
         id: "personal-statement-" + provider.code,
-        completed: applicationValue(["personal-statements", provider.code])
+        tag: {
+          classes: tagClass,
+          text: tagText
+        } if applicationValue(["personal-statements", provider.code])
       }) %}
     {% endfor %}
     {{ appTaskList({
@@ -119,13 +170,19 @@
   {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% if status == "amending" %}
+    <p class="govuk-body">You can’t change your choice of referees after you’ve submitted your application.</p>
+  {% endif %}
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Referees",
       href: applicationPath + "/references" + ("/review" if applicationValue(["referees"])),
       id: "references",
-      completed: applicationValue(["referees"])
+      tag: {
+        classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
+        text: "Completed" if status == "started" else ("Submitted" if status == "amending")
+      } if applicationValue(["referees"])
     }]
   }) }}
 
@@ -133,10 +190,9 @@
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Check your answers before submitting",
+      text: reviewText,
       href: applicationPath + "/review",
-      id: "review",
-      completed: applicationValue("review")
+      id: "review"
     }]
   }) }}
 {% endblock %}

@@ -22,11 +22,13 @@
           {{ _actionLink(params.actions.items[0]) | indent(12) | trim }}
         {% else %}
           <ul class="app-summary-card__actions-list">
-            {% for action in params.actions.items %}
+          {% for action in params.actions.items %}
+            {% if action %}
               <li class="app-summary-card__actions-list-item">
                 {{ _actionLink(action) | indent(18) | trim }}
               </li>
-            {% endfor %}
+            {% endif %}
+          {% endfor %}
           </ul>
         {% endif %}
       </div>

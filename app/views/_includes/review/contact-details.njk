@@ -43,7 +43,7 @@
           text: "Change",
           visuallyHiddenText: "phone number"
         }]
-      } if review == true
+      } if canAmend
     }, {
       key: {
         text: "Email address"
@@ -57,7 +57,7 @@
           text: "Change",
           visuallyHiddenText: "email"
         }]
-      } if review == true
+      } if canAmend
     }, {
       key: {
         text: "Address"
@@ -71,7 +71,7 @@
           text: "Change",
           visuallyHiddenText: "address"
         }]
-      } if review == true
+      } if canAmend
     }]
   }) }}
 {% endset %}

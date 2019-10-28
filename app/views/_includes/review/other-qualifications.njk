@@ -16,7 +16,7 @@
           href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
           text: "Delete qualification"
         }]
-      } if review == true,
+      } if canAmend,
       html: qualificationHtml
     }) }}
   {% endfor %}

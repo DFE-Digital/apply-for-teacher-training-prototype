@@ -9,10 +9,36 @@ function createNewApplication (req) {
   }
 
   if (typeof data.applications[code] === 'undefined') {
-    data.applications[code] = { status: 'started' }
+    data.applications[code] = {
+      status: 'started'
+    }
   }
 
   return code
+}
+
+function createDummyApplication (status, decisions) {
+  return {
+    application: {
+      status: status,
+      choices: {
+        ABCDE: {
+          courseCode: '3DMD',
+          providerCode: 'G50',
+          locationName: 'School name',
+          locationAddress: 'Road, City, SW1 1AA',
+          status: (decisions) ? decisions[0] : false
+        },
+        ZYXWV: {
+          courseCode: 'Q3X1',
+          providerCode: 'B78',
+          locationName: 'Academy name',
+          locationAddress: 'Road, City, SW2 1AA',
+          status: (decisions) ? decisions[1] : false
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -20,12 +46,58 @@ function createNewApplication (req) {
  */
 module.exports = router => {
   router.all('/applications', (req, res) => {
-    const { state } = req.query
+    const { phase, state } = req.query
+    // const data = req.session.data
 
-    if (utils.hasSubmittedApplications(req)) {
+    // Mock different application states if we ask for a state
+    let applications
+    switch (state) {
+      case 'submitted': {
+        applications = createDummyApplication('submitted')
+        break
+      }
+
+      case 'amending': {
+        applications = createDummyApplication('amending')
+        break
+      }
+
+      case 'amended': {
+        applications = createDummyApplication('amended')
+        break
+      }
+
+      case 'pending-decisions': {
+        applications = createDummyApplication('submitted', ['pending', 'pending'])
+        break
+      }
+
+      case 'outstanding-decision': {
+        applications = createDummyApplication('submitted', ['offer', 'pending'])
+        break
+      }
+
+      case 'has-decisions': {
+        applications = createDummyApplication('submitted', ['offer', 'rejected'])
+        break
+      }
+
+      case 'has-accepted': {
+        applications = createDummyApplication('submitted', ['accepted', 'rejected'])
+        break
+      }
+    }
+
+    // Populate session data with stateful application
+    req.session.data.applications = applications
+
+    if (phase && state) {
       res.render('applications/index', {
+        phase,
         state
       })
+    } else if (utils.hasSubmittedApplications(req)) {
+      res.render('applications/index')
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
     } else {

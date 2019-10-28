@@ -4,12 +4,13 @@
 {% set status = applicationValue(["status"]) %}
 {% set choices = applicationValue("choices") | toArray %}
 {% set title = "Your submitted application" %}
+{% set showChoiceStatus = false %}
+{% set canAmend = false %}
 {% set referrer = applicationPath + "/review" %}
-{% set review = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending"),
+    href: "/applications" + ("?phase=amend" if status == "amending"),
     text: "Back to application dashboard"
   }) }}
 {% endblock %}

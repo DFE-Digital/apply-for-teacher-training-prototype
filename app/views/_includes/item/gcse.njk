@@ -27,7 +27,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review == true
+    } if canAmend
   } if missing == true, {
     key: {
       text: "Qualification"
@@ -41,7 +41,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review == true
+    } if canAmend
   } if missing != true, {
     key: {
       text: "Year awarded"
@@ -55,7 +55,7 @@
         text: "Change",
         visuallyHiddenText: "year"
       }]
-    } if review == true
+    } if canAmend
   } if missing != true, {
     key: {
       text: "Grade"
@@ -69,6 +69,6 @@
         text: "Change",
         visuallyHiddenText: "grade"
       }]
-    } if review == true
+    } if canAmend
   } if missing != true]
 }) }}

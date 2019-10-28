@@ -39,7 +39,7 @@
                 href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
                 text: "Please explain break"
               }]
-            } if review == true
+            } if canAmend
           }) }}
         {% endif %}
       {% endif %}
@@ -59,7 +59,7 @@
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
               text: "Delete entry"
             }]
-          } if review == true,
+          } if canAmend,
           html: breakHtml
         }) }}
       {% else %}
@@ -82,7 +82,7 @@
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
               text: "Delete entry"
             }]
-          } if review == true,
+          } if canAmend,
           html: jobHtml
         }) }}
       {% endif %}
@@ -108,7 +108,7 @@
                 href: applicationPath + "/work-history/add/job?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
                 text: "Add another job"
               }]
-            } if review == true
+            } if canAmend
           }) }}
         {% endif %}
       {% endif %}

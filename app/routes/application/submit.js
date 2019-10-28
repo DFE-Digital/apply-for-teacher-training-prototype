@@ -1,5 +1,5 @@
 module.exports = router => {
-  router.post('/application/:applicationId/submit', (req, res) => {
+  router.all('/application/:applicationId/confirmation', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const status = applicationData.status
@@ -12,6 +12,6 @@ module.exports = router => {
       applicationData.status = 'amended'
     }
 
-    res.redirect(`/application/${applicationId}/confirmation`)
+    res.render('application/confirmation')
   })
 }

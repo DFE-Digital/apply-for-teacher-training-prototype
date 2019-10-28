@@ -1,11 +1,16 @@
 {% extends "_content.njk" %}
 
-{% set title = "Check your email" %}
+{% set title = "Check your email to sign in" if action == "sign-in" else "Check your email" %}
 {% set isSignedOut = true %}
 
 {% block primary %}
-  <p><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent an email to {{ data.account.email or 'your-email@domain.com' }}</a>.</p>
+  {% if action == "sign-in"%}
+    <p><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent a sign in link to {{ data.account.email or 'your-email@domain.com' }}</a>.</p>
 
-  <p>Click on the link to confirm your {{ "new " if action == "change-email-address" }}address and return to this service.</p>
-  <p>If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/create-account">try again</a>.</p>
+    <p>If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/sign-in">try again</a>.</p>
+  {% else %}
+    <p><a class="app-hidden-link" href="/email/confirm-address/{{ action }}">We’ve sent an email to {{ data.account.email or 'your-email@domain.com' }}</a>.</p>
+    <p>Click on the link to confirm your {{ "new " if action == "change-email-address" }}address and return to this service.</p>
+    <p>If our email doesn’t arrive within 5 minutes, check your spam and trash folder, or <a href="/account/create-account">try again</a>.</p>
+  {% endif %}
 {% endblock %}

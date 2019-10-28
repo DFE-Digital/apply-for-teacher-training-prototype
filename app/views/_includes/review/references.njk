@@ -21,7 +21,7 @@
           href: applicationPath + "/referees/" + item.id + "/delete?referrer=" + referrer,
           text: "Delete referee"
         }]
-      } if review == true,
+      } if canAmend,
       html: refereeHtml
     }) }}
   {% endfor %}

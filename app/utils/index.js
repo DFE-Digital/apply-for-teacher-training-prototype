@@ -1,7 +1,8 @@
 const querystring = require('querystring')
 
 const applicationData = (req) => {
-  return req.session.data.applications[req.params.applicationId]
+  const applicationId = req.query.applicationId || req.params.applicationId
+  return req.session.data.applications[applicationId]
 }
 
 const capitaliseFirstLetter = str => {

@@ -13,7 +13,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   }, {
     key: {
       text: "Email"
@@ -27,7 +27,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   }, {
     key: {
       text: "Reference type"
@@ -41,7 +41,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   } if data.flags.referee_types, {
     key: {
       text: "Relationship"
@@ -55,6 +55,6 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   }]
 }) }}

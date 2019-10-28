@@ -1,7 +1,9 @@
+{% set appStatus = "submitted" if application.status == "amended" else application.status %}
+{% set status = item.status or appStatus %}
 {% set statusHtml %}
   {{ govukTag({
-    classes: "app-tag--" + item.status,
-    text: item.status | capitalize
+    classes: "app-tag--" + status,
+    text: status | capitalize
   }) }}
 {% endset %}
 {{ govukSummaryList({
@@ -19,7 +21,7 @@
         text: "Change",
         visuallyHiddenText: "course"
       }]
-    } if review == true
+    } if canAmend
   }, {
     key: {
       text: "Location"
@@ -33,7 +35,7 @@
         text: "Change",
         visuallyHiddenText: "course location"
       }]
-    } if review == true and not item.singleLocationCourse
+    } if canAmend and not item.singleLocationCourse
   }, {
     key: {
       text: "Status"
@@ -41,5 +43,5 @@
     value: {
       html: statusHtml
     }
-  } if item.status and state != "isWithinAmendPeriod"]
+  } if (status and status != "amending") and showChoiceStatus]
 }) }}

@@ -56,7 +56,7 @@
           text: "Change",
           visuallyHiddenText: "name"
         }]
-      } if review
+      } if canAmend
     }, {
       key: {
         text: "Date of birth"
@@ -70,7 +70,7 @@
           text: "Change",
           visuallyHiddenText: "date of birth"
         }]
-      } if review
+      } if canAmend
     }, {
       key: {
         text: "Nationality"
@@ -84,7 +84,7 @@
           text: "Change",
           visuallyHiddenText: "nationality"
         }]
-      } if review
+      } if canAmend
     } if data.flags.nationality, {
       key: {
         text: "Residency status"
@@ -98,7 +98,7 @@
           text: "Change",
           visuallyHiddenText: "residency status"
         }]
-      } if review
+      } if canAmend
     } if residencyStatus, {
       key: {
         text: "Is English your main language?"
@@ -112,7 +112,7 @@
           text: "Change",
           visuallyHiddenText: "if English is your main language"
         }]
-      } if review
+      } if canAmend
     }, {
       key: {
         text: "Other languages spoken"
@@ -126,7 +126,7 @@
           text: "Change",
           visuallyHiddenText: "other languages"
         }]
-      } if review
+      } if canAmend
     } if applicationValue(["candidate", "language-skills", "other"]), {
       key: {
         text: "English language qualifications and other languages spoken"
@@ -140,7 +140,7 @@
           text: "Change",
           visuallyHiddenText: "english languages qualifications"
         }]
-      } if review
+      } if canAmend
     } if applicationValue(["candidate", "language-skills", "english-qualifications"])]
   }) }}
 {% endset %}

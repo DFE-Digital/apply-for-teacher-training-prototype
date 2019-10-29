@@ -1,7 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
-{% set parent = provider.name %}
+{% set formaction = referrer or "/application/" + applicationId + "/interview/review" %}
 {% set title = "Interview preferences" %}
 
 {% block pageNavigation %}
@@ -34,7 +33,7 @@
     maxwords: 150,
     threshold: 75,
     rows: 6
-  } | decorateApplicationAttributes(["personal-statements", providerCode, "interview"])) }}
+  } | decorateApplicationAttributes(["interview"])) }}
 
   {{ govukButton({
     text: "Save and continue"

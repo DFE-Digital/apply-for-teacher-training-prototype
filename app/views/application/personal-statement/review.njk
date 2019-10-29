@@ -1,9 +1,8 @@
 {% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set referrer = applicationPath + "/personal-statement/" + providerCode + "/review" %}
-{% set parent = provider.name %}
-{% set title = "Personal statement and interview" %}
+{% set referrer = applicationPath + "/personal-statement/review" %}
+{% set title = "Why do you want to be a teacher?" %}
 {% set review = true %}
 
 {% block pageNavigation %}
@@ -14,7 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% if applicationValue(["personal-statements", providerCode, "vocation"]) and applicationValue(["personal-statements", providerCode, "subject-knowledge"]) %}
+  {% if applicationValue(["personal-statement"]) %}
     <p class="govuk-body govuk-!-font-weight-bold">Before you submit your application:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>proofread your answer carefully for spelling and grammar</li>
@@ -22,14 +21,7 @@
       <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
     </ul>
   {% endif %}
-  {% set item = applicationValue(["personal-statements", providerCode]) %}
-  {% set statementHtml %}
-    {% include "_includes/item/personal-statement.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: statementHtml
-  }) }}
+  {% include "_includes/review/personal-statement.njk" %}
 
   {{ govukButton({
     text: "Continue",

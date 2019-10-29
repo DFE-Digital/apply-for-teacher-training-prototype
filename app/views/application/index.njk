@@ -139,35 +139,34 @@
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement and interview</h2>
-  <p class="govuk-body">You can tailor your personal statement to suit different providers and courses</p>
-  {% set choices = applicationValue("choices") | toArray %}
-  {% if choices | length == 0 %}
-    {{ appTaskList({
-      classes: "govuk-!-margin-bottom-8",
-      items: [{
-        classes: "govuk-hint",
-        text: "Choose a course before adding a personal statement"
-      }]
-    }) }}
-  {% else %}
-    {% set providerItems = [] %}
-    {% for choice in choices %}
-      {% set provider = providers[choice.providerCode] %}
-      {% set items = providerItems.push({
-        text: provider.name,
-        href: applicationPath + "/personal-statement/" + provider.code + "/review",
-        id: "personal-statement-" + provider.code,
-        tag: {
-          classes: tagClass,
-          text: tagText
-        } if applicationValue(["personal-statements", provider.code])
-      }) %}
-    {% endfor %}
-    {{ appTaskList({
-      classes: "govuk-!-margin-bottom-8",
-      items: providerItems
-    }) }}
-  {% endif %}
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Why do you want to be a teacher?",
+      href: applicationPath + "/personal-statement" + ("/review" if applicationValue(["personal-statement"])),
+      id: "personal-statement",
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["personal-statement"])
+    }, {
+      text: "Your knowledge about the subject you want to teach",
+      href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subject-knowledge"])),
+      id: "subject-knowledge",
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["subject-knowledge"])
+    }, {
+      text: "Interview preferences",
+      href: applicationPath + "/interview" + ("/review" if applicationValue(["interview"])),
+      id: "interview",
+      tag: {
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["interview"])
+    }]
+  }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
   {% if status == "amending" %}

@@ -1,0 +1,29 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set interviewHtml %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Interview preferences"
+      },
+      value: {
+        text: (applicationValue(["interview"]) or "Not entered") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/interview?referrer=" + referrer,
+          text: "Change" if applicationValue(["interview"]) else "Add",
+          visuallyHiddenText: "interview preferences"
+        }]
+      } if review == true
+    }]
+  }) }}
+{% endset %}
+
+{% if applicationValue(["interview"]) %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: interviewHtml
+  }) }}
+{% else %}
+  <p class="govuk-body">No interview preferences entered.</p>
+{% endif %}

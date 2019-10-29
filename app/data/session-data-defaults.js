@@ -6,12 +6,12 @@ module.exports = {
   // },
   find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
   flags: {
-    address_lookup: true,
-    automatic_breaks: true,
-    international_address: true,
-    international_qualifications: true,
-    nationality: true,
-    referee_types: true
+    address_lookup: (process.env.MVP !== 'true'),
+    automatic_breaks: process.env.MVP !== 'true',
+    international_address: process.env.MVP !== 'true',
+    international_qualifications: process.env.MVP !== 'true',
+    nationality: process.env.MVP !== 'true',
+    referee_types: process.env.MVP !== 'true'
   },
   account: {
     email: 'janina.doe@example.com'

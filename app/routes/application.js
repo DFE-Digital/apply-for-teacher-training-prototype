@@ -100,6 +100,8 @@ module.exports = router => {
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
+  require('./application/subject-knowledge')(router)
+  require('./application/interview')(router)
   require('./application/references')(router)
   require('./application/equality-monitoring')(router)
   require('./application/submit')(router)

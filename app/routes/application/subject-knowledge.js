@@ -2,11 +2,11 @@
  * Application: Personal statement routes
  */
 module.exports = router => {
-  router.get('/application/:applicationId/personal-statement/:view', (req, res) => {
+  router.get('/application/:applicationId/subject-knowledge/:view', (req, res) => {
     const referrer = req.query.referrer
     const view = req.params.view
 
-    res.render(`application/personal-statement/${view}`, {
+    res.render(`application/subject-knowledge/${view}`, {
       formaction: referrer || `/application/${req.params.applicationId}`,
       referrer
     })

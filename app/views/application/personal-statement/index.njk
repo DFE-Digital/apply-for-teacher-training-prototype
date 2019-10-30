@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/vocation/review" %}
+{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/review" %}
 {% set title = "Why do you want to be a teacher?" %}
 
 {% block pageNavigation %}
@@ -42,7 +42,7 @@
     },
     rows: 20,
     maxwords: 600
-  } | decorateApplicationAttributes(["personal-statements", providerCode, "vocation"])) }}
+  } | decorateApplicationAttributes(["personal-statement"])) }}
 
   {{ govukButton({
     text: "Save and continue"

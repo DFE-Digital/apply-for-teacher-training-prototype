@@ -1,0 +1,29 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set subjectKnowledgeHtml %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Your knowledge about the subject you want to teach"
+      },
+      value: {
+        text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/subject-knowledge?referrer=" + referrer,
+          text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
+          visuallyHiddenText: "evidence of subject knowledge"
+        }]
+      } if review == true
+    }]
+  }) }}
+{% endset %}
+
+{% if applicationValue(["subject-knowledge"]) %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: subjectKnowledgeHtml
+  }) }}
+{% else %}
+  <p class="govuk-body">No subject knowledge entered.</p>
+{% endif %}

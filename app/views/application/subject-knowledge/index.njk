@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/personal-statement/" + providerCode + "/review" %}
+{% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
 {% set parent = provider.name %}
 {% if hasPrimaryChoices() %}
   {% set title = "What knowledge and experience will you bring to teaching primary school?" %}
@@ -51,7 +51,7 @@
 
     maxwords: 400,
     rows: 24
-  } | decorateApplicationAttributes(["personal-statements", providerCode, "subject-knowledge"])) }}
+  } | decorateApplicationAttributes(["subject-knowledge"])) }}
 
   {{ govukButton({
     text: "Save and continue"

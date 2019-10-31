@@ -198,6 +198,13 @@
 
 {% block secondary %}
   {{ appRelated({
+    title: "Application in progress",
+    content: {
+      html: "Last saved on " + ("now" | date("d MMMM yyyy")) + " at " + ("now" | date("tt"))
+    }
+  }) }}
+
+  {{ appRelated({
     title: "Need help?",
     content: {
       html: "Call <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a> on Freephone 0800 389 2500 or chat to an adviser using their <a href=\"https://getintoteaching.education.gov.uk/lp/live-chat\">online chat service</a> between 8am and 8pm, Monday to Friday"

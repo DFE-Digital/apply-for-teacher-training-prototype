@@ -12,6 +12,13 @@ module.exports = router => {
     }
   })
 
+  // Check email prompt
+  router.get('/account/check-email/:action', (req, res) => {
+    res.render('account/check-email', {
+      action: req.params.action
+    })
+  })
+
   // Remove data.token value when signing out
   router.get('/account/sign-out', (req, res, next) => {
     delete req.session.data.token

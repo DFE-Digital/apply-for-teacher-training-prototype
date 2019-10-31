@@ -20,13 +20,6 @@ const sendEmail = (req, template, personalisation) => {
  * Email routes
  */
 module.exports = router => {
-  // Check email
-  router.get('/account/check-email/:action', (req, res) => {
-    res.render('account/check-email', {
-      action: req.params.action
-    })
-  })
-
   // Account created
   router.get('/account/account-created', (req, res) => {
     if (!req.session.data.welcomeEmailSent) {
@@ -34,7 +27,7 @@ module.exports = router => {
     }
 
     req.session.data.welcomeEmailSent = true
-    res.render('account/account-created')
+    res.redirect('/application/start')
   })
 
   router.post('/send-email/create-account', (req, res) => {

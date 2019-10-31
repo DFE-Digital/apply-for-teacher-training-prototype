@@ -1,0 +1,15 @@
+{% extends "_content.njk" %}
+
+{% set title = "Before you start" %}
+
+{% block primary %}
+  <p><mark>Information about only a limited number of courses being available, and that we recommend you see if you course is on Apply first</mark></p>
+  <hr class="govuk-section-break govuk-section-break--m">
+  {{ govukButton({
+    text: "Choose a course",
+    href: "/application/" + applicationId + "/choices/add"
+  }) }}
+
+  <p class="govuk-body">or</p>
+  <p class="govuk-body"><a href="/application/{{ applicationId }}">View application</a></p>
+{% endblock %}

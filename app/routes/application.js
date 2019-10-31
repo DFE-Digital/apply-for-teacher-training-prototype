@@ -37,7 +37,14 @@ module.exports = router => {
   router.get('/application/start', (req, res) => {
     var code = createNewApplication(req)
     req.session.data.applications[code].welcomeFlow = true
-    res.redirect(`/application/${code}/choices/add`)
+
+    if (req.session.data.course_from_find) {
+      // If coming from Find, go straight to course selection
+      res.redirect(`/application/${code}/choices/add`)
+    } else {
+      // Otherwise, give some context about the Apply pilot
+      res.redirect(`/application/${code}/before-you-start`)
+    }
   })
 
   router.get('/application/start/choice', (req, res) => {

@@ -1,9 +1,9 @@
 {% extends "_form.njk" %}
-
+{% set dualRunning = true %}
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
   {% if dualRunning %}
-    {% set title = "Do you want to apply using a new service?" %}
+    {% set title = "Apply for this course" %}
   {% else %}
     {% set title = "Apply for this course" %}
   {% endif %}
@@ -11,7 +11,7 @@
 {% else %}
   {% set title = serviceName %}
 {% endif %}
-{% set hasAccountLinks = false %}
+{% set isSignedOut = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -34,74 +34,36 @@
   {% endset %}
 
   {% if course and dualRunning %}
-    <p>You can apply for this course through Apply for teacher training.</p>
-    <p>Apply for teacher training is a new application process designed to make it easier to apply for teacher training courses. It also offers personalised support.</p>
-    <p>It will eventually replace UCAS as the way to apply for teacher training.</p>
-    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
+    <p>You can apply for this course through UCAS or by using a new service, Apply for teacher training.</p>
+
+    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about Apply for teacher training</a></p>
+
+    <h2 class="govuk-heading-l">Choose how to apply</h2>
 
 
-    <h2 class="govuk-heading-l">Is this new service right for you?</h2>
 
-    <p>We’re still working on Apply for teacher training, so it might not be possible to apply to all the courses you’d like to through the service.</p>
-
-    <p>To apply to those courses you’ll need to make a second application through UCAS.</p>
-
-    <p>Because of this inconvenience, we’ll offer you £50 once a teacher training provider has confirmed whether your application was successful.</p>
-
-    <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>
-
-    {% set govukHtml %}
-
-    {% endset %}
-
-    {% set ucasHtml %}
-      <ul class="govuk-list govuk-list--bullet">
-        <li>you’ve chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
-        <li>you have an application underway with UCAS</li>
-        <li>you are in the Apply 2 stage of your application</li>
-      </ul>
-    {% endset %}
-
-    {# {{ govukRadios({
-      classes: "govuk-!-margin-top-8",
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Apply for this course using GOV.UK Apply if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: govukHtml
-        }
-      }, {
-        value: "ucas",
-        text: "Apply for this course using UCAS if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: ucasHtml
-        },
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }} #}
-
-    <h2 class="govuk-heading-m">Do you want to apply using the new service?</h2>
     {{ govukRadios({
       idPrefix: "apply-route",
       name: "apply-route",
+      classes: "govuk-!-margin-top-6 govuk-!-margin-bottom-6",
       items: [{
         value: "dfe",
-        text: "Yes, apply using the new service (alongside UCAS if necessary)"
+        text: "Apply through the new service",
+        label: {
+          classes: "govuk-label--m govuk-!-margin-bottom-3"
+        },
+        hint: {
+          html: '
+                <p>It might not be possible to apply to all the courses you’d like to. To apply to those courses you’ll need to make a second application through UCAS.</p>
+                <p>Because of this inconvenience we’ll give you £50 once a teacher training provider has confirmed whether your application was successful.</p>
+                <p><a href="#">View a list of available teacher training providers</a></p>
+                <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>'
+        }
       }, {
         value: "ucas",
-        text: "No, I want to apply only through UCAS",
-        conditional: {
-          html: courseCodeHtml
+        text: "Apply through UCAS",
+        label: {
+          classes: "govuk-label--m"
         }
       }]
     }) }}

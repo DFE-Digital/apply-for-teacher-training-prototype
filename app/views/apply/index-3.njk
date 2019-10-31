@@ -1,5 +1,5 @@
 {% extends "_form.njk" %}
-
+{% set dualRunning = true %}
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
   {% if dualRunning %}
@@ -11,7 +11,7 @@
 {% else %}
   {% set title = serviceName %}
 {% endif %}
-{% set hasAccountLinks = false %}
+{% set isSignedOut = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -46,75 +46,17 @@
 
     <p>To apply to those courses you’ll need to make a second application through UCAS.</p>
 
-    <p>Because of this inconvenience, we’ll offer you £50 once a teacher training provider has confirmed whether your application was successful.</p>
-
     <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>
 
-    {% set govukHtml %}
-
-    {% endset %}
-
-    {% set ucasHtml %}
-      <ul class="govuk-list govuk-list--bullet">
-        <li>you’ve chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
-        <li>you have an application underway with UCAS</li>
-        <li>you are in the Apply 2 stage of your application</li>
-      </ul>
-    {% endset %}
-
-    {# {{ govukRadios({
-      classes: "govuk-!-margin-top-8",
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Apply for this course using GOV.UK Apply if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: govukHtml
-        }
-      }, {
-        value: "ucas",
-        text: "Apply for this course using UCAS if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: ucasHtml
-        },
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }} #}
-
-    <h2 class="govuk-heading-m">Do you want to apply using the new service?</h2>
-    {{ govukRadios({
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Yes, apply using the new service (alongside UCAS if necessary)"
-      }, {
-        value: "ucas",
-        text: "No, I want to apply only through UCAS",
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }}
-
     {{ govukButton({
-      text: "Continue",
-      classes: "govuk-!-margin-bottom-5"
+      text: "Apply through the new service",
+      classes: "govuk-!-margin-bottom-5 govuk-!-margin-top-5"
     }) }}
 
-    {# <p>or</p>
+    <p>or</p>
     <p>
       <a href="#">Apply on UCAS</a>
-    </p> #}
+    </p>
   {% elif course and not dualRunning %}
     <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
     {{ courseCodeHtml | safe }}

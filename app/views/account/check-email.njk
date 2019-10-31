@@ -1,7 +1,7 @@
 {% extends "_content.njk" %}
 
 {% set title = "Check your email to sign in" if action == "sign-in" else "Check your email" %}
-{% set isSignedOut = true %}
+{% set hasAccountLinks = false %}
 
 {% block primary %}
   {% if action == "sign-in"%}

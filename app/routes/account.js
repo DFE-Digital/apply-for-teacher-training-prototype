@@ -11,4 +11,10 @@ module.exports = router => {
       res.redirect('/account/create-account') // Create an account
     }
   })
+
+  // Remove data.token value when signing out
+  router.get('/account/sign-out', (req, res, next) => {
+    delete req.session.data.token
+    res.redirect('/')
+  })
 }

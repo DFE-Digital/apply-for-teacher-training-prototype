@@ -27,6 +27,11 @@
   {% endif %}
 {% endblock %}
 
+{% block pageTitle %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Last saved on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}
+{% endblock %}
+
 {% block primary %}
   {{ govukWarningText({
     text: "You have 5 days remaining (until " + (5 | nowPlusDays("d MMMM yyyy")) + ") to resubmit your edited application",
@@ -197,13 +202,6 @@
 {% endblock %}
 
 {% block secondary %}
-  {{ appRelated({
-    title: "Application in progress",
-    content: {
-      html: "Last saved on " + ("now" | date("d MMMM yyyy")) + " at " + ("now" | date("tt"))
-    }
-  }) }}
-
   {{ appRelated({
     title: "Need help?",
     content: {

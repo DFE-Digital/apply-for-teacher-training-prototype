@@ -108,10 +108,6 @@ module.exports = router => {
   require('./application/edit')(router)
   require('./application/withdraw')(router)
 
-  router.all('/application/:applicationId/email/submitted', (req, res) => {
-    res.render('email/application-submitted')
-  })
-
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
     const referrer = req.query.referrer

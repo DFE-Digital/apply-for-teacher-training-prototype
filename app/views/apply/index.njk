@@ -28,50 +28,18 @@
 {% block primary %}
   {# Choice available – show a random variant #}
   {% if course and dualRunning %}
-    <!-- {{ variant }} -->
-
-    {# Variant 1: Steer towards Apply without financial incentive #}
+    {# Variant 1: Steer towards Apply _without_ financial incentive #}
     {% if variant == 1 %}
       {% include "apply/_variant-small-ucas-choice.njk" %}
 
-    {# Variant 2: Balanced choice but with cash incentive #}
+    {# Variant 2: Balanced choice but _with_ financial incentive #}
     {% elseif variant == 2 %}
       {% include "apply/_variant-financial-incentive.njk" %}
 
-    {# Variant 3: Balanced choice but with cash incentive #}
+    {# Variant 3: Balanced choice but with additional course incentive #}
     {% elseif variant == 3 %}
       {% include "apply/_variant-courses-incentive.njk" %}
 
-    {% else %}
-      <p>You can apply for this course through Apply for teacher training.</p>
-      <p>Apply for teacher training is a new application process designed to make it easier to apply for teacher training courses. It also offers personalised support.</p>
-      <p>It will eventually replace UCAS as the way to apply for teacher training.</p>
-      <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
-
-      <h2 class="govuk-heading-l">Is this new service right for you?</h2>
-
-      <p>We’re still working on Apply for teacher training, so it might not be possible to apply to all the courses you’d like to through the service.</p>
-      <p>To apply to those courses you’ll need to make a second application through UCAS.</p>
-      <p>Because of this inconvenience, we’ll offer you £50 once a teacher training provider has confirmed whether your application was successful.</p>
-      <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>
-
-      <h2 class="govuk-heading-m">Do you want to apply using the new service?</h2>
-      {{ govukRadios({
-        idPrefix: "apply-route",
-        name: "apply-route",
-        items: [{
-          value: "dfe",
-          text: "Yes, apply using the new service (alongside UCAS if necessary)"
-        }, {
-          value: "ucas",
-          text: "No, I want to apply only through UCAS"
-        }]
-      }) }}
-
-      {{ govukButton({
-        text: "Continue",
-        classes: "govuk-!-margin-bottom-5"
-      }) }}
     {% endif %}
   {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
@@ -84,7 +52,7 @@
       isStartButton: true
     }) }}
 
-  {# Can't find course #}
+  {# Can’t find course #}
   {% else %}
     <p class="govuk-body">We couldn’t find the course you’re looking for – there may be a problem with the training provider and/or course code(s).</p>
     <p class="govuk-body">Go back to <a href="{{ data['find_url'] }}">Find postgraduate teacher training</a> and try selecting your course again, or choose a different course.</p>

@@ -4,20 +4,23 @@
 
 {% block beforePageTitle %}
   {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">Your account has been created</h2>",
+    html: "<h2 class=\"govuk-heading-m\">Your Apply for teacher training account has been created</h2>",
     type: "success",
     icon: false
   }) }}
 {% endblock %}
 
 {% block primary %}
-  <p><mark>Information about only a limited number of courses being available, and that we recommend you see if you course is on Apply first</mark></p>
+  <p>Apply for teacher training is a new GOV.UK service still in development.</p>
+  <p>The service will eventually replace UCAS as the way candidates apply for teacher training. However, for now, the service is limited to just a few courses.</p>
+  <p>For this reason, we suggest you choose a course first. That way, you can make sure your training provider is available on the service before you fill out the application form.</p>
+  <p>If you choose a course which isn’t yet available on Apply for teacher training, you’ll be guided back to UCAS so you can apply to it using their service.</p>
+  <p class="govuk-body">View <a href="/apply/providers">courses currently available</a> on Apply for teacher training.</p>
   <hr class="govuk-section-break govuk-section-break--m">
   {{ govukButton({
     text: "Choose a course",
     href: "/application/" + applicationId + "/choices/add"
   }) }}
-
-  <p class="govuk-body">or</p>
-  <p class="govuk-body"><a href="/application/{{ applicationId }}">View application</a></p>
+  <h3 class="govuk-heading-m">Preview the application</h3>
+  <p class="govuk-body"><a href="/application/{{ applicationId }}">View the application form</a> to see what you'll need to do to complete it.</p>
 {% endblock %}

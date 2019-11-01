@@ -34,8 +34,8 @@
   {% endset %}
 
   {% if course and dualRunning %}
-    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service, {{ serviceName }} (‘GOV.UK Apply’).</p>
-    <p class="govuk-body">GOV.UK Apply will eventually replace UCAS. However, for now, the service is limited to just a few courses. </p>
+    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service, {{ serviceName }}.</p>
+    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is limited to just a few courses. </p>
     <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
 
     {% set govukHtml %}
@@ -59,7 +59,7 @@
       name: "apply-route",
       items: [{
         value: "dfe",
-        text: "Apply for this course using GOV.UK Apply if:",
+        text: "Apply for this course using Apply for teacher training if:",
         label: {
           classes: "govuk-label--m"
         },

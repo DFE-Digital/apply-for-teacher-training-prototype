@@ -3,7 +3,13 @@
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
   {% if dualRunning %}
-    {% set title = "Choose how to apply" %}
+    {% if variant == 1 %}
+      {% set title = "Do you want to apply using a new service?" %}
+    {% elseif variant == 2 or variant == 3 %}
+      {% set title = "Apply for this course" %}
+    {% else %}
+      {% set title = "Do you want to apply using a new service?" %}
+    {% endif %}
   {% else %}
     {% set title = "Apply for this course" %}
   {% endif %}
@@ -20,70 +26,22 @@
 {% endblock %}
 
 {% block primary %}
-  {% set courseCodeHtml %}
-    <p class="govuk-body">When you apply using UCAS, you’ll need these codes for the Choices section of your application form:</p>
-    <ul class="govuk-list">
-      <li class="govuk-!-margin-bottom-2">
-        Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
-      </li>
-      <li>
-        Training programme code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
-      </li>
-    </ul>
-    <p>Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply/apply">guidance on applying for teacher training</a>.</p>
-  {% endset %}
-
+  {# Choice available – show a random variant #}
   {% if course and dualRunning %}
-    <p class="govuk-body-l">The training provider you have chosen is participating in the trial of a new GOV.UK service, {{ serviceName }}.</p>
-    <p class="govuk-body">Apply for teacher training will eventually replace UCAS. However, for now, the service is limited to just a few courses. </p>
-    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
+    {# Variant 1: Steer towards Apply _without_ financial incentive #}
+    {% if variant == 1 %}
+      {% include "apply/_variant-small-ucas-choice.njk" %}
 
-    {% set govukHtml %}
-      <ul class="govuk-list govuk-list--bullet">
-        <li>for now, this is the only training provider on your shortlist</li>
-        <li>you want to trial a streamlined, modern GOV.UK service with personalised support</li>
-      </ul>
-    {% endset %}
+    {# Variant 2: Balanced choice but _with_ financial incentive #}
+    {% elseif variant == 2 %}
+      {% include "apply/_variant-financial-incentive.njk" %}
 
-    {% set ucasHtml %}
-      <ul class="govuk-list govuk-list--bullet">
-        <li>you’ve chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
-        <li>you have an application underway with UCAS</li>
-        <li>you are in the Apply 2 stage of your application</li>
-      </ul>
-    {% endset %}
+    {# Variant 3: Balanced choice but with additional course incentive #}
+    {% elseif variant == 3 %}
+      {% include "apply/_variant-courses-incentive.njk" %}
 
-    {{ govukRadios({
-      classes: "govuk-!-margin-top-8",
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Apply for this course using Apply for teacher training if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: govukHtml
-        }
-      }, {
-        value: "ucas",
-        text: "Apply for this course using UCAS if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: ucasHtml
-        },
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }}
-
-    {{ govukButton({
-      text: "Continue"
-    }) }}
+    {% endif %}
+  {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
     <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
     {{ courseCodeHtml | safe }}
@@ -93,6 +51,8 @@
       href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do",
       isStartButton: true
     }) }}
+
+  {# Can’t find course #}
   {% else %}
     <p class="govuk-body">We couldn’t find the course you’re looking for – there may be a problem with the training provider and/or course code(s).</p>
     <p class="govuk-body">Go back to <a href="{{ data['find_url'] }}">Find postgraduate teacher training</a> and try selecting your course again, or choose a different course.</p>

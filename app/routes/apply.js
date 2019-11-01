@@ -1,5 +1,6 @@
 module.exports = router => {
   router.get('/apply/:providerCode/:courseCode', (req, res) => {
+    const variant = req.query.variant || Math.floor(Math.random() * 3) + 1
     const dualRunning = req.query.dualrunning
     const ineligible = req.query.ineligible
     const providerCode = req.params.providerCode
@@ -7,6 +8,7 @@ module.exports = router => {
 
     res.render('apply/index', {
       formaction: `/apply/${providerCode}/${courseCode}/answer`,
+      variant,
       dualRunning,
       ineligible,
       providerCode,

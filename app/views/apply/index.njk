@@ -3,7 +3,13 @@
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
   {% if dualRunning %}
-    {% set title = "Do you want to apply using a new service?" %}
+    {% if variant == 1 %}
+      {% set title = "Do you want to apply using a new service?" %}
+    {% elseif variant == 2 or variant == 3 %}
+      {% set title = "Apply for this course" %}
+    {% else %}
+      {% set title = "Do you want to apply using a new service?" %}
+    {% endif %}
   {% else %}
     {% set title = "Apply for this course" %}
   {% endif %}
@@ -20,101 +26,54 @@
 {% endblock %}
 
 {% block primary %}
-  {% set courseCodeHtml %}
-    <p class="govuk-body">When you apply using UCAS, you’ll need these codes for the Choices section of your application form:</p>
-    <ul class="govuk-list">
-      <li class="govuk-!-margin-bottom-2">
-        Training provider code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
-      </li>
-      <li>
-        Training programme code: <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
-      </li>
-    </ul>
-    <p>Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply/apply">guidance on applying for teacher training</a>.</p>
-  {% endset %}
-
+  {# Choice available – show a random variant #}
   {% if course and dualRunning %}
-    <p>You can apply for this course through Apply for teacher training.</p>
-    <p>Apply for teacher training is a new application process designed to make it easier to apply for teacher training courses. It also offers personalised support.</p>
-    <p>It will eventually replace UCAS as the way to apply for teacher training.</p>
-    <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
+    <!-- {{ variant }} -->
 
+    {# Variant 1: Steer towards Apply without financial incentive #}
+    {% if variant == 1 %}
+      {% include "apply/_variant-small-ucas-choice.njk" %}
 
-    <h2 class="govuk-heading-l">Is this new service right for you?</h2>
+    {# Variant 2: Balanced choice but with cash incentive #}
+    {% elseif variant == 2 %}
+      {% include "apply/_variant-financial-incentive.njk" %}
 
-    <p>We’re still working on Apply for teacher training, so it might not be possible to apply to all the courses you’d like to through the service.</p>
+    {# Variant 3: Balanced choice but with cash incentive #}
+    {% elseif variant == 3 %}
+      {% include "apply/_variant-courses-incentive.njk" %}
 
-    <p>To apply to those courses you’ll need to make a second application through UCAS.</p>
+    {% else %}
+      <p>You can apply for this course through Apply for teacher training.</p>
+      <p>Apply for teacher training is a new application process designed to make it easier to apply for teacher training courses. It also offers personalised support.</p>
+      <p>It will eventually replace UCAS as the way to apply for teacher training.</p>
+      <p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about changes to teacher training applications</a></p>
 
-    <p>Because of this inconvenience, we’ll offer you £50 once a teacher training provider has confirmed whether your application was successful.</p>
+      <h2 class="govuk-heading-l">Is this new service right for you?</h2>
 
-    <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>
+      <p>We’re still working on Apply for teacher training, so it might not be possible to apply to all the courses you’d like to through the service.</p>
+      <p>To apply to those courses you’ll need to make a second application through UCAS.</p>
+      <p>Because of this inconvenience, we’ll offer you £50 once a teacher training provider has confirmed whether your application was successful.</p>
+      <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>
 
-    {% set govukHtml %}
+      <h2 class="govuk-heading-m">Do you want to apply using the new service?</h2>
+      {{ govukRadios({
+        idPrefix: "apply-route",
+        name: "apply-route",
+        items: [{
+          value: "dfe",
+          text: "Yes, apply using the new service (alongside UCAS if necessary)"
+        }, {
+          value: "ucas",
+          text: "No, I want to apply only through UCAS"
+        }]
+      }) }}
 
-    {% endset %}
-
-    {% set ucasHtml %}
-      <ul class="govuk-list govuk-list--bullet">
-        <li>you’ve chosen your other training providers, and they are not <a href="/apply/providers">participants in the trial</a></li>
-        <li>you have an application underway with UCAS</li>
-        <li>you are in the Apply 2 stage of your application</li>
-      </ul>
-    {% endset %}
-
-    {# {{ govukRadios({
-      classes: "govuk-!-margin-top-8",
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Apply for this course using GOV.UK Apply if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: govukHtml
-        }
-      }, {
-        value: "ucas",
-        text: "Apply for this course using UCAS if:",
-        label: {
-          classes: "govuk-label--m"
-        },
-        hint: {
-          html: ucasHtml
-        },
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }} #}
-
-    <h2 class="govuk-heading-m">Do you want to apply using the new service?</h2>
-    {{ govukRadios({
-      idPrefix: "apply-route",
-      name: "apply-route",
-      items: [{
-        value: "dfe",
-        text: "Yes, apply using the new service (alongside UCAS if necessary)"
-      }, {
-        value: "ucas",
-        text: "No, I want to apply only through UCAS",
-        conditional: {
-          html: courseCodeHtml
-        }
-      }]
-    }) }}
-
-    {{ govukButton({
-      text: "Continue",
-      classes: "govuk-!-margin-bottom-5"
-    }) }}
-
-    {# <p>or</p>
-    <p>
-      <a href="#">Apply on UCAS</a>
-    </p> #}
+      {{ govukButton({
+        text: "Continue",
+        classes: "govuk-!-margin-bottom-5"
+      }) }}
+    {% endif %}
+  {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
     <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
     {{ courseCodeHtml | safe }}
@@ -124,6 +83,8 @@
       href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do",
       isStartButton: true
     }) }}
+
+  {# Can't find course #}
   {% else %}
     <p class="govuk-body">We couldn’t find the course you’re looking for – there may be a problem with the training provider and/or course code(s).</p>
     <p class="govuk-body">Go back to <a href="{{ data['find_url'] }}">Find postgraduate teacher training</a> and try selecting your course again, or choose a different course.</p>

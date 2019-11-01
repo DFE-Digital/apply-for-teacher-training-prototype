@@ -10,8 +10,14 @@
 {% set formaction = paths.current %}
 
 {% block pageNavigation %}
-  {% if not applicationValue('welcomeFlow') %}
-    {{ govukBackLink({ href: paths.back }) }}
+  {% if not applicationValue("welcomeFlow") %}
+    {{ govukBackLink({
+      href: paths.back
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/before-you-start"
+    }) }}
   {% endif %}
 {% endblock %}
 

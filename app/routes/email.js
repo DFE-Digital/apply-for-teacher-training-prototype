@@ -20,22 +20,6 @@ const sendEmail = (req, template, personalisation) => {
  * Email routes
  */
 module.exports = router => {
-  // Check email
-  router.get('/account/check-email/:action', (req, res) => {
-    res.render('account/check-email', {
-      action: req.params.action
-    })
-  })
-
-  // Confirm address
-  router.get('/email/:page/:action', (req, res) => {
-    const page = req.params.page
-
-    res.render(`email/${page}`, {
-      action: req.params.action
-    })
-  })
-
   // Account created
   router.get('/account/account-created', (req, res) => {
     if (!req.session.data.welcomeEmailSent) {
@@ -43,7 +27,7 @@ module.exports = router => {
     }
 
     req.session.data.welcomeEmailSent = true
-    res.render('account/account-created')
+    res.redirect('/application/start')
   })
 
   router.post('/send-email/create-account', (req, res) => {
@@ -61,6 +45,6 @@ module.exports = router => {
     sendEmail(req, '99a20df5-564d-4612-810e-3788edf7285e', {
       reference: applicationId
     })
-    res.redirect(`/application/${ applicationId }/confirmation`)
+    res.redirect(`/application/${applicationId}/confirmation`)
   })
 }

@@ -8,14 +8,10 @@
 {% endif %}
 
 {% block content %}
-  {% set panelText %}
-    <a class="app-hidden-link" href="/application/{{ applicationId }}/email/submitted">Your application number is {{ applicationId }}</a>
-  {% endset %}
-
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
     titleText: title,
-    html: panelText
+    text: "Your application number is " + applicationId
   }) }}
 
   <div class="govuk-grid-row">

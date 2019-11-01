@@ -13,10 +13,10 @@ module.exports = {
     nationality: process.env.MVP !== 'true',
     referee_types: process.env.MVP !== 'true'
   },
-  account: {
+  account_disabled: {
     email: 'janina.doe@example.com'
   },
-  applications: {
+  applications_disabled: {
     12345: {
       status: 'started',
       choices: {

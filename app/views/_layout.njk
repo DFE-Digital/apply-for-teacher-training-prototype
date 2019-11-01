@@ -59,7 +59,7 @@
     {% set signOutText = "Sign out" %}
   {% endif %}
 
-  {% if not isSignedOut %}
+  {% if data.token %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
     {% else %}
@@ -74,10 +74,13 @@
     serviceName: serviceName,
     serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
-    navigation: (([{
-      href: "/",
+    navigation: [{
+      href: "/account/sign-out",
       text: signOutText
-    }] if data.account) if isSignedOut != true)
+    } if data.token, {
+      href: "/account/sign-in",
+      text: "Sign in"
+    } if not data.token] if hasAccountLinks != false
   }) }}
 {% endblock %}
 
@@ -118,10 +121,7 @@
       } if not urStudy, {
         href: "/admin/clear-data",
         text: "Clear data"
-      } if not urStudy, {
-        href: "/email/welcome",
-        text: "Welcome email"
-      }]
+      } if not urStudy]
     }
   }) }}
 {% endblock %}

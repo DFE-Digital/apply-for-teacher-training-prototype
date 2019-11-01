@@ -11,4 +11,17 @@ module.exports = router => {
       res.redirect('/account/create-account') // Create an account
     }
   })
+
+  // Check email prompt
+  router.get('/account/check-email/:action', (req, res) => {
+    res.render('account/check-email', {
+      action: req.params.action
+    })
+  })
+
+  // Remove data.token value when signing out
+  router.get('/account/sign-out', (req, res, next) => {
+    delete req.session.data.token
+    res.redirect('/')
+  })
 }

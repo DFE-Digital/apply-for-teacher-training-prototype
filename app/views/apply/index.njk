@@ -11,7 +11,7 @@
 {% else %}
   {% set title = serviceName %}
 {% endif %}
-{% set isSignedOut = true %}
+{% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

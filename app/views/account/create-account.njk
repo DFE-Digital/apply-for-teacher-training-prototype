@@ -1,8 +1,8 @@
 {% extends "_form.njk" %}
 
-{% set title = "Please give us your email address" %}
+{% set title = "Apply for teacher training" %}
 {% set formaction = "/send-email/create-account" %}
-{% set isSignedOut = true %}
+{% set hasAccountLinks = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body-l">You’ll then be able to save and return to your application.</p>
-
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">Enter your email to create an account</h2>
+  <p class="govuk-body">You’ll then be able to save and return to your application.</p>
   {{ govukInput({
     label: {
       text: "Email address",
@@ -31,7 +31,27 @@
     name: "account[email]"
   }) }}
 
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">You won’t need a password to use this service</h2>
+  <p class="govuk-body">Instead, you’ll sign in using your email address. We’ll then send you a link so you can return to your application.</p>
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">Terms and conditions</h2>
+  <p class="govuk-body">Our <a href="/terms-conditions">terms and conditions</a> contain important information about:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the application process</li>
+    <li>contacting us</li>
+    <li>our use of your data</li>
+    <li>checking you’re safe to work with children</li>
+  </ul>
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I agree to the terms and conditions"
+    }],
+    name: "terms"
+  }) }}
+
   {{ govukButton({
-    text: "Continue"
+    text: "Create account"
   }) }}
 {% endblock %}

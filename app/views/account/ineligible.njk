@@ -1,8 +1,7 @@
 {% extends "_guidance.njk" %}
 
 {% set title = "We’re sorry, but we’re not ready for you yet" %}
-{% set isSignedOut = true %}
-{% set hasSecondary = true %}
+{% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -15,17 +14,4 @@
   <p class="govuk-body govuk-!-font-weight-bold">You can apply for all teacher training courses and providers using UCAS.</p>
   <p class="govuk-body">You’ll need to register with UCAS before you can apply.</p>
   <p><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
-{% endblock %}
-
-{% block secondary %}
-  {{ appRelated({
-    title: "Related content",
-    items: [{
-      text: "Upcoming changes to teacher training applications",
-      href: "/apply/get-into-teaching"
-    }, {
-      text: "Guidance on applying for teacher training through UCAS",
-      href: "https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training/apply-to-teacher-training"
-    }]
-  }) }}
 {% endblock %}

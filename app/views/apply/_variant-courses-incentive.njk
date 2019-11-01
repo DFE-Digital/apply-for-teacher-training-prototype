@@ -1,0 +1,34 @@
+<p class="govuk-body">You can apply for this course through UCAS or by using a new service, Apply for teacher training.</p>
+<p class="govuk-body"><a href="/apply/get-into-teaching">Learn more about Apply for teacher training</a></p>
+
+<h2 class="govuk-heading-l">Choose how to apply</h2>
+{{ govukRadios({
+  idPrefix: "apply-route",
+  name: "apply-route",
+  classes: "govuk-!-margin-top-6 govuk-!-margin-bottom-6",
+  items: [{
+    value: "dfe",
+    text: "Apply through the new service",
+    label: {
+      classes: "govuk-label--m govuk-!-margin-bottom-3"
+    },
+    hint: {
+      html: "
+        <p>You can apply to 3 courses on the new service as well as 3 on UCAS.</p>
+        <p>Not all training providers are on the service yet. To apply to their courses we can help you make a second application through UCAS.</p>
+        <p><a href=\"/apply/providers\">View a list of available teacher training providers</a></p>
+        <p>Unfortunately the service isn’t ready for international candidates or candidates who’ve studied outside the UK.</p>"
+    }
+  }, {
+    value: "ucas",
+    text: "Apply through UCAS",
+    label: {
+      classes: "govuk-label--m"
+    }
+  }]
+}) }}
+
+{{ govukButton({
+  text: "Continue",
+  classes: "govuk-!-margin-bottom-5"
+}) }}

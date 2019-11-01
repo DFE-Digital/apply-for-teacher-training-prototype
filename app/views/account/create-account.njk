@@ -29,11 +29,11 @@
     name: "account[email]"
   }) }}
 
-  <h2 class="govuk-heading-m">Password</h2>
-  <p class="govuk-body">We won’t ask you to create a password when you use this service.</p>
-  <p class="govuk-body">When you want to return to your saved application, we’ll ask for your email address and send you a link to sign back in.</p>
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">You won’t need a password</h2>
+  <p class="govuk-body">We won’t ask you for a password when you use this service.</p>
+  <p class="govuk-body">When you want to return to your saved application, we’ll ask for your email address again and send you a link to log in.</p>
 
-  <h2 class="govuk-heading-m">Terms and conditions</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">Terms and conditions</h2>
   <p class="govuk-body">The <a href="/terms-conditions">terms and conditions</a> have important information about:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>how the application process works</li>
@@ -42,8 +42,15 @@
     <li>how we check you’re allowed to work with children</li>
   </ul>
 
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I agree to the terms and conditions"
+    }],
+    name: 'terms'
+  }) }}
+
   {{ govukButton({
-    classes: "govuk-!-margin-top-4",
-    text: "Accept terms and continue"
+    text: "Create account"
   }) }}
 {% endblock %}

@@ -2,6 +2,14 @@
 
 {% set title = "Before you start" %}
 
+{% block message %}
+  <div class="success-summary" role="alert" aria-labelledby="success-summary-heading-example-1" tabindex="-1">
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-0 success-summary-heading" id="success-summary-heading-example-1">
+      Your account has been created
+    </h3>
+  </div>
+{% endblock %}
+
 {% block primary %}
   <p><mark>Information about only a limited number of courses being available, and that we recommend you see if you course is on Apply first</mark></p>
   <hr class="govuk-section-break govuk-section-break--m">

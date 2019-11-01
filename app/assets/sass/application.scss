@@ -2,6 +2,9 @@
 $govuk-assets-path: "/govuk/assets/";
 $govuk-global-styles: true;
 
+// Not in design system:
+$button-colour: #00823b;
+
 // Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";
 
@@ -17,6 +20,8 @@ $govuk-global-styles: true;
 @import "components/table";
 @import "components/task-list";
 @import "components/tag";
+
+@import "success-summary";
 
 // Override GOV.UK Frontend print styles
 @media print {

@@ -4,11 +4,11 @@
 {% if course %}
   {% if dualRunning %}
     {% if variant == 1 %}
-      {% set title = "Do you want to apply using a new service?" %}
+      {% set title = "You can apply for this course using a new GOV.UK service" %}
     {% elseif variant == 2 or variant == 3 %}
       {% set title = "Apply for this course" %}
     {% else %}
-      {% set title = "Do you want to apply using a new service?" %}
+      {% set title = "You can apply for this course using a new GOV.UK service" %}
     {% endif %}
   {% else %}
     {% set title = "Apply for this course" %}

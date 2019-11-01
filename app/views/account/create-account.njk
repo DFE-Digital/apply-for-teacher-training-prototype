@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Create an account" %}
+{% set title = "Create an " + serviceName + " account" %}
 {% set formaction = "/send-email/create-account" %}
 {% set hasAccountLinks = true %}
 
@@ -11,11 +11,9 @@
 {% endblock %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m govuk-!-margin-top-6">Enter your email to create an account</h2>
-  <p class="govuk-body">You’ll then be able to save and return to your application.</p>
   {{ govukInput({
     label: {
-      text: "Email address",
+      text: "Enter your email address",
       classes: "govuk-label--m"
     },
     hint: {
@@ -31,10 +29,10 @@
     name: "account[email]"
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-margin-top-6">You won’t need a password to use this service</h2>
+  <h2 class="govuk-heading-m">You won’t need a password to use this service</h2>
   <p class="govuk-body">Instead, you’ll sign in using your email address. Each time you sign in, we'll send you a link so you can return to your application.</p>
 
-  <h2 class="govuk-heading-m govuk-!-margin-top-6">Terms and conditions</h2>
+  <h2 class="govuk-heading-m">Terms and conditions</h2>
   <p class="govuk-body">Our <a href="/terms-conditions">terms and conditions</a> contain important information about:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>the application process</li>

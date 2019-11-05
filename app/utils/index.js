@@ -60,7 +60,8 @@ const hasSubmittedApplications = (req) => {
 const hasStartedApplications = (req) => {
   var applications = req.session.data.applications
   if (applications) {
-    return Object.values(applications).map(a => a.status).includes('started')
+    const status = Object.values(applications).map(a => a.status)
+    return status.includes('started')
   }
 }
 

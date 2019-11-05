@@ -12,6 +12,7 @@
     {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
     {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
     {% set showChoiceStatus = true %}
+    {% set showReferenceStatus = true %}
 
     {# Application summary #}
     <p class="govuk-body">You submitted your application on {{ "now" | date("d MMMM yyyy") }}.</p>
@@ -72,17 +73,8 @@
     {% endif %}
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-    <p>We’ve contacted your references.</p>
-    <ul class="govuk-list">
-    {% for id, referee in application.referees %}
-      <li>{{ referee.name }} has not yet responded</li>
-      {# Examples:
-      [name] has responded
-      [name] has been sent a reminder email
-      [name] has declined to give a reference
-      [name] has failed to respond before the 10-day deadline #}
-    {% endfor %}
-    </ul>
+    {% set references = application.referees %}
+    {% include "_includes/review/references.njk" %}
   {% endfor %}
 {% endblock %}
 

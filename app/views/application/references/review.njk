@@ -5,6 +5,7 @@
 {% set referrer = applicationPath + "/references/review" %}
 {# You can’t amend your referees once application has been submitted #}
 {% set canAmend = true if not hasSubmittedApplications() %}
+{% set references = applicationValue(["referees"]) %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

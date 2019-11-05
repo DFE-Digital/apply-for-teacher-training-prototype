@@ -88,10 +88,9 @@ module.exports = router => {
       }
     }
 
-    // Populate session data with stateful application
-    req.session.data.applications = applications
-
     if (phase && state) {
+      // Populate session data with stateful application
+      req.session.data.applications = applications
       res.render('applications/index', {
         phase,
         state

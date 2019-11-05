@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
-{% set choices = applicationValue("choices") | toArray %}
+{% set choices = applicationValue(["choices"]) | toArray %}
+{% set references = applicationValue(["referees"]) %}
 {% set title = "Review your application" %}
 {% set showChoiceStatus = false %}
 {% set canAmend = true %}

@@ -5,6 +5,11 @@
 {% set referrer = "/applications" %}
 {% set applications = applications or data.applications %}
 
+{% block beforePrimary %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted">View application</a></p>
+{% endblock %}
+
 {% block primary %}
   {% for applicationId, application in applications %}
     {% set applicationPath = "/application/" + applicationId %}
@@ -13,11 +18,6 @@
     {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
     {% set showChoiceStatus = true %}
     {% set showReferenceStatus = true %}
-
-    {# Application summary #}
-    <p class="govuk-body">You submitted your application on {{ "now" | date("d MMMM yyyy") }}.</p>
-
-    <p class="govuk-body"><a href="/application/{{ applicationId }}/submitted">View your application</a></p>
 
     {# Amending an application #}
     {% if phase == "amend" and application.status != "amended" %}
@@ -39,7 +39,7 @@
       </div>
     {% endif %}
 
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you've applied to</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
     {# Decline by default (DBD) #}
     {% if phase == "dbd" %}
       {{ govukInsetText({

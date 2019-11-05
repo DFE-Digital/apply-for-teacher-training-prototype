@@ -9,7 +9,7 @@
   {% for applicationId, application in applications %}
     {% set applicationPath = "/application/" + applicationId %}
     {% set canAmend = application.status == "amending" %}
-    {% set canWithdraw = (phase == "selection") %}
+    {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
     {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
     {% set showChoiceStatus = true %}
 

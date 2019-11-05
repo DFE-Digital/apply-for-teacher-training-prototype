@@ -44,7 +44,6 @@
   {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
     <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
-    {{ courseCodeHtml | safe }}
 
     {{ govukButton({
       text: "Apply through UCAS",

@@ -96,7 +96,9 @@ module.exports = router => {
         state
       })
     } else if (utils.hasSubmittedApplications(req)) {
-      res.render('applications/index')
+      res.render('applications/index', {
+        phase
+      })
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
     } else {

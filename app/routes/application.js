@@ -88,16 +88,17 @@ module.exports = router => {
       }
     }
 
-    // Populate session data with stateful application
-    req.session.data.applications = applications
-
     if (phase && state) {
+      // Populate session data with stateful application
+      req.session.data.applications = applications
       res.render('applications/index', {
         phase,
         state
       })
     } else if (utils.hasSubmittedApplications(req)) {
-      res.render('applications/index')
+      res.render('applications/index', {
+        phase
+      })
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
     } else {

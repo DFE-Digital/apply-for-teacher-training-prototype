@@ -1,5 +1,6 @@
 module.exports = {
   status: 'started',
+  welcomeFlow: false,
   choices: {
     ABCDE: {
       courseCode: '3DMD',

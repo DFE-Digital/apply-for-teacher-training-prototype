@@ -5,8 +5,9 @@
     {% include "_includes/item/choice.njk" %}
   {% endset %}
 
-  {% set canRespond = canMakeDecision and item.status == "offer" %}
-  {% set hasDecision =
+  {% set hasOffer = item.status == "offer" %}
+  {% set canRespond = hasOffer and canMakeDecision %}
+  {% set hasResponded =
     (item.status == "withdrawn")
     or (item.status == "accepted")
     or (item.status == "declined")
@@ -24,13 +25,13 @@
       } if canAmend, {
         href: applicationPath + "/" + item.id + "/withdraw?referrer=" + referrer,
         text: "Withdraw"
-      } if canWithdraw and not hasDecision, {
+      } if canWithdraw and not hasResponded and not hasOffer, {
         href: applicationPath + "/" + item.id + "/accept?referrer=" + referrer,
         text: "Accept offer"
-      } if canRespond and not hasDecision, {
+      } if canRespond and not hasResponded, {
         href: applicationPath + "/" + item.id + "/decline?referrer=" + referrer,
         text: "Decline offer"
-      } if canRespond and not hasDecision]
+      } if canRespond and not hasResponded]
     } if canAmend or canWithdraw or canRespond,
     html: courseHtml
   }) }}

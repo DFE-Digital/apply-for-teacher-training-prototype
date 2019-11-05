@@ -1,6 +1,8 @@
 const NotifyClient = require('notifications-node-client').NotifyClient
 const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 
+const providers = require('./../data/providers')
+
 // Emails will only send if the email address has been whitelisted
 const sendEmail = (req, template, personalisation) => {
   const email = req.session.data.account && req.session.data.account.email
@@ -14,6 +16,14 @@ const sendEmail = (req, template, personalisation) => {
       { personalisation }
     )
   }
+}
+
+const getProvider = (providerCode) => {
+  return providers[providerCode]
+}
+
+const getCourse = (providerCode, courseCode) => {
+  return providers[providerCode].courses[courseCode]
 }
 
 /**
@@ -42,8 +52,22 @@ module.exports = router => {
 
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
     const applicationId = req.params.applicationId
+    const application = req.session.data.applications[applicationId]
+    const candidateName = application['given-name'] || 'applicant'
+
+    const choices = []
+    for (const choice in application.choices) {
+      const { courseCode, providerCode } = application.choices[choice]
+      const provider = getProvider(providerCode)
+      const course = getCourse(providerCode, courseCode)
+      const result = `* ${provider.name} - ${course.name_and_code}\nStarting 5 September 2020`
+      choices.push(result)
+    }
+
     sendEmail(req, '99a20df5-564d-4612-810e-3788edf7285e', {
-      reference: applicationId
+      reference: applicationId,
+      candidateName,
+      choiceList: choices.join('\n')
     })
     res.redirect(`/application/${applicationId}/confirmation`)
   })

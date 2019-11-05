@@ -38,11 +38,11 @@
       </div>
     {% endif %}
 
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you've applied to</h2>
     {# Decline by default (DBD) #}
     {% if phase == "dbd" %}
       {{ govukInsetText({
-        text: "You have 10 days (until " + (10 | nowPlusDays("d MMMM yyyy")) + ") to make a decision."
+        html:"<b> All of your training providers have now reached a decision.</b> You have 10 working days (until " + (10 | nowPlusDays("d MMMM yyyy")) + ") to respond to any offers."
       })}}
     {% elif phase != "completed" %}
       <p class="govuk-body">Training providers must respond to you within 40 working days (by {{ 40 | nowPlusDays("d MMMM yyyy") }}).</p>
@@ -54,8 +54,8 @@
 
     {# Guidance about making a decision #}
     {% if canMakeDecision %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Choosing how to respond to offers</h2>
-      <p class="govuk-body">You can accept or reject offers as soon as they come in (if you do this, all your other applications will be withdrawn).
+      <h2 class="govuk-heading-m govuk-!-font-size-27">Choosing how to respond to training providers</h2>
+      <p class="govuk-body">You can accept or reject an offer from a training provider as soon as it comes in (if you do this, all your other applications will be withdrawn).
       <p class="govuk-body">Or, you can wait to hear back from all your training providers before making a decision.</p>
       <p class="govuk-body">Remember:</p>
       <ul class="govuk-list govuk-list--bullet">
@@ -65,6 +65,19 @@
     {% endif %}
 
     {# Guidance about withdrawing #}
+    Responding to training providers
+
+Now all of your training providers have reached a decision, you have 10 working days to respond to any offers.
+
+If you don’t respond, all your applications will be automatically withdrawn.
+
+Remember:
+
+you can only accept one offer, across both Apply for teacher training and UCAS teacher training
+if you fail to respond, or you decline all your offers, you can still apply to other courses in future
+you can get advice about future applications by registering with Get into Teaching https://getintoteaching.education.gov.uk
+
+
     {% if canWithdraw %}
       <h3 class="govuk-heading-s">Withdrawing an application</h3>
       <p class="govuk-body">You can withdraw an application from your chosen training providers at any point during the application process. You won’t be penalised, but at this stage, you can’t substitute a different provider.</p>

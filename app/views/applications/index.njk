@@ -45,7 +45,7 @@
         text: "You have 10 days (until " + (10 | nowPlusDays("d MMMM yyyy")) + ") to make a decision."
       })}}
     {% elif phase != "completed" %}
-      <p class="govuk-body">Training providers must respond to you by {{ 40 | nowPlusDays("d MMMM yyyy") }}.</p>
+      <p class="govuk-body">Training providers must respond to you within 40 working days (by {{ 40 | nowPlusDays("d MMMM yyyy") }}).</p>
     {% endif %}
 
     {# Course choices #}
@@ -54,8 +54,18 @@
 
     {# Guidance about making a decision #}
     {% if canMakeDecision %}
-      <h3 class="govuk-heading-s">Responding to offers</h3>
-      <p class="govuk-body"><mark>[Candidates are free to wait to make a decision once all providers have communicated their offers]</mark></p>
+      <h2 class="govuk-heading-m govuk-!-font-size-27">Choosing how to respond to offers</h2>
+      <p class="govuk-body">You can accept or reject offers as soon as they come in (if you do this, all your other applications will be withdrawn).
+
+      <p class="govuk-body">Or, you can wait to hear back from all your training providers before making a decision.</p>
+
+      <p class="govuk-body">Remember:
+        <ul class="govuk-list govuk-list--bullet">
+    <li>you are under no obligation to accept or reject an offer until all the decisions are in</li>
+    <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
+  </ul>
+
+
     {% endif %}
 
     {# Guidance about withdrawing #}

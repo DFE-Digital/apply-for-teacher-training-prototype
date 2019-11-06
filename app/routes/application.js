@@ -47,7 +47,6 @@ function createDummyApplication (status, decisions) {
 module.exports = router => {
   router.all('/applications', (req, res) => {
     const { phase, state } = req.query
-    // const data = req.session.data
 
     // Mock different application states if we ask for a state
     let applications

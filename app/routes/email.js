@@ -76,10 +76,18 @@ module.exports = router => {
       choices.push(result)
     }
 
-    sendEmail(req, '99a20df5-564d-4612-810e-3788edf7285e', {
+    let notifyTemplate
+    if (application.status === 'amended') {
+      notifyTemplate = '92231b36-2050-4f4a-b73b-b13a82fe6373'
+    } else {
+      notifyTemplate = '99a20df5-564d-4612-810e-3788edf7285e'
+    }
+
+    sendEmail(req, notifyTemplate, {
       reference: applicationId,
       candidateName,
-      choiceList: choices.join('\n')
+      choiceList: choices.join('\n'),
+      amendDate: nowPlusDays(7, 'd MMMM yyyy')
     })
     res.redirect(`/application/${applicationId}/confirmation`)
   })

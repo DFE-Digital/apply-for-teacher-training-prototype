@@ -1,4 +1,8 @@
-const dummy = require('./dummy-application')
+const dummyApplication = require('./dummy-application')
+
+const testData = {
+  12345: dummyApplication
+}
 
 module.exports = {
   visits_from_find: 0,
@@ -15,7 +19,5 @@ module.exports = {
     nationality: process.env.MVP !== 'true',
     referee_types: process.env.MVP !== 'true'
   },
-  applications: {
-    12345: process.env.PRODUCTION ? dummy : false
-  }
+  applications: (process.env.PRODUCTION === 'true') ? {} : testData
 }

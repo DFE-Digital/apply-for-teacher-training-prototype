@@ -2,6 +2,7 @@
 
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Decline offer" %}
+{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -14,7 +15,10 @@
   <h2 class="govuk-heading-m">Future applications</h2>
   <p class="govuk-body">You can decline this offer (and all other offers on current applications) and still apply to different training providers in future.</p>
   <p class="govuk-body">To do this, you’ll need to go through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.doUCAS">UCAS Teacher Training</a>.</p>
+
   {{ govukButton({
-    text: "Decline offer"
+    text: "Decline offer",
+    name: "decision",
+    value: "decline"
   }) }}
 {% endblock %}

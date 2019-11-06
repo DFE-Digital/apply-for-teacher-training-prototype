@@ -35,11 +35,16 @@ const nowPlusDays = (days, format = 'yyyy-LL-dd') => {
   }).toFormat(format)
 }
 
+// Default template values
+const conditionsList = '* Fitness to teach check\n* Disclosure and Barring Service check'
+const courseDate = '5 September 2020'
+const reasonsList = '* Candidate didn’t come to the interview or assessment'
+
 /**
  * Email routes
  */
 module.exports = router => {
-  // Send welcome email when account created
+  // Account: Welcome
   router.get('/account/account-created', (req, res) => {
     if (!req.session.data.welcomeEmailSent) {
       sendEmail(req, '8aa601b6-9985-471e-bd28-5fe0697820e5')
@@ -49,19 +54,19 @@ module.exports = router => {
     res.redirect('/application/start')
   })
 
-  // Send magic link to verify email address when creating an account
+  // Account: Sign up
   router.post('/send-email/create-account', (req, res) => {
     sendEmail(req, 'd19c241f-73f9-45da-a9cc-6613f9b3d2da')
     res.redirect('/account/check-email/create-account')
   })
 
-  // Send magic link to verify email address when signing in
+  // Account: Sign in
   router.post('/send-email/sign-in', (req, res) => {
     sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
     res.redirect('/account/check-email/sign-in')
   })
 
-  // Send confirmation email when application submitted
+  // Confirmation: (Amended) application submitted
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
     const applicationId = req.params.applicationId
     const application = req.session.data.applications[applicationId]
@@ -92,7 +97,7 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/confirmation`)
   })
 
-  // Send rejected application email
+  // Decision: Rejected/Offer made
   router.post('/admin/send-email', (req, res) => {
     const name = req.session.data.name
     const notifyTemplate = req.session.data['notify-template']
@@ -113,12 +118,58 @@ module.exports = router => {
       outstandingResponsesList,
 
       // Offer email
-      courseDate: '5 September 2020',
-      conditionsList: '* Fitness to teach check\n* Disclosure and Barring Service check',
+      courseDate,
+      conditionsList,
 
       // Rejected email
-      reasonsList: '* Candidate didn’t come to the interview or assessment'
+      reasonsList
     })
     res.redirect('/admin/send-email-success')
+  })
+
+  // Confirmation: Decision made
+  router.post('/send-email/:applicationId/:choiceId/decision', (req, res) => {
+    const applicationId = req.params.applicationId
+    const application = req.session.data.applications[applicationId]
+    const choiceId = req.params.choiceId
+    const { decision } = req.session.data
+
+    let phase
+    let notifyTemplate
+    const choice = application.choices[choiceId]
+    switch (decision) {
+      case 'withdraw': {
+        notifyTemplate = '9ac2723b-11c3-4491-9ec5-88b472403ea2'
+        choice.status = 'withdrawn'
+        break
+      }
+      case 'accept': {
+        notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
+        choice.status = 'accepted'
+        phase = 'decision'
+        break
+      }
+      case 'decline': {
+        notifyTemplate = '906399c1-8694-4430-bcbf-c12cc06fd5a7'
+        choice.status = 'declined'
+        phase = 'decision'
+        break
+      }
+    }
+
+    sendEmail(req, notifyTemplate, {
+      reference: applicationId,
+      candidateName: application['given-name'] || 'applicant',
+      providerName: '(Name of training provider)',
+      courseName: '(Name of course)',
+      courseDate,
+      conditionsList
+    })
+
+    if (phase) {
+      res.redirect(`/applications?phase=${phase}`)
+    } else {
+      res.redirect('/applications')
+    }
   })
 }

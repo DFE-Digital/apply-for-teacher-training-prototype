@@ -2,6 +2,7 @@
 
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Accept offer" %}
+{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -28,6 +29,8 @@
   }) }}
 
   {{ govukButton({
-    text: "Accept offer"
+    text: "Accept offer",
+    name: "decision",
+    value: "accept"
   }) }}
 {% endblock %}

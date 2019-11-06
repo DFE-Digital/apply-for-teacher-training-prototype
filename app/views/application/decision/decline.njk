@@ -11,9 +11,11 @@
 
 {% block primary %}
   <p class="govuk-body">You are declining an offer from {{ provider.name }} to study {{ course.name_and_code }}.
-  <h2 class="govuk-heading-m">Future applications</h2>
-  <p class="govuk-body">You can decline this offer (and all other offers on current applications) and still apply to different training providers in future.</p>
-  <p class="govuk-body">To do this, you’ll need to go through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.doUCAS">UCAS Teacher Training</a>.</p>
+  <h2 class="govuk-heading-m">Next steps</h2>
+  <p class="govuk-body">You can decline this offer (and all other offers on current applications) and still apply for more courses this year.</p>
+  <p class="govuk-body">To do this, you’ll need to go through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
+  <p class="govuk-body">Search for courses on <a href="https://www.gov.uk/find-postgraduate-teacher-training-courses">Find postgraduate teacher training</a>. You'll then be guided back to UCAS to make an application.</p>
+  <p class="govuk-body">You can also register with <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a> for advice and support.</p>
   {{ govukButton({
     text: "Decline offer"
   }) }}

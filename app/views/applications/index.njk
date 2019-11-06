@@ -23,14 +23,14 @@
     {% if phase == "amend" and application.status != "amended" %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
       {% if application.status == "submitted" %}
-        <p class="govuk-body">You have 5 days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 working days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
 
         {{ govukButton({
           text: "Edit your application",
           href: "/application/" + applicationId + "/edit"
         }) }}
       {% elif application.status == "amending" %}
-        <p class="govuk-body">You have 5 days remaining (until {{ 5 | nowPlusDays("d MMMM yyyy")}}) to submit the edits to your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 working days remaining (until {{ 5 | nowPlusDays("d MMMM yyyy")}}) to confirm your edits and resubmit your application, or change your choice of provider, course or training location.</p>
         {{ govukButton({
           text: "Continue editing application",
           href: "/application/" + applicationId
@@ -56,11 +56,11 @@
     {# Guidance about making a decision #}
     {% if canMakeDecision and phase == "decision" %}
       <h2 class="govuk-heading-m govuk-!-font-size-27">Choosing how to respond to training providers</h2>
-      <p class="govuk-body">You can accept or reject an offer from a training provider as soon as it comes in (if you do this, all your other applications will be withdrawn).
+      <p class="govuk-body">You can accept or decline an offer from a training provider as soon as it comes in (if you do this, all your other applications will be withdrawn).
       <p class="govuk-body">Or, you can wait to hear back from all your training providers before making a decision.</p>
       <p class="govuk-body">Remember:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>you are under no obligation to accept or reject an offer until all the decisions are in</li>
+        <li>you are under no obligation to accept or decline an offer until all the decisions are in</li>
         <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
       </ul>
     {% elif canMakeDecision and phase == "dbd" %}

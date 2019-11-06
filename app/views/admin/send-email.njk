@@ -1,0 +1,46 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Prototype admin" %}
+{% set title = "Send an email" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "javascript: window.history.go(-1)"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <h2 class="govuk-heading-m">Make a decision</h2>
+  {{ govukInput({
+    label: {
+      text: "Name of research participant"
+    },
+    attributes: {
+      spellcheck: "false"
+    },
+    name: "name",
+    value: data.name
+  }) }}
+
+  {{ govukButton({
+    classes: "govuk-button--secondary",
+    text: "Make offer",
+    name: "notify-template",
+    value: "2a3478f7-e1bb-45a5-ae3c-2acac1448087"
+  }) }}
+
+  {{ govukButton({
+    classes: "govuk-button--secondary",
+    text: "Reject application",
+    name: "notify-template",
+    value: "621e621d-66b6-4894-9f9e-7b9483929db7"
+  }) }}
+
+  {{ govukButton({
+    classes: "govuk-button--secondary",
+    text: "Make offer (and request decision)",
+    name: "notify-template",
+    value: "d1cde367-8ad8-4cb4-8e4f-f369f6699ade"
+  }) }}
+{% endblock %}

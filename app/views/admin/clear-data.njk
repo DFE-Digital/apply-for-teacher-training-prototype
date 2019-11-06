@@ -2,10 +2,11 @@
 
 {% set parent = "Prototype admin" %}
 {% set title = "Clear data?" %}
+{% set hasAccountLinks = false %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    "href": "javascript: window.history.go(-1)"
+    href: "javascript: window.history.go(-1)"
   }) }}
 {% endblock %}
 

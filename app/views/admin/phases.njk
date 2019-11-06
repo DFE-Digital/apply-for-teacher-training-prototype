@@ -2,11 +2,11 @@
 
 {% set parent = "Prototype admin" %}
 {% set title = "Application phases" %}
-{% set isSignedOut = true %}
+{% set hasAccountLinks = false %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    "href": "javascript: window.history.go(-1)"
+    href: "javascript: window.history.go(-1)"
   }) }}
 {% endblock %}
 

@@ -46,7 +46,7 @@ function createDummyApplication (status, decisions) {
  */
 module.exports = router => {
   router.all('/applications', (req, res) => {
-    const { phase, state, token } = req.query
+    let { phase, state, token } = req.query
 
     // Mock different application states if we ask for a state
     let applications
@@ -96,6 +96,13 @@ module.exports = router => {
         token
       })
     } else if (utils.hasSubmittedApplications(req)) {
+      // Set phase to `amend` if application has not been amended
+      const applications = utils.toArray(req.session.data.applications)
+      const application = applications[0]
+      if (application.status === 'submitted') {
+        phase = 'amend'
+      }
+
       res.render('applications/index', {
         phase,
         token

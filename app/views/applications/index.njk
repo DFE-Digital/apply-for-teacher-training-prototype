@@ -23,14 +23,14 @@
     {% if phase == "amend" and application.status != "amended" %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
       {% if application.status == "submitted" %}
-        <p class="govuk-body">You have 5 working days (until {{ 5 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 working days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
 
         {{ govukButton({
           text: "Edit your application",
           href: "/application/" + applicationId + "/edit"
         }) }}
       {% elif application.status == "amending" %}
-        <p class="govuk-body">You have 5 working days remaining (until {{ 5 | nowPlusDays("d MMMM yyyy")}}) to confirm your edits and resubmit your application, or change your choice of provider, course or training location.</p>
+        <p class="govuk-body">You have 5 working days remaining (until {{ 7 | nowPlusDays("d MMMM yyyy")}}) to confirm your edits and resubmit your application, or change your choice of provider, course or training location.</p>
         {{ govukButton({
           text: "Continue editing application",
           href: "/application/" + applicationId
@@ -43,10 +43,10 @@
     {# Decline by default (DBD) #}
     {% if phase == "dbd" %}
       {{ govukInsetText({
-        html:"<b> All of your training providers have now reached a decision.</b> You have 10 working days (until " + (10 | nowPlusDays("d MMMM yyyy")) + ") to respond to any offers."
+        html:"<b> All of your training providers have now reached a decision.</b> You have 10 working days (until " + (12 | nowPlusDays("d MMMM yyyy")) + ") to respond to any offers."
       })}}
     {% elif phase != "completed" %}
-      <p class="govuk-body">Training providers must respond to you within 40 working days (by {{ 40 | nowPlusDays("d MMMM yyyy") }}).</p>
+      <p class="govuk-body">Training providers must respond to you within 40 working days (by {{ 56 | nowPlusDays("d MMMM yyyy") }}).</p>
     {% endif %}
 
     {# Course choices #}

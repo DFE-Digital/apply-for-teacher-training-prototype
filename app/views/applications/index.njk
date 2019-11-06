@@ -13,14 +13,14 @@
 {% block primary %}
   {% for applicationId, application in applications %}
     {% set applicationPath = "/application/" + applicationId %}
-    {% set canAmend = application.status == "amending" %}
+    {% set canAmend = application.status == "amending" or phase == "amend" %}
     {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
     {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
     {% set showChoiceStatus = true %}
     {% set showReferenceStatus = true %}
 
     {# Amending an application #}
-    {% if phase == "amend" and application.status != "amended" %}
+    {% if canAmend %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
       {% if application.status == "submitted" %}
         <p class="govuk-body">You have 5 working days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
@@ -29,7 +29,7 @@
           text: "Edit your application",
           href: "/application/" + applicationId + "/edit"
         }) }}
-      {% elif application.status == "amending" %}
+      {% else %}
         <p class="govuk-body">You have 5 working days remaining (until {{ 7 | nowPlusDays("d MMMM yyyy")}}) to confirm your edits and resubmit your application, or change your choice of provider, course or training location.</p>
         {{ govukButton({
           text: "Continue editing application",
@@ -52,6 +52,13 @@
     {# Course choices #}
     {% set choices = application.choices | toArray %}
     {% include "_includes/review/choices.njk" %}
+    {% if choices | length < 3 and canAmend %}
+      {{ govukButton({
+        classes: "govuk-button--secondary govuk-!-margin-bottom-9",
+        text: "Add another course",
+        href: applicationPath + "/choices/add"
+      }) }}
+    {% endif %}
 
     {# Guidance about making a decision #}
     {% if canMakeDecision and phase == "decision" %}

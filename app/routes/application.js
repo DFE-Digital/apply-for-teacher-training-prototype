@@ -46,7 +46,7 @@ function createDummyApplication (status, decisions) {
  */
 module.exports = router => {
   router.all('/applications', (req, res) => {
-    const { phase, state } = req.query
+    const { phase, state, token } = req.query
 
     // Mock different application states if we ask for a state
     let applications
@@ -92,11 +92,13 @@ module.exports = router => {
       req.session.data.applications = applications
       res.render('applications/index', {
         phase,
-        state
+        state,
+        token
       })
     } else if (utils.hasSubmittedApplications(req)) {
       res.render('applications/index', {
-        phase
+        phase,
+        token
       })
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')

@@ -1,4 +1,5 @@
 {% if references %}
+  {% set canAmend = true if not hasSubmittedApplications() %}
   {% if not canAmend %}
     <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t supply a reference.</p>
   {% else %}

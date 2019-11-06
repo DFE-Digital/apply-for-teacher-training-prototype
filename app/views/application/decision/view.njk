@@ -3,6 +3,7 @@
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Details of offer" %}
 {% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
+{% set hasSecondary = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -18,9 +19,6 @@
     <li>Disclosure and Barring Service check</li>
   </ul>
   <p class="govuk-body">For help understanding or meeting these conditions, contact your training provider direct.</p>
-  <p class="govuk-body">You can also register with <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a> for advice and support through this process.</p>
-
-  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
   <div class="app-button-group">
     {{ govukButton({
@@ -37,4 +35,8 @@
       href: "/application/" + applicationId + "/" + choiceId + "/decline?referrer=" + referrer
     }) }}
   </div>
+{% endblock %}
+
+{% block secondary %}
+  {% include "_includes/need-help.njk" %}
 {% endblock %}

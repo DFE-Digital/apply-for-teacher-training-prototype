@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set parent = provider.name + " - " + course.name_and_code %}
-{% set title = "Offer" %}
+{% set title = "Details of offer" %}
 {% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
 
 {% block pageNavigation %}
@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">{{ provider.name }} has offered you a place on {{ course.name_and_code }}.
-  <p class="govuk-body">To accept, you must meet the following conditions:</p>
+  <p class="govuk-body">{{ provider.name }} has offered you a place to study {{ course.name_and_code }}.
+  <p class="govuk-body">To take up your place, you must meet the following conditions:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>Fitness to teach check</li>
     <li>Disclosure and Barring Service check</li>

@@ -1,0 +1,40 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Offer" %}
+{% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">{{ provider.name }} has offered you a place on {{ course.name_and_code }}.
+  <p class="govuk-body">To accept, you must meet the following conditions:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Fitness to teach check</li>
+    <li>Disclosure and Barring Service check</li>
+  </ul>
+  <p class="govuk-body">For help understanding or meeting these conditions, contact your training provider direct.</p>
+  <p class="govuk-body">You can also register with <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a> for advice and support through this process.</p>
+
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+  <div class="app-button-group">
+    {{ govukButton({
+      classes: "govuk-button--secondary",
+      text: "Accept offer",
+      href: "/application/" + applicationId + "/" + choiceId + "/accept?referrer=" + referrer
+    }) }}
+
+    <span class="app-button-group__divider">or</span>
+
+    {{ govukButton({
+      classes: "govuk-button--secondary",
+      text: "Decline offer",
+      href: "/application/" + applicationId + "/" + choiceId + "/decline?referrer=" + referrer
+    }) }}
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+$button-shadow-size: $govuk-border-width-form-element;
+
+.app-button-group {
+  @include govuk-responsive-margin(6, "bottom", $adjustment: $button-shadow-size);
+  display: flex;
+
+  .govuk-button {
+    margin-bottom: 0;
+  }
+}
+
+.app-button-group__divider {
+  @include govuk-font($size: 19, $line-height: 19px);
+  color: $govuk-secondary-text-colour;
+  margin: auto govuk-spacing(4);
+}

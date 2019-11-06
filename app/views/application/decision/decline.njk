@@ -3,18 +3,17 @@
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Decline offer" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer
+  }) }}
+{% endblock %}
+
 {% block primary %}
   <p class="govuk-body">You are declining an offer from {{ provider.name }} to study {{ course.name_and_code }}.
-  <p class="govuk-body">If you wished to take up this place, you would need to meet the following conditions:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>Fitness to teach check</li>
-    <li>Disclosure and Barring Service check</li>
-  </ul>
-  <p class="govuk-body">Do you need help understanding or meeting these conditions? If so, you should contact your training provider direct.</p>
   <h2 class="govuk-heading-m">Future applications</h2>
   <p class="govuk-body">You can decline this offer (and all other offers on current applications) and still apply to different training providers in future.</p>
   <p class="govuk-body">To do this, you’ll need to go through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.doUCAS">UCAS Teacher Training</a>.</p>
-  <p class="govuk-body">Register with <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a> for advice and support through this process.</p>
   {{ govukButton({
     text: "Decline offer"
   }) }}

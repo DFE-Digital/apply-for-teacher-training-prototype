@@ -3,6 +3,12 @@
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Withdrawal" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
 {% block primary %}
   <p class="govuk-body">You can withdraw your application to <strong>{{ course.name_and_code }}</strong> by emailing us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
   <p class="govuk-body">We’ll contact your training provider and send you an email confirming that your application has been withdrawn.</p>

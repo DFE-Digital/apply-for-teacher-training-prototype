@@ -1,22 +1,25 @@
 const providers = require('../../data/providers')
 
 module.exports = router => {
-  router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline)', (req, res) => {
+  router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const choiceId = req.params.choiceId
+    const referrer = req.query.referrer
 
     const choice = applicationData.choices[choiceId]
     const provider = providers[choice.providerCode]
     const course = provider.courses[choice.courseCode]
 
-    res.render(`application/${req.params.view}`, {
+    res.render(`application/decision/${req.params.view}`, {
       provider,
-      course
+      course,
+      choiceId,
+      referrer
     })
   })
 
-  router.post('/application/:applicationId/:choiceId/:view(withdraw|accept|decline)', (req, res) => {
+  router.post('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const choiceId = req.params.choiceId

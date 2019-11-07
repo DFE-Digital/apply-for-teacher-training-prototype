@@ -70,6 +70,12 @@
     {% endif %}
   {% endif %}
 
+  {# Guidance about steps after accepting an offer #}
+  {% if phase == "completed" %}
+    <h3 class="govuk-heading-s">Next steps</h3>
+    <p class="govuk-body">Your chosen provider will be in touch with you direct to explain what to do next.</p>
+  {% endif %}
+
   {# References #}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-6">References</h2>
   {% set references = application.referees %}

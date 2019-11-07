@@ -189,6 +189,7 @@ module.exports = router => {
           }
           return choice
         })
+        phase = 'completed'
         break
       }
       case 'decline': {

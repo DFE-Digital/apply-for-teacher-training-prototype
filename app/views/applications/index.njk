@@ -18,7 +18,7 @@
 
 {% block primary %}
   {% set applicationPath = "/application/" + applicationId %}
-  {% set canAmend = application.status == "amending" or phase == "amend" %}
+  {% set canAmend = application.status == "submitted" or application.status == "amending" or phase == "amend" %}
   {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
   {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
   {% set showChoiceStatus = true %}

@@ -35,10 +35,26 @@ const nowPlusDays = (days, format = 'yyyy-LL-dd') => {
   }).toFormat(format)
 }
 
-// Default template values
-const conditionsList = '* Fitness to teach check\n* Disclosure and Barring Service check'
-const courseDate = '5 September 2020'
-const reasonsList = '* Candidate didn’t come to the interview or assessment'
+// UR: Hard-coded template values for use during research sesions
+const urChoices = [{
+  // Participant declines offer on first choice
+  providerName: 'Gorse SCITT',
+  courseName: 'Primary (2XT2)',
+  courseDate: 'September 2020',
+  conditionsList: '* Fitness to teach check\n* Disclosure and Barring Service check'
+}, {
+  // Participant is rejected on second choice
+  providerName: 'Leeds Trinity University',
+  courseName: 'Primary (3-7) (2VLT)',
+  courseDate: 'September 2020',
+  reasonsList: '* Candidate didn’t come to the interview or assessment'
+}, {
+  // Participant accepts offer on third choice
+  providerName: 'Bradford College',
+  courseName: 'Primary (X100)',
+  courseDate: 'September 2020',
+  conditionsList: '* Fitness to teach check\n* Disclosure and Barring Service check'
+}]
 
 /**
  * Email routes
@@ -82,9 +98,11 @@ module.exports = router => {
     }
 
     let notifyTemplate
-    if (application.status === 'amended') {
+    if (application.status === 'amending') {
+      // Application is about to be amended
       notifyTemplate = '92231b36-2050-4f4a-b73b-b13a82fe6373'
     } else {
+      // Application is about to be submitted
       notifyTemplate = '99a20df5-564d-4612-810e-3788edf7285e'
     }
 
@@ -100,29 +118,44 @@ module.exports = router => {
   // Decision: Rejected/Offer made
   router.post('/admin/send-email', (req, res) => {
     const name = req.session.data.name
-    const notifyTemplate = req.session.data['notify-template']
+    const email = req.session.data.email
 
+    let notifyTemplate
+    let providerName
+    let courseName
+    let courseDate
     let outstandingResponsesList
-    if (notifyTemplate === '2a3478f7-e1bb-45a5-ae3c-2acac1448087') {
-      // Offer template
-      outstandingResponsesList = '* (Name of training provider) - (Name of course)\n* (Name of training provider) - (Name of course)'
-    } else {
-      outstandingResponsesList = '* (Name of training provider) - (Name of course)'
+    let conditionsList
+    let reasonsList
+    switch (email) {
+      case 'offer': {
+        notifyTemplate = '2a3478f7-e1bb-45a5-ae3c-2acac1448087';
+        ({ providerName, courseName, courseDate, conditionsList } = urChoices[0])
+        outstandingResponsesList = `* ${urChoices[1].providerName} — ${urChoices[1].courseName}\n* ${urChoices[2].providerName} — ${urChoices[2].courseName}`
+        break
+      }
+      case 'reject': {
+        notifyTemplate = '621e621d-66b6-4894-9f9e-7b9483929db7';
+        ({ providerName, courseName, courseDate, reasonsList } = urChoices[1])
+        outstandingResponsesList = `* ${urChoices[2].providerName} — ${urChoices[2].courseName}`
+        break
+      }
+      case 'final-offer': {
+        notifyTemplate = 'd1cde367-8ad8-4cb4-8e4f-f369f6699ade';
+        ({ providerName, courseName, courseDate, conditionsList } = urChoices[2])
+        break
+      }
     }
 
     sendEmail(req, notifyTemplate, {
       candidateName: name || 'candidate',
-      providerName: '(Name of training provider)',
-      courseName: '(Name of course)',
       dbdDate: nowPlusDays(12, 'd MMMM yyyy'),
-      outstandingResponsesList,
-
-      // Offer email
+      providerName,
+      courseName,
       courseDate,
-      conditionsList,
-
-      // Rejected email
-      reasonsList
+      outstandingResponsesList,
+      conditionsList, // Offer emails only
+      reasonsList // Reject emails only
     })
     res.redirect('/admin/send-email-success')
   })
@@ -157,13 +190,14 @@ module.exports = router => {
       }
     }
 
+    // UR: Decision is made on third course choice
     sendEmail(req, notifyTemplate, {
       reference: applicationId,
       candidateName: application['given-name'] || 'applicant',
-      providerName: '(Name of training provider)',
-      courseName: '(Name of course)',
-      courseDate,
-      conditionsList
+      providerName: urChoices[2].providerName,
+      courseName: urChoices[2].courseName,
+      courseDate: urChoices[2].courseDate,
+      conditionsList: urChoices[2].conditionsList
     })
 
     if (phase) {

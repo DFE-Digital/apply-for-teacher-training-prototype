@@ -3,40 +3,58 @@
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Details of offer" %}
 {% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
-{% set hasSecondary = true %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/applications"
-  }) }}
+  {% if phase %}
+    {{ govukBackLink({
+      href: "/applications?phase=" + phase
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/applications"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">{{ provider.name }} has offered you a place to study {{ course.name_and_code }}.
-  <p class="govuk-body">To take up your place, you must meet the following conditions:</p>
+  {% include "_includes/item/offer.njk" %}
+  <p class="govuk-body">Remember:</p>
   <ul class="govuk-list govuk-list--bullet">
-    <li>Fitness to teach check</li>
-    <li>Disclosure and Barring Service check</li>
+  {% if phase == "dbd" %}
+    <li>you can only accept one offer, across both Apply for teacher training and UCAS teacher training</li>
+    <li>if you fail to respond, or you decline all your offers, you can still apply to other courses in future</li>
+  {% else %}
+    <li>you are under no obligation to accept or decline an offer at this stage</li>
+    <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
+  {%endif %}
   </ul>
-  <p class="govuk-body">For help understanding or meeting these conditions, contact your training provider direct.</p>
 
-  <div class="app-button-group">
-    {{ govukButton({
-      classes: "govuk-button--secondary",
-      text: "Accept offer",
-      href: "/application/" + applicationId + "/" + choiceId + "/accept?referrer=" + referrer
-    }) }}
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "How do you want to respond to this offer?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    id: "decision",
+    name: "decision",
+    items: [{
+      value: "accept",
+      text: "Accept offer and conditions"
+    }, {
+      value: "decline",
+      text: "Decline offer"
+    }]
+  }) }}
 
-    <span class="app-button-group__divider">or</span>
+  {{ govukInput({
+    type: "hidden",
+    name: "phase",
+    value: phase
+  }) }}
 
-    {{ govukButton({
-      classes: "govuk-button--secondary",
-      text: "Decline offer",
-      href: "/application/" + applicationId + "/" + choiceId + "/decline?referrer=" + referrer
-    }) }}
-  </div>
-{% endblock %}
-
-{% block secondary %}
-  {% include "_includes/need-help.njk" %}
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

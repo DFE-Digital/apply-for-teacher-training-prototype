@@ -1,36 +1,26 @@
 {% extends "_form.njk" %}
 
-{% set parent = provider.name + " - " + course.name_and_code %}
-{% set title = "Accept offer" %}
+{% set title = "Are you sure you want to accept this offer?" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
-{% set hasSecondary = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer
+    href: "/applications/" + applicationId + "/" + choiceId + "/view" + ("?phase=" + phase if phase)
   }) }}
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You are accepting an offer from {{ provider.name }} to study {{ course.name_and_code }}.
+  {% include "_includes/item/offer.njk" %}
 
-  <p class="govuk-body">When you accept, all other applications made through Apply for teacher training will be automatically withdrawn.</p>
-
-  {{ govukCheckboxes({
-    items: [{
-      value: "true",
-      text: "I confirm I have not accepted any other offers of teacher training places (for example through UCAS Teacher Training)"
-    }],
-    name: "accept"
-  }) }}
+  <p class="govuk-body">I confirm that:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>I understand all other applications made through Apply for teacher training will be automatically withdrawn</li>
+    <li>I have not accepted any other offers of teacher training places (for example through UCAS Teacher Training)</li>
+  </ul>
 
   {{ govukButton({
     text: "Accept offer",
     name: "decision",
     value: "accept"
   }) }}
-{% endblock %}
-
-{% block secondary %}
-  {% include "_includes/need-help.njk" %}
 {% endblock %}

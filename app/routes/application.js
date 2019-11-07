@@ -96,10 +96,10 @@ module.exports = router => {
         token
       })
     } else if (utils.hasSubmittedApplications(req)) {
-      // Set phase to `amend` if application has not been amended
+      // Set phase to `amend` if application has not been amended and no phase set
       const applications = utils.toArray(req.session.data.applications)
       const application = applications[0]
-      if (application.status === 'submitted') {
+      if (!phase && application.status === 'submitted') {
         phase = 'amend'
       }
 

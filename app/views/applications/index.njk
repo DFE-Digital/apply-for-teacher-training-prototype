@@ -2,7 +2,7 @@
 
 {% set title = "Application dashboard" %}
 {% set hasSecondary = true %}
-{% set referrer = "/applications" %}
+{% set referrer = "/applications&phase=" + phase %}
 {% set applications = applications or data.applications %}
 {% set applicationId = "" %}
 {% set application = "" %}
@@ -18,40 +18,28 @@
 
 {% block primary %}
   {% set applicationPath = "/application/" + applicationId %}
-  {% set canAmend = application.status == "submitted" or application.status == "amending" or phase == "amend" %}
+  {% set canAmend = phase == "amend" and application.status == "amending" %}
+  {% set hasAmended = application.status == "amended" %}
   {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
   {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
   {% set showChoiceStatus = true %}
   {% set showReferenceStatus = true %}
 
-  {# Amending an application #}
+  {# Application mid-way through being amended #}
   {% if canAmend %}
-    <div class="govuk-inset-text govuk-!-margin-top-0">
-    {% if application.status == "submitted" %}
-      <p class="govuk-body">You have 5 working days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
-
-      {{ govukButton({
-        text: "Edit your application",
-        href: "/application/" + applicationId + "/edit"
-      }) }}
-    {% else %}
-      <p class="govuk-body">You have 5 working days remaining (until {{ 7 | nowPlusDays("d MMMM yyyy")}}) to confirm your edits and resubmit your application, or change your choice of provider, course or training location.</p>
-      {{ govukButton({
-        text: "Continue editing application",
-        href: "/application/" + applicationId
-      }) }}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Your application</h2>
+    {{ govukWarningText({
+      html: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application. <a href=\"/application/" + applicationId + "\">Continue editing application</a>",
+      iconFallbackText: "Warning"
+    }) }}
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
+    {# Decision deadlines #}
+    {% if phase == "dbd" %}
+      <p class="govuk-body"><strong>All training providers have reached a decision.</strong> You now have 12 days (until {{ 12 | nowPlusDays("d MMMM yyyy") }}) to respond to any offers. If you don’t respond, your applications will be automatically withdrawn.</p>
+    {% elif phase != "completed" %}
+      <p class="govuk-body">Training providers must respond to you by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
     {% endif %}
-    </div>
-  {% endif %}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
-  {# Decline by default (DBD) #}
-  {% if phase == "dbd" %}
-    {{ govukInsetText({
-      html:"<b> All of your training providers have now reached a decision.</b> You have 10 working days (until " + (12 | nowPlusDays("d MMMM yyyy")) + ") to respond to any offers."
-    })}}
-  {% elif phase != "completed" %}
-    <p class="govuk-body">Training providers must respond to you within 40 working days (by {{ 56 | nowPlusDays("d MMMM yyyy") }}).</p>
   {% endif %}
 
   {# Course choices #}
@@ -59,41 +47,31 @@
   {% include "_includes/review/choices.njk" %}
   {% if choices | length < 3 and canAmend %}
     {{ govukButton({
-      classes: "govuk-button--secondary govuk-!-margin-bottom-9",
+      classes: "govuk-button--secondary",
       text: "Add another course",
       href: applicationPath + "/choices/add"
     }) }}
   {% endif %}
 
+  {# Guidance about amending an application #}
+  {% if phase == "amend" and application.status == "submitted" %}
+    <h3 class="govuk-heading-s">Making changes to your application</h3>
+    <p class="govuk-body">You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+    <p class="govuk-body"><a href="/application/{{ applicationId }}/edit">Edit your application</a></p>
+  {% endif %}
+
   {# Guidance about making a decision #}
-  {% if canMakeDecision and phase == "decision" %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Choosing how to respond to training providers</h2>
-    <p class="govuk-body">You can accept or decline an offer from a training provider as soon as it comes in (if you do this, all your other applications will be withdrawn).
-    <p class="govuk-body">Or, you can wait to hear back from all your training providers before making a decision.</p>
-    <p class="govuk-body">Remember:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you are under no obligation to accept or decline an offer until all the decisions are in</li>
-      <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
-    </ul>
-  {% elif canMakeDecision and phase == "dbd" %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Responding to training providers</h2>
-    <p class="govuk-body">Now all of your training providers have reached a decision, you have 10 working days to respond to any offers.</p>
-    <p class="govuk-body">If you don’t respond, all your applications will be automatically withdrawn.</p>
-    <p class="govuk-body">Remember:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you can only accept one offer, across both Apply for teacher training and UCAS teacher training</li>
-      <li>if you fail to respond, or you decline all your offers, you can still apply to other courses in future</li>
-      <li>you can get advice about future applications by registering with <a href="https://getintoteaching.education.gov.uk">Get into Teaching</a></li>
-    </ul>
+  {% if (canMakeDecision and phase != "dbd") or canWithdraw %}
+    <h3 class="govuk-heading-s">Making a decision</h3>
+    <p class="govuk-body">You can wait to hear back from all your training providers before making a decision. If you accept an offer now, your remaining applications will be withdrawn.</p>
+    {% if canWithdraw %}
+      <h3 class="govuk-heading-s">Withdrawing an application</h3>
+      <p class="govuk-body">You can withdraw an application from a chosen training provider at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.</p>
+    {% endif %}
   {% endif %}
 
-  {% if canWithdraw %}
-    <h3 class="govuk-heading-s">Withdrawing an application</h3>
-    <p class="govuk-body">You can withdraw an application from your chosen training providers at any point during the application process. You won’t be penalised, but at this stage, you can’t substitute a different provider.</p>
-    <p class="govuk-body"> You can learn more  about applying to different providers after this first round of applications by visiting <a href=\"https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training/applying-through-ucas-teacher-training/\">Get into Teaching.</a></p>
-  {% endif %}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {# References #}
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-6">References</h2>
   {% set references = application.referees %}
   {% include "_includes/review/references.njk" %}
 {% endblock %}

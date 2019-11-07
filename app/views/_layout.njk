@@ -119,6 +119,9 @@
         href: "/admin",
         text: "Prototype admin"
       } if not urStudy, {
+        href: "/admin/clear-data",
+        text: "Clear data"
+      } if not urStudy, {
         href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=1",
         text: "v1"
       } if providerCode and courseCode, {

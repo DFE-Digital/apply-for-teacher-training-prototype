@@ -1,30 +1,23 @@
 {% extends "_form.njk" %}
 
-{% set parent = provider.name + " - " + course.name_and_code %}
-{% set title = "Decline offer" %}
+{% set title = "Are you sure you want to decline this offer?" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
-{% set hasSecondary = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer
+    href: "/applications/" + applicationId + "/" + choiceId + "/view" + ("?phase=" + phase if phase)
   }) }}
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You are declining an offer from {{ provider.name }} to study {{ course.name_and_code }}.
-  <h2 class="govuk-heading-m">Next steps</h2>
-  <p class="govuk-body">You can decline this offer (and all other offers on current applications) and still apply for more courses this year.</p>
-  <p class="govuk-body">To do this, you’ll need to go through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
-  <p class="govuk-body">Search for courses on <a href="https://www.gov.uk/find-postgraduate-teacher-training-courses">Find postgraduate teacher training</a>. You'll then be guided back to UCAS to make an application.</p>
+  {% include "_includes/item/offer.njk" %}
+
+  <p class="govuk-body">If you decline this offer (and all other offers on current applications) you can still apply for more courses this year through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
 
   {{ govukButton({
-    text: "Decline offer",
+    classes: "govuk-button--warning",
+    text: "Yes I’m sure - decline this offer",
     name: "decision",
     value: "decline"
   }) }}
-{% endblock %}
-
-{% block secondary %}
-  {% include "_includes/need-help.njk" %}
 {% endblock %}

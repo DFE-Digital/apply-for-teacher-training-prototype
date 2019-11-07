@@ -13,7 +13,6 @@
     or (item.status == "declined")
     or (item.status == "rejected")
   %}
-
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,
@@ -26,7 +25,7 @@
         href: applicationPath + "/" + item.id + "/withdraw",
         text: "Withdraw"
       } if canWithdraw and not hasResponded and not hasOffer, {
-        href: applicationPath + "/" + item.id + "/view",
+        href: applicationPath + "/" + item.id + "/view?phase=" + phase,
         text: "View and respond to offer"
       } if canRespond and not hasResponded]
     } if canAmend or canWithdraw or canRespond,

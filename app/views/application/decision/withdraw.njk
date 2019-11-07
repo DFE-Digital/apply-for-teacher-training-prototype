@@ -3,7 +3,6 @@
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Withdrawal" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
-{% set hasSecondary = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -21,8 +20,4 @@
     name: "decision",
     value: "withdraw"
   }) #}
-{% endblock %}
-
-{% block secondary %}
-  {% include "_includes/need-help.njk" %}
 {% endblock %}

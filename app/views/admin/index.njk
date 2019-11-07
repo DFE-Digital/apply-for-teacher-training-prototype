@@ -1,0 +1,19 @@
+{% extends "_form.njk" %}
+
+{% set title = "Prototype admin" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "javascript: window.history.go(-1)"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <ul class="govuk-list govuk-list--bullet">
+    <li><a href="/admin/clear-data">Clear data</a></li>
+    <li><a href="/admin/flags">View feature flags</a></li>
+    <li><a href="/admin/send-email">Send email</a></li>
+    <li><a href="/admin/phases">Mock application phases</a></li>
+  </ul>
+{% endblock %}

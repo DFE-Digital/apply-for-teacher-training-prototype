@@ -180,6 +180,15 @@ module.exports = router => {
         notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
         choice.status = 'accepted'
         phase = 'decision'
+
+        // Set remaining course choice statuses to `withdrawn`
+        const { choices } = application
+        application.choices = choices.map(choice => {
+          if (choice.status === 'offer') {
+            choice.status = 'withdrawn'
+          }
+          return choice
+        })
         break
       }
       case 'decline': {

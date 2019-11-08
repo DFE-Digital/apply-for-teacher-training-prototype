@@ -5,14 +5,27 @@
     {% include "_includes/item/choice.njk" %}
   {% endset %}
 
-  {% set hasOffer = item.status == "offer" %}
-  {% set canRespond = hasOffer and canMakeDecision %}
+  {# Can respond if within a decision phase and have an offer #}
+  {% set canRespond = canMakeDecision and
+    item.status == "offer"
+  %}
+
+  {# Can withdraw if post-submission and not already withdrawn choice #}
+  {% set canWithdraw = canWithdraw and
+    (item.status != "declined")
+    and (item.status != "offer")
+    and (item.status != "rejected")
+    and (item.status != "withdrawn")
+  %}
+
+  {# Candidate has already responded #}
   {% set hasResponded =
-    (item.status == "withdrawn")
-    or (item.status == "accepted")
+    (item.status == "accepted")
     or (item.status == "declined")
     or (item.status == "rejected")
+    or (item.status == "withdrawn")
   %}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,
@@ -24,7 +37,7 @@
       } if canAmend, {
         href: applicationPath + "/" + item.id + "/withdraw",
         text: "Withdraw"
-      } if canWithdraw and not hasResponded and not hasOffer, {
+      } if canWithdraw, {
         href: applicationPath + "/" + item.id + "/view?phase=" + phase,
         text: "View and respond to offer"
       } if canRespond and not hasResponded]

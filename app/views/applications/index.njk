@@ -20,52 +20,53 @@
   {% set applicationPath = "/application/" + applicationId %}
   {% set canAmend = phase == "amend" and application.status == "amending" %}
   {% set hasAmended = application.status == "amended" %}
-  {% set canWithdraw = (phase == "selection") or (phase == "decision") %}
+  {% set canWithdraw = (phase != "amend") %}
   {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
   {% set showChoiceStatus = true %}
   {% set showReferenceStatus = true %}
 
-  {# Application mid-way through being amended #}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">
   {% if canAmend %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Your application</h2>
+    Your application
+  {% elif phase == "decision" %}
+    We’re waiting to hear back from all of your training providers</h2>
+  {% elif phase == "dbd" %}
+    All training providers have now reached a decision
+  {% elif phase == "completed" %}
+    You have completed the application process
+  {% else %}
+    Courses you’ve applied to
+  {% endif %}
+  </h2>
+
+  {# Guidance about amending an application #}
+  {% if phase == "amend" and application.status == "submitted" %}
+    <div class="govuk-inset-text">
+      <p class="govuk-body">You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
+      <p class="govuk-body"><a href="/application/{{ applicationId }}/edit">Edit your application</a></p>
+    </div>
+  {% elif phase == "amend" and application.status == "amending" %}
     {{ govukWarningText({
       html: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application. <a href=\"/application/" + applicationId + "\">Continue editing application</a>",
       iconFallbackText: "Warning"
     }) }}
-  {% else %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses you’ve applied to</h2>
-    {# Decision deadlines #}
-    {% if phase == "dbd" %}
-      <p class="govuk-body"><strong>All training providers have reached a decision.</strong> You now have 12 days (until {{ 12 | nowPlusDays("d MMMM yyyy") }}) to respond to any offers. If you don’t respond, your applications will be automatically withdrawn.</p>
-    {% elif phase != "completed" %}
-      <p class="govuk-body">Training providers must respond to you by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
-    {% endif %}
-  {% endif %}
-
-  {# Guidance about amending an application #}
-  {% if phase == "amend" and application.status == "submitted" %}
-    <h3 class="govuk-heading-s">Making changes to your application</h3>
-    <p class="govuk-body">You have 7 days (until {{ 7 | nowPlusDays("d MMMM yyyy") }}) to edit your application or change your choice of provider, course or training location.</p>
-    <p class="govuk-body"><a href="/application/{{ applicationId }}/edit">Edit your application</a></p>
   {% endif %}
 
   {# Guidance about making a decision #}
-  {% if (canMakeDecision and phase != "dbd") or canWithdraw %}
-    <h3 class="govuk-heading-s">Making a decision</h3>
-    <p class="govuk-body">You can wait to hear back from all your training providers before making a decision. If you accept an offer now, your remaining applications will be withdrawn.</p>
-    {% if canWithdraw %}
-      <h3 class="govuk-heading-s">Withdrawing an application</h3>
-      <p class="govuk-body">You can withdraw an application from a chosen training provider at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.</p>
-    {% endif %}
+  {% if not canAmend and phase != "dbd" and phase != "completed" %}
+    <p class="govuk-body">Training providers must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
+  {% endif %}
+  {% if canMakeDecision and phase == "decision" %}
+    <p class="govuk-body">If you accept an offer now, your remaining applications will be withdrawn.</p>
+  {% elif canMakeDecision and phase == "dbd" %}
+    <p class="govuk-body">You have 12 days (until {{ 12 | nowPlusDays("d MMMM yyyy") }}) to respond to any offers. If you don’t respond, your applications will be automatically withdrawn.</p>
   {% endif %}
 
   {# Guidance about steps after accepting an offer #}
   {% if phase == "completed" %}
-    <h3 class="govuk-heading-s">Next steps</h3>
     <p class="govuk-body">Your chosen provider will be in touch with you direct to explain what to do next.</p>
   {% endif %}
 
-  {# Course choices #}
   {% set choices = application.choices | toArray %}
   {% include "_includes/review/choices.njk" %}
   {% if choices | length < 3 and canAmend %}
@@ -76,8 +77,13 @@
     }) }}
   {% endif %}
 
+  {# Guidance about withdrawing #}
+  {% if (phase != "amend") %}
+    <p class="govuk-body">You can withdraw an application from a chosen training provider at any point during the application process. You won’t be penalised, but you can’t substitute a different provider.</p>
+  {% endif %}
+
   {# References #}
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-6">References</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">References</h2>
   {% set references = application.referees %}
   {% include "_includes/review/references.njk" %}
 {% endblock %}

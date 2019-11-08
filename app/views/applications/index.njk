@@ -42,17 +42,6 @@
     {% endif %}
   {% endif %}
 
-  {# Course choices #}
-  {% set choices = application.choices | toArray %}
-  {% include "_includes/review/choices.njk" %}
-  {% if choices | length < 3 and canAmend %}
-    {{ govukButton({
-      classes: "govuk-button--secondary",
-      text: "Add another course",
-      href: applicationPath + "/choices/add"
-    }) }}
-  {% endif %}
-
   {# Guidance about amending an application #}
   {% if phase == "amend" and application.status == "submitted" %}
     <h3 class="govuk-heading-s">Making changes to your application</h3>
@@ -74,6 +63,17 @@
   {% if phase == "completed" %}
     <h3 class="govuk-heading-s">Next steps</h3>
     <p class="govuk-body">Your chosen provider will be in touch with you direct to explain what to do next.</p>
+  {% endif %}
+
+  {# Course choices #}
+  {% set choices = application.choices | toArray %}
+  {% include "_includes/review/choices.njk" %}
+  {% if choices | length < 3 and canAmend %}
+    {{ govukButton({
+      classes: "govuk-button--secondary",
+      text: "Add another course",
+      href: applicationPath + "/choices/add"
+    }) }}
   {% endif %}
 
   {# References #}

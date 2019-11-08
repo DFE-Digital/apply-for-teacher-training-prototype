@@ -16,6 +16,7 @@
     and (item.status != "offer")
     and (item.status != "rejected")
     and (item.status != "withdrawn")
+    or (item.status == "pending")
   %}
 
   {# Candidate has already responded #}

@@ -5,7 +5,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+    href: "javascript: window.history.go(-1)"
   }) }}
 {% endblock %}
 

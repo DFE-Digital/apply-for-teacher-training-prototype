@@ -34,7 +34,7 @@
   {% set applicationPath = "/application/" + applicationId %}
   {% set canAmend = phase == "amend" and application.status == "amending" %}
   {% set hasAmended = application.status == "amended" %}
-  {% set canWithdraw = (phase != "amend") %}
+  {% set canWithdraw = (application.status != "submitted") or (phase != "amend") %}
   {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
   {% set showChoiceStatus = true %}
   {% set showReferenceStatus = true %}

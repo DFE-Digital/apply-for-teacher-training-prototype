@@ -25,19 +25,21 @@ module.exports = router => {
   router.get('/account/sign-in', (req, res) => {
     const { phase, status, token } = req.query
 
-    // Get most recent application
-    const applications = utils.toArray(req.session.data.applications)
-    const application = applications[0]
+    if (status) {
+      // Get most recent application
+      const applications = utils.toArray(req.session.data.applications)
+      const application = applications[0]
 
-    // Get statuses
-    const statuses = status.split(',')
+      // Get statuses
+      const statuses = status.split(',')
 
-    // Get choices still pending a decision
-    const choices = utils.toArray(application.choices)
-    application.choices = choices.map((choice, i) => {
-      choice.status = statuses[i]
-      return choice
-    })
+      // Get choices still pending a decision
+      const choices = utils.toArray(application.choices)
+      application.choices = choices.map((choice, i) => {
+        choice.status = statuses[i]
+        return choice
+      })
+    }
 
     res.render('account/sign-in', {
       phase,

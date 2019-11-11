@@ -1,8 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set parent = provider.name + " - " + course.name_and_code %}
-{% set title = "Withdrawal" %}
-{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
+{% if data.flags.self_withdraw %}
+  {% set title = "Are you sure you want to withdraw this course choice?" %}
+  {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
+{% else %}
+  {% set title = "Withdrawal" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -12,9 +15,13 @@
 
 {% block primary %}
   {% if data.flags.self_withdraw %}
+    {% include "_includes/item/offer.njk" %}
+
+    <p class="govuk-body">If you withdraw this course choice (and all your other course choices), you can still apply for more courses this year through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
+
     {{ govukButton({
       classes: "govuk-button--warning",
-      text: "Withdraw application",
+      text: "Yes I’m sure - withdraw this course choice",
       name: "decision",
       value: "withdraw"
     }) }}

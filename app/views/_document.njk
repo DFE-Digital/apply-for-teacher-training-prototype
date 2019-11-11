@@ -10,6 +10,9 @@
       </h1>
     {% endif %}
     {% block primary %}
+    <div class="app-styled-content">
+      {{ content | markdown | safe }}
+    </div>
     {% endblock %}
     </div>
     {% if hasSecondary %}

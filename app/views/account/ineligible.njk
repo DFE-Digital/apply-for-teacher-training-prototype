@@ -1,4 +1,4 @@
-{% extends "_guidance.njk" %}
+{% extends "_document.njk" %}
 
 {% set title = "We’re sorry, but we’re not ready for you yet" %}
 {% set hasAccountLinks = false %}
@@ -9,9 +9,12 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
-  <p class="govuk-body">Apply for teacher training is still in development, so for now, we have to limit candidate numbers.</p>
-  <p class="govuk-body govuk-!-font-weight-bold">You can apply for all teacher training courses and providers using UCAS.</p>
-  <p class="govuk-body">You’ll need to register with UCAS before you can apply.</p>
-  <p><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
-{% endblock %}
+{% set content %}
+Apply for teacher training is still in development, so for now, we have to limit candidate numbers.
+
+**You can apply for all teacher training courses and providers using UCAS**.
+
+You’ll need to register with UCAS before you can apply.
+
+[Apply on UCAS](https://2020.teachertraining.apply.ucas.com/apply/student/login.do)
+{% endset %}

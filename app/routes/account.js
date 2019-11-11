@@ -25,6 +25,11 @@ module.exports = router => {
   router.get('/account/sign-in', (req, res) => {
     const { phase, status, token } = req.query
 
+    if (phase) {
+      // Update application phase
+      req.session.data.phase = phase
+    }
+
     if (status) {
       // Get most recent application
       const applications = utils.toArray(req.session.data.applications)
@@ -41,11 +46,12 @@ module.exports = router => {
       })
     }
 
-    res.render('account/sign-in', {
-      phase,
-      status,
-      token
-    })
+    if (token) {
+      // Set data.token value when signing out
+      req.session.data.token = true
+    }
+
+    res.render('account/sign-in')
   })
 
   // Remove data.token value when signing out

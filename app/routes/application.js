@@ -46,7 +46,8 @@ function createDummyApplication (status, decisions) {
  */
 module.exports = router => {
   router.all('/applications', (req, res) => {
-    let { phase, state, token } = req.query
+    const { state } = req.query
+    const phase = req.query.phase || req.session.data.phase
 
     // Mock different application states if we ask for a state
     let applications
@@ -92,13 +93,11 @@ module.exports = router => {
       req.session.data.applications = applications
       res.render('applications/index', {
         phase,
-        state,
-        token
+        state
       })
     } else if (utils.hasSubmittedApplications(req)) {
       res.render('applications/index', {
-        phase,
-        token
+        phase
       })
     } else if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
@@ -173,12 +172,6 @@ module.exports = router => {
     })
   })
 
-  // Export data
-  router.get('/application/:applicationId/export', (req, res) => {
-    const applicationId = req.params.applicationId
-    res.json(req.session.data.applications[applicationId])
-  })
-
   require('./application/choices')(router)
   require('./application/personal-details')(router)
   require('./application/contact-details')(router)
@@ -194,7 +187,7 @@ module.exports = router => {
   require('./application/interview')(router)
   require('./application/references')(router)
   require('./application/equality-monitoring')(router)
-  require('./application/submit')(router)
+  require('./application/confirmation')(router)
   require('./application/edit')(router)
   require('./application/decision')(router)
 

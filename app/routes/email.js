@@ -164,9 +164,8 @@ module.exports = router => {
     const applicationId = req.params.applicationId
     const application = req.session.data.applications[applicationId]
     const choiceId = req.params.choiceId
-    const { decision } = req.session.data
+    let { decision, phase } = req.session.data
 
-    let phase
     let notifyTemplate
     const choice = application.choices[choiceId]
     switch (decision) {
@@ -178,7 +177,6 @@ module.exports = router => {
       case 'accept': {
         notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
         choice.status = 'accepted'
-        phase = 'decision'
 
         // Set remaining course choice statuses to `withdrawn`
         const { choices } = application

@@ -19,7 +19,9 @@
       value: "withdraw"
     }) }}
   {% else %}
-    <p class="govuk-body">You can withdraw your application to study <strong>{{ course.name_and_code }}</strong> at <strong>{{ provider.name }}</strong> by emailing us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+    <p class="govuk-body">You can withdraw your application to study:</p>
+    <p class="govuk-body"><strong>{{ course.name_and_code }} at {{ provider.name }}</strong></p>
+    <p class="govuk-body">by emailing us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
     <p class="govuk-body">We’ll contact your training provider and send you an email confirming that your application has been withdrawn.</p>
   {% endif %}
 {% endblock %}

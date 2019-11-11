@@ -2,8 +2,9 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set choices = applicationValue("choices") | toArray %}
 {% set title = "Course choices" %}
+{% set showChoiceStatus = false %}
+{% set choices = applicationValue("choices") | toArray %}
 
 {% block pageNavigation %}
   {% if not applicationValue('welcomeFlow') %}
@@ -23,7 +24,7 @@
 {% block primary %}
   {% if choices %}
     {% set referrer = applicationPath + "/choices" %}
-    {% set review = true %}
+    {% set canAmend = true %}
     {% include "_includes/review/choices.njk" %}
     {% if choices | length < 3 %}
       <div class="govuk-grid-row">

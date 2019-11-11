@@ -19,7 +19,7 @@
     {{ govukBreadcrumbs({
       items: [{
         text: "Application dashboard",
-        href: "/applications" + ("?state=isWithinAmendPeriod" if status == "amending")
+        href: "/applications" + ("?phase=amend" if status == "amending")
       }, {
         text: title | safe
       }]
@@ -29,12 +29,12 @@
 
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
-  <p class="govuk-hint govuk-!-margin-bottom-8">Last saved on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}
+  <p class="govuk-hint govuk-!-margin-bottom-8">Last saved on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}</p>
 {% endblock %}
 
 {% block primary %}
   {{ govukWarningText({
-    text: "You have 5 days remaining (until " + (5 | nowPlusDays("d MMMM yyyy")) + ") to resubmit your edited application",
+    text: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application",
     iconFallbackText: "Warning"
   }) if status == "amending" }}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
@@ -202,10 +202,5 @@
 {% endblock %}
 
 {% block secondary %}
-  {{ appRelated({
-    title: "Need help?",
-    content: {
-      html: "Call <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a> on Freephone 0800 389 2500 or chat to an adviser using their <a href=\"https://getintoteaching.education.gov.uk/lp/live-chat\">online chat service</a> between 8am and 8pm, Monday to Friday"
-    }
-  }) }}
+  {% include "_includes/need-help.njk" %}
 {% endblock %}

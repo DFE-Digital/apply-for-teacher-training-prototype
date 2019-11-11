@@ -22,9 +22,9 @@ module.exports = (nunjucksAppEnv, app) => {
       }
 
       // Get the most recently added qualification
-      var qualifications = getApplicationValue(sections.slice(0,1))
+      var qualifications = getApplicationValue(sections.slice(0, 1))
 
-      if (!qualifications || Object.values(qualifications).length == 0) {
+      if (!qualifications || Object.values(qualifications).length === 0) {
         return null
       }
 
@@ -41,10 +41,9 @@ module.exports = (nunjucksAppEnv, app) => {
       var storedValue = getApplicationValue(sections)
 
       // Prefill qualification values based on previous answers
-      if (!storedValue
-            && !sections.includes('completed')
-            && sections.includes('other-qualifications')) {
-
+      if (!storedValue &&
+        !sections.includes('completed') &&
+        sections.includes('other-qualifications')) {
         storedValue = prefillPreviousQualificationValues(sections)
       }
 

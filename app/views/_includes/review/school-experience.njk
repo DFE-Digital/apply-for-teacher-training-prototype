@@ -27,7 +27,7 @@
             href: applicationPath + "/school-experience/" + item.id + "/delete?referrer=" + referrer,
             text: "Delete role"
           }]
-        } if review == true,
+        } if canAmend,
         html: roleHtml
       }) }}
     {% endfor %}

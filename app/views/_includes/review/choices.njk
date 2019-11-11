@@ -1,10 +1,32 @@
-{% for choice in choices %}
-  {% set provider = providers[choice.providerCode] %}
-  {% set course = provider.courses[choice.courseCode] %}
-  {% set item = choice %}
+{% for item in choices %}
+  {% set provider = providers[item.providerCode] %}
+  {% set course = provider.courses[item.courseCode] %}
   {% set courseHtml %}
     {% include "_includes/item/choice.njk" %}
   {% endset %}
+
+  {# Can respond if within a decision phase and have an offer #}
+  {% set canRespond = canMakeDecision and
+    item.status == "offer"
+  %}
+
+  {# Can withdraw if post-submission and not already withdrawn choice #}
+  {% set canWithdraw = canWithdraw and
+    (item.status != "declined")
+    and (item.status != "offer")
+    and (item.status != "rejected")
+    and (item.status != "withdrawn")
+    or (item.status == "pending")
+  %}
+
+  {# Candidate has already responded #}
+  {% set hasResponded =
+    (item.status == "accepted")
+    or (item.status == "declined")
+    or (item.status == "rejected")
+    or (item.status == "withdrawn")
+  %}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,
@@ -13,11 +35,14 @@
       items: [{
         href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
         text: "Delete choice"
-      } if review == true, {
-        href: applicationPath + "/" + item.id + "/withdraw?referrer=" + referrer,
+      } if canAmend, {
+        href: applicationPath + "/" + item.id + "/withdraw",
         text: "Withdraw"
-      } if canWithdraw == true and item.status != "withdrawn"]
-    } if review or canWithdraw,
+      } if canWithdraw, {
+        href: applicationPath + "/" + item.id + "/view?phase=" + phase,
+        text: "View and respond to offer"
+      } if canRespond and not hasResponded]
+    } if canAmend or canWithdraw or canRespond,
     html: courseHtml
   }) }}
 {% endfor %}

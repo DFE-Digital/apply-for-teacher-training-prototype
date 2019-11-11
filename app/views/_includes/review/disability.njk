@@ -14,7 +14,7 @@
           text: "Change",
           visuallyHiddenText: "if you want to disclose a disability"
         }]
-      } if review
+      } if canAmend
     }, {
       key: {
         text: "About your disability"
@@ -28,7 +28,7 @@
           text: "Change",
           visuallyHiddenText: "details about your disability"
         }]
-      } if review
+      } if canAmend
     } if applicationValue(["disability", "disclose"]) == 'Yes']
   }) }}
 {% endset %}

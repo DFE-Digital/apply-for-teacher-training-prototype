@@ -1,0 +1,60 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Details of offer" %}
+{% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
+
+{% block pageNavigation %}
+  {% if phase %}
+    {{ govukBackLink({
+      href: "/applications?phase=" + phase
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/applications"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/item/offer.njk" %}
+  <p class="govuk-body">Remember:</p>
+  <ul class="govuk-list govuk-list--bullet">
+  {% if phase == "dbd" %}
+    <li>you can only accept one offer, across both Apply for teacher training and UCAS teacher training</li>
+    <li>if you fail to respond, or you decline all your offers, you can still apply to other courses in future</li>
+  {% else %}
+    <li>you are under no obligation to accept or decline an offer at this stage</li>
+    <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
+  {%endif %}
+  </ul>
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "How do you want to respond to this offer?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    id: "decision",
+    name: "decision",
+    items: [{
+      value: "accept",
+      text: "Accept offer and conditions"
+    }, {
+      value: "decline",
+      text: "Decline offer"
+    }]
+  }) }}
+
+  {{ govukInput({
+    type: "hidden",
+    name: "phase",
+    value: phase
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

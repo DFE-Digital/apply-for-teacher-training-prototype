@@ -1,7 +1,8 @@
 const querystring = require('querystring')
 
 const applicationData = (req) => {
-  return req.session.data.applications[req.params.applicationId]
+  const applicationId = req.query.applicationId || req.params.applicationId
+  return req.session.data.applications[applicationId]
 }
 
 const capitaliseFirstLetter = str => {
@@ -59,7 +60,8 @@ const hasSubmittedApplications = (req) => {
 const hasStartedApplications = (req) => {
   var applications = req.session.data.applications
   if (applications) {
-    return Object.values(applications).map(a => a.status).includes('started')
+    const status = Object.values(applications).map(a => a.status)
+    return status.includes('started')
   }
 }
 

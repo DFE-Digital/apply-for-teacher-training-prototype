@@ -16,7 +16,7 @@
           href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,
           text: "Delete degree"
         }]
-      } if review == true,
+      } if canAmend,
       html: degreeHtml
     }) }}
   {% endfor %}

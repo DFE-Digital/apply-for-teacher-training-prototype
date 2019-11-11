@@ -1,0 +1,50 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Prototype admin" %}
+{% set title = "Application phases" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/admin"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <h2 class="govuk-heading-m">Application dashboard: phases and states</h2>
+  <h3 class="govuk-heading-s">Post-submission amendments</h3>
+  <p class="govuk-body">Candiates have 5-working days to make changes to their submitted application. This can include amending answers, and changing course choices.</p>
+  <ol class="govuk-list govuk-list--bullet">
+    <li><a href="/applications?phase=amend&state=submitted">Application can be amended</a></li>
+    <li><a href="/applications?phase=amend&state=amending">Application being amended</a></li>
+    <li><a href="/applications?phase=amend&state=amended">Application has been amended</a></li>
+  </ol>
+
+  <h3 class="govuk-heading-s">Selection phase</h3>
+  <p class="govuk-body">While providers review applications and interview candidates, we can only inform candidates that decisions are pending (for now).</p>
+  <p class="govuk-body">A candidate can withdraw a choice during this phase.</p>
+  <ol class="govuk-list govuk-list--bullet">
+    <li><a href="/applications?phase=selection&state=pending-decisions">Application with pending decisions</a></li>
+  </ol>
+
+  <h3 class="govuk-heading-s">Decision phase</h3>
+  <p class="govuk-body">When a provider responds with an offer, a candidate can choose to accept that offer, or wait until every provider has responded.</p>
+  <p class="govuk-body">A candidate can withdraw a course choice during this phase.</p>
+  <ol class="govuk-list govuk-list--bullet">
+    <li><a href="/applications?phase=decision&state=outstanding-decision">Application with a mix of responses and pending decisions</a></li>
+  </ol>
+
+  <h3 class="govuk-heading-s">Decline by default phase (DBD)</h3>
+  <p class="govuk-body">When all providers have responded, a candidate has 10 working days to make a decision.</p>
+  <p class="govuk-body">If a candidate accepts an offer, others are automatically declined.</p>
+  <p class="govuk-body">If a candidate declines all offers, they move into Apply 2.</p>
+  <ol class="govuk-list govuk-list--bullet">
+    <li><a href="/applications?phase=dbd&state=has-decisions">Application with decisions</a></li>
+  </ol>
+
+  <h3 class="govuk-heading-s">Process complete</h3>
+  <p class="govuk-body">A cadidate has made their decision and the application process is complete.</p>
+  <ol class="govuk-list govuk-list--bullet">
+    <li><a href="/applications?phase=completed&state=has-accepted">Application with accepted choice</a></li>
+  </ol>
+{% endblock %}

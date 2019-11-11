@@ -1,4 +1,11 @@
 {% set applicationPath = "/application/" + applicationId %}
+{% set status = item.status or "requested" %}
+{% set statusHtml %}
+  {{ govukTag({
+    classes: "app-tag--" + status,
+    text: status | capitalize
+  }) }}
+{% endset %}
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -13,7 +20,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   }, {
     key: {
       text: "Email"
@@ -27,7 +34,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   }, {
     key: {
       text: "Reference type"
@@ -41,7 +48,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
+    } if canAmend
   } if data.flags.referee_types, {
     key: {
       text: "Relationship"
@@ -55,6 +62,19 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if review == true
-  }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: statusHtml
+    }
+  } if status and showReferenceStatus]
 }) }}
+
+{# Reference statuses:
+[name] has responded
+[name] has been sent a reminder email
+[name] has declined to give a reference
+[name] has failed to respond before the 10-day deadline #}

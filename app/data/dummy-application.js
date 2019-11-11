@@ -1,17 +1,24 @@
 module.exports = {
-  status: 'started',
+  status: 'submitted',
+  welcomeFlow: false,
   choices: {
     ABCDE: {
-      courseCode: '3DMD',
-      providerCode: 'G50',
-      locationName: 'School name',
-      locationAddress: 'Road, City, SW1 1AA'
+      courseCode: '2XT2',
+      providerCode: '1N1',
+      locationName: 'Hillcrest Academy',
+      locationAddress: 'Cowper Street, Leeds. LS7 4DR'
+    },
+    FGHIJ: {
+      courseCode: '2VLT',
+      providerCode: 'L24',
+      locationName: 'Main Site',
+      locationAddress: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
     },
     ZYXWV: {
-      courseCode: 'Q3X1',
-      providerCode: 'B78',
-      locationName: 'Academy name',
-      locationAddress: 'Road, City, SW2 1AA'
+      courseCode: 'X100',
+      providerCode: 'B60',
+      locationName: 'Main Site',
+      locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY'
     }
   },
   completed: {

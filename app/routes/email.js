@@ -117,8 +117,7 @@ module.exports = router => {
 
   // Decision: Rejected/Offer made
   router.post('/admin/send-email', (req, res) => {
-    const name = req.session.data.name
-    const email = req.session.data.email
+    const { email, name } = req.session.data
 
     let notifyTemplate
     let providerName

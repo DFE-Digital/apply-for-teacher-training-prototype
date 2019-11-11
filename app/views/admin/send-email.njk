@@ -14,6 +14,17 @@
   <h2 class="govuk-heading-m">Make a decision</h2>
   {{ govukInput({
     label: {
+      text: "Email for research participant"
+    },
+    attributes: {
+      spellcheck: "false"
+    },
+    name: "account[email]",
+    value: data.account.email
+  }) }}
+
+  {{ govukInput({
+    label: {
       text: "Name of research participant"
     },
     attributes: {

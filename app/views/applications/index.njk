@@ -6,14 +6,26 @@
 {% set applications = applications or data.applications %}
 {% set applicationId = "" %}
 {% set application = "" %}
+{% set phase = phase %}
 {% for key, value in applications %}
   {% set applicationId = key %}
   {% set application = value %}
+  {# If no phase provided, detirmine based on application status #}
+  {# This is not fool proof! #}
+  {% if not phase %}
+    {% if application.status == "submitted" or application.status == "amending" %}
+      {% set phase = "amend" %}
+    {% elif application.status == "amended" %}
+      {% set phase = "selection" %}
+    {% else %}
+      {% set phase = "submitted" %}
+    {% endif %}
+  {% endif %}
 {% endfor %}
 
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
-  <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted">View application</a></p>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?phase={{ phase }}">View application</a></p>
 {% endblock %}
 
 {% block primary %}

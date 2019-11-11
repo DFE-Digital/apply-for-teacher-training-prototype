@@ -1,4 +1,4 @@
-{% set appStatus = "submitted" if application.status == "amended" else application.status %}
+{% set appStatus = "pending" if application.status == "amended" else application.status %}
 {% set status = item.status or appStatus %}
 {% set statusHtml %}
   {{ govukTag({

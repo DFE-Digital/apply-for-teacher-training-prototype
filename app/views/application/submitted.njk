@@ -11,7 +11,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/applications" + ("?phase=amend" if status == "amending"),
+    href: "/applications" + ("?phase=" + phase if phase),
     text: "Back to application dashboard"
   }) }}
 {% endblock %}

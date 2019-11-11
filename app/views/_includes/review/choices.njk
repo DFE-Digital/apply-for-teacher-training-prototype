@@ -11,8 +11,8 @@
   %}
 
   {# Can withdraw if post-submission and not already withdrawn choice #}
-  {% set canWithdraw = canWithdraw and
-    (item.status != "declined")
+  {% set canWithdraw = canWithdraw
+    and (item.status != "declined")
     and (item.status != "offer")
     and (item.status != "rejected")
     and (item.status != "withdrawn")

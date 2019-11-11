@@ -1,3 +1,5 @@
+const utils = require('../utils')
+
 /**
  * Account routes
  */
@@ -16,6 +18,31 @@ module.exports = router => {
   router.get('/account/check-email/:action', (req, res) => {
     res.render('account/check-email', {
       action: req.params.action
+    })
+  })
+
+  // Update choice status and phase from sign-in link in decision notification
+  router.get('/account/sign-in', (req, res) => {
+    const { phase, status, token } = req.query
+
+    // Get most recent application
+    const applications = utils.toArray(req.session.data.applications)
+    const application = applications[0]
+
+    // Get statuses
+    const statuses = status.split(',')
+
+    // Get choices still pending a decision
+    const choices = utils.toArray(application.choices)
+    application.choices = choices.map((choice, i) => {
+      choice.status = statuses[i]
+      return choice
+    })
+
+    res.render('account/sign-in', {
+      phase,
+      status,
+      token
     })
   })
 

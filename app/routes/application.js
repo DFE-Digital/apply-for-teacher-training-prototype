@@ -96,13 +96,6 @@ module.exports = router => {
         token
       })
     } else if (utils.hasSubmittedApplications(req)) {
-      // Set phase to `amend` if application has not been amended and no phase set
-      const applications = utils.toArray(req.session.data.applications)
-      const application = applications[0]
-      if (!phase && application.status === 'submitted') {
-        phase = 'amend'
-      }
-
       res.render('applications/index', {
         phase,
         token
@@ -169,6 +162,15 @@ module.exports = router => {
     }
 
     res.render('application/review')
+  })
+
+  // Render submitted page
+  router.all('/application/:applicationId/submitted', (req, res) => {
+    const { phase } = req.query
+
+    res.render('application/submitted', {
+      phase
+    })
   })
 
   // Export data

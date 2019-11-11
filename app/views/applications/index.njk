@@ -43,11 +43,11 @@
   {% if canAmend %}
     Your application
   {% elif phase == "decision" %}
-    We’re waiting to hear back from all of your training providers</h2>
+    Some of your training providers haven't reached a decision yet</h2>
   {% elif phase == "dbd" %}
-    All training providers have now reached a decision
+    All your training providers have now reached a decision
   {% elif phase == "completed" %}
-    You have completed the application process
+    You have accepted an offer
   {% else %}
     Courses you’ve applied to
   {% endif %}
@@ -78,7 +78,7 @@
 
   {# Guidance about steps after accepting an offer #}
   {% if phase == "completed" %}
-    <p class="govuk-body">Your chosen provider will be in touch with you direct to explain what to do next.</p>
+    <p class="govuk-body">We've sent you an email to confirm this. Your training provider will be in touch with you direct to explain what happens next.</p>
   {% endif %}
 
   {% set choices = application.choices | toArray %}

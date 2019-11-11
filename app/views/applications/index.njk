@@ -6,7 +6,9 @@
 {% set applications = applications or data.applications %}
 {% set applicationId = "" %}
 {% set application = "" %}
-{% set phase = phase %}
+{% if not phase %}
+  {% set phase = "" %}
+{% endif %}
 {% for key, value in applications %}
   {% set applicationId = key %}
   {% set application = value %}

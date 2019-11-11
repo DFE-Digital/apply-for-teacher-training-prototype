@@ -1,5 +1,6 @@
 const { DateTime } = require('luxon')
 const humanizeDuration = require('humanize-duration')
+const marked = require('marked')
 const providers = require('./data/providers')
 
 module.exports = (env) => {
@@ -12,8 +13,9 @@ module.exports = (env) => {
   const filters = {}
 
   /**
-   * Convert object to array
+   * Convert str to date
    * @type {String} str
+   * @type {String} format
    */
   filters.date = (str, format = 'yyyy-LL-dd') => {
     if (str) {
@@ -27,6 +29,11 @@ module.exports = (env) => {
     }
   }
 
+  /**
+   * Add days to date
+   * @type {Integer} days
+   * @type {String} format
+   */
   filters.nowPlusDays = (days, format = 'yyyy-LL-dd') => {
     const date = DateTime.local().plus({ days: days })
 
@@ -53,20 +60,33 @@ module.exports = (env) => {
   }
 
   /**
-   * Convert object to array
-   * @type {Object} obj
+   * Filter array by value
+   * @type {Array} arr
+   * @type {String} searchString
    *
    */
-  filters.includes = (str, searchString) => {
-    if (str) {
-      if (str.includes(searchString)) {
+  filters.includes = (arr, searchString) => {
+    if (arr) {
+      if (arr.includes(searchString)) {
         return true
       }
     }
   }
 
   /**
-   * Convert string into an array
+   * Convert Markdown to HTML
+   * @type {String} str
+   * @type {String} value
+   *
+   */
+  filters.markdown = (str, value) => {
+    if (str) {
+      return marked(str)
+    }
+  }
+
+  /**
+   * Split string into an array
    * @type {String} str
    *
    */

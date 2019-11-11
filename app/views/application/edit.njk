@@ -9,17 +9,30 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You have 7 days after submission to edit most sections of your application.</p>
-  <p class="govuk-body">During this period, your application can only be edited and resubmitted once. If you have applied to more than one training provider, you will be able to edit and resubmit each application separately.</p>
-  <h2 class="govuk-heading-m">Course choice</h2>
-  <p class="govuk-body">You can change your choice of training provider, course or location within the 7-day editing period.</p>
-  <p class="govuk-body">You can also delete a course choice.</p>
-  <p class="govuk-body">After this, you have the option to withdraw your application completely.</p>
-  <h2 class="govuk-heading-m">References</h2>
-  <p class="govuk-body">You can’t edit your choice of referees unless they refuse to give a reference. We’ll email you if this happens, so you can put forward a replacement referee.</p>
-  <h2 class="govuk-heading-m">Contact details</h2>
-  <p class="govuk-body">You can edit your contact details throughout the application process. Sign into your account and visit <a href="/applications">Application dashboard.</a></p>
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+  <p class="govuk-body">You have 5 working days after submission to edit most sections of your application.</p>
+  {% if data.flags.self_amend %}
+    <p class="govuk-body">During this period, your application can only be edited and resubmitted once. If you have applied to more than one training provider, you will be able to edit and resubmit each application separately.</p>
+    <h2 class="govuk-heading-m">Course choice</h2>
+    <p class="govuk-body">You can change your choice of training provider, course or location within the 7-day editing period.</p>
+    <p class="govuk-body">You can also delete a course choice.</p>
+    <p class="govuk-body">After this, you have the option to withdraw your application completely.</p>
+    <h2 class="govuk-heading-m">References</h2>
+    <p class="govuk-body">You can’t edit your choice of referees unless they refuse to give a reference. We’ll email you if this happens, so you can put forward a replacement referee.</p>
+    <h2 class="govuk-heading-m">Contact details</h2>
+    <p class="govuk-body">You can edit your contact details throughout the application process. Sign into your account and visit <a href="/applications">Application dashboard.</a></p>
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  {% else %}
+    <p class="govuk-body">To edit, you'll need to email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>, explaining which changes you'd like to make.</p>
+    <p class="govuk-body">We can only edit your application once.</p>
+    <h2 class="govuk-heading-m">Course choice</h2>
+    <p class="govuk-body">We can change your choice of training provider, course or location within the 5 working day editing period.</p>
+    <p class="govuk-body">We can also delete a course choice.</p>
+    <p class="govuk-body">After this, you can email us asking to withdraw your application completely.</p>
+    <h2 class="govuk-heading-m">References</h2>
+    <p class="govuk-body">We can’t edit your choice of referees unless they refuse to give a reference. We’ll email you if this happens, so you can put forward a replacement referee.</p>
+    <h2 class="govuk-heading-m">Contact details</h2>
+    <p class="govuk-body">You can update your contact details throughout the application process, by emailing us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+  {% endif %}
 {% endblock %}

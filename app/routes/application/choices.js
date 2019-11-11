@@ -45,8 +45,8 @@ const temporaryAndSavedChoices = (req) => {
     applicationData.temporaryChoices = {}
   }
 
-  let existingChoice = applicationData.choices[choiceId] || {}
-  let temporaryChoice = applicationData.temporaryChoices[choiceId] || {}
+  const existingChoice = applicationData.choices[choiceId] || {}
+  const temporaryChoice = applicationData.temporaryChoices[choiceId] || {}
 
   return [existingChoice, temporaryChoice]
 }
@@ -56,29 +56,29 @@ const temporaryChoice = (req) => {
 }
 
 const providerCode = (req) => {
-  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
   return temporaryChoice.provider ? /\(([^)]+)\)$/.exec(temporaryChoice.provider)[1] : existingChoice.providerCode
 }
 
 const courseCode = (req) => {
-  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
   return temporaryChoice.course ? /\(([^)]+)\)$/.exec(temporaryChoice.course)[1] : existingChoice.courseCode
 }
 
 const locationName = (req) => {
-  let [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
+  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
   return temporaryChoice.location ? temporaryChoice.location : existingChoice.locationName
 }
 
 const locationAddress = (req) => {
-  let locations = providers[providerCode(req)].courses[courseCode(req)].locations
-  let location = locations.filter(l => { return l.name === locationName(req) })
-  return location[0].address || ""
+  const locations = providers[providerCode(req)].courses[courseCode(req)].locations
+  const location = locations.filter(l => { return l.name === locationName(req) })
+  return location[0].address || ''
 }
 
 const singleLocationCourse = (req) => {
-  let locations = providers[providerCode(req)].courses[courseCode(req)].locations
-  return locations.length == 1
+  const locations = providers[providerCode(req)].courses[courseCode(req)].locations
+  return locations.length === 1
 }
 
 module.exports = router => {
@@ -124,21 +124,21 @@ module.exports = router => {
 
   router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {
     const paths = pickPaths(req)
-    let locations = providers[providerCode(req)].courses[courseCode(req)].locations
+    const locations = providers[providerCode(req)].courses[courseCode(req)].locations
 
-    if (locations.length == 1) {
+    if (locations.length === 1) {
       temporaryChoice(req).location = locations[0].name
       res.redirect(paths.next)
     } else {
-      let locationOptions = locations.map(function(loc) {
-                              let l = {}
-                              l.text = loc.name
-                              l.hint = { text: loc.address }
-                              l.label = { classes: 'govuk-label--s'}
-                              return l
-                            });
+      const locationOptions = locations.map(function (loc) {
+        const l = {}
+        l.text = loc.name
+        l.hint = { text: loc.address }
+        l.label = { classes: 'govuk-label--s' }
+        return l
+      })
 
-      res.render(`application/choices/location`, {
+      res.render('application/choices/location', {
         locationOptions,
         paths: paths
       })
@@ -152,12 +152,12 @@ module.exports = router => {
     const choiceId = req.params.choiceId
     const temporaryChoice = applicationData.temporaryChoices[choiceId]
 
-    if (temporaryChoice.fromFind && temporaryChoice.fromFind == "yes") {
-      let provider = providers[data.course_from_find.providerCode]
+    if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'yes') {
+      const provider = providers[data.course_from_find.providerCode]
       temporaryChoice.provider = provider.name_and_code
       temporaryChoice.course = provider.courses[data.course_from_find.courseCode].name_and_code
       res.redirect(`/application/${applicationId}/choices/${choiceId}/location`)
-    } else if (temporaryChoice.fromFind && temporaryChoice.fromFind == "no") {
+    } else if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'no') {
       delete data.course_from_find
       delete temporaryChoice.fromFind
       res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)

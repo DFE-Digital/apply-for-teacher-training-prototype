@@ -36,7 +36,7 @@ module.exports = router => {
       const application = applications[0]
 
       // Get statuses
-      const statuses = status.split(',')
+      const statuses = status.split(';')
 
       // Get choices still pending a decision
       const choices = utils.toArray(application.choices)

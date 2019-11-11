@@ -28,10 +28,10 @@ module.exports = (nunjucksAppEnv, app) => {
         return null
       }
 
-      var latest_qualification = Object.values(qualifications).slice(-1)[0]
+      var latestQualification = Object.values(qualifications).slice(-1)[0]
 
       // Return value from previously added qualification
-      return latest_qualification[sections.slice(-1)[0]]
+      return latestQualification[sections.slice(-1)[0]]
     }
 
     // Add name, value, id, idPrefix and checked attributes to GOVUK form inputs

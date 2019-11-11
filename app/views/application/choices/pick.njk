@@ -8,6 +8,7 @@
 {% endif %}
 {% set provider = providers[providerCode] %}
 {% set providerOnDfEApply = false if providerCode == 'B20' else true %}
+{% set courses = provider.courses | toArray | sort(attribute="name") %}
 {% set title = "Which course are you applying to?" if providerOnDfEApply else "You need to apply on UCAS" %}
 {% set formaction = paths.next %}
 {% set applicationPath = "/application/" + applicationId %}
@@ -29,7 +30,6 @@
 
     {% if data.course_from_find and providerCode == data.course_from_find.providerCode %}
       {% set course = provider.courses[data.course_from_find.courseCode] %}
-
       {{ govukRadios({
         items: [{
           text: course.name_and_code
@@ -86,7 +86,7 @@
           id: 'courses-{{ choiceId }}-course',
           showAllValues: true,
           source: [
-            {% for id, item in provider.courses %}"{{ item.name_and_code }}",{% endfor %}
+            {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}
           ]
         })
       {% else %}
@@ -97,7 +97,7 @@
           id: 'courses-{{ choiceId }}-course',
           showAllValues: true,
           source: [
-            {% for id, item in provider.courses %}"{{ item.name_and_code }}",{% endfor %}
+            {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}
           ]
         })
       {% endif %}

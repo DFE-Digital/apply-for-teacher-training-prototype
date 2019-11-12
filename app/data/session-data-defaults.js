@@ -19,6 +19,7 @@ module.exports = {
     nationality: process.env.MVP !== 'true',
     referee_types: process.env.MVP !== 'true',
     self_amend: process.env.MVP !== 'true',
+    self_amend_contact_details: process.env.MVP !== 'true',
     self_withdraw: process.env.MVP !== 'true'
   },
   applications: (process.env.PRODUCTION === 'true') ? {} : testData

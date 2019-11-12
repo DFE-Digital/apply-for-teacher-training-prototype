@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block primary %}
+  {% set contactDetails = applicationValue(["contact-details"]) %}
   {% include "_includes/review/contact-details.njk" %}
   {{ govukButton({
     text: "Continue",

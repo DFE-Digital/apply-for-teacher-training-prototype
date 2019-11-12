@@ -11,7 +11,7 @@ module.exports = router => {
     const international_address_feature_enabled = req.session.data.flags.international_address
 
     if (!international_address_feature_enabled) {
-      res.redirect(`/application/${applicationId}/contact-details/where-do-you-live/answer`)
+      res.redirect(`/application/${applicationId}/contact-details/where-do-you-live/answer?referrer=${referrer}`)
     } else {
       res.render('application/contact-details/where-do-you-live', {
         referrer
@@ -21,6 +21,7 @@ module.exports = router => {
 
   // Address type answer branching
   router.all('/application/:applicationId/contact-details/where-do-you-live/answer', (req, res) => {
+    const referrer = req.query.referrer
     const applicationId = req.params.applicationId
     const applicationData = req.session.data.applications[applicationId]
     const location = applicationData['contact-details']['address-type']
@@ -29,12 +30,12 @@ module.exports = router => {
 
     if (location === 'domestic' || !international_address_feature_enabled) {
       if (address_lookup_feature_enabled) {
-        res.redirect(`/application/${applicationId}/contact-details/lookup-address`)
+        res.redirect(`/application/${applicationId}/contact-details/lookup-address?referrer=${referrer}`)
       } else {
-        res.redirect(`/application/${applicationId}/contact-details/uk-address`)
+        res.redirect(`/application/${applicationId}/contact-details/uk-address?referrer=${referrer}`)
       }
     } else {
-      res.redirect(`/application/${applicationId}/contact-details/international-address`)
+      res.redirect(`/application/${applicationId}/contact-details/international-address?referrer=${referrer}`)
     }
   })
 

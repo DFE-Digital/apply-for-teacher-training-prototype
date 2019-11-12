@@ -1,26 +1,26 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set addressHtml -%}
-  {%- if applicationValue(["contact-details", "address"]) -%}
-    {%- if applicationValue(["contact-details", "address", "street-address"]) -%}
-      {{ applicationValue(["contact-details", "address", "street-address"]) }}
+  {%- if contactDetails.address -%}
+    {%- if contactDetails.address["street-address"] -%}
+      {{ contactDetails.address["street-address"] }}
     {%- else -%}
-      {%- if applicationValue(["contact-details", "address", "line1"]) -%}
-        {{ applicationValue(["contact-details", "address", "line1"]) }}<br>
+      {%- if contactDetails.address.line1 -%}
+        {{ contactDetails.address.line1 }}<br>
       {%- endif -%}
-      {%- if applicationValue(["contact-details", "address", "line2"]) -%}
-        {{ applicationValue(["contact-details", "address", "line2"]) }}<br>
+      {%- if contactDetails.address.line2 -%}
+        {{ contactDetails.address.line2 }}<br>
       {%- endif -%}
-      {%- if applicationValue(["contact-details", "address", "level2"]) -%}
-        {{ applicationValue(["contact-details", "address", "level2"]) }}<br>
+      {%- if contactDetails.address.level2 -%}
+        {{ contactDetails.address.level2 }}<br>
       {%- endif -%}
-      {%- if applicationValue(["contact-details", "address", "level1"]) -%}
-        {{ applicationValue(["contact-details", "address", "level1"]) }}<br>
+      {%- if contactDetails.address.level1 -%}
+        {{ contactDetails.address.level1 }}<br>
       {%- endif -%}
-      {%- if applicationValue(["contact-details", "address", "postal-code"]) -%}
-        {{ applicationValue(["contact-details", "address", "postal-code"]) }}<br>
+      {%- if contactDetails.address["postal-code"] -%}
+        {{ contactDetails.address["postal-code"] }}<br>
       {%- endif -%}
-      {%- if applicationValue(["contact-details", "address", "country"]) -%}
-        {{ applicationValue(["contact-details", "address", "country"]) }}
+      {%- if contactDetails.address.country -%}
+        {{ contactDetails.address.country }}
       {%- endif -%}
     {%- endif -%}
   {%- else -%}
@@ -35,7 +35,7 @@
         text: "Phone number"
       },
       value: {
-        text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
+        text: contactDetails["phone-number"] or "Not entered"
       },
       actions: {
         items: [{
@@ -76,7 +76,7 @@
   }) }}
 {% endset %}
 
-{% if applicationValue("contact-details") %}
+{% if contactDetails %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: contactDetailsHtml

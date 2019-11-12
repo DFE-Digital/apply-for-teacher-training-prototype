@@ -2,12 +2,9 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
-{% set choices = applicationValue(["choices"]) | toArray %}
-{% set references = applicationValue(["referees"]) %}
 {% set title = "Your submitted application" %}
-{% set showChoiceStatus = false %}
-{% set canAmend = false %}
 {% set referrer = applicationPath + "/review" %}
+{% set canAmend = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -30,6 +27,8 @@
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+  {% set choices = applicationValue(["choices"]) | toArray %}
+  {% set showChoiceStatus = false %}
   {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
@@ -37,6 +36,7 @@
   {% include "_includes/review/personal-details.njk" %}
 
   <h3 class="govuk-heading-m">Contact details</h3>
+  {% set contactDetails = applicationValue(["contact-details"]) %}
   {% include "_includes/review/contact-details.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Work history</h2>
@@ -75,5 +75,6 @@
   {% include "_includes/review/interview.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% set references = applicationValue(["referees"]) %}
   {% include "_includes/review/references.njk" %}
 {% endblock %}

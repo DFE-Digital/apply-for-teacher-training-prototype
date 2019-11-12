@@ -10,7 +10,7 @@
   {% set title = "Edit your application" %}
   {% set tagClass = "app-tag--unamended" %}
   {% set tagText = "Unedited" %}
-  {% set reviewText = "Check your changes before submitting" %}
+  {% set reviewText = "Check your changes before resubmitting" %}
 {% endif %}
 {% set hasSecondary = true %}
 
@@ -37,6 +37,11 @@
     text: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application",
     iconFallbackText: "Warning"
   }) if status == "amending" }}
+
+  {% if applicationValue(["completed", "choices"]) %}
+    <p>You have completed 14 of 14 tasks.</p>
+  {% endif %}
+
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
@@ -61,7 +66,7 @@
       tag: {
         classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
         text: "Edited" if status == "amending" else "Completed"
-      } if applicationValue("candidate")
+      } if applicationValue(["candidate"])
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
@@ -88,12 +93,12 @@
       } if applicationValue(["completed", "school-experience"])
     }, {
      text: "Training with a disability",
-     href: applicationPath + "/disability" + ("/review" if applicationValue("disability")),
+     href: applicationPath + "/disability" + ("/review" if applicationValue(["disability"])),
      id: "disability",
      tag: {
        classes: tagClass,
        text: tagText
-     } if applicationValue("disability")
+     } if applicationValue(["disability"])
    }]
   }) }}
 
@@ -186,16 +191,38 @@
       tag: {
         classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
         text: "Completed" if status == "started" else ("Submitted" if status == "amending")
-      } if applicationValue(["referees"])
+      } if applicationValue(["referees", "second"])
     }]
   }) }}
 
+  {% set canReview =
+    applicationValue(["completed", "choices"])
+    and applicationValue(["candidate"])
+    and applicationValue(["contact-details", "address"])
+    and applicationValue(["completed", "work-history"])
+    and applicationValue(["completed", "school-experience"])
+    and applicationValue(["disability"])
+    and applicationValue(["completed", "degree"])
+    and applicationValue(["gcse", "maths"])
+    and applicationValue(["gcse", "english"])
+    and applicationValue(["completed", "other-qualifications"])
+    and applicationValue(["personal-statement"])
+    and applicationValue(["subject-knowledge"])
+    and applicationValue(["interview"])
+    and applicationValue(["referees", "second"])
+  %}
+
   <h2 class="govuk-heading-m govuk-!-font-size-27">Review and submit</h2>
+  {% if canReview %}
+    {% set reviewTextHtml = reviewText %}
+  {% else %}
+    {% set reviewTextHtml = reviewText + "<span class=\"govuk-hint govuk-!-margin-bottom-0\">You can review your application when all the sections have been completed.</span>" %}
+  {% endif %}
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: reviewText,
-      href: applicationPath + "/review",
+      html: reviewTextHtml,
+      href: applicationPath + "/review" if canReview,
       id: "review"
     }]
   }) }}

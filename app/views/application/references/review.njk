@@ -19,19 +19,14 @@
   {% include "_includes/review/references.njk" %}
   {% if not applicationValue(["referees", "second"]) %}
     {{ govukButton({
-      text: "Add a second referee (recommended)",
+      text: "Add a second referee",
       href: "/application/" + applicationId + "/references/" + ("type" if data.flags.referee_types else "details") + "/second?referrer=" + referrer,
       classes: "govuk-button--secondary"
     }) }}
     <p>or</p>
-    {{ govukButton({
-      text: "Continue without adding second referee",
-      href: applicationPath
-    }) }}
-  {% else %}
-    {{ govukButton({
-      text: "Continue",
-      href: applicationPath
-    }) }}
   {% endif %}
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath
+  }) }}
 {% endblock %}

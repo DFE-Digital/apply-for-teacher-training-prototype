@@ -3,9 +3,9 @@
   {% if item %}
     <li class="app-task-list__item{%- if item.classes %} {{ item.classes }}{% endif %}">
     {% if item.href %}
-      <a class="app-task-list__task-name" href="{{ item.href }}"{% if item.completed %} aria-describedby="{{ item.id }}-tag"{% endif %}>{{ item.text | safe }}</a>
+      <a class="app-task-list__task-name" href="{{ item.href }}"{% if item.completed %} aria-describedby="{{ item.id }}-tag"{% endif %}>{{ item.html | safe if item.html else item.text }}</a>
     {% else %}
-      <span class="app-task-list__task-name">{{ item.text | safe }}</span>
+      <span class="app-task-list__task-name">{{ item.html | safe if item.html else item.text }}</span>
     {% endif %}
     {% if item.tag %}
       <strong class="govuk-tag{% if item.tag.classes %} {{ item.tag.classes }}{% endif %}" id="{{ item.id }}-tag">{{ item.tag.text }}</strong>

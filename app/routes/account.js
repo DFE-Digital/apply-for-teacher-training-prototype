@@ -33,7 +33,7 @@ module.exports = router => {
     if (status) {
       // Get most recent application
       const applications = utils.toArray(req.session.data.applications)
-      const application = applications[0]
+      const application = applications[applications.length - 1]
 
       // Get statuses
       const statuses = status.split(';')

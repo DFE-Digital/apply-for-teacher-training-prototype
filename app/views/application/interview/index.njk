@@ -25,15 +25,33 @@
     <li>dates you are unavailable for interview</li>
   </ul>
 
-  {{ govukCharacterCount({
-    label: {
-      text: "Interview preferences",
-      classes: "govuk-label--m"
+  {% set interviewHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "What are your interview preferences?"
+      },
+      maxwords: 150,
+      threshold: 75,
+      rows: 6
+    } | decorateApplicationAttributes(["interview"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m",
+        text: "Do you have any preferences for your interview?"
+      }
     },
-    maxwords: 150,
-    threshold: 75,
-    rows: 6
-  } | decorateApplicationAttributes(["interview"])) }}
+    items: [{
+      text: "Yes",
+      conditional: {
+        html: interviewHtml
+      }
+    }, {
+      text: "No"
+    }]
+  } | decorateApplicationAttributes(["interview-choice"])) }}
 
   {{ govukButton({
     text: "Save and continue"

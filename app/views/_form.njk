@@ -1,28 +1,29 @@
 {% extends "_layout.njk" %}
 
 {% block content %}
+  {% block beforePageTitle %}{% endblock %}
   <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
-  {% set legendHtml %}
-    {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
-    {{ title | safe }}
-  {% endset %}
-  {% call govukFieldset({
-    legend: {
-      html: legendHtml,
-      classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
-      isPageHeading: true
-    }
-  }) %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% block primary %}{% endblock %}
+    {% set legendHtml %}
+      {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
+      {{ title | safe }}
+    {% endset %}
+    {% call govukFieldset({
+      legend: {
+        html: legendHtml,
+        classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
+        isPageHeading: true
+      }
+    }) %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {% block primary %}{% endblock %}
+      </div>
+      {% if hasSecondary %}
+      <div class="govuk-grid-column-one-third">
+        {% block secondary %}{% endblock %}
+      </div>
+      {% endif %}
     </div>
-    {% if hasSecondary %}
-    <div class="govuk-grid-column-one-third">
-      {% block secondary %}{% endblock %}
-    </div>
-    {% endif %}
-  </div>
-  {% endcall %}
+    {% endcall %}
   </form>
 {% endblock %}

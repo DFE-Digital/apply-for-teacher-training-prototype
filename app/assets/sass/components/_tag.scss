@@ -32,11 +32,15 @@
 }
 
 // Section completion statuses
-.app-tag--unamended {
+.app-tag--unamended, {
   @include tag("light-grey", $filled: true);
   color: govuk-colour("dark-grey");
 }
 
 .app-tag--submitted {
   @include tag("dark-grey", $filled: true);
+}
+
+.app-tag--not-complete {
+  @include tag("blue", $filled: false);
 }

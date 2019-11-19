@@ -16,6 +16,26 @@
   }) }}
 {% endblock %}
 
+{% block beforePageTitle %}
+
+  {% if data.incomplete == 'true' %}
+
+    {{ govukErrorSummary({
+      titleText: "Your application can’t be submitted because it’s incomplete",
+      errorList: [
+        {
+          text: "Work history gap not explained",
+          href: "#work-history-error"
+        },
+        {
+          text: "Science GCSE not entered",
+          href: "#gcse-error"
+        }
+      ]
+    }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
   {{ govukWarningText({
     text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once.",
@@ -24,7 +44,8 @@
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
   {% set choices = applicationValue(["choices"]) | toArray %}
-  {% if choices %}
+
+  {% if choices.length %}
     {% set showChoiceStatus = false %}
     {% include "_includes/review/choices.njk" %}
   {% else %}
@@ -85,6 +106,6 @@
 
   {{ govukButton({
     text: "Continue",
-    href: nextHref
+    href: applicationPath + '/review?incomplete=true'
   }) }}
 {% endblock %}

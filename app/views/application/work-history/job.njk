@@ -127,20 +127,28 @@
     value: "job"
   }) }}
 
-  {# Only show ‘Add another…’ button if:
-      * not editing an existing item
-      * not referred from a review page (which also has an ‘Add another…’ button)
+  {# Only ask if want to add another if:
+    * not editing an existing item
+    * not referred from a review page (which has an ‘Add another…’ button)
+    * feature flag enabled
   #}
-  {% if action != "edit" and not referrer %}
-    {{ govukButton({
-      text: "Save and add another job",
-      classes: "govuk-button--secondary",
-      attributes: {
-        formaction: applicationPath + "/work-history/add/job?update=" + id
-      }
+  {% if action != "edit" and not referrer and data.flags.add_another %}
+    {{ govukRadios({
+      name: "next",
+      fieldset: {
+        legend: {
+          text: "Do you want to add another job?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "add",
+        text: "Yes"
+      }, {
+        value: "review",
+        text: "No"
+      }]
     }) }}
-
-    <p class="govuk-body">or</p>
   {% endif %}
 
   {{ govukButton({

@@ -134,7 +134,7 @@
       } if applicationValue(["gcse", "science"])
     } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Other relevant academic and non-academic qualifications",
-      href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
+      href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"])),
       id: "other-qualifications",
       tag: {
         classes: tagClass,

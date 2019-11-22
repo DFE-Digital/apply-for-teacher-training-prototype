@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
-
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Other relevant qualifications" %}
+{% set formaction = applicationPath + "/other-qualifications/answer" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -17,103 +17,28 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Enter your other qualifications as completely as you can, including all your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
-  <p class="govuk-body">You should also tell us about your vocational, practical and creative qualifications.</p>
-
-  {{ govukInput({
-    label: {
-      text: "Type of qualification",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "type"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Subject",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
-
-  {% set internationalConditionalHtml %}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is your institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
-  {% endset %}
+  <p class="govuk-body">Providers use information about your other qualifications to assess your academic ability and the broader contribution you can make to a school.</p>
+  <p class="govuk-body">You can include your GCSEs, A levels and vocational, practical and creative qualifications.</p>
+  <p class="govuk-body">Undergraduate and postgraduate degrees should be included in the ‘Degree’ section.</p>
 
   {{ govukRadios({
     fieldset: {
+      classes: "govuk-!-margin-top-6",
       legend: {
-        text: "This institution is based:"
+        text: "Would you like to add other relevant qualifications?",
+        classes: "govuk-fieldset__legend--m"
       }
     },
     items: [{
-      value: "domestic",
-      text: "In the UK"
+      value: "yes",
+      text: "Yes"
     }, {
-      value: "international",
-      text: "Outside the UK",
-      conditional: {
-        html: internationalConditionalHtml
-      }
+      value: "no",
+      text: "No"
     }]
-  } | decorateApplicationAttributes(["other-qualifications", id, "provenance"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Grade",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Year qualification was awarded",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
-
-  {# Only show ‘Add another…’ button if:
-      * not editing an existing item
-      * not referred from a review page (which also has an ‘Add another…’ button)
-  #}
-  {% if action != "edit" and not referrer %}
-    {{ govukButton({
-      text: "Save and add another qualification",
-      classes: "govuk-button--secondary",
-      attributes: {
-        formaction: applicationPath + "/other-qualifications/add"
-      }
-    }) }}
-
-    <p class="govuk-body">or</p>
-  {% endif %}
+  } | decorateApplicationAttributes(["include-other-qualifications"])) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "country"]) }}',
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-country')
-    })
-  </script>
 {% endblock %}

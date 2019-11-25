@@ -18,13 +18,19 @@ module.exports = router => {
 
   // Render details page
   router.get('/application/:applicationId/other-qualifications/:id', (req, res) => {
-    const id = req.params.id
-    const referrer = req.query.referrer
+    const { id } = req.params
+    const { referrer } = req.query
 
     res.render('application/other-qualifications/index', {
-      formaction: referrer || `/application/${req.params.applicationId}/other-qualifications/review`,
       id,
       referrer
     })
+  })
+
+  router.post('/application/:applicationId/other-qualifications/:id', (req, res) => {
+    const next = req.session.data.next || 'review'
+    const { referrer } = req.query
+
+    res.redirect(referrer || `/application/${req.params.applicationId}/other-qualifications/${next}`)
   })
 }

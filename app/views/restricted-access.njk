@@ -4,14 +4,19 @@
 {% set hasSecondary = true %}
 
 {% block primary %}
-  <p class="govuk-body-l">{{ serviceName}} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
-  <p class="govuk-body">This service is still in development, so for now, we have to limit candidate numbers.</p>
+  <p class="govuk-body-l">{{ serviceName }} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
+  {{ govukInsetText({
+    html: "Learn more about teacher training in <a href=\"https://www.discoverteaching.wales/routes-into-teaching/\">Wales</a>, <a href=\"https://teachinscotland.scot/\">Scotland</a> and <a href=\"https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland\">Northern Ireland</a>"
+  }) }}
 
-  <h2 class="govuk-heading-m">Start your application on UCAS</h2>
-  <p class="govuk-body">You can apply for all teacher training courses and providers using UCAS</p>
-  <p class="govuk-body">You’ll need to register with UCAS before you can apply.</p>
-  <p class="govuk-body"><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">Apply on UCAS</a></p>
+  <h2 class="govuk-heading-m">Already have a {{serviceName }} account with us?</h2>
+  <p class="govuk-body">Please <a href="/account/sign-in">sign in and continue your application</a>.</p>
 
-  <h2 class="govuk-heading-m">Returning user</h2>
-  <p class="govuk-body">If you have teacher training applications in progress, please <a href="/account/sign-in">sign in</a></p>
+  <h2 class="govuk-heading-m">First visit to Apply for teacher training?</h2>
+  <p class="govuk-body">We’re sorry, but this service isn’t ready for any more new candidates at the moment.</p>
+  <p class="govuk-body">You can still apply to all teacher training courses and training providers through UCAS.</p>
+  {{ govukButton({
+    text: "Apply through UCAS",
+    href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do"
+  }) }}
 {% endblock %}

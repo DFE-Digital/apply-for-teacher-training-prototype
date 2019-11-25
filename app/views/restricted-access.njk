@@ -1,0 +1,17 @@
+{% extends "_content.njk" %}
+
+{% set title = serviceName %}
+{% set hasSecondary = true %}
+
+{% block primary %}
+  <p class="govuk-body-l">{{ serviceName}} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
+  <p class="govuk-body">This service is still in development, so for now, we have to limit candidate numbers.</p>
+
+  <h2 class="govuk-heading-m">Start your application on UCAS</h2>
+  <p class="govuk-body">You can apply for all teacher training courses and providers using UCAS</p>
+  <p class="govuk-body">You’ll need to register with UCAS before you can apply.</p>
+  <p class="govuk-body"><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">Apply on UCAS</a></p>
+
+  <h2 class="govuk-heading-m">Returning user</h2>
+  <p class="govuk-body">If you have teacher training applications in progress, please <a href="/account/sign-in">sign in</a></p>
+{% endblock %}

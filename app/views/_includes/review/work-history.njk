@@ -96,6 +96,8 @@
         {% set itemEndEpoch = itemEnd | date("x") | int %}
         {% set itemDuration = itemEndEpoch - itemStartEpoch %}
         {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+
+
           {{ appSummaryCard({
             classes: "govuk-!-margin-bottom-6",
             headingLevel: 3,

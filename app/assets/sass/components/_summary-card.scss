@@ -1,5 +1,34 @@
+
+// .app-summary-card--error {
+//   border: 5px solid govuk-colour('red') !important;
+// }
+
+
 .app-summary-card {
   border: 1px solid $govuk-border-colour;
+
+  &--incomplete {
+    border: 5px solid govuk-colour('blue');
+
+    .app-summary-card__title {
+      color: govuk-colour('blue');
+      font-weight: bold !important;
+    }
+
+    .app-summary-card__header {
+      background-color: govuk-colour("white") !important;
+    }
+  }
+
+  &--error {
+    border: 5px solid govuk-colour('red');
+
+    .app-summary-card__title {
+      color: govuk-colour('red');
+      font-weight: bold !important;
+    }
+
+  }
 
   .app-summary-card__header {
     align-items: center;
@@ -12,6 +41,7 @@
       align-items: start;
     }
   }
+
 
   .app-summary-card__title {
     @include govuk-font($size: 19);

@@ -1,5 +1,5 @@
 module.exports = {
-  status: 'submitted',
+  status: 'started',
   welcomeFlow: false,
   choices: {
     ABCDE: {

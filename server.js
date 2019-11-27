@@ -4,6 +4,7 @@ const path = require('path')
 // NPM dependencies
 const dotenv = require('dotenv')
 const express = require('express')
+const flash = require('connect-flash')
 const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
@@ -171,6 +172,8 @@ if (useCookieSessionStore === 'true') {
     store: sessionStore
   })))
 }
+
+app.use(flash());
 
 // Automatically store all data users enter
 if (useAutoStoreData === 'true') {

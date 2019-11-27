@@ -98,27 +98,7 @@
         {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
 
 
-          {% set errorClass = "" %}
-          {% if data.incomplete == 'true' %}
-            {% set errorClass = " app-summary-card--error" %}
-          {% endif %}
-
           {{ appSummaryCard({
-            attributes: {
-              id: 'work-history-error'
-            },
-            classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
-            titleText: "Work gap not explained",
-            actions: {
-              items: [{
-                text: "Complete section"
-              }]
-            }
-          }) }}
-
-
-
-          {# {{ appSummaryCard({
             classes: "govuk-!-margin-bottom-6",
             headingLevel: 3,
             titleText: "You have a break in your work history (" + (itemDuration | duration) + ")",
@@ -131,7 +111,7 @@
                 text: "Add another job"
               }]
             } if canAmend
-          }) }} #}
+          }) }}
         {% endif %}
       {% endif %}
     {% endfor %}

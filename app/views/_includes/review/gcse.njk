@@ -10,24 +10,5 @@
     html: gcseHtml
   }) }}
 {% else %}
-  {# <p class="govuk-body">Not entered.</p> #}
-
-  {% set errorClass = "" %}
-  {% if data.incomplete == 'true' %}
-    {% set errorClass = " app-summary-card--error" %}
-  {% endif %}
-
-  {{ appSummaryCard({
-    attributes: {
-      id: 'gcse-error'
-    },
-    classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
-    titleText: "Not entered",
-    actions: {
-      items: [{
-        href: "",
-        text: "Complete section"
-      }]
-    }
-  }) }}
+  <p class="govuk-body">Incomplete</p>
 {% endif %}

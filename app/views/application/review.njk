@@ -18,18 +18,13 @@
 
 {% block beforePageTitle %}
 
-  {% if data.incomplete == 'true' %}
-
+  {% if showErrorSummary %}
     {{ govukErrorSummary({
-      titleText: "Your application can’t be submitted because it’s incomplete",
+      titleText: "Your application cannot be submitted because it’s incomplete",
       errorList: [
         {
-          text: "Work history gap not explained",
-          href: "#work-history-error"
-        },
-        {
-          text: "Science GCSE not entered",
-          href: "#gcse-error"
+          text: "Courses: section incomplete",
+          href: "#choices-error"
         }
       ]
     }) }}
@@ -49,10 +44,23 @@
     {% set showChoiceStatus = false %}
     {% include "_includes/review/choices.njk" %}
   {% else %}
-    {{ govukButton({
-      text: "Add a course",
-      href: applicationPath + "/choices/add",
-      classes: "govuk-button--secondary govuk-!-font-size-16 govuk-!-padding-top-1 govuk-!-padding-bottom-1"
+    {% set errorClass = "" %}
+    {% if showErrorSummary %}
+      {% set errorClass = " app-summary-card--error" %}
+    {% endif %}
+
+    {{ appSummaryCard({
+      attributes: {
+        id: 'choices-error'
+      },
+      classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
+      titleText: "Choices: section incomplete",
+      actions: {
+        items: [{
+          href: applicationPath + "/choices/add",
+          text: "Complete section"
+        }]
+      }
     }) }}
   {% endif %}
 
@@ -104,8 +112,9 @@
   {% set references = applicationValue(["referees"]) %}
   {% include "_includes/review/references.njk" %}
 
-  {{ govukButton({
-    text: "Continue",
-    href: applicationPath + '/review?incomplete=true'
-  }) }}
+  <form method="post">
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

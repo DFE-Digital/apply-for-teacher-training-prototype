@@ -1,20 +1,21 @@
 {% extends "_layout.njk" %}
 
 {% block content %}
-<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
-  {% set legendHtml %}
-    {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
-    {{ title | safe }}
-  {% endset %}
-  {% call govukFieldset({
-    legend: {
-      html: legendHtml,
-      classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
-      isPageHeading: true
-    }
-  }) %}
-    {% block primary %}
-    {% endblock %}
-  {% endcall %}
-</form>
+  {% block beforePageTitle %}{% endblock %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {% set legendHtml %}
+      {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
+      {{ title | safe }}
+    {% endset %}
+    {% call govukFieldset({
+      legend: {
+        html: legendHtml,
+        classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
+        isPageHeading: true
+      }
+    }) %}
+      {% block primary %}
+      {% endblock %}
+    {% endcall %}
+  </form>
 {% endblock %}

@@ -141,26 +141,51 @@ module.exports = router => {
 
   // Render review page
   router.get('/application/:applicationId/review', (req, res) => {
-    res.render('application/review')
+    var app = utils.applicationData(req);
+    var pageObject = {};
+
+    pageObject.choices = {
+      items: app.choices,
+      complete: Object.keys(app.choices).length > 0
+    };
+
+    var successFlash = req.flash('success');
+
+    if(successFlash[0] == 'submitted-incompleted-application') {
+      pageObject.showErrorSummary = true;
+    }
+
+    res.render('application/review', pageObject);
+
   })
 
   router.post('/application/:applicationId/review', (req, res) => {
     // If updating jobs or roles, ensure dates are saved using ISO 8601 format
     const id = req.query.update
     const applicationData = utils.applicationData(req)
-    const workHistory = applicationData['work-history']
-    const schoolExperience = applicationData['school-experience']
-    const referer = req.get('referer')
 
-    if (id && referer.includes('work-history')) {
-      utils.saveIsoDate(req, workHistory, id)
+    // User tried to submit incomplete application
+    // just checking choices are empty for now
+    // to make real need to check over every section
+    if(Object.keys(applicationData.choices).length == 0) {
+      req.flash('success', 'submitted-incompleted-application');
+      res.redirect(`/application/${req.params.applicationId}/review`);
+    } else {
+      const workHistory = applicationData['work-history']
+      const schoolExperience = applicationData['school-experience']
+      const referer = req.get('referer')
+
+      if (id && referer.includes('work-history')) {
+        utils.saveIsoDate(req, workHistory, id)
+      }
+
+      if (id && referer.includes('school-experience')) {
+        utils.saveIsoDate(req, schoolExperience, id)
+      }
+
+      res.render('application/review')
     }
 
-    if (id && referer.includes('school-experience')) {
-      utils.saveIsoDate(req, schoolExperience, id)
-    }
-
-    res.render('application/review')
   })
 
   // Render submitted page

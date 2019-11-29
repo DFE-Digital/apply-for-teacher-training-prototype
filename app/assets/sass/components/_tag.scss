@@ -38,3 +38,7 @@
 .app-tag--submitted {
   @include tag("dark-grey", $filled: true);
 }
+
+.app-tag--not-complete {
+  @include tag("blue", $filled: false);
+}

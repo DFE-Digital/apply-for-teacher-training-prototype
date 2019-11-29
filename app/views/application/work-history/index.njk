@@ -24,26 +24,40 @@
     items: [{
       value: "less",
       text: "Less than 5 years",
-      conditional: {
-        html: "<p class=\"govuk-body\">Give us as much of your work history as you can. For example, if you are a recent graduate, tell us about your employment before, during and since leaving university.</p>"
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Give us as much of your work history as you can. For example, if you are a recent graduate, tell us about your employment before, during and since leaving university."
       }
     }, {
       value: "more",
       text: "More than 5 years",
-      conditional: {
-        html: "<p class=\"govuk-body\">You can list your complete work history – or just the roles you think are relevant – going back further than 5 years if you wish.</p>"
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "You can list your complete work history – or just the roles you think are relevant – going back further than 5 years if you wish."
       }
     }, {
       value: "breaks",
       text: "More than 5 years, but with breaks",
-      conditional: {
-        html: "<p class=\"govuk-body\">You’ll be able to give details once you’ve entered your employment history. Please explain any break longer than a month.</p>"
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "You’ll be able to give details once you’ve entered your employment history. Please explain any break longer than a month."
       }
+    }, {
+      divider: "or"
     }, {
       value: "none",
       text: "I have not worked in the last 5 years",
-      conditional: {
-        html: "<p class=\"govuk-body\">You’ll be able to explain why you’ve been out of the workplace.</p>"
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "You’ll be able to explain why you’ve been out of the workplace."
       }
     }]
   } | decorateApplicationAttributes(["work-history", "length"])) }}

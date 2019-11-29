@@ -25,28 +25,5 @@
     html: personalStatementHtml
   }) }}
 {% else %}
-
-
-  {% set interviewHtml %}
-    {# {{ govukErrorMessage({
-      text: "Personal statement incomplete",
-      visuallyHiddenText: ""
-    }) }} #}
-
-    <p class="govuk-body">Personal statement incomplete</p>
-
-    {{govukButton({
-      text: 'Go to section',
-      classes: 'govuk-button--secondary govuk-!-margin-bottom-0'
-    })}}
-
-  {% endset %}
-
-  {{ appSummaryCard({
-    attributes: {
-      id: 'personal-statement-error'
-    },
-    classes: "govuk-!-margin-bottom-6 app-summary-card--erro",
-    html: interviewHtml
-  }) }}
+  <p class="govuk-body">Personal statement not complete</p>
 {% endif %}

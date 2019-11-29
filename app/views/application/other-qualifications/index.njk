@@ -87,20 +87,28 @@
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
 
-  {# Only show ‘Add another…’ button if:
-      * not editing an existing item
-      * not referred from a review page (which also has an ‘Add another…’ button)
+  {# Only ask if want to add another if:
+    * not editing an existing item
+    * not referred from a review page (which has an ‘Add another…’ button)
+    * feature flag enabled
   #}
-  {% if action != "edit" and not referrer %}
-    {{ govukButton({
-      text: "Save and add another qualification",
-      classes: "govuk-button--secondary",
-      attributes: {
-        formaction: applicationPath + "/other-qualifications/add"
-      }
+  {% if action != "edit" and not referrer and data.flags.add_another %}
+    {{ govukRadios({
+      name: "next",
+      fieldset: {
+        legend: {
+          text: "Do you want to add another qualification?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "add",
+        text: "Yes"
+      }, {
+        value: "review",
+        text: "No"
+      }]
     }) }}
-
-    <p class="govuk-body">or</p>
   {% endif %}
 
   {{ govukButton({

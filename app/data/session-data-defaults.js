@@ -12,6 +12,7 @@ module.exports = {
   // },
   find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
   flags: {
+    add_another: (process.env.MVP !== 'true'),
     address_lookup: (process.env.MVP !== 'true'),
     automatic_breaks: process.env.MVP !== 'true',
     international_address: process.env.MVP !== 'true',

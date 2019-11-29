@@ -129,9 +129,9 @@
       href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"])),
       id: "science-gcse",
       tag: {
-        classes: "app-tag--not-complete",
-        text: "Incomplete"
-      }
+        classes: tagClass,
+        text: tagText
+      } if applicationValue(["gcse", "science"])
     } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Other relevant academic and non-academic qualifications",
       href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
@@ -169,7 +169,7 @@
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["interview"])
+      } if applicationValue(["interview-choice"])
     }]
   }) }}
 

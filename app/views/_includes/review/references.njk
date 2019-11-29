@@ -6,51 +6,23 @@
     <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
   {% endif %}
   {% set references = references | toArray %}
-
-
-    {% for item in references %}
-      {% set refereeHtml %}
-        {% include "_includes/item/reference.njk" %}
-      {% endset %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: item.id | capitalize + " referee",
-        actions: {
-          items: [{
-            href: applicationPath + "/referees/" + item.id + "/delete?referrer=" + referrer,
-            text: "Delete referee"
-          }]
-        } if canAmend,
-        html: refereeHtml
-      }) }}
-    {% endfor %}
-  {% if references.length < 2 %}
-
-    {% set interviewHtml %}
-      {# {{ govukErrorMessage({
-        text: "Second referee not provided",
-        visuallyHiddenText: ""
-      }) }} #}
-
-      <p class="govuk-body">Second referee not provided</p>
-
-      {{govukButton({
-        text: 'Go to section',
-        classes: 'govuk-button--secondary govuk-!-margin-bottom-0'
-      })}}
-
+  {% for item in references %}
+    {% set refereeHtml %}
+      {% include "_includes/item/reference.njk" %}
     {% endset %}
-
     {{ appSummaryCard({
-      attributes: {
-        id: 'reference-error'
-      },
-      classes: "govuk-!-margin-bottom-6 app-summary-card--erro",
-      html: interviewHtml
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: item.id | capitalize + " referee",
+      actions: {
+        items: [{
+          href: applicationPath + "/referees/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete referee"
+        }]
+      } if canAmend,
+      html: refereeHtml
     }) }}
-
-  {% endif %}
+  {% endfor %}
 {% else %}
   <p class="govuk-body">No references entered.</p>
 {% endif %}

@@ -1,29 +1,3 @@
-// Task list pattern
-
-.app-task-list {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  @include govuk-media-query($from: tablet) {
-    min-width: 550px;
-  }
-}
-
-.app-task-list__section {
-  display: table;
-  @include govuk-font($size:24, $weight: bold);
-}
-
-.app-task-list__section-number {
-  display: table-cell;
-
-  @include govuk-media-query($from: tablet) {
-    min-width: govuk-spacing(6);
-    padding-right: 0;
-  }
-}
-
 .app-task-list {
   @include govuk-font($size: 19);
   @include govuk-responsive-margin(9, "bottom");
@@ -39,13 +13,12 @@
   @include govuk-clearfix;
 
   .govuk-tag {
-    margin-top: govuk-spacing(2);
-    margin-bottom: govuk-spacing(1);
+    @include govuk-media-query($until: 450px) {
+      margin-top: govuk-spacing(2);
+    }
 
     @include govuk-media-query($from: 450px) {
       float: right;
-      margin-top: 0;
-      margin-bottom: 0;
     }
   }
 }

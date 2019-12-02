@@ -1,0 +1,39 @@
+{% extends "_form-question.njk" %}
+
+{% set formaction = "/reference/submit" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Tell us about " + candidate_name %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/reference"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set hintHtml %}
+    <p class="govuk-body">Try to cover the following, but don’t worry if there are areas you can’t comment on.</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><strong>Teaching potential</strong>. Does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</li>
+      <li><strong>Subject knowledge</strong>. Is the candidate passionate and informed about their teaching subject?</li>
+      <li><strong>Academic abilities</strong>. Does the candidate think critically and have good numeracy and literacy skills?</li>
+      <li><strong>Reliability and professionalism</strong>. Can the candidate meet deadlines and manage their time?</li>
+      <li><strong>Transferable skills</strong>. What abilities would the candidate bring to teaching (for example, communication, creativity, project management)?</li>
+    </ul>
+  {% endset %}
+
+  {{ govukCharacterCount({
+    label: label,
+    hint: {
+      html: hintHtml
+    },
+    maxwords: 300,
+    rows: 9
+  } | decorateApplicationAttributes(["reference", "comments"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

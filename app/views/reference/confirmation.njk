@@ -1,0 +1,17 @@
+{% extends "_content.njk" %}
+
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Reference for " + candidate_name + " has been submitted" %}
+{% set hasAccountLinks = false %}
+
+{% block content %}
+  {{ govukPanel({
+    classes: "govuk-!-margin-bottom-8",
+    titleText: title
+  }) }}
+  <!--div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body"><mark>TBD</mark></p>
+    </div>
+  </div-->
+{% endblock %}

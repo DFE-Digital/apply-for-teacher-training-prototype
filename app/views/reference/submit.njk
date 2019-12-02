@@ -1,0 +1,25 @@
+{% extends "_form.njk" %}
+
+{% set formaction = "/reference/confirmation" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Can we contact you for research purposes?" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/reference/comments"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">You can opt in to being contacted by the Department for Education for research purposes. We’ll only contact you for research purposes if you consent by ticking the box below.</p>
+  {{ govukCheckboxes({
+    items: [{
+      text: "I consent to the Department for Education contacting me for research purposes (optional)"
+    }]
+  } | decorateApplicationAttributes(["reference", "research-consent"])) }}
+
+  {{ govukButton({
+    text: "Submit reference"
+  }) }}
+{% endblock %}

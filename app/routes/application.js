@@ -143,20 +143,27 @@ module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
     var app = utils.applicationData(req);
     var pageObject = {};
-
-    pageObject.choices = {
-      items: app.choices,
-      complete: Object.keys(app.choices).length > 0
-    };
-
     var successFlash = req.flash('success');
 
     if(successFlash[0] == 'submitted-incompleted-application') {
-      pageObject.showErrorSummary = true;
+      pageObject.errorList = [];
+
+      if(Object.keys(app.choices).length == 0) {
+        pageObject.errorList.push({
+          text: "Courses: section incomplete",
+          href: "#choices-error"
+        });
+      }
+
+      if(Object.keys(app['other-qualifications']).length == 0) {
+        pageObject.errorList.push({
+          text: "Other relevant qualifications: section incomplete",
+          href: "#other-qualifications-error"
+        });
+      }
     }
 
     res.render('application/review', pageObject);
-
   })
 
   router.post('/application/:applicationId/review', (req, res) => {
@@ -167,7 +174,8 @@ module.exports = router => {
     // User tried to submit incomplete application
     // just checking choices are empty for now
     // to make real need to check over every section
-    if(Object.keys(applicationData.choices).length == 0) {
+    if( Object.keys(applicationData.choices).length == 0 ||
+        Object.keys(applicationData['other-qualifications']).length == 0) {
       req.flash('success', 'submitted-incompleted-application');
       res.redirect(`/application/${req.params.applicationId}/review`);
     } else {

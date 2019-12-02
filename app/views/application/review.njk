@@ -18,15 +18,10 @@
 
 {% block beforePageTitle %}
 
-  {% if showErrorSummary %}
+  {% if errorList %}
     {{ govukErrorSummary({
       titleText: "Your application cannot be submitted because it’s incomplete",
-      errorList: [
-        {
-          text: "Courses: section incomplete",
-          href: "#choices-error"
-        }
-      ]
+      errorList: errorList
     }) }}
   {% endif %}
 {% endblock %}
@@ -45,7 +40,7 @@
     {% include "_includes/review/choices.njk" %}
   {% else %}
     {% set errorClass = "" %}
-    {% if showErrorSummary %}
+    {% if errorList %}
       {% set errorClass = " app-summary-card--error" %}
     {% endif %}
 
@@ -100,7 +95,47 @@
   {% endif %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% include "_includes/review/other-qualifications.njk" %}
+  {% set qualifications = applicationValue(["other-qualifications"]) %}
+  {% set qualifications = qualifications | toArray | selectattr("id") %}
+  {% if qualifications.length %}
+    {% for item in qualifications %}
+      {% set qualificationHtml %}
+        {% include "_includes/item/other-qualification.njk" %}
+      {% endset %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: item.type + " " + item.subject,
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete qualification"
+          }]
+        } if canAmend,
+        html: qualificationHtml
+      }) }}
+    {% endfor %}
+  {% else %}
+    {% set errorClass = "" %}
+    {% if errorList %}
+      {% set errorClass = " app-summary-card--error" %}
+    {% endif %}
+
+    {{ appSummaryCard({
+      attributes: {
+        id: 'other-qualifications-error'
+      },
+      classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
+      titleText: "Other relevant qualifications: section incomplete",
+      actions: {
+        items: [{
+          href: applicationPath + "/other-qualifications/add?referrer=" + referrer,
+          text: "Complete section"
+        }]
+      }
+    }) }}
+  {% endif %}
+
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement and interview</h2>
   {% include "_includes/review/personal-statement.njk" %}

@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = "/reference/comments" %}
+{% set formaction = "/reference/details" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Give a teacher training reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
@@ -20,7 +20,7 @@
   {% set reasonHtml %}
     {{ govukTextarea({
       label: {
-        text: "Why are you unable to give a reference (optional)?"
+        text: "Tell us why you aren’t giving a reference (optional)"
       },
       hint: {
         html: hintHtml
@@ -33,11 +33,11 @@
     fieldset: {
       legend: {
         classes: "govuk-fieldset__legend--m",
-        text: "I am able to give a reference for " + candidate_name + "?"
+        text: "Will you give a reference for " + candidate_name + "?"
       }
     },
     items: [{
-      text: "Yes"
+      text: "Yes, I will give a reference"
     }, {
       text: "No",
       conditional: {

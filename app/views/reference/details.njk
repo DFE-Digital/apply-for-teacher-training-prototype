@@ -1,0 +1,62 @@
+{% extends "_form-question.njk" %}
+
+{% set formaction = "/reference/comments" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Are these details correct?" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/reference"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  {{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Your name"
+      },
+      value: {
+        text: "Sarah Philips"
+      }
+    },
+    {
+      key: {
+        text: "Their name"
+      },
+      value: {
+        text: "Jane Doe"
+      }
+    },
+    {
+      key: {
+        text: "Their relationship to you"
+      },
+      value: {
+        text: "They were my tutor at university from 2011 to 2013"
+      }
+    }
+  ]}) }}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m govuk-visually-hidden",
+        text: "Are these details correct?"
+      }
+    },
+    items: [{
+      text: "Yes, they’re correct"
+    }, {
+      text: "No, I need to correct something"
+    }]
+  } | decorateApplicationAttributes(["reference", "correct"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

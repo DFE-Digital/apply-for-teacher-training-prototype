@@ -12,10 +12,19 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You can opt in to being contacted by the Department for Education for research purposes. We’ll only contact you for research purposes if you consent by ticking the box below.</p>
-  {{ govukCheckboxes({
+  <p class="govuk-body">You can opt in to being contacted by the Department for Education for research purposes.</p>
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m govuk-visually-hidden",
+        text: "Can we contact you for research purposes?"
+      }
+    },
     items: [{
-      text: "I consent to the Department for Education contacting me for research purposes (optional)"
+      text: "Yes, you can contact me"
+    }, {
+      text: "No, do not contact me"
     }]
   } | decorateApplicationAttributes(["reference", "research-consent"])) }}
 

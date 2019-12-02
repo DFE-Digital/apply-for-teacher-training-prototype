@@ -7,30 +7,37 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/reference"
+    href: "/reference/details"
   }) }}
 {% endblock %}
 
 {% block primary %}
-  {% set hintHtml %}
-    <p class="govuk-body">Try to cover the following, but don’t worry if there are areas you can’t comment on.</p>
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li><strong>Teaching potential</strong>. Does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</li>
-      <li><strong>Subject knowledge</strong>. Is the candidate passionate and informed about their teaching subject?</li>
-      <li><strong>Academic abilities</strong>. Does the candidate think critically and have good numeracy and literacy skills?</li>
-      <li><strong>Reliability and professionalism</strong>. Can the candidate meet deadlines and manage their time?</li>
-      <li><strong>Transferable skills</strong>. What abilities would the candidate bring to teaching (for example, communication, creativity, project management)?</li>
-    </ul>
-  {% endset %}
+    <p class="govuk-body">Try to cover the following, but don’t worry if there are areas you can’t comment on:</p>
+
+    <strong class="govuk-heading-s govuk-!-margin-bottom-1">Teaching potential</strong>
+    <p>For example, does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</p>
+
+    <strong class="govuk-heading-s govuk-!-margin-bottom-1">Subject knowledge</strong>
+    <p>For example, is the candidate passionate and informed about their teaching subject?</p>
+
+    <strong class="govuk-heading-s govuk-!-margin-bottom-1">Academic abilities</strong>
+    <p>For example, does the candidate think critically and have good numeracy and literacy skills?</p>
+
+    <strong class="govuk-heading-s govuk-!-margin-bottom-1">Reliability and professionalism</strong>
+    <p>For example, what abilities would the candidate bring to teaching (for example, communication, creativity, project management)?</p>
+
+    <strong class="govuk-heading-s govuk-!-margin-bottom-1">Transferable skills</strong>
+    <p>For example, can the candidate meet deadlines and manage their time?</p>
 
   {{ govukCharacterCount({
-    label: label,
-    hint: {
-      html: hintHtml
+    label: {
+      text: 'Your reference',
+      classes: 'govuk-label--m govuk-!-margin-top-8'
     },
     maxwords: 300,
-    rows: 9
+    rows: 15
   } | decorateApplicationAttributes(["reference", "comments"])) }}
 
   {{ govukButton({

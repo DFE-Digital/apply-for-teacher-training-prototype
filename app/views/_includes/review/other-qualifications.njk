@@ -1,7 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualifications = applicationValue(["other-qualifications"]) %}
 
-{% if qualifications %}
+{% if qualifications.length %}
   {% set qualifications = qualifications | toArray | selectattr("id") %}
   {% for item in qualifications %}
     {% set qualificationHtml %}

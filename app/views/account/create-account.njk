@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Create an " + serviceName + " account" %}
+{% set title = "Enter your email to create an account" %}
 {% set formaction = "/send-email/create-account" %}
 {% set hasAccountLinks = true %}
 
@@ -11,9 +11,12 @@
 {% endblock %}
 
 {% block primary %}
+
+<h2 class="govuk-heading-m">You won't need a password</h2>
+<p class="govuk-body">Sign in with your email every time you return to the service, and we'll send you a link giving you access to your account.</p>
   {{ govukInput({
     label: {
-      text: "Enter your email address",
+      text: "Enter email",
       classes: "govuk-label--m"
     },
     hint: {
@@ -29,25 +32,30 @@
     name: "account[email]"
   }) }}
 
-  <h2 class="govuk-heading-m">You won’t need a password to use this service</h2>
-  <p class="govuk-body">Instead, you’ll sign in using your email address. Each time you sign in, we'll send you a link so you can return to your application.</p>
 
-  <h2 class="govuk-heading-m">How we look after your data</h2>
-  <p class="govuk-body">Your data will be looked after by the Department for Education and the training providers you apply you. We use it to process your application, build a better application process, and improve policies relating to teacher recruitment and retention.</p>
-  <p class="govuk-body">Take a look at our <a href="/privacy-statement">privacy policy</a> before starting your application to check you understand how we use your data.</p>
+
+  <h2 class="govuk-heading-m">Your data</h2>
+  <p class="govuk-body">We use your personal information to process your application and improve the Apply for teacher training service.</p>
+  <p class="govuk-body">Our <a href="/privacy-statement">privacy policy</a> has more detail about our data responsibilities and your data rights.</p>
 
   <h2 class="govuk-heading-m">Terms of use</h2>
-  <p class="govuk-body">Our <a href="/terms-of-use">terms of use</a> contain important information about:</p>
+  <p class="govuk-body">Our <a href="/terms-of-use">terms of use</a> contain some important rules about using this service. For example, you must:
+    <ul class="govuk-list govuk-list--bullet">
+      <li>apply to a maximum of 3 courses</li>
+      <li>accept only one offer</li>
+      </ul>
+  <p class="govuk-body">We also explain:</p>
   <ul class="govuk-list govuk-list--bullet">
-    <li>the application process</li>
-    <li>contacting us</li>
-    <li>checking you’re safe to work with children</li>
-  </ul>
+      <li>how to contact us if you need help</li>
+      <li>how we check you’re safe to work with children</li>
+      <li>how to change or withdraw your application</li>
+    </ul>
+    <p class="govuk-body">We suggest you read our <a href="/terms-of-use">terms of use</a> before starting your application.</p>
 
   {{ govukCheckboxes({
     items: [{
       value: "true",
-      text: "I agree to the terms of use"
+      html: "I agree to the <a href=\"/terms-of-use\">terms of use</a>"
     }],
     name: "terms"
   }) }}

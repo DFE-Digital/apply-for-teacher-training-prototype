@@ -1,23 +1,22 @@
 {% extends "_layout.njk" %}
 
+{% set labelHtml %}
+  <span class="govuk-caption-xl">{{ parent }}</span>
+  {{ title }}
+{% endset %}
+
+{% set label = {
+  classes: "govuk-label--xl govuk-!-margin-bottom-8",
+  html: labelHtml,
+  isPageHeading: true
+} %}
+
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
   <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {% set legendHtml %}
-          {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
-          {{ title | safe }}
-        {% endset %}
-        {% call govukFieldset({
-          legend: {
-            html: legendHtml,
-            classes: "govuk-fieldset__legend--xl govuk-!-margin-bottom-8",
-            isPageHeading: true
-          }
-        }) %}
-          {% block primary %}{% endblock %}
-        {% endcall %}
+        {% block primary %}{% endblock %}
       </div>
       {% if hasSecondary %}
       <div class="govuk-grid-column-one-third">

@@ -20,6 +20,7 @@ require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)
 require('./routes/application')(router)
+require('./routes/reference')(router)
 require('./routes/email')(router)
 
 // Clear all data in session if you open /admin/clear-data

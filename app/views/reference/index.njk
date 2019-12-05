@@ -1,0 +1,55 @@
+{% extends "_form.njk" %}
+
+{% set formaction = "/reference/participation/answer" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Give a teacher training reference for " + candidate_name %}
+{% set hasAccountLinks = false %}
+
+{% block primary %}
+  <p class="govuk-body">{{ candidate_name }} put us in touch with you to get a reference for their teacher training application. They applied to the following courses:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+    <li>Mallowpond TAFE – Business</li>
+    <li>Mallowpond Technical College – Biomedical Science</li>
+    <li>Falconholt Technical College – Forensic Science</li>
+  </ul>
+
+  {% set reasonHtml %}
+    {{ govukTextarea({
+      id: "reference-decline-reason",
+      name: "reference[decline-reason]",
+      value: reference["decline-reason"],
+      label: {
+        text: "Tell us why you aren’t giving a reference (optional)"
+      },
+      rows: 5
+    }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    idPrefix: "reference-participation",
+    name: "reference[participation]",
+    value: reference["participation"],
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m",
+        text: "Will you give a reference for " + candidate_name + "?"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes, I will give a reference",
+      checked: checked("reference", "participation", "yes")
+    }, {
+      value: "no",
+      text: "No",
+      conditional: {
+        html: reasonHtml
+      },
+      checked: checked("reference", "participation", "no")
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

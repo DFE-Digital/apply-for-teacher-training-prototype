@@ -1,0 +1,56 @@
+{% extends "_form-question.njk" %}
+
+{% set formaction = "/reference/confirmation" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Tell us about " + candidate_name %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/reference/details"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  <p class="govuk-body">Try to cover the following, but don’t worry if there are areas you can’t comment on:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Teaching potential</h2>
+      <p class="govuk-body">For example, does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Subject knowledge</h2>
+      <p class="govuk-body">Is the candidate passionate and informed about their teaching subject?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Academic abilities</h2>
+      <p class="govuk-body">For example, does the candidate think critically and have good numeracy and literacy skills?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Reliability and professionalism</h2>
+      <p class="govuk-body">What abilities would the candidate bring to teaching, for example, communication, creativity, project management?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Transferable skills</h2>
+      <p class="govuk-body">For example, can the candidate meet deadlines and manage their time?</p>
+    </li>
+  </ul>
+
+  {{ govukCharacterCount({
+    id: "reference-comments",
+    name: "reference[comments]",
+    value: reference["comments"],
+    label: {
+      text: "Your reference",
+      classes: "govuk-label--m govuk-!-margin-top-6"
+    },
+    maxwords: 300,
+    rows: 15
+  }) }}
+
+  {{ govukButton({
+    text: "Submit reference"
+  }) }}
+{% endblock %}

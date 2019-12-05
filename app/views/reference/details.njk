@@ -15,34 +15,46 @@
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   {{ govukSummaryList({
-  rows: [
-    {
+    rows: [{
       key: {
         text: "Your name"
       },
       value: {
         text: "Sarah Philips"
       }
-    },
-    {
+    }, {
       key: {
         text: "Their name"
       },
       value: {
         text: "Jane Doe"
       }
-    },
-    {
+    }, {
       key: {
         text: "Their relationship to you"
       },
       value: {
         text: "They were my tutor at university from 2011 to 2013"
       }
-    }
-  ]}) }}
+    }]
+  }) }}
+
+  {% set errataHtml %}
+    {{ govukTextarea({
+      id: "reference-details-errata",
+      name: "reference[details-errata]",
+      value: reference["details-errata"],
+      label: {
+        text: "Tell us which details are incorrect"
+      },
+      rows: 5
+    }) }}
+  {% endset %}
 
   {{ govukRadios({
+    idPrefix: "reference-correct",
+    name: "reference[correct]",
+    value: reference["correct"],
     fieldset: {
       legend: {
         classes: "govuk-fieldset__legend--m govuk-visually-hidden",
@@ -50,11 +62,18 @@
       }
     },
     items: [{
-      text: "Yes, they’re correct"
+      value: "yes",
+      text: "Yes, they’re correct",
+      checked: checked("reference", "correct", "yes")
     }, {
-      text: "No, I need to correct something"
+      value: "no",
+      text: "No, I need to correct something",
+      conditional: {
+        html: errataHtml
+      },
+      checked: checked("reference", "correct", "no")
     }]
-  } | decorateApplicationAttributes(["reference", "correct"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Continue"

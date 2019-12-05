@@ -1,35 +1,34 @@
 {% extends "_form.njk" %}
 
-{% set formaction = "/reference/details" %}
+{% set formaction = "/reference/participation/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Give a teacher training reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
-  <p class="govuk-body">{{ candidate_name }} put us in touch with you to get a reference for their teacher training application. They applied to:</p>
-  <ul class="govuk-list govuk-list--bullet">
+  <p class="govuk-body">{{ candidate_name }} put us in touch with you to get a reference for their teacher training application. They applied to the following courses:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
     <li>Mallowpond TAFE – Business</li>
     <li>Mallowpond Technical College – Biomedical Science</li>
     <li>Falconholt Technical College – Forensic Science</li>
   </ul>
 
-  <!--h2 class="govuk-heading-m">How we look after your data</h2>
-  <p class="govuk-body">Under data protection legislation, it is in our ‘legitimate interest’ to contact you about this. We also have a ‘public task’ to process applications, improve the application process and carry out research to improve policy in this area. Processing your data allows us to perform this task.</p>
-  <p class="govuk-body govuk-!-margin-bottom-6">If you decide to provide a reference, take a look at our <a href="/privacy-statement">privacy policy</a> to find out how we look after your information.</p-->
-
   {% set reasonHtml %}
     {{ govukTextarea({
+      id: "reference-decline-reason",
+      name: "reference[decline-reason]",
+      value: reference["decline-reason"],
       label: {
         text: "Tell us why you aren’t giving a reference (optional)"
       },
-      hint: {
-        html: hintHtml
-      },
       rows: 5
-    } | decorateApplicationAttributes(["reference", "decline-reason"])) }}
+    }) }}
   {% endset %}
 
   {{ govukRadios({
+    idPrefix: "reference-participation",
+    name: "reference[participation]",
+    value: reference["participation"],
     fieldset: {
       legend: {
         classes: "govuk-fieldset__legend--m",
@@ -37,18 +36,20 @@
       }
     },
     items: [{
-      text: "Yes, I will give a reference"
+      value: "yes",
+      text: "Yes, I will give a reference",
+      checked: checked("reference", "participation", "yes")
     }, {
+      value: "no",
       text: "No",
       conditional: {
         html: reasonHtml
-      }
+      },
+      checked: checked("reference", "participation", "no")
     }]
-  } | decorateApplicationAttributes(["reference", "choice"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Continue"
   }) }}
-
-  <p class="govuk-body">Our <a href="/privacy-statement">privacy policy</a> contains information about how we look after your information.</p>
 {% endblock %}

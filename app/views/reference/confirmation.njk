@@ -1,17 +1,46 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
+{% set formaction = "/reference/finish/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Reference for " + candidate_name + " has been submitted" %}
+{% set title = "Your reference for " + candidate_name + " has been&nbsp;submitted" %}
 {% set hasAccountLinks = false %}
 
 {% block content %}
+<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
-    titleText: title
+    titleText: title | safe
   }) }}
-  <!--div class="govuk-grid-row">
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p class="govuk-body"><mark>TBD</mark></p>
+      <h2 class="govuk-heading-m">Can we contact you for research purposes?</h2>
+      <p class="govuk-body">You can opt in to being contacted by the Department for Education for research purposes.</p>
+
+      {{ govukRadios({
+        idPrefix: "reference-research",
+        name: "reference[research]",
+        value: reference["research"],
+        fieldset: {
+          legend: {
+            classes: "govuk-fieldset__legend--m govuk-visually-hidden",
+            text: "Can we contact you for research purposes?"
+          }
+        },
+        items: [{
+          value: "yes",
+          text: "Yes, you can contact me",
+          checked: checked("reference", "user-research", "no")
+        }, {
+          value: "no",
+          text: "No, do not contact me",
+          checked: checked("reference", "user-research", "no")
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Finish"
+      }) }}
     </div>
-  </div-->
+  </div>
+</form>
 {% endblock %}

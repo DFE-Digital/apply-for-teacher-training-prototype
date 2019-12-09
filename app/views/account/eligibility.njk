@@ -1,12 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set title = "First, check you can use Apply for teacher training" %}
+{% set title = "First, check you can use this service" %}
 {% set formaction = "/account/eligibility/answer" %}
-{% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    "href": "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true"
+    "href": "/"
   }) }}
 {% endblock %}
 

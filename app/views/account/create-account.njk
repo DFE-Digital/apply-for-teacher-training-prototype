@@ -1,12 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set title = "Create an " + serviceName + " account" %}
+{% set title = "Create an account" %}
 {% set formaction = "/send-email/create-account" %}
-{% set hasAccountLinks = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/"
+    href: "/account/eligibility"
   }) }}
 {% endblock %}
 
@@ -17,7 +16,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "Don’t use a work or university email address you might lose access to"
+      text: "We’ll send you a new sign-in link every time you want to come back to your application"
     },
     classes: "govuk-!-width-two-thirds",
     attributes: {
@@ -29,28 +28,7 @@
     name: "account[email]"
   }) }}
 
-  <h2 class="govuk-heading-m">You won’t need a password to use this service</h2>
-  <p class="govuk-body">Instead, you’ll sign in using your email address. Each time you sign in, we'll send you a link so you can return to your application.</p>
-
-  <h2 class="govuk-heading-m">How we look after your data</h2>
-  <p class="govuk-body">Your data will be looked after by the Department for Education and the training providers you apply you. We use it to process your application, build a better application process, and improve policies relating to teacher recruitment and retention.</p>
-  <p class="govuk-body">Take a look at our <a href="/privacy-statement">privacy policy</a> before starting your application to check you understand how we use your data.</p>
-
-  <h2 class="govuk-heading-m">Terms of use</h2>
-  <p class="govuk-body">Our <a href="/terms-of-use">terms of use</a> contain important information about:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>the application process</li>
-    <li>contacting us</li>
-    <li>checking you’re safe to work with children</li>
-  </ul>
-
-  {{ govukCheckboxes({
-    items: [{
-      value: "true",
-      text: "I agree to the terms of use"
-    }],
-    name: "terms"
-  }) }}
+  <p class="govuk-body">Take a look at our <a href="/privacy-policy">privacy policy</a> before creating an account.</p>
 
   {{ govukButton({
     text: "Create account"

@@ -1,55 +1,60 @@
 {% extends "_form.njk" %}
 
-{% set formaction = "/reference/participation/answer" %}
+{% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Give a teacher training reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
-  <p class="govuk-body">{{ candidate_name }} put us in touch with you to get a reference for their teacher training application. They applied to the following courses:</p>
-  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+
+  <p class="govuk-body">{{candidate_name}} applied to the following courses:</p>
+
+  <ul class="govuk-list govuk-list--bullet">
     <li>Mallowpond TAFE – Business</li>
     <li>Mallowpond Technical College – Biomedical Science</li>
     <li>Falconholt Technical College – Forensic Science</li>
   </ul>
 
-  {% set reasonHtml %}
-    {{ govukTextarea({
-      id: "reference-decline-reason",
-      name: "reference[decline-reason]",
-      value: reference["decline-reason"],
-      label: {
-        text: "Tell us why you aren’t giving a reference (optional)"
-      },
-      rows: 5
-    }) }}
-  {% endset %}
+   <p class="govuk-body">When giving your reference try to cover the following, but don’t worry if there are areas you can’t comment on:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Teaching potential</h2>
+      <p class="govuk-body">For example, does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Subject knowledge</h2>
+      <p class="govuk-body">Is the candidate passionate and informed about their teaching subject?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Academic abilities</h2>
+      <p class="govuk-body">For example, does the candidate think critically and have good numeracy and literacy skills?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Reliability and professionalism</h2>
+      <p class="govuk-body">What abilities would the candidate bring to teaching, for example, communication, creativity, project management?</p>
+    </li>
+    <li>
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Transferable skills</h2>
+      <p class="govuk-body">For example, can the candidate meet deadlines and manage their time?</p>
+    </li>
+  </ul>
 
-  {{ govukRadios({
-    idPrefix: "reference-participation",
-    name: "reference[participation]",
-    value: reference["participation"],
-    fieldset: {
-      legend: {
-        classes: "govuk-fieldset__legend--m",
-        text: "Will you give a reference for " + candidate_name + "?"
-      }
+   {# <p class="govuk-body">{{ candidate_name }} applied to the following courses:</p> #}
+
+
+  {{ govukCharacterCount({
+    id: "reference-comments",
+    name: "reference[comments]",
+    value: reference["comments"],
+    label: {
+      text: "Your reference",
+      classes: "govuk-label--m govuk-!-margin-top-6"
     },
-    items: [{
-      value: "yes",
-      text: "Yes, I will give a reference",
-      checked: checked("reference", "participation", "yes")
-    }, {
-      value: "no",
-      text: "No",
-      conditional: {
-        html: reasonHtml
-      },
-      checked: checked("reference", "participation", "no")
-    }]
+    maxwords: 300,
+    rows: 15
   }) }}
 
   {{ govukButton({
-    text: "Continue"
+    text: "Submit reference"
   }) }}
 {% endblock %}

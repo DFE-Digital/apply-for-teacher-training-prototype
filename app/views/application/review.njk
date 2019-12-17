@@ -73,9 +73,6 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27">Volunteering with children and young people</h2>
   {% include "_includes/review/school-experience.njk" %}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Training with a disability</h2>
-  {% include "_includes/review/disability.njk" %}
-
   <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
   <h3 class="govuk-heading-m">Degree(s)</h3>
   {% include "_includes/review/degrees.njk" %}
@@ -136,11 +133,13 @@
     }) }}
   {% endif %}
 
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement and interview</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
   {% include "_includes/review/personal-statement.njk" %}
+  {% include "_includes/review/reasonable-adjustments.njk" %}
   {% include "_includes/review/subject-knowledge.njk" %}
-  {% include "_includes/review/interview.njk" %}
+  {% if data.flags.interview_preferences == true %}
+    {% include "_includes/review/interview.njk" %}
+  {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
   {# You can’t change your referees once application has been submitted #}

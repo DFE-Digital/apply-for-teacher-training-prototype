@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set referrer = applicationPath + "/disabilities/review" %}
-{% set title = "Training with a disability" %}
+{% set title = "Ask for help to become a teacher" %}
 {% set canAmend = true %}
 
 {% block pageNavigation %}
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/disability.njk" %}
+  {% include "_includes/review/reasonable-adjustments.njk" %}
   {{ govukButton({
     text: "Continue",
     href: applicationPath

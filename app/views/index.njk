@@ -5,44 +5,52 @@
 
 {% block primary %}
   {% set insetHtml %}
-    <p class="govuk-body">If you’re not looking for courses in England, learn about:</p>
+    <p class="govuk-body">Learn more about:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li><a href="https://www.discoverteaching.wales/routes-into-teaching/">training in Wales</a></li>
-      <li><a href="https://teachinscotland.scot">training in Scotland</a></li>
-      <li><a href="https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland">training in Northern Ireland</a></li>
+      <li><a href="https://www.discoverteaching.wales/routes-into-teaching/">teacher training in Wales</a></li>
+      <li><a href="https://teachinscotland.scot">teacher training in Scotland</a></li>
+      <li><a href="https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland">teacher training in Northern Ireland</a></li>
     </ul>
   {% endset %}
 
-  <p class="govuk-body-l">{{ serviceName}} is a new service that being testing with a few teacher training providers in England.</p>
+  <p class="govuk-body-l">{{ serviceName}} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
+
+  <p class="govuk-body">You can <a href="https://www.apply-for-teacher-training.education.gov.uk/candidate/providers">preview courses currently available on Apply for teacher training.</a> For all other courses in England, <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do"> you will need to apply through UCAS Teacher Training.</a>
   {{ govukInsetText({
     html: insetHtml
   }) }}
 
-  <h2 class="govuk-heading-l">What you need to know before you&nbsp;start</h2>
+  <h2 class="govuk-heading-l">What you'll need</h2>
 
-  <h3 class="govuk-heading-m">You need certain qualifications </h3>
-  <p class="govuk-body">You need these qualifications (or their non-UK equivalents):</p>
+  <p class="govuk-body">To be eligible for teacher training, you need these qualifications (or their non-UK equivalents):</p>
   <ul class="govuk-list govuk-list--bullet">
     <li class="govuk-body">a degree</li>
     <li class="govuk-body">grade 4 (C) or above in English and maths GCSEs</li>
     <li class="govuk-body">grade 4 (C) or above in GCSE science if you want to teach primary</li>
   </ul>
-  <p>If you don’t have a degree, you may still be able to teach. <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">Learn more about eligibility for teacher training</a>.</p>
 
-  <h3 class="govuk-heading-m">You may be asked some questions about your health</h3>
-  <p class="govuk-body">Your training provider may need to ask some relevant questions about your health to check you’re able to teach.</p>
-  <p class="govuk-body">However, it’s unlawful to discriminate against you if you’re disabled and you don’t have to disclose a disability. <a href="https://getintoteaching.education.gov.uk/train-to-teach-with-a-disability">Learn more about training to teach if you have a disability</a>.</p>
+  <p class="govuk-body">Before you start a teacher training course you’ll also need to:
+    <ul class="govuk-list govuk-list--bullet">
+    <li class="govuk-body">confirm you have the health and physical capacity to start training</li>
+    <li class="govuk-body">undergo a <a href="https://www.gov.uk/dbs-check-applicant-criminal-record"> criminal record check</a></li>
+</ul>
 
-  <h3 class="govuk-heading-m">You will need to have a criminal record check</h3>
-  <p class="govuk-body">You will need to have a criminal record check and your name will be checked against a list of people who’ve been banned from working with children.</p>
-  <p class="govuk-body">Not all convictions will stop you from teaching. <a href="https://www.gov.uk/exoffenders-and-employment">Talk to your provider about their policy on criminal convictions</a>.</p>
+    <h3 class="govuk-heading-m">If you have a criminal record</h3>
+
+    <p class="govuk-body"><a href="https://www.gov.uk/exoffenders-and-employment">Not all convictions prevent you teaching.</a> Talk to your provider about their policy on criminal convictions.</p>
+
+  <h3 class="govuk-heading-m">If you have a disability</h3>
+  <p class="govuk-body">It’s unlawful to discriminate against you, and you don’t have to disclose a disability. <a href="https://getintoteaching.education.gov.uk/train-to-teach-with-a-disability">Learn more about training to teach if you have a disability</a>.</p>
+
+<h3 class="govuk-heading-m">If you don't have a degree</h3>
+<p class="govuk-body">You can teach in further education (age 14 to adult), or <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">study for a degree leading to qualified teacher status.<a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training"></a>
+
 
   <h3 class="govuk-heading-m">You can only apply for 3 courses and accept one offer</h3>
-  <p class="govuk-body">You can only apply for 3 courses and accept one offer even if you’re using both Apply for teacher training and UCAS Teacher Training.</p>
-  <p class="govuk-body">If your application isn’t successful or you’re not happy with your offers, we’ll support you to apply for more courses.</p>
+  <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/the-way-you-apply-for-teacher-training-is-changing">Learn more about the application process</a>.</p>
 
-  <h3 class="govuk-heading-m">You will have to declare that what you’ve said is true</h3>
-  <p class="govuk-body">Before you submit your application we’ll ask you to confirm that the information you’ve given is true, complete and accurate.</p>
+
+
 
   {{ govukButton({
     text: "Start now",

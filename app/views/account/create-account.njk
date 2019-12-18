@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block primary %}
+  <p class="govuk-body">Take a look at our <a href="/privacy-policy">privacy policy</a> before creating an account.</p>
+
   {{ govukInput({
     label: {
       text: "Enter your email address",
@@ -27,8 +29,6 @@
     id: "account-email",
     name: "account[email]"
   }) }}
-
-  <p class="govuk-body">Take a look at our <a href="/privacy-policy">privacy policy</a> before creating an account.</p>
 
   {{ govukButton({
     text: "Create account"

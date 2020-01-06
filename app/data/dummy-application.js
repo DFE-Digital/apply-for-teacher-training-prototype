@@ -55,8 +55,9 @@ module.exports = {
       country: 'United Kingdom'
     }
   },
-  disability: {
-    disclose: 'No'
+  'reasonable-adjustments': {
+    disclose: 'true',
+    statement: 'I currently require the use of a wheelchair.'
   },
   degree: {
     kq19m: {

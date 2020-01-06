@@ -4,24 +4,11 @@
 {% set hasSecondary = true %}
 
 {% block primary %}
-  {% set insetHtml %}
-    <p class="govuk-body">Learn more about:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li><a href="https://www.discoverteaching.wales/routes-into-teaching/">teacher training in Wales</a></li>
-      <li><a href="https://teachinscotland.scot">teacher training in Scotland</a></li>
-      <li><a href="https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland">teacher training in Northern Ireland</a></li>
-    </ul>
-  {% endset %}
+  <p class="govuk-body-l">{{ serviceName }} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
+  <p class="govuk-body">You can <a href="https://www.apply-for-teacher-training.education.gov.uk/candidate/providers">preview training providers and courses currently available</a> on this service.</p>
+  <p class="govuk-body">For all other courses in England, <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">you will need to apply through UCAS Teacher Training</a>.
 
-  <p class="govuk-body-l">{{ serviceName}} is a new GOV.UK service being trialled with a small number of training providers in England.</p>
-
-  <p class="govuk-body">You can <a href="https://www.apply-for-teacher-training.education.gov.uk/candidate/providers">preview courses currently available on Apply for teacher training.</a> For all other courses in England, <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do"> you will need to apply through UCAS Teacher Training.</a>
-  {{ govukInsetText({
-    html: insetHtml
-  }) }}
-
-  <h2 class="govuk-heading-l">What you'll need</h2>
-
+  <h2 class="govuk-heading-l">What you’ll need</h2>
   <p class="govuk-body">To be eligible for teacher training, you need these qualifications (or their non-UK equivalents):</p>
   <ul class="govuk-list govuk-list--bullet">
     <li class="govuk-body">a degree</li>
@@ -30,27 +17,22 @@
   </ul>
 
   <p class="govuk-body">Before you start a teacher training course you’ll also need to:
-    <ul class="govuk-list govuk-list--bullet">
+  <ul class="govuk-list govuk-list--bullet">
     <li class="govuk-body">confirm you have the health and physical capacity to start training</li>
     <li class="govuk-body">undergo a <a href="https://www.gov.uk/dbs-check-applicant-criminal-record"> criminal record check</a></li>
-</ul>
+  </ul>
 
-    <h3 class="govuk-heading-m">If you have a criminal record</h3>
-
-    <p class="govuk-body"><a href="https://www.gov.uk/exoffenders-and-employment">Not all convictions prevent you teaching.</a> Talk to your provider about their policy on criminal convictions.</p>
+  <h3 class="govuk-heading-m">If you have a criminal record</h3>
+  <p class="govuk-body"><a href="https://www.gov.uk/exoffenders-and-employment">Not all convictions prevent you teaching.</a> Talk to your provider about their policy on criminal convictions.</p>
 
   <h3 class="govuk-heading-m">If you have a disability</h3>
   <p class="govuk-body">It’s unlawful to discriminate against you, and you don’t have to disclose a disability. <a href="https://getintoteaching.education.gov.uk/train-to-teach-with-a-disability">Learn more about training to teach if you have a disability</a>.</p>
 
-<h3 class="govuk-heading-m">If you don't have a degree</h3>
-<p class="govuk-body">You can teach in further education (age 14 to adult), or <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">study for a degree leading to qualified teacher status.<a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training"></a>
-
+  <h3 class="govuk-heading-m">If you don’t have a degree</h3>
+  <p class="govuk-body">You can teach in further education (age 14 to adult), or <a href="https://getintoteaching.education.gov.uk/eligibility-for-teacher-training">study for a degree leading to qualified teacher status</a>.
 
   <h3 class="govuk-heading-m">You can only apply for 3 courses and accept one offer</h3>
   <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/the-way-you-apply-for-teacher-training-is-changing">Learn more about the application process</a>.</p>
-
-
-
 
   {{ govukButton({
     text: "Start now",
@@ -59,4 +41,20 @@
     classes: "govuk-!-margin-top-4 govuk-!-margin-bottom-3"
   }) }}
   <p class="govuk-body">If you have teacher training applications in progress, please <a href="/account/sign-in">sign in</a></p>
+{% endblock %}
+
+{% block secondary %}
+  {{ appRelated({
+    title: "Teacher training outside England",
+    items: [{
+      text: "Teacher training in Wales",
+      href: "https://www.discoverteaching.wales/routes-into-teaching/"
+    }, {
+      text: "Teacher training in Scotland",
+      href: "https://teachinscotland.scot"
+    }, {
+      text: "Teacher training in Northern Ireland",
+      href: "https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland"
+    }]
+  }) }}
 {% endblock %}

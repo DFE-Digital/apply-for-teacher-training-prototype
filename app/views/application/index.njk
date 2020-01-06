@@ -87,13 +87,13 @@
         text: tagText
       } if applicationValue(["completed", "school-experience"])
     }, {
-     text: "Training with a disability",
-     href: applicationPath + "/disability" + ("/review" if applicationValue("disability")),
-     id: "disability",
+     text: "Ask for help to become a teacher",
+     href: applicationPath + "/reasonable-adjustments" + ("/review" if applicationValue("reasonable-adjustments")),
+     id: "reasonable-adjustments",
      tag: {
        classes: tagClass,
        text: tagText
-     } if applicationValue("disability")
+     } if applicationValue("reasonable-adjustments")
    }]
   }) }}
 
@@ -143,7 +143,7 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement and interview</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -170,7 +170,7 @@
         classes: tagClass,
         text: tagText
       } if applicationValue(["interview-choice"])
-    }]
+    } if data.flags.interview_preferences == true]
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>

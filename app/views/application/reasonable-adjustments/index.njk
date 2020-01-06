@@ -1,0 +1,64 @@
+{% extends "_form.njk" %}
+
+{% set title = "Ask for help to become a teacher" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Training providers might be able to support you to attend the interview or do the training. For example, you might benefit from support if you’re disabled, have a health condition or educational needs.</p>
+  <p class="govuk-body">We recommend contacting your training provider before applying to discuss the support they can give you. Examples of support could be:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>organising assistive equipment, such as a hearing loop or an adapted keyboard</li>
+    <li>making sure classrooms are wheelchair accessible</li>
+    <li>providing additional support, such as a mentor or classroom assistance</li>
+  </ul>
+
+  {% set disabilityConditional %}
+    {{ govukCharacterCount({
+      label: {
+        html: "Give any relevant information",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "You can also use this space to make a note of any discussions you’ve already had with your provider about getting support."
+      },
+      maxwords: 400,
+      rows: 24
+    } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "Do you want to ask for help to become a teacher?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "true",
+      text: "Yes, I want to share information about myself so my provider can take steps to support me",
+      conditional: {
+        html: disabilityConditional
+      }
+    }, {
+      value: "false",
+      text: "No"
+    }]
+  } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

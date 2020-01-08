@@ -1,7 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set workHistory = applicationValue(["work-history"]) %}
 
-{% if workHistory %}
+{% set complete = workHistory | length > 0 %}
+{% if complete %}
   {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
   {% if history.length >= 1 %}
     {% set hasAutomaticBreaks = data.flags.automatic_breaks == true %}

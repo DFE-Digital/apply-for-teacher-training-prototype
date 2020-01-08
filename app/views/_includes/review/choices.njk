@@ -1,4 +1,5 @@
-{% if choices.length %}
+{% set complete = choices | length > 0 %}
+{% if complete %}
   {% for item in choices %}
     {% set provider = providers[item.providerCode] %}
     {% set course = provider.courses[item.courseCode] %}
@@ -49,9 +50,11 @@
     }) }}
   {% endfor %}
 {% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "course-choices" %}
-  {% set incompleteText = "Course choices are not marked as completed" %}
-  {% set incompleteLink = "/choices?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
+  {% if showIncomplete %}
+    {% set incompleteType = "warning" if errorList %}
+    {% set incompleteId = "course-choices" %}
+    {% set incompleteText = "Course choices are not marked as completed" %}
+    {% set incompleteLink = "/choices?referrer=" + referrer %}
+    {% include "_includes/review/incomplete.njk" %}
+  {% endif %}
 {% endif %}

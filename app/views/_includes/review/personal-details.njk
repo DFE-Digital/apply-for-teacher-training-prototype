@@ -145,7 +145,8 @@
   }) }}
 {% endset %}
 
-{% if applicationValue("candidate") %}
+{% set complete = applicationValue(["candidate"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: personalDetailsHtml

@@ -33,7 +33,8 @@
   }) }}
 {% endset %}
 
-{% if applicationValue("reasonable-adjustments") %}
+{% set complete = applicationValue(["reasonable-adjustments"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: supportDetailsHtml

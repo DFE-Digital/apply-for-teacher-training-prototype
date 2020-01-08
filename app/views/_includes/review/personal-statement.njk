@@ -19,7 +19,8 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["personal-statement"]) %}
+{% set complete = applicationValue(["personal-statement"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: personalStatementHtml

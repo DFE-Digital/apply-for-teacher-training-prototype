@@ -35,6 +35,7 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% set choices = applicationValue(["choices"]) | toArray %}
   {% set showChoiceStatus = false %}
+  {% set showIncomplete = true %}
   {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>

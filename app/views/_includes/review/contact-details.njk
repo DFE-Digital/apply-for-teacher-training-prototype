@@ -76,7 +76,8 @@
   }) }}
 {% endset %}
 
-{% if contactDetails %}
+{% set complete = contactDetails | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: contactDetailsHtml

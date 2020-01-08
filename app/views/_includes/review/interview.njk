@@ -20,7 +20,8 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["interview"]) %}
+{% set complete = applicationValue(["interview"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: interviewHtml

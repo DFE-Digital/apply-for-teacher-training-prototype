@@ -1,7 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set schoolExperience = applicationValue(["school-experience"]) %}
 
-{% if schoolExperience %}
+{% set complete = schoolExperience | length > 0 %}
+{% if complete %}
   {% set roles = schoolExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
   {% if roles.length >= 1 %}
     {% for item in roles %}

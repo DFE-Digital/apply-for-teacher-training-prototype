@@ -1,5 +1,7 @@
 {% set item = applicationValue(["gcse", id]) %}
-{% if item %}
+
+{% set complete = item | length > 0 %}
+{% if complete %}
   {% set gcseHtml %}
     {% include "_includes/item/gcse.njk" %}
   {% endset %}

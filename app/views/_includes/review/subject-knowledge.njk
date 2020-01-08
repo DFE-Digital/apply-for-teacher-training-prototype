@@ -19,7 +19,8 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["subject-knowledge"]) %}
+{% set complete = applicationValue(["subject-knowledge"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: subjectKnowledgeHtml

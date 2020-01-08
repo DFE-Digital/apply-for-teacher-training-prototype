@@ -1,10 +1,6 @@
 {% extends "_form.njk" %}
 
-{% if option == "b" %}
-  {% set title = "Asking for adjustments to help you do a course or go to an interview" %}
-{% else %}
-  {% set title = "Asking for help to become a teacher" %}
-{% endif %}
+{% set title = "Get extra assistance to become a teacher" %}
 
 {% block pageNavigation %}
   {% if referrer %}

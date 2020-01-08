@@ -9,117 +9,46 @@ module.exports = router => {
     var pageObject = {}
     var successFlash = req.flash('success')
 
-    // Application sections
-    const { candidate, choices, degree, interview, referees } = applicationData
-    const { maths, english, science } = applicationData.gcse
-    const contactDetails = applicationData['contact-details']
-    const personalStatement = applicationData['personal-statement']
-    const reasonableAdjustments = applicationData['reasonable-adjustments']
-    const schoolExperience = applicationData['school-experience']
-    const subjectKnowledge = applicationData['subject-knowledge']
-    const workHistory = applicationData['work-history']
-
     if (successFlash[0] === 'submitted-incompleted-application') {
       pageObject.errorList = []
-
-      if (Object.keys(choices).length === 0) {
-        pageObject.errorList.push({
-          text: 'Course choices not marked as completed',
-          href: '#missing-course-choices'
-        })
+      const sections = {
+        choices: 'Course choices not marked as completed',
+        candidate: 'Personal details not entered',
+        'contact-details': 'Contact details not entered',
+        'reasonable-adjustments': 'Training with a disability not entered',
+        'work-history': 'Work history is not marked as completed',
+        'school-experience': 'Volunteering with children and young people is not marked as completed',
+        degree: 'Degree(s) are not marked as completed',
+        'personal-statement': 'Tell us why you want to be a teacher',
+        'subject-knowledge': 'Tell us about your knowledge about the subject you want to teach',
+        gcse: {
+          maths: 'Maths GCSE or equivalent not entered',
+          english: 'English GCSE or equivalent not entered',
+          science: 'Science GCSE or equivalent not entered'
+        },
+        interview: 'Tell us your interview preferences',
+        referees: 'Add 2 referees to your application'
       }
 
-      if (Object.keys(candidate).length === 0) {
-        pageObject.errorList.push({
-          text: 'Personal details not entered',
-          href: '#missing-personal-details'
-        })
-      }
-
-      if (Object.keys(contactDetails).length === 0) {
-        pageObject.errorList.push({
-          text: 'Contact details not entered',
-          href: '#missing-contact-details'
-        })
-      }
-
-      if (Object.keys(reasonableAdjustments).length === 0) {
-        pageObject.errorList.push({
-          text: 'Training with a disability not entered',
-          href: '#missing-reasonable-adjustments'
-        })
-      }
-
-      if (Object.keys(workHistory).length === 0) {
-        pageObject.errorList.push({
-          text: 'Work history is not marked as completed',
-          href: '#missing-work-history'
-        })
-      }
-
-      if (Object.keys(schoolExperience).length === 0) {
-        pageObject.errorList.push({
-          text: 'Volunteering with children and young people is not marked as completed',
-          href: '#missing-school-experience'
-        })
-      }
-
-      if (Object.keys(degree).length === 0) {
-        pageObject.errorList.push({
-          text: 'Degree(s) are not marked as completed',
-          href: '#missing-degree'
-        })
-      }
-
-      if (Object.keys(maths).length === 0) {
-        pageObject.errorList.push({
-          text: 'Maths GCSE or equivalent not entered',
-          href: '#missing-maths-gcse'
-        })
-      }
-
-      if (Object.keys(english).length === 0) {
-        pageObject.errorList.push({
-          text: 'English GCSE or equivalent not entered',
-          href: '#missing-english-gcse'
-        })
-      }
-
-      if (Object.keys(science).length === 0) {
-        pageObject.errorList.push({
-          text: 'Science GCSE or equivalent not entered',
-          href: '#missing-science-gcse'
-        })
-      }
-
-      console.log('personalStatement', personalStatement)
-
-      if (personalStatement === null) {
-        pageObject.errorList.push({
-          text: 'Tell us why you want to be a teacher',
-          href: '#missing-personal-statement'
-        })
-      }
-
-      if (subjectKnowledge === null) {
-        pageObject.errorList.push({
-          text: 'Tell us about your knowledge about the subject you want to teach',
-          href: '#missing-subject-knowledge'
-        })
-      }
-
-      if (interview === null) {
-        pageObject.errorList.push({
-          text: 'Tell us your interview preferences',
-          href: '#missing-interview'
-        })
-      }
-
-      if (Object.keys(referees).length === 0) {
-        pageObject.errorList.push({
-          text: 'Add 2 referees to your application',
-          href: '#missing-referees'
-        })
+      for (const [key, value] of Object.entries(sections)) {
+        if (key === 'gcse') {
+          const subjects = ['maths', 'english', 'science']
+          subjects.forEach(subject => {
+            if (Object.keys(applicationData.gcse[subject]).length === 0) {
+              pageObject.errorList.push({
+                text: value[subject],
+                href: `#missing-gcse-${subject}`
+              })
+            }
+          })
+        } else {
+          if (applicationData[key] === null || Object.keys(applicationData[key]).length === 0) {
+            pageObject.errorList.push({
+              text: value,
+              href: `#missing-${key}`
+            })
+          }
+        }
       }
     }
 

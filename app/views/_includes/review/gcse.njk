@@ -13,7 +13,7 @@
   }) }}
 {% else %}
   {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = id + "-gcse" %}
+  {% set incompleteId = "gcse-" + id %}
   {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
   {% set incompleteLink = "/gcse/" + id + "?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}

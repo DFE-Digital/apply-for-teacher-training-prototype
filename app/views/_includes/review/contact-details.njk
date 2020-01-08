@@ -82,6 +82,7 @@
     html: contactDetailsHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "contact-details" %}
   {% set incompleteText = "Contact details not entered" %}
   {% set incompleteLink = "/contact-details?referrer=" + referrer %}

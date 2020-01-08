@@ -141,29 +141,36 @@ module.exports = router => {
 
   // Render review page
   router.get('/application/:applicationId/review', (req, res) => {
-    var app = utils.applicationData(req);
-    var pageObject = {};
-    var successFlash = req.flash('success');
+    var applicationData = utils.applicationData(req)
+    var pageObject = {}
+    var successFlash = req.flash('success')
 
-    if(successFlash[0] == 'submitted-incompleted-application') {
-      pageObject.errorList = [];
+    if (successFlash[0] === 'submitted-incompleted-application') {
+      pageObject.errorList = []
 
-      if(Object.keys(app.choices).length == 0) {
+      if (typeof applicationData.choices === 'undefined' || Object.keys(applicationData.choices).length === 0) {
         pageObject.errorList.push({
-          text: "Courses: section incomplete",
-          href: "#choices-error"
-        });
+          text: 'Course choices not marked as completed',
+          href: '#missing-course-choices'
+        })
       }
 
-      if(Object.keys(app['other-qualifications']).length == 0) {
+      if (typeof applicationData['school-experience'] === 'undefined' || Object.keys(applicationData['school-experience']).length === 0) {
         pageObject.errorList.push({
-          text: "Other relevant qualifications: section incomplete",
-          href: "#other-qualifications-error"
-        });
+          text: 'Volunteering with children and young people is not marked as completed',
+          href: '#missing-school-experience'
+        })
+      }
+
+      if (typeof applicationData['work-history'] === 'undefined' || Object.keys(applicationData['work-history']).length === 0) {
+        pageObject.errorList.push({
+          text: 'Work history is not marked as completed',
+          href: '#missing-work-history'
+        })
       }
     }
 
-    res.render('application/review', pageObject);
+    res.render('application/review', pageObject)
   })
 
   router.post('/application/:applicationId/review', (req, res) => {
@@ -174,10 +181,9 @@ module.exports = router => {
     // User tried to submit incomplete application
     // just checking choices are empty for now
     // to make real need to check over every section
-    if( Object.keys(applicationData.choices).length == 0 ||
-        Object.keys(applicationData['other-qualifications']).length == 0) {
-      req.flash('success', 'submitted-incompleted-application');
-      res.redirect(`/application/${req.params.applicationId}/review`);
+    if (typeof applicationData.choices === 'undefined' || Object.keys(applicationData.choices).length === 0 || Object.keys(applicationData['school-experience']).length === 0 || Object.keys(applicationData['work-history']).length === 0) {
+      req.flash('success', 'submitted-incompleted-application')
+      res.redirect(`/application/${req.params.applicationId}/review`)
     } else {
       const workHistory = applicationData['work-history']
       const schoolExperience = applicationData['school-experience']
@@ -193,7 +199,6 @@ module.exports = router => {
 
       res.render('application/review')
     }
-
   })
 
   // Render submitted page

@@ -25,6 +25,7 @@
     html: subjectKnowledgeHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "subject-knowledge" %}
   {% set incompleteText = "Tell us about your knowledge about the subject you want to teach" %}
   {% set incompleteLink = "/subject-knowledge?referrer=" + referrer %}

@@ -39,6 +39,7 @@
     html: supportDetailsHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "reasonable-adjustments" %}
   {% set incompleteText = "Training with a disability not entered" %}
   {% set incompleteLink = "/reasonable-adjustments?referrer=" + referrer %}

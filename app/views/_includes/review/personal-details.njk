@@ -151,6 +151,7 @@
     html: personalDetailsHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "personal-details" %}
   {% set incompleteText = "Personal details not entered" %}
   {% set incompleteLink = "/personal-details?referrer=" + referrer %}

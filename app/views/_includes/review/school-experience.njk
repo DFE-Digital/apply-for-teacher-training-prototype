@@ -40,6 +40,7 @@
     }) }}
   {% endif %}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "school-experience" %}
   {% set incompleteText = "Volunteering with children and young people is not marked as completed" %}
   {% set incompleteLink = "/school-experience?referrer=" + referrer %}

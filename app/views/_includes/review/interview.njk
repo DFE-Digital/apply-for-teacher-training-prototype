@@ -26,6 +26,7 @@
     html: interviewHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "interview" %}
   {% set incompleteText = "Tell us your interview preferences" %}
   {% set incompleteLink = "/interview?referrer=" + referrer %}

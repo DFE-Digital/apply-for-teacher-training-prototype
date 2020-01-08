@@ -25,6 +25,7 @@
     html: personalStatementHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "personal-statement" %}
   {% set incompleteText = "Tell us why you want to be a teacher" %}
   {% set incompleteLink = "/personal-statement?referrer=" + referrer %}

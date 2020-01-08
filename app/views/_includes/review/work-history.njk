@@ -170,6 +170,7 @@
     }) }}
   {% endif %}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "work-history" %}
   {% set incompleteText = "Work history is not marked as completed" %}
   {% set incompleteLink = "/work-history?referrer=" + referrer %}

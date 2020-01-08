@@ -49,6 +49,7 @@
     }) }}
   {% endfor %}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "course-choices" %}
   {% set incompleteText = "Course choices are not marked as completed" %}
   {% set incompleteLink = "/choices?referrer=" + referrer %}

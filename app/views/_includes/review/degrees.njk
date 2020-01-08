@@ -21,6 +21,7 @@
     }) }}
   {% endfor %}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "degrees" %}
   {% set incompleteText = "Degree(s) are not marked as completed" %}
   {% set incompleteLink = "/degree/add?referrer=" + referrer %}

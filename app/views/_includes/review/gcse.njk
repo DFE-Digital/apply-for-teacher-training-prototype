@@ -10,6 +10,7 @@
     html: gcseHtml
   }) }}
 {% else %}
+  {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = id + "-gcse" %}
   {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
   {% set incompleteLink = "/gcse/" + id + "?referrer=" + referrer %}

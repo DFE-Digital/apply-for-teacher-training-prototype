@@ -27,7 +27,7 @@
   {% endfor %}
 {% else %}
   {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "references" %}
+  {% set incompleteId = "referees" %}
   {% set incompleteText = "Add 2 referees to your application" %}
   {% set incompleteLink = "/references/?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}

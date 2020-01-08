@@ -21,5 +21,8 @@
     }) }}
   {% endfor %}
 {% else %}
-  <p class="govuk-body">No degrees entered.</p>
+  {% set incompleteId = "degrees" %}
+  {% set incompleteText = "Degree(s) are not marked as completed" %}
+  {% set incompleteLink = "/degree/add?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

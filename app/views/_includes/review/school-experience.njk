@@ -12,10 +12,10 @@
         {{ item.role }}
         {%- if item["worked-with-children"] == "Yes" %}
         <span class="app-summary-card__meta">{{ appIcon({
-            classes: "govuk-!-margin-right-1",
-            icon: "tick",
-            hidden: true
-          }) }} This role involved working with children</span>
+          classes: "govuk-!-margin-right-1",
+          icon: "tick",
+          hidden: true
+        }) }} This role involved working with children</span>
         {%- endif %}
       {% endset %}
       {{ appSummaryCard({
@@ -40,5 +40,8 @@
     }) }}
   {% endif %}
 {% else %}
-  <p class="govuk-body">No school experiences entered.</p>
+  {% set incompleteId = "school-experience" %}
+  {% set incompleteText = "Volunteering with children and young people is not marked as completed" %}
+  {% set incompleteLink = "/school-experience?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

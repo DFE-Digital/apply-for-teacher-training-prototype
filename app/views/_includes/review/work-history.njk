@@ -170,5 +170,8 @@
     }) }}
   {% endif %}
 {% else %}
-  <p class="govuk-body">No work history entered.</p>
+  {% set incompleteId = "work-history" %}
+  {% set incompleteText = "Work history is not marked as completed" %}
+  {% set incompleteLink = "/work-history?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

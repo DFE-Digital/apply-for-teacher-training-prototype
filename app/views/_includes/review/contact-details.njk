@@ -82,5 +82,8 @@
     html: contactDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No contact details entered.</p>
+  {% set incompleteId = "contact-details" %}
+  {% set incompleteText = "Contact details not entered" %}
+  {% set incompleteLink = "/contact-details?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

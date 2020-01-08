@@ -151,5 +151,8 @@
     html: personalDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No personal details entered.</p>
+  {% set incompleteId = "personal-details" %}
+  {% set incompleteText = "Personal details not entered" %}
+  {% set incompleteLink = "/personal-details?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

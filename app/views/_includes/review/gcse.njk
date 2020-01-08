@@ -10,5 +10,8 @@
     html: gcseHtml
   }) }}
 {% else %}
-  <p class="govuk-body">Incomplete</p>
+  {% set incompleteId = id + "-gcse" %}
+  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
+  {% set incompleteLink = "/gcse/" + id + "?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

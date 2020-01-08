@@ -25,5 +25,8 @@
     html: personalStatementHtml
   }) }}
 {% else %}
-  <p class="govuk-body">Personal statement not complete</p>
+  {% set incompleteId = "personal-statement" %}
+  {% set incompleteText = "Tell us why you want to be a teacher" %}
+  {% set incompleteLink = "/personal-statement?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

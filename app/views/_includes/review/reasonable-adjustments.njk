@@ -39,5 +39,8 @@
     html: supportDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No choice made about needing support to become a teacher.</p>
+  {% set incompleteId = "reasonable-adjustments" %}
+  {% set incompleteText = "Training with a disability not entered" %}
+  {% set incompleteLink = "/reasonable-adjustments?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

@@ -29,16 +29,34 @@
 
 .app-banner--success {
   border-color: govuk-colour("green");
+
+  .app-banner__icon {
+    fill: govuk-colour("green");
+  }
 }
 
 .app-banner--warning {
   border-color: govuk-colour("red");
+
+  .app-banner__icon {
+    fill: govuk-colour("red");
+  }
 
   &.app-banner--missing-section {
     .app-banner__message p {
       color: govuk-colour("red");
     }
   }
+}
+
+.app-banner__icon {
+  fill: govuk-colour("blue");
+  float: left;
+  margin-right: govuk-spacing(2);
+}
+
+.app-banner__assistive {
+  @include govuk-visually-hidden;
 }
 
 .app-banner__message {

@@ -33,11 +33,16 @@
   }) }}
 {% endset %}
 
-{% if applicationValue("reasonable-adjustments") %}
+{% set complete = applicationValue(["reasonable-adjustments"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: supportDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No choice made about needing support to become a teacher.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "reasonable-adjustments" %}
+  {% set incompleteText = "Training with a disability not entered" %}
+  {% set incompleteLink = "/reasonable-adjustments?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

@@ -76,11 +76,16 @@
   }) }}
 {% endset %}
 
-{% if contactDetails %}
+{% set complete = contactDetails | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: contactDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No contact details entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "contact-details" %}
+  {% set incompleteText = "Contact details not entered" %}
+  {% set incompleteLink = "/contact-details?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

@@ -1,5 +1,7 @@
 {% set item = applicationValue(["gcse", id]) %}
-{% if item %}
+
+{% set complete = item | length > 0 %}
+{% if complete %}
   {% set gcseHtml %}
     {% include "_includes/item/gcse.njk" %}
   {% endset %}
@@ -10,5 +12,9 @@
     html: gcseHtml
   }) }}
 {% else %}
-  <p class="govuk-body">Incomplete</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "gcse-" + id %}
+  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
+  {% set incompleteLink = "/gcse/" + id + "?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

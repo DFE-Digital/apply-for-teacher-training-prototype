@@ -1,8 +1,10 @@
-{% if references %}
+{% set complete = references | length > 0 %}
+{% if complete %}
   {% set canAmend = true if not hasSubmittedApplications() %}
   {% if not canAmend %}
     <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t supply a reference.</p>
   {% else %}
+    {# You can’t change your referees once application has been submitted #}
     <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
   {% endif %}
   {% set references = references | toArray %}
@@ -24,5 +26,9 @@
     }) }}
   {% endfor %}
 {% else %}
-  <p class="govuk-body">No references entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "referees" %}
+  {% set incompleteText = "Add 2 referees to your application" %}
+  {% set incompleteLink = "/references/?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

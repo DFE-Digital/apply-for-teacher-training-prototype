@@ -6,7 +6,10 @@ const utils = require('./../../utils')
 module.exports = router => {
   // First page
   router.get('/application/:applicationId/personal-details', (req, res) => {
+    const referrer = req.query.referrer
+
     res.render('application/personal-details/index', {
+      referrer,
       formaction: `/application/${req.params.applicationId}/personal-details/answer?${utils.queryString(req)}`
     })
   })

@@ -3,7 +3,11 @@ const utils = require('./../../utils')
 
 const degreeData = (req) => {
   const applicationData = utils.applicationData(req)
-  return applicationData.degree[req.params.id]
+  if (applicationData.degree[req.params.id]) {
+    return applicationData.degree[req.params.id]
+  }
+
+  return false
 }
 
 const degreePaths = (req) => {
@@ -42,11 +46,16 @@ module.exports = router => {
 
   // Render first page
   router.get('/application/:applicationId/degree/:id', (req, res) => {
+    const completedDegree = degreeData(req).grade && degreeData(req).year
+
     const id = req.params.id
     const referrer = req.query.referrer
+    const nextPath = `/application/${req.params.applicationId}/degree/${id}/answer?${utils.queryString(req)}`
+    // If completed this section, return to referrer, else next question
+    const formaction = completedDegree ? referrer : nextPath
 
     res.render('application/degree/index', {
-      formaction: referrer || `/application/${req.params.applicationId}/degree/${id}/answer?${utils.queryString(req)}`,
+      formaction,
       id,
       referrer
     })
@@ -71,13 +80,16 @@ module.exports = router => {
 
   // Render NARIC/grade/year pages
   router.all('/application/:applicationId/degree/:id/:template(naric|grade|year)', (req, res) => {
+    const completedDegree = degreeData(req).grade && degreeData(req).year
+
     const id = req.params.id
     const referrer = req.query.referrer
     const template = req.params.template
     const paths = degreePaths(req)
+    const formaction = completedDegree ? referrer : paths.next
 
     res.render(`application/degree/${template}`, {
-      formaction: referrer || paths.next,
+      formaction,
       paths,
       id,
       referrer

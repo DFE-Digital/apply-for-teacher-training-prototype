@@ -1,7 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set degrees = applicationValue(["degree"]) %}
 
-{% if degrees %}
+{% set complete = degrees | length > 0 %}
+{% if complete %}
   {% set degrees = degrees | toArray | selectattr("id") %}
   {% for item in degrees %}
     {% set degreeHtml %}
@@ -21,5 +22,9 @@
     }) }}
   {% endfor %}
 {% else %}
-  <p class="govuk-body">No degrees entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "degree" %}
+  {% set incompleteText = "Degree(s) are not marked as completed" %}
+  {% set incompleteLink = "/degree/add?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

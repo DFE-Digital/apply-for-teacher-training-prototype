@@ -4,10 +4,16 @@
 {% set formaction = applicationPath + "/work-history/answer" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/application/" + applicationId,
-    text: "Back to application"
-  }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}

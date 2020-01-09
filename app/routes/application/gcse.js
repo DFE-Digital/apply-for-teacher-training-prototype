@@ -3,7 +3,11 @@ const utils = require('./../../utils')
 
 const gcseData = (req) => {
   const applicationData = utils.applicationData(req)
-  return applicationData.gcse[req.params.id]
+  if (applicationData.gcse[req.params.id]) {
+    return applicationData.gcse[req.params.id]
+  }
+
+  return false
 }
 
 const isInternational = (req) => {
@@ -47,12 +51,16 @@ module.exports = router => {
 
   // Render first page
   router.get('/application/:applicationId/gcse/:id', (req, res) => {
+    const completedGcse = gcseData(req).grade && gcseData(req).year
+
     const id = req.params.id
     const referrer = req.query.referrer
-    const referrerPath = referrer ? `?referrer=${referrer}` : ''
+    const nextPath = `/application/${req.params.applicationId}/gcse/${id}/answer?${utils.queryString(req)}`
+    // If completed this section, return to referrer, else next question
+    const formaction = completedGcse ? referrer : nextPath
 
     res.render('application/gcse/index', {
-      formaction: referrer || `/application/${req.params.applicationId}/gcse/${id}/answer${referrerPath}`,
+      formaction,
       id,
       referrer
     })
@@ -79,13 +87,16 @@ module.exports = router => {
 
   // Render NARIC/grade/year pages
   router.all('/application/:applicationId/gcse/:id/:template(naric|grade|year)', (req, res) => {
+    const completedGcse = gcseData(req).grade && gcseData(req).year
+
     const id = req.params.id
     const referrer = req.query.referrer
     const template = req.params.template
     const paths = gcsePaths(req)
+    const formaction = completedGcse ? referrer : paths.next
 
     res.render(`application/gcse/${template}`, {
-      formaction: referrer || paths.next,
+      formaction,
       paths,
       id,
       referrer

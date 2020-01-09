@@ -107,7 +107,6 @@ module.exports = router => {
       req.flash('success', 'submitted-incompleted-application')
       res.redirect(`/application/${req.params.applicationId}/review`)
     } else {
-      console.log('applicationData.status', applicationData.status)
       if (status === 'amending') {
         res.redirect(`/application/${req.params.applicationId}/submit`)
       } else {

@@ -34,7 +34,7 @@ module.exports = router => {
         if (key === 'gcse') {
           const subjects = ['maths', 'english', 'science']
           subjects.forEach(subject => {
-            if (Object.keys(applicationData.gcse[subject]).length === 0) {
+            if (!utils.hasCompletedSection(applicationData.gcse[subject])) {
               pageObject.errorList.push({
                 text: value[subject],
                 href: `#missing-gcse-${subject}`
@@ -42,7 +42,7 @@ module.exports = router => {
             }
           })
         } else {
-          if (applicationData[key] === null || Object.keys(applicationData[key]).length === 0) {
+          if (!utils.hasCompletedSection(applicationData[key])) {
             pageObject.errorList.push({
               text: value,
               href: `#missing-${key}`
@@ -74,44 +74,18 @@ module.exports = router => {
 
   router.post('/application/:applicationId/review-complete', (req, res) => {
     const applicationData = utils.applicationData(req)
+    const completedApplication = utils.hasCompletedApplication(req)
 
-    // Application sections
-    const { candidate, choices, degree, interview, status, referees } = applicationData
-    const { maths, english, science } = applicationData.gcse
-    const contactDetails = applicationData['contact-details']
-    const personalStatement = applicationData['personal-statement']
-    const reasonableAdjustments = applicationData['reasonable-adjustments']
-    const schoolExperience = applicationData['school-experience']
-    const subjectKnowledge = applicationData['subject-knowledge']
-    const workHistory = applicationData['work-history']
-
-    // User tried to submit incomplete application
-    // just checking choices are empty for now
-    // to make real need to check over every section
-    if (
-      Object.keys(choices).length === 0 ||
-      Object.keys(candidate).length === 0 ||
-      Object.keys(contactDetails).length === 0 ||
-      Object.keys(reasonableAdjustments).length === 0 ||
-      Object.keys(workHistory).length === 0 ||
-      Object.keys(schoolExperience).length === 0 ||
-      Object.keys(degree).length === 0 ||
-      Object.keys(maths).length === 0 ||
-      Object.keys(english).length === 0 ||
-      Object.keys(science).length === 0 ||
-      Object.keys(personalStatement).length === 0 ||
-      Object.keys(subjectKnowledge).length === 0 ||
-      Object.keys(interview).length === 0 ||
-      Object.keys(referees).length === 0
-    ) {
-      req.flash('success', 'submitted-incompleted-application')
-      res.redirect(`/application/${req.params.applicationId}/review`)
-    } else {
+    if (completedApplication) {
+      const { status } = applicationData
       if (status === 'amending') {
         res.redirect(`/application/${req.params.applicationId}/submit`)
       } else {
         res.redirect(`/application/${req.params.applicationId}/equality-monitoring`)
       }
+    } else {
+      req.flash('success', 'submitted-incompleted-application')
+      res.redirect(`/application/${req.params.applicationId}/review`)
     }
   })
 }

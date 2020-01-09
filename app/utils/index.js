@@ -65,6 +65,39 @@ const hasStartedApplications = (req) => {
   }
 }
 
+const hasCompletedSection = key => {
+  if (!key || key === null || Object.keys(key).length === 0) {
+    return false
+  }
+
+  return true
+}
+
+const hasCompletedApplication = req => {
+  var application = req.session.data.applications[req.params.applicationId]
+  if (
+    module.exports.hasCompletedSection(application.choices) &&
+    module.exports.hasCompletedSection(application.candidate) &&
+    module.exports.hasCompletedSection(application['contact-details']) &&
+    module.exports.hasCompletedSection(application['reasonable-adjustments']) &&
+    module.exports.hasCompletedSection(application['work-history']) &&
+    module.exports.hasCompletedSection(application['school-experience']) &&
+    module.exports.hasCompletedSection(application.degree) &&
+    module.exports.hasCompletedSection(application.gcse.maths) &&
+    module.exports.hasCompletedSection(application.gcse.english) &&
+    module.exports.hasCompletedSection(application.gcse.science) &&
+    module.exports.hasCompletedSection(application['personal-statement']) &&
+    module.exports.hasCompletedSection(application['subject-knowledge']) &&
+    module.exports.hasCompletedSection(application.interview) &&
+    module.exports.hasCompletedSection(application.referees)
+  ) {
+    console.log('has completed application')
+    return true
+  }
+
+  return false
+}
+
 const hasPrimaryChoices = (req) => {
   try {
     var choices = req.session.data.applications[req.params.applicationId].choices
@@ -100,6 +133,8 @@ module.exports = {
   queryString: getQueryString,
   saveIsoDate,
   hasApplications,
+  hasCompletedApplication,
+  hasCompletedSection,
   hasPrimaryChoices,
   hasSubmittedApplications,
   hasStartedApplications,

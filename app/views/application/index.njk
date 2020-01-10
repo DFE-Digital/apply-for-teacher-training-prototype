@@ -162,15 +162,7 @@
         classes: tagClass,
         text: tagText
       } if applicationValue(["subject-knowledge"]) | length > 0
-    }, {
-      text: "Interview preferences",
-      href: applicationPath + "/interview" + ("/review" if applicationValue(["interview"]) | length > 0),
-      id: "interview",
-      tag: {
-        classes: tagClass,
-        text: tagText
-      } if applicationValue(["interview-choice"]) | length > 0
-    } if data.flags.interview_preferences == true]
+    }]
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>

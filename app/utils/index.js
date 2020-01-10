@@ -88,10 +88,8 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.gcse.science) &&
     module.exports.hasCompletedSection(application['personal-statement']) &&
     module.exports.hasCompletedSection(application['subject-knowledge']) &&
-    module.exports.hasCompletedSection(application.interview) &&
     module.exports.hasCompletedSection(application.referees)
   ) {
-    console.log('has completed application')
     return true
   }
 

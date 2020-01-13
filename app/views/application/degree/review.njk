@@ -22,32 +22,12 @@
     href: applicationPath + "/degree/add"
   }) }}
 
-  {# Only ask if want to add another if:
-    * not editing an existing item
-    * not referred from a review page (which has an ‘Add another…’ button)
-  #}
   {{ govukCheckboxes({
     items: [{
       value: "true",
       text: "I have completed this section"
     }]
   } | decorateApplicationAttributes(["completed", "degree"])) }}
-  {{ govukRadios({
-    name: "next",
-    fieldset: {
-      legend: {
-        text: "Do you want to add another degree?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "add",
-      text: "Yes"
-    }, {
-      value: "review",
-      text: "No"
-    }]
-  }) }}
 
   {{ govukButton({
     text: "Continue"

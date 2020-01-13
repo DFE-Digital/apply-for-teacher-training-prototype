@@ -19,11 +19,16 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["subject-knowledge"]) %}
+{% set complete = applicationValue(["subject-knowledge"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: subjectKnowledgeHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No subject knowledge entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "subject-knowledge" %}
+  {% set incompleteText = "Tell us about your knowledge about the subject you want to teach" %}
+  {% set incompleteLink = "/subject-knowledge?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

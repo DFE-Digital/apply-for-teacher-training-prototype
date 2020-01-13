@@ -10,7 +10,25 @@ function createNewApplication (req) {
 
   if (typeof data.applications[code] === 'undefined') {
     data.applications[code] = {
-      status: 'started'
+      status: 'started',
+      choices: {},
+      candidate: {},
+      'contact-details': {},
+      'reasonable-adjustments': {},
+      degree: {},
+      'other-qualifications': {},
+      gcse: {
+        maths: {},
+        english: {},
+        science: {}
+      },
+      'subject-knowledge': null,
+      'interview-choice': null,
+      interview: null,
+      'personal-statement': null,
+      'work-history': {},
+      'school-experience': {},
+      referees: {}
     }
   }
 
@@ -139,63 +157,6 @@ module.exports = router => {
     res.render('application/index')
   })
 
-  // Render review page
-  router.get('/application/:applicationId/review', (req, res) => {
-    var app = utils.applicationData(req);
-    var pageObject = {};
-    var successFlash = req.flash('success');
-
-    if(successFlash[0] == 'submitted-incompleted-application') {
-      pageObject.errorList = [];
-
-      if(Object.keys(app.choices).length == 0) {
-        pageObject.errorList.push({
-          text: "Courses: section incomplete",
-          href: "#choices-error"
-        });
-      }
-
-      if(Object.keys(app['other-qualifications']).length == 0) {
-        pageObject.errorList.push({
-          text: "Other relevant qualifications: section incomplete",
-          href: "#other-qualifications-error"
-        });
-      }
-    }
-
-    res.render('application/review', pageObject);
-  })
-
-  router.post('/application/:applicationId/review', (req, res) => {
-    // If updating jobs or roles, ensure dates are saved using ISO 8601 format
-    const id = req.query.update
-    const applicationData = utils.applicationData(req)
-
-    // User tried to submit incomplete application
-    // just checking choices are empty for now
-    // to make real need to check over every section
-    if( Object.keys(applicationData.choices).length == 0 ||
-        Object.keys(applicationData['other-qualifications']).length == 0) {
-      req.flash('success', 'submitted-incompleted-application');
-      res.redirect(`/application/${req.params.applicationId}/review`);
-    } else {
-      const workHistory = applicationData['work-history']
-      const schoolExperience = applicationData['school-experience']
-      const referer = req.get('referer')
-
-      if (id && referer.includes('work-history')) {
-        utils.saveIsoDate(req, workHistory, id)
-      }
-
-      if (id && referer.includes('school-experience')) {
-        utils.saveIsoDate(req, schoolExperience, id)
-      }
-
-      res.render('application/review')
-    }
-
-  })
-
   // Render submitted page
   router.all('/application/:applicationId/submitted', (req, res) => {
     const { phase } = req.query
@@ -219,6 +180,7 @@ module.exports = router => {
   require('./application/subject-knowledge')(router)
   require('./application/interview')(router)
   require('./application/references')(router)
+  require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
   require('./application/edit')(router)

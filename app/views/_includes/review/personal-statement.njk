@@ -19,11 +19,16 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["personal-statement"]) %}
+{% set complete = applicationValue(["personal-statement"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: personalStatementHtml
   }) }}
 {% else %}
-  <p class="govuk-body">Personal statement not complete</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "personal-statement" %}
+  {% set incompleteText = "Tell us why you want to be a teacher" %}
+  {% set incompleteLink = "/personal-statement?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

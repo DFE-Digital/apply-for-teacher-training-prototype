@@ -1,7 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set schoolExperience = applicationValue(["school-experience"]) %}
 
-{% if schoolExperience %}
+{% set complete = schoolExperience | length > 0 %}
+{% if complete %}
   {% set roles = schoolExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
   {% if roles.length >= 1 %}
     {% for item in roles %}
@@ -12,10 +13,10 @@
         {{ item.role }}
         {%- if item["worked-with-children"] == "Yes" %}
         <span class="app-summary-card__meta">{{ appIcon({
-            classes: "govuk-!-margin-right-1",
-            icon: "tick",
-            hidden: true
-          }) }} This role involved working with children</span>
+          classes: "govuk-!-margin-right-1",
+          icon: "tick",
+          hidden: true
+        }) }} This role involved working with children</span>
         {%- endif %}
       {% endset %}
       {{ appSummaryCard({
@@ -40,5 +41,9 @@
     }) }}
   {% endif %}
 {% else %}
-  <p class="govuk-body">No school experiences entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "school-experience" %}
+  {% set incompleteText = "Volunteering with children and young people is not marked as completed" %}
+  {% set incompleteLink = "/school-experience?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

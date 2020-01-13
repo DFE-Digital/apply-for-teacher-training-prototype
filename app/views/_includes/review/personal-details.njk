@@ -145,11 +145,16 @@
   }) }}
 {% endset %}
 
-{% if applicationValue("candidate") %}
+{% set complete = applicationValue(["candidate"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: personalDetailsHtml
   }) }}
 {% else %}
-  <p class="govuk-body">No personal details entered.</p>
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "candidate" %}
+  {% set incompleteText = "Personal details not entered" %}
+  {% set incompleteLink = "/personal-details?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

@@ -1,13 +1,11 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/review-complete" %}
 {% set status = applicationValue(["status"]) %}
 {% set title = "Review your application" %}
 {% set referrer = applicationPath + "/review" %}
 {% set canAmend = true %}
-
-{# Skip equality monitoring questions if amending application #}
-{% set nextHref = applicationPath + ("/submit" if applicationValue(["status"]) == "amending" else "/equality-monitoring") %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -17,7 +15,6 @@
 {% endblock %}
 
 {% block beforePageTitle %}
-
   {% if errorList %}
     {{ govukErrorSummary({
       titleText: "Your application cannot be submitted because it’s incomplete",
@@ -28,36 +25,14 @@
 
 {% block primary %}
   {{ govukWarningText({
-    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once.",
-    iconFallbackText: "Warning"
+    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once."
   }) if status == "amending" }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Course choices</h2>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% set choices = applicationValue(["choices"]) | toArray %}
-
-  {% if choices.length %}
-    {% set showChoiceStatus = false %}
-    {% include "_includes/review/choices.njk" %}
-  {% else %}
-    {% set errorClass = "" %}
-    {% if errorList %}
-      {% set errorClass = " app-summary-card--error" %}
-    {% endif %}
-
-    {{ appSummaryCard({
-      attributes: {
-        id: 'choices-error'
-      },
-      classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
-      titleText: "Choices: section incomplete",
-      actions: {
-        items: [{
-          href: applicationPath + "/choices/add",
-          text: "Complete section"
-        }]
-      }
-    }) }}
-  {% endif %}
+  {% set showChoiceStatus = false %}
+  {% set showIncomplete = true %}
+  {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
   <h3 class="govuk-heading-m">Personal details</h3>
@@ -66,6 +41,9 @@
   <h3 class="govuk-heading-m">Contact details</h3>
   {% set contactDetails = applicationValue(["contact-details"]) %}
   {% include "_includes/review/contact-details.njk" %}
+
+  <h3 class="govuk-heading-m">Ask for help to become a teacher</h3>
+  {% include "_includes/review/reasonable-adjustments.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Work history</h2>
   {% include "_includes/review/work-history.njk" %}
@@ -92,63 +70,20 @@
   {% endif %}
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
-  {% set qualifications = applicationValue(["other-qualifications"]) %}
-  {% set qualifications = qualifications | toArray | selectattr("id") %}
-  {% if qualifications.length %}
-    {% for item in qualifications %}
-      {% set qualificationHtml %}
-        {% include "_includes/item/other-qualification.njk" %}
-      {% endset %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: item.type + " " + item.subject,
-        actions: {
-          items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
-            text: "Delete qualification"
-          }]
-        } if canAmend,
-        html: qualificationHtml
-      }) }}
-    {% endfor %}
-  {% else %}
-    {% set errorClass = "" %}
-    {% if errorList %}
-      {% set errorClass = " app-summary-card--error" %}
-    {% endif %}
-
-    {{ appSummaryCard({
-      attributes: {
-        id: 'other-qualifications-error'
-      },
-      classes: "app-summary-card--incomplete govuk-!-margin-bottom-6" + errorClass,
-      titleText: "Other relevant qualifications: section incomplete",
-      actions: {
-        items: [{
-          href: applicationPath + "/other-qualifications/add?referrer=" + referrer,
-          text: "Complete section"
-        }]
-      }
-    }) }}
-  {% endif %}
+  {% include "_includes/review/other-qualifications.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
   {% include "_includes/review/personal-statement.njk" %}
-  {% include "_includes/review/reasonable-adjustments.njk" %}
   {% include "_includes/review/subject-knowledge.njk" %}
   {% if data.flags.interview_preferences == true %}
     {% include "_includes/review/interview.njk" %}
   {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {# You can’t change your referees once application has been submitted #}
   {% set references = applicationValue(["referees"]) %}
   {% include "_includes/review/references.njk" %}
 
-  <form method="post">
-    {{ govukButton({
-      text: "Continue"
-    }) }}
-  </form>
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

@@ -1,6 +1,9 @@
 module.exports = router => {
+  // const dualRunningDefaultVarient = Math.floor(Math.random() * 3) + 1;
+  const dualRunningDefaultVarient = 1
+
   router.get('/apply/:providerCode/:courseCode', (req, res) => {
-    const variant = req.query.variant || Math.floor(Math.random() * 3) + 1
+    const variant = req.query.variant || dualRunningDefaultVarient
     const dualRunning = req.query.dualrunning
     const ineligible = req.query.ineligible
     const providerCode = req.params.providerCode

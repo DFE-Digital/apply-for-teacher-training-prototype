@@ -17,5 +17,6 @@
 
 .app-related__list-item {
   @include govuk-font(16);
+  font-weight: bold;
   margin-top: govuk-spacing(3);
 }

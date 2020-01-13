@@ -56,12 +56,12 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Personal details",
-      href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"])),
+      href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"]) | length > 0),
       id: "personal-details",
       tag: {
         classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
         text: "Edited" if status == "amending" else "Completed"
-      } if applicationValue("candidate")
+      } if applicationValue(["candidate"]) | length > 0
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
@@ -72,7 +72,7 @@
       } if applicationValue(["contact-details", "address"])
     }, {
       text: "Work history",
-      href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history")),
+      href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history") | length > 0),
       id: "work-history",
       tag: {
         classes: tagClass,
@@ -80,7 +80,7 @@
       } if applicationValue(["completed", "work-history"])
     }, {
       text: "Volunteering with children and young people",
-      href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience")),
+      href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience") | length > 0),
       id: "school-experience",
       tag: {
         classes: tagClass,
@@ -88,12 +88,12 @@
       } if applicationValue(["completed", "school-experience"])
     }, {
      text: "Get extra assistance to become a teacher",
-     href: applicationPath + "/reasonable-adjustments" + ("/review" if applicationValue("reasonable-adjustments")),
+     href: applicationPath + "/reasonable-adjustments" + ("/review" if applicationValue("reasonable-adjustments") | length > 0),
      id: "reasonable-adjustments",
      tag: {
        classes: tagClass,
        text: tagText
-     } if applicationValue("reasonable-adjustments")
+     } if applicationValue("reasonable-adjustments") | length > 0
    }]
   }) }}
 
@@ -102,7 +102,7 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Degree",
-      href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) else "/add"),
+      href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) | length > 0 else "/add"),
       id: "degree",
       tag: {
         classes: tagClass,
@@ -110,31 +110,31 @@
       } if applicationValue(["completed", "degree"])
     }, {
       text: "Maths GCSE or equivalent",
-      href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"])),
+      href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"]) | length > 0),
       id: "maths-gcse",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["gcse", "maths"])
+      } if applicationValue(["gcse", "maths"]) | length > 0
     }, {
       text: "English GCSE or equivalent",
-      href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"])),
+      href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"]) | length > 0),
       id: "english-gcse",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["gcse", "english"])
+      } if applicationValue(["gcse", "english"]) | length > 0
     }, {
       text: "Science GCSE or equivalent",
-      href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"])),
+      href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"]) | length > 0),
       id: "science-gcse",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["gcse", "science"])
+      } if applicationValue(["gcse", "science"]) | length > 0
     } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Other relevant academic and non-academic qualifications",
-      href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) else "/add"),
+      href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) | length > 0 else "/add"),
       id: "other-qualifications",
       tag: {
         classes: tagClass,
@@ -148,28 +148,28 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Why do you want to be a teacher?",
-      href: applicationPath + "/personal-statement" + ("/review" if applicationValue(["personal-statement"])),
+      href: applicationPath + "/personal-statement" + ("/review" if applicationValue(["personal-statement"]) | length > 0),
       id: "personal-statement",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["personal-statement"])
+      } if applicationValue(["personal-statement"]) | length > 0
     }, {
       text: "Your knowledge about the subject you want to teach",
-      href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subject-knowledge"])),
+      href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subject-knowledge"]) | length > 0),
       id: "subject-knowledge",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["subject-knowledge"])
+      } if applicationValue(["subject-knowledge"]) | length > 0
     }, {
       text: "Interview preferences",
-      href: applicationPath + "/interview" + ("/review" if applicationValue(["interview"])),
+      href: applicationPath + "/interview" + ("/review" if applicationValue(["interview"]) | length > 0),
       id: "interview",
       tag: {
         classes: tagClass,
         text: tagText
-      } if applicationValue(["interview-choice"])
+      } if applicationValue(["interview-choice"]) | length > 0
     } if data.flags.interview_preferences == true]
   }) }}
 
@@ -181,12 +181,12 @@
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Referees",
-      href: applicationPath + "/references" + ("/review" if applicationValue(["referees"])),
+      href: applicationPath + "/references" + ("/review" if applicationValue(["referees"]) | length > 0),
       id: "references",
       tag: {
         classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
         text: "Completed" if status == "started" else ("Submitted" if status == "amending")
-      } if applicationValue(["referees"])
+      } if applicationValue(["referees"]) | length > 0
     }]
   }) }}
 

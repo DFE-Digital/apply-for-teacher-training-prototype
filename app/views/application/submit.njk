@@ -13,49 +13,19 @@
 
 {% block primary %}
   {% set dbsCheckHtml %}
-    <p class="govuk-body">As prospective teachers, all candidates must consent to an enhanced DBS check. This will show up any past criminal convictions, both spent and unspent. Some convictions, even if they are spent, will disbar you from teaching.</p
+    <p class="govuk-body">As prospective teachers, all candidates must consent to an enhanced DBS check. Candidate names are also checked against a list of people who’ve been banned from working with children. The DBS check will show up any past criminal convictions, both spent and unspent. Some convictions, even if they are spent, will disbar you from teaching. </p
     <p class="govuk-body">However, not all past convictions prevent you from training to be a teacher. Talk to your training provider about their policy on criminal convictions.</p>
     <p class="govuk-body"><a href="https://www.gov.uk/exoffenders-and-employment">Learn more about telling an employer about your conviction</a>.</p>
   {% endset %}
 
-    <p>I understand I will have to undergo an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service">Disclosure and Barring Check</a> as part of my application.</p>
-    {{ govukInsetText({
-      html: dbsCheckHtml
-    }) }}
+  <p>I understand I will have to undergo an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service">Disclosure and Barring Check</a> as part of my application.</p>
+  {{ govukInsetText({
+    html: dbsCheckHtml
+  }) }}
 
-    {% set miscellaneousHtml %}
-      {{ govukCharacterCount({
-        label: {
-          text: "Enter further information"
-        },
-        rows: 10,
-        maxwords: 300
-      } | decorateApplicationAttributes(["miscellaneous"])) }}
-    {% endset %}
+  <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate.</p>
 
-    {% set legendHtml %}
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Is there anything else you would like to tell us about your application?</h2>
-      <p class="govuk-body">Examples of further information include any disability, health or other personal or professional issue you feel is relevant to your application.</p>
-    {% endset %}
-    {{ govukRadios({
-      fieldset: {
-        legend: {
-          html: legendHtml
-        }
-      },
-      items: [{
-        text: "Yes",
-        conditional: {
-          html: miscellaneousHtml
-        }
-      }, {
-        text: "No"
-      }]
-    } | decorateApplicationAttributes(["miscellaneous-choice"])) }}
-
-    <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate.</p>
-
-    {{ govukButton({
-      text: "Submit application"
-    }) }}
+  {{ govukButton({
+    text: "Submit application"
+  }) }}
 {% endblock %}

@@ -20,34 +20,16 @@
   }) }}
 {% endset %}
 
-{% if applicationValue(["interview"]) %}
+{% set complete = applicationValue(["interview"]) | length > 0 %}
+{% if complete %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: interviewHtml
   }) }}
 {% else %}
-
-  {% set interviewHtml %}
-    {# {{ govukErrorMessage({
-      text: "Interview preferences incomplete",
-      visuallyHiddenText: ""
-    }) }} #}
-
-    <p class="govuk-body">Interview preferences incomplete</p>
-
-    {{govukButton({
-      text: 'Go to section',
-      classes: 'govuk-button--secondary govuk-!-margin-bottom-0'
-    })}}
-
-  {% endset %}
-
-  {{ appSummaryCard({
-    atttributes: {
-      id: 'interview-preferences-error'
-    },
-    classes: "govuk-!-margin-bottom-6 app-summary-card--erro",
-    html: interviewHtml
-  }) }}
-
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "interview" %}
+  {% set incompleteText = "Tell us your interview preferences" %}
+  {% set incompleteLink = "/interview?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

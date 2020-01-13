@@ -37,14 +37,14 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Was this job full-time or part-time?",
+        text: "Was this job full time or part time?",
         classes: "govuk-fieldset__legend--m"
       }
     },
     items: [{
-      text: "Full-time"
+      text: "Full time"
     }, {
-      text: "Part-time"
+      text: "Part time"
     }]
   } | decorateApplicationAttributes(["work-history", id, "type"])) }}
 

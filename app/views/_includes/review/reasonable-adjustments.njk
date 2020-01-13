@@ -3,7 +3,7 @@
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "Do you want to ask for help to become a teacher?"
+        text: "Do you need any adjustments to help you do a course or go to an interview?" if option == "b" else "Do you want to ask for help to become a teacher?"
       },
       value: {
         text: "Yes" if applicationValue(["reasonable-adjustments", "disclose"]) == 'true' else 'No'

@@ -89,12 +89,14 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-    tag: {
-      text: "Prototype"
-    },
-    html: "This is a prototype of a new service. Some parts may not work yet."
-  }) }}
+  {% if showPhaseBanner != false %}
+    {{ govukPhaseBanner({
+      tag: {
+        text: "Prototype"
+      },
+      html: "This is a prototype of a new service. Some parts may not work yet."
+    }) }}
+  {% endif %}
   {% block pageNavigation %}
   {% endblock %}
   {% block pageBanner %}

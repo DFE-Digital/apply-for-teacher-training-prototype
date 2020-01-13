@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Ask for help to become a teacher" %}
+{% set title = "Get extra assistance to become a teacher" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -16,6 +16,60 @@
 {% endblock %}
 
 {% block primary %}
+
+{% set disabilityConditional %}
+  {{ govukCharacterCount({
+    label: {
+      html: "Give any relevant information",
+      classes: "govuk-label--s"
+    },
+    hint: {
+      text: "You can also use this space to make a note of any discussions you’ve already had with your provider about getting support."
+    },
+    maxwords: 400,
+    rows: 8
+  } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
+{% endset %}
+
+{% if option == "b" %}
+  {# Option B: Legal heavy “know your rights” version #}
+  <p class="govuk-body">If you choose to tell us about a disability or health condition, it can help your training provider make adjustments for you.</p>
+  <p class="govuk-body">Your training provider should be able to tell you how they can support you to attend the interview or do the course.</p>
+  <p class="govuk-body">If you get an offer, your provider may ask you to fill out a health questionnaire to check that you’re able to teach.</p>
+  <p class="govuk-body"><a href="/getintoteaching/train-to-teach-with-a-disability">Providers can ask questions if they’re relevant to your ability to do certain activities, outlined in legislation.</a></p>
+
+  <p class="govuk-body govuk-!-font-weight-bold">It’s against the law to discriminate against you.</p>
+  <p class="govuk-body">If you’re disabled, it’s against the law to discriminate against you. Teacher training providers must make adjustments to help you do a course or go to an interview, if your requests are reasonable.</p>
+  <p class="govuk-body">Teacher training providers must not:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>ask disability or health questions if they’re not relevant to your ability to become a teacher</li>
+    <li>reject your application because you’re disabled</li>
+  </ul>
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "Do you want to disclose a disability or health condition?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "You can tell us about it here or get in touch with your training provider directly."
+    },
+    items: [{
+      value: "true",
+      text: "Yes, I want to disclose a disability",
+      conditional: {
+        html: disabilityConditional
+      }
+    }, {
+      value: "false",
+      text: "No, I don’t want to disclose a disability"
+    }]
+  } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
+{% else %}
+  {# Option A: Stripped back version encouraging disclosure #}
   <p class="govuk-body">Training providers might be able to support you to attend the interview or do the training. For example, you might benefit from support if you’re disabled, have a health condition or educational needs.</p>
   <p class="govuk-body">We recommend contacting your training provider before applying to discuss the support they can give you. Examples of support could be:</p>
   <ul class="govuk-list govuk-list--bullet">
@@ -23,20 +77,6 @@
     <li>making sure classrooms are wheelchair accessible</li>
     <li>providing additional support, such as a mentor or classroom assistance</li>
   </ul>
-
-  {% set disabilityConditional %}
-    {{ govukCharacterCount({
-      label: {
-        html: "Give any relevant information",
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "You can also use this space to make a note of any discussions you’ve already had with your provider about getting support."
-      },
-      maxwords: 400,
-      rows: 24
-    } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
-  {% endset %}
 
   {{ govukRadios({
     fieldset: {
@@ -57,8 +97,13 @@
       text: "No"
     }]
   } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
-
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+{% endif %}
+{{ govukInput({
+  name: "option",
+  type: "hidden",
+  value: option
+}) }}
+{{ govukButton({
+  text: "Continue"
+}) }}
 {% endblock %}

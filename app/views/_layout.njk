@@ -103,21 +103,23 @@
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
+{% set metaHtml %}
+  <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16">
+    <li>Email: <a class="govuk-link govuk-footer__link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
+    <li>Monday to Friday (except public holidays)</li>
+    <li>We aim to respond within 5 working days, or one working day for more urgent&nbsp;queries</li>
+  </ul>
+{% endset %}
+
 {% block footer %}
   {{ appFooter({
     classes: "govuk-footer--app",
     meta: {
       title: "Need help?",
-      html: "Call <a href=\"https://getintoteaching.education.gov.uk/\">Get into Teaching</a> on Freephone 0800 389 2500 or chat to an adviser using their <a href=\"https://getintoteaching.education.gov.uk/lp/live-chat\">online chat service</a> between 8am and 8pm, Monday to Friday",
+      html: metaHtml,
       items: [{
-        href: "mailto:becomingateacher@digital.education.gov.uk",
-        text: "Give feedback or report a problem"
-      }, {
-        href: "/terms-of-use",
-        text: "Terms of use"
-      }, {
-        href: "/privacy-statement",
-        text: "Privacy statement"
+        href: "/privacy-policy",
+        text: "Privacy policy"
       }, {
         href: "/admin",
         text: "Prototype admin"

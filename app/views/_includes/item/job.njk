@@ -11,6 +11,17 @@
   {% endif %}
 {%- endset %}
 
+{% set typeHtml -%}
+  {% if item.type%}
+    {{ item.type }}
+    {% if item['part-time-details'] and item.type == 'Part time' %}
+    <br />{{ item['part-time-details'] }}
+    {% endif %}
+  {% else %}
+    Not entered
+  {% endif %}
+{%- endset %}
+
 {% set datesText %}
   {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}
@@ -34,16 +45,16 @@
     } if canAmend
   }, {
     key: {
-      text: "Type"
+      text: "Working pattern"
     },
     value: {
-      html: item.type or "Not entered"
+      html: typeHtml
     },
     actions: {
       items: [{
         href: changeHref,
         text: "Change",
-        visuallyHiddenText: "job"
+        visuallyHiddenText: "working pattern"
       }]
     } if canAmend
   }, {

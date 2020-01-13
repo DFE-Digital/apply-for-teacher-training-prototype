@@ -91,7 +91,6 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.interview) &&
     module.exports.hasCompletedSection(application.referees)
   ) {
-    console.log('has completed application')
     return true
   }
 

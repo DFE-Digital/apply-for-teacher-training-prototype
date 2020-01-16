@@ -94,7 +94,15 @@
        classes: tagClass,
        text: tagText
      } if applicationValue("reasonable-adjustments") | length > 0
-   }]
+   }, {
+    text: "Your suitability to work with children",
+    href: applicationPath + "/suitability" + ("/review" if applicationValue("suitability") | length > 0),
+    id: "suitability",
+    tag: {
+      classes: tagClass,
+      text: tagText
+    } if applicationValue("suitability") | length > 0
+  }]
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Qualifications</h2>

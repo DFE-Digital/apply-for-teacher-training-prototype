@@ -1,0 +1,48 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set supportDetailsHtml %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Do you want to share any information which could have an impact on your application?"
+      },
+      value: {
+        text: "Yes" if applicationValue(["suitability", "disclose"]) == 'true' else 'No'
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/suitability?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "whether you need to share something"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Relevant information"
+      },
+      value: {
+        html: applicationValue(["suitability", "statement"])
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/suitability?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "the information you are sharing"
+        }]
+      } if canAmend
+    } if applicationValue(["suitability", "disclose"]) == 'true']
+  }) }}
+{% endset %}
+
+{% set complete = applicationValue(["suitability"]) | length > 0 %}
+{% if complete %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: supportDetailsHtml
+  }) }}
+{% else %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "suitability" %}
+  {% set incompleteText = "No information entered" %}
+  {% set incompleteLink = "/suitability?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% endif %}

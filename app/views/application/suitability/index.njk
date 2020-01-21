@@ -1,0 +1,72 @@
+{% extends "_form.njk" %}
+
+{% set title = "Your suitability to work with children" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+<p class="govuk-body">
+  Everyone has to have an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service">Disclosure and Barring Check</a> (DBS check) before becoming a teacher. This shows your criminal record.
+</p>
+
+<p class="govuk-body">
+  Providers will also use other evidence and formal checks in the UK and abroad to decide if you’re suitable for teaching.
+</p>
+
+<p class="govuk-body">
+  If you’re concerned about something which could affect your application, you can talk to your provider about it.
+</p>
+
+<p class="govuk-body">
+  It won’t necessarily stop you from becoming a teacher. Showing honesty early on can help your application.
+</p>
+
+{% set disabilityConditional %}
+  {{ govukCharacterCount({
+    label: {
+      html: "Give any relevant information",
+      classes: "govuk-label--s"
+    },
+    maxwords: 400,
+    rows: 8
+  } | decorateApplicationAttributes(["suitability", "statement"])) }}
+{% endset %}
+
+{{ govukRadios({
+  fieldset: {
+    classes: "govuk-!-margin-top-6",
+    legend: {
+      text: "Do you want to share any information which could have an impact on your application?",
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [{
+    value: "true",
+    text: "Yes, I want to share something",
+    hint: {
+      text: "You can tell us about it here or get in touch with your training provider directly."
+    },
+    conditional: {
+      html: disabilityConditional
+    }
+  }, {
+    value: "false",
+    text: "No"
+  }]
+} | decorateApplicationAttributes(["suitability", "disclose"])) }}
+
+{{ govukButton({
+  text: "Continue"
+}) }}
+{% endblock %}

@@ -172,6 +172,7 @@ module.exports = router => {
   require('./application/work-history')(router)
   require('./application/school-experience')(router)
   require('./application/reasonable-adjustments')(router)
+  require('./application/suitability')(router)
   require('./application/vocation')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)

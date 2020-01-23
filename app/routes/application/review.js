@@ -26,7 +26,7 @@ module.exports = router => {
           english: 'English GCSE or equivalent not entered',
           science: 'Science GCSE or equivalent not entered'
         },
-        interview: 'Tell us your interview preferences',
+        interview: 'Tell us your Interview requirements',
         referees: 'Add 2 referees to your application'
       }
 

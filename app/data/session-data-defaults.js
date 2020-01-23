@@ -22,7 +22,7 @@ module.exports = {
     self_amend: process.env.MVP !== 'true',
     self_amend_contact_details: process.env.MVP !== 'true',
     self_withdraw: process.env.MVP !== 'true',
-    interview_preferences: false
+    interview_preferences: true
   },
   applications: (process.env.PRODUCTION === 'true') ? {} : testData
 }

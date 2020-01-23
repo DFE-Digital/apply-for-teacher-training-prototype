@@ -4,7 +4,7 @@
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "Interview preferences"
+        text: "Interview requirements"
       },
       value: {
         text: interviewText | nl2br | safe
@@ -13,7 +13,7 @@
         items: [{
           href: applicationPath + "/interview?referrer=" + referrer,
           text: "Change" if applicationValue(["interview"]) else "Add",
-          visuallyHiddenText: "interview preferences"
+          visuallyHiddenText: "Interview requirements"
         }]
       } if canAmend
     }]
@@ -29,7 +29,7 @@
 {% else %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "interview" %}
-  {% set incompleteText = "Tell us your interview preferences" %}
+  {% set incompleteText = "Tell us your Interview requirements" %}
   {% set incompleteLink = "/interview?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}
 {% endif %}

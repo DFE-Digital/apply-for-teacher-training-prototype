@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/interview/review" %}
-{% set title = "Interview preferences" %}
+{% set title = "Interview needs" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -18,17 +18,23 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Your interview will usually take place over the course of a day and you will need to attend in person. Please give details of:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>any disability, health or personal issue you feel is relevant</li>
-    <li>special arrangements or assistance you may need</li>
-    <li>dates you are unavailable for interview</li>
+  <p class="govuk-body">Interviews usually take place over the course of a day. You'll need to attend in person.</p>
+
+  <p class="govuk-body">Training providers might not have much flexibility when setting a date and time for interview.</p>
+
+  <p class="govuk-body">If there's a reason why you need some flexibility you can tell us about it here.</p>
+
+  <p class="govuk-body">For example:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+    <li>you have commitments such as employment or caring responsibilities</li>
+    <li>you'll be travelling a long way to get to the interview</li>
+    <li>you'll need some adjustments because you're disabled</li>
   </ul>
 
   {% set interviewHtml %}
     {{ govukCharacterCount({
       label: {
-        text: "What are your interview preferences?"
+        text: "What are your interview needs?"
       },
       maxwords: 150,
       threshold: 75,
@@ -40,7 +46,7 @@
     fieldset: {
       legend: {
         classes: "govuk-fieldset__legend--m",
-        text: "Do you have any preferences for your interview?"
+        text: "Do you have any interview needs?"
       }
     },
     items: [{

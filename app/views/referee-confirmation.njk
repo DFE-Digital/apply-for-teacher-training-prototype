@@ -1,0 +1,100 @@
+{% extends "_content.njk" %}
+
+{% block content %}
+  {{ govukPanel({
+    classes: "govuk-!-margin-bottom-8",
+    titleHtml: "Your reference for Jane Doe has been&nbsp;submitted"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">Tell us about your experience giving a&nbsp;reference</h2>
+      <p class="govuk-body">We need your help to improve Apply for teacher training.</p>
+
+      {{ govukSelect({
+        label: {
+          text: "Rate your experience of providing a reference",
+          classes: "govuk-label--m"
+        },
+        id: "experience-rating",
+        name: "experience-rating",
+        items: [
+          { text: 'Pick a rating' },
+          { text: '1  – Very poor' },
+          { text: '2' },
+          { text: '3' },
+          { text: '4' },
+          { text: '5' },
+          { text: '6' },
+          { text: '7' },
+          { text: '8' },
+          { text: '9' },
+          { text: '10 – Very good' }
+        ]
+      }) }}
+
+      {{ govukTextarea({
+        label: {
+          text: "Tell us why you chose that rating (optional)"
+        }
+      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+
+      {{ govukSelect({
+        label: {
+          text: "Rate how useful our guidance was",
+          classes: "govuk-label--m"
+        },
+        id: "guidance-rating",
+        name: "guidance-rating",
+        items: [
+          { text: 'Pick a rating' },
+          { text: '1  – Very poor' },
+          { text: '2' },
+          { text: '3' },
+          { text: '4' },
+          { text: '5' },
+          { text: '6' },
+          { text: '7' },
+          { text: '8' },
+          { text: '9' },
+          { text: '10 – Very good' }
+        ]
+      }) }}
+
+      {{ govukTextarea({
+        label: {
+          text: "Tell us why you chose that rating (optional)"
+        },
+        hint: {
+          text: "Did you have questions that weren’t answered by the guidance?"
+        }
+      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+
+      {{ govukTextarea({
+        label: {
+          text: "What could we do to improve how we request references?",
+          classes: "govuk-label--m"
+        }
+      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+
+      {{ govukRadios({
+        fieldset: {
+          legend: {
+            text: "Can we contact you for research purposes?",
+            classes: "govuk-label--m"
+          }
+        },
+        items: [{
+          text: "Yes, you can contact me"
+        }, {
+          text: "No, do not contact me"
+        }]
+      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+
+      {{ govukButton({
+        text: "Finish",
+        href: "#"
+      }) }}
+    </div>
+  </div>
+{% endblock %}

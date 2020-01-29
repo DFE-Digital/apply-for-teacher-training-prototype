@@ -9,83 +9,115 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-l">Tell us about your experience giving a&nbsp;reference</h2>
-      <p class="govuk-body">We need your help to improve Apply for teacher training.</p>
+      <p class="govuk-body">Your feedback will help us to improve our service.</p>
 
-      {{ govukSelect({
-        label: {
-          text: "Rate your experience of providing a reference",
-          classes: "govuk-label--m"
+      {% set whyRatingHtml %}
+        {{ govukTextarea({
+          label: {
+            text: "Tell us why you chose that rating"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {% set whyGuidanceRatingHtml %}
+        {{ govukTextarea({
+          label: {
+            text: "Tell us why you chose that rating"
+          },
+          hint: {
+            text: "Did you have questions that weren’t answered by the guidance?"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "Please rate your experience of giving a reference",
+            classes: "govuk-fieldset__legend--m"
+          }
         },
         id: "experience-rating",
         name: "experience-rating",
         items: [
-          { text: 'Pick a rating' },
-          { text: '1  – Very poor' },
-          { text: '2' },
-          { text: '3' },
-          { text: '4' },
-          { text: '5' },
-          { text: '6' },
-          { text: '7' },
-          { text: '8' },
-          { text: '9' },
-          { text: '10 – Very good' }
+          { text: '1 – Very poor', conditional: { html: whyRatingHtml } },
+          { text: '2', conditional: { html: whyRatingHtml }  },
+          { text: '3', conditional: { html: whyRatingHtml }  },
+          { text: '4', conditional: { html: whyRatingHtml }  },
+          { text: '5 – Very good', conditional: { html: whyRatingHtml }  }
         ]
       }) }}
 
-      {{ govukTextarea({
-        label: {
-          text: "Tell us why you chose that rating (optional)"
-        }
-      } | decorateApplicationAttributes(["referee-confirmation"])) }}
-
-      {{ govukSelect({
-        label: {
-          text: "Rate how useful our guidance was",
-          classes: "govuk-label--m"
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "Please rate how useful our guidance was",
+            classes: "govuk-fieldset__legend--m"
+          }
         },
         id: "guidance-rating",
         name: "guidance-rating",
         items: [
-          { text: 'Pick a rating' },
-          { text: '1  – Very poor' },
-          { text: '2' },
-          { text: '3' },
-          { text: '4' },
-          { text: '5' },
-          { text: '6' },
-          { text: '7' },
-          { text: '8' },
-          { text: '9' },
-          { text: '10 – Very good' }
+          { text: '1 – Very poor', conditional: { html: whyGuidanceRatingHtml } },
+          { text: '2', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: '3', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: '4', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: '5 – Very good', conditional: { html: whyGuidanceRatingHtml }  }
         ]
       }) }}
 
-      {{ govukTextarea({
-        label: {
-          text: "Tell us why you chose that rating (optional)"
-        },
-        hint: {
-          text: "Did you have questions that weren’t answered by the guidance?"
-        }
-      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% set giveReason %}
+        {{ govukTextarea({
+          label: {
+            text: "Please tell us why"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
 
-      {{ govukTextarea({
-        label: {
-          text: "What could we do to improve how we request references?",
-          classes: "govuk-label--m"
-        }
-      } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "If we asked whether a candidate was safe to work with children, would you feel able to answer?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        id: "suitability",
+        name: "suitability",
+        items: [
+          { text: 'Yes, I could answer' },
+          { text: 'No, I wouldn’t feel able to answer', conditional: { html: giveReason }  }
+        ]
+      }) }}
+
+      {% set contactDetails %}
+        {{ govukTextarea({
+          label: {
+            text: "Please let us know when you’re available and give a phone number"
+          },
+          hint: {
+            text: ""
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
 
       {{ govukRadios({
         fieldset: {
           legend: {
-            text: "Can we contact you for research purposes?",
+            html: "Can we contact you about your experience of giving a&nbsp;reference?",
             classes: "govuk-label--m"
           }
         },
+        hint: {
+          text: "We’d ideally like to speak on the phone for half an hour."
+        },
         items: [{
-          text: "Yes, you can contact me"
+          text: "Yes, you can contact me",
+          conditional: {
+            html: contactDetails
+          }
         }, {
           text: "No, do not contact me"
         }]

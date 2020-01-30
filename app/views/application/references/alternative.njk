@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set type = applicationValue(["referees", id, "type"]) | lower %}
-{% set title = "Give details for your new referee" %}
+{% set title = "Add a new referee" %}
 {% set formaction = "/application/" + applicationId + "/references/alternative-review" %}
 
 {% block pageNavigation %}

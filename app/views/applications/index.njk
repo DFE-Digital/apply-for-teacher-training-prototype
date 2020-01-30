@@ -39,6 +39,14 @@
   {% set showChoiceStatus = true %}
   {% set showReferenceStatus = true %}
 
+  {% set needsReferee = true %}
+  {% if needsReferee %}
+    {{ govukWarningText({
+      html: "You need to <a href=\"" + applicationPath + "/references/alternative" + "\">give details of a new referee</a>",
+      iconFallbackText: 'Warning'
+    }) }}
+  {% endif %}
+
   <h2 class="govuk-heading-m govuk-!-font-size-27">
   {% if canAmend %}
     Your application

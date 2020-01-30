@@ -1,0 +1,81 @@
+{% extends "_content-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/references/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath + "/references/alternative",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Check your referee’s details before confirming</h1>
+    </div>
+  </div>
+
+  {% set refereeHtml %}
+    {{ govukSummaryList({
+      rows: [{
+        key: {
+          text: "Name"
+        },
+        value: {
+          text: item.name or "Paul Jones"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }, {
+        key: {
+          text: "Email"
+        },
+        value: {
+          text: item.email or "paul.jones@gov.uk"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }, {
+        key: {
+          text: "Relationship"
+        },
+        value: {
+          text: (item.relationship or "My boss") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }]
+    }) }}
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: "New referee",
+    html: refereeHtml
+  }) }}
+
+  <p class="govuk-body">We’ll contact your new referee immediately.</p>
+
+  {{ govukButton({
+    text: "Confirm new referee",
+    href: applicationPath
+  }) }}
+{% endblock %}

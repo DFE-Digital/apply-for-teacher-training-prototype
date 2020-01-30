@@ -1,0 +1,23 @@
+{% extends "_content.njk" %}
+{% set applicationPath = "/application/12345" %}
+
+{% block primary %}
+  <h1 class="govuk-heading-xl">You need to give details of a new referee</h1>
+
+  {# <p>Our email requesting a reference didn’t reach Glinda Baumbach.</p> #}
+  {# <p>We haven’t had a reference from Doyle Denesik.</p> #}
+  <p>Carmel Kohler said they won’t give a reference.</p>
+
+  <p>We can’t send your application to your teacher training providers without 2 complete references.</p>
+
+  <div class="govuk-!-margin-top-6 govuk-!-margin-bottom-4">
+    {{ govukButton({
+      text: "Give details of a new referee",
+      href: applicationPath + "/references/alternative"
+    }) }}
+  </div>
+
+  <p>
+    <a href="/applications">Continue without adding a referee</a>
+  </p>
+{% endblock %}

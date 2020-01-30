@@ -3,12 +3,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set referrer = applicationPath + "/references/review" %}
 
-{# You can’t amend your referees once application has been submitted #}
-{% set canAmend = true if not hasSubmittedApplications() %}
-
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/references/alternative",
+    href: applicationPath + "/references/alternative",
     text: "Back"
   }) }}
 {% endblock %}
@@ -19,73 +16,61 @@
       <h1 class="govuk-heading-xl">Check your answers before&nbsp;confirming</h1>
     </div>
   </div>
-  {% set references = applicationValue(["referees"]) %}
-    {% set references = references | toArray %}
-    {% for item in references %}
-    {% set refereeHtml %}
 
-      {{ govukSummaryList({
-        rows: [{
-          key: {
-            text: "Name"
-          },
-          value: {
-            text: item.name or "Paul Jones"
-          },
-          actions: {
-            items: [{
-              href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-              text: "Change",
-              visuallyHiddenText: "referee"
-            }]
-          } if canAmend
-        }, {
-          key: {
-            text: "Email"
-          },
-          value: {
-            text: item.email or "paul.jones@gov.uk"
-          },
-          actions: {
-            items: [{
-              href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-              text: "Change",
-              visuallyHiddenText: "referee"
-            }]
-          } if canAmend
-        }, {
-          key: {
-            text: "Relationship"
-          },
-          value: {
-            text: (item.relationship or "My boss") | nl2br | safe
-          },
-          actions: {
-            items: [{
-              href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-              text: "Change",
-              visuallyHiddenText: "referee"
-            }]
-          } if canAmend
-        }, {
-          key: {
-            text: "Status"
-          },
-          value: {
-            html: statusHtml
-          }
-        } if status and showReferenceStatus]
-      }) }}
-
-
-    {% endset %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: "New referee",
-      html: refereeHtml
+  {% set refereeHtml %}
+    {{ govukSummaryList({
+      rows: [{
+        key: {
+          text: "Name"
+        },
+        value: {
+          text: item.name or "Paul Jones"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }, {
+        key: {
+          text: "Email"
+        },
+        value: {
+          text: item.email or "paul.jones@gov.uk"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }, {
+        key: {
+          text: "Relationship"
+        },
+        value: {
+          text: (item.relationship or "My boss") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/references/alternative",
+            text: "Change",
+            visuallyHiddenText: "referee"
+          }]
+        }
+      }]
     }) }}
-  {% endfor %}
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: "New referee",
+    html: refereeHtml
+  }) }}
 
   <p class="govuk-body">We’ll contact your new referee immediately.</p>
 

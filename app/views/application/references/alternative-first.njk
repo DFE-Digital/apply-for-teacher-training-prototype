@@ -1,0 +1,64 @@
+{% extends "_form.njk" %}
+
+{% set type = applicationValue(["referees", id, "type"]) | lower %}
+{% set title = "Add your first new referee" %}
+{% set formaction = "/application/" + applicationId + "/references/alternative-second" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/type/" + id
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">Contact your referee in advance to check they are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>happy to give you a reference</li>
+    <li>able to submit the reference as soon as possible</li>
+    <li>comfortable submitting a reference online</li>
+  </ul>
+
+  {{ govukInput({
+    label: {
+      text: "Full name",
+      classes: "govuk-label--m govuk-!-margin-top-6"
+    }
+  } | decorateApplicationAttributes(["referees", id, "name"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--m"
+    }
+  } | decorateApplicationAttributes(["referees", id, "email"])) }}
+
+{% if type == "academic" %}
+  {% set relationshipExample = "They were my tutor at university from 2000 to 2003" %}
+{% elif type == "professional" %}
+  {% set relationshipExample = "I have been employed by them since January 2018" %}
+{% elif type == "school-based" %}
+  {% set relationshipExample = "I spent 2 weeks volunteering at their school in May 2019" %}
+{% else %}
+  {% set relationshipExample = "They were the headteacher at my secondary school between 2003 and 2005" %}
+{% endif %}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "What is your relationship to this referee and how long have you known them?",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, ‘" + relationshipExample + "’"
+    },
+    maxwords: 50
+  } | decorateApplicationAttributes(["referees", id, "relationship"])) }}
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

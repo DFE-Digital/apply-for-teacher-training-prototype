@@ -41,8 +41,13 @@
 
   {% set needsReferee = true %}
   {% if needsReferee %}
-    {{ govukWarningText({
+    {# {{ govukWarningText({
       html: "You need to <a href=\"" + applicationPath + "/references/alternative" + "\">give details of a new referee</a>",
+      iconFallbackText: 'Warning'
+    }) }} #}
+
+    {{ govukWarningText({
+      html: "You need to <a href=\"" + applicationPath + "/references/alternative-first" + "\">give details of 2 new referees</a>",
       iconFallbackText: 'Warning'
     }) }}
   {% endif %}

@@ -47,6 +47,20 @@
 {% endblock %}
 
 {% block header %}
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class=" govuk-grid-column-two-thirds govuk-!-padding-top-4 govuk-!-padding-bottom-4">
+        <p>We use cookies to <a class="govuk-link" href="/help/cookies">collect information</a> about how you use this service.</p>
+        {{ govukButton({
+            html: 'Accept all cookies',
+            classes: 'govuk-!-margin-bottom-4'
+        }) }}
+        <p class="govuk-!-margin-bottom-0">Or <a class="govuk-link" href="/help/cookies">change your settings to opt out</a></p>
+      </div>
+    </div>
+  </div>
+
   {% if shouldShowCookieMessage %}
   {{ appCookieBanner({
     text: cookieText

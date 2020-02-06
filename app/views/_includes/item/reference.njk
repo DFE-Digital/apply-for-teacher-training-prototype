@@ -68,9 +68,37 @@
       text: "Status"
     },
     value: {
-      html: statusHtml
+      html: '<strong class="govuk-tag app-tag--blue">Awaiting response</strong>'
     }
-  } if status and showReferenceStatus]
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: '<strong class="govuk-tag app-tag--green">Reference given</strong>'
+    }
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: '<strong class="govuk-tag app-tag--red">Declined</strong>'
+    }
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: '<strong class="govuk-tag app-tag--red">Response overdue</strong>'
+    }
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: '<strong class="govuk-tag app-tag--red">Email address incorrect</strong>'
+    }
+  }]
 }) }}
 
 {# Reference statuses:

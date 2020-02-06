@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "First, check you can use this service" %}
+{% set title = "Check we’re ready for you to use this service" %}
+
 {% set formaction = "/account/eligibility/answer" %}
 
 {% block pageNavigation %}
@@ -10,13 +11,16 @@
 {% endblock %}
 
 {% block primary %}
+  <p class="govuk-body">This service is new so it’s not ready for everyone yet. Check if we’re ready for you by answering the questions below.</p>
+  <p class="govuk-body govuk-!-margin-bottom-7">If you can’t use our service, you can still apply for teacher training through&nbsp;<a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS</a>.</p>
+
   {{ govukRadios({
     classes: "govuk-radios--inline",
     idPrefix: "eligibile-nationality",
     name: "eligibile-nationality",
     fieldset: {
       legend: {
-        text: "Are you a citizen of the UK, EU or EEA?",
+        text: "Are you a citizen of the UK or the EU?",
         classes: "govuk-fieldset__legend--m"
       }
     },

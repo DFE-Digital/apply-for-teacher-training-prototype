@@ -22,20 +22,23 @@
 
   <p class="govuk-body">We don’t allow Google to use or share our analytics data.</p>
 
-  <p>You can choose to opt out of cookies that measure website use.</p>
-
   {{ govukRadios({
-    classes: "govuk-radios--inline",
-    idPrefix: "changed-name",
-    name: "changed-name",
+    idPrefix: "cookies",
+    name: "cookies",
+    fieldset: {
+      legend: {
+        text: "Do you accept Google Analytics cookies?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [
       {
         value: "on",
-        text: "On"
+        text: "Yes, opt-in to Google Analytics cookies"
       },
       {
         value: "off",
-        text: "Off"
+        text: "No, do not track my website usage"
       }
     ]
   }) }}

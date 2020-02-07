@@ -48,23 +48,23 @@
 
 {% block header %}
 
-  <div class="govuk-width-container">
-    <div class="govuk-grid-row">
-      <div class=" govuk-grid-column-two-thirds govuk-!-padding-top-4 govuk-!-padding-bottom-4">
-        <p>We use cookies to <a class="govuk-link" href="/help/cookies">collect information</a> about how you use this service.</p>
+  <div style="background-color: #f3f2f1">
+    <div class="govuk-width-container govuk-!-padding-top-3 govuk-!-padding-bottom-5">
+      <p>We use cookies to <a class="govuk-link govuk-footer__link" href="/help/cookies">collect information</a> about how you use this service.</p>
+      <p class="govuk-!-margin-bottom-0">
         {{ govukButton({
-            html: 'Accept all cookies',
-            classes: 'govuk-!-margin-bottom-4'
+          html: 'Accept all cookies',
+          classes: 'govuk-!-margin-bottom-0 govuk-!-margin-right-2'
         }) }}
-        <p class="govuk-!-margin-bottom-0">Or <a class="govuk-link" href="/help/cookies">change your settings to opt out</a></p>
-      </div>
+        <span style="display: inline-block; line-height: 38px">or <a class="govuk-link govuk-footer__link govuk-!-margin-left-1" href="/help/cookies">change your settings to opt out</a></span>
+      </p>
     </div>
   </div>
 
   {% if shouldShowCookieMessage %}
-  {{ appCookieBanner({
+  {# {{ appCookieBanner({
     text: cookieText
-  })}}
+  })}} #}
   {% endif %}
 
   {% if applicationValue(["candidate", "given-name"]) %}

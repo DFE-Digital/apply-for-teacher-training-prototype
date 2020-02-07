@@ -1,0 +1,120 @@
+{% extends "_content.njk" %}
+
+{% set title = "Cookies" %}
+
+{% block primary %}
+
+  <p class="govuk-body">‘Find postgraduate teacher training’ puts small files (known as ‘cookies’) onto your device to collect information about how you use the site.</p>
+
+  <p class="govuk-body">Cookies aren’t used to identify you personally.</p>
+
+  <h2 class="govuk-heading-l">Cookies that measure website use</h2>
+
+  <p class="govuk-body">We use Google Analytics software to collect information about how you use ‘Find postgraduate teacher training’. We do this to help make sure the site is meeting the needs of its users and to help us make improvements. </p>
+
+  <p class="govuk-body">Google Analytics stores information about:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the pages you visit on ‘Find postgraduate teacher training’</li>
+    <li>how long you spend on each page</li>
+    <li>how you got to the site</li>
+    <li>what you click on while you’re visiting the site</li>
+  </ul>
+
+  <p class="govuk-body">We don’t allow Google to use or share our analytics data.</p>
+
+  <p>You can choose to opt out of cookies that measure website use.</p>
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    idPrefix: "changed-name",
+    name: "changed-name",
+    items: [
+      {
+        value: "on",
+        text: "On"
+      },
+      {
+        value: "off",
+        text: "Off"
+      }
+    ]
+  }) }}
+
+  {{ govukButton({
+      html: 'Save changes'
+  }) }}
+
+  <h2 class="govuk-heading-l govuk-!-margin-top-7">How we use cookies</h2>
+
+  <h3 class="govuk-heading-m">Measuring website usage (Google Analytics)</h3>
+
+  <p class="govuk-body">Google Analytics, when opted in, sets the following cookies:</p>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__header">
+      <tr>
+        <th class="govuk-table__header">Name</th>
+        <th class="govuk-table__header">Purpose</th>
+        <th class="govuk-table__header">Expires</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">_ga</td>
+        <td class="govuk-table__cell">Used to distinguish anonymous users</td>
+        <td class="govuk-table__cell">2 years</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">_gid</td>
+        <td class="govuk-table__cell">Used to distinguish anonymous users</td>
+        <td class="govuk-table__cell">24 hours</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">_gat_gtag_UA_112932657_1</td>
+        <td class="govuk-table__cell">Throttle requests</td>
+        <td class="govuk-table__cell">10 minutes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {# <p class="govuk-body">You can opt out of <a href="https://tools.google.com/dlpage/gaoptout" rel="external" class="govuk-link">Google Analytics</a>.</p> #}
+
+  <h3 class="govuk-heading-m">Our introductory message</h3>
+
+  <p class="govuk-body">You may see a pop-up welcome message when you first visit ‘Find postgraduate teacher training’. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__header">
+      <tr>
+        <th class="govuk-table__header">Name</th>
+        <th class="govuk-table__header">Purpose</th>
+        <th class="govuk-table__header">Expires</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr>
+        <td class="govuk-table__cell">seen_cookie_message</td>
+        <td class="govuk-table__cell">Show cookie policy banner on first visit only</td>
+        <td class="govuk-table__cell">1 month</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="govuk-body">Other ‘Find postgraduate teacher training’ cookies may include:</p>
+  <table class="govuk-table">
+    <thead class="govuk-table__header">
+      <tr>
+        <th class="govuk-table__header">Name</th>
+        <th class="govuk-table__header">Purpose</th>
+        <th class="govuk-table__header">Expires</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr>
+        <td class="govuk-table__cell"><span class="break-word">b90b2935d687fb546d80508b818e20d3</span></td>
+        <td class="govuk-table__cell">Load balancing</td>
+        <td class="govuk-table__cell">never</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

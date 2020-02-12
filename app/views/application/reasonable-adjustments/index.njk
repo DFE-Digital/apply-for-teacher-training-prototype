@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Get extra assistance to become a teacher" %}
+{% set title = "You can ask for support if you have a disability" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -31,72 +31,44 @@
   } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
 {% endset %}
 
-{% if option == "b" %}
-  {# Option B: Legal heavy “know your rights” version #}
-  <p class="govuk-body">If you choose to tell us about a disability or health condition, it can help your training provider make adjustments for you.</p>
-  <p class="govuk-body">Your training provider should be able to tell you how they can support you to attend the interview or do the course.</p>
-  <p class="govuk-body">If you get an offer, your provider may ask you to fill out a health questionnaire to check that you’re able to teach.</p>
+<p class="govuk-body">You might benefit from extra support if you’re disabled, have a mental health condition or educational needs.</p>
+<p class="govuk-body">If you choose to tell us you need support, we’ll let your training provider know. They can then make adjustments so you can attend an interview or do the training.</p>
+<p class="govuk-body">Examples of support could be:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>organising equipment like a hearing loop or an adapted keyboard</li>
+  <li>putting you in touch with support staff if you have a mental health condition</li>
+  <li>making sure classrooms are wheelchair accessible</li>
+</ul>
+<p class="govuk-body">If the help you need is not covered by your provider making adjustments, you might also be able to get support from <a href="https://www.gov.uk/access-to-work">Access to Work</a>. This could include a grant to help cover the costs of practical support in the workplace.</p>
+<p class="govuk-body">We recommend contacting your training provider before applying to discuss the support they can offer.</p>
 
-  <p class="govuk-body govuk-!-font-weight-bold">It’s against the law to discriminate against you.</p>
-  <p class="govuk-body">If you’re disabled, <a href="/getintoteaching/train-to-teach-with-a-disability">it’s against the law to discriminate against you</a>. Teacher training providers must make adjustments to help you do a course or go to an interview, if your requests are reasonable.</p>
-  <p class="govuk-body">Teacher training providers must not:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>ask disability or health questions if they’re not relevant to your ability to become a teacher</li>
-    <li>reject your application because you’re disabled</li>
-  </ul>
+<h2 class="govuk-heading-m">It’s against the law to discriminate</h2>
+<p class="govuk-body">If you’re disabled, <a href="/getintoteaching/train-to-teach-with-a-disability">it’s against the law to discriminate against you</a>. Training providers must not:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>ask disability or health questions if they’re not relevant to your ability to become a teacher</li>
+  <li>reject your application because you’re disabled</li>
+</ul>
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "Do you want to disclose a disability or health condition?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    hint: {
-      text: "You can tell us about it here or get in touch with your training provider directly."
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I want to disclose a disability",
-      conditional: {
-        html: disabilityConditional
-      }
-    }, {
-      value: "false",
-      text: "No, I don’t want to disclose a disability"
-    }]
-  } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
-{% else %}
-  {# Option A: Stripped back version encouraging disclosure #}
-  <p class="govuk-body">Training providers might be able to support you to attend the interview or do the training. For example, you might benefit from support if you’re disabled, have a health condition or educational needs.</p>
-  <p class="govuk-body">We recommend contacting your training provider before applying to discuss the support they can give you. Examples of support could be:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>organising assistive equipment, such as a hearing loop or an adapted keyboard</li>
-    <li>making sure classrooms are wheelchair accessible</li>
-    <li>providing additional support, such as a mentor or classroom assistance</li>
-  </ul>
+{{ govukRadios({
+  fieldset: {
+    classes: "govuk-!-margin-top-6",
+    legend: {
+      text: "Do you want to ask for help to become a teacher?",
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [{
+    value: "true",
+    text: "Yes, I want to share information about myself so my provider can take steps to support me",
+    conditional: {
+      html: disabilityConditional
+    }
+  }, {
+    value: "false",
+    text: "No"
+  }]
+} | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "Do you want to ask for help to become a teacher?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I want to share information about myself so my provider can take steps to support me",
-      conditional: {
-        html: disabilityConditional
-      }
-    }, {
-      value: "false",
-      text: "No"
-    }]
-  } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
-{% endif %}
 {{ govukInput({
   name: "option",
   type: "hidden",

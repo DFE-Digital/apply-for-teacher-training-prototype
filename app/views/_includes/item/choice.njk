@@ -24,6 +24,20 @@
     } if canAmend
   }, {
     key: {
+      text: "Full time or part time"
+    },
+    value: {
+      html: "Full time"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/choices/" + item.id + "/full-or-part-time?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "course location"
+      }]
+    } if canAmend and not item.singleLocationCourse
+  }, {
+    key: {
       text: "Location"
     },
     value: {

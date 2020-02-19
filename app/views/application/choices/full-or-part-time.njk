@@ -1,0 +1,24 @@
+{% extends "_form.njk" %}
+
+{% set title = "Full time or part time?" %}
+{% set formaction = paths.next %}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Full time"
+    }, {
+      text: "Part time"
+    }]
+  } | decorateApplicationAttributes(["temporaryChoices", choiceId, "full-part"])) }}
+
+  <hr class="govuk-section-break govuk-section-break--m">
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

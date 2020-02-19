@@ -11,6 +11,7 @@ const pickPaths = (req) => {
     `/application/${applicationId}/choices/${choiceId}/found`,
     `/application/${applicationId}/choices/${choiceId}/provider`,
     `/application/${applicationId}/choices/${choiceId}/pick`,
+    `/application/${applicationId}/choices/${choiceId}/full-or-part-time`,
     `/application/${applicationId}/choices/${choiceId}/location`,
     `/application/${applicationId}/choices/${choiceId}/create`,
     `/application/${applicationId}/choices`

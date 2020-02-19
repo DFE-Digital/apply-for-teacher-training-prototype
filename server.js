@@ -173,7 +173,7 @@ if (useCookieSessionStore === 'true') {
   })))
 }
 
-app.use(flash());
+app.use(flash())
 
 // Automatically store all data users enter
 if (useAutoStoreData === 'true') {

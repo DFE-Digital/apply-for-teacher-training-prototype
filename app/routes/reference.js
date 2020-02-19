@@ -2,7 +2,6 @@
  * Reference routes
  */
 module.exports = router => {
-
   router.get('/reference/finish/answer', (req, res) => {
     const { research } = req.session.data.reference
     if (research === 'yes') {

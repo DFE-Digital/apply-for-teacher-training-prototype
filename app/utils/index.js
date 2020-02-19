@@ -1,4 +1,12 @@
+// Not sure why we need to load this again, here
+const dotenv = require('dotenv')
+dotenv.config()
+
 const querystring = require('querystring')
+const { DateTime } = require('luxon')
+const NotifyClient = require('notifications-node-client').NotifyClient
+const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+const providers = require('./../data/providers')
 
 const applicationData = (req) => {
   const applicationId = req.query.applicationId || req.params.applicationId
@@ -15,6 +23,14 @@ const generateRandomString = () => {
 
 const getQueryString = (req) => {
   return querystring.stringify(req.query)
+}
+
+const getProvider = (providerCode) => {
+  return providers[providerCode]
+}
+
+const getCourse = (providerCode, courseCode) => {
+  return providers[providerCode].courses[courseCode]
 }
 
 const saveIsoDate = (req, data, id) => {
@@ -42,6 +58,29 @@ const saveIsoDate = (req, data, id) => {
   if (endMonth && endYear) {
     data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
   }
+}
+
+// Emails will only send if the email address has been whitelisted
+const sendEmail = (req, template, personalisation) => {
+  const email = req.session.data.account && req.session.data.account.email
+  personalisation = personalisation || {}
+  personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
+
+  if (email) {
+    notify.sendEmail(
+      template,
+      email,
+      { personalisation }
+    )
+  }
+}
+
+const nowPlusDays = (days, format = 'yyyy-LL-dd') => {
+  const date = DateTime.local().plus({ days: days })
+
+  return DateTime.fromISO(date, {
+    locale: 'en-GB'
+  }).toFormat(format)
 }
 
 const hasApplications = (req) => {
@@ -130,7 +169,11 @@ module.exports = {
   capitaliseFirstLetter,
   generateRandomString,
   queryString: getQueryString,
+  getProvider,
+  getCourse,
   saveIsoDate,
+  sendEmail,
+  nowPlusDays,
   hasApplications,
   hasCompletedApplication,
   hasCompletedSection,

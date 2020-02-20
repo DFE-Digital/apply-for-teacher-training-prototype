@@ -43,7 +43,21 @@
     {% endif %}
   {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
-    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply.</p>
+    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply. Visit <a href="https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training">Get into Teaching for guidance on applying for teacher training</a>.</p>
+    <p>When you apply you’ll need these codes for the Choices section of your application form:</p>
+
+    <div class="govuk-inset-text">
+      <ul class="govuk-list">
+        <li class="govuk-!-margin-bottom-2">
+          Training provider code:
+          <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ providerCode }}</span>
+        </li>
+        <li>
+          Training programme code:
+          <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold">{{ courseCode }}</span>
+        </li>
+      </ul>
+    </div>
 
     {{ govukButton({
       text: "Apply through UCAS",

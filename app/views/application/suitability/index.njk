@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Your suitability to work with children" %}
+{% set title = "Declaring any safeguarding issues" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -17,19 +17,22 @@
 
 {% block primary %}
 <p class="govuk-body">
-  Everyone has to have an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service">Disclosure and Barring Check</a> (DBS check) before becoming a teacher. This shows your criminal record.
+Teacher training providers need to check that it’s safe for you to work with children and young people. They’ll check:
+</p>
+
+<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+  <li>your criminal record (they’ll do an enhanced DBS Check)</li>
+  <li>official records from other countries if you’ve been travelling or lived abroad</li>
+  <li>official ‘barred lists’ which show if you’ve been banned from working with children</li>
+  <li>your references</li>
+</ul>
+
+<p class="govuk-body">
+  Tell your provider sooner rather than later about any potential safeguarding issues, such as criminal convictions. They’ll be able to give advice about whether this will affect your application or not.
 </p>
 
 <p class="govuk-body">
-  Providers will also use other evidence and formal checks in the UK and abroad to decide if you’re suitable for teaching.
-</p>
-
-<p class="govuk-body">
-  If you’re concerned about something which could affect your application, you can talk to your provider about it.
-</p>
-
-<p class="govuk-body">
-  It won’t necessarily stop you from becoming a teacher. Showing honesty early on can help your application.
+  A criminal conviction won’t necessarily stop you becoming a teacher.
 </p>
 
 {% set disabilityConditional %}
@@ -45,9 +48,9 @@
 
 {{ govukRadios({
   fieldset: {
-    classes: "govuk-!-margin-top-6",
+    classes: "govuk-!-margin-top-7",
     legend: {
-      text: "Do you want to share any information which could have an impact on your application?",
+      text: "Do you want to share any safeguarding issues?",
       classes: "govuk-fieldset__legend--m"
     }
   },
@@ -55,7 +58,7 @@
     value: "true",
     text: "Yes, I want to share something",
     hint: {
-      text: "You can tell us about it here or get in touch with your training provider directly."
+      text: "You talk to your provider directly or tell us about it here. This won’t stop you from submitting your application."
     },
     conditional: {
       html: disabilityConditional

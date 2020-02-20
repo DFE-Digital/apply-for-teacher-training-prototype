@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "You can ask for support if you have a disability" %}
+{% set title = "You can ask for support if you have a disability or other needs" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -23,9 +23,7 @@
       html: "Give any relevant information",
       classes: "govuk-label--s"
     },
-    hint: {
-      text: "You can also use this space to make a note of any discussions you’ve already had with your provider about getting support."
-    },
+
     maxwords: 400,
     rows: 8
   } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
@@ -40,7 +38,6 @@
   <li>making sure classrooms are wheelchair accessible</li>
 </ul>
 <p class="govuk-body">If the help you need is not covered by your provider making adjustments, you might also be able to get support from <a href="https://www.gov.uk/access-to-work">Access to Work</a>. This could include a grant to help cover the costs of practical support in the workplace.</p>
-<p class="govuk-body">We recommend contacting your training provider before applying to discuss the support they can offer.</p>
 
 <h2 class="govuk-heading-m">It’s against the law to discriminate</h2>
 <p class="govuk-body">If you’re disabled, <a href="/getintoteaching/train-to-teach-with-a-disability">it’s against the law to discriminate against you</a>. Training providers must not:</p>

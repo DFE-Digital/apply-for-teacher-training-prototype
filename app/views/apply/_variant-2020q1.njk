@@ -1,0 +1,50 @@
+<p class="govuk-body">The course you’ve chosen is available through a new GOV.UK service called {{ serviceName }}.</p>
+<!--h2 class="govuk-heading-l">Is the new service right for you?</h2-->
+<p class="govuk-body">This will eventually replace UCAS as the way candidates apply for all teacher training. However, for now, the service is limited to certain providers.</p>
+<p class="govuk-body"><a href="/apply/providers">See a list of available training providers and courses</a>.</p>
+
+{{ govukRadios({
+  idPrefix: "apply-route",
+  name: "apply-route",
+  fieldset: {
+    classes: "govuk-!-margin-top-6",
+    legend: {
+      text: "Do you want to apply using a new GOV.UK service?",
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [{
+    value: "dfe",
+    text: "Yes, I want to apply using the new service",
+    label: {
+      classes: "govuk-label--s govuk-!-margin-bottom-2"
+    },
+    hint: {
+      html: "
+        <p class=\"govuk-body govuk-!-margin-bottom-2\">Choose this option if:</p>
+        <ul class=\"govuk-list govuk-list--bullet\">
+          <li>all your chosen providers are available on the new service</li>
+          <li>you want to try a streamlined service with personalised support</li>
+        </ul>"
+    }
+  }, {
+    value: "ucas",
+    text: "No, I want to apply with UCAS",
+    label: {
+      classes: "govuk-label--s govuk-!-margin-bottom-2"
+    },
+    hint: {
+      html: "
+        <p class=\"govuk-body govuk-!-margin-bottom-2\">Choose this option if:</p>
+        <ul class=\"govuk-list govuk-list--bullet\">
+          <li>some of your chosen providers are not available on " +  serviceName + " and you don’t want to use 2 different services.</li>
+          <li>you’ve already started applying with UCAS</li>
+        </ul>"
+    }
+  }]
+}) }}
+
+{{ govukButton({
+  text: "Continue",
+  classes: "govuk-!-margin-bottom-5"
+}) }}

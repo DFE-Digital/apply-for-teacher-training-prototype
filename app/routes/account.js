@@ -11,15 +11,15 @@ module.exports = router => {
       utils.sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
       res.redirect('/account/check-email/sign-in')
     } else {
-      res.redirect('/account/eligibility')
+      res.redirect('/check-you-can-use-this-service')
     }
   })
 
-  router.get('/account/eligibility/answer', (req, res) => {
+  router.get('/check-you-can-use-this-service/answer', (req, res) => {
     const eligibileNationality = req.session.data['eligibile-nationality']
     const eligibileEquivalencies = req.session.data['eligibile-equivalencies']
     if (eligibileNationality === 'no' || eligibileEquivalencies === 'no') {
-      res.redirect('/account/ineligible') // Show UCAS Apply information
+      res.redirect('/check-you-can-use-this-service/ineligible') // Show UCAS Apply information
     } else {
       res.redirect('/account/create-account') // Create an account
     }

@@ -65,7 +65,7 @@ module.exports = router => {
         courseCode
       }
 
-      res.redirect('/account/eligibility') // Go to Apply
+      res.redirect('/check-you-can-use-this-service') // Go to Apply
     }
   })
 

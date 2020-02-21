@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "Are you a citizen of the UK or the EU?" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/check-you-can-use-this-service/application-on-ucas"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    idPrefix: "answer",
+    name: "answer",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

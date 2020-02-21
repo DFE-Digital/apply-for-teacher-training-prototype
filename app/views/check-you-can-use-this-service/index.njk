@@ -1,8 +1,7 @@
-{% extends "_form.njk" %}
+{% extends "_content.njk" %}
 
-{% set title = "Check we’re ready for you to use this service" %}
-
-{% set formaction = "/check-you-can-use-this-service/answer" %}
+{% set title = "Check you can use this service" %}
+{% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -11,48 +10,11 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">This service is new so it’s not ready for everyone yet. Check if we’re ready for you by answering the questions below.</p>
-  <p class="govuk-body govuk-!-margin-bottom-7">If you can’t use our service, you can still apply for teacher training through&nbsp;<a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS</a>.</p>
-
-  {{ govukRadios({
-    classes: "govuk-radios--inline",
-    idPrefix: "eligibile-nationality",
-    name: "eligibile-nationality",
-    fieldset: {
-      legend: {
-        text: "Are you a citizen of the UK or the EU?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "yes",
-      text: "Yes"
-    }, {
-      value: "no",
-      text: "No"
-    }]
-  }) }}
-
-  {{ govukRadios({
-    classes: "govuk-radios--inline",
-    idPrefix: "eligibile-equivalencies",
-    name: "eligibile-equivalencies",
-    fieldset: {
-      legend: {
-        text: "Did you gain all your qualifications at institutions based in the UK?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "yes",
-      text: "Yes"
-    }, {
-      value: "no",
-      text: "No"
-    }]
-  }) }}
+  <p class="govuk-body govuk-!-margin-bottom-6">{{ serviceName }} is a new GOV.UK service that will eventually replace UCAS, but it is not suitable for everyone yet.</p>
+  <p>Check if you should use this service by answering the series of questions that follow.</p>
 
   {{ govukButton({
-    text: "Continue"
+    text: "Continue",
+    href: "/check-you-can-use-this-service/application-on-ucas"
   }) }}
 {% endblock %}

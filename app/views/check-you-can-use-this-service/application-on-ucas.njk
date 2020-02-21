@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "Have you already started an application on UCAS?" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/check-you-can-use-this-service"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    idPrefix: "answer",
+    name: "answer",
+    items: [{
+      value: "yes",
+      text: "Yes"
+    }, {
+      value: "no",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

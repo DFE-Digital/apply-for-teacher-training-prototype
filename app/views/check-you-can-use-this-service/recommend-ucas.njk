@@ -1,0 +1,23 @@
+{% extends "_content.njk" %}
+
+{% set title = "You should complete your teacher training application with UCAS" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    "href": "/check-you-can-use-this-service"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">You can apply for up to three courses across both UCAS and {{ serviceName }}.</p>
+  <p class="govuk-body govuk-!-margin-bottom-6">However, if you have already started your application on UCAS for courses starting in 2020, we recommend you complete it with UCAS.</p>
+
+  {{ govukButton({
+    text: "Apply on UCAS",
+    href: "https://2020.teachertraining.apply.ucas.com/apply/student/login.do"
+  }) }}
+
+  <p class="govuk-body">or</p>
+  <p class="govuk-body"><a href="/account/create-account">Continue with {{ serviceName }}</a></p>
+{% endblock %}

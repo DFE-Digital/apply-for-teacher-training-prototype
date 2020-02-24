@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% if count == 1 %}
-  {% set title = "You can apply to 2 more courses" %}
+  {% set title = "You can choose 2 more courses" %}
 {% else %}
-  {% set title = "You can apply to 1 more course" %}
+  {% set title = "You can choose 1 more course" %}
 {% endif %}
 
 {% set formaction = paths.current %}
@@ -29,14 +29,6 @@
 {% endblock %}
 
 {% block primary %}
-  {% if count == 1 %}
-    <p>You’ve added your first choice.</p>
-    <p>You can apply to 2 more courses at this stage of your application.</p>
-  {% else %}
-    <p>You’ve added your second choice.</p>
-    <p>You can apply to 1 more course at this stage of your application.</p>
-  {% endif %}
-
   <p class="govuk-!-margin-bottom-7">After you submit your application you can’t apply for more courses through this service.</p>
 
   {{ govukRadios({

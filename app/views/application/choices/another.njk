@@ -1,0 +1,62 @@
+{% extends "_form.njk" %}
+
+{% set choices = applicationValue("choices") | toArray %}
+
+{% set count = choices.length %}
+{% set provider = providers[choices[count - 1].providerCode] %}
+{% set courseCode = choices[count - 1].courseCode %}
+{% set course = provider.courses[courseCode] %}
+
+{% block beforePageTitle %}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">You’ve added " + course.name_and_code + " to your application</h2>",
+    type: "success",
+    icon: false
+  }) }}
+{% endblock %}
+
+{% if count == 1 %}
+  {% set title = "You can apply to 2 more courses" %}
+{% else %}
+  {% set title = "You can apply to 1 more course" %}
+{% endif %}
+
+{% set formaction = paths.current %}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if count == 1 %}
+    <p>You’ve added your first choice.</p>
+    <p>You can apply to 2 more courses at this stage of your application.</p>
+  {% else %}
+    <p>You’ve added your second choice.</p>
+    <p>You can apply to 1 more course at this stage of your application.</p>
+  {% endif %}
+
+  <p class="govuk-!-margin-bottom-7">After you submit your application you can’t apply for more courses through this service.</p>
+
+  {{ govukRadios({
+    name: 'add-another-course',
+    fieldset: {
+      legend: {
+        text: "Do you want to add another course?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes, add another course"
+    }, {
+      value: "no",
+      text: "No, not at the moment"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

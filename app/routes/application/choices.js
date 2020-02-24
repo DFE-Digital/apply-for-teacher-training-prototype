@@ -173,7 +173,8 @@ module.exports = router => {
 
   router.all('/application/:applicationId/choices/:choiceId/:view', (req, res) => {
     res.render(`application/choices/${req.params.view}`, {
-      paths: pickPaths(req)
+      paths: pickPaths(req),
+      found: temporaryChoice.found
     })
   })
 }

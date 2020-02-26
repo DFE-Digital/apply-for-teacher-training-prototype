@@ -20,7 +20,7 @@
   <p class="govuk-body">Contact your referee in advance to check they are:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>happy to give you a reference</li>
-    <li>able to submit the reference within a reasonable timeframe</li>
+    <li>able to submit the reference in a week or two</li>
     <li>comfortable submitting a reference online</li>
   </ul>
 
@@ -37,18 +37,18 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "We won’t contact your referees until you submit your application"
+      text: ("In most cases, this should be a work address. " if type != "character") + "We won’t contact your referees until you submit your application."
     }
   } | decorateApplicationAttributes(["referees", id, "email"])) }}
 
 {% if type == "academic" %}
-  {% set relationshipExample = "They were my tutor at university from 2000 to 2003" %}
+  {% set relationshipExample = "He was my course supervisor at university. I’ve known him for a year" %}
 {% elif type == "professional" %}
-  {% set relationshipExample = "I have been employed by them since January 2018" %}
+  {% set relationshipExample = "He was my line manager in my last job. I’ve known him for 2 years" %}
 {% elif type == "school-based" %}
-  {% set relationshipExample = "I spent 2 weeks volunteering at their school in May 2019" %}
+  {% set relationshipExample = "She’s the deputy head at the school where I currently volunteer. I’ve known her for 3 years" %}
 {% else %}
-  {% set relationshipExample = "They were the headteacher at my secondary school between 2003 and 2005" %}
+  {% set relationshipExample = "She’s the head coach for my athletics club. I’ve known her for 5 years" %}
 {% endif %}
 
   {{ govukCharacterCount({
@@ -57,7 +57,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "For example, ‘" + relationshipExample + "’"
+      text: "For example, ‘" + relationshipExample + "’."
     },
     maxwords: 50
   } | decorateApplicationAttributes(["referees", id, "relationship"])) }}

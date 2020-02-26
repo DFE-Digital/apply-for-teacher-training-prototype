@@ -2,10 +2,10 @@
 {% if complete %}
   {% set canAmend = true if not hasSubmittedApplications() %}
   {% if not canAmend %}
-    <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t supply a reference.</p>
+    <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t give a reference.</p>
   {% else %}
     {# You can’t change your referees once application has been submitted #}
-    <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t supply a reference.</p>
+    <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t give a reference.</p>
   {% endif %}
   {% set references = references | toArray %}
   {% for item in references %}

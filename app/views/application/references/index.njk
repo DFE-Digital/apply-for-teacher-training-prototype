@@ -16,39 +16,13 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Choose referees who will endorse your:</p>
+  <p class="govuk-body">We’ll submit your application to your training provider once we receive 2 references for you. These need to be from different people. Choose referees who can endorse your:</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>teaching passion and potential</li>
     <li>suitability to work with children</li>
     <li>academic abilities</li>
     <li>reliability and professionalism</li>
   </ul>
-  <p class="govuk-body">You should aim to give contact details for 2 referees. Referees should not be family members, partners or friends.</p>
-  {{ govukWarningText({
-    text: 'We’ll contact your referees after you submit your application',
-    iconFallbackText: 'Warning',
-    classes: 'govuk-!-margin-bottom-4'
-  }) }}
-  <p class="govuk-body">If your referees don't respond, we’ll get back in touch with you to ask for a replacement.</p>
-  {% set CharacterRefereeHintHtml %}
-    <p class="govuk-hint">If you are finding it difficult to supply academic, professional or school-based references, choose a responsible person who can confirm you are suitable for teaching</p>
-    {% set suitableCharacterRefereesHtml %}
-      <ul class="govuk-hint govuk-list govuk-list--bullet">
-        <li>your local doctor</li>
-        <li>your local priest, or other faith leader</li>
-        <li>your family solicitor</li>
-        <li>your former headteacher</li>
-        <li>a former mentor or probation officer</li>
-        <li>a responsible member of your community who knows you well</li>
-      </ul>
-    {% endset %}
-
-    {{ govukDetails({
-      summaryText: "Examples of suitable character referees",
-      html: suitableCharacterRefereesHtml
-    }) }}
-  {% endset %}
-
   {{ govukButton({
     text: "Continue",
     href: "/application/" + applicationId + "/references/type/first"

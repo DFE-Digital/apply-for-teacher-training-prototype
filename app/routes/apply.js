@@ -1,6 +1,6 @@
 module.exports = router => {
   // const dualRunningDefaultVarient = Math.floor(Math.random() * 3) + 1;
-  const dualRunningDefaultVarient = 1
+  const dualRunningDefaultVarient = 4
 
   router.get('/apply/:providerCode/:courseCode', (req, res) => {
     const variant = req.query.variant || dualRunningDefaultVarient
@@ -65,7 +65,11 @@ module.exports = router => {
         courseCode
       }
 
-      res.redirect('/account/eligibility') // Go to Apply
+      if (route === 'dfe') {
+        res.redirect('/account/eligibility') // Check you can use this service
+      } else if (route === 'dfe-returning') {
+        res.redirect('/account/sign-in') // Sign in to continue
+      }
     }
   })
 

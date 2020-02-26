@@ -2,14 +2,8 @@
 
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
-  {% if dualRunning %}
-    {% if variant == 1 %}
-      {% set title = "You can apply for this course using a new GOV.UK service" %}
-    {% elseif variant == 2 or variant == 3 %}
-      {% set title = "Apply for this course" %}
-    {% else %}
-      {% set title = "You can apply for this course using a new GOV.UK service" %}
-    {% endif %}
+  {% if dualRunning and variant == 1 %}
+    {% set title = "You can apply for this course using a new GOV.UK service" %}
   {% else %}
     {% set title = "Apply for this course" %}
   {% endif %}
@@ -40,11 +34,15 @@
     {% elseif variant == 3 %}
       {% include "apply/_variant-courses-incentive.njk" %}
 
+    {# Variant 4: Choose a service #}
+    {% elseif variant == 4 %}
+      {% include "apply/_variant-2020q1.njk" %}
+
     {% endif %}
   {# Must apply through UCAS #}
   {% elif course and not dualRunning %}
-    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply. Visit <a href="https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training">Get into Teaching for guidance on applying for teacher training</a>.</p>
-    <p>When you apply you’ll need these codes for the Choices section of your application form:</p>
+    <p class="govuk-body">You must apply for this course on UCAS. You’ll need to register with UCAS before you can apply. Visit Get into Teaching for <a href="https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training">guidance on applying for teacher training</a>.</p>
+    <p class="govuk-body">When you apply you’ll need these codes for the Choices section of your application form:</p>
 
     <div class="govuk-inset-text">
       <ul class="govuk-list">

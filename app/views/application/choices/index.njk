@@ -27,13 +27,6 @@
 {% endblock %}
 
 {% block primary %}
-  {% set guidance %}
-    <p class="govuk-body">You can apply to up to 3 courses at this stage of your application.</p>
-    <p class="govuk-body">Not all courses and training providers are signed up to Apply for teacher training. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>
-    <p class="govuk-body">You can preview <a href="/apply/providers">courses currently available</a> on Apply for teacher training.
-    <p class="govuk-body">Get support by emailing <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
-  {% endset %}
-
   {% if choices %}
     {% set referrer = applicationPath + "/choices" %}
     {% set canAmend = true %}
@@ -43,8 +36,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if not choices or choiceCount == 0 %}
-        {{ guidance | safe }}
-
         {{ govukButton({
           text: "Continue",
           href: applicationPath + "/choices/add"
@@ -52,9 +43,6 @@
       {% endif %}
 
       {% if choiceCount >= 1 and choiceCount < 3 %}
-        <h2 class="govuk-heading-m">Do you want to add another course?</h2>
-        {{ guidance | safe }}
-
         {{ govukButton({
           classes: "govuk-button--secondary govuk-!-margin-bottom-9",
           text: "Add another course",

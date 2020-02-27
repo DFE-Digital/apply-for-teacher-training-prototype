@@ -2,16 +2,9 @@
 const assert = require('assert')
 const fs = require('fs')
 const path = require('path')
-const util = require('util')
-
-const glob = require('glob')
 const request = require('supertest')
-const sass = require('node-sass')
 
 const app = require('../../server.js')
-const gulpConfig = require('../../gulp/config.json')
-
-const sassRender = util.promisify(sass.render)
 
 function readFile (pathFromRoot) {
   return fs.readFileSync(path.join(__dirname, '../../' + pathFromRoot), 'utf8')

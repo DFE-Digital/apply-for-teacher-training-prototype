@@ -1,0 +1,31 @@
+{% extends "_form.njk" %}
+
+{% set choices = applicationValue("choices") | toArray %}
+
+{% set count = choices.length %}
+{% set provider = providers[choices[count - 1].providerCode] %}
+{% set courseCode = choices[count - 1].courseCode %}
+{% set course = provider.courses[courseCode] %}
+
+{% set title = "You can’t apply to this course because it has no vacancies" %}
+
+{% set formaction = paths.current %}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p>The course ‘Primary (X100)’ is full.</p>
+
+  <p>You can:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+    <li><a href="#">go back and pick another course</a></li>
+    <li><a href="#">contact the training provider</a> to see if the course will re-open or discuss alternatives</li>
+  </ul>
+
+  {{ govukButton({
+    text: "Return to your application"
+  }) }}
+{% endblock %}

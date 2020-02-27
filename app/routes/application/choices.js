@@ -124,7 +124,7 @@ module.exports = router => {
   })
 
   router.all('/application/:applicationId/choices/:choiceId/another', (req, res) => {
-    if (req.body['add-another-course'] == 'yes') {
+    if (req.body['add-another-course'] === 'yes') {
       return res.redirect(`/application/${req.params.applicationId}/choices/add`)
     }
 
@@ -132,10 +132,10 @@ module.exports = router => {
     const count = Object.keys(applicationData.choices).length
     const paths = pickPaths(req)
 
-    if (count == 3 || req.body['add-another-course'] == 'no') {
+    if (count === 3 || req.body['add-another-course'] === 'no') {
       res.redirect(req.params.referrer || paths.next)
     } else {
-      res.render(`application/choices/another`, {
+      res.render('application/choices/another', {
         paths: paths
       })
     }

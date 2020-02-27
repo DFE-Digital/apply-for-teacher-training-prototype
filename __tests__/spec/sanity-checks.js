@@ -1,9 +1,10 @@
 /* eslint-env jest */
-var request = require('supertest')
-var app = require('../../server.js')
-var path = require('path')
-var fs = require('fs')
-var assert = require('assert')
+const assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const request = require('supertest')
+
+const app = require('../../server.js')
 
 function readFile (pathFromRoot) {
   return fs.readFileSync(path.join(__dirname, '../../' + pathFromRoot), 'utf8')
@@ -56,7 +57,7 @@ describe('The Prototype Kit', () => {
           if (err) {
             done(err)
           } else {
-            assert.strictEqual('' + res.body, readFile('node_modules/govuk-frontend/assets/govuk/images/favicon.ico'))
+            assert.strictEqual('' + res.body, readFile('node_modules/govuk-frontend/govuk/assets/images/favicon.ico'))
             done()
           }
         })

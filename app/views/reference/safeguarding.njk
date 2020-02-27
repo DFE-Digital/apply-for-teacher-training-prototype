@@ -1,0 +1,58 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/reference/safeguarding/answer" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Do you know of any reason why " + candidate_name + " should not work with children?" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference/relationship"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% set safeguardingConcernHtml %}
+    {{ govukCharacterCount({
+      id: "reference-safeguarding-reason",
+      name: "reference[safeguarding][reason]",
+      value: data.reference.safeguarding.reason,
+      label: {
+        text: "Why do you think " + candidate_name + " is not safe to work with children?"
+      },
+      maxwords: 300,
+      rows: 15
+    }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    idPrefix: "reference-safeguarding-concern",
+    name: "reference[safeguarding][concern]",
+    items: [{
+      value: "Yes",
+      text: "Yes",
+      checked: checked("reference.safeguarding.concern", "Yes"),
+      conditional: {
+        html: safeguardingConcernHtml
+      }
+    }, {
+      value: "No",
+      text: "No",
+      checked: checked("reference.safeguarding.concern", "No")
+    }, {
+      value: "Don’t know",
+      text: "Don’t know",
+      checked: checked("reference.safeguarding.concern", "Don’t know")
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

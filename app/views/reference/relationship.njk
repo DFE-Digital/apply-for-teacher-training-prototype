@@ -1,0 +1,64 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/reference/safeguarding" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "What " + candidate_name + " said about your relationship" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInsetText({
+    text: "He was my course supervisor at university. I’ve known him for a year."
+  }) }}
+
+  {% set correctRelationshipHtml %}
+    {{ govukCharacterCount({
+      id: "reference-relationship-correction",
+      name: "reference[relationship][correction]",
+      value: data.reference.relationship.correction,
+      label: {
+        text: "Tell us what your relationship is to " + candidate_name + " and how long you’ve known them"
+      },
+      maxwords: 50,
+      rows: 5
+    }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this correct?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    idPrefix: "reference-relationship-correct",
+    name: "reference[relationship][correct]",
+    items: [{
+      value: "Yes",
+      text: "Yes",
+      checked: checked("reference.relationship.correct", "Yes")
+    }, {
+      value: "No",
+      text: "No",
+      checked: checked("reference.relationship.correct", "No"),
+      conditional: {
+        html: correctRelationshipHtml
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

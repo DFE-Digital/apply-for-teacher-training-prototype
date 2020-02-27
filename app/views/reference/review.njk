@@ -1,0 +1,82 @@
+{% extends "_form.njk" %}
+
+{% set formaction = "/reference/confirmation" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Check your answers before submitting your reference" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference/comments"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if data.reference.relationship.correct == "Yes" %}
+    {% set relationshipValue = "He was my course supervisor at university. I’ve known him for a year." %}
+  {% else %}
+    {% set relationshipValue = data.reference.relationship.correction %}
+  {% endif %}
+
+  {% if data.reference.safeguarding.concern == "Yes" %}
+    {% set safeguardingValue = data.reference.safeguarding.reason %}
+  {% else %}
+    {% set safeguardingValue = data.reference.safeguarding.concern %}
+  {% endif %}
+
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Relationship to candidate"
+      },
+      value: {
+        text: relationshipValue
+      },
+      actions: {
+        items: [{
+          href: "/reference/relationship?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "relationship to candidate"
+        }]
+      }
+    }, {
+      key: {
+        text: "Candidate is safe to work with children?"
+      },
+      value: {
+        text: safeguardingValue
+      },
+      actions: {
+        items: [{
+          href: "/reference/safeguarding?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "safeguarding answer"
+        }]
+      }
+    }, {
+      key: {
+        text: "Reference"
+      },
+      value: {
+        html: data.reference.comments
+      },
+      actions: {
+        items: [{
+          href: "/reference/comments?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "reference"
+        }]
+      }
+    } if data.reference.safeguarding.concern != "Yes"]
+  }) }}
+
+  {{ govukButton({
+    text: "Submit reference"
+  }) }}
+{% endblock %}

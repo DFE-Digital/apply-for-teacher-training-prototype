@@ -9,7 +9,7 @@ module.exports = router => {
     var pageObject = {}
     var successFlash = req.flash('success')
 
-    if (successFlash[0] === 'submitted-incompleted-application') {
+    //if (successFlash[0] === 'submitted-incompleted-application') {
       pageObject.errorList = []
       const sections = {
         choices: 'Course choices not marked as completed',
@@ -50,7 +50,22 @@ module.exports = router => {
           }
         }
       }
-    }
+
+      pageObject.errorList.push({
+        text: 'Your course ‘Gorse SCITT – Primary (X100)’ has no vacancies',
+        href: '#missing-blah'
+      })
+
+      pageObject.errorList.push({
+        text: 'Your course ‘Gorse SCITT – Primary (X100)’ is not running',
+        href: '#missing-blah'
+      })
+
+      pageObject.errorList.push({
+        text: 'Your chosen location for ‘Gorse SCITT – Primary (X100)’ has no vacancies',
+        href: '#missing-blah'
+      })
+    //}
 
     res.render('application/review', pageObject)
   })

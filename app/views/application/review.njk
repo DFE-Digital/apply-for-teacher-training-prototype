@@ -17,7 +17,7 @@
 {% block beforePageTitle %}
   {% if errorList %}
     {{ govukErrorSummary({
-      titleText: "Your application cannot be submitted because it’s incomplete",
+      titleText: "There is a problem",
       errorList: errorList
     }) }}
   {% endif %}
@@ -29,6 +29,179 @@
   }) if status == "amending" }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+
+  <div>
+    <section class="app-summary-card govuk-!-margin-bottom-6">
+      <header class="app-summary-card__header">
+        <h3 class="app-summary-card__title">
+          Gorse SCITT
+        </h3>
+        <div class="app-summary-card__actions">
+          <ul class="app-summary-card__actions-list">
+            <li class="app-summary-card__actions-list-item">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/delete?referrer=/application/12345/review">
+                    Delete choice</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div class="app-summary-card__body">
+        <div class="govuk-form-group govuk-form-group--error">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> You can’t apply to this course because it has no vacancies
+          </span>
+          <p>You can:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li><a href="#">delete this choice</a> to submit your application.</li>
+            <li>choose another course</li>
+            <li><a href="#">contact the training provider</a> to see if the course will re-open or discuss alternatives</li>
+          </ul>
+        </div>
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/1N1/2XT2">Primary (2XT2)</a><br>PGCE with QTS full time
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/pick?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Location
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Hillcrest Academy<br>Cowper Street, Leeds. LS7 4DR
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/location?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course location</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <div>
+    <section class="app-summary-card govuk-!-margin-bottom-6">
+      <header class="app-summary-card__header">
+        <h3 class="app-summary-card__title">
+          Gorse SCITT
+        </h3>
+        <div class="app-summary-card__actions">
+          <ul class="app-summary-card__actions-list">
+            <li class="app-summary-card__actions-list-item">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/delete?referrer=/application/12345/review">
+                    Delete choice</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div class="app-summary-card__body">
+        <div class="govuk-form-group govuk-form-group--error">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> You can’t apply to this course because it is not running
+          </span>
+          <p>Gorse SCITT have decided not to run this course.</p>
+          <p>You can:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li><a href="#">delete this choice</a> to submit your application.</li>
+            <li>choose another course</li>
+            <li><a href="#">contact the training provider</a> to discuss alternatives</li>
+          </ul>
+        </div>
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/1N1/2XT2">Primary (2XT2)</a><br>PGCE with QTS full time
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/pick?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Location
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Hillcrest Academy<br>Cowper Street, Leeds. LS7 4DR
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/location?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course location</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <div>
+    <section class="app-summary-card govuk-!-margin-bottom-6">
+      <header class="app-summary-card__header">
+        <h3 class="app-summary-card__title">
+          Gorse SCITT
+        </h3>
+        <div class="app-summary-card__actions">
+          <ul class="app-summary-card__actions-list">
+            <li class="app-summary-card__actions-list-item">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/delete?referrer=/application/12345/review">
+                    Delete choice</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div class="app-summary-card__body">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Course
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/1N1/2XT2">Primary (2XT2)</a><br>PGCE with QTS full time
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/pick?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Location
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <div class="govuk-form-group govuk-form-group--error">
+                <span class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> No vacancies, pick a new location
+                </span>
+                Hillcrest Academy<br>Cowper Street, Leeds. LS7 4DR
+              </div>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/application/12345/choices/ABCDE/location?referrer=/application/12345/review">
+                Change<span class="govuk-visually-hidden"> course location</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
   {% set choices = applicationValue(["choices"]) | toArray %}
   {% set showChoiceStatus = false %}
   {% set showIncomplete = true %}

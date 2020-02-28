@@ -2,7 +2,7 @@
 
 {% set formaction = "/reference/relationship" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Give a teacher training reference for " + candidate_name %}
+{% set title = "Give a reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
@@ -15,6 +15,7 @@
   </ul>
 
   {{ govukButton({
-    text: "Continue"
+    isStartButton: true,
+    text: "Start now"
   }) }}
 {% endblock %}

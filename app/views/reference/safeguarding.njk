@@ -24,7 +24,7 @@
       name: "reference[safeguarding][reason]",
       value: data.reference.safeguarding.reason,
       label: {
-        text: "Why do you think " + candidate_name + " is not safe to work with children?"
+        text: "Tell us why you think " + candidate_name + " should not work with children"
       },
       maxwords: 300,
       rows: 15
@@ -35,16 +35,16 @@
     idPrefix: "reference-safeguarding-concern",
     name: "reference[safeguarding][concern]",
     items: [{
+      value: "No",
+      text: "No",
+      checked: checked("reference.safeguarding.concern", "No")
+    }, {
       value: "Yes",
       text: "Yes",
       checked: checked("reference.safeguarding.concern", "Yes"),
       conditional: {
         html: safeguardingConcernHtml
       }
-    }, {
-      value: "No",
-      text: "No",
-      checked: checked("reference.safeguarding.concern", "No")
     }, {
       value: "Don’t know",
       text: "Don’t know",

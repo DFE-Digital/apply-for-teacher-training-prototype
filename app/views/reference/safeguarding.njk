@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/reference/safeguarding/answer" %}
+{% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Do you know of any reason why " + candidate_name + " should not work with children?" %}
 {% set hasAccountLinks = false %}
@@ -26,8 +26,8 @@
       label: {
         text: "Tell us why you think " + candidate_name + " should not work with children"
       },
-      maxwords: 300,
-      rows: 15
+      maxwords: 150,
+      rows: 5
     }) }}
   {% endset %}
 

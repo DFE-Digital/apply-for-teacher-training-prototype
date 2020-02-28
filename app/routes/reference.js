@@ -2,24 +2,11 @@
  * Reference routes
  */
 module.exports = router => {
-  router.post('/reference', (req, res) => {
-    res.redirect('/reference/relationship')
-  })
-
   router.get('/reference/:template', (req, res) => {
     res.render(`reference/${req.params.template}`, {
       referrer: req.query.referrer,
       type: req.query.type
     })
-  })
-
-  router.post('/reference/safeguarding/answer', (req, res) => {
-    const { concern } = req.session.data.reference.safeguarding
-    if (concern === 'Yes') {
-      res.redirect('/reference/review')
-    } else {
-      res.redirect('/reference/comments')
-    }
   })
 
   router.post('/reference/finish/answer', (req, res) => {

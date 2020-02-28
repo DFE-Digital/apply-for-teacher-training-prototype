@@ -19,9 +19,9 @@
 
 {% block primary %}
   {% if data.reference.relationship.correct == "Yes" %}
-    {% set relationshipValue = "He was my course supervisor at university. I’ve known him for a year." %}
+    {% set relationshipValue = "Confirmed by referee" %}
   {% else %}
-    {% set relationshipValue = data.reference.relationship.correction %}
+    {% set relationshipValue = "Amended by referee to: " + data.reference.relationship.correction %}
   {% endif %}
 
   {% if data.reference.safeguarding.concern == "Yes" %}
@@ -33,14 +33,14 @@
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "Relationship to candidate"
+        text: "Relationship"
       },
       value: {
         text: relationshipValue
       },
       actions: {
         items: [{
-          href: "/reference/relationship?referrer=/reference/review",
+          href: "/reference?referrer=/reference/review",
           text: "Change",
           visuallyHiddenText: "relationship to candidate"
         }]
@@ -73,7 +73,7 @@
           visuallyHiddenText: "reference"
         }]
       }
-    } if data.reference.safeguarding.concern != "Yes"]
+    }]
   }) }}
 
   {{ govukButton({

@@ -2,6 +2,13 @@
  * Reference routes
  */
 module.exports = router => {
+  router.get('/reference', (req, res) => {
+    res.render('reference/index', {
+      referrer: req.query.referrer,
+      type: req.query.type
+    })
+  })
+
   router.get('/reference/:template', (req, res) => {
     res.render(`reference/${req.params.template}`, {
       referrer: req.query.referrer,

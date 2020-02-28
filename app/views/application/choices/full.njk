@@ -7,7 +7,7 @@
 {% set courseCode = choices[count - 1].courseCode %}
 {% set course = provider.courses[courseCode] %}
 
-{% set title = "You can’t apply to this course because it has no vacancies" %}
+{% set title = "You cannot apply to this course because it has no vacancies" %}
 
 {% set formaction = paths.current %}
 {% block pageNavigation %}
@@ -21,11 +21,45 @@
 
   <p>You can:</p>
   <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
-    <li><a href="#">go back and pick another course</a></li>
-    <li><a href="#">contact the training provider</a> to see if the course will re-open or discuss alternatives</li>
+    <li><a href="#">choose another course</a></li>
+    <li>
+      <p>contact Gorse SCITT to see if the course will re-open or discuss alternatives</p>
+      {# <div class="govuk-inset-text">
+        <p>Telephone: 01234 321978<br/>Email: <a href="#">email@email.com</a></p>
+      </div> #}
+    </li>
   </ul>
 
-  {{ govukButton({
-    text: "Return to your application"
+  <h2 class="govuk-heading-m">Contact Gorse SCITT</h2>
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+          text: "Telephone"
+        },
+        value: {
+          text: "01234 321978"
+        }
+      },
+      {
+        key: {
+          text: "Email"
+        },
+        value: {
+          html: "<a href=\"#\">email@email.com</a>"
+        }
+      }
+    ]
   }) }}
+
+  {# {{ govukDetails({
+    summaryText: "Contact details",
+    html: "
+      <h3 class=\"govuk-heading-s\">Gorse SCITT</h3>
+      <p>Telephone: 01234 321978<br/>Email: <a href=\"#\">email@email.com</a></p>"
+  }) }} #}
+
+  <p class="govuk-!-margin-top-8">
+    <a href="#">Return to your application</a>
+  </p>
 {% endblock %}

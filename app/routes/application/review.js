@@ -52,12 +52,12 @@ module.exports = router => {
       }
 
       pageObject.errorList.push({
-        text: 'Your course ‘Gorse SCITT – Primary (X100)’ has no vacancies',
+        text: 'You cannot apply to ‘Gorse SCITT – Primary (X100)’ because it has no vacancies',
         href: '#missing-blah'
       })
 
       pageObject.errorList.push({
-        text: 'Your course ‘Gorse SCITT – Primary (X100)’ is not running',
+        text: 'You cannot apply to ‘Gorse SCITT – Primary (X100)’ because it is not running',
         href: '#missing-blah'
       })
 

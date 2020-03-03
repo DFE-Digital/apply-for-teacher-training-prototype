@@ -1,60 +1,65 @@
 {% extends "_form.njk" %}
 
-{% set formaction = "/reference/confirmation" %}
+{% set formaction = referrer or "/reference/safeguarding" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Give a teacher training reference for " + candidate_name %}
+{% set title = "Confirm how you know " + candidate_name %}
 {% set hasAccountLinks = false %}
 
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
 {% block primary %}
+  <p class="govuk-body">{{ candidate_name }} describes your relationship as follows:</p>
+  {{ govukInsetText({
+    text: "He was my course supervisor at university. I’ve known him for a year."
+  }) }}
 
-  <p class="govuk-body">{{candidate_name}} applied to the following courses:</p>
+  {% set correctRelationshipHtml %}
+    {{ govukCharacterCount({
+      id: "reference-relationship-correction",
+      name: "reference[relationship][correction]",
+      value: data.reference.relationship.correction,
+      label: {
+        text: "Tell us what your relationship is to " + candidate_name + " and how long you’ve known them"
+      },
+      maxwords: 50,
+      rows: 5
+    }) }}
+  {% endset %}
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>Mallowpond TAFE – Business</li>
-    <li>Mallowpond Technical College – Biomedical Science</li>
-    <li>Falconholt Technical College – Forensic Science</li>
-  </ul>
-
-   <p class="govuk-body">When giving your reference try to cover the following, but don’t worry if there are areas you can’t comment on:</p>
-  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
-    <li>
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Teaching potential</h2>
-      <p class="govuk-body">For example, does the candidate care about the wellbeing of children? Are they emotionally resilient and do they work well with others?</p>
-    </li>
-    <li>
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Subject knowledge</h2>
-      <p class="govuk-body">Is the candidate passionate and informed about their teaching subject?</p>
-    </li>
-    <li>
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Academic abilities</h2>
-      <p class="govuk-body">For example, does the candidate think critically and have good numeracy and literacy skills?</p>
-    </li>
-    <li>
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Reliability and professionalism</h2>
-      <p class="govuk-body">What abilities would the candidate bring to teaching, for example, communication, creativity, project management?</p>
-    </li>
-    <li>
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Transferable skills</h2>
-      <p class="govuk-body">For example, can the candidate meet deadlines and manage their time?</p>
-    </li>
-  </ul>
-
-   {# <p class="govuk-body">{{ candidate_name }} applied to the following courses:</p> #}
-
-
-  {{ govukCharacterCount({
-    id: "reference-comments",
-    name: "reference[comments]",
-    value: reference["comments"],
-    label: {
-      text: "Your reference",
-      classes: "govuk-label--m govuk-!-margin-top-6"
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Is this correct?",
+        classes: "govuk-fieldset__legend--m"
+      }
     },
-    maxwords: 300,
-    rows: 15
+    idPrefix: "reference-relationship-correct",
+    name: "reference[relationship][correct]",
+    items: [{
+      value: "Yes",
+      text: "Yes",
+      checked: checked("reference.relationship.correct", "Yes")
+    }, {
+      value: "No",
+      text: "No",
+      checked: checked("reference.relationship.correct", "No"),
+      conditional: {
+        html: correctRelationshipHtml
+      }
+    }]
   }) }}
 
   {{ govukButton({
-    text: "Submit reference"
+    text: "Continue"
   }) }}
 {% endblock %}

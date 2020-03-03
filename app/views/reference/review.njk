@@ -1,0 +1,82 @@
+{% extends "_form.njk" %}
+
+{% set formaction = "/reference/confirmation" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Check your answers before submitting your reference" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference/comments"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if data.reference.relationship.correct == "Yes" %}
+    {% set relationshipValue = "Confirmed by referee" %}
+  {% else %}
+    {% set relationshipValue = "Amended by referee to: " + data.reference.relationship.correction %}
+  {% endif %}
+
+  {% if data.reference.safeguarding.concern == "Yes" %}
+    {% set safeguardingValue = data.reference.safeguarding.reason %}
+  {% else %}
+    {% set safeguardingValue = data.reference.safeguarding.concern %}
+  {% endif %}
+
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Relationship"
+      },
+      value: {
+        text: relationshipValue
+      },
+      actions: {
+        items: [{
+          href: "/reference?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "relationship to candidate"
+        }]
+      }
+    }, {
+      key: {
+        text: "Concerns about candidate working with children"
+      },
+      value: {
+        text: safeguardingValue
+      },
+      actions: {
+        items: [{
+          href: "/reference/safeguarding?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "safeguarding answer"
+        }]
+      }
+    }, {
+      key: {
+        text: "Reference"
+      },
+      value: {
+        html: data.reference.comments
+      },
+      actions: {
+        items: [{
+          href: "/reference/comments?referrer=/reference/review",
+          text: "Change",
+          visuallyHiddenText: "reference"
+        }]
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Submit reference"
+  }) }}
+{% endblock %}

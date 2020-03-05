@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Other relevant qualifications" %}
+{% set title = "Academic and other relevant qualifications" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -17,32 +17,59 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Enter your other qualifications as completely as you can, including all your GCSEs, A levels, and undergraduate and postgraduate degrees.</p>
-  <p class="govuk-body">You should also tell us about your vocational, practical and creative qualifications.</p>
+  {% set otherUkConditionalHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter type of qualification"
+      }
+    } | decorateApplicationAttributes(["other-qualifications", id, "type-uk"])) }}
+  {% endset %}
 
-  {{ govukInput({
-    label: {
-      text: "Type of qualification",
-      classes: "govuk-label--m"
+  {% set nonUkConditionalHtml %}
+    {{ govukInput({
+      label: {
+        text: "Enter type of qualification"
+      }
+    } | decorateApplicationAttributes(["other-qualifications", id, "type-non-uk"])) }}
+    {{ appAutocomplete({
+      label: {
+        text: "In which country did you gain this qualification?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
+  {% endset %}
+
+  <p class="govuk-body">Enter your qualifications as completely as you can, including all your GCSEs and A levels (or equivalents), and any other qualifications where you showed skills that might help you as a teacher.</p>
+  <p class="govuk-body">Undergraduate and postgraduate degrees should be included in the ‘Degree’ section.</p>
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Type of qualification",
+        classes: "govuk-label--m"
+      },
+      attributes: {
+        "data-module": "clear-hidden"
+      }
     },
-    hint: {
-      text: "For example, GCSE, A level, BTEC, NVQ or non-UK other, please specify"
-    }
+    items: [{
+      text: "GCSE"
+    }, {
+      text: "AS level"
+    }, {
+      text: "A level"
+    }, {
+      text: "Other UK qualification",
+      conditional: {
+        html: otherUkConditionalHtml
+      }
+    }, {
+      text: "Non-UK qualification",
+      conditional: {
+        html: nonUkConditionalHtml
+      }
+    } if data.flags.international_qualifications]
   } | decorateApplicationAttributes(["other-qualifications", id, "type"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Subject",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
 
   {% set internationalConditionalHtml %}
     {{ appAutocomplete({
@@ -52,40 +79,6 @@
       items: countries
     } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endset %}
-
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "This institution is based:"
-      }
-    },
-    items: [{
-      value: "domestic",
-      text: "In the UK"
-    }, {
-      value: "international",
-      text: "Outside the UK",
-      conditional: {
-        html: internationalConditionalHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["other-qualifications", id, "provenance"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Grade",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Year qualification was awarded",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
 
   {# Only ask if want to add another if:
     * not editing an existing item

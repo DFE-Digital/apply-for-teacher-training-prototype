@@ -16,7 +16,7 @@ module.exports = router => {
     res.render('application/other-qualifications/review')
   })
 
-  // Render details page
+  // Render type page
   router.get('/application/:applicationId/other-qualifications/:id', (req, res) => {
     const { id } = req.params
     const { referrer } = req.query
@@ -28,9 +28,28 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/other-qualifications/:id', (req, res) => {
-    const next = req.session.data.next || 'review'
+    const { applicationId, id } = req.params
     const { referrer } = req.query
 
-    res.redirect(referrer || `/application/${req.params.applicationId}/other-qualifications/${next}`)
+    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${id}/details`)
+  })
+
+  // Render details page
+  router.get('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
+    const { id } = req.params
+    const { referrer } = req.query
+
+    res.render('application/other-qualifications/details', {
+      id,
+      referrer
+    })
+  })
+
+  router.post('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
+    const next = req.session.data.next || 'review'
+    const { applicationId } = req.params
+    const { referrer } = req.query
+
+    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
   })
 }

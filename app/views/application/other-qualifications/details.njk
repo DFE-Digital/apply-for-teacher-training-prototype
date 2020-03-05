@@ -51,7 +51,8 @@
     * not referred from a review page (which has an ‘Add another…’ button)
     * feature flag enabled
   #}
-  {% if action != "edit" and not referrer and data.flags.add_another %}
+  {% if action != "edit" and not referrer %}
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
     {{ govukRadios({
       name: "next",
       fieldset: {
@@ -62,10 +63,10 @@
       },
       items: [{
         value: "add",
-        text: "Yes"
+        text: "Yes, I want to add another qualification"
       }, {
         value: "review",
-        text: "No"
+        text: "No, I’ve completed my other qualifications"
       }]
     }) }}
   {% endif %}

@@ -16,12 +16,22 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukInput({
-    label: {
-      text: "Subject",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% if applicationValue(["other-qualifications", id, "type"]) == "gcse" %}
+    {{ appAutocomplete({
+      label: {
+        text: "Subject",
+        classes: "govuk-label--m"
+      },
+      items: gcseSubjects
+    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% else %}
+    {{ govukInput({
+      label: {
+        text: "Subject",
+        classes: "govuk-label--m"
+      }
+    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% endif %}
 
   {{ govukInput({
     label: {
@@ -80,8 +90,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "country"]) }}',
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-country')
+      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}',
+      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject')
     })
   </script>
 {% endblock %}

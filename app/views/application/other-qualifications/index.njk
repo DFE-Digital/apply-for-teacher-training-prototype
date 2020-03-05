@@ -20,7 +20,7 @@
   {% set otherUkConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Enter type of qualification"
+        text: "Type of qualification"
       }
     } | decorateApplicationAttributes(["other-qualifications", id, "type-uk"])) }}
   {% endset %}
@@ -28,7 +28,7 @@
   {% set nonUkConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Enter type of qualification"
+        text: "Type of qualification"
       }
     } | decorateApplicationAttributes(["other-qualifications", id, "type-non-uk"])) }}
     {{ appAutocomplete({
@@ -53,17 +53,22 @@
       }
     },
     items: [{
+      value: "gcse",
       text: "GCSE"
     }, {
+      value: "as-level",
       text: "AS level"
     }, {
+      value: "a-level",
       text: "A level"
     }, {
-      text: "Other UK qualification",
+      value: "other-uk",
+      text: "Other UK qualification" if data.flags.international_qualifications else "Other",
       conditional: {
         html: otherUkConditionalHtml
       }
     }, {
+      value: "non-uk",
       text: "Non-UK qualification",
       conditional: {
         html: nonUkConditionalHtml
@@ -105,7 +110,7 @@
   {% endif %}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}
 

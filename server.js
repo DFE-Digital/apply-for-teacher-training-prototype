@@ -121,6 +121,7 @@ app.locals.extensionConfig = extensions.getAppConfig()
 app.locals.countries = require('./app/data/countries')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')
+app.locals.gcseSubjects = require('./app/data/gcse-subjects')
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')

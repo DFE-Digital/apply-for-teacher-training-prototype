@@ -3,24 +3,27 @@
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "What grade is your " + subject + " qualification?" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
 {% if applicationValue(["gcse", id, "type"]) == "GCSE" %}
   {# Available grades: U,1,2,3,4,5,6,7,8,9 or U,G,F,E,D,C,C*,B,A,A* #}
   {% if id == "science" %}
     {# Maximum number of grades: 3 #}
-    {% set guidance %}
-      <p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
-      <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
-    {% endset %}
+    <p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
+    <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
     {% set hintText = "For example: ‘A*A*A’, ‘AB’, ‘B’, ‘998’, ‘88’, ‘7’" %}
   {% elif id == "english" %}
-    {% set guidance %}
-      <p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
-      <p class="govuk-body">If you have a GCSE in English Literature only, enter this grade – but be aware that providers may want further evidence of your abilities in English.</p>
-      {{ govukDetails({
-        summaryText: "If you have more than one English qualification",
-        text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"
-      }) }}
-    {% endset %}
+    <p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
+    <p class="govuk-body">If you have a GCSE in English Literature only, enter this grade – but be aware that providers may want further evidence of your abilities in English.</p>
+    {{ govukDetails({
+      summaryText: "If you have more than one English qualification",
+      text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"
+    }) }}
     {% set hintText = "For example, ‘C’ or ‘4’" %}
   {% else %}
     {# Maximum number of grades: 1 #}
@@ -31,15 +34,15 @@
   {# Available grades: U,E,D,C,B,A #}
   {% if id == "science" %}
     {# Maximum number of grades: 3 #}
-    {% set guidance %}
-      <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
-    {% endset %}
+    <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
     {% set hintText = "For example, ‘ABC’, ‘AA’, ‘B’" %}
   {% elif id == "english" %}
-    {% set guidance %}
-      <p class="govuk-body">Enter your grade for English Language O level. Providers expect you to have a grade C (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
-      <p class="govuk-body">If you have an O level in English Literature only, enter this grade – but be aware that providers may want further evidence of your abilities in English.</p>
-    {% endset %}
+    <p class="govuk-body">Enter your grade for English Language O level. Providers expect you to have a grade C (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
+    <p class="govuk-body">If you have an O level in English Literature only, enter this grade – but be aware that providers may want further evidence of your abilities in English.</p>
+    {{ govukDetails({
+      summaryText: "If you have more than one English qualification",
+      text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"
+    }) }}
     {% set hintText = "For example, ‘C’" %}
   {% else %}
     {# Maximum number of grades: 1 #}
@@ -50,24 +53,13 @@
   {# Available grades: 7,6,5,4,3,2,1 or D,B,C,A #}
   {% if id == "science" %}
     {# Maximum number of grades: 1 or 3 #}
-    {% set guidance %}
-      <p class="govuk-body">If you studied three science subjects separately or took a general science qualification, enter your total grade.</p>
-    {% endset %}
+    <p class="govuk-body">If you studied three science subjects separately or took a general science qualification, enter your total grade.</p>
     {% set hintText = "For example, ‘A*A*A*’, ‘ABC’, ‘A’, ‘777’, ‘654’, ‘6’" %}
   {% else %}
     {# Maximum number of grades: 1 #}
     {% set hintText = "For example, ‘C’ or ‘4’" %}
   {% endif %}
 {% endif %}
-
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: paths.back
-  }) }}
-{% endblock %}
-
-{% block primary %}
-  {{ guidance | safe }}
 
   {{ govukInput({
     label: {

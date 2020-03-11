@@ -18,11 +18,14 @@
     <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
     {% set hintText = "For example: ‘A*A*A’, ‘AB’, ‘B’, ‘998’, ‘88’, ‘7’" %}
   {% elif id == "english" %}
-    <p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
-    <p class="govuk-body">If you have a GCSE in English Literature only, enter this grade here – but be aware that providers may want further evidence of your abilities in English.</p>
+    {{ govukDetails({
+      classes: "govuk-!-margin-bottom-2",
+      summaryText: "If you have a GCSE in English Literature only",
+      text: "Enter your grade here – but be aware that providers may want further evidence of your abilities in English."
+    }) }}
     {{ govukDetails({
       summaryText: "If you have more than one English qualification",
-      text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"
+      text: "Enter any English Literature qualifications under ‘Academic and other relevant qualifications’"
     }) }}
     {% set hintText = "For example, ‘C’ or ‘4’" %}
   {% else %}
@@ -37,8 +40,11 @@
     <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
     {% set hintText = "For example, ‘ABC’, ‘AA’, ‘B’" %}
   {% elif id == "english" %}
-    <p class="govuk-body">Enter your grade for English Language O level. Providers expect you to have a grade C (or the equivalent) in order to train. If you don't have this, contact your chosen provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
-    <p class="govuk-body">If you have an O level in English Literature only, enter this grade here – but be aware that providers may want further evidence of your abilities in English.</p>
+    {{ govukDetails({
+      classes: "govuk-!-margin-bottom-2",
+      summaryText: "If you have an O level in English Literature only",
+      text: "Enter your grade here – but be aware that providers may want further evidence of your abilities in English."
+    }) }}
     {{ govukDetails({
       summaryText: "If you have more than one English qualification",
       text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"

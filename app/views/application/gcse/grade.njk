@@ -1,7 +1,12 @@
 {% extends "_form.njk" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
-{% set title = "What grade is your " + subject + " qualification?" %}
+{% set type = applicationValue(["gcse", id, "type"]) %}
+{% if type == "Other UK qualification" or type == "Scottish National 5"  %}
+  {% set title = "What grade is your " + subject + " qualification?" %}
+{% else %}
+  {% set title = "What grade is your " + subject + " " + type + "?" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

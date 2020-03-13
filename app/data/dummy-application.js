@@ -59,6 +59,10 @@ module.exports = {
     disclose: 'true',
     statement: 'I currently require the use of a wheelchair.'
   },
+  suitability: {
+    disclose: 'true',
+    statement: 'I have a criminal record in Spain'
+  },
   degree: {
     kq19m: {
       id: 'kq19m',

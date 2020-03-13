@@ -15,6 +15,7 @@ function createNewApplication (req) {
       candidate: {},
       'contact-details': {},
       'reasonable-adjustments': {},
+      suitability: {},
       degree: {},
       'other-qualifications': {},
       gcse: {

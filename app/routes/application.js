@@ -11,6 +11,7 @@ function createNewApplication (req) {
   if (typeof data.applications[code] === 'undefined') {
     data.applications[code] = {
       status: 'started',
+      apply2: false,
       choices: {},
       candidate: {},
       'contact-details': {},

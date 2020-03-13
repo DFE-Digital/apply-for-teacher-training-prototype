@@ -1,6 +1,7 @@
 module.exports = {
   status: 'started',
   welcomeFlow: false,
+  apply2: false,
   choices: {
     ABCDE: {
       courseCode: '2XT2',
@@ -58,6 +59,10 @@ module.exports = {
   'reasonable-adjustments': {
     disclose: 'true',
     statement: 'I currently require the use of a wheelchair.'
+  },
+  suitability: {
+    disclose: 'true',
+    statement: 'I have a criminal record in Spain'
   },
   degree: {
     kq19m: {

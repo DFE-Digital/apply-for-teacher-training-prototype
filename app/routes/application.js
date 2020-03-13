@@ -171,6 +171,7 @@ module.exports = router => {
     apply2Application.apply2 = true
     apply2Application.choices = {}
     apply2Application.completed = {}
+    apply2Application.previousApplications = [existingApplicationId]
 
     data.applications[code] = apply2Application
 

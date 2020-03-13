@@ -16,7 +16,7 @@ module.exports = {
     address_lookup: (process.env.MVP !== 'true'),
     automatic_breaks: process.env.MVP !== 'true',
     international_address: process.env.MVP !== 'true',
-    international_qualifications: process.env.MVP !== 'true',
+    international_qualifications: false,
     nationality: process.env.MVP !== 'true',
     self_amend: process.env.MVP !== 'true',
     self_amend_contact_details: process.env.MVP !== 'true',

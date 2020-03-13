@@ -1,0 +1,97 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "Qualification details" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/other-qualifications/" + id
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if applicationValue(["other-qualifications", id, "type"]) == "gcse" %}
+    {{ appAutocomplete({
+      label: {
+        text: "Subject",
+        classes: "govuk-label--m"
+      },
+      items: gcseSubjects
+    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% else %}
+    {{ govukInput({
+      label: {
+        text: "Subject",
+        classes: "govuk-label--m"
+      }
+    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% endif %}
+
+  {{ govukInput({
+    label: {
+      text: "Grade",
+      classes: "govuk-label--m"
+    },
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Year qualification was awarded",
+      classes: "govuk-label--m"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied",
+      classes: "govuk-label--m"
+    }
+  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
+
+  {# Only ask if want to add another if:
+    * not editing an existing item
+    * not referred from a review page (which has an ‘Add another…’ button)
+    * feature flag enabled
+  #}
+  {% if action != "edit" and not referrer %}
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+    {{ govukRadios({
+      name: "next",
+      fieldset: {
+        legend: {
+          text: "Do you want to add another qualification?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "add",
+        text: "Yes, I want to add another qualification"
+      }, {
+        value: "review",
+        text: "No, I’ve completed my other qualifications"
+      }]
+    }) }}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}',
+      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject')
+    })
+  </script>
+{% endblock %}

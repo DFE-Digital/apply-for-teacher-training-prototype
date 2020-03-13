@@ -2,15 +2,30 @@
 {{ govukSummaryList({
   rows: [{
     key: {
-      text: "Qualification"
+      text: "Type of qualification"
     },
     value: {
-      text: (item.type + " " + item.subject if item.type) or "Not entered"
+      text: item.type or "Not entered"
     },
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
         href: applicationPath + "/other-qualifications/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "year"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Subject"
+    },
+    value: {
+      text: item.subject or "Not entered"
+    },
+    actions: {
+      classes: "govuk-!-padding-right-2",
+      items: [{
+        href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "year"
       }]
@@ -25,7 +40,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "year"
       }]
@@ -40,7 +55,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "year"
       }]
@@ -55,7 +70,7 @@
     actions: {
       classes: "govuk-!-padding-right-2",
       items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "grade"
       }]

@@ -92,7 +92,8 @@ module.exports = {
   'other-qualifications': {
     ksufp: {
       id: 'ksufp',
-      type: 'GCSE(A*-G)',
+      type: 'Non-UK qualification',
+      'type-non-uk': 'GCSE(A*-G)',
       subject: 'Science',
       org: 'Juliet High School',
       grade: '173',
@@ -102,7 +103,8 @@ module.exports = {
     },
     kv0y7: {
       id: 'kv0y7',
-      type: 'Higher Secondary School Certificate',
+      type: 'Non-UK qualification',
+      'type-non-uk': 'Higher Secondary School Certificate',
       subject: '',
       org: 'Juliet High School',
       grade: '647',

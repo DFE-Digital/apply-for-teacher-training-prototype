@@ -5,13 +5,14 @@
 {% if qualifications.length %}
   {% for item in qualifications %}
 
+    {% set type = item["type-uk"] if item["type-uk"] else item.type or "Not entered" %}
     {% set qualificationHtml %}
       {% include "_includes/item/other-qualification.njk" %}
     {% endset %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",
       headingLevel: 3,
-      titleText: item.type + " " + item.subject,
+      titleText: type + " " + item.subject,
       actions: {
         items: [{
           href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,

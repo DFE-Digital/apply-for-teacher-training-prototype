@@ -36,20 +36,37 @@ module.exports = router => {
 
   // Render details page
   router.get('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
+    const applicationData = utils.applicationData(req)
     const { id } = req.params
     const { referrer } = req.query
+    const { type } = applicationData['other-qualifications'][id]
 
     res.render('application/other-qualifications/details', {
       id,
-      referrer
+      referrer,
+      type
     })
   })
 
   router.post('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
+    const applicationData = utils.applicationData(req)
     const next = req.session.data.next || 'review'
-    const { applicationId } = req.params
+    const nextId = utils.generateRandomString()
+    const { applicationId, id } = req.params
     const { referrer } = req.query
+    const { year, org, type } = applicationData['other-qualifications'][id]
+    const typeUk = applicationData['other-qualifications'][id]['type-uk']
 
-    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
+    if (next === 'add-type') {
+      applicationData['other-qualifications'][nextId] = {
+        year,
+        org,
+        type,
+        'type-uk': typeUk
+      }
+      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${nextId}/details`)
+    } else {
+      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
+    }
   })
 }

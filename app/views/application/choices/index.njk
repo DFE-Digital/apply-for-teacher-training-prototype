@@ -62,7 +62,7 @@
         }) }}
       {% endif %}
 
-      {% if choiceCount >= 1 and choiceCount < 3 %}
+      {% if choiceCount >= 1 and choiceCount < 3 and not applicationValue(["apply2"]) %}
         {{ govukButton({
           classes: "govuk-button--secondary govuk-!-margin-bottom-9",
           text: "Add another course",

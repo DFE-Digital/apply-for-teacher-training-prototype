@@ -27,7 +27,7 @@
 
 {% block beforePrimary %}
 
-  {% set needsReferee = true %}
+  {% set needsReferee = false %}
   {% if needsReferee %}
     {# <div class="app-banner">
       <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
@@ -41,6 +41,12 @@
       </h2>
     </div>
   {% endif %}
+
+  <div class="app-banner">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
+      <a href="/application/{{ applicationId }}/apply-again">Do you want to apply again?</a>
+    </h2>
+  </div>
 
   {# <div class="app-banner app-banner--success">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">

@@ -14,6 +14,16 @@
 {% endif %}
 {% set hasSecondary = true %}
 
+{% block beforePageTitle %}
+  {% if showCopiedBanner %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application</h2>",
+      type: "success",
+      icon: false
+    }) }}
+  {% endif %}
+{% endblock %}
+
 {% block pageNavigation %}
   {% if hasSubmittedApplications() %}
     {{ govukBreadcrumbs({

@@ -155,8 +155,10 @@ module.exports = router => {
 
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
+    const showCopiedBanner = req.query.copied
+
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
-    res.render('application/index')
+    res.render('application/index', { showCopiedBanner })
   })
 
   // Generate apply2 application from an existing one
@@ -175,7 +177,7 @@ module.exports = router => {
 
     data.applications[code] = apply2Application
 
-    res.redirect(`/application/${code}`)
+    res.redirect(`/application/${code}?copied=true`)
   })
 
   // Render submitted page

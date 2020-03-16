@@ -2,6 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Qualification details" %}
+{% set nextType = applicationValue(["other-qualifications", id, "type-uk"]) or type %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -73,7 +74,7 @@
       },
       items: [{
         value: "add-type",
-        text: "Yes, add another " + type,
+        text: "Yes, add another " + nextType,
         checked: true
       }, {
         value: "add",

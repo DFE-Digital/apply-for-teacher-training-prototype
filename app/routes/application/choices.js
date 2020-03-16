@@ -132,7 +132,7 @@ module.exports = router => {
     const count = Object.keys(applicationData.choices).length
     const paths = pickPaths(req)
 
-    if (count === 3 || req.body['add-another-course'] === 'no') {
+    if (count === 3 || applicationData.apply2 || req.body['add-another-course'] === 'no') {
       res.redirect(req.params.referrer || paths.next)
     } else {
       res.render('application/choices/another', {

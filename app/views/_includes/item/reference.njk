@@ -1,5 +1,10 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = item.status or "requested" %}
+
+{% if applicationValue('apply2') %}
+  {% set showReferenceStatus = true %}
+{% endif %}
+
 {% set statusHtml %}
   {{ govukTag({
     classes: "app-tag--" + status,

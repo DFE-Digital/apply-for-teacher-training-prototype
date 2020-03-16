@@ -175,6 +175,14 @@ module.exports = router => {
     apply2Application.completed = {}
     apply2Application.previousApplications = [existingApplicationId]
 
+    if (apply2Application.referees && apply2Application.referees.first) {
+      apply2Application.referees.first.status = 'Received'
+    }
+
+    if (apply2Application.referees && apply2Application.referees.second) {
+      apply2Application.referees.second.status = 'Received'
+    }
+
     data.applications[code] = apply2Application
 
     res.redirect(`/application/${code}?copied=true`)

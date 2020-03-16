@@ -6,8 +6,12 @@
       {% if not canAmend %}
         <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t give a reference.</p>
       {% else %}
-        {# You can’t change your referees once application has been submitted #}
-        <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t give a reference.</p>
+        {% if applicationValue('apply2') %}
+          <p class="govuk-body">If you replace a referee we will contact them after you submit your application. We’ll let you know if they don’t give a reference.</p>
+        {% else %}
+          {# You can’t change your referees once application has been submitted #}
+          <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t give a reference.</p>
+        {% endif %}
       {% endif %}
     </div>
   </div>

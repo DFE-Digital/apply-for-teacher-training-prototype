@@ -28,7 +28,11 @@
     text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once."
   }) if status == "amending" }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+  {% if applicationValue(["apply2"]) %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
+  {% endif %}
   {% set choices = applicationValue(["choices"]) | toArray %}
   {% set showChoiceStatus = false %}
   {% set showIncomplete = true %}

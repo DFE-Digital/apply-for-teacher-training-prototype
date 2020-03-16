@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% if applicationValue(["other-qualifications", id, "type"]) == "gcse" %}
+  {% if type == "GCSE" %}
     {{ appAutocomplete({
       label: {
         text: "Subject",
@@ -72,11 +72,15 @@
         }
       },
       items: [{
+        value: "add-type",
+        text: "Yes, add another " + type,
+        checked: true
+      }, {
         value: "add",
-        text: "Yes, I want to add another qualification"
+        text: "Yes, add a different qualification"
       }, {
         value: "review",
-        text: "No, I’ve completed my other qualifications"
+        text: "No, not right now"
       }]
     }) }}
   {% endif %}

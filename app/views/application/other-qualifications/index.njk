@@ -53,22 +53,22 @@
       }
     },
     items: [{
-      value: "gcse",
+      value: "GCSE",
       text: "GCSE"
     }, {
-      value: "as-level",
+      value: "AS level",
       text: "AS level"
     }, {
-      value: "a-level",
+      value: "A level",
       text: "A level"
     }, {
-      value: "other-uk",
+      value: "Other UK qualification",
       text: "Other UK qualification" if data.flags.international_qualifications else "Other",
       conditional: {
         html: otherUkConditionalHtml
       }
     }, {
-      value: "non-uk",
+      value: "Non-UK qualification",
       text: "Non-UK qualification",
       conditional: {
         html: nonUkConditionalHtml

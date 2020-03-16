@@ -1,4 +1,11 @@
 {% set contentHtml %}
+  {% if applicationValue('apply2') %}
+    <p class="govuk-!-font-size-16">
+      <a href="#">View previous applications</a>
+    </p>
+
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="help-title">Need help?</h2>
+  {% endif %}
   <ul class="govuk-list govuk-!-font-size-16">
     <li>Email: <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
     <li>Monday to Friday (except public holidays)</li>
@@ -8,7 +15,7 @@
 
 {{ appRelated({
   name: "help",
-  title: "Need help?",
+  title: "Previous applications" if applicationValue('apply2') else "Need help?",
   content: {
     html: contentHtml
   }

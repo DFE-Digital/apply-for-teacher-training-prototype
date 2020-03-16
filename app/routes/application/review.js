@@ -12,7 +12,7 @@ module.exports = router => {
     if (successFlash[0] === 'submitted-incompleted-application') {
       pageObject.errorList = []
       const sections = {
-        choices: 'Course choices not marked as completed',
+        choices: applicationData.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
         candidate: 'Personal details not entered',
         'contact-details': 'Contact details not entered',
         'reasonable-adjustments': 'Training with a disability not entered',

@@ -6,9 +6,17 @@
 {% set choices = applicationValue("choices") | toArray %}
 {% set choiceCount = choices | length %}
 {% if choiceCount >= 1 %}
-  {% set title = "Course choices" %}
+  {% if applicationValue(["apply2"]) %}
+    {% set title = "Course choice" %}
+  {% else %}
+    {% set title = "Course choices" %}
+  {% endif %}
 {% else %}
-  {% set title = "Choosing courses" %}
+  {% if applicationValue(["apply2"]) %}
+    {% set title = "Choosing a course" %}
+  {% else %}
+    {% set title = "Choosing courses" %}
+  {% endif %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -28,7 +36,11 @@
 
 {% block primary %}
   {% set guidance %}
-    <p class="govuk-body">You can apply to up to 3 courses at this stage of your application.</p>
+    {% if applicationValue(["apply2"]) %}
+      <p class="govuk-body">You can only apply to 1 course at a time at this stage of your application.</p>
+    {% else %}
+      <p class="govuk-body">You can apply to up to 3 courses at this stage of your application.</p>
+    {% endif %}
     <p class="govuk-body">Not all courses and training providers are signed up to Apply for teacher training. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>
     <p class="govuk-body">You can preview <a href="/apply/providers">courses currently available</a> on Apply for teacher training.</p>
   {% endset %}

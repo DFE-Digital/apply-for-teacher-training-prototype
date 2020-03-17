@@ -16,24 +16,24 @@
 {% endblock %}
 
 {% block primary %}
-<p class="govuk-body">Teacher training providers need to make sure that it’s safe for you to work with children and young people.</p>
+<p class="govuk-body">Teacher training providers need to check that it’s safe for you to work with children and young people.</p>
 
-<p class="govuk-body">Providers check your identity and that you're allowed to work in the UK. They also look at:</p>
+<p class="govuk-body">As well as confirming your identity and your right to work in the UK, providers will check:</p>
 
 <ul class="govuk-list govuk-list--bullet">
-  <li>your criminal record in the UK (through an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about#dbs-checks">DBS check)</a> and abroad where relevant</li>
+  <li>your criminal record in the UK (they'll do an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about#dbs-checks">DBS check)</a> and abroad where relevant</li>
   <li>whether you’ve been banned from teaching or working with children</li>
-  <li>your professional behaviour - such as whether you've been taken off a teacher training course, and what your referees say about you</li>
+  <li>your professional behaviour, such as whether you’ve been removed from teacher training and what your referees say about you</li>
 </ul>
 
-<p class="govuk-body">Sharing any potential safeguarding issues (such as cautions or offences) means that providers can give advice about whether it'll affect your application.</p>
+<p class="govuk-body">Tell your provider about any potential safeguarding issues, such as offences, cautions, reprimands and final warnings. They can give advice about whether this will affect your application.</p>
 
-<p class="govuk-body">A criminal conviction won’t necessarily stop you becoming a teacher.</p>
+<p class="govuk-body">It won’t necessarily stop you becoming a teacher.</p>
 
 {% set disabilityConditional %}
   {{ govukCharacterCount({
     label: {
-      html: "Share any relevant information",
+      html: "Give any relevant information",
       classes: "govuk-label--s"
     },
     maxwords: 400,
@@ -53,7 +53,7 @@
     value: "true",
     text: "Yes, I want to share something",
     hint: {
-      text: "Your provider may need to discuss it with you. Declaring something won’t stop you from submitting your application. If you prefer, you can contact your provider directly."
+      text: "After you have submitted your application, your provider may be in touch to discuss the information you shared. If you prefer, you can contact your provider directly."
     },
     conditional: {
       html: disabilityConditional

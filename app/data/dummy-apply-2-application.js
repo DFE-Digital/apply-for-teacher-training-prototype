@@ -11,4 +11,8 @@ dummyApply2Application.completed = {}
 // No choices yet
 dummyApply2Application.choices = {}
 
+// References received
+dummyApply2Application.referees.first.status = 'Received'
+dummyApply2Application.referees.second.status = 'Received'
+
 module.exports = dummyApply2Application

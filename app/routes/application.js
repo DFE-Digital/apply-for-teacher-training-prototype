@@ -155,8 +155,10 @@ module.exports = router => {
 
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
+    const showCopiedBanner = req.query.copied
+
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
-    res.render('application/index')
+    res.render('application/index', { showCopiedBanner })
   })
 
   // Generate apply2 application from an existing one
@@ -173,9 +175,17 @@ module.exports = router => {
     apply2Application.completed = {}
     apply2Application.previousApplications = [existingApplicationId]
 
+    if (apply2Application.referees && apply2Application.referees.first) {
+      apply2Application.referees.first.status = 'Received'
+    }
+
+    if (apply2Application.referees && apply2Application.referees.second) {
+      apply2Application.referees.second.status = 'Received'
+    }
+
     data.applications[code] = apply2Application
 
-    res.redirect(`/application/${code}`)
+    res.redirect(`/application/${code}?copied=true`)
   })
 
   // Render submitted page

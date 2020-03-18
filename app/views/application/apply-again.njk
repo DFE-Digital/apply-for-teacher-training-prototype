@@ -1,0 +1,26 @@
+{% extends "_content.njk" %}
+
+{% set title = "Do you want to apply again?" %}
+
+{% block primary %}
+  <p>Your first application was unsuccessful.</p>
+
+  <p>If you apply again we’ll:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>copy your application so you don’t need to start again</li>
+    <li>let you make changes to each section</li>
+    <li>keep your references so you won’t need to request new ones</li>
+  </ul>
+
+  <p>You can only apply to 1 course at a time at this stage of your application.</p>
+
+  <hr class="govuk-section-break govuk-section-break--m">
+  {{ govukButton({
+    classes: "govuk-!-margin-bottom-5",
+    isStartButton: true,
+    text: "Start now",
+    href: "/application/" + applicationId + "/apply2"
+  }) }}
+  <p class="govuk-body">or</p>
+  <p class="govuk-body"><a href="/application/{{ applicationId }}">Go to your dashboard</a></p>
+{% endblock %}

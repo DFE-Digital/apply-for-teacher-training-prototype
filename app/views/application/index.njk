@@ -2,7 +2,11 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
 {% if status == "started" %}
-  {% set title = "Your application" %}
+  {% if applicationValue('apply2') %}
+    {% set title = "Your new application" %}
+  {% else %}
+    {% set title = "Your application" %}
+  {% endif %}
   {% set tagClass = "app-tag--completed" %}
   {% set tagText = "Completed" %}
   {% set reviewText = "Check your answers before submitting" %}
@@ -13,6 +17,16 @@
   {% set reviewText = "Check your changes before submitting" %}
 {% endif %}
 {% set hasSecondary = true %}
+
+{% block beforePageTitle %}
+  {% if showCopiedBanner %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application</h2>",
+      type: "success",
+      icon: false
+    }) }}
+  {% endif %}
+{% endblock %}
 
 {% block pageNavigation %}
   {% if hasSubmittedApplications() %}
@@ -37,11 +51,16 @@
     text: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application",
     iconFallbackText: "Warning"
   }) if status == "amending" }}
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
+
+  {% if applicationValue(["apply2"]) %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choice</h2>
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
+  {% endif %}
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Course choices",
+      text: "Course choice" if applicationValue(["apply2"]) else "Course choices",
       href: applicationPath + "/choices",
       id: "personal-details",
       tag: {

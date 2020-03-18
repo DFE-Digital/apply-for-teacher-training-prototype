@@ -25,5 +25,6 @@ module.exports = {
     self_withdraw: process.env.MVP !== 'true',
     interview_preferences: true
   },
-  applications: (process.env.PRODUCTION === 'true') ? {} : testData
+  // applications: (process.env.PRODUCTION === 'true') ? {} : testData
+  applications: testData
 }

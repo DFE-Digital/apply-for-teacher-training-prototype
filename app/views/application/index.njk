@@ -10,12 +10,11 @@
   {% else %}
     {% set title = "Your application" %}
   {% endif %}
-  {% set tagClass = "app-tag--completed" %}
   {% set tagText = "Completed" %}
   {% set reviewText = "Check your answers before submitting" %}
 {% elif status == "amending" %}
   {% set title = "Edit your application" %}
-  {% set tagClass = "app-tag--unamended" %}
+  {% set tagClass = "app-tag--grey" %}
   {% set tagText = "Unedited" %}
   {% set reviewText = "Check your changes before submitting" %}
 {% endif %}

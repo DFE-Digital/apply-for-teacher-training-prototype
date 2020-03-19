@@ -5,7 +5,7 @@ module.exports = router => {
     const status = applicationData.status
 
     if (status === 'started') {
-      applicationData.status = 'submitted'
+      applicationData.status = 'Submitted'
     }
 
     if (status === 'amending') {

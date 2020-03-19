@@ -136,18 +136,18 @@ module.exports = router => {
     switch (decision) {
       case 'withdraw': {
         notifyTemplate = '9ac2723b-11c3-4491-9ec5-88b472403ea2'
-        choice.status = 'withdrawn'
+        choice.status = 'Application withdrawn'
         break
       }
       case 'accept': {
         notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
-        choice.status = 'accepted'
+        choice.status = 'Accepted'
 
         // Set remaining course choice statuses to `withdrawn`
         const { choices } = application
         application.choices = choices.map(choice => {
           if (choice.status === 'offer') {
-            choice.status = 'withdrawn'
+            choice.status = 'Application withdrawn'
           }
           return choice
         })
@@ -156,7 +156,7 @@ module.exports = router => {
       }
       case 'decline': {
         notifyTemplate = '906399c1-8694-4430-bcbf-c12cc06fd5a7'
-        choice.status = 'declined'
+        choice.status = 'Declined'
         phase = 'decision'
         break
       }

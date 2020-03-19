@@ -1,5 +1,5 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set status = item.status or "requested" %}
+{% set status = item.status or "Awaiting response" %}
 
 {% if applicationValue('apply2') %}
   {% set showReferenceStatus = true %}
@@ -8,7 +8,7 @@
 
 {% set statusHtml %}
   {{ govukTag({
-    classes: "app-tag--" + status,
+    classes: "app-tag " + status | statusClass,
     text: status | capitalize
   }) }}
 {% endset %}

@@ -1,8 +1,12 @@
-{% set appStatus = "pending" if application.status == "amended" else application.status %}
-{% set status = item.status or appStatus %}
+{% if application.status == "amended" %}
+  {% set appStatus = "Pending" %}
+{% elif application.status == "amending" %}
+  {% set appStatus = "Amending"%}
+{% endif %}
+{% set status = item.status or appStatus or "Submitted" %}
 {% set statusHtml %}
   {{ govukTag({
-    classes: "app-tag--" + status,
+    classes: "app-tag " + status | statusClass,
     text: status | capitalize
   }) }}
 {% endset %}

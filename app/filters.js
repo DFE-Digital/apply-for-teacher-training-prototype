@@ -127,5 +127,39 @@ module.exports = (env) => {
     return regExp.exec(providerAndCode)[1]
   }
 
+  filters.statusClass = (status) => {
+    switch (status) {
+      // States that currently use the default tag style
+      // - 'Enrolled'
+      // - 'Conditions met'
+      // - 'Conditions not met'
+      // - 'Completed'
+
+      // Application phases
+      case 'Submitted':
+        return 'govuk-tag--grey'
+      case 'Pending':
+        return 'govuk-tag--blue'
+      case 'Offer withdrawn':
+        return 'govuk-tag--red'
+      case 'Application withdrawn':
+        return 'govuk-tag--orange'
+      case 'Declined':
+        return 'govuk-tag--orange'
+      case 'Rejected':
+        return 'govuk-tag--red'
+      case 'Accepted':
+        return 'govuk-tag--blue'
+      case 'Offer':
+        return 'govuk-tag--turquoise'
+
+      // Reference statuses
+      case 'Awaiting response':
+        return 'govuk-tag--blue'
+      case 'Reference given':
+        return 'govuk-tag--green'
+    }
+  }
+
   return filters
 }

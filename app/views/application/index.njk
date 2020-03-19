@@ -83,7 +83,10 @@
       tag: {
         classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
         text: "Edited" if status == "amending" else "Completed"
-      } if applicationValue(["candidate"]) | length > 0
+      } if applicationValue(["candidate"]) | length > 0 else {
+        classes: incompleteTagClass,
+        text: incompleteTagText
+      }
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
@@ -216,7 +219,10 @@
       tag: {
         classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
         text: "Completed" if status == "started" else ("Submitted" if status == "amending")
-      } if applicationValue(["referees"]) | length > 0
+      } if applicationValue(["referees"]) | length > 0 else {
+        classes: incompleteTagClass,
+        text: incompleteTagText
+      }
     }]
   }) }}
 

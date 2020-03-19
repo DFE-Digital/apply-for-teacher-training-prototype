@@ -1,6 +1,7 @@
 const { DateTime } = require('luxon')
 const humanizeDuration = require('humanize-duration')
 const marked = require('marked')
+const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
 
 module.exports = (env) => {
@@ -56,6 +57,16 @@ module.exports = (env) => {
       })
 
       return duration
+    }
+  }
+
+  /**
+   * Convert number to ordinal word
+   * @type {String} str
+   */
+  filters.ordinalWord = (int) => {
+    if (!isNaN(int)) {
+      return numberToWords.toWordsOrdinal(int)
     }
   }
 

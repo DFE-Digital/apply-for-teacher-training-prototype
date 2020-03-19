@@ -3,29 +3,28 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
 {% set title = "Your submitted application" %}
-{% set referrer = applicationPath + "/review" %}
+{% set referrer = referrer or applicationPath + "/review" %}
 {% set canAmend = false %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/applications" + ("?phase=" + phase if phase),
-    text: "Back to application dashboard"
-  }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/applications" + ("?phase=" + phase if phase),
+      text: "Back to application dashboard"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block beforePrimary %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Submitted on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}</p>
 {% endblock %}
 
 {% block primary %}
-  {{ govukSummaryList({
-    classes: "app-summary",
-    rows: [{
-      key: {
-        text: "Date submitted"
-      },
-      value: {
-        html: "now" | date("d MMMM yyyy")
-      }
-    }]
-  }) }}
-
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% set choices = applicationValue(["choices"]) | toArray %}
   {% set showChoiceStatus = false %}

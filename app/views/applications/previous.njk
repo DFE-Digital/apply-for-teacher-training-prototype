@@ -1,0 +1,33 @@
+{% extends "_content.njk" %}
+{% set title = "Your previous applications" %}
+{% set showChoiceStatus = true %}
+{% set referrer = "/applications/" + applicationId + "/previous" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <div class="app-timeline">
+    {% for applicationId, application in previousApplications %}
+      <section class="app-timeline__item">
+        <header class="app-timeline__header">
+          <h2 class="app-timeline__title govuk-!-font-size-27">
+            {{ loop.index | ordinalWord | capitalize }} application
+          </h2>
+        </header>
+
+        <div class="app-timeline__description">
+          <p class="govuk-hint">
+            Submitted on <time datetime="{{ application.submitted }}">{{ application.submitted | date("d MMMM yyyy") }}</time>. <a href="/application/{{ applicationId }}/submitted?referrer={{ referrer }}">View application</a>
+          </p>
+          {% set choices = application.choices | toArray %}
+          <h3 class="govuk-heading-m">Course choice{{ "s" if choices.length > 1 }}</h3>
+          {% include "_includes/review/choices.njk" %}
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+{% endblock %}

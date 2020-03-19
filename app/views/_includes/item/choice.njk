@@ -47,5 +47,12 @@
     value: {
       html: statusHtml
     }
-  } if (status and status != "amending") and showChoiceStatus]
+  } if (status and status != "amending") and showChoiceStatus, {
+    key: {
+      text: "Reason for rejection"
+    },
+    value: {
+      html: item.reason
+    }
+  } if item.reason]
 }) }}

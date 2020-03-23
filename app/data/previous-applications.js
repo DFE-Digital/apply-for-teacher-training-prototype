@@ -18,6 +18,10 @@ module.exports = {
         providerCode: '1N1',
         locationName: 'Hillcrest Academy',
         locationAddress: 'Cowper Street, Leeds. LS7 4DR',
+        studyMode: 'Full time',
+        type: 'PGCE with QTS',
+        length: '1 year',
+        starts: '2020-09',
         status: 'Rejected',
         reason: 'Course is full'
       }
@@ -32,6 +36,10 @@ module.exports = {
         providerCode: '1N1',
         locationName: 'Hillcrest Academy',
         locationAddress: 'Cowper Street, Leeds. LS7 4DR',
+        studyMode: 'Full time',
+        type: 'PGCE with QTS',
+        length: '1 year',
+        starts: '2020-09',
         status: 'Rejected',
         reason: 'Candidate did not show enough subject knowledge at this time'
       }

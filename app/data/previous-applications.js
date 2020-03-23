@@ -1,7 +1,7 @@
 // Copies dummy application and tweaks some fields
 const dummyApplication = JSON.parse(JSON.stringify(require('./dummy-application')))
 
-dummyApplication.submitted = '2020-04-29'
+dummyApplication.submitted = '2020-03-29'
 dummyApplication.choices.ABCDE.status = 'Declined'
 dummyApplication.choices.FGHIJ.status = 'Application withdrawn'
 dummyApplication.choices.ZYXWV.status = 'Rejected'
@@ -11,7 +11,7 @@ module.exports = {
   12345: dummyApplication,
   67890: {
     status: 'completed',
-    submitted: '2020-04-29',
+    submitted: '2020-05-19',
     choices: {
       12345: {
         courseCode: '2XT2',

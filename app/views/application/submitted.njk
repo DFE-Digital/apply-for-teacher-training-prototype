@@ -5,6 +5,7 @@
 {% set title = "Your submitted application" %}
 {% set referrer = referrer or applicationPath + "/review" %}
 {% set canAmend = false %}
+{% set showChoiceStatus = true %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -27,7 +28,6 @@
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% set choices = applicationValue(["choices"]) | toArray %}
-  {% set showChoiceStatus = false %}
   {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>

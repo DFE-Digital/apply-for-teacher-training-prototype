@@ -1,10 +1,10 @@
 {% extends "_content.njk" %}
 
 {% set status = applicationValue(["status"]) %}
-{% if status == "submitted" %}
-  {% set title = "Application successfully submitted" %}
-{% elif status == "amended" %}
+{% if status == "amended" %}
   {% set title = "Application successfully resubmitted" %}
+{% else %}
+  {% set title = "Application successfully submitted" %}
 {% endif %}
 
 {% block content %}

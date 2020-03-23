@@ -188,12 +188,22 @@ module.exports = router => {
     res.redirect(`/application/${code}?copied=true`)
   })
 
+  // Render previous applications
+  router.all('/applications/:applicationId/previous', (req, res) => {
+    const { applicationId } = req.params
+
+    res.render('applications/previous', {
+      applicationId
+    })
+  })
+
   // Render submitted page
   router.all('/application/:applicationId/submitted', (req, res) => {
-    const { phase } = req.query
+    const { phase, referrer } = req.query
 
     res.render('application/submitted', {
-      phase
+      phase,
+      referrer
     })
   })
 

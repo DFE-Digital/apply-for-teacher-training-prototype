@@ -3,6 +3,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set incompleteTagClass = "govuk-tag--grey" %}
 {% set incompleteTagText = "Incomplete" %}
+{% set referrer = applicationPath %}
 
 {% if status == "started" %}
   {% if applicationValue('apply2') %}

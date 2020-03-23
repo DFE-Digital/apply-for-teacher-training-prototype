@@ -7,10 +7,6 @@
   border-top-color: transparent;
 }
 
-.app-related__body {
-  @include govuk-font(16);
-}
-
 .app-related__list {
   @extend %govuk-list;
 }

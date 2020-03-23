@@ -42,10 +42,45 @@
     } if canAmend and not item.singleLocationCourse
   }, {
     key: {
+      text: "Full time or part time"
+    },
+    value: {
+      html: item.studyMode
+    } if item.studyMode
+  }, {
+    key: {
+      text: "Type"
+    },
+    value: {
+      html: item.type
+    } if item.type
+  }, {
+    key: {
+      text: "Course length"
+    },
+    value: {
+      html: item.length
+    } if item.length
+  }, {
+    key: {
+      text: "Date course starts"
+    },
+    value: {
+      html: item.starts | date("MMMM yyyy")
+    } if item.starts
+  }, {
+    key: {
       text: "Status"
     },
     value: {
       html: statusHtml
     }
-  } if (status and status != "amending") and showChoiceStatus]
+  } if (status and status != "amending") and showChoiceStatus, {
+    key: {
+      text: "Reason for rejection"
+    },
+    value: {
+      html: item.reason
+    }
+  } if item.reason]
 }) }}

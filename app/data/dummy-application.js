@@ -7,19 +7,31 @@ module.exports = {
       courseCode: '2XT2',
       providerCode: '1N1',
       locationName: 'Hillcrest Academy',
-      locationAddress: 'Cowper Street, Leeds. LS7 4DR'
+      locationAddress: 'Cowper Street, Leeds. LS7 4DR',
+      studyMode: 'Full time',
+      type: 'PGCE with QTS',
+      length: '1 year',
+      starts: '2020-09'
     },
     FGHIJ: {
       courseCode: '2VLT',
       providerCode: 'L24',
       locationName: 'Main Site',
-      locationAddress: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
+      locationAddress: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD',
+      studyMode: 'Full time',
+      type: 'PGCE with QTS',
+      length: '1 year',
+      starts: '2020-09'
     },
     ZYXWV: {
       courseCode: 'X100',
       providerCode: 'B60',
       locationName: 'Main Site',
-      locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY'
+      locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY',
+      studyMode: 'Full time',
+      type: 'PGCE with QTS',
+      length: '1 year',
+      starts: '2020-09'
     }
   },
   completed: {

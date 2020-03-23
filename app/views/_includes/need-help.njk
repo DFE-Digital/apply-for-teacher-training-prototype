@@ -1,12 +1,26 @@
-{% set contentHtml %}
-  {% if applicationValue('apply2') %}
-    <p class="govuk-!-font-size-16">
-      <a href="#">View previous applications</a>
-    </p>
+{% set previousApplications = previousApplications | toArray %}
+{% set previousApplicationsCount = previousApplications | length %}
 
-    <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="help-title">Need help?</h2>
+{% set previousApplicationsHtml %}
+  {% if previousApplicationsCount > 1 %}
+    <ul class="govuk-list govuk-list--bullet govuk-body-s">
+      {% for application in previousApplications %}
+        <li class="govuk-!-margin-bottom-2">
+          <a href="/application/{{ application.id }}/submitted?referrer={{ referrer }}">{{ loop.index | ordinalWord | capitalize }} application</a><br>Submitted <time datetime="{{ application.submitted }}">{{ application.submitted | date("d MMMM yyyy") }}</time>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    {% set applicationId = previousApplications[0].id %}
+    {% set application = previousApplications[0] %}
+    <p class="govuk-body-s">
+      <a href="/application/{{ applicationId }}/submitted?referrer={{ referrer }}">First application</a><br>Submitted <time datetime="{{ application.submitted }}">{{ application.submitted | date("d MMMM yyyy") }}</time>
+    </p>
   {% endif %}
-  <ul class="govuk-list govuk-!-font-size-16">
+{% endset %}
+
+{% set helpHtml %}
+  <ul class="govuk-list govuk-body-s">
     <li>Email: <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
     <li>Monday to Friday (except public holidays)</li>
     <li>We aim to respond within 5 working days, or one working day for more urgent&nbsp;queries</li>
@@ -15,8 +29,16 @@
 
 {{ appRelated({
   name: "help",
-  title: "Previous applications" if applicationValue('apply2') else "Need help?",
+  title: "Previous applications",
   content: {
-    html: contentHtml
+    html: previousApplicationsHtml
+  }
+}) if applicationValue('apply2') }}
+
+{{ appRelated({
+  name: "help",
+  title: "Need help?",
+  content: {
+    html: helpHtml
   }
 }) }}

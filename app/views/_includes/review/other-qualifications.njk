@@ -1,10 +1,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualifications = applicationValue(["other-qualifications"]) %}
-{% set qualifications = qualifications | toArray | selectattr("id") %}
 
 {% if qualifications.length %}
+  {% set qualifications = qualifications | toArray | selectattr("id") %}
   {% for item in qualifications %}
-
     {% set type = item["type-uk"] if item["type-uk"] else item.type or "Not entered" %}
     {% set qualificationHtml %}
       {% include "_includes/item/other-qualification.njk" %}

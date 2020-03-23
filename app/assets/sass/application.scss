@@ -18,7 +18,6 @@ $govuk-global-styles: true;
 @import "components/table";
 @import "components/task-list";
 @import "components/tag";
-@import "components/timeline";
 
 // Override GOV.UK Frontend print styles
 @media print {

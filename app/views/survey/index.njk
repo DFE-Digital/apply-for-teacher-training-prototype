@@ -1,0 +1,226 @@
+{% extends "_form.njk" %}
+
+{% set title = "Give feedback" %}
+{% set formaction = "/survey/thank-you" %}
+
+{% block primary %}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Your experience</h2>
+  <p class="govuk-body">The following questions are phrased differently each time. Please ensure you read the question before answering.</p>
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-recommend-rating",
+    name: "experience-recommend-rating",
+    fieldset: {
+      legend: {
+        html: "I would recommend this service to a friend or colleague",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-complex-rating",
+    name: "experience-complex-rating",
+    fieldset: {
+      legend: {
+        text: "I found this service unnecessarily complex",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-organised-rating",
+    name: "experience-organised-rating",
+    fieldset: {
+      legend: {
+        text: "I found all the parts of this service well-organised",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-inconsistency-rating",
+    name: "experience-inconsistency-rating",
+    fieldset: {
+      legend: {
+        text: "I thought there was too much inconsistency in this website",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-learn-rating",
+    name: "experience-learn-rating",
+    fieldset: {
+      legend: {
+        text: "I would imagine that people would learn to use this website very quickly",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-awkward-rating",
+    name: "experience-awkward-rating",
+    fieldset: {
+      legend: {
+        text: "I found this website very awkward to use",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-confident-rating",
+    name: "experience-confident-rating",
+    fieldset: {
+      legend: {
+        text: "I felt confident using this service",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    id: "experience-learn-rating",
+    name: "experience-learn-rating",
+    fieldset: {
+      legend: {
+        text: "I needed to learn a lot of things before I could get going with this website",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "1 = strongly agree, 5 = strongly disagree"
+    },
+    items: [
+      { text: "1", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5", value: "5" }
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Improvements</h2>
+  {{ govukTextarea({
+    id: "improvements",
+    name: "improvements",
+    label: {
+      classes: "govuk-label--s",
+      text: "If you could improve anything on " + serviceName + " what would it be?"
+    }
+  }) }}
+
+  {{ govukTextarea({
+    id: "miscellaneous",
+    name: "miscellaneous",
+    label: {
+      classes: "govuk-label--s",
+      text: "Is there anything else you would like to tell us?"
+    }
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Your feedback</h2>
+  {{ govukRadios({
+    id: "follow-up",
+    name: "follow-up",
+    fieldset: {
+      legend: {
+        html: "Are you happy for us to contact you with follow-up questions to your feedback?",
+        classes: "govuk-label--s"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes, you can contact me"
+    }, {
+      value: "no",
+      text: "No, do not contact me"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Finish"
+  }) }}
+{% endblock %}

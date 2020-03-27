@@ -3,6 +3,9 @@
 
 {% if applicationValue('apply2') %}
   {% set showReferenceStatus = true %}
+{% endif %}
+
+{% if status == "Reference given" %}
   {% set canAmendReferences = false %}
 {% endif %}
 

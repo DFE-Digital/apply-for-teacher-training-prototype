@@ -16,6 +16,16 @@
 
 {% block primary %}
   {% set references = applicationValue(["referees"]) %}
+  {% set canAmendReferences = true %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if applicationValue('apply2') %}
+        <p class="govuk-body">If you replace a referee we will contact them after you submit your application. We’ll let you know if they don’t give a reference.</p>
+      {% else %}
+        <p class="govuk-body">We’ll contact your referees after you submit your application. We’ll let you know if they don’t give a reference.</p>
+      {% endif %}
+    </div>
+  </div>
   {% include "_includes/review/references.njk" %}
   {% if not applicationValue(["referees", "second"]) %}
     {{ govukButton({

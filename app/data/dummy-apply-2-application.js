@@ -13,6 +13,6 @@ dummyApply2Application.choices = {}
 
 // References received
 dummyApply2Application.referees.first.status = 'Reference given'
-dummyApply2Application.referees.second.status = 'Reference given'
+dummyApply2Application.referees.second.status = 'Not requested yet'
 
 module.exports = dummyApply2Application

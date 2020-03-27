@@ -15,6 +15,13 @@
     text: status | capitalize
   }) }}
 {% endset %}
+
+{% set contextHtml %}
+  {% if status == "Not requested yet" %}
+    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application</p>
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -77,7 +84,7 @@
       text: "Status"
     },
     value: {
-      html: statusHtml
+      html: statusHtml + contextHtml
     }
   } if status and showReferenceStatus]
 }) }}

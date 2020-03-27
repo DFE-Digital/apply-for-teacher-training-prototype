@@ -161,6 +161,8 @@ module.exports = (env) => {
         return 'govuk-tag--red'
       case 'Accepted':
         return 'govuk-tag--blue'
+      case 'Not requested yet':
+        return 'govuk-tag--blue'
       case 'Offer':
         return 'govuk-tag--turquoise'
 

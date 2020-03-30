@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "I found this website very awkward to use" %}
+{% set formaction = "/survey/experience-9" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/survey/experience-7"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    id: "experience-awkward-rating",
+    name: "experience-awkward-rating",
+    items: [
+      { text: "1 - strongly agree", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5 - strongly disagree", value: "5" }
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

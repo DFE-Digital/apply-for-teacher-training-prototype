@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "I thought this service was easy to use" %}
+{% set formaction = "/survey/experience-4" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/survey/experience-2"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    id: "experience-usability-rating",
+    name: "experience-usability-rating",
+    items: [
+      { text: "1 - strongly agree", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5 - strongly disagree", value: "5" }
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

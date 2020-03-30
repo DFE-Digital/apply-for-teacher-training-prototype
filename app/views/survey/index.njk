@@ -1,12 +1,28 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
-{% set title = "Give feedback" %}
+{% set title = "I would recommend this service to a friend or colleague" %}
+{% set formaction = "/survey/experience-2" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/survey"
+  }) }}
+{% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">We’ll ask you a series of questions that are phrased differently each time. Please ensure you read the question before answering.</p>
+  {{ govukRadios({
+    id: "experience-recommend-rating",
+    name: "experience-recommend-rating",
+    items: [
+      { text: "1 - strongly agree", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5 - strongly disagree", value: "5" }
+    ]
+  }) }}
 
   {{ govukButton({
-    text: "Continue",
-    href: "/survey/experience-1"
+    text: "Continue"
   }) }}
 {% endblock %}

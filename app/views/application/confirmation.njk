@@ -24,13 +24,13 @@
       <p class="govuk-body">Training providers then have 40 working days to respond to your application.</p>
       <h2 class="govuk-heading-m">Interview</h2>
       <p class="govuk-body">If your training provider decides to offer you an interview, they will get in touch directly via email to organise a date and give you all the information you need.</p>
-{% if status == "submitted" %}
-      <h2 class="govuk-heading-m">Track, edit or withdraw</h2>
-      <p class="govuk-body">You have 7 days to make changes to a submitted application. We won’t send your application to your training provider(s) until the 5 working days are up.</p>
-      <p class="govuk-body">To edit, return to your <a href="/applications">Application dashboard</a>.</p>
-{% elif status == "amended" %}
+{% if status == "amended" %}
       <h2 class="govuk-heading-m">Track or withdraw</h2>
       <p class="govuk-body">Visit your <a href="/applications">Application dashboard</a> to check the status of an application, or withdraw a course choice. You can update your contact details, but you won’t be able to edit other sections.</p>
+{% else %}
+      <h2 class="govuk-heading-m">Track, edit or withdraw</h2>
+      <p class="govuk-body">You have 7 days to make changes to a submitted application. We won’t send your application to your training provider(s) until the 5 working days are up.</p>
+      <p class="govuk-body"><a href="/applications">To edit your application, return to your Application dashboard</a>.</p>
 {% endif %}
       <h2 class="govuk-heading-m">Give feedback</h2>
       <p class="govuk-body">Your feedback will help us improve this service.</p>

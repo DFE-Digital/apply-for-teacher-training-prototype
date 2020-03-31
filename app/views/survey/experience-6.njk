@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "I thought there was too much inconsistency in this website" %}
+{% set formaction = "/survey/experience-7" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/survey/experience-5"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    id: "experience-inconsistency-rating",
+    name: "experience-inconsistency-rating",
+    items: [
+      { text: "1 - strongly agree", value: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5 - strongly disagree", value: "5" }
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

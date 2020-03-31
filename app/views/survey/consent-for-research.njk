@@ -1,0 +1,28 @@
+{% extends "_form.njk" %}
+
+{% set title = "Are you happy for us to contact you with follow-up questions to your feedback?" %}
+{% set formaction = "/survey/thank-you" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/survey/experience-10"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    id: "follow-up",
+    name: "follow-up",
+    items: [{
+      value: "yes",
+      text: "Yes, you can contact me"
+    }, {
+      value: "no",
+      text: "No, do not contact me"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Finish"
+  }) }}
+{% endblock %}

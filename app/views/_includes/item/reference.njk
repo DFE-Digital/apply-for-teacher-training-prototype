@@ -3,7 +3,10 @@
 
 {% if applicationValue('apply2') %}
   {% set showReferenceStatus = true %}
-  {% set canAmend = false %}
+{% endif %}
+
+{% if status == "Reference given" %}
+  {% set canAmendReferences = false %}
 {% endif %}
 
 {% set statusHtml %}
@@ -12,6 +15,13 @@
     text: status | capitalize
   }) }}
 {% endset %}
+
+{% set contextHtml %}
+  {% if status == "Not requested yet" %}
+    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application</p>
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -26,7 +36,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if canAmend
+    } if canAmendReferences
   }, {
     key: {
       text: "Email"
@@ -40,7 +50,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if canAmend
+    } if canAmendReferences
   }, {
     key: {
       text: "Reference type"
@@ -54,7 +64,7 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if canAmend
+    } if canAmendReferences
   }, {
     key: {
       text: "Relationship"
@@ -68,13 +78,13 @@
         text: "Change",
         visuallyHiddenText: "referee"
       }]
-    } if canAmend
+    } if canAmendReferences
   }, {
     key: {
       text: "Status"
     },
     value: {
-      html: statusHtml
+      html: statusHtml + contextHtml
     }
   } if status and showReferenceStatus]
 }) }}

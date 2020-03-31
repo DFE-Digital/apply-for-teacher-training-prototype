@@ -88,6 +88,7 @@
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
   {% set references = applicationValue(["referees"]) %}
+  {% set canAmendReferences = true %}
   {% include "_includes/review/references.njk" %}
 
   {{ govukButton({

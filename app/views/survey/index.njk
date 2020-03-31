@@ -3,12 +3,6 @@
 {% set title = "I would recommend this service to a friend or colleague" %}
 {% set formaction = "/survey/experience-2" %}
 
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/survey"
-  }) }}
-{% endblock %}
-
 {% block primary %}
   {{ govukRadios({
     id: "experience-recommend-rating",

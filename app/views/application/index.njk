@@ -232,7 +232,11 @@
     items: [{
       text: reviewText,
       href: applicationPath + "/review",
-      id: "review"
+      id: "review",
+      tag: {
+        classes: incompleteTagClass,
+        text: incompleteTagText
+      }
     }]
   }) }}
 {% endblock %}

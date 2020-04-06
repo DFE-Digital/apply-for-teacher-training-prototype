@@ -1,20 +1,19 @@
 {% set item = applicationValue(["gcse", id]) %}
+{% set complete = "true" if applicationValue(["completed", id]) %}
 
-{% set complete = item | length > 0 %}
-{% if complete %}
-  {% set gcseHtml %}
-    {% include "_includes/item/gcse.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: item.type,
-    html: gcseHtml
-  }) }}
-{% else %}
+{% set gcseHtml %}
+  {% include "_includes/item/gcse.njk" %}
+{% endset %}
+
+{% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "gcse-" + id %}
-  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
-  {% set incompleteLink = "/gcse/" + id + "?referrer=" + referrer %}
+  {% set incompleteText = id | capitalize + " GCSE or equivalent not marked as complete" %}
+  {% set incompleteLink = "/" + id + "/review?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}
+{% else %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: gcseHtml
+  }) }}
 {% endif %}

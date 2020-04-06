@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/contact-details/review" %}
 {% set title = "Contact details" %}
 {% set canAmend = true %}
@@ -15,8 +16,15 @@
 {% block primary %}
   {% set contactDetails = applicationValue(["contact-details"]) %}
   {% include "_includes/review/contact-details.njk" %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "contact-details"])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

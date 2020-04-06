@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/personal-details/review" %}
 {% set title = "Personal details" %}
 {% set canAmend = true %}
@@ -14,8 +15,15 @@
 
 {% block primary %}
   {% include "_includes/review/personal-details.njk" %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "personal-details"])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

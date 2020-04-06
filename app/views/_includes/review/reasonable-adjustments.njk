@@ -33,16 +33,17 @@
   }) }}
 {% endset %}
 
-{% set complete = applicationValue(["reasonable-adjustments"]) | length > 0 %}
-{% if complete %}
+{% set complete = "true" if applicationValue(["completed", "reasonable-adjustments"]) %}
+
+{% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "reasonable-adjustments" %}
+  {% set incompleteText = "Training with a disability not marked as complete" %}
+  {% set incompleteLink = "/reasonable-adjustments/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% else %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: supportDetailsHtml
   }) }}
-{% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "reasonable-adjustments" %}
-  {% set incompleteText = "Training with a disability not entered" %}
-  {% set incompleteLink = "/reasonable-adjustments?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

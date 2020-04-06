@@ -1,26 +1,40 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualifications = applicationValue(["other-qualifications"]) %}
 
-{% if qualifications.length %}
-  {% set qualifications = qualifications | toArray | selectattr("id") %}
-  {% for item in qualifications %}
-    {% set type = item["type-uk"] if item["type-uk"] else item.type or "Not entered" %}
-    {% set qualificationHtml %}
-      {% include "_includes/item/other-qualification.njk" %}
-    {% endset %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: type + " " + item.subject,
-      actions: {
-        items: [{
-          href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete qualification"
-        }]
-      } if canAmend,
-      html: qualificationHtml
-    }) }}
-  {% endfor %}
+{% set otherQualificationContentsHtml %}
+
+  {% if qualifications.length %}
+    {% set qualifications = qualifications | toArray | selectattr("id") %}
+    {% for item in qualifications %}
+      {% set type = item["type-uk"] if item["type-uk"] else item.type or "Not entered" %}
+      {% set qualificationHtml %}
+        {% include "_includes/item/other-qualification.njk" %}
+      {% endset %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: type + " " + item.subject,
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete qualification"
+          }]
+        } if canAmend,
+        html: qualificationHtml
+      }) }}
+    {% endfor %}
+  {% else %}
+    <p class="govuk-body">No other qualifications entered.</p>
+  {% endif %}
+{% endset %}
+
+{% set complete = "true" if applicationValue(["completed", "other-qualifications"]) %}
+{% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "other-qualifications" %}
+  {% set incompleteText = "Other qualifications not marked as complete" %}
+  {% set incompleteLink = "/other-qualifications/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
 {% else %}
-  <p class="govuk-body">No other qualifications entered.</p>
+  {{otherQualificationContentsHtml | safe }}
 {% endif %}

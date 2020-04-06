@@ -35,11 +35,7 @@ module.exports = {
     }
   },
   completed: {
-    choices: ['true'],
-    degree: ['true'],
-    'other-qualifications': ['true'],
-    'school-experience': ['true'],
-    'work-history': ['true']
+
   },
   candidate: {
     'given-name': 'Janina',

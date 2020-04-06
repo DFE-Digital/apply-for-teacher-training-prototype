@@ -76,16 +76,17 @@
   }) }}
 {% endset %}
 
-{% set complete = contactDetails | length > 0 %}
-{% if complete %}
+{% set complete = "true" if applicationValue(["completed", "contact-details"]) %}
+
+{% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "contact-details" %}
+  {% set incompleteText = "Contact details not marked as complete" %}
+  {% set incompleteLink = "/contact-details/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% else %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: contactDetailsHtml
   }) }}
-{% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "contact-details" %}
-  {% set incompleteText = "Contact details not entered" %}
-  {% set incompleteLink = "/contact-details?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

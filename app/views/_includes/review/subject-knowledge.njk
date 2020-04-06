@@ -19,16 +19,17 @@
   }) }}
 {% endset %}
 
-{% set complete = applicationValue(["subject-knowledge"]) | length > 0 %}
-{% if complete %}
+{% set complete = "true" if applicationValue(["completed", "subject-knowledge"]) %}
+
+{% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "subject-knowledge" %}
+  {% set incompleteText = "Subject knowledge not marked as completed" %}
+  {% set incompleteLink = "/subject-knowledge/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% else %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: subjectKnowledgeHtml
   }) }}
-{% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "subject-knowledge" %}
-  {% set incompleteText = "Tell us about your knowledge about the subject you want to teach" %}
-  {% set incompleteLink = "/subject-knowledge?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
 {% endif %}

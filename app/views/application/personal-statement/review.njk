@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/personal-statement/review" %}
 {% set title = "Why do you want to be a teacher?" %}
 {% set canAmend = true %}
@@ -23,8 +24,14 @@
   {% endif %}
   {% include "_includes/review/personal-statement.njk" %}
 
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "personal-statement"])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

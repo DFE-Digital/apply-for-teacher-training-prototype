@@ -4,14 +4,14 @@
 
 {% set coursesHtml %}
 <ul class="govuk-list govuk-list--bullet">
-  <li> <a class="govuk-link" href="#">Art and Design (37L3)</a></li>
+  <li><a class="govuk-link" href="#">Art and Design (37L3)</a></li>
   <li><a class="govuk-link" href="#">Biology (37L4)</a></li>
   <li><a class="govuk-link" href="#">Chemistry (37L5)</a></li>
   <li><a class="govuk-link" href="#">Computing (37L6)</a></li>
   <li><a class="govuk-link" href="#">Design and Technology (37L7)</a></li>
   <li><a class="govuk-link" href="#">Drama (37L8)</a></li>
   <li><a class="govuk-link" href="#">English (37L9)</a></li>
-  <li> <a class="govuk-link" href="#">Geography (37LB)</a></li>
+  <li><a class="govuk-link" href="#">Geography (37LB)</a></li>
   <li><a class="govuk-link" href="#">History (37LC)</a></li>
   <li><a class="govuk-link" href="#">Mathematics (37LD)</a></li>
   <li><a class="govuk-link" href="#">Modern Languages (37LF)</a></li>
@@ -26,7 +26,7 @@
 
 {% block primary %}
   <p class="govuk-body">You can apply to the following training providers and courses using Apply for teacher training. Providers not signed up to Apply for teacher training can only receive applications through UCAS.</p>
-  <p class="govuk-body">We suggest you use Apply for teacher training if:</p>
+  <h2 class="govuk-heading-s">We suggest you use Apply for teacher training if:</h2>
   <ul class="govuk-list govuk-list--bullet">
     <li>you want to try a streamlined service with personalised support</li>
     <li>all your chosen providers are available on the new service</li>
@@ -35,7 +35,7 @@
     <a class="govuk-link" href="/candidate">Use Apply for teacher training</a>
   </p>
 
-  <p class="govuk-body">We suggest you use UCAS if:</p>
+  <h2 class="govuk-heading-s">We suggest you use UCAS if:</h2>
   <ul class="govuk-list govuk-list--bullet">
     <li>you’ve already started applying with UCAS</li>
     <li>some of your chosen providers are not available on Apply for teacher training and you don’t want to use 2 different services.</li>
@@ -222,15 +222,6 @@
       heading: {text: "Yorkshire Inclusive TSA"}, content: {html: coursesHtml}
     }, {
       heading: {text: "Yorkshire and Humber Teacher Training"}, content: {html: coursesHtml}
-    }]
-  }) }}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">No region</h2>
-  {{ govukAccordion({
-    id: "accordion-default",
-    headingLevel: "3",
-    items: [{
-      heading: {text: "e-Qualitas"}, content: {html: coursesHtml}
     }]
   }) }}
 {% endblock %}

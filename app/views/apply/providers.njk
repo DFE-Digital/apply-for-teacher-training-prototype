@@ -1,62 +1,227 @@
 {% extends "_form.njk" %}
 
 {% set title = "Training providers available through Apply for teacher training" %}
-{% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: "javascript: window.history.go(-1)"
-  }) }}
-{% endblock %}
+{% set coursesHtml %}
+<ul class="govuk-list govuk-list--bullet">
+  <li><a class="govuk-link" href="#">Art and Design (37L3)</a></li>
+  <li><a class="govuk-link" href="#">Biology (37L4)</a></li>
+  <li><a class="govuk-link" href="#">Chemistry (37L5)</a></li>
+  <li><a class="govuk-link" href="#">Computing (37L6)</a></li>
+  <li><a class="govuk-link" href="#">Design and Technology (37L7)</a></li>
+  <li><a class="govuk-link" href="#">Drama (37L8)</a></li>
+  <li><a class="govuk-link" href="#">English (37L9)</a></li>
+  <li><a class="govuk-link" href="#">Geography (37LB)</a></li>
+  <li><a class="govuk-link" href="#">History (37LC)</a></li>
+  <li><a class="govuk-link" href="#">Mathematics (37LD)</a></li>
+  <li><a class="govuk-link" href="#">Modern Languages (37LF)</a></li>
+  <li><a class="govuk-link" href="#">Music (37LG)</a></li>
+  <li><a class="govuk-link" href="#">Physical Education (37LJ)</a></li>
+  <li><a class="govuk-link" href="#">Physics (37LK)</a></li>
+  <li><a class="govuk-link" href="#">Primary (37L2)</a></li>
+  <li><a class="govuk-link" href="#">Psychology (37LL)</a></li>
+  <li><a class="govuk-link" href="#">Religious Education (37LM)</a></li>
+</ul>
+{% endset %}
 
 {% block primary %}
-  <p class="govuk-body">You can apply to the following training providers and courses using <a href="/application/start">Apply for teacher training.</a></p>
-
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">University of Huddersfield</h2>
+  <p class="govuk-body">You can apply to the following training providers and courses using Apply for teacher training. Providers not signed up to Apply for teacher training can only receive applications through UCAS.</p>
+  <h2 class="govuk-heading-s">We suggest you use Apply for teacher training if:</h2>
   <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
+    <li>you want to try a streamlined service with personalised support</li>
+    <li>all your chosen providers are available on the new service</li>
   </ul>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/candidate">Use Apply for teacher training</a>
+  </p>
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Huddersfield Horizon SCITT</h2>
+  <h2 class="govuk-heading-s">We suggest you use UCAS if:</h2>
   <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
+    <li>you’ve already started applying with UCAS</li>
+    <li>some of your chosen providers are not available on Apply for teacher training and you don’t want to use 2 different services.</li>
   </ul>
+  <p class="govuk-body">
+    <a class="govuk-link" href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">Use UCAS</a>
+  </p>
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Leeds Trinity University</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
-  </ul>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">East Midlands</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Leicester & Leicestershire SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Nottinghamshire TORCH SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Trent Valley Teaching School Alliance"}, content: {html: coursesHtml}
+    }]
+  }) }}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Leeds SCITT</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
-  </ul>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">East of England</h2>
+  <p class="govuk-body">No providers are available in this region yet.</p>
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">The University of Sheffield</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
-  </ul>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">London</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Catholic Teaching Alliance (South East London)"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Hillingdon SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Royal Academy of Dance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Waltham Forest Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Waltham Forest Teaching School Alliance"}, content: {html: coursesHtml}
+    }]
+  }) }}
 
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Sheffield SCITT</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><a href="#">Art and Design (W1X1)</a></li>
-    <li><a href="#">Primary (3-7) (3D8T)</a></li>
-    <li><a href="#">Primary (Special Educational Needs) (2DBB)</a></li>
-    <li><a href="#">History (3CXH)</a></li>
-  </ul>
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">North East</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Durham SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Gateshead Primary SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Sacred Heart Newcastle SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Stockton-on-Tees Teacher Training Partnership"}, content: {html: coursesHtml}
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">North West</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Ashton on Mersey School SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Cheshire East SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Manchester Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "North West SHARES SCITT"}, content: {html: coursesHtml}
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">South East</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Benfleet Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bourton Meadow Academy"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bourton Meadow Initial Teacher Training Centre"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Buckingham Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Essex and Thames Primary SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Kent and Medway Training"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Mid Essex Initial Teacher Training"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Surrey South Farnham SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "The Bedfordshire Schools Training Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "The Buckingham Partnership (School Direct)"}, content: {html: coursesHtml}
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">South West</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Bristol Metropolitan Academy"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bournemouth Poole & Dorset Teacher Training Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Devon Moorland Schools Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Devon Primary SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Devonport High School for Boys"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Exeter Consortium"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Gorse SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Mid Somerset Consortium for Teacher Training"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "National Forest Teaching School"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "North Avon Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "North Devon Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "North Dorset Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "North Wiltshire SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Poole SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Somerset SCITT Consortium"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "South West Teacher Training"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "The Cotswold Teaching School Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "The Learning Institute South West"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Wessex Schools Training Partnership"}, content: {html: coursesHtml}
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">West Midlands</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Aston Manor Academy"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Barr Beacon SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bournville Village Primary School"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bromsgrove Primary Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Colmore Partnership Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Gateway Alliance (Midlands)"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Prince Henry’s High School & South Worcestershire SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "South Worcestershire and ITT Consortium"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Southam Teaching Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "The Warwickshire Teaching School Alliance"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Thorpe St Andrew School and Sixth Form"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "West Midlands Consortium"}, content: {html: coursesHtml}
+    }]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2 govuk-!-margin-top-8">Yorkshire and the Humber</h2>
+  {{ govukAccordion({
+    id: "accordion-default",
+    headingLevel: "3",
+    items: [{
+      heading: {text: "Doncaster ITT Partnership"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Bradford Birth to 19 SCITT"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Yorkshire Inclusive TSA"}, content: {html: coursesHtml}
+    }, {
+      heading: {text: "Yorkshire and Humber Teacher Training"}, content: {html: coursesHtml}
+    }]
+  }) }}
 {% endblock %}

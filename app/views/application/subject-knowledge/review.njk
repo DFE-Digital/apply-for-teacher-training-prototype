@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/subject-knowledge/review" %}
 {% if hasPrimaryChoices() %}
   {% set title = "What knowledge and experience will you bring to teaching primary school?" %}
@@ -18,8 +19,15 @@
 
 {% block primary %}
   {% include "_includes/review/subject-knowledge.njk" %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "subject-knowledge"])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

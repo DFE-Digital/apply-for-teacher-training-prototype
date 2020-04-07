@@ -1,8 +1,10 @@
 {% extends "_content.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
-{% set incompleteTagClass = "govuk-tag--grey" %}
+{% set incompleteTagClass = "govuk-tag--yellow" %}
 {% set incompleteTagText = "Incomplete" %}
+{% set notStartedTagClass = "govuk-tag--grey" %}
+{% set notStartedTagText = "Not started" %}
 {% set referrer = applicationPath %}
 
 {% if status == "started" %}
@@ -24,7 +26,7 @@
 {% block beforePageTitle %}
   {% if showCopiedBanner %}
     {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application</h2>",
+      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
       type: "success",
       icon: false
     }) }}
@@ -50,6 +52,7 @@
 {% endblock %}
 
 {% block primary %}
+
   {{ govukWarningText({
     text: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application",
     iconFallbackText: "Warning"
@@ -60,6 +63,24 @@
   {% else %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
   {% endif %}
+
+  {% if applicationValue(["apply2"]) %}
+    {% if applicationValue(["completed", "choices"]) %}
+      {% set choiceTagText = tagText %}
+      {% set choiceTagClass = tagClass %}
+    {% else %}
+      {% set choiceTagText = notStartedTagText%}
+      {% set choiceTagClass = notStartedTagClass %}
+    {% endif %}
+  {% else %}
+    {% if applicationValue(["completed", "choices"]) %}
+      {% set choiceTagText = tagText %}
+    {% else %}
+      {% set choiceTagText = incompleteTagText %}
+      {% set choiceTagClass = incompleteTagClass %}
+    {% endif %}
+  {% endif %}
+
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -67,8 +88,8 @@
       href: applicationPath + "/choices",
       id: "personal-details",
       tag: {
-        classes: tagClass if applicationValue(["completed", "choices"]) else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "choices"]) else incompleteTagText
+        classes: choiceTagClass,
+        text: choiceTagText
       }
     }]
   }) }}
@@ -81,19 +102,16 @@
       href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"]) | length > 0),
       id: "personal-details",
       tag: {
-        classes: "app-tag--" + ("amended" if status == "amending" else "completed"),
-        text: "Edited" if status == "amending" else "Completed"
-      } if applicationValue(["candidate"]) | length > 0 else {
-        classes: incompleteTagClass,
-        text: incompleteTagText
+        classes: tagClass if applicationValue(["completed", "personal-details"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "personal-details"]) else incompleteTagText
       }
     }, {
       text: "Contact details",
       href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
       id: "contact-details",
       tag: {
-        classes: tagClass if applicationValue(["contact-details", "address"]) else incompleteTagClass,
-        text: tagText if applicationValue(["contact-details", "address"]) else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "contact-details"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "contact-details"]) else incompleteTagText
       }
     }, {
       text: "Work history",
@@ -116,16 +134,16 @@
      href: applicationPath + "/reasonable-adjustments" + ("/review" if applicationValue("reasonable-adjustments") | length > 0),
      id: "reasonable-adjustments",
      tag: {
-       classes: tagClass if applicationValue("reasonable-adjustments") | length > 0 else incompleteTagClass,
-       text: tagText if applicationValue("reasonable-adjustments") | length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "reasonable-adjustments"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "reasonable-adjustments"]) else incompleteTagText
      }
    }, {
     text: "Declaring any safeguarding issues",
     href: applicationPath + "/suitability" + ("/review" if applicationValue("suitability") | length > 0),
     id: "suitability",
     tag: {
-      classes: tagClass if applicationValue("suitability") | length > 0 else incompleteTagClass,
-      text: tagText if applicationValue("suitability") | length > 0 else incompleteTagText
+      classes: tagClass if applicationValue(["completed", "suitability"]) else incompleteTagClass,
+      text: tagText if applicationValue(["completed", "suitability"]) else incompleteTagText
     }
   }]
   }) }}
@@ -146,32 +164,32 @@
       href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"]) | length > 0),
       id: "maths-gcse",
       tag: {
-        classes: tagClass if applicationValue(["gcse", "maths"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["gcse", "maths"]) |length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "maths"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "maths"]) else incompleteTagText
       }
     }, {
       text: "English GCSE or equivalent",
       href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"]) | length > 0),
       id: "english-gcse",
       tag: {
-        classes: tagClass if applicationValue(["gcse", "english"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["gcse", "english"]) |length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "english"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "english"]) else incompleteTagText
       }
     }, {
       text: "Science GCSE or equivalent",
       href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"]) | length > 0),
       id: "science-gcse",
       tag: {
-        classes: tagClass if applicationValue(["gcse", "science"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["gcse", "science"]) |length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "science"]) else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "science"]) else incompleteTagText
       }
     } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
       text: "Academic and other relevant qualifications",
       href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) | length > 0 else "/add"),
       id: "other-qualifications",
       tag: {
-        classes: tagClass if applicationValue(["gcse", "other-qualifications"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["gcse", "other-qualifications"]) |length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "other-qualifications"]) |length > 0 else incompleteTagText
       }
     }]
   }) }}
@@ -184,24 +202,24 @@
       href: applicationPath + "/personal-statement" + ("/review" if applicationValue(["personal-statement"]) | length > 0),
       id: "personal-statement",
       tag: {
-        classes: tagClass if applicationValue("personal-statement") | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue("personal-statement") | length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "personal-statement"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "personal-statement"]) |length > 0 else incompleteTagText
       }
     }, {
       text: "Your knowledge about the subject you want to teach",
       href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subject-knowledge"]) | length > 0),
       id: "subject-knowledge",
       tag: {
-        classes: tagClass if applicationValue("subject-knowledge") | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue("subject-knowledge") | length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "subject-knowledge"]) |length > 0 else incompleteTagText
       }
     }, {
       text: "Interview needs",
       href: applicationPath + "/interview" + ("/review" if applicationValue(["interview"]) | length > 0),
       id: "interview",
       tag: {
-        classes: tagClass if applicationValue("interview-choice") | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue("interview-choice") | length > 0 else incompleteTagText
+        classes: tagClass if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "interview"]) |length > 0 else incompleteTagText
       }
     } if data.flags.interview_preferences == true]
   }) }}
@@ -210,6 +228,18 @@
   {% if status == "amending" %}
     <p class="govuk-body">You can’t change your choice of referees after you’ve submitted your application.</p>
   {% endif %}
+
+
+  {# classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
+  text: "Completed" if status == "started" else ("Submitted" if status == "amending")
+
+
+  if applicationValue(["referees"]) | length > 0 else {
+        classes: incompleteTagClass,
+        text: incompleteTagText
+      }
+  #}
+
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
@@ -217,11 +247,8 @@
       href: applicationPath + "/references" + ("/review" if applicationValue(["referees"]) | length > 0),
       id: "references",
       tag: {
-        classes: "app-tag--" + ("completed" if status == "started" else ("submitted" if status == "amending")),
-        text: "Completed" if status == "started" else ("Submitted" if status == "amending")
-      } if applicationValue(["referees"]) | length > 0 else {
-        classes: incompleteTagClass,
-        text: incompleteTagText
+        classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "references"]) |length > 0 else incompleteTagText
       }
     }]
   }) }}
@@ -232,7 +259,11 @@
     items: [{
       text: reviewText,
       href: applicationPath + "/review",
-      id: "review"
+      id: "review",
+      tag: {
+        classes: notStartedTagClass,
+        text: notStartedTagText
+      }
     }]
   }) }}
 {% endblock %}

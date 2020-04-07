@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/gcse/" + id + "/review" %}
 {% set title = (id | capitalize) + " GCSE or equivalent" %}
 {% set canAmend = true %}
@@ -14,8 +15,15 @@
 
 {% block primary %}
   {% include "_includes/review/gcse.njk" %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", id])) }}
+
   {{ govukButton({
-    text: "Continue",
-    href: applicationPath
+    text: "Continue"
   }) }}
 {% endblock %}

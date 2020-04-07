@@ -29,16 +29,16 @@
 
 {{ appRelated({
   name: "help",
-  title: "Previous applications",
-  content: {
-    html: previousApplicationsHtml
-  }
-}) if applicationValue('apply2') }}
-
-{{ appRelated({
-  name: "help",
   title: "Need help?",
   content: {
     html: helpHtml
   }
 }) }}
+
+{{ appRelated({
+  name: "help",
+  title: "Previous applications",
+  content: {
+    html: previousApplicationsHtml
+  }
+}) if applicationValue('apply2') }}

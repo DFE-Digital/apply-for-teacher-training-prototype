@@ -1,5 +1,12 @@
-{% set complete = references | length > 0 %}
-{% if complete %}
+{% set complete = "true" if applicationValue(["completed", "references"]) %}
+
+{% if showIncomplete and complete != "true" %}
+  {% set incompleteType = "warning" if errorList %}
+  {% set incompleteId = "referees" %}
+  {% set incompleteText = "Referees not marked as completed" %}
+  {% set incompleteLink = "/referees/review?referrer=" + referrer %}
+  {% include "_includes/review/incomplete.njk" %}
+{% else %}
   {% set references = references | toArray %}
   {% for item in references %}
     {% set refereeHtml %}
@@ -18,10 +25,5 @@
       html: refereeHtml
     }) }}
   {% endfor %}
-{% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "referees" %}
-  {% set incompleteText = "Add 2 referees to your application" %}
-  {% set incompleteLink = "/references/?referrer=" + referrer %}
-  {% include "_includes/review/incomplete.njk" %}
 {% endif %}
+

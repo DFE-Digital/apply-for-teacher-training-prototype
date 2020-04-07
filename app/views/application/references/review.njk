@@ -1,6 +1,7 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
 {% set title = "References" %}
 {% set referrer = applicationPath + "/references/review" %}
 
@@ -39,9 +40,15 @@
       href: applicationPath
     }) }}
   {% else %}
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "references"])) }}
+
     {{ govukButton({
-      text: "Continue",
-      href: applicationPath
+      text: "Continue"
     }) }}
   {% endif %}
 {% endblock %}

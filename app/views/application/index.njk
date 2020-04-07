@@ -126,7 +126,7 @@
           Reasons for rejection
         </dt>
         <dd class="govuk-summary-list__value">
-          [Reasons going to go here]
+          Lack of knowledge of the purpose of PE in schools and the content of the secondary PE curriculum Lack of understanding of the procedures / processes related to safeguarding.
         </dd>
 
       </div>
@@ -225,7 +225,8 @@
           Reasons for rejection
         </dt>
         <dd class="govuk-summary-list__value">
-          [Reasons going to go here]
+
+Unfortunately due to the volume of applications we have received for our PE programme and the limited placement opportunities remaining we will be unable to take forward your application at this time.
         </dd>
 
       </div>
@@ -324,7 +325,7 @@
           Reasons for rejection
         </dt>
         <dd class="govuk-summary-list__value">
-          [Reasons going to go here]
+          As per our email communication, you did not have enough English in your profile to be considered for English and neither did you have GCSE's in English, Maths and Science to be considered for Primary.
         </dd>
 
       </div>
@@ -359,10 +360,12 @@
 
   {% endset %}
 
-  {{ govukDetails({
-    summaryText: "See why your previous applications were rejected",
-    html: rejectionHtml
-  }) }}
+  {% if applicationValue(["apply2"]) %}
+    {{ govukDetails({
+      summaryText: "See why your previous applications were rejected",
+      html: rejectionHtml
+    }) }}
+  {% endif %}
 
   {% if applicationValue(["apply2"]) %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choice</h2>

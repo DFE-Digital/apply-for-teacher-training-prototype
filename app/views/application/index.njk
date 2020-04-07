@@ -49,6 +49,7 @@
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
   <p class="govuk-hint govuk-!-margin-bottom-8">Last saved on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}</p>
+
 {% endblock %}
 
 {% block primary %}
@@ -57,6 +58,314 @@
     text: "You have 5 days remaining (until " + (7 | nowPlusDays("d MMMM yyyy")) + ") to submit your edited application",
     iconFallbackText: "Warning"
   }) if status == "amending" }}
+
+  {% set rejectionHtml %}
+    <section class="app-summary-card govuk-!-margin-bottom-6">
+
+  <header class="app-summary-card__header">
+
+    <h3 class="app-summary-card__title">
+      Gorse SCITT
+    </h3>
+
+  </header>
+
+
+  <div class="app-summary-card__body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="govuk-summary-list">
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/1N1/2XT2">Primary (2XT2)</a><br>PGCE with QTS full time
+        </dd>
+
+      </div>
+
+
+
+      {# <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Hillcrest Academy<br>Cowper Street, Leeds. LS7 4DR
+        </dd>
+
+      </div> #}
+
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Reasons for rejection
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Lack of knowledge of the purpose of PE in schools and the content of the secondary PE curriculum Lack of understanding of the procedures / processes related to safeguarding.
+        </dd>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+  </div>
+
+</section>
+
+
+<section class="app-summary-card govuk-!-margin-bottom-6">
+
+  <header class="app-summary-card__header">
+
+    <h3 class="app-summary-card__title">
+      Leeds Trinity University
+    </h3>
+
+  </header>
+
+
+  <div class="app-summary-card__body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="govuk-summary-list">
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/L24/2VLT">Primary (3-7) (2VLT)</a><br>PGCE with QTS full time
+        </dd>
+
+      </div>
+
+
+
+      {# <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Main Site<br>Brownberrie Lane, Horsforth, Leeds. LS18 5HD
+        </dd>
+
+      </div> #}
+
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Reasons for rejection
+        </dt>
+        <dd class="govuk-summary-list__value">
+
+Unfortunately due to the volume of applications we have received for our PE programme and the limited placement opportunities remaining we will be unable to take forward your application at this time.
+        </dd>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+  </div>
+
+</section>
+
+
+<section class="app-summary-card govuk-!-margin-bottom-0">
+
+  <header class="app-summary-card__header">
+
+    <h3 class="app-summary-card__title">
+      Bradford College
+    </h3>
+
+  </header>
+
+
+  <div class="app-summary-card__body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="govuk-summary-list">
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Course
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X100">Primary (X100)</a><br>PGCE with QTS full time
+        </dd>
+
+      </div>
+
+
+
+      {# <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Location
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Main Site<br>David Hockney Building, Great Horton Road, Bradford. BD7 1AY
+        </dd>
+
+      </div> #}
+
+
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Reasons for rejection
+        </dt>
+        <dd class="govuk-summary-list__value">
+          As per our email communication, you did not have enough English in your profile to be considered for English and neither did you have GCSE's in English, Maths and Science to be considered for Primary.
+        </dd>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</dl>
+
+
+
+  </div>
+
+</section>
+
+
+  {% endset %}
+
+  {% if applicationValue(["apply2"]) %}
+    {{ govukDetails({
+      summaryText: "See why your previous applications were rejected",
+      html: rejectionHtml
+    }) }}
+  {% endif %}
 
   {% if applicationValue(["apply2"]) %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choice</h2>

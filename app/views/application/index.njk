@@ -562,19 +562,13 @@ Unfortunately due to the volume of applications we have received for our PE prog
     }]
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Review and submit</h2>
-  {{ appTaskList({
-    classes: "govuk-!-margin-bottom-8",
-    items: [{
-      text: reviewText,
-      href: applicationPath + "/review",
-      id: "review",
-      tag: {
-        classes: notStartedTagClass,
-        text: notStartedTagText
-      }
-    }]
-  }) }}
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Check and submit</h2>
+
+  {{govukButton({
+    text: "Check and submit your application",
+    href: applicationPath + "/review"
+  })}}
+
 {% endblock %}
 
 {% block secondary %}

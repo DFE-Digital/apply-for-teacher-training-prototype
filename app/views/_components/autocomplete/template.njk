@@ -1,11 +1,9 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {{ govukSelect({
-  label: {
-    text: params.label.text,
-    classes: params.label.classes
-  },
-  classes: params.classes,
+  label: params.label,
+  hint: params.hint,
   id: params.id,
+  classes: params.classes,
   name: params.name,
   items: params.items
 }) }}

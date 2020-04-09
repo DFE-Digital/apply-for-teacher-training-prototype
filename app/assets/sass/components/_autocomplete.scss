@@ -105,12 +105,20 @@
   background-color: govuk-colour("light-grey");
 }
 
+.autocomplete__option--hint {
+  color: $govuk-secondary-text-colour;
+}
+
 .autocomplete__option--focused,
 .autocomplete__option:hover {
   background-color: govuk-colour("blue");
   border-color: govuk-colour("blue");
   color: govuk-colour("white");
   outline: 0;
+
+  .autocomplete__option--hint {
+    color: govuk-colour("white");
+  }
 }
 
 .autocomplete__option--no-results {

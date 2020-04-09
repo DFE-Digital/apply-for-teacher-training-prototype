@@ -20,6 +20,8 @@ const degreePaths = (req) => {
   var paths = [
     basePath,
     ...(international ? [`${basePath}/naric`] : []),
+    `${basePath}/subject`,
+    `${basePath}/institution`,
     `${basePath}/grade`,
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/degree/review`])
@@ -46,7 +48,7 @@ module.exports = router => {
 
   // Render first page
   router.get('/application/:applicationId/degree/:id', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req).year
+    const completedDegree = degreeData(req).grade && degreeData(req)['year-start']
 
     const id = req.params.id
     const referrer = req.query.referrer
@@ -70,7 +72,7 @@ module.exports = router => {
 
     let path
     if (provenance === 'domestic' || !req.session.data.flags.international_qualifications) {
-      path = `${id}/grade`
+      path = `${id}/subject`
     } else {
       path = `${id}/naric`
     }
@@ -79,8 +81,8 @@ module.exports = router => {
   })
 
   // Render NARIC/grade/year pages
-  router.all('/application/:applicationId/degree/:id/:template(naric|grade|year)', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req).year
+  router.all('/application/:applicationId/degree/:id/:template(naric|subject|institution|grade|year)', (req, res) => {
+    const completedDegree = degreeData(req).grade && degreeData(req)['year-start']
 
     const id = req.params.id
     const referrer = req.query.referrer

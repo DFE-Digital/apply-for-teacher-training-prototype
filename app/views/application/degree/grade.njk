@@ -4,12 +4,11 @@
 {% set degrees = applicationValue(["degree"]) | toArray %}
 {% set firstDegree = degrees[0].id == id %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% if international and firstDegree == true %}
-  {% set title = "Have you completed your degree?" %}
-{% elif firstDegree == false %}
+{% set undergraduateDegree = applicationValue(["degree", id, "type-uk"]) | isUndergraduateDegree %}
+{% if international %}
   {% set title = "Have you completed this degree?" %}
 {% else %}
-  {% set title = "What class is your degree?" %}
+  {% set title = "What grade is your degree?" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -40,7 +39,7 @@
     } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
   {% endset %}
 
-  {% if international == true or firstDegree == false %}
+  {% if international %}
     {{ govukRadios({
       items: [{
         text: "Yes",
@@ -57,16 +56,33 @@
         }
       }]
     } | decorateApplicationAttributes(["degree", id, "grade"])) }}
-  {% else %}
+  {% elif undergraduateDegree %}
     {{ govukRadios({
       items: [{
-        text: "First"
+        value: "First-class honours",
+        text: "First-class honours"
       }, {
-        text: "Upper second (2:1)"
+        value: "Upper second-class honours (2:1)",
+        text: "Upper second-class honours (2:1)"
       }, {
-        text: "Lower second (2:2)"
+        value: "Lower second-class honours (2:2)",
+        text: "Lower second-class honours (2:2)"
       }, {
-        text: "Third"
+        value: "Third-class honours",
+        text: "Third-class honours"
+      }, {
+        value: "Fourth-class honours",
+        text: "Fourth-class honours"
+      }, {
+        text: "Unclassified"
+      }, {
+        text: "Aegrotat"
+      }, {
+        text: "Pass"
+      }, {
+        text: "Ordinary degree"
+      }, {
+        text: "General degree"
       }, {
         text: "Other",
         conditional: {
@@ -76,7 +92,34 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: "I am still studying for my degree",
+        text: ("I am still studying for my degree" if firstDegree else "I am still studying for this degree"),
+        conditional: {
+          html: predictedGradeHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
+  {% else %}
+    {{ govukRadios({
+      items: [{
+        text: "Destinction"
+      }, {
+        text: "Merit"
+      }, {
+        text: "Pass"
+      }, {
+        text: "Not applicable"
+      }, {
+        text: "Unknown"
+      }, {
+        text: "Other",
+        conditional: {
+          html: otherGradeHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        value: "Pending",
+        text: "I am still studying for this degree",
         conditional: {
           html: predictedGradeHtml
         }

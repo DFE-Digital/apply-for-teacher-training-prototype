@@ -8,10 +8,11 @@
     {% set degreeHtml %}
       {% include "_includes/item/degree.njk" %}
     {% endset %}
+    {% set degreeType = (item["type-uk"] or item["type-nonuk"]) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",
       headingLevel: 3,
-      titleText: item.type + " " + item.subject,
+      titleText: degreeType + " " + item.subject,
       actions: {
         items: [{
           href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,

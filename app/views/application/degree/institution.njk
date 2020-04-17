@@ -35,10 +35,9 @@
         name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
         minLength: 2,
         element: document.querySelector('#org-autocomplete-container'),
-        id: 'degree-{{ id }}-subject',
+        id: 'degree-{{ id }}-org',
         placeholder: false,
         defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
-        selectElement: document.querySelector('#degree-{{ id }}-org'),
         showNoOptionsFound: false,
         source: [
           {% for item in degree.orgs %}"{{ item }}",{% endfor %}

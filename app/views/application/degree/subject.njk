@@ -38,7 +38,6 @@
         id: 'degree-{{ id }}-subject',
         placeholder: false,
         defaultValue: '{{ applicationValue(["degree", id, "subject"]) }}',
-        selectElement: document.querySelector('#degree-{{ id }}-org'),
         showNoOptionsFound: false,
         source: [
           {% for item in degree.subjects %}"{{ item }}",{% endfor %}

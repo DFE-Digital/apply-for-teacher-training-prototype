@@ -26,7 +26,7 @@
       hint: {
         text: "Predicted grades must be validated by an academic referee in the ‘References' section."
       },
-      classes: "govuk-input--width-10"
+      classes: "govuk-input--width-20"
     } | decorateApplicationAttributes(["degree", id, "grade-predicted"])) }}
   {% endset %}
 
@@ -35,8 +35,15 @@
       label: {
         text: "Enter your degree grade"
       },
-      classes: "govuk-input--width-10"
+      classes: "govuk-input--width-20"
     } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
+  {% endset %}
+
+  {% set otherUkGradeHtml %}
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="degree-{{ id }}-grade-other">Enter your degree grade</label>
+      <div id="grade-autocomplete-container" class="govuk-input--width-20"></div>
+    </div>
   {% endset %}
 
   {% if international %}
@@ -50,7 +57,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: ("I am still studying for my degree" if firstDegree else "I am still studying for this degree"),
+        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
         conditional: {
           html: predictedGradeHtml
         }
@@ -71,28 +78,17 @@
         value: "Third-class honours",
         text: "Third-class honours"
       }, {
-        value: "Fourth-class honours",
-        text: "Fourth-class honours"
-      }, {
-        text: "Unclassified"
-      }, {
-        text: "Aegrotat"
-      }, {
         text: "Pass"
-      }, {
-        text: "Ordinary degree"
-      }, {
-        text: "General degree"
       }, {
         text: "Other",
         conditional: {
-          html: otherGradeHtml
+          html: otherUkGradeHtml
         }
       }, {
         divider: "or"
       }, {
         value: "Pending",
-        text: ("I am still studying for my degree" if firstDegree else "I am still studying for this degree"),
+        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
         conditional: {
           html: predictedGradeHtml
         }
@@ -119,7 +115,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: "I am still studying for this degree",
+        text: "I’m still studying for this degree",
         conditional: {
           html: predictedGradeHtml
         }
@@ -131,3 +127,26 @@
     text: "Save and continue"
   }) }}
 {% endblock %}
+
+{% if not international %}
+  {% block pageScripts %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        name: "applications[{{ applicationId }}][degree][{{ id }}][grade-other]",
+        element: document.querySelector('#grade-autocomplete-container'),
+        id: 'degree-{{ id }}-grade-other',
+        placeholder: false,
+        defaultValue: '{{ applicationValue(["degree", id, "grade-other"]) }}',
+        showNoOptionsFound: false,
+        source: [
+          'Aegrotat',
+          'Fourth-class honours',
+          'General degree',
+          'Ordinary degree',
+          'Unclassified'
+        ]
+      })
+    </script>
+  {% endblock %}
+{% endif %}

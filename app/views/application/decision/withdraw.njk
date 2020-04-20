@@ -1,11 +1,7 @@
 {% extends "_form.njk" %}
 
-{% if data.flags.self_withdraw %}
-  {% set title = "Are you sure you want to withdraw this course choice?" %}
-  {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
-{% else %}
-  {% set title = "Withdrawal" %}
-{% endif %}
+{% set title = "Are you sure you want to withdraw this course choice?" %}
+{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -14,21 +10,14 @@
 {% endblock %}
 
 {% block primary %}
-  {% if data.flags.self_withdraw %}
-    {% include "_includes/item/offer.njk" %}
+  {% include "_includes/item/offer.njk" %}
 
-    <p class="govuk-body">If you withdraw this course choice (and all your other course choices), you can still apply for more courses this year through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
+  <p class="govuk-body">If you withdraw this course choice (and all your other course choices), you can still apply for more courses this year through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a>.</p>
 
-    {{ govukButton({
-      classes: "govuk-button--warning",
-      text: "Yes I’m sure - withdraw this course choice",
-      name: "decision",
-      value: "withdraw"
-    }) }}
-  {% else %}
-    <p class="govuk-body">You can withdraw your application to study:</p>
-    <p class="govuk-body"><strong>{{ course.name_and_code }} at {{ provider.name }}</strong></p>
-    <p class="govuk-body">by emailing us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
-    <p class="govuk-body">We’ll contact your training provider and send you an email confirming that your application has been withdrawn.</p>
-  {% endif %}
+  {{ govukButton({
+    classes: "govuk-button--warning",
+    text: "Yes I’m sure - withdraw this course choice",
+    name: "decision",
+    value: "withdraw"
+  }) }}
 {% endblock %}

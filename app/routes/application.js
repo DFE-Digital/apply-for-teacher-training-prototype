@@ -172,9 +172,7 @@ module.exports = router => {
     apply2Application.welcomeFlow = false
     apply2Application.apply2 = true
     apply2Application.choices = {}
-    apply2Application.completed = {
-      // 'personal-details': ['true']
-    }
+    apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
 
     if (apply2Application.referees && apply2Application.referees.first) {

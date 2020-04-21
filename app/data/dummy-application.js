@@ -35,7 +35,21 @@ module.exports = {
     }
   },
   completed: {
-
+    'personal-details': ['true'],
+    'contact-details': ['true'],
+    'work-history': ['true'],
+    'school-experience': ['true'],
+    'reasonable-adjustments': ['true'],
+    suitability: ['true'],
+    degree: ['true'],
+    maths: ['true'],
+    english: ['true'],
+    science: ['true'],
+    'other-qualifications': ['true'],
+    'personal-statement': ['true'],
+    'subject-knowledge': ['true'],
+    interview: ['true'],
+    references: ['true']
   },
   candidate: {
     'given-name': 'Janina',

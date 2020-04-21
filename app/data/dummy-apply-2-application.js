@@ -6,7 +6,7 @@ dummyApply2Application.apply2 = true
 dummyApply2Application.previousApplications = ['12345']
 
 // No sections completed
-dummyApply2Application.completed = {}
+dummyApply2Application.completed.choices = null
 
 // No choices yet
 dummyApply2Application.choices = {}

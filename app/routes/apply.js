@@ -66,9 +66,9 @@ module.exports = router => {
       }
 
       if (route === 'dfe') {
-        res.redirect('/account/eligibility') // Check you can use this service
+        res.redirect('/account/create-account')
       } else if (route === 'dfe-returning') {
-        res.redirect('/account/sign-in') // Sign in to continue
+        res.redirect('/account/sign-in')
       }
     }
   })

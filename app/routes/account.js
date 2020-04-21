@@ -11,17 +11,7 @@ module.exports = router => {
       utils.sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
       res.redirect('/account/check-email/sign-in')
     } else {
-      res.redirect('/account/eligibility')
-    }
-  })
-
-  router.get('/account/eligibility/answer', (req, res) => {
-    const eligibileNationality = req.session.data['eligibile-nationality']
-    const eligibileEquivalencies = req.session.data['eligibile-equivalencies']
-    if (eligibileNationality === 'no' || eligibileEquivalencies === 'no') {
-      res.redirect('/account/ineligible') // Show UCAS Apply information
-    } else {
-      res.redirect('/account/create-account') // Create an account
+      res.redirect('/account/create-account')
     }
   })
 

@@ -4,12 +4,11 @@
 {% set degrees = applicationValue(["degree"]) | toArray %}
 {% set firstDegree = degrees[0].id == id %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% if international and firstDegree == true %}
-  {% set title = "Have you completed your degree?" %}
-{% elif firstDegree == false %}
+{% set undergraduateDegree = applicationValue(["degree", id, "type-uk"]) | isUndergraduateDegree %}
+{% if international %}
   {% set title = "Have you completed this degree?" %}
 {% else %}
-  {% set title = "What class is your degree?" %}
+  {% set title = "What grade is your degree?" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -27,7 +26,7 @@
       hint: {
         text: "Predicted grades must be validated by an academic referee in the ‘References' section."
       },
-      classes: "govuk-input--width-10"
+      classes: "govuk-input--width-20"
     } | decorateApplicationAttributes(["degree", id, "grade-predicted"])) }}
   {% endset %}
 
@@ -36,11 +35,18 @@
       label: {
         text: "Enter your degree grade"
       },
-      classes: "govuk-input--width-10"
+      classes: "govuk-input--width-20"
     } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
   {% endset %}
 
-  {% if international == true or firstDegree == false %}
+  {% set otherUkGradeHtml %}
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="degree-{{ id }}-grade-other">Enter your degree grade</label>
+      <div id="grade-autocomplete-container" class="govuk-input--width-20"></div>
+    </div>
+  {% endset %}
+
+  {% if international %}
     {{ govukRadios({
       items: [{
         text: "Yes",
@@ -51,7 +57,38 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: ("I am still studying for my degree" if firstDegree else "I am still studying for this degree"),
+        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
+        conditional: {
+          html: predictedGradeHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
+  {% elif undergraduateDegree %}
+    {{ govukRadios({
+      items: [{
+        value: "First-class honours",
+        text: "First-class honours"
+      }, {
+        value: "Upper second-class honours (2:1)",
+        text: "Upper second-class honours (2:1)"
+      }, {
+        value: "Lower second-class honours (2:2)",
+        text: "Lower second-class honours (2:2)"
+      }, {
+        value: "Third-class honours",
+        text: "Third-class honours"
+      }, {
+        text: "Pass"
+      }, {
+        text: "Other",
+        conditional: {
+          html: otherUkGradeHtml
+        }
+      }, {
+        divider: "or"
+      }, {
+        value: "Pending",
+        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
         conditional: {
           html: predictedGradeHtml
         }
@@ -60,13 +97,15 @@
   {% else %}
     {{ govukRadios({
       items: [{
-        text: "First"
+        text: "Distinction"
       }, {
-        text: "Upper second (2:1)"
+        text: "Merit"
       }, {
-        text: "Lower second (2:2)"
+        text: "Pass"
       }, {
-        text: "Third"
+        text: "Not applicable"
+      }, {
+        text: "Unknown"
       }, {
         text: "Other",
         conditional: {
@@ -76,7 +115,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: "I am still studying for my degree",
+        text: "I’m still studying for this degree",
         conditional: {
           html: predictedGradeHtml
         }
@@ -88,3 +127,26 @@
     text: "Save and continue"
   }) }}
 {% endblock %}
+
+{% if not international %}
+  {% block pageScripts %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        name: "applications[{{ applicationId }}][degree][{{ id }}][grade-other]",
+        element: document.querySelector('#grade-autocomplete-container'),
+        id: 'degree-{{ id }}-grade-other',
+        placeholder: false,
+        defaultValue: '{{ applicationValue(["degree", id, "grade-other"]) }}',
+        showNoOptionsFound: false,
+        source: [
+          'Aegrotat',
+          'Fourth-class honours',
+          'General degree',
+          'Ordinary degree',
+          'Unclassified'
+        ]
+      })
+    </script>
+  {% endblock %}
+{% endif %}

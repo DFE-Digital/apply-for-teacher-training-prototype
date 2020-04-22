@@ -1,0 +1,48 @@
+{% extends "_form-question.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "What institution did you go to?" %}
+{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if international %}
+    {{ govukInput({
+      label: label
+    } | decorateApplicationAttributes(["degree", id, "org"])) }}
+  {% else %}
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-subject">{{ title }}</label>
+      <div id="org-autocomplete-container"></div>
+    </div>
+  {% endif %}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% if not international %}
+  {% block pageScripts %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
+        minLength: 2,
+        element: document.querySelector('#org-autocomplete-container'),
+        id: 'degree-{{ id }}-org',
+        placeholder: false,
+        defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
+        showNoOptionsFound: false,
+        source: [
+          {% for item in degree.orgs %}"{{ item }}",{% endfor %}
+        ]
+      })
+    </script>
+  {% endblock %}
+{% endif %}

@@ -118,6 +118,7 @@ app.locals.serviceSlug = pkg.name
 app.locals.urStudy = urStudy
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
+app.locals.degree = require('./app/data/degree')()
 app.locals.countries = require('./app/data/countries')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')

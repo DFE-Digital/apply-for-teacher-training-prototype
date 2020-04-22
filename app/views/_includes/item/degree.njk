@@ -1,44 +1,63 @@
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set qualificationText -%}
-  {%- if item.type -%}
-    {{- item.type + " " + item.subject if item.type }}
-    {{ item.org + ", " + item.country if item.org }}
-  {%- else -%}
-    Not entered
-  {%- endif -%}
-{%- endset %}
-
 {{ govukSummaryList({
   rows: [{
     key: {
-      text: "Qualification"
+      text: "Degree type"
     },
     value: {
-      text: qualificationText | nl2br | safe
+      text: item["type-uk"] or item["type-nonuk"] or "Not entered"
     },
     actions: {
       items: [{
         href: applicationPath + "/degree/" + item.id + "?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "year"
+        visuallyHiddenText: "degree type"
       }]
     } if canAmend
   }, {
     key: {
-      text: "Year awarded"
+      text: "Subject"
     },
     value: {
-      text: item.year or "Not entered"
+      text: item.subject or "Not entered"
     },
     actions: {
       items: [{
-        href: applicationPath + "/degree/" + item.id + "/year?referrer=" + referrer,
+        href: applicationPath + "/degree/" + item.id + "/subject?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "year"
+        visuallyHiddenText: "subject"
       }]
     } if canAmend
   }, {
+    key: {
+      text: "Institution"
+    },
+    value: {
+      text: item.org or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/institution?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "institution"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Country"
+    },
+    value: {
+      text: item.country | safe
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "country"
+      }]
+    } if canAmend
+  } if item.country, {
     key: {
       text: "Grade"
     },
@@ -50,6 +69,20 @@
         href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "grade"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Dates"
+    },
+    value: {
+      text: item["year-start"] + " - " + item["year-end"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/year?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "dates"
       }]
     } if canAmend
   }]

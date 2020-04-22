@@ -4,16 +4,16 @@
 {% set degreeCount = applicationValue(["degree"]) | length %}
 {% if degreeCount >= 1 and action == "add" %}
   {% set title = (action | capitalize) + " another degree" %}
+  {% set degreeTypes = degree.types.all %}
 {% else %}
   {% set title = (action | capitalize) + " undergraduate degree" %}
+  {% set degreeTypes = degree.types.undergraduate %}
 {% endif %}
 
-{% if degreeCount >= 1 and action == "add" %}
-  {% set hintText = "For example, Masters, PhD, or other (please specify)" %}
-{% elif degreeCount < 1 and action == "add" %}
-  {% set hintText = "For example, BA, BSc or other (please specify)" %}
+{% if degreeCount < 1 and action == "add" %}
+  {% set internationalTypeHintText = "For example, BA, BSc or other (please specify)" %}
 {% else %}
-  {% set hintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+  {% set internationalTypeHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -30,37 +30,26 @@
 {% endblock %}
 
 {% block primary %}
-  {% if degreeCount < 1 %}
-    <p class="govuk-body">Your undergraduate degree confirms your eligibility to teach. Enter the details of your degree as they appear on your certificate, translating them into English if necessary.</p>
-    <p class="govuk-body">If you have further postgraduate degrees, you’ll be able to add them next.</p>
-  {% endif %}
-
-  {{ govukInput({
-    label: {
-      text: "Type of degree",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: hintText
-    }
-  } | decorateApplicationAttributes(["degree", id, "type"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Subject of degree",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["degree", id, "subject"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["degree", id, "org"])) }}
-
   {% if data.flags.international_qualifications %}
+    {% set ukConditionalHtml %}
+      {{ appAutocomplete({
+        label: {
+          text: "Type of degree"
+        },
+        items: degreeTypes
+      } | decorateApplicationAttributes(["degree", id, "type-uk"])) }}
+    {% endset %}
+
     {% set internationalConditionalHtml %}
+      {{ govukInput({
+        label: {
+          text: "Type of qualification"
+        },
+        hint: {
+          text: internationalTypeHintText
+        }
+      } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
+
       {{ appAutocomplete({
         label: {
           text: "In which country is your institution based?"
@@ -72,20 +61,38 @@
     {{ govukRadios({
       fieldset: {
         legend: {
-          text: "This institution is based:"
+          text: "What type of degree do you want to add?",
+          classes: "govuk-label--m"
         }
       },
+      hint: {
+        text: "You need an undergraduate to apply for teacher training. If you have further degrees, you can add them after."
+      } if degreeCount < 1,
       items: [{
         value: "domestic",
-        text: "In the UK"
+        text: "UK degree",
+        conditional: {
+          html: ukConditionalHtml
+        }
       }, {
         value: "international",
-        text: "Outside the UK",
+        text: "Non-UK degree",
         conditional: {
           html: internationalConditionalHtml
         }
       }]
     } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
+  {% else %}
+    {{ appAutocomplete({
+      label: {
+        text: "What type of degree do you want to add?",
+        classes: "govuk-label--m"
+      },
+      hint: {
+        text: "You need an undergraduate to apply for teacher training. If you have further degrees, you can add them after."
+      } if degreeCount < 1,
+      items: degreeTypes
+    } | decorateApplicationAttributes(["degree", id, "type-uk"])) }}
   {% endif %}
 
   {{ govukButton({
@@ -96,9 +103,44 @@
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
+  {% if data.flags.international_qualifications %}
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue: '{{ applicationValue(["degree", id, "country"]) }}',
       selectElement: document.querySelector('#degree-{{ id }}-country')
+    })
+  {% endif %}
+    function inputTemplate (result) {
+      if (result) {
+        const name = result.split(' - ')
+
+        if (name[1]) {
+          return name[0] && name[0]
+        }
+
+        return result && result
+      }
+
+      return result && result
+    }
+
+    function suggestionTemplate (result) {
+      const name = result.split(' - ')
+
+      if (name[1]) {
+        return name[0] && `<strong>${name[0]}</strong> <span class="autocomplete__option--hint">${name[1]}</span>`
+      }
+
+      return result && `<strong>${result}</strong>`
+    }
+
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue: '{{ applicationValue(["degree", id, "type-uk"]) }}',
+      selectElement: document.querySelector('#degree-{{ id }}-type-uk'),
+      showAllValues: true,
+      templates: {
+        inputValue: inputTemplate,
+        suggestion: suggestionTemplate
+      }
     })
   </script>
 {% endblock %}

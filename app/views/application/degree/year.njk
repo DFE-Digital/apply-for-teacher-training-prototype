@@ -4,11 +4,7 @@
 {% if applicationValue(["degree", id, "grade"]) == "Pending" %}
   {% set pending = true %}
 {% endif %}
-{% if pending %}
-  {% set title = "When will you graduate?" %}
-{% else %}
-  {% set title = "What year did you graduate?" %}
-{% endif %}
+{% set title = "When did you study for your degree?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -23,10 +19,17 @@
 
   {{ govukInput({
     label: {
-      text: "Enter year"
+      text: "Year started course"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["degree", id, "year"])) }}
+  } | decorateApplicationAttributes(["degree", id, "year-start"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "When will you graduate?"if pending else "Year graduated"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["degree", id, "year-end"])) }}
 
   {{ govukButton({
     text: "Save and continue"

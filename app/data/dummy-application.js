@@ -35,7 +35,21 @@ module.exports = {
     }
   },
   completed: {
-
+    'personal-details': ['true'],
+    'contact-details': ['true'],
+    'work-history': ['true'],
+    'school-experience': ['true'],
+    'reasonable-adjustments': ['true'],
+    suitability: ['true'],
+    degree: ['true'],
+    maths: ['true'],
+    english: ['true'],
+    science: ['true'],
+    'other-qualifications': ['true'],
+    'personal-statement': ['true'],
+    'subject-knowledge': ['true'],
+    interview: ['true'],
+    references: ['true']
   },
   candidate: {
     'given-name': 'Janina',
@@ -76,25 +90,26 @@ module.exports = {
     kq19m: {
       id: 'kq19m',
       provenance: 'international',
-      type: 'BS',
+      'type-nonuk': 'BS',
       subject: 'Physics with emphasis in Astronomy',
       org: 'Minnesota State University',
       country: 'United States',
       grade: '2:2',
-      year: '2013',
+      'year-start': '2010',
+      'year-end': '2013',
       naric: 'Yes',
       'naric-details': 'BSc Physics'
     },
     kr525: {
       id: 'kr525',
       provenance: 'domestic',
-      type: 'MSc',
-      subject: 'Applied Physics',
-      org: 'Strathclyde University',
-      country: 'United Kingdom',
+      'type-uk': 'MSc',
+      subject: 'Applied physics',
+      org: 'The University of Strathclyde',
       grade: 'Other',
       'grade-other': 'Pass',
-      year: '2017'
+      'year-start': '2015',
+      'year-end': '2017'
     }
   },
   'other-qualifications': {

@@ -172,10 +172,14 @@ module.exports = router => {
       conditionsList: urChoices[2].conditionsList
     })
 
-    if (phase) {
-      res.redirect(`/applications?phase=${phase}`)
+    if (decision === 'withdraw') {
+      res.redirect(`/application/${applicationId}/${choiceId}/withdraw/confirmation`)
     } else {
-      res.redirect('/applications')
+      if (phase) {
+        res.redirect(`/applications?phase=${phase}`)
+      } else {
+        res.redirect('/applications')
+      }
     }
   })
 }

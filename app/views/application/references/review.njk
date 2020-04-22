@@ -31,29 +31,21 @@
     </div>
   </div>
   {% include "_includes/review/references.njk" %}
-  {% if not applicationValue(["referees", "first"]) %}
 
+
+  {% if not applicationValue(["referees", "first"]) %}
+    <p>You need to add 2 referees.</p>
     {{ govukButton({
-      text: "Add a first referee",
-      href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer,
-      classes: "govuk-button--secondary"
+      text: "Add first referee",
+      href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
     }) }}
-    <p>or</p>
-    {{ govukButton({
-      text: "Continue without adding first referee",
-      href: applicationPath
-    }) }}
+    <p><a href="{{applicationPath}}">I’ll add a referee later</a></p>
   {% elseif not applicationValue(["referees", "second"]) %}
     {{ govukButton({
       text: "Add a second referee",
-      href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer,
-      classes: "govuk-button--secondary"
+      href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer
     }) }}
-    <p>or</p>
-    {{ govukButton({
-      text: "Continue without adding second referee",
-      href: applicationPath
-    }) }}
+    <p><a href="{{applicationPath}}">I’ll add a second referee later</a></p>
   {% else %}
     {{ govukCheckboxes({
       items: [{

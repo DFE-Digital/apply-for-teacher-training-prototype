@@ -1,9 +1,5 @@
 module.exports = function () {
   const types = [{
-    value: '',
-    text: 'Select a qualification type',
-    level: 6
-  }, {
     value: 'BA Education',
     text: 'BA Education',
     level: 6

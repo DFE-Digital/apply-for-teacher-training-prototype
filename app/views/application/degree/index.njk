@@ -32,12 +32,10 @@
 {% block primary %}
   {% if data.flags.international_qualifications %}
     {% set ukConditionalHtml %}
-      {{ appAutocomplete({
-        label: {
-          text: "Type of degree"
-        },
-        items: degreeTypes
-      } | decorateApplicationAttributes(["degree", id, "type-uk"])) }}
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="degree-{{ id }}-type-uk">Type of degree</label>
+        <div id="type-uk-autocomplete-container"></div>
+      </div>
     {% endset %}
 
     {% set internationalConditionalHtml %}
@@ -133,14 +131,22 @@
       return result && `<strong>${result}</strong>`
     }
 
-    accessibleAutocomplete.enhanceSelectElement({
+    accessibleAutocomplete({
+      name: "applications[{{ applicationId }}][degree][{{ id }}][type-uk]",
       defaultValue: '{{ applicationValue(["degree", id, "type-uk"]) }}',
-      selectElement: document.querySelector('#degree-{{ id }}-type-uk'),
+      element: document.querySelector('#type-uk-autocomplete-container'),
+      id: 'degree-{{ id }}-type-uk',
+      placeholder: false,
       showAllValues: true,
+      showNoOptionsFound: 'true',
+      source: [
+        {% for item in degreeTypes %}"{{ item.text }}",{% endfor %}
+      ],
       templates: {
         inputValue: inputTemplate,
         suggestion: suggestionTemplate
-      }
+      },
+      tNoResults: () => 'No results found. Please specify a degree type'
     })
   </script>
 {% endblock %}

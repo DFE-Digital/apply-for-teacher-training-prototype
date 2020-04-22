@@ -63,7 +63,7 @@
         }
       }]
     } | decorateApplicationAttributes(["degree", id, "grade"])) }}
-  {% elif undergraduateDegree %}
+  {% else %}
     {{ govukRadios({
       items: [{
         value: "First-class honours",
@@ -78,8 +78,16 @@
         value: "Third-class honours",
         text: "Third-class honours"
       }, {
+        text: "Distinction"
+      } if not undergraduateDegree, {
+        text: "Merit"
+      } if not undergraduateDegree, {
         text: "Pass"
       }, {
+        text: "Not applicable"
+      } if not undergraduateDegree, {
+        text: "Unknown"
+      } if not undergraduateDegree, {
         text: "Other",
         conditional: {
           html: otherUkGradeHtml
@@ -89,33 +97,6 @@
       }, {
         value: "Pending",
         text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
-        conditional: {
-          html: predictedGradeHtml
-        }
-      }]
-    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
-  {% else %}
-    {{ govukRadios({
-      items: [{
-        text: "Distinction"
-      }, {
-        text: "Merit"
-      }, {
-        text: "Pass"
-      }, {
-        text: "Not applicable"
-      }, {
-        text: "Unknown"
-      }, {
-        text: "Other",
-        conditional: {
-          html: otherGradeHtml
-        }
-      }, {
-        divider: "or"
-      }, {
-        value: "Pending",
-        text: "I’m still studying for this degree",
         conditional: {
           html: predictedGradeHtml
         }

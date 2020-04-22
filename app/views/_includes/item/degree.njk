@@ -62,7 +62,7 @@
       text: "Grade"
     },
     value: {
-      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item["grade-other"] or item.grade or "Not entered"
+      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item.grade or item["grade-other"] or "Not entered"
     },
     actions: {
       items: [{

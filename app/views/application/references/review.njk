@@ -44,16 +44,16 @@
 
     {% if not applicationValue(["referees", "first"])  %}
       {{ govukButton({
-        text: "Add a referee",
+        text: "Add another referee",
         href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
       }) }}
     {% else %}
       {{ govukButton({
-        text: "Add a referee",
+        text: "Add another referee",
         href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer
       }) }}
     {% endif %}
-    <p><a href="{{applicationPath}}">I’ll add a referee later</a></p>
+    <p><a href="{{applicationPath}}">I’ll add another referee later</a></p>
   {% else %}
     {{ govukCheckboxes({
       items: [{

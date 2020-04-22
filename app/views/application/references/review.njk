@@ -22,27 +22,17 @@
     <div class="govuk-grid-column-two-thirds">
       {% if applicationValue('apply2') %}
         {% if applicationValue(["referees", "second"]) or applicationValue(["referees", "first"]) %}
-          <p class="govuk-body">If you replace a referee we’ll contact them after you submit your application.</p>
+          {# <p class="govuk-body">If you replace a referee we’ll contact them after you submit your application.</p> #}
         {% endif %}
       {% else %}
-        <p class="govuk-body">We’ll contact your referees after you submit your application.</p>
+        {# <p class="govuk-body">We’ll contact your referees after you submit your application.</p> #}
       {% endif %}
       {# <p class="govuk-body">We’ll only send your application to the provider after we receive your references.</p> #}
     </div>
   </div>
   {% include "_includes/review/references.njk" %}
-  {% if not applicationValue(["referees", "second"]) %}
-    {{ govukButton({
-      text: "Add a second referee",
-      href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer,
-      classes: "govuk-button--secondary"
-    }) }}
-    <p>or</p>
-    {{ govukButton({
-      text: "Continue without adding second referee",
-      href: applicationPath
-    }) }}
-  {% elseif not applicationValue(["referees", "first"]) %}
+  {% if not applicationValue(["referees", "first"]) %}
+
     {{ govukButton({
       text: "Add a first referee",
       href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer,
@@ -51,6 +41,17 @@
     <p>or</p>
     {{ govukButton({
       text: "Continue without adding first referee",
+      href: applicationPath
+    }) }}
+  {% elseif not applicationValue(["referees", "second"]) %}
+    {{ govukButton({
+      text: "Add a second referee",
+      href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer,
+      classes: "govuk-button--secondary"
+    }) }}
+    <p>or</p>
+    {{ govukButton({
+      text: "Continue without adding second referee",
       href: applicationPath
     }) }}
   {% else %}

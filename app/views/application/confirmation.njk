@@ -18,9 +18,19 @@
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-m">What happens next</h2>
       <p class="govuk-body">You’ll get an email to confirm that your application has been submitted.</p>
-      <h2 class="govuk-heading-m">References</h2>
-      <p class="govuk-body">We’ll contact your referees to ask for your references. When we receive them, we’ll add them to your application and send it to your training provider(s).</p>
-      <p class="govuk-body">We can’t send your application to your training provider(s) without your references.</p>
+
+      {% if applicationValue(["referees", "first", "status"]) === "Not requested yet" or applicationValue(["referees", "second", "status"]) === "Not requested yet" %}
+        <h2 class="govuk-heading-m">References</h2>
+
+        {% if applicationValue(["referees", "first", "status"]) == "Received" or applicationValue(["referees", "second", "status"]) == "Received" %}
+          <p class="govuk-body">We’ll contact your referee to ask for your reference. When we receive it, we’ll add it to your application and send it to your training provider(s).</p>
+          <p class="govuk-body">We can’t send your application to your training provider(s) without your reference.</p>
+        {% else %}
+          <p class="govuk-body">We’ll contact your referees to ask for your references. When we receive them, we’ll add them to your application and send it to your training provider(s).</p>
+          <p class="govuk-body">We can’t send your application to your training provider(s) without your references.</p>
+        {% endif %}
+      {% endif %}
+
       <h2 class="govuk-heading-m">Interview</h2>
       <p class="govuk-body">Your training provider will be in touch with you if they want to arrange an interview.</p>
 {% if status == "amended" %}

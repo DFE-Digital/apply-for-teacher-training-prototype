@@ -24,6 +24,10 @@
     <li>comfortable submitting a reference online</li>
   </ul>
 
+  {% if applicationValue('apply2') %}
+    <input type="hidden" name="applications[{{applicationId}}][referees][{{id}}][status]" value="Not requested yet">
+  {% endif %}
+
   {{ govukInput({
     label: {
       text: "Full name",

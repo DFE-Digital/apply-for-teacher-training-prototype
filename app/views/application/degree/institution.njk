@@ -1,4 +1,4 @@
-{% extends "_form-question.njk" %}
+{% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What institution did you go to?" %}
@@ -17,7 +17,7 @@
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
   {% else %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-subject">{{ title }}</label>
+      <label class="govuk-label" for="degree-{{ id }}-subject">Select an institution</label>
       <div id="org-autocomplete-container"></div>
     </div>
   {% endif %}
@@ -37,11 +37,13 @@
         element: document.querySelector('#org-autocomplete-container'),
         id: 'degree-{{ id }}-org',
         placeholder: false,
+        showAllValues: true,
         defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
-        showNoOptionsFound: false,
+        showNoOptionsFound: true,
         source: [
           {% for item in degree.orgs %}"{{ item }}",{% endfor %}
-        ]
+        ],
+        tNoResults: () => 'No results found. Enter your institution.'
       })
     </script>
   {% endblock %}

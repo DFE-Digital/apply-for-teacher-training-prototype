@@ -33,7 +33,7 @@
   {% if data.flags.international_qualifications %}
     {% set ukConditionalHtml %}
       <div class="govuk-form-group">
-        <label class="govuk-label" for="degree-{{ id }}-type-uk">Type of degree</label>
+        <label class="govuk-label" for="degree-{{ id }}-type-uk">Select degree type</label>
         <div id="type-uk-autocomplete-container"></div>
       </div>
     {% endset %}
@@ -146,7 +146,7 @@
         inputValue: inputTemplate,
         suggestion: suggestionTemplate
       },
-      tNoResults: () => 'No results found. Please specify a degree type'
+      tNoResults: () => 'No results found. Enter your degree type.'
     })
   </script>
 {% endblock %}

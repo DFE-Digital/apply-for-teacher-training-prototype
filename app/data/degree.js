@@ -1642,7 +1642,7 @@ module.exports = function () {
   return {
     types: {
       all: types,
-      undergraduate: types.filter(type => type.level === 6)
+      undergraduate: types.filter(type => type.level === 6 || type.level === 7)
     },
     subjects,
     orgs

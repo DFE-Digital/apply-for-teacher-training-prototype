@@ -549,11 +549,17 @@ Unfortunately due to the volume of applications we have received for our PE prog
       }
   #}
 
+  {% if applicationValue(["referees"]) | length > 0 %}
+    {% set referencesUrl = applicationPath + "/references/review" %}
+  {% else %}
+    {% set referencesUrl = applicationPath + "/references/type/first" %}
+  {% endif %}
+
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
       text: "Referees",
-      href: applicationPath + "/references" + ("/review" if applicationValue(["referees"]) | length > 0),
+      href: referencesUrl,
       id: "references",
       tag: {
         classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,

@@ -1,7 +1,7 @@
 {% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "What institution did you go to?" %}
+{% set title = "Which institution did you study at?" %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 {% block pageNavigation %}
@@ -17,7 +17,7 @@
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
   {% else %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-subject">{{ title }}</label>
+      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-org">{{ title }}</label>
       <div id="org-autocomplete-container"></div>
     </div>
   {% endif %}
@@ -32,13 +32,12 @@
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>
       accessibleAutocomplete({
-        name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
-        minLength: 2,
         element: document.querySelector('#org-autocomplete-container'),
         id: 'degree-{{ id }}-org',
-        placeholder: false,
+        name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
         defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
-        showNoOptionsFound: false,
+        minLength: 2,
+        placeholder: false,
         source: [
           {% for item in degree.orgs %}"{{ item }}",{% endfor %}
         ]

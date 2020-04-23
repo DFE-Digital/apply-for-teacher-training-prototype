@@ -32,13 +32,12 @@
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>
       accessibleAutocomplete({
-        name: "applications[{{ applicationId }}][degree][{{ id }}][subject]",
-        minLength: 2,
         element: document.querySelector('#subject-autocomplete-container'),
         id: 'degree-{{ id }}-subject',
-        placeholder: false,
+        name: "applications[{{ applicationId }}][degree][{{ id }}][subject]",
         defaultValue: '{{ applicationValue(["degree", id, "subject"]) }}',
-        showNoOptionsFound: false,
+        minLength: 2,
+        placeholder: false,
         source: [
           {% for item in degree.subjects %}"{{ item }}",{% endfor %}
         ]

@@ -91,10 +91,10 @@
         {% set defaultValue = provider.courses[applicationValue(["choices", choiceId, "courseCode"])].name_and_code %}
 
         accessibleAutocomplete({
-          defaultValue: "",
-          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
           element: document.querySelector('#course-autocomplete-container'),
           id: 'courses-{{ choiceId }}-course',
+          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
+          defaultValue: "",
           showAllValues: true,
           source: [
             {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}
@@ -102,10 +102,10 @@
         })
       {% else %}
         accessibleAutocomplete({
-          defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "course"]) }}',
-          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
           element: document.querySelector('#course-autocomplete-container'),
           id: 'courses-{{ choiceId }}-course',
+          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
+          defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "course"]) }}',
           showAllValues: true,
           source: [
             {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}

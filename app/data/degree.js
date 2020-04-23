@@ -1,9 +1,5 @@
 module.exports = function () {
   const types = [{
-    value: '',
-    text: 'Select a qualification type',
-    level: 6
-  }, {
     value: 'BA Education',
     text: 'BA Education',
     level: 6
@@ -1642,7 +1638,7 @@ module.exports = function () {
   return {
     types: {
       all: types,
-      undergraduate: types.filter(type => type.level === 6)
+      undergraduate: types.filter(type => type.level === 6 || type.level === 7)
     },
     subjects,
     orgs

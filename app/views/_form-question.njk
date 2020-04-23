@@ -1,7 +1,7 @@
 {% extends "_layout.njk" %}
 
 {% set labelHtml %}
-  <span class="govuk-caption-xl">{{ parent }}</span>
+  {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
   {{ title }}
 {% endset %}
 

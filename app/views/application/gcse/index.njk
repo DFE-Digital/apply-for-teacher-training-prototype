@@ -103,8 +103,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}',
-      selectElement: document.querySelector('#gcse-{{ id }}-country')
+      selectElement: document.querySelector('#gcse-{{ id }}-country'),
+      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}'
     })
   </script>
 {% endblock %}

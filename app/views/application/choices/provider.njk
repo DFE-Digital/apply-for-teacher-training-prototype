@@ -43,10 +43,10 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete({
-      name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][provider]",
-      minLength: 2,
       element: document.querySelector('#provider-autocomplete-container'),
+      name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][provider]",
       id: 'courses-{{ choiceId }}-provider',
+      minLength: 2,
       source: [
         {% for id, item in providers %}"{{ item.name_and_code }}",{% endfor %}
       ]

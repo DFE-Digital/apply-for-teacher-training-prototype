@@ -41,7 +41,7 @@
 
   {% set otherUkGradeHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label" for="degree-{{ id }}-grade-other">Select degree grade</label>
+      <label class="govuk-label" for="degree-{{ id }}-grade-other">Enter your degree grade</label>
       <div id="grade-autocomplete-container" class="govuk-input--width-20"></div>
     </div>
   {% endset %}
@@ -114,21 +114,18 @@
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>
       accessibleAutocomplete({
-        name: "applications[{{ applicationId }}][degree][{{ id }}][grade-other]",
         element: document.querySelector('#grade-autocomplete-container'),
         id: 'degree-{{ id }}-grade-other',
-        placeholder: false,
-        showAllValues: true,
+        name: "applications[{{ applicationId }}][degree][{{ id }}][grade-other]",
         defaultValue: '{{ applicationValue(["degree", id, "grade-other"]) }}',
-        showNoOptionsFound: true,
+        placeholder: false,
         source: [
           'Aegrotat',
           'Fourth-class honours',
           'General degree',
           'Ordinary degree',
           'Unclassified'
-        ],
-        tNoResults: () => 'No results found. Enter your grade.'
+        ]
       })
     </script>
   {% endblock %}

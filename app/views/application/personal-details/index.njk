@@ -150,12 +150,12 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ applicationValue(["candidate", "nationality"]) }}',
-      selectElement: document.querySelector('#candidate-nationality')
+      selectElement: document.querySelector('#candidate-nationality'),
+      defaultValue: '{{ applicationValue(["candidate", "nationality"]) }}'
     })
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ applicationValue(["candidate", "second-nationality"]) }}',
-      selectElement: document.querySelector('#candidate-second-nationality')
+      selectElement: document.querySelector('#candidate-second-nationality'),
+      defaultValue: '{{ applicationValue(["candidate", "second-nationality"]) }}'
     })
   </script>
 {% endblock %}

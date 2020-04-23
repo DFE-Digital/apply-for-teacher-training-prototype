@@ -11,9 +11,9 @@
 {% endif %}
 
 {% if degreeCount < 1 and action == "add" %}
-  {% set internationalTypeHintText = "For example, BA, BSc or other (please specify)" %}
+  {% set typeHintText = "For example, BA, BSc or other (please specify)" %}
 {% else %}
-  {% set internationalTypeHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+  {% set typeHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -30,10 +30,17 @@
 {% endblock %}
 
 {% block primary %}
+  {% if degreeCount < 1 %}
+    <p class="govuk-body">You need an undergraduate degree to apply for teacher training. If you have further degrees, you can add them after.</p>
+  {% endif %}
+
   {% if data.flags.international_qualifications %}
     {% set ukConditionalHtml %}
       <div class="govuk-form-group">
-        <label class="govuk-label" for="degree-{{ id }}-type-uk">Select degree type</label>
+        <label class="govuk-label" for="degree-{{ id }}-type-uk">Enter degree type</label>
+        <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">
+          {{ typeHintText }}
+        </span>
         <div id="type-uk-autocomplete-container"></div>
       </div>
     {% endset %}
@@ -44,7 +51,7 @@
           text: "Type of qualification"
         },
         hint: {
-          text: internationalTypeHintText
+          text: typeHintText
         }
       } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
 
@@ -63,9 +70,6 @@
           classes: "govuk-label--m"
         }
       },
-      hint: {
-        text: "You need an undergraduate to apply for teacher training. If you have further degrees, you can add them after."
-      } if degreeCount < 1,
       items: [{
         value: "domestic",
         text: "UK degree",
@@ -81,16 +85,11 @@
       }]
     } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
   {% else %}
-    {{ appAutocomplete({
-      label: {
-        text: "What type of degree do you want to add?",
-        classes: "govuk-label--m"
-      },
-      hint: {
-        text: "You need an undergraduate to apply for teacher training. If you have further degrees, you can add them after."
-      } if degreeCount < 1,
-      items: degreeTypes
-    } | decorateApplicationAttributes(["degree", id, "type-uk"])) }}
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="degree-{{ id }}-type-uk">What type of degree do you want to add?</label>
+      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">{{ typeHintText }}</span>
+      <div id="type-uk-autocomplete-container"></div>
+    </div>
   {% endif %}
 
   {{ govukButton({
@@ -103,8 +102,8 @@
   <script>
   {% if data.flags.international_qualifications %}
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}',
-      selectElement: document.querySelector('#degree-{{ id }}-country')
+      selectElement: document.querySelector('#degree-{{ id }}-country'),
+      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
     })
   {% endif %}
     function inputTemplate (result) {
@@ -132,21 +131,18 @@
     }
 
     accessibleAutocomplete({
-      name: "applications[{{ applicationId }}][degree][{{ id }}][type-uk]",
-      defaultValue: '{{ applicationValue(["degree", id, "type-uk"]) }}',
       element: document.querySelector('#type-uk-autocomplete-container'),
       id: 'degree-{{ id }}-type-uk',
+      name: "applications[{{ applicationId }}][degree][{{ id }}][type-uk]",
+      defaultValue: '{{ applicationValue(["degree", id, "type-uk"]) }}',
       placeholder: false,
-      showAllValues: true,
-      showNoOptionsFound: 'true',
       source: [
         {% for item in degreeTypes %}"{{ item.text }}",{% endfor %}
       ],
       templates: {
         inputValue: inputTemplate,
         suggestion: suggestionTemplate
-      },
-      tNoResults: () => 'No results found. Enter your degree type.'
+      }
     })
   </script>
 {% endblock %}

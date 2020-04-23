@@ -97,8 +97,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}',
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject')
+      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject'),
+      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}'
     })
   </script>
 {% endblock %}

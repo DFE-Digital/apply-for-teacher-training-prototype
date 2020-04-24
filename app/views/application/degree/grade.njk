@@ -1,12 +1,10 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set degrees = applicationValue(["degree"]) | toArray %}
-{% set firstDegree = degrees[0].id == id %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% set undergraduateDegree = applicationValue(["degree", id, "type-uk"]) | isUndergraduateDegree %}
 {% if international %}
-  {% set title = "Have you completed this degree?" %}
+  {% set title = "Have you completed your degree?" %}
 {% else %}
   {% set title = "What grade is your degree?" %}
 {% endif %}
@@ -21,7 +19,7 @@
   {% set predictedGradeHtml %}
     {{ govukInput({
       label: {
-        text: "Please give details of your predicted grade."
+        text: "Please give details of your predicted grade"
       },
       hint: {
         text: "Predicted grades must be validated by an academic referee in the ‘References' section."
@@ -57,7 +55,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
+        text: "I’m still studying for my degree",
         conditional: {
           html: predictedGradeHtml
         }
@@ -96,7 +94,7 @@
         divider: "or"
       }, {
         value: "Pending",
-        text: ("I’m still studying for my degree" if firstDegree else "I’m still studying for this degree"),
+        text: "I’m still studying for my degree",
         conditional: {
           html: predictedGradeHtml
         }

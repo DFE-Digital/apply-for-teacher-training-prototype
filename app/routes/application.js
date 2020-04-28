@@ -161,6 +161,11 @@ module.exports = router => {
     res.render('application/index', { showCopiedBanner })
   })
 
+  // Render before you start page
+  router.all('/application/:applicationId/before-you-start', (req, res) => {
+    res.render('application/before-you-start', { showCopiedBanner: req.query.copied })
+  })
+
   // Generate apply2 application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = 12346
@@ -185,7 +190,7 @@ module.exports = router => {
 
     data.applications[code] = apply2Application
 
-    res.redirect(`/application/${code}?copied=true`)
+    res.redirect(`/application/${code}/before-you-start?copied=true`)
   })
 
   // Render previous applications

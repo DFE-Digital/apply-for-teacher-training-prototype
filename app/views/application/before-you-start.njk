@@ -1,19 +1,29 @@
 {% extends "_content.njk" %}
-
 {% set title = "We suggest you choose a course first" %}
 
 {% block beforePageTitle %}
-  {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">Your Apply for teacher training account has been created</h2>",
-    type: "success",
-    icon: false
-  }) }}
+  {% if showCopiedBanner %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">Your new application is ready for editing</h2>",
+      type: "success",
+      icon: false
+    }) }}
+  {% else %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">Your Apply for teacher training account has been created</h2>",
+      type: "success",
+      icon: false
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
   <p>Apply for teacher training is a new GOV.UK service that will eventually replace UCAS. For now, you can only apply to some courses using this service.</p>
-  <p>By choosing a course first, you can check it’s available before you complete the rest of your application.</p>
-  <p>If you choose a course which is not available on Apply for teacher training, you’ll be guided back to UCAS to make an application.</p>
+
+  <p>By choosing a course first, you can check it’s available before you {% if applicationValue('apply2') %}edit{% else %}complete{% endif %} your application.</p>
+
+  <p>If your course is not available, you’ll be guided to UCAS to make an application.</p>
+
   <hr class="govuk-section-break govuk-section-break--m">
   {{ govukButton({
     classes: "govuk-!-margin-bottom-5",

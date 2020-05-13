@@ -42,11 +42,11 @@
     </div>
   {% endif %}
 
-  <div class="app-banner">
+  {# <div class="app-banner">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
       <a href="/application/{{ applicationId }}/apply-again">Do you want to apply again?</a>
     </h2>
-  </div>
+  </div> #}
 
   {# <div class="app-banner app-banner--success">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
@@ -132,12 +132,6 @@
 
   {# References #}
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">References</h2>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <p class="govuk-body">We’ve contacted the referees you provided below. We’ll let you know if they don’t give a reference.</p>
-    </div>
-  </div>
 
   {% set references = application.referees %}
   {% set canAmendReferences = false %}

@@ -1,0 +1,32 @@
+{% extends "_form.njk" %}
+
+{% set refereeName = applicationValue(["referees"]).first.name %}
+{% set choices = 2 %}
+{% set providerPlural = "providers" if choices > 1 else "provider" %}
+{% set title = "Are you sure you want to cancel this request for a reference?" %}
+{% set parent = refereeName %}
+
+{% block pageNavigation %}
+  {% if phase %}
+    {{ govukBackLink({
+      href: referrer + "?phase=" + phase
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+{{ type }}
+  <p class="govuk-body">We’ll tell {{ refereeName }} that they do not need to give a reference.</p>
+  <p class="govuk-body">Courses can become full at any time and your {{ providerPlural }} will not consider your application without 2 references.</p>
+  <p class="govuk-body">You can <a href="/applications">check the progress of your reference requests on your dashboard</a>.</p>
+
+  {{ govukButton({
+    text: "Yes I’m sure - cancel this reference request",
+    classes: "govuk-button--warning"
+  }) }}
+  <p class="govuk-body"><a href="{{ referrer }}">No - I’ve changed my mind</a></p>
+{% endblock %}

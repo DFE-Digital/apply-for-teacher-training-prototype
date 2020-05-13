@@ -3,7 +3,7 @@ const dummyApply2Application = require('./dummy-apply-2-application')
 
 const testData = {
   12345: dummyApplication,
-  ABCDE: dummyApply2Application
+  // ABCDE: dummyApply2Application
 }
 
 module.exports = {
@@ -20,7 +20,6 @@ module.exports = {
     international_address: true,
     international_qualifications: true,
     nationality: process.env.MVP !== 'true',
-    self_amend: process.env.MVP !== 'true',
     self_amend_contact_details: process.env.MVP !== 'true',
     interview_preferences: true
   },

@@ -126,6 +126,16 @@ module.exports = router => {
     }
   })
 
+  // New referee request
+  router.all('/applications/add-new-referee', (req, res) => {
+    const {reason1, reason2} = req.query
+
+    res.render(`applications/add-new-referee`, {
+      reason1,
+      reason2
+    })
+  })
+
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
     var code = createNewApplication(req)

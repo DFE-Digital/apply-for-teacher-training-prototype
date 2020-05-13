@@ -18,7 +18,9 @@
 
 {% set contextHtml %}
   {% if status == "Not requested yet" %}
-    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application</p>
+    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application.</p>
+  {% elif status == "Awaiting response" %}
+    <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
   {% endif %}
 {% endset %}
 

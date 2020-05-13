@@ -127,11 +127,12 @@ module.exports = router => {
   })
 
   // New referee request
-  router.all('/applications/new-referee', (req, res) => {
-    const {reason} = req.query
+  router.all('/applications/add-new-referee', (req, res) => {
+    const {reason1, reason2} = req.query
 
     res.render(`applications/new-referee`, {
-      reason
+      reason1,
+      reason2
     })
   })
 

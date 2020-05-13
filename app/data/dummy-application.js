@@ -230,14 +230,16 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
       type: 'Academic',
-      'character-explaination': ''
+      'character-explaination': '',
+      status: 'Awaiting response'
     },
     second: {
       id: 'second',
       name: 'Jane Doe',
       relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
-      type: 'Character'
+      type: 'Character',
+      status: 'Awaiting response'
     }
   }
 }

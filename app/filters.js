@@ -172,6 +172,7 @@ module.exports = (env) => {
       case 'Declined':
         return 'govuk-tag--orange'
       case 'Rejected':
+      case 'Not available':
         return 'govuk-tag--red'
       case 'Accepted':
         return 'govuk-tag--blue'

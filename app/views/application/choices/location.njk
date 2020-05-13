@@ -2,9 +2,10 @@
 
 {% set title = "Pick a course location" %}
 {% set formaction = paths.next %}
+
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

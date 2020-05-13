@@ -3,13 +3,14 @@
 {% elif application.status == "amending" %}
   {% set appStatus = "Amending"%}
 {% endif %}
-{% set status = item.status or appStatus or "Submitted" %}
+{% set status = item.status or appStatus or "Pending" %}
 {% set statusHtml %}
   {{ govukTag({
     classes: "app-tag " + status | statusClass,
     text: status | capitalize
   }) }}
 {% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -42,7 +43,7 @@
     } if canAmend and not item.singleLocationCourse
   }, {
     key: {
-      text: "Full time or part time"
+      text: "Study mode"
     },
     value: {
       html: item.studyMode

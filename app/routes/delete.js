@@ -6,12 +6,14 @@ module.exports = router => {
     const { id, section } = req.params
     const { phase, referrer } = req.query
     const item = applicationData[section][id]
+    const provider = utils.getProvider(item.providerCode);
+    const course = utils.getCourse(item.providerCode, item.courseCode);
 
     let parent
     let type
     switch (section) {
       case 'choices': {
-        parent = item.type ? `${item.providerCode} ${item.courseCode}` : 'Course choices'
+        parent = item.type ? `${provider.name} - ${course.name_and_code}` : 'Course choices'
         type = 'choice'
         break
       }

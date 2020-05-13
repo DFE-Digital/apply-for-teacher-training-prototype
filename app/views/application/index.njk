@@ -24,13 +24,17 @@
 {% set hasSecondary = true %}
 
 {% block beforePageTitle %}
-  {% if showCopiedBanner %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
-      type: "success",
-      icon: false
-    }) }}
-  {% endif %}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">We’ve updated your application.</h2>",
+    type: "success",
+    icon: false
+  }) if showChangesBanner }}
+
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
+    type: "success",
+    icon: false
+  }) if showCopiedBanner }}
 {% endblock %}
 
 {% block pageNavigation %}

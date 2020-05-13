@@ -1,0 +1,42 @@
+{% extends "_content.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "You cannot apply to this course because it has no vacancies" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">The course {{ course.name_and_code }} is full.</p>
+  <p class="govuk-body">You can:</p>
+  <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+    <li><a href="#">choose another course</a></li>
+    <li>contact Gorse SCITT to see if the course will re-open or discuss alternatives</li>
+  </ul>
+
+  <h2 class="govuk-heading-m">Contact Gorse SCITT</h2>
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Telephone"
+      },
+      value: {
+        text: "01234 321978"
+      }
+    }, {
+      key: {
+        text: "Email"
+      },
+      value: {
+        html: "<a href=\"#\">email@email.com</a>"
+      }
+    }]
+  }) }}
+
+  <p class="govuk-!-margin-top-8">
+    <a href="#">Return to your course choices</a>
+  </p>
+{% endblock %}

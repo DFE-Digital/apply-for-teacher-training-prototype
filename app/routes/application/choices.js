@@ -104,6 +104,36 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
   })
 
+  // Review choices
+  router.all('/application/:applicationId/choices/', (req, res) => {
+    const { choices } = req.session.data.applications[req.params.applicationId]
+    delete choices.ABCDE.status
+
+    res.render('application/choices/index', {
+      choices
+    })
+  })
+
+  // Edit choices post-submission
+  router.all('/application/:applicationId/choices/edit', (req, res) => {
+    const application = req.session.data.applications[req.params.applicationId]
+    const { choices } = application
+    application.status = 'Submitted'
+
+    if (choices.ABCDE) {
+      choices.ABCDE.status = 'Not available'
+    }
+
+    const choiceStatuses = Object.values(choices).map(a => a.status);
+    const canSubmit = !choiceStatuses.includes('Not available')
+
+    res.render('application/choices/index', {
+      edit: true,
+      choices,
+      canSubmit
+    })
+  })
+
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
     const applicationData = req.session.data.applications[req.params.applicationId]
     const choiceId = req.params.choiceId
@@ -190,10 +220,27 @@ module.exports = router => {
     }
   })
 
+  router.all('/application/:applicationId/choices/:choiceId/full', (req, res) => {
+    const { applicationId, choiceId } = req.params
+    const { referrer } = req.query
+    const choice = req.session.data.applications[applicationId].choices[choiceId]
+    const provider = utils.getProvider(choice.providerCode)
+    const course = utils.getCourse(choice.providerCode, choice.courseCode)
+
+    res.render(`application/choices/full`, {
+      provider,
+      course,
+      referrer
+    })
+  })
+
   router.all('/application/:applicationId/choices/:choiceId/:view', (req, res) => {
+    const { referrer } = req.query
+
     res.render(`application/choices/${req.params.view}`, {
       paths: pickPaths(req),
-      found: temporaryChoice.found
+      found: temporaryChoice.found,
+      referrer
     })
   })
 }

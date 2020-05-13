@@ -26,39 +26,40 @@
 {% endfor %}
 
 {% block beforePrimary %}
+  {% set showChangesBanner = true %}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">We’ve updated your application and sent it to providers.</h2>",
+    type: "success",
+    icon: false
+  }) if showChangesBanner }}
+
+  {# appBanner({
+    html: "<h2 class=\"govuk-heading-m\"><a href=\"/application/" + applicationId + "/apply-again\">Do you want to apply again?</a></h2>",
+    icon: false
+  }) #}
 
   {% set needsReferee = false %}
-  {% if needsReferee %}
-    {# <div class="app-banner">
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-        You need to <a href="{{ applicationPath }}/references/alternative">give details of a new referee</a>
-      </h2>
-    </div> #}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">You need to <a href=\"" + applicationPath + "/references/alternative\">give details of a new referee</h2>",
+    icon: false
+  }) if needsReferee }}
 
-    <div class="app-banner">
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-        You need to <a href="{{ applicationPath }}/references/alternative-first">give details of 2 new referees</a>
-      </h2>
-    </div>
-  {% endif %}
+  {# appBanner({
+    html: "<h2 class=\"govuk-heading-m\">You need to <a href=\"" + applicationPath + "/references/alternative-first\">give details of 2 new referees</h2>",
+    icon: false
+  }) if needsReferee #}
 
-  {# <div class="app-banner">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      <a href="/application/{{ applicationId }}/apply-again">Do you want to apply again?</a>
-    </h2>
-  </div> #}
+  {# appBanner({
+    html: "<h2 class=\"govuk-heading-m\">Thank you. We’ve asked your new referee for a reference</h2>",
+    type: "success"
+    icon: false
+  }) #}
 
-  {# <div class="app-banner app-banner--success">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      Thank you. We’ve asked your new referee for a reference
-    </h2>
-  </div> #}
-
-  {# <div class="app-banner app-banner--success">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      Thank you. We’ve asked each new referee for a reference
-    </h2>
-  </div> #}
+  {# appBanner({
+    html: "<h2 class=\"govuk-heading-m\">Thank you. We’ve asked each new referee for a reference</h2>",
+    type: "success"
+    icon: false
+  }) #}
 
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
   <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?phase={{ phase }}">View application</a></p>

@@ -25,7 +25,7 @@ require('./routes/email')(router)
 
 // Clear all data in session if you open /admin/clear-data
 router.post('/admin/clear-data', function (req, res) {
-  req.session.data = {}
+  delete req.session.data
   res.render('admin/clear-data-success')
 })
 

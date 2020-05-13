@@ -30,24 +30,43 @@
       or (item.status == "withdrawn")
     %}
 
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: provider.name,
-      actions: {
-        items: [{
-          href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete choice"
-        } if canAmend, {
-          href: applicationPath + "/" + item.id + "/withdraw",
-          text: "Withdraw"
-        } if canWithdraw, {
-          href: applicationPath + "/" + item.id + "/view?phase=" + phase,
-          text: "View and respond to offer"
-        } if canRespond and not hasResponded]
-      } if canAmend or canWithdraw or canRespond,
-      html: courseHtml
-    }) }}
+    {% set summaryCardHtml %}
+      {{ appSummaryCard({
+          classes: "govuk-!-margin-bottom-6",
+          headingLevel: 3,
+          titleText: provider.name,
+          actions: {
+            items: [{
+              href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+              text: "Delete choice"
+            } if canAmend, {
+              href: applicationPath + "/" + item.id + "/withdraw",
+              text: "Withdraw"
+            } if canWithdraw, {
+              href: applicationPath + "/" + item.id + "/view?phase=" + phase,
+              text: "View and respond to offer"
+            } if canRespond and not hasResponded]
+          } if canAmend or canWithdraw or canRespond,
+          html: courseHtml
+        }) }}
+    {% endset %}
+
+    {% if item.status == 'Not available' %}
+      <div class="app-banner app-banner--missing-section app-banner--warning govuk-!-padding-bottom-0 govuk-!-padding-right-0">
+        <span class="app-banner__message">
+          <span class="govuk-visually-hidden">Error:</span> You cannot apply to ‘{{ provider.name }} – {{ course.name_and_code }}’ because it has no vacancies
+        </span>
+        <p>You can:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li><a href="{{ applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer }}">delete this choice</a></li>
+          <li><a href="{{ applicationPath + "/choices/" + item.id + "/provider?referrer=" + referrer }}">change to another course</a></li>
+          <li><a href="{{ applicationPath + "/choices/" + item.id + "/full?referrer=" + referrer }}">contact the training provider</a> to see if the course will re-open or discuss alternatives</li>
+        </ul>
+        {{ summaryCardHtml | safe }}
+      </div>
+    {% else %}
+     {{ summaryCardHtml | safe }}
+    {% endif %}
   {% endfor %}
 {% else %}
   {% if showIncomplete %}

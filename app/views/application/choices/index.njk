@@ -1,9 +1,16 @@
 {% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set showChoiceStatus = false %}
-{% set choices = applicationValue("choices") | toArray %}
+{% set choices = choices | toArray %}
+{% if edit %}
+  {% set formaction = "/applications/?changed=true" %}
+  {% set referrer = applicationPath + "/choices/edit" %}
+  {% set showChoiceStatus = true %}
+{% else %}
+  {% set formaction = applicationPath %}
+  {% set referrer = applicationPath + "/choices" %}
+  {% set showChoiceStatus = false %}
+{% endif %}
 {% set choiceCount = choices | length %}
 {% if choiceCount >= 1 %}
   {% if applicationValue(["apply2"]) %}
@@ -20,16 +27,18 @@
 {% endif %}
 
 {% block pageNavigation %}
-  {% if not applicationValue('welcomeFlow') %}
-    {% if referrer %}
-      {{ govukBackLink({
-        href: referrer
-      }) }}
-    {% else %}
-      {{ govukBackLink({
-        href: "/application/" + applicationId,
-        text: "Back to application"
-      }) }}
+  {% if not edit %}
+    {% if not applicationValue('welcomeFlow') %}
+      {% if referrer %}
+        {{ govukBackLink({
+          href: referrer
+        }) }}
+      {% else %}
+        {{ govukBackLink({
+          href: "/application/" + applicationId,
+          text: "Back to application"
+        }) }}
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endblock %}
@@ -46,41 +55,43 @@
   {% endset %}
 
   {% if choices %}
-    {% set referrer = applicationPath + "/choices" %}
     {% set canAmend = true %}
     {% include "_includes/review/choices.njk" %}
   {% endif %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if not choices or choiceCount == 0 %}
-        {{ guidance | safe }}
+  {% if not choices or choiceCount == 0 %}
+    {{ guidance | safe }}
 
-        {{ govukButton({
-          text: "Continue",
-          href: applicationPath + "/choices/add"
-        }) }}
-      {% endif %}
+    {{ govukButton({
+      text: "Continue",
+      href: applicationPath + "/choices/add"
+    }) }}
+  {% endif %}
 
-      {% if choiceCount >= 1 and choiceCount < 3 and not applicationValue(["apply2"]) %}
-        {{ govukButton({
-          classes: "govuk-button--secondary govuk-!-margin-bottom-9",
-          text: "Add another course",
-          href: applicationPath + "/choices/add"
-        }) }}
-      {% endif %}
+  {% if choiceCount >= 1 and choiceCount < 3 and not applicationValue(["apply2"]) %}
+    {{ govukButton({
+      classes: "govuk-button--secondary",
+      text: "Add another course",
+      href: applicationPath + "/choices/add"
+    }) }}
+  {% endif %}
 
-      {% if choiceCount >= 1 %}
-        {{ govukCheckboxes({
-          items: [{
-            value: "true",
-            text: "I have completed this section"
-          }]
-        } | decorateApplicationAttributes(["completed", "choices"])) }}
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      {% endif %}
-    </div>
-  </div>
+  {% if not edit %}
+    {% if choiceCount >= 1 %}
+      {{ govukCheckboxes({
+        items: [{
+          value: "true",
+          text: "I have completed this section"
+        }]
+      } | decorateApplicationAttributes(["completed", "choices"])) }}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    {% endif %}
+  {% elif edit and canSubmit %}
+    <br>
+    {{ govukButton({
+      text: "Submit application with changes"
+    }) }}
+  {% endif %}
 {% endblock %}

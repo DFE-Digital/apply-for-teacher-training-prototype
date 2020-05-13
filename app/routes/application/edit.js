@@ -1,6 +1,6 @@
 module.exports = router => {
   router.get('/application/:applicationId/edit', (req, res) => {
-    res.render('application/edit')
+    res.render('application/edit/index.njk')
   })
 
   router.post('/application/:applicationId/edit', (req, res) => {

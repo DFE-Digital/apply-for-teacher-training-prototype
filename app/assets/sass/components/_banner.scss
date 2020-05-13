@@ -28,6 +28,12 @@
 
 .app-banner--info {
   border-color: govuk-colour("blue");
+
+  .app-banner__message {
+    @include govuk-typography-weight-bold;
+    color: govuk-colour("blue");
+    margin-bottom: govuk-spacing(3);
+  }
 }
 
 .app-banner--success {
@@ -46,8 +52,10 @@
   }
 
   &.app-banner--missing-section {
-    .app-banner__message p {
+    .app-banner__message {
+      @include govuk-typography-weight-bold;
       color: govuk-colour("red");
+      margin-bottom: govuk-spacing(3);
     }
   }
 }

@@ -130,7 +130,7 @@ module.exports = router => {
   router.all('/applications/add-new-referee', (req, res) => {
     const {reason1, reason2} = req.query
 
-    res.render(`applications/new-referee`, {
+    res.render(`applications/add-new-referee`, {
       reason1,
       reason2
     })

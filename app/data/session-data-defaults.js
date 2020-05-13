@@ -3,7 +3,7 @@ const dummyApply2Application = require('./dummy-apply-2-application')
 
 const testData = {
   12345: dummyApplication,
-  ABCDE: dummyApply2Application
+  // ABCDE: dummyApply2Application
 }
 
 module.exports = {

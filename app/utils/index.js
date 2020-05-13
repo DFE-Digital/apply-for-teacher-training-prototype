@@ -89,7 +89,7 @@ const hasApplications = (req) => {
 
 const hasSubmittedApplications = (req) => {
   const applications = req.session.data.applications
-  const states = ['submitted', 'amending', 'amended']
+  const states = ['Submitted', 'Amending', 'Amended']
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
     return states.some(state => status.includes(state))

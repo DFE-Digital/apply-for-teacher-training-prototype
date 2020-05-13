@@ -35,6 +35,7 @@ module.exports = {
     }
   },
   completed: {
+    'choices': ['true'],
     'personal-details': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],

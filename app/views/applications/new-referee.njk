@@ -1,14 +1,26 @@
 {% extends "_content.njk" %}
 {% set applicationPath = "/application/12345" %}
+{% set choices = 2 %}
+{% set referee1name = "Carmel Kohler" %}
+{% set referee2name = "Glinda Baumbach" %}
+{% set providerPlural = "providers" if choices > 1 else "provider" %}
 
 {% block primary %}
   <h1 class="govuk-heading-xl">You need to add a new referee</h1>
 
-  {# <p>Our email requesting a reference didn’t reach Glinda Baumbach.</p> #}
-  {# <p>We haven’t had a reference from Doyle Denesik.</p> #}
-  <p>Carmel Kohler said they won’t give a reference.</p>
+  {% if reason == "overdue" %}
+    <p class="govuk-body">{{ referee1name }} has not responded.</p>
+  {% elif reason == "cancelled" %}
+    <p class="govuk-body">You cancelled your request for a reference from {{ referee1name }}.</p>
+  {% elif reason == "declined" %}
+    <p class="govuk-body">{{ referee1name }} declined to give a reference.</p>
+  {% endif %}
 
-  <p>We can’t send your application to your teacher training providers without 2 complete references.</p>
+  <p class="govuk-body">Add a new referee as soon as possible. Courses can become full at any time and your {{ providerPlural }} will not consider your application without 2 references.</p>
+
+  {% if reason == "overdue" %}
+    <p class="govuk-body">Adding a new referee will not prevent {{ referee1name }} from giving a reference. You can keep chasing {{ referee1name }} if you know they’re planning on giving a reference.</p>
+  {% endif %}
 
   <div class="govuk-!-margin-top-6 govuk-!-margin-bottom-4">
     {{ govukButton({
@@ -17,7 +29,5 @@
     }) }}
   </div>
 
-  <p>
-    <a href="/applications">Continue without adding a new referee</a>
-  </p>
+  <p><a href="/applications">Continue without adding a new referee</a></p>
 {% endblock %}

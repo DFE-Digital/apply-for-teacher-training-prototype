@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% if type == "GCSE" or "A level" %}
+  {% if type == "GCSE" or "AS level" or "A level" %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-subject">Subject</label>
       <div id="subject-autocomplete-container"></div>
@@ -95,9 +95,18 @@
   }) }}
 {% endblock %}
 
-{% if type == "GCSE" or "A level" %}
-  {% set subjectData = gcse.subjects if type == "GCSE" else aLevel.subjects %}
-  {% set gradeData = gcse.grades if type == "GCSE" else aLevel.grades %}
+{% if type == "GCSE" or "AS level" or "A level" %}
+  {% if type == "GCSE" %}
+    {% set subjectData = gcse.subjects %}
+    {% set gradeData = gcse.grades %}
+  {% elif type == "AS level" %}
+    {% set subjectData = asLevel.subjects %}
+    {% set gradeData = asLevel.grades %}
+  {% elif type == "A level" %}
+    {% set subjectData = aLevel.subjects %}
+    {% set gradeData = aLevel.grades %}
+  {% endif %}
+  
   {% block pageScripts %}
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>

@@ -120,6 +120,7 @@ app.locals.urStudy = urStudy
 app.locals.extensionConfig = extensions.getAppConfig()
 app.locals.degree = require('./app/data/degree')()
 app.locals.gcse = require('./app/data/gcse')()
+app.locals.aLevel = require('./app/data/a-level')()
 app.locals.countries = require('./app/data/countries')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')

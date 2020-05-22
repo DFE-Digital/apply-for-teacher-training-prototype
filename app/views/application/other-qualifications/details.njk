@@ -20,29 +20,31 @@
 
 {% block primary %}
   {% if type == "GCSE" %}
-    {{ appAutocomplete({
-      label: {
-        text: "Subject",
-        classes: "govuk-label--m"
-      },
-      items: gcseSubjects
-    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-subject">Subject</label>
+      <div id="subject-autocomplete-container"></div>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-grade">Grade</label>
+      <div id="grade-autocomplete-container" class="govuk-input--width-10"></div>
+    </div>
   {% else %}
     {{ govukInput({
       label: {
         text: "Subject",
         classes: "govuk-label--m"
       }
-    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
-  {% endif %}
+    } | decorateApplicationAttributes(["degree", id, "subject"])) }}
 
-  {{ govukInput({
-    label: {
-      text: "Grade",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+    {{ govukInput({
+      label: {
+        text: "Grade",
+        classes: "govuk-label--m"
+      },
+      classes: "govuk-input--width-10"
+    } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+  {% endif %}
 
   {{ govukInput({
     label: {
@@ -93,12 +95,33 @@
   }) }}
 {% endblock %}
 
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject'),
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}'
-    })
-  </script>
-{% endblock %}
+{% if type == "GCSE"  %}
+  {% block pageScripts %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        element: document.querySelector('#subject-autocomplete-container'),
+        id: 'other-qualifications-{{ id }}-subject',
+        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][subject]",
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "subject"]) }}',
+        minLength: 2,
+        placeholder: false,
+        source: [
+          {% for item in gcse.subjects %}"{{ item }}",{% endfor %}
+        ]
+      })
+
+      accessibleAutocomplete({
+        element: document.querySelector('#grade-autocomplete-container'),
+        id: 'other-qualifications-{{ id }}-grade',
+        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][grade]",
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "grade"]) }}',
+        minLength: 1,
+        placeholder: false,
+        source: [
+          {% for item in gcse.grades %}"{{ item }}",{% endfor %}
+        ]
+      })
+    </script>
+  {% endblock %}
+{% endif %}

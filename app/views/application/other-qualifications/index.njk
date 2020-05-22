@@ -18,11 +18,10 @@
 
 {% block primary %}
   {% set otherUkConditionalHtml %}
-    {{ govukInput({
-      label: {
-        text: "Type of qualification"
-      }
-    } | decorateApplicationAttributes(["other-qualifications", id, "type-uk"])) }}
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="other-qualifications-{{ id }}-type-uk">Type of qualification</label>
+      <div id="type-uk-autocomplete-container"></div>
+    </div>
   {% endset %}
 
   {% set nonUkConditionalHtml %}
@@ -120,6 +119,24 @@
     accessibleAutocomplete.enhanceSelectElement({
       selectElement: document.querySelector('#other-qualifications-{{ id }}-country'),
       defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "country"]) }}'
+    })
+    accessibleAutocomplete({
+      element: document.querySelector('#type-uk-autocomplete-container'),
+      id: 'other-qualifications-{{ id }}-type-uk',
+      name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][type-uk]",
+      defaultValue: '{{ applicationValue(["other-qualifications", id, "type-uk"]) }}',
+      minLength: 2,
+      placeholder: false,
+      source: [
+        'BTEC',
+        'GCE O Level',
+        'NVQ',
+        'Scottish National 5',
+        'Scottish Higher',
+        'Scottish Advanced Higher', 
+        'SVQ',
+        'VRQ'
+      ]
     })
   </script>
 {% endblock %}

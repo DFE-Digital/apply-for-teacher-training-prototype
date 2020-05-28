@@ -126,11 +126,11 @@ module.exports = function () {
     'Engineering and Manufacturing',
     'English',
     'English (Double Award)',
-    'English - Drama and Prose (Short Course) (Pilot)',
-    'English - Spoken English Studies (Short Course) (Pilot)',
-    'English - Communication (Short Course) (Pilot)',
-    'English - The Language of Digital Communication (Short Course) (Pilot)',
-    'English - The Moving Image (Short Course) (Pilot)',
+    'English - Drama and Prose (Short Course)',
+    'English - Spoken English Studies (Short Course)',
+    'English - Communication (Short Course)',
+    'English - The Language of Digital Communication (Short Course)',
+    'English - The Moving Image (Short Course)',
     'English A',
     'English B',
     'English Language',
@@ -341,61 +341,104 @@ module.exports = function () {
     'Welsh Literature',
   ];
 
-  const grades = [
+  // Single grades
+  const singleGrades = [
     '9',
-    '9-9', 
-    '9-8',
     '8',
+    '7',
+    '6',
+    '5',
+    '4',
+    '3',
+    '2',
+    '1',
+    'A*',
+    'A',
+    'B',
+    'C*',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'U'
+  ]
+  const singleGradeOptions = singleGrades.map(grade => ({
+    value: grade,
+    text: grade
+  }))
+
+  singleGradeOptions.unshift({
+    value: '',
+    text: 'Select a grade'
+  })
+
+  // Double grades
+  const doubleGrades = [
+    '9-8',
+    '9-9',
     '8-8',
     '8-7',
-    '7',
     '7-7',
     '7-6',
-    '6',
     '6-6',
     '6-5',
-    '5',
     '5-5',
     '5-4',
-    '4',
     '4-4',
     '4-3',
-    '3',
     '3-3',
     '3-2',
     '2-2',
     '2-1',
     '1-1',
-
-    'A*',
-    'A*A*',
     'A*A',
-    'A',
+    'A*A*',
     'AA',
     'AB',
-    'B',
     'BB',
     'BC',
-    'C*',
-    'C',
     'CC',
     'CD',
-    'D',
     'DD',
     'DE',
-    'E',
     'EE',
     'EF',
-    'F',
     'FF',
     'FG',
-    'G',
     'GG',
     'U'
   ]
+  const doubleGradeOptions = doubleGrades.map(grade => ({
+    value: grade,
+    text: grade
+  }))
+
+  doubleGradeOptions.unshift({
+    value: '',
+    text: 'Select a grade'
+  })
+
+  // All grades
+  const combinedGrades = singleGrades.concat(doubleGrades)
+  const grades = [...new Set(combinedGrades)];
+  const gradeOptions = grades.map(grade => ({
+    value: grade,
+    text: grade
+  }))
+
+  gradeOptions.unshift({
+    value: '',
+    text: 'Select a grade'
+  })
 
   return {
     subjects,
-    grades
+    grades,
+    gradeOptions,
+    singleGrades,
+    singleGradeOptions,
+    doubleGrades,
+    doubleGradeOptions
   }
 }

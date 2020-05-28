@@ -2,10 +2,14 @@
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set type = applicationValue(["gcse", id, "type"]) %}
-{% if type == "Other UK qualification" or type == "Scottish National 5"  %}
-  {% set title = "What grade is your " + subject + " qualification?" %}
-{% else %}
+{% if type == "GCSE" and id == "english" %}
+  {% set title = "What English GCSE did you do?" %}
+{% elif type == "GCSE" and id == "science" %}
+  {% set title = "What science GCSEs did you do?" %}
+{% elif type == "GCSE" or type == "O level" or type == "Scottish National 5" %}
   {% set title = "What grade is your " + subject + " " + type + "?" %}
+{% else %}
+  {% set title = "What grade is your " + subject + " qualification?" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -15,30 +19,179 @@
 {% endblock %}
 
 {% block primary %}
-<p class="govuk-body">Providers expect you to have a grade C or 4 (or the equivalent) in order to train. If you don't have this, contact your provider to discuss your options. You might be able to retake an exam or do an equivalence test.</p>
+<p class="govuk-body">You need a grade C or 4 (or the equivalent). Contact your provider if you do not have this. You might be able to retake an exam or do an equivalence test.</p>
+
+{# Structured GCSE grade #}
+{% macro gradeAutocomplete(params) %}
+  {{ appAutocomplete({
+    label: {
+      text: params.label or "Grade",
+      classes: params.classes
+    },
+    hint: {
+      text: params.hint or "For example, ‘C’ or ‘4’"
+    },
+    classes: "govuk-input--width-10",
+    items: params.items
+  } | decorateApplicationAttributes(["gcse", id, "grade-" + params.name])) }}
+{% endmacro %}
+
+{# Structured English GCSE grade for other English exam #}
+{% set otherEnglishSubjectHtml %}
+  {{ govukInput({
+    label: {
+      text: "What English GCSE do you have?"
+    }
+  } | decorateApplicationAttributes(["gcse", id, "subject"])) }}
+  {{ gradeAutocomplete({
+    name: "other",
+    items: gcse.singleGradeOptions
+  }) }}
+{% endset %}
+
+{# Structured Science GCSE grade for tripple award exam #}
+{% set tripleScienceGradeHtml %}
+  {{ gradeAutocomplete({
+    name: "biology",
+    label: "Biology grade",
+    items: gcse.singleGradeOptions
+  }) }}
+  {{ gradeAutocomplete({
+    name: "chemistry",
+    label: "Chemistry grade",
+    items: gcse.singleGradeOptions
+  }) }}
+  {{ gradeAutocomplete({
+    name: "physics",
+    label: "Physics grade",
+    items: gcse.singleGradeOptions
+  }) }}
+{% endset %}
+
+{# Unstructured grade #}
+{% macro otherGradeHtml(hintText) %}
+  {{ govukInput({
+    label: {
+      classes: "govuk-label--m",
+      text: "Grade"
+    },
+    hint: {
+      text: hintText
+    } if hintText,
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
+{% endmacro %}
+
+{# Structured GCSE #}
 {% if applicationValue(["gcse", id, "type"]) == "GCSE" %}
-  {# Available grades: U,1,2,3,4,5,6,7,8,9 or U,G,F,E,D,C,C*,B,A,A* #}
   {% if id == "science" %}
-    {# Maximum number of grades: 3 #}
-    <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
-    {% set hintText = "For example: ‘A*A*A’, ‘AB’, ‘B’, ‘998’, ‘88’, ‘7’" %}
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          classes: "govuk-fieldset__legend--m",
+          text: "Select the GCSEs you did and include your grade"
+        }
+      },
+      items: [{
+        value: "Single award",
+        text: "Single award",
+        hint: {
+          text: "You have one science grade"
+        },
+        conditional: {
+          html: gradeAutocomplete({
+            name: "single",
+            items: gcse.singleGradeOptions
+          })
+        }
+      }, {
+        value: "Double (or combined) award",
+        text: "Double award",
+        hint: {
+          text: "You have a combined science grade"
+        },
+        conditional: {
+          html: gradeAutocomplete({
+            name: "double",
+            hint: "For example, ‘CD’ or ‘4-3’",
+            items: gcse.doubleGradeOptions
+          })
+        }
+      }, {
+        value: "Triple award",
+        text: "Triple award",
+        hint: {
+          text: "You have a grade for each science subject"
+        },
+        conditional: {
+          html: tripleScienceGradeHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["gcse", id, "exam"])) }}
   {% elif id == "english" %}
-    {{ govukDetails({
-      classes: "govuk-!-margin-bottom-2",
-      summaryText: "If you have a GCSE in English Literature only",
-      text: "Enter your grade here – but be aware that providers may want further evidence of your abilities in English."
-    }) }}
-    {{ govukDetails({
-      summaryText: "If you have more than one English qualification",
-      text: "Enter any English Literature qualifications under ‘Academic and other relevant qualifications’"
-    }) }}
-    {% set hintText = "For example, ‘C’ or ‘4’" %}
+    <p class="govuk-body">An English Language GCSE is preferred.</p>
+    {{ govukCheckboxes({
+      fieldset: {
+        legend: {
+          classes: "govuk-fieldset__legend--m",
+          text: "Select the GCSE(s) you did and include your grade"
+        }
+      },
+      items: [{
+        value: "English",
+        text: "English",
+        conditional: {
+          html: gradeAutocomplete({
+            name: "english",
+            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’",
+            items: gcse.gradeOptions
+          })
+        }
+      }, {
+        value: "English Language",
+        text: "English Language",
+        conditional: {
+          html: gradeAutocomplete({
+            name: "language",
+            items: gcse.singleGradeOptions
+          })
+        }
+      }, {
+        value: "English Literature",
+        text: "English Literature",
+        conditional: {
+          html: gradeAutocomplete({
+            name: "literature",
+            items: gcse.singleGradeOptions
+          })
+        }
+      }, {
+        value: "English Studies",
+        text: "English Studies",
+        conditional: {
+          html: gradeAutocomplete({
+            name: "studies",
+            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’",
+            items: gcse.gradeOptions
+          })
+        }
+      }, {
+        value: "Other English subject",
+        text: "Other English subject",
+        conditional: {
+          html: otherEnglishSubjectHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["gcse", id, "exam"])) }}
   {% else %}
-    {# Maximum number of grades: 1 #}
-    {% set hintText = "For example, ‘C’ or ‘4’" %}
+    {{ gradeAutocomplete({
+      name: "single",
+      classes: "govuk-label--m",
+      items: gcse.singleGradeOptions
+    }) }}
   {% endif %}
 
-{% elif applicationValue(["gcse", id, "type"]) == "GCE O Level" %}
+{% elif applicationValue(["gcse", id, "type"]) == "O level" %}
   {# Available grades: U,E,D,C,B,A #}
   {% if id == "science" %}
     {# Maximum number of grades: 3 #}
@@ -52,13 +205,14 @@
     }) }}
     {{ govukDetails({
       summaryText: "If you have more than one English qualification",
-      text: "Enter any English Literature qualifications under 'Academic and other relevant qualifications'"
+      text: "Enter any English Literature qualifications under ‘Academic and other relevant qualifications’"
     }) }}
     {% set hintText = "For example, ‘C’" %}
   {% else %}
     {# Maximum number of grades: 1 #}
     {% set hintText = "For example, ‘C’" %}
   {% endif %}
+  {{ otherGradeHtml(hintText) | safe }}
 
 {% elif applicationValue(["gcse", id, "type"]) == "Scottish National 5" %}
   {# Available grades: 7,6,5,4,3,2,1 or D,B,C,A #}
@@ -70,20 +224,79 @@
     {# Maximum number of grades: 1 #}
     {% set hintText = "For example, ‘C’ or ‘4’" %}
   {% endif %}
+  {{ otherGradeHtml(hintText) | safe }}
+{% else %}
+  {{ otherGradeHtml(hintText) | safe }}
 {% endif %}
-
-  {{ govukInput({
-    label: {
-      classes: "govuk-label--m",
-      text: "Please specify your grade"
-    },
-    hint: {
-      text: hintText
-    } if hintText,
-    classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
 {% endblock %}
+
+{% if applicationValue(["gcse", id, "type"]) == "GCSE" %}
+  {% block pageScripts %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+    {% if id == "science" %}
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-science-grade-single'),
+        defaultValue: '{{ applicationValue(["gcse", "science", "grade-single"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-science-grade-double'),
+        defaultValue: '{{ applicationValue(["gcse", "science", "grade-double"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-science-grade-biology'),
+        defaultValue: '{{ applicationValue(["gcse", "science", "grade-biology"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-science-grade-chemistry'),
+        defaultValue: '{{ applicationValue(["gcse", "science", "grade-chemistry"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-science-grade-physics'),
+        defaultValue: '{{ applicationValue(["gcse", "science", "grade-physics"]) }}'
+      })
+    {% elif id == "english" %}
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-english-grade-english'),
+        defaultValue: '{{ applicationValue(["gcse", "english", "grade-english"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-english-grade-language'),
+        defaultValue: '{{ applicationValue(["gcse", "english", "grade-language"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-english-grade-literature'),
+        defaultValue: '{{ applicationValue(["gcse", "english", "grade-literature"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-english-grade-studies'),
+        defaultValue: '{{ applicationValue(["gcse", "english", "grade-studies"]) }}'
+      })
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-english-grade-other'),
+        defaultValue: '{{ applicationValue(["gcse", "english", "grade-other"]) }}'
+      })
+    {% else %}
+      accessibleAutocomplete.enhanceSelectElement({
+        cssNamespace: 'govuk-input--width-10 autocomplete',
+        selectElement: document.querySelector('#gcse-maths-grade-single'),
+        defaultValue: '{{ applicationValue(["gcse", "maths", "grade-single"]) }}'
+      })
+    {% endif %}
+    </script>
+  {% endblock %}
+{% endif %}

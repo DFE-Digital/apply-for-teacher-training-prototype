@@ -1,8 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set qualifications = applicationValue(["other-qualifications"]) %}
+{% set qualifications = applicationValue(["other-qualifications"]) | toArray %}
 
 {% set otherQualificationContentsHtml %}
-
   {% if qualifications.length %}
     {% set qualifications = qualifications | toArray | selectattr("id") %}
     {% for item in qualifications %}
@@ -36,5 +35,5 @@
   {% set incompleteLink = "/other-qualifications/review?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
-  {{otherQualificationContentsHtml | safe }}
+  {{ otherQualificationContentsHtml | safe }}
 {% endif %}

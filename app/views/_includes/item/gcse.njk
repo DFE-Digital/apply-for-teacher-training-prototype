@@ -13,6 +13,34 @@
   {%- endif -%}
 {%- endset %}
 
+{% if item.type == "GCSE" and id == "maths" %}
+  {% set gradeHtml = item["grade-single"] %}
+{% elif item.type == "GCSE" and id == "english" %}
+  {% set gradeHtml %}
+  <ul class="govuk-list">
+    {% if item["grade-english"] %}<li>{{ item["grade-english"] }} (English)</li>{% endif %}
+    {% if item["grade-language"] %}<li>{{ item["grade-language"] }} (English Language)</li>{% endif %}
+    {% if item["grade-literature"] %}<li>{{ item["grade-literature"] }} (English Literature)</li>{% endif %}
+    {% if item["grade-studies"] %}<li>{{ item["grade-studies"] }} (English Studies)</li>{% endif %}
+    {% if item["grade-other"] %}<li>{{ item["grade-other"] }} ({{ item.subject }})</li>{% endif %}
+  </ul>
+  {% endset %}
+{% elif item.type == "GCSE" and id == "science" %}
+  {% set gradeHtml %}
+  {% if item["grade-single"] %}{{ item["grade-single"] }} (Single Award){% endif %}
+  {% if item["grade-double"] %}{{ item["grade-double"] }} (Double Award){% endif %}
+  {% if item["grade-biology"] or item["grade-chemistry"] or item["grade-physics"] %}
+  <ul class="govuk-list">
+    <li>{{ item["grade-biology"] }} (Biology)</li>
+    <li>{{ item["grade-chemistry"] }} (Chemistry)</li>
+    <li>{{ item["grade-physics"] }} (Physics)</li>
+  </ul>
+  {% endif %}
+{% endset %}
+{% else %}
+  {% set gradeHtml = item.grade %}
+{% endif %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -61,7 +89,7 @@
       text: "Grade"
     },
     value: {
-      text: item.grade or "Not entered"
+      html: gradeHtml or "Not entered"
     },
     actions: {
       items: [{

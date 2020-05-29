@@ -19,30 +19,45 @@
 {% endblock %}
 
 {% block primary %}
-  {% if type == "GCSE" %}
-    {{ appAutocomplete({
-      label: {
-        text: "Subject",
-        classes: "govuk-label--m"
-      },
-      items: gcseSubjects
-    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {# Suggest subjects if GCSE, AS level or A level qualification #}
+  {% if qualificationType == "GCSE"
+    or qualificationType == "AS level"
+    or qualificationType == "A level"
+  %}
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-subject">Subject</label>
+      <div id="subject-autocomplete-container"></div>
+    </div>
   {% else %}
     {{ govukInput({
       label: {
         text: "Subject",
         classes: "govuk-label--m"
       }
-    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+    } | decorateApplicationAttributes(["degree", id, "subject"])) }}
   {% endif %}
 
-  {{ govukInput({
-    label: {
-      text: "Grade",
-      classes: "govuk-label--m"
-    },
-    classes: "govuk-input--width-10"
-  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+  {# Suggest grades if GCSE, AS level, A level or vocational qualification #}
+  {% if qualificationType == "GCSE"
+    or qualificationType == "AS level"
+    or qualificationType == "A level"
+    or qualificationType == "BTEC"
+    or qualificationType == "NVQ"
+    or qualificationType == "VRQ"
+  %}
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-grade">Grade</label>
+      <div id="grade-autocomplete-container" class="govuk-input--width-10"></div>
+    </div>
+  {% else %}
+    {{ govukInput({
+      label: {
+        text: "Grade",
+        classes: "govuk-label--m"
+      },
+      classes: "govuk-input--width-10"
+    } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+  {% endif %}
 
   {{ govukInput({
     label: {
@@ -83,7 +98,7 @@
         text: "Yes, add a different qualification"
       }, {
         value: "review",
-        text: "No, not right now"
+        text: "No, not at the moment"
       }]
     }) }}
   {% endif %}
@@ -94,11 +109,71 @@
 {% endblock %}
 
 {% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-subject'),
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "subject"]) }}'
-    })
-  </script>
+  {% if qualificationType == "GCSE"
+    or qualificationType == "AS level"
+    or qualificationType == "A level"
+  %}
+    {% if qualificationType == "GCSE" %}
+      {% set subjectData = gcse.subjects %}
+      {% set gradeData = gcse.grades %}
+    {% elif qualificationType == "AS level" %}
+      {% set subjectData = asLevel.subjects %}
+      {% set gradeData = asLevel.grades %}
+    {% elif qualificationType == "A level" %}
+      {% set subjectData = aLevel.subjects %}
+      {% set gradeData = aLevel.grades %}
+    {% endif %}
+
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        element: document.querySelector('#subject-autocomplete-container'),
+        id: 'other-qualifications-{{ id }}-subject',
+        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][subject]",
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "subject"]) }}',
+        minLength: 2,
+        placeholder: false,
+        source: [
+          {% for item in subjectData %}"{{ item }}",{% endfor %}
+        ]
+      })
+
+      accessibleAutocomplete({
+        element: document.querySelector('#grade-autocomplete-container'),
+        id: 'other-qualifications-{{ id }}-grade',
+        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][grade]",
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "grade"]) }}',
+        minLength: 1,
+        placeholder: false,
+        source: [
+          {% for item in gradeData %}"{{ item }}",{% endfor %}
+        ]
+      })
+    </script>
+  {% elif qualificationType == "BTEC"
+    or qualificationType == "NVQ"
+    or qualificationType == "VRQ"
+  %}
+    {% set gradeData = [
+      'Distinction',
+      'Merit',
+      'Pass',
+      'Unclassified',
+      'Not applicable'
+    ] %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete({
+        element: document.querySelector('#grade-autocomplete-container'),
+        id: 'other-qualifications-{{ id }}-grade',
+        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][grade]",
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "grade"]) }}',
+        minLength: 1,
+        placeholder: false,
+        source: [
+          {% for item in gradeData %}"{{ item }}",{% endfor %}
+        ]
+      })
+    </script>
+  {% endif %}
 {% endblock %}

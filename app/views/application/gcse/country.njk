@@ -1,0 +1,30 @@
+{% extends "_form-question.njk" %}
+
+{% set title = "In which country did you study for your maths qualification?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ appAutocomplete({
+    label: label,
+    items: countries
+  } | decorateApplicationAttributes(["gcse", id, "country"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#gcse-{{ id }}-country'),
+      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}'
+    })
+  </script>
+{% endblock %}

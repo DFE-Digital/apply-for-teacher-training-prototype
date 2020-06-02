@@ -30,19 +30,11 @@
     {{ govukInput({
       label: {
         text: "Enter type of qualification"
+      },
+      hint: {
+        html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
       }
     } | decorateApplicationAttributes(["gcse", id, "type-non-uk"])) }}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country did you gain this qualification?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["gcse", id, "country"])) }}
-    {{ govukInput({
-      label: {
-        text: "What was the awarding organisation?"
-      }
-    } | decorateApplicationAttributes(["gcse", id, "award-org"])) }}
   {% endset %}
 
   {% set missingConditionalHtml %}
@@ -97,14 +89,4 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#gcse-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}'
-    })
-  </script>
 {% endblock %}

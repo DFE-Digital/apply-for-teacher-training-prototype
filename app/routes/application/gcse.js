@@ -21,8 +21,8 @@ const gcsePaths = (req) => {
 
   var paths = [
     basePath,
-    ...(isInternational(req) ? [`${basePath}/naric`] : []),
-    `${basePath}/grade`,
+    ...(isInternational(req) ? [`${basePath}/country`] : []),
+    ...(isInternational(req) ? [`${basePath}/naric`] : [`${basePath}/grade`]),
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/gcse/${id}/review`])
   ]
@@ -74,7 +74,7 @@ module.exports = router => {
 
     let path
     if (isInternational(req)) {
-      path = `/application/${applicationId}/gcse/${id}/naric`
+      path = `/application/${applicationId}/gcse/${id}/country`
     } else if (isMissing(req)) {
       path = referrer || `/application/${applicationId}/gcse/${id}/review`
     } else {
@@ -85,7 +85,7 @@ module.exports = router => {
   })
 
   // Render NARIC/grade/year pages
-  router.all('/application/:applicationId/gcse/:id/:template(naric|subject|grade|year)', (req, res) => {
+  router.all('/application/:applicationId/gcse/:id/:template(subject|country|grade|naric|year)', (req, res) => {
     const completedGcse = gcseData(req).grade && gcseData(req).year
 
     const id = req.params.id

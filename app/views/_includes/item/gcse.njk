@@ -44,7 +44,7 @@
 {{ govukSummaryList({
   rows: [{
     key: {
-    text: "How I expect to gain this qualification"
+      text: "How I expect to gain this qualification"
     },
     value: {
       html: (item.missing or "No reason given") | nl2br | safe
@@ -58,7 +58,7 @@
     } if canAmend
   } if missing == true, {
     key: {
-      text: "Qualification"
+      text: "Qualification type"
     },
     value: {
       text: qualificationText | nl2br | safe
@@ -68,6 +68,48 @@
         href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "year"
+      }]
+    } if canAmend
+  } if missing != true, {
+    key: {
+      text: "Country"
+    },
+    value: {
+      text: item.country or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + id + "/country?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "country"
+      }]
+    } if canAmend
+  } if missing != true, {
+    key: {
+      text: "NARIC reference number"
+    },
+    value: {
+      text: item["naric-reference"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "NARIC reference"
+      }]
+    } if canAmend
+  } if missing != true, {
+    key: {
+      text: "Comparable UK qualification"
+    },
+    value: {
+      text: item["naric-comparability"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "comparable UK qualification"
       }]
     } if canAmend
   } if missing != true, {
@@ -98,5 +140,5 @@
         visuallyHiddenText: "grade"
       }]
     } if canAmend
-  } if missing != true]
+  } if missing != true and item.provenance == "domestic"]
 }) }}

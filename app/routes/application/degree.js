@@ -63,7 +63,7 @@ module.exports = router => {
   })
 
   // Render NARIC/grade/year pages
-  router.all('/application/:applicationId/degree/:id/:template(naric|subject|institution|grade|year)', (req, res) => {
+  router.all('/application/:applicationId/degree/:id/:template(subject|institution|grade|naric|year)', (req, res) => {
     const completedDegree = degreeData(req).grade && degreeData(req)['year-start']
 
     const id = req.params.id

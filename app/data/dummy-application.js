@@ -145,8 +145,9 @@ module.exports = {
       grade: '92',
       year: '2004',
       country: 'India',
-      'award-org': 'WBBSE',
       naric: 'No',
+      'naric-reference': 4000228363,
+      'naric-comparability': 'GCSE (grades A*-C / 9-4)',
       missing: ''
     },
     english: {

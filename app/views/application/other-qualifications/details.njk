@@ -1,10 +1,14 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set qualificationType = applicationValue(["other-qualifications", id, "type-uk"]) or type %}
+{% set qualificationName =
+  applicationValue(["other-qualifications", id, "type-uk"])
+  or type | replace("qualification", "") | replace("Other UK", "UK") | replace("Non", "non")
+%}
+{% set international = type == "Non-UK qualification" %}
 {% set parent = "Academic and other relevant qualifications" %}
 {% set action = "edit" if applicationValue(["other-qualifications", id, "subject"]) else "add" %}
-{% set title = (action | capitalize) + " " + qualificationType + " qualification" %}
+{% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -20,9 +24,9 @@
 
 {% block primary %}
   {# Suggest subjects if GCSE, AS level or A level qualification #}
-  {% if qualificationType == "GCSE"
-    or qualificationType == "AS level"
-    or qualificationType == "A level"
+  {% if type == "GCSE"
+    or type == "AS level"
+    or type == "A level"
   %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-subject">Subject</label>
@@ -34,16 +38,33 @@
         text: "Subject",
         classes: "govuk-label--m"
       }
-    } | decorateApplicationAttributes(["degree", id, "subject"])) }}
+    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+  {% endif %}
+
+  {{ govukInput({
+    label: {
+      text: "Institution where you studied",
+      classes: "govuk-label--m"
+    }
+  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
+
+  {% if international %}
+    {{ appAutocomplete({
+      label: {
+        text: "Country where you studied",
+        classes: "govuk-label--m"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endif %}
 
   {# Suggest grades if GCSE, AS level, A level or vocational qualification #}
-  {% if qualificationType == "GCSE"
-    or qualificationType == "AS level"
-    or qualificationType == "A level"
-    or qualificationType == "BTEC"
-    or qualificationType == "NVQ"
-    or qualificationType == "VRQ"
+  {% if type == "GCSE"
+    or type == "AS level"
+    or type == "A level"
+    or type == "BTEC"
+    or type == "NVQ"
+    or type == "VRQ"
   %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-grade">Grade</label>
@@ -52,7 +73,7 @@
   {% else %}
     {{ govukInput({
       label: {
-        text: "Grade",
+        text: "Grade" + (" (optional)" if international),
         classes: "govuk-label--m"
       },
       classes: "govuk-input--width-10"
@@ -66,13 +87,6 @@
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
-
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
 
   {# Only ask if want to add another if:
     * not editing an existing item
@@ -91,7 +105,7 @@
       },
       items: [{
         value: "add-type",
-        text: "Yes, add another " + qualificationType,
+        text: "Yes, add another " + qualificationName + " qualification",
         checked: true
       }, {
         value: "add",
@@ -109,17 +123,17 @@
 {% endblock %}
 
 {% block pageScripts %}
-  {% if qualificationType == "GCSE"
-    or qualificationType == "AS level"
-    or qualificationType == "A level"
+  {% if type == "GCSE"
+    or type == "AS level"
+    or type == "A level"
   %}
-    {% if qualificationType == "GCSE" %}
+    {% if type == "GCSE" %}
       {% set subjectData = gcse.subjects %}
       {% set gradeData = gcse.grades %}
-    {% elif qualificationType == "AS level" %}
+    {% elif type == "AS level" %}
       {% set subjectData = asLevel.subjects %}
       {% set gradeData = asLevel.grades %}
-    {% elif qualificationType == "A level" %}
+    {% elif type == "A level" %}
       {% set subjectData = aLevel.subjects %}
       {% set gradeData = aLevel.grades %}
     {% endif %}
@@ -150,9 +164,9 @@
         ]
       })
     </script>
-  {% elif qualificationType == "BTEC"
-    or qualificationType == "NVQ"
-    or qualificationType == "VRQ"
+  {% elif type == "BTEC"
+    or type == "NVQ"
+    or type == "VRQ"
   %}
     {% set gradeData = [
       'Distinction',
@@ -174,6 +188,13 @@
           {% for item in gradeData %}"{{ item }}",{% endfor %}
         ]
       })
-    </script>
+  {% elif international %}
+    <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script>
+      accessibleAutocomplete.enhanceSelectElement({
+        selectElement: document.querySelector('#other-qualifications-{{ id }}-country'),
+        defaultValue: '{{ applicationValue(["other-qualifications", id, "country"]) }}'
+      })
   {% endif %}
+    </script>
 {% endblock %}

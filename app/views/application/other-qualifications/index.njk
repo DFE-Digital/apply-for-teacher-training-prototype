@@ -19,7 +19,7 @@
 {% block primary %}
   {% set otherUkConditionalHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label" for="other-qualifications-{{ id }}-type-uk">Type of qualification</label>
+      <label class="govuk-label" for="other-qualifications-{{ id }}-type-uk">Qualification name</label>
       <div id="type-uk-autocomplete-container"></div>
     </div>
   {% endset %}
@@ -27,15 +27,12 @@
   {% set nonUkConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Type of qualification"
+        text: "Qualification name"
+      },
+      hint: {
+        html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
       }
     } | decorateApplicationAttributes(["other-qualifications", id, "type-non-uk"])) }}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country did you gain this qualification?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endset %}
 
   <p class="govuk-body">Enter your qualifications as completely as you can, including all your GCSEs and A levels (or equivalents), and any other qualifications where you showed skills that might help you as a teacher.</p>
@@ -116,10 +113,6 @@
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#other-qualifications-{{ id }}-country'),
-      defaultValue: '{{ valueOrPreviousQualificationValue(["other-qualifications", id, "country"]) }}'
-    })
     accessibleAutocomplete({
       element: document.querySelector('#type-uk-autocomplete-container'),
       id: 'other-qualifications-{{ id }}-type-uk',

@@ -62,7 +62,7 @@
       text: "A level"
     }, {
       value: "Other UK qualification",
-      text: "Other UK qualification" if data.flags.international_qualifications else "Other",
+      text: "Other UK qualification",
       conditional: {
         html: otherUkConditionalHtml
       }
@@ -72,7 +72,7 @@
       conditional: {
         html: nonUkConditionalHtml
       }
-    } if data.flags.international_qualifications]
+    }]
   } | decorateApplicationAttributes(["other-qualifications", id, "type"])) }}
 
   {% set internationalConditionalHtml %}
@@ -133,7 +133,7 @@
         'NVQ',
         'Scottish National 5',
         'Scottish Higher',
-        'Scottish Advanced Higher', 
+        'Scottish Advanced Higher',
         'SVQ',
         'VRQ'
       ]

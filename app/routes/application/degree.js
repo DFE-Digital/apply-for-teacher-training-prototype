@@ -13,7 +13,7 @@ const degreeData = (req) => {
 const degreePaths = (req) => {
   const applicationId = req.params.applicationId
   const data = degreeData(req)
-  const international = req.session.data.flags.international_qualifications && data.provenance && data.provenance === 'international'
+  const international = data.provenance && data.provenance === 'international'
   const basePath = `/application/${applicationId}/degree/${req.params.id}`
   const referrer = req.query.referrer
 
@@ -71,7 +71,7 @@ module.exports = router => {
     const provenance = applicationData.degree[id].provenance || 'domestic'
 
     let path
-    if (provenance === 'domestic' || !req.session.data.flags.international_qualifications) {
+    if (provenance === 'domestic') {
       path = `${id}/subject`
     } else {
       path = `${id}/naric`

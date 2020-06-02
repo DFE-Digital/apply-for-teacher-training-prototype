@@ -34,63 +34,55 @@
     <p class="govuk-body">You need an undergraduate degree to apply for teacher training. If you have further degrees, you can add them after.</p>
   {% endif %}
 
-  {% if data.flags.international_qualifications %}
-    {% set ukConditionalHtml %}
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="degree-{{ id }}-type-uk">Enter degree type</label>
-        <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">
-          {{ typeHintText }}
-        </span>
-        <div id="type-uk-autocomplete-container"></div>
-      </div>
-    {% endset %}
-
-    {% set internationalConditionalHtml %}
-      {{ govukInput({
-        label: {
-          text: "Type of qualification"
-        },
-        hint: {
-          text: typeHintText
-        }
-      } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
-
-      {{ appAutocomplete({
-        label: {
-          text: "In which country is your institution based?"
-        },
-        items: countries
-      } | decorateApplicationAttributes(["degree", id, "country"])) }}
-    {% endset %}
-
-    {{ govukRadios({
-      fieldset: {
-        legend: {
-          text: "What type of degree do you want to add?",
-          classes: "govuk-label--m"
-        }
-      },
-      items: [{
-        value: "domestic",
-        text: "UK degree",
-        conditional: {
-          html: ukConditionalHtml
-        }
-      }, {
-        value: "international",
-        text: "Non-UK degree",
-        conditional: {
-          html: internationalConditionalHtml
-        }
-      }]
-    } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
-  {% else %}
+  {% set ukConditionalHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--m" for="degree-{{ id }}-type-uk">What type of degree do you want to add?</label>
-      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">{{ typeHintText }}</span>
+      <label class="govuk-label" for="degree-{{ id }}-type-uk">Enter degree type</label>
+      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">
+        {{ typeHintText }}
+      </span>
       <div id="type-uk-autocomplete-container"></div>
     </div>
-  {% endif %}
+  {% endset %}
+
+  {% set internationalConditionalHtml %}
+    {{ govukInput({
+      label: {
+        text: "Type of qualification"
+      },
+      hint: {
+        text: typeHintText
+      }
+    } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
+
+    {{ appAutocomplete({
+      label: {
+        text: "In which country is your institution based?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["degree", id, "country"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What type of degree do you want to add?",
+        classes: "govuk-label--m"
+      }
+    },
+    items: [{
+      value: "domestic",
+      text: "UK degree",
+      conditional: {
+        html: ukConditionalHtml
+      }
+    }, {
+      value: "international",
+      text: "Non-UK degree",
+      conditional: {
+        html: internationalConditionalHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
 
   {{ govukButton({
     text: "Save and continue"
@@ -100,12 +92,10 @@
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
-  {% if data.flags.international_qualifications %}
     accessibleAutocomplete.enhanceSelectElement({
       selectElement: document.querySelector('#degree-{{ id }}-country'),
       defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
     })
-  {% endif %}
     function inputTemplate (result) {
       if (result) {
         const name = result.split(' - ')

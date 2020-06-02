@@ -71,7 +71,35 @@
         visuallyHiddenText: "grade"
       }]
     } if canAmend
-  }, {
+  } if item.provenance == "domestic", {
+    key: {
+      text: "NARIC reference number"
+    },
+    value: {
+      text: item["naric-reference"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/naric?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "NARIC reference"
+      }]
+    } if canAmend
+  } if item["naric-reference"], {
+    key: {
+      text: "Comparable UK degree"
+    },
+    value: {
+      text: item["naric-comparability"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/naric?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "comparable UK degree"
+      }]
+    } if canAmend
+  } if item["naric-comparability"], {
     key: {
       text: "Dates"
     },

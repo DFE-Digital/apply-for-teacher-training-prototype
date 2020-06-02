@@ -11,10 +11,11 @@
 {% endif %}
 
 {% if degreeCount < 1 and action == "add" %}
-  {% set typeHintText = "For example, BA, BSc or other (please specify)" %}
+  {% set ukHintText = "For example, BA, BSc or other (please specify)" %}
 {% else %}
-  {% set typeHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
+  {% set ukHintText = "For example, BA, BSc, Masters, PhD, or other (please specify)" %}
 {% endif %}
+{% set intHintHtml = "For example, Bachelor degree, Bachelor of Arts, <span lang=\"fr\">Diplôme</span>, <span lang=\"es\">Licenciatura</span>" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -37,9 +38,7 @@
   {% set ukConditionalHtml %}
     <div class="govuk-form-group">
       <label class="govuk-label" for="degree-{{ id }}-type-uk">Enter degree type</label>
-      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">
-        {{ typeHintText }}
-      </span>
+      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">{{ ukHintText }}</span>
       <div id="type-uk-autocomplete-container"></div>
     </div>
   {% endset %}
@@ -50,16 +49,9 @@
         text: "Type of qualification"
       },
       hint: {
-        text: typeHintText
+        html: intHintHtml
       }
     } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
-
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is your institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -92,10 +84,6 @@
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#degree-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
-    })
     function inputTemplate (result) {
       if (result) {
         const name = result.split(' - ')

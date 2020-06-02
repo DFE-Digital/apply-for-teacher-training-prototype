@@ -19,10 +19,9 @@ const degreePaths = (req) => {
 
   var paths = [
     basePath,
-    ...(international ? [`${basePath}/naric`] : []),
     `${basePath}/subject`,
     `${basePath}/institution`,
-    `${basePath}/grade`,
+    ...(international ? [`${basePath}/naric`] : [`${basePath}/grade`]),
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/degree/review`])
   ]
@@ -52,7 +51,7 @@ module.exports = router => {
 
     const id = req.params.id
     const referrer = req.query.referrer
-    const nextPath = `/application/${req.params.applicationId}/degree/${id}/answer?${utils.queryString(req)}`
+    const nextPath = `/application/${req.params.applicationId}/degree/${id}/subject?${utils.queryString(req)}`
     // If completed this section, return to referrer, else next question
     const formaction = completedDegree ? referrer : nextPath
 
@@ -61,23 +60,6 @@ module.exports = router => {
       id,
       referrer
     })
-  })
-
-  // Degree provenance answer branching
-  router.post('/application/:applicationId/degree/:id/answer', (req, res) => {
-    const applicationId = req.params.applicationId
-    const applicationData = utils.applicationData(req)
-    const id = req.params.id
-    const provenance = applicationData.degree[id].provenance || 'domestic'
-
-    let path
-    if (provenance === 'domestic') {
-      path = `${id}/subject`
-    } else {
-      path = `${id}/naric`
-    }
-
-    res.redirect(`/application/${applicationId}/degree/${path}?${utils.queryString(req)}`)
   })
 
   // Render NARIC/grade/year pages

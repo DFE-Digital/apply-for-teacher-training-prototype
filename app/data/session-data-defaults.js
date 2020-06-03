@@ -19,6 +19,7 @@ module.exports = {
     automatic_breaks: process.env.MVP !== 'true',
     international_qualifications: true,
     nationality: process.env.MVP !== 'true',
+    self_amend_email_address: false,
     self_amend_contact_details: process.env.MVP !== 'true',
     interview_preferences: true
   },

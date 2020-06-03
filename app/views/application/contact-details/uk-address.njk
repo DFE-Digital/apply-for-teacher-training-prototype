@@ -11,7 +11,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/contact-details/where-do-you-live" if data.flags.international_address else "/application/" + applicationId + "/contact-details"
+      href: "/application/" + applicationId + "/contact-details/where-do-you-live"
     }) }}
   {% endif %}
 {% endblock %}

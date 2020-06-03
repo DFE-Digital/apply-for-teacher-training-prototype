@@ -5,7 +5,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/contact-details/where-do-you-live"
+    href: (referrer if referrer else "/application/" + applicationId + "/contact-details/where-do-you-live")
   }) }}
 {% endblock %}
 

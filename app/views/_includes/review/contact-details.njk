@@ -1,7 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set addressHtml -%}
   {%- if contactDetails.address -%}
-    {%- if contactDetails.address["street-address"] -%}
+    {%- if contactDetails["address-type"] == "international" -%}
       {{ contactDetails.address["street-address"] }}
     {%- else -%}
       {%- if contactDetails.address.line1 -%}
@@ -58,7 +58,7 @@
           visuallyHiddenText: "email"
         }]
       } if canAmend
-    }, {
+    } if data.flags.self_amend_email_address, {
       key: {
         text: "Address"
       },

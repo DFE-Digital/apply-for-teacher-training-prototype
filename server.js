@@ -41,7 +41,6 @@ var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreDat
 var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
 var mongoDbUri = process.env.MONGODB_URI
 var useHttps = process.env.USE_HTTPS || config.useHttps
-var urStudy = process.env.UR_STUDY
 var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
 
 useHttps = useHttps.toLowerCase()
@@ -115,7 +114,6 @@ app.locals.cookieText = config.cookieText
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
 app.locals.serviceSlug = pkg.name
-app.locals.urStudy = urStudy
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
 app.locals.degree = require('./app/data/degree')()
@@ -134,17 +132,6 @@ const sessionOptions = {
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
     secure: isSecure
-  }
-}
-
-// Allow research users to open prototype in new browsers/sessions
-// and return to their original session and filled in data
-// This is only ok if content is on a unique URL and behind basic auth
-// NOTE: genid must always return a STRING
-// https://github.com/expressjs/session#genid
-if (urStudy && typeof urStudy === 'string') {
-  sessionOptions.genid = function () {
-    return urStudy
   }
 }
 

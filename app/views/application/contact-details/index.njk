@@ -23,36 +23,17 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "For non-UK numbers, include the country code"
+      text: "Enter a landline or mobile. For non-UK numbers, include the country code"
     },
     classes: "govuk-input--width-20",
     autocomplete: "tel",
     type: "tel"
   } | decorateApplicationAttributes(["contact-details", "phone-number"])) }}
 
-{% if urStudy %}
-  {{ govukInput({
-    label: {
-      text: "Email address",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "Don’t use a work or university email address you might lose access to"
-    },
-    classes: "govuk-input--width-20",
-    attributes: {
-      spellcheck: "false"
-    },
-    autocomplete: "email",
-    type: "email",
-    id: "account-email",
-    name: "account[email]",
-    value: data["account"]["email"]
-  }) }}
-{% else %}
-  <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Email address</h3>
-  <p class="govuk-body">{{ data["account"]["email"] }} &nbsp; <a href="/account/change-email-address">Change</a></p>
-{% endif %}
+  {% if data.flags.self_amend_email_address %}
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Email address</h3>
+    <p class="govuk-body">{{ data["account"]["email"] }} &nbsp; <a href="/account/change-email-address">Change</a></p>
+  {% endif %}
 
   {{ govukButton({
     text: "Save and continue"

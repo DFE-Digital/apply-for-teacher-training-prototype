@@ -1,7 +1,7 @@
 const utils = require('./../utils')
 
 function createNewApplication (req) {
-  var code = req.app.locals.urStudy || utils.generateRandomString()
+  var code = utils.generateRandomString()
   var data = req.session.data
 
   if (typeof data.applications === 'undefined') {

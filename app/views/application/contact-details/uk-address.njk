@@ -1,6 +1,5 @@
 {% extends "_form.njk" %}
 
-{% set parent = "Contact details" %}
 {% set title = "What is your address?" %}
 {% set international = applicationValue(["contact-details", "address-type"]) == "international" %}
 
@@ -11,7 +10,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/contact-details/where-do-you-live" if data.flags.international_address else "/application/" + applicationId + "/contact-details"
+      href: "/application/" + applicationId + "/contact-details/where-do-you-live"
     }) }}
   {% endif %}
 {% endblock %}

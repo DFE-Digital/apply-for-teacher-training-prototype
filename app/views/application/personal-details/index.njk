@@ -1,5 +1,6 @@
 {% extends "_form.njk" %}
 
+{% set formaction = referrer or "/application/" + applicationId + "/personal-details/nationality" %}
 {% set title = "Personal details" %}
 
 {% block pageNavigation %}
@@ -76,29 +77,6 @@
     }]
   }) }}
 
-  {{ appAutocomplete({
-    label: {
-      text: "Nationality",
-      classes: "govuk-label--m"
-    },
-    items: nationalities
-  } | decorateApplicationAttributes(["candidate", "nationality"])) }}
-
-  {% set anotherNationality %}
-    {{ appAutocomplete({
-      label: {
-        text: "Second nationality"
-      },
-      items: nationalities
-    } | decorateApplicationAttributes(["candidate", "second-nationality"])) }}
-  {% endset -%}
-
-  {{ govukDetails({
-    summaryText: "Add another nationality",
-    html: anotherNationality,
-    open: ["candidate", "second-nationality"] | ifSetForApplication
-  }) }}
-
   {% set englishDetailHtml %}
     {{ govukCharacterCount({
       label: {
@@ -142,18 +120,4 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-nationality'),
-      defaultValue: '{{ applicationValue(["candidate", "nationality"]) }}'
-    })
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-second-nationality'),
-      defaultValue: '{{ applicationValue(["candidate", "second-nationality"]) }}'
-    })
-  </script>
 {% endblock %}

@@ -19,16 +19,12 @@
   {% endif %}
 {% endset %}
 
-{% set nationalityText %}
-  {% if applicationValue(["candidate", "nationality"]) %}
-    {{ applicationValue(["candidate", "nationality"]) }}
-    {% if applicationValue(["candidate", "second-nationality"]) %}
-      and {{ applicationValue(["candidate", "second-nationality"]) }}
-    {% endif %}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
+{% set nationalityText =
+  applicationValue(["candidate", "multiple-nationalities"])
+  or applicationValue(["candidate", "other-nationality"])
+  or applicationValue(["candidate", "nationality"])
+  or 'Not entered'
+%}
 
 {% set residencyStatusText %}
   {% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
@@ -80,7 +76,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/personal-details?referrer=" + referrer,
+          href: applicationPath + "/personal-details/nationality?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "nationality"
         }]

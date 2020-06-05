@@ -1,0 +1,70 @@
+{% extends "_form.njk" %}
+
+{% set formaction = "/application/" + applicationId + "/personal-details/nationality-answer" %}
+{% set title = "Nationality" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set otherHtml %}
+    {{ appAutocomplete({
+      label: {
+        text: "Enter your nationality"
+      },
+      items: nationalities
+    } | decorateApplicationAttributes(["candidate", "other-nationality"])) }}
+  {% endset -%}
+
+  {% set manyHtml %}
+    {{ govukCharacterCount({
+      label: {
+        html: "Give details"
+      },
+      maxwords: 200,
+      rows: 2
+    } | decorateApplicationAttributes(["candidate", "multiple-nationalities"])) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      text: "British"
+    }, {
+      text: "Irish"
+    }, {
+      text: "Other",
+      value: "other",
+      conditional: {
+        html: otherHtml
+      }
+    }, {
+      text: "I have multiple nationalities",
+      value: "multiple",
+      conditional: {
+        html: manyHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["candidate", "nationality"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#candidate-other-nationality'),
+      defaultValue: '{{ applicationValue(["candidate", "other-nationality"]) }}'
+    })
+  </script>
+{% endblock %}

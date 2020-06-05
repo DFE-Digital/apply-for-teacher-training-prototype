@@ -1,11 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set parent = "Personal details" %}
-{% set title = "What is your residence status?" %}
+{% set formaction = referrer or "/application/" + applicationId + "/personal-details/review" %}
+{% set title = "Do you have the right to work or study in the UK?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/")
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/nationality/")
   }) }}
 {% endblock %}
 
@@ -13,40 +13,14 @@
   {% set rightToWorkStudy %}
     {{ govukCharacterCount({
       label: {
-        html: "Please give details of your visa type, status or circumstances"
+        html: "Give details"
+      },
+      hint: {
+        text: "For example, you have settled status or a permanent residence card"
       },
       maxwords: 200,
       rows: 5
     } | decorateApplicationAttributes(["candidate", "residency-status-right-to-work"])) }}
-  {% endset -%}
-
-  {% set requireTier2 %}
-    <p>Bear in mind that:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you must be offered a salaried place on a course before you apply for a Tier 2 visa</li>
-      <li>the earliest you can apply for a visa is 3 months before you start your course</li>
-    </ul>
-    <p><a href="https://www.gov.uk/tier-2-general">Learn more about Tier 2 visas</a>.</p>
-  {% endset -%}
-
-  {% set requireTier4 %}
-    <p>Bear in mind that:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>you must be accepted onto a course before you apply for a Tier 4 visa</li>
-      <li>the earliest you can apply for a visa is 3 months before you start your course</li>
-      <li>Tier 4 visa holders are not eligible for public funds, including bursaries and student loans</li>
-    </ul>
-    <p><a href="https://www.gov.uk/tier-4-general-visa">Learn more about Tier 4 visas</a>.</p>
-  {% endset -%}
-
-  {% set unknown %}
-    {{ govukCharacterCount({
-      label: {
-        html: "Please explain your circumstances. It may help you to <a href=\"https://www.gov.uk/browse/visas-immigration/what-you-need-to-do/\">read guidance on UK visas and immigration</a>."
-      },
-      maxwords: 200,
-      rows: 5
-    } | decorateApplicationAttributes(["candidate", "residency-status-unknown"])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -56,24 +30,19 @@
       }
     },
     items: [{
-      text: "I have the right to study and/or work in the UK",
+      text: "Yes – I have the right to work or study in the UK",
       conditional: {
         html: rightToWorkStudy
       }
     }, {
-      text: "I will need to apply for a general work visa (Tier 2) to work in the UK",
+      text: "Not yet – I will need to apply for permission to work or study in the UK",
       conditional: {
-        html: requireTier2
+        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
       }
     }, {
-      text: "I will need to apply for a general student visa (Tier 4) to study in the UK",
+      text: "I do not know",
       conditional: {
-        html: requireTier4
-      }
-    }, {
-      text: "I don’t know my residency status",
-      conditional: {
-        html: unknown
+        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
       }
     }]
   } | decorateApplicationAttributes(["candidate", "residency-status"])) }}

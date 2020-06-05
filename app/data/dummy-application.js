@@ -61,8 +61,8 @@ module.exports = {
       month: '02',
       year: '1988'
     },
-    nationality: ['Indian'],
-    'residency-status': 'I will need to apply for a general work visa (Tier 2) to work in the UK',
+    nationality: 'Indian',
+    'residency-status': 'Not yet – I will need to apply for permission to work or study in the UK',
     'language-skills': {
       'english-is-main': 'No',
       'english-qualifications': 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'

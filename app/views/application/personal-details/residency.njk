@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/personal-details/review" %}
+{% set formaction = referrer or "/application/" + applicationId + "/personal-details/english-proficiency" %}
 {% set title = "Do you have the right to work or study in the UK?" %}
 
 {% block pageNavigation %}
@@ -20,7 +20,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(["candidate", "residency-status-right-to-work"])) }}
+    } | decorateApplicationAttributes(["candidate", "residency-right-to-work"])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -45,7 +45,7 @@
         html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
       }
     }]
-  } | decorateApplicationAttributes(["candidate", "residency-status"])) }}
+  } | decorateApplicationAttributes(["candidate", "residency"])) }}
 
   {{ govukButton({
     text: "Save and continue"

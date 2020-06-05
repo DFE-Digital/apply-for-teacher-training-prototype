@@ -23,18 +23,26 @@
   applicationValue(["candidate", "multiple-nationalities"])
   or applicationValue(["candidate", "other-nationality"])
   or applicationValue(["candidate", "nationality"])
-  or 'Not entered'
+  or "Not entered"
 %}
 
-{% set residencyStatusText %}
-  {% set residencyStatus = applicationValue(["candidate", "residency-status"]) %}
-  {% if residencyStatus %}
-    {{ applicationValue(["candidate", "residency-status"]) }}
-    {{- ": " + applicationValue(["candidate", "residency-status-right-to-work"]) if applicationValue(["candidate", "residency-status-right-to-work"]) }}
-    {{- ": " + applicationValue(["candidate", "residency-status-unknown"]) if applicationValue(["candidate", "residency-status-unknown"]) }}
-  {% else %}
-    UK citizen
+{% set residency = applicationValue(["candidate", "residency"]) %}
+
+{% set residencyText %}
+  <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
+  {%- if applicationValue(["candidate", "residency"]) == "Yes – I have the right to work or study in the UK" -%}
+    <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
   {% endif %}
+{% endset %}
+
+{% set proficiencyText %}
+  <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency"]) }}</p>
+  {%- if applicationValue(["candidate", "english-proficiency"]) == "I can participate in any conversation easily" -%}
+    <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-professional"]) | nl2br }}</p>
+  {%- endif %}
+  {%- if applicationValue(["candidate", "english-proficiency"]) == "I’m completely fluent" -%}
+    <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-fluent"]) | nl2br }}</p>
+  {%- endif %}
 {% endset %}
 
 {% set personalDetailsHtml %}
@@ -86,58 +94,30 @@
         text: "Residency status"
       },
       value: {
-        html: residencyStatusText
+        html: residencyText
       },
       actions: {
         items: [{
-          href: applicationPath + "/personal-details/residency-status?referrer=" + referrer,
+          href: applicationPath + "/personal-details/residency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "residency status"
         }]
       } if canAmend
-    } if residencyStatus, {
+    } if residency, {
       key: {
-        text: "Is English your main language?"
+        text: "Proficiency in English"
       },
       value: {
-        html: applicationValue(["candidate", "language-skills", "english-is-main"]) or "Not entered"
+        html: proficiencyText
       },
       actions: {
         items: [{
-          href: applicationPath + "/personal-details?referrer=" + referrer,
+          href: applicationPath + "/personal-details/english-proficiency?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "if English is your main language"
+          visuallyHiddenText: "proficiency in English"
         }]
       } if canAmend
-    }, {
-      key: {
-        text: "Other languages spoken"
-      },
-      value: {
-        html: applicationValue(["candidate", "language-skills", "other"])
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/personal-details?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "other languages"
-        }]
-      } if canAmend
-    } if applicationValue(["candidate", "language-skills", "other"]), {
-      key: {
-        text: "English language qualifications and other languages spoken"
-      },
-      value: {
-        html: applicationValue(["candidate", "language-skills", "english-qualifications"])
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/personal-details?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "english languages qualifications"
-        }]
-      } if canAmend
-    } if applicationValue(["candidate", "language-skills", "english-qualifications"])]
+    } if residency]
   }) }}
 {% endset %}
 

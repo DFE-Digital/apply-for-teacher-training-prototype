@@ -77,46 +77,6 @@
     }]
   }) }}
 
-  {% set englishDetailHtml %}
-    {{ govukCharacterCount({
-      label: {
-        text: "If you are bilingual or very familiar with languages other than English, you can tell us about them here."
-      },
-      maxwords: 200
-    } | decorateApplicationAttributes(["candidate", "language-skills", "other"])) }}
-  {% endset -%}
-  {% set otherDetailHtml %}
-    {{ govukCharacterCount({
-      label: {
-        text: "Please tell us about your English language qualifications (including grades or scores), and give details of other languages you are fluent in."
-      },
-      maxwords: 200
-    } | decorateApplicationAttributes(["candidate", "language-skills", "english-qualifications"])) }}
-  {% endset -%}
-
-    {{ govukRadios({
-      fieldset: {
-        attributes: {
-          "data-module": "clear-hidden"
-        },
-        legend: {
-          text: "Is English your main language?",
-          classes: "govuk-label--m"
-        }
-      },
-      items: [{
-        text: "Yes",
-        conditional: {
-          html: englishDetailHtml
-        }
-      }, {
-        text: "No",
-        conditional: {
-          html: otherDetailHtml
-        }
-      }]
-    } | decorateApplicationAttributes(["candidate", "language-skills", "english-is-main"])) }}
-
   {{ govukButton({
     text: "Save and continue"
   }) }}

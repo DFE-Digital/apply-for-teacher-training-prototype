@@ -1,7 +1,8 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Do you know what UK degree your degree is equivalent to?" %}
+{% set degreeCount = applicationValue(["degree"]) | length %}
+{% set title = "Do you have a NARIC statement of comparability for your degree?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,21 +11,48 @@
 {% endblock %}
 
 {% block primary %}
+  <p class="govuk-body">This shows how your qualifications compare to UK qualifications.</p>
+
   {% set yesConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Enter details here, giving evidence if you have it."
+        text: "UK NARIC reference number",
+        classes: "govuk-label--s"
       },
       hint: {
-        text: "For example, ‘My degree is equivalent to a UK BA. I have a NARIC statement of comparability, UK NARIC reference 0000000000’"
-      }
-    } | decorateApplicationAttributes(["degree", id, "naric-details"])) }}
+        text: "For example ‘4000228363’"
+      },
+      classes: "govuk-input--width-20"
+    } | decorateApplicationAttributes(["degree", id, "naric-reference"])) }}
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Select the comparable UK degree",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: "As shown on your statement"
+      },
+      items: [{
+        text: "Bachelor (Ordinary) degree"
+      }, {
+        text: "Bachelor (Honours) degree"
+      }, {
+        text: "Postgraduate Certificate / Postgraduate Diploma"
+      }, {
+        text: "Master’s degree / Integrated Master’s degree"
+      }, {
+        text: "Doctor of Philosophy degree"
+      } if degreeCount > 1, {
+        text: "Post Doctoral award"
+      } if degreeCount > 1]
+    } | decorateApplicationAttributes(["degree", id, "naric-comparability"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <p class="govuk-body"><strong>If you studied for your degree outside the UK, you will need to check that it is valid.</strong></p>
-    <p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications.</p>
-    <p class="govuk-body">Consider registering at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get Into Teaching</a>. Registration will give you access to phone and email support from a teacher training adviser (TTA). Your TTA can tell you if your degree makes you eligible for teacher training and how it corresponds to a UK degree.</p>
+    <p class="govuk-body">Check that your degree is valid for teacher training in the UK. You can ask your training provider or register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> to talk to an adviser.</p>
   {% endset %}
 
   {{ govukRadios({

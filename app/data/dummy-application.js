@@ -90,15 +90,15 @@ module.exports = {
     kq19m: {
       id: 'kq19m',
       provenance: 'international',
-      'type-nonuk': 'BS',
+      'type-nonuk': 'Bachelor degree',
       subject: 'Physics with emphasis in Astronomy',
       org: 'Minnesota State University',
       country: 'United States',
-      grade: '2:2',
       'year-start': '2010',
       'year-end': '2013',
       naric: 'Yes',
-      'naric-details': 'BSc Physics'
+      'naric-reference': 4000228363,
+      'naric-comparability': 'Bachelor (Honours) degree'
     },
     kr525: {
       id: 'kr525',
@@ -145,8 +145,9 @@ module.exports = {
       grade: '92',
       year: '2004',
       country: 'India',
-      'award-org': 'WBBSE',
       naric: 'No',
+      'naric-reference': 4000228363,
+      'naric-comparability': 'GCSE (grades A*-C / 9-4)',
       missing: ''
     },
     english: {

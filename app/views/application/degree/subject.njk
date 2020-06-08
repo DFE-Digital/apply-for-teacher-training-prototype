@@ -13,7 +13,10 @@
 {% block primary %}
   {% if international %}
     {{ govukInput({
-      label: label
+      label: label,
+      hint: {
+        text: "For example, Liberal Arts, Marine Sciences, Psychology"
+      }
     } | decorateApplicationAttributes(["degree", id, "subject"])) }}
   {% else %}
     <div class="govuk-form-group">

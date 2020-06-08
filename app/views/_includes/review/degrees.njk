@@ -9,10 +9,15 @@
       {% include "_includes/item/degree.njk" %}
     {% endset %}
     {% set degreeType = (item["type-uk"] or item["type-nonuk"]) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
+    {% if item.provenance == "domestic" %}
+      {% set titleText = degreeType + " " + item.subject %}
+    {% else %}
+      {% set titleText = degreeType + ": " + item.subject %}
+    {% endif %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",
       headingLevel: 3,
-      titleText: degreeType + " " + item.subject,
+      titleText: titleText,
       actions: {
         items: [{
           href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,

@@ -1,8 +1,11 @@
-{% extends "_form-question.njk" %}
-
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Which institution did you study at?" %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
+{% if international %}
+  {% extends "_form.njk" %}
+{% else %}
+  {% extends "_form-question.njk" %}
+{% endif %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -13,8 +16,17 @@
 {% block primary %}
   {% if international %}
     {{ govukInput({
-      label: label
+      label: {
+        text: "Institution name"
+      }
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
+
+    {{ appAutocomplete({
+      label: {
+        text: "In which country is this institution based?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% else %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-org">{{ title }}</label>
@@ -27,21 +39,26 @@
   }) }}
 {% endblock %}
 
-{% if not international %}
-  {% block pageScripts %}
-    <script src="/public/javascripts/autocomplete.min.js"></script>
-    <script>
-      accessibleAutocomplete({
-        element: document.querySelector('#org-autocomplete-container'),
-        id: 'degree-{{ id }}-org',
-        name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
-        defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
-        minLength: 2,
-        placeholder: false,
-        source: [
-          {% for item in degree.orgs %}"{{ item }}",{% endfor %}
-        ]
-      })
-    </script>
-  {% endblock %}
-{% endif %}
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+  {% if international %}
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#degree-{{ id }}-country'),
+      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
+    })
+  {% else %}
+    accessibleAutocomplete({
+      element: document.querySelector('#org-autocomplete-container'),
+      id: 'degree-{{ id }}-org',
+      name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
+      defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
+      minLength: 2,
+      placeholder: false,
+      source: [
+        {% for item in degree.orgs %}"{{ item }}",{% endfor %}
+      ]
+    })
+  {% endif %}
+  </script>
+{% endblock %}

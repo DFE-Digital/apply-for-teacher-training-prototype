@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
-{% set title = "Do you know what UK qualification your " + subject + " qualification is equivalent to?" %}
+{% set title = "Do you have a NARIC statement of comparability for your " + subject + " qualification?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -13,18 +13,39 @@
   {% set yesConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Enter details here, giving evidence if you have it."
+        text: "UK NARIC reference number",
+        classes: "govuk-label--s"
       },
       hint: {
-        text: "For example, ‘My qualification is equivalent to a UK GCSE. I have a NARIC statement of comparability, UK NARIC reference 0000000000’"
-      }
-    } | decorateApplicationAttributes(["gcse", id, "naric-details"])) }}
+        text: "For example ‘4000228363’"
+      },
+      classes: "govuk-input--width-20"
+    } | decorateApplicationAttributes(["gcse", id, "naric-reference"])) }}
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Select the comparable UK qualification",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: "As shown on your statement"
+      },
+      items: [{
+        text: "GCSE (grades A*-C / 9-4)"
+      }, {
+        text: "Between GCSE and GCE AS level"
+      }, {
+        text: "GCE Advanced Subsidiary (AS) level"
+      }, {
+        text: "GCE Advanced (A) level"
+      }]
+    } | decorateApplicationAttributes(["gcse", id, "naric-comparability"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <p class="govuk-body"><strong>If you studied for this qualification outside the UK, you will need to check that it is valid.</strong></p>
-    <p class="govuk-body">Contact your chosen training provider to check their policy on non-UK qualifications.</p>
-    <p class="govuk-body">Register at GOV.UK’s <a href="https://getintoteaching.education.gov.uk">Get Into Teaching</a>. Registration will give you access to phone and email support from a teacher training adviser (TTA). Your TTA can tell you if your qualification makes you eligible for teacher training and how it corresponds to a UK GCSE.</p>
+    <p class="govuk-body">Check that your qualification is valid for teacher training in the UK. You can ask your training provider or register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> to talk to an adviser.</p>
   {% endset %}
 
   {{ govukRadios({

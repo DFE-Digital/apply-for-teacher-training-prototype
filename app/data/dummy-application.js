@@ -61,12 +61,11 @@ module.exports = {
       month: '02',
       year: '1988'
     },
-    nationality: ['Indian'],
-    'residency-status': 'I will need to apply for a general work visa (Tier 2) to work in the UK',
-    'language-skills': {
-      'english-is-main': 'No',
-      'english-qualifications': 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English. My native language is Bengali.'
-    }
+    nationality: 'other',
+    'other-nationality': 'Indian',
+    'residency': 'Not yet – I will need to apply for permission to work or study in the UK',
+    'english-proficiency': 'I can participate in any conversation easily',
+    'english-proficiency-professional': 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English.'
   },
   'contact-details': {
     'phone-number': '07944 386555',

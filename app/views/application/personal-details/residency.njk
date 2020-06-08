@@ -1,0 +1,53 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/application/" + applicationId + "/personal-details/english-proficiency" %}
+{% set title = "Do you have the right to work or study in the UK?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/nationality/")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set rightToWorkStudy %}
+    {{ govukCharacterCount({
+      label: {
+        html: "Give details"
+      },
+      hint: {
+        text: "For example, you have settled status or a permanent residence card"
+      },
+      maxwords: 200,
+      rows: 5
+    } | decorateApplicationAttributes(["candidate", "residency-right-to-work"])) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      text: "Yes – I have the right to work or study in the UK",
+      conditional: {
+        html: rightToWorkStudy
+      }
+    }, {
+      text: "Not yet – I will need to apply for permission to work or study in the UK",
+      conditional: {
+        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
+      }
+    }, {
+      text: "I do not know",
+      conditional: {
+        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
+      }
+    }]
+  } | decorateApplicationAttributes(["candidate", "residency"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

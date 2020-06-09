@@ -30,19 +30,22 @@
 
 {% set residencyText %}
   <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
-  {%- if applicationValue(["candidate", "residency"]) == "Yes – I have the right to work or study in the UK" -%}
-    <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
+  {% if applicationValue(["candidate", "residency-right-to-work"]) %}
+    {%- if applicationValue(["candidate", "residency"]) == "Yes – I have the right to work or study in the UK" -%}
+      <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
+    {% endif %}
   {% endif %}
 {% endset %}
 
 {% set proficiencyText %}
   <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency"]) }}</p>
-  {%- if applicationValue(["candidate", "english-proficiency"]) == "I can participate in any conversation easily" -%}
-    <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-professional"]) | nl2br }}</p>
-  {%- endif %}
-  {%- if applicationValue(["candidate", "english-proficiency"]) == "I’m completely fluent" -%}
-    <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-fluent"]) | nl2br }}</p>
-  {%- endif %}
+  {% if applicationValue(["candidate", "english-proficiency-fluent"]) or applicationValue(["candidate", "english-proficiency-professional"]) %}
+    {%- if applicationValue(["candidate", "english-proficiency"]) == "I can participate in any conversation easily" -%}
+      <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-professional"]) | nl2br }}</p>
+    {%- elif applicationValue(["candidate", "english-proficiency"]) == "I’m completely fluent" -%}
+      <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-fluent"]) | nl2br }}
+    {%- endif %}
+  {% endif %}
 {% endset %}
 
 {% set personalDetailsHtml %}

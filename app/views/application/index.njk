@@ -6,6 +6,7 @@
 {% set notStartedTagClass = "govuk-tag--grey" %}
 {% set notStartedTagText = "Not started" %}
 {% set referrer = applicationPath %}
+{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
 
 {% if status == "started" %}
   {% if applicationValue('apply2') %}
@@ -285,7 +286,15 @@
         classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
         text: tagText if applicationValue(["completed", "other-qualifications"]) |length > 0 else incompleteTagText
       }
-    }]
+    }, {
+      text: "English language qualifications",
+      href: applicationPath + "/english-language" + ("/review" if applicationValue(["english-language"]) | length > 0 else "/add"),
+      id: "english-language",
+      tag: {
+        classes: tagClass if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "english-language"]) |length > 0 else incompleteTagText
+      }
+    } if international]
   }) }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Personal statement</h2>

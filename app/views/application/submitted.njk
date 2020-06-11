@@ -4,6 +4,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set title = "Your submitted application" %}
 {% set referrer = referrer or applicationPath + "/review" %}
+{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
 {% set canAmend = false %}
 {% set showChoiceStatus = true %}
 
@@ -67,6 +68,11 @@
 
   <h3 class="govuk-heading-m">Other relevant qualifications</h3>
   {% include "_includes/review/other-qualifications.njk" %}
+
+  {% if international %}
+    <h3 class="govuk-heading-m">English language qualifications</h3>
+    {% include "_includes/review/english-language.njk" %}
+  {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
   {% include "_includes/review/personal-statement.njk" %}

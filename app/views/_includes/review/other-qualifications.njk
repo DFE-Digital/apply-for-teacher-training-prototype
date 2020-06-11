@@ -3,7 +3,7 @@
 
 {% set otherQualificationContentsHtml %}
   {% if qualifications.length %}
-    {% set qualifications = qualifications | toArray | selectattr("id") %}
+    {% set qualifications = qualifications | selectattr("id") %}
     {% for item in qualifications %}
       {% set qualificationHtml %}
         {% include "_includes/item/other-qualification.njk" %}

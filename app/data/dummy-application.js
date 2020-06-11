@@ -47,6 +47,7 @@ module.exports = {
     english: ['true'],
     science: ['true'],
     'other-qualifications': ['true'],
+    'english-language': ['true'],
     'personal-statement': ['true'],
     'subject-knowledge': ['true'],
     interview: ['true'],
@@ -108,6 +109,15 @@ module.exports = {
       'grade-other': 'Pass',
       'year-start': '2015',
       'year-end': '2017'
+    }
+  },
+  'english-language': {
+    acf9z: {
+      id: 'acf9z',
+      type: 'IELTS',
+      grade: '7.5',
+      'certificate-number': '02GB0674SOOM599A',
+      year: '2015'
     }
   },
   'other-qualifications': {

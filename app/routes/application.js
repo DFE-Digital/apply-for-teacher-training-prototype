@@ -233,6 +233,7 @@ module.exports = router => {
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
+  require('./application/english-language')(router)
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
   require('./application/interview')(router)

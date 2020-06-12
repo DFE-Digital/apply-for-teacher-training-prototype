@@ -39,6 +39,7 @@
         id: 'degree-{{ id }}-subject',
         name: "applications[{{ applicationId }}][degree][{{ id }}][subject]",
         defaultValue: '{{ applicationValue(["degree", id, "subject"]) }}',
+        showNoOptionsFound: false,
         minLength: 2,
         placeholder: false,
         source: [

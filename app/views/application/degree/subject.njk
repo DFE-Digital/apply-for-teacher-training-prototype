@@ -21,6 +21,7 @@
   {% else %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-subject">{{ title }}</label>
+      <span id="degree-{{ id }}-subject-hint" class="govuk-hint">For example, History with French, Maths, Film studies</span>
       <div id="subject-autocomplete-container"></div>
     </div>
   {% endif %}

@@ -11,12 +11,14 @@
   {% set certificateHintText = "For example, 02GB0674SOOM599A" %}
   {% set gradeLabelText = "Overall band score" %}
   {% set gradeHintText = "For example, 7.5" %}
+  {% set gradeWidth = 4 %}
 {% elif toefl %}
   {% set qualificationName = "TOEFL" %}
   {% set certificateLabelText = "TOEFL registration number" %}
   {% set certificateHintText = "For example, 0000 0000 2500 2147" %}
   {% set gradeLabelText = "Total score" %}
   {% set gradeHintText = "For example, 92" %}
+  {% set gradeWidth = 4 %}
 {% endif %}
 
 {% set parent = "Academic and other relevant qualifications" %}
@@ -66,7 +68,7 @@
     hint: {
       text: gradeHintText
     },
-    classes: "govuk-input--width-10"
+    classes: "govuk-input--width-" + (gradeWidth | default(10))
   } | decorateApplicationAttributes(["english-language", id, "grade"])) }}
 
   {{ govukInput({

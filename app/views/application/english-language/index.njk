@@ -1,0 +1,45 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "English language qualifications" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What type of qualification do you want to add?",
+        classes: "govuk-fieldset__legend--m"
+      },
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      value: "IELTS",
+      text: "International English Language Testing System (IELTS)"
+    }, {
+      value: "TOEFL",
+      text: "Test of English as a Foreign Language (TOEFL)"
+    }, {
+      value: "Other",
+      text: "Other"
+    }]
+  } | decorateApplicationAttributes(["english-language", id, "type"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

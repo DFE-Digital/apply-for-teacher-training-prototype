@@ -47,6 +47,7 @@ module.exports = {
     english: ['true'],
     science: ['true'],
     'other-qualifications': ['true'],
+    'english-language': ['true'],
     'personal-statement': ['true'],
     'subject-knowledge': ['true'],
     interview: ['true'],
@@ -63,9 +64,7 @@ module.exports = {
     },
     nationality: 'other',
     'other-nationality': 'Indian',
-    'residency': 'Not yet – I will need to apply for permission to work or study in the UK',
-    'english-proficiency': 'I can participate in any conversation easily',
-    'english-proficiency-professional': 'I learnt English during high school, and given my studies in the USA and Scotland, now spend most of my time speaking English.'
+    'residency': 'Not yet – I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
     'phone-number': '07944 386555',
@@ -110,6 +109,15 @@ module.exports = {
       'grade-other': 'Pass',
       'year-start': '2015',
       'year-end': '2017'
+    }
+  },
+  'english-language': {
+    acf9z: {
+      id: 'acf9z',
+      type: 'IELTS',
+      grade: '7.5',
+      'certificate-number': '02GB0674SOOM599A',
+      year: '2015'
     }
   },
   'other-qualifications': {

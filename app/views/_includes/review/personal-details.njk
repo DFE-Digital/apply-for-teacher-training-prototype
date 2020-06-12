@@ -37,17 +37,6 @@
   {% endif %}
 {% endset %}
 
-{% set proficiencyText %}
-  <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency"]) }}</p>
-  {% if applicationValue(["candidate", "english-proficiency-fluent"]) or applicationValue(["candidate", "english-proficiency-professional"]) %}
-    {%- if applicationValue(["candidate", "english-proficiency"]) == "I can participate in any conversation easily" -%}
-      <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-professional"]) | nl2br }}</p>
-    {%- elif applicationValue(["candidate", "english-proficiency"]) == "I’m completely fluent" -%}
-      <p class="govuk-body">{{ applicationValue(["candidate", "english-proficiency-fluent"]) | nl2br }}
-    {%- endif %}
-  {% endif %}
-{% endset %}
-
 {% set personalDetailsHtml %}
   {{ govukSummaryList({
     rows: [{
@@ -104,20 +93,6 @@
           href: applicationPath + "/personal-details/residency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "residency status"
-        }]
-      } if canAmend
-    } if residency, {
-      key: {
-        text: "Proficiency in English"
-      },
-      value: {
-        html: proficiencyText
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/personal-details/english-proficiency?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "proficiency in English"
         }]
       } if canAmend
     } if residency]

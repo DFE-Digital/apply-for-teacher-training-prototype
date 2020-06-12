@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">This shows how your qualifications compare to UK qualifications.</p>
+  <p class="govuk-body">This shows how your qualifications compare to UK qualifications. Not all providers ask for a NARIC statement of comparability.</p>
 
   {% set yesConditionalHtml %}
     {{ govukInput({
@@ -52,7 +52,7 @@
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <p class="govuk-body">Check that your degree is valid for teacher training in the UK. You can ask your training provider or register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> to talk to an adviser.</p>
+    <p class="govuk-body">Ask your training provider if they need a NARIC statement of comparability. Register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> for help if you need to get one.</p>
   {% endset %}
 
   {{ govukRadios({

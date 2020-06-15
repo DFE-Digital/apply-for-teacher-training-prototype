@@ -145,6 +145,7 @@
         id: 'other-qualifications-{{ id }}-subject',
         name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][subject]",
         defaultValue: '{{ applicationValue(["other-qualifications", id, "subject"]) }}',
+        showNoOptionsFound: false,
         minLength: 2,
         placeholder: false,
         source: [

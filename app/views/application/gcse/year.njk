@@ -4,7 +4,7 @@
 {% if applicationValue(["gcse", id, "completed"]) == "false" %}
   {% set title = "When will you get your " + subject + " qualification?" %}
 {% else %}
-  {% set title = "When was your qualification awarded?" %}
+  {% set title = "When was your " + subject + " qualification awarded?" %}
 {% endif %}
 
 {% block pageNavigation %}

@@ -64,7 +64,7 @@ module.exports = {
     },
     nationality: 'other',
     'other-nationality': 'Indian',
-    'residency': 'Not yet – I will need to apply for permission to work or study in the UK'
+    'residency': 'I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
     'phone-number': '07944 386555',

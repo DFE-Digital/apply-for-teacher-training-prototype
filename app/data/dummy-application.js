@@ -97,7 +97,9 @@ module.exports = {
       'year-end': '2013',
       naric: 'Yes',
       'naric-reference': 4000228363,
-      'naric-comparability': 'Bachelor (Honours) degree'
+      'naric-comparability': 'Bachelor (Honours) degree',
+      grade: 'other',
+      'grade-other': 'Distinction'
     },
     kr525: {
       id: 'kr525',
@@ -150,13 +152,13 @@ module.exports = {
       type: 'Non-UK qualification',
       'type-non-uk': 'GCSE(A*-G)',
       completed: 'true',
-      grade: '92',
       year: '2004',
       country: 'India',
       naric: 'No',
       'naric-reference': 4000228363,
       'naric-comparability': 'GCSE (grades A*-C / 9-4)',
-      missing: ''
+      grade: 'other',
+      'grade-other': '92'
     },
     english: {
       id: 'english',

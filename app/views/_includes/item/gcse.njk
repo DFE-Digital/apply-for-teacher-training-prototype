@@ -38,7 +38,7 @@
   {% endif %}
 {% endset %}
 {% else %}
-  {% set gradeHtml = item.grade %}
+  {% set gradeHtml = item['grade-other'] or item.grade %}
 {% endif %}
 
 {% if missing %}
@@ -119,20 +119,6 @@
       } if canAmend
     }, {
       key: {
-        text: "Year awarded"
-      },
-      value: {
-        text: item.year or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "year"
-        }]
-      } if canAmend
-    }, {
-      key: {
         text: "Grade"
       },
       value: {
@@ -145,6 +131,20 @@
           visuallyHiddenText: "grade"
         }]
       } if canAmend
-    } if item.provenance == "domestic"]
+    }, {
+      key: {
+        text: "Year awarded"
+      },
+      value: {
+        text: item.year or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }]
   }) }}
 {% endif %}

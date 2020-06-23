@@ -287,7 +287,7 @@
         text: tagText if applicationValue(["completed", "other-qualifications"]) |length > 0 else incompleteTagText
       }
     }, {
-      text: "English language qualifications",
+      text: "English as a foreign language",
       href: applicationPath + "/english-language" + ("/review" if applicationValue(["english-language"]) | length > 0 else "/add"),
       id: "english-language",
       tag: {

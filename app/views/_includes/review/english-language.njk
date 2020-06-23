@@ -1,38 +1,23 @@
-{% set applicationPath = "/application/" + applicationId %}
+{% set item = applicationValue(["english-language"]) | first %}
 {% set qualifications = applicationValue(["english-language"]) | toArray %}
 
-{% set englishLanguageContentsHtml %}
-  {% if qualifications.length %}
-    {% set qualifications = qualifications | selectattr("id") %}
-    {% for item in qualifications %}
-      {% set qualificationHtml %}
-        {% include "_includes/item/english-language.njk" %}
-      {% endset %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: item["type-other"] or item.type,
-        actions: {
-          items: [{
-            href: applicationPath + "/english-language/" + item.id + "/delete?referrer=" + referrer,
-            text: "Delete qualification"
-          }]
-        } if canAmend,
-        html: qualificationHtml
-      }) }}
-    {% endfor %}
-  {% else %}
-    <p class="govuk-body">No English language qualifications entered.</p>
-  {% endif %}
+{% set complete = "true" if applicationValue(["completed", "english-language"]) %}
+
+{% set englishLanguageHtml %}
+  {% for item in qualifications %}
+    {% include "_includes/item/english-language.njk" %}
+  {% endfor %}
 {% endset %}
 
-{% set complete = "true" if applicationValue(["completed", "english-language"]) %}
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "english-language" %}
-  {% set incompleteText = "English language qualifications not marked as complete" %}
+  {% set incompleteText = "English as a foreign language not marked as complete" %}
   {% set incompleteLink = "/english-language/review?referrer=" + referrer %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
-  {{ englishLanguageContentsHtml | safe }}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: englishLanguageHtml
+  }) }}
 {% endif %}

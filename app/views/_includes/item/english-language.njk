@@ -1,4 +1,6 @@
 {% set applicationPath = "/application/" + applicationId %}
+{% set missing = item.type == "I don’t have this qualification yet" %}
+{% set na = item.type == "English is not a foreign language to me" %}
 {% set type = item["type-other"] or item.type or "Not entered" %}
 {% if item.type == "IELTS" %}
   {% set certificateItemText = "Test report form (TRF) number" %}
@@ -10,66 +12,100 @@
   {% set gradeItemText = "Score or grade" %}
 {% endif %}
 
-{{ govukSummaryList({
-  rows: [{
-    key: {
-      text: "Type of qualification"
-    },
-    value: {
-      text: type
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: certificateItemText
-    },
-    value: {
-      text: item['certificate-number'] or "Not entered"
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "certifcate number"
-      }]
-    } if canAmend
-  } if item.type != "Other", {
-    key: {
-      text: "Year awarded"
-    },
-    value: {
-      text: item.year or "Not entered"
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: gradeItemText
-    },
-    value: {
-      text: item.grade  or "Not entered"
-    },
-    actions: {
-      classes: "govuk-!-padding-right-2",
-      items: [{
-        href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "score"
-      }]
-    } if canAmend
-  }]
-}) }}
+{% if na %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "???"
+      },
+      value: {
+        html: item.type
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }]
+  }) }}
+{% elif missing %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "How I expect to gain this qualification"
+      },
+      value: {
+        html: (item.missing or "No reason given") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }]
+  }) }}
+{% else %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Type of qualification"
+      },
+      value: {
+        text: type
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: certificateItemText
+      },
+      value: {
+        text: item['certificate-number'] or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "certifcate number"
+        }]
+      } if canAmend
+    } if item.type != "Other", {
+      key: {
+        text: "Year awarded"
+      },
+      value: {
+        text: item.year or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: gradeItemText
+      },
+      value: {
+        text: item.grade  or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "score"
+        }]
+      } if canAmend
+    }]
+  }) }}
+{% endif %}

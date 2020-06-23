@@ -21,7 +21,7 @@
   {% set gradeWidth = 4 %}
 {% endif %}
 
-{% set parent = "English language qualifications" %}
+{% set parent = "English as a foreign language" %}
 {% set action = "edit" if applicationValue(["english-language", id, "subject"]) else "add" %}
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 

@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "English language qualifications" %}
+{% set title = "English as a foreign language" %}
 {% set referrer = applicationPath + "/english-language/review" %}
 {% set canAmend = true %}
 
@@ -15,11 +15,6 @@
 
 {% block primary %}
   {% include "_includes/review/english-language.njk" %}
-  {{ govukButton({
-    text: "Add another qualification",
-    href: applicationPath + "/english-language/add",
-    classes: "govuk-button--secondary"
-  }) }}
 
   {{ govukCheckboxes({
     items: [{

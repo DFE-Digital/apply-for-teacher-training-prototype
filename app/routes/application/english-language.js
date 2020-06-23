@@ -1,7 +1,7 @@
 const utils = require('../../utils')
 
 /**
- * Application: English language qualifications routes
+ * Application: English as a foreign language routes
  */
 module.exports = router => {
   // Generate new id and redirect to that qualification
@@ -29,10 +29,18 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/english-language/:id', (req, res) => {
+    const applicationData = utils.applicationData(req)
     const { applicationId, id } = req.params
     const { referrer } = req.query
+    const { type } = applicationData['english-language'][id]
 
-    res.redirect(referrer || `/application/${applicationId}/english-language/${id}/details`)
+    if (type === 'I don’t have this qualification yet') {
+      path = `/application/${applicationId}/english-language/review`
+    } else {
+      path = referrer || `/application/${applicationId}/english-language/${id}/details`
+    }
+
+    res.redirect(path)
   })
 
   // Render details page

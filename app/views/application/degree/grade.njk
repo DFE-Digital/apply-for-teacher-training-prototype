@@ -3,11 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% set undergraduateDegree = applicationValue(["degree", id, "type-uk"]) | isUndergraduateDegree %}
-{% if international %}
-  {% set title = "Have you completed your degree?" %}
-{% else %}
-  {% set title = "What grade is your degree?" %}
-{% endif %}
+{% set title = "What grade is your degree?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -33,6 +29,9 @@
       label: {
         text: "Enter your degree grade"
       },
+      hint: {
+        text: "For example, A, 4.5, 94%, Distinction"
+      },
       classes: "govuk-input--width-20"
     } | decorateApplicationAttributes(["degree", id, "grade-other"])) }}
   {% endset %}
@@ -44,63 +43,44 @@
     </div>
   {% endset %}
 
-  {% if international %}
-    {{ govukRadios({
-      items: [{
-        text: "Yes",
-        conditional: {
-          html: otherGradeHtml
-        }
-      }, {
-        divider: "or"
-      }, {
-        value: "Pending",
-        text: "I’m still studying for my degree",
-        conditional: {
-          html: predictedGradeHtml
-        }
-      }]
-    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
-  {% else %}
-    {{ govukRadios({
-      items: [{
-        value: "First-class honours",
-        text: "First-class honours"
-      }, {
-        value: "Upper second-class honours (2:1)",
-        text: "Upper second-class honours (2:1)"
-      }, {
-        value: "Lower second-class honours (2:2)",
-        text: "Lower second-class honours (2:2)"
-      }, {
-        value: "Third-class honours",
-        text: "Third-class honours"
-      }, {
-        text: "Distinction"
-      } if not undergraduateDegree, {
-        text: "Merit"
-      } if not undergraduateDegree, {
-        text: "Pass"
-      }, {
-        text: "Not applicable"
-      } if not undergraduateDegree, {
-        text: "Unknown"
-      } if not undergraduateDegree, {
-        text: "Other",
-        conditional: {
-          html: otherUkGradeHtml
-        }
-      }, {
-        divider: "or"
-      }, {
-        value: "Pending",
-        text: "I’m still studying for my degree",
-        conditional: {
-          html: predictedGradeHtml
-        }
-      }]
-    } | decorateApplicationAttributes(["degree", id, "grade"])) }}
-  {% endif %}
+  {{ govukRadios({
+    items: [{
+      value: "First-class honours",
+      text: "First-class honours"
+    } if not international, {
+      value: "Upper second-class honours (2:1)",
+      text: "Upper second-class honours (2:1)"
+    } if not international, {
+      value: "Lower second-class honours (2:2)",
+      text: "Lower second-class honours (2:2)"
+    } if not international, {
+      value: "Third-class honours",
+      text: "Third-class honours"
+    } if not international, {
+      text: "Distinction"
+    } if not (undergraduateDegree or international), {
+      text: "Merit"
+    } if not (undergraduateDegree or international), {
+      text: "Pass"
+    } if not international, {
+      text: "Not applicable"
+    } if not undergraduateDegree, {
+      text: "Unknown"
+    } if not undergraduateDegree, {
+      text: "Other",
+      conditional: {
+        html: otherGradeHtml if international else otherUkGradeHtml
+      }
+    }, {
+      divider: "or"
+    }, {
+      value: "Pending",
+      text: "I’m still studying for my degree",
+      conditional: {
+        html: predictedGradeHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["degree", id, "grade"])) }}
 
   {{ govukButton({
     text: "Save and continue"

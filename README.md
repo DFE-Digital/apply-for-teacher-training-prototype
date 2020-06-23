@@ -1,4 +1,4 @@
-# Apply for postgraduate teacher training (prototype)
+# Apply for teacher training (prototype)
 
 This prototype is based on the [GOV.UK prototype kit](https://github.com/alphagov/govuk-prototype-kit)
 
@@ -8,12 +8,8 @@ This prototype is based on the [GOV.UK prototype kit](https://github.com/alphago
 
 ## Install dependencies
 
-```
-npm install
-```
+`npm install`
 
 ## Start the app
 
-```
-npm start
-```
+`npm start`

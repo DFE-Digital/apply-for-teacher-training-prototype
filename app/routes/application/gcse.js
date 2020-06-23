@@ -22,7 +22,8 @@ const gcsePaths = (req) => {
   var paths = [
     basePath,
     ...(isInternational(req) ? [`${basePath}/country`] : []),
-    ...(isInternational(req) ? [`${basePath}/naric`] : [`${basePath}/grade`]),
+    ...(isInternational(req) ? [`${basePath}/naric`] : []),
+    `${basePath}/grade`,
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/gcse/${id}/review`])
   ]

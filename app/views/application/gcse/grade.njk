@@ -19,7 +19,9 @@
 {% endblock %}
 
 {% block primary %}
-<p class="govuk-body">You need a grade C or 4 (or the equivalent). Contact your provider if you do not have this. You might be able to retake an exam or do an equivalence test.</p>
+{% if applicationValue(["gcse", id, "type"]) != "Non-UK qualification" %}
+  <p class="govuk-body">You need a grade C or 4 (or the equivalent). Contact your provider if you do not have this. You might be able to retake an exam or do an equivalence test.</p>
+{% endif %}
 
 {# Structured GCSE grade #}
 {% macro gradeAutocomplete(params) %}
@@ -68,8 +70,8 @@
   }) }}
 {% endset %}
 
-{# Unstructured grade #}
-{% macro otherGradeHtml(hintText) %}
+{# Unstructured UK grade #}
+{% macro otherUkGradeHtml(hintText) %}
   {{ govukInput({
     label: {
       classes: "govuk-label--m",
@@ -81,6 +83,19 @@
     classes: "govuk-input--width-10"
   } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
 {% endmacro %}
+
+{# Unstructured international  grade #}
+{% set otherGradeHtml %}
+  {{ govukInput({
+    label: {
+      text: "Grade"
+    },
+    hint: {
+      text: "For example, ‘A’, ‘4.5’, ‘94%’"
+    },
+    classes: "govuk-input--width-10"
+  } | decorateApplicationAttributes(["gcse", id, "grade"])) }}
+{% endset %}
 
 {# Structured GCSE #}
 {% if applicationValue(["gcse", id, "type"]) == "GCSE" %}
@@ -212,7 +227,7 @@
     {# Maximum number of grades: 1 #}
     {% set hintText = "For example, ‘C’" %}
   {% endif %}
-  {{ otherGradeHtml(hintText) | safe }}
+  {{ otherUkGradeHtml(hintText) | safe }}
 
 {% elif applicationValue(["gcse", id, "type"]) == "Scottish National 5" %}
   {# Available grades: 7,6,5,4,3,2,1 or D,B,C,A #}
@@ -224,7 +239,22 @@
     {# Maximum number of grades: 1 #}
     {% set hintText = "For example, ‘C’ or ‘4’" %}
   {% endif %}
-  {{ otherGradeHtml(hintText) | safe }}
+  {{ otherUkGradeHtml(hintText) | safe }}
+
+{% elif applicationValue(["gcse", id, "type"]) == "Non-UK qualification" %}
+  {{ govukRadios({
+    items: [{
+      text: "Not applicable"
+    } if not undergraduateDegree, {
+      text: "Unknown"
+    } if not undergraduateDegree, {
+      text: "Other",
+      conditional: {
+        html: otherGradeHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["degree", id, "grade"])) }}
+
 {% else %}
   {{ otherGradeHtml(hintText) | safe }}
 {% endif %}

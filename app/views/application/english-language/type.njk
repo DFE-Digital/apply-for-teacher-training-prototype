@@ -1,0 +1,42 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = "/application/" + applicationId + "/english-language/details" %}
+{% set parent = "English as a foreign language" %}
+{% set title = "What English language qualification do you have?" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      value: "IELTS",
+      text: "International English Language Testing System (IELTS)"
+    }, {
+      value: "TOEFL",
+      text: "Test of English as a Foreign Language (TOEFL)"
+    }, {
+      text: "Other"
+    }]
+  } | decorateApplicationAttributes(["english-language", "type"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

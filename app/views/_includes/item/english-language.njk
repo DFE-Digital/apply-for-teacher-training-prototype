@@ -1,6 +1,6 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set missing = item.type == "I don’t have this qualification yet" %}
-{% set na = item.type == "English is not a foreign language to me" %}
+{% set na = applicationValue(["english-language", "answer"]) == "No, English is not a foreign language to me" %}
+{% set missing = applicationValue(["english-language", "answer"]) == "No, I do not have an English as a foreign language qualification" %}
 {% set type = item["type-other"] or item.type or "Not entered" %}
 {% if item.type == "IELTS" %}
   {% set certificateItemText = "Test report form (TRF) number" %}
@@ -12,20 +12,27 @@
   {% set gradeItemText = "Score or grade" %}
 {% endif %}
 
+{% set missingHtml %}
+  <p class="govuk-body">{{ applicationValue(["english-language", "answer"]) }}</p>
+  {% if applicationValue(["english-language", "answer-missing"]) %}
+    <p class="govuk-body">{{ applicationValue(["english-language", "answer-missing"]) | nl2br }}</p>
+  {% endif %}
+{% endset %}
+
 {% if na %}
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "???"
+        text: "Do you have an English as a foreign language qualification?"
       },
       value: {
-        html: item.type
+        text: item.answer
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          href: applicationPath + "/english-language/?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "year"
+          visuallyHiddenText: "answer"
         }]
       } if canAmend
     }]
@@ -34,16 +41,16 @@
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "How I expect to gain this qualification"
+        text: "Do you have an English as a foreign language qualification?"
       },
       value: {
-        html: (item.missing or "No reason given") | nl2br | safe
+        html: missingHtml
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          href: applicationPath + "/english-language/?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "year"
+          visuallyHiddenText: "answer"
         }]
       } if canAmend
     }]
@@ -52,6 +59,20 @@
   {{ govukSummaryList({
     rows: [{
       key: {
+        text: "Do you have an English as a foreign language qualification?"
+      },
+      value: {
+        text: item.answer
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/english-language/?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "answer"
+        }]
+      } if canAmend
+    }, {
+      key: {
         text: "Type of qualification"
       },
       value: {
@@ -59,9 +80,9 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "?referrer=" + referrer,
+          href: applicationPath + "/english-language/type?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "year"
+          visuallyHiddenText: "type"
         }]
       } if canAmend
     }, {
@@ -73,7 +94,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          href: applicationPath + "/english-language/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "certifcate number"
         }]
@@ -87,7 +108,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          href: applicationPath + "/english-language/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "year"
         }]
@@ -101,7 +122,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/english-language/" + item.id + "/details?referrer=" + referrer,
+          href: applicationPath + "/english-language/details?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "score"
         }]

@@ -1,12 +1,8 @@
-{% set item = applicationValue(["english-language"]) | first %}
-{% set qualifications = applicationValue(["english-language"]) | toArray %}
-
+{% set item = applicationValue(["english-language"]) %}
 {% set complete = "true" if applicationValue(["completed", "english-language"]) %}
 
 {% set englishLanguageHtml %}
-  {% for item in qualifications %}
-    {% include "_includes/item/english-language.njk" %}
-  {% endfor %}
+  {% include "_includes/item/english-language.njk" %}
 {% endset %}
 
 {% if showIncomplete and complete != "true" %}

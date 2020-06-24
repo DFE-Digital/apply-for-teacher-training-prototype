@@ -3,6 +3,7 @@
   {%- if contactDetails.address -%}
     {%- if contactDetails["address-type"] == "international" -%}
       {{ contactDetails.address["street-address"] }}
+      {{ contactDetails.address.country }}
     {%- else -%}
       {%- if contactDetails.address.line1 -%}
         {{ contactDetails.address.line1 }}<br>

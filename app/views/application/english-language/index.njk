@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "English language qualifications" %}
+{% set title = "English as a foreign language" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -17,10 +17,24 @@
 {% endblock %}
 
 {% block primary %}
+  {% set missingConditionalHtml %}
+    <p class="govuk-hint">If English is a foreign language to you, or if you do not have an English GCSE or equivalent, you may have to give evidence for your level of English.</p>
+    <p class="govuk-hint">Contact your provider for advice about showing your level of English.</p>
+
+    {{ govukCharacterCount({
+      label: {
+        classes: "govuk-label--s",
+        html: "If you’re working towards a qualification, give details here"
+      },
+      maxwords: 200,
+      rows: 6
+    } | decorateApplicationAttributes(["english-language", "answer-missing"])) }}
+  {% endset -%}
+
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of qualification do you want to add?",
+        text: "Do you have an English as a foreign language qualification?",
         classes: "govuk-fieldset__legend--m"
       },
       attributes: {
@@ -28,16 +42,16 @@
       }
     },
     items: [{
-      value: "IELTS",
-      text: "International English Language Testing System (IELTS)"
+      text: "Yes"
     }, {
-      value: "TOEFL",
-      text: "Test of English as a Foreign Language (TOEFL)"
+      text: "No, English is not a foreign language to me"
     }, {
-      value: "Other",
-      text: "Other"
+      text: "No, I do not have an English as a foreign language qualification",
+      conditional: {
+        html: missingConditionalHtml
+      }
     }]
-  } | decorateApplicationAttributes(["english-language", id, "type"])) }}
+  } | decorateApplicationAttributes(["english-language", "answer"])) }}
 
   {{ govukButton({
     text: "Continue"

@@ -34,7 +34,7 @@
       text: "Institution"
     },
     value: {
-      text: item.org or "Not entered"
+      text: item.org + (", " + item.country if item.country) or "Not entered"
     },
     actions: {
       items: [{
@@ -44,34 +44,6 @@
       }]
     } if canAmend
   }, {
-    key: {
-      text: "Country"
-    },
-    value: {
-      text: item.country | safe
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/degree/" + item.id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "country"
-      }]
-    } if canAmend
-  } if item.country, {
-    key: {
-      text: "Grade"
-    },
-    value: {
-      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item.grade or item["grade-other"] or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "grade"
-      }]
-    } if canAmend
-  } if item.provenance == "domestic", {
     key: {
       text: "NARIC reference number"
     },
@@ -100,6 +72,20 @@
       }]
     } if canAmend
   } if item["naric-comparability"], {
+    key: {
+      text: "Grade"
+    },
+    value: {
+      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item["grade-other"] or item.grade or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "grade"
+      }]
+    } if canAmend
+  }, {
     key: {
       text: "Dates"
     },

@@ -21,7 +21,8 @@ const degreePaths = (req) => {
     basePath,
     `${basePath}/subject`,
     `${basePath}/institution`,
-    ...(international ? [`${basePath}/naric`] : [`${basePath}/grade`]),
+    ...(international ? [`${basePath}/naric`] : []),
+    `${basePath}/grade`,
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/degree/review`])
   ]

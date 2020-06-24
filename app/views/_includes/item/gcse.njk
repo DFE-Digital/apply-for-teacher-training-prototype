@@ -38,107 +38,113 @@
   {% endif %}
 {% endset %}
 {% else %}
-  {% set gradeHtml = item.grade %}
+  {% set gradeHtml = item['grade-other'] or item.grade %}
 {% endif %}
 
-{{ govukSummaryList({
-  rows: [{
-    key: {
-      text: "How I expect to gain this qualification"
-    },
-    value: {
-      html: (item.missing or "No reason given") | nl2br | safe
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  } if missing == true, {
-    key: {
-      text: "Qualification type"
-    },
-    value: {
-      text: qualificationText | nl2br | safe
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  } if missing != true, {
-    key: {
-      text: "Country"
-    },
-    value: {
-      text: item.country or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "/country?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "country"
-      }]
-    } if canAmend
-  } if missing != true, {
-    key: {
-      text: "NARIC reference number"
-    },
-    value: {
-      text: item["naric-reference"] or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "NARIC reference"
-      }]
-    } if canAmend
-  } if missing != true, {
-    key: {
-      text: "Comparable UK qualification"
-    },
-    value: {
-      text: item["naric-comparability"] or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "comparable UK qualification"
-      }]
-    } if canAmend
-  } if missing != true, {
-    key: {
-      text: "Year awarded"
-    },
-    value: {
-      text: item.year or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  } if missing != true, {
-    key: {
-      text: "Grade"
-    },
-    value: {
-      html: gradeHtml or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/gcse/" + id + "/grade?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "grade"
-      }]
-    } if canAmend
-  } if missing != true and item.provenance == "domestic"]
-}) }}
+{% if missing %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "How I expect to gain this qualification"
+      },
+      value: {
+        html: (item.missing or "No reason given") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }]
+  }) }}
+{% else %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Qualification type"
+      },
+      value: {
+        text: qualificationText | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Country"
+      },
+      value: {
+        text: item.country or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/country?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "country"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "NARIC reference number"
+      },
+      value: {
+        text: item["naric-reference"] or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "NARIC reference"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Comparable UK qualification"
+      },
+      value: {
+        text: item["naric-comparability"] or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "comparable UK qualification"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Grade"
+      },
+      value: {
+        html: gradeHtml or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/grade?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "grade"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Year awarded"
+      },
+      value: {
+        text: item.year or "Not entered"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "year"
+        }]
+      } if canAmend
+    }]
+  }) }}
+{% endif %}

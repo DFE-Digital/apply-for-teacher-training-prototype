@@ -10,17 +10,39 @@
 {% endblock %}
 
 {% block primary %}
+  {% set internationalCountryHtml %}
+    {{ appAutocomplete({
+      label: {
+        text: "Which country?"
+      },
+      items: countries
+    } | decorateApplicationAttributes(["contact-details", "address", "country"])) }}
+  {% endset %}
+
   {{ govukRadios({
     items: [{
       text: "In the UK",
       value: "domestic"
     }, {
       text: "Outside the UK",
-      value: "international"
+      value: "international",
+      conditional: {
+        html: internationalCountryHtml
+      }
     }]
   } | decorateApplicationAttributes(["contact-details", "address-type"])) }}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#contact-details-address-country'),
+      defaultValue: '{{ applicationValue(["contact-details", "address", "country"]) }}'
+    })
+  </script>
 {% endblock %}

@@ -40,3 +40,34 @@ $govuk-global-styles: true;
     display: none !important;
   }
 }
+
+// Add another nationality
+.app-add-another-nationality {
+  margin-bottom: govuk-spacing(4);
+}
+
+.app-add-another-nationality__remove {
+  @include govuk-font($size: 19);
+  display: block;
+  padding: govuk-spacing(2) 0;
+}
+
+.app-button--link {
+  @include govuk-link-common;
+  @include govuk-link-style-default;
+  @include govuk-link-print-friendly;
+  color: $govuk-link-colour;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: govuk-spacing(2) 0;
+  margin: 0;
+}
+
+.app-button--link:active {
+  top: 0;
+}
+
+.app-button--link:hover {
+  background: transparent;
+}

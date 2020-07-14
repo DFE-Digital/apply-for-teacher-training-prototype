@@ -19,12 +19,18 @@
   {% endif %}
 {% endset %}
 
-{% set nationalityText =
-  applicationValue(["candidate", "multiple-nationalities"])
-  or applicationValue(["candidate", "other-nationality"])
-  or applicationValue(["candidate", "nationality"])
-  or "Not entered"
-%}
+{% set nationalityText %}
+  {% set nationalities = applicationValue(["candidate", "nationality"]) | split %}
+  {% if nationalities.length >= 1 %}
+    {%- for nationality in nationalities -%}
+      {{ (" and " if loop.last else ", ") if not loop.first }}{%- if nationality == "Other" %}
+        {{ applicationValue(["candidate", "other-nationality-1"]) }}
+      {%- else -%}
+        {{ nationality }}
+      {%- endif -%}
+    {%- endfor -%}
+  {% endif %}
+{% endset %}
 
 {% set residency = applicationValue(["candidate", "residency"]) %}
 

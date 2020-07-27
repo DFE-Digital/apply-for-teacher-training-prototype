@@ -60,90 +60,138 @@
   }) if status == "amending" }}
 
   {% set rejectionHtml %}
-    <section class="app-summary-card govuk-!-margin-bottom-6">
-      <header class="app-summary-card__header">
-        <h3 class="app-summary-card__title">Gorse SCITT</h3>
-      </header>
-      <div class="app-summary-card__body">
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Course
-            </dt>
-            <dd class="govuk-summary-list__value">
-              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/1N1/2XT2">Primary
-                (2XT2)</a><br>PGCE with QTS full time
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Reasons for rejection
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Lack of knowledge of the purpose of PE in schools and the content of the secondary PE curriculum Lack of
-              understanding of the procedures / processes related to safeguarding.
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </section>
+    {% if application.status == "amended" %}
+  {% set appStatus = "Pending" %}
+{% elif application.status == "amending" %}
+  {% set appStatus = "Amending"%}
+{% endif %}
+{% set status = item.status or appStatus or "Submitted" %}
+{% set statusHtml %}
+  {{ govukTag({
+    classes: "app-tag " + status | statusClass,
+    text: status | capitalize
+  }) }}
+{% endset %}
 
-    <section class="app-summary-card govuk-!-margin-bottom-6">
-      <header class="app-summary-card__header">
-        <h3 class="app-summary-card__title">Leeds Trinity University</h3>
-      </header>
-      <div class="app-summary-card__body">
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Course
-            </dt>
-            <dd class="govuk-summary-list__value">
-              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/L24/2VLT">Primary (3-7)
-                (2VLT)</a><br>PGCE with QTS full time
-            </dd>
-          </div>
+{% set courseHtml1 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
+    <p class="govuk-body">Your subject knowledge could be improved.</p>
+    <p class="govuk-body">Details: Understand the purpose of PE in schools and the learn more about the procedures related to safeguarding.</p>
 
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Reasons for rejection
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Unfortunately due to the volume of applications we have received for our PE programme and the limited
-              placement opportunities remaining we will be unable to take forward your application at this time.
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </section>
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
+    <p class="govuk-body">No Science GCSE grade 4 (C) or above, or valid equivalent.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (2XT2)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--pink",
+          text: "Unsuccessful"
+        })
+      }
+    }, {
+      key: {
+        text: "Feedback"
+      },
+      value: {
+        html: reasonHtml
+      }
+    }]
+  }) }}
+{% endset %}
 
-    <section class="app-summary-card govuk-!-margin-bottom-0">
-      <header class="app-summary-card__header">
-        <h3 class="app-summary-card__title">Bradford College</h3>
-      </header>
-      <div class="app-summary-card__body">
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Course
-            </dt>
-            <dd class="govuk-summary-list__value">
-              <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/B60/X100">Primary
-                (X100)</a><br>PGCE with QTS full time
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Reasons for rejection
-            </dt>
-            <dd class="govuk-summary-list__value">
-              As per our email communication, you did not have enough English in your profile to be considered for
-              English and neither did you have GCSE's in English, Maths and Science to be considered for Primary.
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </section>
+{% set courseHtml2 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
+    <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (3-7) (2VLT)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--pink",
+          text: "Unsuccessful"
+        })
+      }
+    }, {
+      key: {
+        text: "Feedback"
+      },
+      value: {
+        html: reasonHtml
+      }
+    }]
+  }) }}
+{% endset %}
+
+{% set courseHtml3 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
+    <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (X100)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--orange",
+          text: "Application withdrawn"
+        })
+      }
+    }]
+  }) }}
+{% endset %}
+
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: "Gorse SCITT",
+      html: courseHtml1
+    }) }}
+
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: "Leeds Trinity University",
+      html: courseHtml2
+    }) }}
+
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: "Bradford College",
+      html: courseHtml3
+    }) }}
   {% endset %}
 
   {% if applicationValue(["apply2"]) %}

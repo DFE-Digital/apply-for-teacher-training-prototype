@@ -32,6 +32,13 @@
       icon: false
     }) }}
   {% endif %}
+
+  {% if closed %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body-l\">Submit your application from 13 October for courses starting in 2021.</p>",
+      icon: false
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block pageNavigation %}
@@ -205,6 +212,11 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choice</h2>
   {% else %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
+    {% if closed == "true" %}
+      <p>You can apply for courses from 13 October.</p>
+    {% else %}
+      <p class="govuk-body">You can apply for up to 3 courses.</p>
+    {% endif %}
   {% endif %}
 
   {% if applicationValue(["apply2"]) %}
@@ -235,7 +247,7 @@
         text: choiceTagText
       }
     }]
-  }) }}
+  }) if not closed }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">About you</h2>
   {{ appTaskList({
@@ -410,12 +422,21 @@
     }]
   }) }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">Check and submit</h2>
-
-  {{govukButton({
-    text: "Check and submit your application",
-    href: applicationPath + "/review"
-  })}}
+  {% if closed %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Review</h2>
+    <p class="govuk-body">Applications for courses starting in 2021 open from 13 October. You can continue to make changes to your application until then.</p>
+    {{ govukButton({
+      classes: "govuk-button--secondary",
+      text: "Review your application",
+      href: applicationPath + "/review?closed=true"
+    }) }}
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Check and submit</h2>
+    {{ govukButton({
+      text: "Check and submit your application",
+      href: applicationPath + "/review"
+    }) }}
+  {% endif %}
 
 {% endblock %}
 

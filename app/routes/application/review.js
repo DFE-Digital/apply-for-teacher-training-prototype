@@ -52,6 +52,8 @@ module.exports = router => {
       }
     }
 
+    pageObject.closed = req.query.closed
+
     res.render('application/review', pageObject)
   })
 

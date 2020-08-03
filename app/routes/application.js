@@ -128,9 +128,9 @@ module.exports = router => {
 
   // New referee request
   router.all('/applications/add-new-referee', (req, res) => {
-    const {reason1, reason2} = req.query
+    const { reason1, reason2 } = req.query
 
-    res.render(`applications/add-new-referee`, {
+    res.render('applications/add-new-referee', {
       reason1,
       reason2
     })
@@ -168,7 +168,10 @@ module.exports = router => {
     const showCopiedBanner = req.query.copied
 
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
-    res.render('application/index', { showCopiedBanner })
+    res.render('application/index', {
+      showCopiedBanner,
+      closed: req.query.closed
+    })
   })
 
   // Render before you start page

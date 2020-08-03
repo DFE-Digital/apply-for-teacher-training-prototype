@@ -22,6 +22,13 @@
       errorList: errorList
     }) }}
   {% endif %}
+
+  {% if closed %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed.</h2><p>Submit your application from 13 October for courses starting in 2021.</p>",
+      icon: false
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
@@ -29,15 +36,20 @@
     text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once."
   }) if status == "amending" }}
 
-  {% if applicationValue(["apply2"]) %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
+  {% if not closed %}
+    {% if applicationValue(["apply2"]) %}
+      <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
+    {% else %}
+      <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
+    {% endif %}
+    {% set choices = applicationValue(["choices"]) | toArray %}
+    {% set showChoiceStatus = false %}
+    {% set showIncomplete = true %}
+    {% include "_includes/review/choices.njk" %}
   {% else %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
+    <p>You can apply for courses from 13 October.</p>
   {% endif %}
-  {% set choices = applicationValue(["choices"]) | toArray %}
-  {% set showChoiceStatus = false %}
-  {% set showIncomplete = true %}
-  {% include "_includes/review/choices.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
   <h3 class="govuk-heading-m">Personal details</h3>
@@ -99,5 +111,5 @@
 
   {{ govukButton({
     text: "Continue"
-  }) }}
+  }) if not closed }}
 {% endblock %}

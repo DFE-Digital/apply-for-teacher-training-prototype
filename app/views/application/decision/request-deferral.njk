@@ -1,0 +1,79 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Ask if you can defer" %}
+{% set formaction = "/applications/accepted-offer?deferral-requested=true" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/applications/accepted-offer"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set ConditionsHtml %}
+    <ul class="govuk-!-margin-top-0">
+      <li>Complete DBS</li>
+    </ul>
+    <p>For help understanding or meeting your conditions, contact Gorse SCITT directly.</p>
+  {% endset %}
+
+  <h2 class="govuk-heading-m">Your current offer</h2>
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Provider"
+      },
+      value: {
+        text: provider.name
+      }
+    }, {
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: course.name_and_code + "<br>" + course.description
+      }
+    }, {
+      key: {
+        text: "Location"
+      },
+      value: {
+        html: course.locations[0].name + "<br>" + course.locations[0].address
+      }
+    }, {
+      key: {
+        text: "Date course starts"
+      },
+      value: {
+        text: "September 2020"
+      }
+    }, {
+      key: {
+        text: "Conditions"
+      },
+      value: {
+        html: ConditionsHtml
+      }
+    }]
+  }) }}
+
+  {% set hintHtml %}
+    <p class="govuk-hint">If you need to postpone your training, you can ask {{ provider.name }} if they can defer your place until next year.</p>
+    <p class="govuk-hint">Give as much detail as possible to explain why you would like to defer.</p>
+  {% endset %}
+
+  {{ govukTextarea({
+    label: {
+      text: "Why do you want to defer?",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      html: hintHtml
+    }
+  } | decorateApplicationAttributes(["defferal-reason"])) }}
+
+  {{ govukButton({
+    text: "Ask if you can defer"
+  }) }}
+{% endblock %}

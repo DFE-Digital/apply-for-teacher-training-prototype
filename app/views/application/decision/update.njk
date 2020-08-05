@@ -1,0 +1,45 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Update course choice" %}
+{% set token = true %}
+
+{# block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId + "/" + choiceId + "/view" + ("?phase=" + phase if phase)
+  }) }}
+{% endblock #}
+
+{% block primary %}
+  <p class="govuk-body">{{ course.name_and_code }} is now full.</p>
+  <p class="govuk-body">Update your course choice now: when your references come in we’ll send your application to your provider.</p>
+
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    fieldset: {
+      legend: {
+        text: "What do you want to do?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    id: "guidance-rating",
+    name: "guidance-rating",
+    items: [{
+      text: "Choose a different course"
+    }, {
+      text: "Keep this course choice",
+      hint: {
+        text: provider.name + " will get your application but there’s no guarantee they’ll consider it."
+      }
+    }, {
+      text: "Save application and apply for this course next year",
+      hint: {
+        text: "We’ll notify you when applications for the next academic year open."
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

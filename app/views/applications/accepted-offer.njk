@@ -1,0 +1,59 @@
+{% extends "_content.njk" %}
+
+{% set title = "Application dashboard" %}
+{% set hasSecondary = true %}
+{% set referrer = "/applications&phase=completed" %}
+{% set applications = data.applications %}
+{% set applicationId = "VWXYZ" %}
+{% set application = data.applications.VWXYZ %}
+
+{% block beforePrimary %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?phase={{ phase }}">View application</a></p>
+{% endblock %}
+
+{% block primary %}
+  {% set applicationPath = "/application/" + applicationId %}
+  {% set canAmend = false %}
+  {% set hasAmended = false %}
+  {% set canWithdraw = true %}
+  {% set canMakeDecision = false %}
+  {% set showChoiceStatus = true %}
+  {% set showReferenceStatus = true %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">You have accepted an offer</h2>
+  <p class="govuk-body">We've sent you an email to confirm this. Your training provider will be in touch with you direct to explain what happens next.</p>
+
+  {% set choices = application.choices | toArray %}
+  {% include "_includes/review/choices.njk" %}
+
+  {# Guidance about withdrawing #}
+  <p class="govuk-body">You can withdraw an application from a training provider at any point, even after you’ve accepted an offer. You won’t be penalised, but you can’t substitute a different course or provider.</p>
+
+  {# References #}
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">References</h2>
+  {% set references = application.referees %}
+  {% set canAmendReferences = false %}
+  {% include "_includes/review/references.njk" %}
+
+  {# Contact details #}
+  {% if data.flags.self_amend_contact_details %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">Contact details</h2>
+    <p class="govuk-body">You can update your contact details at any point during the application process.</p>
+    {% set contactDetails = application["contact-details"] %}
+    {% set canAmend = true %}
+    {% include "_includes/review/contact-details.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block secondary %}
+  {% include "_includes/need-help.njk" %}
+  {% if not data.flags.self_amend_contact_details %}
+    {{ appRelated({
+      title: "Updating your contact details",
+      content: {
+        html: "<p class=\"govuk-body-s\">You can update your contact details at any point during the application process. To do this, email us at <a href=\"mailto:becomingateacher@digital.education.gov.uk\">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>"
+      }
+    }) }}
+  {% endif %}
+{% endblock %}

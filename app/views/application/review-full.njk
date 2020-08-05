@@ -1,0 +1,109 @@
+{% extends "_form-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/review-complete" %}
+{% set status = applicationValue(["status"]) %}
+{% set title = "Review your application" %}
+{% set referrer = applicationPath + "/review" %}
+{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
+{% set canAmend = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block beforePageTitle %}
+  {% if errorList %}
+    {{ govukErrorSummary({
+      titleText: "Your application cannot be submitted because it’s incomplete",
+      errorList: errorList
+    }) }}
+  {% endif %}
+
+  {% if closed %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed.</h2><p>Submit your application from 13 October for courses starting in 2021.</p>",
+      icon: false
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukWarningText({
+    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once."
+  }) if status == "amending" }}
+
+  {% if applicationValue(["apply2"]) %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
+  {% endif %}
+  {% set choices = applicationValue(["choices"]) | toArray %}
+  {% set showChoiceStatus = false %}
+  {% include "_includes/review/choices-full.njk" %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
+  <h3 class="govuk-heading-m">Personal details</h3>
+  {% include "_includes/review/personal-details.njk" %}
+
+  <h3 class="govuk-heading-m">Contact details</h3>
+  {% set contactDetails = applicationValue(["contact-details"]) %}
+  {% include "_includes/review/contact-details.njk" %}
+
+  <h3 class="govuk-heading-m">Asking for support if you have a disability</h3>
+  {% include "_includes/review/reasonable-adjustments.njk" %}
+
+  <h3 class="govuk-heading-m">Your suitability to work with children</h3>
+  {% include "_includes/review/suitability.njk" %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Work history</h2>
+  {% include "_includes/review/work-history.njk" %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Unpaid experience and volunteering</h2>
+  {% include "_includes/review/school-experience.njk" %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+  <h3 class="govuk-heading-m">Degree(s)</h3>
+  {% include "_includes/review/degrees.njk" %}
+
+  <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
+  {% set id = "maths" %}
+  {% include "_includes/review/gcse.njk" %}
+
+  <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
+  {% set id = "english" %}
+  {% include "_includes/review/gcse.njk" %}
+
+  {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
+    <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
+    {% set id = "science" %}
+    {% include "_includes/review/gcse.njk" %}
+  {% endif %}
+
+  <h3 class="govuk-heading-m">Other relevant qualifications</h3>
+  {% include "_includes/review/other-qualifications.njk" %}
+
+  {% if international %}
+    <h3 class="govuk-heading-m">English as a foreign language</h3>
+    {% include "_includes/review/english-language.njk" %}
+  {% endif %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
+  {% include "_includes/review/personal-statement.njk" %}
+  {% include "_includes/review/subject-knowledge.njk" %}
+  {% if data.flags.interview_preferences == true %}
+    {% include "_includes/review/interview.njk" %}
+  {% endif %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% set references = applicationValue(["referees"]) %}
+  {% set canAmendReferences = true %}
+  {% include "_includes/review/references.njk" %}
+
+  {{ govukButton({
+    text: "Continue"
+  }) if not closed }}
+{% endblock %}

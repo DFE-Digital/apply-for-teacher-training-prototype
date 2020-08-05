@@ -2,7 +2,7 @@ const providers = require('../../data/providers')
 
 module.exports = router => {
   // Render decision pages
-  router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
+  router.get('/application/:applicationId/:choiceId/:view(withdraw|request-deferral|accept-deferral|accept|decline|view|update)', (req, res) => {
     const { applicationId, choiceId } = req.params
     const { phase, referrer } = req.query
     const application = req.session.data.applications[applicationId]
@@ -22,8 +22,8 @@ module.exports = router => {
   })
 
   // Render withdraw confirmation page
-  router.get('/application/:applicationId/:choiceId/withdraw/confirmation', (req, res) => {
-    const { applicationId, choiceId } = req.params
+  router.get('/application/:applicationId/:choiceId/:view(withdraw|request-deferral)/confirmation', (req, res) => {
+    const { applicationId, choiceId, view } = req.params
     const { phase, referrer } = req.query
     const application = req.session.data.applications[applicationId]
 
@@ -31,7 +31,7 @@ module.exports = router => {
     const provider = providers[choice.providerCode]
     const course = provider.courses[choice.courseCode]
 
-    res.render('application/decision/withdraw-confirmation', {
+    res.render(`application/decision/${view}-confirmation`, {
       provider,
       course,
       choice,

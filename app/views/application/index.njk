@@ -68,7 +68,7 @@
 
   {% set rejectionHtml %}
     {% if application.status == "amended" %}
-  {% set appStatus = "Pending" %}
+  {% set appStatus = "Awaiting decision" %}
 {% elif application.status == "amending" %}
   {% set appStatus = "Amending"%}
 {% endif %}

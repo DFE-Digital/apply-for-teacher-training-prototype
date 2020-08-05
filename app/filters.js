@@ -163,26 +163,28 @@ module.exports = (env) => {
       // Application phases
       case 'Submitted':
         return 'govuk-tag--grey'
-      case 'Pending':
-        return 'govuk-tag--blue'
+      case 'Awaiting decision':
+      case 'Deferral requested':
+        return 'govuk-tag--purple'
+      case 'Offer received':
+        return 'govuk-tag--turquoise'
       case 'Offer withdrawn':
         return 'govuk-tag--red'
+      case 'Unsuccessful':
+        return 'govuk-tag--pink'
+      case 'Offer declined':
       case 'Application withdrawn':
+      case 'Application cancelled':
         return 'govuk-tag--orange'
-      case 'Declined':
-        return 'govuk-tag--orange'
-      case 'Rejected':
-        return 'govuk-tag--red'
-      case 'Accepted':
+      case 'Offer accepted':
+      case 'Offer deferred':
         return 'govuk-tag--blue'
-      case 'Not requested yet':
-        return 'govuk-tag--blue'
-      case 'Offer':
-        return 'govuk-tag--turquoise'
 
       // Reference statuses
+      case 'Not requested yet':
+        return 'govuk-tag--grey'
       case 'Awaiting response':
-        return 'govuk-tag--blue'
+        return 'govuk-tag--purple'
       case 'Reference given':
         return 'govuk-tag--green'
     }

@@ -2,9 +2,9 @@
 const dummyApplication = JSON.parse(JSON.stringify(require('./dummy-application')))
 
 dummyApplication.submitted = '2020-03-29'
-dummyApplication.choices.ABCDE.status = 'Declined'
+dummyApplication.choices.ABCDE.status = 'Offer declined'
 dummyApplication.choices.FGHIJ.status = 'Application withdrawn'
-dummyApplication.choices.ZYXWV.status = 'Rejected'
+dummyApplication.choices.ZYXWV.status = 'Unsuccessful'
 dummyApplication.choices.ZYXWV.reason = 'Candidate didn’t come to the interview or assessment'
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
   //       type: 'PGCE with QTS',
   //       length: '1 year',
   //       starts: '2020-09',
-  //       status: 'Rejected',
+  //       status: 'Unsuccessful',
   //       reason: 'Course is full'
   //     }
   //   }
@@ -40,7 +40,7 @@ module.exports = {
   //       type: 'PGCE with QTS',
   //       length: '1 year',
   //       starts: '2020-09',
-  //       status: 'Rejected',
+  //       status: 'Unsuccessful',
   //       reason: 'Candidate did not show enough subject knowledge at this time'
   //     }
   //   }

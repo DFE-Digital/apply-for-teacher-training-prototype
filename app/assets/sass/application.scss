@@ -13,6 +13,7 @@ $govuk-global-styles: true;
 @import "components/hidden-link";
 @import "components/icon";
 @import "components/related";
+@import "components/review-warning";
 @import "components/styled-content";
 @import "components/summary-card";
 @import "components/table";
@@ -70,4 +71,12 @@ $govuk-global-styles: true;
 
 .app-button--link:hover {
   background: transparent;
+}
+
+.govuk-summary-list--no-padding {
+  .govuk-summary-list__key,
+  .govuk-summary-list__value {
+    padding-top: 0;
+    padding-bottom: govuk-spacing(1);
+  }
 }

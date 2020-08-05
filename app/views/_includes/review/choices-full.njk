@@ -1,0 +1,50 @@
+{% set item = choices[0] %}
+{% set provider = providers[item.providerCode] %}
+{% set course = provider.courses[item.courseCode] %}
+{% set courseHtml %}
+  {% include "_includes/item/choice.njk" %}
+{% endset %}
+
+{% set canAmendLocation = false %}
+{% set canRespond = false %}
+{% set canWithdraw = false %}
+{% set canRequestDeferral = false %}
+{% set hasResponded = false %}
+
+<div class="app-review-warning">
+  <p class="app-review-warning__primary-message">You cannot apply to ‘Art and Design (238T)’ because it has no vacancies.</p>
+  <p class="govuk-body">You can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      <a class="govuk-link" href="{{ applicationPath + "/choices/" + item.id + "/pick?referrer=" + referrer }}">change to another course</a>
+    </li>
+    <li>
+      <a class="govuk-link" href="#">save application and apply for this course next year</a>
+    </li>
+    <li>
+      <a class="govuk-link" href="https://www.find-postgraduate-teacher-training.service.gov.uk/course/{{ item.providerCode }}/{{ item.courseCode }}#section-contact">contact the training provider</a> to discuss alternatives
+    </li>
+  </ul>
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: provider.name,
+    actions: {
+      items: [{
+        href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+        text: "Delete choice"
+      } if canAmend, {
+        href: applicationPath + "/" + item.id + "/request-deferral",
+        text: "Ask if you can defer"
+      } if canRequestDeferral, {
+        href: applicationPath + "/" + item.id + "/withdraw",
+        text: "Withdraw"
+      } if canWithdraw, {
+        href: applicationPath + "/" + item.id + "/view?phase=" + phase,
+        text: "View and respond to offer"
+      } if canRespond and not hasResponded]
+    } if canAmend or canWithdraw or canRespond,
+    html: courseHtml
+  }) }}
+</div>

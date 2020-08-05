@@ -1,0 +1,89 @@
+{% extends "_form.njk" %}
+
+{% set parent = provider.name + " - " + course.name_and_code %}
+{% set title = "Deferred offer" %}
+{% set formaction = "/applications/accepted-offer?deferral-requested=true" %}
+{% set showCourseStartDate = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/applications/accepted-offer?deferral-requested=true"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set ConditionsHtml %}
+    <ul class="govuk-!-margin-top-0">
+      <li>Complete DBS</li>
+    </ul>
+    <p>For help understanding or meeting your conditions, contact Gorse SCITT directly.</p>
+  {% endset %}
+
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Provider"
+      },
+      value: {
+        text: provider.name
+      }
+    }, {
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: course.name_and_code + "<br>" + course.description
+      }
+    }, {
+      key: {
+        text: "Location"
+      },
+      value: {
+        html: course.locations[0].name + "<br>" + course.locations[0].address
+      }
+    }, {
+      key: {
+        text: "Date course starts"
+      },
+      value: {
+        text: "September 2021"
+      }
+    }, {
+      key: {
+        text: "Conditions"
+      },
+      value: {
+        html: ConditionsHtml
+      }
+    }]
+  }) }}
+
+  {{ govukRadios({
+    idPrefix: "accept-deferral",
+    name: "accept-deferral",
+    value: "accept-deferral",
+    fieldset: {
+      legend: {
+        html: "Do you want to accept this deferred offer?",
+        classes: "govuk-label--m"
+      }
+    },
+    items: [{
+      value: "yes",
+      text: "Yes, defer my entry",
+      hint: {
+        text: "You can start training in September 2021 "
+      }
+    }, {
+      value: "no",
+      text: "No, keep my original offer",
+      hint: {
+        text: "You will start training in September 2020"
+      }
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

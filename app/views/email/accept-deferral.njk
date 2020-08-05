@@ -1,0 +1,14 @@
+{% extends "_email.njk" %}
+
+{% set title = "Deferral request accepted" %}
+{% set to = "email@example.com" %}
+
+{% block content %}
+  <p class="govuk-body">Dear Janina,</p>
+  <h2 class="govuk-heading-m">Deferral request accepted</h2>
+  <p class="govuk-body">Gorse SCITT have agreed to defer your offer for Primary (2XT2) so that you can start training in September 2021.</p>
+  <h2 class="govuk-heading-m">Respond now</h2>
+  <p class="govuk-body">Sign in to your account to accept or decline:</p>
+  <p class="govuk-body"><a href="/application/VWXYZ/ABCDE/accept-deferral">https://www.apply-for-teacher-training.service.gov.uk/candidate/authenticate?token=J-eszzKJ-_rs-39ehJ9P&u=sWzbIUx2--cGaEAaI3n%2Fjc5Lmb--B9wLV5RKnbS40wqLLpYb8A%3D%3D</a></p>
+  <p class="govuk-body">Contact Gorse SCITT directly if you have any questions about this.</p>
+{% endblock %}

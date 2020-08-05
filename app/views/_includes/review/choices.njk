@@ -9,25 +9,30 @@
 
     {# Can respond if within a decision phase and have an offer #}
     {% set canRespond = canMakeDecision and
-      item.status == "offer"
+      item.status == "Offer received"
     %}
 
     {# Can withdraw if post-submission and not already withdrawn choice #}
     {% set canWithdraw = canWithdraw
-      and (item.status != "declined")
-      and (item.status != "offer")
-      and (item.status != "rejected")
-      and (item.status != "withdrawn")
-      or (item.status == "pending")
-      or (item.status == "accepted")
+      and (item.status != "Offer declined")
+      and (item.status != "Offer received")
+      and (item.status != "Unsuccessful")
+      and (item.status != "Withdrawn")
+      or (item.status == "Awaiting decision")
+      or (item.status == "Offer accepted")
+    %}
+
+    {# Can request a deferral if has accepted an offer #}
+    {% set canRequestDeferral = canRequestDeferral
+      and (item.status == "Offer accepted")
     %}
 
     {# Candidate has already responded #}
     {% set hasResponded =
-      (item.status == "accepted")
-      or (item.status == "declined")
-      or (item.status == "rejected")
-      or (item.status == "withdrawn")
+      (item.status == "Offer accepted")
+      or (item.status == "Offer declined")
+      or (item.status == "Unsuccessful")
+      or (item.status == "Withdrawn")
     %}
 
     {{ appSummaryCard({
@@ -39,6 +44,9 @@
           href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
           text: "Delete choice"
         } if canAmend, {
+          href: applicationPath + "/" + item.id + "/request-deferral",
+          text: "Ask if you can defer"
+        } if canRequestDeferral, {
           href: applicationPath + "/" + item.id + "/withdraw",
           text: "Withdraw"
         } if canWithdraw, {

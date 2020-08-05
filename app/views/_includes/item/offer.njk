@@ -29,10 +29,17 @@
     }
   }, {
     key: {
+      text: "Date course starts"
+    },
+    value: {
+      html: choice.starts | date("MMMM yyyy")
+    }
+  } if showCourseStartDate, {
+    key: {
       text: "Conditions"
     },
     value: {
       html: conditionsHtml
     }
-  }]
+  } if showConditions]
 }) }}

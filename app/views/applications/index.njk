@@ -137,8 +137,8 @@
   {% set canAmendReferences = false %}
   {% include "_includes/review/references.njk" %}
 
+  {# Contact details #}
   {% if data.flags.self_amend_contact_details %}
-    {# Contact details #}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">Contact details</h2>
     <p class="govuk-body">You can update your contact details at any point during the application process.</p>
     {% set contactDetails = application["contact-details"] %}
@@ -153,7 +153,7 @@
     {{ appRelated({
       title: "Updating your contact details",
       content: {
-        html: "You can update your contact details at any point during the application process. To do this, email us at <a href=\"mailto:becomingateacher@digital.education.gov.uk\">becomingateacher<wbr>@digital.education.gov.uk</a>."
+        html: "<p class=\"govuk-body-s\">You can update your contact details at any point during the application process. To do this, email us at <a href=\"mailto:becomingateacher@digital.education.gov.uk\">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>"
       }
     }) }}
   {% endif %}

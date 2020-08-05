@@ -5,7 +5,7 @@
 
 {% set graduatingYearExample = "2002" %}
 {% set degreeCount = applicationValue(["degree"]) | length %}
-{% if applicationValue(["degree", id, "grade"]) == "Pending" and degreeCount <= 1 %}
+{% if applicationValue(["degree", id, "grade"]) == "Awaiting decision" and degreeCount <= 1 %}
   {% set pendingFirstDegree = true %}
   {% set graduatingYearExample = "2020" %}
 {% endif %}

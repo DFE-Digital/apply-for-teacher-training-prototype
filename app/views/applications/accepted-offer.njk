@@ -8,6 +8,14 @@
 {% set application = data.applications.VWXYZ %}
 
 {% block beforePrimary %}
+  {% if deferralAccepted %}
+    <div class="app-banner app-banner--success">
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
+        You have deferred your offer to study Primary (2XT2) at Gorse SCITT
+      </h2>
+    </div>
+  {% endif %}
+
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
   <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?phase={{ phase }}">View application</a></p>
 {% endblock %}

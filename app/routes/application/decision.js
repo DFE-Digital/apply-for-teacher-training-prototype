@@ -42,6 +42,17 @@ module.exports = router => {
     })
   })
 
+  // Submit deferal decision
+  router.post('/application/:applicationId/:choiceId/accept-deferral', (req, res) => {
+    const { decision } = req.session.data
+
+    if (decision === 'defer') {
+      res.redirect('/applications/accepted-offer?defferal-accepted=true')
+    } else {
+      res.redirect('/applications/accepted-offer')
+    }
+  })
+
   // Submit decision
   router.post('/application/:applicationId/:choiceId/view', (req, res) => {
     const { applicationId, choiceId } = req.params

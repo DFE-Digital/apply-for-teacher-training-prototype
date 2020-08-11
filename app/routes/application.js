@@ -151,12 +151,14 @@ module.exports = router => {
 
     if (deferralAccepted) {
       canRequestDeferral = false
+      applications.VWXYZ.choices.ABCDE.starts = '2021-09'
       applications.VWXYZ.choices.ABCDE.status = 'Offer deferred'
     }
 
     res.render('applications/accepted-offer', {
       applications,
-      canRequestDeferral
+      canRequestDeferral,
+      deferralAccepted
     })
   })
 

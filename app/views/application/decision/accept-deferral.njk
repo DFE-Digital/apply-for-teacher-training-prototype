@@ -2,7 +2,6 @@
 
 {% set parent = provider.name + " - " + course.name_and_code %}
 {% set title = "Deferred offer" %}
-{% set formaction = "/applications/accepted-offer?deferral-requested=true" %}
 {% set showCourseStartDate = true %}
 
 {% block pageNavigation %}
@@ -59,9 +58,9 @@
   }) }}
 
   {{ govukRadios({
-    idPrefix: "accept-deferral",
-    name: "accept-deferral",
-    value: "accept-deferral",
+    idPrefix: "decision",
+    name: "decision",
+    value: "decision",
     fieldset: {
       legend: {
         html: "Do you want to accept this deferred offer?",
@@ -69,13 +68,13 @@
       }
     },
     items: [{
-      value: "yes",
+      value: "defer",
       text: "Yes, defer my entry",
       hint: {
         text: "You can start training in September 2021 "
       }
     }, {
-      value: "no",
+      value: "keep",
       text: "No, keep my original offer",
       hint: {
         text: "You will start training in September 2020"

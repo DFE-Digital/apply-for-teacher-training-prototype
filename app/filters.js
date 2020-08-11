@@ -177,8 +177,9 @@ module.exports = (env) => {
       case 'Application cancelled':
         return 'govuk-tag--orange'
       case 'Offer accepted':
-      case 'Offer deferred':
         return 'govuk-tag--blue'
+      case 'Offer deferred':
+        return 'govuk-tag--yellow'
 
       // Reference statuses
       case 'Not requested yet':

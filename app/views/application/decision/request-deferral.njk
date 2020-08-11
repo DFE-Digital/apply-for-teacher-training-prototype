@@ -58,22 +58,53 @@
     }]
   }) }}
 
-  {% set hintHtml %}
-    <p class="govuk-hint">If you need to postpone your training, you can ask {{ provider.name }} if they can defer your place until next year.</p>
-    <p class="govuk-hint">Give as much detail as possible to explain why you would like to defer.</p>
-  {% endset %}
+  {% if alternative == "true" %}
+    {% set hintHtml %}
+      <p class="govuk-hint">If you need to postpone your training, you can ask {{ provider.name }} if they can defer your place until next year.</p>
+      <p class="govuk-hint">Give as much detail as possible to explain why you would like to defer.</p>
+    {% endset %}
 
-  {{ govukTextarea({
-    label: {
-      text: "Why do you want to defer?",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      html: hintHtml
-    }
-  } | decorateApplicationAttributes(["defferal-reason"])) }}
+    {{ govukTextarea({
+      label: {
+        text: "Why do you want to defer?",
+        classes: "govuk-label--m"
+      },
+      hint: {
+        html: hintHtml
+      }
+    } | decorateApplicationAttributes(["defferal-reason"])) }}
 
-  {{ govukButton({
-    text: "Ask if you can defer"
-  }) }}
+    {{ govukButton({
+      text: "Ask if you can defer"
+    }) }}
+  {% else %}
+    <p class="govuk-body">If you need to postpone your training, you can ask {{ provider.name }} if they can defer your place until next year.</p>
+    <p class="govuk-body">Not all providers allow you to do this.</p>
+    <p class="govuk-body">Contact Gorse SCITT to find out what their policy is.</p>
+    {{ govukSummaryList({
+      classes: "govuk-summary-list--no-border govuk-summary-list--no-padding",
+      rows: [{
+        key: {
+          text: "Email"
+        },
+        value: {
+          html: "<a href=\"mailto:info@gorsescitt.org.uk\">info@gorsescitt.org.uk</a>"
+        }
+      }, {
+        key: {
+          text: "Telephone"
+        },
+        value: {
+          text: "0113 4871777"
+        }
+      }, {
+        key: {
+          text: "Website"
+        },
+        value: {
+          html: "<a href=\"http://www.gorsescitt.org.uk\">http://www.gorsescitt.org.uk</a>"
+        }
+      }]
+    }) }}
+  {% endif %}
 {% endblock %}

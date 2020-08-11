@@ -4,7 +4,7 @@ module.exports = router => {
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|request-deferral|accept-deferral|accept|decline|view|update)', (req, res) => {
     const { applicationId, choiceId } = req.params
-    const { phase, referrer } = req.query
+    const { phase, referrer, alternative } = req.query
     const application = req.session.data.applications[applicationId]
 
     const choice = application.choices[choiceId]
@@ -17,7 +17,8 @@ module.exports = router => {
       choice,
       choiceId,
       referrer,
-      phase
+      phase,
+      alternative
     })
   })
 

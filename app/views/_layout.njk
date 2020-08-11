@@ -119,6 +119,37 @@
 {% block footer %}
   {{ appFooter({
     classes: "govuk-footer--app",
+    navigation: [{
+      title: "Defer offer",
+      items: [{
+        href: "/applications/accepted-offer",
+        text: "Dashboard with accepted offer"
+      }, {
+        href: "/application/VWXYZ/ABCDE/request-deferral",
+        text: "Ask if I can defer (option 1)"
+      }, {
+        href: "/application/VWXYZ/ABCDE/request-deferral?alternative=true",
+        text: "Ask if I can defer (option 2)"
+      }, {
+        href: "/email/accept-deferral",
+        text: "Email: Deferral request accepted"
+      }, {
+        href: "/application/VWXYZ/ABCDE/accept-deferral",
+        text: "Deferred offer"
+      }]
+    }, {
+      title: "Postpone application",
+      items: [{
+        href: "/email/course-full",
+        text: "Email: Course unavailable"
+      }, {
+        href: "/application/VWXYZ/ABCDE/update",
+        text: "Update course choice"
+      }, {
+        href: "/application/VWXYZ/review-full",
+        text: "Review application with choice unavailable"
+      }]
+    }],
     meta: {
       title: "Need help?",
       html: metaHtml,

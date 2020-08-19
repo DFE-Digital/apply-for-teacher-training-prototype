@@ -8,8 +8,6 @@ const flash = require('connect-flash')
 const nunjucks = require('nunjucks')
 const sessionInCookie = require('client-sessions')
 const sessionInMemory = require('express-session')
-const MongoStore = require('connect-mongo')(sessionInMemory)
-const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const addNunjucksFiltersWithAppContext = require('./app/utils/filters-with-app-context')
 
@@ -39,7 +37,6 @@ var releaseVersion = pkg.version
 var env = (process.env.NODE_ENV || 'development').toLowerCase()
 var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
 var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
-var mongoDbUri = process.env.MONGODB_URI
 var useHttps = process.env.USE_HTTPS || config.useHttps
 var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
 
@@ -135,21 +132,7 @@ const sessionOptions = {
   }
 }
 
-// Configure session store
-// Use memory unless a MongoDB URI is provided
-let sessionStore = false
-if (mongoDbUri) {
-  mongoose.connect(mongoDbUri, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-  })
-  mongoose.Promise = global.Promise
-  sessionStore = new MongoStore({
-    mongooseConnection: mongoose.connection
-  })
-}
-
-// Support session data in cookie or memory/MongoDB
+// Support session data in cookie or memory
 if (useCookieSessionStore === 'true') {
   app.use(sessionInCookie(Object.assign(sessionOptions, {
     cookieName: sessionName,
@@ -160,8 +143,7 @@ if (useCookieSessionStore === 'true') {
   app.use(sessionInMemory(Object.assign(sessionOptions, {
     name: sessionName,
     resave: false,
-    saveUninitialized: true,
-    store: sessionStore
+    saveUninitialized: false
   })))
 }
 

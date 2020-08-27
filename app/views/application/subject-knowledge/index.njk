@@ -1,12 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
-{% set parent = provider.name %}
-{% if hasPrimaryChoices() %}
-  {% set title = "What knowledge and experience will you bring to teaching primary school?" %}
-{% else %}
-  {% set title = "What do you know about the subject you want to teach?" %}
-{% endif %}
+{% set title = "Your suitability to teach a subject or age group" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}

@@ -45,9 +45,7 @@
     "prompt": "^1.0.0",
     "querystring": "^0.2.0",
     "require-dir": "^1.0.0",
-    "sync-request": "^6.1.0",
-    "universal-analytics": "^0.4.23",
-    "uuid": "^8.3.0"
+    "sync-request": "^6.1.0"
   },
   "greenkeeper": {
     "ignore": [

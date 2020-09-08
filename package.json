@@ -38,7 +38,7 @@
     "keypather": "^3.0.0",
     "luxon": "^1.22.0",
     "marked": "^1.1.1",
-    "notifications-node-client": "^4.8.0",
+    "notifications-node-client": "^5.0.0",
     "number-to-words": "^1.2.4",
     "nunjucks": "^3.2.2",
     "portscanner": "^2.1.1",

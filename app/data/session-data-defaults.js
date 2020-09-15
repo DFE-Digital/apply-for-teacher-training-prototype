@@ -16,7 +16,6 @@ module.exports = {
   flags: {
     add_another: false,
     address_lookup: false,
-    automatic_breaks: process.env.MVP !== 'true',
     self_amend_email_address: false,
     self_amend_contact_details: process.env.MVP !== 'true',
     interview_preferences: true

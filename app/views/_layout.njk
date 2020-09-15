@@ -122,24 +122,12 @@
       title: "Get support",
       html: metaHtml,
       items: [{
-        href: "/privacy-policy",
-        text: "Privacy policy"
-      }, {
         href: "/admin",
         text: "Prototype admin"
       }, {
         href: "/admin/clear-data",
         text: "Clear data"
-      }, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=1",
-        text: "v1"
-      } if providerCode and courseCode, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=2",
-        text: "v2"
-      } if providerCode and courseCode, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=3",
-        text: "v3"
-      } if providerCode and courseCode]
+      }]
     }
   }) }}
 {% endblock %}

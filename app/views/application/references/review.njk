@@ -16,54 +16,24 @@
 {% endblock %}
 
 {% block primary %}
-  {% set references = applicationValue(["referees"]) %}
-  {% set canAmendReferences = true %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if applicationValue('apply2') %}
-        {% if applicationValue(["referees", "second"]) or applicationValue(["referees", "first"]) %}
-          {# <p class="govuk-body">If you replace a referee we’ll contact them after you submit your application.</p> #}
-        {% endif %}
-      {% else %}
-        {# <p class="govuk-body">We’ll contact your referees after you submit your application.</p> #}
-      {% endif %}
-      {# <p class="govuk-body">We’ll only send your application to the provider after we receive your references.</p> #}
-    </div>
-  </div>
+  {% set references = applicationValue(["references"]) %}
+  {% set showReferenceRequestLog = true %}
   {% include "_includes/review/references.njk" %}
 
+  {# govukButton({
+    classes: "govuk-button--secondary",
+    text: "Add another referee",
+    href: "#"
+  }) #}
 
-  {% if not applicationValue(["referees", "first"]) and not applicationValue(["referees", "second"])  %}
-    <p>You need to add 2 referees.</p>
-    {{ govukButton({
-      text: "Add referee",
-      href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
-    }) }}
-    <p><a href="{{applicationPath}}">I’ll add referees later</a></p>
-  {% elseif not applicationValue(["referees", "first"]) or not applicationValue(["referees", "second"]) %}
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "references"])) }}
 
-    {% if not applicationValue(["referees", "first"])  %}
-      {{ govukButton({
-        text: "Add another referee",
-        href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
-      }) }}
-    {% else %}
-      {{ govukButton({
-        text: "Add another referee",
-        href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer
-      }) }}
-    {% endif %}
-    <p><a href="{{applicationPath}}">I’ll add another referee later</a></p>
-  {% else %}
-    {{ govukCheckboxes({
-      items: [{
-        value: "true",
-        text: "I have completed this section"
-      }]
-    } | decorateApplicationAttributes(["completed", "references"])) }}
-
-    {{ govukButton({
-      text: "Continue"
-    }) }}
-  {% endif %}
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

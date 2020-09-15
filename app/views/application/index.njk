@@ -234,7 +234,7 @@
   }) if not closed }}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {% if applicationValue(["referees"]) | length > 0 %}
+  {% if applicationValue(["references"]) | length > 0 %}
     {% set referencesUrl = applicationPath + "/references/review" %}
   {% else %}
     {% set referencesUrl = applicationPath + "/references/type/first" %}
@@ -248,7 +248,7 @@
       id: "references",
       tag: {
         classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "references"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "references"]) | length > 0 else incompleteTagText
       }
     }]
   }) }}
@@ -348,7 +348,7 @@
       id: "other-qualifications",
       tag: {
         classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "other-qualifications"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagText
       }
     }, {
       text: "English as a foreign language",
@@ -356,7 +356,7 @@
       id: "english-language",
       tag: {
         classes: tagClass if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "english-language"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagText
       }
     } if international]
   }) }}
@@ -370,7 +370,7 @@
       id: "personal-statement",
       tag: {
         classes: tagClass if applicationValue(["completed", "personal-statement"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "personal-statement"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "personal-statement"]) | length > 0 else incompleteTagText
       }
     }, {
       text: "Your knowledge about the subject you want to teach",
@@ -378,7 +378,7 @@
       id: "subject-knowledge",
       tag: {
         classes: tagClass if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "subject-knowledge"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagText
       }
     }, {
       text: "Interview needs",
@@ -386,7 +386,7 @@
       id: "interview",
       tag: {
         classes: tagClass if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "interview"]) |length > 0 else incompleteTagText
+        text: tagText if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagText
       }
     }]
   }) }}

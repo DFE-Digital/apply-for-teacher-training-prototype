@@ -8,20 +8,26 @@
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {% set references = references | toArray %}
+
   {% for item in references %}
+    {% set canCancelRequest = (item.status != "Reference given") and (item.status != "Cancelled") %}
+    {% set canDeactivateReference = item.status == "Reference given" %}
     {% set refereeHtml %}
       {% include "_includes/item/reference.njk" %}
     {% endset %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",
       headingLevel: 3,
-      titleText: item.id | capitalize + " referee",
+      titleText: item.name,
       actions: {
         items: [{
-          href: applicationPath + "/referees/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete referee"
-        }]
-      } if canAmendReferences,
+          href: applicationPath + "/referees/" + item.id + "/cancel?referrer=" + referrer,
+          text: "Cancel request"
+        } if canCancelRequest, {
+          href: applicationPath + "/referees/" + item.id + "/suspend?referrer=" + referrer,
+          text: "Deactivate reference"
+        } if canDeactivateReference]
+      },
       html: refereeHtml
     }) }}
   {% endfor %}

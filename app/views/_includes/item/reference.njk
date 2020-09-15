@@ -1,13 +1,6 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = item.status or "Awaiting response" %}
-
-{% if applicationValue('apply2') %}
-  {% set showReferenceStatus = true %}
-{% endif %}
-
-{% if status == "Reference given" %}
-  {% set canAmendReferences = false %}
-{% endif %}
+{% set canAmendReferences = status == "Not requested yet" %}
 
 {% set statusHtml %}
   {{ govukTag({
@@ -17,24 +10,33 @@
 {% endset %}
 
 {% set contextHtml %}
-  {% if status == "Not requested yet" %}
-    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application.</p>
-  {% elif status == "Awaiting response" %}
+  {% if status == "Awaiting response" %}
     <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
   {% endif %}
+{% endset %}
+
+{% set logHtml %}
+  <ul class="govuk-list">
+  {% for entry in item.log %}
+    <li>
+      {{ entry.note }}
+      <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date | date("DDD 'at' T") }}</span>
+    </li>
+  {% endfor %}
+  </ul>
 {% endset %}
 
 {{ govukSummaryList({
   rows: [{
     key: {
-      text: "Name"
+      text: "Reference type"
     },
     value: {
-      text: item.name or "Not entered"
+      text: item.type or "Not entered"
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "referee"
       }]
@@ -55,21 +57,7 @@
     } if canAmendReferences
   }, {
     key: {
-      text: "Reference type"
-    },
-    value: {
-      text: item.type or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "referee"
-      }]
-    } if canAmendReferences
-  }, {
-    key: {
-      text: "Relationship"
+      text: "Relationship with referee"
     },
     value: {
       text: (item.relationship or "Not entered") | nl2br | safe
@@ -88,11 +76,12 @@
     value: {
       html: statusHtml + contextHtml
     }
-  } if status and showReferenceStatus]
+  }, {
+    key: {
+      text: "History"
+    },
+    value: {
+      html: logHtml
+    }
+  } if item.log and showReferenceRequestLog]
 }) }}
-
-{# Reference statuses:
-[name] has responded
-[name] has been sent a reminder email
-[name] has declined to give a reference
-[name] has failed to respond before the 10-day deadline #}

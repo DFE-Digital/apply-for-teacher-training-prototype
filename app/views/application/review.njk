@@ -45,8 +45,7 @@
   {% endif %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {% set references = applicationValue(["referees"]) %}
-  {% set canAmendReferences = true %}
+  {% set references = applicationValue(["references"]) | toArray | selectattr("ready") %}
   {% include "_includes/review/references.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>

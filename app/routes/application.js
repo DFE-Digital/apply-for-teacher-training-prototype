@@ -78,22 +78,22 @@ module.exports = router => {
       }
 
       case 'pending-decisions': {
-        applications = createDummyApplication('submitted', ['Pending', 'Pending'])
+        applications = createDummyApplication('submitted', ['Awaiting decision', 'Awaiting decision'])
         break
       }
 
       case 'outstanding-decision': {
-        applications = createDummyApplication('submitted', ['Offer', 'Pending'])
+        applications = createDummyApplication('submitted', ['Offer received', 'Awaiting decision'])
         break
       }
 
       case 'has-decisions': {
-        applications = createDummyApplication('submitted', ['Offer', 'Rejected'])
+        applications = createDummyApplication('submitted', ['Offer received', 'Unsuccessful'])
         break
       }
 
       case 'has-accepted': {
-        applications = createDummyApplication('submitted', ['Accepted', 'Rejected'])
+        applications = createDummyApplication('submitted', ['Offer accepted', 'Unsuccessful'])
         break
       }
     }

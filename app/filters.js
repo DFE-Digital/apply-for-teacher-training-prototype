@@ -154,37 +154,45 @@ module.exports = (env) => {
 
   filters.statusClass = (status) => {
     switch (status) {
-      // States that currently use the default tag style
-      // - 'Enrolled'
-      // - 'Conditions met'
-      // - 'Conditions not met'
-      // - 'Completed'
-
       // Application phases
       case 'Submitted':
         return 'govuk-tag--grey'
-      case 'Pending':
+      case 'Awaiting decision':
+        return 'govuk-tag--purple'
+      case 'Offer received':
+        return 'govuk-tag--turquoise'
+      case 'Offer accepted':
         return 'govuk-tag--blue'
+      case 'Offer declined':
+        return 'govuk-tag--orange'
+      case 'Offer deferred':
+        return 'govuk-tag--yellow'
       case 'Offer withdrawn':
+      case 'Conditions not met':
         return 'govuk-tag--red'
+      case 'Conditions met':
+        return 'govuk-tag--green'
+      case 'Unsuccessful':
+      case 'Application not sent':
+        return 'govuk-tag--pink'
+      case 'Application cancelled':
       case 'Application withdrawn':
         return 'govuk-tag--orange'
-      case 'Declined':
-        return 'govuk-tag--orange'
-      case 'Rejected':
-        return 'govuk-tag--red'
-      case 'Accepted':
-        return 'govuk-tag--blue'
-      case 'Not requested yet':
-        return 'govuk-tag--blue'
-      case 'Offer':
-        return 'govuk-tag--turquoise'
 
       // Reference statuses
+      case 'Not requested yet':
+        return 'govuk-tag--grey'
       case 'Awaiting response':
-        return 'govuk-tag--blue'
+        return 'govuk-tag--purple'
+      case 'Reference overdue':
+        return 'govuk-tag--yellow'
       case 'Reference given':
         return 'govuk-tag--green'
+      case 'Cancelled':
+        return 'govuk-tag--orange'
+      case 'Reference declined':
+      case 'Email address incorrect':
+        return 'govuk-tag--red'
     }
   }
 

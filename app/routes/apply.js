@@ -1,9 +1,5 @@
 module.exports = router => {
-  // const dualRunningDefaultVarient = Math.floor(Math.random() * 3) + 1;
-  const dualRunningDefaultVarient = 4
-
   router.get('/apply/:providerCode/:courseCode', (req, res) => {
-    const variant = req.query.variant || dualRunningDefaultVarient
     const dualRunning = req.query.dualrunning
     const ineligible = req.query.ineligible
     const providerCode = req.params.providerCode
@@ -11,7 +7,6 @@ module.exports = router => {
 
     res.render('apply/index', {
       formaction: `/apply/${providerCode}/${courseCode}/answer`,
-      variant,
       dualRunning,
       ineligible,
       providerCode,
@@ -23,33 +18,11 @@ module.exports = router => {
     const providerCode = req.query.provider
     const courseCode = req.query.course
 
-    // Detirmine variant based on providerCode
-    const variant1Providers = ['H60', '2EX'] // Huddersfield
-    const variant2Providers = ['L24', 'L26'] // Leeds
-    const variant3Providers = ['S18', 'S97'] // Sheffield
-
-    let variant
-    if (variant1Providers.includes(providerCode)) {
-      variant = 1
-    }
-
-    if (variant2Providers.includes(providerCode)) {
-      variant = 2
-    }
-
-    if (variant3Providers.includes(providerCode)) {
-      variant = 3
-    }
-
     // Count this so we can act on the data
     // eg We show them a course that’s only on UCAS the second time around
     req.session.data.visits_from_find = req.session.data.visits_from_find + 1
 
-    if (variant) {
-      res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true&variant=${variant}`)
-    } else {
-      res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
-    }
+    res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
   })
 
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {

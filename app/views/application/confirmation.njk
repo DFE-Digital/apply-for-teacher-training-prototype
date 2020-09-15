@@ -3,11 +3,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set choices = applicationValue(["choices"]) | length %}
 {% set providerPlural = "providers" if choices > 1 else "provider" %}
-{% if status == "amended" %}
-  {% set title = "Application successfully resubmitted" %}
-{% else %}
-  {% set title = "Application successfully submitted" %}
-{% endif %}
+{% set title = "Application successfully submitted" %}
 
 {% block content %}
   {{ govukPanel({

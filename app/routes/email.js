@@ -47,7 +47,7 @@ module.exports = router => {
     res.redirect('/account/check-email/sign-in')
   })
 
-  // Confirmation: (Amended) application submitted
+  // Confirmation: Application submitted
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
     const applicationId = req.params.applicationId
     const application = req.session.data.applications[applicationId]
@@ -62,16 +62,7 @@ module.exports = router => {
       choices.push(result)
     }
 
-    let notifyTemplate
-    if (application.status === 'amending') {
-      // Application is about to be amended
-      notifyTemplate = '92231b36-2050-4f4a-b73b-b13a82fe6373'
-    } else {
-      // Application is about to be submitted
-      notifyTemplate = '99a20df5-564d-4612-810e-3788edf7285e'
-    }
-
-    utils.sendEmail(req, notifyTemplate, {
+    utils.sendEmail(req, '99a20df5-564d-4612-810e-3788edf7285e', {
       reference: applicationId,
       candidateName,
       choiceList: choices.join('\n'),

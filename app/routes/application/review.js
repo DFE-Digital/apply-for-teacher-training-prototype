@@ -75,16 +75,10 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/review-complete', (req, res) => {
-    const applicationData = utils.applicationData(req)
     const completedApplication = utils.hasCompletedApplication(req)
 
     if (completedApplication) {
-      const { status } = applicationData
-      if (status === 'amending') {
-        res.redirect(`/application/${req.params.applicationId}/submit`)
-      } else {
-        res.redirect(`/application/${req.params.applicationId}/equality-monitoring`)
-      }
+      res.redirect(`/application/${req.params.applicationId}/equality-monitoring`)
     } else {
       req.flash('success', 'submitted-incompleted-application')
       res.redirect(`/application/${req.params.applicationId}/review`)

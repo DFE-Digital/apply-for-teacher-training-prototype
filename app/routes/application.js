@@ -77,16 +77,6 @@ module.exports = router => {
         break
       }
 
-      case 'amending': {
-        applications = createDummyApplication('amending')
-        break
-      }
-
-      case 'amended': {
-        applications = createDummyApplication('amended')
-        break
-      }
-
       case 'pending-decisions': {
         applications = createDummyApplication('submitted', ['Pending', 'Pending'])
         break
@@ -234,7 +224,6 @@ module.exports = router => {
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
-  require('./application/edit')(router)
   require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found

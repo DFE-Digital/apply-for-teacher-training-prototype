@@ -21,32 +21,12 @@
       <h2 class="govuk-heading-m">What happens next</h2>
       <p class="govuk-body">You’ll get an email to confirm that your application has been submitted.</p>
 
-      {% if applicationValue(["referees", "first", "status"]) === "Awaiting response" or applicationValue(["referees", "second", "status"]) === "Awaiting response" %}
-        <h2 class="govuk-heading-m">References</h2>
-        {% if applicationValue(["referees", "first", "status"]) == "Received" or applicationValue(["referees", "second", "status"]) == "Received" %}
-          {# Application with a new referee (i.e. during apply again) #}
-          <p class="govuk-body">We’ve sent an email to your referee and will send them a reminder in 5 working days.</p>
-          <p class="govuk-body">When we get your reference, we’ll add it to your application and send it to your {{ providerPlural }}.</p>
-          <p class="govuk-body">Courses can become full at any time. Keep in touch with your referee to ensure they’re planning on giving a reference as soon as possible.</p>
-        {% else %}
-          {# Application with 2 new referees #}
-          <p class="govuk-body">We’ve sent an email to your referees and will send them a reminder in 5 working days.</p>
-          <p class="govuk-body">When we get your references, we’ll add them to your application and send it to your {{ providerPlural }}.</p>
-          <p class="govuk-body">Courses can become full at any time. Keep in touch with your referees to ensure they’re planning on giving a reference as soon as possible.</p>
-        {% endif %}
-      {% endif %}
-
       <h2 class="govuk-heading-m">Interview</h2>
-      <p class="govuk-body">Your training {{ providerPlural }} will be in touch with you if they want to arrange an interview.</p>
+      <p class="govuk-body">Your training provider will be in touch with you if they want to arrange an interview.</p>
 
-      {% if status == "amended" %}
-        <h2 class="govuk-heading-m">Track or withdraw</h2>
-        <p class="govuk-body">Visit your <a href="/applications">Application dashboard</a> to check the status of an application, or withdraw a course choice. You can update your contact details, but you won’t be able to edit other sections.</p>
-      {% else %}
-        <h2 class="govuk-heading-m">Track, edit or withdraw</h2>
-        <p class="govuk-body">You have 7 days to make changes to a submitted application. We won’t send your application to your training {{ providerPlural }} until the 5 working days are up.</p>
-        <p class="govuk-body"><a href="/applications">To edit your application, return to your Application dashboard</a>.</p>
-      {% endif %}
+      <h2 class="govuk-heading-m">Track or withdraw</h2>
+      <p class="govuk-body">You can track or withdraw your application from your application dashboard.</p>
+      <p class="govuk-body"><a href="/applications">To view your application, return to your application dashboard</a>.</p>
 
       <h2 class="govuk-heading-m">Tell us what you think of this service</h2>
       <p class="govuk-body">Your feedback will help us improve.</p>

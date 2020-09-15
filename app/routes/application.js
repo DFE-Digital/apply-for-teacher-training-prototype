@@ -77,16 +77,6 @@ module.exports = router => {
         break
       }
 
-      case 'amending': {
-        applications = createDummyApplication('amending')
-        break
-      }
-
-      case 'amended': {
-        applications = createDummyApplication('amended')
-        break
-      }
-
       case 'pending-decisions': {
         applications = createDummyApplication('submitted', ['Pending', 'Pending'])
         break
@@ -124,16 +114,6 @@ module.exports = router => {
     } else {
       res.redirect('/application/start')
     }
-  })
-
-  // New referee request
-  router.all('/applications/add-new-referee', (req, res) => {
-    const { reason1, reason2 } = req.query
-
-    res.render('applications/add-new-referee', {
-      reason1,
-      reason2
-    })
   })
 
   // Generate new applicationID and redirect to that application
@@ -244,7 +224,6 @@ module.exports = router => {
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
-  require('./application/edit')(router)
   require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found

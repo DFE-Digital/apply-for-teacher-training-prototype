@@ -49,7 +49,7 @@
             </div>
           {% endif %}
           {% if params.meta.items %}
-            <ul class="govuk-footer__inline-list">
+            <ul class="govuk-footer__inline-list govuk-!-margin-bottom-0">
               {% for item in params.meta.items %}
                 <li class="govuk-footer__inline-list-item">
                   <a class="govuk-footer__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>
@@ -62,9 +62,7 @@
         {% endif %}
       </div>
       <div class="govuk-footer__meta-item">
-        <a class="govuk-footer__link govuk-footer__copyright-logo"
-          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
-        >© Crown copyright</a>
+        <a class="govuk-footer__link govuk-footer__copyright-logo govuk-!-margin-bottom-1" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
       </div>
     </div>
   </div>

@@ -32,10 +32,6 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukWarningText({
-    text: "Please review your changes carefully before you resubmit. Your application can only be resubmitted once."
-  }) if status == "amending" }}
-
   {% if not closed %}
     {% if applicationValue(["apply2"]) %}
       <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
@@ -100,9 +96,7 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
   {% include "_includes/review/personal-statement.njk" %}
   {% include "_includes/review/subject-knowledge.njk" %}
-  {% if data.flags.interview_preferences == true %}
-    {% include "_includes/review/interview.njk" %}
-  {% endif %}
+  {% include "_includes/review/interview.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
   {% set references = applicationValue(["referees"]) %}

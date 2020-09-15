@@ -233,6 +233,26 @@
     }]
   }) if not closed }}
 
+  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% if applicationValue(["referees"]) | length > 0 %}
+    {% set referencesUrl = applicationPath + "/references/review" %}
+  {% else %}
+    {% set referencesUrl = applicationPath + "/references/type/first" %}
+  {% endif %}
+
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-8",
+    items: [{
+      text: "Referees",
+      href: referencesUrl,
+      id: "references",
+      tag: {
+        classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,
+        text: tagText if applicationValue(["completed", "references"]) |length > 0 else incompleteTagText
+      }
+    }]
+  }) }}
+
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-4">About you</h2>
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
@@ -367,26 +387,6 @@
       tag: {
         classes: tagClass if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagClass,
         text: tagText if applicationValue(["completed", "interview"]) |length > 0 else incompleteTagText
-      }
-    }]
-  }) }}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {% if applicationValue(["referees"]) | length > 0 %}
-    {% set referencesUrl = applicationPath + "/references/review" %}
-  {% else %}
-    {% set referencesUrl = applicationPath + "/references/type/first" %}
-  {% endif %}
-
-  {{ appTaskList({
-    classes: "govuk-!-margin-bottom-8",
-    items: [{
-      text: "Referees",
-      href: referencesUrl,
-      id: "references",
-      tag: {
-        classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "references"]) |length > 0 else incompleteTagText
       }
     }]
   }) }}

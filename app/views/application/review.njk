@@ -33,12 +33,9 @@
 
 {% block primary %}
   {% if not closed %}
-    {% if applicationValue(["apply2"]) %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course</h2>
-    {% else %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Courses</h2>
-    {% endif %}
     {% set choices = applicationValue(["choices"]) | toArray %}
+    {% set courseTitle = "Course choices" if (choices | length) > 1 else "Course choice" %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">{{ courseTitle }}</h2>
     {% set showChoiceStatus = false %}
     {% set showIncomplete = true %}
     {% include "_includes/review/choices.njk" %}
@@ -46,6 +43,11 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
     <p>You can apply for courses from 13 October.</p>
   {% endif %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+  {% set references = applicationValue(["referees"]) %}
+  {% set canAmendReferences = true %}
+  {% include "_includes/review/references.njk" %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">About you</h2>
   <h3 class="govuk-heading-m">Personal details</h3>
@@ -97,11 +99,6 @@
   {% include "_includes/review/personal-statement.njk" %}
   {% include "_includes/review/subject-knowledge.njk" %}
   {% include "_includes/review/interview.njk" %}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {% set references = applicationValue(["referees"]) %}
-  {% set canAmendReferences = true %}
-  {% include "_includes/review/references.njk" %}
 
   {{ govukButton({
     text: "Continue"

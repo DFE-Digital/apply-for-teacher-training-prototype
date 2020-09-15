@@ -26,40 +26,6 @@
 {% endfor %}
 
 {% block beforePrimary %}
-
-  {% set needsReferee = false %}
-  {% if needsReferee %}
-    {# <div class="app-banner">
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-        You need to <a href="{{ applicationPath }}/references/alternative">give details of a new referee</a>
-      </h2>
-    </div> #}
-
-    <div class="app-banner">
-      <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-        You need to <a href="{{ applicationPath }}/references/alternative-first">give details of 2 new referees</a>
-      </h2>
-    </div>
-  {% endif %}
-
-  {# <div class="app-banner">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      <a href="/application/{{ applicationId }}/apply-again">Do you want to apply again?</a>
-    </h2>
-  </div> #}
-
-  {# <div class="app-banner app-banner--success">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      Thank you. We’ve asked your new referee for a reference
-    </h2>
-  </div> #}
-
-  {# <div class="app-banner app-banner--success">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0" id="success-message">
-      Thank you. We’ve asked each new referee for a reference
-    </h2>
-  </div> #}
-
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
   <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?phase={{ phase }}">View application</a></p>
 {% endblock %}
@@ -71,7 +37,6 @@
   {% set canWithdraw = (application.status != "submitted") or (phase != "amend") %}
   {% set canMakeDecision = (phase == "decision") or (phase == "dbd") %}
   {% set showChoiceStatus = true %}
-  {% set showReferenceStatus = true %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">
   {% if canAmend %}
@@ -129,13 +94,6 @@
   {% if (phase != "amend") %}
     <p class="govuk-body">You can withdraw an application from a training provider at any point, even after you’ve accepted an offer. You won’t be penalised, but you can’t substitute a different course or provider.</p>
   {% endif %}
-
-  {# References #}
-  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">References</h2>
-
-  {% set references = application.referees %}
-  {% set canAmendReferences = false %}
-  {% include "_includes/review/references.njk" %}
 
   {% if data.flags.self_amend_contact_details %}
     {# Contact details #}

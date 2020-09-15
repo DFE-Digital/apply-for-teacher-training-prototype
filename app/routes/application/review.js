@@ -13,6 +13,7 @@ module.exports = router => {
       pageObject.errorList = []
       const sections = {
         choices: applicationData.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
+        references: 'Add 2 referees to your application',
         candidate: 'Personal details not entered',
         'contact-details': 'Contact details not entered',
         'reasonable-adjustments': 'Training with a disability not entered',
@@ -26,8 +27,7 @@ module.exports = router => {
           english: 'English GCSE or equivalent not entered',
           science: 'Science GCSE or equivalent not entered'
         },
-        interview: 'Tell us your interview needs',
-        referees: 'Add 2 referees to your application'
+        interview: 'Tell us your interview needs'
       }
 
       for (const [key, value] of Object.entries(sections)) {

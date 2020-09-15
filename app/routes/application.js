@@ -13,6 +13,7 @@ function createNewApplication (req) {
       status: 'started',
       apply2: false,
       choices: {},
+      references: {},
       candidate: {},
       'contact-details': {},
       'reasonable-adjustments': {},
@@ -29,8 +30,7 @@ function createNewApplication (req) {
       interview: null,
       'personal-statement': null,
       'work-history': {},
-      'school-experience': {},
-      referees: {}
+      'school-experience': {}
     }
   }
 
@@ -173,12 +173,12 @@ module.exports = router => {
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
 
-    if (apply2Application.referees && apply2Application.referees.first) {
-      apply2Application.referees.first.status = 'Received'
+    if (apply2Application.references && apply2Application.references[0]) {
+      apply2Application.references[0].status = 'Received'
     }
 
-    if (apply2Application.referees && apply2Application.referees.second) {
-      apply2Application.referees.second.status = 'Received'
+    if (apply2Application.references && apply2Application.references[1]) {
+      apply2Application.references[1].status = 'Received'
     }
 
     data.applications[code] = apply2Application

@@ -3,20 +3,20 @@
 {% set status = applicationValue(["status"]) %}
 {% set incompleteTagClass = "govuk-tag--grey" %}
 {% set incompleteTagText = "Incomplete" %}
+{% set inprogressTagClass = "govuk-tag--purple" %}
+{% set inprogressTagText = "In progress" %}
 {% set notStartedTagClass = "govuk-tag--grey" %}
 {% set notStartedTagText = "Not started" %}
 {% set referrer = applicationPath %}
 {% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
 
-{% if status == "started" %}
-  {% if applicationValue('apply2') %}
-    {% set title = "Your new application" %}
-  {% else %}
-    {% set title = "Your application" %}
-  {% endif %}
-  {% set tagText = "Completed" %}
-  {% set reviewText = "Check your answers before submitting" %}
+{% if applicationValue('apply2') %}
+  {% set title = "Your new application" %}
+{% else %}
+  {% set title = "Your application" %}
 {% endif %}
+{% set tagText = "Completed" %}
+{% set reviewText = "Check your answers before submitting" %}
 {% set hasSecondary = true %}
 
 {% block beforePageTitle %}
@@ -55,156 +55,31 @@
 {% endblock %}
 
 {% block primary %}
-{% set rejectionHtml %}
-  {% set status = item.status or application.status or "Submitted" %}
-  {% set statusHtml %}
-    {{ govukTag({
-      classes: "app-tag " + status | statusClass,
-      text: status | capitalize
-    }) }}
-  {% endset %}
-
-  {% set courseHtml1 %}
-    {% set reasonHtml %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
-      <p class="govuk-body">Your subject knowledge could be improved.</p>
-      <p class="govuk-body">Details: Understand the purpose of PE in schools and the learn more about the procedures related to safeguarding.</p>
-
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
-      <p class="govuk-body">No Science GCSE grade 4 (C) or above, or valid equivalent.</p>
-    {% endset %}
-    {{ govukSummaryList({
-      rows: [{
-        key: {
-          text: "Course"
-        },
-        value: {
-          html: "Primary (2XT2)"
-        }
-      }, {
-        key: {
-          text: "Status"
-        },
-        value: {
-          html: govukTag({
-            classes: "app-tag govuk-tag--pink",
-            text: "Unsuccessful"
-          })
-        }
-      }, {
-        key: {
-          text: "Feedback"
-        },
-        value: {
-          html: reasonHtml
-        }
-      }]
-    }) }}
-  {% endset %}
-
-  {% set courseHtml2 %}
-    {% set reasonHtml %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
-      <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
-    {% endset %}
-    {{ govukSummaryList({
-      rows: [{
-        key: {
-          text: "Course"
-        },
-        value: {
-          html: "Primary (3-7) (2VLT)"
-        }
-      }, {
-        key: {
-          text: "Status"
-        },
-        value: {
-          html: govukTag({
-            classes: "app-tag govuk-tag--pink",
-            text: "Unsuccessful"
-          })
-        }
-      }, {
-        key: {
-          text: "Feedback"
-        },
-        value: {
-          html: reasonHtml
-        }
-      }]
-    }) }}
-  {% endset %}
-
-  {% set courseHtml3 %}
-    {% set reasonHtml %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
-      <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
-    {% endset %}
-    {{ govukSummaryList({
-      rows: [{
-        key: {
-          text: "Course"
-        },
-        value: {
-          html: "Primary (X100)"
-        }
-      }, {
-        key: {
-          text: "Status"
-        },
-        value: {
-          html: govukTag({
-            classes: "app-tag govuk-tag--orange",
-            text: "Application withdrawn"
-          })
-        }
-      }]
-    }) }}
-  {% endset %}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Gorse SCITT",
-    html: courseHtml1
-  }) }}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Leeds Trinity University",
-    html: courseHtml2
-  }) }}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Bradford College",
-    html: courseHtml3
-  }) }}
-{% endset %}
-
+  {# PREVIOUS APPLICATIONS #}
   {% if applicationValue(["apply2"]) %}
+    {% set previousApplicationSummaryHtml %}
+      {% include "_includes/previous-application-summary.njk" %}
+    {% endset %}
     {{ govukDetails({
       summaryText: "See feedback from your previous application",
-      html: rejectionHtml
+      html: previousApplicationSummaryHtml
     }) }}
   {% endif %}
 
+  {# COURSE CHOICES #}
   {% if applicationValue(["apply2"]) %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choice</h2>
   {% else %}
     <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">Course choices</h2>
     {% if closed == "true" %}
-      <p>You can apply for courses from 13 October.</p>
+      <p class="govuk-body">You can apply for courses from 13 October.</p>
     {% else %}
       <p class="govuk-body">You can apply for up to 3 courses.</p>
     {% endif %}
   {% endif %}
 
-  {% if applicationValue(["apply2"]) %}
-    {% if applicationValue(["completed", "choices"]) %}
+  {% if applicationValue(["apply2"]) | length  %}
+    {% if applicationValue(["choices"]) | length > 1 %}
       {% set choiceTagText = tagText %}
       {% set choiceTagClass = tagClass %}
     {% else %}
@@ -212,7 +87,7 @@
       {% set choiceTagClass = notStartedTagClass %}
     {% endif %}
   {% else %}
-    {% if applicationValue(["completed", "choices"]) %}
+    {% if applicationValue(["choices"]) | length > 1 %}
       {% set choiceTagText = tagText %}
     {% else %}
       {% set choiceTagText = incompleteTagText %}
@@ -223,7 +98,7 @@
   {{ appTaskList({
     classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Course choice" if applicationValue(["apply2"]) else "Course choices",
+      text: "Choose your course" if applicationValue(["apply2"]) else "Choose your courses",
       href: applicationPath + "/choices",
       id: "personal-details",
       tag: {
@@ -233,23 +108,46 @@
     }]
   }) if not closed }}
 
-  <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-  {% if applicationValue(["references"]) | length > 0 %}
-    {% set referencesUrl = applicationPath + "/references/review" %}
+  {# REFERENCES #}
+  <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">References</h2>
+  {% set references = applicationValue(["references"]) | toArray %}
+  {% set readyReferences = references | selectattr("ready") | reverse %}
+
+  {% if readyReferences | length >= 2 %}
+    {% set referencesItemText = "Review your references" %}
+    {% set referencesTagText = tagText %}
+    {% set referencesTagClass = tagClass %}
   {% else %}
-    {% set referencesUrl = applicationPath + "/references/type/first" %}
+    <p class="govuk-body govuk-!-margin-bottom-2">You need 2 references before you can submit your application.</p>
+    <p class="govuk-body">It takes 8 days to get a reference on average.</p>
+    {% if references | length %}
+      {% set referencesItemText = "Manage your references" %}
+      {% set referencesTagText = inprogressTagText %}
+      {% set referencesTagClass = inprogressTagClass %}
+      {% set referencesContent %}
+        <ul class="govuk-list">
+        {% for reference in references %}
+          <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
+        {% endfor %}
+        </ul>
+      {% endset %}
+    {% else %}
+      {% set referencesItemText = "Add your references" %}
+      {% set referencesTagText = incompleteTagText %}
+      {% set referencesTagClass = incompleteTagClass %}
+    {% endif %}
   {% endif %}
 
   {{ appTaskList({
-    classes: "govuk-!-margin-bottom-8",
     items: [{
-      text: "Referees",
-      href: referencesUrl,
+      text: referencesItemText,
+      href: applicationPath + "/references",
       id: "references",
       tag: {
-        classes: tagClass if applicationValue(["completed", "references"]) | length > 0 else incompleteTagClass,
-        text: tagText if applicationValue(["completed", "references"]) | length > 0 else incompleteTagText
-      }
+        classes: referencesTagClass,
+        text: referencesTagText
+      },
+      content: referencesContent | safe if referencesContent
     }]
   }) }}
 

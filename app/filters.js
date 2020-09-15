@@ -152,47 +152,48 @@ module.exports = (env) => {
     return false
   }
 
-  filters.statusClass = (status) => {
+  filters.statusClass = (status, prefix = 'govuk-tag') => {
     switch (status) {
       // Application phases
       case 'Submitted':
-        return 'govuk-tag--grey'
+        return `${prefix}--grey`
       case 'Awaiting decision':
-        return 'govuk-tag--purple'
+        return `${prefix}--purple`
       case 'Offer received':
-        return 'govuk-tag--turquoise'
+        return `${prefix}--turquoise`
       case 'Offer accepted':
-        return 'govuk-tag--blue'
+        return `${prefix}--blue`
       case 'Offer declined':
-        return 'govuk-tag--orange'
+        return `${prefix}--orange`
       case 'Offer deferred':
-        return 'govuk-tag--yellow'
+        return `${prefix}--yellow`
       case 'Offer withdrawn':
       case 'Conditions not met':
-        return 'govuk-tag--red'
+        return `${prefix}--red`
       case 'Conditions met':
-        return 'govuk-tag--green'
+        return `${prefix}--green`
       case 'Unsuccessful':
       case 'Application not sent':
-        return 'govuk-tag--pink'
+        return `${prefix}--pink`
       case 'Application cancelled':
       case 'Application withdrawn':
-        return 'govuk-tag--orange'
+        return `${prefix}--orange`
 
       // Reference statuses
       case 'Not requested yet':
-        return 'govuk-tag--grey'
+      case 'Deactivated':
+        return `${prefix}--grey`
       case 'Awaiting response':
-        return 'govuk-tag--purple'
+        return `${prefix}--purple`
       case 'Reference overdue':
-        return 'govuk-tag--yellow'
+        return `${prefix}--yellow`
       case 'Reference given':
-        return 'govuk-tag--green'
+        return `${prefix}--green`
       case 'Cancelled':
-        return 'govuk-tag--orange'
+        return `${prefix}--orange`
       case 'Reference declined':
-      case 'Email address incorrect':
-        return 'govuk-tag--red'
+      case 'Request failed':
+        return `${prefix}--red`
     }
   }
 

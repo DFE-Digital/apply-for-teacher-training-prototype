@@ -3,8 +3,6 @@ module.exports = {
   welcomeFlow: false,
   apply2: false,
   completed: {
-    choices: ['true'],
-    references: ['true'],
     'personal-details': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],
@@ -54,8 +52,8 @@ module.exports = {
     }
   },
   references: {
-    1: {
-      id: 1,
+    first: {
+      id: 'first',
       name: 'Joesph Bloggs',
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
@@ -73,13 +71,14 @@ module.exports = {
         date: '2021-01-10T21:39:20'
       }]
     },
-    2: {
-      id: 2,
+    second: {
+      id: 'second',
       name: 'Jane Doe',
       relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
       status: 'Cancelled',
+      nudges: 0,
       log: [{
         note: 'Request sent',
         date: '2021-01-03T17:39:20'
@@ -87,18 +86,19 @@ module.exports = {
         note: 'Automated reminder sent',
         date: '2021-01-10T17:39:20'
       }, {
-        note: 'Reference cancelled',
+        note: 'Request cancelled',
         date: '2021-01-10T21:39:20'
       }]
     },
-    3: {
-      id: 3,
+    third: {
+      id: 'third',
       name: 'Jamie Murphy',
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'james.m@example.com',
       type: 'Academic',
       status: 'Reference given',
       ready: true,
+      nudges: 0,
       log: [{
         note: 'Request sent',
         date: '2021-01-03T17:39:20'

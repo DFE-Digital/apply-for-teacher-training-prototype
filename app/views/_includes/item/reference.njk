@@ -1,6 +1,4 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set status = item.status or "Awaiting response" %}
-{% set canAmendReferences = status == "Not requested yet" %}
 
 {% set statusHtml %}
   {{ govukTag({
@@ -12,6 +10,8 @@
 {% set contextHtml %}
   {% if status == "Awaiting response" %}
     <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
+  {% elif status == "Deactivated" %}
+    <p class="govuk-body govuk-!-margin-top-2">This reference will not be sent to any provider.</p>
   {% endif %}
 {% endset %}
 
@@ -29,6 +29,34 @@
 {{ govukSummaryList({
   rows: [{
     key: {
+      text: "Name"
+    },
+    value: {
+      text: item.name or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/" + item.id + "/name?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "name"
+      }]
+    } if canAmendReferee
+  }, {
+    key: {
+      text: "Email address"
+    },
+    value: {
+      text: item.email or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/" + item.id + "/email?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "email address"
+      }]
+    } if canAmendReferee or canAmendEmailAddress
+  }, {
+    key: {
       text: "Reference type"
     },
     value: {
@@ -36,39 +64,25 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/type?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "reference type"
       }]
-    } if canAmendReferences
+    } if canAmendReferee
   }, {
     key: {
-      text: "Email"
-    },
-    value: {
-      text: item.email or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "referee"
-      }]
-    } if canAmendReferences
-  }, {
-    key: {
-      text: "Relationship with referee"
+      text: "Relationship to referee"
     },
     value: {
       text: (item.relationship or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/relationship?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "relationship to referee"
       }]
-    } if canAmendReferences
+    } if canAmendReferee
   }, {
     key: {
       text: "Status"
@@ -82,6 +96,12 @@
     },
     value: {
       html: logHtml
-    }
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/" + item.id + "/action/nudge?referrer=" + referrer,
+        text: "Send a reminder to this referee"
+      }]
+    } if canNudgeReferee
   } if item.log and showReferenceRequestLog]
 }) }}

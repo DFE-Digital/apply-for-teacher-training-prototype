@@ -116,8 +116,25 @@
 {% endset %}
 
 {% block footer %}
+  {% set references = applicationValue(["references"]) | toArray %}
   {{ appFooter({
     classes: "govuk-footer--app",
+    navigation: [{
+      title: "Reference emails",
+      items: [{
+        href: "/application/" + applicationId + "/emails/reference-overdue",
+        text: "A referee has not responded yet"
+      }, {
+        href: "/application/" + applicationId + "/emails/reference-bounced",
+        text: "A reference request has bounced"
+      }, {
+        href: "/application/" + applicationId + "/emails/reference-declined",
+        text: "A reference has been declined"
+      }, {
+        href: "/application/" + applicationId + "/emails/reference-given",
+        text: "A reference has been given"
+      }]
+    }] if references.length,
     meta: {
       title: "Get support",
       html: metaHtml,

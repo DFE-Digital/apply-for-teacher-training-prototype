@@ -170,11 +170,11 @@ module.exports = router => {
   })
 
   // Render referee question page
-  router.get('/application/:applicationId/references/:id/:template', (req, res) => {
-    const { applicationId, id, template } = req.params
-    const referrer = req.query.referrer
+  router.get('/application/:applicationId/references/:id/:view', (req, res) => {
+    const { applicationId, id, view } = req.params
+    const { referrer } = req.query
 
-    res.render(`application/references/${template}`, {
+    res.render(`application/references/${view}`, {
       id,
       formaction: referrer || `/application/${applicationId}/references/review`,
       referrer

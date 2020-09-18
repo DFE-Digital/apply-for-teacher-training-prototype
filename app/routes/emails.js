@@ -2,10 +2,10 @@
  * Email routes
  */
 module.exports = router => {
-  router.get('/application/:applicationId/emails/:template', (req, res) => {
-    const { applicationId, template } = req.params
+  router.get('/application/:applicationId/emails/:view', (req, res) => {
+    const { applicationId, view } = req.params
 
-    res.render(`emails/${template}`, {
+    res.render(`emails/${view}`, {
       applicationId
     })
   })

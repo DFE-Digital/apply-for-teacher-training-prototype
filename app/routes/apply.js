@@ -1,9 +1,8 @@
 module.exports = router => {
   router.get('/apply/:providerCode/:courseCode', (req, res) => {
+    const { courseCode, providerCode } = req.params
     const dualRunning = req.query.dualrunning
     const ineligible = req.query.ineligible
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
 
     res.render('apply/index', {
       formaction: `/apply/${providerCode}/${courseCode}/answer`,
@@ -26,8 +25,7 @@ module.exports = router => {
   })
 
   router.get('/apply/:providerCode/:courseCode/answer', (req, res) => {
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
+    const { courseCode, providerCode } = req.params
     const route = req.session.data['apply-route']
     if (route === 'ucas') {
       res.redirect('https://2020.teachertraining.apply.ucas.com/apply/student/login.do') // Go to UCAS
@@ -46,11 +44,10 @@ module.exports = router => {
     }
   })
 
-  router.get('/apply/:providerCode/:courseCode/:template', (req, res) => {
-    const providerCode = req.params.providerCode
-    const courseCode = req.params.courseCode
+  router.get('/apply/:providerCode/:courseCode/:view', (req, res) => {
+    const { courseCode, providerCode, view } = req.params
 
-    res.render(`apply/${req.params.template}`, {
+    res.render(`apply/${view}`, {
       providerCode,
       courseCode
     })

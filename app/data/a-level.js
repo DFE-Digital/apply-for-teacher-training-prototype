@@ -181,7 +181,7 @@ module.exports = function () {
     'Urdu (listening, reading and writing)',
     'Use of Mathematics',
     'World Development'
-  ];
+  ]
 
   const grades = [
     'A*',

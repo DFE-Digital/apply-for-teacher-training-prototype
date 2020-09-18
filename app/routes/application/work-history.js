@@ -15,8 +15,7 @@ module.exports = router => {
 
   // Generate new ID and redirect to that item
   router.get('/application/:applicationId/work-history/add/:type(job|break)', (req, res) => {
-    const applicationId = req.params.applicationId
-    const type = req.params.type
+    const { applicationId, type } = req.params
     const id = utils.generateRandomString()
     const queryString = querystring.stringify(req.query)
 
@@ -25,10 +24,8 @@ module.exports = router => {
 
   // Render job/break page
   router.get('/application/:applicationId/work-history/:type(job|break)/:id', (req, res) => {
-    const applicationId = req.params.applicationId
-    const type = req.params.type
-    const id = req.params.id
-    const referrer = req.query.referrer
+    const { applicationId, id, type } = req.params
+    const { referrer } = req.query
 
     let formaction
     if (referrer) {
@@ -49,10 +46,7 @@ module.exports = router => {
   // Convert individual date components into single ISO 8601 date string before
   // proceeding to next page (reviewing all or adding another)
   router.post('/application/:applicationId/work-history/:next(review|add)/:type?', (req, res) => {
-    const applicationId = req.params.applicationId
-    const next = req.params.next
-    const type = req.params.type
-
+    const { applicationId, next, type } = req.params
     const id = req.query.update
     const applicationData = utils.applicationData(req)
     const workHistory = applicationData['work-history']
@@ -67,7 +61,7 @@ module.exports = router => {
 
   // Work history length answer branching
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const applicationData = utils.applicationData(req)
     const workHistory = applicationData['work-history']
 

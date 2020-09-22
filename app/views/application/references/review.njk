@@ -4,9 +4,11 @@
 {% set formaction = applicationPath %}
 {% set title = "References" %}
 {% set referrer = applicationPath + "/references/review" %}
-
-{# You can’t amend your referees once application has been submitted #}
-{% set canAmend = true if not hasSubmittedApplications() %}
+{% set references = applicationValue(["references"]) | toArray %}
+{% set pendingReferences = references | selectattr("pending") | reverse %}
+{% set readyReferences = references | selectattr("ready") | reverse %}
+{% set otherReferences = references | rejectattr("pending") | rejectattr("ready") | reverse %}
+{% set showReferenceRequestLog = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -15,55 +17,47 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {% set references = applicationValue(["referees"]) %}
-  {% set canAmendReferences = true %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if applicationValue('apply2') %}
-        {% if applicationValue(["referees", "second"]) or applicationValue(["referees", "first"]) %}
-          {# <p class="govuk-body">If you replace a referee we’ll contact them after you submit your application.</p> #}
-        {% endif %}
-      {% else %}
-        {# <p class="govuk-body">We’ll contact your referees after you submit your application.</p> #}
-      {% endif %}
-      {# <p class="govuk-body">We’ll only send your application to the provider after we receive your references.</p> #}
-    </div>
-  </div>
-  {% include "_includes/review/references.njk" %}
+{% block beforePageTitle %}
 
-
-  {% if not applicationValue(["referees", "first"]) and not applicationValue(["referees", "second"])  %}
-    <p>You need to add 2 referees.</p>
-    {{ govukButton({
-      text: "Add referee",
-      href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
-    }) }}
-    <p><a href="{{applicationPath}}">I’ll add referees later</a></p>
-  {% elseif not applicationValue(["referees", "first"]) or not applicationValue(["referees", "second"]) %}
-
-    {% if not applicationValue(["referees", "first"])  %}
-      {{ govukButton({
-        text: "Add another referee",
-        href: "/application/" + applicationId + "/references/type/first?referrer=" + referrer
-      }) }}
-    {% else %}
-      {{ govukButton({
-        text: "Add another referee",
-        href: "/application/" + applicationId + "/references/type/second?referrer=" + referrer
-      }) }}
-    {% endif %}
-    <p><a href="{{applicationPath}}">I’ll add another referee later</a></p>
-  {% else %}
-    {{ govukCheckboxes({
-      items: [{
-        value: "true",
-        text: "I have completed this section"
-      }]
-    } | decorateApplicationAttributes(["completed", "references"])) }}
-
-    {{ govukButton({
-      text: "Continue"
+  {% if messages[0] %}
+    {{ appBanner({
+      html: "<h2 class=\"govuk-heading-m\">" + messages[0] + "</h2>",
+      type: "success",
+      icon: false
     }) }}
   {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if readyReferences | length < 2 %}
+    <div class="govuk-inset-text govuk-!-margin-top-0">
+      <p class="govuk-body">You need 2 references before you can submit your application.</p>
+      {{ govukButton({
+        text: "Add another referee",
+        href: "/application/" + applicationId + "/references/add?referrer=" + referrer
+      }) }}
+    </div>
+  {% endif %}
+
+  {% if readyReferences.length %}
+    <h2 class="govuk-heading-m">References that have been given</h2>
+    {% set references = readyReferences %}
+    {% include "_includes/review/references.njk" %}
+  {% endif %}
+
+  {% if pendingReferences.length %}
+    <h2 class="govuk-heading-m">Requests waiting to be sent</h2>
+    {% set references = pendingReferences %}
+    {% include "_includes/review/references.njk" %}
+  {% endif %}
+
+  {% if otherReferences.length %}
+    <h2 class="govuk-heading-m">Reference requests</h2>
+    {% set references = otherReferences %}
+    {% include "_includes/review/references.njk" %}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

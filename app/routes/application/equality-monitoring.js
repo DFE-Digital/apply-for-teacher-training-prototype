@@ -20,7 +20,7 @@ const hasDisclosedDisability = (req) => {
 }
 
 const questionPaths = (req) => {
-  const applicationId = req.params.applicationId
+  const { applicationId } = req.params
   const basePath = `/application/${applicationId}/equality-monitoring`
 
   const paths = [
@@ -43,9 +43,9 @@ const questionPaths = (req) => {
  */
 module.exports = router => {
   router.get('/application/:applicationId/equality-monitoring/:view?', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const basePath = `/application/${applicationId}/equality-monitoring`
-    const referrer = req.query.referrer
+    const { referrer } = req.query
     const referrerPath = referrer ? `?referrer=${referrer}` : ''
     const view = req.params.view || 'index'
     const paths = questionPaths(req)
@@ -68,9 +68,9 @@ module.exports = router => {
 
   // Ethnic group answer branching
   router.post('/application/:applicationId/equality-monitoring/ethnic-group/answer', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const basePath = `/application/${applicationId}/equality-monitoring`
-    const referrer = req.query.referrer
+    const { referrer } = req.query
 
     let path
     if (hasDisclosedEthnicity(req)) {
@@ -84,9 +84,9 @@ module.exports = router => {
 
   // Disability answer branching
   router.post('/application/:applicationId/equality-monitoring/disability-status/answer', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const basePath = `/application/${applicationId}/equality-monitoring`
-    const referrer = req.query.referrer
+    const { referrer } = req.query
 
     let path
     if (hasDisclosedDisability(req)) {

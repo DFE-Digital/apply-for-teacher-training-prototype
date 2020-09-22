@@ -2,6 +2,23 @@ module.exports = {
   status: 'started',
   welcomeFlow: false,
   apply2: false,
+  completed: {
+    'personal-details': ['true'],
+    'contact-details': ['true'],
+    'work-history': ['true'],
+    'school-experience': ['true'],
+    'reasonable-adjustments': ['true'],
+    suitability: ['true'],
+    degree: ['true'],
+    maths: ['true'],
+    english: ['true'],
+    science: ['true'],
+    'other-qualifications': ['true'],
+    'english-language': ['true'],
+    'personal-statement': ['true'],
+    'subject-knowledge': ['true'],
+    interview: ['true']
+  },
   choices: {
     ABCDE: {
       courseCode: '2XT2',
@@ -34,24 +51,62 @@ module.exports = {
       starts: '2020-09'
     }
   },
-  completed: {
-    'choices': ['true'],
-    'personal-details': ['true'],
-    'contact-details': ['true'],
-    'work-history': ['true'],
-    'school-experience': ['true'],
-    'reasonable-adjustments': ['true'],
-    suitability: ['true'],
-    degree: ['true'],
-    maths: ['true'],
-    english: ['true'],
-    science: ['true'],
-    'other-qualifications': ['true'],
-    'english-language': ['true'],
-    'personal-statement': ['true'],
-    'subject-knowledge': ['true'],
-    interview: ['true'],
-    references: ['true']
+  references: {
+    first: {
+      id: 'first',
+      name: 'Joesph Bloggs',
+      relationship: 'They were my tutor at university from 2011 to 2013',
+      email: 'joesph.r.bloggs@example.com',
+      type: 'Academic',
+      status: 'Reference given',
+      ready: true,
+      log: [{
+        note: 'Request sent',
+        date: '2021-01-03T17:39:20'
+      }, {
+        note: 'Automated reminder sent',
+        date: '2021-01-10T17:39:20'
+      }, {
+        note: 'Reference given',
+        date: '2021-01-10T21:39:20'
+      }]
+    },
+    second: {
+      id: 'second',
+      name: 'Jane Doe',
+      relationship: 'Faith leader who I have known since January 2018',
+      email: 'jane.doe@example.com',
+      type: 'Character',
+      status: 'Cancelled',
+      nudges: 0,
+      log: [{
+        note: 'Request sent',
+        date: '2021-01-03T17:39:20'
+      }, {
+        note: 'Automated reminder sent',
+        date: '2021-01-10T17:39:20'
+      }, {
+        note: 'Request cancelled',
+        date: '2021-01-10T21:39:20'
+      }]
+    },
+    third: {
+      id: 'third',
+      name: 'Jamie Murphy',
+      relationship: 'They were my tutor at university from 2011 to 2013',
+      email: 'james.m@example.com',
+      type: 'Academic',
+      status: 'Reference given',
+      ready: true,
+      nudges: 0,
+      log: [{
+        note: 'Request sent',
+        date: '2021-01-03T17:39:20'
+      }, {
+        note: 'Reference given',
+        date: '2021-01-05T10:12:20'
+      }]
+    }
   },
   candidate: {
     'given-name': 'Janina',
@@ -64,7 +119,7 @@ module.exports = {
     },
     nationality: 'other',
     'other-nationality': 'Indian',
-    'residency': 'I will need to apply for permission to work or study in the UK'
+    residency: 'I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
     'phone-number': '07944 386555',
@@ -230,24 +285,5 @@ module.exports = {
   },
   'school-experience': {
     attained: 'false'
-  },
-  referees: {
-    first: {
-      id: 'first',
-      name: 'Joesph Bloggs',
-      relationship: 'They were my tutor at university from 2011 to 2013',
-      email: 'joesph.r.bloggs@example.com',
-      type: 'Academic',
-      'character-explaination': '',
-      status: 'Awaiting response'
-    },
-    second: {
-      id: 'second',
-      name: 'Jane Doe',
-      relationship: 'Faith leader who I have known since January 2018',
-      email: 'jane.doe@example.com',
-      type: 'Character',
-      status: 'Awaiting response'
-    }
   }
 }

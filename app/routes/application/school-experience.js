@@ -23,9 +23,8 @@ module.exports = router => {
 
   // Render role page
   router.get('/application/:applicationId/school-experience/role/:id', (req, res) => {
-    const applicationId = req.params.applicationId
-    const id = req.params.id
-    const referrer = req.query.referrer
+    const { applicationId, id } = req.params
+    const { referrer } = req.query
 
     let formaction
     if (referrer) {
@@ -44,9 +43,7 @@ module.exports = router => {
   // Convert individual date components into single ISO 8601 date string before
   // proceeding to next page (reviewing all or adding another)
   router.post('/application/:applicationId/school-experience/:next(review|add)', (req, res) => {
-    const applicationId = req.params.applicationId
-    const next = req.params.next
-
+    const { applicationId, next } = req.params
     const id = req.query.update
     const applicationData = utils.applicationData(req)
     const schoolExperience = applicationData['school-experience']
@@ -61,7 +58,7 @@ module.exports = router => {
 
   // School-experience completed answer branching
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const applicationData = utils.applicationData(req)
     const schoolExperience = applicationData['school-experience']
 

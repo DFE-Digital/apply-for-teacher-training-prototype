@@ -9,8 +9,8 @@ module.exports = router => {
     })
   })
 
-  router.get('/reference/:template', (req, res) => {
-    res.render(`reference/${req.params.template}`, {
+  router.get('/reference/:view', (req, res) => {
+    res.render(`reference/${req.params.view}`, {
       referrer: req.query.referrer,
       type: req.query.type
     })

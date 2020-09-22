@@ -28,12 +28,6 @@ module.exports = router => {
         break
       }
 
-      case 'referees': {
-        parent = `${utils.capitaliseFirstLetter(item.id)} referee`
-        type = 'referee'
-        break
-      }
-
       case 'school-experience': {
         parent = item.role ? item.role : 'Volunteering with children and young people'
         type = 'role'

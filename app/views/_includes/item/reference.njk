@@ -1,13 +1,4 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set status = item.status or "Awaiting response" %}
-
-{% if applicationValue('apply2') %}
-  {% set showReferenceStatus = true %}
-{% endif %}
-
-{% if status == "Reference given" %}
-  {% set canAmendReferences = false %}
-{% endif %}
 
 {% set statusHtml %}
   {{ govukTag({
@@ -17,11 +8,22 @@
 {% endset %}
 
 {% set contextHtml %}
-  {% if status == "Not requested yet" %}
-    <p class="govuk-body govuk-!-margin-top-2">We’ll contact your referee when you submit your application.</p>
-  {% elif status == "Awaiting response" %}
+  {% if status == "Awaiting response" %}
     <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
+  {% elif status == "Deactivated" %}
+    <p class="govuk-body govuk-!-margin-top-2">This reference will not be sent to any provider.</p>
   {% endif %}
+{% endset %}
+
+{% set logHtml %}
+  <ul class="govuk-list">
+  {% for entry in item.log %}
+    <li>
+      {{ entry.note }}
+      <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date | date("DDD 'at' T") }}</span>
+    </li>
+  {% endfor %}
+  </ul>
 {% endset %}
 
 {{ govukSummaryList({
@@ -34,25 +36,25 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/name?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "name"
       }]
-    } if canAmendReferences
+    } if canAmendReferee
   }, {
     key: {
-      text: "Email"
+      text: "Email address"
     },
     value: {
       text: item.email or "Not entered"
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/email?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "email address"
       }]
-    } if canAmendReferences
+    } if canAmendReferee or canAmendEmailAddress
   }, {
     key: {
       text: "Reference type"
@@ -62,25 +64,25 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/type/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/type?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "reference type"
       }]
-    } if canAmendReferences
+    } if canAmendReferee
   }, {
     key: {
-      text: "Relationship"
+      text: "Relationship to referee"
     },
     value: {
       text: (item.relationship or "Not entered") | nl2br | safe
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/details/" + item.id + "?referrer=" + referrer,
+        href: applicationPath + "/references/" + item.id + "/relationship?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "referee"
+        visuallyHiddenText: "relationship to referee"
       }]
-    } if canAmendReferences
+    } if canAmendReferee
   }, {
     key: {
       text: "Status"
@@ -88,11 +90,18 @@
     value: {
       html: statusHtml + contextHtml
     }
-  } if status and showReferenceStatus]
+  }, {
+    key: {
+      text: "History"
+    },
+    value: {
+      html: logHtml
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/references/" + item.id + "/action/nudge?referrer=" + referrer,
+        text: "Send a reminder to this referee"
+      }]
+    } if canNudgeReferee
+  } if item.log and showReferenceRequestLog]
 }) }}
-
-{# Reference statuses:
-[name] has responded
-[name] has been sent a reminder email
-[name] has declined to give a reference
-[name] has failed to respond before the 10-day deadline #}

@@ -1,0 +1,26 @@
+{% extends "_form-question.njk" %}
+
+{% set title = "Referee name" %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/" + id + "/start/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: label
+  } | decorateApplicationAttributes(["references", id, "name"])) }}
+
+  {{ govukButton({
+    text: "Save changes" if referrer else "Save and continue"
+  }) }}
+{% endblock %}

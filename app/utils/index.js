@@ -116,6 +116,7 @@ const hasCompletedApplication = req => {
   var application = req.session.data.applications[req.params.applicationId]
   if (
     module.exports.hasCompletedSection(application.choices) &&
+    module.exports.hasCompletedSection(application.references) &&
     module.exports.hasCompletedSection(application.candidate) &&
     module.exports.hasCompletedSection(application['contact-details']) &&
     module.exports.hasCompletedSection(application['reasonable-adjustments']) &&
@@ -127,8 +128,7 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.gcse.science) &&
     module.exports.hasCompletedSection(application['personal-statement']) &&
     module.exports.hasCompletedSection(application['subject-knowledge']) &&
-    module.exports.hasCompletedSection(application.interview) &&
-    module.exports.hasCompletedSection(application.referees)
+    module.exports.hasCompletedSection(application.interview)
   ) {
     return true
   }

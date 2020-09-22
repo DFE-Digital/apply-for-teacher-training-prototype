@@ -338,8 +338,8 @@ module.exports = function () {
     'Welsh: First Language',
     'Welsh: Second Language',
     'Welsh: Second Language (Short Course)',
-    'Welsh Literature',
-  ];
+    'Welsh Literature'
+  ]
 
   // Single grades
   const singleGrades = [
@@ -421,7 +421,7 @@ module.exports = function () {
 
   // All grades
   const combinedGrades = singleGrades.concat(doubleGrades)
-  const grades = [...new Set(combinedGrades)];
+  const grades = [...new Set(combinedGrades)]
   const gradeOptions = grades.map(grade => ({
     value: grade,
     text: grade

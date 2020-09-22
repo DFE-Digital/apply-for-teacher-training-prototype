@@ -71,7 +71,7 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/confirmation`)
   })
 
-  // Decision: Rejected/Offer made
+  // Decision: Unsuccessful/Offer received
   router.post('/admin/send-email', (req, res) => {
     const { email, name } = req.session.data
 
@@ -132,7 +132,7 @@ module.exports = router => {
       }
       case 'accept': {
         notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
-        choice.status = 'Accepted'
+        choice.status = 'Offer accepted'
 
         // Set remaining course choice statuses to `withdrawn`
         const { choices } = application
@@ -147,7 +147,7 @@ module.exports = router => {
       }
       case 'decline': {
         notifyTemplate = '906399c1-8694-4430-bcbf-c12cc06fd5a7'
-        choice.status = 'Declined'
+        choice.status = 'Offer declined'
         phase = 'decision'
         break
       }

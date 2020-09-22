@@ -177,8 +177,8 @@ module.exports = function () {
     'Turkish',
     'Urdu',
     'Use of Mathematics',
-    'World Development',
-  ];
+    'World Development'
+  ]
 
   const grades = [
     'A',

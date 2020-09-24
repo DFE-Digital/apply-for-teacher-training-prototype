@@ -38,7 +38,7 @@
           text: "Cancel request"
         } if canCancelRequest, {
           href: applicationPath + "/references/" + item.id + "/action/request?referrer=" + referrer,
-          text: "Re-request reference" if (item.status == "Request cancelled" or item.status == "Request failed") else "Send request"
+          text: "Send request again" if (item.status == "Request cancelled" or item.status == "Request failed") else "Send request"
         } if canMakeRequest, {
           href: applicationPath + "/references/" + item.id + "/action/deactivate?referrer=" + referrer,
           text: "Deactivate reference"

@@ -112,11 +112,19 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-2">References</h2>
   {% set references = applicationValue(["references"]) | toArray %}
   {% set readyReferences = references | selectattr("ready") | reverse %}
+  {% set referencesContent %}
+    <ul class="govuk-list">
+    {% for reference in references %}
+      <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
+    {% endfor %}
+    </ul>
+  {% endset %}
 
   {% if readyReferences | length >= 2 %}
     {% set referencesItemText = "Review your references" %}
     {% set referencesTagText = tagText %}
     {% set referencesTagClass = tagClass %}
+    {% set showReferencesContent = true %}
   {% else %}
     <p class="govuk-body govuk-!-margin-bottom-2">You need 2 references before you can submit your application.</p>
     <p class="govuk-body">It takes 8 days to get a reference on average.</p>
@@ -125,13 +133,7 @@
       {% set referencesItemText = "Manage your references" %}
       {% set referencesTagText = inprogressTagText %}
       {% set referencesTagClass = inprogressTagClass %}
-      {% set referencesContent %}
-        <ul class="govuk-list">
-        {% for reference in references %}
-          <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
-        {% endfor %}
-        </ul>
-      {% endset %}
+      {% set showReferencesContent = true %}
     {% else %}
       {% set referencesItemText = "Add your references" %}
       {% set referencesTagText = incompleteTagText %}
@@ -148,7 +150,7 @@
         classes: referencesTagClass,
         text: referencesTagText
       },
-      content: referencesContent | safe if referencesContent
+      content: referencesContent | safe if showReferencesContent
     }]
   }) }}
 

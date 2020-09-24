@@ -77,7 +77,7 @@ module.exports = {
       relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
-      status: 'Cancelled',
+      status: 'Request cancelled',
       nudges: 0,
       log: [{
         note: 'Request sent',

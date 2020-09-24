@@ -14,7 +14,7 @@
     {% set canAmendReferee = item.status == "Not requested yet" %}
     {% set canAmendEmailAddress = item.status == "Request failed" %}
     {% set canCancelRequest = (item.status == "Awaiting response") or (item.status == "Reference overdue") %}
-    {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Cancelled") or (item.status == "Request failed")) and readyReferences.length < 2 %}
+    {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Request failed")) and readyReferences.length < 2 %}
     {% set canNudgeReferee = ((item.status == "Awaiting response") or (item.status == "Reference overdue")) and item.nudges < 1 %}
 
     {# Deactivating references is an idea we can return to later #}
@@ -38,7 +38,7 @@
           text: "Cancel request"
         } if canCancelRequest, {
           href: applicationPath + "/references/" + item.id + "/action/request?referrer=" + referrer,
-          text: "Re-request reference" if (item.status == "Cancelled" or item.status == "Request failed") else "Request reference"
+          text: "Re-request reference" if (item.status == "Request cancelled" or item.status == "Request failed") else "Request reference"
         } if canMakeRequest, {
           href: applicationPath + "/references/" + item.id + "/action/deactivate?referrer=" + referrer,
           text: "Deactivate reference"

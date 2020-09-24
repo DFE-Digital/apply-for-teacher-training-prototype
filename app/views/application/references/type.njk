@@ -26,13 +26,27 @@
       }
     },
     items: [{
-      text: "Academic"
+      text: "Academic",
+      hint: {
+        text: "For example: a university tutor."
+      }
     }, {
-      text: "Professional"
+      text: "Professional",
+      hint: {
+        text: "For example: a manager."
+      }
+    }, {
+      text: "School-based",
+      hint: {
+        text: "For example: a colleague from a school where you did experience."
+      }
     }, {
       text: "Character",
       hint: {
-        text: "Training providers will only accept a character reference if there’s also an academic or professional reference."
+        html: "
+          <p class=\"govuk-hint\">For example: a mentor, or someone you know from volunteering.</p>
+          <p class=\"govuk-hint\">Training providers will only accept a character reference if there’s also an academic or professional reference.</p>
+        "
       }
     }]
   } | decorateApplicationAttributes(["references", id, "type"])) }}

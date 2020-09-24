@@ -1,11 +1,6 @@
 {% extends "_content.njk" %}
 
 {% set title = "Choose your referees" %}
-{% if applicationValue(["candidate", "given-name"]) %}
-  {% set buttonLink = "/application/" + applicationId + "/references/" + id + "/name/" %}
-{% else %}
-  {% set buttonLink = "/application/" + applicationId + "/references/" + id + "/candidate/" %}
-{% endif %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -28,6 +23,6 @@
 
   {{ govukButton({
     text: "Continue",
-    href: buttonLink
+    href: "/application/" + applicationId + "/references/" + id + "/type/"
   }) }}
 {% endblock %}

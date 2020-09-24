@@ -189,7 +189,7 @@ module.exports = (env) => {
         return `${prefix}--yellow`
       case 'Reference given':
         return `${prefix}--green`
-      case 'Cancelled':
+      case 'Request cancelled':
         return `${prefix}--orange`
       case 'Reference declined':
       case 'Request failed':

@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "Your name" %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name/" %}
+{% set title = "Give your name so the referee knows who you are" %}
+{% set formaction = "/application/" + applicationId + "/references/" + id + "/request/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -10,7 +10,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/start/"
+      href: "/application/" + applicationId + "/references/" + id + "/relationship/"
     }) }}
   {% endif %}
 {% endblock %}

@@ -2,8 +2,8 @@
 
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
-{% set title = "What kind of reference can this referee give?" %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/relationship/" %}
+{% set title = "What kind of referee do you want to add?" %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -12,7 +12,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/email/"
+      href: "/application/" + applicationId + "/references/" + id + "/start/"
     }) }}
   {% endif %}
 {% endblock %}
@@ -43,10 +43,7 @@
     }, {
       text: "Character",
       hint: {
-        html: "
-          <p class=\"govuk-hint\">For example: a mentor, or someone you know from volunteering.</p>
-          <p class=\"govuk-hint\">Training providers will only accept a character reference if there’s also an academic or professional reference.</p>
-        "
+        text: "For example: a mentor, or someone you know from volunteering."
       }
     }]
   } | decorateApplicationAttributes(["references", id, "type"])) }}

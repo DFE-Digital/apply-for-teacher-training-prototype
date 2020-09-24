@@ -3,7 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% set title = "Referee email address" %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/type/" %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/relationship/" %}
 
 {% block pageNavigation %}
   {% if referrer %}

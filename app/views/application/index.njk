@@ -113,29 +113,30 @@
   {% set references = applicationValue(["references"]) | toArray %}
   {% set readyReferences = references | selectattr("ready") | reverse %}
 
-  {% if references | length %}
-    {% if readyReferences | length >= 2 %}
-      {% set referencesItemText = "Review your references" %}
-      {% set referencesTagText = tagText %}
-      {% set referencesTagClass = tagClass %}
-    {% else %}
-      {% set referencesItemText = "Manage your references" %}
-      {% set referencesTagText = inprogressTagText %}
-      {% set referencesTagClass = inprogressTagClass %}
-    {% endif %}
-    {% set referencesContent %}
-      <ul class="govuk-list">
-      {% for reference in references %}
-        <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
-      {% endfor %}
-      </ul>
-    {% endset %}
+  {% if readyReferences | length >= 2 %}
+    {% set referencesItemText = "Review your references" %}
+    {% set referencesTagText = tagText %}
+    {% set referencesTagClass = tagClass %}
   {% else %}
     <p class="govuk-body govuk-!-margin-bottom-2">You need 2 references before you can submit your application.</p>
     <p class="govuk-body">It takes 8 days to get a reference on average.</p>
-    {% set referencesItemText = "Add your references" %}
-    {% set referencesTagText = incompleteTagText %}
-    {% set referencesTagClass = incompleteTagClass %}
+
+    {% if references | length %}
+      {% set referencesItemText = "Manage your references" %}
+      {% set referencesTagText = inprogressTagText %}
+      {% set referencesTagClass = inprogressTagClass %}
+      {% set referencesContent %}
+        <ul class="govuk-list">
+        {% for reference in references %}
+          <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
+        {% endfor %}
+        </ul>
+      {% endset %}
+    {% else %}
+      {% set referencesItemText = "Add your references" %}
+      {% set referencesTagText = incompleteTagText %}
+      {% set referencesTagClass = incompleteTagClass %}
+    {% endif %}
   {% endif %}
 
   {{ appTaskList({

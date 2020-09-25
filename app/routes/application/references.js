@@ -148,7 +148,10 @@ module.exports = router => {
     const applicationData = utils.applicationData(req)
     const now = new Date()
 
-    if (decision === 'now') {
+    if (decision === 'later') {
+      applicationData.references[id].status = 'Not requested yet'
+      applicationData.references[id].pending = true
+    } else {
       applicationData.references[id].status = 'Awaiting response'
       applicationData.references[id].nudges = 0
       const log = applicationData.references[id].log = []
@@ -159,11 +162,6 @@ module.exports = router => {
       })
 
       req.flash('success', `Reference request sent to ${applicationData.references[id].name}`)
-    }
-
-    if (decision === 'later') {
-      applicationData.references[id].status = 'Not requested yet'
-      applicationData.references[id].pending = true
     }
 
     res.redirect(referrer || `/application/${applicationId}/references/review`)

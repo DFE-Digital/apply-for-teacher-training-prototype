@@ -24,8 +24,9 @@
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "subject-knowledge" %}
-  {% set incompleteText = "Subject knowledge not marked as completed" %}
+  {% set incompleteText = "Subject knowledge not entered" %}
   {% set incompleteLink = "/subject-knowledge/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "What you know about the subject you want to teach?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {{ appSummaryCard({

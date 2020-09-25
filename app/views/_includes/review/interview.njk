@@ -25,8 +25,9 @@
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "interview" %}
-  {% set incompleteText = "Interview needs not marked as completed" %}
+  {% set incompleteText = "Interview needs not entered" %}
   {% set incompleteLink = "/interview/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Do you have any interview needs?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {{ appSummaryCard({

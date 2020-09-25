@@ -1,8 +1,9 @@
 {% if showIncomplete and references.length < 2 %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "referees" %}
-  {% set incompleteText = "Referees not marked as completed" %}
+  {% set incompleteText = "You need 2 references before you can submit your application" %}
   {% set incompleteLink = "/referees/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Manage your references" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {% for item in references %}

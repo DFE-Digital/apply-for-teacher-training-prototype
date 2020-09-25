@@ -10,6 +10,7 @@
   {% set incompleteId = "english-language" %}
   {% set incompleteText = "English as a foreign language not marked as complete" %}
   {% set incompleteLink = "/english-language/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Have you done an English as a foreign language assessment?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {{ appSummaryCard({

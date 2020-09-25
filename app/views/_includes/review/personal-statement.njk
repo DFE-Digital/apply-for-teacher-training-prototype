@@ -24,8 +24,9 @@
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "personal-statement" %}
-  {% set incompleteText = "Why you want to be a teacher not marked as completed" %}
+  {% set incompleteText = "Personal statement not entered" %}
   {% set incompleteLink = "/personal-statement/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Why do you want to be a teacher?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {{ appSummaryCard({

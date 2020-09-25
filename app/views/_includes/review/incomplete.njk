@@ -1,6 +1,6 @@
 {% set bannerHtml %}
   <p class="govuk-body" id="missing-{{ incompleteId }}">{{ incompleteText }}</p>
-  <a class="govuk-link" aria-describedby="missing-{{ incompleteId }}" href="{{ applicationPath }}{{ incompleteLink }}">Complete section</a>
+  <a class="govuk-link" aria-describedby="missing-{{ incompleteId }}" href="{{ applicationPath }}{{ incompleteLink }}">{{ incompleteLinkText }}</a>
 {% endset %}
 
 {{ appBanner({

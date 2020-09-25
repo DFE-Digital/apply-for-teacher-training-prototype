@@ -30,7 +30,8 @@
 {% else %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "degree" %}
-  {% set incompleteText = "Degree(s) are not marked as completed" %}
+  {% set incompleteText = "Degree(s) section not marked as completed" %}
   {% set incompleteLink = "/degree/add?referrer=" + referrer %}
+  {% set incompleteLinkText = "Enter your degree(s)" %}
   {% include "_includes/review/incomplete.njk" %}
 {% endif %}

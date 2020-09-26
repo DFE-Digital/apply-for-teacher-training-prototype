@@ -55,6 +55,6 @@
   "devDependencies": {
     "jest": "^26.4.0",
     "standard": "^14.3.4",
-    "supertest": "^4.0.0"
+    "supertest": "^5.0.0"
   }
 }

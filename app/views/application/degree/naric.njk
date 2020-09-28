@@ -2,16 +2,16 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set degreeCount = applicationValue(["degree"]) | length %}
-{% set title = "Do you have a NARIC statement of comparability for your degree?" %}
+{% set title = "How your degree compares to a UK degree" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">This shows how your qualifications compare to UK qualifications. Not all providers ask for a NARIC statement of comparability.</p>
+  <p class="govuk-body">You can get a statement from The National Recognition Information Centre for the United Kingdom (UK NARIC) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
 
   {% set yesConditionalHtml %}
     {{ govukInput({
@@ -52,10 +52,16 @@
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <p class="govuk-body">Ask your training provider if they need a NARIC statement of comparability. Register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> for help if you need to get one.</p>
+    <p class="govuk-body">Ask your training provider if they need a UK NARIC statement of comparability. Register with <a href="https://register.getintoteaching.education.gov.uk/register">Get Into Teaching</a> for help if you need to get one.</p>
   {% endset %}
 
   {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Do you have a statement of comparability from The National Recognition Information Centre?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [{
       text: "Yes",
       conditional: {

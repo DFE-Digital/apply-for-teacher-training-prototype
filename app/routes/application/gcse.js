@@ -82,7 +82,7 @@ module.exports = router => {
     res.redirect(`${path}?${utils.queryString(req)}`)
   })
 
-  // Render NARIC/grade/year pages
+  // Render UK NARIC/grade/year pages
   router.all('/application/:applicationId/gcse/:id/:view(subject|country|grade|naric|year)', (req, res) => {
     const completedGcse = gcseData(req).grade && gcseData(req).year
 

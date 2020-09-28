@@ -1,0 +1,26 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "Have you completed your degree?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No, I am studying for my degree"
+    }]
+  } | decorateApplicationAttributes(["degree", id, "completed"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

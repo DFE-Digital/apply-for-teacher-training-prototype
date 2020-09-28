@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "What is your name?" %}
-{% set formaction = "/application/" + applicationId + "/references/" + id + "/request/" %}
+{% set formaction = "/application/" + applicationId + "/references/" + id + "/send-request/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -10,13 +10,13 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/relationship/"
+      href: "/application/" + applicationId + "/references/" + id + "/request/"
     }) }}
   {% endif %}
 {% endblock %}
 
 {% block primary %}
-{{ govukInput({
+  {{ govukInput({
     label: {
       text: "First name",
       classes: "govuk-label--m"

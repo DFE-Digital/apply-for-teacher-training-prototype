@@ -3,11 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% set title = "How do you know this referee and how long have you known them?" %}
-{% if applicationValue(["candidate", "given-name"]) %}
-  {% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/request/" %}
-{% else %}
-  {% set formaction = "/application/" + applicationId + "/references/" + id + "/candidate/" %}
-{% endif %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/request/" %}
 
 {% block pageNavigation %}
   {% if referrer %}

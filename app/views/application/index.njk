@@ -126,7 +126,9 @@
     {% set referencesTagClass = tagClass %}
     {% set showReferencesContent = true %}
   {% else %}
-    <p class="govuk-body govuk-!-margin-bottom-2">You need 2 references before you can submit your application.</p>
+    <!--p class="govuk-body govuk-!-margin-bottom-2">You need to receive 2 references before sending your application to training providers.</p-->
+    <p class="govuk-body govuk-!-margin-bottom-2">You have to get 2 references back before you can send your application to training providers.</p>
+
     <p class="govuk-body">It takes 8 days to get a reference on average.</p>
     {% if references | length > 0 %}
       {% set referencesItemText = "Manage your references" %}
@@ -301,9 +303,10 @@
       href: applicationPath + "/review?closed=true"
     }) }}
   {% else %}
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Check and submit</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Review and send</h2>
+    <p>Review and send your application to your training {{ "providers" if (applicationValue(["choices"]) | length > 1) else "provider" }}.</p>
     {{ govukButton({
-      text: "Check and submit your application",
+      text: "Review your application",
       href: applicationPath + "/review"
     }) }}
   {% endif %}

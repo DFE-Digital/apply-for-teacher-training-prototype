@@ -1,0 +1,13 @@
+{% extends "_email.njk" %}
+{% set references = applicationValue(["references"]) | toArray %}
+{% set referee = references[0] %}
+
+{% set title = "You have a reference from " + referee.name %}
+
+{% block content %}
+  <h1 class="govuk-heading-m">{{ title }}</h1>
+  <p class="govuk-body">You’ve got 2 references back now.</p>
+  <p class="govuk-body">When you’re ready, you can send your application to training providers.</p>
+  <p class="govuk-body">Sign in to continue your application:</p>
+  <p class="govuk-body"><a href="/application/{{ applicationId }}">https://{{ serviceSlug }}.service.gov.uk/<wbr>confirm_authentication?token=FPoZNtUaGsqPevCd5GV&amp;<wbr>u=elM2TVdzZnBzRUJ1LzdSMmlOYW10QT09LS1MLy8xcVdSUmlpVVNkdzNiTG11bTdRPT0%3D</a></p>
+{% endblock %}

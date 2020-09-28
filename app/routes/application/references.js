@@ -84,7 +84,7 @@ module.exports = router => {
 
   // Handle action request
   router.post('/application/:applicationId/references/:id/action/:action', (req, res) => {
-    const { action, id } = req.params
+    const { action, applicationId, id } = req.params
     const { referrer } = req.query
     const { status } = req.session.data
     const applicationData = utils.applicationData(req)
@@ -93,6 +93,67 @@ module.exports = router => {
     applicationData.references[id].status = status || applicationData.references[id].status
 
     if (action === 'request') {
+      // Need to check if candidate has given their name, first
+      res.redirect(`/application/${applicationId}/references/${id}/send-request`)
+    } else {
+      if (action === 'cancel') {
+        applicationData.references[id].log.push({
+          note: 'Request cancelled',
+          date: now.toISOString()
+        })
+
+        req.flash('success', `Reference request cancelled for ${applicationData.references[id].name}`)
+      }
+
+      if (action === 'deactivate') {
+        applicationData.references[id].ready = false
+      }
+
+      if (action === 'reactivate') {
+        applicationData.references[id].ready = true
+      }
+
+      if (action === 'delete') {
+        delete applicationData.references[id]
+      }
+
+      if (action === 'nudge') {
+        applicationData.references[id].nudges = 1
+        applicationData.references[id].log.push({
+          note: 'Reminder sent',
+          date: now.toISOString()
+        })
+
+        req.flash('success', `Reminder sent to ${applicationData.references[id].name}`)
+      }
+
+      res.redirect(referrer)
+    }
+  })
+
+  // Send now or later?
+  router.post('/application/:applicationId/references/:id/request/decision', (req, res) => {
+    const { applicationId, id } = req.params
+    const { referrer } = req.query
+    const { decision } = req.session.data
+    const applicationData = utils.applicationData(req)
+
+    if (decision === 'later') {
+      applicationData.references[id].status = 'Not requested yet'
+      applicationData.references[id].pending = true
+      res.redirect(referrer || `/application/${applicationId}/references/review`)
+    } else {
+      res.redirect(referrer || `/application/${applicationId}/references/${id}/send-request`)
+    }
+  })
+
+  // Request reference
+  router.get('/application/:applicationId/references/:id/send-request', (req, res) => {
+    const { applicationId, id } = req.params
+    const applicationData = utils.applicationData(req)
+    const now = new Date()
+
+    if (applicationData.candidate['given-name']) {
       applicationData.references[id].nudges = applicationData.references[id].nudges || 0
       applicationData.references[id].status = 'Awaiting response'
       applicationData.references[id].pending = false
@@ -104,67 +165,10 @@ module.exports = router => {
       })
 
       req.flash('success', `Reference request sent to ${applicationData.references[id].name}`)
-    }
-
-    if (action === 'cancel') {
-      applicationData.references[id].log.push({
-        note: 'Request cancelled',
-        date: now.toISOString()
-      })
-
-      req.flash('success', `Reference request cancelled for ${applicationData.references[id].name}`)
-    }
-
-    if (action === 'deactivate') {
-      applicationData.references[id].ready = false
-    }
-
-    if (action === 'reactivate') {
-      applicationData.references[id].ready = true
-    }
-
-    if (action === 'delete') {
-      delete applicationData.references[id]
-    }
-
-    if (action === 'nudge') {
-      applicationData.references[id].nudges = 1
-      applicationData.references[id].log.push({
-        note: 'Reminder sent',
-        date: now.toISOString()
-      })
-
-      req.flash('success', `Reminder sent to ${applicationData.references[id].name}`)
-    }
-
-    res.redirect(referrer)
-  })
-
-  // Handle immediate reference request
-  router.post('/application/:applicationId/references/:id/request/decision', (req, res) => {
-    const { applicationId, id } = req.params
-    const { referrer } = req.query
-    const { decision } = req.session.data
-    const applicationData = utils.applicationData(req)
-    const now = new Date()
-
-    if (decision === 'later') {
-      applicationData.references[id].status = 'Not requested yet'
-      applicationData.references[id].pending = true
+      res.redirect(`/application/${applicationId}/references/review`)
     } else {
-      applicationData.references[id].status = 'Awaiting response'
-      applicationData.references[id].nudges = 0
-      const log = applicationData.references[id].log = []
-
-      log.push({
-        note: 'Request sent',
-        date: now.toISOString()
-      })
-
-      req.flash('success', `Reference request sent to ${applicationData.references[id].name}`)
+      res.redirect(`/application/${applicationId}/references/${id}/candidate`)
     }
-
-    res.redirect(referrer || `/application/${applicationId}/references/review`)
   })
 
   // Render referee question page

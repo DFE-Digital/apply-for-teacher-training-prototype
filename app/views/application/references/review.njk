@@ -32,6 +32,7 @@
   {% if readyReferences | length < 2 %}
     <div class="govuk-inset-text govuk-!-margin-top-0">
       <p class="govuk-body">You need 2 references before you can submit your application.</p>
+      <p class="govuk-body">You can add as many referees as you like to increase the chances of getting 2 references quickly.</p>
       {{ govukButton({
         text: "Add another referee",
         href: "/application/" + applicationId + "/references/add?referrer=" + referrer

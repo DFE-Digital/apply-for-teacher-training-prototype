@@ -14,6 +14,7 @@
     {# Available actions #}
     {% set canAmendReferee = item.status == "Not requested yet" %}
     {% set canAmendEmailAddress = item.status == "Request failed" %}
+    {% set canDelete = (item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Reference declined") or (item.status == "Request failed") %}
     {% set canCancelRequest = (item.status == "Awaiting response") or (item.status == "Reference overdue") %}
     {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Request failed")) and readyReferences.length < 2 %}
     {% set canNudgeReferee = ((item.status == "Awaiting response") or (item.status == "Reference overdue")) and item.nudges < 1 %}
@@ -33,8 +34,8 @@
       actions: {
         items: [{
           href: applicationPath + "/references/" + item.id + "/action/delete?referrer=" + referrer,
-          text: "Delete referee"
-        } if canAmendReferee, {
+          text: "Delete referee" if item.status == "Not requested yet" else "Delete request"
+        } if canDelete, {
           href: applicationPath + "/references/" + item.id + "/action/cancel?referrer=" + referrer,
           text: "Cancel request"
         } if canCancelRequest, {

@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
-{% set title = "Submit application" %}
+{% set providerText = "providers" if (applicationValue(["choices"]) | length > 1) else "provider" %}
+{% set title = "Send application to training " + providerText %}
 {% set formaction = "/send-email/" + applicationId + "/application-submitted" %}
 
 {% block pageNavigation %}
@@ -23,9 +24,9 @@
     html: dbsCheckHtml
   }) }}
 
-  <p class="govuk-body">By submitting, I confirm that the information given is true, complete and accurate.</p>
+  <p class="govuk-body">By sending this application to {{ providerText }}, I confirm that the information given is true, complete and accurate.</p>
 
   {{ govukButton({
-    text: "Submit application"
+    text: "Send application"
   }) }}
 {% endblock %}

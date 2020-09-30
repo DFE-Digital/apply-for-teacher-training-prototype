@@ -150,11 +150,12 @@ module.exports = {
       country: 'United States',
       'year-start': '2010',
       'year-end': '2013',
+      completed: 'Yes',
       naric: 'Yes',
       'naric-reference': 4000228363,
       'naric-comparability': 'Bachelor (Honours) degree',
-      grade: 'other',
-      'grade-other': 'Distinction'
+      grade: 'Distinction',
+      'has-grade': 'Yes'
     },
     kr525: {
       id: 'kr525',
@@ -162,10 +163,10 @@ module.exports = {
       'type-uk': 'MSc',
       subject: 'Applied physics',
       org: 'The University of Strathclyde',
-      grade: 'Other',
-      'grade-other': 'Pass',
       'year-start': '2015',
-      'year-end': '2017'
+      'year-end': '2017',
+      completed: 'Yes',
+      'has-grade': 'No'
     }
   },
   'english-language': {

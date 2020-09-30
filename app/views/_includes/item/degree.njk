@@ -90,7 +90,7 @@
       text: "Have you completed this degree?"
     },
     value: {
-      text: item["completed"] or "Not entered"
+      text: item.completed or "Not entered"
     },
     actions: {
       items: [{
@@ -115,7 +115,7 @@
     } if canAmend
   } if item["has-grade"], {
     key: {
-      text: "Grade" if item["completed"] == "Yes" else "Predicted grade"
+      text: "Grade" if item.completed == "Yes" else "Predicted grade"
     },
     value: {
       text: item.grade or "Not entered"

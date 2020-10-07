@@ -56,12 +56,6 @@
   })}}
   {% endif %}
 
-  {% if applicationValue(["candidate", "given-name"]) %}
-    {% set signOutText = "Sign out (" + applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) + ")" %}
-  {% else %}
-    {% set signOutText = "Sign out" %}
-  {% endif %}
-
   {% if data.token %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
@@ -78,8 +72,10 @@
     serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: [{
+      text: applicationValue(["candidate", "email"])
+    } if data.token and applicationValue(["candidate", "email"]), {
       href: "/account/sign-out",
-      text: signOutText
+      text: "Sign out"
     } if data.token, {
       href: "/account/sign-in",
       text: "Sign in"
@@ -119,25 +115,6 @@
   {% set references = applicationValue(["references"]) | toArray %}
   {{ appFooter({
     classes: "govuk-footer--app",
-    navigation: [{
-      title: "Reference emails",
-      items: [{
-        href: "/application/" + applicationId + "/emails/reference-overdue",
-        text: "A referee has not responded yet"
-      }, {
-        href: "/application/" + applicationId + "/emails/reference-bounced",
-        text: "A reference request has bounced"
-      }, {
-        href: "/application/" + applicationId + "/emails/reference-declined",
-        text: "A reference has been declined"
-      }, {
-        href: "/application/" + applicationId + "/emails/reference-given",
-        text: "A reference has been given"
-      }, {
-        href: "/application/" + applicationId + "/emails/reference-2-given",
-        text: "Both references have been given"
-      }]
-    }] if references.length,
     meta: {
       title: "Get support",
       html: metaHtml,

@@ -3,7 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% if action == "delete" %}
-  {% set type = "referee" if item.status == "Not requested yet" else "request" %}
+  {% set type = "referee" if referee.status == "Not requested yet" else "reference request" %}
   {% set title = "Are you sure you want to delete this " + type + "?" %}
   {% set buttonText = "Yes I’m sure - delete this " + type %}
   {% set destructive = true %}

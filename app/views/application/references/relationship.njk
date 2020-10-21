@@ -3,6 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% set title = "How do you know this referee and how long have you known them?" %}
+{% set allowsFeedback = true %}
 {% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/request/" %}
 
 {% block pageNavigation %}

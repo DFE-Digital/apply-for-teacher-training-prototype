@@ -1,0 +1,132 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+<div class="govuk-width-container">
+  <div class="app-feedback" data-module="feedback">
+
+    <div class="app-feedback__prompt" id="feedback-question" tabindex="-1" aria-hidden="{{ "true" if params.validate == "feedback" else "false" }}">
+      <h2 class="app-feedback__prompt-title">Are there any issues with this section?</h2>
+      <!-- Maybe button exists only to try and capture clicks by bots -->
+      <button hidden aria-hidden="true">Maybe</button>
+
+      <ul class="app-feedback__prompt-list">
+        <li class="app-feedback__prompt-list-item">
+          {{ govukButton({
+            classes: "app-feedback__button",
+            html: "Yes <span class=\"govuk-visually-hidden\">, there are issue with this section</span>",
+            attributes: {
+              "aria-controls": "feedback-form",
+              "aria-expanded": true if params.validate == 'feedback' else false
+            }
+          }) }}
+        </li>
+        <li class="app-feedback__prompt-list-item">
+          {{ govukButton({
+            classes: "app-feedback__button",
+            html: "No <span class=\"govuk-visually-hidden\">, there are no issues with this section</span>",
+            attributes: {
+              "aria-controls": "feedback-success",
+              "aria-expanded": false
+            }
+          }) }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="app-feedback__prompt" id="feedback-success" role="alert" aria-hidden="true">
+      <p class="app-feedback__prompt-title">Thank you for your feedback</p>
+    </div>
+
+    <form class="app-feedback__form" id="feedback-form" action="#feedback-form" method="get" aria-hidden="{{ "false" if params.validate == "feedback" else "true" }}">
+      {{ govukButton({
+        classes: "govuk-button--secondary app-feedback__form-close",
+        text: "Close",
+        type: "button",
+        attributes: {
+          "aria-controls": "feedback-form",
+          "aria-expanded": "true" if params.validate == "feedback" else "false"
+        }
+      }) }}
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {% if params.validate == "feedback" %}
+            {{ govukErrorSummary({
+              classes: "govuk-!-margin-bottom-6",
+              titleText: "There is a problem",
+              errorList: [
+                {
+                  text: "Select yes if we can contact you about your feedback",
+                  href: "#contact"
+                }
+              ]
+            }) }}
+          {% endif %}
+
+          <h3 class="govuk-heading-m">Help us improve this service</h3>
+
+          {{ govukCheckboxes({
+            idPrefix: "issues",
+            fieldset: {
+              legend: {
+                classes: "govuk-fieldset__legend--s",
+                text: "What issues are there in this section?"
+              }
+            },
+            items: [{
+              text: "I do not understand this section"
+            }, {
+              text: "I do not have the information needed at the moment"
+            }, {
+              text: "My answers do not fit the format"
+            }]
+          }) }}
+
+          {{ govukCharacterCount({
+            id: "feedback",
+            label: {
+              classes: "govuk-label--s",
+              text: "Do you have any other feedback about this section?"
+            },
+            maxwords: 300
+          }) }}
+
+          {{ govukRadios({
+            idPrefix: "contact",
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                classes: "govuk-fieldset__legend--s",
+                text: "Can we contact you about your feedback?"
+              }
+            },
+            items: [{
+              text: "Yes"
+            }, {
+              text: "No"
+            }],
+            errorMessage: {
+              text: "Select yes if we can contact you about your feedback"
+            } if params.validate == "feedback"
+          }) }}
+
+          {{ govukInput({
+            name: "validate",
+            value: "feedback",
+            type: "hidden"
+          }) }}
+
+          {{ govukButton({
+            classes: "govuk-!-margin-bottom-0",
+            text: "Submit feedback",
+            type: "submit"
+          }) }}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

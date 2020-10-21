@@ -3,6 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set title = "References" %}
+{% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/references/review" %}
 {% set references = applicationValue(["references"]) | toArray %}
 {% set pendingReferences = references | selectattr("pending") | reverse %}

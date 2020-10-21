@@ -35,6 +35,7 @@
 {% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
 {% from "_components/banner/macro.njk"         import appBanner %}
 {% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
+{% from "_components/feedback/macro.njk"       import appFeedback %}
 {% from "_components/icon/macro.njk"           import appIcon %}
 {% from "_components/related/macro.njk"        import appRelated %}
 {% from "_components/summary-card/macro.njk"   import appSummaryCard %}
@@ -111,6 +112,13 @@
 {% endset %}
 
 {% block footer %}
+  {% block beforeFooter %}
+    {% if allowsFeedback %}
+      {{ appFeedback({
+        validate: validate
+      }) }}
+    {% endif %}
+  {% endblock %}
   {{ govukFooter({
     meta: {
       title: "Get support",

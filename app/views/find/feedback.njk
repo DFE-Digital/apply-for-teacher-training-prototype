@@ -1,0 +1,22 @@
+{% from "_components/feedback-find/macro.njk" import appFeedbackFind %}
+
+{% extends "_document.njk" %}
+
+{% set title = "[Page title]" %}
+{% set hasAccountLinks = false %}
+{% set serviceName = "Find postgraduate teacher training" %}
+{% set allowsFeedback = true %}
+
+{% block primary %}
+  <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque ipsum, molestie quis enim quis, efficitur sagittis nulla. Pellentesque cursus tellus facilisis metus pulvinar, condimentum sagittis magna eleifend.</p>
+  <p class="govuk-body">Morbi sollicitudin vel ex ut tempus. Pellentesque at dolor quis mi mollis sagittis. Phasellus nec libero vel nunc ultricies faucibus a feugiat dolor. Nullam dapibus lobortis quam vel lobortis.</p>
+  <p class="govuk-body">Curabitur ut condimentum tortor, vel lacinia orci. Morbi vel enim congue, euismod urna eget, porttitor nisl. Maecenas dignissim semper nisl, quis viverra elit semper id. Maecenas convallis tempor tellus.</p>
+{% endblock %}
+
+{% block beforeFooter %}
+  {% if allowsFeedback %}
+    {{ appFeedbackFind({
+      validate: validate
+    }) }}
+  {% endif %}
+{% endblock %}

@@ -1,6 +1,7 @@
 {% extends "_form-question.njk" %}
 
 {% set title = "What is the referee’s name?" %}
+{% set allowsFeedback = true %}
 {% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
 
 {% block pageNavigation %}

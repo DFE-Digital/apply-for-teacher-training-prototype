@@ -3,6 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set degreeCount = applicationValue(["degree"]) | length %}
 {% set title = "How your degree compares to a UK degree" %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

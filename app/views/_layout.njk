@@ -36,6 +36,7 @@
 {% from "_components/banner/macro.njk"         import appBanner %}
 {% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
 {% from "_components/footer/macro.njk"         import appFooter %}
+{% from "_components/feedback/macro.njk"       import appFeedback %}
 {% from "_components/icon/macro.njk"           import appIcon %}
 {% from "_components/related/macro.njk"        import appRelated %}
 {% from "_components/summary-card/macro.njk"   import appSummaryCard %}
@@ -112,9 +113,14 @@
 {% endset %}
 
 {% block footer %}
-  {% set references = applicationValue(["references"]) | toArray %}
+  {% block beforeFooter %}
+    {% if allowsFeedback %}
+      {{ appFeedback({
+        validate: validate
+      }) }}
+    {% endif %}
+  {% endblock %}
   {{ appFooter({
-    classes: "govuk-footer--app",
     meta: {
       title: "Get support",
       html: metaHtml,

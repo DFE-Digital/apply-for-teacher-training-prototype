@@ -9,6 +9,7 @@
 {% set parent = "Academic and other relevant qualifications" %}
 {% set action = "edit" if applicationValue(["other-qualifications", id, "subject"]) else "add" %}
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {% if referrer %}

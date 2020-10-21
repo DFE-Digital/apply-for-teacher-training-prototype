@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Tell the referee your name" %}
+{% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/references/" + id + "/send-request/" %}
 
 {% block pageNavigation %}

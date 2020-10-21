@@ -9,6 +9,7 @@
   {% set title = (action | capitalize) + " undergraduate degree" %}
   {% set degreeTypes = degree.types.undergraduate %}
 {% endif %}
+{% set allowsFeedback = true %}
 
 {% if degreeCount < 1 and action == "add" %}
   {% set ukHintText = "For example, BA, BSc or other (please specify)" %}

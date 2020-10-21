@@ -3,6 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% set title = "Check your answers before sending your request" %}
+{% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/references/" + id + "/request/decision" %}
 
 {% block primary %}

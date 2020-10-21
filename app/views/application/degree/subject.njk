@@ -2,6 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What subject is your degree?" %}
+{% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 {% block pageNavigation %}

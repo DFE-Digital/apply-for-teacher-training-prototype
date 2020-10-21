@@ -16,6 +16,15 @@ router.all([
   next()
 })
 
+// Make `validate` available as local variable for Find page
+router.get('/find/feedback', (req, res) => {
+  const { validate } = req.query
+
+  res.render('find/feedback.njk', {
+    validate
+  })
+})
+
 require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)

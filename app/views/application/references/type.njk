@@ -3,6 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
 {% set title = "What kind of referee do you want to add?" %}
+{% set allowsFeedback = true %}
 {% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name/" %}
 
 {% block pageNavigation %}

@@ -228,7 +228,7 @@ module.exports = router => {
 
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
-    const referrer = req.query.referrer
+    const { referrer } = req.query
 
     res.render(
       `application/${req.params.view}`,

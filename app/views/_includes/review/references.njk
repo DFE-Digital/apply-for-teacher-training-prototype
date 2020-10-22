@@ -16,7 +16,8 @@
     {% set canAmendEmailAddress = item.status == "Request failed" %}
     {% set canDelete = (item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Reference declined") or (item.status == "Request failed") %}
     {% set canCancelRequest = (item.status == "Awaiting response") or (item.status == "Reference overdue") %}
-    {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Request failed")) and readyReferences.length < 2 %}
+    {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled")) and readyReferences.length < 2 %}
+    {% set canRetryRequest = (item.status == "Request failed") and readyReferences.length < 2 %}
     {% set canNudgeReferee = ((item.status == "Awaiting response") or (item.status == "Reference overdue")) and item.nudges < 1 %}
 
     {# Deactivating references is an idea we can return to later #}
@@ -33,15 +34,18 @@
       titleText: item.type + " reference from " + item.name,
       actions: {
         items: [{
-          href: applicationPath + "/references/" + item.id + "/action/delete?referrer=" + referrer,
-          text: "Delete referee" if item.status == "Not requested yet" else "Delete request"
-        } if canDelete, {
           href: applicationPath + "/references/" + item.id + "/action/cancel?referrer=" + referrer,
           text: "Cancel request"
         } if canCancelRequest, {
           href: applicationPath + "/references/" + item.id + "/action/request?referrer=" + referrer,
           text: "Send request again" if (item.status == "Request cancelled" or item.status == "Request failed") else "Send request"
         } if canMakeRequest, {
+          href: applicationPath + "/references/" + item.id + "/action/retry?referrer=" + referrer,
+          text: "Retry request"
+        } if canRetryRequest, {
+          href: applicationPath + "/references/" + item.id + "/action/delete?referrer=" + referrer,
+          text: "Delete referee" if item.status == "Not requested yet" else "Delete request"
+        } if canDelete, {
           href: applicationPath + "/references/" + item.id + "/action/deactivate?referrer=" + referrer,
           text: "Deactivate reference"
         } if canDeactivateReference, {

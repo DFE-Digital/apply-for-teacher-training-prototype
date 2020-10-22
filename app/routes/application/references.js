@@ -127,6 +127,15 @@ module.exports = router => {
         req.flash('success', `Reminder sent to ${applicationData.references[id].name}`)
       }
 
+      if (action === 'retry') {
+        applicationData.references[id].log.push({
+          note: `Request sent to ${applicationData.references[id].email}`,
+          date: now.toISOString()
+        })
+
+        req.flash('success', `Reference request sent to ${applicationData.references[id].email}`)
+      }
+
       res.redirect(referrer)
     }
   })

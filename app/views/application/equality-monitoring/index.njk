@@ -1,6 +1,6 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Can you complete a 3-minute equality and diversity questionnaire?" %}
+{% set title = "Equality and diversity questionnaire" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,16 +9,30 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Completing the questionnaire is optional and will not affect the progress of your application.</p>
   <p class="govuk-body">The Department for Education (DfE) uses equality and diversity data to improve the teacher training application process and make government policy better.</p>
-  <p class="govuk-body">For example, DfE will use the information you give in this questionnaire to help prevent discrimination in teacher recruitment.</p>
-  <p class="govuk-body">The information you give in this questionnaire will also be shared with your teacher training provider if you accept a place on their course.</p>
+  <p class="govuk-body">We use the information you give in this questionnaire to help prevent discrimination in teacher recruitment. We also share it with your teacher training provider if you accept a place on their course.</p>
   <p class="govuk-body"><a href="#">Find out how we use and look after your data</a></p>
+  <p class="govuk-body">Completing the questionnaire is optional and will not affect the progress of your application.</p>
 
-  {{ govukButton({
-    text: "Yes, continue to the questionnaire",
-    href: paths.next
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Can you complete a 3-minute questionnaire?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    name: "decision",
+    items: [{
+      value: "yes",
+      text: "Yes, continue to the questionnaire",
+      checked: "checked"
+    }, {
+      value: "no",
+      text: "No, continue without completing questionnaire"
+    }]
   }) }}
 
-  <p class="govuk-body"><a href="{{ applicationPath }}/submit">Continue without completing questionnaire</a></p>
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

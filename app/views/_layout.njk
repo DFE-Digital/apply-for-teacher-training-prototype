@@ -32,15 +32,15 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
-{% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
-{% from "_components/banner/macro.njk"         import appBanner %}
-{% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
-{% from "_components/footer/macro.njk"         import appFooter %}
-{% from "_components/feedback/macro.njk"       import appFeedback %}
-{% from "_components/icon/macro.njk"           import appIcon %}
-{% from "_components/related/macro.njk"        import appRelated %}
-{% from "_components/summary-card/macro.njk"   import appSummaryCard %}
-{% from "_components/task-list/macro.njk"      import appTaskList %}
+{% from "_components/autocomplete/macro.njk"          import appAutocomplete %}
+{% from "_components/banner/macro.njk"                import appBanner %}
+{% from "_components/cookie-banner/macro.njk"         import appCookieBanner %}
+{% from "_components/footer/macro.njk"                import appFooter %}
+{% from "_components/feedback/macro.njk"              import appFeedback %}
+{% from "_components/icon/macro.njk"                  import appIcon %}
+{% from "_components/related/macro.njk"               import appRelated %}
+{% from "_components/summary-card/macro.njk"          import appSummaryCard %}
+{% from "_components/task-list/macro.njk"             import appTaskList %}
 
 {% block head %}
   {% include "_includes/head.njk" %}
@@ -92,14 +92,12 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {% if showPhaseBanner != false %}
-    {{ govukPhaseBanner({
-      tag: {
-        text: "Prototype"
-      },
-      html: "This is a prototype of a new service. Some parts may not work yet."
-    }) }}
-  {% endif %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    html: "This is a prototype of a new service. Some parts may not work yet."
+  }) if showPhaseBanner != false }}
   {% block pageNavigation %}
   {% endblock %}
   {% block pageBanner %}

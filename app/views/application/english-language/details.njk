@@ -5,16 +5,16 @@
 {% set ielts = type == "IELTS" %}
 {% set toefl = type == "TOEFL" %}
 
-{% set qualificationName = "English language" %}
+{% set assessmentName = "English language assessment" %}
 {% if ielts %}
-  {% set qualificationName = "IELTS" %}
+  {% set assessmentName = "IELTS" %}
   {% set certificateLabelText = "Test report form (TRF) number" %}
   {% set certificateHintText = "For example, 02GB0674SOOM599A" %}
   {% set gradeLabelText = "Overall band score" %}
   {% set gradeHintText = "For example, 7.5" %}
   {% set gradeWidth = 4 %}
 {% elif toefl %}
-  {% set qualificationName = "TOEFL" %}
+  {% set assessmentName = "TOEFL" %}
   {% set certificateLabelText = "TOEFL registration number" %}
   {% set certificateHintText = "For example, 0000 0000 2500 2147" %}
   {% set gradeLabelText = "Total score" %}
@@ -23,8 +23,8 @@
 {% endif %}
 
 {% set parent = "English as a foreign language" %}
-{% set action = "edit" if applicationValue(["english-language", "subject"]) else "add" %}
-{% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
+{% set action = "edit" if applicationValue(["english-language", "subject"]) else "your" %}
+{% set title = (action | capitalize) + " " + assessmentName + " result" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -33,7 +33,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/english-language/"
+      href: "/application/" + applicationId + "/english-language/type"
     }) }}
   {% endif %}
 {% endblock %}
@@ -52,7 +52,7 @@
   {% else %}
     {{ govukInput({
       label: {
-        text: "Qualification name",
+        text: "Assessment name",
         classes: "govuk-label--m"
       },
       hint: {
@@ -74,8 +74,11 @@
 
   {{ govukInput({
     label: {
-      text: "Year qualification was awarded",
+      text: "When did you complete the assessment?",
       classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Give the year, for example: ‘2020’"
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["english-language", "year"])) }}

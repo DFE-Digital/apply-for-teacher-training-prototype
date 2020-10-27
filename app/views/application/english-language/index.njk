@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "English as a foreign language assessment" %}
+{% set title = "English as a foreign language" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -24,7 +24,7 @@
     {{ govukCharacterCount({
       label: {
         classes: "govuk-label--s",
-        html: "If you’re working towards a qualification, give details here"
+        html: "If you’re planning on doing an assessment, give details here"
       },
       maxwords: 200,
       rows: 6
@@ -34,7 +34,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Do you have an English as a foreign language qualification?",
+        text: "Have you done an English as a foreign language assessment?",
         classes: "govuk-fieldset__legend--m"
       },
       attributes: {
@@ -46,7 +46,7 @@
     }, {
       text: "No, English is not a foreign language to me"
     }, {
-      text: "No, I do not have an English as a foreign language qualification",
+      text: "No, I have not done an English as a foreign language assessment",
       conditional: {
         html: missingConditionalHtml
       }

@@ -1,19 +1,17 @@
 .app-feedback {
-  @include govuk-responsive-margin(6, "top");
-  background: govuk-colour("white");
+  @include govuk-responsive-margin(6, "bottom");
 }
 
 .app-feedback__prompt {
   @include govuk-clearfix;
   align-items: center;
-  background-color: govuk-colour("blue");
+  background-color: govuk-colour("light-grey");
   box-sizing: border-box;
-  color: govuk-colour("white");
   flex-wrap: wrap;
   text-align: center;
   outline: 0;
   padding: govuk-spacing(2) govuk-spacing(5);
-  min-height: 75px;
+  min-height: 80px;
 
   .js-enabled & {
     display: flex;
@@ -30,7 +28,6 @@
 
 .app-feedback__prompt-title {
   @include govuk-font(19, $weight: bold);
-  color: govuk-colour("white");
   display: inline-block;
   margin: govuk-spacing(3) 0;
   margin-right: govuk-spacing(4);
@@ -46,16 +43,8 @@
 
 .app-feedback__button {
   @include govuk-font(19);
-  background: transparent;
-  box-shadow: 0 2px 0 govuk-colour("white");
-  border: 1px solid govuk-colour("white");
-  margin: -1px;
+  margin: 0;
   min-width: 100px;
-
-  &:hover {
-    background: govuk-colour("black");
-    background: rgba(govuk-colour("black"), 0.2);
-  }
 
   @include govuk-media-query($from: tablet) {
     @include govuk-font(16);
@@ -95,5 +84,6 @@
 
 .app-feedback__form-close {
   float: right;
-  margin: 0 govuk-spacing(1) govuk-spacing(2) 0;
+  margin-top: govuk-spacing(1) * -1;
+  margin-bottom: govuk-spacing(4);
 }

@@ -8,6 +8,7 @@ $govuk-global-styles: true;
 // Components that aren’t in Frontend
 @import "components/autocomplete";
 @import "components/banner";
+@import "components/button";
 @import "components/cookie-banner";
 @import "components/feedback";
 @import "components/hidden-link";

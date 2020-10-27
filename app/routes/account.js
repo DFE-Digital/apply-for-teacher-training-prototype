@@ -47,17 +47,15 @@ module.exports = router => {
       })
     }
 
-    if (token) {
-      // Set data.token value when signing out
-      req.session.data.token = true
-    }
-
     res.render('account/sign-in')
   })
 
-  // Remove data.token value when signing out
+  // Remove session account email value when signing out
   router.get('/account/sign-out', (req, res, next) => {
-    delete req.session.data.token
+    if (req.session.data && req.session.data.account) {
+      delete req.session.data.account.email
+    }
+
     res.redirect('/')
   })
 }

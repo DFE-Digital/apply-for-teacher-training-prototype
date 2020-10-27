@@ -2,6 +2,9 @@ module.exports = {
   status: 'started',
   welcomeFlow: false,
   apply2: false,
+  account: {
+    email: 'jessica.doe@example.com'
+  },
   choices: {
     ABCDE: {
       courseCode: '2XT2',

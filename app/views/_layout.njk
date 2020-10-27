@@ -52,12 +52,14 @@
 
 {% block header %}
   {% if shouldShowCookieMessage %}
-  {{ appCookieBanner({
-    text: cookieText
-  })}}
+    {{ appCookieBanner({
+      text: cookieText
+    })}}
   {% endif %}
 
-  {% if data.token %}
+  {% set accountEmail = data.applications[applicationId].account.email or data.account.email %}
+
+  {% if accountEmail %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
     {% else %}
@@ -73,14 +75,11 @@
     serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: [{
-      text: applicationValue(["candidate", "email"])
-    } if data.token and applicationValue(["candidate", "email"]), {
+      html: "<strong>" + accountEmail + "</strong>"
+    }, {
       href: "/account/sign-out",
       text: "Sign out"
-    } if data.token, {
-      href: "/account/sign-in",
-      text: "Sign in"
-    } if not data.token] if hasAccountLinks != false
+    }] if accountEmail and hasAccountLinks != false
   }) }}
 {% endblock %}
 

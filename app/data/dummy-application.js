@@ -19,6 +19,9 @@ module.exports = {
     'subject-knowledge': ['true'],
     interview: ['true']
   },
+  account: {
+    email: 'janina.doe@example.com'
+  },
   choices: {
     ABCDE: {
       courseCode: '2XT2',
@@ -123,7 +126,6 @@ module.exports = {
   },
   'contact-details': {
     'phone-number': '07944 386555',
-    email: 'janina.doe@example.com',
     'address-type': 'domestic',
     address: {
       'postal-code': 'G1 3AH',

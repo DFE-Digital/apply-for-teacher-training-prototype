@@ -127,7 +127,6 @@
       {% set showReferencesContent = true %}
     {% else %}
       <p class="govuk-body govuk-!-margin-bottom-2">You have to get 2 references back before you can send your application to training providers.</p>
-
       <p class="govuk-body">It takes 8 days to get a reference on average.</p>
       {% if references | length > 0 %}
         {% set referencesItemText = "Manage your references" %}
@@ -239,7 +238,7 @@
     {{ appTaskList({
       items: [{
         text: "Work history",
-        href: applicationPath + "/work-history" + ("/review" if applicationValue("work-history") | length > 0),
+        href: applicationPath + "/work-history",
         id: "work-history",
         tag: {
           classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,

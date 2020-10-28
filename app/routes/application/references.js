@@ -46,7 +46,7 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/references/review`)
   })
 
-  // Generate new id and redirect to start of referee flow
+  // Generate new ID and redirect to start of referee flow
   router.get('/application/:applicationId/references/add', (req, res) => {
     const { applicationId } = req.params
     const id = utils.generateRandomString()

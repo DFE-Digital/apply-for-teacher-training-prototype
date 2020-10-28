@@ -55,30 +55,20 @@
           actions: {
             items: [{
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete entry"
+              text: "Delete break"
             }]
           } if canAmend,
           html: breakHtml
         }) }}
       {% else %}
-        {% set titleHtml %}
-          {{ item.role }}
-          {%- if item["worked-with-children"] == "Yes" %}
-          <span class="app-summary-card__meta">{{ appIcon({
-              classes: "govuk-!-margin-right-1",
-              icon: "tick",
-              hidden: true
-            }) }} This role involved working with children</span>
-          {%- endif %}
-        {% endset %}
         {{ appSummaryCard({
           classes: "govuk-!-margin-bottom-6",
           headingLevel: 3,
-          titleHtml: titleHtml,
+          titleHtml: item.role,
           actions: {
             items: [{
               href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete entry"
+              text: "Delete job"
             }]
           } if canAmend,
           html: jobHtml
@@ -109,6 +99,11 @@
         }) }}
       {% endif %}
     {% endfor %}
+    {{ govukButton({
+      text: "Add another job",
+      href: applicationPath + "/work-history/add/job?referrer=" + referrer,
+      classes: "govuk-button--secondary"
+    }) }}
   {% else %}
     {% set outofWorkHtml %}
       {{ govukSummaryList({

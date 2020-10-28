@@ -59,6 +59,20 @@
     } if canAmend
   }, {
     key: {
+      text: "Dates"
+    },
+    value: {
+      text: datesText
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "dates"
+      }]
+    } if canAmend
+  }, {
+    key: {
       text: "Description"
     },
     value: {
@@ -73,16 +87,16 @@
     } if canAmend
   }, {
     key: {
-      text: "Dates"
+      text: "Did this job involve working in a school or with children?"
     },
     value: {
-      text: datesText
+      text: (item["worked-with-children"] or "Not entered")
     },
     actions: {
       items: [{
         href: changeHref,
         text: "Change",
-        visuallyHiddenText: "dates"
+        visuallyHiddenText: "if this job involved working with children"
       }]
     } if canAmend
   }]

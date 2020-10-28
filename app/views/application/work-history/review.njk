@@ -15,13 +15,6 @@
 
 {% block primary %}
   {% include "_includes/review/work-history.njk" %}
-  {% if applicationValue(["work-history", "length"]) != "none" %}
-    {{ govukButton({
-      text: "Add another job",
-      href: applicationPath + "/work-history/add/job?referrer=" + referrer,
-      classes: "govuk-button--secondary"
-    }) }}
-  {% endif %}
 
   {{ govukCheckboxes({
     items: [{

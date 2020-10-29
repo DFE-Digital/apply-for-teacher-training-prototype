@@ -9,41 +9,76 @@
   GOVUK.Modules.Feedback = function () {
     this.start = function (element) {
       const feedback = $(element)[0]
-      const toggles = feedback.querySelectorAll('[aria-controls]')
-      const toggleQuestion = document.getElementById('feedback-question')
 
-      let toggleID
-      let toggleContent
-      let i
-      let target
-      for (i = 0; i < toggles.length; i = i + 1) {
-        toggleID = toggles[i].getAttribute('aria-controls')
-        toggleContent = document.getElementById(toggleID)
-        toggleContent.setAttribute('tabindex', '-1')
+      // Prompt question container
+      // Show question with ‘Yes’ and ‘No’ answers
+      const promptTemplate = document.getElementById('feedback-prompt-template')
+      const promptClone = promptTemplate.content.cloneNode(true)
+      feedback.prepend(promptClone)
+      const promptContainer = document.getElementById('feedback-prompt')
+
+      // Success message container
+      // Show a thank-you message once feedback has been submitted
+      const successTemplate = document.getElementById('feedback-success-template')
+      const successClone = successTemplate.content.cloneNode(true)
+      feedback.append(successClone)
+      const successContainer = document.getElementById('feedback-success')
+
+      // Success button
+      const successButton = feedback.querySelector('.js-show-feedback-success')
+      successButton.addEventListener('click', showSuccessMessage)
+
+      function showSuccessMessage () {
+        promptContainer.classList.add('govuk-visually-hidden')
+        successContainer.setAttribute('aria-hidden', 'false')
       }
 
-      function toggle (ev) {
-        ev = ev || window.event
-        target = ev.target || ev.srcElement
-        if (target.hasAttribute('aria-controls')) {
-          toggleID = target.getAttribute('aria-controls')
-          toggleContent = document.getElementById(toggleID)
+      // Form containers
+      const formContainers = feedback.querySelectorAll('[aria-controls]')
 
-          if (toggleContent.getAttribute('aria-hidden') === 'true') {
-            toggleContent.setAttribute('aria-hidden', 'false')
-            target.setAttribute('aria-expanded', 'true')
-            toggleQuestion.setAttribute('aria-hidden', 'true')
-            toggleQuestion.setAttribute('aria-expanded', 'false')
+      // Form close button
+      const closeButtonTemplate = document.getElementById('feedback-close-button-template')
+      const closeButtonClone = closeButtonTemplate.content.cloneNode(true)
+
+      // Form toggling
+      let formId
+      let formContainer
+      let formCloseToggle
+      let formToggle
+      let i
+      for (i = 0; i < formContainers.length; i = i + 1) {
+        formId = formContainers[i].getAttribute('aria-controls')
+        formContainer = document.getElementById(formId)
+        formContainer.setAttribute('tabindex', '-1')
+
+        // Add close button to each form before fieldset (and after any error summary)
+        const formFieldset = formContainer.querySelector('.govuk-fieldset')
+        formContainer.insertBefore(closeButtonClone, formFieldset)
+        formCloseToggle = formContainer.querySelector('.app-feedback__button--close')
+      }
+
+      function toggleForm (ev) {
+        ev = ev || window.event
+        formToggle = ev.target || ev.srcElement
+        if (formToggle.hasAttribute('aria-controls')) {
+          formId = formToggle.getAttribute('aria-controls')
+          formContainer = document.getElementById(formId)
+
+          if (formContainer.getAttribute('aria-hidden') === 'true') {
+            formToggle.setAttribute('aria-expanded', 'true')
+            formCloseToggle.setAttribute('aria-expanded', 'true')
+            formContainer.setAttribute('aria-hidden', 'false')
+            promptContainer.classList.add('govuk-visually-hidden')
           } else {
-            toggleContent.setAttribute('aria-hidden', 'true')
-            target.setAttribute('aria-expanded', 'false')
-            toggleQuestion.setAttribute('aria-hidden', 'false')
-            toggleQuestion.setAttribute('aria-expanded', 'true')
+            formContainer.setAttribute('aria-hidden', 'true')
+            formCloseToggle.setAttribute('aria-expanded', 'false')
+            formToggle.setAttribute('aria-expanded', 'false')
+            promptContainer.classList.remove('govuk-visually-hidden')
           }
         }
       }
 
-      feedback.addEventListener('click', toggle, false)
+      feedback.addEventListener('click', toggleForm, false)
     }
   }
 

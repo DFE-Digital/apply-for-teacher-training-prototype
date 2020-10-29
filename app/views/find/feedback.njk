@@ -1,11 +1,8 @@
-{% from "_components/feedback-find/macro.njk" import appFeedbackFind %}
-
 {% extends "_document.njk" %}
 
 {% set title = "[Page title]" %}
 {% set hasAccountLinks = false %}
 {% set serviceName = "Find postgraduate teacher training" %}
-{% set allowsFeedback = true %}
 
 {% block primary %}
   <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque ipsum, molestie quis enim quis, efficitur sagittis nulla. Pellentesque cursus tellus facilisis metus pulvinar, condimentum sagittis magna eleifend.</p>
@@ -14,9 +11,73 @@
 {% endblock %}
 
 {% block beforeFooter %}
-  {% if allowsFeedback %}
-    {{ appFeedbackFind({
-      validate: validate
+  {% call appFeedback({
+    title: "Is this page useful?",
+    formaction: "#feedback-form",
+    options: [{
+      text: "Yes",
+      visuallyHiddenText: ", this page is useful",
+      showSuccessMessage: true
+    }, {
+      text: "No",
+      visuallyHiddenText: ", this page is not useful",
+      attributes: {
+        "aria-controls": "feedback-form",
+        "aria-expanded": true if validate == 'feedback' else false
+      }
+    }],
+    validate: validate
+  }) %}
+    {% if validate == "feedback" %}
+      {{ govukErrorSummary({
+        classes: "govuk-!-margin-bottom-6",
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: "Tell us how can we improve this service",
+            href: "#feedback"
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    <p class="govuk-body">We use your feedback to make these pages better. We don’t check responses every day, and cannot respond to comments. If you need support, please email <a href="#">becomingateacher@digital.education.gov.uk</a>.</p>
+
+    {{ govukCharacterCount({
+      id: "feedback",
+      label: {
+        classes: "govuk-label--s",
+        text: "How can we improve this service?"
+      },
+      maxwords: 300,
+      errorMessage: {
+        text: "Tell us how can we improve this service"
+      } if validate == "feedback"
     }) }}
-  {% endif %}
+
+    {{ govukInput({
+      id: "feedback",
+      label: {
+        classes: "govuk-label--s",
+        text: "Email address (optional)"
+      },
+      hint: {
+        text: "We may contact you to ask you some questions about your feedback"
+      },
+      type: "email",
+      spellcheck: "false"
+    }) }}
+
+    {{ govukInput({
+      name: "validate",
+      value: "feedback",
+      type: "hidden"
+    }) }}
+
+    {{ govukButton({
+      classes: "govuk-!-margin-bottom-0",
+      text: "Submit feedback",
+      type: "submit"
+    }) }}
+  {% endcall %}
 {% endblock %}

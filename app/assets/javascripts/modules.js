@@ -2,10 +2,10 @@
   'use strict'
 
   var $ = global.jQuery
-  var GOVUK = global.GOVUK || {}
-  GOVUK.Modules = GOVUK.Modules || {}
+  var APP = global.APP || {}
+  APP.Modules = APP.Modules || {}
 
-  GOVUK.modules = {
+  APP.modules = {
     find: function (container) {
       container = container || $('body')
 
@@ -31,8 +31,8 @@
         var type = camelCaseAndCapitalise(element.data('module'))
         var started = element.data('module-started')
 
-        if (typeof GOVUK.Modules[type] === 'function' && !started) {
-          module = new GOVUK.Modules[type]()
+        if (typeof APP.Modules[type] === 'function' && !started) {
+          module = new APP.Modules[type]()
           module.start(element)
           element.data('module-started', true)
         }
@@ -57,5 +57,5 @@
     }
   }
 
-  global.GOVUK = GOVUK
+  global.APP = APP
 })(window)

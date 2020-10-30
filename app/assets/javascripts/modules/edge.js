@@ -3,10 +3,10 @@
 ;(function (global) {
   'use strict'
 
-  var GOVUK = global.GOVUK || {}
-  GOVUK.Modules = GOVUK.Modules || {}
+  var APP = global.APP || {}
+  APP.Modules = APP.Modules || {}
 
-  GOVUK.Modules.Edge = function () {
+  APP.Modules.Edge = function () {
     this.start = function (element) {
       element.on('click', 'a[href="#"], .js-edge', alertUser)
 
@@ -20,5 +20,5 @@
     }
   }
 
-  global.GOVUK = GOVUK
+  global.APP = APP
 })(window)

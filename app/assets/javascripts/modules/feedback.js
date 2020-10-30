@@ -3,10 +3,10 @@
 ;(function (global) {
   'use strict'
 
-  var GOVUK = global.GOVUK || {}
-  GOVUK.Modules = GOVUK.Modules || {}
+  var APP = global.APP || {}
+  APP.Modules = APP.Modules || {}
 
-  GOVUK.Modules.Feedback = function () {
+  APP.Modules.Feedback = function () {
     this.start = function (element) {
       const feedback = $(element)[0]
 
@@ -82,5 +82,5 @@
     }
   }
 
-  global.GOVUK = GOVUK
+  global.APP = APP
 })(window)

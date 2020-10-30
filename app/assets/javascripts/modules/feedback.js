@@ -47,7 +47,6 @@
 
       // Form close button
       const closeButtonTemplate = document.getElementById('feedback-close-button-template')
-      const closeButtonClone = closeButtonTemplate.content.cloneNode(true)
 
       // Form toggling
       let formId
@@ -60,13 +59,15 @@
         formContainer = document.getElementById(formId)
         formContainer.setAttribute('tabindex', '-1')
 
-        // Remove forms from accessibility tree by default
-        formContainer.hidden = true
-
-        // Add close button to each form before fieldset (and after any error summary)
-        const formFieldset = formContainer.querySelector('.govuk-fieldset')
-        formContainer.insertBefore(closeButtonClone, formFieldset)
+        // Add close button to form
+        const closeButtonClone = closeButtonTemplate.content.cloneNode(true)
+        formContainer.prepend(closeButtonClone)
         formCloseToggle = formContainer.querySelector('.app-feedback__button--close')
+        formCloseToggle.setAttribute('aria-controls', formId)
+        console.log('formCloseToggle', formCloseToggle)
+
+        // Remove form from accessibility tree by default
+        formContainer.hidden = true
       }
 
       function toggleForm (e) {

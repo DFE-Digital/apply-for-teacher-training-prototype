@@ -1,13 +1,12 @@
 {% if allowsFeedback %}
   {% call appFeedback({
     title: "Are there any issues with this section?",
-    formaction: "/feedback/thank-you",
     options: [{
       text: "Yes",
       visuallyHiddenText: ", there are issues with this section",
       attributes: {
         "aria-controls": "feedback-form",
-        "aria-expanded": true if validate == 'feedback' else false
+        "aria-expanded": false
       }
     }, {
       text: "No",
@@ -15,6 +14,7 @@
       showSuccessMessage: true
     }]
   }) %}
+    <h3 class="govuk-heading-m">Help us improve this service</h3>
     {{ govukCheckboxes({
       idPrefix: "issues",
       fieldset: {
@@ -51,7 +51,8 @@
         }
       },
       items: [{
-        text: "Yes"
+        text: "Yes",
+        checked: true
       }, {
         text: "No"
       }]

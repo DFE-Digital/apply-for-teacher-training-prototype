@@ -10,6 +10,15 @@
     this.start = function (element) {
       const feedback = $(element)[0]
 
+      // If following methods not supported, fall back to non-enhanced component
+      if (
+        !window.addEventListener ||
+        !window.DOMTokenList ||
+        !window.HTMLTemplateElement
+      ) {
+        return
+      }
+
       // Prompt question container
       // Show question with ‘Yes’ and ‘No’ answers
       const promptTemplate = document.getElementById('feedback-prompt-template')
@@ -30,7 +39,7 @@
 
       function showSuccessMessage () {
         promptContainer.classList.add('govuk-visually-hidden')
-        successContainer.setAttribute('aria-hidden', 'false')
+        successContainer.hidden = false
       }
 
       // Form containers
@@ -51,6 +60,9 @@
         formContainer = document.getElementById(formId)
         formContainer.setAttribute('tabindex', '-1')
 
+        // Remove forms from accessibility tree by default
+        formContainer.hidden = true
+
         // Add close button to each form before fieldset (and after any error summary)
         const formFieldset = formContainer.querySelector('.govuk-fieldset')
         formContainer.insertBefore(closeButtonClone, formFieldset)
@@ -64,15 +76,15 @@
           formId = formToggle.getAttribute('aria-controls')
           formContainer = document.getElementById(formId)
 
-          if (formContainer.getAttribute('aria-hidden') === 'true') {
+          if (formContainer.hidden) {
             formToggle.setAttribute('aria-expanded', 'true')
             formCloseToggle.setAttribute('aria-expanded', 'true')
-            formContainer.setAttribute('aria-hidden', 'false')
+            formContainer.hidden = false
             promptContainer.classList.add('govuk-visually-hidden')
           } else {
-            formContainer.setAttribute('aria-hidden', 'true')
             formCloseToggle.setAttribute('aria-expanded', 'false')
             formToggle.setAttribute('aria-expanded', 'false')
+            formContainer.hidden = true
             promptContainer.classList.remove('govuk-visually-hidden')
           }
         }

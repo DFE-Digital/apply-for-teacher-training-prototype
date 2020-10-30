@@ -6,7 +6,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       <aside class="app-feedback" data-module="feedback">
-        <form class="app-feedback__form" id="feedback-form" action="{{ params.formaction }}" method="get" aria-hidden="{{ "false" if params.validate == "feedback" else "true" }}">
+        <form class="app-feedback__form" id="{{ "feedback-form" if not params.validate }}" action="{{ params.formaction }}" method="get">
           <template id="feedback-close-button-template">
             {{ govukButton({
               classes: "govuk-button--secondary app-feedback__button app-feedback__button--close",
@@ -51,7 +51,7 @@
         </template>
 
         <template id="feedback-success-template">
-          <div class="app-feedback__container app-feedback__container--success" id="feedback-success" role="alert" aria-hidden="true">
+          <div class="app-feedback__container app-feedback__container--success" id="feedback-success" role="alert" hidden>
             <p class="app-feedback__container-title">Thank you for your feedback</p>
           </div>
         </template>

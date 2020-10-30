@@ -32,7 +32,7 @@
   .js-enabled & {
     display: flex;
 
-    &[aria-hidden="true"] {
+    &[hidden] {
       display: none;
     }
   }
@@ -82,7 +82,7 @@
   .js-enabled & {
     display: block;
 
-    &[aria-hidden="true"] {
+    &[hidden] {
       display: none;
     }
   }

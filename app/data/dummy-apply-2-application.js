@@ -1,5 +1,5 @@
 // Copies dummy application and tweaks some fields
-var dummyApply2Application = JSON.parse(JSON.stringify(require('./dummy-application')))
+const dummyApply2Application = JSON.parse(JSON.stringify(require('./dummy-application')))
 
 // Custom Apply 2 fields
 dummyApply2Application.apply2 = true

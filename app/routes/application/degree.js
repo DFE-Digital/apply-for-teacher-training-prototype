@@ -17,7 +17,7 @@ const degreePaths = (req) => {
   const basePath = `/application/${applicationId}/degree/${req.params.id}`
   const { referrer } = req.query
 
-  var paths = [
+  const paths = [
     basePath,
     `${basePath}/subject`,
     `${basePath}/institution`,

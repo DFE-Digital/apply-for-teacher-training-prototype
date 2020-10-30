@@ -41,7 +41,7 @@ function runGulp () {
   const spawn = require('cross-spawn')
 
   process.env.FORCE_COLOR = 1
-  var gulp = spawn('./node_modules/.bin/gulp')
+  const gulp = spawn('./node_modules/.bin/gulp')
   gulp.stdout.pipe(process.stdout)
   gulp.stderr.pipe(process.stderr)
   process.stdin.pipe(gulp.stdin)

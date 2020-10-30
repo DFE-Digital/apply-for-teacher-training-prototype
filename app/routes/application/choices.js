@@ -6,7 +6,7 @@ const pickPaths = (req) => {
   const applicationId = req.params.applicationId
   const choiceId = req.params.choiceId
 
-  var paths = [
+  const paths = [
     `/application/${applicationId}/choices`,
     `/application/${applicationId}/choices/${choiceId}/found`,
     `/application/${applicationId}/choices/${choiceId}/provider`,
@@ -24,7 +24,7 @@ const findPaths = (req) => {
   const { applicationId } = req.params
   const { choiceId } = req.params
 
-  var paths = [
+  const paths = [
     `/application/${applicationId}`,
     `/application/${applicationId}/choices/${choiceId}/found`,
     `/application/${applicationId}/choices/${choiceId}/find`
@@ -86,7 +86,7 @@ module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const { applicationId } = req.params
     const choiceId = utils.generateRandomString()
-    var data = req.session.data
+    const data = req.session.data
 
     if (typeof data.applications[applicationId].temporaryChoices === 'undefined') {
       data.applications[applicationId].temporaryChoices = {}

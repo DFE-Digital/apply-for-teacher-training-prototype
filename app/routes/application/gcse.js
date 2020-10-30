@@ -18,7 +18,7 @@ const gcsePaths = (req) => {
   const basePath = `/application/${applicationId}/gcse/${req.params.id}`
   const referrer = req.query.referrer
 
-  var paths = [
+  const paths = [
     basePath,
     ...(isInternational(req) ? [`${basePath}/country`] : []),
     ...(isInternational(req) ? [`${basePath}/naric`] : []),

@@ -33,18 +33,18 @@ const handleCookies = utils.handleCookies(app)
 app.use(handleCookies)
 
 // Set up configuration variables
-var releaseVersion = pkg.version
-var env = (process.env.NODE_ENV || 'development').toLowerCase()
-var useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
-var useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
-var useHttps = process.env.USE_HTTPS || config.useHttps
-var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
+const releaseVersion = pkg.version
+const env = (process.env.NODE_ENV || 'development').toLowerCase()
+const useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData
+const useCookieSessionStore = process.env.USE_COOKIE_SESSION_STORE || config.useCookieSessionStore
+let useHttps = process.env.USE_HTTPS || config.useHttps
+const gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
 
 useHttps = useHttps.toLowerCase()
 
 // Force HTTPS on production. Do this before using basicAuth to avoid
 // asking for username/password twice (for `http`, then `https`).
-var isSecure = (env === 'production' && useHttps === 'true')
+const isSecure = (env === 'production' && useHttps === 'true')
 if (isSecure) {
   app.use(utils.forceHttps)
   app.set('trust proxy', 1) // needed for secure cookies on heroku
@@ -53,12 +53,12 @@ if (isSecure) {
 middleware.forEach(func => app.use(func))
 
 // Set up App
-var appViews = extensions.getAppViews([
+const appViews = extensions.getAppViews([
   path.join(__dirname, '/app/views/'),
   path.join(__dirname, '/lib/')
 ])
 
-var nunjucksConfig = {
+const nunjucksConfig = {
   autoescape: true,
   noCache: true,
   watch: false // We are now setting this to `false` (it's by default false anyway) as having it set to `true` for production was making the tests hang
@@ -70,7 +70,7 @@ if (env === 'development') {
 
 nunjucksConfig.express = app
 
-var nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
+const nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig)
 
 // Add Nunjucks filters
 utils.addNunjucksFilters(nunjucksAppEnv)
@@ -178,8 +178,8 @@ if (typeof (routes) !== 'function') {
 
 // Strip .html and .htm if provided
 app.get(/\.html?$/i, function (req, res) {
-  var path = req.path
-  var parts = path.split('.')
+  let path = req.path
+  const parts = path.split('.')
   parts.pop()
   path = parts.join('.')
   res.redirect(path)

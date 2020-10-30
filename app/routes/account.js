@@ -24,7 +24,7 @@ module.exports = router => {
 
   // Update choice status and phase from sign-in link in decision notification
   router.get('/account/sign-in', (req, res) => {
-    const { phase, status, token } = req.query
+    const { phase, status } = req.query
 
     if (phase) {
       // Update application phase

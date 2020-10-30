@@ -1,8 +1,8 @@
 const utils = require('./../utils')
 
 function createNewApplication (req) {
-  var code = utils.generateRandomString()
-  var data = req.session.data
+  const code = utils.generateRandomString()
+  const data = req.session.data
 
   if (typeof data.applications === 'undefined') {
     data.applications = {}
@@ -118,7 +118,7 @@ module.exports = router => {
 
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
-    var code = createNewApplication(req)
+    const code = createNewApplication(req)
     req.session.data.applications[code].welcomeFlow = true
 
     if (req.session.data.course_from_find) {
@@ -131,13 +131,13 @@ module.exports = router => {
   })
 
   router.get('/application/start/choice', (req, res) => {
-    var code = createNewApplication(req)
+    const code = createNewApplication(req)
     res.redirect(`/application/${code}/choices/add`)
   })
 
   router.all('/application/started', (req, res) => {
-    var applications = req.session.data.applications
-    var applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
+    const applications = req.session.data.applications
+    const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
     if (applicationId) {
       res.redirect('/application/' + applicationId)
     }

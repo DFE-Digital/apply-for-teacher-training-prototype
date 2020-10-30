@@ -3,7 +3,7 @@
 ;(function (global) {
   'use strict'
 
-  var APP = global.APP || {}
+  const APP = global.APP || {}
   APP.Modules = APP.Modules || {}
 
   APP.Modules.Feedback = function () {

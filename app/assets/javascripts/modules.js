@@ -1,16 +1,16 @@
 ;(function (global) {
   'use strict'
 
-  var $ = global.jQuery
-  var APP = global.APP || {}
+  const $ = global.jQuery
+  const APP = global.APP || {}
   APP.Modules = APP.Modules || {}
 
   APP.modules = {
     find: function (container) {
       container = container || $('body')
 
-      var modules
-      var moduleSelector = '[data-module]'
+      let modules
+      const moduleSelector = '[data-module]'
 
       modules = container.find(moduleSelector)
 
@@ -23,13 +23,13 @@
     },
 
     start: function (container) {
-      var modules = this.find(container)
+      const modules = this.find(container)
 
-      for (var i = 0, l = modules.length; i < l; i++) {
-        var module
-        var element = $(modules[i])
-        var type = camelCaseAndCapitalise(element.data('module'))
-        var started = element.data('module-started')
+      for (let i = 0, l = modules.length; i < l; i++) {
+        let module
+        const element = $(modules[i])
+        const type = camelCaseAndCapitalise(element.data('module'))
+        const started = element.data('module-started')
 
         if (typeof APP.Modules[type] === 'function' && !started) {
           module = new APP.Modules[type]()

@@ -5,9 +5,9 @@ const utils = require('./../../utils')
  */
 module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
-    var applicationData = utils.applicationData(req)
-    var pageObject = {}
-    var successFlash = req.flash('success')
+    const applicationData = utils.applicationData(req)
+    const pageObject = {}
+    const successFlash = req.flash('success')
 
     if (successFlash[0] === 'submitted-incompleted-application') {
       pageObject.errorList = []

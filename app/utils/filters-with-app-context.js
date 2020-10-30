@@ -10,7 +10,7 @@ module.exports = (nunjucksAppEnv, app) => {
     }
 
     const getApplicationValue = (sections) => {
-      var path = ['applications', applicationId()]
+      const path = ['applications', applicationId()]
       sections = sections || []
       path.push(...sections)
       return getKeypath(req.session.data, path.map(s => `["${s}"]`).join(''))
@@ -22,13 +22,13 @@ module.exports = (nunjucksAppEnv, app) => {
       }
 
       // Get the most recently added qualification
-      var qualifications = getApplicationValue(sections.slice(0, 1))
+      const qualifications = getApplicationValue(sections.slice(0, 1))
 
       if (!qualifications || Object.values(qualifications).length === 0) {
         return null
       }
 
-      var latestQualification = Object.values(qualifications).slice(-1)[0]
+      const latestQualification = Object.values(qualifications).slice(-1)[0]
 
       // Return value from previously added qualification
       return latestQualification[sections.slice(-1)[0]]
@@ -38,7 +38,7 @@ module.exports = (nunjucksAppEnv, app) => {
     // Generate the attributes based on the application ID and the section they’re in
     nunjucksAppEnv.addFilter('decorateApplicationAttributes', (obj, sections) => {
       sections = sections || []
-      var storedValue = getApplicationValue(sections)
+      let storedValue = getApplicationValue(sections)
 
       // Prefill qualification values based on previous answers
       if (!storedValue &&
@@ -49,7 +49,7 @@ module.exports = (nunjucksAppEnv, app) => {
 
       if (obj.items !== undefined) {
         obj.items = obj.items.map(item => {
-          var checked = ''
+          let checked = ''
           if (typeof item.value === 'undefined') {
             item.value = item.text
           }

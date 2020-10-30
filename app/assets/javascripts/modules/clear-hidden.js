@@ -2,7 +2,7 @@
 ;(function (global) {
   'use strict'
 
-  var APP = global.APP || {}
+  const APP = global.APP || {}
   APP.Modules = APP.Modules || {}
 
   // Clear values from any hidden conditional inputs on form submission

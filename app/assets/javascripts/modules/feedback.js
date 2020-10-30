@@ -57,9 +57,9 @@
         formCloseToggle = formContainer.querySelector('.app-feedback__button--close')
       }
 
-      function toggleForm (ev) {
-        ev = ev || window.event
-        formToggle = ev.target || ev.srcElement
+      function toggleForm (e) {
+        e = e || window.event
+        formToggle = e.target || e.srcElement
         if (formToggle.hasAttribute('aria-controls')) {
           formId = formToggle.getAttribute('aria-controls')
           formContainer = document.getElementById(formId)

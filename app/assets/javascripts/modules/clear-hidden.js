@@ -2,11 +2,11 @@
 ;(function (global) {
   'use strict'
 
-  var GOVUK = global.GOVUK || {}
-  GOVUK.Modules = GOVUK.Modules || {}
+  var APP = global.APP || {}
+  APP.Modules = APP.Modules || {}
 
   // Clear values from any hidden conditional inputs on form submission
-  GOVUK.Modules.ClearHidden = function () {
+  APP.Modules.ClearHidden = function () {
     this.start = element => {
       function getClosest (elem, selector) {
         for (; elem && elem !== document; elem = elem.parentNode) {
@@ -37,5 +37,5 @@
     }
   }
 
-  global.GOVUK = GOVUK
+  global.APP = APP
 })(window)

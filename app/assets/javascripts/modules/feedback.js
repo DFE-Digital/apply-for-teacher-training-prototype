@@ -3,49 +3,97 @@
 ;(function (global) {
   'use strict'
 
-  var GOVUK = global.GOVUK || {}
-  GOVUK.Modules = GOVUK.Modules || {}
+  var APP = global.APP || {}
+  APP.Modules = APP.Modules || {}
 
-  GOVUK.Modules.Feedback = function () {
+  APP.Modules.Feedback = function () {
     this.start = function (element) {
       const feedback = $(element)[0]
-      const toggles = feedback.querySelectorAll('[aria-controls]')
-      const toggleQuestion = document.getElementById('feedback-question')
 
-      let toggleID
-      let toggleContent
-      let i
-      let target
-      for (i = 0; i < toggles.length; i = i + 1) {
-        toggleID = toggles[i].getAttribute('aria-controls')
-        toggleContent = document.getElementById(toggleID)
-        toggleContent.setAttribute('tabindex', '-1')
+      // If following methods not supported, fall back to non-enhanced component
+      if (
+        !window.addEventListener ||
+        !window.DOMTokenList ||
+        !window.HTMLTemplateElement
+      ) {
+        return
       }
 
-      function toggle (ev) {
-        ev = ev || window.event
-        target = ev.target || ev.srcElement
-        if (target.hasAttribute('aria-controls')) {
-          toggleID = target.getAttribute('aria-controls')
-          toggleContent = document.getElementById(toggleID)
+      // Prompt question container
+      // Show question with ‘Yes’ and ‘No’ answers
+      const promptTemplate = document.getElementById('feedback-prompt-template')
+      const promptClone = promptTemplate.content.cloneNode(true)
+      feedback.prepend(promptClone)
+      const promptContainer = document.getElementById('feedback-prompt')
 
-          if (toggleContent.getAttribute('aria-hidden') === 'true') {
-            toggleContent.setAttribute('aria-hidden', 'false')
-            target.setAttribute('aria-expanded', 'true')
-            toggleQuestion.setAttribute('aria-hidden', 'true')
-            toggleQuestion.setAttribute('aria-expanded', 'false')
+      // Success message container
+      // Show a thank-you message once feedback has been submitted
+      const successTemplate = document.getElementById('feedback-success-template')
+      const successClone = successTemplate.content.cloneNode(true)
+      feedback.append(successClone)
+      const successContainer = document.getElementById('feedback-success')
+
+      // Success button
+      const successButton = feedback.querySelector('.js-show-feedback-success')
+      successButton.addEventListener('click', showSuccessMessage)
+
+      function showSuccessMessage () {
+        promptContainer.classList.add('govuk-visually-hidden')
+        successContainer.hidden = false
+      }
+
+      // Form containers
+      const formContainers = feedback.querySelectorAll('[aria-controls]')
+
+      // Form close button
+      const closeButtonTemplate = document.getElementById('feedback-close-button-template')
+
+      // Form toggling
+      let formId
+      let formContainer
+      let formCloseToggle
+      let formToggle
+      let i
+      for (i = 0; i < formContainers.length; i = i + 1) {
+        formId = formContainers[i].getAttribute('aria-controls')
+        formContainer = document.getElementById(formId)
+        formContainer.setAttribute('tabindex', '-1')
+
+        // Add close button to form
+        const closeButtonClone = closeButtonTemplate.content.cloneNode(true)
+        formContainer.prepend(closeButtonClone)
+        formCloseToggle = formContainer.querySelector('.app-feedback__button--close')
+        formCloseToggle.setAttribute('aria-controls', formId)
+        console.log('formCloseToggle', formCloseToggle)
+
+        // Remove form from accessibility tree by default
+        formContainer.hidden = true
+      }
+
+      function toggleForm (e) {
+        e = e || window.event
+        formToggle = e.target || e.srcElement
+        if (formToggle.hasAttribute('aria-controls')) {
+          formId = formToggle.getAttribute('aria-controls')
+          formContainer = document.getElementById(formId)
+
+          if (formContainer.hidden) {
+            formToggle.setAttribute('aria-expanded', 'true')
+            formCloseToggle.setAttribute('aria-expanded', 'true')
+            formContainer.hidden = false
+            promptContainer.classList.add('govuk-visually-hidden')
           } else {
-            toggleContent.setAttribute('aria-hidden', 'true')
-            target.setAttribute('aria-expanded', 'false')
-            toggleQuestion.setAttribute('aria-hidden', 'false')
-            toggleQuestion.setAttribute('aria-expanded', 'true')
+            formCloseToggle.setAttribute('aria-expanded', 'false')
+            formToggle.setAttribute('aria-expanded', 'false')
+            formContainer.hidden = true
+            promptContainer.classList.remove('govuk-visually-hidden')
           }
         }
       }
 
-      feedback.addEventListener('click', toggle, false)
+      feedback.addEventListener('click', toggleForm, false)
     }
   }
 
-  global.GOVUK = GOVUK
+  global.APP = APP
 })(window)

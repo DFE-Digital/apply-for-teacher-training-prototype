@@ -1,22 +1,69 @@
-{% from "_components/feedback-find/macro.njk" import appFeedbackFind %}
-
 {% extends "_document.njk" %}
 
 {% set title = "[Page title]" %}
 {% set hasAccountLinks = false %}
 {% set serviceName = "Find postgraduate teacher training" %}
-{% set allowsFeedback = true %}
 
 {% block primary %}
-  <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque ipsum, molestie quis enim quis, efficitur sagittis nulla. Pellentesque cursus tellus facilisis metus pulvinar, condimentum sagittis magna eleifend.</p>
-  <p class="govuk-body">Morbi sollicitudin vel ex ut tempus. Pellentesque at dolor quis mi mollis sagittis. Phasellus nec libero vel nunc ultricies faucibus a feugiat dolor. Nullam dapibus lobortis quam vel lobortis.</p>
-  <p class="govuk-body">Curabitur ut condimentum tortor, vel lacinia orci. Morbi vel enim congue, euismod urna eget, porttitor nisl. Maecenas dignissim semper nisl, quis viverra elit semper id. Maecenas convallis tempor tellus.</p>
+  <h3 class="govuk-heading-l" id="section-advice">Support and advice</h3>
+  <p class="govuk-body">For questions about this course you should contact the training provider using <a href="#contact_section">the contact details above</a>.</p>
+  <h4 class="govuk-heading-m">Get support and advice about teaching</h4>
+  <p class="govuk-body">Register with <a class="govuk-link" href="https://getintoteaching.education.gov.uk/user/register">Get Into Teaching</a>, the Department for Education’s free support and advice service, for personalised guidance from teaching experts. They can help you to prepare your application, book school experience, and access exclusive teaching events. You can also call them free of charge on 0800 389 2500, or speak to an adviser using their <a class="govuk-link" href="https://getintoteaching.education.gov.uk/lp/live-chat">online chat service</a>, from 8am to 8pm, Monday to Friday.</p>
 {% endblock %}
 
 {% block beforeFooter %}
-  {% if allowsFeedback %}
-    {{ appFeedbackFind({
-      validate: validate
+  {% call appFeedback({
+    title: "Is this page useful?",
+    askIfSomethingWrong: true,
+    options: [{
+      text: "Yes",
+      visuallyHiddenText: ", this page is useful",
+      showSuccessMessage: true
+    }, {
+      text: "No",
+      visuallyHiddenText: ", this page is not useful",
+      attributes: {
+        "aria-controls": "feedback-form",
+        "aria-expanded": false
+      }
+    }, {
+      text: "There is something wrong with this page",
+      attributes: {
+        "aria-controls": "problem-form",
+        "aria-expanded": true if validate == 'problem' else false
+      }
+    }],
+    validate: validate
+  }) %}
+    <h3 class="govuk-heading-m">Help us improve this service</h3>
+    <p class="govuk-body">We use your feedback to make these pages better. We don’t check responses every day, and cannot respond to comments. If you need support, please <a href="mailto:becomingateacher@digital.education.gov.uk">contact us by email</a>.</p>
+
+    {{ govukCharacterCount({
+      id: "feedback",
+      label: {
+        classes: "govuk-label--s",
+        text: "How can we improve this service?"
+      },
+      maxwords: 300
     }) }}
-  {% endif %}
+
+    {{ govukInput({
+      id: "feedback",
+      label: {
+        classes: "govuk-label--s",
+        text: "Email address (optional)"
+      },
+      hint: {
+        text: "We may contact you to ask you some questions about your feedback"
+      },
+      type: "email",
+      spellcheck: "false"
+    }) }}
+
+    {{ govukButton({
+      classes: "govuk-!-margin-bottom-0",
+      text: "Submit feedback",
+      type: "submit"
+    }) }}
+  {% endcall %}
 {% endblock %}

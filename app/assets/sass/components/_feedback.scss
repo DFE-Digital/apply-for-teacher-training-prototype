@@ -1,69 +1,83 @@
-.app-feedback {
-  @include govuk-responsive-margin(6, "bottom");
+.app-feedback__button {
+  @include govuk-font(16);
+  margin: 0;
+  min-width: 80px;
+
+  @include govuk-media-query($from: mobile) {
+    white-space: nowrap;
+  }
 }
 
-.app-feedback__prompt {
+.app-feedback__button--close {
+  margin-top: govuk-spacing(1) * -1;
+  margin-bottom: govuk-spacing(4);
+
+  @include govuk-media-query($from: tablet) {
+    float: right;
+  }
+}
+
+.app-feedback__container {
   @include govuk-clearfix;
   align-items: center;
   background-color: govuk-colour("light-grey");
   box-sizing: border-box;
   flex-wrap: wrap;
-  text-align: center;
   outline: 0;
   padding: govuk-spacing(2) govuk-spacing(5);
   min-height: 80px;
 
+  &.app-feedback__container--success {
+    background-color: govuk-colour("green");
+  }
+
   .js-enabled & {
     display: flex;
 
-    &[aria-hidden="true"] {
+    &[hidden] {
       display: none;
     }
   }
-
-  @include govuk-media-query($from: tablet) {
-    text-align: left;
-  }
 }
 
-.app-feedback__prompt-title {
-  @include govuk-font(19, $weight: bold);
+.app-feedback__container-title {
+  @include govuk-font(16, $weight: bold);
   display: inline-block;
-  margin: govuk-spacing(3) 0;
+  margin: govuk-spacing(2) 0;
   margin-right: govuk-spacing(4);
 
   &:focus {
     outline: 0;
   }
 
-  @include govuk-media-query($from: tablet) {
-    @include govuk-font(16, $weight: bold);
+  .app-feedback__container--success & {
+    color: govuk-colour("white");
   }
 }
 
-.app-feedback__button {
-  @include govuk-font(19);
-  margin: 0;
-  min-width: 100px;
-
-  @include govuk-media-query($from: tablet) {
-    @include govuk-font(16);
-  }
-}
-
-.app-feedback__prompt-list {
+.app-feedback__list {
   list-style-type: none;
-  margin: govuk-spacing(2) 0;
+  margin: 0;
   padding: 0;
+
+  @include govuk-media-query($from: tablet) {
+    align-items: center;
+    display: flex;
+    flex: 1;
+  }
 }
 
-.app-feedback__prompt-list-item {
-  + .app-feedback__prompt-list-item {
-    margin-left: govuk-spacing(4);
+.app-feedback__list-item {
+  margin: govuk-spacing(2) 0;
+
+  &:nth-of-type(3) {
+    margin-left: auto;
+    margin-right: 0;
   }
 
   @include govuk-media-query($from: mobile) {
     display: inline-block;
+    margin-right: govuk-spacing(2);
   }
 }
 
@@ -76,14 +90,8 @@
   .js-enabled & {
     display: block;
 
-    &[aria-hidden="true"] {
+    &[hidden] {
       display: none;
     }
   }
-}
-
-.app-feedback__form-close {
-  float: right;
-  margin-top: govuk-spacing(1) * -1;
-  margin-bottom: govuk-spacing(4);
 }

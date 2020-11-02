@@ -53,8 +53,8 @@
     ]
   },
   "devDependencies": {
-    "jest": "^26.6.1",
-    "standard": "^16.0.0",
+    "jest": "^26.6.2",
+    "standard": "^16.0.1",
     "supertest": "^6.0.0"
   }
 }

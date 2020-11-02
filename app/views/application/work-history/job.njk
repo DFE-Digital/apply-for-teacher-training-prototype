@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
-{% set action = "edit" if applicationValue(["work-history", id, "role"]) else "add" %}
+{% set action = "edit" if applicationValue(["work-history", id]) else "add" %}
 {% set title = (action | capitalize) + " job" %}
 
 {% block pageNavigation %}
@@ -19,7 +19,7 @@
 
 {% block primary %}
   <p class="govuk-body">Include all your paid work in this section.</p>
-  <p class="govuk-body">Don’t include voluntary or unpaid experience – we'll ask about that later.</p>
+  <p class="govuk-body">Do not include voluntary or unpaid experience – we’ll ask you about that later.</p>
   {{ govukInput({
     label: {
       text: "Job title",
@@ -80,12 +80,12 @@
     items: [{
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('L'),
+      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('L'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('yyyy'),
+      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
@@ -104,12 +104,12 @@
     items: [{
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('L'),
+      value: (applicationValue(["work-history", id, "end-date"]) or end or "") | date('L'),
       classes: "govuk-input--width-2"
     }, {
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('yyyy'),
+      value: (applicationValue(["work-history", id, "end-date"]) or end or "") | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
   } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
@@ -128,10 +128,10 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Did this job involve working in a school or with children?"
+        text: "Did this job involve working in a school or with children?",
+        classes: "govuk-fieldset__legend--m"
       }
     },
-    classes: "govuk-radios--inline",
     items: [{
       text: "Yes"
     }, {
@@ -148,9 +148,9 @@
   {# Only ask if want to add another if:
     * not editing an existing item
     * not referred from a review page (which has an ‘Add another…’ button)
-    * feature flag enabled
   #}
-  {% if action != "edit" and not referrer and data.flags.add_another %}
+  {% if action != "edit" and not referrer %}
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
     {{ govukRadios({
       name: "next",
       fieldset: {
@@ -161,10 +161,10 @@
       },
       items: [{
         value: "add",
-        text: "Yes"
+        text: "Yes, I want to add another job"
       }, {
         value: "review",
-        text: "No"
+        text: "No, not at the moment"
       }]
     }) }}
   {% endif %}

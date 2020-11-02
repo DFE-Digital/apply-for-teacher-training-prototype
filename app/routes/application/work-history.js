@@ -1,4 +1,3 @@
-const querystring = require('querystring')
 const utils = require('./../../utils')
 
 /**
@@ -6,26 +5,34 @@ const utils = require('./../../utils')
  */
 module.exports = router => {
   // Render missing work history page
-  // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/work-history/missing', (req, res) => {
-    res.render('application/work-history/missing', {
-      referrer: req.query.referrer
-    })
+    res.render('application/work-history/missing')
   })
 
   // Generate new ID and redirect to that item
   router.get('/application/:applicationId/work-history/add/:type(job|break)', (req, res) => {
     const { applicationId, type } = req.params
     const id = utils.generateRandomString()
-    const queryString = querystring.stringify(req.query)
-
+    const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
     res.redirect(`/application/${applicationId}/work-history/${type}/${id}?${queryString}`)
+  })
+
+  // Render review page, redirecting to start page if no work history added
+  router.get('/application/:applicationId/work-history/:view?', (req, res) => {
+    const applicationData = utils.applicationData(req)
+    const workHistory = Object.entries(applicationData['work-history'])
+
+    if (workHistory.length) {
+      res.render('application/work-history/review')
+    } else {
+      res.render('application/work-history/index')
+    }
   })
 
   // Render job/break page
   router.get('/application/:applicationId/work-history/:type(job|break)/:id', (req, res) => {
     const { applicationId, id, type } = req.params
-    const { referrer } = req.query
+    const { referrer, start, end } = req.query
 
     let formaction
     if (referrer) {
@@ -38,8 +45,8 @@ module.exports = router => {
       referrer,
       formaction,
       id,
-      start: `${req.query.start}`,
-      end: `${req.query.end}`
+      start,
+      end
     })
   })
 
@@ -62,23 +69,12 @@ module.exports = router => {
   // Work history length answer branching
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const { applicationId } = req.params
-    const applicationData = utils.applicationData(req)
-    const workHistory = applicationData['work-history']
+    const { decision } = req.session.data
 
-    let length
-    if (workHistory) {
-      length = applicationData['work-history'].length
-    }
-
-    if (length === 'none') {
-      res.redirect(`/application/${applicationId}/work-history/missing`)
-    } else {
+    if (decision === 'yes') {
       res.redirect(`/application/${applicationId}/work-history/add/job`)
+    } else {
+      res.redirect(`/application/${applicationId}/work-history/missing`)
     }
-  })
-
-  // Render other work history pages
-  router.get('/application/:applicationId/work-history/:view', (req, res) => {
-    res.render(`application/work-history/${req.params.view}`)
   })
 }

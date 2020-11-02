@@ -114,9 +114,8 @@
   {# Only ask if want to add another if:
     * not editing an existing item
     * not referred from a review page (which has an ‘Add another…’ button)
-    * feature flag enabled
   #}
-  {% if action != "edit" and not referrer and data.flags.add_another %}
+  {% if action != "edit" and not referrer %}
     {{ govukRadios({
       name: "next",
       fieldset: {

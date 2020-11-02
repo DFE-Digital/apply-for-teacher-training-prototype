@@ -5,9 +5,13 @@
 
 {% block pageNavigation %}
   {% if referrer %}
-    {{ govukBackLink({ href: referrer }) }}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
   {% else %}
-    {{ govukBackLink({ href: applicationPath + "/work-history" }) }}
+    {{ govukBackLink({
+      href: applicationPath + "/work-history"
+    }) }}
   {% endif %}
 {% endblock %}
 

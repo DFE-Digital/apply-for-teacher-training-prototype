@@ -5,29 +5,18 @@
 {% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
 
 {% block pageNavigation %}
-  {% if phase %}
-    {{ govukBackLink({
-      href: "/applications?phase=" + phase
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/applications"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
 {% endblock %}
 
 {% block primary %}
   {% include "_includes/item/offer.njk" %}
   <p class="govuk-body">Remember:</p>
   <ul class="govuk-list govuk-list--bullet">
-  {% if phase == "dbd" %}
     <li>you can only accept one offer, across both Apply for teacher training and UCAS teacher training</li>
     <li>if you fail to respond, or you decline all your offers, you can still apply to other courses this year through <a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do">UCAS Teacher Training</a></li>
     <li>you can register with <a href="https://getintoteaching.education.gov.uk/">Get Into Teaching</a> to get help from a teacher training advisor</li>
-  {% else %}
-    <li>you are under no obligation to accept or decline an offer at this stage</li>
-    <li>you can only accept one offer, across both Apply for teacher training and UCAS Teacher Training</li>
-  {% endif %}
   </ul>
 
   {{ govukRadios({
@@ -47,12 +36,6 @@
       value: "decline",
       text: "Decline offer"
     }]
-  }) }}
-
-  {{ govukInput({
-    type: "hidden",
-    name: "phase",
-    value: phase
   }) }}
 
   {{ govukButton({

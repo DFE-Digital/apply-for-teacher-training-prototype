@@ -4,7 +4,7 @@ module.exports = router => {
   router.get('/application/:applicationId/:section/:id/delete', (req, res) => {
     const applicationData = utils.applicationData(req)
     const { id, section } = req.params
-    const { phase, referrer } = req.query
+    const { referrer } = req.query
     const item = applicationData[section][id]
 
     let parent
@@ -45,7 +45,6 @@ module.exports = router => {
       id,
       item,
       parent,
-      phase,
       referrer,
       section,
       type
@@ -55,14 +54,10 @@ module.exports = router => {
   router.post('/application/:applicationId/:section/:id/delete', (req, res) => {
     const applicationData = utils.applicationData(req)
     const { id, section } = req.params
-    const { phase, referrer } = req.query
+    const { referrer } = req.query
 
     delete applicationData[section][id]
 
-    if (phase) {
-      res.redirect(`${referrer}?phase=${phase}`)
-    } else {
-      res.redirect(referrer)
-    }
+    res.redirect(referrer)
   })
 }

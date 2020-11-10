@@ -3,15 +3,9 @@
 {% set title = "Are you sure you want to delete this " + type + "?" %}
 
 {% block pageNavigation %}
-  {% if phase %}
-    {{ govukBackLink({
-      href: referrer + "?phase=" + phase
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: referrer
+  }) }}
 {% endblock %}
 
 {% block primary %}

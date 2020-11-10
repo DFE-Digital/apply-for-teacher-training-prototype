@@ -117,10 +117,9 @@ module.exports = router => {
 
   // Confirmation: Decision made
   router.post('/send-email/:applicationId/:choiceId/decision', (req, res) => {
-    const applicationId = req.params.applicationId
-    const application = req.session.data.applications[applicationId]
-    const choiceId = req.params.choiceId
-    let { decision, phase } = req.session.data
+    const { applicationId, choiceId } = req.params
+    const application = utils.applicationData(req)
+    const { decision } = req.session.data
 
     let notifyTemplate
     const choice = application.choices[choiceId]
@@ -135,20 +134,19 @@ module.exports = router => {
         choice.status = 'Offer accepted'
 
         // Set remaining course choice statuses to `withdrawn`
-        const { choices } = application
+        let { choices } = application
+        choices = utils.toArray(choices)
         application.choices = choices.map(choice => {
-          if (choice.status === 'offer') {
+          if (choice.status === 'Offer received') {
             choice.status = 'Application withdrawn'
           }
           return choice
         })
-        phase = 'completed'
         break
       }
       case 'decline': {
         notifyTemplate = '906399c1-8694-4430-bcbf-c12cc06fd5a7'
         choice.status = 'Offer declined'
-        phase = 'decision'
         break
       }
     }
@@ -166,11 +164,7 @@ module.exports = router => {
     if (decision === 'withdraw') {
       res.redirect(`/application/${applicationId}/${choiceId}/withdraw/confirmation`)
     } else {
-      if (phase) {
-        res.redirect(`/applications?phase=${phase}`)
-      } else {
-        res.redirect('/applications')
-      }
+      res.redirect(`/dashboard/${applicationId}`)
     }
   })
 }

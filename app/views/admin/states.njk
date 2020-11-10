@@ -1,0 +1,39 @@
+{% extends "_form.njk" %}
+
+{% set parent = "Prototype admin" %}
+{% set title = "Application states" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/admin"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <h2 class="govuk-heading-m">Application</h2>
+  <dl class="govuk-list app-list--definition">
+    <dt><a href="/application/start">Have not started form</a></dt>
+    <dd>The candidate has signed in but has not edited the form yet.</dd>
+    <dt><a href="/application/12345">Form started but unsubmitted</a></dt>
+    <dd>The candidate has started editing but has not submitted the form yet.</dd>
+    <dt><a href="/application/12346">Form started but unsubmitted (apply again)</a></dt>
+    <dd>The candidate has started apply again but has not submitted the form yet.</dd>
+  </dl>
+
+  <h2 class="govuk-heading-m">Dashboard</h2>
+  <dl class="govuk-list app-list--definition">
+    <dt><a href="/dashboard/12345/awaiting-provider-decisions">Awaiting decisions from providers</a></dt>
+    <dd>We’ve sent the applications to the providers, but we have not heard back from all of them.</dd>
+    <dt><a href="/dashboard/12345/awaiting-candidate-response">Awaiting decision from candidate</a></dt>
+    <dd>All providers have responded and it’s now up to the candidate to make a decision.</dd>
+    <dt><a href="/dashboard/12345/ended-without-success">Ended without success</a></dt>
+    <dd>All of the candidate’s applications have been withdrawn, rejected, declined or offer conditions were not met.</dd>
+    <dt><a href="/dashboard/12345/pending-conditions">Accepted offer, pending conditions</a></dt>
+    <dd>The candidate has accepted an offer. The provider now has to confirm to us that the candidate has met the conditions in the offer.</dd>
+    <dt><a href="/dashboard/12345/offer-deferred">Offer deferred</a></dt>
+    <dd>The candidate has deferred their offer until the next academic year.</dd>
+    <dt><a href="/dashboard/12345/recruited">Recruited</a></dt>
+    <dd>The candidate has been recruited.</dd>
+  </dl>
+{% endblock %}

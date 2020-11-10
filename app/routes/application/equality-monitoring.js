@@ -51,6 +51,10 @@ module.exports = router => {
     const paths = questionPaths(req)
     let formaction = referrer || paths.next
 
+    if (view === 'index') {
+      formaction = `${basePath}/answer${referrerPath}`
+    }
+
     if (view === 'ethnic-group') {
       formaction = `${basePath}/ethnic-group/answer${referrerPath}`
     }
@@ -64,6 +68,18 @@ module.exports = router => {
       paths,
       referrer
     })
+  })
+
+  // Opt-in answer branching
+  router.post('/application/:applicationId/equality-monitoring/answer', (req, res) => {
+    const { applicationId } = req.params
+    const { answer } = req.session.data
+
+    if (answer === 'yes') {
+      res.redirect(`/application/${applicationId}/equality-monitoring/sex`)
+    }
+
+    res.redirect(`/application/${applicationId}/submit`)
   })
 
   // Ethnic group answer branching

@@ -11,7 +11,7 @@
       text: "Course"
     },
     value: {
-      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
+      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a>"
     },
     actions: {
       items: [{
@@ -35,13 +35,6 @@
         visuallyHiddenText: "course location"
       }]
     } if canAmend and not item.singleLocationCourse
-  }, {
-    key: {
-      text: "Full time or part time"
-    },
-    value: {
-      html: item.studyMode
-    } if item.studyMode
   }, {
     key: {
       text: "Type"

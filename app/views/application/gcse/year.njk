@@ -6,10 +6,11 @@
 {% else %}
   {% set title = "When was your " + subject + " qualification awarded?" %}
 {% endif %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

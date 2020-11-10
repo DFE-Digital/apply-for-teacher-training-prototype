@@ -1,15 +1,15 @@
 const originalQuery = (req) => {
-  var originalQueryString = req.originalUrl.split('?')[1]
+  const originalQueryString = req.originalUrl.split('?')[1]
   return originalQueryString ? `?${originalQueryString}` : ''
 }
 
 const nextAndBackPaths = (paths, req) => {
-  var currentPath = req.path
-  var query = originalQuery(req)
+  const currentPath = req.path
+  const query = originalQuery(req)
 
-  var index = paths.indexOf(currentPath)
-  var next = paths[index + 1] || ''
-  var back = paths[index - 1] || ''
+  const index = paths.indexOf(currentPath)
+  const next = paths[index + 1] || ''
+  const back = paths[index - 1] || ''
 
   return {
     next: next + query,

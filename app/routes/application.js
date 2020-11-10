@@ -1,8 +1,8 @@
 const utils = require('./../utils')
 
 function createNewApplication (req) {
-  var code = utils.generateRandomString()
-  var data = req.session.data
+  const code = utils.generateRandomString()
+  const data = req.session.data
 
   if (typeof data.applications === 'undefined') {
     data.applications = {}
@@ -13,6 +13,7 @@ function createNewApplication (req) {
       status: 'started',
       apply2: false,
       choices: {},
+      references: {},
       candidate: {},
       'contact-details': {},
       'reasonable-adjustments': {},
@@ -29,8 +30,7 @@ function createNewApplication (req) {
       interview: null,
       'personal-statement': null,
       'work-history': {},
-      'school-experience': {},
-      referees: {}
+      'school-experience': {}
     }
   }
 
@@ -77,33 +77,23 @@ module.exports = router => {
         break
       }
 
-      case 'amending': {
-        applications = createDummyApplication('amending')
-        break
-      }
-
-      case 'amended': {
-        applications = createDummyApplication('amended')
-        break
-      }
-
       case 'pending-decisions': {
-        applications = createDummyApplication('submitted', ['Pending', 'Pending'])
+        applications = createDummyApplication('submitted', ['Awaiting decision', 'Awaiting decision'])
         break
       }
 
       case 'outstanding-decision': {
-        applications = createDummyApplication('submitted', ['Offer', 'Pending'])
+        applications = createDummyApplication('submitted', ['Offer received', 'Awaiting decision'])
         break
       }
 
       case 'has-decisions': {
-        applications = createDummyApplication('submitted', ['Offer', 'Rejected'])
+        applications = createDummyApplication('submitted', ['Offer received', 'Unsuccessful'])
         break
       }
 
       case 'has-accepted': {
-        applications = createDummyApplication('submitted', ['Accepted', 'Rejected'])
+        applications = createDummyApplication('submitted', ['Offer accepted', 'Unsuccessful'])
         break
       }
     }
@@ -126,19 +116,9 @@ module.exports = router => {
     }
   })
 
-  // New referee request
-  router.all('/applications/add-new-referee', (req, res) => {
-    const { reason1, reason2 } = req.query
-
-    res.render('applications/add-new-referee', {
-      reason1,
-      reason2
-    })
-  })
-
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
-    var code = createNewApplication(req)
+    const code = createNewApplication(req)
     req.session.data.applications[code].welcomeFlow = true
 
     if (req.session.data.course_from_find) {
@@ -151,13 +131,13 @@ module.exports = router => {
   })
 
   router.get('/application/start/choice', (req, res) => {
-    var code = createNewApplication(req)
+    const code = createNewApplication(req)
     res.redirect(`/application/${code}/choices/add`)
   })
 
   router.all('/application/started', (req, res) => {
-    var applications = req.session.data.applications
-    var applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
+    const applications = req.session.data.applications
+    const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
     if (applicationId) {
       res.redirect('/application/' + applicationId)
     }
@@ -193,12 +173,12 @@ module.exports = router => {
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
 
-    if (apply2Application.referees && apply2Application.referees.first) {
-      apply2Application.referees.first.status = 'Received'
+    if (apply2Application.references && apply2Application.references[0]) {
+      apply2Application.references[0].status = 'Received'
     }
 
-    if (apply2Application.referees && apply2Application.referees.second) {
-      apply2Application.referees.second.status = 'Received'
+    if (apply2Application.references && apply2Application.references[1]) {
+      apply2Application.references[1].status = 'Received'
     }
 
     data.applications[code] = apply2Application
@@ -244,12 +224,11 @@ module.exports = router => {
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
-  require('./application/edit')(router)
   require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found
   router.all('/application/:applicationId/:view', (req, res) => {
-    const referrer = req.query.referrer
+    const { referrer } = req.query
 
     res.render(
       `application/${req.params.view}`,

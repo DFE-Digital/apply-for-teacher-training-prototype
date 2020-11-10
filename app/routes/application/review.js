@@ -5,14 +5,15 @@ const utils = require('./../../utils')
  */
 module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
-    var applicationData = utils.applicationData(req)
-    var pageObject = {}
-    var successFlash = req.flash('success')
+    const applicationData = utils.applicationData(req)
+    const pageObject = {}
+    const successFlash = req.flash('success')
 
     if (successFlash[0] === 'submitted-incompleted-application') {
       pageObject.errorList = []
       const sections = {
         choices: applicationData.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
+        references: 'Add 2 referees to your application',
         candidate: 'Personal details not entered',
         'contact-details': 'Contact details not entered',
         'reasonable-adjustments': 'Training with a disability not entered',
@@ -26,8 +27,7 @@ module.exports = router => {
           english: 'English GCSE or equivalent not entered',
           science: 'Science GCSE or equivalent not entered'
         },
-        interview: 'Tell us your interview needs',
-        referees: 'Add 2 referees to your application'
+        interview: 'Tell us your interview needs'
       }
 
       for (const [key, value] of Object.entries(sections)) {
@@ -75,16 +75,10 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/review-complete', (req, res) => {
-    const applicationData = utils.applicationData(req)
     const completedApplication = utils.hasCompletedApplication(req)
 
     if (completedApplication) {
-      const { status } = applicationData
-      if (status === 'amending') {
-        res.redirect(`/application/${req.params.applicationId}/submit`)
-      } else {
-        res.redirect(`/application/${req.params.applicationId}/equality-monitoring`)
-      }
+      res.redirect(`/application/${req.params.applicationId}/equality-monitoring`)
     } else {
       req.flash('success', 'submitted-incompleted-application')
       res.redirect(`/application/${req.params.applicationId}/review`)

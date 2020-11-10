@@ -3,7 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = "/application/" + applicationId + "/english-language/details" %}
 {% set parent = "English as a foreign language" %}
-{% set title = "What English language qualification do you have?" %}
+{% set title = "What English language assessment did you do?" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -12,8 +12,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
+       href: "/application/" + applicationId + "/english-language"
     }) }}
   {% endif %}
 {% endblock %}

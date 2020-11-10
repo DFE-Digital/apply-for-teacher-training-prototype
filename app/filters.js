@@ -152,39 +152,48 @@ module.exports = (env) => {
     return false
   }
 
-  filters.statusClass = (status) => {
+  filters.statusClass = (status, prefix = 'govuk-tag') => {
     switch (status) {
-      // States that currently use the default tag style
-      // - 'Enrolled'
-      // - 'Conditions met'
-      // - 'Conditions not met'
-      // - 'Completed'
-
       // Application phases
       case 'Submitted':
-        return 'govuk-tag--grey'
-      case 'Pending':
-        return 'govuk-tag--blue'
+        return `${prefix}--grey`
+      case 'Awaiting decision':
+        return `${prefix}--purple`
+      case 'Offer received':
+        return `${prefix}--turquoise`
+      case 'Offer accepted':
+        return `${prefix}--blue`
+      case 'Offer declined':
+        return `${prefix}--orange`
+      case 'Offer deferred':
+        return `${prefix}--yellow`
       case 'Offer withdrawn':
-        return 'govuk-tag--red'
+      case 'Conditions not met':
+        return `${prefix}--red`
+      case 'Conditions met':
+        return `${prefix}--green`
+      case 'Unsuccessful':
+      case 'Application not sent':
+        return `${prefix}--pink`
+      case 'Application cancelled':
       case 'Application withdrawn':
-        return 'govuk-tag--orange'
-      case 'Declined':
-        return 'govuk-tag--orange'
-      case 'Rejected':
-        return 'govuk-tag--red'
-      case 'Accepted':
-        return 'govuk-tag--blue'
-      case 'Not requested yet':
-        return 'govuk-tag--blue'
-      case 'Offer':
-        return 'govuk-tag--turquoise'
+        return `${prefix}--orange`
 
       // Reference statuses
+      case 'Not requested yet':
+      case 'Deactivated':
+        return `${prefix}--grey`
       case 'Awaiting response':
-        return 'govuk-tag--blue'
+        return `${prefix}--purple`
+      case 'Reference overdue':
+        return `${prefix}--yellow`
       case 'Reference given':
-        return 'govuk-tag--green'
+        return `${prefix}--green`
+      case 'Request cancelled':
+        return `${prefix}--orange`
+      case 'Reference declined':
+      case 'Request failed':
+        return `${prefix}--red`
     }
   }
 

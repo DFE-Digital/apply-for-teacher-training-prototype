@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath + "/work-history/review" %}
@@ -23,11 +23,10 @@
   {% endset %}
 
   {{ govukCharacterCount({
-    label: {
-      html: labelHtml,
-      classes: "govuk-label--s"
+    label: label,
+    hint: {
+      text: "For example, parenting or caring responsibilities, unemployment, travel, health, study or other personal reasons"
     },
-    rows: 20,
     maxwords: 400
   } | decorateApplicationAttributes(["work-history", "missing"])) }}
 

@@ -11,10 +11,11 @@
 {% else %}
   {% set title = "What grade is your " + subject + " qualification?" %}
 {% endif %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

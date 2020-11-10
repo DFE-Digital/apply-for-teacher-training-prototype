@@ -8,8 +8,9 @@
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "gcse-" + id %}
-  {% set incompleteText = id | capitalize + " GCSE or equivalent not marked as complete" %}
+  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
   {% set incompleteLink = "/" + id + "/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Enter your " + id | capitalize + " GCSE or equivalent" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
   {{ appSummaryCard({

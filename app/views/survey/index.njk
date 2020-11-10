@@ -1,22 +1,35 @@
 {% extends "_form.njk" %}
 
-{% set title = "I would recommend this service to a friend or colleague" %}
-{% set formaction = "/survey/experience-2" %}
+{% set title = "Your feedback" %}
+{% set formaction = "/survey/thank-you" %}
 
 {% block primary %}
   {{ govukRadios({
-    id: "experience-recommend-rating",
-    name: "experience-recommend-rating",
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m",
+        text: "How satisfied are you with this service?"
+      }
+    },
     items: [
-      { text: "1 - strongly agree", value: "1" },
-      { text: "2" },
-      { text: "3" },
-      { text: "4" },
-      { text: "5 - strongly disagree", value: "5" }
+      { text: "Very satisfied" },
+      { text: "Satisfied" },
+      { text: "Neither satisfied or dissatisfied" },
+      { text: "Dissatisfied" },
+      { text: "Very dissatisfied" }
     ]
   }) }}
 
+  {{ govukCharacterCount({
+    label: {
+      classes: "govuk-label--m",
+      text: "How could we improve this service?"
+    },
+    maxwords: 1200,
+    rows: 6
+  }) }}
+
   {{ govukButton({
-    text: "Continue"
+    text: "Send feedback"
   }) }}
 {% endblock %}

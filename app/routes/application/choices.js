@@ -6,7 +6,7 @@ const pickPaths = (req) => {
   const applicationId = req.params.applicationId
   const choiceId = req.params.choiceId
 
-  var paths = [
+  const paths = [
     `/application/${applicationId}/choices`,
     `/application/${applicationId}/choices/${choiceId}/found`,
     `/application/${applicationId}/choices/${choiceId}/provider`,
@@ -21,10 +21,10 @@ const pickPaths = (req) => {
 }
 
 const findPaths = (req) => {
-  const applicationId = req.params.applicationId
-  const choiceId = req.params.choiceId
+  const { applicationId } = req.params
+  const { choiceId } = req.params
 
-  var paths = [
+  const paths = [
     `/application/${applicationId}`,
     `/application/${applicationId}/choices/${choiceId}/found`,
     `/application/${applicationId}/choices/${choiceId}/find`
@@ -34,9 +34,9 @@ const findPaths = (req) => {
 }
 
 const temporaryAndSavedChoices = (req) => {
-  const data = req.session.data
+  const { data } = req.session
   const applicationData = data.applications[req.params.applicationId]
-  const choiceId = req.params.choiceId
+  const { choiceId } = req.params
 
   if (typeof applicationData.choices === 'undefined') {
     applicationData.choices = {}
@@ -84,9 +84,9 @@ const singleLocationCourse = (req) => {
 
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const choiceId = utils.generateRandomString()
-    var data = req.session.data
+    const data = req.session.data
 
     if (typeof data.applications[applicationId].temporaryChoices === 'undefined') {
       data.applications[applicationId].temporaryChoices = {}
@@ -106,7 +106,7 @@ module.exports = router => {
 
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
     const applicationData = req.session.data.applications[req.params.applicationId]
-    const choiceId = req.params.choiceId
+    const { choiceId } = req.params
     const paths = pickPaths(req)
 
     applicationData.choices[choiceId] = {
@@ -165,10 +165,10 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {
-    const data = req.session.data
-    const applicationId = req.params.applicationId
+    const { data } = req.session
+    const { applicationId } = req.params
     const applicationData = data.applications[applicationId]
-    const choiceId = req.params.choiceId
+    const { choiceId } = req.params
     const temporaryChoice = applicationData.temporaryChoices[choiceId]
 
     if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'yes') {

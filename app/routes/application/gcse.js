@@ -14,12 +14,11 @@ const isInternational = (req) => gcseData(req).type === 'Non-UK qualification'
 const isMissing = (req) => gcseData(req).type === 'I don’t have this qualification yet'
 
 const gcsePaths = (req) => {
-  const applicationId = req.params.applicationId
+  const { applicationId, id } = req.params
   const basePath = `/application/${applicationId}/gcse/${req.params.id}`
   const referrer = req.query.referrer
-  const id = req.params.id
 
-  var paths = [
+  const paths = [
     basePath,
     ...(isInternational(req) ? [`${basePath}/country`] : []),
     ...(isInternational(req) ? [`${basePath}/naric`] : []),
@@ -53,8 +52,8 @@ module.exports = router => {
   router.get('/application/:applicationId/gcse/:id', (req, res) => {
     const completedGcse = gcseData(req).grade && gcseData(req).year
 
-    const id = req.params.id
-    const referrer = req.query.referrer
+    const { id } = req.params
+    const { referrer } = req.query
     const nextPath = `/application/${req.params.applicationId}/gcse/${id}/answer?${utils.queryString(req)}`
     // If completed this section, return to referrer, else next question
     const formaction = completedGcse ? referrer : nextPath
@@ -68,10 +67,8 @@ module.exports = router => {
 
   // GCSE type answer branching
   router.post('/application/:applicationId/gcse/:id/answer', (req, res) => {
-    const id = req.params.id
-    const applicationId = req.params.applicationId
-    const referrer = req.query.referrer
-    const type = gcseData(req).type
+    const { applicationId, id } = req.params
+    const { referrer } = req.query
 
     let path
     if (isInternational(req)) {
@@ -85,17 +82,16 @@ module.exports = router => {
     res.redirect(`${path}?${utils.queryString(req)}`)
   })
 
-  // Render NARIC/grade/year pages
-  router.all('/application/:applicationId/gcse/:id/:template(subject|country|grade|naric|year)', (req, res) => {
+  // Render UK NARIC/grade/year pages
+  router.all('/application/:applicationId/gcse/:id/:view(subject|country|grade|naric|year)', (req, res) => {
     const completedGcse = gcseData(req).grade && gcseData(req).year
 
-    const id = req.params.id
-    const referrer = req.query.referrer
-    const template = req.params.template
+    const { id, view } = req.params
+    const { referrer } = req.query
     const paths = gcsePaths(req)
     const formaction = completedGcse ? referrer : paths.next
 
-    res.render(`application/gcse/${template}`, {
+    res.render(`application/gcse/${view}`, {
       formaction,
       paths,
       id,

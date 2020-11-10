@@ -1,27 +1,58 @@
-{% set complete = "true" if applicationValue(["completed", "references"]) %}
-
-{% if showIncomplete and complete != "true" %}
+{% if showIncomplete and references.length < 2 %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "referees" %}
-  {% set incompleteText = "Referees not marked as completed" %}
+  {% set incompleteText = "You need 2 references before you can submit your application" %}
   {% set incompleteLink = "/referees/review?referrer=" + referrer %}
+  {% set incompleteLinkText = "Manage your references" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
-  {% set references = references | toArray %}
   {% for item in references %}
+    {% set allReferences = applicationValue(["references"]) | toArray %}
+    {% set status = item.status %}
+    {% set readyReferences = allReferences | selectattr("ready") %}
+
+    {# Available actions #}
+    {% set canAmendReferee = item.status == "Not requested yet" %}
+    {% set canAmendEmailAddress = item.status == "Request failed" %}
+    {% set canDelete = (item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Reference declined") or (item.status == "Request failed") %}
+    {% set canCancelRequest = (item.status == "Awaiting response") or (item.status == "Reference overdue") %}
+    {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled")) and readyReferences.length < 2 %}
+    {% set canRetryRequest = (item.status == "Request failed") and readyReferences.length < 2 %}
+    {% set canNudgeReferee = ((item.status == "Awaiting response") or (item.status == "Reference overdue")) and item.nudges < 1 %}
+
+    {# Deactivating references is an idea we can return to later #}
+    {# set canDeactivateReference = item.status == "Reference given" #}
+    {% set canDeactivateReference = false %}
+    {% set canReactivateReference = item.status == "Deactivated" %}
+
     {% set refereeHtml %}
       {% include "_includes/item/reference.njk" %}
     {% endset %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",
       headingLevel: 3,
-      titleText: item.id | capitalize + " referee",
+      titleText: item.type + " reference from " + item.name,
       actions: {
         items: [{
-          href: applicationPath + "/referees/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete referee"
-        }]
-      } if canAmendReferences,
+          href: applicationPath + "/references/" + item.id + "/action/cancel?referrer=" + referrer,
+          text: "Cancel request"
+        } if canCancelRequest, {
+          href: applicationPath + "/references/" + item.id + "/action/request?referrer=" + referrer,
+          text: "Send request again" if (item.status == "Request cancelled" or item.status == "Request failed") else "Send request"
+        } if canMakeRequest, {
+          href: applicationPath + "/references/" + item.id + "/action/retry?referrer=" + referrer,
+          text: "Retry request"
+        } if canRetryRequest, {
+          href: applicationPath + "/references/" + item.id + "/action/delete?referrer=" + referrer,
+          text: "Delete referee" if item.status == "Not requested yet" else "Delete request"
+        } if canDelete, {
+          href: applicationPath + "/references/" + item.id + "/action/deactivate?referrer=" + referrer,
+          text: "Deactivate reference"
+        } if canDeactivateReference, {
+          href: applicationPath + "/references/" + item.id + "/action/reactivate?referrer=" + referrer,
+          text: "Reactivate reference"
+        } if canReactivateReference]
+      },
       html: refereeHtml
     }) }}
   {% endfor %}

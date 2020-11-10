@@ -1,0 +1,27 @@
+{% extends "_form-question.njk" %}
+
+{% set title = "What is the referee’s name?" %}
+{% set allowsFeedback = true %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/" + id + "/type/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: label
+  } | decorateApplicationAttributes(["references", id, "name"])) }}
+
+  {{ govukButton({
+    text: "Save changes" if referrer else "Save and continue"
+  }) }}
+{% endblock %}

@@ -2,11 +2,12 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What subject is your degree?" %}
+{% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

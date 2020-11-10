@@ -45,7 +45,21 @@
     } if canAmend
   }, {
     key: {
-      text: "NARIC reference number"
+      text: "Do you have a UK NARIC statement of comparability?"
+    },
+    value: {
+      text: item.naric or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/naric?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "UK NARIC statement of comparability"
+      }]
+    } if canAmend
+  } if item.naric, {
+    key: {
+      text: "UK NARIC reference number"
     },
     value: {
       text: item["naric-reference"] or "Not entered"
@@ -54,10 +68,10 @@
       items: [{
         href: applicationPath + "/degree/" + item.id + "/naric?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "NARIC reference"
+        visuallyHiddenText: "UK NARIC reference"
       }]
     } if canAmend
-  } if item["naric-reference"], {
+  } if item.naric and item["naric-reference"], {
     key: {
       text: "Comparable UK degree"
     },
@@ -71,12 +85,40 @@
         visuallyHiddenText: "comparable UK degree"
       }]
     } if canAmend
-  } if item["naric-comparability"], {
+  } if item.naric and item["naric-comparability"], {
     key: {
-      text: "Grade"
+      text: "Have you completed this degree?"
     },
     value: {
-      text: (item["grade-predicted"] + " (Predicted)" if item["grade"] == "Pending") or item["grade-other"] or item.grade or "Not entered"
+      text: item.completed or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/completed?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "if completed degree"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Does this degree give a grade?"
+    },
+    value: {
+      text: item["has-grade"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "if this degree give a grade"
+      }]
+    } if canAmend
+  } if item["has-grade"], {
+    key: {
+      text: "Grade" if item.completed == "Yes" else "Predicted grade"
+    },
+    value: {
+      text: item.grade or "Not entered"
     },
     actions: {
       items: [{
@@ -85,18 +127,32 @@
         visuallyHiddenText: "grade"
       }]
     } if canAmend
-  }, {
+  } if item.grade, {
     key: {
-      text: "Dates"
+      text: "Start year"
     },
     value: {
-      text: item["year-start"] + " - " + item["year-end"] or "Not entered"
+      text: item["year-start"] or "Not entered"
     },
     actions: {
       items: [{
         href: applicationPath + "/degree/" + item.id + "/year?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "dates"
+        visuallyHiddenText: "start year"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Graduation year"
+    },
+    value: {
+      text: item["year-end"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/year?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "graduation year"
       }]
     } if canAmend
   }]

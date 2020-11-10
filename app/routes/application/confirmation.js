@@ -1,16 +1,9 @@
 module.exports = router => {
   router.all('/application/:applicationId/confirmation', (req, res) => {
-    const applicationId = req.params.applicationId
+    const { applicationId } = req.params
     const applicationData = req.session.data.applications[applicationId]
-    const status = applicationData.status
 
-    if (status === 'started') {
-      applicationData.status = 'Submitted'
-    }
-
-    if (status === 'amending') {
-      applicationData.status = 'amended'
-    }
+    applicationData.status = 'Submitted'
 
     res.render('application/confirmation')
   })

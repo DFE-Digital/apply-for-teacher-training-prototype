@@ -32,37 +32,38 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
-{% from "_components/autocomplete/macro.njk"   import appAutocomplete %}
-{% from "_components/banner/macro.njk"         import appBanner %}
-{% from "_components/cookie-banner/macro.njk"  import appCookieBanner %}
-{% from "_components/footer/macro.njk"         import appFooter %}
-{% from "_components/icon/macro.njk"           import appIcon %}
-{% from "_components/related/macro.njk"        import appRelated %}
-{% from "_components/summary-card/macro.njk"   import appSummaryCard %}
-{% from "_components/task-list/macro.njk"      import appTaskList %}
+{% from "_components/autocomplete/macro.njk"          import appAutocomplete %}
+{% from "_components/banner/macro.njk"                import appBanner %}
+{% from "_components/cookie-banner/macro.njk"         import appCookieBanner %}
+{% from "_components/footer/macro.njk"                import appFooter %}
+{% from "_components/feedback/macro.njk"              import appFeedback %}
+{% from "_components/icon/macro.njk"                  import appIcon %}
+{% from "_components/related/macro.njk"               import appRelated %}
+{% from "_components/summary-card/macro.njk"          import appSummaryCard %}
+{% from "_components/task-list/macro.njk"             import appTaskList %}
 
 {% block head %}
   {% include "_includes/head.njk" %}
 {% endblock %}
 
 {% block pageTitle %}
-  {% if title %}{{ title }} - {% endif %}{{ serviceName }} - GOV.UK
+  {% if serviceName %}
+    {% if title %}{{ title }} - {% endif %}{{ serviceName }} - GOV.UK
+  {% else %}
+    {% if title %}{{ title }} - {% endif %}GOV.UK
+  {% endif %}
 {% endblock %}
 
 {% block header %}
   {% if shouldShowCookieMessage %}
-  {{ appCookieBanner({
-    text: cookieText
-  })}}
+    {{ appCookieBanner({
+      text: cookieText
+    })}}
   {% endif %}
 
-  {% if applicationValue(["candidate", "given-name"]) %}
-    {% set signOutText = "Sign out (" + applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) + ")" %}
-  {% else %}
-    {% set signOutText = "Sign out" %}
-  {% endif %}
+  {% set accountEmail = data.applications[applicationId].account.email or data.account.email %}
 
-  {% if data.token %}
+  {% if accountEmail %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
     {% else %}
@@ -78,12 +79,11 @@
     serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: [{
+      html: "<strong>" + accountEmail + "</strong>"
+    }, {
       href: "/account/sign-out",
-      text: signOutText
-    } if data.token, {
-      href: "/account/sign-in",
-      text: "Sign in"
-    } if not data.token] if hasAccountLinks != false
+      text: "Sign out"
+    }] if accountEmail and hasAccountLinks != false
   }) }}
 {% endblock %}
 
@@ -92,14 +92,12 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {% if showPhaseBanner != false %}
-    {{ govukPhaseBanner({
-      tag: {
-        text: "Prototype"
-      },
-      html: "This is a prototype of a new service. Some parts may not work yet."
-    }) }}
-  {% endif %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    text: "This is a prototype of a new service. Some parts may not work yet."
+  }) if showPhaseBanner != false }}
   {% block pageNavigation %}
   {% endblock %}
   {% block pageBanner %}
@@ -108,39 +106,29 @@
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
-{% set metaHtml %}
-  <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16">
-    <li>Email: <a class="govuk-link govuk-footer__link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
-    <li>Monday to Friday (except public holidays)</li>
-    <li>We aim to respond within 5 working days, or one working day for more urgent&nbsp;queries</li>
-  </ul>
-{% endset %}
-
 {% block footer %}
+  {% block beforeFooter %}
+    {% include "_includes/feedback.njk" %}
+  {% endblock %}
+
+  {% set metaHtml %}
+    <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-8">
+      <li>Email: <a class="govuk-link govuk-footer__link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
+      <li>We respond within 5 working days, or one working day for more urgent queries</li>
+    </ul>
+  {% endset %}
+
   {{ appFooter({
-    classes: "govuk-footer--app",
     meta: {
-      title: "Need help?",
+      title: "Get support",
       html: metaHtml,
       items: [{
-        href: "/privacy-policy",
-        text: "Privacy policy"
-      }, {
         href: "/admin",
         text: "Prototype admin"
       }, {
         href: "/admin/clear-data",
         text: "Clear data"
-      }, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=1",
-        text: "v1"
-      } if providerCode and courseCode, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=2",
-        text: "v2"
-      } if providerCode and courseCode, {
-        href: "/apply/" + providerCode + "/" + courseCode + "?dualrunning=true&variant=3",
-        text: "v3"
-      } if providerCode and courseCode]
+      }]
     }
   }) }}
 {% endblock %}

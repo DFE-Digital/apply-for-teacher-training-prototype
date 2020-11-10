@@ -1,9 +1,4 @@
-{% if application.status == "amended" %}
-  {% set appStatus = "Pending" %}
-{% elif application.status == "amending" %}
-  {% set appStatus = "Amending"%}
-{% endif %}
-{% set status = item.status or appStatus or "Submitted" %}
+{% set status = item.status or application.status or "Submitted" %}
 {% set statusHtml %}
   {{ govukTag({
     classes: "app-tag " + status | statusClass,
@@ -75,7 +70,7 @@
     value: {
       html: statusHtml
     }
-  } if (status and status != "amending") and showChoiceStatus, {
+  } if showChoiceStatus, {
     key: {
       text: "Reason for rejection"
     },

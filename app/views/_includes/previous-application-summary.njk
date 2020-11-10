@@ -1,0 +1,119 @@
+{% set courseHtml1 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
+    <p class="govuk-body">Your subject knowledge could be improved.</p>
+    <p class="govuk-body">Details: Understand the purpose of PE in schools and the learn more about the procedures related to safeguarding.</p>
+
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
+    <p class="govuk-body">No Science GCSE grade 4 (C) or above, or valid equivalent.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (2XT2)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--pink",
+          text: "Unsuccessful"
+        })
+      }
+    }, {
+      key: {
+        text: "Feedback"
+      },
+      value: {
+        html: reasonHtml
+      }
+    }]
+  }) }}
+{% endset %}
+
+{% set courseHtml2 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
+    <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (3-7) (2VLT)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--pink",
+          text: "Unsuccessful"
+        })
+      }
+    }, {
+      key: {
+        text: "Feedback"
+      },
+      value: {
+        html: reasonHtml
+      }
+    }]
+  }) }}
+{% endset %}
+
+{% set courseHtml3 %}
+  {% set reasonHtml %}
+    <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Course full</h4>
+    <p class="govuk-body">We’re sorry to tell you that the course you applied to was full.</p>
+  {% endset %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Course"
+      },
+      value: {
+        html: "Primary (X100)"
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: govukTag({
+          classes: "app-tag govuk-tag--orange",
+          text: "Application withdrawn"
+        })
+      }
+    }]
+  }) }}
+{% endset %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  headingLevel: 3,
+  titleText: "Gorse SCITT",
+  html: courseHtml1
+}) }}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  headingLevel: 3,
+  titleText: "Leeds Trinity University",
+  html: courseHtml2
+}) }}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  headingLevel: 3,
+  titleText: "Bradford College",
+  html: courseHtml3
+}) }}

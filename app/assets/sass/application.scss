@@ -8,16 +8,22 @@ $govuk-global-styles: true;
 // Components that aren’t in Frontend
 @import "components/autocomplete";
 @import "components/banner";
+@import "components/button";
 @import "components/cookie-banner";
-@import "components/footer";
+@import "components/feedback";
 @import "components/hidden-link";
 @import "components/icon";
 @import "components/related";
+@import "components/status-indicator";
 @import "components/styled-content";
 @import "components/summary-card";
 @import "components/table";
 @import "components/task-list";
 @import "components/tag";
+
+.govuk-body {
+  word-wrap: break-word;
+}
 
 // Override GOV.UK Frontend print styles
 @media print {

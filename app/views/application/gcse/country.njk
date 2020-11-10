@@ -2,10 +2,11 @@
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "In which country did you study for your " + subject + " qualification?" %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

@@ -1,5 +1,6 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Which institution did you study at?" %}
+{% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% if international %}
   {% extends "_form.njk" %}
@@ -9,7 +10,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: referrer or paths.back
   }) }}
 {% endblock %}
 

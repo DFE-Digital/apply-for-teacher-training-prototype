@@ -19,24 +19,23 @@
   {% endif %}
 {% endset %}
 
-{% set helpHtml %}
+{% set supportHtml %}
   <ul class="govuk-list govuk-body-s">
     <li>Email: <a class="govuk-link" href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a></li>
-    <li>Monday to Friday (except public holidays)</li>
-    <li>We aim to respond within 5 working days, or one working day for more urgent&nbsp;queries</li>
+    <li>We respond within 5 working days, or one working day for more urgent queries</li>
   </ul>
 {% endset %}
 
 {{ appRelated({
-  name: "help",
-  title: "Need help?",
+  name: "get-support",
+  title: "Get support",
   content: {
-    html: helpHtml
+    html: supportHtml
   }
 }) }}
 
 {{ appRelated({
-  name: "help",
+  name: "previous-applications",
   title: "Previous applications",
   content: {
     html: previousApplicationsHtml

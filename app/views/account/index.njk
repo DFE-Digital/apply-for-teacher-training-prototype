@@ -1,14 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Create an account or sign in" %}
-{# set formaction = "/send-email/sign-in" #}
 {% set hasAccountLinks = false %}
-
-{% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/"
-  }) }}
-{% endblock %}
 
 {% block primary %}
   {% set signinHtml %}

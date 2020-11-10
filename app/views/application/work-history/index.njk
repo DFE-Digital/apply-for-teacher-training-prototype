@@ -17,56 +17,27 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Training providers need a complete picture of the last 5 years of of your work history, including time out of the workplace, to safeguard children.</p>
-  <p class="govuk-body">Breaks in work history won’t impact your application if you have a reasonable explanation for them (for example, parenting responsibilities, redundancy, illness or personal reasons such as study or travel).</p>
+  <p class="govuk-body">Training providers need a complete picture of your work history, including time out of the workplace, to safeguard children.</p>
+  <p class="govuk-body">Breaks in work history will not impact your application if you have a reasonable explanation for them (for example, parenting responsibilities, redundancy, illness or personal reasons such as study or travel).</p>
   {{ govukRadios({
+    name: "decision",
     fieldset: {
-      classes: "govuk-!-margin-top-6",
       legend: {
-        text: "How long have you been working?",
-        classes: "govuk-fieldset__legend--m"
+        classes: "govuk-fieldset__legend--m",
+        text: "Do you have any work history to add?"
       }
     },
     items: [{
-      value: "less",
-      text: "Less than 5 years",
-      label: {
-        classes: "govuk-label--s"
-      },
+      value: "yes",
+      text: "Yes, I have a complete work history",
       hint: {
-        text: "Give us as much of your work history as you can. For example, if you are a recent graduate, tell us about your employment before, during and since leaving university."
+        text: "You’ll be able to give details of any breaks once you’ve entered your employment history"
       }
     }, {
-      value: "more",
-      text: "More than 5 years",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "You can list your complete work history – or just the roles you think are relevant – going back further than 5 years if you wish."
-      }
-    }, {
-      value: "breaks",
-      text: "More than 5 years, but with breaks",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "You’ll be able to give details once you’ve entered your employment history. Please explain any break longer than a month."
-      }
-    }, {
-      divider: "or"
-    }, {
-      value: "none",
-      text: "I have not worked in the last 5 years",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "You’ll be able to explain why you’ve been out of the workplace."
-      }
+      value: "no",
+      text: "No, I do not have any work history"
     }]
-  } | decorateApplicationAttributes(["work-history", "length"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Continue"

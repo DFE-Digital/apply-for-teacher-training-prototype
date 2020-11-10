@@ -97,7 +97,7 @@ const hasSubmittedApplications = (req) => {
 }
 
 const hasStartedApplications = (req) => {
-  var applications = req.session.data.applications
+  const applications = req.session.data.applications
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
     return status.includes('started')
@@ -113,9 +113,10 @@ const hasCompletedSection = key => {
 }
 
 const hasCompletedApplication = req => {
-  var application = req.session.data.applications[req.params.applicationId]
+  const application = req.session.data.applications[req.params.applicationId]
   if (
     module.exports.hasCompletedSection(application.choices) &&
+    module.exports.hasCompletedSection(application.references) &&
     module.exports.hasCompletedSection(application.candidate) &&
     module.exports.hasCompletedSection(application['contact-details']) &&
     module.exports.hasCompletedSection(application['reasonable-adjustments']) &&
@@ -127,8 +128,7 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.gcse.science) &&
     module.exports.hasCompletedSection(application['personal-statement']) &&
     module.exports.hasCompletedSection(application['subject-knowledge']) &&
-    module.exports.hasCompletedSection(application.interview) &&
-    module.exports.hasCompletedSection(application.referees)
+    module.exports.hasCompletedSection(application.interview)
   ) {
     return true
   }
@@ -138,7 +138,7 @@ const hasCompletedApplication = req => {
 
 const hasPrimaryChoices = (req) => {
   try {
-    var choices = req.session.data.applications[req.params.applicationId].choices
+    const choices = req.session.data.applications[req.params.applicationId].choices
 
     const result = Object.values(choices).map((a) => {
       const providerCode = a.providerCode

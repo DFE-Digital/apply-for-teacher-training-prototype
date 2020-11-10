@@ -3,11 +3,11 @@
  */
 module.exports = router => {
   router.get('/application/:applicationId/interview/:view', (req, res) => {
-    const referrer = req.query.referrer
-    const view = req.params.view
+    const { applicationId, view } = req.params
+    const { referrer } = req.query
 
     res.render(`application/interview/${view}`, {
-      formaction: referrer || `/application/${req.params.applicationId}`,
+      formaction: referrer || `/application/${applicationId}`,
       referrer
     })
   })

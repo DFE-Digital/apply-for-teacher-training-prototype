@@ -71,6 +71,13 @@
       {% endif %}
 
       {% if choiceCount >= 1 %}
+        {{ govukCheckboxes({
+          items: [{
+            value: "true",
+            text: "I have completed this section"
+          }]
+        } | decorateApplicationAttributes(["completed", "choices"])) }}
+
         {{ govukButton({
           text: "Continue"
         }) }}

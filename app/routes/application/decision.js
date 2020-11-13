@@ -1,11 +1,12 @@
 const providers = require('../../data/providers')
+const utils = require('./../../utils')
 
 module.exports = router => {
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
-    const { applicationId, choiceId } = req.params
+    const { choiceId } = req.params
     const { referrer } = req.query
-    const application = req.session.data.applications[applicationId]
+    const application = utils.applicationData(req)
 
     const choice = application.choices[choiceId]
     const provider = providers[choice.providerCode]
@@ -22,9 +23,9 @@ module.exports = router => {
 
   // Render withdraw confirmation page
   router.get('/application/:applicationId/:choiceId/withdraw/confirmation', (req, res) => {
-    const { applicationId, choiceId } = req.params
+    const { choiceId } = req.params
     const { referrer } = req.query
-    const application = req.session.data.applications[applicationId]
+    const application = utils.applicationData(req)
 
     const choice = application.choices[choiceId]
     const provider = providers[choice.providerCode]

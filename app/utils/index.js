@@ -84,11 +84,12 @@ const nowPlusDays = (days, format = 'yyyy-LL-dd') => {
 }
 
 const hasApplications = (req) => {
-  return Object.values(req.session.data.applications).length > 0
+  const { applications } = req.session.data
+  return Object.values(applications).length > 0
 }
 
 const hasSubmittedApplications = (req) => {
-  const applications = req.session.data.applications
+  const { applications } = req.session.data
   const states = ['Submitted', 'Amending', 'Amended']
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
@@ -97,7 +98,7 @@ const hasSubmittedApplications = (req) => {
 }
 
 const hasStartedApplications = (req) => {
-  const applications = req.session.data.applications
+  const { applications } = req.session.data
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
     return status.includes('started')
@@ -113,7 +114,8 @@ const hasCompletedSection = key => {
 }
 
 const hasCompletedApplication = req => {
-  const application = req.session.data.applications[req.params.applicationId]
+  const application = applicationData(req)
+
   if (
     module.exports.hasCompletedSection(application.choices) &&
     module.exports.hasCompletedSection(application.references) &&
@@ -137,8 +139,10 @@ const hasCompletedApplication = req => {
 }
 
 const hasPrimaryChoices = (req) => {
+  const application = applicationData(req)
+
   try {
-    const choices = req.session.data.applications[req.params.applicationId].choices
+    const { choices } = application
 
     const result = Object.values(choices).map((a) => {
       const providerCode = a.providerCode

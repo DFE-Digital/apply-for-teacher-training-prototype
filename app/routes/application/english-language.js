@@ -11,10 +11,10 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/english-language', (req, res) => {
-    const applicationData = utils.applicationData(req)
+    const application = utils.applicationData(req)
     const { applicationId } = req.params
     const { referrer } = req.query
-    const { answer } = applicationData['english-language']
+    const { answer } = application['english-language']
 
     let path
     if (answer === 'Yes') {
@@ -28,10 +28,10 @@ module.exports = router => {
 
   // Render type and details pages
   router.get('/application/:applicationId/english-language/:view(details|type)', (req, res) => {
-    const applicationData = utils.applicationData(req)
+    const application = utils.applicationData(req)
     const { view } = req.params
     const { referrer } = req.query
-    const { type } = applicationData['english-language']
+    const { type } = application['english-language']
 
     res.render(`application/english-language/${view}`, {
       referrer,

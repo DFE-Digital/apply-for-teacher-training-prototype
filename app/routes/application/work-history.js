@@ -19,8 +19,8 @@ module.exports = router => {
 
   // Render review page, redirecting to start page if no work history added
   router.get('/application/:applicationId/work-history/:view?', (req, res) => {
-    const applicationData = utils.applicationData(req)
-    const workHistory = Object.entries(applicationData['work-history'])
+    const application = utils.applicationData(req)
+    const workHistory = Object.entries(application['work-history'])
 
     if (workHistory.length) {
       res.render('application/work-history/review')
@@ -55,8 +55,8 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/:next(review|add)/:type?', (req, res) => {
     const { applicationId, next, type } = req.params
     const id = req.query.update
-    const applicationData = utils.applicationData(req)
-    const workHistory = applicationData['work-history']
+    const application = utils.applicationData(req)
+    const workHistory = application['work-history']
     utils.saveIsoDate(req, workHistory, id)
 
     if (next === 'review') {

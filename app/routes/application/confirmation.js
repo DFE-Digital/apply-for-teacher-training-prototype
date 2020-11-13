@@ -4,10 +4,10 @@ module.exports = router => {
   router.all('/application/:applicationId/confirmation', (req, res) => {
     const { applicationId } = req.params
 
-    const applicationData = utils.applicationData(req)
-    applicationData.status = 'awaiting-provider-decisions'
+    const application = utils.applicationData(req)
+    application.status = 'awaiting-provider-decisions'
 
-    let { choices } = applicationData
+    let { choices } = application
     choices = utils.toArray(choices)
     choices[0].status = 'Awaiting decision'
     choices[1].status = 'Awaiting decision'

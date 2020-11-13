@@ -49,8 +49,8 @@ module.exports = router => {
 
   // Confirmation: Application submitted
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
-    const applicationId = req.params.applicationId
-    const application = req.session.data.applications[applicationId]
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
     const candidateName = application['given-name'] || 'applicant'
 
     const choices = []

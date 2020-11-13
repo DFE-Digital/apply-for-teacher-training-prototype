@@ -2,9 +2,9 @@ const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
 const degreeData = (req) => {
-  const applicationData = utils.applicationData(req)
-  if (applicationData.degree[req.params.id]) {
-    return applicationData.degree[req.params.id]
+  const application = utils.applicationData(req)
+  if (application.degree[req.params.id]) {
+    return application.degree[req.params.id]
   }
 
   return false

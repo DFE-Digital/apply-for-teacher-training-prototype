@@ -34,20 +34,19 @@ const findPaths = (req) => {
 }
 
 const temporaryAndSavedChoices = (req) => {
-  const { data } = req.session
-  const applicationData = data.applications[req.params.applicationId]
+  const application = utils.applicationData(req)
   const { choiceId } = req.params
 
-  if (typeof applicationData.choices === 'undefined') {
-    applicationData.choices = {}
+  if (typeof application.choices === 'undefined') {
+    application.choices = {}
   }
 
-  if (typeof applicationData.temporaryChoices === 'undefined') {
-    applicationData.temporaryChoices = {}
+  if (typeof application.temporaryChoices === 'undefined') {
+    application.temporaryChoices = {}
   }
 
-  const existingChoice = applicationData.choices[choiceId] || {}
-  const temporaryChoice = applicationData.temporaryChoices[choiceId] || {}
+  const existingChoice = application.choices[choiceId] || {}
+  const temporaryChoice = application.temporaryChoices[choiceId] || {}
 
   return [existingChoice, temporaryChoice]
 }
@@ -85,31 +84,31 @@ const singleLocationCourse = (req) => {
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const { applicationId } = req.params
+    const application = utils.applicationData(req)
     const choiceId = utils.generateRandomString()
-    const data = req.session.data
 
-    if (typeof data.applications[applicationId].temporaryChoices === 'undefined') {
-      data.applications[applicationId].temporaryChoices = {}
+    if (typeof application.temporaryChoices === 'undefined') {
+      application.temporaryChoices = {}
     }
 
-    data.applications[applicationId].temporaryChoices[choiceId] = {
+    application.temporaryChoices[choiceId] = {
       started: true
     }
 
     // Already made one choice, second choice shouldn't be in welcome flow
-    if (data.applications[applicationId].choices && Object.entries(data.applications[applicationId].choices).length > 0) {
-      req.session.data.applications[applicationId].welcomeFlow = false
+    if (application.choices && Object.entries(application.choices).length > 0) {
+      application.welcomeFlow = false
     }
 
     res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
   })
 
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
-    const applicationData = req.session.data.applications[req.params.applicationId]
+    const application = utils.applicationData(req)
     const { choiceId } = req.params
     const paths = pickPaths(req)
 
-    applicationData.choices[choiceId] = {
+    application.choices[choiceId] = {
       providerCode: providerCode(req),
       courseCode: courseCode(req),
       locationName: locationName(req),
@@ -118,7 +117,7 @@ module.exports = router => {
     }
 
     delete req.session.data.course_from_find
-    delete applicationData.temporaryChoices
+    delete application.temporaryChoices
 
     res.redirect(req.params.referrer || paths.next)
   })
@@ -128,11 +127,11 @@ module.exports = router => {
       return res.redirect(`/application/${req.params.applicationId}/choices/add`)
     }
 
-    const applicationData = req.session.data.applications[req.params.applicationId]
-    const count = Object.keys(applicationData.choices).length
+    const application = utils.applicationData(req)
+    const count = Object.keys(application.choices).length
     const paths = pickPaths(req)
 
-    if (count === 3 || applicationData.apply2 || req.body['add-another-course'] === 'no') {
+    if (count === 3 || application.apply2 || req.body['add-another-course'] === 'no') {
       res.redirect(req.params.referrer || paths.next)
     } else {
       res.render('application/choices/another', {
@@ -165,11 +164,11 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {
-    const { data } = req.session
     const { applicationId } = req.params
-    const applicationData = data.applications[applicationId]
+    const application = utils.applicationData(req)
     const { choiceId } = req.params
-    const temporaryChoice = applicationData.temporaryChoices[choiceId]
+    const { data } = req.session
+    const temporaryChoice = application.temporaryChoices[choiceId]
 
     if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'yes') {
       const provider = providers[data.course_from_find.providerCode]

@@ -36,10 +36,10 @@ module.exports = router => {
 
   // Render details page
   router.get('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
-    const applicationData = utils.applicationData(req)
+    const application = utils.applicationData(req)
     const { id } = req.params
     const { referrer } = req.query
-    const { type } = applicationData['other-qualifications'][id]
+    const { type } = application['other-qualifications'][id]
 
     res.render('application/other-qualifications/details', {
       id,
@@ -49,16 +49,16 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
-    const applicationData = utils.applicationData(req)
+    const application = utils.applicationData(req)
     const next = req.session.data.next || 'review'
     const nextId = utils.generateRandomString()
     const { applicationId, id } = req.params
     const { referrer } = req.query
-    const { year, org, type } = applicationData['other-qualifications'][id]
-    const typeUk = applicationData['other-qualifications'][id]['type-uk']
+    const { year, org, type } = application['other-qualifications'][id]
+    const typeUk = application['other-qualifications'][id]['type-uk']
 
     if (next === 'add-type') {
-      applicationData['other-qualifications'][nextId] = {
+      application['other-qualifications'][nextId] = {
         year,
         org,
         type,

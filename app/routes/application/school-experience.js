@@ -45,8 +45,8 @@ module.exports = router => {
   router.post('/application/:applicationId/school-experience/:next(review|add)', (req, res) => {
     const { applicationId, next } = req.params
     const id = req.query.update
-    const applicationData = utils.applicationData(req)
-    const schoolExperience = applicationData['school-experience']
+    const application = utils.applicationData(req)
+    const schoolExperience = application['school-experience']
     utils.saveIsoDate(req, schoolExperience, id)
 
     if (next === 'review') {
@@ -59,12 +59,12 @@ module.exports = router => {
   // School-experience completed answer branching
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
     const { applicationId } = req.params
-    const applicationData = utils.applicationData(req)
-    const schoolExperience = applicationData['school-experience']
+    const application = utils.applicationData(req)
+    const schoolExperience = application['school-experience']
 
     let attained
     if (schoolExperience) {
-      attained = applicationData['school-experience'].attained
+      attained = application['school-experience'].attained
     }
 
     if (attained === 'false') {

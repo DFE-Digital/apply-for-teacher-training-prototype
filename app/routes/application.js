@@ -69,7 +69,7 @@ module.exports = router => {
   })
 
   router.all('/application/started', (req, res) => {
-    const applications = req.session.data.applications
+    const { applications } = req.session.data
     const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
     if (applicationId) {
       res.redirect('/application/' + applicationId)
@@ -79,8 +79,7 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
-    const { applicationId } = req.params
-    const thisApplication = req.session.data.applications[applicationId]
+    const thisApplication = utils.applicationData(req)
     const prevApplication = req.session.data.applications['12345']
     let { choices } = prevApplication
 
@@ -111,9 +110,9 @@ module.exports = router => {
   // Generate apply2 application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = 12346
-    const data = req.session.data
+    const { applications } = req.session.data
     const existingApplicationId = req.params.applicationId
-    const existingApplication = data.applications[existingApplicationId]
+    const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
     apply2Application.welcomeFlow = false
@@ -130,7 +129,7 @@ module.exports = router => {
       apply2Application.references[1].status = 'Received'
     }
 
-    data.applications[code] = apply2Application
+    applications[code] = apply2Application
 
     res.redirect(`/application/${code}/before-you-start?copied=true`)
   })

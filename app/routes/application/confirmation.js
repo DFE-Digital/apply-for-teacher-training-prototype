@@ -1,10 +1,20 @@
+const utils = require('./../../utils')
+
 module.exports = router => {
   router.all('/application/:applicationId/confirmation', (req, res) => {
     const { applicationId } = req.params
-    const applicationData = req.session.data.applications[applicationId]
 
-    applicationData.status = 'Submitted'
+    const application = utils.applicationData(req)
+    application.status = 'awaiting-provider-decisions'
 
-    res.render('application/confirmation')
+    let { choices } = application
+    choices = utils.toArray(choices)
+    choices[0].status = 'Awaiting decision'
+    choices[1].status = 'Awaiting decision'
+    choices[2].status = 'Awaiting decision'
+
+    res.render('application/confirmation', {
+      applicationId
+    })
   })
 }

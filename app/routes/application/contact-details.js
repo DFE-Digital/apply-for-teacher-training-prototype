@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const utils = require('./../../utils')
 
 /**
  * Application: Contact details routes
@@ -16,8 +17,8 @@ module.exports = router => {
   // Address type answer branching
   router.all('/application/:applicationId/contact-details/where-do-you-live/answer', (req, res) => {
     const { applicationId } = req.params
-    const applicationData = req.session.data.applications[applicationId]
-    const location = applicationData['contact-details']['address-type']
+    const application = utils.applicationData(req)
+    const location = application['contact-details']['address-type']
     const address_lookup_feature_enabled = req.session.data.flags.address_lookup
 
     if (location === 'domestic') {

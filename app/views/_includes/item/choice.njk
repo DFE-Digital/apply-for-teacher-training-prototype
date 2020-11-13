@@ -1,17 +1,43 @@
-{% set status = item.status or application.status or "Submitted" %}
+{% set status = item.status or application.status %}
+{% set startDate = item.starts | date("MMMM yyyy") %}
+
 {% set statusHtml %}
   {{ govukTag({
     classes: "app-tag " + status | statusClass,
     text: status | capitalize
   }) }}
+  {% if status == "Offer deferred" %}
+    <p class="govuk-body govuk-body govuk-!-margin-top-2">Your training will now start in September 2021.</p>
+  {% elif status == "Offer received" or status == "Offer accepted" or status == "Conditions met" %}
+    {{ govukDetails({
+      classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
+      summaryText: "What to do if you’re unable to start training in " + startDate,
+      html: "<p>Some providers allow you to defer your offer. This means that you could start your course a year later.</p>
+<p>Every provider is different, so it may or may not be possible to do this. Find out by contacting " + provider.name + ".</p>
+<p>Asking if it’s possible to defer will not affect your existing offer.</p>"
+    }) }}
+  {% endif %}
 {% endset %}
+
+{% set feedbackHtml %}
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
+  <p class="govuk-body">Your subject knowledge could be improved.</p>
+  <p class="govuk-body">Details: Understand the purpose of PE in schools and the learn more about the procedures related to safeguarding.</p>
+
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
+  <p class="govuk-body">Your degree does not meet the course requirements.</p>
+
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Future applications</h4>
+  <p class="govuk-body">The provider would be interested in future applications from you.</p>
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
       text: "Course"
     },
     value: {
-      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
+      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a>"
     },
     actions: {
       items: [{
@@ -37,33 +63,26 @@
     } if canAmend and not item.singleLocationCourse
   }, {
     key: {
-      text: "Full time or part time"
-    },
-    value: {
-      html: item.studyMode
-    } if item.studyMode
-  }, {
-    key: {
       text: "Type"
     },
     value: {
       html: item.type
     } if item.type
-  }, {
+  } if showChoiceDetails !== false, {
     key: {
       text: "Course length"
     },
     value: {
       html: item.length
     } if item.length
-  }, {
+  } if showChoiceDetails !== false, {
     key: {
       text: "Date course starts"
     },
     value: {
-      html: item.starts | date("MMMM yyyy")
+      html: startDate
     } if item.starts
-  }, {
+  } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
     key: {
       text: "Status"
     },
@@ -72,10 +91,10 @@
     }
   } if showChoiceStatus, {
     key: {
-      text: "Reason for rejection"
+      text: "Feedback"
     },
     value: {
-      html: item.reason
+      html: feedbackHtml
     }
-  } if item.reason]
+  } if showChoiceFeedback and item.status == "Unsuccessful" and item.hasFeedback]
 }) }}

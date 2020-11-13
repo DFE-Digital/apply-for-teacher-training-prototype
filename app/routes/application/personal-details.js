@@ -17,14 +17,14 @@ module.exports = router => {
   router.post('/application/:applicationId/personal-details/nationality-answer', (req, res) => {
     const { referrer } = req.session.data
     const { applicationId } = req.params
-    const applicationData = req.session.data.applications[applicationId]
-    const { nationality } = applicationData.candidate
+    const application = req.session.data.applications[applicationId]
+    const { nationality } = application.candidate
 
     if (nationality === 'other' || nationality === 'multiple') {
       res.redirect(`/application/${applicationId}/personal-details/residency?${utils.queryString(req)}`)
     } else {
       // Delete residency status if previously entered
-      delete applicationData.candidate.residency
+      delete application.candidate.residency
 
       res.redirect(referrer || `/application/${applicationId}/personal-details/review`)
     }

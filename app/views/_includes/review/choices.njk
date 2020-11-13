@@ -7,27 +7,29 @@
       {% include "_includes/item/choice.njk" %}
     {% endset %}
 
-    {# Can respond if within a decision phase and have an offer #}
-    {% set canRespond = canMakeDecision and
-      item.status == "offer"
+    {% set canRespond = canMakeDecision
+      and item.status == "Offer received"
     %}
 
-    {# Can withdraw if post-submission and not already withdrawn choice #}
-    {% set canWithdraw = canWithdraw
-      and (item.status != "declined")
-      and (item.status != "offer")
-      and (item.status != "rejected")
-      and (item.status != "withdrawn")
-      or (item.status == "pending")
-      or (item.status == "accepted")
-    %}
-
-    {# Candidate has already responded #}
     {% set hasResponded =
-      (item.status == "accepted")
-      or (item.status == "declined")
-      or (item.status == "rejected")
-      or (item.status == "withdrawn")
+      (item.status == "Conditions not met")
+      or (item.status == "Conditions met")
+      or (item.status == "Offer declined")
+      or (item.status == "Unsuccessful")
+      or (item.status == "Offer withdrawn")
+      or (item.status == "Application withdrawn")
+      or (item.status == "Application cancelled")
+    %}
+
+
+    {% set canWithdraw =
+      item.status == true
+      and (item.status != "Offer received")
+      and (item.status != "Offer declined")
+      and (item.status != "Application not sent")
+      and (item.status != "Unsuccessful")
+      and (item.status != "Offer withdrawn")
+      and (item.status != "Application withdrawn")
     %}
 
     {{ appSummaryCard({
@@ -42,7 +44,7 @@
           href: applicationPath + "/" + item.id + "/withdraw",
           text: "Withdraw"
         } if canWithdraw, {
-          href: applicationPath + "/" + item.id + "/view?phase=" + phase,
+          href: applicationPath + "/" + item.id + "/view",
           text: "View and respond to offer"
         } if canRespond and not hasResponded]
       } if canAmend or canWithdraw or canRespond,

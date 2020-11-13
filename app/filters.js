@@ -154,7 +154,7 @@ module.exports = (env) => {
 
   filters.statusClass = (status, prefix = 'govuk-tag') => {
     switch (status) {
-      // Application phases
+      // Application statuses
       case 'Submitted':
         return `${prefix}--grey`
       case 'Awaiting decision':

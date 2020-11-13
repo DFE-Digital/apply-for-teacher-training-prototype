@@ -32,9 +32,17 @@ When you are asked to ‘Check your email’, instead click on the text which in
 
 You can skip the account creation process by visiting <https://apply-beta-prototype.herokuapp.com/application/start>.
 
-### Viewing a completed (but unsubmitted) application
+### Viewing an unsubmitted application
 
 You can skip completing an application by visiting <https://apply-beta-prototype.herokuapp.com/application/12345>.
+
+### Viewing an unsubmitted apply again application
+
+You can skip creating an application for applying again by visiting <https://apply-beta-prototype.herokuapp.com/application/12346>.
+
+### Viewing different application states
+
+You can view the different application states by visiting <https://apply-beta-prototype.herokuapp.com/admin/states>
 
 ### Giving a reference
 

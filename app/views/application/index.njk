@@ -20,33 +20,16 @@
 {% set hasSecondary = true %}
 
 {% block beforePageTitle %}
-  {% if showCopiedBanner %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
-      type: "success",
-      icon: false
-    }) }}
-  {% endif %}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
+    type: "success",
+    icon: false
+  }) if showCopiedBanner }}
 
-  {% if closed %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body-l\">Submit your application from 13 October for courses starting in 2021.</p>",
-      icon: false
-    }) }}
-  {% endif %}
-{% endblock %}
-
-{% block pageNavigation %}
-  {% if hasSubmittedApplications() %}
-    {{ govukBreadcrumbs({
-      items: [{
-        text: "Application dashboard",
-        href: "/applications"
-      }, {
-        text: title | safe
-      }]
-    }) }}
-  {% endif %}
+  {{ appBanner({
+    html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body-l\">Submit your application from 13 October for courses starting in 2021.</p>",
+    icon: false
+  }) if closed }}
 {% endblock %}
 
 {% block beforePrimary %}
@@ -55,10 +38,13 @@
 {% endblock %}
 
 {% block primary %}
-  {# PREVIOUS APPLICATIONS #}
   {% if applicationValue(["apply2"]) %}
     {% set previousApplicationSummaryHtml %}
-      {% include "_includes/previous-application-summary.njk" %}
+      {% set choices = choices | selectattr("hasFeedback") %}
+      {% set showChoiceDetails = false %}
+      {% set showChoiceFeedback = true %}
+      {% set showChoiceStatus = true %}
+      {% include "_includes/review/choices.njk" %}
     {% endset %}
     {{ govukDetails({
       summaryText: "See feedback from your previous application",
@@ -329,5 +315,5 @@
 {% endblock %}
 
 {% block secondary %}
-  {% include "_includes/need-help.njk" %}
+  {% include "_includes/get-support.njk" %}
 {% endblock %}

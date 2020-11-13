@@ -2,9 +2,9 @@ const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
 const gcseData = (req) => {
-  const applicationData = utils.applicationData(req)
-  if (applicationData.gcse[req.params.id]) {
-    return applicationData.gcse[req.params.id]
+  const application = utils.applicationData(req)
+  if (application.gcse[req.params.id]) {
+    return application.gcse[req.params.id]
   }
 
   return false

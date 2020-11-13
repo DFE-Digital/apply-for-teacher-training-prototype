@@ -2,19 +2,19 @@ const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
 const hasDisclosedEthnicity = (req) => {
-  const applicationData = utils.applicationData(req)
+  const application = utils.applicationData(req)
 
-  if (applicationData['equality-monitoring']) {
-    const answer = applicationData['equality-monitoring']['ethnic-group']
+  if (application['equality-monitoring']) {
+    const answer = application['equality-monitoring']['ethnic-group']
     return answer !== 'Prefer not to say'
   }
 }
 
 const hasDisclosedDisability = (req) => {
-  const applicationData = utils.applicationData(req)
+  const application = utils.applicationData(req)
 
-  if (applicationData['equality-monitoring'] && applicationData['equality-monitoring']['disability-status']) {
-    const answer = applicationData['equality-monitoring']['disability-status']
+  if (application['equality-monitoring'] && application['equality-monitoring']['disability-status']) {
+    const answer = application['equality-monitoring']['disability-status']
     return answer === 'Yes'
   }
 }
@@ -51,6 +51,10 @@ module.exports = router => {
     const paths = questionPaths(req)
     let formaction = referrer || paths.next
 
+    if (view === 'index') {
+      formaction = `${basePath}/answer${referrerPath}`
+    }
+
     if (view === 'ethnic-group') {
       formaction = `${basePath}/ethnic-group/answer${referrerPath}`
     }
@@ -64,6 +68,18 @@ module.exports = router => {
       paths,
       referrer
     })
+  })
+
+  // Opt-in answer branching
+  router.post('/application/:applicationId/equality-monitoring/answer', (req, res) => {
+    const { applicationId } = req.params
+    const { answer } = req.session.data
+
+    if (answer === 'yes') {
+      res.redirect(`/application/${applicationId}/equality-monitoring/sex`)
+    }
+
+    res.redirect(`/application/${applicationId}/submit`)
   })
 
   // Ethnic group answer branching

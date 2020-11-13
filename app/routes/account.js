@@ -22,14 +22,9 @@ module.exports = router => {
     })
   })
 
-  // Update choice status and phase from sign-in link in decision notification
+  // Update choice status from sign-in link in decision notification
   router.get('/account/sign-in', (req, res) => {
-    const { phase, status } = req.query
-
-    if (phase) {
-      // Update application phase
-      req.session.data.phase = phase
-    }
+    const { status } = req.query
 
     if (status) {
       // Get most recent application

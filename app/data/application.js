@@ -29,7 +29,7 @@ module.exports = {
       locationName: 'Hillcrest Academy',
       locationAddress: 'Cowper Street, Leeds. LS7 4DR',
       studyMode: 'Full time',
-      type: 'PGCE with QTS',
+      type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2020-09'
     },
@@ -39,7 +39,7 @@ module.exports = {
       locationName: 'Main Site',
       locationAddress: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD',
       studyMode: 'Full time',
-      type: 'PGCE with QTS',
+      type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2020-09'
     },
@@ -49,7 +49,7 @@ module.exports = {
       locationName: 'Main Site',
       locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY',
       studyMode: 'Full time',
-      type: 'PGCE with QTS',
+      type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2020-09'
     }

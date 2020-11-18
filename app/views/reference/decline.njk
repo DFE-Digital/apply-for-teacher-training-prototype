@@ -1,12 +1,13 @@
 {% extends "_form.njk" %}
 
+{% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "You’ve declined to give a reference" %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
   <p class="govuk-body">Teacher training courses can fill up quickly, and candidates need 2 references to apply.</p>
-  <p class="govuk-body"> {{ candidate_name }} will be able to submit the application quicker if you give a reference.</p>
+  <p class="govuk-body">{{ candidate_name }} will be able to submit the application quicker if you give a reference.</p>
 
   {{ govukRadios({
     fieldset: {
@@ -16,23 +17,16 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
+    name: "answer",
     items: [{
-      value: "true",
-      text: "Yes, I'm sure",
-      conditional: {
-        html: disabilityConditional
-      }
+      value: "yes",
+      text: "Yes, I’m sure"
     }, {
-      value: "false",
-      text: "No, I've changed my mind"
+      value: "no",
+      text: "No, I’ve changed my mind"
     }]
-    } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
-
-  {{ govukInput({
-    name: "option",
-    type: "hidden",
-    value: option
   }) }}
+
   {{ govukButton({
     text: "Continue"
   }) }}

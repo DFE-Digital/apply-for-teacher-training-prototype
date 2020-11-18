@@ -63,7 +63,7 @@
 
   {% set accountEmail = data.applications[applicationId].account.email or data.account.email %}
 
-  {% if accountEmail %}
+  {% if applicationId %}
     {% if applicationValue(["status"]) == "started" %}
       {% set serviceUrl = "/application/" + applicationId %}
     {% else %}

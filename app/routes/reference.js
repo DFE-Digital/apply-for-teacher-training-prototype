@@ -31,4 +31,13 @@ module.exports = router => {
       research
     })
   })
+
+  router.post('/reference/decline/answer', (req, res) => {
+    const { answer } = req.session.data
+    if (answer === 'yes') {
+      res.redirect('/reference/thank-you')
+    } else {
+      res.redirect('/reference/?referrer=/reference/decline')
+    }
+  })
 }

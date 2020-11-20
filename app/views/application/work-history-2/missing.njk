@@ -1,0 +1,37 @@
+{% extends "_form-question.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/work-history-2/review" %}
+{% set parent = "Work history" %}
+{% set title = "Tell us why you’ve been out of the workplace" %}
+{% set formaction = "/application/" + applicationId + "/work-history-2/missing" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: applicationPath + "/work-history-2"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% set labelHtml %}
+    <p class="govuk-label">If you are returning to work for the first time in 5 or more years, please give details. For example, explain your parental or caring responsibilities (or any other reason why you haven’t been employed).</p> <p class="govuk-label">You can also include relevant work history from more than 5 years ago. Providers will be interested in skills and experience you could transfer to a school setting.</p>
+  {% endset %}
+
+  {{ govukCharacterCount({
+    label: label,
+    hint: {
+      text: "For example, parenting or caring responsibilities, unemployment, travel, health, study or other personal reasons"
+    },
+    maxwords: 400
+  } | decorateApplicationAttributes(["work-history", "missing"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

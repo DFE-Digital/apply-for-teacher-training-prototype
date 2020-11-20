@@ -1,0 +1,180 @@
+{% extends "_form-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
+{% set title = "Work history" %}
+{% set referrer = applicationPath + "/work-history/review" %}
+{% set canAmend = true %}
+
+{% set workHistory = applicationValue(["work-history"]) or {} %}
+
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+{% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
+
+{% if workHistoryDecision == "full-time-education" %}
+
+  {{ govukSummaryList({
+    classes: "app-summary",
+    rows: [{
+      key: {
+        text: "Do you have any work history?"
+      },
+      value: {
+        text: "No, I have always been in full time education"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/work-history-2",
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      }
+    }]
+  }) }}
+
+{% elseif workHistoryDecision == "no" %}
+
+  {{ govukSummaryList({
+    classes: "app-summary",
+    rows: [{
+      key: {
+        text: "Explanation of why you’ve been out of the workplace"
+      },
+      value: {
+        text: (applicationValue(["work-history", "missing"]) or "Not entered") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/work-history-2/missing?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      }
+    }]
+  }) }}
+
+{% else %}
+
+  <div style="max-width: 650px;">
+    <p class="govuk-body">Include all the jobs you have had as an adult, including unpaid roles.</p>
+
+    <p>You do not need to include part time jobs done whilst in full time education.</p>
+
+    <p>Any gaps of longer than one month should be explained.</p>
+  </div>
+
+  {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption-xlma`">Jobs and breaks in work history</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">From</th>
+          <th class="govuk-table__header">To</th>
+          <th class="govuk-table__header">Role and employer</th>
+          <!--<th class="govuk-table__header">Employer</th>-->
+          <th class="govuk-table__header" style="text-align: right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% if history.length >= 1 %}
+          {% for item in history %}
+
+          {# periodStart = Earliest date in required work history period #}
+          {% set periodStart = "now" | date | replace("2019", "2014") %}
+          {% set periodStartEpoch = periodStart | date("x") | int %}
+
+          {# firstStart = Start date of first item in work history #}
+          {% set firstStart = item["start-date"] %}
+          {% set firstStartEpoch = firstStart | date("x") | int %}
+
+
+          {% set nextItem = history[loop.index] %}
+          {% set itemStart = item["end-date"] %}
+          {% set itemStartEpoch = itemStart | date("x") | int %}
+          {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+          {% set itemEndEpoch = itemEnd | date("x") | int %}
+          {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+
+          {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+            {# Unexplained break (prior to work history commencing) #}
+            {% set itemStart = periodStart %}
+            {% set itemStartEpoch = itemStart | date("x") | int %}
+            {% set itemEnd = firstStart %}
+            {% set itemEndEpoch = itemEnd | date("x") | int %}
+            {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+
+            <tr>
+            <td class="govuk-table__cell" colspan="4" style="background-color: #f3f2f1; padding: 10px 10px;">
+              You have a break in your work history ( {{ itemDuration | duration }})
+
+              <a href="{{ applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Please explain break</a>
+            </tr></td>
+          {% endif %}
+
+
+            <tr>
+              <td class="govuk-table__cell" style="white-space: nowrap">{{ item["start-date"] | date('LLL yyyy') }}</td>
+              <td class="govuk-table__cell" style="white-space: nowrap">
+                {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+              </td>
+              <td class="govuk-table__cell">{{ item["role"] }} (Part time)
+              <br>{{ item["org"] }}
+
+              {% if item["worked-with-children"] == "Yes" %}
+                <br><br>This role involved working with children
+              {% endif %}
+              </td>
+              <td class="govuk-table__cell" style="text-align: right;">
+                <a class="govuk-link" href="{{ applicationPath + "/work-history-2/" + item.id }}">Change</a>
+
+                <br>
+                <a class="govuk-link app-link--destructive" href="{{ applicationPath + "/work-history-2/" + item.id + "/remove" }}">Remove</a>
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr class="govuk-table__row">
+            <td colspan="5" class="govuk-table__cell">
+              No work history added yet.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+
+  <!--<p class="govuk-body"><a class="govuk-link" href="/application/{{ applicationId}}/work-history-2/{{newId}}">Add work history</a></p>-->
+
+  {{ govukButton({
+    text: "Add work history",
+    href: "/application/" + applicationId + "/work-history-2/" + newId,
+    classes: "govuk-button--secondary"
+    }) }}
+
+
+{% endif %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "work-history"])) }}
+
+  {{ govukButton({
+    text: "Return to application"
+  }) }}
+
+
+{% endblock %}

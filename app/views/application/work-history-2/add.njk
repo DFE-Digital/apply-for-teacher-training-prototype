@@ -21,17 +21,43 @@
 
 {% block primary %}
 
+  {% set roleEndHTML %}
+    {{ govukDateInput({
+      fieldset: {
+        legend: {
+          text: "When did you finish this role?"
+        }
+      },
+      hint: {
+        text: "For example, 5 2019"
+      },
+      namePrefix: id + "-end-date",
+      items: [{
+        label: "Month",
+        name: "month",
+        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('L'),
+        classes: "govuk-input--width-2"
+      }, {
+        label: "Year",
+        name: "year",
+        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('yyyy'),
+        classes: "govuk-input--width-4"
+      }]
+    } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+  {% endset %}
+
+
   {{ govukInput({
     label: {
       text: "Job title",
-      classes: "govuk-label--m"
+      classes: "govuk-label--s"
     }
   } | decorateApplicationAttributes(["work-history", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Name of employer",
-      classes: "govuk-label--m"
+      classes: "govuk-label--s"
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 
@@ -54,7 +80,7 @@
     fieldset: {
       legend: {
         text: "Was this job full time or part time?",
-        classes: "govuk-fieldset__legend--m"
+        classes: "govuk-fieldset__legend--s"
       }
     },
     hint: {
@@ -70,8 +96,8 @@
   {{ govukDateInput({
     fieldset: {
       legend: {
-        text: "Start date",
-        classes: "govuk-fieldset__legend--m"
+        text: "When did you begin this job?",
+        classes: "govuk-fieldset__legend--s"
       }
     },
     hint: {
@@ -91,35 +117,35 @@
     }]
   } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
 
-  {{ govukDateInput({
+  {{ govukRadios({
     fieldset: {
       legend: {
-        text: "End date (leave blank if this is your current role)",
-        classes: "govuk-fieldset__legend--m"
+        text: "Are you still working in this job?",
+        classes: "govuk-fieldset__legend--s"
       }
     },
-    hint: {
-      text: "For example, 5 2019"
-    },
-    namePrefix: id + "-end-date",
-    items: [{
-      label: "Month",
-      name: "month",
-      value: (applicationValue(["work-history", id, "end-date"]) or ""),
-      classes: "govuk-input--width-2"
-    }, {
-      label: "Year",
-      name: "year",
-      value: (applicationValue(["work-history", id, "end-date"]) or ""),
-      classes: "govuk-input--width-4"
-    }]
-  } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+    items: [
+      {
+        value: "yes",
+        text: "Yes"
+      },
+      {
+        value: "no",
+        text: "No",
+        conditional: {
+          html: roleEndHTML
+        }
+
+      }
+    ]
+  } | decorateApplicationAttributes(["work-history", id, "end-date-present"])) }}
+
 
   {{ govukRadios({
     fieldset: {
       legend: {
         text: "Did this job involve working in a school or with children?",
-        classes: "govuk-fieldset__legend--m"
+        classes: "govuk-fieldset__legend--s"
       }
     },
     items: [{

@@ -54,7 +54,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/work-history-2/missing?referrer=" + referrer,
+          href: applicationPath + "/work-history-2?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
@@ -126,7 +126,12 @@
             <tr>
               <td class="govuk-table__cell" style="white-space: nowrap">{{ item["start-date"] | date('LLL yyyy') }}</td>
               <td class="govuk-table__cell" style="white-space: nowrap">
+
+              {% if item["end-date-present"] == "yes" %}
+                Present
+              {% else %}
                 {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+              {% endif %}
               </td>
               <td class="govuk-table__cell">{{ item["role"] }} (Part time)
               <br>{{ item["org"] }}

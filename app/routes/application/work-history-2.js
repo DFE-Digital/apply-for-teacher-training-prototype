@@ -27,26 +27,9 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const workHistoryDecision = application['work-history-decision']
 
-
-
-    if (workHistoryDecision === 'yes') {
-      res.redirect(`/application/${applicationId}/work-history-2/review`)
-    } else if (workHistoryDecision == "full-time-education") {
-      res.redirect(`/application/${applicationId}/work-history-2/review`)
-    } else {
-      res.redirect(`/application/${applicationId}/work-history-2/missing`)
-    }
-  })
-
-
-  router.get('/application/:applicationId/work-history-2/missing', (req, res) => {
-    res.render('application/work-history-2/missing')
-  })
-
-  router.post('/application/:applicationId/work-history-2/missing', (req, res) => {
-    const { applicationId } = req.params
     res.redirect(`/application/${applicationId}/work-history-2/review`)
   })
+
 
   router.get('/application/:applicationId/work-history-2/:id', (req, res) => {
     const { applicationId, id } = req.params
@@ -61,7 +44,7 @@ module.exports = router => {
 
     const application = utils.applicationData(req)
     const workHistory = application['work-history']
-    utils.saveIsoDate(req, workHistory, id)
+    utils.saveIsoDate(req, workHistory, id, false)
 
     res.redirect(`/application/${applicationId}/work-history-2/review`)
   })

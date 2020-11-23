@@ -18,6 +18,19 @@
 
 {% block primary %}
 
+{% set noWorkHistoryHtml %}
+  {{ govukCharacterCount({
+    label: {
+      text: "Tell us why you’ve been out of the workplace"
+    },
+    hint: {
+      text: "For example, parenting or caring responsibilities, unemployment, travel, health, study or other personal reasons"
+    },
+    maxwords: 400
+  } | decorateApplicationAttributes(["work-history", "missing"])) }}
+{% endset -%}
+
+
   <p class="govuk-body">Training providers need a complete picture of your work history (outside of full time education), including time out of the workplace, to safeguard children.</p>
   <p class="govuk-body">Breaks in work history will not impact your application if you have a reasonable explanation for them (for example, parenting responsibilities, redundancy, illness or personal reasons such as study or travel).</p>
   {{ govukRadios({
@@ -38,7 +51,10 @@
       text: "No, I have always been in full time education"
     }, {
       value: "no",
-      text: "No, I do not have any work history"
+      text: "No, I do not have any work history",
+      conditional: {
+        html: noWorkHistoryHtml
+      }
     }]
   } | decorateApplicationAttributes(["work-history-decision"])
   ) }}

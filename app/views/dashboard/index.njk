@@ -35,10 +35,8 @@
 {% endif %}
 
 {% block beforePageTitle %}
-  {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\"><a href=\"" + applicationPath + "/apply-again\">Do you want to apply again?</a></h2>",
-    type: "information",
-    icon: false
+  {{ govukNotificationBanner({
+    html: "<p class=\"govuk-notification-banner__heading\"><a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Do you want to apply again?</a></p>"
   }) if status == "ended-without-success" }}
 {% endblock %}
 

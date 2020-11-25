@@ -1,8 +1,9 @@
-{{ appSummaryText({
-  text: incompleteText,
-  type: "error" if errorList,
-  action: {
-    href: applicationPath + incompleteLink,
-    text: incompleteLinkText
-  }
+{% set html %}
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ incompleteText }}</h4>
+  <p class="govuk-body"><a href="{{ applicationPath + incompleteLink }}">{{ incompleteLinkText }}</a></p>
+{% endset %}
+
+{{ govukInsetText({
+  classes: "app-inset-text--error" if errorList else "app-inset-text--important",
+  html: html
 }) }}

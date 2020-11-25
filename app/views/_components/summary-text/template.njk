@@ -1,6 +1,0 @@
-<div class="app-summary-text{% if params.type == "error" %} app-summary-text--error{% endif %}{{- " " + params.classes if params.classes}}" {%- for attribute, value in params.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
-  <p class="app-summary-text__text">
-    {{ params.text }}<br>
-    <a class="app-summary-text__link" href="{{ params.action.href }}">{{ params.action.text }}</a>
-  </p>
-</div>

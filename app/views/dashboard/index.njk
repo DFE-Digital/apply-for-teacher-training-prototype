@@ -36,7 +36,7 @@
 
 {% block beforePageTitle %}
   {{ govukNotificationBanner({
-    html: "<p class=\"govuk-notification-banner__heading\"><a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Do you want to apply again?</a></p>"
+    html: "<p class=\"govuk-notification-banner__heading\">You did not get a place on a course this time. <a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Apply again</a>.</p>"
   }) if status == "ended-without-success" }}
 {% endblock %}
 

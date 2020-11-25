@@ -3,16 +3,13 @@
 
 {% block beforePageTitle %}
   {% if showCopiedBanner %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">Your new application is ready for editing</h2>",
-      type: "success",
-      icon: false
+    {{ govukNotificationBanner({
+      text: "Your new application is ready for editing"
     }) }}
   {% else %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">Your " + serviceName + " account has been created</h2>",
-      type: "success",
-      icon: false
+    {{ govukNotificationBanner({
+      text: "Your " + serviceName + " account has been created",
+      type: "success"
     }) }}
   {% endif %}
 {% endblock %}

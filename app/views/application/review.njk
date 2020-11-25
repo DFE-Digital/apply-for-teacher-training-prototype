@@ -23,12 +23,9 @@
     }) }}
   {% endif %}
 
-  {% if closed %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed.</h2><p>Submit your application from 13 October for courses starting in 2021.</p>",
-      icon: false
-    }) }}
-  {% endif %}
+  {{ govukNotificationBanner({
+    html: "<h2 class=\"govuk-notification-banner__heading\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body\">Submit your application from 13 October for courses starting in 2021.</p>"
+  }) if closed }}
 {% endblock %}
 
 {% block primary %}

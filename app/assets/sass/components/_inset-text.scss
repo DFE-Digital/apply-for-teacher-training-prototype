@@ -3,7 +3,8 @@
   border-left-width: $govuk-border-width;
 
   .govuk-heading-s {
-    color: govuk-colour("blue");
+    font-weight: normal;
+    color: $govuk-text-colour;
   }
 }
 

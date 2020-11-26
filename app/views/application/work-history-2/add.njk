@@ -25,7 +25,8 @@
     {{ govukDateInput({
       fieldset: {
         legend: {
-          text: "When did you finish this role?"
+          text: "When did you finish this role?",
+          classes: "govuk-fieldset__legend--s"
         }
       },
       hint: {
@@ -50,14 +51,14 @@
   {{ govukInput({
     label: {
       text: "Job title",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["work-history", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Name of employer",
-      classes: "govuk-label--s"
+      classes: "govuk-label--m"
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 
@@ -65,7 +66,7 @@
     {{ govukCharacterCount({
       label: {
         text: "Give details about your working pattern",
-        classes: "govuk-label--s"
+        classes: "govuk-label--m"
       },
       hint: {
         text: "For example: ‘20 hours per week’"
@@ -80,7 +81,7 @@
     fieldset: {
       legend: {
         text: "Was this job full time or part time?",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -97,7 +98,7 @@
     fieldset: {
       legend: {
         text: "When did you begin this job?",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
@@ -121,7 +122,7 @@
     fieldset: {
       legend: {
         text: "Are you still working in this job?",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     items: [
@@ -145,7 +146,7 @@
     fieldset: {
       legend: {
         text: "Did this job involve working in a school or with children?",
-        classes: "govuk-fieldset__legend--s"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     items: [{

@@ -75,12 +75,12 @@
   {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
 
     <table class="govuk-table">
-      <caption class="govuk-table__caption govuk-table__caption-xlma`">Jobs and breaks in work history</caption>
+      <caption class="govuk-table__caption govuk-heading-m">Jobs and breaks in work history</caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header">From</th>
           <th class="govuk-table__header">To</th>
-          <th class="govuk-table__header">Role and employer</th>
+          <th class="govuk-table__header">Description</th>
           <!--<th class="govuk-table__header">Employer</th>-->
           <th class="govuk-table__header" style="text-align: right;">Actions</th>
         </tr>
@@ -98,31 +98,6 @@
           {% set firstStart = item["start-date"] %}
           {% set firstStartEpoch = firstStart | date("x") | int %}
 
-
-          {% set nextItem = history[loop.index] %}
-          {% set itemStart = item["end-date"] %}
-          {% set itemStartEpoch = itemStart | date("x") | int %}
-          {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
-          {% set itemEndEpoch = itemEnd | date("x") | int %}
-          {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-
-          {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
-            {# Unexplained break (prior to work history commencing) #}
-            {% set itemStart = periodStart %}
-            {% set itemStartEpoch = itemStart | date("x") | int %}
-            {% set itemEnd = firstStart %}
-            {% set itemEndEpoch = itemEnd | date("x") | int %}
-            {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-
-            <tr>
-            <td class="govuk-table__cell" colspan="4" style="background-color: #f3f2f1; padding: 10px 10px;">
-              You have a break in your work history ( {{ itemDuration | duration }})
-
-              <a href="{{ applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Please explain break</a>
-            </tr></td>
-          {% endif %}
-
-
             <tr>
               <td class="govuk-table__cell" style="white-space: nowrap">{{ item["start-date"] | date('LLL yyyy') }}</td>
               <td class="govuk-table__cell" style="white-space: nowrap">
@@ -133,12 +108,25 @@
                 {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
               {% endif %}
               </td>
-              <td class="govuk-table__cell">{{ item["role"] }} (Part time)
-              <br>{{ item["org"] }}
+              <td class="govuk-table__cell">
+                {% if item["category"] == "break" %}
+                  <b>Break in work history</b>
+                  <br><br>
+                  {{ item["description"] }}
+                {% else %}
 
-              {% if item["worked-with-children"] == "Yes" %}
-                <br><br>This role involved working with children
-              {% endif %}
+
+
+                  <p class="govuk-body">
+                    <b class="govuk-!-font-weight-bold">{{ item["role"] }}</b>
+                    {% if item["type"] == "Part time" %}(Part time){% endif %}
+                  <br>{{ item["org"] }}
+                </p>
+
+                  {% if item["worked-with-children"] == "Yes" %}
+                    <p class="govuk-body-s govuk-!-margin-bottom-1">This role involved working with children</p>
+                  {% endif %}
+                {% endif %}
               </td>
               <td class="govuk-table__cell" style="text-align: right;">
                 <a class="govuk-link" href="{{ applicationPath + "/work-history-2/" + item.id }}">Change</a>
@@ -147,6 +135,30 @@
                 <a class="govuk-link app-link--destructive" href="{{ applicationPath + "/work-history-2/" + item.id + "/remove" }}">Remove</a>
               </td>
             </tr>
+
+            {# Unexplained break (during work history) #}
+            {% set nextItem = history[loop.index] %}
+            {% set itemStart = item["end-date"] %}
+            {% set itemStartEpoch = itemStart | date("x") | int %}
+            {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+            {% set itemEndEpoch = itemEnd | date("x") | int %}
+            {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+            {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" colspan="4" style="background-color: #f3f2f1; padding: 10px 10px;">
+                You have a break in your work history ( {{ itemDuration | duration }})
+
+                <a style="margin-left: 10px; margin-right: 10px;" href="{{ applicationPath + "/work-history-2/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Add another job</a>
+
+                <a href="{{ applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Add reason for break</a>
+              </tr>
+            </td>
+
+
+            {% endif %}
+
+
           {% endfor %}
         {% else %}
           <tr class="govuk-table__row">
@@ -159,10 +171,8 @@
     </table>
 
 
-  <!--<p class="govuk-body"><a class="govuk-link" href="/application/{{ applicationId}}/work-history-2/{{newId}}">Add work history</a></p>-->
-
   {{ govukButton({
-    text: "Add work history",
+    text: "Add another job",
     href: "/application/" + applicationId + "/work-history-2/" + newId,
     classes: "govuk-button--secondary"
     }) }}

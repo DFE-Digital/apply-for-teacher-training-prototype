@@ -3,7 +3,6 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set title = "Work history" %}
-{% set referrer = applicationPath + "/work-history/review" %}
 {% set canAmend = true %}
 
 {% set workHistory = applicationValue(["work-history"]) or {} %}
@@ -54,7 +53,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/work-history-2?referrer=" + referrer,
+          href: applicationPath + "/work-history-2",
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
@@ -127,9 +126,12 @@
                 {% endif %}
               </td>
               <td class="govuk-table__cell" style="text-align: right;">
-                <a class="govuk-link" href="{{ applicationPath + "/work-history-2/" + item.id }}">Change</a>
 
-                <br>
+
+                {% set editPath = (applicationPath + "/work-history-2/break/" + item.id) if item["category"] == "break" else (applicationPath + "/work-history-2/" + item.id) %}
+
+
+                <a class="govuk-link" href="{{ editPath }}">Change</a><br>
                 <a class="govuk-link app-link--destructive" href="{{ applicationPath + "/work-history-2/" + item.id + "/remove" }}">Remove</a>
               </td>
             </tr>
@@ -143,16 +145,16 @@
             {% set itemDuration = itemEndEpoch - itemStartEpoch %}
             {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
 
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell" colspan="4" style="background-color: #f3f2f1; padding: 10px 10px;">
-                You have a break in your work history ( {{ itemDuration | duration }})
+             <tr class="govuk-table__row">
+              <td class="govuk-table__cell" colspan="4" style="border-left: 5px solid #1d70b8; padding-left: 15px; background-color: #f3f2f1;">
+                You have a break in your work history ({{ itemDuration | duration }})
 
-                <a style="margin-left: 10px; margin-right: 10px;" href="{{ applicationPath + "/work-history-2/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Add another job</a>
+                <br><a href="{{ applicationPath + "/work-history-2/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">Add another job</a> or
 
-                <a href="{{ applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer }} ">Add reason for break</a>
+                <a href="{{ applicationPath + "/work-history-2/break/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">add a reason for this break</a>
+
               </tr>
             </td>
-
 
             {% endif %}
 
@@ -174,7 +176,6 @@
     href: "/application/" + applicationId + "/work-history-2/" + newId,
     classes: "govuk-button--secondary"
     }) }}
-
 
 {% endif %}
 

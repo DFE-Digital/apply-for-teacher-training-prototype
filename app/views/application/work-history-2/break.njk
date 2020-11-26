@@ -1,0 +1,77 @@
+{% extends "_form.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set parent = "Work history" %}
+{% set title = "Please tell us what you were doing over this period" %}
+{% set formaction = "/application/" + applicationId + "/work-history-2/break/" + id %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+      href: applicationPath + "/work-history-2/review"
+    }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Start of break",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    namePrefix: id + "-start-date",
+    items: [{
+      classes: "govuk-input--width-2",
+      label: "Month",
+      name: "month",
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('L')
+    }, {
+      classes: "govuk-input--width-4",
+      label: "Year",
+      name: "year",
+      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('yyyy')
+    }]
+  } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "End of break",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    namePrefix: id + "-end-date",
+    items: [{
+      classes: "govuk-input--width-2",
+      label: "Month",
+      name: "month",
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('L')
+    }, {
+      classes: "govuk-input--width-4",
+      label: "Year",
+      name: "year",
+      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('yyyy')
+    }]
+  } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+
+  {{ govukCharacterCount({
+    label: {
+      text: "Enter reasons for break in work history",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, parenting or caring responsibilities, unemployment, travel, health, study or other personal reasons"
+    },
+    maxwords: 400
+  } | decorateApplicationAttributes(["work-history", id, "description"])) }}
+
+  {{ govukInput({
+    type: "hidden",
+    name: "applications[" + applicationId + "][work-history][" + id + "][category]",
+    value: "break"
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

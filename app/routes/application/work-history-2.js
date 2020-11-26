@@ -31,6 +31,27 @@ module.exports = router => {
   })
 
 
+  router.get('/application/:applicationId/work-history-2/break/:id', (req, res) => {
+    const { applicationId, id } = req.params
+    const { start, end } = req.query
+
+    res.render('application/work-history-2/break', {
+      id,
+      start,
+      end
+    })
+  })
+
+  router.post('/application/:applicationId/work-history-2/break/:id', (req, res) => {
+    const { applicationId, id } = req.params
+
+    const application = utils.applicationData(req)
+    const workHistory = application['work-history']
+    utils.saveIsoDate(req, workHistory, id, false)
+
+    res.redirect(`/application/${applicationId}/work-history-2/review`)
+  })
+
   router.get('/application/:applicationId/work-history-2/:id', (req, res) => {
     const { applicationId, id } = req.params
     res.render('application/work-history-2/add', {
@@ -52,12 +73,13 @@ module.exports = router => {
   // remove job page
   router.get('/application/:applicationId/work-history-2/:id/remove', (req, res) => {
     const { applicationId, id } = req.params
-
+    const item = utils.applicationData(req)["work-history"][id]
     const formaction = `/application/${applicationId}/work-history-2/${id}/remove`
 
     res.render('application/work-history-2/remove', {
       id,
-      formaction
+      formaction,
+      item
     })
   })
 

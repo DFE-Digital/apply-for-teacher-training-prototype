@@ -171,13 +171,18 @@
     </table>
 
 
+  {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}
+  {% set buttonClasses = "govuk-button--secondary" if history.length > 0 %}
+
   {{ govukButton({
-    text: "Add another job",
+    text: buttonText,
     href: "/application/" + applicationId + "/work-history-2/" + newId,
-    classes: "govuk-button--secondary"
+    classes: buttonClasses
     }) }}
 
 {% endif %}
+
+{% if history.length >= 1 %}
 
   {{ govukCheckboxes({
     items: [{
@@ -190,5 +195,6 @@
     text: "Return to application"
   }) }}
 
+{% endif %}
 
 {% endblock %}

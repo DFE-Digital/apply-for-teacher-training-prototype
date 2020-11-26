@@ -65,11 +65,9 @@
 {% else %}
 
   <div style="max-width: 650px;">
-    <p class="govuk-body">Include all the jobs you have had as an adult, including unpaid roles.</p>
+    <p class="govuk-body">Include all the jobs you’ve had as an adult, including unpaid roles.</p>
 
-    <p>You do not need to include part time jobs done whilst in full time education.</p>
-
-    <p>Any gaps of longer than one month should be explained.</p>
+    <p>Do not include part time jobs you had during full time education.</p>
   </div>
 
   {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}

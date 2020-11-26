@@ -20,15 +20,13 @@
 {% set hasSecondary = true %}
 
 {% block beforePageTitle %}
-  {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
-    type: "success",
-    icon: false
+  {{ govukNotificationBanner({
+    text: "We’ve copied your application. Please review all sections.",
+    type: "success"
   }) if showCopiedBanner }}
 
-  {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body-l\">Submit your application from 13 October for courses starting in 2021.</p>",
-    icon: false
+  {{ govukNotificationBanner({
+    html: "<h2 class=\"govuk-notification-banner__heading\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body\">Submit your application from 13 October for courses starting in 2021.</p>"
   }) if closed }}
 {% endblock %}
 

@@ -1,10 +1,33 @@
-{% extends "_content.njk" %}
+{% extends "_form.njk" %}
 
+{% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "You’ve declined to give a reference" %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m">We will tell {{ candidate_name }} and ask them for a new referee</h2>
-  <p class="govuk-body">If you declined in error, please email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+  <p class="govuk-body">Teacher training courses can fill up quickly, and candidates need 2 references to apply.</p>
+  <p class="govuk-body">{{ candidate_name }} will be able to submit the application quicker if you give a reference.</p>
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: "Are you sure you do not want to give " + candidate_name + " a reference?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    name: "answer",
+    items: [{
+      value: "yes",
+      text: "Yes, I’m sure"
+    }, {
+      value: "no",
+      text: "No, I’ve changed my mind"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 {% endblock %}

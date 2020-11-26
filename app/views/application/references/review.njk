@@ -19,13 +19,10 @@
 {% endblock %}
 
 {% block beforePageTitle %}
-  {% if messages[0] %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">" + messages[0] + "</h2>",
-      type: "success",
-      icon: false
-    }) }}
-  {% endif %}
+  {{ govukNotificationBanner({
+    text: messages[0],
+    type: "success"
+  }) if messages }}
 {% endblock %}
 
 {% block primary %}

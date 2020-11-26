@@ -1,11 +1,9 @@
-{% set bannerHtml %}
-  <p class="govuk-body" id="missing-{{ incompleteId }}">{{ incompleteText }}</p>
-  <a class="govuk-link" aria-describedby="missing-{{ incompleteId }}" href="{{ applicationPath }}{{ incompleteLink }}">{{ incompleteLinkText }}</a>
+{% set html %}
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ incompleteText }}</h4>
+  <p class="govuk-body"><a href="{{ applicationPath + incompleteLink }}">{{ incompleteLinkText }}</a></p>
 {% endset %}
 
-{{ appBanner({
-  classes: "app-banner--missing-section",
-  html: bannerHtml,
-  type: incompleteType or "information",
-  icon: false
+{{ govukInsetText({
+  classes: "app-inset-text--error" if errorList else "app-inset-text--important",
+  html: html
 }) }}

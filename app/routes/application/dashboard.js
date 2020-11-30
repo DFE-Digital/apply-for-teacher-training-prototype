@@ -19,6 +19,12 @@ module.exports = router => {
           choices[2].status = 'Awaiting decision'
           break
 
+        case 'interviewing':
+          choices[0].status = 'Interview arranged'
+          choices[1].status = 'Awaiting decision'
+          choices[2].status = 'Awaiting decision'
+          break
+
         case 'awaiting-candidate-response':
           choices[0].status = 'Offer received'
           choices[1].status = 'Offer received'

@@ -10,7 +10,7 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% if status == "awaiting-provider-decisions" %}
+{% if status == "awaiting-provider-decisions" or "interviewing" %}
   {% set statusTitle = "Some of your training providers have not reached a decision yet" %}
   {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
 {% elif status == "awaiting-candidate-response" %}
@@ -51,6 +51,9 @@
   <h2 class="govuk-heading-m govuk-!-font-size-27">{{ statusTitle }}</h2>
   {% if statusDesc %}
     <p class="govuk-body">{{ statusDesc }}</p>
+  {% endif %}
+  {% if status == "interviewing" %}
+    <p class="govuk-body">Not all providers will update an application’s status when they have arranged an interview.</p>
   {% endif %}
 
   {% set choices = application.choices | toArray %}

@@ -52,9 +52,6 @@
   {% if statusDesc %}
     <p class="govuk-body">{{ statusDesc }}</p>
   {% endif %}
-  {% if status == "interviewing" %}
-    <p class="govuk-body">Not all providers will update an application’s status when they have arranged an interview.</p>
-  {% endif %}
 
   {% set choices = application.choices | toArray %}
   {% set showChoiceStatus = true %}

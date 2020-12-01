@@ -15,8 +15,11 @@ module.exports = router => {
       switch (applicationStatus) {
         case 'awaiting-provider-decisions':
           choices[0].status = 'Awaiting decision'
+          choices[0].interview = false
           choices[1].status = 'Awaiting decision'
+          choices[1].interview = false
           choices[2].status = 'Awaiting decision'
+          choices[2].interview = false
           break
 
         case 'interviewing':

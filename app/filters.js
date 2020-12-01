@@ -158,6 +158,7 @@ module.exports = (env) => {
       case 'Submitted':
         return `${prefix}--grey`
       case 'Awaiting decision':
+      case 'Interview arranged':
         return `${prefix}--purple`
       case 'Offer received':
         return `${prefix}--turquoise`

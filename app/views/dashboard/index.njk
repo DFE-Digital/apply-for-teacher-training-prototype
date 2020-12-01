@@ -10,7 +10,7 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% if status == "awaiting-provider-decisions" %}
+{% if status == "awaiting-provider-decisions" or "interviewing" %}
   {% set statusTitle = "Some of your training providers have not reached a decision yet" %}
   {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
 {% elif status == "awaiting-candidate-response" %}

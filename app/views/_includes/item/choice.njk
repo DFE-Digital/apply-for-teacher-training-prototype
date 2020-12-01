@@ -19,6 +19,28 @@
   {% endif %}
 {% endset %}
 
+{% macro interviewItem(interview) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ interview.date | date("d MMMM yyyy 'at' h:mma") }}</p>
+  <p class="govuk-body">
+    {{ interview.providerName }}<br>
+    {{ interview.address }}
+  </p>
+{% endmacro %}
+
+{% set interviewHtml %}
+  {% if item.interview | length > 1 %}
+    <ul class="govuk-list govuk-list--number">
+    {% for interview in item.interview %}
+      <li>
+        {{ interviewItem(interview) | safe }}
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    {{ interviewItem(item.interview[0]) | safe }}
+  {% endif %}
+{% endset %}
+
 {% set feedbackHtml %}
   <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
   <p class="govuk-body">Your subject knowledge could be improved.</p>
@@ -90,6 +112,13 @@
       html: statusHtml
     }
   } if showChoiceStatus, {
+    key: {
+      text: "Interviews" if item.interview | length > 1 else "Interview"
+    },
+    value: {
+      html: interviewHtml
+    }
+  } if item.interview and item.status == "Awaiting decision", {
     key: {
       text: "Feedback"
     },

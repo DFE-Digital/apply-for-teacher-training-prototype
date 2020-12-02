@@ -43,9 +43,10 @@ module.exports = router => {
           break
 
         case 'awaiting-candidate-response':
-          choices[0].status = 'Offer received'
+          choices[0].status = 'Unsuccessful'
+          choices[0].hasFeedback = true
           choices[1].status = 'Offer received'
-          choices[2].status = 'Application withdrawn'
+          choices[2].status = 'Awaiting decision'
           break
 
         case 'ended-without-success':

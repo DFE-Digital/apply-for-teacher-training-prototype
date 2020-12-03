@@ -25,7 +25,7 @@
     {{ govukDateInput({
       fieldset: {
         legend: {
-          text: "When did you finish this role?",
+          text: "When did you leave this job?",
           classes: "govuk-fieldset__legend--s"
         }
       },
@@ -61,7 +61,7 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "If you worked for yourself, enter ‘self-employed’. Include the name of your company if you had one."
+      text: "If you worked for yourself, enter ‘self-employed’."
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
 
@@ -97,7 +97,7 @@
   {{ govukDateInput({
     fieldset: {
       legend: {
-        text: "When did you begin this job?",
+        text: "When did you start this job?",
         classes: "govuk-fieldset__legend--m"
       }
     },

@@ -221,9 +221,6 @@ module.exports = [{
   value: 'Dubai',
   text: 'Dubai'
 }, {
-  value: 'East Germany',
-  text: 'East Germany'
-}, {
   value: 'East Timor',
   text: 'East Timor'
 }, {

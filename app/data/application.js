@@ -31,7 +31,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2020-09'
+      starts: '2021-09'
     },
     FGHIJ: {
       courseCode: '2VLT',
@@ -41,7 +41,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2020-09'
+      starts: '2021-09'
     },
     ZYXWV: {
       courseCode: 'X100',
@@ -51,7 +51,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2020-09'
+      starts: '2021-09'
     }
   },
   references: {

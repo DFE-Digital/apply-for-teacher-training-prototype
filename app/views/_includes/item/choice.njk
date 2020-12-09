@@ -19,10 +19,32 @@
   {% endif %}
 {% endset %}
 
+{% macro interviewItem(interview) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ interview.date | date("d MMMM yyyy 'at' h:mma") }}</p>
+  <p class="govuk-body">
+    {{ interview.providerName }}<br>
+    {{ interview.address }}
+  </p>
+{% endmacro %}
+
+{% set interviewHtml %}
+  {% if item.interview | length > 1 %}
+    <ul class="govuk-list govuk-list--number">
+    {% for interview in item.interview %}
+      <li>
+        {{ interviewItem(interview) | safe }}
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    {{ interviewItem(item.interview[0]) | safe }}
+  {% endif %}
+{% endset %}
+
 {% set feedbackHtml %}
   <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
   <p class="govuk-body">Your subject knowledge could be improved.</p>
-  <p class="govuk-body">Details: Understand the purpose of PE in schools and the learn more about the procedures related to safeguarding.</p>
+  <p class="govuk-body">Details: Understand the purpose of primary education and then learn more about the procedures related to safeguarding.</p>
 
   <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
   <p class="govuk-body">Your degree does not meet the course requirements.</p>
@@ -90,6 +112,13 @@
       html: statusHtml
     }
   } if showChoiceStatus, {
+    key: {
+      text: "Interviews" if item.interview | length > 1 else "Interview"
+    },
+    value: {
+      html: interviewHtml
+    }
+  } if item.interview and item.status == "Awaiting application decision", {
     key: {
       text: "Feedback"
     },

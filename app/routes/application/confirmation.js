@@ -9,9 +9,9 @@ module.exports = router => {
 
     let { choices } = application
     choices = utils.toArray(choices)
-    choices[0].status = 'Awaiting decision'
-    choices[1].status = 'Awaiting decision'
-    choices[2].status = 'Awaiting decision'
+    choices[0].status = 'Awaiting application decision'
+    choices[1].status = 'Awaiting application decision'
+    choices[2].status = 'Awaiting application decision'
 
     res.render('application/confirmation', {
       applicationId

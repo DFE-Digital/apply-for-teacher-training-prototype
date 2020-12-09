@@ -56,8 +56,8 @@
           <th class="govuk-table__header">From</th>
           <th class="govuk-table__header">To</th>
           <th class="govuk-table__header">Description</th>
-          <!--<th class="govuk-table__header">Employer</th>-->
-          <th class="govuk-table__header" style="text-align: right;">Actions</th>
+
+          <th class="govuk-table__header app-table__cell--action">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -74,13 +74,12 @@
           {% set firstStartEpoch = firstStart | date("x") | int %}
 
             <tr>
-              <td class="govuk-table__cell" style="white-space: nowrap">{{ item["start-date"] | date('LLL yyyy') }}</td>
-              <td class="govuk-table__cell" style="white-space: nowrap">
-
+              <td class="govuk-table__cell"><span class="app-date">{{ item["start-date"] | date('LLL yyyy') }}</span></td>
+              <td class="govuk-table__cell">
               {% if item["end-date-present"] == "yes" %}
                 Present
               {% else %}
-                {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+                <span class="app-date">{{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}</span>
               {% endif %}
               </td>
               <td class="govuk-table__cell">
@@ -103,7 +102,7 @@
                   {% endif %}
                 {% endif %}
               </td>
-              <td class="govuk-table__cell" style="text-align: right;">
+              <td class="govuk-table__cell app-table__cell--action">
 
 
                 {% set editPath = (applicationPath + "/work-history-2/break/" + item.id) if item["category"] == "break" else (applicationPath + "/work-history-2/" + item.id) %}
@@ -124,7 +123,7 @@
             {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
 
              <tr class="govuk-table__row">
-              <td class="govuk-table__cell" colspan="4" style="border-left: 5px solid #1d70b8; padding-left: 15px; background-color: #f3f2f1;">
+              <td class="govuk-table__cell app-table__cell--break-prompt" colspan="4">
                 You have a break in your work history ({{ itemDuration | duration }})
 
                 <br><a href="{{ applicationPath + "/work-history-2/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">Add another job</a> or

@@ -148,6 +148,7 @@ module.exports = router => {
   require('./application/contact-details')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)
+  require('./application/work-history-2')(router)
   require('./application/school-experience')(router)
   require('./application/reasonable-adjustments')(router)
   require('./application/suitability')(router)

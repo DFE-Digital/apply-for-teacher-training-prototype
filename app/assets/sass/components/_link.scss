@@ -1,0 +1,11 @@
+.app-link--destructive:link {
+  color: govuk-colour("red");
+}
+
+.app-link--destructive:visited {
+  color: govuk-colour("red");
+}
+
+.app-link--destructive:focus {
+  color: govuk-colour("black");
+}

@@ -9,18 +9,20 @@ $govuk-global-styles: true;
 @import "components/autocomplete";
 @import "components/button";
 @import "components/cookie-banner";
+@import "components/date";
 @import "components/feedback";
 @import "components/hidden-link";
 @import "components/icon";
 @import "components/inset-text";
+@import "components/link";
 @import "components/list";
 @import "components/related";
 @import "components/status-indicator";
 @import "components/styled-content";
 @import "components/summary-card";
 @import "components/table";
-@import "components/task-list";
 @import "components/tag";
+@import "components/task-list";
 
 .govuk-body {
   word-wrap: break-word;

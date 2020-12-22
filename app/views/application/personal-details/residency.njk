@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/personal-details/review" %}
-{% set title = "Do you have the right to work or study in the UK?" %}
+{% set title = "Your right to work or study in the UK" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,13 +10,19 @@
 {% endblock %}
 
 {% block primary %}
+
+<p class="govuk-body">To get help with student visas and your immigration status, <a href="https://beta-getintoteaching.education.gov.uk/helping-you-become-a-teacher">register with Get Into Teaching</a> . You will be able to speak to an adviser.</p>
+<p class="govuk-body">Most School Centred Initial Teacher Training (SCITT) providers cannot sponsor student visas for trainees on unsalaried courses.</p>
+<p class="govuk-body">You may be eligible for another type of visa that does not need your training provider to act as sponsor.</p>
+<p class="govuk-body"><a href="https://beta-getintoteaching.education.gov.uk/international-candidates">Find out about student visas, visa routes that do not need a sponsor and visa options for trainees on salaried courses</a>.</p>
+
   {% set rightToWorkStudy %}
     {{ govukCharacterCount({
       label: {
-        html: "Give details"
+        html: "What is your immigration status?"
       },
       hint: {
-        text: "For example, you have settled status or a permanent residence card"
+        text: "For example, “I have settled status” or “I have permanent residence”."
       },
       maxwords: 200,
       rows: 5
@@ -25,27 +31,23 @@
 
   {{ govukRadios({
     fieldset: {
+      legend: {
+        text: "Do you already have the right to work or study in the UK?",
+        classes: "govuk-label--m"
+      },
       attributes: {
         "data-module": "clear-hidden"
       }
     },
     items: [{
       value: "I have the right to work or study in the UK",
-      text: "Yes – I have the right to work or study in the UK",
+      text: "Yes",
       conditional: {
         html: rightToWorkStudy
       }
     }, {
       value: "I will need to apply for permission to work or study in the UK",
-      text: "Not yet – I will need to apply for permission to work or study in the UK",
-      conditional: {
-        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
-      }
-    }, {
-      text: "I do not know",
-      conditional: {
-        html: "<p class=\"govuk-body\">Visit <a href=\"https://getintoteaching.education.gov.uk/explore-my-options/overseas-graduates\">Get Into Teaching</a> for guidance on immigration. You can also <a href=\"https://register.getintoteaching.education.gov.uk/register\">register to talk to an adviser</a> if you need help.</p>"
-      }
+      text: "Not yet, or not sure"
     }]
   } | decorateApplicationAttributes(["candidate", "residency"])) }}
 

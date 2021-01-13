@@ -21,6 +21,16 @@
 
 {% block primary %}
 
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: "<p class=\"govuk-body\">Include all the jobs you’ve had since you turned 18.</p><p class=\"govuk-body\">You do not need to enter jobs you had while in full time education.</p>",
+  attributes: {
+    style: "margin-top: -20px;"
+  }
+}) }}
+
+
   {% set roleEndHTML %}
     {{ govukDateInput({
       fieldset: {
@@ -30,30 +40,23 @@
         }
       },
       hint: {
-        text: "For example, 5 2019"
+        text: "For example, 2019 5"
       },
       namePrefix: id + "-end-date",
       items: [{
-        label: "Month",
-        name: "month",
-        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('L'),
-        classes: "govuk-input--width-2"
-      }, {
         label: "Year",
         name: "year",
         value: (applicationValue(["work-history", id, "end-date"]) or "") | date('yyyy'),
         classes: "govuk-input--width-4"
+      },
+      {
+        label: "Month",
+        name: "month",
+        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('L'),
+        classes: "govuk-input--width-2"
       }]
     } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
   {% endset %}
-
-
-  {{ govukInput({
-    label: {
-      text: "Job title",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["work-history", id, "role"])) }}
 
   {{ govukInput({
     label: {
@@ -64,6 +67,18 @@
       text: "If you worked for yourself, enter ‘self-employed’."
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
+
+
+  {{ govukInput({
+    label: {
+      text: "Job title",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "If you had more than one role with this employer, enter your last role."
+    }
+  } | decorateApplicationAttributes(["work-history", id, "role"])) }}
+
 
   {% set partTimeHtml %}
     {{ govukCharacterCount({
@@ -102,22 +117,53 @@
       }
     },
     hint: {
-      text: "For example, 5 2018"
+      text: "For example, 2018 5. If you cannot remember the exact month or year, enter an estimate."
     },
     namePrefix: id + "-start-date",
     items: [{
-      label: "Month",
-      name: "month",
-      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('L'),
-      classes: "govuk-input--width-2"
-    }, {
       label: "Year",
       name: "year",
       value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('yyyy'),
       classes: "govuk-input--width-4"
+    },
+    {
+      label: "Month",
+      name: "month",
+      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('L'),
+      classes: "govuk-input--width-2"
     }]
   } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
 
+  {% set approxStartHtml %}
+    <p class="govuk-body">
+      Enter an approximate month and year.
+    </p>
+
+    <div class="govuk-date-input" id="dob">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group govuk-!-margin-bottom-0">
+          <label class="govuk-label govuk-date-input__label" for="dob-month">
+            Month
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="dob-month" name="dob-month" type="text" autocomplete="bday-month" pattern="[0-9]*" inputmode="numeric"></div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group govuk-!-margin-bottom-0">
+          <label class="govuk-label govuk-date-input__label" for="dob-year">
+            Year
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="dob-year" name="dob-year" type="text" autocomplete="bday-year" pattern="[0-9]*" inputmode="numeric"></div>
+      </div>
+    </div>
+  {% endset %}
+
+  {% from "govuk/components/details/macro.njk" import govukDetails %}
+<!--
+  {{ govukDetails({
+    summaryText: "I don’t remember the year or month",
+    html: approxStartHtml
+  }) }}
+-->
   {{ govukRadios({
     fieldset: {
       legend: {

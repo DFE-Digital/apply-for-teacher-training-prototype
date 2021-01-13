@@ -200,6 +200,39 @@
     }) }}
   </section>
 
+<section class="govuk-!-margin-bottom-8">
+
+
+    {% if applicationValue("work-history-decision") %}
+      {% set workHistoryPath = applicationPath + "/work-history-2/review" %}
+    {% else %}
+      {% set workHistoryPath = applicationPath + "/work-history-2" %}
+    {% endif %}
+
+
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
+    {{ appTaskList({
+      items: [{
+        text: "Your full work history",
+        href: workHistoryPath,
+        id: "work-history",
+        tag: {
+          classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "work-history"]) else incompleteTagText
+        }
+      },
+      {
+        text: "Unpaid experience",
+        href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience") | length > 0),
+        id: "school-experience",
+        tag: {
+          classes: tagClass if applicationValue(["completed", "school-experience"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "school-experience"]) else incompleteTagText
+        }
+      }]
+    }) }}
+  </section>
+
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
     {{ appTaskList({
@@ -248,24 +281,8 @@
 
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
-
-    {% if applicationValue("work-history-decision") %}
-      {% set workHistoryPath = applicationPath + "/work-history-2/review" %}
-    {% else %}
-      {% set workHistoryPath = applicationPath + "/work-history-2" %}
-    {% endif %}
-
-
     {{ appTaskList({
-      items: [{
-        text: "Work history",
-        href: workHistoryPath,
-        id: "work-history",
-        tag: {
-          classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "work-history"]) else incompleteTagText
-        }
-      },
+      items: [
       {
         text: "Declare any safeguarding issues",
         href: applicationPath + "/suitability" + ("/review" if applicationValue("suitability") | length > 0),

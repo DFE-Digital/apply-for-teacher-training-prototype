@@ -21,6 +21,54 @@
     <p class="govuk-body">You should mention any relevant skills and experience gained from your work history in your personal statement.</p>
   </div>
 
+
+
+  {% set errorListBreaks = [] %}
+
+  {% if history.length >= 1 %}
+    {% for item in history %}
+
+      {# periodStart = Earliest date in required work history period #}
+      {% set periodStart = "now" | date | replace("2019", "2014") %}
+      {% set periodStartEpoch = periodStart | date("x") | int %}
+
+      {# firstStart = Start date of first item in work history #}
+      {% set firstStart = item["start-date"] %}
+      {% set firstStartEpoch = firstStart | date("x") | int %}
+
+      {% set nextItem = history[loop.index] %}
+      {% set itemStart = item["end-date"] %}
+      {% set itemStartEpoch = itemStart | date("x") | int %}
+      {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+      {% set itemEndEpoch = itemEnd | date("x") | int %}
+      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+      {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+
+        {% set errorListBreaks = errorListBreaks | push(
+          {
+            href: "#work-history-break-" + (itemStart | date("yyyy-LL")),
+            text: (itemStart | date("LLLL yyyy")) + " to " + ( itemEnd | date("LLLL yyyy"))
+          }
+        ) %}
+
+      {% endif %}
+
+    {% endfor %}
+  {% endif %}
+
+
+  {% if errorListBreaks | length  > 0 %}
+    {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+
+
+    {{ govukErrorSummary({
+      classes: "app-error-summary--advisory",
+      titleText: "You have unexplained breaks in your work history",
+      errorList: errorListBreaks
+    }) }}
+
+  {% endif %}
+
   {% include "_includes/review/work-history-2.njk" %}
 
   {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}

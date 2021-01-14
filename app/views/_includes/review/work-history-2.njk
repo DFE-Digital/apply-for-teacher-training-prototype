@@ -122,7 +122,7 @@
             {% set itemDuration = itemEndEpoch - itemStartEpoch %}
             {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
 
-             <tr class="govuk-table__row">
+             <tr class="govuk-table__row" id="work-history-break-{{ itemStart | date("yyyy-LL") }}">
               <td class="govuk-table__cell app-table__cell--break-prompt" colspan="4">
                 You have a break in your work history ({{ itemDuration | duration }})
 

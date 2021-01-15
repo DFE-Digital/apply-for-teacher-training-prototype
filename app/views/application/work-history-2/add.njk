@@ -1,5 +1,9 @@
 {% extends "_form.njk" %}
 
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
 {% set action = "edit" if applicationValue(["work-history", id]) else "add" %}
@@ -21,7 +25,6 @@
 
 {% block primary %}
 
-{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {{ govukInsetText({
   html: "<p class=\"govuk-body\">Include all the jobs you’ve had since you turned 18.</p><p class=\"govuk-body\">You do not need to enter jobs you had while in full time education.</p>",
@@ -40,22 +43,32 @@
         }
       },
       hint: {
-        text: "For example, 2019 5"
+        text: "For example, 5 2019"
       },
       namePrefix: id + "-end-date",
       items: [{
-        label: "Year",
-        name: "year",
-        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('yyyy'),
-        classes: "govuk-input--width-4"
-      },
-      {
         label: "Month",
         name: "month",
         value: (applicationValue(["work-history", id, "end-date"]) or "") | date('L'),
         classes: "govuk-input--width-2"
+      },
+      {
+        label: "Year",
+        name: "year",
+        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('yyyy'),
+        classes: "govuk-input--width-4"
       }]
     } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+
+      {{ govukCheckboxes({
+    name: "start-date-approx",
+    items: [
+      {
+        value: "start-date-approx",
+        text: "Approximate date"
+      }
+    ]
+  }) }}
   {% endset %}
 
   {{ govukInput({
@@ -71,29 +84,13 @@
 
   {{ govukInput({
     label: {
-      text: "Job title",
+      text: "Role",
       classes: "govuk-label--m"
     },
     hint: {
       text: "If you had more than one role with this employer, enter your last role."
     }
   } | decorateApplicationAttributes(["work-history", id, "role"])) }}
-
-
-  {% set partTimeHtml %}
-    {{ govukCharacterCount({
-      label: {
-        text: "Give details about your working pattern",
-        classes: "govuk-label--m"
-      },
-      hint: {
-        text: "For example: ‘20 hours per week’"
-      },
-      maxwords: 50,
-      threshold: 75,
-      rows: 2
-    } | decorateApplicationAttributes(["work-history", id, "part-time-details"])) }}
-  {% endset -%}
 
   {{ govukRadios({
     fieldset: {
@@ -117,20 +114,20 @@
       }
     },
     hint: {
-      text: "For example, 2018 5. If you cannot remember the exact month or year, enter an estimate."
+      text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
     },
     namePrefix: id + "-start-date",
     items: [{
-      label: "Year",
-      name: "year",
-      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('yyyy'),
-      classes: "govuk-input--width-4"
-    },
-    {
       label: "Month",
       name: "month",
       value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('L'),
       classes: "govuk-input--width-2"
+    },
+    {
+      label: "Year",
+      name: "year",
+      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('yyyy'),
+      classes: "govuk-input--width-4"
     }]
   } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
 
@@ -157,12 +154,24 @@
     </div>
   {% endset %}
 
-  {% from "govuk/components/details/macro.njk" import govukDetails %}
 
+  {{ govukCheckboxes({
+    name: "start-date-approx",
+    items: [
+      {
+        value: "start-date-approx",
+        text: "Approximate date"
+      }
+    ]
+  }) }}
+
+
+  <!--
   {{ govukDetails({
     summaryText: "I don’t remember the year or month",
     html: approxStartHtml
   }) }}
+  -->
 
   {{ govukRadios({
     fieldset: {
@@ -187,11 +196,10 @@
     ]
   } | decorateApplicationAttributes(["work-history", id, "end-date-present"])) }}
 
-
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Did this job involve working in a school or with children?",
+        text: "Did this job involve working with children?",
         classes: "govuk-fieldset__legend--m"
       }
     },

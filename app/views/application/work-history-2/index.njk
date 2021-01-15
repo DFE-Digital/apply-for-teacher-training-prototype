@@ -31,10 +31,8 @@
   } | decorateApplicationAttributes(["work-history", "missing"])) }}
 {% endset -%}
 
+  <p class="govuk-body">Training providers need your full work history. </p>
 
-  <p class="govuk-body">Training providers need a complete work history. It is an important part of the background checks that ensure children are safe around you.</p>
-
-  <p class="govuk-body">Breaks in work history will not impact your application if you have an explanation for them. For example this could be raising children, unemployment, redundancy, illness, study or travel.</p>
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -44,10 +42,7 @@
     },
     items: [{
       value: "yes",
-      text: "Yes",
-      hint: {
-        text: "You’ll be able to give details of any breaks once you’ve entered your employment history"
-      }
+      text: "Yes"
     }, {
       value: "full-time-education",
       text: "No, I have always been in full time education"

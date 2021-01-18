@@ -30,6 +30,8 @@
     } | decorateApplicationAttributes(["work-history", "missing"])) }}
   {% endset -%}
 
+  <div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
   <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
     {{ govukRadios({
       fieldset: {
@@ -59,4 +61,6 @@
       text: "Continue"
     }) }}
   </form>
+  <div>
+  </div>
 {% endblock %}

@@ -1,6 +1,6 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Work history" %}
+{% set title = "" %}
 {% set formaction = applicationPath + "/work-history-2/answer" %}
 
 {% block pageNavigation %}
@@ -16,47 +16,47 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  {% set noWorkHistoryHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "Tell us why you’ve been out of the workplace"
+      },
+      hint: {
+        text: "For example, ‘I have been unemployed’, ‘I have been volunteering’ or ‘I have been caring for a child’"
+      },
+      threshold: 90,
+      maxwords: 400
+    } | decorateApplicationAttributes(["work-history", "missing"])) }}
+  {% endset -%}
 
-{% set noWorkHistoryHtml %}
-  {{ govukCharacterCount({
-    label: {
-      text: "Tell us why you’ve been out of the workplace"
-    },
-    hint: {
-      text: "For example, ‘I have been unemployed’, ‘I have been volunteering’ or ‘I have been caring for a child’"
-    },
-    threshold: 90,
-    maxwords: 400
-  } | decorateApplicationAttributes(["work-history", "missing"])) }}
-{% endset -%}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          classes: "govuk-fieldset__legend--xl",
+          text: "Do you have any work history?",
+          isPageHeading: true
+        }
+      },
+      items: [{
+        value: "yes",
+        text: "Yes"
+      }, {
+        value: "full-time-education",
+        text: "No, I have always been in full time education"
+      }, {
+        value: "no",
+        text: "No, I do not have any work history",
+        conditional: {
+          html: noWorkHistoryHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["work-history-decision"])
+    ) }}
 
-  <p class="govuk-body">Training providers need your full work history. </p>
-
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        classes: "govuk-fieldset__legend--m",
-        text: "Do you have any work history?"
-      }
-    },
-    items: [{
-      value: "yes",
-      text: "Yes"
-    }, {
-      value: "full-time-education",
-      text: "No, I have always been in full time education"
-    }, {
-      value: "no",
-      text: "No, I do not have any work history",
-      conditional: {
-        html: noWorkHistoryHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["work-history-decision"])
-  ) }}
-
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

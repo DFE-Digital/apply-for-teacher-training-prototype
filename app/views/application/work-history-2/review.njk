@@ -16,7 +16,7 @@
 
 {% block primary %}
 
-  <div class="govuk-!-width-two-thirds">
+<div class="govuk-!-width-two-thirds">
     <p class="govuk-body">Providers use this information for safeguarding and to find out about you.</p>
 
     <p class="govuk-body">Detail any relevant experience you’ve gained from work in your personal statement.</p>
@@ -69,7 +69,7 @@
   {% endif %}
 
   {% if history.length >= 1 %}
-    {% include "_includes/review/work-history-2.njk" %}
+    {% include "_includes/review/work-history-3.njk" %}
   {% endif %}
 
   {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}

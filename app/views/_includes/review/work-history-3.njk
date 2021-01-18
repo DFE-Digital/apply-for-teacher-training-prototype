@@ -78,7 +78,7 @@
             {% endif %}
           </p>
           {% if item["worked-with-children"] == "Yes" %}
-            <p class="govuk-body-s govuk-!-margin-bottom-1">This role involved working with children</p>
+            <p class="govuk-body-s govuk-!-margin-bottom-1">This role used skills relevant to teaching</p>
           {% endif %}
 
           {% set editPath = (applicationPath + "/work-history-2/break/" + item.id) if item["category"] == "break" else (applicationPath + "/work-history-2/" + item.id) %}

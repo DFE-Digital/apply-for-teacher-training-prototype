@@ -24,16 +24,6 @@
 {% endblock %}
 
 {% block primary %}
-
-
-{{ govukInsetText({
-  text: "Include all the jobs you’ve had since you turned 18.",
-  attributes: {
-    style: "margin-top: -20px;"
-  }
-}) }}
-
-
   {% set roleEndHTML %}
     {{ govukDateInput({
       fieldset: {
@@ -199,9 +189,12 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Did this job involve working with children?",
+        text: "Did this job involve using skills relevant to teaching?",
         classes: "govuk-fieldset__legend--m"
       }
+    },
+    hint: {
+      text: "You can go into more detail about this in your personal statement."
     },
     items: [{
       text: "Yes"

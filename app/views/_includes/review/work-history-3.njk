@@ -63,6 +63,7 @@
 
           <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
+
           <h2 class="govuk-heading-s govuk-!-margin-bottom-0">{{ item["org"] }}</h2>
           <p class="govuk-body govuk-!-margin-bottom-0">
             {{ item["role"] }}
@@ -70,11 +71,21 @@
           </p>
           <p class="govuk-body">
             {{ item["start-date"] | date('LLL yyyy') }}
+
+            {% if item['start-date-approx'] | length  > 0 %}
+              (estimate)
+            {% endif %}
+
             –
             {% if item["end-date-present"] == "yes" %}
               Present
             {% else %}
               {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+
+            {% if item['end-date-approx'] | length  > 0 %}
+              (estimate)
+            {% endif %}
+
             {% endif %}
           </p>
           {% if item["worked-with-children"] == "Yes" %}

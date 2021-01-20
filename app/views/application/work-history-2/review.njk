@@ -94,16 +94,18 @@
 
 {% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
 
-  {{ govukCheckboxes({
-    items: [{
-      value: "true",
-      text: "I have completed this section"
-    }]
-  } | decorateApplicationAttributes(["completed", "work-history"])) }}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "work-history"])) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
 
 {% endif %}
 

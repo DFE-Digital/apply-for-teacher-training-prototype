@@ -6,6 +6,7 @@
 {% set canAmend = true %}
 {% set workHistory = applicationValue(["work-history"]) or {} %}
 {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+{% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -16,72 +17,82 @@
 
 {% block primary %}
 
-<div class="govuk-!-width-two-thirds">
-    <p class="govuk-body">Providers need to see your full work history. Include the jobs you’ve had since you left school.</p>
+{% if workHistoryDecision == "yes" %}
 
-    <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness. They will not impact your application.</p>
-  </div>
+  <div class="govuk-!-width-two-thirds">
+      <p class="govuk-body">Enter all the jobs you've had since you left school.</p>
 
-  {% set errorListBreaks = [] %}
+      <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness.</p>
+    </div>
 
-  {% if history.length >= 1 %}
-    {% for item in history %}
+    {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}
+    {% set buttonClasses = "govuk-button--secondary" if history.length > 0 %}
 
-      {# periodStart = Earliest date in required work history period #}
-      {% set periodStart = "now" | date | replace("2019", "2014") %}
-      {% set periodStartEpoch = periodStart | date("x") | int %}
+    {{ govukButton({
+      text: buttonText,
+      href: "/application/" + applicationId + "/work-history-2/" + newId,
+      classes: buttonClasses
+      }) }}
 
-      {# firstStart = Start date of first item in work history #}
-      {% set firstStart = item["start-date"] %}
-      {% set firstStartEpoch = firstStart | date("x") | int %}
 
-      {% set nextItem = history[loop.index] %}
-      {% set itemStart = item["end-date"] %}
-      {% set itemStartEpoch = itemStart | date("x") | int %}
-      {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
-      {% set itemEndEpoch = itemEnd | date("x") | int %}
-      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-      {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+    {% if history.length >= 1 %}
+      {% include "_includes/review/work-history-3.njk" %}
+    {% endif %}
 
-        {% set errorListBreaks = errorListBreaks | push(
-          {
-            href: "#work-history-break-" + (itemStart | date("yyyy-LL")),
-            text: (itemStart | date("LLLL yyyy")) + " to " + ( itemEnd | date("LLLL yyyy"))
+{% else %}
+  {% set workHistoryDetailsHtml %}
+    {% if workHistoryDecision == "full-time-education" %}
+
+      {{ govukSummaryList({
+        classes: "app-summary",
+        rows: [{
+          key: {
+            text: "Do you have any work history?"
+          },
+          value: {
+            text: "No, I have always been in full time education"
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/work-history-2",
+              text: "Change",
+              visuallyHiddenText: "explanation"
+            }]
           }
-        ) %}
+        }]
+      }) }}
 
-      {% endif %}
+    {% elseif workHistoryDecision == "no" %}
 
-    {% endfor %}
-  {% endif %}
+      {{ govukSummaryList({
+        classes: "app-summary",
+        rows: [{
+          key: {
+            text: "Explanation of why you’ve been out of the workplace"
+          },
+          value: {
+            text: (applicationValue(["work-history", "missing"]) or "Not entered") | nl2br | safe
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/work-history-2",
+              text: "Change",
+              visuallyHiddenText: "explanation"
+            }]
+          }
+        }]
+      }) }}
+    {% endif %}
+  {% endset %}
 
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: workHistoryDetailsHtml
+  }) }}
 
-  {% if errorListBreaks | length  > 0 %}
-    {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% endif %}
 
-<!--
-    {{ govukErrorSummary({
-      classes: "app-error-summary--advisory",
-      titleText: "You have unexplained breaks in your work history",
-      errorList: errorListBreaks
-    }) }}
--->
-  {% endif %}
-
-  {% if history.length >= 1 %}
-    {% include "_includes/review/work-history-3.njk" %}
-  {% endif %}
-
-  {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}
-  {% set buttonClasses = "govuk-button--secondary" if history.length > 0 %}
-
-  {{ govukButton({
-    text: buttonText,
-    href: "/application/" + applicationId + "/work-history-2/" + newId,
-    classes: buttonClasses
-    }) }}
-
-{% if history.length >= 1 %}
+{% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
 
   {{ govukCheckboxes({
     items: [{

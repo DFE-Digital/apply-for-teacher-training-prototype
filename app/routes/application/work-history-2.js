@@ -91,7 +91,19 @@ module.exports = router => {
 
     delete application["work-history"][id]
 
-    res.redirect(`/application/${applicationId}/work-history-2/review`)
+    const numberOfJobsLeft = Object.entries(application["work-history"])
+      .filter(function(job) {
+      return job[1]['id'] != undefined
+    }).length
+
+    if (numberOfJobsLeft > 0) {
+      res.redirect(`/application/${applicationId}/work-history-2/review`)
+    } else {
+      // Return to branching question if no jobs left
+      res.redirect(`/application/${applicationId}/work-history-2`)
+    }
+
+
 
   })
 

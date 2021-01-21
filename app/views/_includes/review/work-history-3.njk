@@ -64,10 +64,20 @@
           <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
 
-          <h2 class="govuk-heading-s govuk-!-margin-bottom-0">{{ item["org"] }}</h2>
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-0">
+            {% if item['category'] == 'break' %}
+              Break in work history
+            {% else %}
+              {{  item['org'] }}
+            {%  endif %}
+          </h2>
           <p class="govuk-body govuk-!-margin-bottom-0">
-            {{ item["role"] }}
-            {% if item["type"] == "Part time" %}(Part time){% endif %}
+            {% if item['category'] == 'break' %}
+              {{ item["description"] }}
+            {% else %}
+              {{ item["role"] }}
+              {% if item["type"] == "Part time" %}(Part time){% endif %}
+            {% endif %}
           </p>
           <p class="govuk-body">
             {{ item["start-date"] | date('LLL yyyy') }}

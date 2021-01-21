@@ -5,8 +5,11 @@ module.exports = router => {
   router.get('/application/:applicationId/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
 
+    const fromPage = req.query['from']
+
     res.render('application/work-history/review', {
-      newId
+      newId,
+      fromPage
     })
   })
 

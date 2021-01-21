@@ -9,10 +9,17 @@
 {% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/application/" + applicationId,
-    text: "Back to application"
-  }) }}
+  {% if fromPage == "work-history-question" %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/work-history",
+      text: "Back"
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}

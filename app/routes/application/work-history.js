@@ -1,80 +1,96 @@
 const utils = require('./../../utils')
 
-/**
- * Application: Work history routes
- */
 module.exports = router => {
-  // Render missing work history page
-  router.get('/application/:applicationId/work-history/missing', (req, res) => {
-    res.render('application/work-history/missing')
+  // Review page
+  router.get('/application/:applicationId/work-history/review', (req, res) => {
+    const newId = utils.generateRandomString()
+
+    res.render('application/work-history/review', {
+      newId
+    })
   })
 
-  // Generate new ID and redirect to that item
-  router.get('/application/:applicationId/work-history/add/:type(job|break)', (req, res) => {
-    const { applicationId, type } = req.params
-    const id = utils.generateRandomString()
-    const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    res.redirect(`/application/${applicationId}/work-history/${type}/${id}?${queryString}`)
+  // Root path - show branching page if no data yet, otherwise the review page.
+  router.get('/application/:applicationId/work-history', (req, res) => {
+    res.render('application/work-history/index')
   })
 
-  // Render review page, redirecting to start page if no work history added
-  router.get('/application/:applicationId/work-history/:view?', (req, res) => {
-    const application = utils.applicationData(req)
-    const workHistory = Object.entries(application['work-history'])
+  // Answering the initial branching question
+  router.post('/application/:applicationId/work-history/answer', (req, res) => {
+    const { applicationId } = req.params
 
-    if (workHistory.length) {
-      res.render('application/work-history/review')
-    } else {
-      res.render('application/work-history/index')
-    }
+    res.redirect(`/application/${applicationId}/work-history/review`)
   })
 
-  // Render job/break page
-  router.get('/application/:applicationId/work-history/:type(job|break)/:id', (req, res) => {
-    const { applicationId, id, type } = req.params
-    const { referrer, start, end } = req.query
+  router.get('/application/:applicationId/work-history/break/:id', (req, res) => {
+    const { id } = req.params
+    const { start, end } = req.query
 
-    let formaction
-    if (referrer) {
-      formaction = `${referrer}?update=${id}`
-    } else {
-      formaction = `/application/${applicationId}/work-history/review?update=${id}`
-    }
-
-    res.render(`application/work-history/${type}`, {
-      referrer,
-      formaction,
+    res.render('application/work-history/break', {
       id,
       start,
       end
     })
   })
 
-  // Convert individual date components into single ISO 8601 date string before
-  // proceeding to next page (reviewing all or adding another)
-  router.post('/application/:applicationId/work-history/:next(review|add)/:type?', (req, res) => {
-    const { applicationId, next, type } = req.params
-    const id = req.query.update
+  router.post('/application/:applicationId/work-history/break/:id', (req, res) => {
+    const { applicationId, id } = req.params
+
     const application = utils.applicationData(req)
     const workHistory = application['work-history']
-    utils.saveIsoDate(req, workHistory, id)
+    utils.saveIsoDate(req, workHistory, id, false)
 
-    if (next === 'review') {
-      res.redirect(`/application/${applicationId}/work-history/review`)
-    } else {
-      res.redirect(`/application/${applicationId}/work-history/add/${type}`)
-    }
+    res.redirect(`/application/${applicationId}/work-history/review`)
   })
 
-  // Work history length answer branching
-  router.post('/application/:applicationId/work-history/answer', (req, res) => {
-    const { applicationId } = req.params
-    const { decision } = req.session.data
+  router.get('/application/:applicationId/work-history/:id', (req, res) => {
+    const { id } = req.params
+    res.render('application/work-history/add', {
+      id
+    })
+  })
 
-    if (decision === 'yes') {
-      res.redirect(`/application/${applicationId}/work-history/add/job`)
+  // Adding a job
+  router.post('/application/:applicationId/work-history/:id', (req, res) => {
+    const { applicationId, id } = req.params
+
+    const application = utils.applicationData(req)
+    const workHistory = application['work-history']
+    utils.saveIsoDate(req, workHistory, id, false)
+
+    res.redirect(`/application/${applicationId}/work-history/review`)
+  })
+
+  // remove job page
+  router.get('/application/:applicationId/work-history/:id/remove', (req, res) => {
+    const { applicationId, id } = req.params
+    const item = utils.applicationData(req)['work-history'][id]
+    const formaction = `/application/${applicationId}/work-history/${id}/remove`
+
+    res.render('application/work-history/remove', {
+      id,
+      formaction,
+      item
+    })
+  })
+
+  // Remove a job
+  router.post('/application/:applicationId/work-history/:id/remove', (req, res) => {
+    const { applicationId, id } = req.params
+    const application = utils.applicationData(req)
+
+    delete application['work-history'][id]
+
+    const numberOfJobsLeft = Object.entries(application['work-history'])
+      .filter(function (job) {
+        return job[1].id !== undefined
+      }).length
+
+    if (numberOfJobsLeft > 0) {
+      res.redirect(`/application/${applicationId}/work-history/review`)
     } else {
-      res.redirect(`/application/${applicationId}/work-history/missing`)
+      // Return to branching question if no jobs left
+      res.redirect(`/application/${applicationId}/work-history`)
     }
   })
 }

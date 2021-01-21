@@ -1,18 +1,14 @@
 {% extends "_form.njk" %}
 
+{% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
 {% set title = "Please tell us what you were doing over this period" %}
+{% set formaction = "/application/" + applicationId + "/work-history/break/" + id %}
 
 {% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
+  {{ govukBackLink({
+      href: applicationPath + "/work-history/review"
     }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: applicationPath + "/work-history"
-    }) }}
-  {% endif %}
 {% endblock %}
 
 {% block primary %}
@@ -64,8 +60,9 @@
       classes: "govuk-label--m"
     },
     hint: {
-      text: "For example, parenting or caring responsibilities, unemployment, travel, health, study or other personal reasons"
+      text: "For example, ‘I was unemployed’, ‘I had health issues’ or ‘I was caring for a child’"
     },
+    threshold: 90,
     maxwords: 400
   } | decorateApplicationAttributes(["work-history", id, "description"])) }}
 

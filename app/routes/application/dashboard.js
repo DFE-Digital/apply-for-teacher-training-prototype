@@ -13,6 +13,34 @@ module.exports = router => {
       choices = utils.toArray(choices)
 
       switch (applicationStatus) {
+        // Single course states
+        case 'awaiting-decision':
+          choices[0].status = 'Awaiting provider decision'
+          choices[0].interview = false
+          break
+        // Single course states
+        case 'future-interview':
+          choices[0].status = 'Awaiting provider decision'
+          choices[0].interview = [{
+            date: '2021-12-14T10:30:00',
+            providerName: 'Leeds Trinity University',
+            address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
+          }]
+          break
+        case 'post-interview':
+          choices[0].status = 'Awaiting provider decision'
+          choices[0].interview = [{
+            date: '2019-12-14T10:30:00',
+            providerName: 'Leeds Trinity University',
+            address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
+          }]
+          break
+        case 'offer-received':
+          choices[0].status = 'Offer received'
+          choices[0].interview = null
+          break
+
+        // Multiple courses applied for
         case 'awaiting-provider-decisions':
           choices[0].status = 'Awaiting application decision'
           choices[0].interview = false

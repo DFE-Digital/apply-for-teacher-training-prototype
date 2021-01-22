@@ -10,7 +10,7 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% if status == "awaiting-provider-decisions" or "interviewing" %}
+{% if status == "awaiting-provider-decisions" or status == "interviewing" %}
   {% set statusTitle = "Some of your training providers have not reached a decision yet" %}
   {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
 {% elif status == "awaiting-candidate-response" %}
@@ -30,8 +30,12 @@
   {% set statusTitle = "You have met your conditions and are ready to be enrolled" %}
   {% set statusDesc = "Your training provider will be in touch with you directly to explain what happens next." %}
 {% else %}
-  {% set statusTitle = "Courses you’ve applied to" %}
-  {% set statusDesc = false %}
+  {% if application.choices | toArray | length > 1 %}
+    {% set statusTitle = "Courses you’ve applied to" %}
+  {% else %}
+    {% set statusTitle = "Course you’ve applied to" %}
+  {% endif %}
+  {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
 {% endif %}
 
 {% block beforePageTitle %}
@@ -46,7 +50,8 @@
 {% endblock %}
 
 {% block primary %}
-  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response") %}
+
+  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received") %}
 
   <h2 class="govuk-heading-m govuk-!-font-size-27">{{ statusTitle }}</h2>
   {% if statusDesc %}

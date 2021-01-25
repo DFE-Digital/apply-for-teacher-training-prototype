@@ -126,7 +126,7 @@
             {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
             {% set itemEndEpoch = itemEnd | date("x") | int %}
             {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-            {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
+            {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 and item['end-date-present'] != 'yes' %}
 
               {% if loop.index == history.length %}
                 <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">

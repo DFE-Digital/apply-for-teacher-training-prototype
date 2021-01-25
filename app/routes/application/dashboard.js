@@ -18,7 +18,6 @@ module.exports = router => {
           choices[0].status = 'Awaiting provider decision'
           choices[0].interview = false
           break
-        // Single course states
         case 'future-interview':
           choices[0].status = 'Awaiting provider decision'
           choices[0].interview = [{
@@ -39,6 +38,57 @@ module.exports = router => {
           choices[0].status = 'Offer received'
           choices[0].interview = null
           break
+        case 'unsuccessful-with-feedback':
+          choices[0].status = 'Unsuccessful'
+          choices[0].hasFeedback = true
+          choices[0].feedback = {
+            behaviour: false,
+            quality_of_application: {
+              subject_knowledge: "Understand the purpose of primary education and then learn more about the procedures related to safeguarding."
+            },
+            qualifications: {
+              degree_does_not_meet_requirements: true
+            },
+            interested_in_future_applications: true
+          }
+          break
+        case 'unsuccessful-course-full':
+          choices[0].status = 'Unsuccessful'
+          choices[0].hasFeedback = true
+          choices[0].feedback = {
+            course_full: true
+          }
+          break
+        case 'unsuccessful-provider-did-not-respond':
+          choices[0].status = 'Unsuccessful'
+          choices[0].hasFeedback = true
+          choices[0].feedback = {
+            rejected_by_default: true
+          }
+          break
+        case 'withdrawn':
+          choices[0].status = 'Withdrawn'
+          break
+        case 'offer-withdrawn':
+          choices[0].status = 'Offer Withdrawn'
+          break
+
+        case 'accepted':
+          choices[0].status = 'Offer accepted'
+          break
+        case 'declined':
+          choices[0].status = 'Offer declined'
+          break
+        case 'deferred':
+          choices[0].status = 'Offer deferred'
+          break
+        case 'did-not-respond-to-offer':
+          choices[0].status = 'Unsuccessful'
+          break
+        case 'recruited-single':
+          choices[0].status = 'Conditions met'
+          break
+
 
         // Multiple courses applied for
         case 'awaiting-provider-decisions':

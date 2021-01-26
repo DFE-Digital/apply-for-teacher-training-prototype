@@ -33,7 +33,7 @@ const getCourse = (providerCode, courseCode) => {
   return providers[providerCode].courses[courseCode]
 }
 
-const saveIsoDate = (req, data, id, blank_equals_now = true) => {
+const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
   // If no ID, we won’t have any dates to convert
   if (!id) {
     return
@@ -54,7 +54,7 @@ const saveIsoDate = (req, data, id, blank_equals_now = true) => {
   const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
   const endYear = req.body[`${id}-end-date-year`]
 
-  if (blank_equals_now) {
+  if (blankEqualsNow) {
     data[id]['end-date'] = 'now' // No date indicates today
   }
 

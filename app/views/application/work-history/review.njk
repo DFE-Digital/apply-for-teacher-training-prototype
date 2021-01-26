@@ -1,29 +1,70 @@
-{% extends "_form-wide.njk" %}
+{% extends "_content-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set title = "Work history" %}
-{% set referrer = applicationPath + "/work-history/review" %}
 {% set canAmend = true %}
+{% set workHistory = applicationValue(["work-history"]) or {} %}
+{% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+{% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    href: "/application/" + applicationId,
-    text: "Back to application"
-  }) }}
+  {% if fromPage == "work-history-question" %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/work-history",
+      text: "Back"
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
+
+{% if workHistoryDecision == "yes" %}
+
+  <div class="govuk-!-width-two-thirds">
+      <p class="govuk-body">Enter all the jobs you've had since you left school.</p>
+
+      <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness.</p>
+    </div>
+
+    {% set buttonText = "Add another job" if history.length > 0 else "Add a job" %}
+    {% set buttonClasses = "govuk-button--secondary" if history.length > 0 %}
+
+    {{ govukButton({
+      text: buttonText,
+      href: "/application/" + applicationId + "/work-history/" + newId,
+      classes: buttonClasses
+      }) }}
+
+
+    {% if history.length >= 1 %}
+      {% include "_includes/review/work-history.njk" %}
+    {% endif %}
+
+{% else %}
   {% include "_includes/review/work-history.njk" %}
+{% endif %}
 
-  {{ govukCheckboxes({
-    items: [{
-      value: "true",
-      text: "I have completed this section"
-    }]
-  } | decorateApplicationAttributes(["completed", "work-history"])) }}
+{% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "work-history"])) }}
+
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
+
+{% endif %}
+
 {% endblock %}

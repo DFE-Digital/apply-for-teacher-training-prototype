@@ -7,7 +7,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: applicationPath + "/work-history-2/review"
+    href: applicationPath + "/work-history/review"
   }) }}
 {% endblock %}
 
@@ -16,5 +16,5 @@
     text: "Yes I’m sure - delete this " + type,
     classes: "govuk-button--warning"
   }) }}
-  <p class="govuk-body"><a href="{{ applicationPath + "/work-history-2/review" }}">Cancel</a></p>
+  <p class="govuk-body"><a href="{{ applicationPath + "/work-history/review" }}">Cancel</a></p>
 {% endblock %}

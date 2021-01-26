@@ -125,6 +125,11 @@ module.exports = (env) => {
     }
   }
 
+  filters.push = (array, item) => {
+    array.push(item)
+    return array
+  }
+
   /**
    * Get course information
    * @type {String} providerCode

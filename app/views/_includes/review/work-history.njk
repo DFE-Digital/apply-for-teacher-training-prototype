@@ -1,145 +1,162 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set workHistory = applicationValue(["work-history"]) %}
+{% set workHistory = applicationValue(["work-history"]) or {} %}
+{% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
 
-{% set complete = workHistory | length > 0 %}
-{% if complete %}
-  {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
-  {% if history.length >= 1 %}
-    {% for item in history %}
-      {% set jobHtml %}
-        {% include "_includes/item/job.njk" %}
-      {% endset %}
-
-      {% set breakHtml %}
-        {% include "_includes/item/break.njk" %}
-      {% endset %}
-
-      {# periodStart = Earliest date in required work history period #}
-      {% set periodStart = "now" | date | replace("2019", "2014") %}
-      {% set periodStartEpoch = periodStart | date("x") | int %}
-
-      {# firstStart = Start date of first item in work history #}
-      {% set firstStart = item["start-date"] %}
-      {% set firstStartEpoch = firstStart | date("x") | int %}
-
-      {% if loop.first and firstStartEpoch > periodStartEpoch %}
-        {# Unexplained break (prior to work history commencing) #}
-        {% set itemStart = periodStart %}
-        {% set itemStartEpoch = itemStart | date("x") | int %}
-        {% set itemEnd = firstStart %}
-        {% set itemEndEpoch = itemEnd | date("x") | int %}
-        {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-        {{ appSummaryCard({
-          classes: "govuk-!-margin-bottom-6",
-          headingLevel: 3,
-          titleText: "You have a break in your work history (" + (itemDuration | duration) + ")",
-          actions: {
-            items: [{
-              href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-              text: "Please explain break"
-            }]
-          } if canAmend
-        }) }}
-      {% endif %}
-
-      {% if item.category == "break" %}
-        {% set itemStart = item["start-date"] %}
-        {% set itemStartEpoch = itemStart | date("x") | int %}
-        {% set itemEnd = item["end-date"] %}
-        {% set itemEndEpoch = itemEnd | date("x") | int %}
-        {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-        {{ appSummaryCard({
-          classes: "govuk-!-margin-bottom-6",
-          headingLevel: 3,
-          titleText: "Break in work history (" + (itemDuration | duration) + ")",
-          actions: {
-            items: [{
-              href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete break"
-            }]
-          } if canAmend,
-          html: breakHtml
-        }) }}
-      {% else %}
-        {{ appSummaryCard({
-          classes: "govuk-!-margin-bottom-6",
-          headingLevel: 3,
-          titleHtml: item.role,
-          actions: {
-            items: [{
-              href: applicationPath + "/work-history/" + item.id + "/delete?referrer=" + referrer,
-              text: "Delete job"
-            }]
-          } if canAmend,
-          html: jobHtml
-        }) }}
-      {% endif %}
-
-      {# Unexplained break (during work history) #}
-      {% set nextItem = history[loop.index] %}
-      {% set itemStart = item["end-date"] %}
-      {% set itemStartEpoch = itemStart | date("x") | int %}
-      {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
-      {% set itemEndEpoch = itemEnd | date("x") | int %}
-      {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-      {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 %}
-        {{ appSummaryCard({
-          classes: "govuk-!-margin-bottom-6",
-          headingLevel: 3,
-          titleText: "You have a break in your work history (" + (itemDuration | duration) + ")",
-          actions: {
-            items: [{
-              href: applicationPath + "/work-history/add/break?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-              text: "Please explain break"
-            }, {
-              href: applicationPath + "/work-history/add/job?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") + "&referrer=" + referrer,
-              text: "Add another job"
-            }]
-          } if canAmend
-        }) }}
-      {% endif %}
-    {% endfor %}
-    {{ govukButton({
-      text: "Add another job",
-      href: applicationPath + "/work-history/add/job?referrer=" + referrer,
-      classes: "govuk-button--secondary"
+{% if workHistoryDecision == "full-time-education" %}
+  {% set workHistoryDetailsHtml %}
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Do you have any work history?"
+        },
+        value: {
+          text: "No, I have always been in full time education"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history",
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
     }) }}
-  {% else %}
-    {% set outofWorkHtml %}
-      {{ govukSummaryList({
-        classes: "app-summary",
-        rows: [{
-          key: {
-            text: "Explanation of why you’ve been out of the workplace"
-          },
-          value: {
-            text: (applicationValue(["work-history", "missing"]) or "Not entered") | nl2br | safe
-          },
-          actions: {
-            items: [{
-              href: applicationPath + "/work-history/missing?referrer=" + referrer,
-              text: "Change",
-              visuallyHiddenText: "explanation"
-            }]
-          }
-        }]
-      }) }}
-    {% endset %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      html: outofWorkHtml
+  {% endset %}
+
+{% elseif workHistoryDecision == "no" %}
+  {% set workHistoryDetailsHtml %}
+
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Explanation of why you’ve been out of the workplace"
+        },
+        value: {
+          text: (applicationValue(["work-history", "missing"]) or "Not entered") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history",
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
     }) }}
-    {{ govukButton({
-      text: "Add job",
-      classes: "govuk-button--secondary",
-      href: applicationPath + "/work-history/add/job?referrer="  + referrer
-    }) }}
-  {% endif %}
+  {% endset %}
 {% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "work-history" %}
-  {% set incompleteText = "Work history is not marked as completed" %}
-  {% set incompleteLink = "/work-history?referrer=" + referrer %}
-  {% set incompleteLinkText = "Complete your work history" %}
-  {% include "_includes/review/incomplete.njk" %}
+
+  {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+
+  {% set workHistoryDetailsHtml %}
+
+    <section>
+
+        {% if history.length >= 1 %}
+          {% for item in history %}
+
+          {# periodStart = Earliest date in required work history period #}
+          {% set periodStart = "now" | date | replace("2019", "2014") %}
+          {% set periodStartEpoch = periodStart | date("x") | int %}
+
+          {# firstStart = Start date of first item in work history #}
+          {% set firstStart = item["start-date"] %}
+          {% set firstStartEpoch = firstStart | date("x") | int %}
+
+          <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+
+          <h2 class="govuk-heading-s govuk-!-margin-bottom-0">
+            {% if item['category'] == 'break' %}
+              Break in work history
+            {% else %}
+              {{  item['org'] }}
+            {%  endif %}
+          </h2>
+          <p class="govuk-body govuk-!-margin-bottom-0">
+            {% if item['category'] == 'break' %}
+              {{ item["description"] }}
+            {% else %}
+              {{ item["role"] }}
+              {% if item["type"] == "Part time" %}(Part time){% endif %}
+            {% endif %}
+          </p>
+          <p class="govuk-body">
+            {{ item["start-date"] | date('LLL yyyy') }}
+
+            {% if item['start-date-approx'] | length  > 0 %}
+              (estimate)
+            {% endif %}
+
+            –
+            {% if item["end-date-present"] == "yes" %}
+              Present
+            {% else %}
+              {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+
+            {% if item['end-date-approx'] | length  > 0 %}
+              (estimate)
+            {% endif %}
+
+            {% endif %}
+          </p>
+          {% if item["worked-with-children"] == "Yes" %}
+            <p class="govuk-body-s govuk-!-margin-bottom-1">This role used skills relevant to teaching</p>
+          {% endif %}
+
+          {% set editPath = (applicationPath + "/work-history/break/" + item.id) if item["category"] == "break" else (applicationPath + "/work-history/" + item.id) %}
+
+
+          </div>
+          <div class="govuk-grid-column-one-third govuk-body app-grid-column-one-third--actions">
+            <a class="govuk-link" href="{{ editPath }}">Change</a>&nbsp;&nbsp;&nbsp;
+            <a class="govuk-link" href="{{ applicationPath + "/work-history/" + item.id + "/remove" }}">Delete</a>
+          </div>
+          </div>
+
+          {% if loop.index != history.length %}
+            <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
+          {% endif %}
+
+            {# Unexplained break (during work history) #}
+            {% set nextItem = history[loop.index] %}
+            {% set itemStart = item["end-date"] %}
+            {% set itemStartEpoch = itemStart | date("x") | int %}
+            {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+            {% set itemEndEpoch = itemEnd | date("x") | int %}
+            {% set itemDuration = itemEndEpoch - itemStartEpoch %}
+            {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 and item['end-date-present'] != 'yes' %}
+
+              {% if loop.index == history.length %}
+                <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
+              {% endif %}
+
+
+              <div class="govuk-inset-text app-inset-text--important govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+                You have a break in your work history ({{ itemDuration | duration }})
+
+                <br><a href="{{ applicationPath + "/work-history/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">Add another job</a> or
+
+                <a href="{{ applicationPath + "/work-history/break/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">add a reason for this break</a>
+
+              </div>
+
+              {% if loop.index != history.length %}
+                <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
+              {% endif %}
+
+            {% endif %}
+
+
+          {% endfor %}
+        {% endif %}
+
+    </section>
+  {% endset %}
 {% endif %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: workHistoryDetailsHtml
+  }) }}

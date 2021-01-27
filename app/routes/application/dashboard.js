@@ -98,6 +98,10 @@ module.exports = router => {
           choices[0].status = 'Unsuccessful'
           application.endedWithoutSuccess = true
           break
+        case 'conditions-not-met':
+          choices[0].status = 'Conditions not met'
+          application.endedWithoutSuccess = true
+          break
         case 'recruited-single':
           choices[0].status = 'Conditions met'
           application.endedWithoutSuccess = false

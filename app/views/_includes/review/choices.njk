@@ -7,9 +7,7 @@
       {% include "_includes/item/choice.njk" %}
     {% endset %}
 
-    {% set canRespond = canMakeDecision
-      and item.status == "Offer received"
-    %}
+    {% set canRespond = item.status == "Offer received" %}
 
     {% set hasResponded =
       (item.status == "Conditions not met")

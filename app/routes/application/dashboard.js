@@ -109,13 +109,14 @@ module.exports = router => {
 
 
         // Multiple courses applied for
-        case 'awaiting-provider-decisions':
+        case 'awaiting-all-provider-decisions':
           choices[0].status = 'Awaiting decision'
           choices[0].interview = false
           choices[1].status = 'Awaiting decision'
           choices[1].interview = false
           choices[2].status = 'Awaiting decision'
           choices[2].interview = false
+          application.endedWithoutSuccess = false
           break
 
         case 'interviewing':
@@ -136,6 +137,51 @@ module.exports = router => {
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
           choices[2].status = 'Awaiting decision'
+          application.endedWithoutSuccess = false
+
+          break
+
+        case 'awaiting-some-provider-decisions':
+          choices[0].status = 'Awaiting decision'
+          choices[0].interview = [{
+            date: '2020-12-14T11:00:00',
+            providerName: 'Gorse SCITT',
+            address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+          }]
+          choices[1].status = 'Unsuccessful'
+          choices[1].hasFeedback = true
+          choices[1].feedback = {
+            course_full: true
+          }
+          choices[2].status = 'Offer received'
+          choices[2].interview = null
+          application.endedWithoutSuccess = false
+          break
+
+        case 'received-one-offer':
+          choices[0].status = 'Unsuccessful'
+          choices[0].interview = [{
+            date: '2020-12-14T11:00:00',
+            providerName: 'Gorse SCITT',
+            address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+          }]
+          choices[1].status = 'Withdrawn'
+          choices[1].interview = false
+          choices[2].status = 'Offer received'
+          application.endedWithoutSuccess = false
+          break
+
+        case 'received-two-offers':
+          choices[0].status = 'Unsuccessful'
+          choices[0].interview = [{
+            date: '2020-12-14T11:00:00',
+            providerName: 'Gorse SCITT',
+            address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+          }]
+          choices[1].status = 'Offer received'
+          choices[1].interview = false
+          choices[2].status = 'Offer received'
+          application.endedWithoutSuccess = false
           break
 
         case 'awaiting-candidate-response':
@@ -155,21 +201,24 @@ module.exports = router => {
           break
 
         case 'pending-conditions':
-          choices[0].status = 'Offer accepted'
+          choices[0].status = 'Offer declined'
           choices[1].status = 'Application withdrawn'
-          choices[2].status = 'Offer declined'
+          choices[2].status = 'Offer accepted'
+          application.endedWithoutSuccess = false
           break
 
         case 'offer-deferred':
-          choices[0].status = 'Offer deferred'
+          choices[0].status = 'Offer declined'
           choices[1].status = 'Application withdrawn'
-          choices[2].status = 'Offer declined'
+          choices[2].status = 'Offer deferred'
+          application.endedWithoutSuccess = false
           break
 
         case 'recruited':
-          choices[0].status = 'Conditions met'
+          choices[0].status = 'Offer declined'
           choices[1].status = 'Application withdrawn'
-          choices[2].status = 'Offer declined'
+          choices[2].status = 'Conditions met'
+          application.endedWithoutSuccess = false
           break
 
         default:

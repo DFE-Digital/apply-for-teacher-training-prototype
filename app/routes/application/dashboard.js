@@ -14,29 +14,33 @@ module.exports = router => {
 
       switch (applicationStatus) {
         // Single course states
-        case 'awaiting-decision':
-          choices[0].status = 'Awaiting provider decision'
+        case 'awaiting-provider-decision':
+          choices[0].status = 'Awaiting decision'
           choices[0].interview = false
+          application.endedWithoutSuccess = false
           break
         case 'future-interview':
-          choices[0].status = 'Awaiting provider decision'
+          choices[0].status = 'Awaiting decision'
           choices[0].interview = [{
             date: '2021-12-14T10:30:00',
             providerName: 'Leeds Trinity University',
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
+          application.endedWithoutSuccess = false
           break
         case 'post-interview':
-          choices[0].status = 'Awaiting provider decision'
+          choices[0].status = 'Awaiting decision'
           choices[0].interview = [{
             date: '2019-12-14T10:30:00',
             providerName: 'Leeds Trinity University',
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
+          application.endedWithoutSuccess = false
           break
         case 'offer-received':
           choices[0].status = 'Offer received'
           choices[0].interview = null
+          application.endedWithoutSuccess = false
           break
         case 'unsuccessful-with-feedback':
           choices[0].status = 'Unsuccessful'
@@ -51,6 +55,7 @@ module.exports = router => {
             },
             interested_in_future_applications: true
           }
+          application.endedWithoutSuccess = true
           break
         case 'unsuccessful-course-full':
           choices[0].status = 'Unsuccessful'
@@ -58,6 +63,7 @@ module.exports = router => {
           choices[0].feedback = {
             course_full: true
           }
+          application.endedWithoutSuccess = true
           break
         case 'unsuccessful-provider-did-not-respond':
           choices[0].status = 'Unsuccessful'
@@ -65,43 +71,51 @@ module.exports = router => {
           choices[0].feedback = {
             rejected_by_default: true
           }
+          application.endedWithoutSuccess = true
           break
         case 'withdrawn':
           choices[0].status = 'Withdrawn'
+          application.endedWithoutSuccess = true
           break
         case 'offer-withdrawn':
-          choices[0].status = 'Offer Withdrawn'
+          choices[0].status = 'Offer withdrawn'
+          application.endedWithoutSuccess = true
           break
 
         case 'accepted':
           choices[0].status = 'Offer accepted'
+          application.endedWithoutSuccess = false
           break
         case 'declined':
           choices[0].status = 'Offer declined'
+          application.endedWithoutSuccess = true
           break
         case 'deferred':
           choices[0].status = 'Offer deferred'
+          application.endedWithoutSuccess = false
           break
         case 'did-not-respond-to-offer':
           choices[0].status = 'Unsuccessful'
+          application.endedWithoutSuccess = true
           break
         case 'recruited-single':
           choices[0].status = 'Conditions met'
+          application.endedWithoutSuccess = false
           break
 
 
         // Multiple courses applied for
         case 'awaiting-provider-decisions':
-          choices[0].status = 'Awaiting application decision'
+          choices[0].status = 'Awaiting decision'
           choices[0].interview = false
-          choices[1].status = 'Awaiting application decision'
+          choices[1].status = 'Awaiting decision'
           choices[1].interview = false
-          choices[2].status = 'Awaiting application decision'
+          choices[2].status = 'Awaiting decision'
           choices[2].interview = false
           break
 
         case 'interviewing':
-          choices[0].status = 'Awaiting application decision'
+          choices[0].status = 'Awaiting decision'
           choices[0].interview = [{
             date: '2020-12-14T11:00:00',
             providerName: 'Gorse SCITT',
@@ -111,20 +125,20 @@ module.exports = router => {
             providerName: 'University of Leeds',
             address: 'Woodhouse, Leeds. LS2 9JT'
           }]
-          choices[1].status = 'Awaiting application decision'
+          choices[1].status = 'Awaiting decision'
           choices[1].interview = [{
             date: '2020-12-14T10:30:00',
             providerName: 'Leeds Trinity University',
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
-          choices[2].status = 'Awaiting application decision'
+          choices[2].status = 'Awaiting decision'
           break
 
         case 'awaiting-candidate-response':
           choices[0].status = 'Unsuccessful'
           choices[0].hasFeedback = true
           choices[1].status = 'Offer received'
-          choices[2].status = 'Awaiting application decision'
+          choices[2].status = 'Awaiting decision'
           break
 
         case 'ended-without-success':
@@ -133,6 +147,7 @@ module.exports = router => {
           choices[1].status = 'Offer withdrawn'
           choices[1].hasFeedback = true
           choices[2].status = 'Application withdrawn'
+          application.endedWithoutSuccess = true
           break
 
         case 'pending-conditions':

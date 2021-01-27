@@ -23,13 +23,12 @@
 
 
     {% set canWithdraw =
-      item.status == true
-      and (item.status != "Offer received")
+      (item.status != "Offer received")
       and (item.status != "Offer declined")
       and (item.status != "Application not sent")
       and (item.status != "Unsuccessful")
       and (item.status != "Offer withdrawn")
-      and (item.status != "Application withdrawn")
+      and (item.status != "Withdrawn")
     %}
 
     {{ appSummaryCard({

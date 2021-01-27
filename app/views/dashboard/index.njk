@@ -16,6 +16,9 @@
 {% elif status == "awaiting-candidate-response" %}
   {% set statusTitle = "All your training providers have now reached a decision" %}
   {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
+{% elif status == "offer-received" %}
+  {% set statusTitle = "Your training provider has now reached a decision" %}
+  {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
 {% elif status == "ended-without-success" %}
   {% set statusTitle = "All your training providers have now reached a decision" %}
 {% elif status == "withdrawn" %}
@@ -26,7 +29,7 @@
 {% elif status == "offer-deferred" %}
   {% set statusTitle = "Your original offer has been deferred" %}
   {% set statusDesc = "We’ve sent you an email to confirm this. Your training provider will be in touch with you directly to explain what happens next." %}
-{% elif status == "recruited" %}
+{% elif status == "recruited" or status == "recruited-single" %}
   {% set statusTitle = "You have met your conditions and are ready to be enrolled" %}
   {% set statusDesc = "Your training provider will be in touch with you directly to explain what happens next." %}
 {% else %}
@@ -39,9 +42,11 @@
 {% endif %}
 
 {% block beforePageTitle %}
-  {{ govukNotificationBanner({
-    html: "<p class=\"govuk-notification-banner__heading\">You did not get a place on a course this time. <a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Apply again</a>.</p>"
-  }) if status == "ended-without-success" }}
+  {% if application.endedWithoutSuccess == true %}
+    {{ govukNotificationBanner({
+      html: "<p class=\"govuk-notification-banner__heading\">You did not get a place on a course this time. <a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Apply again</a>.</p>"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block beforePrimary %}

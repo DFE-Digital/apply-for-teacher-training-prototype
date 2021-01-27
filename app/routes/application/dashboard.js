@@ -74,7 +74,7 @@ module.exports = router => {
           application.endedWithoutSuccess = true
           break
         case 'withdrawn':
-          choices[0].status = 'Withdrawn'
+          choices[0].status = 'Application withdrawn'
           application.endedWithoutSuccess = true
           break
         case 'offer-withdrawn':
@@ -165,7 +165,7 @@ module.exports = router => {
             providerName: 'Gorse SCITT',
             address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
           }]
-          choices[1].status = 'Withdrawn'
+          choices[1].status = 'Application withdrawn'
           choices[1].interview = false
           choices[2].status = 'Offer received'
           application.endedWithoutSuccess = false

@@ -10,15 +10,15 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% if status == "awaiting-candidate-response" %}
+{% if status == "awaiting-candidate-response" or status == "received-one-offer" or status == "received-two-offers" %}
   {% set statusTitle = "All your training providers have now reached a decision" %}
   {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
 {% elif status == "offer-received" %}
   {% set statusTitle = "Your training provider has now reached a decision" %}
   {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
-{% elif status == "ended-without-success" or status == "received-one-offer" %}
+{% elif status == "ended-without-success" %}
   {% set statusTitle = "All your training providers have now reached a decision" %}
-{% elif status == "withdrawn" %}
+{% elif status == "withdrawn" or status == "did-not-respond-to-offer" %}
   {% set statusTitle = "You have withdrawn all your choices" %}
 {% elif status == "pending-conditions" %}
   {% set statusTitle = "You have accepted an offer" %}

@@ -2,6 +2,7 @@ module.exports = {
   status: 'started',
   welcomeFlow: false,
   apply2: false,
+  ended_without_success: false,
   completed: {
     'personal-details': ['true'],
     'contact-details': ['true'],

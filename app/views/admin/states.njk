@@ -21,14 +21,62 @@
     <dd>The candidate has started apply again but has not submitted the form yet.</dd>
   </dl>
 
-  <h2 class="govuk-heading-m">Dashboard</h2>
+  <h2 class="govuk-heading-m">Post-submission</h2>
+
+  <h3 class="govuk-heading-s">Applied for a single course</h3>
+
   <dl class="govuk-list app-list--definition">
-    <dt><a href="/dashboard/12345/awaiting-provider-decisions">Awaiting decisions from providers</a></dt>
-    <dd>We’ve sent the applications to the providers, but we have not heard back from all of them.</dd>
+    <dt><a href="/dashboard/45678/awaiting-provider-decision">Awaiting decision from provider</a></dt>
+    <dd>Candidate needs to wait</dd>
+    <dt><a href="/dashboard/45678/future-interview">Interview scheduled in future</a></dt>
+    <dd>Candidate needs to attend interview</dd>
+    <dt><a href="/dashboard/45678/post-interview">After interview, still awaiting decision</a></dt>
+    <dd>Candidate needs to wait</dd>
+    <dt><a href="/dashboard/45678/offer-received">Received an offer with conditions</a></dt>
+    <dd>Candidate needs to respond to the offer</dd>
+    <dt><a href="/dashboard/45678/unsuccessful-with-feedback">Unsuccessful - provider has given feedback</a></dt>
+    <dd>Candidate can apply again using feedback</dd>
+    <dt><a href="/dashboard/45678/unsuccessful-course-full">Unsuccessful - course was full</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/unsuccessful-provider-did-not-respond">Unsuccessful - provider did not respond in time</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/withdrawn">Candidate withdrew application</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/offer-withdrawn">Offer withdrawn by provider</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/accepted">Accepted (pending conditions)</a></dt>
+    <dd>Candidate needs to meet the conditions</dd>
+    <dt><a href="/dashboard/45678/declined">Declined</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/deferred">Deferred</a></dt>
+    <dd>Candidate needs to meet conditions before next year</dd>
+    <dt><a href="/dashboard/45678/did-not-respond-to-offer">Candidate did not respond to offer in time</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/conditions-not-met">Candidate did not meet offer conditions in time</a></dt>
+    <dd>Candidate can apply again</dd>
+    <dt><a href="/dashboard/45678/recruited-single">Candidate recruited</a></dt>
+    <dd>Signposting of onward services?</dd>
+
+  </dl>
+
+  <h3 class="govuk-heading-s">Applied for multiple courses</h3>
+
+  <dl class="govuk-list app-list--definition">
+    <dt><a href="/dashboard/12345/awaiting-all-provider-decisions">Awaiting decisions from all providers</a></dt>
+    <dd>We’ve sent the applications to the providers, but haven’t yet heard back from any of them</dd>
+
     <dt><a href="/dashboard/12345/interviewing">Interviewing</a></dt>
     <dd>Some providers have indicated that they’ve invited the candidate to interview.</dd>
-    <dt><a href="/dashboard/12345/awaiting-candidate-response">Awaiting decision from candidate</a></dt>
-    <dd>All providers have responded and it’s now up to the candidate to make a decision.</dd>
+
+    <dt><a href="/dashboard/12345/awaiting-some-provider-decisions">Some responses received, some still waiting</a></dt>
+    <dd>Candidate has received one offer and one rejection but is still waiting on the third provider</dd>
+
+    <dt><a href="/dashboard/12345/received-one-offer">Received one offer</a></dt>
+    <dd>All providers have responded and one offer has been made</dd>
+
+    <dt><a href="/dashboard/12345/received-two-offers">Received two offers</a></dt>
+    <dd>All providers have responded and two offers have been made</dd>
+
     <dt><a href="/dashboard/12345/ended-without-success">Ended without success</a></dt>
     <dd>All of the candidate’s applications have been withdrawn, rejected, declined or offer conditions were not met.</dd>
     <dt><a href="/dashboard/12345/pending-conditions">Accepted offer, pending conditions</a></dt>

@@ -95,7 +95,7 @@ module.exports = router => {
           application.endedWithoutSuccess = false
           break
         case 'did-not-respond-to-offer':
-          choices[0].status = 'Unsuccessful'
+          choices[0].status = 'Offer declined'
           application.endedWithoutSuccess = true
           break
         case 'conditions-not-met':

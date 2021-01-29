@@ -2,6 +2,7 @@
 
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
 
 
 {% set title = "Your application" %}
@@ -77,182 +78,22 @@
   {% set choices = application.choices | toArray %}
 
   {% if choices | length > 1 %}
-
-    <p class="govuk-body">You applied for {{ choices | length }} courses. All providers must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}</p>
-
-    {% set statusHtml %}
-      {{ govukTag({
-        classes: "govuk-tag govuk-tag--blue",
-        text: "Awaiting decision"
-      }) }}
-
-
-    {% endset %}
-
-
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: {
-            classes: "app-summary-list__key--wide",
-            html: "<b>Gorse SCITT</b><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">Primary (ABCD)</a>"
-          },
-          value: {
-            classes: "app-summary-list__value--narrow",
-            html: statusHtml
-          }
-        },
-        {
-          key: {
-            classes: "app-summary-list__key--wide",
-            html: "<b>Leeds Trinity University</b><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">Primary (3-7) (2VLT)</a>"
-          },
-          value: {
-            classes: "app-summary-list__value--narrow",
-            html: statusHtml
-          }
-        },
-        {
-          key: {
-            classes: "app-summary-list__key--wide",
-            html: "<b>Bradford College</b><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">Primary (X100)</a>"
-          },
-          value: {
-            classes: "app-summary-list__value--narrow",
-            html: statusHtml
-          }
-        }
-      ]
-    }) }}
-
-
+    {% include "dashboard/_multiple_active_applications.njk" %}
   {% else %}
-
-    {% set firstChoice = choices | first %}
-    {% set firstChoiceProvider = providers[firstChoice["providerCode"]] %}
-    {% set firstChoiceCourse = firstChoiceProvider.courses[firstChoice.courseCode] %}
-
-
-    <p class="govuk-body-l">You applied for the <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/{{ provider.code }}/{{ course.code }}">{{ firstChoiceCourse["name"] }}</a> course at {{ providers[firstChoice["providerCode"]]["name"] }}.</p>
-
-  {% set statusHtml %}
-    {{ govukTag({
-      classes: "govuk-tag govuk-tag--blue",
-      text: "Awaiting decision"
-    }) }}
-
-  <p class="govuk-!-margin-top-3">The provider must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
-
-  {% endset %}
-
-
-  {{ govukSummaryList({
-    classes: "govuk-summary-list--no-border",
-    rows: [{
-      key: {
-        text: "Status"
-      },
-      value: {
-        html: statusHtml
-      },
-      actions: {}
-    },
-    {
-      key: { text: "Contact details" },
-      value: { html: "0113 4871777 <br> <a href=\"mailto:info@gorsescitt.org.uk\">info@gorsescitt.org.uk</a>" }
-    }
-
-    ]
-  }) }}
-{% endif %}
-
-<p class="govuk-body"><a href="#" class="govuk-link">View your application</a></p>
-
-<h2 class="govuk-heading-m">What happens next?</h2>
-
-<p class="govuk-body">The provider will review your application, and you may be invited to an interview. If the provider offers you a place, you will have 10 working days to either accept or reject the offer.</p>
-
-<p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to apply for this course.</p>
-
-<p class="govuk-body">If you are not offered a place, or you withdraw your application, you will be able to apply to a different course.</p>
-
-{% from "govuk/components/table/macro.njk" import govukTable %}
-
-{{ govukTable({
-  caption: "Your previous applications",
-  captionClasses: "app-table__caption--m",
-  firstCellIsHeader: false,
-  head: [
-    {
-      text: "Course"
-    },
-    {
-      text: "Status"
-    },
-    {
-      text: ""
-    }
-  ],
-  rows: [
-    [
-      {
-        html: "<a href=\"#\">Primary (ABC12)</a><br>2 Schools Consortium"
-      },
-      {
-        html: "<strong class=\"govuk-tag govuk-tag govuk-tag--red\">Unsuccessful</strong>"
-      },
-      {
-        html: "<a href=\"#\">View</a>"
-      }
-    ],
-    [
-      {
-        html: "<a href=\"#\">Primary (XZ134)</a><br>Coventry University"
-      },
-      {
-        html: "<strong class=\"govuk-tag govuk-tag govuk-tag--red\">Unsuccessful</strong>"
-      },
-      {
-        html: "<a href=\"#\">View</a>"
-      }
-    ],
-    [
-      {
-        html: "<a href=\"#\">Primary (XZ134)</a><br>Acorns Teaching School Alliance"
-      },
-      {
-        html: "<strong class=\"govuk-tag govuk-tag govuk-tag--red\">Application withdrawn</strong>"
-      },
-      {
-        html: "<a href=\"#\">View</a>"
-      }
-    ]
-  ]
-}) }}
-
-
-
-{#
-{{ govukButton({
-  text: "Withdraw application",
-  classes: "govuk-button--secondary"
-}) }}
- #}
-<!-- <p class="govuk-body"><a href="#" class="govuk-link">Withdraw</a></p>
- -->
-
-<!--
-  <p class="govuk-body-l">{{ statusTitle }}</p>
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">{{ statusTitle }}</h2>
-  {% if statusDesc %}
-    <p class="govuk-body">{{ statusDesc }}</p>
+    {% include "dashboard/_single_active_application.njk" %}
   {% endif %}
 
-  {% set showChoiceStatus = true %}
-  {% set showChoiceFeedback = true %}
-  {% include "_includes/review/choices.njk" %}
--->
+  <h2 class="govuk-heading-m">Next steps</h2>
+
+  <p class="govuk-body">The provider will review your application and decide whether to interview you.</p>
+
+  <p class="govuk-body">If the provider then offers you a place on the course, you have 10 working days to respond.</p>
+
+  <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to apply for this course.</p>
+
+  <p class="govuk-body">If you are not offered a place, or you withdraw your application, you can apply to a different course.</p>
+
+  {% include "dashboard/_previous_applications_summary.njk" %}
 
 {% endblock %}
 

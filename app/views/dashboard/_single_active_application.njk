@@ -1,0 +1,36 @@
+{% set firstChoice = choices | first %}
+{% set firstChoiceProvider = providers[firstChoice["providerCode"]] %}
+{% set firstChoiceCourse = firstChoiceProvider.courses[firstChoice.courseCode] %}
+
+<p class="govuk-body-l">You applied for the <a href="https://find-postgraduate-teacher-training.education.gov.uk/course/{{ provider.code }}/{{ firstChoiceCourse.code }}">{{ firstChoiceCourse["name"] }} ({{ firstChoiceCourse.code }}) course</a>  at {{ providers[firstChoice["providerCode"]]["name"] }}</p>
+
+{% set statusHtml %}
+{{ govukTag({
+  classes: "govuk-tag govuk-tag--blue",
+  text: "Awaiting decision"
+}) }}
+
+<p class="govuk-!-margin-top-3">The provider must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
+
+{% endset %}
+
+
+{{ govukSummaryList({
+  classes: "govuk-summary-list--no-border",
+  rows: [{
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: statusHtml
+    },
+    actions: {}
+  },
+  {
+    key: { text: "Contact details" },
+    value: { html: "0113 4871777 <br> <a href=\"mailto:info@gorsescitt.org.uk\">info@gorsescitt.org.uk</a>" }
+  }]
+}) }}
+
+<p class="govuk-body"><a href="#" class="govuk-link">View your application</a></p>
+

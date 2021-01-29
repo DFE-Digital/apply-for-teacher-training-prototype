@@ -1,0 +1,46 @@
+<p class="govuk-body">You applied for {{ choices | length }} courses. All providers must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}</p>
+
+{% set statusHtml %}
+  {{ govukTag({
+    classes: "govuk-tag govuk-tag--blue",
+    text: "Awaiting decision"
+  }) }}
+
+
+{% endset %}
+
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        classes: "app-summary-list__key--wide",
+        html: "<b>Gorse SCITT</b><br><span class=\"govuk-!-font-weight-regular\">Primary (ABCD)</span><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">View application</a>"
+      },
+      value: {
+        classes: "app-summary-list__value--narrow",
+        html: statusHtml
+      }
+    },
+    {
+      key: {
+        classes: "app-summary-list__key--wide",
+        html: "<b>Leeds Trinity University</b><br><span class=\"govuk-!-font-weight-regular\">Primary (3-7) (2VLT)</span><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">View application</a>"
+      },
+      value: {
+        classes: "app-summary-list__value--narrow",
+        html: statusHtml
+      }
+    },
+    {
+      key: {
+        classes: "app-summary-list__key--wide",
+        html: "<b>Bradford College</b><br><span class=\"govuk-!-font-weight-regular\">Primary (X100)</span><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">View application</a>"
+      },
+      value: {
+        classes: "app-summary-list__value--narrow",
+        html: statusHtml
+      }
+    }
+  ]
+}) }}

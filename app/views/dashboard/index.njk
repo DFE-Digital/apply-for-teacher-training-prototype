@@ -2,7 +2,6 @@
 
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "govuk/components/table/macro.njk" import govukTable %}
 
 
 {% set title = "Your application" %}
@@ -85,7 +84,9 @@
 
   <h2 class="govuk-heading-m">Next steps</h2>
 
-  <p class="govuk-body">The provider will review your application and decide whether to interview you.</p>
+  {% if status == "awaiting-provider-decision" %}
+    <p class="govuk-body">The provider will review your application and decide whether to interview you.</p>
+  {% endif %}
 
   <p class="govuk-body">If the provider then offers you a place on the course, you have 10 working days to respond.</p>
 

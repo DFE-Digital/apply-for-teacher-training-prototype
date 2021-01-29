@@ -10,7 +10,34 @@
   text: "Awaiting decision"
 }) }}
 
-<p class="govuk-!-margin-top-3">The provider must respond by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
+{% if status == "post-interview" %}
+  <p class="govuk-!-margin-top-3">You had an interview scheduled on 15 March 2020 at 11:00am</p>
+
+{% elseif status == "future-interview" %}
+  <p class="govuk-!-margin-top-3">You have an interview scheduled for 15 March 2020 at 11:00am</p>
+
+  {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+  <p class="govuk-body govuk-!-margin-bottom-0">Details from provider:</p>
+
+  {% set interviewDetails %}
+    <p class="govuk-body">Leeds Trinity University
+    Brownberrie Lane, Horsforth, Leeds. LS18 5HD</p>
+    <p class="govuk-body">To get there, follow the A9 to junction 12 and then follow signs to the University teaching campus.</p>
+    <p class="govuk-body">If you get lost, phone Emma on 07700900124</p>
+
+  {% endset %}
+
+  {{ govukInsetText({
+    html: interviewDetails,
+    classes: "govuk-!-margin-top-1"
+
+  }) }}
+
+{% else %}
+{% endif %}
+
+<p class="govuk-!-margin-top-3">The provider must make a decision by {{ 56 | nowPlusDays("d MMMM yyyy") }}.</p>
 
 {% endset %}
 

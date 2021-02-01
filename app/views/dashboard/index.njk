@@ -62,7 +62,7 @@
   {% if canMakeDecision == true %}
     {{ govukInsetText({
       html: respondToOfferHtml,
-      classes: "govuk-!-margin-top-0"
+      classes: "app-inset-text--important govuk-!-margin-top-0"
     }) }}
   {% endif %}
 
@@ -79,7 +79,7 @@
 
     {{ govukInsetText({
       html: applyAgainHtml,
-      classes: "govuk-!-margin-top-0"
+      classes: "govuk-!-margin-top-0 app-inset-text--important"
     }) }}
   {% endif %}
 

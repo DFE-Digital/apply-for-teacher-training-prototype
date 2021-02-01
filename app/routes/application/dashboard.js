@@ -50,6 +50,14 @@ module.exports = router => {
           choices[0].interview = null
           choices[0].feedback = null
           choices[0].rejectedByDefault = false
+          choices[0].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check",
+            "Achievement of Degree in BA Ballet Education with 2:1 or above",
+            "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
+            "Return completed and signed Suitability Declaration.",
+            "Return completed and signed Fee Status Declaration."
+          ]
           application.endedWithoutSuccess = false
           break
         case 'unsuccessful-with-feedback':

@@ -18,6 +18,7 @@ module.exports = router => {
           choices[0].status = 'Awaiting decision'
           choices[0].interview = false
           choices[0].feedback = null
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = false
           break
         case 'future-interview':
@@ -28,6 +29,8 @@ module.exports = router => {
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
           choices[0].feedback = null
+          choices[0].rejectedByDefault = false
+
           application.endedWithoutSuccess = false
           break
         case 'post-interview':
@@ -38,12 +41,15 @@ module.exports = router => {
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
           choices[0].feedback = null
+          choices[0].rejectedByDefault = false
+
           application.endedWithoutSuccess = false
           break
         case 'offer-received':
           choices[0].status = 'Offer received'
           choices[0].interview = null
           choices[0].feedback = null
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = false
           break
         case 'unsuccessful-with-feedback':
@@ -59,6 +65,7 @@ module.exports = router => {
             },
             interested_in_future_applications: true
           }
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = true
           break
         case 'unsuccessful-course-full':
@@ -67,47 +74,89 @@ module.exports = router => {
           choices[0].feedback = {
             course_full: true
           }
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = true
           break
         case 'unsuccessful-provider-did-not-respond':
           choices[0].status = 'Unsuccessful'
           choices[0].hasFeedback = true
-          choices[0].feedback = {
-            rejected_by_default: true
-          }
+          choices[0].rejectedByDefault = true
+          choices[0].feedback = null
           application.endedWithoutSuccess = true
           break
         case 'withdrawn':
           choices[0].status = 'Application withdrawn'
+          choices[0].rejectedByDefault = false
+          choices[0].feedback = null
           application.endedWithoutSuccess = true
           break
         case 'offer-withdrawn':
           choices[0].status = 'Offer withdrawn'
+          choices[0].rejectedByDefault = false
+          choices[0].feedback = {
+            behaviour: {
+              didNotReplyToMessages: true,
+              other: "You did not send us the required form with additional information.",
+              whatTheyCouldToDoImprove: "Respond promptly to our requests."
+            },
+            interested_in_future_applications: true
+          }
           application.endedWithoutSuccess = true
           break
 
         case 'accepted':
           choices[0].status = 'Offer accepted'
+          choices[0].rejectedByDefault = false
+          choices[0].feedback = null
+          choices[0].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check",
+            "Achievement of Degree in BA Ballet Education with 2:1 or above",
+            "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
+            "Return completed and signed Suitability Declaration.",
+            "Return completed and signed Fee Status Declaration."
+          ]
           application.endedWithoutSuccess = false
           break
         case 'declined':
           choices[0].status = 'Offer declined'
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = true
           break
         case 'deferred':
           choices[0].status = 'Offer deferred'
+          choices[0].rejectedByDefault = false
+          choices[0].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check",
+            "Achievement of Degree in BA Ballet Education with 2:1 or above",
+            "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
+            "Return completed and signed Suitability Declaration.",
+            "Return completed and signed Fee Status Declaration."
+          ]
           application.endedWithoutSuccess = false
           break
         case 'did-not-respond-to-offer':
           choices[0].status = 'Offer declined'
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = true
           break
         case 'conditions-not-met':
           choices[0].status = 'Conditions not met'
+          choices[0].rejectedByDefault = false
+          choices[0].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check",
+            "Achievement of Degree in BA Ballet Education with 2:1 or above",
+            "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
+            "Return completed and signed Suitability Declaration.",
+            "Return completed and signed Fee Status Declaration."
+          ]
           application.endedWithoutSuccess = true
           break
         case 'recruited-single':
           choices[0].status = 'Conditions met'
+          choices[0].rejectedByDefault = false
           application.endedWithoutSuccess = false
           break
 

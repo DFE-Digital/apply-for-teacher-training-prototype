@@ -1,4 +1,4 @@
-{% extends "_content.njk" %}
+{% extends "_content-wide.njk" %}
 
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -139,9 +139,4 @@
 
   {% include "dashboard/_previous_applications_summary.njk" %}
 
-{% endblock %}
-
-{% block secondary %}
-  {% include "_includes/get-support.njk" %}
-  {% include "_includes/update-contact-details.njk" %}
 {% endblock %}

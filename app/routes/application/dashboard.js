@@ -17,6 +17,7 @@ module.exports = router => {
         case 'awaiting-provider-decision':
           choices[0].status = 'Awaiting decision'
           choices[0].interview = false
+          choices[0].feedback = null
           application.endedWithoutSuccess = false
           break
         case 'future-interview':
@@ -26,6 +27,7 @@ module.exports = router => {
             providerName: 'Leeds Trinity University',
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
+          choices[0].feedback = null
           application.endedWithoutSuccess = false
           break
         case 'post-interview':
@@ -35,11 +37,13 @@ module.exports = router => {
             providerName: 'Leeds Trinity University',
             address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
           }]
+          choices[0].feedback = null
           application.endedWithoutSuccess = false
           break
         case 'offer-received':
           choices[0].status = 'Offer received'
           choices[0].interview = null
+          choices[0].feedback = null
           application.endedWithoutSuccess = false
           break
         case 'unsuccessful-with-feedback':

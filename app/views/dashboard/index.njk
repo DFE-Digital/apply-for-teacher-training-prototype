@@ -48,13 +48,25 @@
 
 {% block primary %}
 
-  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received") %}
+  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received" or status == "received-two-offers") %}
 
   {% set respondToOfferHtml %}
-    <h2 class="govuk-heading-m">You have received a conditional offer</h2>
-    <p class="govuk-body-l">You have until 4 March 2021 to accept or reject the offer.</p>
+    <h2 class="govuk-heading-m">
+    {% if status == "received-two-offers" %}
+      You have received 2 conditional offers
+    {% else %}
+      You have received a conditional offer
+    {% endif %}
+    </h2>
+    <p class="govuk-body-l">You have until 4 March 2021 to accept or reject the
+    {{ "offers" if status == "received-two-offers" else "offer" }}.</p>
+
+    {% set buttonText %}
+      Respond to  {{ "offers" if status == "received-two-offers" else "offer" }}
+    {% endset %}
+
     {{ govukButton({
-      text: "Respond to offer",
+      text: buttonText,
       href: "#"
     }) }}
   {% endset %}

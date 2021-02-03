@@ -185,14 +185,16 @@ module.exports = router => {
         case 'interviewing':
           choices[0].status = 'Awaiting decision'
           choices[0].interview = [{
-            date: '2020-12-14T11:00:00',
+            date: '2021-05-16T14:00:00',
+            providerName: 'University of Leeds',
+            address: 'Woodhouse, Leeds. LS2 9JT<br><br>To get there, follow the A9 to junction 12 and then follow signs to the University teaching campus.',
+            additional_details: 'If you get lost, phone Emma on 07700900124'
+          },
+          {
+            date: '2021-02-01T11:00:00',
             providerName: 'Gorse SCITT',
             address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
-          }, {
-            date: '2020-12-16T14:00:00',
-            providerName: 'University of Leeds',
-            address: 'Woodhouse, Leeds. LS2 9JT'
-          }]
+          }, ]
           choices[1].status = 'Awaiting decision'
           choices[1].interview = [{
             date: '2020-12-14T10:30:00',

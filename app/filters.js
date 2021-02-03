@@ -14,6 +14,10 @@ module.exports = (env) => {
    */
   const filters = {}
 
+  filters.dateNow = () => {
+    return DateTime.local()
+  }
+
   /**
    * Convert str to date
    * @type {String} str

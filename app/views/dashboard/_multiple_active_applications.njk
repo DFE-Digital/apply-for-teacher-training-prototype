@@ -7,9 +7,11 @@
 
   {% set statusHtml %}
     {{ govukTag({
-      classes: "app-tag " + item.status | statusClass,
+      classes: "app-tag govuk-!-margin-bottom-2 " + item.status | statusClass,
       text: item.status
     }) }}
+
+    {% include "dashboard/_interview_summary.njk" %}
   {% endset %}
 
   {% set result = rows.push({

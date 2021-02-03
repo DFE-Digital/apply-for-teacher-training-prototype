@@ -45,7 +45,7 @@
 {% endif %}
 
 {% if item.rejectedByDefault == true %}
-  <p class="govuk-!-margin-top-3">The provider did not respond in time.</p>
+  <p class="govuk-!-margin-top-3">Provider did not respond in time.</p>
 {% endif %}
 
 {% if item.feedback %}
@@ -54,11 +54,30 @@
 
     {% if item.feedback.course_full %}
       <h2 class="govuk-heading-s">Course was full</h2>
-      <p class="govuk-body">We're sorry to tell you the course you applied to was full</p>
+      <p class="govuk-body">The course you applied to was full.</p>
     {% endif %}
+
     {% if item.feedback.rejected_by_default %}
       <p class="govuk-body">Provider did not respond in time</p>
     {% endif %}
+
+    {% if item.feedback.behaviour %}
+
+      {% if item.feedback.behaviour.didNotReplyToMessages == true %}
+        <p class="govuk-body">Did not reply to messages.</p>
+      {% endif %}
+
+      {% if item.feedback.behaviour.other %}
+        <p class="govuk-body">{{ item.feedback.behaviour.other }}</p>
+      {% endif %}
+
+      {% if item.feedback.behaviour.whatTheyCouldToDoImprove %}
+        <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">What you could do to improve</p>
+        <p class="govuk-body">{{ item.feedback.behaviour.whatTheyCouldToDoImprove }}</p>
+      {% endif %}
+
+    {% endif %}
+
 
     {% if item.feedback.quality_of_application %}
       <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
@@ -77,23 +96,6 @@
       {% endif %}
     {% endif %}
 
-    {% if item.feedback.behaviour %}
-
-      {% if item.feedback.behaviour.didNotReplyToMessages == true %}
-        <p class="govuk-body">You did not reply to messages.</p>
-      {% endif %}
-
-      {% if item.feedback.behaviour.other %}
-        <p class="govuk-body">{{ item.feedback.behaviour.other }}</p>
-      {% endif %}
-
-      {% if item.feedback.behaviour.whatTheyCouldToDoImprove %}
-        <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">What you could do to improve</p>
-        <p class="govuk-body">{{ item.feedback.behaviour.whatTheyCouldToDoImprove }}</p>
-      {% endif %}
-
-    {% endif %}
-
     {% if item.feedback.interested_in_future_applications %}
       <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Future applications</h4>
       <p class="govuk-body">The provider would be interested in future applications from you.</p>
@@ -109,7 +111,7 @@
 {% endif  %}
 
 
-{% if (item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met") and  item.conditions %}
+{% if (item.status == "Offer received" or item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met") and  item.conditions %}
 
   <h2 class="govuk-heading-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">Conditions of offer</h2>
 
@@ -122,23 +124,26 @@
 
 {% endset %}
 
-
-{{ govukSummaryList({
-  classes: "govuk-summary-list--no-border",
-  rows: [{
-    key: {
-      text: "Status"
-    },
-    value: {
-      html: statusHtml
-    },
-    actions: {}
-  },
-  {
-    key: { text: "Contact details" },
-    value: { html: "0113 4871777 <br> <a href=\"mailto:info@gorsescitt.org.uk\">info@gorsescitt.org.uk</a>" }
-  }]
-}) }}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    {{ govukSummaryList({
+      classes: "govuk-summary-list--no-border",
+      rows: [{
+        key: {
+          text: "Status"
+        },
+        value: {
+          html: statusHtml
+        },
+        actions: {}
+      },
+      {
+        key: { text: "Contact details" },
+        value: { html: "0113 4871777 <br> <a href=\"mailto:info@gorsescitt.org.uk\">info@gorsescitt.org.uk</a>" }
+      }]
+    }) }}
+  </div>
+</div>
 
 <p class="govuk-body"><a href="#" class="govuk-link">View your application</a></p>
 

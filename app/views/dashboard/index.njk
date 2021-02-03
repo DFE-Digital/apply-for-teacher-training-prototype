@@ -58,8 +58,10 @@
       You have received a conditional offer
     {% endif %}
     </h2>
-    <p class="govuk-body-l">You have until 4 March 2021 to accept or reject the
+    <p class="govuk-body-l">You have until 14 days (4 March 2021) to accept or decline the
     {{ "offers" if status == "received-two-offers" else "offer" }}.</p>
+
+    <p class="govuk-body-l">Your offer will be withdrawn if you do not respond in time.</p>
 
     {% set buttonText %}
       Respond to  {{ "offers" if status == "received-two-offers" else "offer" }}
@@ -81,8 +83,19 @@
   {% if application.endedWithoutSuccess == true %}
 
     {% set applyAgainHtml %}
-      <h2 class="govuk-heading-m">You did not get a place on a course this time</h2>
-      <p class="govuk-body-l">You can apply again for a course starting September 2021 up until 5 August 2021</p>
+      <h2 class="govuk-heading-m">
+        {% if status == "withdrawn" %}
+          You withdrew your application
+        {% elseif status == "declined" %}
+          You declined an offer
+        {% else %}
+          You did not get a place on a course this time
+        {% endif %}
+      </h2>
+
+      <p class="govuk-body-l">You can apply again for courses starting in September 2021.</p>
+
+      <p class="govuk-body-l">You have until 5 August 2021 to apply again.</p>
       {{ govukButton({
         text: "Apply again",
         href: "#"
@@ -97,43 +110,53 @@
 
   {% set choices = application.choices | toArray %}
 
-  {% if choices | length > 1 %}
-    {% include "dashboard/_multiple_active_applications.njk" %}
-  {% else %}
-    {% include "dashboard/_single_active_application.njk" %}
+  {% if status != "declined" %}
+    {% if choices | length > 1 %}
+      {% include "dashboard/_multiple_active_applications.njk" %}
+    {% else %}
+      {% include "dashboard/_single_active_application.njk" %}
+    {% endif %}
   {% endif %}
 
 
   {% if canMakeDecision == false and application.endedWithoutSuccess == false %}
-    <h2 class="govuk-heading-m">Next steps</h2>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">Next steps</h2>
 
-    {% if status == "awaiting-provider-decision" %}
-      <p class="govuk-body">The provider will review your application and decide whether to interview you.</p>
-    {% endif %}
+        {% if status == "awaiting-provider-decision" %}
+          <p class="govuk-body">The provider will review your application and decide whether to interview you.</p>
+        {% endif %}
 
-    {% if status == "accepted" %}
-      <p class="govuk-body">You now need to meet the offer conditions. The provider will give you further instructions. Once you have met the conditions, you will be enrolled.</p>
+        {% if status == "accepted" %}
+          <p class="govuk-body">The provider has guaranteed you a place on the course as long as you meet the conditions.</p>
 
-      <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to enroll for this course.</p>
+          <p class="govuk-body">Some providers will allow you to defer your offer. This means you will start the course a year later.</p>
 
-    {% elseif status == "deferred" %}
+          <p class="govuk-body">Contact Gorse SCITT for more information about your offer and conditions and deferring.</p>
 
-      <p class="govuk-body">You need to meet the offer conditions.</p>
+          <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to enroll for this course.</p>
 
-      <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to enroll for this course.</p>
+        {% elseif status == "deferred" %}
 
-    {% elseif status == "recruited-single" %}
+          <p class="govuk-body">You need to meet the offer conditions.</p>
 
-      <p class="govuk-body">???</p>
+          <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to enroll for this course.</p>
 
-    {% else %}
+        {% elseif status == "recruited-single" %}
 
-      <p class="govuk-body">If the provider offers you a place on the course, you have 10 working days to respond.</p>
+          <p class="govuk-body">???</p>
 
-      <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to apply for this course.</p>
+        {% else %}
 
-      <p class="govuk-body">If you are not offered a place, or you withdraw your application, you can apply to a different course.</p>
-    {% endif %}
+          <p class="govuk-body">If the provider offers you a place on the course, you have 10 working days to respond.</p>
+
+          <p class="govuk-body">You can <a href="#" class="govuk-link">withdraw your application</a> if you no longer want to apply for this course.</p>
+
+          <p class="govuk-body">If you are not offered a place, or you withdraw your application, you can apply to a different course.</p>
+        {% endif %}
+      </div>
+    </div>
 
   {% endif %}
 

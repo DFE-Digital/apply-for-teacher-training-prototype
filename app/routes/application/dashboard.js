@@ -64,7 +64,9 @@ module.exports = router => {
           choices[0].status = 'Unsuccessful'
           choices[0].hasFeedback = true
           choices[0].feedback = {
-            behaviour: false,
+            behaviour: {
+              didNotReplyToMessages: true
+            },
             quality_of_application: {
               subject_knowledge: "Understand the purpose of primary education and then learn more about the procedures related to safeguarding."
             },

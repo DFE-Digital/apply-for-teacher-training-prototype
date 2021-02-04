@@ -220,19 +220,33 @@ module.exports = router => {
           }
           choices[2].status = 'Offer received'
           choices[2].interview = null
+          choices[2].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check",
+            "Achievement of Degree in BA Ballet Education with 2:1 or above",
+            "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
+            "Return completed and signed Suitability Declaration.",
+            "Return completed and signed Fee Status Declaration."
+          ]
           application.endedWithoutSuccess = false
           break
 
         case 'received-one-offer':
           choices[0].status = 'Unsuccessful'
-          choices[0].interview = [{
-            date: '2020-12-14T11:00:00',
-            providerName: 'Gorse SCITT',
-            address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
-          }]
+          choices[0].interview = false
+          choices[0].feedback = {
+            behaviour: {
+              didNotReplyToMessages: true
+            },
+            interested_in_future_applications: true
+          }
           choices[1].status = 'Application withdrawn'
           choices[1].interview = false
           choices[2].status = 'Offer received'
+          choices[2].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check"
+          ]
           application.endedWithoutSuccess = false
           break
 
@@ -243,9 +257,21 @@ module.exports = router => {
             providerName: 'Gorse SCITT',
             address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
           }]
+          choices[0].feedback = {
+            course_full: true
+          }
           choices[1].status = 'Offer received'
           choices[1].interview = false
+          choices[1].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check"
+          ]
           choices[2].status = 'Offer received'
+          choices[2].interview = false
+          choices[2].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check"
+          ]
           application.endedWithoutSuccess = false
           break
 
@@ -258,17 +284,22 @@ module.exports = router => {
 
         case 'ended-without-success':
           choices[0].status = 'Unsuccessful'
-          choices[0].hasFeedback = true
+          choices[0].feedback = {
+            course_full: true
+          }
           choices[1].status = 'Offer withdrawn'
-          choices[1].hasFeedback = true
+          choices[1].feedback = false
           choices[2].status = 'Application withdrawn'
+          choices[2].feedback = false
           application.endedWithoutSuccess = true
           break
 
         case 'pending-conditions':
-          choices[0].status = 'Offer declined'
-          choices[1].status = 'Application withdrawn'
-          choices[2].status = 'Offer accepted'
+          choices[0].status = 'Offer accepted'
+          choices[0].conditions = [
+            "Fitness to Teach check",
+            "Disclosure and barring service check"
+          ]
           application.endedWithoutSuccess = false
           break
 

@@ -3,8 +3,14 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% set choices = application.choices | toArray %}
 
-{% set title = "Your application" %}
+{% if choices | length > 1  %}
+  {% set title = "Your applications" %}
+{% else %}
+  {% set title = "Your application" %}
+{% endif %}
+
 {% set hasSecondary = true %}
 {% set applicationPath = "/application/" + applicationId %}
 
@@ -48,7 +54,7 @@
 
 {% block primary %}
 
-  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received" or status == "received-two-offers") %}
+  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received" or status == "received-one-offer" or status == "received-two-offers") %}
 
   {% set respondToOfferHtml %}
     <h2 class="govuk-heading-m">
@@ -61,7 +67,7 @@
     <p class="govuk-body-l">You have until 14 days (4 March 2021) to accept or decline the
     {{ "offers" if status == "received-two-offers" else "offer" }}.</p>
 
-    <p class="govuk-body-l">Your offer will be withdrawn if you do not respond in time.</p>
+    <p class="govuk-body-l">Your {{ "offers" if status == "received-two-offers" else "offer" }} will be withdrawn if you do not respond in time.</p>
 
     {% set buttonText %}
       Respond to  {{ "offers" if status == "received-two-offers" else "offer" }}
@@ -107,8 +113,6 @@
       classes: "govuk-!-margin-top-0 app-inset-text--important"
     }) }}
   {% endif %}
-
-  {% set choices = application.choices | toArray %}
 
   {% if status != "declined" %}
     {% if choices | length > 1 %}

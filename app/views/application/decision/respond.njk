@@ -2,6 +2,12 @@
 
 {% set title = "Your conditional " + ("offers" if choices | length > 1 else "offer") %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
+{% endblock %}
+
 {% block primary %}
 
   <p class="govuk-body-l govuk-!-margin-top-0">
@@ -17,6 +23,7 @@
   {% for choice in choices %}
     {% if choices | length > 1 %}
       <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ providers[choice.providerCode]["name"] }}</h2>
+      <p class="govuk-body">{{ providers[choice.providerCode].courses[choice.courseCode].name }} ({{ choice.courseCode }})</p>
     {%  endif %}
 
     <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
@@ -29,6 +36,12 @@
   {% endfor %}
 
   <p class="govuk-body">For help understanding or meeting your conditions, contact {{ "the providers" if choices | length > 1 else "the provider" }} directly.</p>
+
+  <h2 class="govuk-heading-m">Accepting or declining offers</h2>
+
+  <p class="govuk-body">You can only accept one offer, across both Apply for teacher training and UCAS teacher training.</p>
+
+  <p class="govuk-body">You can still apply again for a course this year if you fail to respond or decline your offers.</p>
 
 
   {% set legendText %}

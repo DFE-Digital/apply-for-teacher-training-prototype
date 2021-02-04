@@ -2,6 +2,10 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   router.get('/dashboard/:applicationId/:applicationStatus?', (req, res) => {
+    // clear data and reset it from file
+    req.session.data = {}
+    req.session.data = utils.defaultSessionData()
+
     const { applicationId, applicationStatus } = req.params
     const application = utils.applicationData(req)
     let status
@@ -304,16 +308,14 @@ module.exports = router => {
           break
 
         case 'offer-deferred':
-          choices[0].status = 'Offer declined'
-          choices[1].status = 'Application withdrawn'
           choices[2].status = 'Offer deferred'
+          application.choices = [choices[2]]
           application.endedWithoutSuccess = false
           break
 
         case 'recruited':
-          choices[0].status = 'Offer declined'
-          choices[1].status = 'Application withdrawn'
           choices[2].status = 'Conditions met'
+          application.choices = [choices[2]]
           application.endedWithoutSuccess = false
           break
 

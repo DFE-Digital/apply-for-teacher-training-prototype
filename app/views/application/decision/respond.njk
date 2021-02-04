@@ -8,15 +8,16 @@
     {% if choices | length > 1  %}
       You have received {{ choices | length }} conditional offers.
     {% else %}
-      {{ providers[choices[0].providerCode]["name"] }} have offered you a conditional place on the <a href="#">Primary (ABCA12) course)</a>.
+      {{ providers[choices[0].providerCode]["name"] }} have offered you a conditional place on the <a href="#">Primary (ABCA12) course</a>.
     {% endif %}
   </p>
 
   <p class="govuk-body-l">You have 14 days (until 4 March 2021) to accept or decline the     {{ "offers" if choices | length > 1 else "offer" }}.</p>
 
   {% for choice in choices %}
-
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ providers[choice.providerCode]["name"] }}</h2>
+    {% if choices | length > 1 %}
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-2">{{ providers[choice.providerCode]["name"] }}</h2>
+    {%  endif %}
 
     <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
     <ul class="govuk-list govuk-list--bullet">
@@ -41,10 +42,8 @@
   {% set items = [] %}
 
   {% if choices | length == 1  %}
-    {% set _ = items.push([
-      {value: "choice-0", text: "Accept offer and conditions"}
-
-    ]) %}
+    {% set _ = items.push({value: "choice-0", text: "Accept offer and conditions"}) %}
+    {% set _ = items.push({value: "choice-0", text: "Decline offer"}) %}
 
   {% else %}
 

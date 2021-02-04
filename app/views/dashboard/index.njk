@@ -64,7 +64,7 @@
       You have received a conditional offer
     {% endif %}
     </h2>
-    <p class="govuk-body-l">You have until 14 days (4 March 2021) to accept or decline the
+    <p class="govuk-body-l">You have 14 days (until 4 March 2021) to accept or decline the
     {{ "offers" if status == "received-two-offers" else "offer" }}.</p>
 
     <p class="govuk-body-l">Your {{ "offers" if status == "received-two-offers" else "offer" }} will be withdrawn if you do not respond in time.</p>
@@ -75,7 +75,7 @@
 
     {{ govukButton({
       text: buttonText,
-      href: "#"
+      href: "/application/" + applicationId + "/respond"
     }) }}
   {% endset %}
 

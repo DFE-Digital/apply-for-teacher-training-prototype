@@ -2,6 +2,26 @@ const providers = require('../../data/providers')
 const utils = require('./../../utils')
 
 module.exports = router => {
+
+
+  // Top level respond page
+  router.get('/application/:applicationId/respond', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+
+    const choices = utils.toArray(application.choices).filter(function(choice) {
+      return (choice["status"] == "Offer received")
+    })
+
+    res.render(`application/decision/respond`, {
+      applicationId,
+      application,
+      choices
+    })
+  })
+
+
+
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const { choiceId } = req.params

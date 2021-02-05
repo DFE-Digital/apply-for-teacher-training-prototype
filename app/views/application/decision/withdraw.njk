@@ -1,7 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Are you sure you want to withdraw this course choice?" %}
-{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
+{% set title = "Withdraw an application" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,14 +9,52 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/item/offer.njk" %}
 
-  <p class="govuk-body">If you withdraw this course choice{% if not applicationValue('apply2') %} (and all your other course choices){% endif %} you can still apply for more courses this&nbsp;year.</p>
+  {% set legendText %}
+    {% if choices | length > 1  %}
+      Which application do you want to withdraw?
+    {% else %}
+      Are you sure you want to withdraw your application for this course?
+    {% endif %}
+  {% endset %}
+
+  <p class="govuk-body">[Content here about what happens when you withdraw?]</p>
+
+  {% set items = [] %}
+
+  {% if choices | length == 1  %}
+    {% set _ = items.push({value: "choice-0", text: "Accept offer and conditions"}) %}
+    {% set _ = items.push({value: "choice-0", text: "Decline offer"}) %}
+
+  {% else %}
+
+    {% for choice in choices %}
+      {% set _ = items.push({value: "choice-0", text: providers[choice.providerCode].courses[choice.courseCode].name + " at " + providers[choice.providerCode]["name"] + " (" + choice.courseCode + ")" })
+      %}
+    {% endfor %}
+      {% set _ = items.push({divider: "or"})
+      %}
+      {% set _ = items.push({value: "choice-0", text: "Withdraw all applications"}) %}
+
+  {% endif %}
+
+
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-margin-top-6",
+      legend: {
+        text: legendText,
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    id: "decision",
+    name: "decision",
+    items: items
+  }) }}
+
 
   {{ govukButton({
-    classes: "govuk-button--warning",
-    text: "Yes I’m sure - withdraw this course choice",
-    name: "decision",
-    value: "withdraw"
+    text: "Continue"
   }) }}
 {% endblock %}

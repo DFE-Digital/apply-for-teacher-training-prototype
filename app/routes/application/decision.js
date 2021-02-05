@@ -21,6 +21,22 @@ module.exports = router => {
   })
 
 
+  // Top level withdraw page
+  router.get('/application/:applicationId/withdraw', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+
+    const choices = utils.toArray(application.choices).filter(function(choice) {
+      return true
+    })
+
+    res.render(`application/decision/withdraw`, {
+      applicationId,
+      application,
+      choices
+    })
+  })
+
 
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {

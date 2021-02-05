@@ -21,7 +21,10 @@ const capitaliseFirstLetter = str => {
 const defaultSessionData = () => {
   const sessionDataDefaultsFile = path.join(__dirname, '/../data/session-data-defaults.js')
   const sessionDataDefaults = require(sessionDataDefaultsFile)
-  return sessionDataDefaults
+  console.log(sessionDataDefaults.applications['12345'].choices)
+
+  // Return deep copy of session default so that it can always be restored.
+  return JSON.parse(JSON.stringify(sessionDataDefaults))
 }
 
 const generateRandomString = () => {

@@ -20,34 +20,6 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% if applicationStatus == "awaiting-candidate-response" or applicationStatus == "received-one-offer" or applicationStatus == "received-two-offers" %}
-  {% set statusTitle = "All your training providers have now reached a decision" %}
-  {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
-{% elif applicationStatus == "offer-received" %}
-  {% set statusTitle = "Your training provider has now reached a decision" %}
-  {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
-{% elif applicationStatus == "ended-without-success" %}
-  {% set statusTitle = "All your training providers have now reached a decision" %}
-{% elif applicationStatus == "withdrawn" or applicationStatus == "did-not-respond-to-offer" %}
-  {% set statusTitle = "You have withdrawn all your choices" %}
-{% elif applicationStatus == "pending-conditions" %}
-  {% set statusTitle = "You have accepted an offer" %}
-  {% set statusDesc = "We’ve sent you an email to confirm this. Your training provider will be in touch with you directly to explain what happens next." %}
-{% elif applicationStatus == "offer-deferred" %}
-  {% set statusTitle = "Your original offer has been deferred" %}
-  {% set statusDesc = "We’ve sent you an email to confirm this. Your training provider will be in touch with you directly to explain what happens next." %}
-{% elif applicationStatus == "recruited" or applicationStatus == "recruited-single" %}
-  {% set statusTitle = "You have met your conditions and are ready to be enrolled" %}
-  {% set statusDesc = "Your training provider will be in touch with you directly to explain what happens next." %}
-{% else %}
-  {% if application.choices | toArray | length > 1 %}
-    {% set statusTitle = "Courses you’ve applied to" %}
-  {% else %}
-    {% set statusTitle = "Course you’ve applied to" %}
-  {% endif %}
-  {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
-{% endif %}
-
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 {% endblock %}

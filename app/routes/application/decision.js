@@ -34,7 +34,15 @@ module.exports = router => {
       }
       application.endedWithoutSuccess = true
     } else {
-      application.choices[decision].status = "Offer accepted"
+
+
+      var acceptedChoice = application.choices[decision]
+      acceptedChoice.status = "Offer accepted"
+
+      // Only keep the offer accepted
+      application.choices = {}
+      application.choices[decision] = acceptedChoice
+
     }
 
     res.redirect(`/dashboard/${applicationId}`)

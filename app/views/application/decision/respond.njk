@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Your conditional " + ("offers" if choices | length > 1 else "offer") %}
+{% set formaction = "/application/" + applicationId + "/decision" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -55,18 +56,18 @@
   {% set items = [] %}
 
   {% if choices | length == 1  %}
-    {% set _ = items.push({value: "choice-0", text: "Accept offer and conditions"}) %}
-    {% set _ = items.push({value: "choice-0", text: "Decline offer"}) %}
-
+    {% set _ = items.push({value: choices[0].id, text: "Accept offer and conditions"}) %}
+    {% set _ = items.push({value: "decline-all", text: "Decline offer"}) %}
   {% else %}
 
     {% for choice in choices %}
-      {% set _ = items.push({value: "choice-0", text: "Accept offer from " + providers[choice.providerCode]["name"] + " for " + providers[choice.providerCode].courses[choice.courseCode].name + " (" + choice.courseCode + ")" })
+      {% set _ = items.push({value: choice.id, text: "Accept offer from " + providers[choice.providerCode]["name"] + " for " + providers[choice.providerCode].courses[choice.courseCode].name + " (" + choice.courseCode + ")" })
       %}
     {% endfor %}
-      {% set _ = items.push({divider: "or"})
+
+    {% set _ = items.push({divider: "or"})
       %}
-      {% set _ = items.push({value: "choice-0", text: "Decline all offers"}) %}
+    {% set _ = items.push({value: "decline-all", text: "Decline all offers"}) %}
 
   {% endif %}
 

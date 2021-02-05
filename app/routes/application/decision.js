@@ -20,6 +20,26 @@ module.exports = router => {
     })
   })
 
+  // Submit decision
+  router.post('/application/:applicationId/decision', (req, res) => {
+    const { applicationId } = req.params
+    const { decision } = req.session.data
+    const application = utils.applicationData(req)
+
+    if (decision == "decline-all") {
+      for (choice of Object.keys(application.choices)) {
+        if (application.choices[choice].status == "Offer received") {
+          application.choices[choice].status = "Offer declined"
+        }
+      }
+      application.endedWithoutSuccess = true
+    } else {
+      application.choices[decision].status = "Offer accepted"
+    }
+
+    res.redirect(`/dashboard/${applicationId}`)
+  })
+
 
   // Top level withdraw page
   router.get('/application/:applicationId/withdraw', (req, res) => {

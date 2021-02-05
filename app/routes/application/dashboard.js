@@ -319,10 +319,21 @@ module.exports = router => {
         break
     }
 
+    const numberOfOffersReceived = utils.toArray(application.choices).filter(function(choice) {
+      return choice.status == "Offer received"
+    }).length
+
+    const numberOfChoicesAwaitingDecision = utils.toArray(application.choices).filter(function(choice) {
+      return choice.status == "Awaiting decision"
+    }).length
+
+    const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision == 0)
+
     res.render('dashboard/index', {
-      applicationStatus,
       applicationId,
-      application
+      application,
+      canMakeDecision,
+      numberOfOffersReceived
     })
   })
 }

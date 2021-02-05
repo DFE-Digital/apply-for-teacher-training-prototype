@@ -14,35 +14,27 @@
 {% set hasSecondary = true %}
 {% set applicationPath = "/application/" + applicationId %}
 
-{% if applicationStatus %}
-  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
-{% else %}
-  {% set referrer = "/dashboard/" + applicationId %}
-{% endif %}
-
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 {% endblock %}
 
 {% block primary %}
 
-  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or applicationStatus == "offer-received" or applicationStatus == "received-one-offer" or applicationStatus == "received-two-offers") %}
-
   {% set respondToOfferHtml %}
     <h2 class="govuk-heading-m">
-    {% if applicationStatus == "received-two-offers" %}
-      You have received 2 conditional offers
+    {% if numberOfOffersReceived > 1 %}
+      You have received {{ numberOfOffersReceived }} conditional offers
     {% else %}
       You have received a conditional offer
     {% endif %}
     </h2>
     <p class="govuk-body-l">You have 14 days (until 4 March 2021) to accept or decline the
-    {{ "offers" if applicationStatus == "received-two-offers" else "offer" }}.</p>
+    {{ "offers" if numberOfOffersReceived > 1 else "offer" }}.</p>
 
-    <p class="govuk-body-l">Your {{ "offers" if applicationStatus == "received-two-offers" else "offer" }} will be withdrawn if you do not respond in time.</p>
+    <p class="govuk-body-l">Your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will be withdrawn if you do not respond in time.</p>
 
     {% set buttonText %}
-      Respond to  {{ "offers" if applicationStatus == "received-two-offers" else "offer" }}
+      Respond to  {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
     {% endset %}
 
     {{ govukButton({
@@ -62,9 +54,9 @@
 
     {% set applyAgainHtml %}
       <h2 class="govuk-heading-m">
-        {% if applicationStatus == "withdrawn" %}
+        {% if choices.length == 1 and choices[0].status == "Application withdrawn" %}
           You withdrew your application
-        {% elseif applicationStatus == "declined" %}
+        {% elseif choices.length == 1 and choices[0].status == "Offer declined" %}
           You declined an offer
         {% else %}
           You did not get a place on a course this time
@@ -86,12 +78,10 @@
     }) }}
   {% endif %}
 
-  {% if applicationStatus != "declined" %}
-    {% if choices | length > 1 %}
-      {% include "dashboard/_multiple_active_applications.njk" %}
-    {% else %}
-      {% include "dashboard/_single_active_application.njk" %}
-    {% endif %}
+  {% if choices | length > 1 %}
+    {% include "dashboard/_multiple_active_applications.njk" %}
+  {% else %}
+    {% include "dashboard/_single_active_application.njk" %}
   {% endif %}
 
   {% include "dashboard/_next_steps.njk" %}

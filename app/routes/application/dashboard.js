@@ -209,7 +209,7 @@ module.exports = router => {
 
         break
 
-      case 'awaiting-some-provider-decisions':
+      case 'awaiting-one-provider-decision-one-offer':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
           date: '2021-02-06T11:00:00',
@@ -224,6 +224,34 @@ module.exports = router => {
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
           course_full: true,
+          interested_in_future_applications: true
+        }
+        choices.ZYXWV.status = 'Offer received'
+        choices.ZYXWV.conditions = [
+          "Fitness to Teach check",
+          "Disclosure and barring service check"
+        ]
+
+        application.endedWithoutSuccess = false
+        break
+
+      case 'awaiting-one-provider-decision-no-offers':
+        choices.ABCDE.status = 'Awaiting decision'
+        choices.ABCDE.interview = [{
+          date: '2021-02-06T11:00:00',
+          providerName: 'Gorse SCITT',
+          address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+        },
+        {
+          date: '2021-02-01T11:00:00',
+          providerName: 'Gorse SCITT',
+          address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+        }]
+        choices.FGHIJ.status = 'Unsuccessful'
+        choices.FGHIJ.feedback = {
+          behaviour: {
+            didNotReplyToMessages: true
+          },
           interested_in_future_applications: true
         }
         choices.ZYXWV.status = 'Unsuccessful'
@@ -261,21 +289,23 @@ module.exports = router => {
         break
 
       case 'received-two-offers':
-        choices.ABCDE.status = 'Unsuccessful'
+        choices.ABCDE.status = 'Offer received'
         choices.ABCDE.interview = [{
           date: '2020-12-14T11:00:00',
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
-        choices.ABCDE.feedback = {
-          course_full: true
-        }
-        choices.FGHIJ.status = 'Offer received'
-        choices.FGHIJ.interview = false
-        choices.FGHIJ.conditions = [
+        choices.ABCDE.conditions = [
           "Fitness to Teach check",
-          "Disclosure and barring service check"
+          "Disclosure and barring service check",
+          "Return completed and signed Suitability Declaration.",
+          "Return completed and signed Fee Status Declaration."
         ]
+        choices.FGHIJ.status = 'Unsuccessful'
+        choices.FGHIJ.feedback = {
+          course_full: true,
+          interested_in_future_applications: true
+        }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
@@ -295,12 +325,28 @@ module.exports = router => {
       case 'ended-without-success':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          course_full: true
+          rejected_by_default: true
         }
-        choices.FGHIJ.status = 'Offer withdrawn'
-        choices.FGHIJ.feedback = false
-        choices.ZYXWV.status = 'Application withdrawn'
-        choices.ZYXWV.feedback = false
+
+        choices.FGHIJ.status = 'Unsuccessful'
+        choices.FGHIJ.feedback = {
+          behaviour: {
+            didNotReplyToMessages: true
+          },
+          interested_in_future_applications: true
+        }
+        choices.ZYXWV.status = 'Unsuccessful'
+        choices.ZYXWV.interview = null
+        choices.ZYXWV.feedback = {
+          behaviour: {
+            other: "TBC",
+            whatTheyCouldToDoImprove: "TBC"
+          },
+          quality_of_application: {
+            subject_knowledge: "TBC"
+          },
+          interested_in_future_applications: true
+        }
         application.endedWithoutSuccess = true
         break
 

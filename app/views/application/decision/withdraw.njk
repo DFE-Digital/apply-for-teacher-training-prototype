@@ -18,11 +18,13 @@
 
 {% block primary %}
 
-  <p class="govuk-body">[Content here about what happens when you withdraw?]</p>
-
   {% if choices | length == 1  %}
 
-    <p class="govuk-body">[Content here to remind you about the course?]</p>
+    {% set choice = choices[0] %}
+
+    <p class="govuk-body-l">{{ providers[choice.providerCode].courses[choice.courseCode]["name"] }} ({{ choice.courseCode }})  at {{ providers[choice.providerCode]["name"] }}</p>
+
+    <p class="govuk-body">If you withdraw your application you can still apply to another course starting in 2021.</p>
 
     {% set buttonText %}
       {% if  choices[0].status == "Offer accepted" or choices[0].status == "Conditions met" or choices[0] == "Offer deferred" %}
@@ -31,7 +33,6 @@
         Yes I’m sure - withdraw this application
       {% endif %}
     {% endset %}
-
 
 
    {{ govukButton({

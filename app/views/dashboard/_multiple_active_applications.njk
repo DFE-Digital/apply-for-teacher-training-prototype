@@ -1,4 +1,8 @@
-<p class="govuk-body">You applied for {{ choices | length }} courses. All providers must respond by {{ 14 | nowPlusDays("d MMMM yyyy") }}.</p>
+<p class="govuk-body">You applied for {{ choices | length }} courses.
+  {% if numberOfChoicesAwaitingDecision > 0 %}
+    All providers must respond by {{ 14 | nowPlusDays("d MMMM yyyy") }}.
+  {% endif %}
+</p>
 
 
 {% set rows = [] %}

@@ -28,13 +28,24 @@
 
     {% endif %}
 
+    {% if item.feedback.performanceAtInterview %}
 
-    {% if item.feedback.quality_of_application %}
+      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Performance at interview</h4>
+      <p class="govuk-body">{{ item.feedback.performanceAtInterview | safe }}</p>
+
+    {% endif %}
+
+    {% if item.feedback.qualityOfApplication %}
       <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
 
-      {% if item.feedback.quality_of_application.subject_knowledge %}
-        <p class="govuk-body">Subject knowledge</p>
-        <p class="govuk-body">{{ item.feedback.quality_of_application.subject_knowledge }}</p>
+      {% if item.feedback.qualityOfApplication.personalStatement %}
+        <p class="govuk-body">Personal statement could be improved.</p>
+        <p class="govuk-body">{{ item.feedback.qualityOfApplication.personalStatement }}</p>
+      {% endif %}
+
+      {% if item.feedback.qualityOfApplication.subjectKnowledge %}
+        <p class="govuk-body">Subject knowledge could be improved.</p>
+        <p class="govuk-body">{{ item.feedback.qualityOfApplication.subjectKnowledge }}</p>
       {% endif %}
     {% endif %}
 
@@ -46,9 +57,21 @@
       {% endif %}
     {% endif %}
 
-    {% if item.feedback.interested_in_future_applications %}
+    {% if item.feedback.additionalFeedback %}
+      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Additional feedback</h4>
+      <p class="govuk-body">{{ item.feedback.additionalFeedback }}</p>
+    {% endif %}
+
+    {% if item.feedback.interested_in_future_applications != null %}
       <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Future applications</h4>
-      <p class="govuk-body">The provider would be interested in future applications from you.</p>
+
+      <p class="govuk-body">
+        {% if item.feedback.interested_in_future_applications %}
+          The provider would be interested in future applications from you.
+        {% else %}
+          The provider would not be interested in future applications from you.
+        {% endif %}
+      </p>
     {% endif %}
   {% endset %}
 

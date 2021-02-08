@@ -19,7 +19,7 @@
   {% set result = rows.push({
     key: {
         classes: "app-summary-list__key--narrow",
-        html: "<b>" +  providers[item.providerCode]["name"] + "</b><br><span class=\"govuk-!-font-weight-regular\">" + providers[item.providerCode].courses[item.courseCode].name + " (" + item.courseCode + ")</span><br><a href=\"#\" class=\"govuk-!-font-weight-regular\">View application</a>"
+        html: "<b>" +  providers[item.providerCode]["name"] + "</b><br><span class=\"govuk-!-font-weight-regular\">" + providers[item.providerCode].courses[item.courseCode].name + " (" + item.courseCode + ")</span><br><a href=\"/application/" + applicationId + "/submitted/" + item.id + "?referrer=/dashboard/" + applicationId + "\" class=\"govuk-!-font-weight-regular\">View application</a>"
       },
       value: {
         classes: "app-summary-list__value--wide",

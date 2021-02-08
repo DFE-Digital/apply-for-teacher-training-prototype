@@ -212,25 +212,32 @@ module.exports = router => {
       case 'awaiting-some-provider-decisions':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2020-12-14T11:00:00',
+          date: '2021-02-06T11:00:00',
+          providerName: 'Gorse SCITT',
+          address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
+        },
+        {
+          date: '2021-02-01T11:00:00',
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.hasFeedback = true
         choices.FGHIJ.feedback = {
-          course_full: true
+          course_full: true,
+          interested_in_future_applications: true
         }
-        choices.ZYXWV.status = 'Offer received'
+        choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
-        choices.ZYXWV.conditions = [
-          "Fitness to Teach check",
-          "Disclosure and barring service check",
-          "Achievement of Degree in BA Ballet Education with 2:1 or above",
-          "Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.",
-          "Return completed and signed Suitability Declaration.",
-          "Return completed and signed Fee Status Declaration."
-        ]
+        choices.ZYXWV.feedback = {
+          behaviour: {
+            other: "TBC",
+            whatTheyCouldToDoImprove: "TBC"
+          },
+          quality_of_application: {
+            subject_knowledge: "TBC"
+          },
+          interested_in_future_applications: true
+        }
         application.endedWithoutSuccess = false
         break
 

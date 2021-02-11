@@ -75,6 +75,20 @@ module.exports = router => {
         ]
         application.endedWithoutSuccess = false
         break
+      case 'offer-received-different-provider':
+        choices.ABCDE.status = 'Offer received'
+        choices.ABCDE.offeredCourseId = "X100"
+        choices.ABCDE.offeredProviderId = "S31"
+        choices.ABCDE.interview = null
+        choices.ABCDE.feedback = null
+        choices.ABCDE.rejectedByDefault = false
+        choices.ABCDE.conditions = [
+          "Fitness to Teach check",
+          "Disclosure and barring service check"
+        ]
+        application.endedWithoutSuccess = false
+        break
+
       case 'unsuccessful-with-feedback':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.hasFeedback = true

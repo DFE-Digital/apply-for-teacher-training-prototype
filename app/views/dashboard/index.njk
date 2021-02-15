@@ -78,11 +78,7 @@
     }) }}
   {% endif %}
 
-  {% if choices | length > 1 %}
-    {% include "dashboard/_multiple_active_applications.njk" %}
-  {% else %}
-    {% include "dashboard/_single_active_application.njk" %}
-  {% endif %}
+  {% include "dashboard/_multiple_active_applications.njk" %}
 
   {% include "dashboard/_next_steps.njk" %}
   {% include "dashboard/_previous_applications_summary.njk" %}

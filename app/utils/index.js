@@ -73,7 +73,7 @@ const sendEmail = (req, template, personalisation) => {
   personalisation = personalisation || {}
   personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
 
-  if (email && notify) {
+  if (email && (typeof notify !== 'undefined')) {
     notify.sendEmail(
       template,
       email,

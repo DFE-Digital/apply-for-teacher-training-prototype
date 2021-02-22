@@ -2,6 +2,13 @@
 
 {% set title = "Do you want to apply again?" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
+{% endblock %}
+
+
 {% block primary %}
   <p>You could still get a place on a course this year.</p>
 

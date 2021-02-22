@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Academic and other relevant qualifications" %}
+{% set title = "Other qualifications" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
@@ -36,8 +36,9 @@
     } | decorateApplicationAttributes(["other-qualifications", id, "type-non-uk"])) }}
   {% endset %}
 
-  <p class="govuk-body">Enter your qualifications as completely as you can, including all your GCSEs and A levels (or equivalents), and any other qualifications where you showed skills that might help you as a teacher.</p>
-  <p class="govuk-body">Undergraduate and postgraduate degrees should be included in the ‘Degree’ section.</p>
+  <p class="govuk-body">Adding any other qualifications you have will make your application stronger.</p>
+  <p class="govuk-body">Include every qualification you can, especially if they help to show knowledge about the subjects you want to teach.</p>
+  <p class="govuk-body">If you are an international student, you can enter your qualifications here too.</p>
 
   {{ govukRadios({
     fieldset: {

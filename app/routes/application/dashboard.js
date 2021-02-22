@@ -386,6 +386,12 @@ module.exports = router => {
         application.choices = [choices.ZYXWV]
         application.endedWithoutSuccess = false
         break
+
+      case 'awaiting-apply-again-response':
+        choices.ABCDE.status = 'Awaiting decision'
+        application.endedWithoutSuccess = false
+
+        break
     }
 
     const numberOfOffersReceived = utils.toArray(application.choices).filter(function(choice) {

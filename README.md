@@ -20,6 +20,8 @@ This prototype is based on the [GOV.UK prototype kit](https://github.com/alphago
 
 If you want to skip installing dependencies each time, you can instead type `npm run s`.
 
+If you want to also test the email notifications, you can get an API key for GOV.UK Notify and add it to a `.env` file after `NOTIFYAPIKEY=`.
+
 ## Available user journeys
 
 ### Creating an account

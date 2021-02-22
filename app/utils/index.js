@@ -4,8 +4,12 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
-const NotifyClient = require('notifications-node-client').NotifyClient
-const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+
+if (process.env.NOTIFYAPIKEY) {
+  const NotifyClient = require('notifications-node-client').NotifyClient
+  const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+}
+
 const providers = require('./../data/providers')
 const path = require('path')
 
@@ -79,7 +83,7 @@ const sendEmail = (req, template, personalisation) => {
   personalisation = personalisation || {}
   personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
 
-  if (email) {
+  if (email && (typeof notify !== 'undefined')) {
     notify.sendEmail(
       template,
       email,

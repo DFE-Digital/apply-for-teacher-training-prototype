@@ -4,7 +4,7 @@ module.exports = {
   apply2: false,
   ended_without_success: false,
   completed: {
-    'personal-details': ['true'],
+    '_personal-details': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],
     'school-experience': ['true'],
@@ -121,8 +121,8 @@ module.exports = {
       month: '02',
       year: '1988'
     },
-    nationality: 'other',
-    'other-nationality': 'Indian',
+    nationality: ['Other'],
+    'other-nationality-1': 'Indian',
     residency: 'I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
@@ -179,7 +179,7 @@ module.exports = {
     'certificate-number': '02GB0674SOOM599A',
     year: '2015'
   },
-  'other-qualifications': {
+  '_other-qualifications': {
     ksufp: {
       id: 'ksufp',
       type: 'Non-UK qualification',

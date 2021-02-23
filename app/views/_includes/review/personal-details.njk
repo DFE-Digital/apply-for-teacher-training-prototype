@@ -1,5 +1,7 @@
 {% set complete = "true" if applicationValue(["completed", "personal-details"]) %}
 
+{{ complete }}
+
 {% if showIncomplete and complete != "true" %}
   {% set incompleteType = "warning" if errorList %}
   {% set incompleteId = "candidate" %}

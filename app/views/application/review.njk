@@ -30,11 +30,7 @@
 
 {% block primary %}
   <section class="app-section">
-    {% if applicationValue(["apply2"]) %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Course</h2>
-    {% else %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-    {% endif %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">{{ "Course" if applicationValue(["apply2"]) else "Courses" }}</h2>
     {% if not closed %}
       {% set choices = applicationValue(["choices"]) | toArray %}
       {% set showChoiceStatus = false %}
@@ -67,16 +63,16 @@
     {% set id = "english" %}
     {% include "_includes/review/gcse.njk" %}
 
-    {% if international %}
-      {% include "_includes/review/english-language.njk" %}
-    {% endif %}
-
     {% set id = "maths" %}
     {% include "_includes/review/gcse.njk" %}
 
     {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
       {% set id = "science" %}
       {% include "_includes/review/gcse.njk" %}
+    {% endif %}
+
+    {% if international %}
+      {% include "_includes/review/english-language.njk" %}
     {% endif %}
   </section>
 

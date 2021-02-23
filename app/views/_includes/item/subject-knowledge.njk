@@ -1,0 +1,19 @@
+{% set applicationPath = "/application/" + applicationId %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Your knowledge about the subject you want to teach"
+    },
+    value: {
+      text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/subject-knowledge?referrer=" + referrer,
+        text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
+        visuallyHiddenText: "evidence of subject knowledge"
+      }]
+    } if canAmend
+  }]
+}) }}

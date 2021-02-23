@@ -1,0 +1,78 @@
+{% set applicationPath = "/application/" + applicationId %}
+{% set contactDetails = applicationValue(["contact-details"]) %}
+
+{% set addressHtml -%}
+  {%- if contactDetails.address -%}
+    {%- if contactDetails["address-type"] == "international" -%}
+      {{ contactDetails.address["street-address"] }}
+      {{ contactDetails.address.country }}
+    {%- else -%}
+      {%- if contactDetails.address.line1 -%}
+        {{ contactDetails.address.line1 }}<br>
+      {%- endif -%}
+      {%- if contactDetails.address.line2 -%}
+        {{ contactDetails.address.line2 }}<br>
+      {%- endif -%}
+      {%- if contactDetails.address.level2 -%}
+        {{ contactDetails.address.level2 }}<br>
+      {%- endif -%}
+      {%- if contactDetails.address.level1 -%}
+        {{ contactDetails.address.level1 }}<br>
+      {%- endif -%}
+      {%- if contactDetails.address["postal-code"] -%}
+        {{ contactDetails.address["postal-code"] }}<br>
+      {%- endif -%}
+      {%- if contactDetails.address.country -%}
+        {{ contactDetails.address.country }}
+      {%- endif -%}
+    {%- endif -%}
+  {%- else -%}
+    Not entered
+  {%- endif %}
+{%- endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Phone number"
+    },
+    value: {
+      text: contactDetails["phone-number"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/contact-details?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "phone number"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Email address"
+    },
+    value: {
+      text: data["account"]["email"] or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/contact-details?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "email"
+      }]
+    } if canAmend
+  } if data.flags.self_amend_email_address, {
+    key: {
+      text: "Address"
+    },
+    value: {
+      html: addressHtml | nl2br | safe
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "address"
+      }]
+    } if canAmend
+  }]
+}) }}

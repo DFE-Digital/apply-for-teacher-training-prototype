@@ -1,24 +1,3 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set subjectKnowledgeHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Your knowledge about the subject you want to teach"
-      },
-      value: {
-        text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/subject-knowledge?referrer=" + referrer,
-          text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
-          visuallyHiddenText: "evidence of subject knowledge"
-        }]
-      } if canAmend
-    }]
-  }) }}
-{% endset %}
-
 {% set complete = "true" if applicationValue(["completed", "subject-knowledge"]) %}
 
 {% if showIncomplete and complete != "true" %}
@@ -29,8 +8,13 @@
   {% set incompleteLinkText = "What you know about the subject you want to teach?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
+  {% set summaryBodyHtml %}
+    {% include "_includes/item/subject-knowledge.njk" %}
+  {% endset %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: subjectKnowledgeHtml
+    headingLevel: 3,
+    titleText: "Your suitability to teach a subject or age group",
+    html: summaryBodyHtml
   }) }}
 {% endif %}

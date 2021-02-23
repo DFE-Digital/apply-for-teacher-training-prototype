@@ -1,38 +1,3 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set supportDetailsHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Do you need any adjustments to help you do a course or go to an interview?" if option == "b" else "Do you want to ask for help to become a teacher?"
-      },
-      value: {
-        text: "Yes" if applicationValue(["reasonable-adjustments", "disclose"]) == 'true' else 'No'
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/reasonable-adjustments?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "if you need support to become a teacher"
-        }]
-      } if canAmend
-    }, {
-      key: {
-        text: "Relevant information"
-      },
-      value: {
-        html: applicationValue(["reasonable-adjustments", "statement"])
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/reasonable-adjustments?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "your reasonable adjustments"
-        }]
-      } if canAmend
-    } if applicationValue(["reasonable-adjustments", "disclose"]) == 'true']
-  }) }}
-{% endset %}
-
 {% set complete = "true" if applicationValue(["completed", "reasonable-adjustments"]) %}
 
 {% if showIncomplete and complete != "true" %}
@@ -43,8 +8,13 @@
   {% set incompleteLinkText = "Do you want to ask for help to become a teacher?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
+  {% set summaryBodyHtml %}
+    {% include "_includes/item/reasonable-adjustments.njk" %}
+  {% endset %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: supportDetailsHtml
+    headingLevel: 3,
+    titleText: "Ask for support if you’re disabled",
+    html: summaryBodyHtml
   }) }}
 {% endif %}

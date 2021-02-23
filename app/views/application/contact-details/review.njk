@@ -15,7 +15,7 @@
 
 {% block primary %}
   {% set contactDetails = applicationValue(["contact-details"]) %}
-  {% include "_includes/review/contact-details.njk" %}
+  {% include "_includes/item/contact-details.njk" %}
 
   {{ govukCheckboxes({
     items: [{

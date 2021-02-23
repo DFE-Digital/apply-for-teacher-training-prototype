@@ -1,14 +1,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set datesHtml -%}
-  {%- if item["start-date"] or item["time-commitment"] -%}
-    {{- item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
-    {%- if item["time-commitment"] -%}
-      <br>{{ item["time-commitment"] | nl2br | safe }}
-    {%- endif -%}
-  {%- else -%}
-    Not entered
-  {%- endif -%}
+{% set datesText %}
+  {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}
 
 {% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}
@@ -44,16 +37,44 @@
     } if canAmend
   }, {
     key: {
-      text: "Tell us how long you’ve been in this role and what it involves"
+      text: "Did this role involve working in a school or with children?"
     },
     value: {
-      text: datesHtml | nl2br | safe
+      text: (item["worked-with-children"] or "Not entered")
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "if this role involved working with children"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Dates"
+    },
+    value: {
+      text: datesText
     },
     actions: {
       items: [{
         href: changeHref,
         text: "Change",
         visuallyHiddenText: "dates"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Time commitment and responsibilities"
+    },
+    value: {
+      text: item["time-commitment"] | nl2br | safe
+    },
+    actions: {
+      items: [{
+        href: changeHref,
+        text: "Change",
+        visuallyHiddenText: "time commitment and responsibilities"
       }]
     } if canAmend
   }]

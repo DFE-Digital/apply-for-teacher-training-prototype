@@ -15,13 +15,13 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/degrees.njk" %}
-
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",
     href: applicationPath + "/degree/add"
   }) }}
+
+  {% include "_includes/review/degrees.njk" %}
 
   {{ govukCheckboxes({
     items: [{

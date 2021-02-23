@@ -1,38 +1,4 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set supportDetailsHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Do you want to share any information which could have an impact on your application?"
-      },
-      value: {
-        text: "Yes" if applicationValue(["suitability", "disclose"]) == 'true' else 'No'
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/suitability?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "whether you need to share something"
-        }]
-      } if canAmend
-    }, {
-      key: {
-        text: "Relevant information"
-      },
-      value: {
-        html: applicationValue(["suitability", "statement"])
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/suitability?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "the information you are sharing"
-        }]
-      } if canAmend
-    } if applicationValue(["suitability", "disclose"]) == 'true']
-  }) }}
-{% endset %}
-
 {% set complete = "true" if applicationValue(["completed", "suitability"]) %}
 
 {% if showIncomplete and complete != "true" %}
@@ -43,8 +9,13 @@
   {% set incompleteLinkText = "Do you need to declare any safeguarding issues?" %}
   {% include "_includes/review/incomplete.njk" %}
 {% else %}
+  {% set summaryBodyHtml %}
+    {% include "_includes/item/suitability.njk" %}
+  {% endset %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: supportDetailsHtml
+    headingLevel: 3,
+    titleText: "Declare any safeguarding issues",
+    html: summaryBodyHtml
   }) }}
 {% endif %}

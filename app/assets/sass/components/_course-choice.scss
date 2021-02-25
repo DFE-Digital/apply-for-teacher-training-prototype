@@ -1,6 +1,6 @@
 .app-course-choice {
-  background-color: govuk-colour("light-grey");
-  border: 0 none !important;
+  // background-color: govuk-colour("light-grey");
+  // border: 0 none !important;
 
   .govuk-summary-list__key {
     @include govuk-media-query($from: tablet) {
@@ -18,7 +18,7 @@
 }
 
 .app-course-choice__course-name {
-  @include govuk-font($size: 24, $weight: "bold");
+  // @include govuk-font($size: 24, $weight: "bold");
   display: block;
-  text-decoration: underline;
+  // text-decoration: underline;
 }

@@ -46,10 +46,10 @@
   {% endset %}
 
   {% set summaryHeaderHtml %}
-    <a class="govuk-link govuk-link--no-visited-state" href="{{ applicationPath + "/submitted/" + item.id + "/delete?referrer=" + referrer }}">
+    <!--a class="govuk-link govuk-link--no-visited-state" href="{{ applicationPath + "/submitted/" + item.id + "/delete?referrer=" + referrer }}"-->
       <span class="app-course-choice__provider-name">{{ providers[item.providerCode]["name"] }}</span>
       <span class="app-course-choice__course-name">{{ providers[item.providerCode].courses[item.courseCode].name_and_code }}</span>
-    </a>
+    <!--/a-->
   {% endset %}
 
   {% set summaryBodyHtml %}
@@ -69,7 +69,7 @@
         value: {
           html: interviewHtml | safe
         }
-      } if item.interview, {
+      } if item.interview and not canRespond, {
         key: {
           text: "Feedback"
         },
@@ -78,7 +78,7 @@
         }
       } if item.feedback, {
         key: {
-          text: "Conditions of offer"
+          text: "Conditions"
         },
         value: {
           html: conditionsHtml | safe
@@ -96,17 +96,14 @@
   {% endset %}
 
   {{ appSummaryCard({
-    classes: "app-course-choice govuk-!-margin-top-6",
+    classes: "app-course-choice govuk-!-margin-bottom-6",
     titleHtml: summaryHeaderHtml,
-    _actions: {
+    actions: {
       items: [{
-        href: applicationPath + "/" + item.id + "/withdraw",
-        text: "Withdraw"
-      } if canWithdraw, {
-        href: applicationPath + "/" + item.id + "/view",
-        text: "View and respond to offer"
-      } if canRespond and not hasResponded]
-    } if canAmend or canWithdraw or canRespond,
+        href: applicationPath + "/submitted/?referrer=" + referrer,
+        text: "View application"
+      }]
+    },
     html: summaryBodyHtml
   }) }}
 {% endfor %}

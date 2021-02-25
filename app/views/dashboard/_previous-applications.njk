@@ -1,20 +1,16 @@
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
 {% if application.previousApplications | length > 0 %}
-
   {{ govukTable({
-    classes: "govuk-!-margin-top-9",
+    classes: "govuk-!-margin-top-6",
     caption: "Your previous applications",
     captionClasses: "app-table__caption--m",
     firstCellIsHeader: false,
-    head: [
-      {
-        text: "Course"
-      },
-      {
-        text: "Status"
-      }
-    ],
+    head: [{
+      text: "Course"
+    }, {
+      text: "Status"
+    }],
     rows: [
       [
         {

@@ -1,0 +1,25 @@
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% for interview in item.interview %}
+  {% if (interview.date | date) > ("" | dateNow() | date) %}
+    <p class="govuk-body">You have an interview scheduled for {{ interview.date | date("d LLLL yyyy, h:mma") }}</p>
+
+    <p class="govuk-body govuk-!-margin-bottom-0">Details from provider:</p>
+
+    {% set interviewDetails %}
+      <p class="govuk-body">{{ interview.address | safe }}</p>
+
+      {% if interview.additional_details %}
+        <p class="govuk-body">{{ interview.additional_details | safe }}</p>
+      {% endif %}
+    {% endset %}
+
+    {{ govukInsetText({
+      html: interviewDetails,
+      classes: "govuk-!-margin-top-1"
+    }) }}
+
+  {% else %}
+    <p class="govuk-body">You had an interview scheduled for {{ interview.date | date("d LLLL yyyy") }}</p>
+  {% endif %}
+{% endfor %}

@@ -26,7 +26,6 @@ const defaultSessionData = () => {
   const sessionDataDefaultsFile = path.join(__dirname, '/../data/session-data-defaults.js')
   const sessionDataDefaults = require(sessionDataDefaultsFile)
 
-  console.log('reloading session data from file')
   // Return deep copy of session default so that it can always be restored.
   return JSON.parse(JSON.stringify(sessionDataDefaults))
 }

@@ -1,4 +1,4 @@
-{% extends "_content-wide.njk" %}
+{% extends "_content.njk" %}
 
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -14,11 +14,18 @@
 {% set hasSecondary = true %}
 {% set applicationPath = "/application/" + applicationId %}
 
+{% if applicationStatus %}
+  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
+{% else %}
+  {% set referrer = "/dashboard/" + applicationId %}
+{% endif %}
+
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 {% endblock %}
 
 {% block primary %}
+  {% include "dashboard/_next_steps.njk" %}
 
   {% set respondToOfferHtml %}
     <h2 class="govuk-heading-m">
@@ -28,13 +35,13 @@
       You have received a conditional offer
     {% endif %}
     </h2>
-    <p class="govuk-body-l">You have 14 days (until 4 March 2021) to accept or decline the
+    <p class="govuk-body">You have 14 days (until 4 March 2021) to accept or decline the
     {{ "offers" if numberOfOffersReceived > 1 else "offer" }}.</p>
 
-    <p class="govuk-body-l">Your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will be withdrawn if you do not respond in time.</p>
+    <p class="govuk-body">Your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will be withdrawn if you do not respond in time.</p>
 
     {% set buttonText %}
-      Respond to  {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
+      Respond to {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
     {% endset %}
 
     {{ govukButton({
@@ -45,13 +52,12 @@
 
   {% if canMakeDecision == true %}
     {{ govukInsetText({
-      html: respondToOfferHtml,
-      classes: "app-inset-text--important govuk-!-margin-top-0"
+      classes: "govuk-!-margin-top-0",
+      html: respondToOfferHtml
     }) }}
   {% endif %}
 
   {% if application.endedWithoutSuccess == true %}
-
     {% set applyAgainHtml %}
       <h2 class="govuk-heading-m">
         {% if choices.length == 1 and choices[0].status == "Application withdrawn" %}
@@ -63,9 +69,10 @@
         {% endif %}
       </h2>
 
-      <p class="govuk-body-l">You can apply again for courses starting in September 2021.</p>
+      <p class="govuk-body">You can apply again for courses starting in September 2021.</p>
 
-      <p class="govuk-body-l">You have until 5 August 2021 to apply again.</p>
+      <p class="govuk-body">You have until 5 August 2021 to apply again.</p>
+
       {{ govukButton({
         text: "Apply again",
         href: "/application/" + applicationId + "/apply-again"
@@ -74,13 +81,11 @@
 
     {{ govukInsetText({
       html: applyAgainHtml,
-      classes: "govuk-!-margin-top-0 app-inset-text--important"
+      classes: "govuk-!-margin-top-0"
     }) }}
   {% endif %}
 
-  {% include "dashboard/_multiple_active_applications.njk" %}
+  {% include "dashboard/_course-choices.njk" %}
 
-  {% include "dashboard/_next_steps.njk" %}
-  {% include "dashboard/_previous_applications_summary.njk" %}
-
+  {% include "dashboard/_previous-applications.njk" %}
 {% endblock %}

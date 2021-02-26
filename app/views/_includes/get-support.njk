@@ -14,29 +14,3 @@
     html: supportHtml
   }
 }) }}
-
-{% set previousApplicationsHtml %}
-  {% if previousApplications | length > 1 %}
-    <ul class="govuk-list govuk-list--bullet govuk-body-s">
-      {% for application in previousApplications %}
-        <li class="govuk-!-margin-bottom-2">
-          <a href="/application/{{ application.id }}/submitted?referrer={{ referrer }}">{{ loop.index | ordinalWord | capitalize }} application</a><br>Submitted <time datetime="{{ application.submitted }}">{{ application.submitted | date("d MMMM yyyy") }}</time>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    {% set applicationId = previousApplications[0].id %}
-    {% set application = previousApplications[0] %}
-    <p class="govuk-body-s">
-      <a href="/application/{{ applicationId }}/submitted?referrer={{ referrer }}">First application</a><br>Submitted <time datetime="{{ application.submitted }}">{{ application.submitted | date("d MMMM yyyy") }}</time>
-    </p>
-  {% endif %}
-{% endset %}
-
-{{ appRelated({
-  name: "previous-applications",
-  title: "Previous applications",
-  content: {
-    html: previousApplicationsHtml
-  }
-}) if applicationValue('apply2') }}

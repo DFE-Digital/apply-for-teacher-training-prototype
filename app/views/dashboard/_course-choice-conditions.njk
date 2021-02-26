@@ -31,7 +31,7 @@
   }) }}
 {% endif %}
 
-{% if (item.status == "Offer received" or item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met") and  item.conditions %}
+{% if (item.status == "Offer received" or item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met" or item.status == "Offer declined") and  item.conditions %}
   <ul class="govuk-list govuk-list--bullet">
     {% for condition in item.conditions %}
       <li>{{ condition }}</li>

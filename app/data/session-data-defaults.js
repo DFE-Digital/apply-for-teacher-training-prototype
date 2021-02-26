@@ -19,5 +19,6 @@ module.exports = {
     self_amend_email_address: false,
     self_amend_contact_details: false
   },
-  visits_from_find: 0
+  visits_from_find: 0,
+  previousApplications: {}
 }

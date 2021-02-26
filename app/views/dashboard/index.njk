@@ -57,7 +57,7 @@
     }) }}
   {% endif %}
 
-  {% if application.endedWithoutSuccess == true %}
+  {% if endedWithoutSuccess == true %}
     {% set applyAgainHtml %}
       <h2 class="govuk-heading-m">
         {% if choices.length == 1 and choices[0].status == "Application withdrawn" %}

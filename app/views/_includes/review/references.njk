@@ -1,10 +1,15 @@
 {% if showIncomplete and references.length < 2 %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "referees" %}
-  {% set incompleteText = "You need 2 references before you can submit your application" %}
-  {% set incompleteLink = "/referees/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Manage your references" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "referees",
+    title: "You need 2 references before you can submit your application",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Manage your references",
+        href: applicationPath + "/referees/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% for item in references %}
     {% set allReferences = applicationValue(["references"]) | toArray %}

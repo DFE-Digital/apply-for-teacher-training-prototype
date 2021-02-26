@@ -1,12 +1,17 @@
 {% set complete = "true" if applicationValue(["completed", "subject-knowledge"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "subject-knowledge" %}
-  {% set incompleteText = "Subject knowledge not entered" %}
-  {% set incompleteLink = "/subject-knowledge/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "What you know about the subject you want to teach?" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "subject-knowledge",
+    title: "Subject knowledge not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "What you know about the subject you want to teach?",
+        href: applicationPath + "/subject-knowledge/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/subject-knowledge.njk" %}

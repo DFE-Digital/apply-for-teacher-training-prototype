@@ -1,12 +1,17 @@
 {% set complete = "true" if applicationValue(["completed", "interview"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "interview" %}
-  {% set incompleteText = "Interview needs not entered" %}
-  {% set incompleteLink = "/interview/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Do you have any interview needs?" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "interview",
+    title: "Interview needs not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you have any interview needs?",
+        href: applicationPath + "/interview/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/interview.njk" %}

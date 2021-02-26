@@ -2,12 +2,17 @@
 {% set complete = "true" if applicationValue(["completed", "work-history"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "work-history" %}
-  {% set incompleteText = "Work history is not marked as completed" %}
-  {% set incompleteLink = "/work-history?referrer=" + referrer %}
-  {% set incompleteLinkText = "Complete your work history" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "work-history",
+    title: "Work history is not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete your work history",
+        href: applicationPath + "/work-history?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/work-history.njk" %}

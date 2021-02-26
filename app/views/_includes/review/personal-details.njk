@@ -1,14 +1,17 @@
 {% set complete = "true" if applicationValue(["completed", "personal-details"]) %}
 
-{{ complete }}
-
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "candidate" %}
-  {% set incompleteText = "Personal details are not marked as completed" %}
-  {% set incompleteLink = "/personal-details/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your personal details" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "candidate",
+    title: "Personal details are not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your personal details",
+        href: applicationPath + "/personal-details/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/personal-details.njk" %}

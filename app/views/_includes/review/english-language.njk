@@ -6,12 +6,17 @@
 {% endset %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "english-language" %}
-  {% set incompleteText = "English as a foreign language not marked as complete" %}
-  {% set incompleteLink = "/english-language/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Have you done an English as a foreign language assessment?" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "english-language",
+    title: "English as a foreign language not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Have you done an English as a foreign language assessment?",
+        href: applicationPath + "/english-language/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",

@@ -1,12 +1,17 @@
 {% set complete = "true" if applicationValue(["completed", "reasonable-adjustments"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "reasonable-adjustments" %}
-  {% set incompleteText = "Any disability or other needs not entered" %}
-  {% set incompleteLink = "/reasonable-adjustments/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Do you want to ask for help to become a teacher?" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "reasonable-adjustments",
+    title: "Any disability or other needs not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you want to ask for help to become a teacher?",
+        href: applicationPath + "/reasonable-adjustments/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/reasonable-adjustments.njk" %}

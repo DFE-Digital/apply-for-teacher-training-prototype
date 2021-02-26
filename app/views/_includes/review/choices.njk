@@ -51,11 +51,16 @@
   {% endfor %}
 {% else %}
   {% if showIncomplete %}
-    {% set incompleteType = "warning" if errorList %}
-    {% set incompleteId = "choices" %}
-    {% set incompleteText = "Course choices are not marked as completed" %}
-    {% set incompleteLink = "/choices?referrer=" + referrer %}
-    {% set incompleteLinkText = "Complete your course choices" %}
-    {% include "_includes/review/incomplete.njk" %}
+    {{ appSuggestion({
+      id: "choices",
+      title: "Course choices are not marked as completed",
+      warning: true if errorList,
+      actions: {
+        items: [{
+          text: "Complete your course choices",
+          href: applicationPath + "/choices?referrer=" + referrer
+        }]
+      }
+    }) }}
   {% endif %}
 {% endif %}

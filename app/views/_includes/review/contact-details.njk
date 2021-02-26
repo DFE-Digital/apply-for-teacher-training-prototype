@@ -1,12 +1,17 @@
 {% set complete = "true" if applicationValue(["completed", "contact-details"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "contact-details" %}
-  {% set incompleteText = "Contact details not entered" %}
-  {% set incompleteLink = "/contact-details/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your contact details" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "contact-details",
+    title: "Contact details not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your contact details",
+        href: applicationPath + "/contact-details/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/contact-details.njk" %}

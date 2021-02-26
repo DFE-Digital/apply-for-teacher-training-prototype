@@ -2,12 +2,17 @@
 {% set complete = "true" if applicationValue(["completed", "suitability"]) %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "safeguarding" %}
-  {% set incompleteText = "Safeguarding information not entered" %}
-  {% set incompleteLink = "/suitability/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Do you need to declare any safeguarding issues?" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you need to declare any safeguarding issues?",
+        href: applicationPath + "/suitability/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {% set summaryBodyHtml %}
     {% include "_includes/item/suitability.njk" %}

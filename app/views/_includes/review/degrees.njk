@@ -35,10 +35,15 @@
     }) }}
   {% endfor %}
 {% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "degree" %}
-  {% set incompleteText = "Degree(s) section not marked as completed" %}
-  {% set incompleteLink = "/degree/add?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your degree(s)" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "degree",
+    title: "Degree section not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your degree",
+        href: applicationPath + "/degree/add?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% endif %}

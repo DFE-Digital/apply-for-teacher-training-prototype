@@ -6,12 +6,17 @@
 {% endset %}
 
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "gcse-" + id %}
-  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
-  {% set incompleteLink = "/" + id + "/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your " + id | capitalize + " GCSE or equivalent" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "gcse-" + id,
+    title: id | capitalize + " GCSE or equivalent not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your " + id | capitalize + " GCSE or equivalent",
+        href: applicationPath + "/" + id + "/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",

@@ -4,6 +4,7 @@ const marked = require('marked')
 const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
 const degree = require('./data/degree')()
+const utils = require('./utils')
 
 module.exports = (env) => {
   /**
@@ -137,6 +138,10 @@ module.exports = (env) => {
    */
   filters.getCourse = (providerCode, courseCode) => {
     return providers[providerCode].courses[courseCode]
+  }
+
+  filters.getProvider = (providerCode) => {
+    return utils.getProvider(providerCode)
   }
 
   filters.providerCode = (providerAndCode) => {

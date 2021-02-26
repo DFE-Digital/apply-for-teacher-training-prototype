@@ -39,12 +39,17 @@
 
 {% set complete = "true" if applicationValue(["completed", "other-qualifications"]) %}
 {% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "other-qualifications" %}
-  {% set incompleteText = "Academic and other qualifications not marked as complete" %}
-  {% set incompleteLink = "/other-qualifications/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter academic and other relevant qualifications" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "other-qualifications",
+    title: "Academic and other qualifications not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter academic and other relevant qualifications",
+        href: applicationPath + "/other-qualifications/review?referrer=" + referrer
+      }]
+    }
+  }) }}
 {% else %}
   {{ otherQualificationContentsHtml | safe }}
 {% endif %}

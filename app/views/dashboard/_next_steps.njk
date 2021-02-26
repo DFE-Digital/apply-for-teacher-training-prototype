@@ -10,13 +10,9 @@
 
     <p class="govuk-body">Contact Gorse SCITT for more information about your offer conditions and deferring.</p>
 
-    <p class="govuk-body">You can <a href="/application/{{ applicationId }}/withdraw" class="govuk-link">withdraw your application</a> if you no longer want to enrol for this course.</p>
-
   {% elseif choices | length == 1 and choices[0].status == "Offer deferred" %}
 
     <p class="govuk-body">You need to meet the offer conditions.</p>
-
-    <p class="govuk-body">You can <a href="/application/{{ applicationId }}/withdraw" class="govuk-link">withdraw your application</a> if you no longer want to take this course.</p>
 
   {% elseif choices | length == 1 and choices[0].status == "Conditions met" %}
 
@@ -26,15 +22,11 @@
 
     <p class="govuk-body">Once all providers have made their decisions, you will have 10 working days to respond to any offers made.</p>
 
-    <p class="govuk-body">You can <a href="/application/{{ applicationId }}/withdraw" class="govuk-link">withdraw an application</a> if you no longer want to apply for a course.</p>
-
     <p class="govuk-body">If you are not offered a place, or you withdraw all your applications, you can apply to a different course.</p>
 
   {% else %}
 
     <p class="govuk-body">If the provider offers you a place on the course, you have 10 working days to respond.</p>
-
-    <p class="govuk-body">You can <a href="/application/{{ applicationId }}/withdraw" class="govuk-link">withdraw your application</a> if you no longer want to apply for this course.</p>
 
     <p class="govuk-body">If you are not offered a place, or you withdraw your application, you can apply to a different course.</p>
   {% endif %}

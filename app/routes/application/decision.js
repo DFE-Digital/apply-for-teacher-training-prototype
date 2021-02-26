@@ -3,69 +3,6 @@ const utils = require('./../../utils')
 
 module.exports = router => {
 
-
-  // Top level respond page
-  router.get('/application/:applicationId/respond', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-
-    const choices = utils.toArray(application.choices).filter(function(choice) {
-      return (choice["status"] == "Offer received")
-    })
-
-    res.render(`application/decision/respond`, {
-      applicationId,
-      application,
-      choices
-    })
-  })
-
-  // Submit decision
-  router.post('/application/:applicationId/decision', (req, res) => {
-    const { applicationId } = req.params
-    const { decision } = req.session.data
-    const application = utils.applicationData(req)
-
-    if (decision == "decline-all") {
-      for (choice of Object.keys(application.choices)) {
-        if (application.choices[choice].status == "Offer received") {
-          application.choices[choice].status = "Offer declined"
-        }
-      }
-      application.endedWithoutSuccess = true
-    } else {
-
-
-      var acceptedChoice = application.choices[decision]
-      acceptedChoice.status = "Offer accepted"
-
-      // Only keep the offer accepted
-      application.choices = {}
-      application.choices[decision] = acceptedChoice
-
-    }
-
-    res.redirect(`/dashboard/${applicationId}`)
-  })
-
-
-  // Top level withdraw page
-  router.get('/application/:applicationId/withdraw', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-
-    const choices = utils.toArray(application.choices).filter(function(choice) {
-      return true
-    })
-
-    res.render(`application/decision/withdraw`, {
-      applicationId,
-      application,
-      choices
-    })
-  })
-
-
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const { choiceId } = req.params

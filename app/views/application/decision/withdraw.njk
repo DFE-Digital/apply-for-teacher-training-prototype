@@ -1,14 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title %}
-  {% if choices | length > 1  %}
-    Which application do you want to withdraw?
-  {% elseif choices[0].status == "Offer accepted" or choices[0].status == "Conditions met" or choices[0].status == "Offer deferred" %}
-    Are you sure you want to withdraw from this course?
-  {% else %}
-    Are you sure you want to withdraw your application?
-  {% endif %}
-{% endset %}
+{% set title = "Are you sure you want to withdraw this course choice?" %}
+{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -17,61 +10,14 @@
 {% endblock %}
 
 {% block primary %}
+  {% include "_includes/item/offer.njk" %}
 
-  {% if choices | length == 1  %}
+  <p class="govuk-body">If you withdraw this course choice{% if not applicationValue('apply2') %} (and all your other course choices){% endif %} you can still apply for more courses this&nbsp;year.</p>
 
-    {% set choice = choices[0] %}
-
-    <p class="govuk-body-l">{{ providers[choice.providerCode].courses[choice.courseCode]["name"] }} ({{ choice.courseCode }})  at {{ providers[choice.providerCode]["name"] }}</p>
-
-    <p class="govuk-body">If you withdraw your application you can still apply to another course starting in 2021.</p>
-
-    {% set buttonText %}
-      {% if  choices[0].status == "Offer accepted" or choices[0].status == "Conditions met" or choices[0] == "Offer deferred" %}
-        Yes I’m sure - withdraw from this course
-      {% else %}
-        Yes I’m sure - withdraw this application
-      {% endif %}
-    {% endset %}
-
-
-   {{ govukButton({
-      classes: "govuk-button--warning",
-      text: buttonText,
-      name: "decision",
-      value: "withdraw"
-    }) }}
-
-  {% else %}
-
-    {% set items = [] %}
-
-    {% for choice in choices %}
-      {% set _ = items.push({value: "choice-0", text: providers[choice.providerCode].courses[choice.courseCode].name + " at " + providers[choice.providerCode]["name"] + " (" + choice.courseCode + ")" })
-      %}
-    {% endfor %}
-
-    {% set _ = items.push({divider: "or"})
-      %}
-    {% set _ = items.push({value: "choice-0", text: "Withdraw all applications"}) %}
-
-    {{ govukRadios({
-      fieldset: {
-        classes: "govuk-!-margin-top-6",
-        legend: {
-          text: legendText,
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      id: "decision",
-      name: "decision",
-      items: items
-    }) }}
-
-    {{ govukButton({
-      text: "Continue"
-    }) }}
-
-  {% endif %}
-
+  {{ govukButton({
+    classes: "govuk-button--warning",
+    text: "Yes I’m sure - withdraw this course choice",
+    name: "decision",
+    value: "withdraw"
+  }) }}
 {% endblock %}

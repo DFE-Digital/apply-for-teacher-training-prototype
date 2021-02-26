@@ -1,0 +1,80 @@
+{% extends "_content.njk" %}
+
+{% set title = "Application dashboard" %}
+{% set hasSecondary = true %}
+{% set applicationPath = "/application/" + applicationId %}
+
+{% if applicationStatus %}
+  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
+{% else %}
+  {% set referrer = "/dashboard/" + applicationId %}
+{% endif %}
+
+{% if status == "awaiting-candidate-response" or status == "received-one-offer" or status == "received-two-offers" %}
+  {% set statusTitle = "All your training providers have now reached a decision" %}
+  {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
+{% elif status == "offer-received" %}
+  {% set statusTitle = "Your training provider has now reached a decision" %}
+  {% set statusDesc = "You have 14 days (until " + 14 | nowPlusDays("d MMMM yyyy") + ") to respond to any offers. If you do not respond, your applications will be automatically withdrawn." %}
+{% elif status == "ended-without-success" %}
+  {% set statusTitle = "All your training providers have now reached a decision" %}
+{% elif status == "withdrawn" or status == "did-not-respond-to-offer" %}
+  {% set statusTitle = "You have withdrawn all your choices" %}
+{% elif status == "pending-conditions" %}
+  {% set statusTitle = "You have accepted an offer" %}
+  {% set statusDesc = "We’ve sent you an email to confirm this. Your training provider will be in touch with you directly to explain what happens next." %}
+{% elif status == "offer-deferred" %}
+  {% set statusTitle = "Your original offer has been deferred" %}
+  {% set statusDesc = "We’ve sent you an email to confirm this. Your training provider will be in touch with you directly to explain what happens next." %}
+{% elif status == "recruited" or status == "recruited-single" %}
+  {% set statusTitle = "You have met your conditions and are ready to be enrolled" %}
+  {% set statusDesc = "Your training provider will be in touch with you directly to explain what happens next." %}
+{% else %}
+  {% if application.choices | toArray | length > 1 %}
+    {% set statusTitle = "Courses you’ve applied to" %}
+  {% else %}
+    {% set statusTitle = "Course you’ve applied to" %}
+  {% endif %}
+  {% set statusDesc = "Training providers must respond by " + 56 | nowPlusDays("d MMMM yyyy") + "." %}
+{% endif %}
+
+{% block beforePageTitle %}
+  {% if application.endedWithoutSuccess == true %}
+    {{ govukNotificationBanner({
+      html: "<p class=\"govuk-notification-banner__heading\">You did not get a place on a course this time. <a class=\"govuk-notification-banner__link\" href=\"" + applicationPath + "/apply-again\">Apply again</a>.</p>"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block beforePrimary %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Application submitted on {{ "now" | date("d MMMM yyyy") }}. <a href="/application/{{ applicationId }}/submitted?referrer={{ referrer }}">View application</a></p>
+{% endblock %}
+
+{% block primary %}
+
+  {% set canMakeDecision = (status == "awaiting-provider-decisions") or (status == "awaiting-candidate-response" or status == "offer-received") %}
+
+  <h2 class="govuk-heading-m govuk-!-font-size-27">{{ statusTitle }}</h2>
+  {% if statusDesc %}
+    <p class="govuk-body">{{ statusDesc }}</p>
+  {% endif %}
+
+  {% set choices = application.choices | toArray %}
+  {% set showChoiceStatus = true %}
+  {% set showChoiceFeedback = true %}
+  {% include "_includes/review/choices.njk" %}
+
+  {% if data.flags.self_amend_contact_details %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8">Contact details</h2>
+    <p class="govuk-body">You can update your contact details at any point during the application process.</p>
+    {% set contactDetails = applicationValue(["contact-details"]) %}
+    {% set canAmend = true %}
+    {% include "_includes/review/contact-details.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block secondary %}
+  {% include "_includes/get-support.njk" %}
+  {% include "_includes/update-contact-details.njk" %}
+{% endblock %}

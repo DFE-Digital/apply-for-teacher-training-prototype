@@ -82,29 +82,6 @@
     } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endset %}
 
-  {# Only ask if want to add another if:
-    * not editing an existing item
-    * not referred from a review page (which has an ‘Add another…’ button)
-  #}
-  {% if action != "edit" and not referrer %}
-    {{ govukRadios({
-      name: "next",
-      fieldset: {
-        legend: {
-          text: "Do you want to add another qualification?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      items: [{
-        value: "add",
-        text: "Yes"
-      }, {
-        value: "review",
-        text: "No"
-      }]
-    }) }}
-  {% endif %}
-
   {{ govukButton({
     text: "Continue"
   }) }}

@@ -37,79 +37,12 @@ function createNewApplication (req) {
   return code
 }
 
-function createDummyApplication (status, decisions) {
-  return {
-    application: {
-      status: status,
-      choices: {
-        ABCDE: {
-          courseCode: '3DMD',
-          providerCode: 'G50',
-          locationName: 'School name',
-          locationAddress: 'Road, City, SW1 1AA',
-          status: (decisions) ? decisions[0] : false
-        },
-        ZYXWV: {
-          courseCode: 'Q3X1',
-          providerCode: 'B78',
-          locationName: 'Academy name',
-          locationAddress: 'Road, City, SW2 1AA',
-          status: (decisions) ? decisions[1] : false
-        }
-      }
-    }
-  }
-}
-
 /**
  * Application routes
  */
 module.exports = router => {
-  router.all('/applications', (req, res) => {
-    const { state } = req.query
-    const phase = req.query.phase || req.session.data.phase
-
-    // Mock different application states if we ask for a state
-    let applications
-    switch (state) {
-      case 'submitted': {
-        applications = createDummyApplication('submitted')
-        break
-      }
-
-      case 'pending-decisions': {
-        applications = createDummyApplication('submitted', ['Awaiting decision', 'Awaiting decision'])
-        break
-      }
-
-      case 'outstanding-decision': {
-        applications = createDummyApplication('submitted', ['Offer received', 'Awaiting decision'])
-        break
-      }
-
-      case 'has-decisions': {
-        applications = createDummyApplication('submitted', ['Offer received', 'Unsuccessful'])
-        break
-      }
-
-      case 'has-accepted': {
-        applications = createDummyApplication('submitted', ['Offer accepted', 'Unsuccessful'])
-        break
-      }
-    }
-
-    if (phase && state) {
-      // Populate session data with stateful application
-      req.session.data.applications = applications
-      res.render('applications/index', {
-        phase,
-        state
-      })
-    } else if (utils.hasSubmittedApplications(req)) {
-      res.render('applications/index', {
-        phase
-      })
-    } else if (utils.hasStartedApplications(req)) {
+  router.all('/application', (req, res) => {
+    if (utils.hasStartedApplications(req)) {
       res.redirect('/application/started')
     } else {
       res.redirect('/application/start')
@@ -136,7 +69,7 @@ module.exports = router => {
   })
 
   router.all('/application/started', (req, res) => {
-    const applications = req.session.data.applications
+    const { applications } = req.session.data
     const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
     if (applicationId) {
       res.redirect('/application/' + applicationId)
@@ -146,10 +79,25 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
+    const thisApplication = utils.applicationData(req)
+    const prevApplication = req.session.data.applications['12345']
+    let { choices } = prevApplication
+
+    // Choices from previous application
+    // Only shown when applying again
+    if (thisApplication.apply2) {
+      choices = utils.toArray(choices)
+      choices[0].hasFeedback = true
+      choices[0].status = 'Unsuccessful'
+      choices[1].hasFeedback = true
+      choices[1].status = 'Unsuccessful'
+      choices[2].status = 'Offer declined'
+    }
 
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,
+      choices,
       closed: req.query.closed
     })
   })
@@ -162,9 +110,9 @@ module.exports = router => {
   // Generate apply2 application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = 12346
-    const data = req.session.data
+    const { applications } = req.session.data
     const existingApplicationId = req.params.applicationId
-    const existingApplication = data.applications[existingApplicationId]
+    const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
     apply2Application.welcomeFlow = false
@@ -181,26 +129,16 @@ module.exports = router => {
       apply2Application.references[1].status = 'Received'
     }
 
-    data.applications[code] = apply2Application
+    applications[code] = apply2Application
 
     res.redirect(`/application/${code}/before-you-start?copied=true`)
   })
 
-  // Render previous applications
-  router.all('/applications/:applicationId/previous', (req, res) => {
-    const { applicationId } = req.params
-
-    res.render('applications/previous', {
-      applicationId
-    })
-  })
-
   // Render submitted page
   router.all('/application/:applicationId/submitted', (req, res) => {
-    const { phase, referrer } = req.query
+    const { referrer } = req.query
 
     res.render('application/submitted', {
-      phase,
       referrer
     })
   })
@@ -224,6 +162,7 @@ module.exports = router => {
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
+  require('./application/dashboard')(router)
   require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found

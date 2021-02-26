@@ -4,8 +4,12 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
-const NotifyClient = require('notifications-node-client').NotifyClient
-const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+
+if (process.env.NOTIFYAPIKEY) {
+  const NotifyClient = require('notifications-node-client').NotifyClient
+  const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+}
+
 const providers = require('./../data/providers')
 
 const applicationData = (req) => {
@@ -33,7 +37,7 @@ const getCourse = (providerCode, courseCode) => {
   return providers[providerCode].courses[courseCode]
 }
 
-const saveIsoDate = (req, data, id) => {
+const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
   // If no ID, we won’t have any dates to convert
   if (!id) {
     return
@@ -53,7 +57,10 @@ const saveIsoDate = (req, data, id) => {
   const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
   const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
   const endYear = req.body[`${id}-end-date-year`]
-  data[id]['end-date'] = 'now' // No date indicates today
+
+  if (blankEqualsNow) {
+    data[id]['end-date'] = 'now' // No date indicates today
+  }
 
   if (endMonth && endYear) {
     data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
@@ -66,7 +73,7 @@ const sendEmail = (req, template, personalisation) => {
   personalisation = personalisation || {}
   personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
 
-  if (email) {
+  if (email && (typeof notify !== 'undefined')) {
     notify.sendEmail(
       template,
       email,
@@ -84,11 +91,12 @@ const nowPlusDays = (days, format = 'yyyy-LL-dd') => {
 }
 
 const hasApplications = (req) => {
-  return Object.values(req.session.data.applications).length > 0
+  const { applications } = req.session.data
+  return Object.values(applications).length > 0
 }
 
 const hasSubmittedApplications = (req) => {
-  const applications = req.session.data.applications
+  const { applications } = req.session.data
   const states = ['Submitted', 'Amending', 'Amended']
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
@@ -97,7 +105,7 @@ const hasSubmittedApplications = (req) => {
 }
 
 const hasStartedApplications = (req) => {
-  const applications = req.session.data.applications
+  const { applications } = req.session.data
   if (applications) {
     const status = Object.values(applications).map(a => a.status)
     return status.includes('started')
@@ -113,7 +121,8 @@ const hasCompletedSection = key => {
 }
 
 const hasCompletedApplication = req => {
-  const application = req.session.data.applications[req.params.applicationId]
+  const application = applicationData(req)
+
   if (
     module.exports.hasCompletedSection(application.choices) &&
     module.exports.hasCompletedSection(application.references) &&
@@ -137,8 +146,10 @@ const hasCompletedApplication = req => {
 }
 
 const hasPrimaryChoices = (req) => {
+  const application = applicationData(req)
+
   try {
-    const choices = req.session.data.applications[req.params.applicationId].choices
+    const { choices } = application
 
     const result = Object.values(choices).map((a) => {
       const providerCode = a.providerCode

@@ -20,33 +20,14 @@
 {% set hasSecondary = true %}
 
 {% block beforePageTitle %}
-  {% if showCopiedBanner %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">We’ve copied your application. Please review all sections.</h2>",
-      type: "success",
-      icon: false
-    }) }}
-  {% endif %}
+  {{ govukNotificationBanner({
+    text: "We’ve copied your application. Please review all sections.",
+    type: "success"
+  }) if showCopiedBanner }}
 
-  {% if closed %}
-    {{ appBanner({
-      html: "<h2 class=\"govuk-heading-m\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body-l\">Submit your application from 13 October for courses starting in 2021.</p>",
-      icon: false
-    }) }}
-  {% endif %}
-{% endblock %}
-
-{% block pageNavigation %}
-  {% if hasSubmittedApplications() %}
-    {{ govukBreadcrumbs({
-      items: [{
-        text: "Application dashboard",
-        href: "/applications"
-      }, {
-        text: title | safe
-      }]
-    }) }}
-  {% endif %}
+  {{ govukNotificationBanner({
+    html: "<h2 class=\"govuk-notification-banner__heading\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body\">Submit your application from 13 October for courses starting in 2021.</p>"
+  }) if closed }}
 {% endblock %}
 
 {% block beforePrimary %}
@@ -55,10 +36,13 @@
 {% endblock %}
 
 {% block primary %}
-  {# PREVIOUS APPLICATIONS #}
   {% if applicationValue(["apply2"]) %}
     {% set previousApplicationSummaryHtml %}
-      {% include "_includes/previous-application-summary.njk" %}
+      {% set choices = choices | selectattr("hasFeedback") %}
+      {% set showChoiceDetails = false %}
+      {% set showChoiceFeedback = true %}
+      {% set showChoiceStatus = true %}
+      {% include "_includes/review/choices.njk" %}
     {% endset %}
     {{ govukDetails({
       summaryText: "See feedback from your previous application",
@@ -78,31 +62,14 @@
       {% endif %}
     {% endif %}
 
-    {% if applicationValue(["apply2"]) | length  %}
-      {% if applicationValue(["choices"]) | length > 1 %}
-        {% set choiceTagText = tagText %}
-        {% set choiceTagClass = tagClass %}
-      {% else %}
-        {% set choiceTagText = notStartedTagText%}
-        {% set choiceTagClass = notStartedTagClass %}
-      {% endif %}
-    {% else %}
-      {% if applicationValue(["choices"]) | length > 1 %}
-        {% set choiceTagText = tagText %}
-      {% else %}
-        {% set choiceTagText = incompleteTagText %}
-        {% set choiceTagClass = incompleteTagClass %}
-      {% endif %}
-    {% endif %}
-
     {{ appTaskList({
       items: [{
         text: "Choose your course" if applicationValue(["apply2"]) else "Choose your courses",
         href: applicationPath + "/choices",
         id: "personal-details",
         tag: {
-          classes: choiceTagClass,
-          text: choiceTagText
+          classes: tagClass if applicationValue(["completed", "choices"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "choices"]) else incompleteTagText
         }
       }]
     }) if not closed }}
@@ -203,7 +170,7 @@
         id: "english-language",
         tag: {
           classes: tagClass if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "english-language"]) |length > 0 else incompleteTagText
+          text: tagText if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagText
         }
       } if international, {
         text: "Maths GCSE or equivalent",
@@ -227,24 +194,34 @@
         id: "other-qualifications",
         tag: {
           classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "other-qualifications"]) |length > 0 else incompleteTagText
+          text: tagText if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}
   </section>
 
-  <section class="govuk-!-margin-bottom-8">
+<section class="govuk-!-margin-bottom-8">
+
+
+    {% if applicationValue("work-history-decision") %}
+      {% set workHistoryPath = applicationPath + "/work-history/review" %}
+    {% else %}
+      {% set workHistoryPath = applicationPath + "/work-history" %}
+    {% endif %}
+
+
     <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
     {{ appTaskList({
       items: [{
         text: "Work history",
-        href: applicationPath + "/work-history",
+        href: workHistoryPath,
         id: "work-history",
         tag: {
           classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,
           text: tagText if applicationValue(["completed", "work-history"]) else incompleteTagText
         }
-      }, {
+      },
+      {
         text: "Unpaid experience",
         href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience") | length > 0),
         id: "school-experience",
@@ -265,7 +242,7 @@
         id: "personal-statement",
         tag: {
           classes: tagClass if applicationValue(["completed", "personal-statement"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "personal-statement"]) |length > 0 else incompleteTagText
+          text: tagText if applicationValue(["completed", "personal-statement"]) | length > 0 else incompleteTagText
         }
       }, {
         text: "Your suitability to teach a subject or age group",
@@ -273,7 +250,7 @@
         id: "subject-knowledge",
         tag: {
           classes: tagClass if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "subject-knowledge"]) |length > 0 else incompleteTagText
+          text: tagText if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}
@@ -296,7 +273,7 @@
         id: "interview",
         tag: {
           classes: tagClass if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "interview"]) |length > 0 else incompleteTagText
+          text: tagText if applicationValue(["completed", "interview"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}
@@ -305,7 +282,8 @@
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
     {{ appTaskList({
-      items: [{
+      items: [
+      {
         text: "Declare any safeguarding issues",
         href: applicationPath + "/suitability" + ("/review" if applicationValue("suitability") | length > 0),
         id: "suitability",
@@ -329,5 +307,5 @@
 {% endblock %}
 
 {% block secondary %}
-  {% include "_includes/need-help.njk" %}
+  {% include "_includes/get-support.njk" %}
 {% endblock %}

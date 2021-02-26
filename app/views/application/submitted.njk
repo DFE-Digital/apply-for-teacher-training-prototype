@@ -15,7 +15,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/applications" + ("?phase=" + phase if phase),
+      href: "/dashboard",
       text: "Back to application dashboard"
     }) }}
   {% endif %}
@@ -34,7 +34,7 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
   {% endif %}
     {% set choices = applicationValue(["choices"]) | toArray %}
-    {% set showChoiceStatus = false %}
+    {% set showChoiceStatus = true %}
     {% set showIncomplete = true %}
     {% include "_includes/review/choices.njk" %}
   </section>

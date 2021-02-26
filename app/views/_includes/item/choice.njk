@@ -1,17 +1,90 @@
-{% set status = item.status or application.status or "Submitted" %}
+{% set status = item.status or application.status %}
+{% set startDate = item.starts | date("MMMM yyyy") %}
+
 {% set statusHtml %}
   {{ govukTag({
     classes: "app-tag " + status | statusClass,
     text: status | capitalize
   }) }}
+  {% if status == "Offer deferred" %}
+    <p class="govuk-body govuk-body govuk-!-margin-top-2">Your training will now start in September 2021.</p>
+  {% elif status == "Offer received" or status == "Offer accepted" or status == "Conditions met" %}
+    {{ govukDetails({
+      classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
+      summaryText: "What to do if you’re unable to start training in " + startDate,
+      html: "<p>Some providers allow you to defer your offer. This means that you could start your course a year later.</p>
+<p>Every provider is different, so it may or may not be possible to do this. Find out by contacting " + provider.name + ".</p>
+<p>Asking if it’s possible to defer will not affect your existing offer.</p>"
+    }) }}
+  {% endif %}
 {% endset %}
+
+{% macro interviewItem(interview) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ interview.date | date("d MMMM yyyy 'at' h:mma") }}</p>
+  <p class="govuk-body">
+    {{ interview.providerName }}<br>
+    {{ interview.address }}
+  </p>
+{% endmacro %}
+
+{% set interviewHtml %}
+  {% if item.interview | length > 1 %}
+    <ul class="govuk-list govuk-list--number">
+    {% for interview in item.interview %}
+      <li>
+        {{ interviewItem(interview) | safe }}
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    {{ interviewItem(item.interview[0]) | safe }}
+  {% endif %}
+{% endset %}
+
+{% set feedbackHtml %}
+
+  {% if item.feedback %}
+    {% if item.feedback.course_full %}
+      <h2 class="govuk-heading-s">Course was full</h2>
+      <p class="govuk-body">We're sorry to tell you the course you applied to was full</p>
+    {% endif %}
+    {% if item.feedback.rejected_by_default %}
+      <p class="govuk-body">Provider did not respond in time</p>
+    {% endif %}
+
+    {% if item.feedback.quality_of_application %}
+      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
+
+      {% if item.feedback.quality_of_application.subject_knowledge %}
+        <p class="govuk-body">Subject knowledge</p>
+        <p class="govuk-body">{{ item.feedback.quality_of_application.subject_knowledge }}</p>
+      {% endif %}
+
+    {% endif %}
+
+    {% if item.feedback.qualifications %}
+      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
+
+      {% if item.feedback.qualifications.degree_does_not_meet_requirements %}
+        <p class="govuk-body">Your degree does not meet the course requirements.</p>
+      {% endif %}
+    {% endif %}
+
+    {% if item.feedback.interested_in_future_applications %}
+      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Future applications</h4>
+      <p class="govuk-body">The provider would be interested in future applications from you.</p>
+    {% endif %}
+
+  {% endif  %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
       text: "Course"
     },
     value: {
-      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
+      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a>"
     },
     actions: {
       items: [{
@@ -37,33 +110,26 @@
     } if canAmend and not item.singleLocationCourse
   }, {
     key: {
-      text: "Full time or part time"
-    },
-    value: {
-      html: item.studyMode
-    } if item.studyMode
-  }, {
-    key: {
       text: "Type"
     },
     value: {
       html: item.type
     } if item.type
-  }, {
+  } if showChoiceDetails !== false, {
     key: {
       text: "Course length"
     },
     value: {
       html: item.length
     } if item.length
-  }, {
+  } if showChoiceDetails !== false, {
     key: {
       text: "Date course starts"
     },
     value: {
-      html: item.starts | date("MMMM yyyy")
+      html: startDate
     } if item.starts
-  }, {
+  } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
     key: {
       text: "Status"
     },
@@ -72,10 +138,17 @@
     }
   } if showChoiceStatus, {
     key: {
-      text: "Reason for rejection"
+      text: "Interviews" if item.interview | length > 1 else "Interview"
     },
     value: {
-      html: item.reason
+      html: interviewHtml
     }
-  } if item.reason]
+  } if item.interview, {
+    key: {
+      text: "Feedback"
+    },
+    value: {
+      html: feedbackHtml
+    }
+  } if showChoiceFeedback and item.status == "Unsuccessful" and item.hasFeedback]
 }) }}

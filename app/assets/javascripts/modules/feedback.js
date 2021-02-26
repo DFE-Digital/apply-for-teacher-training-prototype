@@ -64,7 +64,6 @@
         formContainer.prepend(closeButtonClone)
         formCloseToggle = formContainer.querySelector('.app-feedback__button--close')
         formCloseToggle.setAttribute('aria-controls', formId)
-        console.log('formCloseToggle', formCloseToggle)
 
         // Remove form from accessibility tree by default
         formContainer.hidden = true

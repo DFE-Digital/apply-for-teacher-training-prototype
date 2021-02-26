@@ -18,28 +18,10 @@
         href: applicationPath + "/" + item.id + "/withdraw",
         text: "Withdraw"
       } if canWithdraw, {
-        href: applicationPath + "/" + item.id + "/view?phase=" + phase,
+        href: applicationPath + "/" + item.id + "/view",
         text: "View and respond to offer"
       } if canRespond and not hasResponded]
     } if canAmend or canWithdraw or canRespond,
     html: courseHtml
   }) }}
 {% endfor %}
-
-{# govukSummaryList({
-  rows: [{
-    key: {
-      text: "Status"
-    },
-    value: {
-      html: application.status
-    }
-  }, {
-    key: {
-      text: "Choices"
-    },
-    value: {
-      html: application.choices | dump
-    }
-  }]
-}) #}

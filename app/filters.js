@@ -125,6 +125,11 @@ module.exports = (env) => {
     }
   }
 
+  filters.push = (array, item) => {
+    array.push(item)
+    return array
+  }
+
   /**
    * Get course information
    * @type {String} providerCode
@@ -154,7 +159,7 @@ module.exports = (env) => {
 
   filters.statusClass = (status, prefix = 'govuk-tag') => {
     switch (status) {
-      // Application phases
+      // Application statuses
       case 'Submitted':
         return `${prefix}--grey`
       case 'Awaiting decision':

@@ -1,0 +1,44 @@
+{% extends "_email.njk" %}
+{% set choices = applicationValue(["choices"]) | toArray %}
+
+{% set provider = providers[choices[0].providerCode] %}
+{% set course = provider.courses[choices[0].courseCode] %}
+
+{% set provider1 = providers[choices[1].providerCode] %}
+{% set course1 = provider1.courses[choices[1].courseCode] %}
+
+{% set provider2 = providers[choices[2].providerCode] %}
+{% set course2 = provider2.courses[choices[2].courseCode] %}
+
+{% set name = applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) %}
+
+{% set title = "Update on your application - decide what to do" %}
+
+{% block content %}
+  <p class="govuk-body">Dear {{ name }}</p>
+
+  <h2 class="govuk-heading-m">Update on your application</h2>
+  <p class="govuk-body">{{ provider.name }} has decided not to make you an offer to study {{ course.name_and_code }}.</p>
+  <p class="govuk-body">They’ve given feedback to explain this decision:</p>
+  <div class="govuk-inset-text">
+    <h2 class="govuk-heading-m">Quality of application</h2>
+    <p class="govuk-body">Your subject knowledge could be improved.</p>
+    <p class="govuk-body">Understand the purpose of primary education and then learn more about the procedures related to safeguarding.</p>
+    <h2 class="govuk-heading-m">Qualifications</h2>
+    <p class="govuk-body">Your degree does not meet the course requirements.</p>
+    <h2 class="govuk-heading-m">Future applications</h2>
+    <p class="govuk-body">The provider would not be interested in future applications from you.</p>
+  </div>
+  <p class="govuk-body">Contact {{ provider.name }} directly if you have any questions about their feedback.</p>
+
+  <h2 class="govuk-heading-m">You have an offer and are waiting for a decision about another course</h2>
+  <p class="govuk-body">You have an offer from {{ provider1.name }} to study {{ course1.name_and_code }}.</p>
+  <p class="govuk-body">{{ provider2.name }} has until {{ 56 | nowPlusDays("d MMMM yyyy") }} to make a decision about your application to study {{ course2.name_and_code }}.</p>
+  <p class="govuk-body">You can wait until you’ve received both decisions before you respond. Alternatively you can sign in to you account and accept the offer you’ve already got:</p>
+  <p class="govuk-body"><a href="/dashboard/{{ applicationId }}/awaiting-candidate-response">https://{{ serviceSlug }}.service.gov.uk/<wbr>candidate/<wbr>confirm_authentication?token=FPoZNtUaGsqPevCd5GV&amp;<wbr>u=elM2TVdzZnBzRUJ1LzdSMmlOYW10QT09LS1MLy8xcVdSUmlpVVNkdzNiTG11bTdRPT0%3D</a></p>
+
+  <h2 class="govuk-heading-m">Get support</h2>
+  <p class="govuk-body">If you need help getting a place on a course, contact Get Into Teaching (8:30am to 5pm Monday to Friday). Call for free on 0800 389 2500 or chat to an adviser online:</p>
+  <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/lp/live-chat">https://getintoteaching.education.gov.uk/lp/live-chat</a></p>
+  <p class="govuk-body">Contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a> if you have problems applying online or want to give feedback.</p>
+{% endblock %}

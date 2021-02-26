@@ -22,7 +22,6 @@ module.exports = router => {
         choices.ABCDE.interview = false
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = false
         break
       case 'future-interview':
         choices.ABCDE.status = 'Awaiting decision'
@@ -33,8 +32,6 @@ module.exports = router => {
         }]
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
-
-        application.endedWithoutSuccess = false
         break
       case 'post-interview':
         choices.ABCDE.status = 'Awaiting decision'
@@ -45,8 +42,6 @@ module.exports = router => {
         }]
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
-
-        application.endedWithoutSuccess = false
         break
       case 'offer-received':
         choices.ABCDE.status = 'Offer received'
@@ -61,7 +56,6 @@ module.exports = router => {
           "Return completed and signed Suitability Declaration.",
           "Return completed and signed Fee Status Declaration."
         ]
-        application.endedWithoutSuccess = false
         break
       case 'offer-received-different-course':
         choices.ABCDE.status = 'Offer received'
@@ -73,7 +67,6 @@ module.exports = router => {
           "Fitness to Teach check",
           "Disclosure and barring service check"
         ]
-        application.endedWithoutSuccess = false
         break
       case 'offer-received-different-provider':
         choices.ABCDE.status = 'Offer received'
@@ -86,7 +79,6 @@ module.exports = router => {
           "Fitness to Teach check",
           "Disclosure and barring service check"
         ]
-        application.endedWithoutSuccess = false
         break
 
       case 'unsuccessful-with-feedback':
@@ -105,7 +97,6 @@ module.exports = router => {
           interested_in_future_applications: true
         }
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = true
         break
       case 'unsuccessful-course-full':
         choices.ABCDE.status = 'Unsuccessful'
@@ -114,20 +105,17 @@ module.exports = router => {
           course_full: true
         }
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = true
         break
       case 'unsuccessful-provider-did-not-respond':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.hasFeedback = true
         choices.ABCDE.rejectedByDefault = true
         choices.ABCDE.feedback = null
-        application.endedWithoutSuccess = true
         break
       case 'withdrawn':
         choices.ABCDE.status = 'Application withdrawn'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
-        application.endedWithoutSuccess = true
         break
       case 'offer-withdrawn':
         choices.ABCDE.status = 'Offer withdrawn'
@@ -140,7 +128,6 @@ module.exports = router => {
           },
           interested_in_future_applications: true
         }
-        application.endedWithoutSuccess = true
         break
 
       case 'accepted':
@@ -155,12 +142,10 @@ module.exports = router => {
           "Return completed and signed Suitability Declaration.",
           "Return completed and signed Fee Status Declaration."
         ]
-        application.endedWithoutSuccess = false
         break
       case 'declined':
         choices.ABCDE.status = 'Offer declined'
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = true
         break
       case 'deferred':
         choices.ABCDE.status = 'Offer deferred'
@@ -173,12 +158,10 @@ module.exports = router => {
           "Return completed and signed Suitability Declaration.",
           "Return completed and signed Fee Status Declaration."
         ]
-        application.endedWithoutSuccess = false
         break
       case 'did-not-respond-to-offer':
         choices.ABCDE.status = 'Offer declined'
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = true
         break
       case 'conditions-not-met':
         choices.ABCDE.status = 'Conditions not met'
@@ -191,12 +174,10 @@ module.exports = router => {
           "Return completed and signed Suitability Declaration.",
           "Return completed and signed Fee Status Declaration."
         ]
-        application.endedWithoutSuccess = true
         break
       case 'recruited-single':
         choices.ABCDE.status = 'Conditions met'
         choices.ABCDE.rejectedByDefault = false
-        application.endedWithoutSuccess = false
         break
 
 
@@ -208,7 +189,6 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Awaiting decision'
         choices.ZYXWV.interview = false
-        application.endedWithoutSuccess = false
         break
 
       case 'interviewing':
@@ -231,7 +211,6 @@ module.exports = router => {
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
         choices.ZYXWV.status = 'Awaiting decision'
-        application.endedWithoutSuccess = false
 
         break
 
@@ -258,7 +237,6 @@ module.exports = router => {
           "Disclosure and barring service check"
         ]
 
-        application.endedWithoutSuccess = false
         break
 
       case 'awaiting-one-provider-decision-no-offers':
@@ -287,7 +265,6 @@ module.exports = router => {
           additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made.",
           interested_in_future_applications: false
         }
-        application.endedWithoutSuccess = false
         break
 
       case 'received-one-offer':
@@ -306,7 +283,6 @@ module.exports = router => {
           "Fitness to Teach check",
           "Disclosure and barring service check"
         ]
-        application.endedWithoutSuccess = false
         break
 
       case 'received-two-offers':
@@ -333,7 +309,6 @@ module.exports = router => {
           "Fitness to Teach check",
           "Disclosure and barring service check"
         ]
-        application.endedWithoutSuccess = false
         break
 
       case 'awaiting-candidate-response':
@@ -363,7 +338,6 @@ module.exports = router => {
           additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made.",
           interested_in_future_applications: false
         }
-        application.endedWithoutSuccess = true
         break
 
       case 'pending-conditions':
@@ -372,25 +346,21 @@ module.exports = router => {
           "Fitness to Teach check",
           "Disclosure and barring service check"
         ]
-        application.endedWithoutSuccess = false
+        application.choices = [choices.ABCDE]
         break
 
       case 'offer-deferred':
         choices.ZYXWV.status = 'Offer deferred'
         application.choices = [choices.ZYXWV]
-        application.endedWithoutSuccess = false
         break
 
       case 'recruited':
         choices.ZYXWV.status = 'Conditions met'
         application.choices = [choices.ZYXWV]
-        application.endedWithoutSuccess = false
         break
 
       case 'awaiting-apply-again-response':
         choices.ABCDE.status = 'Awaiting decision'
-        application.endedWithoutSuccess = false
-
         break
     }
 
@@ -402,13 +372,21 @@ module.exports = router => {
       return choice.status == "Awaiting decision"
     }).length
 
+    const courseOfferAccepted =
+    utils.toArray(application.choices).filter(function(choice) {
+      return (choice.status == "Offer accepted") || (choice.status == "Conditions met") || (choice.status == "Offer deferred")
+    }).length > 0
+
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision == 0)
+
+    const endedWithoutSuccess = (numberOfOffersReceived == 0 && numberOfChoicesAwaitingDecision == 0 && courseOfferAccepted == false)
 
     res.render('dashboard/index', {
       applicationId,
       application,
       canMakeDecision,
-      numberOfOffersReceived
+      numberOfOffersReceived,
+      endedWithoutSuccess
     })
   })
 }

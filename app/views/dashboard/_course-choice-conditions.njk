@@ -32,9 +32,6 @@
 {% endif %}
 
 {% if (item.status == "Offer received" or item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met") and  item.conditions %}
-
-  <h2 class="govuk-heading-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">Conditions of offer</h2>
-
   <ul class="govuk-list govuk-list--bullet">
     {% for condition in item.conditions %}
       <li>{{ condition }}</li>

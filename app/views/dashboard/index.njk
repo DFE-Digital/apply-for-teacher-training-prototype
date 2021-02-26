@@ -1,4 +1,4 @@
-{% extends "_content-wide.njk" %}
+{% extends "_content.njk" %}
 
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -14,11 +14,18 @@
 {% set hasSecondary = true %}
 {% set applicationPath = "/application/" + applicationId %}
 
+{% if applicationStatus %}
+  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
+{% else %}
+  {% set referrer = "/dashboard/" + applicationId %}
+{% endif %}
+
 {% block beforePrimary %}
   <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 {% endblock %}
 
 {% block primary %}
+  {% include "dashboard/_next_steps.njk" %}
 
   {% set respondToOfferHtml %}
     <h2 class="govuk-heading-m">
@@ -34,7 +41,7 @@
     <p class="govuk-body">Your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will be withdrawn if you do not respond in time.</p>
 
     {% set buttonText %}
-      Respond to  {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
+      Respond to {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
     {% endset %}
 
     {{ govukButton({
@@ -45,13 +52,12 @@
 
   {% if canMakeDecision == true %}
     {{ govukInsetText({
-      html: respondToOfferHtml,
-      classes: "app-inset-text--important govuk-!-margin-top-0"
+      classes: "govuk-!-margin-top-0",
+      html: respondToOfferHtml
     }) }}
   {% endif %}
 
   {% if application.endedWithoutSuccess == true %}
-
     {% set applyAgainHtml %}
       <h2 class="govuk-heading-m">
         {% if choices.length == 1 and choices[0].status == "Application withdrawn" %}
@@ -73,13 +79,14 @@
 
     {{ govukInsetText({
       html: applyAgainHtml,
-      classes: "govuk-!-margin-top-0 app-inset-text--important"
+      classes: "govuk-!-margin-top-0"
     }) }}
   {% endif %}
 
-  {% include "dashboard/_multiple_active_applications.njk" %}
+  {% include "dashboard/_course-choices.njk" %}
 
-  {% include "dashboard/_next_steps.njk" %}
-  {% include "dashboard/_previous_applications_summary.njk" %}
+  <h2 class="govuk-heading-m">Updating your contact details</h2>
+  <p class="govuk-body">You can update your contact details at any point during the application process. To do this, email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>
 
+  {% include "dashboard/_previous-applications.njk" %}
 {% endblock %}

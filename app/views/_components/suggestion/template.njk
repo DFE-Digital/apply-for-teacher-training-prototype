@@ -11,7 +11,7 @@
 
 {% set insetTextHtml %}
   {% if params.title %}
-    <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ params.title }}</h4>
+    <h4 class="govuk-heading-s">{{ params.title }}</h4>
   {% endif %}
   {% if params.content %}
     {{ params.content.html | safe if params.content.html else params.content.text }}
@@ -35,6 +35,6 @@
 
 {{ govukInsetText({
   id: params.id if params.id,
-  classes: "app-inset-text--error" if params.warning else "app-inset-text--important",
+  classes: ("app-inset-text--error" if params.warning else "app-inset-text--important") + " govuk-!-margin-top-0 govuk-!-width-two-thirds",
   html: insetTextHtml
 }) }}

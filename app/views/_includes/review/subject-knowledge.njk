@@ -1,6 +1,25 @@
-{% set complete = "true" if applicationValue(["completed", "subject-knowledge"]) %}
-
-{% if showIncomplete and complete != "true" %}
+{% if applicationValue(["completed", "subject-knowledge"]) %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Your knowledge about the subject you want to teach"
+        },
+        value: {
+          text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/subject-knowledge?referrer=" + referrer,
+            text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
+            visuallyHiddenText: "evidence of subject knowledge"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "subject-knowledge",
     title: "Subject knowledge not entered",
@@ -11,15 +30,5 @@
         href: applicationPath + "/subject-knowledge/review?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/subject-knowledge.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Your suitability to teach a subject or age group",
-    html: summaryBodyHtml
   }) }}
 {% endif %}

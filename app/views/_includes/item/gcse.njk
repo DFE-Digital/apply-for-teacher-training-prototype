@@ -1,4 +1,4 @@
-{% set applicationPath = "/application/" + applicationId %}
+{% set item = applicationValue(["gcse", id]) %}
 {% set missing = item.type == "I don’t have this qualification yet" %}
 {% set nonUK = item.type == "Non-UK qualification" %}
 

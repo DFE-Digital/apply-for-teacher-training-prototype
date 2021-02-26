@@ -4,7 +4,7 @@ module.exports = {
   apply2: false,
   ended_without_success: false,
   completed: {
-    '_personal-details': ['true'],
+    'personal-details': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],
     'school-experience': ['true'],
@@ -123,16 +123,17 @@ module.exports = {
     },
     nationality: ['Other'],
     'other-nationality-1': 'Indian',
-    residency: 'I will need to apply for permission to work or study in the UK'
+    residency: 'I have the right to work or study in the UK',
+    'residency-right-to-work': 'I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
     'phone-number': '07944 386555',
     'address-type': 'domestic',
     address: {
-      'postal-code': 'G1 3AH',
       line1: '5 Royal Exchange Square',
       level2: 'Glasgow',
-      country: 'United Kingdom'
+      country: 'United Kingdom',
+      'postal-code': 'G1 3AH'
     }
   },
   'reasonable-adjustments': {
@@ -179,7 +180,7 @@ module.exports = {
     'certificate-number': '02GB0674SOOM599A',
     year: '2015'
   },
-  '_other-qualifications': {
+  'other-qualifications': {
     ksufp: {
       id: 'ksufp',
       type: 'Non-UK qualification',

@@ -1,6 +1,53 @@
-{% set complete = "true" if applicationValue(["completed", "contact-details"]) %}
-
-{% if showIncomplete and complete != "true" %}
+{% if applicationValue(["completed", "contact-details"]) %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Phone number"
+        },
+        value: {
+          text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "phone number"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Email address"
+        },
+        value: {
+          text: data["account"]["email"] or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "email"
+          }]
+        } if canAmend
+      } if data.flags.self_amend_email_address, {
+        key: {
+          text: "Address"
+        },
+        value: {
+          html: applicationValue(["contact-details", "address"]) | formatAddress | nl2br | safe or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "address"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "contact-details",
     title: "Contact details not entered",
@@ -11,15 +58,5 @@
         href: applicationPath + "/contact-details/review?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/contact-details.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Contact information",
-    html: summaryBodyHtml
   }) }}
 {% endif %}

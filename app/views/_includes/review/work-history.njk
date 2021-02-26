@@ -1,7 +1,6 @@
-{% set workHistory = applicationValue(["work-history"]) %}
-{% set complete = "true" if applicationValue(["completed", "work-history"]) %}
-
-{% if showIncomplete and complete != "true" %}
+{% if applicationValue(["completed", "work-history"]) %}
+  {% include "_includes/item/work-history.njk" %}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "work-history",
     title: "Work history is not marked as completed",
@@ -12,15 +11,5 @@
         href: applicationPath + "/work-history?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/work-history.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Work history",
-    html: summaryBodyHtml
   }) }}
 {% endif %}

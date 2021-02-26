@@ -1,6 +1,74 @@
-{% set complete = "true" if applicationValue(["completed", "personal-details"]) %}
+{% if applicationValue(["completed", "personal-details"]) %}
+  {% set residencyText %}
+    <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
+    {% if applicationValue(["candidate", "residency-right-to-work"]) and applicationValue(["candidate", "residency"]) == "I have the right to work or study in the UK" %}
+      <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
+    {% endif %}
+  {% endset %}
 
-{% if showIncomplete and complete != "true" %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Name"
+        },
+        value: {
+          text: applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "name"
+          }]
+        } if applicationValue(["candidate", "given-name"]) or applicationValue(["candidate", "family-name"]) and canAmend
+      }, {
+        key: {
+          text: "Date of birth"
+        },
+        value: {
+          text: applicationValue(["candidate", "date-of-birth"]) | formatDate or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "date of birth"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Nationality"
+        },
+        value: {
+          html: applicationValue(["candidate"]) | formatNationalities or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-details/nationality?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "nationality"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Immigration status"
+        },
+        value: {
+          html: residencyText
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-details/residency?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "immigration status"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "residency"])]
+    })
+  }) }}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "candidate",
     title: "Personal details are not marked as completed",
@@ -11,15 +79,5 @@
         href: applicationPath + "/personal-details/review?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/personal-details.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Personal information",
-    html: summaryBodyHtml
   }) }}
 {% endif %}

@@ -1,6 +1,19 @@
-{% set complete = "true" if applicationValue(["completed", "school-experience"]) %}
+{% if applicationValue(["completed", "school-experience"]) %}
+  {{ appSuggestion({
+    title: "Get school experience",
+    content: {
+      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
+    },
+    actions: {
+      items: [{
+        text: "Learn more at Get school experience",
+        href: "https://schoolexperience.education.gov.uk"
+      }]
+    }
+  }) if applicationValue(["school-experience","attained"]) == "false" }}
 
-{% if showIncomplete and complete != "true" %}
+  {% include "_includes/item/school-experience.njk" %}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "school-experience",
     title: "Volunteering with children and young people is not marked as completed",
@@ -12,19 +25,4 @@
       }]
     }
   }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/school-experience.njk" %}
-  {% endset %}
-  {% if applicationValue(["school-experience","attained"]) == "false" %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: "Unpaid experience",
-      html: summaryBodyHtml
-    }) }}
-  {% else %}
-    <h3 class="govuk-heading-m">Unpaid experience</h3>
-    {{ summaryBodyHtml | safe }}
-  {% endif %}
 {% endif %}

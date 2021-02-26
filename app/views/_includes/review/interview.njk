@@ -1,6 +1,39 @@
-{% set complete = "true" if applicationValue(["completed", "interview"]) %}
-
-{% if showIncomplete and complete != "true" %}
+{% if applicationValue(["completed", "interview"]) %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you have any interview needs?"
+        },
+        value: {
+          text: applicationValue(["interview-choice"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/interview?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "interview needs"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "What are your interview needs?"
+        },
+        value: {
+          text: applicationValue(["interview"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/interview?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "interview needs"
+          }]
+        } if canAmend
+      } if applicationValue(["interview-choice"]) == "Yes"]
+    })
+  }) }}
+{% elif showIncomplete %}
   {{ appSuggestion({
     id: "interview",
     title: "Interview needs not entered",
@@ -11,15 +44,5 @@
         href: applicationPath + "/interview/review?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {% set summaryBodyHtml %}
-    {% include "_includes/item/interview.njk" %}
-  {% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "Interview needs",
-    html: summaryBodyHtml
   }) }}
 {% endif %}

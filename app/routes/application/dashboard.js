@@ -364,8 +364,17 @@ module.exports = router => {
         break
     }
 
+    // TODO: refactor these counts
     const numberOfOffersReceived = utils.toArray(application.choices).filter(function(choice) {
       return choice.status == "Offer received"
+    }).length
+
+    const numberOfOffersDeclined = utils.toArray(application.choices).filter(function(choice) {
+      return choice.status == "Offer declined"
+    }).length
+
+    const numberOfApplicationsWithdrawn = utils.toArray(application.choices).filter(function(choice) {
+      return choice.status == "Application withdrawn"
     }).length
 
     const numberOfChoicesAwaitingDecision = utils.toArray(application.choices).filter(function(choice) {
@@ -386,7 +395,10 @@ module.exports = router => {
       application,
       canMakeDecision,
       numberOfOffersReceived,
-      endedWithoutSuccess
+      numberOfOffersDeclined,
+      endedWithoutSuccess,
+      numberOfApplicationsWithdrawn,
+      numberOfChoicesAwaitingDecision
     })
   })
 }

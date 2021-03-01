@@ -25,62 +25,12 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "dashboard/_next_steps.njk" %}
-
-  {% set respondToOfferHtml %}
-    <h2 class="govuk-heading-m">
-    {% if numberOfOffersReceived > 1 %}
-      You have received {{ numberOfOffersReceived }} conditional offers
-    {% else %}
-      You have received a conditional offer
-    {% endif %}
-    </h2>
-    <p class="govuk-body">You have 14 days (until 4 March 2021) to accept or decline the
-    {{ "offers" if numberOfOffersReceived > 1 else "offer" }}.</p>
-
-    <p class="govuk-body">Your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will be withdrawn if you do not respond in time.</p>
-
-    {% set buttonText %}
-      Respond to {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
-    {% endset %}
-
-    {{ govukButton({
-      text: buttonText,
-      href: "/application/" + applicationId + "/respond"
-    }) }}
-  {% endset %}
-
   {% if canMakeDecision == true %}
-    {{ govukInsetText({
-      classes: "govuk-!-margin-top-0",
-      html: respondToOfferHtml
-    }) }}
-  {% endif %}
-
-  {% if endedWithoutSuccess == true %}
-    {% set applyAgainHtml %}
-      <h2 class="govuk-heading-m">
-        {% if choices.length == 1 and choices[0].status == "Application withdrawn" %}
-          You withdrew your application
-        {% elseif choices.length == 1 and choices[0].status == "Offer declined" %}
-          You declined an offer
-        {% else %}
-          You did not get a place on a course this time
-        {% endif %}
-      </h2>
-
-      <p class="govuk-body">You can still apply for a course starting this academic year.</p>
-
-      {{ govukButton({
-        text: "Apply again",
-        href: "/application/" + applicationId + "/apply-again"
-      }) }}
-    {% endset %}
-
-    {{ govukInsetText({
-      html: applyAgainHtml,
-      classes: "govuk-!-margin-top-0"
-    }) }}
+    {% include "dashboard/_respond-to-offer.njk" %}
+  {% elif endedWithoutSuccess == true %}
+    {% include "dashboard/_apply-again.njk" %}
+  {% else %}
+    {% include "dashboard/_guidance.njk" %}
   {% endif %}
 
   {% include "dashboard/_course-choices.njk" %}

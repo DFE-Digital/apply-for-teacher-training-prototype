@@ -131,7 +131,7 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    res.redirect(`/application/${code}/before-you-start?copied=true`)
+    res.redirect(`/application/${code}?copied=true`)
   })
 
   // Render course-specific submitted page

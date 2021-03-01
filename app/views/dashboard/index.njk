@@ -1,8 +1,5 @@
 {% extends "_content.njk" %}
 
-{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
-{% from "govuk/components/button/macro.njk" import govukButton %}
-
 {% set choices = application.choices | toArray %}
 
 {% if choices | length > 1  %}

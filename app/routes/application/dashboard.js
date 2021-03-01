@@ -4,6 +4,7 @@ module.exports = router => {
   router.get('/dashboard/:applicationId/:applicationStatus?', (req, res) => {
 
     const { applicationId, applicationStatus } = req.params
+    const { confirmation } = req.query
 
     if (applicationStatus) {
       // clear data and reset it from file
@@ -398,7 +399,8 @@ module.exports = router => {
       numberOfOffersDeclined,
       endedWithoutSuccess,
       numberOfApplicationsWithdrawn,
-      numberOfChoicesAwaitingDecision
+      numberOfChoicesAwaitingDecision,
+      confirmation
     })
   })
 }

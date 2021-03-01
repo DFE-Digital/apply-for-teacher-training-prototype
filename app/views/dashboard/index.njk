@@ -21,10 +21,14 @@
 {% endif %}
 
 {% block beforePrimary %}
+{% if confirmation == "true" %}
+{% include "dashboard/_confirmation_banner.njk" %}
+{% endif %}
   <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 {% endblock %}
 
 {% block primary %}
+
   {% if canMakeDecision == true %}
     {% include "dashboard/_respond-to-offer.njk" %}
   {% elif endedWithoutSuccess == true %}

@@ -68,7 +68,8 @@ module.exports = router => {
       choiceList: choices.join('\n'),
       amendDate: utils.nowPlusDays(7, 'd MMMM yyyy')
     })
-    res.redirect(`/application/${applicationId}/confirmation`)
+
+    res.redirect(`/dashboard/${applicationId}?confirmation=true`)
   })
 
   // Decision: Unsuccessful/Offer received

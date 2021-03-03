@@ -83,7 +83,6 @@ module.exports = router => {
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,
-      choices,
       closed: req.query.closed
     })
   })

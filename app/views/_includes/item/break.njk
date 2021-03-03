@@ -1,5 +1,3 @@
-{% set applicationPath = "/application/" + applicationId %}
-
 {% set datesText %}
   {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}

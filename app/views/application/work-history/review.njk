@@ -23,12 +23,9 @@
 {% endblock %}
 
 {% block primary %}
-
-{% if workHistoryDecision == "yes" %}
-
-  <div class="govuk-!-width-two-thirds">
+  {% if workHistoryDecision == "yes" %}
+    <div class="govuk-!-width-two-thirds">
       <p class="govuk-body">Enter all the jobs you've had since you left school.</p>
-
       <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness.</p>
     </div>
 
@@ -39,32 +36,27 @@
       text: buttonText,
       href: "/application/" + applicationId + "/work-history/" + newId,
       classes: buttonClasses
-      }) }}
-
+    }) }}
 
     {% if history.length >= 1 %}
       {% include "_includes/review/work-history.njk" %}
     {% endif %}
+  {% else %}
+    {% include "_includes/review/work-history.njk" %}
+  {% endif %}
 
-{% else %}
-  {% include "_includes/review/work-history.njk" %}
-{% endif %}
+  {% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
+    <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+      {{ govukCheckboxes({
+        items: [{
+          value: "true",
+          text: "I have completed this section"
+        }]
+      } | decorateApplicationAttributes(["completed", "work-history"])) }}
 
-{% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
-
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
-    {{ govukCheckboxes({
-      items: [{
-        value: "true",
-        text: "I have completed this section"
-      }]
-    } | decorateApplicationAttributes(["completed", "work-history"])) }}
-
-    {{ govukButton({
-      text: "Save and continue"
-    }) }}
-  </form>
-
-{% endif %}
-
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+  {% endif %}
 {% endblock %}

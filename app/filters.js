@@ -4,6 +4,7 @@ const marked = require('marked')
 const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
 const degree = require('./data/degree')()
+const utils = require('./utils')
 
 module.exports = (env) => {
   /**
@@ -13,6 +14,59 @@ module.exports = (env) => {
    * @type {Object}
    */
   const filters = {}
+
+  /**
+   * Remove empty values from address object and break into new lines
+   *
+   * @type {object} object
+   */
+  filters.formatAddress = object => {
+    if (object) {
+      const array = filters.toArray(object)
+      return array.filter(value => value !== '').join('\n')
+    }
+  }
+
+  /**
+   * Format numeric date into a human readable format
+   *
+   * @type {object} object
+   */
+  filters.formatDate = object => {
+    if (object) {
+      const date = `${object.year}-${object.month}-${object.day}`
+
+      return filters.date(date, 'd MMMM yyyy')
+    }
+  }
+
+  /**
+   * Format list of nationalities to remove ‘Other’
+   *
+   * @type {object} object
+   */
+  filters.formatNationalities = object => {
+    if (object) {
+      const nationalities = object.nationality
+      if (object['other-nationality-1']) { nationalities.push(object['other-nationality-1']) }
+      if (object['other-nationality-2']) { nationalities.push(object['other-nationality-2']) }
+      if (object['other-nationality-3']) { nationalities.push(object['other-nationality-3']) }
+
+      const nationalityList = nationalities.filter(value => value !== 'Other')
+
+      return filters.formatList(nationalityList)
+    }
+  }
+
+  /**
+   * Convert array to readable list format
+   * @param {Array} array Array to convert
+   * @example [A, B, C] => A, B anc C
+   */
+  filters.formatList = (array = []) => {
+    const lf = new Intl.ListFormat('en')
+    return lf.format(array)
+  }
 
   /**
    * Convert str to date
@@ -137,6 +191,10 @@ module.exports = (env) => {
    */
   filters.getCourse = (providerCode, courseCode) => {
     return providers[providerCode].courses[courseCode]
+  }
+
+  filters.getProvider = (providerCode) => {
+    return utils.getProvider(providerCode)
   }
 
   filters.providerCode = (providerAndCode) => {

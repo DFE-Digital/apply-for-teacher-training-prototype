@@ -1,0 +1,47 @@
+{% set schoolExperience = applicationValue(["school-experience"]) %}
+{% set roles = schoolExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
+
+{% set summaryCardHtml %}
+  {% if roles.length >= 1 %}
+    {% for item in roles %}
+      {% set roleHtml %}
+        {% include "_includes/item/role.njk" %}
+      {% endset %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleHtml: item.role,
+        actions: {
+          items: [{
+            href: applicationPath + "/school-experience/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete role"
+          }]
+        } if canAmend,
+        html: roleHtml
+      }) }}
+    {% endfor %}
+  {% elif applicationValue(["school-experience","attained"]) == "false" %}
+    {{ govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you have any unpaid experience?"
+        },
+        value: {
+          text: "Yes" if applicationValue(["school-experience", "attained"]) == 'true' else 'No'
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/school-experience?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you have any unpaid experience"
+          }]
+        } if canAmend
+      }]
+    }) }}
+  {% endif %}
+{% endset %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  html: summaryCardHtml
+}) }}

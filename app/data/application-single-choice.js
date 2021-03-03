@@ -9,6 +9,8 @@ module.exports = {
   account: {
     email: 'janina.doe@example.com'
   },
-  choices: {'ABCDE': application.choices['ABCDE']},
+  choices: {
+    ABCDE: application.choices.ABCDE
+  },
   references: []
 }

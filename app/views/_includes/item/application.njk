@@ -2,9 +2,7 @@
 {% for item in choices %}
   {% set provider = providers[item.providerCode] %}
   {% set course = provider.courses[item.courseCode] %}
-  {% set courseHtml %}
-    {% include "_includes/item/choice.njk" %}
-  {% endset %}
+  {% set courseHtml %}{% include "_includes/item/choice.njk" %}{% endset %}
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",

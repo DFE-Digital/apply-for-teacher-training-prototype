@@ -6,7 +6,7 @@
   or type | replace("qualification", "") | replace("Other UK", "UK") | replace("Non", "non")
 %}
 {% set international = type == "Non-UK qualification" %}
-{% set parent = "Academic and other relevant qualifications" %}
+{% set parent = "Other qualifications" %}
 {% set action = "edit" if applicationValue(["other-qualifications", id, "subject"]) else "add" %}
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 {% set allowsFeedback = true %}
@@ -42,13 +42,6 @@
     } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
   {% endif %}
 
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
-
   {% if international %}
     {{ appAutocomplete({
       label: {
@@ -59,32 +52,24 @@
     } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
   {% endif %}
 
-  {# Suggest grades if GCSE, AS level, A level or vocational qualification #}
-  {% if type == "GCSE"
-    or type == "AS level"
-    or type == "A level"
-    or type == "BTEC"
-    or type == "NVQ"
-    or type == "VRQ"
-  %}
-    <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-grade">Grade</label>
-      <div id="grade-autocomplete-container" class="govuk-input--width-10"></div>
-    </div>
-  {% else %}
-    {{ govukInput({
-      label: {
-        text: "Grade" + (" (optional)" if international),
-        classes: "govuk-label--m"
-      },
-      classes: "govuk-input--width-10"
-    } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
-  {% endif %}
+  {{ govukInput({
+    label: {
+      text: "Grade" + (" (optional)" if international),
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, ‘C’, ‘CD’, ‘4’ or ‘4-3’"
+    } if type == "GCSE",
+    classes: "govuk-input--width-" + ("4" if type == "GCSE" or type == "AS level" or type == "A level" else "10")
+  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
 
   {{ govukInput({
     label: {
       text: "Year qualification was awarded",
       classes: "govuk-label--m"
+    },
+    hint: {
+      text: "For example, 1998"
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
@@ -95,7 +80,6 @@
     * feature flag enabled
   #}
   {% if action != "edit" and not referrer %}
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
     {{ govukRadios({
       name: "next",
       fieldset: {
@@ -130,13 +114,10 @@
   %}
     {% if type == "GCSE" %}
       {% set subjectData = gcse.subjects %}
-      {% set gradeData = gcse.grades %}
     {% elif type == "AS level" %}
       {% set subjectData = asLevel.subjects %}
-      {% set gradeData = asLevel.grades %}
     {% elif type == "A level" %}
       {% set subjectData = aLevel.subjects %}
-      {% set gradeData = aLevel.grades %}
     {% endif %}
 
     <script src="/public/javascripts/autocomplete.min.js"></script>
@@ -153,43 +134,7 @@
           {% for item in subjectData %}"{{ item }}",{% endfor %}
         ]
       })
-
-      accessibleAutocomplete({
-        element: document.querySelector('#grade-autocomplete-container'),
-        id: 'other-qualifications-{{ id }}-grade',
-        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][grade]",
-        defaultValue: '{{ applicationValue(["other-qualifications", id, "grade"]) }}',
-        minLength: 1,
-        placeholder: false,
-        source: [
-          {% for item in gradeData %}"{{ item }}",{% endfor %}
-        ]
-      })
     </script>
-  {% elif type == "BTEC"
-    or type == "NVQ"
-    or type == "VRQ"
-  %}
-    {% set gradeData = [
-      'Distinction',
-      'Merit',
-      'Pass',
-      'Unclassified',
-      'Not applicable'
-    ] %}
-    <script src="/public/javascripts/autocomplete.min.js"></script>
-    <script>
-      accessibleAutocomplete({
-        element: document.querySelector('#grade-autocomplete-container'),
-        id: 'other-qualifications-{{ id }}-grade',
-        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][grade]",
-        defaultValue: '{{ applicationValue(["other-qualifications", id, "grade"]) }}',
-        minLength: 1,
-        placeholder: false,
-        source: [
-          {% for item in gradeData %}"{{ item }}",{% endfor %}
-        ]
-      })
   {% elif international %}
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>

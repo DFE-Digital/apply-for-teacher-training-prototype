@@ -1,94 +1,62 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set addressHtml -%}
-  {%- if contactDetails.address -%}
-    {%- if contactDetails["address-type"] == "international" -%}
-      {{ contactDetails.address["street-address"] }}
-      {{ contactDetails.address.country }}
-    {%- else -%}
-      {%- if contactDetails.address.line1 -%}
-        {{ contactDetails.address.line1 }}<br>
-      {%- endif -%}
-      {%- if contactDetails.address.line2 -%}
-        {{ contactDetails.address.line2 }}<br>
-      {%- endif -%}
-      {%- if contactDetails.address.level2 -%}
-        {{ contactDetails.address.level2 }}<br>
-      {%- endif -%}
-      {%- if contactDetails.address.level1 -%}
-        {{ contactDetails.address.level1 }}<br>
-      {%- endif -%}
-      {%- if contactDetails.address["postal-code"] -%}
-        {{ contactDetails.address["postal-code"] }}<br>
-      {%- endif -%}
-      {%- if contactDetails.address.country -%}
-        {{ contactDetails.address.country }}
-      {%- endif -%}
-    {%- endif -%}
-  {%- else -%}
-    Not entered
-  {%- endif %}
-{%- endset %}
-
-{% set contactDetailsHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Phone number"
-      },
-      value: {
-        text: contactDetails["phone-number"] or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/contact-details?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "phone number"
-        }]
-      } if canAmend
-    }, {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: data["account"]["email"] or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/contact-details?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "email"
-        }]
-      } if canAmend
-    } if data.flags.self_amend_email_address, {
-      key: {
-        text: "Address"
-      },
-      value: {
-        html: addressHtml | nl2br | safe
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "address"
-        }]
-      } if canAmend
-    }]
-  }) }}
-{% endset %}
-
-{% set complete = "true" if applicationValue(["completed", "contact-details"]) %}
-
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "contact-details" %}
-  {% set incompleteText = "Contact details not entered" %}
-  {% set incompleteLink = "/contact-details/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your contact details" %}
-  {% include "_includes/review/incomplete.njk" %}
-{% else %}
+{% if applicationValue(["completed", "contact-details"]) %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: contactDetailsHtml
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Phone number"
+        },
+        value: {
+          text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "phone number"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Email address"
+        },
+        value: {
+          text: data["account"]["email"] or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "email"
+          }]
+        } if canAmend
+      } if data.flags.self_amend_email_address, {
+        key: {
+          text: "Address"
+        },
+        value: {
+          html: applicationValue(["contact-details", "address"]) | formatAddress | nl2br | safe or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "address"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% elif showIncomplete %}
+  {{ appSuggestion({
+    id: "contact-details",
+    title: "Contact details not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your contact details",
+        href: applicationPath + "/contact-details/review?referrer=" + referrer
+      }]
+    }
   }) }}
 {% endif %}

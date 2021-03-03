@@ -1,36 +1,34 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set subjectKnowledgeHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Your knowledge about the subject you want to teach"
-      },
-      value: {
-        text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/subject-knowledge?referrer=" + referrer,
-          text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
-          visuallyHiddenText: "evidence of subject knowledge"
-        }]
-      } if canAmend
-    }]
-  }) }}
-{% endset %}
-
-{% set complete = "true" if applicationValue(["completed", "subject-knowledge"]) %}
-
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "subject-knowledge" %}
-  {% set incompleteText = "Subject knowledge not entered" %}
-  {% set incompleteLink = "/subject-knowledge/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "What you know about the subject you want to teach?" %}
-  {% include "_includes/review/incomplete.njk" %}
-{% else %}
+{% if applicationValue(["completed", "subject-knowledge"]) %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: subjectKnowledgeHtml
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Your knowledge about the subject you want to teach"
+        },
+        value: {
+          text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/subject-knowledge?referrer=" + referrer,
+            text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
+            visuallyHiddenText: "evidence of subject knowledge"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% elif showIncomplete %}
+  {{ appSuggestion({
+    id: "subject-knowledge",
+    title: "Subject knowledge not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "What you know about the subject you want to teach?",
+        href: applicationPath + "/subject-knowledge/review?referrer=" + referrer
+      }]
+    }
   }) }}
 {% endif %}

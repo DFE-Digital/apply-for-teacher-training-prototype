@@ -2,13 +2,15 @@ const application = require('./application')
 const applicationApplyAgain = require('./application-apply-again')
 const applicationWithChoices = require('./application-with-choices')
 const applicationWithSingleChoice = require('./application-single-choice')
+const applicationInternational = require('./application-international')
 
 module.exports = {
   applications: {
     12345: application,
     12346: applicationApplyAgain,
-    'ABCDE': applicationWithChoices,
-    45678: applicationWithSingleChoice
+    ABCDE: applicationWithChoices,
+    45678: applicationWithSingleChoice,
+    GLOBE: applicationInternational
   },
   find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
   flags: {

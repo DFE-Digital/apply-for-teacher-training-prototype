@@ -1,13 +1,11 @@
-{% set applicationPath = "/application/" + applicationId %}
 {% set country = " " + item.country if item.country else "" %}
-{% set type = item["type-uk"] or item["type-non-uk"] or item.type or "Not entered" %}
 {{ govukSummaryList({
   rows: [{
     key: {
       text: "Type of qualification"
     },
     value: {
-      text: type
+      text: item["type-uk"] or item["type-non-uk"] or item.type or "Not entered"
     },
     actions: {
       items: [{

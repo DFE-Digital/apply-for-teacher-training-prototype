@@ -1,0 +1,54 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% if data.previousApplications | toArray | length > 0 %}
+
+  {% set rows = [] %}
+
+  {% for previousApplication in data.previousApplications | toArray %}
+
+    {% for choice in previousApplication["choices"] | toArray %}
+
+      {% set courseSummaryHtml %}
+        <span class="app-course-choice__provider-name">{{ providers[choice.providerCode]["name"] }}</span>
+        <span class="app-course-choice__course-name">{{ providers[choice.providerCode].courses[choice.courseCode].name_and_code }}</span>
+
+        <a class="govuk-link govuk-link--no-visited-state" href="/application/{{  previousApplication.id + "/submitted/" + choice.id }}">View application</a>
+
+      {% endset %}
+
+      {% set statusHtml %}
+      {{ govukTag({
+        classes: choice.status | statusClass,
+        text: choice.status
+      }) }}
+
+      {% endset %}
+
+      {% set result = rows.push([
+      {
+        html: courseSummaryHtml
+      },
+      {
+        html: statusHtml
+      }
+      ]) %}
+
+
+    {% endfor %}
+
+  <hr>
+  {% endfor %}
+
+  {{ govukTable({
+    classes: "govuk-!-margin-top-6",
+    caption: "Your previous applications",
+    captionClasses: "app-table__caption--m",
+    firstCellIsHeader: false,
+    head: [{
+      text: "Course"
+    }, {
+      text: "Status"
+    }],
+    rows: rows
+  }) }}
+{% endif %}

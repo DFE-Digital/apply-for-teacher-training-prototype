@@ -15,6 +15,10 @@ module.exports = (env) => {
    */
   const filters = {}
 
+  filters.dateNow = () => {
+    return DateTime.local()
+  }
+
   /**
    * Remove empty values from address object and break into new lines
    *

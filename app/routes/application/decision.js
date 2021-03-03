@@ -2,6 +2,7 @@ const providers = require('../../data/providers')
 const utils = require('./../../utils')
 
 module.exports = router => {
+
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const { choiceId } = req.params

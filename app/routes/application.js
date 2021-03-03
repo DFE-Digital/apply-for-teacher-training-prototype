@@ -131,7 +131,18 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    res.redirect(`/application/${code}/before-you-start?copied=true`)
+    res.redirect(`/application/${code}?copied=true`)
+  })
+
+  // Render course-specific submitted page
+  router.all('/application/:applicationId/submitted/:choiceId', (req, res) => {
+    const { referrer } = req.query
+    const { choiceId } = req.params
+
+    res.render('application/submitted', {
+      referrer,
+      choiceId
+    })
   })
 
   // Render submitted page
@@ -142,6 +153,8 @@ module.exports = router => {
       referrer
     })
   })
+
+
 
   require('./application/choices')(router)
   require('./application/personal-details')(router)

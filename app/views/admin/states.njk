@@ -34,6 +34,10 @@
     <dd>Candidate needs to wait</dd>
     <dt><a href="/dashboard/45678/offer-received">Received an offer with conditions</a></dt>
     <dd>Candidate needs to respond to the offer</dd>
+    <dt><a href="/dashboard/45678/offer-received-different-course">Received an an offer for a different course</a></dt>
+    <dd>Candidate needs to respond to the offer</dd>
+    <dt><a href="/dashboard/45678/offer-received-different-provider">Received an an offer for a course from a different provider</a></dt>
+    <dd>Candidate needs to respond to the offer</dd>
     <dt><a href="/dashboard/45678/unsuccessful-with-feedback">Unsuccessful - provider has given feedback</a></dt>
     <dd>Candidate can apply again using feedback</dd>
     <dt><a href="/dashboard/45678/unsuccessful-course-full">Unsuccessful - course was full</a></dt>
@@ -68,8 +72,11 @@
     <dt><a href="/dashboard/12345/interviewing">Interviewing</a></dt>
     <dd>Some providers have indicated that they’ve invited the candidate to interview.</dd>
 
-    <dt><a href="/dashboard/12345/awaiting-some-provider-decisions">Some responses received, some still waiting</a></dt>
+    <dt><a href="/dashboard/12345/awaiting-one-provider-decision-one-offer">One offer received, still awaiting one provider decision</a></dt>
     <dd>Candidate has received one offer and one rejection but is still waiting on the third provider</dd>
+
+    <dt><a href="/dashboard/12345/awaiting-one-provider-decision-no-offers">Two rejections received, still awaiting third provider decision</a></dt>
+    <dd>Candidate has received two rejections but is still waiting on the third provider</dd>
 
     <dt><a href="/dashboard/12345/received-one-offer">Received one offer</a></dt>
     <dd>All providers have responded and one offer has been made</dd>
@@ -86,4 +93,12 @@
     <dt><a href="/dashboard/12345/recruited">Recruited</a></dt>
     <dd>The candidate has been recruited.</dd>
   </dl>
+
+  <h3 class="govuk-heading-s">Applying again</h3>
+
+  <dl class="govuk-list app-list--definition">
+    <dt><a href="/dashboard/23456/awaiting-apply-again-response">Awaiting decision from the 'apply again' application</a></dt>
+    <dd>The candidate can also see a summary of their previous applications</dd>
+  </dl>
+
 {% endblock %}

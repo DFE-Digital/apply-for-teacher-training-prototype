@@ -1,0 +1,12 @@
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
+{% set html %}
+  <h3 class="govuk-notification-banner__heading">
+    Application successfully submitted
+  </h3>
+{% endset %}
+
+{{ govukNotificationBanner({
+  html: html,
+  type: 'success'
+}) }}

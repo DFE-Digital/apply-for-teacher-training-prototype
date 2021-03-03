@@ -120,7 +120,6 @@ app.locals.asLevel = require('./app/data/as-level')()
 app.locals.countries = require('./app/data/countries')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')
-app.locals.previousApplications = require('./app/data/previous-applications')
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')

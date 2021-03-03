@@ -11,6 +11,7 @@ if (process.env.NOTIFYAPIKEY) {
 }
 
 const providers = require('./../data/providers')
+const path = require('path')
 
 const applicationData = (req) => {
   const applicationId = req.query.applicationId || req.params.applicationId
@@ -19,6 +20,14 @@ const applicationData = (req) => {
 
 const capitaliseFirstLetter = str => {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+const defaultSessionData = () => {
+  const sessionDataDefaultsFile = path.join(__dirname, '/../data/session-data-defaults.js')
+  const sessionDataDefaults = require(sessionDataDefaultsFile)
+
+  // Return deep copy of session default so that it can always be restored.
+  return JSON.parse(JSON.stringify(sessionDataDefaults))
 }
 
 const generateRandomString = () => {
@@ -191,5 +200,6 @@ module.exports = {
   hasPrimaryChoices,
   hasSubmittedApplications,
   hasStartedApplications,
-  toArray
+  toArray,
+  defaultSessionData
 }

@@ -42,13 +42,6 @@
     } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
   {% endif %}
 
-  {{ govukInput({
-    label: {
-      text: "Institution where you studied",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["other-qualifications", id, "org"])) }}
-
   {% if international %}
     {{ appAutocomplete({
       label: {

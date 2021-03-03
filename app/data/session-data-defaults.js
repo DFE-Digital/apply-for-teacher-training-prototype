@@ -10,8 +10,8 @@ module.exports = {
     12345: application,
     12346: applicationApplyAgain,
     23456: applicationApplyAgainWithChoice,
-    'ABCDE': applicationWithChoices,
-    45678: applicationWithSingleChoice
+    ABCDE: applicationWithChoices,
+    45678: applicationWithSingleChoice,
     GLOBE: applicationInternational
   },
   find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',

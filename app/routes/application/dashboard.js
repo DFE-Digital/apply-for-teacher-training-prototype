@@ -367,6 +367,17 @@ module.exports = router => {
 
       case 'awaiting-apply-again-response':
         choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.previousApplications = {
+          "2468": {
+            choices: {
+              "ABC234": {
+                courseCode: 'X100',
+                providerCode: 'B60',
+                status: "Unsuccessful"
+              }
+            }
+          }
+        }
         break
     }
 

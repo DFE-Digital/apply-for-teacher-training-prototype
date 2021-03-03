@@ -352,7 +352,12 @@ module.exports = router => {
 
       case 'offer-deferred':
         choices.ZYXWV.status = 'Offer deferred'
+        choices.ZYXWV.conditions = [
+          "Fitness to Teach check",
+          "Disclosure and barring service check",
+        ]
         application.choices = [choices.ZYXWV]
+
         break
 
       case 'recruited':

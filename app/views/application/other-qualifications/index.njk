@@ -20,7 +20,7 @@
 {% block primary %}
   {% set otherUkConditionalHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label" for="other-qualifications-{{ id }}-type-uk">Qualification name</label>
+      <label class="govuk-label govuk-label--s" for="other-qualifications-{{ id }}-type-uk">Qualification name</label>
       <div id="type-uk-autocomplete-container"></div>
     </div>
   {% endset %}
@@ -28,7 +28,8 @@
   {% set nonUkConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "Qualification name"
+        text: "Qualification name",
+        classes: "govuk-label--s"
       },
       hint: {
         html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
@@ -51,14 +52,14 @@
       }
     },
     items: [{
-      value: "GCSE",
-      text: "GCSE"
+      value: "A level",
+      text: "A level"
     }, {
       value: "AS level",
       text: "AS level"
     }, {
-      value: "A level",
-      text: "A level"
+      value: "GCSE",
+      text: "GCSE"
     }, {
       value: "Other UK qualification",
       text: "Other UK qualification",

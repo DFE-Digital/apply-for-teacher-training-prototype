@@ -80,20 +80,6 @@ module.exports = router => {
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
     const thisApplication = utils.applicationData(req)
-    const prevApplication = req.session.data.applications['12345']
-    let { choices } = prevApplication
-
-    // Choices from previous application
-    // Only shown when applying again
-    if (thisApplication.apply2) {
-      choices = utils.toArray(choices)
-      choices[0].hasFeedback = true
-      choices[0].status = 'Unsuccessful'
-      choices[1].hasFeedback = true
-      choices[1].status = 'Unsuccessful'
-      choices[2].status = 'Offer declined'
-    }
-
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,

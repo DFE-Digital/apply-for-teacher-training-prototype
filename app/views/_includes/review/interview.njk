@@ -1,37 +1,48 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set interviewText = applicationValue(["interview"]) if applicationValue(["interview-choice"]) == "Yes" else "No" %}
-{% set interviewHtml %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Interview needs"
-      },
-      value: {
-        text: interviewText | nl2br | safe
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/interview?referrer=" + referrer,
-          text: "Change" if applicationValue(["interview"]) else "Add",
-          visuallyHiddenText: "interview needs"
-        }]
-      } if canAmend
-    }]
-  }) }}
-{% endset %}
-
-{% set complete = "true" if applicationValue(["completed", "interview"]) %}
-
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "interview" %}
-  {% set incompleteText = "Interview needs not entered" %}
-  {% set incompleteLink = "/interview/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Do you have any interview needs?" %}
-  {% include "_includes/review/incomplete.njk" %}
-{% else %}
+{% if applicationValue(["completed", "interview"]) %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: interviewHtml
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you have any interview needs?"
+        },
+        value: {
+          text: applicationValue(["interview-choice"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/interview?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "interview needs"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "What are your interview needs?"
+        },
+        value: {
+          text: applicationValue(["interview"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/interview?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "interview needs"
+          }]
+        } if canAmend
+      } if applicationValue(["interview-choice"]) == "Yes"]
+    })
+  }) }}
+{% elif showIncomplete %}
+  {{ appSuggestion({
+    id: "interview",
+    title: "Interview needs not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you have any interview needs?",
+        href: applicationPath + "/interview/review?referrer=" + referrer
+      }]
+    }
   }) }}
 {% endif %}

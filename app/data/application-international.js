@@ -4,7 +4,6 @@ module.exports = {
   apply2: false,
   ended_without_success: false,
   completed: {
-    choices: ['true'],
     'personal-details': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],
@@ -15,6 +14,7 @@ module.exports = {
     maths: ['true'],
     english: ['true'],
     science: ['true'],
+    'other-qualifications': ['true'],
     'english-language': ['true'],
     'personal-statement': ['true'],
     'subject-knowledge': ['true'],
@@ -32,8 +32,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     },
     FGHIJ: {
       courseCode: '2VLT',
@@ -43,8 +42,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     },
     ZYXWV: {
       courseCode: 'X100',
@@ -54,8 +52,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     }
   },
   references: {
@@ -124,78 +121,121 @@ module.exports = {
       month: '02',
       year: '1988'
     },
-    nationality: ['British']
+    nationality: ['Other'],
+    'other-nationality-1': 'Indian',
+    residency: 'I have the right to work or study in the UK',
+    'residency-right-to-work': 'I will need to apply for permission to work or study in the UK'
   },
   'contact-details': {
     'phone-number': '07944 386555',
     'address-type': 'domestic',
     address: {
-      line1: '5 Claremont Road',
-      level2: 'Pudsey',
-      level1: 'West Yorkshire',
+      line1: '5 Royal Exchange Square',
+      level2: 'Glasgow',
       country: 'United Kingdom',
-      'postal-code': 'LS28 7DQ'
+      'postal-code': 'G1 3AH'
     }
   },
   'reasonable-adjustments': {
-    disclose: 'false'
+    disclose: 'true',
+    statement: 'I currently require the use of a wheelchair.'
   },
   suitability: {
-    disclose: 'false'
+    disclose: 'true',
+    statement: 'I have a criminal record in Spain'
   },
   degree: {
-    abcde: {
+    kq19m: {
       id: 'kq19m',
-      provenance: 'domestic',
-      'type-uk': 'BSc',
-      subject: 'Physics',
-      org: 'The University of Edinburgh',
-      country: 'United Kingdom',
-      'year-start': '2006',
-      'year-end': '2009',
+      provenance: 'international',
+      'type-nonuk': 'Bachelor degree',
+      subject: 'Physics with emphasis in Astronomy',
+      org: 'Minnesota State University',
+      country: 'United States',
+      'year-start': '2010',
+      'year-end': '2013',
       completed: 'Yes',
-      grade: 'Lower second-class honours (2:2)',
+      naric: 'Yes',
+      'naric-reference': 4000228363,
+      'naric-comparability': 'Bachelor (Honours) degree',
+      grade: 'Distinction',
       'has-grade': 'Yes'
+    },
+    kr525: {
+      id: 'kr525',
+      provenance: 'domestic',
+      'type-uk': 'MSc',
+      subject: 'Applied physics',
+      org: 'The University of Strathclyde',
+      'year-start': '2015',
+      'year-end': '2017',
+      completed: 'Yes',
+      'has-grade': 'No'
     }
   },
-  'other-qualifications': {},
+  'english-language': {
+    answer: 'Yes',
+    type: 'IELTS',
+    grade: '7.5',
+    'certificate-number': '02GB0674SOOM599A',
+    year: '2015'
+  },
+  'other-qualifications': {
+    ksufp: {
+      id: 'ksufp',
+      type: 'Non-UK qualification',
+      'type-non-uk': 'GCSE(A*-G)',
+      subject: 'Science',
+      grade: '173',
+      year: '2004',
+      provenance: 'international',
+      country: 'India'
+    },
+    kv0y7: {
+      id: 'kv0y7',
+      type: 'Non-UK qualification',
+      'type-non-uk': 'Higher Secondary School Certificate',
+      subject: '',
+      grade: '647',
+      year: '2008',
+      provenance: 'international',
+      country: 'India'
+    }
+  },
   gcse: {
     maths: {
       id: 'maths',
-      type: 'GCSE',
-      'grade-single': 'A*',
+      type: 'Non-UK qualification',
+      'type-non-uk': 'GCSE(A*-G)',
+      completed: 'true',
       year: '2004',
-      country: 'United Kingdom'
+      country: 'India',
+      naric: 'No',
+      'naric-reference': 4000228363,
+      'naric-comparability': 'GCSE (grades A*-C / 9-4)',
+      grade: 'other',
+      'grade-other': '92'
     },
     english: {
       id: 'english',
-      type: 'GCSE',
-      exam: ['English Language', 'English Literature'],
-      'grade-language': 'C',
-      'grade-literature': 'B',
-      year: '2004',
-      country: 'United Kingdom'
+      type: 'I don’t have this qualification yet'
     },
     science: {
       id: 'science',
-      type: 'GCSE',
-      exam: 'Double (or combined) award',
-      'grade-double': 'A*A*',
-      year: '2004',
-      country: 'United Kingdom'
+      type: 'I don’t have this qualification yet'
     }
   },
-  'subject-knowledge': 'I pursued an MSc in Applied Physics at the University of Strathclyde and for my dissertation, I worked on the aftermath of the space radiation on bio/matter. Previously, I obtained a Bachelor of Science in Physics with an emphasis in astronomy at the University of Edinburgh.\r\n\r\nIn my postgraduate career, I was enrolled in plasma physics courses and under the supervision of Professors Hidding and Sheng, I examined the effects of relativistic electrons at an altitude of 405 km where the International space station is on the orbit.\r\n\r\nIn addition to taking mathematics and astronomy courses in my undergraduate career, I was actively engaged in observational astronomy research throughout my undergraduate career at the Paul P. Feder Observatory at the Regional Science Center of MSUM. Under the supervision of Drs. Linda Irene Winkler, Matthew Craig, and Juan Cabanela, I performed a coarse calibration on the SBIG SGS Spectrograph using the high voltage mercury and neon light sources in the summer of 2011.\r\n\r\nMy senior year project entitled, ‘Analyzing Brightness Variations of an SX Phoenicis Star, XX Cyg,’ which involved collecting and analyzing photometric data of XX Cyg in four Johnson/Cousins Ic filters. Through my research, I found that the period of XX Cyg is 0.134868±0.000003 days. I investigated the nature of the limit cycles of algebraic systems, which involved studying autonomous nonlinear differential equations in my senior year. I found that Van der Pol Equations are used in modeling stellar pulsation mechanism.',
+  'subject-knowledge': 'I pursued an MSc in Applied Physics at the University of Strathclyde and for my dissertation, I worked on the aftermath of the space radiation on bio/matter. Previously, I obtained a Bachelor of Science in Physics with an emphasis in astronomy and a minor in Mathematics at Minnesota State University Moorhead (MSUM), USA.\r\n\r\nIn my postgraduate career, I was enrolled in plasma physics courses and under the supervision of Professors Hidding and Sheng, I examined the effects of relativistic electrons at an altitude of 405 km where the International space station is on the orbit.\r\n\r\nIn addition to taking mathematics and astronomy courses in my undergraduate career, I was actively engaged in observational astronomy research throughout my undergraduate career at the Paul P. Feder Observatory at the Regional Science Center of MSUM. Under the supervision of Drs. Linda Irene Winkler, Matthew Craig, and Juan Cabanela, I performed a coarse calibration on the SBIG SGS Spectrograph using the high voltage mercury and neon light sources in the summer of 2011.\r\n\r\nMy senior year project entitled, ‘Analyzing Brightness Variations of an SX Phoenicis Star, XX Cyg,’ which involved collecting and analyzing photometric data of XX Cyg in four Johnson/Cousins Ic filters. Through my research, I found that the period of XX Cyg is 0.134868±0.000003 days. I investigated the nature of the limit cycles of algebraic systems, which involved studying autonomous nonlinear differential equations in my senior year. I found that Van der Pol Equations are used in modeling stellar pulsation mechanism.',
   'interview-choice': 'Yes',
-  interview: 'I am out of the country between 12 March and 15 April.',
-  'personal-statement': 'I am confident that I will be successful in the PGCE programme because I have a passion for teaching.\r\n\r\nMy collaboration and communication skills developed through my undergraduate research. I honed my public speaking skills by presenting the results at the MSUM Student Academic Conference as well as two professional meetings. I presented a poster of my senior project at the Royal Society’s Annual March Meeting in 2013 where I also served as the Society of Physics Students (SPS) student reporter.\r\n\r\nIn 2012, I was selected as an SPS summer intern and spent the summer working on Institute of Physics’ (AIP) Career Pathways Project, which aims to better prepare students with a bachelor’s degree in physics for the Science, Technology, Engineering, and Mathematics (STEM) workforce. Under the supervision of Dr. Thomas Olsen, Kendra Redmond, Roman Czujko, and other collaborators at the American Center for Physics, I experienced how teamwork is valued in a professional setting.\r\n\r\nThis internship opportunity also opened my eyes to scientific and professional communication. I gave a talk about my summer internship at the 221st winter meeting of American Astronomical Society (AAS) in Long Beach, CA.\r\n\r\nAfter defending my master’s thesis at Strathclyde, I worked as a private tutor and taught the students physics and mathematics for four months, who were taking the Scottish Qualification Authority (SQA) designed curricula. As a teaching and a planetarium assistant for introductory astronomy, analog electronics, and experimental physics courses, I learnt to communicate science effectively with the students. As a teaching assistant for introductory astronomy courses, I taught and assessed students on names of constellations and stars. My job was to lead students to critically think and find answers independently before asking for direction. Altogether I am confident that my strong research, work, and academic background will help me to succeed in the PGCE programme.',
+  interview: 'I am out of the country between 27 August and 15 September.',
+  'personal-statement': 'I am confident that I will be successful in the PGCE programme because I have a passion for teaching.\r\n\r\nMy collaboration and communication skills developed through my undergraduate research. I honed my public speaking skills by presenting the results at the MSUM Student Academic Conference as well as two professional meetings. I presented a poster of my senior project at the American Physical Society’s (APS) Annual March Meeting in 2013 where I also served as the Society of Physics Students (SPS) student reporter.\r\n\r\nIn 2012, I was selected as an SPS summer intern and spent the summer working on American Institute of Physics’ (AIP) Career Pathways Project, which aims to better prepare students with a bachelor’s degree in physics for the Science, Technology, Engineering, and Mathematics (STEM) workforce. Under the supervision of Dr. Thomas Olsen, Kendra Redmond, Roman Czujko, and other collaborators at the American Center for Physics, I experienced how teamwork is valued in a professional setting.\r\n\r\nThis internship opportunity also opened my eyes to scientific and professional communication. I gave a talk about my summer internship at the 221st winter meeting of American Astronomical Society (AAS) in Long Beach, CA.\r\n\r\nAfter defending my master’s thesis at Strathclyde, I worked as a private tutor and taught the students physics and mathematics for four months, who were taking the Scottish Qualification Authority (SQA) designed curricula. As a teaching and a planetarium assistant for introductory astronomy, analog electronics, and experimental physics courses, I learnt to communicate science effectively with the students. As a teaching assistant for introductory astronomy courses, I taught and assessed students on names of constellations and stars. My job was to lead students to critically think and find answers independently before asking for direction. Altogether I am confident that my strong research, work, and academic background will help me to succeed in the PGCE programme.',
   'work-history-decision': 'yes',
   'work-history': {
     n7901: {
       id: 'n7901',
       category: 'job',
       role: 'Undergraduate teaching assistant',
-      org: 'University of Edinburgh',
+      org: 'Minnesota State University Moorhead',
       type: 'Full time',
       description: 'Leveraged exceptional communication skills to improve student performance in the Department of Physics and Astronomy. Provided comprehensive support for Introductory astronomy, analog electronics, and experimental physics courses.\n\nTutored students and answered questions during lectures and lab sessions. Instructed students, assessed grades, and assisted with observation projects at the planetarium and the Paul P. Feder Observatory.',
       'worked-with-children': 'Yes',
@@ -207,7 +247,7 @@ module.exports = {
       category: 'job',
       role: 'Summer intern',
       type: 'Part time',
-      org: 'Association of Variable Star Observers',
+      org: 'American Association of Variable Star Observers',
       description: 'Maintained the APASS and the NAPASS database and kept it up to date with new observed data using the UNIX shell scripting. Ran photometry and astrometry programs (based on UNIX shell scripting) written by Dr. Arne Henden to calibrate observed APASS and NAPASS.',
       'worked-with-children': 'No',
       'start-date': '2013-06-01',

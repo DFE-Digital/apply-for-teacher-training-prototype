@@ -1,6 +1,5 @@
 {% extends "_form-wide.njk" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/disabilities/review" %}
 {% set title = "Ask for support if you’re disabled" %}
@@ -14,7 +13,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/reasonable-adjustments.njk" %}
+  {% include "_includes/item/reasonable-adjustments.njk" %}
 
   {{ govukCheckboxes({
     items: [{

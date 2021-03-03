@@ -40,8 +40,8 @@
         html: "Remove <span class=\"govuk-visually-hidden\">2nd nationality</span>",
         classes: "app-button--link"
       }) }}
-    </div> #}
-    <!--div class="app-add-another-nationality">
+    </div>
+    <div class="app-add-another-nationality">
       {{ appAutocomplete({
         label: {
           text: "Nationality"
@@ -55,7 +55,7 @@
         html: "Remove <span class=\"govuk-visually-hidden\">3rd nationality</span>",
         classes: "app-button--link"
       }) }}
-    </div-->
+    </div>#}
     {{ govukButton({
       text: "Add another nationality",
       classes: "govuk-button--secondary"
@@ -95,13 +95,13 @@
       selectElement: document.querySelector('#candidate-other-nationality-1'),
       defaultValue: '{{ applicationValue(["candidate", "other-nationality-1"]) }}'
     })
-    accessibleAutocomplete.enhanceSelectElement({
+    {# accessibleAutocomplete.enhanceSelectElement({
       selectElement: document.querySelector('#candidate-other-nationality-2'),
       defaultValue: '{{ applicationValue(["candidate", "other-nationality-2"]) }}'
     })
     accessibleAutocomplete.enhanceSelectElement({
       selectElement: document.querySelector('#candidate-other-nationality-3'),
       defaultValue: '{{ applicationValue(["candidate", "other-nationality-3"]) }}'
-    })
+    }) #}
   </script>
 {% endblock %}

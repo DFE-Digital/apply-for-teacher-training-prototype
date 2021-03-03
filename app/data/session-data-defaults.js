@@ -3,7 +3,7 @@ const applicationApplyAgain = require('./application-apply-again')
 const applicationWithChoices = require('./application-with-choices')
 const applicationWithSingleChoice = require('./application-single-choice')
 const applicationApplyAgainWithChoice = require('./application-apply-again-with-choice')
-
+const applicationInternational = require('./application-international')
 
 module.exports = {
   applications: {
@@ -12,6 +12,7 @@ module.exports = {
     23456: applicationApplyAgainWithChoice,
     'ABCDE': applicationWithChoices,
     45678: applicationWithSingleChoice
+    GLOBE: applicationInternational
   },
   find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
   flags: {

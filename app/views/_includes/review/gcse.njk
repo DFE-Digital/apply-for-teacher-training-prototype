@@ -1,20 +1,21 @@
-{% set item = applicationValue(["gcse", id]) %}
 {% set complete = "true" if applicationValue(["completed", id]) %}
 
-{% set gcseHtml %}
-  {% include "_includes/item/gcse.njk" %}
-{% endset %}
+{{ appSuggestion({
+  id: "gcse-" + id,
+  title: id | capitalize + " GCSE or equivalent not entered",
+  warning: true if errorList,
+  actions: {
+    items: [{
+      text: "Enter your " + id | capitalize + " GCSE or equivalent",
+      href: applicationPath + "/" + id + "/review?referrer=" + referrer
+    }]
+  }
+}) if showIncomplete and not complete }}
 
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "gcse-" + id %}
-  {% set incompleteText = id | capitalize + " GCSE or equivalent not entered" %}
-  {% set incompleteLink = "/" + id + "/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your " + id | capitalize + " GCSE or equivalent" %}
-  {% include "_includes/review/incomplete.njk" %}
-{% else %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: gcseHtml
-  }) }}
-{% endif %}
+{% set summaryCardHtml %}{% include "_includes/item/gcse.njk" %}{% endset %}
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  headingLevel: 3,
+  titleText: id | capitalize + " GCSE or equivalent",
+  html: summaryCardHtml
+}) if complete }}

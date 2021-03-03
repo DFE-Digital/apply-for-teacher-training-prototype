@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "Academic and other relevant qualifications" %}
+{% set title = "Other qualifications" %}
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set canAmend = true %}
@@ -16,11 +16,6 @@
 
 {% block primary %}
   {% include "_includes/review/other-qualifications.njk" %}
-  {{ govukButton({
-    text: "Add another qualification",
-    href: applicationPath + "/other-qualifications/add",
-    classes: "govuk-button--secondary"
-  }) }}
 
   {{ govukCheckboxes({
     items: [{

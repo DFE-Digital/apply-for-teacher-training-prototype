@@ -6,6 +6,7 @@ const utils = require('./../../utils')
 module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
     const application = utils.applicationData(req)
+    const { applicationId } = req.params
     const pageObject = {}
     const successFlash = req.flash('success')
 
@@ -53,6 +54,8 @@ module.exports = router => {
     }
 
     pageObject.closed = req.query.closed
+
+    pageObject.applicationPath = `/application/${applicationId}`
 
     res.render('application/review', pageObject)
   })

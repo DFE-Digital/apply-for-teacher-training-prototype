@@ -26,6 +26,11 @@
 
 {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
 
-  <p class="govuk-body">You’ve chosen to defer your course.
+  <p class="govuk-body">You’ve chosen to defer your course.</p>
   <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
+
+{% elif choices | length == 1 and choices[0].status == "Conditions met" %}
+
+  <p class="govuk-body">Congratulations on joining your teacher training course.</p>
+
 {% endif %}

@@ -30,20 +30,6 @@
     } if canAmend
   }, {
     key: {
-      text: "Institution"
-    },
-    value: {
-      text: (item.org + country if item.org) or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "year"
-      }]
-    } if canAmend
-  }, {
-    key: {
       text: "Year awarded"
     },
     value: {

@@ -154,8 +154,7 @@ module.exports = {
       'year-start': '2006',
       'year-end': '2009',
       completed: 'Yes',
-      grade: 'Lower second-class honours (2:2)',
-      'has-grade': 'Yes'
+      grade: 'Lower second-class honours (2:2)'
     }
   },
   'other-qualifications': {},

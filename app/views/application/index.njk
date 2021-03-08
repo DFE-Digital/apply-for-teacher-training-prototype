@@ -36,13 +36,18 @@
 {% endblock %}
 
 {% block primary %}
-  {% if applicationValue(["apply2"]) %}
+  {% if applicationValue('apply2') %}
     {% set previousApplicationSummaryHtml %}
-      {% set choices = choices | selectattr("hasFeedback") %}
-      {% set showChoiceDetails = false %}
-      {% set showChoiceFeedback = true %}
-      {% set showChoiceStatus = true %}
-      {% include "_includes/review/choices.njk" %}
+
+      {% for previousApplicationId in applicationValue("previousApplications") %}
+        {% set choices = (data.applications[previousApplicationId].choices | toArray) %}
+        {% set showChoiceDetails = false %}
+        {% set showChoiceFeedback = true %}
+        {% set showChoiceStatus = true %}
+
+        {% include "_includes/review/choices.njk" %}
+      {% endfor %}
+
     {% endset %}
     {{ govukDetails({
       summaryText: "See feedback from your previous application",

@@ -142,17 +142,21 @@ module.exports = router => {
             choice.status = 'Application withdrawn'
           }
 
-          if (choice.status != 'Offer accepted') {
-            req.session.data.previousApplications ||= {}
+          const newApplicationCodeForUnsuccessfulCourses = utils.generateRandomString()
 
-            if (!req.session.data.previousApplications[applicationId]) {
+
+          if (choice.status != 'Offer accepted') {
+
+            if (!req.session.data.applications[newApplicationCodeForUnsuccessfulCourses]) {
               // Copy application to previousApplications
-              req.session.data.previousApplications[applicationId] = JSON.parse(JSON.stringify(application))
-              req.session.data.previousApplications[applicationId].choices = {}
+              req.session.data.applications[newApplicationCodeForUnsuccessfulCourses] = JSON.parse(JSON.stringify(application))
+              req.session.data.applications[newApplicationCodeForUnsuccessfulCourses].choices = {}
             }
 
+            // console.log(req.session.data.applications[newApplicationCodeForUnsuccessfulCourses])
+            application.previousApplications = [newApplicationCodeForUnsuccessfulCourses]
             // Add choice to previousApplication
-            req.session.data.previousApplications[applicationId].choices[choice.id] = choice
+            req.session.data.applications[newApplicationCodeForUnsuccessfulCourses].choices[choice.id] = choice
 
           }
 

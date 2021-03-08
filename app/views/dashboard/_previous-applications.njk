@@ -1,12 +1,12 @@
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
-{% if data.previousApplications | toArray | length > 0 %}
+{% if applicationValue("previousApplications") | length > 0 %}
 
   {% set rows = [] %}
 
-  {% for previousApplication in data.previousApplications | toArray %}
+  {% for previousApplicationId in applicationValue("previousApplications") %}
 
-    {% for choice in previousApplication["choices"] | toArray %}
+    {% for choice in data.applications[previousApplicationId]["choices"] | toArray %}
 
       {% set courseSummaryHtml %}
         <span class="app-course-choice__provider-name">{{ providers[choice.providerCode]["name"] }}</span>

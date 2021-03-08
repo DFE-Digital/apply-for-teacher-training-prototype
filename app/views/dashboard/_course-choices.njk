@@ -30,6 +30,37 @@
     {% if item.status == "Awaiting decision" %}
       <p class="govuk-body govuk-!-margin-top-2">The provider must make a decision by  {{ 14 | nowPlusDays("d MMMM yyyy") }}.</p>
     {% endif %}
+
+    {% if item.offeredCourseId %}
+
+      {% if item.offeredProviderId %}
+        {% set offeredCourse = providers[item.offeredProviderId].courses[item.offeredCourseId] %}
+      {% else %}
+        {% set offeredCourse = providers[item.providerCode].courses[item.offeredCourseId] %}
+      {% endif %}
+
+      {% if item.offeredProviderId != item.providerId %}
+        <p class="govuk-body govuk-!-margin-top-2">You have been offered a place on a different course from another provider:</p>
+      {% else %}
+        <p class="govuk-body govuk-!-margin-top-2">You have been offered a place on a different course from the one you applied to:</p>
+      {% endif %}
+
+      {% set courseOfferedDescription %}
+
+        {% if item.offeredProviderId != item.providerId %}
+          <b>{{ providers[item.offeredProviderId].name }}</b><br>
+        {% endif %}
+
+        <a href="#">{{ offeredCourse.name }} ({{ item.offeredCourseId }})</a>
+        <br>{{ offeredCourse.description }}<br>{{  offeredCourse.locations[0].name }}
+      {% endset %}
+
+      {{ govukInsetText({
+        html: courseOfferedDescription,
+        classes: "govuk-!-padding-top-0 govuk-!-padding-bottom-0 govuk-!-margin-top-0"
+      }) }}
+    {% endif %}
+
   {% endset %}
 
   {% set interviewHtml %}{% include "dashboard/_course-choice-interview.njk" %}{% endset %}

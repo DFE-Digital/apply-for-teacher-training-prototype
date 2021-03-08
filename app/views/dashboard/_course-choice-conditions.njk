@@ -1,36 +1,3 @@
-
-{% if item.offeredCourseId %}
-
-  {% if item.offeredProviderId %}
-    {% set offeredCourse = providers[item.offeredProviderId].courses[firstChoice.offeredCourseId] %}
-  {% else %}
-    {% set offeredCourse = firstChoiceProvider.courses[firstChoice.offeredCourseId] %}
-  {% endif %}
-
-  {% if item.offeredProviderId != firtChoiceCourse.providerId %}
-    <p class="govuk-body govuk-!-margin-top-2">You have been offered a place on a different course from another provider:</p>
-  {% else %}
-    <p class="govuk-body govuk-!-margin-top-2">You have been offered a place on a different course from the one you applied to:</p>
-  {% endif %}
-
-  {% set courseOfferedDescription %}
-
-    {% if item.offeredProviderId != firtChoiceCourse.providerId %}
-      <b>{{ providers[item.offeredProviderId].name }}</b><br>
-    {% endif %}
-
-    <a href="#">{{ offeredCourse.name }} ({{ firstChoiceCourse.code }})</a>
-
-
-    <br>{{ offeredCourse.description }}<br>{{  offeredCourse.locations[0].name }}
-  {% endset %}
-
-  {{ govukInsetText({
-    html: courseOfferedDescription,
-    classes: "govuk-!-padding-top-0 govuk-!-padding-bottom-0 govuk-!-margin-top-0"
-  }) }}
-{% endif %}
-
 {% if (item.status == "Offer received" or item.status == "Offer accepted" or item.status == "Offer deferred" or item.status == "Conditions not met" or item.status == "Offer declined") and  item.conditions %}
   <ul class="govuk-list govuk-list--bullet">
     {% for condition in item.conditions %}

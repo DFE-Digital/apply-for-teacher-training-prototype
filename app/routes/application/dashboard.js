@@ -358,17 +358,9 @@ module.exports = router => {
 
       case 'awaiting-apply-again-response':
         choices.ABCDE.status = 'Awaiting decision'
-        req.session.data.previousApplications = {
-          "2468": {
-            choices: {
-              "ABC234": {
-                courseCode: 'X100',
-                providerCode: 'B60',
-                status: "Unsuccessful"
-              }
-            }
-          }
-        }
+        req.session.data.applications["12345"].choices["ABCDE"].status = "Unsuccessful"
+        req.session.data.applications["12345"].choices["FGHIJ"].status = "Unsuccessful"
+        req.session.data.applications["12345"].choices["ZYXWV"].status = "Unsuccessful"
         break
     }
 

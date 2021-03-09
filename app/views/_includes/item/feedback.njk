@@ -1,0 +1,86 @@
+{% if item.feedback.course_full %}
+<p class="govuk-body">The course you applied to was full.</p>
+{% endif %}
+
+{% if item.feedback.rejected_by_default %}
+<p class="govuk-body">Provider did not respond in time.</p>
+{% endif %}
+
+{% if item.feedback.behaviour %}
+{% if item.feedback.behaviour.didNotReplyToMessages == true %}
+  <p class="govuk-body">Did not reply to messages.</p>
+{% endif %}
+
+{% if item.feedback.behaviour.other %}
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.behaviour.other | nl2br | safe
+  }) }}
+{% endif %}
+
+{% if item.feedback.behaviour.whatTheyCouldToDoImprove %}
+  <p class="govuk-body">What you could do to improve:</p>
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.behaviour.whatTheyCouldToDoImprove | nl2br | safe
+  }) }}
+{% endif %}
+{% endif %}
+
+{% if item.feedback.performanceAtInterview %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Performance at interview</h4>
+
+{{ govukInsetText({
+  classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+  text: item.feedback.performanceAtInterview | nl2br | safe
+}) }}
+{% endif %}
+
+{% if item.feedback.qualityOfApplication %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Quality of application</h4>
+
+{% if item.feedback.qualityOfApplication.personalStatement %}
+  <p class="govuk-body">Personal statement could be improved.</p>
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.qualityOfApplication.personalStatement | nl2br | safe
+  }) }}
+{% endif %}
+
+{% if item.feedback.qualityOfApplication.subjectKnowledge %}
+  <p class="govuk-body">Subject knowledge could be improved.</p>
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.qualityOfApplication.subjectKnowledge | nl2br | safe
+  }) }}
+{% endif %}
+{% endif %}
+
+{% if item.feedback.qualifications %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Qualifications</h4>
+
+{% if item.feedback.qualifications.degree_does_not_meet_requirements %}
+  <p class="govuk-body">Your degree does not meet the course requirements.</p>
+{% endif %}
+{% endif %}
+
+{% if item.feedback.additionalFeedback %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Additional feedback</h4>
+
+{{ govukInsetText({
+  classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+  text: item.feedback.additionalFeedback | nl2br | safe
+}) }}
+{% endif %}
+
+{% if item.feedback.interested_in_future_applications != null %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Future applications</h4>
+
+<p class="govuk-body">
+  {% if item.feedback.interested_in_future_applications %}
+    The provider would be interested in future applications from you.
+  {% else %}
+    The provider would not be interested in future applications from you.
+  {% endif %}
+</p>
+{% endif %}

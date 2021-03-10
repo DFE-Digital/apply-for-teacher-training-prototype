@@ -1,3 +1,4 @@
+const { DateTime } = require('luxon')
 const utils = require('./../../utils')
 
 module.exports = router => {
@@ -27,7 +28,7 @@ module.exports = router => {
       case 'future-interview':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2021-12-14T10:30:00',
+          date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
@@ -37,7 +38,7 @@ module.exports = router => {
       case 'post-interview':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2019-12-14T10:30:00',
+          date: DateTime.local().set({hour: 10, minute: 30}). minus({ days: 2 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
@@ -193,16 +194,17 @@ module.exports = router => {
         break
 
       case 'interviewing':
+        var futureInterviewDate =
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2021-03-06T14:00:00',
+          date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'University of Leeds',
           address: 'Please use this link to attend the interview on Zoom:\n\n<a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a><br><br>You may need to download the Zoom app first.',
           additional_details: 'The interview panel will consist of Gemma (training lead) and Brian (recruitment officer)'
         }]
         choices.FGHIJ.status = 'Awaiting decision'
         choices.FGHIJ.interview = [{
-          date: '2021-02-08T10:30:00',
+          date:DateTime.local().set({hour: 14, minute: 30}).plus({ days: 2 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
@@ -213,7 +215,7 @@ module.exports = router => {
       case 'awaiting-one-provider-decision-one-offer':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2021-03-06T14:00:00',
+          date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'University of Leeds',
           address: 'Please use this link to attend the interview on Zoom:\n\n<a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a><br><br>You may need to download the Zoom app first.',
           additional_details: 'The interview panel will consist of Gemma (training lead) and Brian (recruitment officer)'
@@ -234,12 +236,7 @@ module.exports = router => {
       case 'awaiting-one-provider-decision-no-offers':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: '2021-02-06T11:00:00',
-          providerName: 'Gorse SCITT',
-          address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
-        },
-        {
-          date: '2021-02-01T11:00:00',
+          date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
@@ -280,7 +277,7 @@ module.exports = router => {
       case 'received-two-offers':
         choices.ABCDE.status = 'Offer received'
         choices.ABCDE.interview = [{
-          date: '2020-12-14T11:00:00',
+          date: DateTime.local().set({hour: 10, minute: 30}).minus({ days: 3 }),
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]

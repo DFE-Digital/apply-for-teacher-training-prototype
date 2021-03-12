@@ -199,8 +199,7 @@ module.exports = router => {
         choices.ABCDE.interview = [{
           date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'University of Leeds',
-          address: 'Please use this link to attend the interview on Zoom:\n\n<a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a><br><br>You may need to download the Zoom app first.',
-          additional_details: 'The interview panel will consist of Gemma (training lead) and Brian (recruitment officer)'
+          address: 'Zoom: <a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a>'
         }]
         choices.FGHIJ.status = 'Awaiting decision'
         choices.FGHIJ.interview = [{
@@ -217,8 +216,7 @@ module.exports = router => {
         choices.ABCDE.interview = [{
           date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
           providerName: 'University of Leeds',
-          address: 'Please use this link to attend the interview on Zoom:\n\n<a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a><br><br>You may need to download the Zoom app first.',
-          additional_details: 'The interview panel will consist of Gemma (training lead) and Brian (recruitment officer)'
+          address: 'Zoom: <a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a>'
         }]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {

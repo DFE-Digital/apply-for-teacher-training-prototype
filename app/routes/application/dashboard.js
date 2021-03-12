@@ -214,7 +214,7 @@ module.exports = router => {
       case 'awaiting-one-provider-decision-one-offer':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{
-          date: DateTime.local().set({hour: 10, minute: 30}).plus({ days: 7 }),
+          date: DateTime.local().set({hour: 10, minute: 30}).minus({ days: 2 }),
           providerName: 'University of Leeds',
           address: 'Zoom: <a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a>'
         }]

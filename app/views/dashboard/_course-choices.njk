@@ -73,6 +73,14 @@
     {% endif %}
     {% if canRespond and not hasResponded %}
       <p class="govuk-body"><a href="{{ applicationPath + "/" + item.id + "/view" }}">Respond to offer</a></p>
+
+      <p class="govuk-body">
+        {% if numberOfChoicesAwaitingDecision > 0 %}
+          You can wait to hear back from everyone before you respond.
+        {% else %}
+          You have 14 days (until 19 March 2021) to respond.
+        {% endif %}
+      </p>
     {% endif %}
   {% endset %}
 
@@ -100,7 +108,7 @@
         value: {
           html: interviewHtml | safe
         }
-      } if item.interview and not canRespond, {
+      } if not canRespond and item.status != "Unsuccessful", {
         key: {
           text: "Feedback"
         },

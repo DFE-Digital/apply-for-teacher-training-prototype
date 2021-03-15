@@ -108,7 +108,7 @@
         value: {
           html: interviewHtml | safe
         }
-      } if not canRespond, {
+      } if not canRespond and item.status != "Unsuccessful", {
         key: {
           text: "Feedback"
         },

@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "Other qualifications" %}
+{% set international = applicationValue(["candidate", "other-nationality-1"]) %}
+{% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set canAmend = true %}

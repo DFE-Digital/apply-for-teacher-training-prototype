@@ -1,6 +1,5 @@
-{% if applicationValue(["completed", "work-history"]) %}
-  {% include "_includes/item/work-history.njk" %}
-{% elif showIncomplete %}
+{% include "_includes/item/work-history.njk" %}
+{% if showIncomplete %}
   {{ appSuggestion({
     id: "work-history",
     title: "Work history is not marked as completed",

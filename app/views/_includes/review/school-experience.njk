@@ -1,19 +1,18 @@
-{% if applicationValue(["completed", "school-experience"]) %}
-  {{ appSuggestion({
-    title: "Get school experience",
-    content: {
-      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
-    },
-    actions: {
-      items: [{
-        text: "Learn more at Get school experience",
-        href: "https://schoolexperience.education.gov.uk"
-      }]
-    }
-  }) if applicationValue(["school-experience","attained"]) == "false" }}
+{{ appSuggestion({
+  title: "Get school experience",
+  content: {
+    html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
+  },
+  actions: {
+    items: [{
+      text: "Learn more at Get school experience",
+      href: "https://schoolexperience.education.gov.uk"
+    }]
+  }
+}) if applicationValue(["school-experience","attained"]) == "false" }}
 
-  {% include "_includes/item/school-experience.njk" %}
-{% elif showIncomplete %}
+{% include "_includes/item/school-experience.njk" %}
+{% if showIncomplete %}
   {{ appSuggestion({
     id: "school-experience",
     title: "Volunteering with children and young people is not marked as completed",

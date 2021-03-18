@@ -206,7 +206,7 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    {% if applicationValue("work-history-decision") %}
+    {% if applicationValue("work-history-disclose") %}
       {% set workHistoryPath = applicationPath + "/work-history/review" %}
     {% else %}
       {% set workHistoryPath = applicationPath + "/work-history" %}

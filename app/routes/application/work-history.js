@@ -22,7 +22,7 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const { applicationId } = req.params
 
-    const answer = req.body.applications[applicationId]['work-history-decision']
+    const answer = req.body.applications[applicationId]['work-history-disclose']
 
     if (answer !== undefined) {
       res.redirect(`/application/${applicationId}/work-history/review?from=work-history-question`)

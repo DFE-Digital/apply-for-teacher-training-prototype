@@ -1,4 +1,4 @@
-{% extends "_content-wide.njk" %}
+{% extends "_form-wide.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
@@ -6,7 +6,7 @@
 {% set canAmend = true %}
 {% set workHistory = applicationValue(["work-history"]) or {} %}
 {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
-{% set workHistoryDecision = applicationValue(["work-history-decision"]) %}
+{% set workHistoryDecision = applicationValue(["work-history-disclose"]) %}
 
 {% block pageNavigation %}
   {% if fromPage == "work-history-question" %}
@@ -23,9 +23,9 @@
 {% endblock %}
 
 {% block primary %}
-  {% if workHistoryDecision == "yes" %}
+  {% if workHistoryDecision == "Yes" %}
     <div class="govuk-!-width-two-thirds">
-      <p class="govuk-body">Enter all the jobs you've had since you left school.</p>
+      <p class="govuk-body">Enter all the jobs you’ve had since you left school.</p>
       <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness.</p>
     </div>
 
@@ -45,18 +45,16 @@
     {% include "_includes/review/work-history.njk" %}
   {% endif %}
 
-  {% if history.length >= 1 or workHistoryDecision == "no" or workHistoryDecision == "full-time-education"  %}
-    <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
-      {{ govukCheckboxes({
-        items: [{
-          value: "true",
-          text: "I have completed this section"
-        }]
-      } | decorateApplicationAttributes(["completed", "work-history"])) }}
+  {% if history.length >= 1 or workHistoryDecision != "Yes" %}
+    {{ govukCheckboxes({
+      items: [{
+        value: "true",
+        text: "I have completed this section"
+      }]
+    } | decorateApplicationAttributes(["completed", "work-history"])) }}
 
-      {{ govukButton({
-        text: "Save and continue"
-      }) }}
-    </form>
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
   {% endif %}
 {% endblock %}

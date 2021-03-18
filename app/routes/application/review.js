@@ -28,7 +28,7 @@ module.exports = router => {
           english: 'English GCSE or equivalent not entered',
           science: 'Science GCSE or equivalent not entered'
         },
-        interview: 'Tell us your interview needs'
+        interviewNeeds: 'Tell us your interview needs'
       }
 
       for (const [key, value] of Object.entries(sections)) {

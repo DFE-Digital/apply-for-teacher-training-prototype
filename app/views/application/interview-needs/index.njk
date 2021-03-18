@@ -33,7 +33,7 @@
       maxwords: 150,
       threshold: 75,
       rows: 6
-    } | decorateApplicationAttributes(["interview-needs"])) }}
+    } | decorateApplicationAttributes(["interviewNeeds"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -51,7 +51,7 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(["interview-needs-disclose"])) }}
+  } | decorateApplicationAttributes(["interviewNeedsDisclose"])) }}
 
   {{ govukButton({
     text: "Save and continue"

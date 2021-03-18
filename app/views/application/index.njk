@@ -270,11 +270,11 @@
         }
       }, {
         text: "Interview needs",
-        href: applicationPath + "/interview-needs" + ("/review" if applicationValue(["interview-needs"]) | length > 0),
+        href: applicationPath + "/interview-needs" + ("/review" if applicationValue(["interviewNeeds"]) | length > 0),
         id: "interview",
         tag: {
-          classes: tagClass if applicationValue(["completed", "interview-needs"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "interview-needs"]) | length > 0 else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "interviewNeeds"]) | length > 0 else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "interviewNeeds"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}

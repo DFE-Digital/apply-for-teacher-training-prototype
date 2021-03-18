@@ -27,8 +27,8 @@ function createNewApplication (req) {
         science: {}
       },
       'subject-knowledge': null,
-      'interview-needs-disclose': null,
-      'interview-needs': null,
+      interviewNeedsDisclose: null,
+      interviewNeeds: null,
       'personal-statement': null,
       'work-history': {},
       'unpaid-experience': {}

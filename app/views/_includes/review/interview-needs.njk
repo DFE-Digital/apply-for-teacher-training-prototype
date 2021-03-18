@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "interview-needs"]) %}
-{% set entered = applicationValue(["interview-needs-disclose"]) %}
+{% set completed = applicationValue(["completed", "interviewNeeds"]) %}
+{% set entered = applicationValue(["interviewNeedsDisclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,7 +34,7 @@
           text: "Do you have any interview needs?"
         },
         value: {
-          text: applicationValue(["interview-needs-disclose"])
+          text: applicationValue(["interviewNeedsDisclose"])
         },
         actions: {
           items: [{
@@ -48,7 +48,7 @@
           text: "What are your interview needs?"
         },
         value: {
-          text: applicationValue(["interview-needs"])
+          text: applicationValue(["interviewNeeds"])
         },
         actions: {
           items: [{
@@ -57,7 +57,7 @@
             visuallyHiddenText: "interview needs"
           }]
         } if canAmend
-      } if applicationValue(["interview-needs-disclose"]) == "Yes"]
+      } if applicationValue(["interviewNeedsDisclose"]) == "Yes"]
     })
   }) }}
 {% endif %}

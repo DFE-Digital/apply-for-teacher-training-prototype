@@ -27,7 +27,7 @@ function createNewApplication (req) {
         english: {},
         science: {}
       },
-      'subject-knowledge': null,
+      subjectKnowledge: null,
       interviewNeedsDisclose: null,
       interviewNeeds: null,
       'personal-statement': null,

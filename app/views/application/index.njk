@@ -247,11 +247,11 @@
         }
       }, {
         text: "Your suitability to teach a subject or age group",
-        href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subject-knowledge"]) | length > 0),
+        href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subjectKnowledge"]) | length > 0),
         id: "subject-knowledge",
         tag: {
-          classes: tagClass if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "subjectKnowledge"]) | length > 0 else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "subjectKnowledge"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}

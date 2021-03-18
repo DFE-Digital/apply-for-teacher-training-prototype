@@ -1,4 +1,31 @@
-{% if applicationValue(["completed", "suitability"]) %}
+{% set completed = applicationValue(["completed", "suitability"]) %}
+{% set entered = applicationValue(["suitability", "disclose"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you need to declare any safeguarding issues?",
+        href: applicationPath + "/suitability/review?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete safeguarding issues",
+        href: applicationPath + "/suitability/review?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -7,7 +34,7 @@
           text: "Do you want to share any safeguarding issues?"
         },
         value: {
-          text: "Yes" if applicationValue(["suitability", "disclose"]) == 'true' else 'No'
+          text: applicationValue(["suitability", "disclose"])
         },
         actions: {
           items: [{
@@ -30,19 +57,7 @@
             visuallyHiddenText: "the information you are sharing"
           }]
         } if canAmend
-      } if applicationValue(["suitability", "disclose"]) == 'true']
+      } if applicationValue(["suitability", "disclose"]) == "Yes"]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "safeguarding",
-    title: "Safeguarding information not entered",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Do you need to declare any safeguarding issues?",
-        href: applicationPath + "/suitability/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

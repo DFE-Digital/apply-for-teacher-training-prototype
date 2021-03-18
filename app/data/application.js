@@ -141,7 +141,7 @@ module.exports = {
     disclose: 'false'
   },
   suitability: {
-    disclose: 'false'
+    disclose: 'No'
   },
   degree: {
     abcde: {
@@ -157,7 +157,6 @@ module.exports = {
       grade: 'Lower second-class honours (2:2)'
     }
   },
-  'other-qualifications': {},
   gcse: {
     maths: {
       id: 'maths',

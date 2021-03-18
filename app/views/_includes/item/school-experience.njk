@@ -19,7 +19,7 @@
       html: roleHtml
     }) }}
   {% endfor %}
-{% elif applicationValue(["school-experience","attained"]) == "false" %}
+{% elif applicationValue(["school-experience-decision"]) == "No" %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -28,7 +28,7 @@
           text: "Do you have any unpaid experience?"
         },
         value: {
-          text: "Yes" if applicationValue(["school-experience", "attained"]) == "true" else "No"
+          text: applicationValue(["school-experience-decision"])
         },
         actions: {
           items: [{

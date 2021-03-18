@@ -20,7 +20,7 @@
     text: addButtonText,
     href: applicationPath + "/school-experience/add/role?referrer=" + referrer,
     classes: "govuk-button--secondary"
-  }) if applicationValue(["school-experience", "attained"]) != "false" }}
+  }) if applicationValue(["school-experience-decision"]) != "No" }}
 
   {% include "_includes/review/school-experience.njk" %}
 

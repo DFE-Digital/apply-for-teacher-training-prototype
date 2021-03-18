@@ -1,11 +1,11 @@
 {% extends "_form.njk" %}
 
 {% set title = "What is your address?" %}
-{% set formaction = "/application/" + applicationId + "/contact-details/select-address" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/select-address" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/contact-details/where-do-you-live"
+    href: "/application/" + applicationId + "/contact-information/where-do-you-live"
   }) }}
 {% endblock %}
 
@@ -19,13 +19,13 @@
     },
     autocomplete: "postal-code",
     classes: "govuk-input--width-5"
-  } | decorateApplicationAttributes(["contact-details", "address", "postal-code"])) }}
+  } | decorateApplicationAttributes(["contact-information", "address", "postal-code"])) }}
 
   {{ govukButton({
     text: "Look up address"
   }) }}
 
   <p class="govuk-body">
-    <a href="/application/{{ applicationId }}/contact-details/international-address">I live outside the UK</a>
+    <a href="/application/{{ applicationId }}/contact-information/international-address">I live outside the UK</a>
   </p>
 {% endblock %}

@@ -140,11 +140,11 @@
         }
       }, {
         text: "Contact information",
-        href: applicationPath + "/contact-details" + ("/review" if applicationValue(["contact-details", "address"])),
-        id: "contact-details",
+        href: applicationPath + "/contact-information" + ("/review" if applicationValue(["contact-information", "address"])),
+        id: "contact-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "contact-details"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "contact-details"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "contact-information"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "contact-information"]) else incompleteTagText
         }
       }]
     }) }}

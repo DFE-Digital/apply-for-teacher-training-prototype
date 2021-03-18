@@ -2,17 +2,17 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What is your address?" %}
-{% set formaction = "/application/" + applicationId + "/contact-details/review" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/review" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/contact-details/lookup-address"
+    href: "/application/" + applicationId + "/contact-information/lookup-address"
   }) }}
 {% endblock %}
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
-  <p class="govuk-body">{{ applicationValue(["contact-details", "address", "postal-code"]) }} &nbsp; <a href="{{ applicationPath }}/contact-details/lookup-address">Change</a></p>
+  <p class="govuk-body">{{ applicationValue(["contact-information", "address", "postal-code"]) }} &nbsp; <a href="{{ applicationPath }}/contact-information/lookup-address">Change</a></p>
 
   {{ govukRadios({
     fieldset: {
@@ -79,25 +79,25 @@
       text: "Flat 5, 245-247 Baker Street, London",
       value: "Flat 5, 245-247 Baker Street"
     }]
-  } | decorateApplicationAttributes(["contact-details", "address", "line1"])) }}
+  } | decorateApplicationAttributes(["contact-information", "address", "line1"])) }}
 
-  <p class="govuk-body"><a href="{{ applicationPath }}/contact-details/uk-address">I can’t find my address in the list</a></p>
+  <p class="govuk-body"><a href="{{ applicationPath }}/contact-information/uk-address">I can’t find my address in the list</a></p>
 
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-details][address][line2]",
+    name: "applications[" + applicationId + "][contact-information][address][line2]",
     type: "hidden",
     value: "London"
   }) }}
 
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-details][address][country]",
+    name: "applications[" + applicationId + "][contact-information][address][country]",
     type: "hidden",
     value: "United Kingdom"
   }) }}
 
   {# Remove international address if previously entered #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-details][address][street-address]",
+    name: "applications[" + applicationId + "][contact-information][address][street-address]",
     type: "hidden",
     value: ""
   }) }}

@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "Contact information" %}
-{% set formaction = referrer or "/application/" + applicationId + "/contact-details/where-do-you-live" %}
+{% set formaction = referrer or "/application/" + applicationId + "/contact-information/where-do-you-live" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -28,7 +28,7 @@
     classes: "govuk-input--width-20",
     autocomplete: "tel",
     type: "tel"
-  } | decorateApplicationAttributes(["contact-details", "phone-number"])) }}
+  } | decorateApplicationAttributes(["contact-information", "phone-number"])) }}
 
   {% if data.flags.self_amend_email_address %}
     <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Email address</h3>

@@ -1,27 +1,27 @@
-{% set completed = applicationValue(["completed", "contact-details"]) %}
-{% set entered = applicationValue(["contact-details", "phone-number"]) %}
+{% set completed = applicationValue(["completed", "contact-information"]) %}
+{% set entered = applicationValue(["contact-information", "phone-number"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "contact-details",
-    title: "Contact details not entered",
+    id: "contact-information",
+    title: "Contact information not entered",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Enter your contact details",
-        href: applicationPath + "/contact-details/?referrer=" + referrer
+        text: "Enter your contact information",
+        href: applicationPath + "/contact-information/?referrer=" + referrer
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "contact-details",
-    title: "Contact details are not marked as completed",
+    id: "contact-information",
+    title: "Contact information are not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Complete contact details",
-        href: applicationPath + "/contact-details/?referrer=" + referrer
+        text: "Complete contact information",
+        href: applicationPath + "/contact-information/?referrer=" + referrer
       }]
     }
   }) if not completed and showIncomplete }}
@@ -34,11 +34,11 @@
           text: "Phone number"
         },
         value: {
-          text: applicationValue(["contact-details", "phone-number"]) or "Not entered"
+          text: applicationValue(["contact-information", "phone-number"]) or "Not entered"
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-details?referrer=" + referrer,
+            href: applicationPath + "/contact-information?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "phone number"
           }]
@@ -52,7 +52,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-details?referrer=" + referrer,
+            href: applicationPath + "/contact-information?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "email"
           }]
@@ -62,11 +62,11 @@
           text: "Address"
         },
         value: {
-          html: applicationValue(["contact-details", "address"]) | formatAddress | nl2br | safe or "Not entered"
+          html: applicationValue(["contact-information", "address"]) | formatAddress | nl2br | safe or "Not entered"
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-details/where-do-you-live?referrer=" + referrer,
+            href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "address"
           }]

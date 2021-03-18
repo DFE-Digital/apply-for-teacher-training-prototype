@@ -5,7 +5,7 @@ module.exports = {
   ended_without_success: false,
   completed: {
     'personal-information': ['true'],
-    'contact-details': ['true'],
+    'contact-information': ['true'],
     'work-history': ['true'],
     'school-experience': ['true'],
     'additional-support': ['true'],
@@ -126,7 +126,7 @@ module.exports = {
     residency: 'I have the right to work or study in the UK',
     'residency-right-to-work': 'I will need to apply for permission to work or study in the UK'
   },
-  'contact-details': {
+  'contact-information': {
     'phone-number': '07944 386555',
     'address-type': 'domestic',
     address: {

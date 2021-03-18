@@ -1,11 +1,11 @@
 {% extends "_form.njk" %}
 
 {% set title = "Where do you live?" %}
-{% set formaction = "/application/" + applicationId + "/contact-details/where-do-you-live/answer" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/where-do-you-live/answer" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/contact-details/")
+    href: (referrer if referrer else "/application/" + applicationId + "/contact-information/")
   }) }}
 {% endblock %}
 
@@ -16,7 +16,7 @@
         text: "Which country?"
       },
       items: countries
-    } | decorateApplicationAttributes(["contact-details", "address", "country"])) }}
+    } | decorateApplicationAttributes(["contact-information", "address", "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -30,7 +30,7 @@
         html: internationalCountryHtml
       }
     }]
-  } | decorateApplicationAttributes(["contact-details", "address-type"])) }}
+  } | decorateApplicationAttributes(["contact-information", "address-type"])) }}
 
   {{ govukButton({
     text: "Save and continue"
@@ -41,8 +41,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#contact-details-address-country'),
-      defaultValue: '{{ applicationValue(["contact-details", "address", "country"]) }}'
+      selectElement: document.querySelector('#contact-information-address-country'),
+      defaultValue: '{{ applicationValue(["contact-information", "address", "country"]) }}'
     })
   </script>
 {% endblock %}

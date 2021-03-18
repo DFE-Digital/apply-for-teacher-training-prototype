@@ -151,17 +151,9 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Entry requirements</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
     {{ appTaskList({
       items: [{
-        text: "Degree",
-        href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) | length > 0 else "/add"),
-        id: "degree",
-        tag: {
-          classes: tagClass if applicationValue(["completed", "degree"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "degree"]) else incompleteTagText
-        }
-      }, {
         text: "English GCSE or equivalent",
         href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"]) | length > 0),
         id: "english-gcse",
@@ -170,6 +162,14 @@
           text: tagText if applicationValue(["completed", "english"]) else incompleteTagText
         }
       }, {
+        text: "English as a foreign language assessment",
+        href: applicationPath + "/english-language" + ("/review" if applicationValue(["english-language"]) | length > 0),
+        id: "english-language",
+        tag: {
+          classes: tagClass if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagText
+        }
+      } if international, {
         text: "Maths GCSE or equivalent",
         href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"]) | length > 0),
         id: "maths-gcse",
@@ -186,14 +186,22 @@
           text: tagText if applicationValue(["completed", "science"]) else incompleteTagText
         }
       } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
-        text: "English as a foreign language assessment",
-        href: applicationPath + "/english-language" + ("/review" if applicationValue(["english-language"]) | length > 0),
-        id: "english-language",
+        text: "Other qualifications" if international else "A levels and other qualifications",
+        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) | length > 0 else "/add"),
+        id: "other-qualifications",
         tag: {
-          classes: tagClass if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "english-language"]) | length > 0 else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagText
         }
-      } if international]
+      }, {
+        text: "Degree",
+        href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) | length > 0 else "/add"),
+        id: "degree",
+        tag: {
+          classes: tagClass if applicationValue(["completed", "degree"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "degree"]) else incompleteTagText
+        }
+      }]
     }) }}
   </section>
 
@@ -228,7 +236,7 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement and subject knowledge</h2>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
     {{ appTaskList({
       items: [{
         text: "Why you want to teach",
@@ -245,15 +253,6 @@
         tag: {
           classes: tagClass if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagClass,
           text: tagText if applicationValue(["completed", "subject-knowledge"]) | length > 0 else incompleteTagText
-        }
-      }, {
-        text: "Other qualifications",
-        hint: "For example, A level, AS level, GCSE, Diploma",
-        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) | length > 0 else "/add"),
-        id: "other-qualifications",
-        tag: {
-          classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagText
         }
       }]
     }) }}

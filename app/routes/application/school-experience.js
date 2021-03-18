@@ -60,14 +60,9 @@ module.exports = router => {
   router.post('/application/:applicationId/school-experience/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const schoolExperience = application['school-experience']
+    const schoolExperienceDecision = application['school-experience-decision']
 
-    let attained
-    if (schoolExperience) {
-      attained = application['school-experience'].attained
-    }
-
-    if (attained === 'false') {
+    if (schoolExperienceDecision === 'No') {
       res.redirect(`/application/${applicationId}/school-experience/review`)
     } else {
       res.redirect(`/application/${applicationId}/school-experience/add/role`)

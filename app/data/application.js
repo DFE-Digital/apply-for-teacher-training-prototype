@@ -138,10 +138,10 @@ module.exports = {
     }
   },
   'reasonable-adjustments': {
-    disclose: 'false'
+    disclose: 'No'
   },
   suitability: {
-    disclose: 'false'
+    disclose: 'No'
   },
   degree: {
     abcde: {
@@ -157,7 +157,6 @@ module.exports = {
       grade: 'Lower second-class honours (2:2)'
     }
   },
-  'other-qualifications': {},
   gcse: {
     maths: {
       id: 'maths',
@@ -246,7 +245,6 @@ module.exports = {
       'end-date': 'now'
     }
   },
-  'school-experience': {
-    attained: 'false'
-  }
+  'school-experience-decision': 'No',
+  'school-experience': {}
 }

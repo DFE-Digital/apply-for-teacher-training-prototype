@@ -1,4 +1,31 @@
-{% if applicationValue(["completed", "subject-knowledge"]) %}
+{% set completed = applicationValue(["completed", "subject-knowledge"]) %}
+{% set entered = applicationValue(["subject-knowledge"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "subject-knowledge",
+    title: "Subject knowledge not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "What you know about the subject you want to teach?",
+        href: applicationPath + "/subject-knowledge/review?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "subject-knowledge",
+    title: "Subject knowledge not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete Subject knowledge",
+        href: applicationPath + "/subject-knowledge/?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -18,17 +45,5 @@
         } if canAmend
       }]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "subject-knowledge",
-    title: "Subject knowledge not entered",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "What you know about the subject you want to teach?",
-        href: applicationPath + "/subject-knowledge/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

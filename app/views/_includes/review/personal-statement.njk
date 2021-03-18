@@ -1,4 +1,19 @@
-{% if applicationValue(["completed", "personal-statement"]) %}
+{% set completed = applicationValue(["completed", "personal-statement"]) %}
+{% set entered = applicationValue(["personal-statement"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "personal-statement",
+    title: "Personal statement not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Why do you want to be a teacher?",
+        href: applicationPath + "/personal-statement/review?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
   {{ appSuggestion({
     title: "Proofread your personal statement",
     content: {
@@ -25,17 +40,5 @@
         } if canAmend
       }]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "personal-statement",
-    title: "Personal statement not entered",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Why do you want to be a teacher?",
-        href: applicationPath + "/personal-statement/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

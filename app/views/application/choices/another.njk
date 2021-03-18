@@ -8,10 +8,9 @@
 {% set course = provider.courses[courseCode] %}
 
 {% block beforePageTitle %}
-  {{ appBanner({
-    html: "<h2 class=\"govuk-heading-m\">You’ve added " + course.name_and_code + " to your application</h2>",
-    type: "success",
-    icon: false
+  {{ govukNotificationBanner({
+    text: "You’ve added " + course.name_and_code + " to your application",
+    type: "success"
   }) }}
 {% endblock %}
 

@@ -1,6 +1,19 @@
-{% if applicationValue(["completed", "work-history"]) %}
-  {% include "_includes/item/work-history.njk" %}
-{% elif showIncomplete %}
+{% set completed = applicationValue(["completed", "work-history"]) %}
+{% set entered = applicationValue(["work-history-decision"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "work-history",
+    title: "Work history not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your work history",
+        href: applicationPath + "/work-history/?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
   {{ appSuggestion({
     id: "work-history",
     title: "Work history is not marked as completed",
@@ -8,8 +21,10 @@
     actions: {
       items: [{
         text: "Complete your work history",
-        href: applicationPath + "/work-history?referrer=" + referrer
+        href: applicationPath + "/work-history/review?referrer=" + referrer
       }]
     }
-  }) }}
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/work-history.njk" %}
 {% endif %}

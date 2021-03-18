@@ -6,7 +6,6 @@
   or type | replace("qualification", "") | replace("Other UK", "UK") | replace("Non", "non")
 %}
 {% set international = type == "Non-UK qualification" %}
-{% set parent = "Other qualifications" %}
 {% set action = "edit" if applicationValue(["other-qualifications", id, "subject"]) else "add" %}
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 {% set allowsFeedback = true %}

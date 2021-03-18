@@ -287,7 +287,6 @@ module.exports = {
       'end-date': 'now'
     }
   },
-  'school-experience': {
-    attained: 'false'
-  }
+  'school-experience-decision': 'No',
+  'school-experience': {}
 }

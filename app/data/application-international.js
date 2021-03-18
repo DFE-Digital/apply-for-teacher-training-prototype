@@ -137,7 +137,7 @@ module.exports = {
   },
   additionalSupportDisclose: 'Yes',
   additionalSupport: 'I currently require the use of a wheelchair.',
-  'safeguarding-disclose': 'Yes',
+  safeguardingDisclose: 'Yes',
   safeguarding: 'I have a criminal record in Spain',
   degree: {
     kq19m: {

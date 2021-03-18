@@ -137,7 +137,7 @@ module.exports = {
     }
   },
   additionalSupportDisclose: 'No',
-  'safeguarding-disclose': 'No',
+  safeguardingDisclose: 'No',
   degree: {
     abcde: {
       id: 'kq19m',

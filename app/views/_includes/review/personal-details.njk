@@ -1,4 +1,31 @@
-{% if applicationValue(["completed", "personal-details"]) %}
+{% set completed = applicationValue(["completed", "personal-details"]) %}
+{% set entered = applicationValue(["candidate", "given-name"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "candidate",
+    title: "Personal details not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your personal details",
+        href: applicationPath + "/personal-details/?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "candidate",
+    title: "Personal details are not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete personal details",
+        href: applicationPath + "/personal-details/review?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
   {% set residencyText %}
     <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
     {% if applicationValue(["candidate", "residency-right-to-work"]) and applicationValue(["candidate", "residency"]) == "I have the right to work or study in the UK" %}
@@ -67,17 +94,5 @@
         } if canAmend
       } if applicationValue(["candidate", "residency"])]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "candidate",
-    title: "Personal details are not marked as completed",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Enter your personal details",
-        href: applicationPath + "/personal-details/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

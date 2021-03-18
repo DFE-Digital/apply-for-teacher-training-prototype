@@ -298,10 +298,14 @@ module.exports = router => {
         choices.ZYXWV.status = 'Awaiting decision'
         break
 
+      // Actionable feedback
       case 'ended-without-success':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          performanceAtInterview: "You did not show sufficient depth within your responses during the Interview. This was most evident when you were asked about what it means to be a primary teacher.<br><br>You demonstrated a lack of critical evaluation within presentation and research questions.<br><br>The detail we are looking for is outlined in our selection criteria, which can be found attached to the interview invitation letter. For future applications, you could improve by ensuring you are able to cover and evidence the selection criteria."
+          qualityOfApplication: {
+            personalStatement: "Contained several spelling mistakes and grammatical errors.\n\nThe candidate should describe the impact they want to have on their students in more detail.",
+            other: "Candidate was not able to demonstrate sufficient experience of working with children."
+          }
         }
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
@@ -313,7 +317,64 @@ module.exports = router => {
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made."
+          qualityOfApplication: {
+            personalStatement: "Focus more on why teaching is the career for you.",
+            subjectKnowledge: "Look at ways to evidence subject knowledge within your application or supporting statement."
+          }
+        }
+        break
+
+      // Vague feedback
+      case 'ended-without-success-vague-feedback':
+        choices.ABCDE.status = 'Unsuccessful'
+        choices.ABCDE.feedback = {
+          qualityOfApplication: {
+            personalStatement: "The overall application was weak suggesting that the applicant may not be successful on the course",
+            subjectKnowledge: "Lack of reference regarding the subject."
+          }
+        }
+        choices.FGHIJ.status = 'Unsuccessful'
+        choices.FGHIJ.feedback = {
+          performanceAtInterview: "You had not made a sufficiently considered and informed decision to train to teach.",
+          qualityOfApplication: {
+            personalStatement: "The quality of communication in the personal statement could be improved."
+          },
+          additionalFeedback: "There have been limited places for this course and stronger applications received."
+        }
+        choices.ZYXWV.status = 'Unsuccessful'
+        choices.ZYXWV.interview = null
+        choices.ZYXWV.feedback = {
+          qualityOfApplication: {
+            personalStatement: "Focus more on why teaching is the career for you.",
+            subjectKnowledge: "Academic record does not look strong enough to cope with the PGCE that is mandatory this year, on top of heavy planning and teaching workload."
+          },
+          additionalFeedback: "You could apply for the unsalaried route that we offer."
+        }
+        break
+
+      // Qualifications feedback
+      case 'ended-without-success-qualifications-feedback':
+        choices.ABCDE.status = 'Unsuccessful'
+        choices.ABCDE.feedback = {
+          qualifications: {
+            noMathsGCSEOrEquivalent: true
+          }
+        }
+        choices.FGHIJ.status = 'Unsuccessful'
+        choices.FGHIJ.feedback = {
+          qualifications: {
+            noMathsGCSEOrEquivalent: true,
+            other: "Our minimum degree requirement is a 2:1. We cannot accepted degrees with a 2:2 or below."
+          },
+          additionalFeedback: "There have been limited places for this course and stronger applications received."
+        }
+        choices.ZYXWV.status = 'Unsuccessful'
+        choices.ZYXWV.interview = null
+        choices.ZYXWV.feedback = {
+          qualifications: {
+            noMathsGCSEOrEquivalent: true,
+            other: "Thank you for your application. Unfortunately you do not meet our entry requirements in terms of subject knowledge. As your degree is not in English you would need A Levels of grade C or above in English Language and English Literature."
+          }
         }
         break
 

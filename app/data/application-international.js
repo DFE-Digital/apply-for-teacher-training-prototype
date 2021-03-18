@@ -4,7 +4,7 @@ module.exports = {
   apply2: false,
   ended_without_success: false,
   completed: {
-    'personal-details': ['true'],
+    'personal-information': ['true'],
     'contact-details': ['true'],
     'work-history': ['true'],
     'school-experience': ['true'],

@@ -1,11 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/personal-details/review" %}
+{% set formaction = referrer or "/application/" + applicationId + "/personal-information/review" %}
 {% set title = "Your right to work or study in the UK" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-details/nationality/")
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/nationality/")
   }) }}
 {% endblock %}
 

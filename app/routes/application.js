@@ -140,7 +140,7 @@ module.exports = router => {
   })
 
   require('./application/choices')(router)
-  require('./application/personal-details')(router)
+  require('./application/personal-information')(router)
   require('./application/contact-details')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)

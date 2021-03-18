@@ -1,27 +1,27 @@
-{% set completed = applicationValue(["completed", "personal-details"]) %}
+{% set completed = applicationValue(["completed", "personal-information"]) %}
 {% set entered = applicationValue(["candidate", "given-name"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
     id: "candidate",
-    title: "Personal details not entered",
+    title: "Personal information not entered",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Enter your personal details",
-        href: applicationPath + "/personal-details/?referrer=" + referrer
+        text: "Enter your personal information",
+        href: applicationPath + "/personal-information/?referrer=" + referrer
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
     id: "candidate",
-    title: "Personal details are not marked as completed",
+    title: "Personal information are not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Complete personal details",
-        href: applicationPath + "/personal-details/review?referrer=" + referrer
+        text: "Complete personal information",
+        href: applicationPath + "/personal-information/review?referrer=" + referrer
       }]
     }
   }) if not completed and showIncomplete }}
@@ -45,7 +45,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-details?referrer=" + referrer,
+            href: applicationPath + "/personal-information?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "name"
           }]
@@ -59,7 +59,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-details?referrer=" + referrer,
+            href: applicationPath + "/personal-information?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "date of birth"
           }]
@@ -73,7 +73,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-details/nationality?referrer=" + referrer,
+            href: applicationPath + "/personal-information/nationality?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "nationality"
           }]
@@ -87,7 +87,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-details/residency?referrer=" + referrer,
+            href: applicationPath + "/personal-information/residency?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "immigration status"
           }]

@@ -71,7 +71,7 @@
       items: [{
         text: "Choose your course" if applicationValue(["apply2"]) else "Choose your courses",
         href: applicationPath + "/choices",
-        id: "personal-details",
+        id: "personal-information",
         tag: {
           classes: tagClass if applicationValue(["completed", "choices"]) else incompleteTagClass,
           text: tagText if applicationValue(["completed", "choices"]) else incompleteTagText
@@ -132,11 +132,11 @@
     {{ appTaskList({
       items: [{
         text: "Personal information",
-        href: applicationPath + "/personal-details" + ("/review" if applicationValue(["candidate"]) | length > 0),
-        id: "personal-details",
+        href: applicationPath + "/personal-information" + ("/review" if applicationValue(["candidate"]) | length > 0),
+        id: "personal-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "personal-details"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "personal-details"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "personal-information"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "personal-information"]) else incompleteTagText
         }
       }, {
         text: "Contact information",

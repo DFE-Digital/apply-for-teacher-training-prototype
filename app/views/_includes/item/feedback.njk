@@ -72,15 +72,3 @@
   text: item.feedback.additionalFeedback | nl2br | safe
 }) }}
 {% endif %}
-
-{% if item.feedback.interested_in_future_applications != null %}
-<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Future applications</h4>
-
-<p class="govuk-body">
-  {% if item.feedback.interested_in_future_applications %}
-    The provider would be interested in future applications from you.
-  {% else %}
-    The provider would not be interested in future applications from you.
-  {% endif %}
-</p>
-{% endif %}

@@ -15,7 +15,7 @@ module.exports = {
     maths: ['true'],
     english: ['true'],
     science: ['true'],
-    'english-language': ['true'],
+    englishLanguage: ['true'],
     personalStatement: ['true'],
     subjectKnowledge: ['true'],
     interviewNeeds: ['true']

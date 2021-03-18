@@ -15,7 +15,7 @@ module.exports = {
     english: ['true'],
     science: ['true'],
     'other-qualifications': ['true'],
-    'english-language': ['true'],
+    englishLanguage: ['true'],
     personalStatement: ['true'],
     subjectKnowledge: ['true'],
     interviewNeeds: ['true']
@@ -168,7 +168,7 @@ module.exports = {
       hasGrade: 'No'
     }
   },
-  'english-language': {
+  englishLanguage: {
     answer: 'Yes',
     type: 'IELTS',
     grade: '7.5',

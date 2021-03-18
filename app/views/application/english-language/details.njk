@@ -23,7 +23,7 @@
 {% endif %}
 
 {% set parent = "English as a foreign language" %}
-{% set action = "edit" if applicationValue(["english-language", "subject"]) else "your" %}
+{% set action = "edit" if applicationValue(["englishLanguage", "subject"]) else "your" %}
 {% set title = (action | capitalize) + " " + assessmentName + " result" %}
 
 {% block pageNavigation %}
@@ -48,7 +48,7 @@
       hint: {
         text: certificateHintText
       }
-    } | decorateApplicationAttributes(["english-language", "certificateNumber"])) }}
+    } | decorateApplicationAttributes(["englishLanguage", "certificateNumber"])) }}
   {% else %}
     {{ govukInput({
       label: {
@@ -58,7 +58,7 @@
       hint: {
         text: "For example, CAE (Cambridge Advanced English), Pearson Test of English"
       }
-    } | decorateApplicationAttributes(["english-language", "typeOther"])) }}
+    } | decorateApplicationAttributes(["englishLanguage", "typeOther"])) }}
   {% endif %}
 
   {{ govukInput({
@@ -70,7 +70,7 @@
       text: gradeHintText
     },
     classes: "govuk-input--width-" + (gradeWidth | default(10))
-  } | decorateApplicationAttributes(["english-language", "grade"])) }}
+  } | decorateApplicationAttributes(["englishLanguage", "grade"])) }}
 
   {{ govukInput({
     label: {
@@ -81,7 +81,7 @@
       text: "Give the year, for example: ‘2020’"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["english-language", "year"])) }}
+  } | decorateApplicationAttributes(["englishLanguage", "year"])) }}
 
   {{ govukButton({
     text: "Save and continue"

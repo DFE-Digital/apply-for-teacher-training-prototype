@@ -14,7 +14,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const { applicationId } = req.params
     const { referrer } = req.query
-    const { answer } = application['english-language']
+    const { answer } = application.englishLanguage
 
     let path
     if (answer === 'Yes') {
@@ -31,7 +31,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const { view } = req.params
     const { referrer } = req.query
-    const { type } = application['english-language']
+    const { type } = application.englishLanguage
 
     res.render(`application/english-language/${view}`, {
       referrer,

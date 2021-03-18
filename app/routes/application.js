@@ -30,7 +30,7 @@ function createNewApplication (req) {
       interview: null,
       'personal-statement': null,
       'work-history': {},
-      'school-experience': {}
+      'unpaid-experience': {}
     }
   }
 
@@ -144,7 +144,7 @@ module.exports = router => {
   require('./application/contact-information')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)
-  require('./application/school-experience')(router)
+  require('./application/unpaid-experience')(router)
   require('./application/additional-support')(router)
   require('./application/safeguarding')(router)
   require('./application/vocation')(router)

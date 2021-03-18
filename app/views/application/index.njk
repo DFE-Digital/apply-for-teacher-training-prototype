@@ -222,14 +222,13 @@
           classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,
           text: tagText if applicationValue(["completed", "work-history"]) else incompleteTagText
         }
-      },
-      {
+      }, {
         text: "Unpaid experience",
-        href: applicationPath + "/school-experience" + ("/review" if applicationValue("school-experience") | length > 0),
-        id: "school-experience",
+        href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaid-experience") | length > 0),
+        id: "unpaid-experience",
         tag: {
-          classes: tagClass if applicationValue(["completed", "school-experience"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "school-experience"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "unpaid-experience"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "unpaid-experience"]) else incompleteTagText
         }
       }]
     }) }}

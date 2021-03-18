@@ -8,7 +8,7 @@ module.exports = {
     'personal-information': ['true'],
     'contact-information': ['true'],
     'work-history': ['true'],
-    'school-experience': ['true'],
+    'unpaid-experience': ['true'],
     'additional-support': ['true'],
     safeguarding: ['true'],
     degree: ['true'],
@@ -245,6 +245,6 @@ module.exports = {
       'end-date': 'now'
     }
   },
-  'school-experience-decision': 'No',
-  'school-experience': {}
+  'unpaid-experience-decision': 'No',
+  'unpaid-experience': {}
 }

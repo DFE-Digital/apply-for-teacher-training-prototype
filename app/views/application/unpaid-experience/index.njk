@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Unpaid experience" %}
-{% set formaction = applicationPath + "/school-experience/answer" %}
+{% set formaction = applicationPath + "/unpaid-experience/answer" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -41,7 +41,7 @@
       value: "No",
       text: "No"
     }]
-  } | decorateApplicationAttributes(["school-experience-decision"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience-decision"])) }}
 
   {{ govukButton({
     text: "Save and continue"

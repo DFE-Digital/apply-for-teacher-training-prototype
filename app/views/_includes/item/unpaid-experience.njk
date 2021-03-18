@@ -1,5 +1,5 @@
-{% set schoolExperience = applicationValue(["school-experience"]) %}
-{% set roles = schoolExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
+{% set unpaidExperience = applicationValue(["unpaid-experience"]) %}
+{% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
 
 {% if roles.length >= 1 %}
   {% for item in roles %}
@@ -12,14 +12,14 @@
       titleHtml: item.role,
       actions: {
         items: [{
-          href: applicationPath + "/school-experience/" + item.id + "/delete?referrer=" + referrer,
+          href: applicationPath + "/unpaid-experience/" + item.id + "/delete?referrer=" + referrer,
           text: "Delete role"
         }]
       } if canAmend,
       html: roleHtml
     }) }}
   {% endfor %}
-{% elif applicationValue(["school-experience-decision"]) == "No" %}
+{% elif applicationValue(["unpaid-experience-decision"]) == "No" %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -28,11 +28,11 @@
           text: "Do you have any unpaid experience?"
         },
         value: {
-          text: applicationValue(["school-experience-decision"])
+          text: applicationValue(["unpaid-experience-decision"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/school-experience?referrer=" + referrer,
+            href: applicationPath + "/unpaid-experience?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "if you have any unpaid experience"
           }]

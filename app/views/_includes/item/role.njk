@@ -2,7 +2,7 @@
   {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
 {% endset %}
 
-{% set changeHref = applicationPath + "/school-experience/role/" + item.id + "?referrer=" + referrer %}
+{% set changeHref = applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer %}
 
 {{ govukSummaryList({
   rows: [{

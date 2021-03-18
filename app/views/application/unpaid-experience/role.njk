@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Unpaid experience" %}
-{% set action = "edit" if applicationValue(["school-experience", id, "role"]) else "add" %}
+{% set action = "edit" if applicationValue(["unpaid-experience", id, "role"]) else "add" %}
 {% set title = (action | capitalize) + " role" %}
 
 {% block pageNavigation %}
@@ -12,7 +12,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: applicationPath + "/school-experience"
+      href: applicationPath + "/unpaid-experience"
     }) }}
   {% endif %}
 {% endblock %}
@@ -24,14 +24,14 @@
       text: "Your role",
       classes: "govuk-label--m"
     }
-  } | decorateApplicationAttributes(["school-experience", id, "role"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "role"])) }}
 
   {{ govukInput({
     label: {
       text: "Organisation where you gained experience or volunteered",
       classes: "govuk-label--m"
     }
-  } | decorateApplicationAttributes(["school-experience", id, "org"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "org"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -45,10 +45,10 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(["school-experience", id, "worked-with-children"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "worked-with-children"])) }}
 
-  {% set startDate = applicationValue(["school-experience", id, "start-date"]) %}
-  {% set endDate = applicationValue(["school-experience", id, "end-date"]) %}
+  {% set startDate = applicationValue(["unpaid-experience", id, "start-date"]) %}
+  {% set endDate = applicationValue(["unpaid-experience", id, "end-date"]) %}
   {{ govukDateInput({
     fieldset: {
       legend: {
@@ -71,14 +71,14 @@
       value: startDate | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(["school-experience", id, "start-date"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "start-date"])) }}
 
   {{ govukCheckboxes({
     items: [{
       value: "true",
       text: "I’m not sure the exact month or year I started"
     }]
-  } | decorateApplicationAttributes(["school-experience", id, "start-date-is-exact"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "start-date-is-exact"])) }}
 
   {% set endDateHtml %}
     {{ govukDateInput({
@@ -103,14 +103,14 @@
         value: endDate | date("yyyy"),
         classes: "govuk-input--width-4"
       }]
-    } | decorateApplicationAttributes(["school-experience", id, "end-date"])) }}
+    } | decorateApplicationAttributes(["unpaid-experience", id, "end-date"])) }}
 
     {{ govukCheckboxes({
       items: [{
         value: "true",
         text: "I’m not sure the exact month or year I left"
       }]
-    } | decorateApplicationAttributes(["school-experience", id, "end-date-is-exact"])) }}
+    } | decorateApplicationAttributes(["unpaid-experience", id, "end-date-is-exact"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -128,7 +128,7 @@
         html: endDateHtml
       }
     }]
-  } | decorateApplicationAttributes(["school-experience", id, "end-date"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "end-date"])) }}
 
   {{ govukCharacterCount({
     label: {
@@ -139,7 +139,7 @@
       text: "For example, ‘I volunteer in the classroom every Friday morning’ or ‘I spent 1 day observing in this school’ or ‘I am a Scout Leader involved in activities throughout the year’"
     },
     maxwords: 150
-  } | decorateApplicationAttributes(["school-experience", id, "time-commitment"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "time-commitment"])) }}
 
   {{ govukButton({
     text: "Save and continue"

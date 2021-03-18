@@ -3,10 +3,10 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set title = "Unpaid experience" %}
-{% set referrer = applicationPath + "/school-experience/review" %}
+{% set referrer = applicationPath + "/unpaid-experience/review" %}
 {% set canAmend = true %}
-{% set schoolExperience = applicationValue("school-experience") | toArray | selectattr("id") %}
-{% set addButtonText = "Add another role" if schoolExperience.length >= 1 else "Add a role" %}
+{% set unpaidExperience = applicationValue("unpaid-experience") | toArray | selectattr("id") %}
+{% set addButtonText = "Add another role" if unpaidExperience.length >= 1 else "Add a role" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -18,18 +18,18 @@
 {% block primary %}
   {{ govukButton({
     text: addButtonText,
-    href: applicationPath + "/school-experience/add/role?referrer=" + referrer,
+    href: applicationPath + "/unpaid-experience/add/role?referrer=" + referrer,
     classes: "govuk-button--secondary"
-  }) if applicationValue(["school-experience-decision"]) != "No" }}
+  }) if applicationValue(["unpaid-experience-decision"]) != "No" }}
 
-  {% include "_includes/review/school-experience.njk" %}
+  {% include "_includes/review/unpaid-experience.njk" %}
 
   {{ govukCheckboxes({
     items: [{
       value: "true",
       text: "I have completed this section"
     }]
-  } | decorateApplicationAttributes(["completed", "school-experience"])) }}
+  } | decorateApplicationAttributes(["completed", "unpaid-experience"])) }}
 
   {{ govukButton({
     text: "Continue"

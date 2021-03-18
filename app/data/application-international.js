@@ -136,10 +136,8 @@ module.exports = {
       'postal-code': 'G1 3AH'
     }
   },
-  'additional-support': {
-    disclose: 'Yes',
-    statement: 'I currently require the use of a wheelchair.'
-  },
+  'additional-support-disclose': 'Yes',
+  'additional-support': 'I currently require the use of a wheelchair.',
   'safeguarding-disclose': 'Yes',
   safeguarding: 'I have a criminal record in Spain',
   degree: {

@@ -137,9 +137,7 @@ module.exports = {
       'postal-code': 'LS28 7DQ'
     }
   },
-  'additional-support': {
-    disclose: 'No'
-  },
+  'additional-support-disclose': 'No',
   'safeguarding-disclose': 'No',
   degree: {
     abcde: {

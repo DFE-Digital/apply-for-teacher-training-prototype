@@ -1,21 +1,36 @@
-{% set complete = "true" if applicationValue(["completed", id]) %}
+{% set completed = applicationValue(["completed", id]) %}
+{% set entered = applicationValue(["gcse", id, "type"]) %}
 
-{{ appSuggestion({
-  id: "gcse-" + id,
-  title: id | capitalize + " GCSE or equivalent not entered",
-  warning: true if errorList,
-  actions: {
-    items: [{
-      text: "Enter your " + id | capitalize + " GCSE or equivalent",
-      href: applicationPath + "/" + id + "/review?referrer=" + referrer
-    }]
-  }
-}) if showIncomplete and not complete }}
+{% if not entered %}
+  {{ appSuggestion({
+    id: "gcse-" + id,
+    title: id | capitalize + " GCSE or equivalent not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your " + id | capitalize + " GCSE or equivalent",
+        href: applicationPath + "/gcse/" + id + "/?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+{% else %}
+  {{ appSuggestion({
+    id: "gcse-" + id,
+    title: id | capitalize + " GCSE or equivalent not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete your " + id | capitalize + " GCSE or equivalent",
+        href: applicationPath + "/gcse/" + id + "/review?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
 
-{% set summaryCardHtml %}{% include "_includes/item/gcse.njk" %}{% endset %}
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  headingLevel: 3,
-  titleText: id | capitalize + " GCSE or equivalent",
-  html: summaryCardHtml
-}) if complete }}
+  {% set summaryCardHtml %}{% include "_includes/item/gcse.njk" %}{% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: id | capitalize + " GCSE or equivalent",
+    html: summaryCardHtml
+  }) }}
+{% endif %}

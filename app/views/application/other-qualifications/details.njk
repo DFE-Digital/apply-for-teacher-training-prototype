@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualificationName =
-  applicationValue(["other-qualifications", id, "type-uk"])
+  applicationValue(["other-qualifications", id, "typeUk"])
   or type | replace("qualification", "") | replace("Other UK", "UK") | replace("Non", "non")
 %}
 {% set international = type == "Non-UK qualification" %}

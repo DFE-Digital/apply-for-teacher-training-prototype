@@ -3,7 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% set completed =  applicationValue(["degree", id, "completed"]) == "Yes" %}
-{% set undergraduateDegree = applicationValue(["degree", id, "type-uk"]) | isUndergraduateDegree %}
+{% set undergraduateDegree = applicationValue(["degree", id, "typeUk"]) | isUndergraduateDegree %}
 {% if completed %}
   {% if international %}
     {% set title = "Did your degree give a grade?" %}
@@ -46,7 +46,7 @@
 
   {% set otherUkGradeHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label" for="degree-{{ id }}-grade-other">Enter your degree grade</label>
+      <label class="govuk-label" for="degree-{{ id }}-gradeOther">Enter your degree grade</label>
       <div id="grade-autocomplete-container" class="govuk-input--width-20"></div>
     </div>
   {% endset %}
@@ -69,7 +69,7 @@
       }, {
         text: "I do not know"
       }]
-    } | decorateApplicationAttributes(["degree", id, "has-grade"])) }}
+    } | decorateApplicationAttributes(["degree", id, "hasGrade"])) }}
   {% else %}
     {{ govukRadios({
       items: [{
@@ -114,9 +114,9 @@
     <script>
       accessibleAutocomplete({
         element: document.querySelector('#grade-autocomplete-container'),
-        id: 'degree-{{ id }}-grade-other',
-        name: "applications[{{ applicationId }}][degree][{{ id }}][grade-other]",
-        defaultValue: '{{ applicationValue(["degree", id, "grade-other"]) }}',
+        id: 'degree-{{ id }}-gradeOther',
+        name: "applications[{{ applicationId }}][degree][{{ id }}][gradeOther]",
+        defaultValue: '{{ applicationValue(["degree", id, "gradeOther"]) }}',
         placeholder: false,
         source: [
           'Aegrotat',

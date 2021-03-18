@@ -3,8 +3,8 @@
 {% set nonUK = item.type == "Non-UK qualification" %}
 
 {% set qualificationText -%}
-  {%- if item["type-uk"] or item["type-non-uk"] or item.type %}
-    {{- (item["type-uk"] if item["type-uk"]) or (item["type-non-uk"] if item["type-non-uk"]) or item.type }}
+  {%- if item.typeUk or item.typeNonUk or item.type %}
+    {{- (item.typeUk if item.typeUk) or (item.typeNonUk if item.typeNonUk) or item.type }}
     {%- if nonUK -%}
       {{ item["award-org"] + ", " + item.country if item["award-org"] }}
     {%- endif %}
@@ -14,31 +14,31 @@
 {%- endset %}
 
 {% if item.type == "GCSE" and id == "maths" %}
-  {% set gradeHtml = item["grade-single"] %}
+  {% set gradeHtml = item.gradeSingle %}
 {% elif item.type == "GCSE" and id == "english" %}
   {% set gradeHtml %}
   <ul class="govuk-list">
-    {% if item["grade-english"] %}<li>{{ item["grade-english"] }} (English)</li>{% endif %}
-    {% if item["grade-language"] %}<li>{{ item["grade-language"] }} (English Language)</li>{% endif %}
-    {% if item["grade-literature"] %}<li>{{ item["grade-literature"] }} (English Literature)</li>{% endif %}
-    {% if item["grade-studies"] %}<li>{{ item["grade-studies"] }} (English Studies)</li>{% endif %}
-    {% if item["grade-other"] %}<li>{{ item["grade-other"] }} ({{ item.subject }})</li>{% endif %}
+    {% if item.gradeEnglish %}<li>{{ item.gradeEnglish }} (English)</li>{% endif %}
+    {% if item.gradeLanguage %}<li>{{ item.gradeLanguage }} (English Language)</li>{% endif %}
+    {% if item.gradeLiterature %}<li>{{ item.gradeLiterature }} (English Literature)</li>{% endif %}
+    {% if item.gradeStudies %}<li>{{ item.gradeStudies }} (English Studies)</li>{% endif %}
+    {% if item.gradeOther %}<li>{{ item.gradeOther }} ({{ item.subject }})</li>{% endif %}
   </ul>
   {% endset %}
 {% elif item.type == "GCSE" and id == "science" %}
   {% set gradeHtml %}
-  {% if item["grade-single"] %}{{ item["grade-single"] }} (Single Award){% endif %}
-  {% if item["grade-double"] %}{{ item["grade-double"] }} (Double Award){% endif %}
-  {% if item["grade-biology"] or item["grade-chemistry"] or item["grade-physics"] %}
+  {% if item.gradeSingle %}{{ item.gradeSingle }} (Single Award){% endif %}
+  {% if item.gradeDouble %}{{ item.gradeDouble }} (Double Award){% endif %}
+  {% if item.gradeBiology or item.gradeChemistry or item.gradePhysics %}
   <ul class="govuk-list">
-    <li>{{ item["grade-biology"] }} (Biology)</li>
-    <li>{{ item["grade-chemistry"] }} (Chemistry)</li>
-    <li>{{ item["grade-physics"] }} (Physics)</li>
+    <li>{{ item.gradeBiology }} (Biology)</li>
+    <li>{{ item.gradeChemistry }} (Chemistry)</li>
+    <li>{{ item.gradePhysics }} (Physics)</li>
   </ul>
   {% endif %}
 {% endset %}
 {% else %}
-  {% set gradeHtml = item['grade-other'] or item.grade %}
+  {% set gradeHtml = item.gradeOther or item.grade %}
 {% endif %}
 
 {% if missing %}
@@ -108,7 +108,7 @@
         text: "UK ENIC reference number"
       },
       value: {
-        text: item["enic-reference"] or "Not entered"
+        text: item.enicReference or "Not entered"
       },
       actions: {
         items: [{
@@ -117,12 +117,12 @@
           visuallyHiddenText: "UK ENIC reference"
         }]
       } if canAmend
-    } if item.enic and item["enic-reference"], {
+    } if item.enic and item.enicReference, {
       key: {
         text: "Comparable UK qualification"
       },
       value: {
-        text: item["enic-comparability"] or "Not entered"
+        text: item.enicComparability or "Not entered"
       },
       actions: {
         items: [{
@@ -131,7 +131,7 @@
           visuallyHiddenText: "comparable UK qualification"
         }]
       } if canAmend
-    } if item.enic and item["enic-comparability"], {
+    } if item.enic and item.enicComparability, {
       key: {
         text: "Grade"
       },

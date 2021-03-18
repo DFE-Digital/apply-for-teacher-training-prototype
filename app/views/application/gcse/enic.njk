@@ -23,7 +23,7 @@
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["gcse", id, "enic-reference"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "enicReference"])) }}
 
     {{ govukRadios({
       fieldset: {
@@ -44,7 +44,7 @@
       }, {
         text: "GCE Advanced (A) level"
       }]
-    } | decorateApplicationAttributes(["gcse", id, "enic-comparability"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "enicComparability"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}

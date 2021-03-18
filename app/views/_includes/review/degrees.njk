@@ -42,7 +42,7 @@
 {% set degrees = degrees | selectattr("id") %}
 {% for item in degrees %}
   {% set summaryCardHtml %}{% include "_includes/item/degree.njk" %}{% endset %}
-  {% set degreeType = (item["type-uk"] or item["type-nonuk"]) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
+  {% set degreeType = (item.typeUk or item.typeNonUk) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,

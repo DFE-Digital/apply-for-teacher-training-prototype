@@ -142,12 +142,12 @@ module.exports = {
     abcde: {
       id: 'kq19m',
       provenance: 'domestic',
-      'type-uk': 'BSc',
+      typeUk: 'BSc',
       subject: 'Physics',
       org: 'The University of Edinburgh',
       country: 'United Kingdom',
-      'year-start': '2006',
-      'year-end': '2009',
+      yearStart: '2006',
+      yearEnd: '2009',
       completed: 'Yes',
       grade: 'Lower second-class honours (2:2)'
     }
@@ -156,7 +156,7 @@ module.exports = {
     maths: {
       id: 'maths',
       type: 'GCSE',
-      'grade-single': 'A*',
+      gradeSingle: 'A*',
       year: '2004',
       country: 'United Kingdom'
     },
@@ -164,8 +164,8 @@ module.exports = {
       id: 'english',
       type: 'GCSE',
       exam: ['English Language', 'English Literature'],
-      'grade-language': 'C',
-      'grade-literature': 'B',
+      gradeLanguage: 'C',
+      gradeLiterature: 'B',
       year: '2004',
       country: 'United Kingdom'
     },
@@ -173,7 +173,7 @@ module.exports = {
       id: 'science',
       type: 'GCSE',
       exam: 'Double (or combined) award',
-      'grade-double': 'A*A*',
+      gradeDouble: 'A*A*',
       year: '2004',
       country: 'United Kingdom'
     }

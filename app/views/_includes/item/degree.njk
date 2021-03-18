@@ -4,7 +4,7 @@
       text: "Degree type"
     },
     value: {
-      text: item["type-uk"] or item["type-nonuk"] or "Not entered"
+      text: item.typeUk or item.typeNonUk or "Not entered"
     },
     actions: {
       items: [{
@@ -60,7 +60,7 @@
       text: "UK ENIC reference number"
     },
     value: {
-      text: item["enic-reference"] or "Not entered"
+      text: item.enicReference or "Not entered"
     },
     actions: {
       items: [{
@@ -69,12 +69,12 @@
         visuallyHiddenText: "UK ENIC reference"
       }]
     } if canAmend
-  } if item.enic and item["enic-reference"], {
+  } if item.enic and item.enicReference, {
     key: {
       text: "Comparable UK degree"
     },
     value: {
-      text: item["enic-comparability"] or "Not entered"
+      text: item.enicComparability or "Not entered"
     },
     actions: {
       items: [{
@@ -83,7 +83,7 @@
         visuallyHiddenText: "comparable UK degree"
       }]
     } if canAmend
-  } if item.enic and item["enic-comparability"], {
+  } if item.enic and item.enicComparability, {
     key: {
       text: "Have you completed this degree?"
     },
@@ -102,7 +102,7 @@
       text: "Does this degree give a grade?"
     },
     value: {
-      text: item["has-grade"] or "Not entered"
+      text: item.hasGrade or "Not entered"
     },
     actions: {
       items: [{
@@ -111,7 +111,7 @@
         visuallyHiddenText: "if this degree give a grade"
       }]
     } if canAmend
-  } if item["has-grade"], {
+  } if item.hasGrade, {
     key: {
       text: "Grade" if item.completed == "Yes" else "Predicted grade"
     },
@@ -130,7 +130,7 @@
       text: "Start year"
     },
     value: {
-      text: item["year-start"] or "Not entered"
+      text: item.yearStart or "Not entered"
     },
     actions: {
       items: [{
@@ -144,7 +144,7 @@
       text: "Graduation year"
     },
     value: {
-      text: item["year-end"] or "Not entered"
+      text: item.yearEnd or "Not entered"
     },
     actions: {
       items: [{

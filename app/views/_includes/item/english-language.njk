@@ -1,7 +1,7 @@
 {% set na = applicationValue(["english-language", "answer"]) == "No, English is not a foreign language to me" %}
 {% set missing = applicationValue(["english-language", "answer"]) == "No, I do not have an English as a foreign language qualification" %}
 {% set item = applicationValue(["english-language"]) %}
-{% set type = item["type-other"] or item.type or "Not entered" %}
+{% set type = item.typeOther or item.type or "Not entered" %}
 {% if item.type == "IELTS" %}
   {% set certificateItemText = "Test report form (TRF) number" %}
   {% set gradeItemText = "Overall band score" %}

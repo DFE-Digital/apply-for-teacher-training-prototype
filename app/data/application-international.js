@@ -143,29 +143,29 @@ module.exports = {
     kq19m: {
       id: 'kq19m',
       provenance: 'international',
-      'type-nonuk': 'Bachelor degree',
+      typeNonUk: 'Bachelor degree',
       subject: 'Physics with emphasis in Astronomy',
       org: 'Minnesota State University',
       country: 'United States',
-      'year-start': '2010',
-      'year-end': '2013',
+      yearStart: '2010',
+      yearEnd: '2013',
       completed: 'Yes',
       enic: 'Yes',
-      'enic-reference': 4000228363,
-      'enic-comparability': 'Bachelor (Honours) degree',
+      enicReference: 4000228363,
+      enicComparability: 'Bachelor (Honours) degree',
       grade: 'Distinction',
-      'has-grade': 'Yes'
+      hasGrade: 'Yes'
     },
     kr525: {
       id: 'kr525',
       provenance: 'domestic',
-      'type-uk': 'MSc',
+      typeUk: 'MSc',
       subject: 'Applied physics',
       org: 'The University of Strathclyde',
-      'year-start': '2015',
-      'year-end': '2017',
+      yearStart: '2015',
+      yearEnd: '2017',
       completed: 'Yes',
-      'has-grade': 'No'
+      hasGrade: 'No'
     }
   },
   'english-language': {
@@ -179,7 +179,7 @@ module.exports = {
     ksufp: {
       id: 'ksufp',
       type: 'Non-UK qualification',
-      'type-non-uk': 'GCSE(A*-G)',
+      typeNonUk: 'GCSE(A*-G)',
       subject: 'Science',
       grade: '173',
       year: '2004',
@@ -189,7 +189,7 @@ module.exports = {
     kv0y7: {
       id: 'kv0y7',
       type: 'Non-UK qualification',
-      'type-non-uk': 'Higher Secondary School Certificate',
+      typeNonUk: 'Higher Secondary School Certificate',
       subject: '',
       grade: '647',
       year: '2008',
@@ -201,15 +201,15 @@ module.exports = {
     maths: {
       id: 'maths',
       type: 'Non-UK qualification',
-      'type-non-uk': 'GCSE(A*-G)',
+      typeNonUk: 'GCSE(A*-G)',
       completed: 'true',
       year: '2004',
       country: 'India',
       enic: 'No',
-      'enic-reference': 4000228363,
-      'enic-comparability': 'GCSE (grades A*-C / 9-4)',
+      enicReference: 4000228363,
+      enicComparability: 'GCSE (grades A*-C / 9-4)',
       grade: 'other',
-      'grade-other': '92'
+      gradeOther: '92'
     },
     english: {
       id: 'english',

@@ -24,7 +24,7 @@
       label: {
         text: "Enter type of qualification"
       }
-    } | decorateApplicationAttributes(["gcse", id, "type-uk"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "typeUk"])) }}
   {% endset %}
 
   {% set nonUkConditionalHtml %}
@@ -35,7 +35,7 @@
       hint: {
         html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
       }
-    } | decorateApplicationAttributes(["gcse", id, "type-non-uk"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "typeNonUk"])) }}
   {% endset %}
 
   {% set missingConditionalHtml %}

@@ -22,34 +22,10 @@
 
 {% block primary %}
   <p class="govuk-body">Find postgraduate teaching courses in England if you want to teach in a state primary or secondary school, or in further education.</p>
-  <p class="govuk-body">You can use this service to look for courses starting in September 2020.</p>
 
   {{ govukInsetText({
     html: "You can find courses in <a href=\"https://teachinscotland.scot/become-a-teacher/new-to-teaching/\">Scotland</a>, <a href=\"https://www.ucas.com/teaching-in-wales\">Wales</a> and <a href=\"https://www.ucas.com/postgraduate/teacher-training/train-teach-northern-ireland\">Northern Ireland</a>."
   }) }}
-
-  <h2 class="govuk-heading-m govuk-!-font-size-27">What you’ll need</h2>
-  <h3 class="govuk-heading-s">Primary and secondary postgraduate teacher training</h3>
-  <p class="govuk-body">To qualify you’ll need the following or equivalents:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>a degree</li>
-    <li>grade 4 (C) or above in English and maths GCSEs</li>
-    <li>grade 4 (C) or above in GCSE science if you want to teach primary</li>
-  </ul>
-  <p class="govuk-body">If you do not have GCSE grade 4 (C), you’ll need to show that you can meet an equivalent level. The training provider may ask you to take an equivalence test or show other evidence of your ability.</p>
-  <p class="govuk-body">Before you start a teacher training course you’ll also need to:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>pass numeracy and literacy professional skills tests, if you are starting training before 1 April 2020</li>
-    <li>confirm you have the health and physical capacity to start training</li>
-  </ul>
-
-  <h3 class="govuk-heading-s">Further education postgraduate teacher training</h3>
-  <p class="govuk-body">To qualify, training providers usually prefer you to have:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>a degree, or relevant vocational or technical qualification</li>
-    <li>grade 4 (C) or above in English and maths GCSEs (or equivalent)</li>
-  </ul>
-  <p class="govuk-body">You’ll need a Disclosure and Barring Service (DBS) certificate if you are teaching students under 18.</p>
 
   {{ govukButton({
     text: "Start now",
@@ -58,8 +34,31 @@
     classes: "govuk-!-margin-bottom-9"
   }) }}
 
-  <h2 class="govuk-heading-m">Before you start</h2>
-  <p class="govuk-body">If you’re not sure you have the correct qualifications, check with the training provider. If you studied for your qualifications overseas, contact <a href="https://www.naric.org.uk/naric/">UK NARIC</a> to find out if your qualifications are recognised in the UK.</p>
+  <h2 class="govuk-heading-m govuk-!-font-size-27">Before you start</h2>
+  <p class="govuk-body">Check what qualifications you’ll need. You’ll also need to:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>confirm you have the health and physical capacity to start training</li>
+    <li>get a Disclosure and Barring Service (DBS) certificate if you’re teaching students under 18</li>
+  </ul>
+
+  <h3 class="govuk-heading-s">Primary and secondary postgraduate teacher training</h3>
+  <p class="govuk-body">You’ll need the following or equivalents:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>a degree</li>
+    <li>grade 4 (C) or above in English and maths GCSEs</li>
+    <li>grade 4 (C) or above in GCSE science if you want to teach primary</li>
+  </ul>
+  <p class="govuk-body">If you do not have GCSE grade 4 (C), you’ll need to show that you can meet an equivalent level. The training provider may ask you to take an equivalence test or show other evidence of your ability.</p>
+
+  <h3 class="govuk-heading-s">Further education postgraduate teacher training</h3>
+  <p class="govuk-body">Training providers usually prefer you to have:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>a degree, or relevant vocational or technical qualification</li>
+    <li>grade 4 (C) or above in English and maths GCSEs (or equivalent)</li>
+  </ul>
+
+  <h3 class="govuk-heading-s">If you studied overseas</h3>
+  <p class="govuk-body">You can <a href="https://www.enic.org.uk/Qualifications/SOC/Default.aspx">get a statement from UK ENIC (the UK agency for international qualifications and skills)</a> that shows how your qualifications compare to UK qualifications. Some training providers may ask to see it as part of your application.</p>
 
   <h3 class="govuk-heading-s">Get advice and support</h3>
   <p class="govuk-body">You can <a href="https://getintoteaching.education.gov.uk/">register with Get Into Teaching</a>, the Department for Education’s free support and advice service.</p>

@@ -144,9 +144,7 @@ module.exports = router => {
 
           const newApplicationCodeForUnsuccessfulCourses = utils.generateRandomString()
 
-
-          if (choice.status != 'Offer accepted') {
-
+          if (choice.status !== 'Offer accepted') {
             if (!req.session.data.applications[newApplicationCodeForUnsuccessfulCourses]) {
               // Copy application to previousApplications
               req.session.data.applications[newApplicationCodeForUnsuccessfulCourses] = JSON.parse(JSON.stringify(application))
@@ -157,7 +155,6 @@ module.exports = router => {
             application.previousApplications = [newApplicationCodeForUnsuccessfulCourses]
             // Add choice to previousApplication
             req.session.data.applications[newApplicationCodeForUnsuccessfulCourses].choices[choice.id] = choice
-
           }
 
           return choice

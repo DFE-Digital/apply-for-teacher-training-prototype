@@ -79,7 +79,6 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
-    const thisApplication = utils.applicationData(req)
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,

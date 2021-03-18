@@ -4,10 +4,11 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
+let notify
 
 if (process.env.NOTIFYAPIKEY) {
   const NotifyClient = require('notifications-node-client').NotifyClient
-  const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+  notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 }
 
 const providers = require('./../data/providers')

@@ -5,7 +5,7 @@ module.exports = router => {
   router.get('/application/:applicationId/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
 
-    const fromPage = req.query['from']
+    const fromPage = req.query.from
 
     res.render('application/work-history/review', {
       newId,
@@ -22,9 +22,9 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const { applicationId } = req.params
 
-    const answer = req.body['applications'][applicationId]['work-history-decision']
+    const answer = req.body.applications[applicationId]['work-history-decision']
 
-    if (answer != undefined) {
+    if (answer !== undefined) {
       res.redirect(`/application/${applicationId}/work-history/review?from=work-history-question`)
     } else {
       res.redirect(`/application/${applicationId}/work-history`)

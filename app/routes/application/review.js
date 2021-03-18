@@ -17,7 +17,7 @@ module.exports = router => {
         references: 'Add 2 referees to your application',
         candidate: 'Personal details not entered',
         'contact-details': 'Contact details not entered',
-        'reasonable-adjustments': 'Training with a disability not entered',
+        'additional-support': 'Training with a disability not entered',
         'work-history': 'Work history is not marked as completed',
         'school-experience': 'Volunteering with children and young people is not marked as completed',
         degree: 'Degree(s) are not marked as completed',

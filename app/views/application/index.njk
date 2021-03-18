@@ -263,11 +263,11 @@
     {{ appTaskList({
       items: [{
         text: "Ask for support if you’re disabled",
-        href: applicationPath + "/reasonable-adjustments" + ("/review" if applicationValue("reasonable-adjustments") | length > 0),
-        id: "reasonable-adjustments",
+        href: applicationPath + "/additional-support" + ("/review" if applicationValue("additional-support") | length > 0),
+        id: "additional-support",
         tag: {
-          classes: tagClass if applicationValue(["completed", "reasonable-adjustments"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "reasonable-adjustments"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "additional-support"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "additional-support"]) else incompleteTagText
         }
       }, {
         text: "Interview needs",

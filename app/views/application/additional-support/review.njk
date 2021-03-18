@@ -1,7 +1,8 @@
 {% extends "_form-wide.njk" %}
 
+{% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/disabilities/review" %}
+{% set referrer = applicationPath + "/additional-support/review" %}
 {% set title = "Ask for support if you’re disabled" %}
 {% set canAmend = true %}
 
@@ -13,14 +14,14 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/reasonable-adjustments.njk" %}
+  {% include "_includes/review/additional-support.njk" %}
 
   {{ govukCheckboxes({
     items: [{
       value: "true",
       text: "I have completed this section"
     }]
-  } | decorateApplicationAttributes(["completed", "reasonable-adjustments"])) }}
+  } | decorateApplicationAttributes(["completed", "additional-support"])) }}
 
   {{ govukButton({
     text: "Continue"

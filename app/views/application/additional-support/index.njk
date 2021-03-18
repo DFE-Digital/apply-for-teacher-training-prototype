@@ -24,7 +24,7 @@
       },
       maxwords: 400,
       rows: 8
-    } | decorateApplicationAttributes(["reasonable-adjustments", "statement"])) }}
+    } | decorateApplicationAttributes(["additional-support", "statement"])) }}
   {% endset %}
 
   <p class="govuk-body">You might benefit from extra support if you’re disabled, have a mental health condition or educational needs.</p>
@@ -62,7 +62,7 @@
       value: "No",
       text: "No"
     }]
-  } | decorateApplicationAttributes(["reasonable-adjustments", "disclose"])) }}
+  } | decorateApplicationAttributes(["additional-support", "disclose"])) }}
 
   {{ govukInput({
     name: "option",

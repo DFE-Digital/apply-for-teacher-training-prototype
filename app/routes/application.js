@@ -16,7 +16,7 @@ function createNewApplication (req) {
       references: {},
       candidate: {},
       'contact-details': {},
-      'reasonable-adjustments': {},
+      'additional-support': {},
       safeguarding: {},
       degree: {},
       'other-qualifications': {},
@@ -139,15 +139,13 @@ module.exports = router => {
     })
   })
 
-
-
   require('./application/choices')(router)
   require('./application/personal-details')(router)
   require('./application/contact-details')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)
   require('./application/school-experience')(router)
-  require('./application/reasonable-adjustments')(router)
+  require('./application/additional-support')(router)
   require('./application/safeguarding')(router)
   require('./application/vocation')(router)
   require('./application/degree')(router)

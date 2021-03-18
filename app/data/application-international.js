@@ -8,7 +8,7 @@ module.exports = {
     'contact-details': ['true'],
     'work-history': ['true'],
     'school-experience': ['true'],
-    'reasonable-adjustments': ['true'],
+    'additional-support': ['true'],
     safeguarding: ['true'],
     degree: ['true'],
     maths: ['true'],
@@ -136,8 +136,8 @@ module.exports = {
       'postal-code': 'G1 3AH'
     }
   },
-  'reasonable-adjustments': {
-    disclose: 'true',
+  'additional-support': {
+    disclose: 'Yes',
     statement: 'I currently require the use of a wheelchair.'
   },
   safeguarding: {

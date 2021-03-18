@@ -95,8 +95,7 @@ module.exports = router => {
           },
           qualifications: {
             degree_does_not_meet_requirements: true
-          },
-          interested_in_future_applications: true
+          }
         }
         choices.ABCDE.rejectedByDefault = false
         break
@@ -127,8 +126,7 @@ module.exports = router => {
             didNotReplyToMessages: true,
             other: "You did not send us the required form with additional information.",
             whatTheyCouldToDoImprove: "Respond promptly to our requests."
-          },
-          interested_in_future_applications: true
+          }
         }
         break
 
@@ -220,8 +218,7 @@ module.exports = router => {
         }]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          course_full: true,
-          interested_in_future_applications: true
+          course_full: true
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
@@ -243,14 +240,12 @@ module.exports = router => {
           qualityOfApplication: {
             personalStatement: "Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application."
           },
-          additionalFeedback: "It would also strengthen your application if you could get more experience of working within a primary school. ",
-          interested_in_future_applications: true
+          additionalFeedback: "It would also strengthen your application if you could get more experience of working within a primary school. "
         }
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made.",
-          interested_in_future_applications: false
+          additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made."
         }
         break
 
@@ -260,8 +255,7 @@ module.exports = router => {
         choices.ABCDE.feedback = {
           behaviour: {
             didNotReplyToMessages: true
-          },
-          interested_in_future_applications: true
+          }
         }
         choices.FGHIJ.status = 'Application withdrawn'
         choices.FGHIJ.interview = false
@@ -287,8 +281,7 @@ module.exports = router => {
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          course_full: true,
-          interested_in_future_applications: true
+          course_full: true
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
@@ -308,22 +301,19 @@ module.exports = router => {
       case 'ended-without-success':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          performanceAtInterview: "You did not show sufficient depth within your responses during the Interview. This was most evident when you were asked about what it means to be a primary teacher.<br><br>You demonstrated a lack of critical evaluation within presentation and research questions.<br><br>The detail we are looking for is outlined in our selection criteria, which can be found attached to the interview invitation letter. For future applications, you could improve by ensuring you are able to cover and evidence the selection criteria.",
-          interested_in_future_applications: true
+          performanceAtInterview: "You did not show sufficient depth within your responses during the Interview. This was most evident when you were asked about what it means to be a primary teacher.<br><br>You demonstrated a lack of critical evaluation within presentation and research questions.<br><br>The detail we are looking for is outlined in our selection criteria, which can be found attached to the interview invitation letter. For future applications, you could improve by ensuring you are able to cover and evidence the selection criteria."
         }
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
           qualityOfApplication: {
             personalStatement: "Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application."
           },
-          additionalFeedback: "It would also strengthen your application if you could get more experience of working within a primary school. ",
-          interested_in_future_applications: true
+          additionalFeedback: "It would also strengthen your application if you could get more experience of working within a primary school. "
         }
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made.",
-          interested_in_future_applications: false
+          additionalFeedback: "Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made."
         }
         break
 

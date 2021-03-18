@@ -287,6 +287,6 @@ module.exports = {
       'end-date': 'now'
     }
   },
-  'unpaid-experience-decision': 'No',
+  'unpaid-experience-disclose': 'No',
   'unpaid-experience': {}
 }

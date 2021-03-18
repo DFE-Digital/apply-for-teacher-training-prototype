@@ -60,7 +60,7 @@ module.exports = router => {
   router.post('/application/:applicationId/unpaid-experience/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const unpaidExperienceDecision = application['unpaid-experience-decision']
+    const unpaidExperienceDecision = application['unpaid-experience-disclose']
 
     if (unpaidExperienceDecision === 'No') {
       res.redirect(`/application/${applicationId}/unpaid-experience/review`)

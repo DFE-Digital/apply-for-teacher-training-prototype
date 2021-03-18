@@ -172,7 +172,7 @@ module.exports = {
     answer: 'Yes',
     type: 'IELTS',
     grade: '7.5',
-    'certificate-number': '02GB0674SOOM599A',
+    certificateNumber: '02GB0674SOOM599A',
     year: '2015'
   },
   'other-qualifications': {

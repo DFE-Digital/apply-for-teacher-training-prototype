@@ -10,7 +10,7 @@ module.exports = {
     'work-history': ['true'],
     'school-experience': ['true'],
     'reasonable-adjustments': ['true'],
-    suitability: ['true'],
+    safeguarding: ['true'],
     degree: ['true'],
     maths: ['true'],
     english: ['true'],
@@ -140,7 +140,7 @@ module.exports = {
   'reasonable-adjustments': {
     disclose: 'No'
   },
-  suitability: {
+  safeguarding: {
     disclose: 'No'
   },
   degree: {

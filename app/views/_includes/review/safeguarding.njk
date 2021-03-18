@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "suitability"]) %}
-{% set entered = applicationValue(["suitability", "disclose"]) %}
+{% set completed = applicationValue(["completed", "safeguarding"]) %}
+{% set entered = applicationValue(["safeguarding", "disclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -9,7 +9,7 @@
     actions: {
       items: [{
         text: "Do you need to declare any safeguarding issues?",
-        href: applicationPath + "/suitability/review?referrer=" + referrer
+        href: applicationPath + "/safeguarding/review?referrer=" + referrer
       }]
     }
   }) }}
@@ -21,7 +21,7 @@
     actions: {
       items: [{
         text: "Complete safeguarding issues",
-        href: applicationPath + "/suitability/review?referrer=" + referrer
+        href: applicationPath + "/safeguarding/review?referrer=" + referrer
       }]
     }
   }) if not completed and showIncomplete }}
@@ -34,11 +34,11 @@
           text: "Do you want to share any safeguarding issues?"
         },
         value: {
-          text: applicationValue(["suitability", "disclose"])
+          text: applicationValue(["safeguarding", "disclose"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/suitability?referrer=" + referrer,
+            href: applicationPath + "/safeguarding?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "whether you need to share something"
           }]
@@ -48,16 +48,16 @@
           text: "Give any relevant information"
         },
         value: {
-          html: applicationValue(["suitability", "statement"])
+          html: applicationValue(["safeguarding", "statement"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/suitability?referrer=" + referrer,
+            href: applicationPath + "/safeguarding?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "the information you are sharing"
           }]
         } if canAmend
-      } if applicationValue(["suitability", "disclose"]) == "Yes"]
+      } if applicationValue(["safeguarding", "disclose"]) == "Yes"]
     })
   }) }}
 {% endif %}

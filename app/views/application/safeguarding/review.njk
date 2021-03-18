@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/suitability/review" %}
+{% set referrer = applicationPath + "/safeguarding/review" %}
 {% set title = "Declare any safeguarding issues" %}
 {% set canAmend = true %}
 
@@ -14,14 +14,14 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/suitability.njk" %}
+  {% include "_includes/review/safeguarding.njk" %}
 
   {{ govukCheckboxes({
     items: [{
       value: "true",
       text: "I have completed this section"
     }]
-  } | decorateApplicationAttributes(["completed", "suitability"])) }}
+  } | decorateApplicationAttributes(["completed", "safeguarding"])) }}
 
   {{ govukButton({
     text: "Continue"

@@ -9,7 +9,7 @@ module.exports = {
     'work-history': ['true'],
     'school-experience': ['true'],
     'reasonable-adjustments': ['true'],
-    suitability: ['true'],
+    safeguarding: ['true'],
     degree: ['true'],
     maths: ['true'],
     english: ['true'],
@@ -140,8 +140,8 @@ module.exports = {
     disclose: 'true',
     statement: 'I currently require the use of a wheelchair.'
   },
-  suitability: {
-    disclose: 'true',
+  safeguarding: {
+    disclose: 'Yes',
     statement: 'I have a criminal record in Spain'
   },
   degree: {

@@ -284,14 +284,13 @@
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
     {{ appTaskList({
-      items: [
-      {
+      items: [{
         text: "Declare any safeguarding issues",
-        href: applicationPath + "/suitability" + ("/review" if applicationValue("suitability") | length > 0),
-        id: "suitability",
+        href: applicationPath + "/safeguarding" + ("/review" if applicationValue("safeguarding") | length > 0),
+        id: "safeguarding",
         tag: {
-          classes: tagClass if applicationValue(["completed", "suitability"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "suitability"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "safeguarding"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "safeguarding"]) else incompleteTagText
         }
       }]
     }) }}

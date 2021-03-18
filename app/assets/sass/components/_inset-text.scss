@@ -18,3 +18,12 @@
     color: $govuk-error-colour;
   }
 }
+
+.app-inset-text--review {
+  border-color: govuk-tint(govuk-colour("red"), 80);
+
+  .govuk-heading-s {
+    color: govuk-shade(govuk-colour("red"), 30);
+  }
+
+}

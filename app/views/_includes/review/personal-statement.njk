@@ -14,12 +14,51 @@
     }
   }) }}
 {% else %}
+
+  {% set hasFeedbackFromPreviousApplication = false %}
+  {% set feedbackFromPreviousApplications = "" %}
+
+  {% if applicationValue(["apply2"]) %}
+    {% for previousApplicationId in applicationValue("previousApplications") %}
+      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
+
+        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+
+          {% set hasFeedbackFromPreviousApplication = true %}
+          {% set feedbackFromPreviousApplications %}
+            {{ feedbackFromPreviousApplications | safe }}
+
+            <p class="govuk-body govuk-!-margin-bottom-0">{{ providers[item.providerCode].name }}:</p>
+            <p class="govuk-body">“{{ item.feedback.qualityOfApplication.personalStatement | safe }}”</p>
+          {% endset %}
+
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {% if hasFeedbackFromPreviousApplication %}
+
+    {% set feedbackFromPreviousApplications %}
+      <h2 class="govuk-heading-s">Feedback from previous applications</h2>
+      {{ feedbackFromPreviousApplications | safe }}
+    {% endset %}
+
+    {{ govukInsetText({
+      html: feedbackFromPreviousApplications | safe,
+      classes: "govuk-!-width-two-thirds app-inset-text--review"
+      })
+    }}
+  {% endif %}
+
+{% if not hasFeedbackFromPreviousApplication %}
   {{ appSuggestion({
-    title: "Proofread your personal statement",
-    content: {
-      html: "Training providers will pay attention to your spelling, punctuation and grammar. It is important to get it right.\n\nThe best way to proofread is to read your personal statement out loud. Or ask someone to check it for you." | markdown
-    }
+  title: "Proofread your personal statement",
+  content: {
+    html: "Training providers will pay attention to your spelling, punctuation and grammar. It is important to get it right.\n\nThe best way to proofread is to read your personal statement out loud. Or ask someone to check it for you." | markdown
+  }
   }) }}
+{% endif %}
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",

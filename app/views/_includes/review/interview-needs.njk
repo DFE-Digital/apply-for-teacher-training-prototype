@@ -1,27 +1,27 @@
-{% set completed = applicationValue(["completed", "interview"]) %}
-{% set entered = applicationValue(["interview-choice"]) %}
+{% set completed = applicationValue(["completed", "interview-needs"]) %}
+{% set entered = applicationValue(["interview-needs-disclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "interview",
+    id: "interview-needs",
     title: "Interview needs not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Do you have any interview needs?",
-        href: applicationPath + "/interview/?referrer=" + referrer
+        href: applicationPath + "/interview-needs/?referrer=" + referrer
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "safeguarding",
-    title: "Safeguarding information not marked as complete",
+    id: "interview-needs",
+    title: "Interview needs not marked as complete",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete interview needs",
-        href: applicationPath + "/interview/review?referrer=" + referrer
+        href: applicationPath + "/interview-needs/review?referrer=" + referrer
       }]
     }
   }) if not completed and showIncomplete }}
@@ -34,11 +34,11 @@
           text: "Do you have any interview needs?"
         },
         value: {
-          text: applicationValue(["interview-choice"])
+          text: applicationValue(["interview-needs-disclose"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/interview?referrer=" + referrer,
+            href: applicationPath + "/interview-needs?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "interview needs"
           }]
@@ -48,16 +48,16 @@
           text: "What are your interview needs?"
         },
         value: {
-          text: applicationValue(["interview"])
+          text: applicationValue(["interview-needs"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/interview?referrer=" + referrer,
+            href: applicationPath + "/interview-needs?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "interview needs"
           }]
         } if canAmend
-      } if applicationValue(["interview-choice"]) == "Yes"]
+      } if applicationValue(["interview-needs-disclose"]) == "Yes"]
     })
   }) }}
 {% endif %}

@@ -26,8 +26,8 @@ function createNewApplication (req) {
         science: {}
       },
       'subject-knowledge': null,
-      'interview-choice': null,
-      interview: null,
+      'interview-needs-disclose': null,
+      'interview-needs': null,
       'personal-statement': null,
       'work-history': {},
       'unpaid-experience': {}
@@ -153,7 +153,7 @@ module.exports = router => {
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
-  require('./application/interview')(router)
+  require('./application/interview-needs')(router)
   require('./application/references')(router)
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)

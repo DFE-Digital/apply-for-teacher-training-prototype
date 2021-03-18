@@ -51,7 +51,7 @@ module.exports = router => {
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const candidateName = application['given-name'] || 'applicant'
+    const candidateName = application.givenName || 'applicant'
 
     const choices = []
     for (const choice in application.choices) {
@@ -173,7 +173,7 @@ module.exports = router => {
     // UR: Decision is made on third course choice
     utils.sendEmail(req, notifyTemplate, {
       reference: applicationId,
-      candidateName: application['given-name'] || 'applicant',
+      candidateName: application.givenName || 'applicant',
       providerName: urChoices[2].providerName,
       courseName: urChoices[2].courseName,
       courseDate: urChoices[2].courseDate,

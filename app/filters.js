@@ -52,9 +52,9 @@ module.exports = (env) => {
   filters.formatNationalities = object => {
     if (object) {
       const nationalities = object.nationality
-      if (object['other-nationality-1']) { nationalities.push(object['other-nationality-1']) }
-      if (object['other-nationality-2']) { nationalities.push(object['other-nationality-2']) }
-      if (object['other-nationality-3']) { nationalities.push(object['other-nationality-3']) }
+      if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
+      if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
+      if (object.otherNationality3) { nationalities.push(object.otherNationality3) }
 
       const nationalityList = nationalities.filter(value => value !== 'Other')
 

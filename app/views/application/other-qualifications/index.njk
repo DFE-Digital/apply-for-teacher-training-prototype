@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set international = applicationValue(["candidate", "other-nationality-1"]) %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 

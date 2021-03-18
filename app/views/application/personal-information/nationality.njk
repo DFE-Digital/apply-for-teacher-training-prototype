@@ -20,7 +20,7 @@
           }
         },
         items: nationalities
-      } | decorateApplicationAttributes(["candidate", "other-nationality-1"])) }}
+      } | decorateApplicationAttributes(["candidate", "otherNationality1"])) }}
       {# {{ govukButton({
         html: "Remove <span class=\"govuk-visually-hidden\">1st nationality</span>",
         classes: "app-button--link"
@@ -35,7 +35,7 @@
           "aria-label": "2nd nationality"
         },
         items: nationalities
-      } | decorateApplicationAttributes(["candidate", "other-nationality-2"])) }}
+      } | decorateApplicationAttributes(["candidate", "otherNationality2"])) }}
       {{ govukButton({
         html: "Remove <span class=\"govuk-visually-hidden\">2nd nationality</span>",
         classes: "app-button--link"
@@ -50,7 +50,7 @@
           "aria-label": "3rd nationality"
         },
         items: nationalities
-      } | decorateApplicationAttributes(["candidate", "other-nationality-3"])) }}
+      } | decorateApplicationAttributes(["candidate", "otherNationality3"])) }}
       {{ govukButton({
         html: "Remove <span class=\"govuk-visually-hidden\">3rd nationality</span>",
         classes: "app-button--link"
@@ -92,16 +92,16 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-other-nationality-1'),
-      defaultValue: '{{ applicationValue(["candidate", "other-nationality-1"]) }}'
+      selectElement: document.querySelector('#candidate-otherNationality1'),
+      defaultValue: '{{ applicationValue(["candidate", "otherNationality1"]) }}'
     })
     {# accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-other-nationality-2'),
-      defaultValue: '{{ applicationValue(["candidate", "other-nationality-2"]) }}'
+      selectElement: document.querySelector('#candidate-otherNationality2'),
+      defaultValue: '{{ applicationValue(["candidate", "otherNationality2"]) }}'
     })
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-other-nationality-3'),
-      defaultValue: '{{ applicationValue(["candidate", "other-nationality-3"]) }}'
+      selectElement: document.querySelector('#candidate-otherNationality3'),
+      defaultValue: '{{ applicationValue(["candidate", "otherNationality3"]) }}'
     }) #}
   </script>
 {% endblock %}

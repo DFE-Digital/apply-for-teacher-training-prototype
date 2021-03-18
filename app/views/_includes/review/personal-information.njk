@@ -1,5 +1,5 @@
 {% set completed = applicationValue(["completed", "personal-information"]) %}
-{% set entered = applicationValue(["candidate", "given-name"]) %}
+{% set entered = applicationValue(["candidate", "givenName"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -27,9 +27,9 @@
   }) if not completed and showIncomplete }}
 
   {% set residencyText %}
-    <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) }}</p>
-    {% if applicationValue(["candidate", "residency-right-to-work"]) and applicationValue(["candidate", "residency"]) == "I have the right to work or study in the UK" %}
-      <p class="govuk-body">{{ applicationValue(["candidate", "residency-right-to-work"]) | nl2br }}</p>
+    <p class="govuk-body">{{ applicationValue(["candidate", "residencyDisclose"]) }}</p>
+    {% if applicationValue(["candidate", "residency"]) and applicationValue(["candidate", "residencyDisclose"]) == "I have the right to work or study in the UK" %}
+      <p class="govuk-body">{{ applicationValue(["candidate", "residency"]) | nl2br }}</p>
     {% endif %}
   {% endset %}
 
@@ -41,7 +41,7 @@
           text: "Name"
         },
         value: {
-          text: applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"])
+          text: applicationValue(["candidate", "givenName"]) + " " + applicationValue(["candidate", "familyName"])
         },
         actions: {
           items: [{
@@ -49,13 +49,13 @@
             text: "Change",
             visuallyHiddenText: "name"
           }]
-        } if applicationValue(["candidate", "given-name"]) or applicationValue(["candidate", "family-name"]) and canAmend
+        } if applicationValue(["candidate", "givenName"]) or applicationValue(["candidate", "familyName"]) and canAmend
       }, {
         key: {
           text: "Date of birth"
         },
         value: {
-          text: applicationValue(["candidate", "date-of-birth"]) | formatDate or "Not entered"
+          text: applicationValue(["candidate", "dateOfBirth"]) | formatDate or "Not entered"
         },
         actions: {
           items: [{
@@ -92,7 +92,7 @@
             visuallyHiddenText: "immigration status"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "residency"])]
+      } if applicationValue(["candidate", "residencyDisclose"])]
     })
   }) }}
 {% endif %}

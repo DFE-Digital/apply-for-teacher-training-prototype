@@ -29,7 +29,7 @@
     attributes: {
       spellcheck: "false"
     }
-  } | decorateApplicationAttributes(["candidate", "given-name"])) }}
+  } | decorateApplicationAttributes(["candidate", "givenName"])) }}
 
   {{ govukInput({
     label: {
@@ -43,7 +43,7 @@
     attributes: {
       spellcheck: "false"
     }
-  } | decorateApplicationAttributes(["candidate", "family-name"])) }}
+  } | decorateApplicationAttributes(["candidate", "familyName"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -55,24 +55,24 @@
     hint: {
       text: "For example, 31 3 1980"
     },
-    id: "candidate-date-of-birth",
+    id: "candidate-dateOfBirth",
     items: [{
       classes: "govuk-input--width-2",
       label: "Day",
-      name: "applications[" + applicationId + "][candidate][date-of-birth][day]",
-      value: applicationValue(["candidate", "date-of-birth", "day"]),
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][day]",
+      value: applicationValue(["candidate", "dateOfBirth", "day"]),
       autocomplete: "bday-day"
     }, {
       classes: "govuk-input--width-2",
       label: "Month",
-      name: "applications[" + applicationId + "][candidate][date-of-birth][month]",
-      value: applicationValue(["candidate", "date-of-birth", "month"]),
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][month]",
+      value: applicationValue(["candidate", "dateOfBirth", "month"]),
       autocomplete: "bday-month"
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
-      name: "applications[" + applicationId + "][candidate][date-of-birth][year]",
-      value: applicationValue(["candidate", "date-of-birth", "year"]),
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][year]",
+      value: applicationValue(["candidate", "dateOfBirth", "year"]),
       autocomplete: "bday-year"
     }]
   }) }}

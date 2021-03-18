@@ -162,7 +162,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const now = new Date()
 
-    if (application.candidate['given-name']) {
+    if (application.candidate.givenName) {
       application.references[id].nudges = application.references[id].nudges || 0
       application.references[id].status = 'Awaiting response'
       application.references[id].pending = false

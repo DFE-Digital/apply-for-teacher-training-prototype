@@ -116,10 +116,9 @@ module.exports = {
     }
   },
   candidate: {
-    'given-name': 'Janina',
-    'family-name': 'Doe',
-    'optional-name': '',
-    'date-of-birth': {
+    givenName: 'Janina',
+    familyName: 'Doe',
+    dateOfBirth: {
       day: '09',
       month: '02',
       year: '1988'

@@ -113,18 +113,17 @@ module.exports = {
     }
   },
   candidate: {
-    'given-name': 'Janina',
-    'family-name': 'Doe',
-    'optional-name': '',
-    'date-of-birth': {
+    givenName: 'Janina',
+    familyName: 'Doe',
+    dateOfBirth: {
       day: '09',
       month: '02',
       year: '1988'
     },
     nationality: ['Other'],
-    'other-nationality-1': 'Indian',
-    residency: 'I have the right to work or study in the UK',
-    'residency-right-to-work': 'I will need to apply for permission to work or study in the UK'
+    otherNationality1: 'Indian',
+    residencyDisclose: 'I have the right to work or study in the UK',
+    residency: 'I will need to apply for permission to work or study in the UK'
   },
   'contact-information': {
     'phone-number': '07944 386555',

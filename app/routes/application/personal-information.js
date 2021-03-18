@@ -20,7 +20,7 @@ module.exports = router => {
     const application = req.session.data.applications[applicationId]
     const { nationality } = application.candidate
 
-    if (nationality === 'other' || nationality === 'multiple') {
+    if (nationality[0] === 'Other') {
       res.redirect(`/application/${applicationId}/personal-information/residency?${utils.queryString(req)}`)
     } else {
       // Delete residency status if previously entered

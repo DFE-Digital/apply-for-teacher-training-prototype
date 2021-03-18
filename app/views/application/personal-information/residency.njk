@@ -28,7 +28,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(["candidate", "residency-right-to-work"])) }}
+    } | decorateApplicationAttributes(["candidate", "residency"])) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -51,7 +51,7 @@
       value: "I will need to apply for permission to work or study in the UK",
       text: "Not yet, or not sure"
     }]
-  } | decorateApplicationAttributes(["candidate", "residency"])) }}
+  } | decorateApplicationAttributes(["candidate", "residencyDisclose"])) }}
 
   {{ govukButton({
     text: "Save and continue"

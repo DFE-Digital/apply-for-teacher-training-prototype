@@ -5,7 +5,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set title = "Review your application" %}
 {% set referrer = applicationPath + "/review" %}
-{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
 {% set canAmend = true %}
 
 {% block pageNavigation %}

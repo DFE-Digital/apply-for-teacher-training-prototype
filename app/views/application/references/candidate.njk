@@ -30,7 +30,7 @@
     attributes: {
       spellcheck: "false"
     }
-  } | decorateApplicationAttributes(["candidate", "given-name"])) }}
+  } | decorateApplicationAttributes(["candidate", "givenName"])) }}
 
   {{ govukInput({
     label: {
@@ -44,7 +44,7 @@
     attributes: {
       spellcheck: "false"
     }
-  } | decorateApplicationAttributes(["candidate", "family-name"])) }}
+  } | decorateApplicationAttributes(["candidate", "familyName"])) }}
 
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"

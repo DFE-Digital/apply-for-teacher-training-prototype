@@ -138,7 +138,7 @@ module.exports = {
     }
   },
   'reasonable-adjustments': {
-    disclose: 'false'
+    disclose: 'No'
   },
   suitability: {
     disclose: 'No'

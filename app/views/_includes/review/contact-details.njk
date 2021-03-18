@@ -1,4 +1,31 @@
-{% if applicationValue(["completed", "contact-details"]) %}
+{% set completed = applicationValue(["completed", "contact-details"]) %}
+{% set entered = applicationValue(["contact-details", "phone-number"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "contact-details",
+    title: "Contact details not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your contact details",
+        href: applicationPath + "/contact-details/?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "contact-details",
+    title: "Contact details are not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete contact details",
+        href: applicationPath + "/contact-details/?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -46,17 +73,5 @@
         } if canAmend
       }]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "contact-details",
-    title: "Contact details not entered",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Enter your contact details",
-        href: applicationPath + "/contact-details/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

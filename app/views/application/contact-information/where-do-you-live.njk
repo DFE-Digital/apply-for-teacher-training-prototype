@@ -16,7 +16,7 @@
         text: "Which country?"
       },
       items: countries
-    } | decorateApplicationAttributes(["contact-information", "address", "country"])) }}
+    } | decorateApplicationAttributes(["contactInformation", "address", "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -30,7 +30,7 @@
         html: internationalCountryHtml
       }
     }]
-  } | decorateApplicationAttributes(["contact-information", "addressType"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "addressType"])) }}
 
   {{ govukButton({
     text: "Save and continue"
@@ -41,8 +41,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#contact-information-address-country'),
-      defaultValue: '{{ applicationValue(["contact-information", "address", "country"]) }}'
+      selectElement: document.querySelector('#contactInformation-address-country'),
+      defaultValue: '{{ applicationValue(["contactInformation", "address", "country"]) }}'
     })
   </script>
 {% endblock %}

@@ -15,7 +15,7 @@ function createNewApplication (req) {
       choices: {},
       references: {},
       candidate: {},
-      'contact-information': {},
+      contactInformation: {},
       additionalSupportDisclose: null,
       additionalSupport: {},
       safeguardingDisclose: null,

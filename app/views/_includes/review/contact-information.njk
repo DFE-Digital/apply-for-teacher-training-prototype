@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "contact-information"]) %}
-{% set entered = applicationValue(["contact-information", "tel"]) %}
+{% set completed = applicationValue(["completed", "contactInformation"]) %}
+{% set entered = applicationValue(["contactInformation", "tel"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,7 +34,7 @@
           text: "Phone number"
         },
         value: {
-          text: applicationValue(["contact-information", "tel"]) or "Not entered"
+          text: applicationValue(["contactInformation", "tel"]) or "Not entered"
         },
         actions: {
           items: [{
@@ -62,7 +62,7 @@
           text: "Address"
         },
         value: {
-          html: applicationValue(["contact-information", "address"]) | formatAddress | nl2br | safe or "Not entered"
+          html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"
         },
         actions: {
           items: [{

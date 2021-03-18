@@ -6,7 +6,7 @@ module.exports = {
   completed: {
     choices: ['true'],
     personalInformation: ['true'],
-    'contact-information': ['true'],
+    contactInformation: ['true'],
     'work-history': ['true'],
     'unpaid-experience': ['true'],
     additionalSupport: ['true'],
@@ -125,7 +125,7 @@ module.exports = {
     },
     nationality: ['British']
   },
-  'contact-information': {
+  contactInformation: {
     tel: '07944 386555',
     addressType: 'domestic',
     address: {

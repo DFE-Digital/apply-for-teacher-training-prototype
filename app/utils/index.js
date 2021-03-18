@@ -137,7 +137,7 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.choices) &&
     module.exports.hasCompletedSection(application.references) &&
     module.exports.hasCompletedSection(application.candidate) &&
-    module.exports.hasCompletedSection(application['contact-information']) &&
+    module.exports.hasCompletedSection(application.contactInformation) &&
     module.exports.hasCompletedSection(application.additionalSupport) &&
     module.exports.hasCompletedSection(application['work-history']) &&
     module.exports.hasCompletedSection(application['unpaid-experience']) &&

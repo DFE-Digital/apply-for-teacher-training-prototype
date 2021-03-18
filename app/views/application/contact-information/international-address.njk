@@ -14,14 +14,14 @@
       html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
     },
     autocomplete: "address-line1"
-  } | decorateApplicationAttributes(["contact-information", "address", "line1"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "line1"])) }}
 
   {{ govukInput({
     label: {
       html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
     },
     autocomplete: "address-line2"
-  } | decorateApplicationAttributes(["contact-information", "address", "line2"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "line2"])) }}
 
   {{ govukInput({
     label: {
@@ -29,7 +29,7 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level2"
-  } | decorateApplicationAttributes(["contact-information", "address", "level2"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "level2"])) }}
 
   {{ govukInput({
     label: {
@@ -37,7 +37,7 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level1"
-  } | decorateApplicationAttributes(["contact-information", "address", "level1"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "level1"])) }}
 
   {{ govukInput({
     label: {
@@ -45,11 +45,11 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "postal-code"
-  } | decorateApplicationAttributes(["contact-information", "address", "postalCode"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "postalCode"])) }}
 
   {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where do you live’ page #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-information][addressType]",
+    name: "applications[" + applicationId + "][contactInformation][addressType]",
     type: "hidden",
     value: "international"
   }) }}

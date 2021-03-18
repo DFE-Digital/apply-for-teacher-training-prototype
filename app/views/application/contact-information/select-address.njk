@@ -12,7 +12,7 @@
 
 {% block primary %}
   <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
-  <p class="govuk-body">{{ applicationValue(["contact-information", "address", "postalCode"]) }} &nbsp; <a href="{{ applicationPath }}/contact-information/lookup-address">Change</a></p>
+  <p class="govuk-body">{{ applicationValue(["contactInformation", "address", "postalCode"]) }} &nbsp; <a href="{{ applicationPath }}/contact-information/lookup-address">Change</a></p>
 
   {{ govukRadios({
     fieldset: {
@@ -79,25 +79,25 @@
       text: "Flat 5, 245-247 Baker Street, London",
       value: "Flat 5, 245-247 Baker Street"
     }]
-  } | decorateApplicationAttributes(["contact-information", "address", "line1"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "address", "line1"])) }}
 
   <p class="govuk-body"><a href="{{ applicationPath }}/contact-information/uk-address">I can’t find my address in the list</a></p>
 
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-information][address][line2]",
+    name: "applications[" + applicationId + "][contactInformation][address][line2]",
     type: "hidden",
     value: "London"
   }) }}
 
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-information][address][country]",
+    name: "applications[" + applicationId + "][contactInformation][address][country]",
     type: "hidden",
     value: "United Kingdom"
   }) }}
 
   {# Remove international address if previously entered #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-information][address][street-address]",
+    name: "applications[" + applicationId + "][contactInformation][address][street-address]",
     type: "hidden",
     value: ""
   }) }}

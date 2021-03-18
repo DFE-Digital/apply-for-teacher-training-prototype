@@ -18,7 +18,7 @@ module.exports = router => {
   router.all('/application/:applicationId/contact-information/where-do-you-live/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const location = application['contact-information'].addressType
+    const location = application.contactInformation.addressType
     const address_lookup_feature_enabled = req.session.data.flags.address_lookup
 
     if (location === 'domestic') {

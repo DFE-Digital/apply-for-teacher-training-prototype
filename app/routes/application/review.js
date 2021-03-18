@@ -16,7 +16,7 @@ module.exports = router => {
         choices: application.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
         references: 'Add 2 referees to your application',
         candidate: 'Personal information not entered',
-        'contact-information': 'Contact information not entered',
+        contactInformation: 'Contact information not entered',
         additionalSupport: 'Training with a disability not entered',
         'work-history': 'Work history is not marked as completed',
         'unpaid-experience': 'Volunteering with children and young people is not marked as completed',

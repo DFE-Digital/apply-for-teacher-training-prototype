@@ -135,8 +135,8 @@
         href: applicationPath + "/personal-information" + ("/review" if applicationValue(["candidate"]) | length > 0),
         id: "personal-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "personal-information"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "personal-information"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "personalInformation"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "personalInformation"]) else incompleteTagText
         }
       }, {
         text: "Contact information",

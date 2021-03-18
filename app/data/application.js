@@ -5,7 +5,7 @@ module.exports = {
   ended_without_success: false,
   completed: {
     choices: ['true'],
-    'personal-information': ['true'],
+    personalInformation: ['true'],
     'contact-information': ['true'],
     'work-history': ['true'],
     'unpaid-experience': ['true'],

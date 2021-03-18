@@ -1,5 +1,5 @@
 {% set completed = applicationValue(["completed", "contact-information"]) %}
-{% set entered = applicationValue(["contact-information", "phone-number"]) %}
+{% set entered = applicationValue(["contact-information", "tel"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,7 +34,7 @@
           text: "Phone number"
         },
         value: {
-          text: applicationValue(["contact-information", "phone-number"]) or "Not entered"
+          text: applicationValue(["contact-information", "tel"]) or "Not entered"
         },
         actions: {
           items: [{

@@ -126,13 +126,13 @@ module.exports = {
     residency: 'I will need to apply for permission to work or study in the UK'
   },
   'contact-information': {
-    'phone-number': '07944 386555',
-    'address-type': 'domestic',
+    tel: '07944 386555',
+    addressType: 'domestic',
     address: {
       line1: '5 Royal Exchange Square',
       level2: 'Glasgow',
       country: 'United Kingdom',
-      'postal-code': 'G1 3AH'
+      postalCode: 'G1 3AH'
     }
   },
   'additional-support-disclose': 'Yes',

@@ -126,14 +126,14 @@ module.exports = {
     nationality: ['British']
   },
   'contact-information': {
-    'phone-number': '07944 386555',
-    'address-type': 'domestic',
+    tel: '07944 386555',
+    addressType: 'domestic',
     address: {
       line1: '5 Claremont Road',
       level2: 'Pudsey',
       level1: 'West Yorkshire',
       country: 'United Kingdom',
-      'postal-code': 'LS28 7DQ'
+      postalCode: 'LS28 7DQ'
     }
   },
   'additional-support-disclose': 'No',

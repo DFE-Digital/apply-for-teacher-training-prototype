@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set title = "What is your address?" %}
-{% set international = applicationValue(["contact-information", "address-type"]) == "international" %}
+{% set international = applicationValue(["contact-information", "addressType"]) == "international" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -60,7 +60,7 @@
       },
       classes: "govuk-input--width-10",
       autocomplete: "postal-code"
-    } | decorateApplicationAttributes(["contact-information", "address", "postal-code"])) }}
+    } | decorateApplicationAttributes(["contact-information", "address", "postalCode"])) }}
   {% endif %}
 
   {{ govukButton({

@@ -45,11 +45,11 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "postal-code"
-  } | decorateApplicationAttributes(["contact-information", "address", "postal-code"])) }}
+  } | decorateApplicationAttributes(["contact-information", "address", "postalCode"])) }}
 
   {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where do you live’ page #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contact-information][address-type]",
+    name: "applications[" + applicationId + "][contact-information][addressType]",
     type: "hidden",
     value: "international"
   }) }}

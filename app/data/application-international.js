@@ -14,7 +14,7 @@ module.exports = {
     maths: ['true'],
     english: ['true'],
     science: ['true'],
-    'other-qualifications': ['true'],
+    otherQualifications: ['true'],
     englishLanguage: ['true'],
     personalStatement: ['true'],
     subjectKnowledge: ['true'],
@@ -175,7 +175,7 @@ module.exports = {
     certificateNumber: '02GB0674SOOM599A',
     year: '2015'
   },
-  'other-qualifications': {
+  otherQualifications: {
     ksufp: {
       id: 'ksufp',
       type: 'Non-UK qualification',

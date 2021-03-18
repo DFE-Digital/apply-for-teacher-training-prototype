@@ -187,11 +187,11 @@
         }
       } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
         text: "Other qualifications" if international else "A levels and other qualifications",
-        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["other-qualifications"]) | length > 0 else "/add"),
+        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["otherQualifications"]) | length > 0 else "/add"),
         id: "other-qualifications",
         tag: {
-          classes: tagClass if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "other-qualifications"]) | length > 0 else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "otherQualifications"]) | length > 0 else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "otherQualifications"]) | length > 0 else incompleteTagText
         }
       }, {
         text: "Degree",

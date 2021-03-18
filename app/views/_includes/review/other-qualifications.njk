@@ -1,6 +1,6 @@
-{% set qualifications = applicationValue(["other-qualifications"]) | toArray %}
+{% set qualifications = applicationValue(["otherQualifications"]) | toArray %}
 
-{% if applicationValue(["completed", "other-qualifications"]) %}
+{% if applicationValue(["completed", "otherQualifications"]) %}
   {{ appSuggestion({
     title: "Add all of your qualifications" if qualifications.length else "You have not added any other qualifications",
     content: {

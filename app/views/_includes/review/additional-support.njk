@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "additional-support"]) %}
-{% set entered = applicationValue(["additional-support-disclose"]) %}
+{% set completed = applicationValue(["completed", "additionalSupport"]) %}
+{% set entered = applicationValue(["additionalSupportDisclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,7 +34,7 @@
           text: "Do you need any adjustments to help you do a course or go to an interview?" if option == "b" else "Do you want to ask for help to become a teacher?"
         },
         value: {
-          text: applicationValue(["additional-support-disclose"])
+          text: applicationValue(["additionalSupportDisclose"])
         },
         actions: {
           items: [{
@@ -48,7 +48,7 @@
           text: "Relevant information"
         },
         value: {
-          html: applicationValue(["additional-support"])
+          html: applicationValue(["additionalSupport"])
         },
         actions: {
           items: [{
@@ -57,7 +57,7 @@
             visuallyHiddenText: "your reasonable adjustments"
           }]
         } if canAmend
-      } if applicationValue(["additional-support-disclose"]) == "Yes"]
+      } if applicationValue(["additionalSupportDisclose"]) == "Yes"]
     })
   }) }}
 {% endif %}

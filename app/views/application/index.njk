@@ -262,11 +262,11 @@
     {{ appTaskList({
       items: [{
         text: "Ask for support if you’re disabled",
-        href: applicationPath + "/additional-support" + ("/review" if applicationValue("additional-support") | length > 0),
+        href: applicationPath + "/additional-support" + ("/review" if applicationValue("additionalSupport") | length > 0),
         id: "additional-support",
         tag: {
-          classes: tagClass if applicationValue(["completed", "additional-support"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "additional-support"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "additionalSupport"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "additionalSupport"]) else incompleteTagText
         }
       }, {
         text: "Interview needs",

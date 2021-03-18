@@ -9,7 +9,7 @@ module.exports = {
     'contact-information': ['true'],
     'work-history': ['true'],
     'unpaid-experience': ['true'],
-    'additional-support': ['true'],
+    additionalSupport: ['true'],
     safeguarding: ['true'],
     degree: ['true'],
     maths: ['true'],
@@ -136,7 +136,7 @@ module.exports = {
       postalCode: 'LS28 7DQ'
     }
   },
-  'additional-support-disclose': 'No',
+  additionalSupportDisclose: 'No',
   'safeguarding-disclose': 'No',
   degree: {
     abcde: {

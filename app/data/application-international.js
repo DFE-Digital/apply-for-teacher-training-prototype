@@ -8,7 +8,7 @@ module.exports = {
     'contact-information': ['true'],
     'work-history': ['true'],
     'unpaid-experience': ['true'],
-    'additional-support': ['true'],
+    additionalSupport: ['true'],
     safeguarding: ['true'],
     degree: ['true'],
     maths: ['true'],
@@ -135,8 +135,8 @@ module.exports = {
       postalCode: 'G1 3AH'
     }
   },
-  'additional-support-disclose': 'Yes',
-  'additional-support': 'I currently require the use of a wheelchair.',
+  additionalSupportDisclose: 'Yes',
+  additionalSupport: 'I currently require the use of a wheelchair.',
   'safeguarding-disclose': 'Yes',
   safeguarding: 'I have a criminal record in Spain',
   degree: {

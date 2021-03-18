@@ -1,5 +1,5 @@
 {% set unpaidExperience = applicationValue(["unpaid-experience"]) %}
-{% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="start-date") %}
+{% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="startDate") %}
 
 {% if roles.length >= 1 %}
   {% for item in roles %}

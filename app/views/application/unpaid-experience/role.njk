@@ -45,10 +45,10 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(["unpaid-experience", id, "worked-with-children"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "workedWithChildren"])) }}
 
-  {% set startDate = applicationValue(["unpaid-experience", id, "start-date"]) %}
-  {% set endDate = applicationValue(["unpaid-experience", id, "end-date"]) %}
+  {% set startDate = applicationValue(["unpaid-experience", id, "startDate"]) %}
+  {% set endDate = applicationValue(["unpaid-experience", id, "endDate"]) %}
   {{ govukDateInput({
     fieldset: {
       legend: {
@@ -59,7 +59,7 @@
     hint: {
       text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
     },
-    namePrefix: id + "-start-date",
+    namePrefix: id + "-startDate",
     items: [{
       label: "Month",
       name: "month",
@@ -71,7 +71,7 @@
       value: startDate | date("yyyy"),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(["unpaid-experience", id, "start-date"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "startDate"])) }}
 
   {{ govukCheckboxes({
     items: [{
@@ -91,7 +91,7 @@
       hint: {
         text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
       },
-      namePrefix: id + "-end-date",
+      namePrefix: id + "-endDate",
       items: [{
         label: "Month",
         name: "month",
@@ -103,7 +103,7 @@
         value: endDate | date("yyyy"),
         classes: "govuk-input--width-4"
       }]
-    } | decorateApplicationAttributes(["unpaid-experience", id, "end-date"])) }}
+    } | decorateApplicationAttributes(["unpaid-experience", id, "endDate"])) }}
 
     {{ govukCheckboxes({
       items: [{
@@ -128,7 +128,7 @@
         html: endDateHtml
       }
     }]
-  } | decorateApplicationAttributes(["unpaid-experience", id, "end-date"])) }}
+  } | decorateApplicationAttributes(["unpaid-experience", id, "endDate"])) }}
 
   {{ govukCharacterCount({
     label: {

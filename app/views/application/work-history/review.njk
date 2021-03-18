@@ -5,7 +5,7 @@
 {% set title = "Work history" %}
 {% set canAmend = true %}
 {% set workHistory = applicationValue(["work-history"]) or {} %}
-{% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+{% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
 {% set workHistoryDecision = applicationValue(["work-history-disclose"]) %}
 
 {% block pageNavigation %}

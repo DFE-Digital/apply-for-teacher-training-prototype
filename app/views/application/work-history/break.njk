@@ -19,19 +19,19 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
-    namePrefix: id + "-start-date",
+    namePrefix: id + "-startDate",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('L')
+      value: (applicationValue(["work-history", id, "startDate"]) or start) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "start-date"]) or start) | date('yyyy')
+      value: (applicationValue(["work-history", id, "startDate"]) or start) | date('yyyy')
     }]
-  } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
+  } | decorateApplicationAttributes(["work-history", id, "startDate"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -40,19 +40,19 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
-    namePrefix: id + "-end-date",
+    namePrefix: id + "-endDate",
     items: [{
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('L')
+      value: (applicationValue(["work-history", id, "endDate"]) or end) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "end-date"]) or end) | date('yyyy')
+      value: (applicationValue(["work-history", id, "endDate"]) or end) | date('yyyy')
     }]
-  } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+  } | decorateApplicationAttributes(["work-history", id, "endDate"])) }}
 
   {{ govukCharacterCount({
     label: {

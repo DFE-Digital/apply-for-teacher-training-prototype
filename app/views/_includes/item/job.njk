@@ -21,7 +21,7 @@
 {%- endset %}
 
 {% set datesText %}
-  {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
+  {{ item.startDate | date("MMMM yyyy") }} - {{ item.endDate | date("MMMM yyyy") if item.endDate != "now" else "Present" }}
 {% endset %}
 
 {% set changeHref = applicationPath + "/work-history/job/" + item.id + "?referrer=" + referrer %}
@@ -88,7 +88,7 @@
       text: "Did this job involve working in a school or with children?"
     },
     value: {
-      text: (item["worked-with-children"] or "Not entered")
+      text: item.workedWithChildren or "Not entered"
     },
     actions: {
       items: [{

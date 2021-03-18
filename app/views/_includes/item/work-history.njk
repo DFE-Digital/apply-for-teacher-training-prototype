@@ -41,7 +41,7 @@
       }]
     }) }}
   {% else %}
-    {% set history = workHistory | toArray | selectattr("id") | sort(attribute="start-date") %}
+    {% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
 
     <section>
       {% if history.length >= 1 %}
@@ -52,7 +52,7 @@
         {% set periodStartEpoch = periodStart | date("x") | int %}
 
         {# firstStart = Start date of first item in work history #}
-        {% set firstStart = item["start-date"] %}
+        {% set firstStart = item.startDate %}
         {% set firstStartEpoch = firstStart | date("x") | int %}
 
         <div class="govuk-grid-row">
@@ -75,26 +75,26 @@
             </p>
 
             <p class="govuk-body">
-              {{ item["start-date"] | date('LLL yyyy') }}
+              {{ item.startDate | date('LLL yyyy') }}
 
-              {% if item['start-date-approx'] | length  > 0 %}
+              {% if item.startDateApprox | length  > 0 %}
                 (estimate)
               {% endif %}
 
               to
-              {% if item["end-date-present"] == "yes" %}
+              {% if item.endDatePresent == "yes" %}
                 Present
               {% else %}
-                {{ item["end-date"] | date("LLL yyyy") if item["end-date"] != "now" else "Present" }}
+                {{ item.endDate | date("LLL yyyy") if item.endDate != "now" else "Present" }}
 
-                {% if item['end-date-approx'] | length  > 0 %}
+                {% if item.endDateApprox | length  > 0 %}
                   (estimate)
                 {% endif %}
 
               {% endif %}
             </p>
 
-            {% if item["worked-with-children"] == "Yes" %}
+            {% if item.workedWithChildren == "Yes" %}
               <p class="govuk-body-s govuk-!-margin-bottom-1">This role used skills relevant to teaching</p>
             {% endif %}
           </div>
@@ -112,12 +112,12 @@
 
         {# Unexplained break (during work history) #}
         {% set nextItem = history[loop.index] %}
-        {% set itemStart = item["end-date"] %}
+        {% set itemStart = item.endDate %}
         {% set itemStartEpoch = itemStart | date("x") | int %}
-        {% set itemEnd = nextItem["start-date"] if nextItem else "now" %}
+        {% set itemEnd = nextItem.startDate if nextItem else "now" %}
         {% set itemEndEpoch = itemEnd | date("x") | int %}
         {% set itemDuration = itemEndEpoch - itemStartEpoch %}
-        {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 and item['end-date-present'] != 'yes' %}
+        {% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 and item.endDatePresent != 'Yes' %}
 
           {% if loop.index == history.length %}
             <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">

@@ -10,7 +10,6 @@
 {% set title = (action | capitalize) + " job" %}
 {% set formaction = "/application/" + applicationId + "/work-history/" + id %}
 
-
 {% block pageNavigation %}
   {% if referrer %}
     {{ govukBackLink({
@@ -33,32 +32,28 @@
         }
       },
       hint: {
-        text: "For example, 5 2019.  If you cannot remember the exact month or year, enter an estimate."
+        text: "For example, 5 2019. If you cannot remember the exact month or year, enter an estimate."
       },
-      namePrefix: id + "-end-date",
+      namePrefix: id + "-endDate",
       items: [{
         label: "Month",
         name: "month",
-        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('L'),
+        value: (applicationValue(["work-history", id, "endDate"]) or "") | date('L'),
         classes: "govuk-input--width-2"
-      },
-      {
+      }, {
         label: "Year",
         name: "year",
-        value: (applicationValue(["work-history", id, "end-date"]) or "") | date('yyyy'),
+        value: (applicationValue(["work-history", id, "endDate"]) or "") | date('yyyy'),
         classes: "govuk-input--width-4"
       }]
-    } | decorateApplicationAttributes(["work-history", id, "end-date"])) }}
+    } | decorateApplicationAttributes(["work-history", id, "endDate"])) }}
 
-      {{ govukCheckboxes({
-    items: [
-      {
-        value: "end-date-approx",
+    {{ govukCheckboxes({
+      items: [{
+        value: "endDateApprox",
         text: "I’m not sure of the exact month or year I left"
-      }
-    ]
-  } | decorateApplicationAttributes(["work-history", id, "end-date-approx"])) }}
-
+      }]
+    } | decorateApplicationAttributes(["work-history", id, "endDateApprox"])) }}
   {% endset %}
 
   {{ govukInput({
@@ -70,7 +65,6 @@
       text: "If you worked for yourself, enter ‘self-employed’."
     }
   } | decorateApplicationAttributes(["work-history", id, "org"])) }}
-
 
   {{ govukInput({
     label: {
@@ -107,30 +101,27 @@
     hint: {
       text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
     },
-    namePrefix: id + "-start-date",
+    namePrefix: id + "-startDate",
     items: [{
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('L'),
+      value: (applicationValue(["work-history", id, "startDate"]) or start or "") | date('L'),
       classes: "govuk-input--width-2"
     },
     {
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "start-date"]) or start or "") | date('yyyy'),
+      value: (applicationValue(["work-history", id, "startDate"]) or start or "") | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "start-date"])) }}
+  } | decorateApplicationAttributes(["work-history", id, "startDate"])) }}
 
   {{ govukCheckboxes({
-    items: [
-      {
-        value: "start-date-approx",
-        text: "I’m not sure of the exact month or year I started"
-      }
-    ]
-  } | decorateApplicationAttributes(["work-history", id, "start-date-approx"])) }}
-
+    items: [{
+      value: "startDateApprox",
+      text: "I’m not sure of the exact month or year I started"
+    }]
+  } | decorateApplicationAttributes(["work-history", id, "startDateApprox"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -139,21 +130,17 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
-    items: [
-      {
-        value: "yes",
-        text: "Yes"
-      },
-      {
-        value: "no",
-        text: "No",
-        conditional: {
-          html: roleEndHTML
-        }
-
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No",
+      conditional: {
+        html: roleEndHTML
       }
-    ]
-  } | decorateApplicationAttributes(["work-history", id, "end-date-present"])) }}
+    }]
+  } | decorateApplicationAttributes(["work-history", id, "endDatePresent"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -170,7 +157,7 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "worked-with-children"])) }}
+  } | decorateApplicationAttributes(["work-history", id, "workedWithChildren"])) }}
 
   {{ govukInput({
     type: "hidden",

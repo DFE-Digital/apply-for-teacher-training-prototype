@@ -54,26 +54,26 @@ const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
   }
 
   // Create ISO 8601 start date
-  const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
-  const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')
-  const startYear = req.body[`${id}-start-date-year`]
-  data[id]['start-date'] = false
+  const startDay = (req.body[`${id}-startDate-day`] || '1').padStart(2, '0')
+  const startMonth = (req.body[`${id}-startDate-month`]).padStart(2, '0')
+  const startYear = req.body[`${id}-startDate-year`]
+  data[id].startDate = false
 
   if (startMonth && startYear) {
-    data[id]['start-date'] = `${startYear}-${startMonth}-${startDay}`
+    data[id].startDate = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
-  const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
-  const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
-  const endYear = req.body[`${id}-end-date-year`]
+  const endDay = (req.body[`${id}-endDate-day`] || '1').padStart(2, '0')
+  const endMonth = (req.body[`${id}-endDate-month`]).padStart(2, '0')
+  const endYear = req.body[`${id}-endDate-year`]
 
   if (blankEqualsNow) {
-    data[id]['end-date'] = 'now' // No date indicates today
+    data[id].endDate = 'now' // No date indicates today
   }
 
   if (endMonth && endYear) {
-    data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
+    data[id].endDate = `${endYear}-${endMonth}-${endDay}`
   }
 }
 

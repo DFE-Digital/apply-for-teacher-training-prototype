@@ -1,5 +1,5 @@
 {% set completed = applicationValue(["completed", "safeguarding"]) %}
-{% set entered = applicationValue(["safeguarding", "disclose"]) %}
+{% set entered = applicationValue(["safeguarding-disclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,7 +34,7 @@
           text: "Do you want to share any safeguarding issues?"
         },
         value: {
-          text: applicationValue(["safeguarding", "disclose"])
+          text: applicationValue(["safeguarding-disclose"])
         },
         actions: {
           items: [{
@@ -48,7 +48,7 @@
           text: "Give any relevant information"
         },
         value: {
-          html: applicationValue(["safeguarding", "statement"])
+          html: applicationValue(["safeguarding"])
         },
         actions: {
           items: [{
@@ -57,7 +57,7 @@
             visuallyHiddenText: "the information you are sharing"
           }]
         } if canAmend
-      } if applicationValue(["safeguarding", "disclose"]) == "Yes"]
+      } if applicationValue(["safeguarding-disclose"]) == "Yes"]
     })
   }) }}
 {% endif %}

@@ -17,7 +17,8 @@ function createNewApplication (req) {
       candidate: {},
       'contact-information': {},
       'additional-support': {},
-      safeguarding: {},
+      'safeguarding-disclose': null,
+      safeguarding: null,
       degree: {},
       'other-qualifications': {},
       gcse: {

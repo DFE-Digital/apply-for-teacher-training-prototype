@@ -140,9 +140,7 @@ module.exports = {
   'additional-support': {
     disclose: 'No'
   },
-  safeguarding: {
-    disclose: 'No'
-  },
+  'safeguarding-disclose': 'No',
   degree: {
     abcde: {
       id: 'kq19m',

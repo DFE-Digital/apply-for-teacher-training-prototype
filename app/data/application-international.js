@@ -140,10 +140,8 @@ module.exports = {
     disclose: 'Yes',
     statement: 'I currently require the use of a wheelchair.'
   },
-  safeguarding: {
-    disclose: 'Yes',
-    statement: 'I have a criminal record in Spain'
-  },
+  'safeguarding-disclose': 'Yes',
+  safeguarding: 'I have a criminal record in Spain',
   degree: {
     kq19m: {
       id: 'kq19m',

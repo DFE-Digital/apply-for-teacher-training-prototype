@@ -38,7 +38,7 @@
     },
     maxwords: 400,
     rows: 8
-  } | decorateApplicationAttributes(["safeguarding", "statement"])) }}
+  } | decorateApplicationAttributes(["safeguarding"])) }}
 {% endset %}
 
 {{ govukRadios({
@@ -62,7 +62,7 @@
     value: "No",
     text: "No"
   }]
-} | decorateApplicationAttributes(["safeguarding", "disclose"])) }}
+} | decorateApplicationAttributes(["safeguarding-disclose"])) }}
 
 {{ govukButton({
   text: "Continue"

@@ -11,19 +11,19 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">You can get a statement from The National Recognition Information Centre for the United Kingdom (UK NARIC) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
+  <p class="govuk-body">You can get a statement from UK ENIC (the UK agency for international qualifications and skills) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
 
   {% set yesConditionalHtml %}
     {{ govukInput({
       label: {
-        text: "UK NARIC reference number",
+        text: "UK ENIC reference number",
         classes: "govuk-label--s"
       },
       hint: {
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["gcse", id, "naric-reference"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "enic-reference"])) }}
 
     {{ govukRadios({
       fieldset: {
@@ -44,17 +44,17 @@
       }, {
         text: "GCE Advanced (A) level"
       }]
-    } | decorateApplicationAttributes(["gcse", id, "naric-comparability"])) }}
+    } | decorateApplicationAttributes(["gcse", id, "enic-comparability"])) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
-    <p class="govuk-body">Ask your training provider if they need a UK NARIC statement of comparability. You can get a free statement (this usually costs £49.50 plus VAT) by calling Get Into Teaching on Freephone 0800 389 2501.</p>
+    <p class="govuk-body">Ask your training provider if they need a UK ENIC statement of comparability. You can get a free statement (this usually costs £49.50 plus VAT) by calling Get Into Teaching on Freephone 0800 389 2501.</p>
   {% endset %}
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Do you have a statement of comparability from The National Recognition Information Centre?",
+        text: "Do you have a statement of comparability from UK ENIC (the UK agency for international qualifications and skills)?",
         classes: "govuk-fieldset__legend--m"
       }
     },
@@ -69,7 +69,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["gcse", id, "naric"])) }}
+  } | decorateApplicationAttributes(["gcse", id, "enic"])) }}
 
   {{ govukButton({
     text: "Save and continue"

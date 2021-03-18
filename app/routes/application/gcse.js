@@ -21,7 +21,7 @@ const gcsePaths = (req) => {
   const paths = [
     basePath,
     ...(isInternational(req) ? [`${basePath}/country`] : []),
-    ...(isInternational(req) ? [`${basePath}/naric`] : []),
+    ...(isInternational(req) ? [`${basePath}/enic`] : []),
     `${basePath}/grade`,
     `${basePath}/year`,
     ...(referrer ? [referrer] : [`/application/${applicationId}/gcse/${id}/review`])
@@ -82,8 +82,8 @@ module.exports = router => {
     res.redirect(`${path}?${utils.queryString(req)}`)
   })
 
-  // Render UK NARIC/grade/year pages
-  router.all('/application/:applicationId/gcse/:id/:view(subject|country|grade|naric|year)', (req, res) => {
+  // Render UK ENIC/grade/year pages
+  router.all('/application/:applicationId/gcse/:id/:view(subject|country|grade|enic|year)', (req, res) => {
     const completedGcse = gcseData(req).grade && gcseData(req).year
 
     const { id, view } = req.params

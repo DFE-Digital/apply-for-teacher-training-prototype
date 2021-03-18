@@ -145,7 +145,7 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.gcse.maths) &&
     module.exports.hasCompletedSection(application.gcse.english) &&
     module.exports.hasCompletedSection(application.gcse.science) &&
-    module.exports.hasCompletedSection(application['personal-statement']) &&
+    module.exports.hasCompletedSection(application.personalStatement) &&
     module.exports.hasCompletedSection(application.subjectKnowledge) &&
     module.exports.hasCompletedSection(application.interviewNeeds)
   ) {

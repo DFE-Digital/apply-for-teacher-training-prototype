@@ -21,7 +21,7 @@ module.exports = router => {
         'work-history': 'Work history is not marked as completed',
         'unpaid-experience': 'Volunteering with children and young people is not marked as completed',
         degree: 'Degree(s) are not marked as completed',
-        'personal-statement': 'Tell us why you want to be a teacher',
+        personalStatement: 'Tell us why you want to be a teacher',
         subjectKnowledge: 'Tell us about your knowledge about the subject you want to teach',
         gcse: {
           maths: 'Maths GCSE or equivalent not entered',

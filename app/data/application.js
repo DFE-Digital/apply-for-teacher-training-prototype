@@ -25,8 +25,8 @@ module.exports = {
   },
   choices: {
     ABCDE: {
-      courseCode: '2XT2',
-      providerCode: '1N1',
+      courseCode: '2MH9',
+      providerCode: '1DR',
       locationName: 'Hillcrest Academy',
       locationAddress: 'Cowper Street, Leeds. LS7 4DR',
       studyMode: 'Full time',
@@ -36,8 +36,8 @@ module.exports = {
       status: 'Awaiting decision'
     },
     FGHIJ: {
-      courseCode: '2VLT',
-      providerCode: 'L24',
+      courseCode: '38PN',
+      providerCode: 'S90',
       locationName: 'Main Site',
       locationAddress: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD',
       studyMode: 'Full time',
@@ -47,8 +47,8 @@ module.exports = {
       status: 'Awaiting decision'
     },
     ZYXWV: {
-      courseCode: 'X100',
-      providerCode: 'B60',
+      courseCode: 'AP21',
+      providerCode: '4F5',
       locationName: 'Main Site',
       locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY',
       studyMode: 'Full time',

@@ -39,29 +39,63 @@
 {% if item.feedback.qualityOfApplication %}
 <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Quality of application</h4>
 
-{% if item.feedback.qualityOfApplication.personalStatement %}
-  <p class="govuk-body">Personal statement could be improved.</p>
-  {{ govukInsetText({
-    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
-    text: item.feedback.qualityOfApplication.personalStatement | nl2br | safe
-  }) }}
-{% endif %}
+  {% set qualityOfApplicaitonFeedback %}
+    {% if item.feedback.qualityOfApplication.personalStatement %}
+      <p class="govuk-body govuk-!-margin-bottom-0">Personal statement could be improved.</p>
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.personalStatement | nl2br | safe }}</p>
+    {% endif %}
 
-{% if item.feedback.qualityOfApplication.subjectKnowledge %}
-  <p class="govuk-body">Subject knowledge could be improved.</p>
+    {% if item.feedback.qualityOfApplication.subjectKnowledge %}
+      <p class="govuk-body govuk-!-margin-bottom-0">Subject knowledge could be improved.</p>
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.subjectKnowledge | nl2br | safe }}</p>
+    {% endif %}
+
+    {% if item.feedback.qualityOfApplication.other %}
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.other | nl2br | safe }} </p>
+    {% endif %}
+  {% endset %}
+
   {{ govukInsetText({
     classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
-    text: item.feedback.qualityOfApplication.subjectKnowledge | nl2br | safe
+    html: qualityOfApplicaitonFeedback
   }) }}
-{% endif %}
 {% endif %}
 
 {% if item.feedback.qualifications %}
-<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Qualifications</h4>
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Qualifications</h4>
 
-{% if item.feedback.qualifications.degree_does_not_meet_requirements %}
-  <p class="govuk-body">Your degree does not meet the course requirements.</p>
-{% endif %}
+  {% set qualificationsFeedbackHtml %}
+
+    {% if item.feedback.qualifications.noMathsGCSEOrEquivalent %}
+      <p class="govuk-body">No maths GCSE grade 4 (C) or above, or accepted equivalent.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noEnglishGCSEOrEquivalent %}
+      <p class="govuk-body">No English GCSE grade 4 (C) or above, or accepted equivalent.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noScienceGCSEOrEquivalent %}
+      <p class="govuk-body">No science GCSE grade 4 (C) or above, or accepted equivalent (for primary applicants).</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noDegree %}
+      <p class="govuk-body">No degree.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.degree_does_not_meet_requirements %}
+      <p class="govuk-body">Degree does not meet course requirements.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.other %}
+      <p class="govuk-body">{{ item.feedback.qualifications.other | nl2br }}</p>
+    {% endif %}
+  {% endset %}
+
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    html: qualificationsFeedbackHtml | safe
+  }) }}
+
 {% endif %}
 
 {% if item.feedback.additionalFeedback %}

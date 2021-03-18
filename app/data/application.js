@@ -245,5 +245,6 @@ module.exports = {
       'end-date': 'now'
     }
   },
-  'school-experience-decision': 'No'
+  'school-experience-decision': 'No',
+  'school-experience': {}
 }

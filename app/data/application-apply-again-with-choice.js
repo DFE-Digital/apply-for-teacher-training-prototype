@@ -6,6 +6,8 @@ applicationApplyAgainWithChoice.apply2 = true
 applicationApplyAgainWithChoice.previousApplications = ['12345']
 
 // No choices yet
-applicationApplyAgainWithChoice.choices = {'ABCDE': applicationApplyAgainWithChoice.choices['ABCDE']}
+applicationApplyAgainWithChoice.choices = {
+  ABCDE: applicationApplyAgainWithChoice.choices.ABCDE
+}
 
 module.exports = applicationApplyAgainWithChoice

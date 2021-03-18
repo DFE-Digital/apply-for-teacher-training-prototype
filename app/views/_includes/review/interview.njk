@@ -1,4 +1,31 @@
-{% if applicationValue(["completed", "interview"]) %}
+{% set completed = applicationValue(["completed", "interview"]) %}
+{% set entered = applicationValue(["interview-choice"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "interview",
+    title: "Interview needs not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you have any interview needs?",
+        href: applicationPath + "/interview/?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete interview needs",
+        href: applicationPath + "/interview/review?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -32,17 +59,5 @@
         } if canAmend
       } if applicationValue(["interview-choice"]) == "Yes"]
     })
-  }) }}
-{% elif showIncomplete %}
-  {{ appSuggestion({
-    id: "interview",
-    title: "Interview needs not entered",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Do you have any interview needs?",
-        href: applicationPath + "/interview/review?referrer=" + referrer
-      }]
-    }
   }) }}
 {% endif %}

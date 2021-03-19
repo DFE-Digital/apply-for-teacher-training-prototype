@@ -3,6 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
+{% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
@@ -73,7 +74,7 @@
       divider: "or"
     }, {
       value: "None",
-      text: "I do not want to add A levels or other qualifications",
+      text: "I do not want to add any " + itemName,
       hint: {
         text: "Providers look at " + itemName + " for evidence of subject knowledge not covered in your degree or work history"
       }

@@ -1,9 +1,10 @@
 {% set otherQualifications = applicationValue(["otherQualifications"]) %}
 {% set qualifications = otherQualifications | toArray | selectattr("id") %}
+{% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 
 {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
   {% set contentHtml %}
-    <p class="govuk-body">Adding your A levels and other qualifications can:</p>
+    <p class="govuk-body">Adding your {{ itemName }} can:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>make your application stronger</li>
       <li>demonstrate knowledge of a subject not covered in your degree or work history</li>
@@ -11,7 +12,7 @@
     </ul>
   {% endset %}
   {{ appSuggestion({
-    title: "You have not added any A levels or other qualifications",
+    title: "You have not added any " + itemName,
     content: {
       html: contentHtml
     },
@@ -28,7 +29,7 @@
     html: govukSummaryList({
       rows: [{
         key: {
-          text: "Do you want to add A levels or other qualifications?"
+          text: "Do you want to add any " + itemName
         },
         value: {
           text: applicationValue(["otherQualificationsDisclose"])

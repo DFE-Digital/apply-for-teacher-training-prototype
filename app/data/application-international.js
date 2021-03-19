@@ -4,6 +4,7 @@ module.exports = {
   apply2: false,
   ended_without_success: false,
   completed: {
+    choices: ['true'],
     personalInformation: ['true'],
     contactInformation: ['true'],
     workHistory: ['true'],
@@ -14,7 +15,6 @@ module.exports = {
     maths: ['true'],
     english: ['true'],
     science: ['true'],
-    otherQualifications: ['true'],
     englishLanguage: ['true'],
     personalStatement: ['true'],
     subjectKnowledge: ['true'],
@@ -174,28 +174,6 @@ module.exports = {
     grade: '7.5',
     certificateNumber: '02GB0674SOOM599A',
     year: '2015'
-  },
-  otherQualifications: {
-    ksufp: {
-      id: 'ksufp',
-      type: 'Non-UK qualification',
-      typeNonUk: 'GCSE(A*-G)',
-      subject: 'Science',
-      grade: '173',
-      year: '2004',
-      provenance: 'international',
-      country: 'India'
-    },
-    kv0y7: {
-      id: 'kv0y7',
-      type: 'Non-UK qualification',
-      typeNonUk: 'Higher Secondary School Certificate',
-      subject: '',
-      grade: '647',
-      year: '2008',
-      provenance: 'international',
-      country: 'India'
-    }
   },
   gcse: {
     maths: {

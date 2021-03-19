@@ -78,7 +78,7 @@
       value: "true",
       text: "I’m not sure the exact month or year I started"
     }]
-  } | decorateApplicationAttributes(["unpaidExperience", id, "start-date-is-exact"])) }}
+  } | decorateApplicationAttributes(["unpaidExperience", id, "startDateApprox"])) }}
 
   {% set endDateHtml %}
     {{ govukDateInput({
@@ -110,7 +110,7 @@
         value: "true",
         text: "I’m not sure the exact month or year I left"
       }]
-    } | decorateApplicationAttributes(["unpaidExperience", id, "end-date-is-exact"])) }}
+    } | decorateApplicationAttributes(["unpaidExperience", id, "endDateApprox"])) }}
   {% endset %}
 
   {{ govukRadios({

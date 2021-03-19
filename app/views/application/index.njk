@@ -189,8 +189,8 @@
         href: applicationPath + "/english-language" + ("/review" if applicationValue(["englishLanguage"]) | length > 0),
         id: "english-language",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "english-language"]),apply2=apply2),
-          text: tagTextForSection(completed=applicationValue(["completed", "english-language"]),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "englishLanguage"]),apply2=apply2),
+          text: tagTextForSection(completed=applicationValue(["completed", "englishLanguage"]),apply2=apply2)
         }
       } if international, {
         text: "Maths GCSE or equivalent",

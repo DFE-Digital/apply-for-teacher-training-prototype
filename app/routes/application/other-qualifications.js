@@ -35,7 +35,7 @@ module.exports = router => {
       res.redirect(referrer || `/application/${applicationId}/other-qualifications/review`)
     } else {
       req.session.data.applications[applicationId].otherQualificationsDisclose = 'Yes'
-      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${id}/details`)
+      res.redirect(`/application/${applicationId}/other-qualifications/${id}/details`)
     }
   })
 

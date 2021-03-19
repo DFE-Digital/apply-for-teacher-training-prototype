@@ -26,7 +26,7 @@
 
 {# Structured GCSE grade #}
 {% macro gradeAutocomplete(params) %}
-  {{ appAutocomplete({
+  {{ govukInput({
     label: {
       text: params.label or "Grade",
       classes: params.classes
@@ -34,7 +34,7 @@
     hint: {
       text: params.hint or "For example, ‘C’ or ‘4’"
     },
-    classes: "govuk-input--width-10",
+    classes: "govuk-input--width-2",
     items: params.items
   } | decorateApplicationAttributes(["gcse", id, "grade" + params.name])) }}
 {% endmacro %}
@@ -256,78 +256,11 @@
     }]
   } | decorateApplicationAttributes(["degree", id, "grade"])) }}
 
-{% else %}
-  {{ otherGradeHtml(hintText) | safe }}
-{% endif %}
+  {% else %}
+    {{ otherGradeHtml(hintText) | safe }}
+  {% endif %}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
 {% endblock %}
-
-{% if applicationValue(["gcse", id, "type"]) == "GCSE" %}
-  {% block pageScripts %}
-    <script src="/public/javascripts/autocomplete.min.js"></script>
-    <script>
-    {% if id == "science" %}
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-science-gradeSingle'),
-        defaultValue: '{{ applicationValue(["gcse", "science", "gradeSingle"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-science-gradeDouble'),
-        defaultValue: '{{ applicationValue(["gcse", "science", "gradeDouble"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-science-gradeBiology'),
-        defaultValue: '{{ applicationValue(["gcse", "science", "gradeBiology"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-science-gradeChemistry'),
-        defaultValue: '{{ applicationValue(["gcse", "science", "gradeChemistry"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-science-gradePhysics'),
-        defaultValue: '{{ applicationValue(["gcse", "science", "gradePhysics"]) }}'
-      })
-    {% elif id == "english" %}
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-english-gradeEnglish'),
-        defaultValue: '{{ applicationValue(["gcse", "english", "gradeEnglish"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-english-gradeLanguage'),
-        defaultValue: '{{ applicationValue(["gcse", "english", "gradeLanguage"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-english-gradeLiterature'),
-        defaultValue: '{{ applicationValue(["gcse", "english", "gradeLiterature"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-english-gradeStudies'),
-        defaultValue: '{{ applicationValue(["gcse", "english", "gradeStudies"]) }}'
-      })
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-english-gradeOther'),
-        defaultValue: '{{ applicationValue(["gcse", "english", "gradeOther"]) }}'
-      })
-    {% else %}
-      accessibleAutocomplete.enhanceSelectElement({
-        cssNamespace: 'govuk-input--width-10 autocomplete',
-        selectElement: document.querySelector('#gcse-maths-gradeSingle'),
-        defaultValue: '{{ applicationValue(["gcse", "maths", "gradeSingle"]) }}'
-      })
-    {% endif %}
-    </script>
-  {% endblock %}
-{% endif %}

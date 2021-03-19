@@ -49,35 +49,39 @@
       classes: "govuk-!-width-two-thirds app-inset-text--review"
       })
     }}
+
+  {% else %}
+
+    {{ appSuggestion({
+
+      title: "Proofread your personal statement",
+      content: {
+        html: "Training providers will pay attention to your spelling, punctuation and grammar. It is important to get it right.\n\nThe best way to proofread is to read your personal statement out loud. Or ask someone to check it for you." | markdown
+      }
+    }) }}
+
   {% endif %}
 
-{% if not hasFeedbackFromPreviousApplication %}
-  {{ appSuggestion({
 
-    title: "Proofread your personal statement",
-    content: {
-      html: "Training providers will pay attention to your spelling, punctuation and grammar. It is important to get it right.\n\nThe best way to proofread is to read your personal statement out loud. Or ask someone to check it for you." | markdown
-    }
-  }) if not showIncomplete }}
 
   {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Why do you want to be a teacher?"
-        },
-        value: {
-          text: (applicationValue(["personalStatement"]) or "Not entered") | nl2br | safe
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-statement?referrer=" + referrer,
-            text: "Change" if applicationValue(["personalStatement"]) else "Add",
-            visuallyHiddenText: "why you want to be a teacher"
-          }]
-        } if canAmend
-      }]
-    })
+  classes: "govuk-!-margin-bottom-6",
+  html: govukSummaryList({
+    rows: [{
+      key: {
+        text: "Why do you want to be a teacher?"
+      },
+      value: {
+        text: (applicationValue(["personalStatement"]) or "Not entered") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/personal-statement?referrer=" + referrer,
+          text: "Change" if applicationValue(["personalStatement"]) else "Add",
+          visuallyHiddenText: "why you want to be a teacher"
+        }]
+      } if canAmend
+    }]
+  })
   }) }}
 {% endif %}

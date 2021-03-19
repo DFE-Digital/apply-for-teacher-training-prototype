@@ -1,13 +1,20 @@
 
-{% if applicationValue(["completed", "englishLanguage"]) %}
-  {% set summaryCardHtml %}{% include "_includes/item/english-language.njk" %}{% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "English as a foreign language assessment",
-    html: summaryCardHtml
+{% set completed = applicationValue(["completed", "englishLanguage"]) %}
+{% set entered = applicationValue(["englishLanguage"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "english-language",
+    title: "English as a foreign language assessment not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your English as a foreign language assessment",
+        href: applicationPath + "/english-language/?referrer=" + referrer
+      }]
+    }
   }) }}
-{% elif showIncomplete %}
+{% else %}
   {{ appSuggestion({
     id: "english-language",
     title: "English as a foreign language not marked as complete",
@@ -18,5 +25,13 @@
         href: applicationPath + "/english-language/review?referrer=" + referrer
       }]
     }
+  }) if not completed and showIncomplete }}
+
+  {% set summaryCardHtml %}{% include "_includes/item/english-language.njk" %}{% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: "English as a foreign language assessment",
+    html: summaryCardHtml
   }) }}
 {% endif %}

@@ -11,21 +11,23 @@ module.exports = router => {
       pageObject.errorList = []
       const sections = {
         choices: application.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
-        references: 'Add 2 referees to your application',
+        references: 'You need 2 references before you can submit your application',
         candidate: 'Personal information not entered',
-        contactInformation: 'Contact information not entered',
-        additionalSupport: 'Training with a disability not entered',
-        workHistory: 'Work history is not marked as completed',
-        unpaidExperience: 'Volunteering with children and young people is not marked as completed',
-        degree: 'Degree(s) are not marked as completed',
-        personalStatement: 'Tell us why you want to be a teacher',
-        subjectKnowledge: 'Tell us about your knowledge about the subject you want to teach',
+        'contact-information': 'Contact information not entered',
         gcse: {
           maths: 'Maths GCSE or equivalent not entered',
           english: 'English GCSE or equivalent not entered',
           science: 'Science GCSE or equivalent not entered'
         },
-        interviewNeeds: 'Tell us your interview needs'
+        'other-qualifications': 'A levels and other qualifications not marked as complete',
+        degree: 'Degree section not marked as completed',
+        'work-history': 'Work history not entered',
+        'unpaid-experience': 'Unpaid experience not entered',
+        'personal-statement': 'Personal statement not entered',
+        'subject-knowledge': 'Subject knowledge not entered',
+        'additional-support': 'Any disability or other needs not entered',
+        'interview-needs': 'Interview needs not entered',
+        safeguarding: 'Safeguarding information not entered'
       }
 
       for (const [key, value] of Object.entries(sections)) {
@@ -35,7 +37,7 @@ module.exports = router => {
             if (!utils.hasCompletedSection(application.gcse[subject])) {
               pageObject.errorList.push({
                 text: value[subject],
-                href: `#missing-gcse-${subject}`
+                href: `#gcse-${subject}`
               })
             }
           })
@@ -43,7 +45,7 @@ module.exports = router => {
           if (!utils.hasCompletedSection(application[key])) {
             pageObject.errorList.push({
               text: value,
-              href: `#missing-${key}`
+              href: `#${key}`
             })
           }
         }

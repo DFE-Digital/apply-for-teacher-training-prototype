@@ -1,5 +1,5 @@
-{% set workHistory = applicationValue(["work-history"]) or {} %}
-{% set workHistoryDecision = applicationValue(["work-history-disclose"]) %}
+{% set workHistory = applicationValue(["workHistory"]) or {} %}
+{% set workHistoryDecision = applicationValue(["workHistoryDisclose"]) %}
 
 {% set summaryCardHtml %}
   {% if workHistoryDecision == "No, I have always been in full time education" %}
@@ -29,7 +29,7 @@
           text: "Explanation of why you’ve been out of the workplace"
         },
         value: {
-          text: (applicationValue(["work-history", "missing"]) or "Not entered") | nl2br | safe
+          text: (applicationValue(["workHistory", "missing"]) or "Not entered") | nl2br | safe
         },
         actions: {
           items: [{

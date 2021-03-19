@@ -6,7 +6,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
-{% set action = "edit" if applicationValue(["work-history", id]) else "add" %}
+{% set action = "edit" if applicationValue(["workHistory", id]) else "add" %}
 {% set title = (action | capitalize) + " job" %}
 {% set formaction = "/application/" + applicationId + "/work-history/" + id %}
 
@@ -38,22 +38,22 @@
       items: [{
         label: "Month",
         name: "month",
-        value: (applicationValue(["work-history", id, "endDate"]) or "") | date('L'),
+        value: (applicationValue(["workHistory", id, "endDate"]) or "") | date('L'),
         classes: "govuk-input--width-2"
       }, {
         label: "Year",
         name: "year",
-        value: (applicationValue(["work-history", id, "endDate"]) or "") | date('yyyy'),
+        value: (applicationValue(["workHistory", id, "endDate"]) or "") | date('yyyy'),
         classes: "govuk-input--width-4"
       }]
-    } | decorateApplicationAttributes(["work-history", id, "endDate"])) }}
+    } | decorateApplicationAttributes(["workHistory", id, "endDate"])) }}
 
     {{ govukCheckboxes({
       items: [{
         value: "endDateApprox",
         text: "I’m not sure of the exact month or year I left"
       }]
-    } | decorateApplicationAttributes(["work-history", id, "endDateApprox"])) }}
+    } | decorateApplicationAttributes(["workHistory", id, "endDateApprox"])) }}
   {% endset %}
 
   {{ govukInput({
@@ -64,7 +64,7 @@
     hint: {
       text: "If you worked for yourself, enter ‘self-employed’."
     }
-  } | decorateApplicationAttributes(["work-history", id, "org"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "org"])) }}
 
   {{ govukInput({
     label: {
@@ -74,7 +74,7 @@
     hint: {
       text: "If you had more than one role with this employer, enter your last role."
     }
-  } | decorateApplicationAttributes(["work-history", id, "role"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "role"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -89,7 +89,7 @@
     }, {
       text: "Part time"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "type"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "type"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -105,23 +105,23 @@
     items: [{
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "startDate"]) or start or "") | date('L'),
+      value: (applicationValue(["workHistory", id, "startDate"]) or start or "") | date('L'),
       classes: "govuk-input--width-2"
     },
     {
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "startDate"]) or start or "") | date('yyyy'),
+      value: (applicationValue(["workHistory", id, "startDate"]) or start or "") | date('yyyy'),
       classes: "govuk-input--width-4"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "startDate"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "startDate"])) }}
 
   {{ govukCheckboxes({
     items: [{
       value: "startDateApprox",
       text: "I’m not sure of the exact month or year I started"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "startDateApprox"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "startDateApprox"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -140,7 +140,7 @@
         html: roleEndHTML
       }
     }]
-  } | decorateApplicationAttributes(["work-history", id, "endDatePresent"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "endDatePresent"])) }}
 
   {{ govukRadios({
     fieldset: {
@@ -157,11 +157,11 @@
     }, {
       text: "No"
     }]
-  } | decorateApplicationAttributes(["work-history", id, "workedWithChildren"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "workedWithChildren"])) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "applications[" + applicationId + "][work-history][" + id + "][category]",
+    name: "applications[" + applicationId + "][workHistory][" + id + "][category]",
     value: "job"
   }) }}
 

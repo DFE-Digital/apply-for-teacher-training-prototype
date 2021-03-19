@@ -18,7 +18,7 @@ module.exports = router => {
         candidate: 'Personal information not entered',
         contactInformation: 'Contact information not entered',
         additionalSupport: 'Training with a disability not entered',
-        'work-history': 'Work history is not marked as completed',
+        workHistory: 'Work history is not marked as completed',
         unpaidExperience: 'Volunteering with children and young people is not marked as completed',
         degree: 'Degree(s) are not marked as completed',
         personalStatement: 'Tell us why you want to be a teacher',
@@ -67,7 +67,7 @@ module.exports = router => {
     const referer = req.get('referer')
 
     if (id && referer.includes('work-history')) {
-      utils.saveIsoDate(req, application['work-history'], id)
+      utils.saveIsoDate(req, application.workHistory, id)
     }
 
     if (id && referer.includes('unpaid-experience')) {

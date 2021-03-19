@@ -4,9 +4,9 @@
 {% set formaction = applicationPath %}
 {% set title = "Work history" %}
 {% set canAmend = true %}
-{% set workHistory = applicationValue(["work-history"]) or {} %}
+{% set workHistory = applicationValue(["workHistory"]) or {} %}
 {% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
-{% set workHistoryDecision = applicationValue(["work-history-disclose"]) %}
+{% set workHistoryDecision = applicationValue(["workHistoryDisclose"]) %}
 
 {% block pageNavigation %}
   {% if fromPage == "work-history-question" %}
@@ -51,7 +51,7 @@
         value: "true",
         text: "I have completed this section"
       }]
-    } | decorateApplicationAttributes(["completed", "work-history"])) }}
+    } | decorateApplicationAttributes(["completed", "workHistory"])) }}
 
     {{ govukButton({
       text: "Save and continue"

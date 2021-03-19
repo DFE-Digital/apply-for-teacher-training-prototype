@@ -206,7 +206,7 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    {% if applicationValue("work-history-disclose") %}
+    {% if applicationValue(["workHistoryDisclose"]) %}
       {% set workHistoryPath = applicationPath + "/work-history/review" %}
     {% else %}
       {% set workHistoryPath = applicationPath + "/work-history" %}
@@ -219,8 +219,8 @@
         href: workHistoryPath,
         id: "work-history",
         tag: {
-          classes: tagClass if applicationValue(["completed", "work-history"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "work-history"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "workHistory"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "workHistory"]) else incompleteTagText
         }
       }, {
         text: "Unpaid experience",

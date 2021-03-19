@@ -24,14 +24,14 @@
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "startDate"]) or start) | date('L')
+      value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "startDate"]) or start) | date('yyyy')
+      value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('yyyy')
     }]
-  } | decorateApplicationAttributes(["work-history", id, "startDate"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "startDate"])) }}
 
   {{ govukDateInput({
     fieldset: {
@@ -45,14 +45,14 @@
       classes: "govuk-input--width-2",
       label: "Month",
       name: "month",
-      value: (applicationValue(["work-history", id, "endDate"]) or end) | date('L')
+      value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('L')
     }, {
       classes: "govuk-input--width-4",
       label: "Year",
       name: "year",
-      value: (applicationValue(["work-history", id, "endDate"]) or end) | date('yyyy')
+      value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('yyyy')
     }]
-  } | decorateApplicationAttributes(["work-history", id, "endDate"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "endDate"])) }}
 
   {{ govukCharacterCount({
     label: {
@@ -64,11 +64,11 @@
     },
     threshold: 90,
     maxwords: 400
-  } | decorateApplicationAttributes(["work-history", id, "description"])) }}
+  } | decorateApplicationAttributes(["workHistory", id, "description"])) }}
 
   {{ govukInput({
     type: "hidden",
-    name: "applications[" + applicationId + "][work-history][" + id + "][category]",
+    name: "applications[" + applicationId + "][workHistory][" + id + "][category]",
     value: "break"
   }) }}
 

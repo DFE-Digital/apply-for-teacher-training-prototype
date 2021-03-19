@@ -12,6 +12,29 @@ if (application.choices.ABCDE) {
   }
 }
 
+// Add some A-levels.
+application.otherQualificationsDisclose = 'Yes'
+application.otherQualifications = {
+  abcde: {
+    type: "A level",
+    subject: "English language",
+    grade: "B",
+    year: "2006"
+  },
+  fghij: {
+    type: "A level",
+    subject: "English literature",
+    grade: "A",
+    year: "2006"
+  },
+  klmno: {
+    type: "A level",
+    subject: "Drama and Theatre studies",
+    grade: "C",
+    year: "2006"
+  }
+}
+
 if (application.choices.FGHIJ) {
   application.choices.FGHIJ.status = 'Unsuccessful'
 }

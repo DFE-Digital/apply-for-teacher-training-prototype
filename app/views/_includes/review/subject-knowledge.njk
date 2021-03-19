@@ -14,17 +14,57 @@
     }
   }) }}
 {% else %}
-  {{ appSuggestion({
-    id: "subject-knowledge",
-    title: "Subject knowledge not marked as completed",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Complete Subject knowledge",
-        href: applicationPath + "/subject-knowledge/?referrer=" + referrer
-      }]
-    }
-  }) if not completed and showIncomplete }}
+
+  {% set hasFeedbackFromPreviousApplication = false %}
+  {% set feedbackFromPreviousApplications = "" %}
+
+  {% if applicationValue(["apply2"]) %}
+    {% for previousApplicationId in applicationValue("previousApplications") %}
+      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
+
+        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.subjectKnowledge %}
+
+          {% set hasFeedbackFromPreviousApplication = true %}
+          {% set feedbackFromPreviousApplications %}
+            {{ feedbackFromPreviousApplications | safe }}
+
+            <p class="govuk-body govuk-!-margin-bottom-0">{{ providers[item.providerCode].name }}:</p>
+            <p class="govuk-body">“{{ item.feedback.qualityOfApplication.subjectKnowledge | safe }}”</p>
+          {% endset %}
+
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {% if hasFeedbackFromPreviousApplication %}
+
+    {% set feedbackFromPreviousApplications %}
+      <h2 class="govuk-heading-s">Feedback from previous applications</h2>
+      {{ feedbackFromPreviousApplications | safe }}
+    {% endset %}
+
+    {{ govukInsetText({
+      html: feedbackFromPreviousApplications | safe,
+      classes: "govuk-!-width-two-thirds app-inset-text--review"
+      })
+    }}
+  {% endif %}
+
+  {% if not hasFeedbackFromPreviousApplication %}
+
+    {{ appSuggestion({
+      id: "subject-knowledge",
+      title: "Subject knowledge not marked as completed",
+      warning: true if errorList,
+      actions: {
+        items: [{
+          text: "Complete Subject knowledge",
+          href: applicationPath + "/subject-knowledge/?referrer=" + referrer
+        }]
+      }
+    }) if not completed and showIncomplete }}
+  {% endif %}
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",

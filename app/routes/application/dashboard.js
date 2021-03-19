@@ -350,6 +350,7 @@ module.exports = router => {
 
       // Qualifications feedback
       case 'ended-without-success-qualifications-feedback':
+        application.gcse.maths["grade-single"] = "D"
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
           qualifications: {

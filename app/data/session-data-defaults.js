@@ -1,6 +1,7 @@
 module.exports = {
   applications: {
     12345: require('./application'),
+    65432: require('./previous-applications'),
     12346: require('./application-apply-again'),
     23456: require('./application-apply-again-with-choice'),
     ABCDE: require('./application-with-choices'),

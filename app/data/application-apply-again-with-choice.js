@@ -3,7 +3,7 @@ const applicationApplyAgainWithChoice = JSON.parse(JSON.stringify(require('./app
 
 // Custom Apply 2 fields
 applicationApplyAgainWithChoice.apply2 = true
-applicationApplyAgainWithChoice.previousApplications = ['12345']
+applicationApplyAgainWithChoice.previousApplications = ['65432']
 
 // No choices yet
 applicationApplyAgainWithChoice.choices = {

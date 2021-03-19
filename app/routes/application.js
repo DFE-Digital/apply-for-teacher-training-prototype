@@ -107,6 +107,20 @@ module.exports = router => {
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
 
+    for (choice of utils.toArray(existingApplication.choices)) {
+      if (choice?.feedback?.qualityOfApplication?.personalStatement) {
+        apply2Application.completed.personalStatement = false
+      }
+
+      if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
+        apply2Application.completed.subjectKnowledge = false
+      }
+
+      if (choice?.feedback?.qualifications?.noMathsGCSEOrEquivalent) {
+        apply2Application.completed.maths = false
+      }
+    }
+
     if (apply2Application.references && apply2Application.references[0]) {
       apply2Application.references[0].status = 'Received'
     }

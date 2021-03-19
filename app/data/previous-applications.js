@@ -13,6 +13,7 @@ if (application.choices.ABCDE) {
 }
 
 // Add some A-levels.
+application.completed.otherQualifications = ['true']
 application.otherQualificationsDisclose = 'Yes'
 application.otherQualifications = {
   abcde: {

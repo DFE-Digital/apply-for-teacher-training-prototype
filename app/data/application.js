@@ -18,8 +18,7 @@ module.exports = {
     englishLanguage: ['true'],
     personalStatement: ['true'],
     subjectKnowledge: ['true'],
-    interviewNeeds: ['true'],
-    otherQualifications: ['true']
+    interviewNeeds: ['true']
   },
   account: {
     email: 'janina.doe@example.com'

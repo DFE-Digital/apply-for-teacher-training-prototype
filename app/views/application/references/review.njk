@@ -22,7 +22,7 @@
   {{ govukNotificationBanner({
     text: messages[0],
     type: "success"
-  }) if messages }}
+  }) if messages.length > 0 }}
 {% endblock %}
 
 {% block primary %}

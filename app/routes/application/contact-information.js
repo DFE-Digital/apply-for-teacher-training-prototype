@@ -1,9 +1,6 @@
 /* eslint-disable camelcase */
 const utils = require('../../utils')
 
-/**
- * Application: Contact information routes
- */
 module.exports = router => {
   // Render other contact pages
   router.get('/application/:applicationId/contact-information/where-do-you-live', (req, res) => {

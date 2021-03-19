@@ -1,6 +1,3 @@
-/**
- * Application: Interview needs routes
- */
 module.exports = router => {
   router.get('/application/:applicationId/interview-needs/:view', (req, res) => {
     const { applicationId, view } = req.params

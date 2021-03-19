@@ -1,8 +1,5 @@
 const utils = require('./../../utils')
 
-/**
- * Application: Other relevant qualifications routes
- */
 module.exports = router => {
   // Generate new id and redirect to that qualification
   router.get('/application/:applicationId/other-qualifications/add', (req, res) => {

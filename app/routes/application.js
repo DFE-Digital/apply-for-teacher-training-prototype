@@ -148,7 +148,6 @@ module.exports = router => {
   require('./application/unpaid-experience')(router)
   require('./application/additional-support')(router)
   require('./application/safeguarding')(router)
-  require('./application/vocation')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)

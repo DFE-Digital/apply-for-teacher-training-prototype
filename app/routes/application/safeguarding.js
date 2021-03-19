@@ -1,6 +1,3 @@
-/**
- * Application: Safeguarding routes
- */
 module.exports = router => {
   router.get('/application/:applicationId/safeguarding', (req, res) => {
     const { applicationId } = req.params

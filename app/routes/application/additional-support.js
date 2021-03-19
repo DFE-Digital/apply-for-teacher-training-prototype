@@ -1,6 +1,3 @@
-/**
- * Application: Additional support routes
- */
 module.exports = router => {
   router.get('/application/:applicationId/additional-support', (req, res) => {
     const { applicationId } = req.params

@@ -1,8 +1,5 @@
 const utils = require('./../../utils')
 
-/**
- * Application: References routes
- */
 module.exports = router => {
   // Mock events in reference request timeline
   router.get('/application/:applicationId/references/mock/:action', (req, res) => {

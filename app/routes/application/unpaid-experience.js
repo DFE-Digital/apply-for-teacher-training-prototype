@@ -1,9 +1,6 @@
 const querystring = require('querystring')
 const utils = require('../../utils')
 
-/**
- * Application: Unpaid experience routes
- */
 module.exports = router => {
   // Render missing unpaid experience page
   // Note: Must be defined before next route declaration

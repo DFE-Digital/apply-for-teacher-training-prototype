@@ -1,8 +1,5 @@
 const utils = require('../../utils')
 
-/**
- * Application: Personal information routes
- */
 module.exports = router => {
   // First page
   router.get('/application/:applicationId/personal-information', (req, res) => {

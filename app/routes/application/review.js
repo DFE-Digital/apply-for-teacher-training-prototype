@@ -1,8 +1,5 @@
 const utils = require('./../../utils')
 
-/**
- * Application: Review answers
- */
 module.exports = router => {
   router.get('/application/:applicationId/review', (req, res) => {
     const application = utils.applicationData(req)

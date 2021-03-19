@@ -1,8 +1,5 @@
 const utils = require('../../utils')
 
-/**
- * Application: English as a foreign language routes
- */
 module.exports = router => {
   // Render review page
   // Note: Must be defined before next route declaration

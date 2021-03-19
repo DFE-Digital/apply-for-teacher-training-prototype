@@ -30,7 +30,7 @@
     type: "tel"
   } | decorateApplicationAttributes(["contactInformation", "tel"])) }}
 
-  {% if data.flags.self_amend_email_address %}
+  {% if data.flags.selfAmendEmailAddress %}
     <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Email address</h3>
     <p class="govuk-body">{{ data["account"]["email"] }} &nbsp; <a href="/account/change-email-address">Change</a></p>
   {% endif %}

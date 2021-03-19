@@ -1,25 +1,18 @@
-const application = require('./application')
-const applicationApplyAgain = require('./application-apply-again')
-const applicationWithChoices = require('./application-with-choices')
-const applicationWithSingleChoice = require('./application-single-choice')
-const applicationApplyAgainWithChoice = require('./application-apply-again-with-choice')
-const applicationInternational = require('./application-international')
-
 module.exports = {
   applications: {
-    12345: application,
-    12346: applicationApplyAgain,
-    23456: applicationApplyAgainWithChoice,
-    ABCDE: applicationWithChoices,
-    45678: applicationWithSingleChoice,
-    GLOBE: applicationInternational
+    12345: require('./application'),
+    12346: require('./application-apply-again'),
+    23456: require('./application-apply-again-with-choice'),
+    ABCDE: require('./application-with-choices'),
+    45678: require('./application-single-choice'),
+    GLOBE: require('./application-international')
   },
-  find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
+  findUrl: 'http://search-and-compare-ui-pr-442.herokuapp.com',
   flags: {
-    address_lookup: false,
-    self_amend_email_address: false,
-    self_amend_contact_details: false
+    addressLookup: false,
+    selfAmendEmailAddress: false,
+    selfAmendContactDetails: false
   },
-  visits_from_find: 0,
+  visitsFromFind: 0,
   previousApplications: {}
 }

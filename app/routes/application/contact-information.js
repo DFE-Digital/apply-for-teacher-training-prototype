@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const utils = require('../../utils')
 
 module.exports = router => {
@@ -16,10 +15,10 @@ module.exports = router => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
     const location = application.contactInformation.addressType
-    const address_lookup_feature_enabled = req.session.data.flags.address_lookup
+    const { addressLookup } = req.session.data.flags
 
     if (location === 'domestic') {
-      if (address_lookup_feature_enabled) {
+      if (addressLookup) {
         res.redirect(`/application/${applicationId}/contact-information/lookup-address`)
       } else {
         res.redirect(`/application/${applicationId}/contact-information/uk-address`)

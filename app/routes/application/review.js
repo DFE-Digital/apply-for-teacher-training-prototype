@@ -19,7 +19,7 @@ module.exports = router => {
         contactInformation: 'Contact information not entered',
         additionalSupport: 'Training with a disability not entered',
         'work-history': 'Work history is not marked as completed',
-        'unpaid-experience': 'Volunteering with children and young people is not marked as completed',
+        unpaidExperience: 'Volunteering with children and young people is not marked as completed',
         degree: 'Degree(s) are not marked as completed',
         personalStatement: 'Tell us why you want to be a teacher',
         subjectKnowledge: 'Tell us about your knowledge about the subject you want to teach',
@@ -71,7 +71,7 @@ module.exports = router => {
     }
 
     if (id && referer.includes('unpaid-experience')) {
-      utils.saveIsoDate(req, application['unpaid-experience'], id)
+      utils.saveIsoDate(req, application.unpaidExperience, id)
     }
 
     res.render('application/review')

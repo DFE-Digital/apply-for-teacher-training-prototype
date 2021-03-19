@@ -45,8 +45,7 @@ module.exports = router => {
   router.post('/application/:applicationId/unpaid-experience/:next(review|add)', (req, res) => {
     const { applicationId, next } = req.params
     const id = req.query.update
-    const application = utils.applicationData(req)
-    const unpaidExperience = application['unpaid-experience']
+    const { unpaidExperience } = utils.applicationData(req)
     utils.saveIsoDate(req, unpaidExperience, id)
 
     if (next === 'review') {
@@ -59,10 +58,9 @@ module.exports = router => {
   // Unpaid experience completed answer branching
   router.post('/application/:applicationId/unpaid-experience/answer', (req, res) => {
     const { applicationId } = req.params
-    const application = utils.applicationData(req)
-    const unpaidExperienceDecision = application['unpaid-experience-disclose']
+    const { unpaidExperienceDisclose } = utils.applicationData(req)
 
-    if (unpaidExperienceDecision === 'No') {
+    if (unpaidExperienceDisclose === 'No') {
       res.redirect(`/application/${applicationId}/unpaid-experience/review`)
     } else {
       res.redirect(`/application/${applicationId}/unpaid-experience/add/role`)

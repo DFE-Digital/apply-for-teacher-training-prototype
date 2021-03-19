@@ -8,7 +8,7 @@ module.exports = {
     personalInformation: ['true'],
     contactInformation: ['true'],
     'work-history': ['true'],
-    'unpaid-experience': ['true'],
+    unpaidExperience: ['true'],
     additionalSupport: ['true'],
     safeguarding: ['true'],
     degree: ['true'],
@@ -240,6 +240,6 @@ module.exports = {
       endDate: 'now'
     }
   },
-  'unpaid-experience-disclose': 'No',
-  'unpaid-experience': {}
+  unpaidExperienceDisclose: 'No',
+  unpaidExperience: {}
 }

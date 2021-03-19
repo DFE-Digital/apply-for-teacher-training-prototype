@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "unpaid-experience"]) %}
-{% set entered = applicationValue(["unpaid-experience-disclose"]) %}
+{% set completed = applicationValue(["completed", "unpaidExperience"]) %}
+{% set entered = applicationValue(["unpaidExperienceDisclose"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -37,7 +37,7 @@
         href: "https://schoolexperience.education.gov.uk"
       }]
     }
-  }) if applicationValue(["unpaid-experience-disclose"]) == "No" }}
+  }) if applicationValue(["unpaidExperienceDisclose"]) == "No" }}
 
   {% include "_includes/item/unpaid-experience.njk" %}
 {% endif %}

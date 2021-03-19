@@ -1,4 +1,4 @@
-{% set unpaidExperience = applicationValue(["unpaid-experience"]) %}
+{% set unpaidExperience = applicationValue(["unpaidExperience"]) %}
 {% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="startDate") %}
 
 {% if roles.length >= 1 %}
@@ -19,7 +19,7 @@
       html: roleHtml
     }) }}
   {% endfor %}
-{% elif applicationValue(["unpaid-experience-disclose"]) == "No" %}
+{% elif applicationValue(["unpaidExperienceDisclose"]) == "No" %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -28,7 +28,7 @@
           text: "Do you have any unpaid experience?"
         },
         value: {
-          text: applicationValue(["unpaid-experience-disclose"])
+          text: applicationValue(["unpaidExperienceDisclose"])
         },
         actions: {
           items: [{

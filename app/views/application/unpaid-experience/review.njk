@@ -5,7 +5,7 @@
 {% set title = "Unpaid experience" %}
 {% set referrer = applicationPath + "/unpaid-experience/review" %}
 {% set canAmend = true %}
-{% set unpaidExperience = applicationValue("unpaid-experience") | toArray | selectattr("id") %}
+{% set unpaidExperience = applicationValue("unpaidExperience") | toArray | selectattr("id") %}
 {% set addButtonText = "Add another role" if unpaidExperience.length >= 1 else "Add a role" %}
 
 {% block pageNavigation %}
@@ -20,7 +20,7 @@
     text: addButtonText,
     href: applicationPath + "/unpaid-experience/add/role?referrer=" + referrer,
     classes: "govuk-button--secondary"
-  }) if applicationValue(["unpaid-experience-disclose"]) != "No" }}
+  }) if applicationValue(["unpaidExperienceDisclose"]) != "No" }}
 
   {% include "_includes/review/unpaid-experience.njk" %}
 
@@ -29,7 +29,7 @@
       value: "true",
       text: "I have completed this section"
     }]
-  } | decorateApplicationAttributes(["completed", "unpaid-experience"])) }}
+  } | decorateApplicationAttributes(["completed", "unpaidExperience"])) }}
 
   {{ govukButton({
     text: "Continue"

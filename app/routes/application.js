@@ -32,7 +32,7 @@ function createNewApplication (req) {
       interviewNeeds: null,
       personalStatement: null,
       'work-history': {},
-      'unpaid-experience': {}
+      unpaidExperience: {}
     }
   }
 

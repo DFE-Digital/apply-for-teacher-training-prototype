@@ -224,11 +224,11 @@
         }
       }, {
         text: "Unpaid experience",
-        href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaid-experience") | length > 0),
+        href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaidExperience") | length > 0),
         id: "unpaid-experience",
         tag: {
-          classes: tagClass if applicationValue(["completed", "unpaid-experience"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "unpaid-experience"]) else incompleteTagText
+          classes: tagClass if applicationValue(["completed", "unpaidExperience"]) else incompleteTagClass,
+          text: tagText if applicationValue(["completed", "unpaidExperience"]) else incompleteTagText
         }
       }]
     }) }}

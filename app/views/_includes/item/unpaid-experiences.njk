@@ -1,0 +1,125 @@
+{% set unpaidExperience = applicationValue(["unpaidExperience"]) %}
+{% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="startDate") %}
+
+{% if applicationValue(["unpaidExperienceDisclose"]) == "No" %}
+  {{ appSuggestion({
+    title: "Get school experience",
+    content: {
+      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
+    },
+    actions: {
+      items: [{
+        text: "Learn more at Get school experience",
+        href: "https://schoolexperience.education.gov.uk"
+      }]
+    }
+  }) if not showIncomplete }}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you have any unpaid experience?"
+        },
+        value: {
+          text: applicationValue(["unpaidExperienceDisclose"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/unpaid-experience?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you have any unpaid experience"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% else %}
+  {% for item in roles %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleHtml: item.role,
+      actions: {
+        items: [{
+          href: applicationPath + "/unpaid-experience/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete role"
+        }]
+      } if canAmend,
+      html: govukSummaryList({
+        rows: [{
+          key: {
+            text: "Role"
+          },
+          value: {
+            text: item.role or "Not entered"
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "role"
+            }]
+          } if canAmend
+        }, {
+          key: {
+            text: "Organisation"
+          },
+          value: {
+            text: item.org or "Not entered"
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "organisation"
+            }]
+          } if canAmend
+        }, {
+          key: {
+            text: "Did this role involve working in a school or with children?"
+          },
+          value: {
+            text: item.workedWithChildren or "Not entered"
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "if this role involved working with children"
+            }]
+          } if canAmend
+        }, {
+          key: {
+            text: "Dates"
+          },
+          value: {
+            text: item.startDate | date("MMMM yyyy") + " - " + (item.endDate | date("MMMM yyyy") if item.endDate != "now" else "Present")
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "dates"
+            }]
+          } if canAmend
+        }, {
+          key: {
+            text: "Time commitment and responsibilities"
+          },
+          value: {
+            text: item["time-commitment"] | nl2br | safe
+          },
+          actions: {
+            items: [{
+              href: applicationPath + "/unpaid-experience/role/" + item.id + "?referrer=" + referrer,
+              text: "Change",
+              visuallyHiddenText: "time commitment and responsibilities"
+            }]
+          } if canAmend
+        }]
+      })
+    }) }}
+  {% endfor %}
+{% endif %}

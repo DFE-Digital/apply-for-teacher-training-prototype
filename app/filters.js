@@ -49,7 +49,7 @@ module.exports = (env) => {
    *
    * @type {object} object
    */
-  filters.formatNationalities = object => {
+  filters.formatNationalities = (object = {}) => {
     if (object) {
       const nationalities = object.nationality
       if (object.otherNationality1) { nationalities.push(object.otherNationality1) }

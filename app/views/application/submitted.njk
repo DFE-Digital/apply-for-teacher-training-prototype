@@ -59,32 +59,30 @@
     {% include "_includes/review/contact-information.njk" %}
   </section>
 
-  <section class="govuk-!-margin-bottom-8">
+  <section class="app-section">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
-    <h3 class="govuk-heading-m">Degree</h3>
-    {% include "_includes/review/degrees.njk" %}
 
-    <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
+    <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
     {% set id = "english" %}
     {% include "_includes/review/gcse.njk" %}
 
     {% if international %}
-      <h3 class="govuk-heading-m">English as a foreign language assessment</h3>
       {% include "_includes/review/english-language.njk" %}
     {% endif %}
 
-    <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
     {% set id = "maths" %}
     {% include "_includes/review/gcse.njk" %}
 
     {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
-      <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
       {% set id = "science" %}
       {% include "_includes/review/gcse.njk" %}
     {% endif %}
 
-    <h3 class="govuk-heading-m">Other qualifications</h3>
+    <h3 class="govuk-heading-m">{{ "Other qualifications" if international else "A levels and other qualifications" }}</h3>
     {% include "_includes/review/other-qualifications.njk" %}
+
+    <h3 class="govuk-heading-m">Degree</h3>
+    {% include "_includes/review/degrees.njk" %}
   </section>
 
   <section class="govuk-!-margin-bottom-8">

@@ -2,10 +2,18 @@
 {% set qualifications = otherQualifications | toArray | selectattr("id") %}
 
 {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
+  {% set contentHtml %}
+    <p class="govuk-body">Adding your A levels and other qualifications can:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>make your application stronger</li>
+      <li>demonstrate knowledge of a subject not covered in your degree or work history</li>
+      <li>stop training providers asking for them later and slowing your application</li>
+    </ul>
+  {% endset %}
   {{ appSuggestion({
     title: "You have not added any A levels or other qualifications",
     content: {
-      html: "Adding all of your qualifications makes your application stronger.\n\nThis is important if you are applying to teach a different subject to your degree." | markdown
+      html: contentHtml
     },
     actions: {
       items: [{

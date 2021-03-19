@@ -3,9 +3,11 @@ const applicationApplyAgain = JSON.parse(JSON.stringify(require('./application')
 
 // Custom Apply 2 fields
 applicationApplyAgain.apply2 = true
-applicationApplyAgain.previousApplications = ['12345']
+applicationApplyAgain.previousApplications = ['65432']
 
 // No choices yet
 applicationApplyAgain.choices = {}
+applicationApplyAgain.completed["choices"] = false
+applicationApplyAgain.completed["personal-statement"] = false
 
 module.exports = applicationApplyAgain

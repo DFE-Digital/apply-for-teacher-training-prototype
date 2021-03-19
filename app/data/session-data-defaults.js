@@ -5,9 +5,12 @@ const applicationWithSingleChoice = require('./application-single-choice')
 const applicationApplyAgainWithChoice = require('./application-apply-again-with-choice')
 const applicationInternational = require('./application-international')
 
+const previousApplication = require('./previous-applications')
+
 module.exports = {
   applications: {
     12345: application,
+    65432: previousApplication,
     12346: applicationApplyAgain,
     23456: applicationApplyAgainWithChoice,
     ABCDE: applicationWithChoices,

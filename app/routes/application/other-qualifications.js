@@ -1,8 +1,5 @@
 const utils = require('./../../utils')
 
-/**
- * Application: Other relevant qualifications routes
- */
 module.exports = router => {
   // Generate new id and redirect to that qualification
   router.get('/application/:applicationId/other-qualifications/add', (req, res) => {
@@ -30,8 +27,16 @@ module.exports = router => {
   router.post('/application/:applicationId/other-qualifications/:id', (req, res) => {
     const { applicationId, id } = req.params
     const { referrer } = req.query
+    const { otherQualifications } = utils.applicationData(req)
+    const { type } = otherQualifications[id]
 
-    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${id}/details`)
+    if (type === 'None') {
+      req.session.data.applications[applicationId].otherQualificationsDisclose = 'No'
+      res.redirect(referrer || `/application/${applicationId}/other-qualifications/review`)
+    } else {
+      req.session.data.applications[applicationId].otherQualificationsDisclose = 'Yes'
+      res.redirect(`/application/${applicationId}/other-qualifications/${id}/details`)
+    }
   })
 
   // Render details page
@@ -39,7 +44,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const { id } = req.params
     const { referrer } = req.query
-    const { type } = application['other-qualifications'][id]
+    const { type } = application.otherQualifications[id]
 
     res.render('application/other-qualifications/details', {
       id,
@@ -54,15 +59,15 @@ module.exports = router => {
     const nextId = utils.generateRandomString()
     const { applicationId, id } = req.params
     const { referrer } = req.query
-    const { year, org, type } = application['other-qualifications'][id]
-    const typeUk = application['other-qualifications'][id]['type-uk']
+    const { year, org, type } = application.otherQualifications[id]
+    const { typeUk } = application.otherQualifications[id]
 
     if (next === 'add-type') {
-      application['other-qualifications'][nextId] = {
+      application.otherQualifications[nextId] = {
         year,
         org,
         type,
-        'type-uk': typeUk
+        typeUk
       }
       res.redirect(referrer || `/application/${applicationId}/other-qualifications/${nextId}/details`)
     } else {

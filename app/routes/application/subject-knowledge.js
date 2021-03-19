@@ -1,6 +1,3 @@
-/**
- * Application: Personal statement routes
- */
 module.exports = router => {
   router.get('/application/:applicationId/subject-knowledge/:view', (req, res) => {
     const { applicationId, view } = req.params

@@ -21,7 +21,7 @@ const degreePaths = (req) => {
     basePath,
     `${basePath}/subject`,
     `${basePath}/institution`,
-    ...(international ? [`${basePath}/naric`] : []),
+    ...(international ? [`${basePath}/enic`] : []),
     `${basePath}/completed`,
     `${basePath}/grade`,
     `${basePath}/year`,
@@ -49,7 +49,7 @@ module.exports = router => {
 
   // Render first page
   router.get('/application/:applicationId/degree/:id', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req)['year-start']
+    const completedDegree = degreeData(req).grade && degreeData(req).yearStart
 
     const { id } = req.params
     const { referrer } = req.query
@@ -64,9 +64,9 @@ module.exports = router => {
     })
   })
 
-  // Render UK NARIC/grade/year pages
-  router.all('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|naric|year)', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req)['year-start']
+  // Render UK ENIC/grade/year pages
+  router.all('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|enic|year)', (req, res) => {
+    const completedDegree = degreeData(req).grade && degreeData(req).yearStart
 
     const { id, view } = req.params
     const { referrer } = req.query

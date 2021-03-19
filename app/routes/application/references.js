@@ -1,8 +1,5 @@
 const utils = require('./../../utils')
 
-/**
- * Application: References routes
- */
 module.exports = router => {
   // Mock events in reference request timeline
   router.get('/application/:applicationId/references/mock/:action', (req, res) => {
@@ -162,7 +159,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
     const now = new Date()
 
-    if (application.candidate['given-name']) {
+    if (application.candidate.givenName) {
       application.references[id].nudges = application.references[id].nudges || 0
       application.references[id].status = 'Awaiting response'
       application.references[id].pending = false

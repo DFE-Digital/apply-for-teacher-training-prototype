@@ -1,0 +1,29 @@
+{% extends "_form-wide.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
+{% set referrer = applicationPath + "/safeguarding/review" %}
+{% set title = "Declare any safeguarding issues" %}
+{% set canAmend = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review/safeguarding.njk" %}
+
+  {{ govukCheckboxes({
+    items: [{
+      value: "true",
+      text: "I have completed this section"
+    }]
+  } | decorateApplicationAttributes(["completed", "safeguarding"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

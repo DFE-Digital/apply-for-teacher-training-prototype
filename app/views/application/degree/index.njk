@@ -38,8 +38,8 @@
 
   {% set ukConditionalHtml %}
     <div class="govuk-form-group">
-      <label class="govuk-label" for="degree-{{ id }}-type-uk">Enter degree type</label>
-      <span id="degree-{{ id }}-type-uk-hint" class="govuk-hint">{{ ukHintText }}</span>
+      <label class="govuk-label" for="degree-{{ id }}-typeUk">Enter degree type</label>
+      <span id="degree-{{ id }}-typeUk-hint" class="govuk-hint">{{ ukHintText }}</span>
       <div id="type-uk-autocomplete-container"></div>
     </div>
   {% endset %}
@@ -52,7 +52,7 @@
       hint: {
         html: intHintHtml
       }
-    } | decorateApplicationAttributes(["degree", id, "type-nonuk"])) }}
+    } | decorateApplicationAttributes(["degree", id, "typeNonUk"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -111,9 +111,9 @@
 
     accessibleAutocomplete({
       element: document.querySelector('#type-uk-autocomplete-container'),
-      id: 'degree-{{ id }}-type-uk',
-      name: "applications[{{ applicationId }}][degree][{{ id }}][type-uk]",
-      defaultValue: '{{ applicationValue(["degree", id, "type-uk"]) }}',
+      id: 'degree-{{ id }}-typeUk',
+      name: "applications[{{ applicationId }}][degree][{{ id }}][typeUk]",
+      defaultValue: '{{ applicationValue(["degree", id, "typeUk"]) }}',
       placeholder: false,
       source: [
         {% for item in degreeTypes %}"{{ item.text }}",{% endfor %}

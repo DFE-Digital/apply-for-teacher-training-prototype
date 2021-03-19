@@ -4,8 +4,7 @@ module.exports = router => {
   // Review page
   router.get('/application/:applicationId/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
-
-    const fromPage = req.query['from']
+    const fromPage = req.query.from
 
     res.render('application/work-history/review', {
       newId,
@@ -22,9 +21,9 @@ module.exports = router => {
   router.post('/application/:applicationId/work-history/answer', (req, res) => {
     const { applicationId } = req.params
 
-    const answer = req.body['applications'][applicationId]['work-history-decision']
+    const { workHistoryDisclose } = req.body.applications[applicationId]
 
-    if (answer != undefined) {
+    if (workHistoryDisclose !== undefined) {
       res.redirect(`/application/${applicationId}/work-history/review?from=work-history-question`)
     } else {
       res.redirect(`/application/${applicationId}/work-history`)
@@ -44,9 +43,8 @@ module.exports = router => {
 
   router.post('/application/:applicationId/work-history/break/:id', (req, res) => {
     const { applicationId, id } = req.params
+    const { workHistory } = utils.applicationData(req)
 
-    const application = utils.applicationData(req)
-    const workHistory = application['work-history']
     utils.saveIsoDate(req, workHistory, id, false)
 
     res.redirect(`/application/${applicationId}/work-history/review`)
@@ -54,6 +52,7 @@ module.exports = router => {
 
   router.get('/application/:applicationId/work-history/:id', (req, res) => {
     const { id } = req.params
+
     res.render('application/work-history/add', {
       id
     })
@@ -62,9 +61,8 @@ module.exports = router => {
   // Adding a job
   router.post('/application/:applicationId/work-history/:id', (req, res) => {
     const { applicationId, id } = req.params
+    const { workHistory } = utils.applicationData(req)
 
-    const application = utils.applicationData(req)
-    const workHistory = application['work-history']
     utils.saveIsoDate(req, workHistory, id, false)
 
     res.redirect(`/application/${applicationId}/work-history/review`)
@@ -73,7 +71,7 @@ module.exports = router => {
   // remove job page
   router.get('/application/:applicationId/work-history/:id/remove', (req, res) => {
     const { applicationId, id } = req.params
-    const item = utils.applicationData(req)['work-history'][id]
+    const item = utils.applicationData(req).workHistory[id]
     const formaction = `/application/${applicationId}/work-history/${id}/remove`
 
     res.render('application/work-history/remove', {
@@ -88,9 +86,9 @@ module.exports = router => {
     const { applicationId, id } = req.params
     const application = utils.applicationData(req)
 
-    delete application['work-history'][id]
+    delete application.workHistory[id]
 
-    const numberOfJobsLeft = Object.entries(application['work-history'])
+    const numberOfJobsLeft = Object.entries(application.workHistory)
       .filter(function (job) {
         return job[1].id !== undefined
       }).length

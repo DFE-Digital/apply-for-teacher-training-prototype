@@ -1,0 +1,30 @@
+{% set completed = applicationValue(["completed", "unpaidExperience"]) %}
+{% set entered = applicationValue(["unpaidExperienceDisclose"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "unpaid-experience",
+    title: "Unpaid experience not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you have any experience working with children and young people?",
+        href: applicationPath + "/unpaid-experience/?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "unpaid-experience",
+    title: "Volunteering with children and young people is not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete your unpaid experience",
+        href: applicationPath + "/unpaid-experience?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/unpaid-experiences.njk" %}
+{% endif %}

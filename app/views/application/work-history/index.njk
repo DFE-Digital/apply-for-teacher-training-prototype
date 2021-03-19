@@ -27,7 +27,7 @@
       },
       threshold: 90,
       maxwords: 400
-    } | decorateApplicationAttributes(["work-history", "missing"])) }}
+    } | decorateApplicationAttributes(["workHistory", "missing"])) }}
   {% endset -%}
 
   <div class="govuk-grid-row">
@@ -42,19 +42,19 @@
         }
       },
       items: [{
-        value: "yes",
+        value: "Yes",
         text: "Yes"
       }, {
-        value: "full-time-education",
+        value: "No, I have always been in full time education",
         text: "No, I have always been in full time education"
       }, {
-        value: "no",
+        value: "No, I do not have any work history",
         text: "No, I do not have any work history",
         conditional: {
           html: noWorkHistoryHtml
         }
       }]
-    } | decorateApplicationAttributes(["work-history-decision"])
+    } | decorateApplicationAttributes(["workHistoryDisclose"])
     ) }}
 
     {{ govukButton({

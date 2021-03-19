@@ -1,0 +1,83 @@
+{% extends "_form.njk" %}
+
+{% set formaction = referrer or "/application/" + applicationId + "/personal-information/nationality" %}
+{% set title = "Personal information" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: "First name",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Or given names"
+    },
+    autocomplete: "given-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "givenName"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Last name",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Or family name"
+    },
+    autocomplete: "family-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "familyName"])) }}
+
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: "Date of birth",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "For example, 31 3 1980"
+    },
+    id: "candidate-dateOfBirth",
+    items: [{
+      classes: "govuk-input--width-2",
+      label: "Day",
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][day]",
+      value: applicationValue(["candidate", "dateOfBirth", "day"]),
+      autocomplete: "bday-day"
+    }, {
+      classes: "govuk-input--width-2",
+      label: "Month",
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][month]",
+      value: applicationValue(["candidate", "dateOfBirth", "month"]),
+      autocomplete: "bday-month"
+    }, {
+      classes: "govuk-input--width-4",
+      label: "Year",
+      name: "applications[" + applicationId + "][candidate][dateOfBirth][year]",
+      value: applicationValue(["candidate", "dateOfBirth", "year"]),
+      autocomplete: "bday-year"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

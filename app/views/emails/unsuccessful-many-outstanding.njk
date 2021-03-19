@@ -10,7 +10,7 @@
 {% set provider2 = providers[choices[2].providerCode] %}
 {% set course2 = provider2.courses[choices[2].courseCode] %}
 
-{% set name = applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) %}
+{% set name = applicationValue(["candidate", "givenName"]) + " " + applicationValue(["candidate", "familyName"]) %}
 
 {% set title = "Update on your application" %}
 

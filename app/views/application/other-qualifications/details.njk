@@ -2,11 +2,11 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualificationName =
-  applicationValue(["other-qualifications", id, "type-uk"])
+  applicationValue(["otherQualifications", id, "typeUk"])
   or type | replace("qualification", "") | replace("Other UK", "UK") | replace("Non", "non")
 %}
 {% set international = type == "Non-UK qualification" %}
-{% set action = "edit" if applicationValue(["other-qualifications", id, "subject"]) else "add" %}
+{% set action = "edit" if applicationValue(["otherQualifications", id, "subject"]) else "add" %}
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 {% set allowsFeedback = true %}
 
@@ -29,7 +29,7 @@
     or type == "A level"
   %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--m" for="other-qualifications-{{ id }}-subject">Subject</label>
+      <label class="govuk-label govuk-label--m" for="otherQualifications-{{ id }}-subject">Subject</label>
       <div id="subject-autocomplete-container"></div>
     </div>
   {% else %}
@@ -38,7 +38,7 @@
         text: "Subject",
         classes: "govuk-label--m"
       }
-    } | decorateApplicationAttributes(["other-qualifications", id, "subject"])) }}
+    } | decorateApplicationAttributes(["otherQualifications", id, "subject"])) }}
   {% endif %}
 
   {% if international %}
@@ -48,7 +48,7 @@
         classes: "govuk-label--m"
       },
       items: countries
-    } | decorateApplicationAttributes(["other-qualifications", id, "country"])) }}
+    } | decorateApplicationAttributes(["otherQualifications", id, "country"])) }}
   {% endif %}
 
   {{ govukInput({
@@ -60,7 +60,7 @@
       text: "For example, ‘C’, ‘CD’, ‘4’ or ‘4-3’"
     } if type == "GCSE",
     classes: "govuk-input--width-" + ("4" if type == "GCSE" or type == "AS level" or type == "A level" else "10")
-  } | decorateApplicationAttributes(["other-qualifications", id, "grade"])) }}
+  } | decorateApplicationAttributes(["otherQualifications", id, "grade"])) }}
 
   {{ govukInput({
     label: {
@@ -71,7 +71,7 @@
       text: "For example, 1998"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["other-qualifications", id, "year"])) }}
+  } | decorateApplicationAttributes(["otherQualifications", id, "year"])) }}
 
   {# Only ask if want to add another if:
     * not editing an existing item
@@ -123,9 +123,9 @@
     <script>
       accessibleAutocomplete({
         element: document.querySelector('#subject-autocomplete-container'),
-        id: 'other-qualifications-{{ id }}-subject',
-        name: "applications[{{ applicationId }}][other-qualifications][{{ id }}][subject]",
-        defaultValue: '{{ applicationValue(["other-qualifications", id, "subject"]) }}',
+        id: 'otherQualifications-{{ id }}-subject',
+        name: "applications[{{ applicationId }}][otherQualifications][{{ id }}][subject]",
+        defaultValue: '{{ applicationValue(["otherQualifications", id, "subject"]) }}',
         showNoOptionsFound: false,
         minLength: 2,
         placeholder: false,
@@ -138,8 +138,8 @@
     <script src="/public/javascripts/autocomplete.min.js"></script>
     <script>
       accessibleAutocomplete.enhanceSelectElement({
-        selectElement: document.querySelector('#other-qualifications-{{ id }}-country'),
-        defaultValue: '{{ applicationValue(["other-qualifications", id, "country"]) }}'
+        selectElement: document.querySelector('#otherQualifications-{{ id }}-country'),
+        defaultValue: '{{ applicationValue(["otherQualifications", id, "country"]) }}'
       })
   {% endif %}
     </script>

@@ -1,25 +1,19 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set choice = applicationValue(["choices"]) | toArray | first %}
-{% set provider = choice.providerCode | getProvider %}
-{% set degrees = applicationValue(["degree"]) | toArray %}
+{% set completed = applicationValue(["completed", "degree"]) %}
+{% set entered = applicationValue(["degree"]) %}
 
-{% if applicationValue(["completed", "degree"]) %}
+{% if not entered %}
   {{ appSuggestion({
-    title: provider.name + " asks for a minimum of a 2:1 at degree level. Your degree grade is a 2:2.",
-    content: {
-      html: "Most training providers will not accept applications that do not meet their criteria.\n\nSome training providers will look to other parts of your application to assess your suitability for teaching. Make sure you have entered all of your qualifications, and been clear about why you want to teach in your personal statement." | markdown
-    },
+    id: "degree",
+    title: "Degree not entered",
+    warning: true if errorList,
     actions: {
       items: [{
-        text: "Contact the provider",
-        href: "#"
-      }, {
-        text: "Choose a different course",
-        href: applicationPath + "/choices/review?referrer=" + referrer
+        text: "Enter your degree",
+        href: applicationPath + "/degree/?referrer=" + referrer
       }]
     }
   }) }}
-{% elif showIncomplete %}
+{% else %}
   {{ appSuggestion({
     id: "degree",
     title: "Degree section not marked as completed",
@@ -30,29 +24,7 @@
         href: applicationPath + "/degree/add?referrer=" + referrer
       }]
     }
-  }) }}
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/degrees.njk" %}
 {% endif %}
-
-{{ govukButton({
-  text: "Add another degree",
-  classes: "govuk-button--secondary",
-  href: applicationPath + "/degree/add"
-}) }}
-
-{% set degrees = degrees | selectattr("id") %}
-{% for item in degrees %}
-  {% set summaryCardHtml %}{% include "_includes/item/degree.njk" %}{% endset %}
-  {% set degreeType = (item["type-uk"] or item["type-nonuk"]) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: degreeType + " " + item.subject,
-    actions: {
-      items: [{
-        href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,
-        text: "Delete degree"
-      }]
-    } if canAmend,
-    html: summaryCardHtml
-  }) }}
-{% endfor %}

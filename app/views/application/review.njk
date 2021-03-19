@@ -5,7 +5,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set title = "Review your application" %}
 {% set referrer = applicationPath + "/review" %}
-{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
 {% set canAmend = true %}
 
 {% block pageNavigation %}
@@ -51,10 +51,10 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
 
     <h3 class="govuk-heading-m">Personal information</h3>
-    {% include "_includes/review/personal-details.njk" %}
+    {% include "_includes/review/personal-information.njk" %}
 
     <h3 class="govuk-heading-m">Contact information</h3>
-    {% include "_includes/review/contact-details.njk" %}
+    {% include "_includes/review/contact-information.njk" %}
   </section>
 
   <section class="app-section">
@@ -90,7 +90,7 @@
     {% include "_includes/review/work-history.njk" %}
 
     <h3 class="govuk-heading-m">Unpaid experience</h3>
-    {% include "_includes/review/school-experience.njk" %}
+    {% include "_includes/review/unpaid-experience.njk" %}
   </section>
 
   <section class="app-section">
@@ -107,15 +107,15 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
 
     <h3 class="govuk-heading-m">Ask for support if you’re disabled</h3>
-    {% include "_includes/review/reasonable-adjustments.njk" %}
+    {% include "_includes/review/additional-support.njk" %}
 
     <h3 class="govuk-heading-m">Interview needs</h3>
-    {% include "_includes/review/interview.njk" %}
+    {% include "_includes/review/interview-needs.njk" %}
   </section>
 
   <section class="app-section">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
-    {% include "_includes/review/suitability.njk" %}
+    {% include "_includes/review/safeguarding.njk" %}
   </section>
 
   {{ govukButton({

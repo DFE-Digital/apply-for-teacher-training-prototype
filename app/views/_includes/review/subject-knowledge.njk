@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "subject-knowledge"]) %}
-{% set entered = applicationValue(["subject-knowledge"]) %}
+{% set completed = applicationValue(["completed", "subjectKnowledge"]) %}
+{% set entered = applicationValue(["subjectKnowledge"]) %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -34,12 +34,12 @@
           text: "Your knowledge about the subject you want to teach"
         },
         value: {
-          text: (applicationValue(["subject-knowledge"]) or "Not entered") | nl2br | safe
+          text: (applicationValue(["subjectKnowledge"]) or "Not entered") | nl2br | safe
         },
         actions: {
           items: [{
             href: applicationPath + "/subject-knowledge?referrer=" + referrer,
-            text: "Change" if applicationValue(["subject-knowledge"]) else "Add",
+            text: "Change" if applicationValue(["subjectKnowledge"]) else "Add",
             visuallyHiddenText: "evidence of subject knowledge"
           }]
         } if canAmend

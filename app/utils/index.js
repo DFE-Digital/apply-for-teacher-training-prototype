@@ -4,10 +4,11 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
+let notify
 
 if (process.env.NOTIFYAPIKEY) {
   const NotifyClient = require('notifications-node-client').NotifyClient
-  const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+  notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 }
 
 const providers = require('./../data/providers')
@@ -53,26 +54,26 @@ const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
   }
 
   // Create ISO 8601 start date
-  const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
-  const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')
-  const startYear = req.body[`${id}-start-date-year`]
-  data[id]['start-date'] = false
+  const startDay = (req.body[`${id}-startDate-day`] || '1').padStart(2, '0')
+  const startMonth = (req.body[`${id}-startDate-month`]).padStart(2, '0')
+  const startYear = req.body[`${id}-startDate-year`]
+  data[id].startDate = false
 
   if (startMonth && startYear) {
-    data[id]['start-date'] = `${startYear}-${startMonth}-${startDay}`
+    data[id].startDate = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
-  const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
-  const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
-  const endYear = req.body[`${id}-end-date-year`]
+  const endDay = (req.body[`${id}-endDate-day`] || '1').padStart(2, '0')
+  const endMonth = (req.body[`${id}-endDate-month`]).padStart(2, '0')
+  const endYear = req.body[`${id}-endDate-year`]
 
   if (blankEqualsNow) {
-    data[id]['end-date'] = 'now' // No date indicates today
+    data[id].endDate = 'now' // No date indicates today
   }
 
   if (endMonth && endYear) {
-    data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
+    data[id].endDate = `${endYear}-${endMonth}-${endDay}`
   }
 }
 
@@ -136,17 +137,17 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.choices) &&
     module.exports.hasCompletedSection(application.references) &&
     module.exports.hasCompletedSection(application.candidate) &&
-    module.exports.hasCompletedSection(application['contact-details']) &&
-    module.exports.hasCompletedSection(application['reasonable-adjustments']) &&
-    module.exports.hasCompletedSection(application['work-history']) &&
-    module.exports.hasCompletedSection(application['school-experience']) &&
+    module.exports.hasCompletedSection(application.contactInformation) &&
+    module.exports.hasCompletedSection(application.additionalSupport) &&
+    module.exports.hasCompletedSection(application.workHistory) &&
+    module.exports.hasCompletedSection(application.unpaidExperience) &&
     module.exports.hasCompletedSection(application.degree) &&
     module.exports.hasCompletedSection(application.gcse.maths) &&
     module.exports.hasCompletedSection(application.gcse.english) &&
     module.exports.hasCompletedSection(application.gcse.science) &&
-    module.exports.hasCompletedSection(application['personal-statement']) &&
-    module.exports.hasCompletedSection(application['subject-knowledge']) &&
-    module.exports.hasCompletedSection(application.interview)
+    module.exports.hasCompletedSection(application.personalStatement) &&
+    module.exports.hasCompletedSection(application.subjectKnowledge) &&
+    module.exports.hasCompletedSection(application.interviewNeeds)
   ) {
     return true
   }

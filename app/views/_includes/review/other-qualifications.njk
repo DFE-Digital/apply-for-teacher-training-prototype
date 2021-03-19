@@ -1,50 +1,30 @@
-{% set qualifications = applicationValue(["otherQualifications"]) | toArray %}
+{% set completed = applicationValue(["completed", "otherQualifications"]) %}
+{% set entered = applicationValue(["otherQualificationsDisclose"]) %}
 
-{% if applicationValue(["completed", "otherQualifications"]) %}
+{% if not entered %}
   {{ appSuggestion({
-    title: "Add all of your qualifications" if qualifications.length else "You have not added any other qualifications",
-    content: {
-      html: "Adding all of your qualifications makes your application stronger.\n\nThis is important if you are applying to teach a different subject to your degree." | markdown
-    },
+    id: "other-qualifications",
+    title: "A levels or other qualifications not entered",
+    warning: true if errorList,
     actions: {
       items: [{
-        text: "Add another qualification",
-        href: applicationPath + "/other-qualifications/add?referrer=" + referrer
+        text: "Enter your other qualifications",
+        href: applicationPath + "/other-qualifications/?referrer=" + referrer
       }]
     }
   }) }}
-{% elif showIncomplete %}
+{% else %}
   {{ appSuggestion({
     id: "other-qualifications",
     title: "A levels and other qualifications not marked as complete",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Enter academic and other relevant qualifications",
+        text: "Complete your other qualifications",
         href: applicationPath + "/other-qualifications/review?referrer=" + referrer
       }]
     }
-  }) }}
-{% else %}
-  {{ govukButton({
-    text: "Add another qualification",
-    href: applicationPath + "/other-qualifications/add",
-    classes: "govuk-button--secondary"
-  }) }}
-{% endif %}
+  }) if not completed and showIncomplete }}
 
-{% for item in qualifications %}
-  {% set summaryCardHtml %}{% include "_includes/item/other-qualification.njk" %}{% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: item.type,
-    actions: {
-      items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
-        text: "Delete qualification"
-      }]
-    } if canAmend,
-    html: summaryCardHtml
-  }) }}
-{% endfor %}
+  {% include "_includes/item/other-qualifications.njk" %}
+{% endif %}

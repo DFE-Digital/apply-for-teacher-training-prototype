@@ -1,25 +1,21 @@
 {% set unpaidExperience = applicationValue(["unpaidExperience"]) %}
 {% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="startDate") %}
+{% set roleHtml %}{% include "_includes/item/role.njk" %}{% endset %}
 
-{% if roles.length >= 1 %}
-  {% for item in roles %}
-    {% set roleHtml %}
-      {% include "_includes/item/role.njk" %}
-    {% endset %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleHtml: item.role,
-      actions: {
-        items: [{
-          href: applicationPath + "/unpaid-experience/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete role"
-        }]
-      } if canAmend,
-      html: roleHtml
-    }) }}
-  {% endfor %}
-{% elif applicationValue(["unpaidExperienceDisclose"]) == "No" %}
+{% if applicationValue(["unpaidExperienceDisclose"]) == "No" %}
+  {{ appSuggestion({
+    title: "Get school experience",
+    content: {
+      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
+    },
+    actions: {
+      items: [{
+        text: "Learn more at Get school experience",
+        href: "https://schoolexperience.education.gov.uk"
+      }]
+    }
+  }) if not showIncomplete }}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -40,4 +36,19 @@
       }]
     })
   }) }}
+{% else %}
+  {% for item in roles %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleHtml: item.role,
+      actions: {
+        items: [{
+          href: applicationPath + "/unpaid-experience/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete role"
+        }]
+      } if canAmend,
+      html: roleHtml
+    }) }}
+  {% endfor %}
 {% endif %}

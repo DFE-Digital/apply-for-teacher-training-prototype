@@ -27,8 +27,16 @@ module.exports = router => {
   router.post('/application/:applicationId/other-qualifications/:id', (req, res) => {
     const { applicationId, id } = req.params
     const { referrer } = req.query
+    const { otherQualifications } = utils.applicationData(req)
+    const { type } = otherQualifications[id]
 
-    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${id}/details`)
+    if (type === 'None') {
+      req.session.data.applications[applicationId].otherQualificationsDisclose = 'No'
+      res.redirect(referrer || `/application/${applicationId}/other-qualifications/review`)
+    } else {
+      req.session.data.applications[applicationId].otherQualificationsDisclose = 'Yes'
+      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${id}/details`)
+    }
   })
 
   // Render details page

@@ -8,7 +8,7 @@
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Enter your unpaid experience",
+        text: "Do you have any experience working with children and young people?",
         href: applicationPath + "/unpaid-experience/?referrer=" + referrer
       }]
     }
@@ -20,24 +20,11 @@
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Do you have any experience working with children and young people?",
+        text: "Complete your unpaid experience",
         href: applicationPath + "/unpaid-experience?referrer=" + referrer
       }]
     }
   }) if not completed and showIncomplete }}
-
-  {{ appSuggestion({
-    title: "Get school experience",
-    content: {
-      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
-    },
-    actions: {
-      items: [{
-        text: "Learn more at Get school experience",
-        href: "https://schoolexperience.education.gov.uk"
-      }]
-    }
-  }) if applicationValue(["unpaidExperienceDisclose"]) == "No" }}
 
   {% include "_includes/item/unpaid-experience.njk" %}
 {% endif %}

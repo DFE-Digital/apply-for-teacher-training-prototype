@@ -1,0 +1,67 @@
+{% set otherQualifications = applicationValue(["otherQualifications"]) %}
+{% set qualifications = otherQualifications | toArray | selectattr("id") %}
+{% set qualificationHtml %}{% include "_includes/item/qualification.njk" %}{% endset %}
+
+{% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
+  {{ appSuggestion({
+    title: "You have not added any other qualifications",
+    content: {
+      html: "Adding all of your qualifications makes your application stronger.\n\nThis is important if you are applying to teach a different subject to your degree." | markdown
+    },
+    actions: {
+      items: [{
+        text: "Add a qualification",
+        href: applicationPath + "/other-qualifications/add?referrer=" + referrer
+      }]
+    }
+  }) if not showIncomplete }}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you want to add A levels or other qualifications?"
+        },
+        value: {
+          text: applicationValue(["otherQualificationsDisclose"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/add?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you want to add A levels or other qualifications"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    title: "Add all of your qualifications",
+    content: {
+      html: "Adding all of your qualifications makes your application stronger.\n\nThis is important if you are applying to teach a different subject to your degree." | markdown
+    },
+    actions: {
+      items: [{
+        text: "Add another qualification",
+        href: applicationPath + "/other-qualifications/add?referrer=" + referrer
+      }]
+    }
+  }) }}
+
+  {% for item in qualifications %}
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: item.type,
+      actions: {
+        items: [{
+          href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete qualification"
+        }]
+      } if canAmend,
+      html: qualificationHtml
+    }) if item.type != "None" }}
+  {% endfor %}
+{% endif %}

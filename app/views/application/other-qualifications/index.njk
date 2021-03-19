@@ -38,10 +38,6 @@
     } | decorateApplicationAttributes(["otherQualifications", id, "typeNonUk"])) }}
   {% endset %}
 
-  <p class="govuk-body">Adding any other qualifications you have will make your application stronger.</p>
-  <p class="govuk-body">Include every qualification you can, especially if they help to show knowledge about the subjects you want to teach.</p>
-  <p class="govuk-body">If you are an international student, you can enter your qualifications here too.</p>
-
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -72,6 +68,14 @@
       text: "Non-UK qualification",
       conditional: {
         html: nonUkConditionalHtml
+      }
+    }, {
+      divider: "or"
+    }, {
+      value: "None",
+      text: "I do not want to add A levels or other qualifications",
+      hint: {
+        text: "Some providers may ask for them later"
       }
     }]
   } | decorateApplicationAttributes(["otherQualifications", id, "type"])) }}

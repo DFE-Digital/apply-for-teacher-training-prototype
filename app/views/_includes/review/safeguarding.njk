@@ -1,0 +1,63 @@
+{% set completed = applicationValue(["completed", "safeguarding"]) %}
+{% set entered = applicationValue(["safeguardingDisclose"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Do you need to declare any safeguarding issues?",
+        href: applicationPath + "/safeguarding/review?referrer=" + referrer
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "safeguarding",
+    title: "Safeguarding information not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete safeguarding issues",
+        href: applicationPath + "/safeguarding/review?referrer=" + referrer
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Do you want to share any safeguarding issues?"
+        },
+        value: {
+          text: applicationValue(["safeguardingDisclose"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/safeguarding?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "whether you need to share something"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Give any relevant information"
+        },
+        value: {
+          html: applicationValue(["safeguarding"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/safeguarding?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "the information you are sharing"
+          }]
+        } if canAmend
+      } if applicationValue(["safeguardingDisclose"]) == "Yes"]
+    })
+  }) }}
+{% endif %}

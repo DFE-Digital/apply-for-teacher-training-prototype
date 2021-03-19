@@ -15,22 +15,24 @@ function createNewApplication (req) {
       choices: {},
       references: {},
       candidate: {},
-      'contact-details': {},
-      'reasonable-adjustments': {},
-      suitability: {},
+      contactInformation: {},
+      additionalSupportDisclose: null,
+      additionalSupport: {},
+      safeguardingDisclose: null,
+      safeguarding: null,
       degree: {},
-      'other-qualifications': {},
+      otherQualifications: {},
       gcse: {
         maths: {},
         english: {},
         science: {}
       },
-      'subject-knowledge': null,
-      'interview-choice': null,
-      interview: null,
-      'personal-statement': null,
-      'work-history': {},
-      'school-experience': {}
+      subjectKnowledge: null,
+      interviewNeedsDisclose: null,
+      interviewNeeds: null,
+      personalStatement: null,
+      workHistory: {},
+      unpaidExperience: {}
     }
   }
 
@@ -79,7 +81,6 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
-    const thisApplication = utils.applicationData(req)
     req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,
@@ -153,23 +154,20 @@ module.exports = router => {
     })
   })
 
-
-
   require('./application/choices')(router)
-  require('./application/personal-details')(router)
-  require('./application/contact-details')(router)
+  require('./application/personal-information')(router)
+  require('./application/contact-information')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)
-  require('./application/school-experience')(router)
-  require('./application/reasonable-adjustments')(router)
-  require('./application/suitability')(router)
-  require('./application/vocation')(router)
+  require('./application/unpaid-experience')(router)
+  require('./application/additional-support')(router)
+  require('./application/safeguarding')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
-  require('./application/interview')(router)
+  require('./application/interview-needs')(router)
   require('./application/references')(router)
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)

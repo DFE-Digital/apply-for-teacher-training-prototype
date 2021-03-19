@@ -19,7 +19,7 @@ module.exports = router => {
 
     // Count this so we can act on the data
     // eg We show them a course that’s only on UCAS the second time around
-    req.session.data.visits_from_find = req.session.data.visits_from_find + 1
+    req.session.data.visitsFromFind = req.session.data.visitsFromFind + 1
 
     res.redirect(`/apply/${providerCode}/${courseCode}?dualrunning=true`)
   })

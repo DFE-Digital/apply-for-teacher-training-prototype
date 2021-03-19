@@ -2,7 +2,6 @@ const providers = require('../../data/providers')
 const utils = require('./../../utils')
 
 module.exports = router => {
-
   // Render decision pages
   router.get('/application/:applicationId/:choiceId/:view(withdraw|accept|decline|view)', (req, res) => {
     const { choiceId } = req.params
@@ -13,8 +12,8 @@ module.exports = router => {
     const provider = providers[choice.providerCode]
     const course = provider.courses[choice.courseCode]
 
-    const numberOfOffersReceived = utils.toArray(application.choices).filter(function(choice) {
-      return choice.status == "Offer received"
+    const numberOfOffersReceived = utils.toArray(application.choices).filter(function (choice) {
+      return choice.status === 'Offer received'
     }).length
 
     res.render(`application/decision/${req.params.view}`, {

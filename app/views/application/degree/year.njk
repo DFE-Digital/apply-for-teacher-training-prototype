@@ -28,7 +28,7 @@
       text: "For example, " + startYearExample
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["degree", id, "year-start"])) }}
+  } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}
 
   {{ govukInput({
     label: {
@@ -39,7 +39,7 @@
       text: "For example, " + graduatingYearExample + (". You must have successfully graduated by the time you start your course." if pendingFirstDegree)
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["degree", id, "year-end"])) }}
+  } | decorateApplicationAttributes(["degree", id, "yearEnd"])) }}
 
   {{ govukButton({
     text: "Save and continue"

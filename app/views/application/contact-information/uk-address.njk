@@ -1,0 +1,69 @@
+{% extends "_form.njk" %}
+
+{% set title = "What is your address?" %}
+{% set international = applicationValue(["contactInformation", "addressType"]) == "international" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/contact-information/where-do-you-live"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if international %}
+    {{ govukTextarea({
+      label: {
+        text: "Enter your address"
+      },
+      autocomplete: "street-address"
+    } | decorateApplicationAttributes(["contactInformation", "address", "street-address"])) }}
+  {% else %}
+    {{ govukInput({
+      label: {
+        html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
+      },
+      autocomplete: "address-line1"
+    } | decorateApplicationAttributes(["contactInformation", "address", "line1"])) }}
+
+    {{ govukInput({
+      label: {
+        html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
+      },
+      autocomplete: "address-line2"
+    } | decorateApplicationAttributes(["contactInformation", "address", "line2"])) }}
+
+    {{ govukInput({
+      label: {
+        text: "Town or city"
+      },
+      classes: "govuk-!-width-two-thirds",
+      autocomplete: "address-level2"
+    } | decorateApplicationAttributes(["contactInformation", "address", "level2"])) }}
+
+    {{ govukInput({
+      label: {
+        text: "County"
+      },
+      classes: "govuk-!-width-two-thirds",
+      autocomplete: "address-level1"
+    } | decorateApplicationAttributes(["contactInformation", "address", "level1"])) }}
+
+    {{ govukInput({
+      label: {
+        text: "Postal code"
+      },
+      classes: "govuk-input--width-10",
+      autocomplete: "postal-code"
+    } | decorateApplicationAttributes(["contactInformation", "address", "postalCode"])) }}
+  {% endif %}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

@@ -3,7 +3,7 @@
 {% set choice = choices[0] %}
 {% set provider = providers[choice.providerCode] %}
 {% set course = provider.courses[choice.courseCode] %}
-{% set name = applicationValue(["candidate", "given-name"]) + " " + applicationValue(["candidate", "family-name"]) %}
+{% set name = applicationValue(["candidate", "givenName"]) + " " + applicationValue(["candidate", "familyName"]) %}
 
 {% set title = "Interview cancelled - " + provider.name %}
 

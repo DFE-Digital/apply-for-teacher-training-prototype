@@ -4,7 +4,7 @@
 {% set status = applicationValue(["status"]) %}
 {% set title = "Your submitted application" %}
 {% set referrer = referrer or applicationPath + "/review" %}
-{% set international = applicationValue(["candidate", "other-nationality"]) or applicationValue(["candidate", "multiple-nationalities"]) %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
 {% set canAmend = false %}
 {% set showChoiceStatus = true %}
 
@@ -53,39 +53,36 @@
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
     <h3 class="govuk-heading-m">Personal information</h3>
-    {% include "_includes/review/personal-details.njk" %}
+    {% include "_includes/review/personal-information.njk" %}
 
     <h3 class="govuk-heading-m">Contact information</h3>
-    {% set contactDetails = applicationValue(["contact-details"]) %}
-    {% include "_includes/review/contact-details.njk" %}
+    {% include "_includes/review/contact-information.njk" %}
   </section>
 
-  <section class="govuk-!-margin-bottom-8">
+  <section class="app-section">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
-    <h3 class="govuk-heading-m">Degree</h3>
-    {% include "_includes/review/degrees.njk" %}
 
-    <h3 class="govuk-heading-m">English GCSE or equivalent</h3>
+    <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
     {% set id = "english" %}
     {% include "_includes/review/gcse.njk" %}
 
     {% if international %}
-      <h3 class="govuk-heading-m">English as a foreign language assessment</h3>
       {% include "_includes/review/english-language.njk" %}
     {% endif %}
 
-    <h3 class="govuk-heading-m">Maths GCSE or equivalent</h3>
     {% set id = "maths" %}
     {% include "_includes/review/gcse.njk" %}
 
     {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
-      <h3 class="govuk-heading-m">Science GCSE or equivalent</h3>
       {% set id = "science" %}
       {% include "_includes/review/gcse.njk" %}
     {% endif %}
 
-    <h3 class="govuk-heading-m">Other qualifications</h3>
+    <h3 class="govuk-heading-m">{{ "Other qualifications" if international else "A levels and other qualifications" }}</h3>
     {% include "_includes/review/other-qualifications.njk" %}
+
+    <h3 class="govuk-heading-m">Degree</h3>
+    {% include "_includes/review/degrees.njk" %}
   </section>
 
   <section class="govuk-!-margin-bottom-8">
@@ -94,7 +91,7 @@
     {% include "_includes/review/work-history.njk" %}
 
     <h3 class="govuk-heading-m">Unpaid experience</h3>
-    {% include "_includes/review/school-experience.njk" %}
+    {% include "_includes/review/unpaid-experience.njk" %}
   </section>
 
   <section class="govuk-!-margin-bottom-8">
@@ -105,12 +102,12 @@
 
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
-    {% include "_includes/review/reasonable-adjustments.njk" %}
-    {% include "_includes/review/interview.njk" %}
+    {% include "_includes/review/additional-support.njk" %}
+    {% include "_includes/review/interview-needs.njk" %}
   </section>
 
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
-    {% include "_includes/review/suitability.njk" %}
+    {% include "_includes/review/safeguarding.njk" %}
   </section>
 {% endblock %}

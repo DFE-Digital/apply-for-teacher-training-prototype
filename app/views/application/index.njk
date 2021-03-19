@@ -152,6 +152,7 @@
 
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+
     {{ appTaskList({
       items: [{
         text: "English GCSE or equivalent",
@@ -187,7 +188,7 @@
         }
       } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
         text: "Other qualifications" if international else "A levels and other qualifications",
-        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["otherQualifications"]) | length > 0 else "/add"),
+        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["otherQualificationsDisclose"]) else "/add"),
         id: "other-qualifications",
         tag: {
           classes: tagClass if applicationValue(["completed", "otherQualifications"]) | length > 0 else incompleteTagClass,
@@ -206,17 +207,11 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    {% if applicationValue(["workHistoryDisclose"]) %}
-      {% set workHistoryPath = applicationPath + "/work-history/review" %}
-    {% else %}
-      {% set workHistoryPath = applicationPath + "/work-history" %}
-    {% endif %}
-
     <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
     {{ appTaskList({
       items: [{
         text: "Work history",
-        href: workHistoryPath,
+        href: applicationPath + "/work-history" + ("/review" if applicationValue("workHistoryDisclose")),
         id: "work-history",
         tag: {
           classes: tagClass if applicationValue(["completed", "workHistory"]) else incompleteTagClass,
@@ -224,7 +219,7 @@
         }
       }, {
         text: "Unpaid experience",
-        href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaidExperience") | length > 0),
+        href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaidExperienceDisclose")),
         id: "unpaid-experience",
         tag: {
           classes: tagClass if applicationValue(["completed", "unpaidExperience"]) else incompleteTagClass,
@@ -262,7 +257,7 @@
     {{ appTaskList({
       items: [{
         text: "Ask for support if you’re disabled",
-        href: applicationPath + "/additional-support" + ("/review" if applicationValue("additionalSupport") | length > 0),
+        href: applicationPath + "/additional-support" + ("/review" if applicationValue("additionalSupportDisclose")),
         id: "additional-support",
         tag: {
           classes: tagClass if applicationValue(["completed", "additionalSupport"]) else incompleteTagClass,
@@ -270,7 +265,7 @@
         }
       }, {
         text: "Interview needs",
-        href: applicationPath + "/interview-needs" + ("/review" if applicationValue(["interviewNeeds"]) | length > 0),
+        href: applicationPath + "/interview-needs" + ("/review" if applicationValue(["interviewNeedsDisclose"])),
         id: "interview",
         tag: {
           classes: tagClass if applicationValue(["completed", "interviewNeeds"]) | length > 0 else incompleteTagClass,
@@ -285,7 +280,7 @@
     {{ appTaskList({
       items: [{
         text: "Declare any safeguarding issues",
-        href: applicationPath + "/safeguarding" + ("/review" if applicationValue("safeguarding") | length > 0),
+        href: applicationPath + "/safeguarding" + ("/review" if applicationValue("safeguardingDisclose")),
         id: "safeguarding",
         tag: {
           classes: tagClass if applicationValue(["completed", "safeguarding"]) else incompleteTagClass,

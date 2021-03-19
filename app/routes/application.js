@@ -109,15 +109,15 @@ module.exports = router => {
 
     for (choice of utils.toArray(existingApplication.choices)) {
       if (choice?.feedback?.qualityOfApplication?.personalStatement) {
-        apply2Application.completed["personal-statement"] = false
+        apply2Application.completed.personalStatement = false
       }
 
       if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
-        apply2Application.completed["subject-knowledge"] = false
+        apply2Application.completed.subjectKnowledge = false
       }
 
       if (choice?.feedback?.qualifications?.noMathsGCSEOrEquivalent) {
-        apply2Application.completed["maths"] = false
+        apply2Application.completed.maths = false
       }
     }
 

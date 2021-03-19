@@ -7,7 +7,7 @@ applicationApplyAgain.previousApplications = ['65432']
 
 // No choices yet
 applicationApplyAgain.choices = {}
-applicationApplyAgain.completed["choices"] = false
-applicationApplyAgain.completed["personal-statement"] = false
+applicationApplyAgain.completed.choices = false
+applicationApplyAgain.completed.personalStatement = false
 
 module.exports = applicationApplyAgain

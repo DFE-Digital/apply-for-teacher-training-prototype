@@ -55,6 +55,7 @@
       name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
       defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
       minLength: 2,
+      showNoOptionsFound: false,
       placeholder: false,
       source: [
         {% for item in degree.orgs %}"{{ item }}",{% endfor %}

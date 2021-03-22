@@ -115,6 +115,7 @@
       name: "applications[{{ applicationId }}][degree][{{ id }}][typeUk]",
       defaultValue: '{{ applicationValue(["degree", id, "typeUk"]) }}',
       placeholder: false,
+      showNoOptionsFound: false,
       source: [
         {% for item in degreeTypes %}"{{ item.text }}",{% endfor %}
       ],

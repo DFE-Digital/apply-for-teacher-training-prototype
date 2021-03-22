@@ -8,7 +8,7 @@ module.exports = {
     45678: require('./application-single-choice'),
     GLOBE: require('./application-international')
   },
-  findUrl: 'http://search-and-compare-ui-pr-442.herokuapp.com',
+  findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {
     addressLookup: false,
     selfAmendEmailAddress: false,

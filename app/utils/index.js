@@ -130,6 +130,8 @@ const hasCompletedSection = key => {
   return true
 }
 
+// TODO: refactor this to check the "Completed" checkbox state for each
+// section instead?
 const hasCompletedApplication = req => {
   const application = applicationData(req)
 
@@ -138,9 +140,9 @@ const hasCompletedApplication = req => {
     module.exports.hasCompletedSection(application.references) &&
     module.exports.hasCompletedSection(application.candidate) &&
     module.exports.hasCompletedSection(application.contactInformation) &&
-    module.exports.hasCompletedSection(application.additionalSupport) &&
+    module.exports.hasCompletedSection(application.additionalSupportDisclose) &&
     module.exports.hasCompletedSection(application.workHistory) &&
-    module.exports.hasCompletedSection(application.unpaidExperience) &&
+    module.exports.hasCompletedSection(application.unpaidExperienceDisclose) &&
     module.exports.hasCompletedSection(application.degree) &&
     module.exports.hasCompletedSection(application.gcse.maths) &&
     module.exports.hasCompletedSection(application.gcse.english) &&

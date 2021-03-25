@@ -108,7 +108,7 @@
         value: {
           html: interviewHtml | safe
         }
-      } if not canRespond and item.status != "Unsuccessful", {
+      } if item.status == "Awaiting decision", {
         key: {
           text: "Feedback"
         },

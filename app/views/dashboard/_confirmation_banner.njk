@@ -5,6 +5,9 @@
     Application successfully submitted
   </h3>
   <p class="govuk-body"> You will get an email when something changes.</p>
+  {{
+    govukButton({href: "/survey", text: "Give feedback about this service"})
+  }}
 {% endset %}
 
 {{ govukNotificationBanner({

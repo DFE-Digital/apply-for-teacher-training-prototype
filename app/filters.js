@@ -237,7 +237,7 @@ module.exports = (env) => {
       case 'Offer withdrawn':
       case 'Conditions not met':
         return `${prefix}--red`
-      case 'Conditions met':
+      case 'Offer confirmed':
         return `${prefix}--green`
       case 'Unsuccessful':
       case 'Application not sent':

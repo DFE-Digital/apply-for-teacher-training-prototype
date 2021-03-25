@@ -174,7 +174,7 @@ module.exports = router => {
         ]
         break
       case 'recruited-single':
-        choices.ABCDE.status = 'Conditions met'
+        choices.ABCDE.status = 'Offer confirmed'
         choices.ABCDE.rejectedByDefault = false
         break
 
@@ -395,7 +395,7 @@ module.exports = router => {
         break
 
       case 'recruited':
-        choices.ZYXWV.status = 'Conditions met'
+        choices.ZYXWV.status = 'Offer confirmed'
         application.choices = [choices.ZYXWV]
         break
 
@@ -425,7 +425,7 @@ module.exports = router => {
     }).length
 
     const courseOfferAccepted = utils.toArray(application.choices).filter(function (choice) {
-      return (choice.status === 'Offer accepted') || (choice.status === 'Conditions met') || (choice.status === 'Offer deferred')
+      return (choice.status === 'Offer accepted') || (choice.status === 'Offer confirmed') || (choice.status === 'Offer deferred')
     }).length > 0
 
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)

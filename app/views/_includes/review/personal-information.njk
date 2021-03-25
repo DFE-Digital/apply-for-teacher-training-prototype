@@ -3,25 +3,25 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "candidate",
+    id: "personalInformation",
     title: "Personal information not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Enter your personal information",
-        href: applicationPath + "/personal-information/?referrer=" + referrer
+        href: applicationPath + "/personal-information"
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "candidate",
+    id: "personalInformation",
     title: "Personal information are not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete personal information",
-        href: applicationPath + "/personal-information/review?referrer=" + referrer
+        href: applicationPath + "/personal-information/review"
       }]
     }
   }) if not completed and showIncomplete }}

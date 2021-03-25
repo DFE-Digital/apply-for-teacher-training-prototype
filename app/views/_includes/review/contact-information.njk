@@ -3,25 +3,25 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "contact-information",
+    id: "contactInformation",
     title: "Contact information not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Enter your contact information",
-        href: applicationPath + "/contact-information/?referrer=" + referrer
+        href: applicationPath + "/contact-information"
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "contact-information",
+    id: "contactInformation",
     title: "Contact information are not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete contact information",
-        href: applicationPath + "/contact-information/?referrer=" + referrer
+        href: applicationPath + "/contact-information/review"
       }]
     }
   }) if not completed and showIncomplete }}

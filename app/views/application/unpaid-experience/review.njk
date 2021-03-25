@@ -16,18 +16,37 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukButton({
-    text: addButtonText,
-    href: applicationPath + "/unpaid-experience/add/role?referrer=" + referrer,
-    classes: "govuk-button--secondary"
-  }) if applicationValue(["unpaidExperienceDisclose"]) != "No" }}
-
   {% include "_includes/review/unpaid-experience.njk" %}
 
-  {{ govukCheckboxes({
+  {% if applicationValue(["unpaidExperienceDisclose"]) != "No" %}
+    {{ govukButton({
+      text: addButtonText,
+      href: applicationPath + "/unpaid-experience/add/role?referrer=" + referrer,
+      classes: "govuk-button--secondary"
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  {% else %}
+    {{ govukInsetText({
+      classes: "govuk-!-width-two-thirds",
+      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school.\n\n[Learn more at Get school experience](https://schoolexperience.education.gov.uk)" | markdown
+    }) }}
+  {% endif %}
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", "unpaidExperience"])) }}
 

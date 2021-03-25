@@ -11,30 +11,28 @@ module.exports = router => {
       pageObject.errorList = []
       const sections = {
         choices: application.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
-        references: 'You need 2 references before you can submit your application',
-        candidate: 'Personal information not entered',
-        'contact-information': 'Contact information not entered',
-        gcse: {
-          maths: 'Maths GCSE or equivalent not entered',
-          english: 'English GCSE or equivalent not entered',
-          science: 'Science GCSE or equivalent not entered'
-        },
-        'other-qualifications': 'A levels and other qualifications not marked as complete',
+        // references: 'You need 2 references before you can submit your application',
+        personalInformation: 'Personal information not marked as completed',
+        contactInformation: 'Contact information not marked as completed',
+        english: 'English GCSE or equivalent not marked as completed',
+        maths: 'Maths GCSE or equivalent not marked as completed',
+        science: 'Science GCSE or equivalent not marked as completed',
+        otherQualifications: 'A levels and other qualifications not marked as complete',
         degree: 'Degree section not marked as completed',
-        'work-history': 'Work history not entered',
-        'unpaid-experience': 'Unpaid experience not entered',
-        'personal-statement': 'Personal statement not entered',
-        'subject-knowledge': 'Subject knowledge not entered',
-        'additional-support': 'Any disability or other needs not entered',
-        'interview-needs': 'Interview needs not entered',
-        safeguarding: 'Safeguarding information not entered'
+        workHistory: 'Work history not marked as completed',
+        unpaidExperience: 'Unpaid experience not marked as completed',
+        personalStatement: 'Personal statement not marked as completed',
+        subjectKnowledge: 'Subject knowledge not marked as completed',
+        additionalSupport: 'Any disability or other needs not marked as completed',
+        interviewNeeds: 'Interview needs not marked as completed',
+        safeguarding: 'Safeguarding information not marked as completed'
       }
 
       for (const [key, value] of Object.entries(sections)) {
         if (key === 'gcse') {
           const subjects = ['maths', 'english', 'science']
           subjects.forEach(subject => {
-            if (!utils.hasCompletedSection(application.gcse[subject])) {
+            if (!utils.hasCompletedSection(application.completed.subject)) {
               pageObject.errorList.push({
                 text: value[subject],
                 href: `#gcse-${subject}`
@@ -42,7 +40,7 @@ module.exports = router => {
             }
           })
         } else {
-          if (!utils.hasCompletedSection(application[key])) {
+          if (!utils.hasCompletedSection(application.completed[key])) {
             pageObject.errorList.push({
               text: value,
               href: `#${key}`

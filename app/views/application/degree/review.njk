@@ -15,18 +15,33 @@
 {% endblock %}
 
 {% block primary %}
+  {% include "_includes/review/degrees.njk" %}
+
   {{ govukButton({
     text: "Add another degree",
     classes: "govuk-button--secondary",
     href: applicationPath + "/degree/add"
   }) }}
 
-  {% include "_includes/review/degrees.njk" %}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-  {{ govukCheckboxes({
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "Check the entry requirements for your chosen course. Providers usually ask for a degree at 2:2 or above. Contact the training provider if you do not have the right degree level."
+    } if hasElligibleGrade,
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", "degree"])) }}
 

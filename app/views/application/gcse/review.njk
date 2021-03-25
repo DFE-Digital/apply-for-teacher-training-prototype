@@ -17,10 +17,23 @@
 {% block primary %}
   {% include "_includes/review/gcse.njk" %}
 
-  {{ govukCheckboxes({
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "Check the entry requirements for your chosen courses. Contact the training provider if you do not have the right grade."
+    } if hasElligibleGrade,
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", id])) }}
 

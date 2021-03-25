@@ -3,7 +3,7 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "interview-needs",
+    id: "interviewNeeds",
     title: "Interview needs not entered",
     warning: true if errorList,
     actions: {
@@ -15,7 +15,7 @@
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "interview-needs",
+    id: "interviewNeeds",
     title: "Interview needs not marked as complete",
     warning: true if errorList,
     actions: {

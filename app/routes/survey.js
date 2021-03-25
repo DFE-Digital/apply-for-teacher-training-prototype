@@ -2,7 +2,7 @@ module.exports = router => {
   router.get('/survey', (req, res) => {
     const { applicationId } = req.query
 
-    res.render(`survey/index`, {
+    res.render('survey/index', {
       applicationId
     })
   })

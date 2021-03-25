@@ -3,25 +3,25 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "additional-support",
+    id: "additionalSupport",
     title: "Any disability or other needs not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Do you want to ask for help to become a teacher?",
-        href: applicationPath + "/additional-support/?referrer=" + referrer
+        href: applicationPath + "/additional-support"
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "additional-support",
+    id: "additionalSupport",
     title: "Ask for support if you’re disabled not marked as complete",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete ask for support if you’re disabled",
-        href: applicationPath + "/additional-support/review?referrer=" + referrer
+        href: applicationPath + "/additional-support/review"
       }]
     }
   }) if not completed and showIncomplete }}

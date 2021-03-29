@@ -17,10 +17,15 @@ module.exports = router => {
   router.get('/application/:applicationId/other-qualifications/:id', (req, res) => {
     const { id } = req.params
     const { referrer } = req.query
+    let { otherQualifications } = utils.applicationData(req)
+
+    otherQualifications = utils.toArray(otherQualifications)
+    const noQualificationsEntered = !(otherQualifications && otherQualifications.length > 1)
 
     res.render('application/other-qualifications/index', {
       id,
-      referrer
+      referrer,
+      noQualificationsEntered
     })
   })
 
@@ -41,10 +46,10 @@ module.exports = router => {
 
   // Render details page
   router.get('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
-    const application = utils.applicationData(req)
+    const { otherQualifications } = utils.applicationData(req)
     const { id } = req.params
     const { referrer } = req.query
-    const { type } = application.otherQualifications[id]
+    const { type } = otherQualifications[id]
 
     res.render('application/other-qualifications/details', {
       id,

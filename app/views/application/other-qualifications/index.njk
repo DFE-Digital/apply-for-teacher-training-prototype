@@ -72,13 +72,13 @@
       }
     }, {
       divider: "or"
-    }, {
+    } if noQualificationsEntered, {
       value: "None",
       text: "I do not want to add any " + itemName,
       hint: {
         text: "Providers look at " + itemName + " for evidence of subject knowledge not covered in your degree or work history"
       }
-    }]
+    } if noQualificationsEntered]
   } | decorateApplicationAttributes(["otherQualifications", id, "type"])) }}
 
   {% set internationalConditionalHtml %}

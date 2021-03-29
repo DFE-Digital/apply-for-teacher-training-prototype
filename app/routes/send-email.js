@@ -69,7 +69,7 @@ module.exports = router => {
       amendDate: utils.nowPlusDays(7, 'd MMMM yyyy')
     })
 
-    res.redirect(`/dashboard/${applicationId}?confirmation=true`)
+    res.redirect(`/survey?applicationId=${applicationId}`)
   })
 
   // Decision: Unsuccessful/Offer received

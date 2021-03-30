@@ -28,8 +28,10 @@
           {% set feedbackFromPreviousApplications %}
             {{ feedbackFromPreviousApplications | safe }}
 
-            <p class="govuk-body govuk-!-margin-bottom-0">{{ providers[item.providerCode].name }}:</p>
-            <p class="govuk-body">“{{ item.feedback.qualityOfApplication.subjectKnowledge | safe }}”</p>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ providers[item.providerCode].name }}</h3>
+            <blockquote class="govuk-!-margin-left-0 govuk-!-margin-top-0">
+              <p class="govuk-body">“{{ item.feedback.qualityOfApplication.subjectKnowledge | safe }}”</p>
+            </blockquote>
           {% endset %}
 
         {% endif %}
@@ -40,13 +42,13 @@
   {% if hasFeedbackFromPreviousApplication %}
 
     {% set feedbackFromPreviousApplications %}
-      <h2 class="govuk-heading-s">Feedback from previous applications</h2>
+      <h2 class="govuk-heading-m">Feedback from previous applications</h2>
       {{ feedbackFromPreviousApplications | safe }}
     {% endset %}
 
     {{ govukInsetText({
       html: feedbackFromPreviousApplications | safe,
-      classes: "govuk-!-width-two-thirds app-inset-text--review"
+      classes: "govuk-!-width-two-thirds"
       })
     }}
   {% endif %}

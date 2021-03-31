@@ -1,5 +1,5 @@
 {% set completed = applicationValue(["completed", "degree"]) %}
-{% set entered = applicationValue(["degree"]) %}
+{% set entered = applicationValue(["degree"]) | length %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -9,19 +9,24 @@
     actions: {
       items: [{
         text: "Enter your degree",
-        href: applicationPath + "/degree/?referrer=" + referrer
+        href: applicationPath + "/degree/add"
       }]
     }
   }) }}
 {% else %}
+  {{ govukInsetText({
+    classes: "govuk-!-width-two-thirds",
+    html: "<p>Training providers usually ask for a degree at 2:2 or above. You’ve entered ‘" + enteredGrade + "’.</p><p>Contact your chosen training provider for advice.</p>"
+  }) if not hasElligibleGrade and not showIncomplete }}
+
   {{ appSuggestion({
     id: "degree",
     title: "Degree section not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
-        text: "Enter your degree",
-        href: applicationPath + "/degree/add?referrer=" + referrer
+        text: "Complete the degree section",
+        href: applicationPath + "/degree/review"
       }]
     }
   }) if not completed and showIncomplete }}

@@ -122,34 +122,29 @@ const hasStartedApplications = (req) => {
   }
 }
 
-const hasCompletedSection = key => {
-  if (!key || key === null || Object.keys(key).length === 0) {
-    return false
-  }
-
-  return true
+const hasCompletedSection = section => {
+  return section === 'true'
 }
 
-// TODO: refactor this to check the "Completed" checkbox state for each
-// section instead?
 const hasCompletedApplication = req => {
-  const application = applicationData(req)
+  const { completed } = applicationData(req)
 
   if (
-    module.exports.hasCompletedSection(application.choices) &&
-    module.exports.hasCompletedSection(application.references) &&
-    module.exports.hasCompletedSection(application.candidate) &&
-    module.exports.hasCompletedSection(application.contactInformation) &&
-    module.exports.hasCompletedSection(application.additionalSupportDisclose) &&
-    module.exports.hasCompletedSection(application.workHistory) &&
-    module.exports.hasCompletedSection(application.unpaidExperienceDisclose) &&
-    module.exports.hasCompletedSection(application.degree) &&
-    module.exports.hasCompletedSection(application.gcse.maths) &&
-    module.exports.hasCompletedSection(application.gcse.english) &&
-    module.exports.hasCompletedSection(application.gcse.science) &&
-    module.exports.hasCompletedSection(application.personalStatement) &&
-    module.exports.hasCompletedSection(application.subjectKnowledge) &&
-    module.exports.hasCompletedSection(application.interviewNeeds)
+    module.exports.hasCompletedSection(completed.choices) &&
+    module.exports.hasCompletedSection(completed.personalInformation) &&
+    module.exports.hasCompletedSection(completed.contactInformation) &&
+    module.exports.hasCompletedSection(completed.english) &&
+    module.exports.hasCompletedSection(completed.maths) &&
+    module.exports.hasCompletedSection(completed.science) &&
+    module.exports.hasCompletedSection(completed.otherQualifications) &&
+    module.exports.hasCompletedSection(completed.degree) &&
+    module.exports.hasCompletedSection(completed.workHistory) &&
+    module.exports.hasCompletedSection(completed.unpaidExperience) &&
+    module.exports.hasCompletedSection(completed.personalStatement) &&
+    module.exports.hasCompletedSection(completed.subjectKnowledge) &&
+    module.exports.hasCompletedSection(completed.additionalSupport) &&
+    module.exports.hasCompletedSection(completed.interviewNeeds) &&
+    module.exports.hasCompletedSection(completed.safeguarding)
   ) {
     return true
   }

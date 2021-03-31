@@ -43,7 +43,25 @@ module.exports = router => {
   // Render GCSE review page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/gcse/:id/review', (req, res) => {
+    const gcse = gcseData(req)
+
+    const enteredGrade =
+      gcse.gradeSingle || gcse.gradeDouble ||
+      gcse.gradeBiology || gcse.gradeChemistry || gcse.gradePhysics ||
+      gcse.gradeEnglish || gcse.gradeLanguage || gcse.gradeLiterature || gcse.gradeStudies || gcse.gradeOther
+
+    const passGrades = [
+      'A*', 'A', 'B', 'C',
+      'A*A*', 'A*A', 'AA', 'AB', 'BB', 'BC', 'CC',
+      '1', '2', '3', '4',
+      '11', '12', '22', '23', '33', '34', '44'
+    ]
+
+    const hasElligibleGrade = passGrades.includes(enteredGrade)
+
     res.render('application/gcse/review', {
+      enteredGrade,
+      hasElligibleGrade,
       id: req.params.id
     })
   })

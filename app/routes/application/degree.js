@@ -44,7 +44,23 @@ module.exports = router => {
   // Render degree review page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/degree/review', (req, res) => {
-    res.render('application/degree/review')
+    const { degree } = utils.applicationData(req)
+    const degreeArray = utils.toArray(degree)
+
+    const enteredGrade = degreeArray[0].grade
+
+    const passGrades = [
+      'First-class honours',
+      'Upper second-class honours (2:1)',
+      'Lower second-class honours (2:2)'
+    ]
+
+    const hasElligibleGrade = passGrades.includes(enteredGrade)
+
+    res.render('application/degree/review', {
+      enteredGrade,
+      hasElligibleGrade
+    })
   })
 
   // Render first page

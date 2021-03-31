@@ -25,7 +25,7 @@
 {% endif %}
 
 {# Structured GCSE grade #}
-{% macro gradeAutocomplete(params) %}
+{% macro gradeHtml(params) %}
   {{ govukInput({
     label: {
       text: params.label or "Grade",
@@ -34,8 +34,7 @@
     hint: {
       text: params.hint or "For example, ‘C’ or ‘4’"
     },
-    classes: "govuk-input--width-2",
-    items: params.items
+    classes: "govuk-input--width-2"
   } | decorateApplicationAttributes(["gcse", id, "grade" + params.name])) }}
 {% endmacro %}
 
@@ -46,28 +45,24 @@
       text: "What English GCSE do you have?"
     }
   } | decorateApplicationAttributes(["gcse", id, "subject"])) }}
-  {{ gradeAutocomplete({
-    name: "Other",
-    items: gcse.singleGradeOptions
+  {{ gradeHtml({
+    name: "Other"
   }) }}
 {% endset %}
 
 {# Structured Science GCSE grade for tripple award exam #}
 {% set tripleScienceGradeHtml %}
-  {{ gradeAutocomplete({
+  {{ gradeHtml({
     name: "Biology",
-    label: "Biology grade",
-    items: gcse.singleGradeOptions
+    label: "Biology grade"
   }) }}
-  {{ gradeAutocomplete({
+  {{ gradeHtml({
     name: "Chemistry",
-    label: "Chemistry grade",
-    items: gcse.singleGradeOptions
+    label: "Chemistry grade"
   }) }}
-  {{ gradeAutocomplete({
+  {{ gradeHtml({
     name: "Physics",
-    label: "Physics grade",
-    items: gcse.singleGradeOptions
+    label: "Physics grade"
   }) }}
 {% endset %}
 
@@ -115,9 +110,8 @@
           text: "You have one science grade"
         },
         conditional: {
-          html: gradeAutocomplete({
-            name: "Single",
-            items: gcse.singleGradeOptions
+          html: gradeHtml({
+            name: "Single"
           })
         }
       }, {
@@ -127,10 +121,9 @@
           text: "You have a combined science grade"
         },
         conditional: {
-          html: gradeAutocomplete({
+          html: gradeHtml({
             name: "Double",
-            hint: "For example, ‘CD’ or ‘4-3’",
-            items: gcse.doubleGradeOptions
+            hint: "For example, ‘CD’ or ‘4-3’"
           })
         }
       }, {
@@ -157,38 +150,34 @@
         value: "English",
         text: "English",
         conditional: {
-          html: gradeAutocomplete({
+          html: gradeHtml({
             name: "English",
-            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’",
-            items: gcse.gradeOptions
+            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’"
           })
         }
       }, {
         value: "English Language",
         text: "English Language",
         conditional: {
-          html: gradeAutocomplete({
-            name: "Language",
-            items: gcse.singleGradeOptions
+          html: gradeHtml({
+            name: "Language"
           })
         }
       }, {
         value: "English Literature",
         text: "English Literature",
         conditional: {
-          html: gradeAutocomplete({
-            name: "Literature",
-            items: gcse.singleGradeOptions
+          html: gradeHtml({
+            name: "Literature"
           })
         }
       }, {
         value: "English Studies",
         text: "English Studies",
         conditional: {
-          html: gradeAutocomplete({
+          html: gradeHtml({
             name: "Studies",
-            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’",
-            items: gcse.gradeOptions
+            hint: "For example, ‘CD’, ‘4-3’, ‘C’ or ‘4’"
           })
         }
       }, {
@@ -200,10 +189,9 @@
       }]
     } | decorateApplicationAttributes(["gcse", id, "exam"])) }}
   {% else %}
-    {{ gradeAutocomplete({
+    {{ gradeHtml({
       name: "Single",
-      classes: "govuk-label--m",
-      items: gcse.singleGradeOptions
+      classes: "govuk-label--m"
     }) }}
   {% endif %}
 

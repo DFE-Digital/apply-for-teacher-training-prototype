@@ -17,7 +17,6 @@
 {% block primary %}
   {% include "_includes/review/personal-statement.njk" %}
 
-
   {% set hasFeedbackFromPreviousApplication = false %}
   {% if applicationValue(["apply2"]) %}
     {% for previousApplicationId in applicationValue("previousApplications") %}
@@ -29,10 +28,23 @@
     {% endfor %}
   {% endif %}
 
-  {{ govukCheckboxes({
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
+    },
     items: [{
       value: "true",
-      text: "I have " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
+      text: "Yes, I’ve " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", "personalStatement"])) }}
 

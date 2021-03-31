@@ -12,6 +12,7 @@ function createNewApplication (req) {
     data.applications[code] = {
       status: 'started',
       apply2: false,
+      completed: {},
       choices: {},
       references: {},
       candidate: {},
@@ -107,7 +108,7 @@ module.exports = router => {
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
 
-    for (choice of utils.toArray(existingApplication.choices)) {
+    for (const choice of utils.toArray(existingApplication.choices)) {
       if (choice?.feedback?.qualityOfApplication?.personalStatement) {
         apply2Application.completed.personalStatement = false
       }

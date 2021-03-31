@@ -3,27 +3,6 @@
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 
 {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
-  {% set contentHtml %}
-    <p class="govuk-body">Adding your {{ itemName }} can:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>make your application stronger</li>
-      <li>demonstrate knowledge of a subject not covered in your degree or work history</li>
-      <li>stop training providers asking for them later and slowing your application</li>
-    </ul>
-  {% endset %}
-  {{ appSuggestion({
-    title: "You have not added any " + itemName,
-    content: {
-      html: contentHtml
-    },
-    actions: {
-      items: [{
-        text: "Add a qualification",
-        href: applicationPath + "/other-qualifications/add?referrer=" + referrer
-      }]
-    }
-  }) if not showIncomplete }}
-
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     html: govukSummaryList({
@@ -45,19 +24,6 @@
     })
   }) }}
 {% else %}
-  {{ appSuggestion({
-    title: "Add all of your qualifications",
-    content: {
-      html: "Adding all of your qualifications makes your application stronger.\n\nThis is important if you are applying to teach a different subject to your degree." | markdown
-    },
-    actions: {
-      items: [{
-        text: "Add another qualification",
-        href: applicationPath + "/other-qualifications/add?referrer=" + referrer
-      }]
-    }
-  }) if not showIncomplete }}
-
   {% for item in qualifications %}
     {{ appSummaryCard({
       classes: "govuk-!-margin-bottom-6",

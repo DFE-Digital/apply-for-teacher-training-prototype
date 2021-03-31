@@ -2,18 +2,10 @@
 {% set roles = unpaidExperience | toArray | selectattr("id") | sort(attribute="startDate") %}
 
 {% if applicationValue(["unpaidExperienceDisclose"]) == "No" %}
-  {{ appSuggestion({
-    title: "Get school experience",
-    content: {
-      html: "The Department for Education have made it easier for teacher training applicants to gain experience in school." | markdown
-    },
-    actions: {
-      items: [{
-        text: "Learn more at Get school experience",
-        href: "https://schoolexperience.education.gov.uk"
-      }]
-    }
-  }) if not showIncomplete }}
+  {% set answerHtml %}
+    <p class="govuk-body">{{ applicationValue(["unpaidExperienceDisclose"]) }}</p>
+
+  {% endset %}
 
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
@@ -23,7 +15,7 @@
           text: "Do you have any unpaid experience?"
         },
         value: {
-          text: applicationValue(["unpaidExperienceDisclose"])
+          html: answerHtml
         },
         actions: {
           items: [{

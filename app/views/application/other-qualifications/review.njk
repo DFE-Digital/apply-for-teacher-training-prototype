@@ -18,10 +18,31 @@
 {% block primary %}
   {% include "_includes/review/other-qualifications.njk" %}
 
-  {{ govukCheckboxes({
+  {{ govukButton({
+    text: "Add a qualification",
+    classes: "govuk-button--secondary",
+    href: applicationPath + "/other-qualifications/add"
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "Ensure you’ve added all your A levels and other qualifications."
+    },
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", "otherQualifications"])) }}
 

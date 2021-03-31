@@ -3,8 +3,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
 {% set choices = applicationValue("choices") | toArray %}
-{% set choiceCount = choices | length %}
-{% if choiceCount >= 1 %}
+{% set choicesCount = choices | length %}
+{% set choicesRemaining = 3 - choicesCount %}
+{% if choicesCount >= 1 %}
   {% if applicationValue(["apply2"]) %}
     {% set title = "Course choice" %}
   {% else %}
@@ -35,13 +36,15 @@
 
 {% block primary %}
   {% set guidance %}
-    {% if applicationValue(["apply2"]) %}
-      <p class="govuk-body">You can only apply to 1 course at a time at this stage of your application.</p>
-    {% else %}
-      <p class="govuk-body">You can apply to up to 3 courses at this stage of your application.</p>
-    {% endif %}
-    <p class="govuk-body">Not all courses and training providers are signed up to Apply for teacher training. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>
-    <p class="govuk-body">You can preview <a href="/apply/providers">courses currently available</a> on Apply for teacher training.</p>
+    <div class="govuk-!-width-two-thirds">
+      {% if applicationValue(["apply2"]) %}
+        <p class="govuk-body">You can only apply to 1 course at a time at this stage of your application.</p>
+      {% else %}
+        <p class="govuk-body">You can apply to up to 3 courses at this stage of your application.</p>
+      {% endif %}
+      <p class="govuk-body">Not all courses and training providers are signed up to Apply for teacher training. If you choose a course that isn’t signed up to the service, you’ll be directed to UCAS to continue your application.</p>
+      <p class="govuk-body">You can preview <a href="/apply/providers">courses currently available</a> on Apply for teacher training.</p>
+    </div>
   {% endset %}
 
   {% if choices %}
@@ -51,37 +54,48 @@
     {% include "_includes/review/choices.njk" %}
   {% endif %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if not choices or choiceCount == 0 %}
-        {{ guidance | safe }}
+  {% if not choices or choicesCount == 0 %}
+    {{ guidance | safe }}
 
-        {{ govukButton({
-          text: "Continue",
-          href: applicationPath + "/choices/add"
-        }) }}
-      {% endif %}
+    {{ govukButton({
+      text: "Continue",
+      href: applicationPath + "/choices/add"
+    }) }}
+  {% endif %}
 
-      {% if choiceCount >= 1 and choiceCount < 3 and not applicationValue(["apply2"]) %}
-        {{ govukButton({
-          classes: "govuk-button--secondary govuk-!-margin-bottom-9",
-          text: "Add another course",
-          href: applicationPath + "/choices/add"
-        }) }}
-      {% endif %}
+  {% if choicesCount >= 1 %}
+    {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Add another course",
+        href: applicationPath + "/choices/add"
+      }) }}
 
-      {% if choiceCount >= 1 %}
-        {{ govukCheckboxes({
-          items: [{
-            value: "true",
-            text: "I have completed this section"
-          }]
-        } | decorateApplicationAttributes(["completed", "choices"])) }}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    {% endif %}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      {% endif %}
-    </div>
-  </div>
+    {{ govukRadios({
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
+      } if not applicationValue(["apply2"]) and choicesRemaining != 0,
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } | decorateApplicationAttributes(["completed", "choices"])) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  {% endif %}
 {% endblock %}

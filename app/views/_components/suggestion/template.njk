@@ -35,6 +35,6 @@
 
 {{ govukInsetText({
   id: params.id if params.id,
-  classes: ("app-inset-text--error" if params.warning else "app-inset-text--important") + " govuk-!-margin-top-0 govuk-!-width-two-thirds",
+  classes: ("app-inset-text--error" if params.warning else "app-inset-text--important") + " app-inset-text--narrow-border " + params.classes,
   html: insetTextHtml
 }) }}

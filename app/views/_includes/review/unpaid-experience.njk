@@ -3,25 +3,25 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "unpaid-experience",
+    id: "unpaidExperience",
     title: "Unpaid experience not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Do you have any experience working with children and young people?",
-        href: applicationPath + "/unpaid-experience/?referrer=" + referrer
+        href: applicationPath + "/unpaid-experience"
       }]
     }
   }) }}
 {% else %}
   {{ appSuggestion({
-    id: "unpaid-experience",
+    id: "unpaidExperience",
     title: "Volunteering with children and young people is not marked as completed",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete your unpaid experience",
-        href: applicationPath + "/unpaid-experience?referrer=" + referrer
+        href: applicationPath + "/unpaid-experience/review"
       }]
     }
   }) if not completed and showIncomplete }}

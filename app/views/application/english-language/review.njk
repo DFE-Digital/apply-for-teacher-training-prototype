@@ -16,10 +16,20 @@
 {% block primary %}
   {% include "_includes/review/english-language.njk" %}
 
-  {{ govukCheckboxes({
+  {{ govukRadios({
+    classes: "govuk-!-width-two-thirds",
+    fieldset: {
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
   } | decorateApplicationAttributes(["completed", "englishLanguage"])) }}
 

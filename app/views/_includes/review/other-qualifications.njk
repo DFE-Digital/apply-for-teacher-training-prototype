@@ -3,25 +3,30 @@
 
 {% if not entered %}
   {{ appSuggestion({
-    id: "other-qualifications",
+    id: "otherQualifications",
     title: "A levels or other qualifications not entered",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Enter your other qualifications",
-        href: applicationPath + "/other-qualifications/add/?referrer=" + referrer
+        href: applicationPath + "/other-qualifications/add"
       }]
     }
   }) }}
 {% else %}
+  {{ govukInsetText({
+    classes: "govuk-!-width-two-thirds",
+    html: "<p>Adding A levels and other qualifications makes your application stronger. They demonstrate subject knowledge not covered in your degree or work experience.</p><p class=\"govuk-hint\">Training providers usually ask you for them later in the process.</p>"
+  }) if applicationValue(["otherQualificationsDisclose"]) == "No" and not showIncomplete }}
+
   {{ appSuggestion({
-    id: "other-qualifications",
+    id: "otherQualifications",
     title: "A levels and other qualifications not marked as complete",
     warning: true if errorList,
     actions: {
       items: [{
         text: "Complete your other qualifications",
-        href: applicationPath + "/other-qualifications/review?referrer=" + referrer
+        href: applicationPath + "/other-qualifications/review"
       }]
     }
   }) if not completed and showIncomplete }}

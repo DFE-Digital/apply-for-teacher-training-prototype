@@ -17,10 +17,21 @@
 {% block primary %}
   {% include "_includes/review/subject-knowledge.njk" %}
 
+  {% set hasFeedbackFromPreviousApplication = false %}
+  {% if applicationValue(["apply2"]) %}
+    {% for previousApplicationId in applicationValue("previousApplications") %}
+      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
+        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.subjectKnowledge %}
+          {% set hasFeedbackFromPreviousApplication = true %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
   {{ govukCheckboxes({
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "I have " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
     }]
   } | decorateApplicationAttributes(["completed", "subjectKnowledge"])) }}
 

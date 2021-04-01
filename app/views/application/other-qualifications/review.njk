@@ -36,7 +36,7 @@
     },
     hint: {
       text: "Ensure you’ve added all your A levels and other qualifications."
-    },
+    } if applicationValue(["otherQualificationsDisclose"] != "No"),
     items: [{
       value: "true",
       text: "Yes, I’ve completed this section"

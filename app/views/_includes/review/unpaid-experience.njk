@@ -14,6 +14,11 @@
     }
   }) }}
 {% else %}
+  {{ govukInsetText({
+    classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
+    html: "The Department for Education have made it easier for teacher training applicants to gain experience in school.\n\n[Learn more at Get school experience](https://schoolexperience.education.gov.uk)" | markdown
+  }) if applicationValue(["unpaidExperienceDisclose"]) == "No" and not showIncomplete }}
+
   {{ appSuggestion({
     id: "unpaidExperience",
     title: "Volunteering with children and young people is not marked as completed",

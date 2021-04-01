@@ -43,10 +43,9 @@
     {% endset %}
 
     {{ govukInsetText({
-      html: feedbackFromPreviousApplications | safe,
-      classes: "govuk-!-width-two-thirds"
-      })
-    }}
+      classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
+      html: feedbackFromPreviousApplications | safe
+    }) }}
   {% endif %}
 
   {{ appSummaryCard({

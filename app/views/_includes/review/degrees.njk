@@ -16,7 +16,7 @@
 {% else %}
   {{ govukInsetText({
     classes: "govuk-!-width-two-thirds",
-    html: "<p>Training providers usually ask for a degree at 2:2 or above. You’ve entered ‘" + enteredGrade + "’.</p><p>Contact your chosen training provider for advice.</p>"
+    html: "<p>Training providers usually ask for a degree at 2:2 or above. You’ve entered ‘" + enteredGrade + "’.</p><p>Contact your chosen training provider for advice. You can also search for providers that accept ‘" + enteredGrade + "’ degrees on <a href=\"https:\/\/www.find-postgraduate-teacher-training.service.gov.uk\">Find postgraduate teacher training courses</a>.</p>"
   }) if not hasElligibleGrade and not showIncomplete }}
 
   {{ appSuggestion({

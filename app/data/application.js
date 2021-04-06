@@ -11,12 +11,6 @@ module.exports = {
     unpaidExperience: 'true',
     additionalSupport: 'true',
     safeguarding: 'true',
-    degree: 'true',
-    maths: 'true',
-    english: 'true',
-    science: 'true',
-    englishLanguage: 'true',
-    personalStatement: 'true',
     subjectKnowledge: 'true',
     interviewNeeds: 'true'
   },
@@ -47,10 +41,10 @@ module.exports = {
       status: 'Awaiting decision'
     },
     ZYXWV: {
-      courseCode: 'AP21',
-      providerCode: '4F5',
-      locationName: 'Main Site',
-      locationAddress: 'David Hockney Building, Great Horton Road, Bradford. BD7 1AY',
+      courseCode: '3C2X',
+      providerCode: '1N1',
+      locationName: 'Boston Spa School',
+      locationAddress: 'Clifford Moor Road, West Yorkshire, LS23 6RW',
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
@@ -138,46 +132,8 @@ module.exports = {
   },
   additionalSupportDisclose: 'No',
   safeguardingDisclose: 'No',
-  degree: {
-    abcde: {
-      id: 'kq19m',
-      provenance: 'domestic',
-      typeUk: 'BSc',
-      subject: 'Physics',
-      org: 'The University of Edinburgh',
-      country: 'United Kingdom',
-      yearStart: '2006',
-      yearEnd: '2009',
-      completed: 'Yes',
-      grade: 'Lower second-class honours (2:2)'
-    }
-  },
-  gcse: {
-    maths: {
-      id: 'maths',
-      type: 'GCSE',
-      gradeSingle: 'A*',
-      year: '2004',
-      country: 'United Kingdom'
-    },
-    english: {
-      id: 'english',
-      type: 'GCSE',
-      exam: ['English Language', 'English Literature'],
-      gradeLanguage: 'C',
-      gradeLiterature: 'B',
-      year: '2004',
-      country: 'United Kingdom'
-    },
-    science: {
-      id: 'science',
-      type: 'GCSE',
-      exam: 'Double (or combined) award',
-      gradeDouble: 'A*A*',
-      year: '2004',
-      country: 'United Kingdom'
-    }
-  },
+  degree: {},
+  gcse: {},
   subjectKnowledge: 'I have a passion for literature and drama, and have studied these at A-level. I enjoy reading and regularly going to the theatre. I have also self-published 2 short stories.\n\nI believe I would be able to inspire children with a lifelong passion for reading.',
   interviewNeedsDisclose: 'Yes',
   interviewNeeds: 'I am out of the country between 12 March and 15 April.',

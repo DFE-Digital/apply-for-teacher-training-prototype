@@ -159,6 +159,20 @@
           visuallyHiddenText: "year"
         }]
       } if canAmend
-    }]
+    }, {
+      key: {
+        text: "How I meet the requirement for grade 4 (C) or above"
+      },
+      value: {
+        html: (item.missing or "No reason given") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/no-pass-grade?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      } if canAmend
+    } if item.missing and not hasElligibleGrade]
   }) }}
 {% endif %}

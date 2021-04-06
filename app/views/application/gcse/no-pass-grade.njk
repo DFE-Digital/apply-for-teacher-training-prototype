@@ -1,0 +1,29 @@
+{% extends "_form.njk" %}
+
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = "You need a grade 4 (C) or above in " + subject + " to apply" %}
+{% set allowsFeedback = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukCharacterCount({
+    label: {
+      classes: "govuk-label--m",
+      html: "Tell us how you meet this requirement"
+    },
+    hint: {
+      text: "For example, you are working towards this qualification, or if you have other qualifications that are relevant."
+    },
+    maxwords: 200,
+    rows: 6
+  } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

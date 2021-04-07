@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
-{% set title = "You need a grade 4 (C) or above in " + subject + " to apply" %}
+{% set title = "You need a " + subject + " GCSE grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
@@ -14,10 +14,10 @@
   {{ govukCharacterCount({
     label: {
       classes: "govuk-label--m",
-      html: "Tell us how you meet this requirement"
+      html: "Tell us how you will meet this requirement"
     },
     hint: {
-      text: "For example, you are working towards this qualification, or if you have other qualifications that are relevant."
+      text: "For example, you are working towards this qualification or you have other qualifications which demonstrate equivalent skills"
     },
     maxwords: 200,
     rows: 6

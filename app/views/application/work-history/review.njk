@@ -25,16 +25,14 @@
 {% block primary %}
   {% if workHistoryDecision == "Yes" %}
     {% if history.length >= 1 %}
-      {# Show list of jobs added, with prompt to add another #}
-      {% include "_includes/review/work-history.njk" %}
-
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another job",
         href: "/application/" + applicationId + "/work-history/" + newId
       }) }}
 
-      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      {# Show list of jobs added, with prompt to add another #}
+      {% include "_includes/review/work-history.njk" %}
     {% else %}
       {# Introduce work history, with prompt to add first job #}
       <div class="govuk-!-width-two-thirds">

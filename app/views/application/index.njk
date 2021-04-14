@@ -10,10 +10,10 @@
 {% set referrer = applicationPath %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
 
-{% set apply2 = applicationValue('apply2') %}
+{% set apply2 = applicationValue("apply2") %}
 
-{% macro tagClassesForSection(completed=false,apply2=false) %}
-  {% if completed %}
+{% macro tagClassesForSection(completed=false, apply2=false) %}
+  {% if completed == "true" %}
     govuk-tag
   {% elif apply2 %}
     govuk-tag--pink
@@ -22,8 +22,8 @@
   {% endif %}
 {% endmacro %}
 
-{% macro tagTextForSection(completed=false,apply2=false) %}
-  {% if completed %}
+{% macro tagTextForSection(completed=false, apply2=false) %}
+  {% if completed == "true" %}
     Completed
   {% elif apply2 %}
     Review
@@ -182,32 +182,32 @@
         href: applicationPath + "/gcse/english" + ("/review" if applicationValue(["gcse", "english"]) | length > 0),
         id: "english-gcse",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "english"]),apply2=apply2),
-          text: tagTextForSection(completed=applicationValue(["completed", "english"]),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "english"]), apply2=apply2),
+          text: tagTextForSection(completed=applicationValue(["completed", "english"]), apply2=apply2)
         }
       }, {
         text: "English as a foreign language assessment",
         href: applicationPath + "/english-language" + ("/review" if applicationValue(["englishLanguage"]) | length > 0),
         id: "english-language",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "englishLanguage"]),apply2=apply2),
-          text: tagTextForSection(completed=applicationValue(["completed", "englishLanguage"]),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "englishLanguage"]), apply2=apply2),
+          text: tagTextForSection(completed=applicationValue(["completed", "englishLanguage"]), apply2=apply2)
         }
       } if international, {
         text: "Maths GCSE or equivalent",
         href: applicationPath + "/gcse/maths" + ("/review" if applicationValue(["gcse", "maths"]) | length > 0),
         id: "maths-gcse",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "maths"]),apply2=apply2),
-          text: tagTextForSection(completed=applicationValue(["completed", "maths"]),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "maths"]), apply2=apply2),
+          text: tagTextForSection(completed=applicationValue(["completed", "maths"]), apply2=apply2)
         }
       }, {
         text: "Science GCSE or equivalent",
         href: applicationPath + "/gcse/science" + ("/review" if applicationValue(["gcse", "science"]) | length > 0),
         id: "science-gcse",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "science"]),apply2=apply2),
-          text: tagTextForSection(completed=applicationValue(["completed", "science"]),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "science"]), apply2=apply2),
+          text: tagTextForSection(completed=applicationValue(["completed", "science"]), apply2=apply2)
         }
       } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
         text: "Other qualifications" if international else "A levels and other qualifications",

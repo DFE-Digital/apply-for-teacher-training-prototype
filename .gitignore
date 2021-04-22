@@ -7,3 +7,4 @@ lib/extensions/_extensions.scss
 public
 node_modules/*
 package-lock.json
+.DS_Store

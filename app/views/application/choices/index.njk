@@ -48,6 +48,14 @@
   {% endset %}
 
   {% if choices %}
+    {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Add another course",
+        href: applicationPath + "/choices/add"
+      }) }}
+    {% endif %}
+
     {% set referrer = applicationPath + "/choices" %}
     {% set canAmend = true %}
     {% set showChoiceStatus = false %}
@@ -64,16 +72,6 @@
   {% endif %}
 
   {% if choicesCount >= 1 %}
-    {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
-      {{ govukButton({
-        classes: "govuk-button--secondary",
-        text: "Add another course",
-        href: applicationPath + "/choices/add"
-      }) }}
-
-      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-    {% endif %}
-
     {{ govukRadios({
       fieldset: {
         classes: "govuk-!-width-two-thirds",

@@ -16,12 +16,6 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukButton({
-    text: "Add another qualification",
-    classes: "govuk-button--secondary",
-    href: applicationPath + "/other-qualifications/add"
-  }) }}
-
   {% include "_includes/review/other-qualifications.njk" %}
 
   {{ govukRadios({

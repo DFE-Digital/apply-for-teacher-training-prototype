@@ -260,16 +260,16 @@
         href: applicationPath + "/personal-statement" + ("/review" if applicationValue(["personalStatement"]) | length > 0),
         id: "personal-statement",
         tag: {
-          classes: tagClassesForSection(completed=(applicationValue(["completed", "personalStatement"]) | length > 0),apply2=apply2),
-          text: tagTextForSection(completed=(applicationValue(["completed", "personalStatement"]) | length > 0),apply2=apply2)
+          classes: tagClassesForSection(completed=applicationValue(["completed", "personalStatement"]),apply2=apply2),
+          text: tagTextForSection(completed=(applicationValue(["completed", "personalStatement"])),apply2=apply2)
         }
       }, {
         text: "Your suitability to teach a subject or age group",
         href: applicationPath + "/subject-knowledge" + ("/review" if applicationValue(["subjectKnowledge"]) | length > 0),
         id: "subject-knowledge",
         tag: {
-          classes: tagClassesForSection(completed=(applicationValue(["completed", "subjectKnowledge"]) | length > 0),apply2=apply2),
-          text: tagTextForSection(completed=(applicationValue(["completed", "subjectKnowledge"]) | length > 0),apply2=apply2)
+          classes: tagClassesForSection(completed=(applicationValue(["completed", "subjectKnowledge"])),apply2=apply2),
+          text: tagTextForSection(completed=(applicationValue(["completed", "subjectKnowledge"])),apply2=apply2)
         }
       }]
     }) }}

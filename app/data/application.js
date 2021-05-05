@@ -12,7 +12,13 @@ module.exports = {
     additionalSupport: 'true',
     safeguarding: 'true',
     subjectKnowledge: 'true',
-    interviewNeeds: 'true'
+    interviewNeeds: 'true',
+    english: 'true',
+    science: 'true',
+    maths: 'true',
+    degree: 'true',
+    otherQualifications: 'true',
+    personalStatement: 'true'
   },
   account: {
     email: 'janina.doe@example.com'

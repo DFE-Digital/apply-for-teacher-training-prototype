@@ -24,7 +24,7 @@
     "cookie-parser": "^1.4.5",
     "cross-spawn": "^7.0.3",
     "del": "^6.0.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-writer": "^0.0.4",

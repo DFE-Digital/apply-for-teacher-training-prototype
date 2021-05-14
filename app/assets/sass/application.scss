@@ -1,6 +1,7 @@
 // GOV.UK Frontend settings
 $govuk-assets-path: "/govuk/assets/";
 $govuk-global-styles: true;
+$govuk-new-link-styles: true;
 
 // Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";

@@ -33,6 +33,21 @@ $govuk-new-link-styles: true;
   word-wrap: break-word;
 }
 
+// Disable underline skipping of descenders. This is currently
+// only implemented by Safari, which also has a bug causing the
+// underline breaks to be too wide, particularly with the thicker
+// underlines that are now used on hover.
+//
+// This feature will possibly be deprecated in favour of a
+// simpler text-decoration-skip-ink: auto|none|all feature.
+//
+// If Safari fixes its bug, this could be deleted. Chrome is unaffected
+// as it is currently drawing its underline slightly further down (another
+// bug?) so isn’t skipping any descenders anyway.
+* {
+  text-decoration-skip: none;
+}
+
 // Override GOV.UK Frontend print styles
 @media print {
   .govuk-template {

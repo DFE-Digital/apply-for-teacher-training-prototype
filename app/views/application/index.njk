@@ -32,7 +32,14 @@
   {% endif %}
 {% endmacro %}
 
-{% if apply2 %}
+{% set hasPreviousApplications = false %}
+{% for a in data.applications | toArray %}
+  {% if a.status == 'submitted' %}
+    {% set hasPreviousApplications = true %}
+  {% endif %}
+{% endfor %}
+
+{% if hasPreviousApplications %}
   {% set title = "Your new application" %}
 {% else %}
   {% set title = "Your application" %}
@@ -57,7 +64,15 @@
   <p class="govuk-hint govuk-!-margin-bottom-8">Last saved on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}</p>
 {% endblock %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/dashboard"
+  }) }}
+{% endblock %}
+
 {% block primary %}
+
   {% if apply2 %}
     {% set previousApplicationSummaryHtml %}
 

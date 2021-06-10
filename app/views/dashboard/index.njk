@@ -5,7 +5,7 @@
 {% if choices | length > 1  %}
   {% set title = "Your applications" %}
 {% else %}
-  {% set title = "Your application" %}
+  {% set title = "Your applications" %}
 {% endif %}
 
 {% set hasSecondary = true %}
@@ -34,7 +34,8 @@
     {% include "dashboard/_guidance.njk" %}
   {% endif %}
 
-  {% include "dashboard/_course-choices.njk" %}
+  {% include "dashboard/_unsubmitted.njk" %}
+  {% include "dashboard/_pending_applications.njk" %}
 
   <h2 class="govuk-heading-m">Updating your contact information</h2>
   <p class="govuk-body">To update your contact information, email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>

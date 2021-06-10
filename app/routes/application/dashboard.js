@@ -3,6 +3,7 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   router.get('/dashboard/:applicationId/:applicationStatus?', (req, res) => {
+
     const { applicationId, applicationStatus } = req.params
     const { confirmation } = req.query
 
@@ -12,10 +13,20 @@ module.exports = router => {
       req.session.data = utils.defaultSessionData()
     }
 
-    const application = utils.applicationData(req)
-    const choices = application.choices
+    const application = utils.applicationData(req) || {}
+    const choices = application.choices || {}
 
     switch (applicationStatus) {
+
+      // One submitted, one in draft
+      case 'one-submitted-one-in-draft':
+        req.session.data.applications["45678"] = JSON.parse(JSON.stringify(require('../../data/application-single-choice')))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["AB12C"] = JSON.parse(JSON.stringify(require('../../data/application-single-choice')))
+        req.session.data.applications.AB12C.status = 'started'
+        break
+
       // Single course states
       case 'awaiting-provider-decision':
         choices.ABCDE.status = 'Awaiting decision'
@@ -407,41 +418,7 @@ module.exports = router => {
         break
     }
 
-    // TODO: refactor these counts
-    const numberOfOffersReceived = utils.toArray(application.choices).filter(function (choice) {
-      return choice.status === 'Offer received'
-    }).length
 
-    const numberOfOffersDeclined = utils.toArray(application.choices).filter(function (choice) {
-      return choice.status === 'Offer declined'
-    }).length
-
-    const numberOfApplicationsWithdrawn = utils.toArray(application.choices).filter(function (choice) {
-      return choice.status === 'Application withdrawn'
-    }).length
-
-    const numberOfChoicesAwaitingDecision = utils.toArray(application.choices).filter(function (choice) {
-      return choice.status === 'Awaiting decision'
-    }).length
-
-    const courseOfferAccepted = utils.toArray(application.choices).filter(function (choice) {
-      return (choice.status === 'Offer accepted') || (choice.status === 'Offer confirmed') || (choice.status === 'Offer deferred')
-    }).length > 0
-
-    const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
-
-    const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
-
-    res.render('dashboard/index', {
-      applicationId,
-      application,
-      canMakeDecision,
-      numberOfOffersReceived,
-      numberOfOffersDeclined,
-      endedWithoutSuccess,
-      numberOfApplicationsWithdrawn,
-      numberOfChoicesAwaitingDecision,
-      confirmation
-    })
+    res.redirect('/dashboard')
   })
 }

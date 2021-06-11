@@ -96,12 +96,13 @@ module.exports = router => {
 
   // Generate apply2 application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
-    const code = 12346
+    const code = utils.generateRandomString()
     const { applications } = req.session.data
     const existingApplicationId = req.params.applicationId
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
+    apply2Application.status = 'started'
     apply2Application.welcomeFlow = false
     apply2Application.apply2 = true
     apply2Application.choices = {}

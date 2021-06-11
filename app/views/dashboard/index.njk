@@ -1,21 +1,13 @@
 {% extends "_content.njk" %}
 
-{% set choices = application.choices | toArray %}
-
-{% if choices | length > 1  %}
+{% if totalNumberOfChoices() > 1  %}
   {% set title = "Your applications" %}
 {% else %}
-  {% set title = "Your applications" %}
+  {% set title = "Your application" %}
 {% endif %}
 
 {% set hasSecondary = true %}
 {% set applicationPath = "/application/" + applicationId %}
-
-{% if applicationStatus %}
-  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
-{% else %}
-  {% set referrer = "/dashboard/" + applicationId %}
-{% endif %}
 
 {% block beforePrimary %}
 {% if confirmation == "true" %}
@@ -25,7 +17,6 @@
 {% endblock %}
 
 {% block primary %}
-
   {% if canMakeDecision == true %}
     {% include "dashboard/_respond-to-offer.njk" %}
   {% elif endedWithoutSuccess == true %}
@@ -34,7 +25,14 @@
     {% include "dashboard/_guidance.njk" %}
   {% endif %}
 
-  {% include "dashboard/_unsubmitted.njk" %}
+  {% if hasDraftApplication() == false and numberOfPendingChoices() < 3 %}
+    {% include "dashboard/_apply-for-another-course.njk" %}
+  {% endif %}
+
+  {% if hasDraftApplication() %}
+    {% include "dashboard/_unsubmitted.njk" %}
+  {% endif %}
+
   {% include "dashboard/_pending_applications.njk" %}
 
   <h2 class="govuk-heading-m">Updating your contact information</h2>

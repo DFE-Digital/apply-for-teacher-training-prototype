@@ -1,6 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set choices = applicationValue("choices") | toArray %}
+{% set choicesRemaining = 3 - numberOfPendingChoices() %}
 
 {% set count = choices.length %}
 {% set provider = providers[choices[count - 1].providerCode] %}
@@ -14,10 +15,10 @@
   }) }}
 {% endblock %}
 
-{% if count == 1 %}
-  {% set title = "You can choose 2 more courses" %}
-{% else %}
+{% if choicesRemaining == 1 %}
   {% set title = "You can choose 1 more course" %}
+{% else %}
+  {% set title = "You can choose " + choicesRemaining + " more courses" %}
 {% endif %}
 
 {% set formaction = paths.current %}
@@ -28,7 +29,8 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-!-margin-bottom-7">After you submit your application you can’t apply for more courses through this service.</p>
+
+{{ data.applications[applicationId].courses | dump }}
 
   {{ govukRadios({
     name: 'add-another-course',

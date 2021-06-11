@@ -1,0 +1,23 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set applyAgainHtml %}
+  {% set choicesAllowed = 3 - numberOfPendingChoices() %}
+  <p class="govuk-body">You can apply for
+    {% if choicesAllowed == 1 %}
+      1 other course.
+    {% else %}
+      up to {{ choicesAllowed }} other courses.
+    {% endif %}
+  </p>
+
+  {{ govukButton({
+    text: "Apply for another course",
+    href: "/application/" + "45678" + "/apply2",
+    classes: "govuk-button--secondary"
+  }) }}
+{% endset %}
+
+{{ govukInsetText({
+  html: applyAgainHtml,
+  classes: "govuk-!-margin-top-0"
+}) }}

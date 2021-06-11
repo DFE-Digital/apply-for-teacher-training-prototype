@@ -2,7 +2,7 @@ const { DateTime } = require('luxon')
 const utils = require('./../../utils')
 
 module.exports = router => {
-  router.get('/dashboard/:applicationId/:applicationStatus?', (req, res) => {
+  router.get('/admin/state/:applicationStatus?', (req, res) => {
 
     const { applicationId, applicationStatus } = req.params
     const { confirmation } = req.query
@@ -14,26 +14,34 @@ module.exports = router => {
     }
 
     const application = utils.applicationData(req) || {}
-    const choices = application.choices || {}
+    // const choices = application.choices || {}
 
     switch (applicationStatus) {
 
       // One submitted, one in draft
       case 'one-submitted-one-in-draft':
-        req.session.data.applications["45678"] = JSON.parse(JSON.stringify(require('../../data/application-single-choice')))
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
         req.session.data.applications["45678"].status = 'submitted'
 
-        req.session.data.applications["AB12C"] = JSON.parse(JSON.stringify(require('../../data/application-single-choice')))
+        req.session.data.applications["AB12C"] = utils.copyObject(require('../../data/application-single-choice'))
         req.session.data.applications.AB12C.status = 'started'
+        req.session.data.applications.AB12C.choices = {}
+        req.session.data.applications.AB12C.completed.choices = false
         break
 
       // Single course states
       case 'awaiting-provider-decision':
+
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+
+        req.session.data.applications["45678"].status = 'submitted'
+        const choices = req.session.data.applications["45678"].choices
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = false
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         break
+
       case 'future-interview':
         choices.ABCDE.status = 'Awaiting decision'
         choices.ABCDE.interview = [{

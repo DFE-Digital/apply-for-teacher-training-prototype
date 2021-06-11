@@ -121,6 +121,44 @@ module.exports = (nunjucksAppEnv, app) => {
       return utils.hasPrimaryChoices(req)
     })
 
+    // Returns true if there is an application in the unsubmitted state
+    nunjucksAppEnv.addGlobal('hasDraftApplication', () => {
+      return Boolean(utils.toArray(req.session.data.applications)
+        .find(application => application.status == 'started'))
+    })
+
+    // Returns number of courses that have ever been applied to, regardless of state
+    nunjucksAppEnv.addGlobal('totalNumberOfChoices', () => {
+      let numberOfChoices = 0
+
+      for (application of utils.toArray(req.session.data.applications)) {
+        numberOfChoices += utils.toArray(application.choices)
+      }
+
+      return numberOfChoices
+    })
+
+
+    // Returns the number of courses to which the candidate has a pending application
+    // (submitted and still waiting on an outcome)
+    nunjucksAppEnv.addGlobal('numberOfPendingChoices', () => {
+      let numberOfPendingChoices = 0
+      for (application of utils.toArray(req.session.data.applications)) {
+        for (choice of utils.toArray(application.choices)) {
+          if (application.status == 'submitted' &&
+            (choice.status == 'Awaiting decision' || choice.status == 'Offer received' )
+          ) {
+            numberOfPendingChoices += 1
+          }
+        }
+      }
+
+      return numberOfPendingChoices
+    })
+
+
+
+
     next()
   })
 }

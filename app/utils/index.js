@@ -19,6 +19,11 @@ const applicationData = (req) => {
   return req.session.data.applications[applicationId]
 }
 
+// Returns a copy of an object (instead of referencing it)
+const copyObject = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 const capitaliseFirstLetter = str => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
@@ -199,5 +204,6 @@ module.exports = {
   hasSubmittedApplications,
   hasStartedApplications,
   toArray,
-  defaultSessionData
+  defaultSessionData,
+  copyObject
 }

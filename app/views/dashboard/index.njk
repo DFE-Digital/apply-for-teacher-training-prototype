@@ -19,14 +19,13 @@
 {% block primary %}
   {% if canMakeDecision == true %}
     {% include "dashboard/_respond-to-offer.njk" %}
-  {% elif endedWithoutSuccess == true %}
+  {% elif numberOfPendingChoices() == 0 and not acceptedChoice()  %}
     {% include "dashboard/_apply-again.njk" %}
+  {% elif hasDraftApplication() == false and numberOfPendingChoices() < 3 %}
+    {% include "dashboard/_guidance.njk" %}
+    {% include "dashboard/_apply-for-another-course.njk" %}
   {% else %}
     {% include "dashboard/_guidance.njk" %}
-  {% endif %}
-
-  {% if hasDraftApplication() == false and numberOfPendingChoices() < 3 %}
-    {% include "dashboard/_apply-for-another-course.njk" %}
   {% endif %}
 
   {% if hasDraftApplication() %}

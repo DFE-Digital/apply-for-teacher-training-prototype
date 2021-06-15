@@ -138,6 +138,22 @@ module.exports = (nunjucksAppEnv, app) => {
       return numberOfChoices
     })
 
+    // Returns the accepted offer if there is one, regardless of whether
+    // there are conditions that need to be met, or if the offer has been deferred
+    nunjucksAppEnv.addGlobal('acceptedChoice', () => {
+      let acceptedChoice = null
+
+      for (application of utils.toArray(req.session.data.applications)) {
+        for (choice of utils.toArray(application.choices)) {
+          if (choice.status == 'Offer accepted' || choice.status == 'Offer deferred' || choice.status == 'Offer confirmed') {
+            acceptedChoice = choice
+          }
+        }
+      }
+
+      return acceptedChoice
+    })
+
 
     // Returns the number of courses to which the candidate has a pending application
     // (submitted and still waiting on an outcome)

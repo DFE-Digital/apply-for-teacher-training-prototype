@@ -380,24 +380,29 @@ module.exports = router => {
 
       // Qualifications feedback
       case 'ended-without-success-qualifications-feedback':
-        application.gcse.maths.gradeSingle = 'D'
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.feedback = {
+
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+
+        req.session.data.applications.Z12S3.gcse.maths.gradeSingle = 'D'
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ABCDE.feedback = {
           qualifications: {
             noMathsGCSEOrEquivalent: true
           }
         }
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           qualifications: {
             noMathsGCSEOrEquivalent: true,
             other: 'Our minimum degree requirement is a 2:1. We cannot accepted degrees with a 2:2 or below.'
           },
           additionalFeedback: 'There have been limited places for this course and stronger applications received.'
         }
-        choices.ZYXWV.status = 'Unsuccessful'
-        choices.ZYXWV.interview = null
-        choices.ZYXWV.feedback = {
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ZYXWV.interview = null
+        req.session.data.applications.Z12S3.choices.ZYXWV.feedback = {
           qualifications: {
             noMathsGCSEOrEquivalent: true,
             other: 'Thank you for your application. Unfortunately you do not meet our entry requirements in terms of subject knowledge. As your degree is not in English you would need A Levels of grade C or above in English Language and English Literature.'

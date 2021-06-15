@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% if totalNumberOfChoices() > 1  %}
+{% if totalNumberOfChoices() > 1 or (data.applications | length) > 1  %}
   {% set title = "Your applications" %}
 {% else %}
   {% set title = "Your application" %}

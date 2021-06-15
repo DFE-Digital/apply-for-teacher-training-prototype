@@ -11,7 +11,6 @@ function createNewApplication (req) {
   if (typeof data.applications[code] === 'undefined') {
     data.applications[code] = {
       status: 'started',
-      apply2: false,
       completed: {},
       choices: {},
       references: {},
@@ -94,44 +93,43 @@ module.exports = router => {
     res.render('application/before-you-start', { showCopiedBanner: req.query.copied })
   })
 
-  // Generate apply2 application from an existing one
+  // Generate another application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = utils.generateRandomString()
     const { applications } = req.session.data
     const existingApplicationId = req.params.applicationId
     const existingApplication = applications[existingApplicationId]
-    const apply2Application = JSON.parse(JSON.stringify(existingApplication))
+    const copiedApplication = JSON.parse(JSON.stringify(existingApplication))
 
-    apply2Application.status = 'started'
-    apply2Application.welcomeFlow = false
-    apply2Application.apply2 = true
-    apply2Application.choices = {}
-    apply2Application.completed.choices = false
-    apply2Application.previousApplications = [existingApplicationId]
+    copiedApplication.status = 'started'
+    copiedApplication.welcomeFlow = false
+    copiedApplication.choices = {}
+    copiedApplication.completed.choices = false
+    copiedApplication.previousApplications = [existingApplicationId]
 
     for (const choice of utils.toArray(existingApplication.choices)) {
       if (choice?.feedback?.qualityOfApplication?.personalStatement) {
-        apply2Application.completed.personalStatement = false
+        copiedApplication.completed.personalStatement = false
       }
 
       if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
-        apply2Application.completed.subjectKnowledge = false
+        copiedApplication.completed.subjectKnowledge = false
       }
 
       if (choice?.feedback?.qualifications?.noMathsGCSEOrEquivalent) {
-        apply2Application.completed.maths = false
+        copiedApplication.completed.maths = false
       }
     }
 
-    if (apply2Application.references && apply2Application.references[0]) {
-      apply2Application.references[0].status = 'Received'
+    if (copiedApplication.references && copiedApplication.references[0]) {
+      copiedApplication.references[0].status = 'Received'
     }
 
-    if (apply2Application.references && apply2Application.references[1]) {
-      apply2Application.references[1].status = 'Received'
+    if (copiedApplication.references && copiedApplication.references[1]) {
+      copiedApplication.references[1].status = 'Received'
     }
 
-    applications[code] = apply2Application
+    applications[code] = copiedApplication
 
     res.redirect(`/application/${code}?copied=true`)
   })

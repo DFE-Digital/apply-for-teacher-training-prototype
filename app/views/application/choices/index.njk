@@ -76,7 +76,7 @@
       },
       hint: {
         text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
-      } if not applicationValue(["apply2"]) and choicesRemaining != 0,
+      } if choicesRemaining != 0,
       items: [{
         value: "true",
         text: "Yes, I’ve completed this section"

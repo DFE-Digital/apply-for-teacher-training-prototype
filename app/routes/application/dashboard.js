@@ -18,6 +18,13 @@ module.exports = router => {
 
     switch (applicationStatus) {
 
+      // Started but unsubmitted
+      case 'started':
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application'))
+        req.session.data.applications["45678"].status = 'started'
+
+        break
+
       // One submitted, one in draft
       case 'one-submitted-one-in-draft':
         req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))

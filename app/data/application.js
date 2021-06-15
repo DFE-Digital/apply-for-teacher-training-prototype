@@ -1,5 +1,5 @@
 module.exports = {
-  status: 'xstarted',
+  status: 'started',
   welcomeFlow: false,
   ended_without_success: false,
   completed: {

@@ -172,7 +172,6 @@ module.exports = router => {
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)
-  require('./application/dashboard')(router)
   require('./application/decision')(router)
 
   // Render provided view, or index template for that view if not found

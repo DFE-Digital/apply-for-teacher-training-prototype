@@ -4,7 +4,7 @@
 {% set formaction = applicationPath %}
 {% set choices = applicationValue("choices") | toArray %}
 
-{% set choicesRemaining = 3 - numberOfPendingChoices() %}
+{% set choicesRemaining = 3 - (numberOfPendingChoices() + (choices | length))  %}
 {% if choicesRemaining >= 1 %}
   {% set title = "Course choices" %}
 {% else %}
@@ -42,7 +42,7 @@
   {% endset %}
 
   {% if choices %}
-    {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
+    {% if (choices | length > 0) and choicesRemaining != 0 %}
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another course",
@@ -56,7 +56,7 @@
     {% include "_includes/review/choices.njk" %}
   {% endif %}
 
-  {% if not choices or choicesCount == 0 %}
+  {% if (choices | length) == 0 %}
     {{ guidance | safe }}
 
     {{ govukButton({

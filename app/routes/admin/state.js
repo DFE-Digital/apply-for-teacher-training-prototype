@@ -322,23 +322,27 @@ module.exports = router => {
 
       // Actionable feedback
       case 'ended-without-success':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.feedback = {
+
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ABCDE.feedback = {
           qualityOfApplication: {
             personalStatement: 'Contained several spelling mistakes and grammatical errors.\n\nThe candidate should describe the impact they want to have on their students in more detail.',
             other: 'Candidate was not able to demonstrate sufficient experience of working with children.'
           }
         }
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           qualityOfApplication: {
             personalStatement: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
           },
           additionalFeedback: 'It would also strengthen your application if you could get more experience of working within a primary school. '
         }
-        choices.ZYXWV.status = 'Unsuccessful'
-        choices.ZYXWV.interview = null
-        choices.ZYXWV.feedback = {
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ZYXWV.interview = null
+        req.session.data.applications.Z12S3.choices.ZYXWV.feedback = {
           qualityOfApplication: {
             personalStatement: 'Focus more on why teaching is the career for you.',
             subjectKnowledge: 'Look at ways to evidence subject knowledge within your application or supporting statement.'

@@ -10,11 +10,12 @@
     {% endif %}
   </p>
 
-  {{ govukButton({
-    text: "Apply for another course",
-    href: "/application/" + "45678" + "/apply2",
-    classes: "govuk-button--secondary"
-  }) }}
+  <form action="/application/apply-again" method="POST">
+    {{ govukButton({
+      text: "Apply for another course",
+      classes: "govuk-button--secondary"
+    }) }}
+  </form>
 {% endset %}
 
 {{ govukInsetText({

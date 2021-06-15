@@ -10,7 +10,7 @@
 {% set referrer = applicationPath %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
 
-{% set apply2 = applicationValue("apply2") %}
+{% set apply2 = applicationValue("copiedFromApplicationId") %}
 
 {% macro tagClassesForSection(completed=false, apply2=false) %}
   {% if completed == "true" %}

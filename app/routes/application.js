@@ -78,38 +78,35 @@ module.exports = router => {
     }
   })
 
-  // Render application page
-  router.all('/application/:applicationId', (req, res) => {
-    const showCopiedBanner = req.query.copied
-    req.session.data.applications[req.params.applicationId].welcomeFlow = false
-    res.render('application/index', {
-      showCopiedBanner,
-      closed: req.query.closed
-    })
-  })
-
   // Render before you start page
   router.all('/application/:applicationId/before-you-start', (req, res) => {
     res.render('application/before-you-start', { showCopiedBanner: req.query.copied })
   })
 
   // Generate another application from an existing one
-  router.get('/application/:applicationId/apply2', (req, res) => {
+  router.post('/application/apply-again', (req, res) => {
     const code = utils.generateRandomString()
     const { applications } = req.session.data
-    const existingApplicationId = req.params.applicationId
-    const existingApplication = applications[existingApplicationId]
+
+    // Copies a previous application
+    // TODO: this should copy the most-recent application by submission data
+    const existingApplicationId = Object.keys(req.session.data.applications)[0]
+
+    const existingApplication = req.session.data.applications[existingApplicationId]
+
     const copiedApplication = JSON.parse(JSON.stringify(existingApplication))
 
     copiedApplication.status = 'started'
     copiedApplication.welcomeFlow = false
     copiedApplication.choices = {}
     copiedApplication.completed.choices = false
-    copiedApplication.previousApplications = [existingApplicationId]
+    copiedApplication.copiedFromApplicationId = existingApplicationId
 
     for (const choice of utils.toArray(existingApplication.choices)) {
       if (choice?.feedback?.qualityOfApplication?.personalStatement) {
         copiedApplication.completed.personalStatement = false
+
+
       }
 
       if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
@@ -143,6 +140,24 @@ module.exports = router => {
       referrer,
       choiceId
     })
+  })
+
+  // Render application page
+  router.all('/application/:applicationId', (req, res) => {
+    const showCopiedBanner = req.query.copied
+
+    const application = req.session.data.applications[req.params.applicationId]
+
+    if (application) {
+      application.welcomeFlow = false
+      res.render('application/index', {
+        showCopiedBanner,
+        closed: req.query.closed
+        })
+    } else {
+      res.redirect('/dashboard')
+    }
+
   })
 
   // Render submitted page

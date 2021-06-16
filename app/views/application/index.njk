@@ -101,7 +101,7 @@
       {% if closed == "true" %}
         <p class="govuk-body">You can apply for courses from 13 October.</p>
       {% else %}
-        {% set choicesAllowed = 3 - numberOfPendingChoices() %}
+        {% set choicesAllowed = 3 - (pendingChoices() | length) %}
         <p class="govuk-body">You can apply for
           {% if choicesAllowed == 1 %}
             1 course.

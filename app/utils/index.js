@@ -152,6 +152,11 @@ const submittedChoices = (req) => {
   return allChoices(req).filter(function(choice) { return choice.status })
 }
 
+// Unsubmitted choices attached to a draft application
+const unsubmittedChoices = (req) => {
+  return allChoices(req).filter(function(choice) { return !choice.status })
+}
+
 // All choices regardless of state
 const allChoices = (req) => {
   let choices = []
@@ -244,6 +249,7 @@ module.exports = {
   copyObject,
   allChoices,
   submittedChoices,
+  unsubmittedChoices,
   pendingChoices,
   choicesAwaitingProviderDecision,
   acceptedChoice

@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set choices = applicationValue("choices") | toArray %}
-{% set choicesRemaining = 3 - (pendingChoices() | length) %}
+{% set choicesRemaining = 3 - ((pendingChoices() | length) + (choices | length)) %}
 
 {% set count = choices.length %}
 {% set provider = providers[choices[count - 1].providerCode] %}
@@ -24,13 +24,13 @@
 {% set formaction = paths.current %}
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/" + applicationId + "/choices"
   }) }}
 {% endblock %}
 
 {% block primary %}
 
-{{ data.applications[applicationId].courses | dump }}
+  {{ pendingChoices() | dump }}
 
   {{ govukRadios({
     name: 'add-another-course',

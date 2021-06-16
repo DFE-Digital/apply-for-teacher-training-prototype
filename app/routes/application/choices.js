@@ -129,9 +129,11 @@ module.exports = router => {
 
     const application = utils.applicationData(req)
     const count = Object.keys(application.choices).length
+
+    const remainingChoices = 3 - ((utils.pendingChoices(req).length) + (utils.unsubmittedChoices(req).length))
     const paths = pickPaths(req)
 
-    if (count === 3 || req.body['add-another-course'] === 'no') {
+    if (remainingChoices == 0 || req.body['add-another-course'] === 'no') {
       res.redirect(req.params.referrer || paths.next)
     } else {
       res.render('application/choices/another', {

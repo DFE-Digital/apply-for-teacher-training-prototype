@@ -93,28 +93,23 @@
   {% endif %}
 
   <section class="govuk-!-margin-bottom-8">
-    {% if copiedFromApplicationId %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Course</h2>
-      <p class="govuk-body">You can apply to 1 course at a time at this stage of your application.</p>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+    {% if closed == "true" %}
+      <p class="govuk-body">You can apply for courses from 13 October.</p>
     {% else %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-      {% if closed == "true" %}
-        <p class="govuk-body">You can apply for courses from 13 October.</p>
-      {% else %}
-        {% set choicesAllowed = 3 - (pendingChoices() | length) %}
-        <p class="govuk-body">You can apply for
-          {% if choicesAllowed == 1 %}
-            1 course.
-          {% else %}
-            up to {{ choicesAllowed }} courses.
-          {% endif %}
-        </p>
-      {% endif %}
+      {% set choicesAllowed = 3 - (pendingChoices() | length) %}
+      <p class="govuk-body">You can apply for
+        {% if choicesAllowed == 1 %}
+          1 course.
+        {% else %}
+          up to {{ choicesAllowed }} courses.
+        {% endif %}
+      </p>
     {% endif %}
 
     {{ appTaskList({
       items: [{
-        text: "Choose your course" if copiedFromApplicationId else "Choose your courses",
+        text: "Choose your course" if choicesAllowed == 1 else "Choose your courses",
         href: applicationPath + "/choices",
         id: "personal-information",
         tag: {

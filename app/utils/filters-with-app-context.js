@@ -192,6 +192,11 @@ module.exports = (nunjucksAppEnv, app) => {
       return utils.submittedChoices(req)
     })
 
+    // Returns all unsubmitted choices on draft applications
+    nunjucksAppEnv.addGlobal('submittedChoices', () => {
+      return utils.submittedChoices(req)
+    })
+
     next()
   })
 }

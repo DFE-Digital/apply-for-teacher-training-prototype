@@ -4,7 +4,7 @@
 {% set formaction = applicationPath %}
 {% set choices = applicationValue("choices") | toArray %}
 
-{% set choicesRemaining = 3 - (numberOfPendingChoices() + (choices | length))  %}
+{% set choicesRemaining = 3 - ((pendingChoices() | length) + (choices | length))  %}
 {% if choicesRemaining >= 1 %}
   {% set title = "Course choices" %}
 {% else %}

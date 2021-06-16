@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set choices = applicationValue("choices") | toArray %}
-{% set choicesRemaining = 3 - numberOfPendingChoices() %}
+{% set choicesRemaining = 3 - (pendingChoices() | length) %}
 
 {% set count = choices.length %}
 {% set provider = providers[choices[count - 1].providerCode] %}

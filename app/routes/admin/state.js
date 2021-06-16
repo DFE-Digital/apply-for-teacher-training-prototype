@@ -29,6 +29,7 @@ module.exports = router => {
       case 'one-submitted-one-in-draft':
         req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
         req.session.data.applications["45678"].status = 'submitted'
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Awaiting decision'
 
         req.session.data.applications["AB12C"] = utils.copyObject(require('../../data/application-single-choice'))
         req.session.data.applications.AB12C.status = 'started'
@@ -50,31 +51,43 @@ module.exports = router => {
         break
 
       case 'future-interview':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = [{
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications["45678"].choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).plus({ days: 7 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
-        choices.ABCDE.feedback = null
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'post-interview':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = [{
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications["45678"].choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).minus({ days: 2 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
-        choices.ABCDE.feedback = null
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'offer-received':
-        choices.ABCDE.status = 'Offer received'
-        choices.ABCDE.interview = null
-        choices.ABCDE.feedback = null
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer received'
+        req.session.data.applications["45678"].choices.ABCDE.interview = null
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -83,69 +96,96 @@ module.exports = router => {
           'Return completed and signed Fee Status Declaration.'
         ]
         break
+
       case 'offer-received-different-course':
-        choices.ABCDE.status = 'Offer received'
-        choices.ABCDE.offeredCourseId = '3C2X'
-        choices.ABCDE.interview = null
-        choices.ABCDE.feedback = null
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer received'
+        req.session.data.applications["45678"].choices.ABCDE.offeredCourseId = '3C2X'
+        req.session.data.applications["45678"].choices.ABCDE.interview = null
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
         break
+
       case 'offer-received-different-provider':
-        choices.ABCDE.status = 'Offer received'
-        choices.ABCDE.offeredCourseId = 'X100'
-        choices.ABCDE.offeredProviderId = 'S31'
-        choices.ABCDE.interview = null
-        choices.ABCDE.feedback = null
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer received'
+        req.session.data.applications["45678"].choices.ABCDE.offeredCourseId = 'X100'
+        req.session.data.applications["45678"].choices.ABCDE.offeredProviderId = 'S31'
+        req.session.data.applications["45678"].choices.ABCDE.interview = null
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
         break
 
       case 'unsuccessful-with-feedback':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.hasFeedback = true
-        choices.ABCDE.feedback = {
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications["45678"].choices.ABCDE.hasFeedback = true
+        req.session.data.applications["45678"].choices.ABCDE.feedback = {
           behaviour: {
             didNotReplyToMessages: true
           },
           qualityOfApplication: {
-            subject_knowledge: 'Understand the purpose of primary education and then learn more about the procedures related to safeguarding.'
+            subjectKnowledge: 'Understand the purpose of primary education and then learn more about the procedures related to safeguarding.'
           },
           qualifications: {
             degree_does_not_meet_requirements: true
           }
         }
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'unsuccessful-course-full':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.hasFeedback = true
-        choices.ABCDE.feedback = {
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications["45678"].choices.ABCDE.hasFeedback = true
+        req.session.data.applications["45678"].choices.ABCDE.feedback = {
           course_full: true
         }
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'unsuccessful-provider-did-not-respond':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.hasFeedback = true
-        choices.ABCDE.rejectedByDefault = true
-        choices.ABCDE.feedback = null
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications["45678"].choices.ABCDE.hasFeedback = true
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = true
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
         break
+
       case 'withdrawn':
-        choices.ABCDE.status = 'Application withdrawn'
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.feedback = null
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Application withdrawn'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
         break
+
       case 'offer-withdrawn':
-        choices.ABCDE.status = 'Offer withdrawn'
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.feedback = {
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer withdrawn'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.feedback = {
           behaviour: {
             didNotReplyToMessages: true,
             other: 'You did not send us the required form with additional information.',
@@ -155,10 +195,13 @@ module.exports = router => {
         break
 
       case 'accepted':
-        choices.ABCDE.status = 'Offer accepted'
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.feedback = null
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer accepted'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.feedback = null
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -167,14 +210,22 @@ module.exports = router => {
           'Return completed and signed Fee Status Declaration.'
         ]
         break
+
       case 'declined':
-        choices.ABCDE.status = 'Offer declined'
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer declined'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'deferred':
-        choices.ABCDE.status = 'Offer deferred'
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer deferred'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -183,14 +234,22 @@ module.exports = router => {
           'Return completed and signed Fee Status Declaration.'
         ]
         break
+
       case 'did-not-respond-to-offer':
-        choices.ABCDE.status = 'Offer declined'
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer declined'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
+
       case 'conditions-not-met':
-        choices.ABCDE.status = 'Conditions not met'
-        choices.ABCDE.rejectedByDefault = false
-        choices.ABCDE.conditions = [
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Conditions not met'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"].choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -200,50 +259,62 @@ module.exports = router => {
         ]
         break
       case 'recruited-single':
-        choices.ABCDE.status = 'Offer confirmed'
-        choices.ABCDE.rejectedByDefault = false
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Offer confirmed'
+        req.session.data.applications["45678"].choices.ABCDE.rejectedByDefault = false
         break
 
       // Multiple courses applied for
       case 'awaiting-all-provider-decisions':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = false
-        choices.FGHIJ.status = 'Awaiting decision'
-        choices.FGHIJ.interview = false
-        choices.ZYXWV.status = 'Awaiting decision'
-        choices.ZYXWV.interview = false
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application'))
+        req.session.data.applications["45678"].status = 'submitted'
+
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications["45678"].choices.ABCDE.interview = false
+        req.session.data.applications["45678"].choices.FGHIJ.status = 'Awaiting decision'
+        req.session.data.applications["45678"].choices.FGHIJ.interview = false
+        req.session.data.applications["45678"].choices.ZYXWV.status = 'Awaiting decision'
+        req.session.data.applications["45678"].choices.ZYXWV.interview = false
         break
 
       case 'interviewing':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = [{
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3.choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).plus({ days: 7 }),
           providerName: 'University of Leeds',
           address: 'Zoom: <a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a>'
         }]
-        choices.FGHIJ.status = 'Awaiting decision'
-        choices.FGHIJ.interview = [{
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3.choices.FGHIJ.interview = [{
           date: DateTime.local().set({ hour: 14, minute: 30 }).plus({ days: 2 }),
           providerName: 'Leeds Trinity University',
           address: 'Brownberrie Lane, Horsforth, Leeds. LS18 5HD'
         }]
-        choices.ZYXWV.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Awaiting decision'
 
         break
 
       case 'awaiting-one-provider-decision-one-offer':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = [{
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3.choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).minus({ days: 2 }),
           providerName: 'University of Leeds',
           address: 'Zoom: <a href="#">https://zoom.us/https://us02web.zoom.us/j/35346436342?pwd=bk43RStvSnFHK1NQZnVp6D3DFTSJFGNS</a>'
         }]
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           course_full: true
         }
-        choices.ZYXWV.status = 'Offer received'
-        choices.ZYXWV.conditions = [
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Offer received'
+        req.session.data.applications.Z12S3.choices.ZYXWV.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
@@ -251,77 +322,91 @@ module.exports = router => {
         break
 
       case 'awaiting-one-provider-decision-no-offers':
-        choices.ABCDE.status = 'Awaiting decision'
-        choices.ABCDE.interview = [{
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3.choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).plus({ days: 7 }),
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           qualityOfApplication: {
             personalStatement: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
           },
           additionalFeedback: 'It would also strengthen your application if you could get more experience of working within a primary school. '
         }
-        choices.ZYXWV.status = 'Unsuccessful'
-        choices.ZYXWV.interview = null
-        choices.ZYXWV.feedback = {
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ZYXWV.interview = null
+        req.session.data.applications.Z12S3.choices.ZYXWV.feedback = {
           additionalFeedback: 'Thank you for your application. After careful consideration, we have decided not to select you for interview for a place on this highly competitive programme.  We wish you all the best with the other applications you have made.'
         }
         break
 
       case 'received-one-offer':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.interview = false
-        choices.ABCDE.feedback = {
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ABCDE.interview = false
+        req.session.data.applications.Z12S3.choices.ABCDE.feedback = {
           behaviour: {
             didNotReplyToMessages: true
           }
         }
-        choices.FGHIJ.status = 'Application withdrawn'
-        choices.FGHIJ.interview = false
-        choices.ZYXWV.status = 'Offer received'
-        choices.ZYXWV.conditions = [
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Application withdrawn'
+        req.session.data.applications.Z12S3.choices.FGHIJ.interview = false
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Offer received'
+        req.session.data.applications.Z12S3.choices.ZYXWV.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
         break
 
       case 'received-two-offers':
-        choices.ABCDE.status = 'Offer received'
-        choices.ABCDE.interview = [{
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Offer received'
+        req.session.data.applications.Z12S3.choices.ABCDE.interview = [{
           date: DateTime.local().set({ hour: 10, minute: 30 }).minus({ days: 3 }),
           providerName: 'Gorse SCITT',
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
-        choices.ABCDE.conditions = [
+        req.session.data.applications.Z12S3.choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
         ]
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           course_full: true
         }
-        choices.ZYXWV.status = 'Offer received'
-        choices.ZYXWV.interview = false
-        choices.ZYXWV.conditions = [
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Offer received'
+        req.session.data.applications.Z12S3.choices.ZYXWV.interview = false
+        req.session.data.applications.Z12S3.choices.ZYXWV.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
         break
 
       case 'awaiting-candidate-response':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.hasFeedback = true
-        choices.FGHIJ.status = 'Offer received'
-        choices.ZYXWV.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ABCDE.hasFeedback = true
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Offer received'
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Awaiting decision'
         break
 
       // Actionable feedback
       case 'ended-without-success':
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
 
         req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
         req.session.data.applications.Z12S3.status = 'submitted'
@@ -352,24 +437,27 @@ module.exports = router => {
 
       // Vague feedback
       case 'ended-without-success-vague-feedback':
-        choices.ABCDE.status = 'Unsuccessful'
-        choices.ABCDE.feedback = {
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ABCDE.feedback = {
           qualityOfApplication: {
             personalStatement: 'The overall application was weak suggesting that the applicant may not be successful on the course',
             subjectKnowledge: 'Lack of reference regarding the subject.'
           }
         }
-        choices.FGHIJ.status = 'Unsuccessful'
-        choices.FGHIJ.feedback = {
+        req.session.data.applications.Z12S3.choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.FGHIJ.feedback = {
           performanceAtInterview: 'You had not made a sufficiently considered and informed decision to train to teach.',
           qualityOfApplication: {
             personalStatement: 'The quality of communication in the personal statement could be improved.'
           },
           additionalFeedback: 'There have been limited places for this course and stronger applications received.'
         }
-        choices.ZYXWV.status = 'Unsuccessful'
-        choices.ZYXWV.interview = null
-        choices.ZYXWV.feedback = {
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Unsuccessful'
+        req.session.data.applications.Z12S3.choices.ZYXWV.interview = null
+        req.session.data.applications.Z12S3.choices.ZYXWV.feedback = {
           qualityOfApplication: {
             personalStatement: 'Focus more on why teaching is the career for you.',
             subjectKnowledge: 'Academic record does not look strong enough to cope with the PGCE that is mandatory this year, on top of heavy planning and teaching workload.'
@@ -380,10 +468,8 @@ module.exports = router => {
 
       // Qualifications feedback
       case 'ended-without-success-qualifications-feedback':
-
         req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
         req.session.data.applications.Z12S3.status = 'submitted'
-
 
         req.session.data.applications.Z12S3.gcse.maths.gradeSingle = 'D'
         req.session.data.applications.Z12S3.choices.ABCDE.status = 'Unsuccessful'
@@ -411,34 +497,58 @@ module.exports = router => {
         break
 
       case 'pending-conditions':
-        choices.ABCDE.status = 'Offer accepted'
-        choices.ABCDE.conditions = [
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Offer accepted'
+        req.session.data.applications.Z12S3.choices.ABCDE.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
-        application.choices = [choices.ABCDE]
+        req.session.data.applications.Z12S3.choices = [req.session.data.applications.Z12S3.choices.ABCDE]
         break
 
       case 'offer-deferred':
-        choices.ZYXWV.status = 'Offer deferred'
-        choices.ZYXWV.conditions = [
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Offer deferred'
+        req.session.data.applications.Z12S3.choices.ZYXWV.conditions = [
           'Fitness to Teach check',
           'Disclosure and barring service check'
         ]
-        application.choices = [choices.ZYXWV]
+        req.session.data.applications.Z12S3.choices = [req.session.data.applications.Z12S3.choices.ZYXWV]
 
         break
 
       case 'recruited':
-        choices.ZYXWV.status = 'Offer confirmed'
-        application.choices = [choices.ZYXWV]
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+
+        req.session.data.applications.Z12S3.choices.ZYXWV.status = 'Offer confirmed'
+        req.session.data.applications.Z12S3.choices = [req.session.data.applications.Z12S3.choices.ZYXWV]
         break
 
       case 'awaiting-apply-again-response':
-        choices.ABCDE.status = 'Awaiting decision'
+        req.session.data.applications.Z12S3 = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications.Z12S3.status = 'submitted'
+        req.session.data.applications.Z12S3.choices.ABCDE.status = 'Awaiting decision'
+
+        req.session.data.applications['12345'] = utils.copyObject(require('../../data/application'))
+        req.session.data.applications['12345'].status = 'submitted'
         req.session.data.applications['12345'].choices.ABCDE.status = 'Unsuccessful'
+        req.session.data.applications["12345"].choices.ABCDE.feedback = {
+          course_full: true
+        }
         req.session.data.applications['12345'].choices.FGHIJ.status = 'Unsuccessful'
+        req.session.data.applications["12345"].choices.FGHIJ.feedback = {
+          course_full: true
+        }
+
         req.session.data.applications['12345'].choices.ZYXWV.status = 'Unsuccessful'
+        req.session.data.applications["12345"].choices.ZYXWV.feedback = {
+          course_full: true
+        }
         break
     }
 

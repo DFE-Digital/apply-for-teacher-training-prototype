@@ -31,8 +31,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     },
     FGHIJ: {
       courseCode: '38PN',
@@ -42,8 +41,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     },
     ZYXWV: {
       courseCode: '3C2X',
@@ -53,8 +51,7 @@ module.exports = {
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
-      starts: '2021-09',
-      status: 'Awaiting decision'
+      starts: '2021-09'
     }
   },
   references: {

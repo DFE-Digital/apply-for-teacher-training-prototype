@@ -1,7 +1,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% set applyAgainHtml %}
-  {% set choicesAllowed = 3 - numberOfPendingChoices() %}
+  {% set choicesAllowed = 3 - (pendingChoices() | length) %}
   <p class="govuk-body">You can apply for
     {% if choicesAllowed == 1 %}
       1 other course.
@@ -20,5 +20,5 @@
 
 {{ govukInsetText({
   html: applyAgainHtml,
-  classes: "govuk-!-margin-top-0"
+  classes: "govuk-!-margin-top-0 govuk-!-padding-bottom-0"
 }) }}

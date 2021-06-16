@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% if totalNumberOfChoices() > 1 or (data.applications | length) > 1  %}
+{% if (allChoices() | length) > 1 or (data.applications | length) > 1  %}
   {% set title = "Your applications" %}
 {% else %}
   {% set title = "Your application" %}
@@ -25,7 +25,7 @@
   {% elif (pendingChoices() | length == 0) and (submittedChoices() | length > 0) and not acceptedChoice() %}
     {% include "dashboard/_apply-again.njk" %}
   {% elif hasDraftApplication() == false and pendingChoices() | length < 3 %}
-  {% else %}
+    {% include "dashboard/_apply-for-another-course.njk" %}
   {% endif %}
 
   {% if hasDraftApplication() %}

@@ -65,10 +65,12 @@
 {% endblock %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-    text: "Back",
-    href: "/dashboard"
-  }) }}
+  {% if submittedChoices() | length > 0 %}
+    {{ govukBackLink({
+      text: "Back",
+      href: "/dashboard"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}

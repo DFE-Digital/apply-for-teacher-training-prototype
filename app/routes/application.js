@@ -72,17 +72,13 @@ module.exports = router => {
 
   // Dashboard
   router.get('/dashboard', (req, res) => {
-
-    console.log(req.session.data.applications)
-
+    // Redirect to application if there's no submitted choices yet
     if (utils.submittedChoices(req).length == 0) {
       res.redirect('/application/' + Object.keys(req.session.data.applications)[0])
     } else {
       res.render('dashboard/index')
     }
-
   })
-
 
   router.all('/application/started', (req, res) => {
     const { applications } = req.session.data

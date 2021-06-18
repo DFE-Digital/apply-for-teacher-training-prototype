@@ -25,6 +25,19 @@ module.exports = router => {
 
         break
 
+      // Stated an second application after first one unsuccessful
+      case 'applying-again':
+        req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
+        req.session.data.applications["45678"].status = 'submitted'
+        req.session.data.applications["45678"].choices.ABCDE.status = 'Unsuccessful'
+
+        req.session.data.applications["ABC12"] = utils.copyObject(require('../../data/application'))
+        req.session.data.applications["ABC12"].status = 'started'
+
+
+        break
+
+
       // One submitted, one in draft
       case 'one-submitted-one-in-draft':
         req.session.data.applications["45678"] = utils.copyObject(require('../../data/application-single-choice'))
@@ -551,7 +564,6 @@ module.exports = router => {
         }
         break
     }
-
 
     res.redirect('/dashboard')
   })

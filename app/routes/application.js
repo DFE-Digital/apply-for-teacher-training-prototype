@@ -70,6 +70,20 @@ module.exports = router => {
     res.redirect(`/application/${code}/choices/add`)
   })
 
+  // Dashboard
+  router.get('/dashboard', (req, res) => {
+
+    console.log(req.session.data.applications)
+
+    if (utils.submittedChoices(req).length == 0) {
+      res.redirect('/application/' + Object.keys(req.session.data.applications)[0])
+    } else {
+      res.render('dashboard/index')
+    }
+
+  })
+
+
   router.all('/application/started', (req, res) => {
     const { applications } = req.session.data
     const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]

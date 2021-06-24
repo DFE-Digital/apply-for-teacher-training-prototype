@@ -152,7 +152,7 @@ module.exports = router => {
         const l = {}
         l.text = loc.name
         l.hint = { text: loc.address }
-        l.label = { classes: 'govuk-label--s' }
+        l.label = { classes: 'z' }
         return l
       })
 

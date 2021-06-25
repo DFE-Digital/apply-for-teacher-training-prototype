@@ -13,7 +13,6 @@ const pickPaths = (req) => {
     `/application/${applicationId}/choices/${choiceId}/pick`,
     `/application/${applicationId}/choices/${choiceId}/location`,
     `/application/${applicationId}/choices/${choiceId}/create`,
-    `/application/${applicationId}/choices/${choiceId}/another`,
     `/application/${applicationId}/choices`
   ]
 
@@ -105,7 +104,7 @@ module.exports = router => {
 
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
     const application = utils.applicationData(req)
-    const { choiceId } = req.params
+    const { applicationId, choiceId } = req.params
     const paths = pickPaths(req)
 
     application.choices[choiceId] = {
@@ -119,25 +118,7 @@ module.exports = router => {
     delete req.session.data.course_from_find
     delete application.temporaryChoices
 
-    res.redirect(req.params.referrer || paths.next)
-  })
-
-  router.all('/application/:applicationId/choices/:choiceId/another', (req, res) => {
-    if (req.body['add-another-course'] === 'yes') {
-      return res.redirect(`/application/${req.params.applicationId}/choices/add`)
-    }
-
-    const application = utils.applicationData(req)
-    const count = Object.keys(application.choices).length
-    const paths = pickPaths(req)
-
-    if (count === 3 || application.apply2 || req.body['add-another-course'] === 'no') {
-      res.redirect(req.params.referrer || paths.next)
-    } else {
-      res.render('application/choices/another', {
-        paths: paths
-      })
-    }
+    res.redirect(`/application/${applicationId}/choices`)
   })
 
   router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {

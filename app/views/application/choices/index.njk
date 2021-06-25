@@ -38,11 +38,25 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
-        {{ govukButton({
-          classes: "govuk-button--secondary",
-          text: "Add another course",
-          href: applicationPath + "/choices/add?from=choices"
-        }) }}
+
+        {% set addAnotherHtml %}
+
+          <p class="govuk-body">
+            {% if choicesRemaining == 1 %}
+              You can add 1 more course.
+            {% else %}
+              You can add {{ choicesRemaining }} more courses.
+            {% endif %}
+          </p>
+
+          {{ govukButton({
+            classes: "govuk-button--secondary",
+            text: "Add another course",
+            href: applicationPath + "/choices/add?from=choices"
+          }) }}
+        {% endset %}
+
+        {{ govukInsetText({html: addAnotherHtml}) }}
       {% endif %}
 
       {% set referrer = applicationPath + "/choices" %}

@@ -29,7 +29,7 @@
     "express-session": "^1.17.1",
     "express-writer": "^0.0.4",
     "fancy-log": "^1.3.3",
-    "govuk-frontend": "^3.10.2",
+    "govuk-frontend": "^3.13.0",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
     "gulp-sass": "^4.1.0",

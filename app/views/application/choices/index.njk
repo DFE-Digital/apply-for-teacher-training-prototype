@@ -5,7 +5,7 @@
 {% set choices = applicationValue("choices") | toArray %}
 
 {% set choicesRemaining = 3 - ((pendingChoices() | length) + (choices | length))  %}
-{% if choicesRemaining >= 1 %}
+{% if choicesRemaining >= 1 or (choices | length) > 1 %}
   {% set title = "Course choices" %}
 {% else %}
   {% set title = "Course choice" %}

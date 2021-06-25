@@ -27,67 +27,71 @@
 {% endblock %}
 
 {% block primary %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  {% set guidance %}
-    <div class="govuk-!-width-two-thirds">
-      <p class="govuk-body">
-        You can apply to
-        {% if choicesRemaining == 1 %}
-          1 course.
-        {% else %}
-          {{ choicesRemaining }} courses.
+      {% set guidance %}
+        <div class="govuk-!-width-two-thirds">
+          <p class="govuk-body">
+            You can apply to
+            {% if choicesRemaining == 1 %}
+              1 course.
+            {% else %}
+              {{ choicesRemaining }} courses.
+            {% endif %}
+          </p>
+        </div>
+      {% endset %}
+
+      {% if choices %}
+        {% if (choices | length > 0) and choicesRemaining != 0 %}
+          {{ govukButton({
+            classes: "govuk-button--secondary",
+            text: "Add another course",
+            href: applicationPath + "/choices/add"
+          }) }}
         {% endif %}
-      </p>
+
+        {% set referrer = applicationPath + "/choices" %}
+        {% set canAmend = true %}
+        {% set showChoiceStatus = false %}
+        {% include "_includes/review/choices.njk" %}
+      {% endif %}
+
+      {% if (choices | length) == 0 %}
+        {{ guidance | safe }}
+
+        {{ govukButton({
+          text: "Continue",
+          href: applicationPath + "/choices/add"
+        }) }}
+      {% endif %}
+
+      {% if (choices | length) >= 1 %}
+        {{ govukRadios({
+          fieldset: {
+            classes: "govuk-!-width-two-thirds",
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
+          } if choicesRemaining != 0,
+          items: [{
+            value: "true",
+            text: "Yes, I’ve completed this section"
+          }, {
+            value: "false",
+            text: "No, I’ll come back to it later"
+          }]
+        } | decorateApplicationAttributes(["completed", "choices"])) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      {% endif %}
     </div>
-  {% endset %}
-
-  {% if choices %}
-    {% if (choices | length > 0) and choicesRemaining != 0 %}
-      {{ govukButton({
-        classes: "govuk-button--secondary",
-        text: "Add another course",
-        href: applicationPath + "/choices/add"
-      }) }}
-    {% endif %}
-
-    {% set referrer = applicationPath + "/choices" %}
-    {% set canAmend = true %}
-    {% set showChoiceStatus = false %}
-    {% include "_includes/review/choices.njk" %}
-  {% endif %}
-
-  {% if (choices | length) == 0 %}
-    {{ guidance | safe }}
-
-    {{ govukButton({
-      text: "Continue",
-      href: applicationPath + "/choices/add"
-    }) }}
-  {% endif %}
-
-  {% if (choices | length) >= 1 %}
-    {{ govukRadios({
-      fieldset: {
-        classes: "govuk-!-width-two-thirds",
-        legend: {
-          text: "Have you completed this section?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      hint: {
-        text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
-      } if choicesRemaining != 0,
-      items: [{
-        value: "true",
-        text: "Yes, I’ve completed this section"
-      }, {
-        value: "false",
-        text: "No, I’ll come back to it later"
-      }]
-    } | decorateApplicationAttributes(["completed", "choices"])) }}
-
-    {{ govukButton({
-      text: "Continue"
-    }) }}
-  {% endif %}
+  </div>
 {% endblock %}

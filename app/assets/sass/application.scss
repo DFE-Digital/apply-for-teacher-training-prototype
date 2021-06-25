@@ -2,6 +2,10 @@
 $govuk-assets-path: "/govuk/assets/";
 $govuk-global-styles: true;
 
+// Enable new link styles (currently opt-in).
+// TODO: remove this when this becomes the default.
+$govuk-new-link-styles: true;
+
 // Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";
 

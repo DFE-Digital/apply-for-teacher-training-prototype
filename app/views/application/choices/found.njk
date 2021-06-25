@@ -1,11 +1,11 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 {% set hasCourseFromFind = data.course_from_find %}
 {% if hasCourseFromFind %}
   {% set provider = providers[data.course_from_find.providerCode] %}
   {% set course = provider.courses[data.course_from_find.courseCode] %}
   {% set title = "You selected a course" %}
 {% else %}
-  {% set title = "Have you chosen a course to apply to?" %}
+  {% set title = "Do you know which course you want to apply to?" %}
 {% endif %}
 {% set formaction = paths.current %}
 
@@ -21,49 +21,63 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
-  {% if hasCourseFromFind %}
-    {% set courseHtml %}
-      <a href="{{ data.findUrl }}/course/T92/X130" target="_blank" class="govuk-!-font-weight-bold" style="text-decoration: none">
-        <span class="govuk-!-font-size-19">
-          {{ provider.name }}
-        </span><br>
-        <span class="search-result-link-name govuk-!-font-size-24" style="text-decoration: underline">
-          {{ course.name_and_code }}
-        </span>
-      </a>
-    {% endset %}
+{% block content %}
+  {% block beforePageTitle %}{% endblock %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+      {% if hasCourseFromFind %}
+        {% set courseHtml %}
+          <a href="{{ data.findUrl }}/course/T92/X130" target="_blank" class="govuk-!-font-weight-bold" style="text-decoration: none">
+            <span class="govuk-!-font-size-19">
+              {{ provider.name }}
+            </span><br>
+            <span class="search-result-link-name govuk-!-font-size-24" style="text-decoration: underline">
+              {{ course.name_and_code }}
+            </span>
+          </a>
+        {% endset %}
 
 
-    {{ govukInsetText({
-        html: courseHtml,
-        classes: "govuk-!-margin-top-0"
-    }) }}
+        {{ govukInsetText({
+            html: courseHtml,
+            classes: "govuk-!-margin-top-0"
+        }) }}
 
-    <h2 class="govuk-heading-m">Do you want to apply to this course?</h2>
+        <h2 class="govuk-heading-m">Do you want to apply to this course?</h2>
 
-    {{ govukRadios({
-      items: [{
-        value: "yes",
-        text: "Yes"
-      }, {
-        value: "no",
-        text: "No"
-      }]
-    } | decorateApplicationAttributes(["temporaryChoices", choiceId, "fromFind"])) }}
-  {% else %}
-    {{ govukRadios({
-      items: [{
-        value: "know",
-        text: "Yes, I know where I want to apply"
-      }, {
-        value: "need",
-        text: "No, I need to find a course"
-      }]
-    } | decorateApplicationAttributes(["temporaryChoices", choiceId, "found"])) }}
-  {% endif %}
+        {{ govukRadios({
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        } | decorateApplicationAttributes(["temporaryChoices", choiceId, "fromFind"])) }}
+      {% else %}
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: title,
+              isPageTitle: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          items: [{
+            value: "know",
+            text: "Yes, I know where I want to apply"
+          }, {
+            value: "need",
+            text: "No, I need to find a course"
+          }]
+        } | decorateApplicationAttributes(["temporaryChoices", choiceId, "found"])) }}
+      {% endif %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </div>
+  </form>
 {% endblock %}

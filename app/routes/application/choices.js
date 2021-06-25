@@ -195,4 +195,15 @@ module.exports = router => {
       found: temporaryChoice.found
     })
   })
+
+  router.get('/application/:applicationId/choices', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+
+    if (utils.toArray(application.choices).length == 0) {
+      res.redirect(`/application/${applicationId}/choices/add`)
+    } else {
+      res.render(`application/choices/index`)
+    }
+  })
 }

@@ -90,10 +90,16 @@
       {% endif %}
     {% endif %}
 
+    {% if applicationValue("choices") | toArray | length == 0 %}
+      {% set choicesHref = applicationPath + "/choices/add?from=application" %}
+    {% else %}
+      {% set choicesHref = applicationPath + "/choices" %}
+    {% endif %}
+
     {{ appTaskList({
       items: [{
         text: "Choose your course" if apply2 else "Choose your courses",
-        href: applicationPath + "/choices",
+        href: choicesHref,
         id: "personal-information",
         tag: {
           classes: tagClass if applicationValue(["completed", "choices"]) else incompleteTagClass,

@@ -1,5 +1,7 @@
 {% extends "_layout.njk" %}
 {% set hasCourseFromFind = data.course_from_find %}
+{% set choices = applicationValue("choices") | toArray %}
+
 {% if hasCourseFromFind %}
   {% set provider = providers[data.course_from_find.providerCode] %}
   {% set course = provider.courses[data.course_from_find.courseCode] %}
@@ -9,16 +11,18 @@
 {% endif %}
 {% set formaction = paths.current %}
 
+{% if data["from"] == "application" or (choices | length) == 0 %}
+  {% set backLinkHref = "/application/" + applicationId %}
+{% elif applicationValue("welcomeFlow") %}
+  {% set backLinkHref = "/application/" + applicationId + "/before-you-start" %}
+{% else %}
+  {% set backLinkHref = "/application/" + applicationId + "/choices" %}
+{% endif %}
+
 {% block pageNavigation %}
-  {% if not applicationValue("welcomeFlow") %}
-    {{ govukBackLink({
-      href: paths.back
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId + "/before-you-start"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: backLinkHref
+  }) }}
 {% endblock %}
 
 {% block content %}

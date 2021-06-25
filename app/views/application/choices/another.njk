@@ -23,7 +23,7 @@
 {% set formaction = paths.current %}
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/" + applicationId + "/choices"
   }) }}
 {% endblock %}
 

@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Pick a course location" %}
+{% set title = "Which location are you applying to?" %}
 {% set formaction = paths.next %}
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,8 +9,6 @@
 {% endblock %}
 
 {% block primary %}
-  <p>This course is offered in different locations. Pick the location you would prefer to be based in.</p>
-
   {{ govukRadios({
     items: locationOptions
   } | decorateApplicationAttributes(["temporaryChoices", choiceId, "location"])) }}

@@ -30,32 +30,29 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% set guidance %}
-        <div class="govuk-!-width-two-thirds">
-          <p class="govuk-body">
-            You can apply to
-            {% if choicesRemaining == 1 %}
-              1 course.
-            {% else %}
-              {{ choicesRemaining }} courses.
-            {% endif %}
-          </p>
-        </div>
-      {% endset %}
+      {% if choicesRemaining != 0 %}
 
-      {% if choices %}
-        {% if (choices | length > 0) and choicesRemaining != 0 %}
+        {% set addAnotherHtml %}
+          <div class="govuk-!-width-two-thirds">
+            <p class="govuk-body">
+              You can apply to
+              {% if choicesRemaining == 1 %}
+                1 course.
+              {% else %}
+                {{ choicesRemaining }} courses.
+              {% endif %}
+            </p>
+          </div>
+        {% endset %}
+
           {{ govukButton({
             classes: "govuk-button--secondary",
             text: "Add another course",
-            href: applicationPath + "/choices/add"
+            href: applicationPath + "/choices/add?from=choices"
           }) }}
-        {% endif %}
+        {% endset %}
 
-        {% set referrer = applicationPath + "/choices" %}
-        {% set canAmend = true %}
-        {% set showChoiceStatus = false %}
-        {% include "_includes/review/choices.njk" %}
+        {{ govukInsetText({html: addAnotherHtml}) }}
       {% endif %}
 
       {% if (choices | length) == 0 %}
@@ -88,10 +85,9 @@
           }]
         } | decorateApplicationAttributes(["completed", "choices"])) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      {% endif %}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </div>
   </div>
 {% endblock %}

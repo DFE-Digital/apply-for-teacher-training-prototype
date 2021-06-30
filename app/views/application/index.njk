@@ -1,12 +1,11 @@
 {% extends "_content.njk" %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set status = applicationValue(["status"]) %}
+{% set completedTagText = "Completed" %}
 {% set incompleteTagClass = "govuk-tag--grey" %}
 {% set incompleteTagText = "Incomplete" %}
 {% set inprogressTagClass = "govuk-tag--purple" %}
 {% set inprogressTagText = "In progress" %}
-{% set notStartedTagClass = "govuk-tag--grey" %}
-{% set notStartedTagText = "Not started" %}
 {% set referrer = applicationPath %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
 
@@ -24,11 +23,11 @@
 
 {% macro tagTextForSection(completed=false, apply2=false) %}
   {% if completed == "true" %}
-    Completed
+    {{ completedTagText }}
   {% elif apply2 %}
     Review
   {% else %}
-    Incomplete
+    {{ incompleteTagText }}
   {% endif %}
 {% endmacro %}
 
@@ -37,7 +36,6 @@
 {% else %}
   {% set title = "Your application" %}
 {% endif %}
-{% set tagText = "Completed" %}
 {% set reviewText = "Check your answers before submitting" %}
 {% set hasSecondary = true %}
 
@@ -102,8 +100,8 @@
         href: choicesHref,
         id: "personal-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "choices"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "choices"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "choices"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "choices"]))
         }
       }]
     }) if not closed }}
@@ -123,7 +121,7 @@
 
     {% if readyReferences | length >= 2 %}
       {% set referencesItemText = "Review your references" %}
-      {% set referencesTagText = tagText %}
+      {% set referencesTagText = completedTagText %}
       {% set referencesTagClass = tagClass %}
       {% set showReferencesContent = true %}
     {% else %}
@@ -164,16 +162,16 @@
         href: applicationPath + "/personal-information" + ("/review" if applicationValue(["candidate"]) | length > 0),
         id: "personal-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "personalInformation"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "personalInformation"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "personalInformation"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "personalInformation"]))
         }
       }, {
         text: "Contact information",
         href: applicationPath + "/contact-information" + ("/review" if applicationValue(["contactInformation", "address"])),
         id: "contact-information",
         tag: {
-          classes: tagClass if applicationValue(["completed", "contactInformation"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "contactInformation"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "contactInformation"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "contactInformation"]))
         }
       }]
     }) }}
@@ -220,16 +218,16 @@
         href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["otherQualificationsDisclose"]) else "/add"),
         id: "other-qualifications",
         tag: {
-          classes: tagClass if applicationValue(["completed", "otherQualifications"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "otherQualifications"]) | length > 0 else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "otherQualifications"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "otherQualifications"]))
         }
       }, {
         text: "Degree",
         href: applicationPath + "/degree" + ("/review" if applicationValue(["degree"]) | length > 0 else "/add"),
         id: "degree",
         tag: {
-          classes: tagClass if applicationValue(["completed", "degree"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "degree"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "degree"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "degree"]))
         }
       }]
     }) }}
@@ -243,16 +241,16 @@
         href: applicationPath + "/work-history" + ("/review" if applicationValue("workHistoryDisclose")),
         id: "work-history",
         tag: {
-          classes: tagClass if applicationValue(["completed", "workHistory"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "workHistory"]) else incompleteTagText
+          classes: tagClassesForSection(applicationValue(["completed", "workHistory"])),
+          text: tagTextForSection(complted=applicationValue(["completed", "workHistory"]))
         }
       }, {
         text: "Unpaid experience",
         href: applicationPath + "/unpaid-experience" + ("/review" if applicationValue("unpaidExperienceDisclose")),
         id: "unpaid-experience",
         tag: {
-          classes: tagClass if applicationValue(["completed", "unpaidExperience"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "unpaidExperience"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "unpaidExperience"])),
+          text: tagTextForSection(complted=applicationValue(["completed", "unpaidExperience"]))
         }
       }]
     }) }}
@@ -289,16 +287,16 @@
         href: applicationPath + "/additional-support" + ("/review" if applicationValue("additionalSupportDisclose")),
         id: "additional-support",
         tag: {
-          classes: tagClass if applicationValue(["completed", "additionalSupport"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "additionalSupport"]) else incompleteTagText
+          classes: tagClassesForSection(applicationValue(["completed", "additionalSupport"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "additionalSupport"]))
         }
       }, {
         text: "Interview needs",
         href: applicationPath + "/interview-needs" + ("/review" if applicationValue(["interviewNeedsDisclose"])),
         id: "interview",
         tag: {
-          classes: tagClass if applicationValue(["completed", "interviewNeeds"]) | length > 0 else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "interviewNeeds"]) | length > 0 else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "interviewNeeds"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "interviewNeeds"]))
         }
       }]
     }) }}
@@ -312,8 +310,8 @@
         href: applicationPath + "/safeguarding" + ("/review" if applicationValue("safeguardingDisclose")),
         id: "safeguarding",
         tag: {
-          classes: tagClass if applicationValue(["completed", "safeguarding"]) else incompleteTagClass,
-          text: tagText if applicationValue(["completed", "safeguarding"]) else incompleteTagText
+          classes: tagClassesForSection(completed=applicationValue(["completed", "safeguarding"])),
+          text: tagTextForSection(complted=applicationValue(["completed", "safeguarding"]))
         }
       }]
     }) }}

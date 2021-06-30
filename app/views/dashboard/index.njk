@@ -22,7 +22,7 @@
 
   {% if (choicesWithOfferReceived() | length) > 0 %}
     {% include "dashboard/_respond-to-offer.njk" %}
-  {% elif (pendingChoices() | length == 0) and (submittedChoices() | length > 0) and not acceptedChoice() %}
+  {% elif (pendingChoices() | length == 0) and (submittedChoices() | length > 0) and not acceptedChoice() and not hasDraftApplication() %}
     {% include "dashboard/_apply-again.njk" %}
 
   {% elif hasDraftApplication() == false and pendingChoices() | length < 3 and not acceptedChoice() %}

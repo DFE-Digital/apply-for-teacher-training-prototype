@@ -4,9 +4,9 @@
   {% set choicesAllowed = 3 - (pendingChoices() | length) %}
   <p class="govuk-body">You can apply for
     {% if choicesAllowed == 1 %}
-      1 other course.
+      1 other course at the moment.
     {% else %}
-      up to {{ choicesAllowed }} other courses.
+      up to {{ choicesAllowed }} other courses at the moment.
     {% endif %}
   </p>
 

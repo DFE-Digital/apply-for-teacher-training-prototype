@@ -1,0 +1,20 @@
+{% extends "_layout.njk" %}
+
+{% set title = "You did not submit your application in time" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">You did not submit your application in time to start a course in the 2021 to 2022 academic year.</p>
+
+      <p class="govuk-body">But you can carry on with your application for courses starting in the 2022 to 2023 academic year.</p>
+
+      {{ govukButton({
+        text: "Continue",
+        href: "/application/" + applicationId + "/apply2"
+      }) }}
+    </div>
+  </div>
+{% endblock %}

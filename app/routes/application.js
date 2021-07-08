@@ -107,7 +107,9 @@ module.exports = router => {
 
     apply2Application.welcomeFlow = false
 
-    if (!existingApplication.cycleDeadlinePassed == true) {
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+      apply2Application.apply2 = false
+    } else {
       apply2Application.apply2 = true
     }
     apply2Application.choices = {}
@@ -138,7 +140,7 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    if (existingApplication.cycleDeadlinePassed == true) {
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
       res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
     } else {
       res.redirect(`/application/${code}?copied=true`)

@@ -2,34 +2,6 @@
 {% if complete %}
 
 
-{% if data.applications[applicationId].candidate.residencyDisclose == "I will need to apply for permission to work or study in the UK" %}
-
-  {% set coursesWhichCannotSponsorVisas = [] %}
-
-  {% for item in choices %}
-    {% if item.canSponsorVisa == false %}
-      {% set _ = coursesWhichCannotSponsorVisas.push(item) %}
-    {% endif %}
-  {% endfor %}
-
-  {% if coursesWhichCannotSponsorVisas | length > 0 %}
-    {{ appSuggestion({
-        id: "visaSponsorship",
-        title: "One of your course choices is unable to sponsor visas",
-        warning: true,
-        content: {
-          html: "<p class=\"govuk-body\">You have indiciated that you do not yet have the right to work or study in the UK.</p>"
-        },
-        actions: {
-          items: [{
-            text: "Change course choices",
-            href: applicationPath + "/choices"
-          }]
-        }
-      }) }}
-  {% endif %}
-{% endif %}
-
   {% for item in choices %}
     {% set provider = providers[item.providerCode] %}
     {% set course = provider.courses[item.courseCode] %}
@@ -58,6 +30,7 @@
       and (item.status != "Offer withdrawn")
       and (item.status != "Application withdrawn")
       and (item.status != "Conditions not met")
+      and (item.status != nil)
     %}
 
     {{ appSummaryCard({

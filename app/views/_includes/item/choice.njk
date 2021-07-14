@@ -45,6 +45,34 @@
   {% include "_includes/item/feedback.njk" %}
 {% endset %}
 
+{% set visaSponsorshipHtml %}
+  {% if item.canSponsorVisa %}
+    Visas can be sponsored
+  {% else %}
+
+    {% set visaSponsorshipInsetTextHtml %}
+      <p class="govuk-heading-s app-inset-text__title">This provider cannot sponsor Student visas</p>
+
+      <p class="govuk-body">You have said that you do not yet have the right to work or study in the UK.</p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="#" class="govuk-link">find another course which is able to sponsor visas</a></li>
+        <li><a href="#" class="govuk-link">find out about other options for obtaining a visa</a></li>
+      </ul>
+    {% endset %}
+
+
+    {{ govukInsetText({
+      html: visaSponsorshipInsetTextHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+
+
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -101,9 +129,10 @@
       text: "Visa sponsorship"
     },
     value: {
-      html: ("Visas can be sponsored" if item.canSponsorVisa else "Visas cannot be sponsored")
+      html: visaSponsorshipHtml,
+      classes: "app-summary-list__value--wide"
     }
-  }, {
+  } if (data.applications[applicationId].candidate.residencyDisclose == "I will need to apply for permission to work or study in the UK"), {
     key: {
       text: "Status"
     },

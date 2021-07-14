@@ -98,6 +98,13 @@
     } if item.starts
   } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
     key: {
+      text: "Visa sponsorship"
+    },
+    value: {
+      html: ("Visas can be sponsored" if item.canSponsorVisa else "Visas cannot be sponsored")
+    }
+  }, {
+    key: {
       text: "Status"
     },
     value: {

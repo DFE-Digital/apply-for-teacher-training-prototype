@@ -124,9 +124,9 @@ module.exports = {
       year: '1988'
     },
     nationality: ['Other'],
-    otherNationality1: 'Indian',
+    otherNationality1: 'French',
     residencyDisclose: 'I have the right to work or study in the UK',
-    residency: 'I will need to apply for permission to work or study in the UK'
+    residency: 'I have EU Settled Status'
   },
   contactInformation: {
     tel: '07944 386555',

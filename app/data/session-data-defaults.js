@@ -3,6 +3,7 @@
 const internationalApplicationNoRightToStudyYet = JSON.parse(JSON.stringify(require('./application-international')))
 
 internationalApplicationNoRightToStudyYet.candidate.residencyDisclose = 'I will need to apply for permission to work or study in the UK'
+internationalApplicationNoRightToStudyYet.candidate.residency  = ''
 
 module.exports = {
   applications: {

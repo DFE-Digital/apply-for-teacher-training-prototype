@@ -94,11 +94,6 @@ module.exports = router => {
       started: true
     }
 
-    // Already made one choice, second choice shouldn't be in welcome flow
-    if (application.choices && Object.entries(application.choices).length > 0) {
-      application.welcomeFlow = false
-    }
-
     res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
   })
 

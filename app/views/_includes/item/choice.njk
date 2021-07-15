@@ -73,6 +73,60 @@
   {% endif %}
 {% endset %}
 
+{% set degreeRequired %}
+  {% if item.degreeRequired == "21" %}
+    2:1 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "22" %}
+    2:2 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "third" %}
+    Third class degree or higher (or equivalent)
+  {% else %}
+    Any undergraduate degree
+  {% endif %}
+{% endset %}
+
+{% set candidateHighestDegreeGrade = highestDegreeGrade() %}
+
+{% set degreeRequiredHtml %}
+
+  {% if (item.degreeRequired == "21" and (candidateHighestDegreeGrade == "22" or candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "22" and (candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "third" and (candidateHighestDegreeGrade == "pass")) %}
+
+    {% set degreeRequiredWarningHtml %}
+      <p class="govuk-heading-s app-inset-text__title">{{ degreeRequired }}</p>
+
+      {% set firstDegree = applicationValue("degree") | toArray | first %}
+
+      <p class="govuk-body">
+        You said
+
+        {# Ideally this would check the completed status of your highest degree grade #}
+        {% if firstDegree["completed"] == "Yes" %}
+          you have
+        {% else %}
+          you’re expecting
+        {% endif %}
+
+        {% if candidateHighestDegreeGrade == "22" %}
+          a 2:2
+        {% elif candidateHighestDegreeGrade == "third" %}
+          a third class
+        {% else %}
+          an ordinary (pass)
+        {% endif %}
+      degree.</p>
+
+      <p class="govuk-body">Contact the provider to see if they will still consider your application.</p>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: degreeRequiredWarningHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+  {% else %}
+    {{ degreeRequired }}
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -125,6 +179,13 @@
       html: startDate
     } if item.starts
   } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
+    key: {
+      text: "Degree required"
+    },
+    value: {
+      html: degreeRequiredHtml
+    }
+  }, {
     key: {
       text: "Visa sponsorship"
     },

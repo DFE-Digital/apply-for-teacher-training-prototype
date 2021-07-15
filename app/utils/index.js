@@ -179,6 +179,8 @@ const toArray = (obj) => {
       arr.push(value)
     }
     return arr
+  } else {
+    return []
   }
 }
 

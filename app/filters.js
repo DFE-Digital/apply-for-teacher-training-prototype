@@ -170,7 +170,7 @@ module.exports = (env) => {
   }
 
   /**
-   * Convert object to array
+   * Convert object to array, or return empty array.
    * @type {Object} obj
    */
   filters.toArray = (obj) => {
@@ -181,6 +181,8 @@ module.exports = (env) => {
         arr.push(value)
       }
       return arr
+    } else {
+      return []
     }
   }
 

@@ -107,12 +107,19 @@ module.exports = router => {
     const { applicationId, choiceId } = req.params
     const paths = pickPaths(req)
 
+    const selectedCourseProviderCode = providerCode(req)
+    const selectedCourseCode = courseCode(req)
+    const courseSelected = providers[selectedCourseProviderCode].courses[selectedCourseCode]
+
     application.choices[choiceId] = {
-      providerCode: providerCode(req),
-      courseCode: courseCode(req),
+      providerCode: selectedCourseProviderCode,
+      courseCode: selectedCourseCode,
       locationName: locationName(req),
       locationAddress: locationAddress(req),
-      singleLocationCourse: singleLocationCourse(req)
+      singleLocationCourse: singleLocationCourse(req),
+      length: '1 year',
+      type: courseSelected.description,
+      starts: '2022-09'
     }
 
     delete req.session.data.course_from_find

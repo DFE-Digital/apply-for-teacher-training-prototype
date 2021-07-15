@@ -106,6 +106,9 @@ module.exports = router => {
     const selectedCourseCode = courseCode(req)
     const courseSelected = providers[selectedCourseProviderCode].courses[selectedCourseCode]
 
+    // Randomised for now, until this data is added to Find and the API
+    const canSponsorVisa = (Math.random(choiceId) > 0.5)
+
     application.choices[choiceId] = {
       providerCode: selectedCourseProviderCode,
       courseCode: selectedCourseCode,
@@ -114,7 +117,8 @@ module.exports = router => {
       singleLocationCourse: singleLocationCourse(req),
       length: '1 year',
       type: courseSelected.description,
-      starts: '2022-09'
+      starts: '2022-09',
+      canSponsorVisa: canSponsorVisa
     }
 
     delete req.session.data.course_from_find

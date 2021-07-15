@@ -73,9 +73,8 @@
 
     <p class="govuk-body"><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
 
-    {% if not applicationValue('welcomeFlow') %}
-      <p class="govuk-body">or</p>
-      <p class="govuk-body"><a href="{{ applicationPath }}" class="govuk-link">Return to your application</a></p>
-    {% endif %}
+    <p class="govuk-body">or</p>
+    <p class="govuk-body"><a href="{{ applicationPath }}" class="govuk-link">Return to your application</a></p>
+
   {% endif %}
 {% endblock %}

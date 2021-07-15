@@ -13,8 +13,6 @@
 
 {% if data["from"] == "application" or (choices | length) == 0 %}
   {% set backLinkHref = "/application/" + applicationId %}
-{% elif applicationValue("welcomeFlow") %}
-  {% set backLinkHref = "/application/" + applicationId + "/before-you-start" %}
 {% else %}
   {% set backLinkHref = "/application/" + applicationId + "/choices" %}
 {% endif %}

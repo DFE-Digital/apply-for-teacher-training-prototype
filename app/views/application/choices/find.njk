@@ -24,7 +24,5 @@
   }) }}
   <p class="govuk-body-s govuk-!-margin-bottom-6" id="find-new-window" aria-hidden="true">Opens in a new window</p>
 
-  {% if not applicationValue("welcomeFlow") %}
-    <p class="govuk-body"><a href="/application/{{ applicationId }}">Return to your application</a></p>
-  {% endif %}
+  <p class="govuk-body"><a href="/application/{{ applicationId }}">Return to your application</a></p>
 {% endblock %}

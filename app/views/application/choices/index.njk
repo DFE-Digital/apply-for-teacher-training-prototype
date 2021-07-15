@@ -20,17 +20,15 @@
 {% endif %}
 
 {% block pageNavigation %}
-  {% if not applicationValue('welcomeFlow') %}
-    {% if referrer %}
-      {{ govukBackLink({
-        href: referrer
-      }) }}
-    {% else %}
-      {{ govukBackLink({
-        href: "/application/" + applicationId,
-        text: "Back to application"
-      }) }}
-    {% endif %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
   {% endif %}
 {% endblock %}
 

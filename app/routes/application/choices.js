@@ -80,6 +80,19 @@ const singleLocationCourse = (req) => {
   return locations.length === 1
 }
 
+const randomDegreeRequirement = (seed) => {
+ switch (Math.floor(Math.random(seed) * 5)) {
+    case 0:
+      return '21'
+    case 1:
+      return '22'
+    case 2:
+      return 'third'
+    default:
+      return 'degree'
+  }
+}
+
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const { applicationId } = req.params
@@ -109,6 +122,9 @@ module.exports = router => {
     // Randomised for now, until this data is added to Find and the API
     const canSponsorVisa = (Math.random(choiceId) > 0.5)
 
+    // Adding random degree class requirement
+    const degreeRequired = randomDegreeRequirement(choiceId)
+
     application.choices[choiceId] = {
       providerCode: selectedCourseProviderCode,
       courseCode: selectedCourseCode,
@@ -118,7 +134,8 @@ module.exports = router => {
       length: '1 year',
       type: courseSelected.description,
       starts: '2022-09',
-      canSponsorVisa: canSponsorVisa
+      canSponsorVisa: canSponsorVisa,
+      degreeRequired: degreeRequired
     }
 
     delete req.session.data.course_from_find

@@ -1,6 +1,7 @@
 {% set item = applicationValue(["gcse", id]) %}
-{% set missing = item.type == "I don’t have this qualification yet" %}
+{% set missingGcse = item.type == "not-yet" %}
 {% set nonUK = item.type == "Non-UK qualification" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
 
 {% set qualificationText -%}
   {%- if item.typeUk or item.typeNonUk or item.type %}
@@ -41,11 +42,34 @@
   {% set gradeHtml = item.gradeOther or item.grade %}
 {% endif %}
 
-{% if missing %}
+{% if missingGcse %}
+
   {{ govukSummaryList({
     rows: [{
+      key: { text: "What type of " + subject + " qualification do you have?" },
+      value: { text: "I don’t have a " + subject + " qualification yet" },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "whether you have this qualification"
+        }]
+      } if canAmend
+    },
+    {
+      key: { text: "Are you currently studying for this qualification?" },
+      value: { text: (item.currentlyStudying | capitalize) },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/not-yet",
+          text: "Change",
+          visuallyHiddenText: "whether you are studying for this qualification"
+        }]
+      } if canAmend
+    },
+    {
       key: {
-        text: "How I expect to gain this qualification"
+        text: ("How I expect to gain this qualification" if item.currentlyStudying == "yes" else "Evidence I have the the skills at the required standard")
       },
       value: {
         html: (item.missing or "No reason given") | nl2br | safe

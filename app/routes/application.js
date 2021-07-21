@@ -81,13 +81,16 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
+
     res.render('application/index', {
       showCopiedBanner,
-      closed: req.query.closed
+      closed: req.query.closed,
+      findNotOpen: req.query.findNotOpen,
+      cycleNotOpen: req.query.cycleNotOpen
     })
   })
 
-  // Generate apply2 application from an existing one
+  // Generate a new application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = 12346
     const { applications } = req.session.data
@@ -95,7 +98,13 @@ module.exports = router => {
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
-    apply2Application.apply2 = true
+
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+      apply2Application.apply2 = false
+    } else {
+      apply2Application.apply2 = true
+    }
+
     apply2Application.choices = {}
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
@@ -124,7 +133,11 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    res.redirect(`/application/${code}?copied=true`)
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+      res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
+    } else {
+      res.redirect(`/application/${code}?copied=true`)
+    }
   })
 
   // Render course-specific submitted page

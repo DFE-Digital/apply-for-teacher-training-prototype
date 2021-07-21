@@ -20,23 +20,21 @@
 {% endif %}
 
 {% block pageNavigation %}
-  {% if not applicationValue('welcomeFlow') %}
-    {% if referrer %}
-      {{ govukBackLink({
-        href: referrer
-      }) }}
-    {% else %}
-      {{ govukBackLink({
-        href: "/application/" + applicationId,
-        text: "Back to application"
-      }) }}
-    {% endif %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
   {% endif %}
 {% endblock %}
 
 {% block primary %}
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-three-quarters">
       {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
 
         {% set addAnotherHtml %}

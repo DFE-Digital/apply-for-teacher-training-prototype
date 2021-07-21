@@ -1,6 +1,5 @@
 module.exports = {
   status: 'started',
-  welcomeFlow: false,
   apply2: false,
   ended_without_success: false,
   completed: {
@@ -33,7 +32,8 @@ module.exports = {
       type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2021-09',
-      status: 'Awaiting decision'
+      status: 'Awaiting decision',
+      degreeRequired: 'degree'
     },
     FGHIJ: {
       courseCode: '38PN',
@@ -44,7 +44,8 @@ module.exports = {
       type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2021-09',
-      status: 'Awaiting decision'
+      status: 'Awaiting decision',
+      degreeRequired: 'degree'
     },
     ZYXWV: {
       courseCode: '3C2X',
@@ -55,7 +56,8 @@ module.exports = {
       type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2021-09',
-      status: 'Awaiting decision'
+      status: 'Awaiting decision',
+      degreeRequired: 'third'
     }
   },
   references: {

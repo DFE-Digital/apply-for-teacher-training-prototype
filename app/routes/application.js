@@ -55,14 +55,13 @@ module.exports = router => {
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
     const code = createNewApplication(req)
-    req.session.data.applications[code].welcomeFlow = true
 
     if (req.session.data.course_from_find) {
       // If coming from Find, go straight to course selection
       res.redirect(`/application/${code}/choices/add`)
     } else {
-      // Otherwise, give some context about the Apply pilot
-      res.redirect(`/application/${code}/before-you-start`)
+      // Otherwise, go straight to the Application page
+      res.redirect(`/application/${code}`)
     }
   })
 
@@ -83,18 +82,12 @@ module.exports = router => {
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
 
-    req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,
       closed: req.query.closed,
       findNotOpen: req.query.findNotOpen,
       cycleNotOpen: req.query.cycleNotOpen
     })
-  })
-
-  // Render before you start page
-  router.all('/application/:applicationId/before-you-start', (req, res) => {
-    res.render('application/before-you-start', { showCopiedBanner: req.query.copied })
   })
 
   // Generate a new application from an existing one
@@ -105,13 +98,13 @@ module.exports = router => {
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
-    apply2Application.welcomeFlow = false
 
     if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
       apply2Application.apply2 = false
     } else {
       apply2Application.apply2 = true
     }
+
     apply2Application.choices = {}
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]

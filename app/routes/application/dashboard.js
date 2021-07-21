@@ -113,6 +113,13 @@ module.exports = router => {
         break
       case 'withdrawn':
         choices.ABCDE.status = 'Application withdrawn'
+        choices.ABCDE.withdrawnByProvider = false
+        choices.ABCDE.rejectedByDefault = false
+        choices.ABCDE.feedback = null
+        break
+      case 'withdrawn-by-provider':
+        choices.ABCDE.status = 'Application withdrawn'
+        choices.ABCDE.withdrawnByProvider = true
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
         break

@@ -51,7 +51,8 @@ module.exports = (env) => {
    */
   filters.formatNationalities = (object = {}) => {
     if (object) {
-      const nationalities = object.nationality
+      // Using slice() to shallow-copy the array rather than referencing the original
+      const nationalities = object.nationality.slice()
       if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
       if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
       if (object.otherNationality3) { nationalities.push(object.otherNationality3) }
@@ -169,7 +170,7 @@ module.exports = (env) => {
   }
 
   /**
-   * Convert object to array
+   * Convert object to array, or return empty array.
    * @type {Object} obj
    */
   filters.toArray = (obj) => {
@@ -180,6 +181,8 @@ module.exports = (env) => {
         arr.push(value)
       }
       return arr
+    } else {
+      return []
     }
   }
 

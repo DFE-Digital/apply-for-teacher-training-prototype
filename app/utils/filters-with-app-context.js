@@ -121,6 +121,12 @@ module.exports = (nunjucksAppEnv, app) => {
       return utils.hasPrimaryChoices(req)
     })
 
+    nunjucksAppEnv.addGlobal('highestDegreeGrade', () => {
+      return utils.highestDegreeGrade(req)
+    })
+
+
+
     next()
   })
 }

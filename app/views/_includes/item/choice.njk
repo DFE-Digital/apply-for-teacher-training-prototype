@@ -136,15 +136,15 @@
 {% set gcseRequirements %}
   {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
     {% if item.acceptsPendingGcses %}
-      Candidates with pending GCSEs will be considered
+      This provider will consider candidates with pending GCSEs
     {% else %}
-      Candidates with pending GCSEs will not be considered
+      This provider does not consider candidates with pending GCSEs
     {% endif %}
   {% else %}
     {% if item.acceptsEquivalencyTests %}
-      Equivalency tests will be accepted in English and maths
+      This provider does will accept equivalency tests in English and maths
     {% else %}
-      Equivalency tests will not be accepted
+      This provider does will accept equivalency tests
     {% endif %}
   {% endif %}
 {% endset %}
@@ -171,7 +171,7 @@
 
       <ul class="govuk-list govuk-list--bullet">
         <li>find a course that does {{ "accept pending GCSEs" if  applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' else "accept equivalency tests"}} </li>
-        <li>contact the provider to see if they will still consider your application</li>
+        <li>contact the provider to see if they’ll still consider your application</li>
       </ul>
 
     {% endset %}

@@ -23,6 +23,8 @@ const gcseData = (req) => {
   return false
 }
 
+const hasGcse = (req) => gcseData(req).hasGcse === 'Yes'
+
 const isInternational = (req) => gcseData(req).type === 'Non-UK qualification'
 const isMissing = (req) => gcseData(req).type === 'not-yet'
 const isFailGrade = (req) => {
@@ -78,11 +80,9 @@ module.exports = router => {
 
     const { id } = req.params
     const { referrer } = req.query
-    const nextPath = `/application/${req.params.applicationId}/gcse/${id}/answer?${utils.queryString(req)}`
-    // If completed this section, return to referrer, else next question
-    const formaction = completedGcse ? referrer : nextPath
+    const formaction = `/application/${req.params.applicationId}/gcse/${id}/gcse-or-not`
 
-    res.render('application/gcse/index', {
+    res.render('application/gcse/gcse-or-not', {
       formaction,
       id,
       referrer
@@ -124,6 +124,23 @@ module.exports = router => {
   })
 
 
+  // GCSE or not branching
+  router.post('/application/:applicationId/gcse/:id/gcse-or-not', (req, res) => {
+
+    const { applicationId, id } = req.params
+    const application = utils.applicationData(req)
+    const { referrer } = req.query
+
+    let path
+    if (hasGcse(req)) {
+      application.gcse[id].type = 'GCSE'
+      path = `/application/${applicationId}/gcse/${id}/grade`
+    } else {
+      path = `/application/${applicationId}/gcse/${id}/type`
+    }
+
+    res.redirect(`${path}?${utils.queryString(req)}`)
+  })
 
   // GCSE type answer branching
   router.post('/application/:applicationId/gcse/:id/answer', (req, res) => {
@@ -142,6 +159,23 @@ module.exports = router => {
     }
 
     res.redirect(`${path}?${utils.queryString(req)}`)
+  })
+
+  // Render 'another type of [subject] qualification page'
+  router.all('/application/:applicationId/gcse/:id/type', (req, res) => {
+    const completedGcse = gcseData(req).grade && gcseData(req).year
+
+    const { id, view } = req.params
+    const { referrer } = req.query
+    const paths = gcsePaths(req)
+    const formaction = `/application/${req.params.applicationId}/gcse/${id}/answer`
+
+    res.render(`application/gcse/type`, {
+      formaction,
+      paths,
+      id,
+      referrer
+    })
   })
 
   // Render UK ENIC/grade/year pages

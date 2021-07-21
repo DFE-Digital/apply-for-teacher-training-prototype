@@ -6,16 +6,10 @@
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId + "/gcse/" + id,
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block content %}
@@ -58,7 +52,7 @@
         {{ govukRadios({
           fieldset: {
             legend: {
-              text: "What type of " + subject + " qualification do you have?",
+              text: "Do you have another type of qualification in " + subject + "?",
               classes: "govuk-label--l",
               isPageTitle: true
             },
@@ -67,8 +61,6 @@
             }
           },
           items: [{
-            text: "GCSE"
-          }, {
             text: "O level"
           }, {
             text: "Scottish National 5"
@@ -85,7 +77,7 @@
           }, {
             divider: "or"
           }, {
-            text: "I don’t have a " + subject + " qualification yet",
+            text: "I do not have a " + subject + " qualification yet",
             value: "not-yet"
           }]
         } | decorateApplicationAttributes(["gcse", id, "type"])) }}

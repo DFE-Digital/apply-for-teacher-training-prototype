@@ -1,0 +1,50 @@
+{% extends "_layout.njk" %}
+
+{% set action = "edit" if applicationValue(["gcse", id, "type"]) else "add" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = (action | capitalize) + " " + subject + " GCSE grade 4 (C) or above, or equivalent" %}
+{% set allowsFeedback = true %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "Do you have a GCSE in " + subject + "?",
+              classes: "govuk-label--l",
+              isPageTitle: true
+            },
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            text: "Yes"
+          }, {
+            text: "No"
+          }]
+        } | decorateApplicationAttributes(["gcse", id, "hasGcse"])) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

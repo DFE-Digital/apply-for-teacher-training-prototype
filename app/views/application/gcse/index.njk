@@ -26,7 +26,7 @@
         {% set otherUkConditionalHtml %}
           {{ govukInput({
             label: {
-              text: "Enter type of qualification"
+              text: "Type of qualification"
             }
           } | decorateApplicationAttributes(["gcse", id, "typeUk"])) }}
         {% endset %}
@@ -34,7 +34,7 @@
         {% set nonUkConditionalHtml %}
           {{ govukInput({
             label: {
-              text: "Enter type of qualification"
+              text: "Type of qualification"
             },
             hint: {
               html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
@@ -58,7 +58,7 @@
         {{ govukRadios({
           fieldset: {
             legend: {
-              text: "What type of " + subject + " qualification do you have?",
+              text: "What type of qualification in " + subject + " do you have?",
               classes: "govuk-label--l",
               isPageTitle: true
             },
@@ -73,19 +73,19 @@
           }, {
             text: "Scottish National 5"
           }, {
-            text: "Other UK qualification",
+            text: "Another UK qualification",
             conditional: {
               html: otherUkConditionalHtml
             }
           }, {
-            text: "Non-UK qualification",
+            text: "A non-UK qualification",
             conditional: {
               html: nonUkConditionalHtml
             }
           }, {
             divider: "or"
           }, {
-            text: "I don’t have a " + subject + " qualification yet",
+            text: "I don’t have " + ("an " + subject if subject == 'English' else 'a ' + subject) + " qualification yet",
             value: "not-yet"
           }]
         } | decorateApplicationAttributes(["gcse", id, "type"])) }}

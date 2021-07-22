@@ -1,10 +1,10 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% if applicationValue(["gcse", id, "completed"]) == "false" %}
   {% set title = "When will you get your " + subject + " qualification?" %}
 {% else %}
-  {% set title = "When was your " + subject + " qualification awarded?" %}
+  {% set title = "What year did you get your " + subject + " qualification?" %}
 {% endif %}
 {% set allowsFeedback = true %}
 
@@ -14,19 +14,27 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukInput({
-    label: {
-      classes: "govuk-label--m",
-      text: "Enter year"
-    },
-    hint: {
-      text: "For example, 1996"
-    },
-    classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["gcse", id, "year"])) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+{% block content %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+          {{ govukInput({
+            label: {
+              classes: "govuk-label--xl",
+              text: title
+            },
+            hint: {
+              text: "For example, 1996"
+            },
+            classes: "govuk-input--width-4"
+          } | decorateApplicationAttributes(["gcse", id, "year"])) }}
+
+          {{ govukButton({
+            text: "Save and continue"
+          }) }}
+        </div>
+      </div>
+    </form>
 {% endblock %}

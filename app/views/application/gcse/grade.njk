@@ -3,9 +3,9 @@
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set type = applicationValue(["gcse", id, "type"]) %}
 {% if type == "GCSE" and id == "english" %}
-  {% set title = "What English GCSE did you do?" %}
+  {% set title = "Which English GCSE did you do?" %}
 {% elif type == "GCSE" and id == "science" %}
-  {% set title = "What science GCSEs did you do?" %}
+  {% set title = "Which science GCSEs did you do?" %}
 {% elif type == "GCSE" or type == "O level" or type == "Scottish National 5" %}
   {% set title = "What grade is your " + subject + " " + type + "?" %}
 {% else %}

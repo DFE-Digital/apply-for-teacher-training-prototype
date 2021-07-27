@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% set title = "Choose your referees" %}
+{% set title = "Requesting a reference" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
@@ -17,14 +17,20 @@
 {% endblock %}
 
 {% block primary %}
+  <h2 class="govuk-heading-m">Who to choose as a referee</h2>
   <p class="govuk-body">Referees should not be family members, partners or friends.</p>
-  <p class="govuk-body">Choose at least one academic referee if you graduated in the last 5 years or you do not have a grade for your degree yet.</p>
+  <p class="govuk-body">If you graduated in the last 5 years, or you do not yet have a grade for your degree, choose at least one academic referee.</p>
+  <p class="govuk-body">If you’re applying for a salaried course, one of your references must be from an employer.</p>
   <p class="govuk-body">Training providers will only accept a character reference if there’s also an academic or professional reference.</p>
-  <p class="govuk-body">If you’re applying for a School Direct (Salaried) course, one of your references must be from an employer.</p>
-  <p class="govuk-body">You can add as many referees as you like to increase the chances of getting 2 references quickly.</p>
-  <h2 class="govuk-heading-m">Contact your referees</h2>
-  <p class="govuk-body">Contact your referees in advance to check that they can submit a reference quickly online.</p>
-  <p class="govuk-body">Check that they can give you a full reference and not just confirm the dates you worked there. Providers need to know about your suitability for teaching.</p>
+
+  <h2 class="govuk-heading-m">Contact your referee</h2>
+  <p class="govuk-body">Your referee will receive a link to an online form to complete. References sent to providers by email will not be accepted.</p>
+  <p class="govuk-body">Contact your referee in advance to check that they can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>type or paste their reference into an online form (with a 500-word limit)</li>
+    <li>submit a reference quickly, so as not to delay your application</li>
+    <li>give you a full reference – providers need to know if you’re suitable to become a teacher</li>
+  </ul>
   {{ govukButton({
     text: "Continue",
     href: "/application/" + applicationId + "/references/" + id + "/type/"

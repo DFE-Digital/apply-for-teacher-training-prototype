@@ -48,7 +48,9 @@ module.exports = (env) => {
    */
   filters.formatDate = object => {
     if (object) {
-      const date = `${object.year}-${object.month}-${object.day}`
+      const month = object.month.padStart(2, '0')
+      const day = object.day.padStart(2, '0')
+      const date = `${object.year}-${month}-${day}`
 
       return filters.date(date, 'd MMMM yyyy')
     }

@@ -61,8 +61,12 @@ module.exports = (env) => {
    */
   filters.formatNationalities = (object = {}) => {
     if (object) {
+      // Always return an array of selected nationalities, even if only 1 selected
+      let { nationality } = object
+      nationality = nationality instanceof Array ? nationality : [nationality]
+
       // Using slice() to shallow-copy the array rather than referencing the original
-      const nationalities = object.nationality.slice()
+      const nationalities = nationality.slice()
       if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
       if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
       if (object.otherNationality3) { nationalities.push(object.otherNationality3) }

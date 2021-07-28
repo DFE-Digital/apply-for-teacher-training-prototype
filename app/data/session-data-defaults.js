@@ -1,16 +1,14 @@
 
 // Copies dummy application and tweaks some fields
 const internationalApplicationNoRightToStudyYet = JSON.parse(JSON.stringify(require('./application-international')))
-
 internationalApplicationNoRightToStudyYet.candidate.residencyDisclose = 'I will need to apply for permission to work or study in the UK'
-internationalApplicationNoRightToStudyYet.candidate.residency  = ''
+internationalApplicationNoRightToStudyYet.candidate.residency = ''
 
-applicationWhereNotMeetingMinimiumDegreeRequirement =  JSON.parse(JSON.stringify(require('./application')))
-
-applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ABCDE.degreeRequired = "21"
-applicationWhereNotMeetingMinimiumDegreeRequirement.choices.FGHIJ.degreeRequired = "22"
-applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ZYXWV.degreeRequired = "third"
-applicationWhereNotMeetingMinimiumDegreeRequirement.degree.abcde.grade = "Third-class honours"
+const applicationWhereNotMeetingMinimiumDegreeRequirement = JSON.parse(JSON.stringify(require('./application')))
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ABCDE.degreeRequired = '21'
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.FGHIJ.degreeRequired = '22'
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ZYXWV.degreeRequired = 'third'
+applicationWhereNotMeetingMinimiumDegreeRequirement.degree.abcde.grade = 'Third-class honours'
 
 module.exports = {
   applications: {
@@ -21,6 +19,7 @@ module.exports = {
     ABCDE: require('./application-with-choices'),
     45678: require('./application-single-choice'),
     GLOBE: require('./application-international'),
+    WORLD: require('./application-international-with-choices'),
     21234: internationalApplicationNoRightToStudyYet,
     52614: applicationWhereNotMeetingMinimiumDegreeRequirement
   },

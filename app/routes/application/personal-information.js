@@ -27,6 +27,22 @@ module.exports = router => {
     }
   })
 
+  // Residency question answer branching
+  router.post('/application/:applicationId/personal-information/residency', (req, res) => {
+    const { referrer } = req.session.data
+    const { applicationId } = req.params
+    const application = req.session.data.applications[applicationId]
+    const { nationality } = application.candidate
+
+    const answer = application.candidate.residencyDisclose
+
+    if (answer === 'yes') {
+      res.redirect(`/application/${applicationId}/personal-information/review`)
+    } else {
+      res.redirect(`/application/${applicationId}/personal-information/residency-sponsorship`)
+    }
+  })
+
   // Render other personal information pages
   router.get('/application/:applicationId/personal-information/:view', (req, res) => {
     const { view } = req.params

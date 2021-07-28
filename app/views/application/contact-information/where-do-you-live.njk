@@ -13,7 +13,8 @@
   {% set internationalCountryHtml %}
     {{ appAutocomplete({
       label: {
-        text: "Which country?"
+        text: "Which country?",
+        classes: "govuk-label--m"
       },
       items: countries
     } | decorateApplicationAttributes(["contactInformation", "address", "country"])) }}

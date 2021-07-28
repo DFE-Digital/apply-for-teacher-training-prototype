@@ -81,7 +81,7 @@ const singleLocationCourse = (req) => {
 }
 
 const randomDegreeRequirement = (seed) => {
- switch (Math.floor(Math.random(seed) * 5)) {
+  switch (Math.floor(Math.random(seed) * 5)) {
     case 0:
       return '21'
     case 1:
@@ -113,7 +113,6 @@ module.exports = router => {
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
     const application = utils.applicationData(req)
     const { applicationId, choiceId } = req.params
-    const paths = pickPaths(req)
 
     const selectedCourseProviderCode = providerCode(req)
     const selectedCourseCode = courseCode(req)
@@ -204,10 +203,10 @@ module.exports = router => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
 
-    if (utils.toArray(application.choices).length == 0) {
+    if (utils.toArray(application.choices).length === 0) {
       res.redirect(`/application/${applicationId}/choices/add`)
     } else {
-      res.render(`application/choices/index`)
+      res.render('application/choices/index')
     }
   })
 }

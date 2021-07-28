@@ -24,10 +24,20 @@ module.exports = (env) => {
    *
    * @type {object} object
    */
-  filters.formatAddress = object => {
+  filters.formatAddress = (object, separator = '\n') => {
     if (object) {
+      // Ensure object values are in the correct order before transforming
+      object = {
+        line1: object.line1,
+        line2: object.line2,
+        level2: object.level2,
+        level1: object.level1,
+        postalCode: object.postalCode,
+        country: object.country
+      }
+
       const array = filters.toArray(object)
-      return array.filter(value => value !== '').join('\n')
+      return array.filter(value => value !== '').join(separator)
     }
   }
 

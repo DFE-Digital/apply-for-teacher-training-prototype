@@ -59,7 +59,7 @@
         } if canAmend
       } if data.flags.selfAmendEmailAddress, {
         key: {
-          text: "Address"
+          text: "Contact address"
         },
         value: {
           html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"
@@ -71,7 +71,63 @@
             visuallyHiddenText: "address"
           }]
         } if canAmend
-      }]
+      }, {
+        key: {
+          text: "Have you lived in the UK for longer than 3 years?"
+        },
+        value: {
+          html: applicationValue(["contactInformation", "lengthOfStay"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-information/length-of-stay?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you lived in the UK for longer than 3 years"
+          }]
+        } if canAmend
+      } if applicationValue(["contactInformation", "lengthOfStay"]) and not applicationValue(["contactInformation", "address", "country"]), {
+        key: {
+          text: "Previous country of residence"
+        },
+        value: {
+          html: applicationValue(["contactInformation", "previousAddress", "country"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-information/length-of-stay?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "previous country of residence"
+          }]
+        } if canAmend
+      } if applicationValue(["contactInformation", "lengthOfStay"] == "No") and not applicationValue(["contactInformation", "address", "country"]), {
+        key: {
+          text: "What is your permanent address?"
+        },
+        value: {
+          html: applicationValue(["contactInformation", "contactAddressIsResidence"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-information/permanent-address?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "permanent address"
+          }]
+        } if canAmend
+      } if applicationValue(["contactInformation", "contactAddressIsResidence"]) and applicationValue(["contactInformation", "address", "country"]), {
+        key: {
+          text: "Permanent address"
+        },
+        value: {
+          html: applicationValue(["contactInformation", "permanentAddress"]) | formatAddress | nl2br | safe or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-information/permanent-address?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "permanent address"
+          }]
+        } if canAmend
+      } if applicationValue(["contactInformation", "permanentAddress"]) and applicationValue(["contactInformation", "address", "country"])]
     })
   }) }}
 {% endif %}

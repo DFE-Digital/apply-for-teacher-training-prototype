@@ -67,7 +67,7 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
       type: 'Academic',
-      status: 'Reference given',
+      status: 'Reference selected',
       ready: true,
       log: [{
         note: 'Request sent',
@@ -105,7 +105,7 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'james.m@example.com',
       type: 'Academic',
-      status: 'Reference given',
+      status: 'Reference selected',
       ready: true,
       nudges: 0,
       log: [{
@@ -140,7 +140,7 @@ module.exports = {
   },
   additionalSupportDisclose: 'No',
   safeguardingDisclose: 'No',
-  test: "test",
+  test: 'test',
   degree: {
     abcde: {
       id: 'kq19m',

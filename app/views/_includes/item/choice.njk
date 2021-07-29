@@ -150,7 +150,7 @@
 {% endset %}
 
 {% set gcseRequirementsHtml %}
-  {% if applicationValue(["gcse", "english", "type"]) == "not-yet" %}
+  {% if applicationValue(["gcse", "english", "type"]) == "not-yet" or applicationValue(["gcse", "english", "currentlyRetaking"]) %}
 
     {% set gcseRequirementsWarningHtml %}
       <p class="govuk-heading-s app-inset-text__title">{{ gcseRequirements }}</p>
@@ -159,13 +159,15 @@
         You said
 
         {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
-          you are currently studying for an
+          you are currently studying for a qualification in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' %}
+          you are currently re-taking a GCSE in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'no' %}
+          you do not have grade 4 (C) or above in GCSE English or an equivalent qualification.
         {% else %}
-          you do not have an
+          you do not have a qualification in English.
         {% endif %}
-
-        English qualification
-      .</p>
+      </p>
 
       <p class="govuk-body">You can:</p>
 

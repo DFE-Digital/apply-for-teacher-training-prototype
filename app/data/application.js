@@ -140,7 +140,6 @@ module.exports = {
   },
   additionalSupportDisclose: 'No',
   safeguardingDisclose: 'No',
-  test: 'test',
   degree: {
     abcde: {
       id: 'kq19m',

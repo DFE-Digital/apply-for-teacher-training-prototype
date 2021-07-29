@@ -1,0 +1,96 @@
+{% extends "_form.njk" %}
+
+{% set title = "What is your contact address?" %}
+{% set formaction = referrer if referrer else "/application/" + applicationId + "/contact-information/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer if referrer else "/application/" + applicationId + "/contact-information/international-address"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set contactAddressHtml %}
+    {% call govukFieldset({
+      legend: {
+        text: "Enter your contact address",
+        classes: "govuk-fieldset__legend--m"
+      }
+    }) %}
+      {{ govukInput({
+        label: {
+          html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
+        },
+        autocomplete: "address-line1"
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "line1"])) }}
+
+      {{ govukInput({
+        label: {
+          html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
+        },
+        autocomplete: "address-line2"
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "line2"])) }}
+
+      {{ govukInput({
+        label: {
+          html: "City, town or village"
+        },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "address-level2"
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "level2"])) }}
+
+      {{ govukInput({
+        label: {
+          html: "Region, state or province"
+        },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "address-level1"
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "level1"])) }}
+
+      {{ govukInput({
+        label: {
+          text: "ZIP or postal code"
+        },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "postal-code"
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "postalCode"])) }}
+
+      {{ appAutocomplete({
+        label: {
+          text: "Country"
+        },
+        items: countries
+      } | decorateApplicationAttributes(["contactInformation", "contactAddress", "country"])) }}
+    {% endcall %}
+  {% endset %}
+
+  {{ govukRadios({
+    items: [{
+      text: "Same as my current address",
+      value: "Same as my current address",
+      hint: {
+        text: applicationValue(["contactInformation", "address"]) | formatAddress(", ")
+      }
+    }, {
+      text: "A different address",
+      value: "A different address",
+      conditional: {
+        html: contactAddressHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["contactInformation", "contactAddressIsResidence"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#contactInformation-contactAddress-country'),
+      defaultValue: '{{ applicationValue(["contactInformation", "contactAddress", "country"]) }}'
+    })
+  </script>
+{% endblock %}

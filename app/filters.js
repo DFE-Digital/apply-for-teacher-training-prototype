@@ -24,10 +24,20 @@ module.exports = (env) => {
    *
    * @type {object} object
    */
-  filters.formatAddress = object => {
+  filters.formatAddress = (object, separator = '\n') => {
     if (object) {
+      // Ensure object values are in the correct order before transforming
+      object = {
+        line1: object.line1,
+        line2: object.line2,
+        level2: object.level2,
+        level1: object.level1,
+        postalCode: object.postalCode,
+        country: object.country
+      }
+
       const array = filters.toArray(object)
-      return array.filter(value => value !== '').join('\n')
+      return array.filter(value => value !== '').join(separator)
     }
   }
 
@@ -38,7 +48,9 @@ module.exports = (env) => {
    */
   filters.formatDate = object => {
     if (object) {
-      const date = `${object.year}-${object.month}-${object.day}`
+      const month = object.month.padStart(2, '0')
+      const day = object.day.padStart(2, '0')
+      const date = `${object.year}-${month}-${day}`
 
       return filters.date(date, 'd MMMM yyyy')
     }
@@ -51,8 +63,12 @@ module.exports = (env) => {
    */
   filters.formatNationalities = (object = {}) => {
     if (object) {
+      // Always return an array of selected nationalities, even if only 1 selected
+      let { nationality } = object
+      nationality = nationality instanceof Array ? nationality : [nationality]
+
       // Using slice() to shallow-copy the array rather than referencing the original
-      const nationalities = object.nationality.slice()
+      const nationalities = nationality.slice()
       if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
       if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
       if (object.otherNationality3) { nationalities.push(object.otherNationality3) }

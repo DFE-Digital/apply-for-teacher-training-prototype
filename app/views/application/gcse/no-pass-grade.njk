@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
-{% set title = "You need a " + subject + " GCSE at grade 4 (C) or above, or equivalent" %}
+{% set title = "You need GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}

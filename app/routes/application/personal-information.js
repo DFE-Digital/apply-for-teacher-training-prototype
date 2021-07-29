@@ -16,8 +16,9 @@ module.exports = router => {
     const { applicationId } = req.params
     const application = req.session.data.applications[applicationId]
     const { nationality } = application.candidate
+    const hasOtherNationality = nationality === 'Other' || nationality[0] === 'Other'
 
-    if (nationality[0] === 'Other') {
+    if (hasOtherNationality) {
       res.redirect(`/application/${applicationId}/personal-information/residency?${utils.queryString(req)}`)
     } else {
       // Delete residency status if previously entered
@@ -29,11 +30,8 @@ module.exports = router => {
 
   // Residency question answer branching
   router.post('/application/:applicationId/personal-information/residency', (req, res) => {
-    const { referrer } = req.session.data
     const { applicationId } = req.params
     const application = req.session.data.applications[applicationId]
-    const { nationality } = application.candidate
-
     const answer = application.candidate.residencyDisclose
 
     if (answer === 'yes') {

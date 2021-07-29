@@ -59,7 +59,7 @@
         } if canAmend
       } if data.flags.selfAmendEmailAddress, {
         key: {
-          text: "Current address"
+          text: "Address" if applicationValue(["contactInformation", "addressType"]) == "In the UK" else "Permanent address"
         },
         value: {
           html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"

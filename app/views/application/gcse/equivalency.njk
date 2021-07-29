@@ -8,7 +8,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: referrer or "/application/" + applicationId + "/gcse/" + id + "/not-yet"
   }) }}
 {% endblock %}
 

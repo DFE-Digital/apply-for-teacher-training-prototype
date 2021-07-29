@@ -42,6 +42,30 @@
   {% set gradeHtml = item.gradeOther or item.grade %}
 {% endif %}
 
+{% set currentlyStudyingHtml %}
+  {% if item.currentlyStudying == 'yes' %}
+    {% if item.currentlyStudyingDetails %}
+      {{ item.currentlyStudyingDetails | nl2br | safe }}
+    {% else %}
+      Yes
+    {% endif %}
+  {% else %}
+    No
+  {% endif %}
+{% endset %}
+
+{% set currentlyRetakingHtml %}
+  {% if item.currentlyRetaking == 'yes' %}
+    {% if item.currentlyRetakingDetails %}
+      {{ item.currentlyRetakingDetails | nl2br | safe }}
+    {% else %}
+      Yes
+    {% endif %}
+  {% else %}
+    No
+  {% endif %}
+{% endset %}
+
 {% if missingGcse %}
 
   {{ govukSummaryList({
@@ -58,7 +82,7 @@
     },
     {
       key: { text: "Are you currently studying for this qualification?" },
-      value: { text: (item.currentlyStudying | capitalize) },
+      value: { html: currentlyStudyingHtml },
       actions: {
         items: [{
           href: applicationPath + "/gcse/" + id + "/not-yet",
@@ -66,22 +90,22 @@
           visuallyHiddenText: "whether you are studying for this qualification"
         }]
       } if canAmend
-    },
-    {
+    }, {
       key: {
-        text: ("How I expect to gain this qualification" if item.currentlyStudying == "yes" else "Evidence I have the the skills at the required standard")
+        text: "Other evidence I have the skills required"
       },
       value: {
-        html: (item.missing or "No reason given") | nl2br | safe
+        html: (item.otherEvidence or "Not provided") | nl2br | safe
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/no-pass-grade?referrer=" + referrer,
+          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "year"
+          visuallyHiddenText: "explanation"
         }]
       } if canAmend
-    }]
+    }
+    ]
   }) }}
 {% else %}
   {{ govukSummaryList({
@@ -183,20 +207,31 @@
           visuallyHiddenText: "year"
         }]
       } if canAmend
+    },
+    {
+      key: { text: "Are you currently studying to re-take this qualification?" },
+      value: { html: currentlyRetakingHtml },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/no-pass-grade",
+          text: "Change",
+          visuallyHiddenText: "whether you are re-taking this qualification"
+        }]
+      } if canAmend
     }, {
       key: {
-        text: "How I meet the requirement for grade 4 (C) or above"
+        text: "Other evidence I have the skills required"
       },
       value: {
-        html: (item.missing or "No reason given") | nl2br | safe
+        html: (item.otherEvidence or "Not provided") | nl2br | safe
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/no-pass-grade?referrer=" + referrer,
+          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
       } if canAmend
-    } if item.missing and not hasElligibleGrade]
+    } if item.currentlyRetaking == 'no']
   }) }}
 {% endif %}

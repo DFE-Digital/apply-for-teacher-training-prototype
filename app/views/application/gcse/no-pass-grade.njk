@@ -3,6 +3,7 @@
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "You need a GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/gcse/" + id + "/currently-retaking" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -23,7 +24,7 @@
         },
         maxwords: 200,
         rows: 6
-      } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
+      } | decorateApplicationAttributes(["gcse", id, "currentlyRetakingDetails"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -43,7 +44,7 @@
       text: "No",
       value: "no"
     }
-    ]} | decorateApplicationAttributes(["gcse", id, "currentlyStudying"])) }}
+    ]} | decorateApplicationAttributes(["gcse", id, "currentlyRetaking"])) }}
 
   {{ govukButton({
     text: "Save and continue"

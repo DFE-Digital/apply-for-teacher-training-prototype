@@ -113,6 +113,21 @@ module.exports = router => {
     res.redirect(path)
   })
 
+   // Routing for 'Are you currently retaking your {subject} qualification?'
+  router.post('/application/:applicationId/gcse/:id/currently-retaking', (req, res) => {
+    const { applicationId, id } = req.params
+
+    const answer = utils.applicationData(req).gcse[id].currentlyRetaking
+    let path
+    if (answer == 'yes') {
+      path = `/application/${applicationId}/gcse/${id}/review`
+    } else {
+      path = `/application/${applicationId}/gcse/${id}/equivalency`
+    }
+
+    res.redirect(path)
+  })
+
 
   // Render equivalency page
   router.get('/application/:applicationId/gcse/:id/equivalency', (req, res) => {

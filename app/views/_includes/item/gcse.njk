@@ -56,11 +56,7 @@
 
 {% set currentlyRetakingHtml %}
   {% if item.currentlyRetaking == 'yes' %}
-    {% if item.currentlyRetakingDetails %}
-      {{ item.currentlyRetakingDetails | nl2br | safe }}
-    {% else %}
-      Yes
-    {% endif %}
+    Yes
   {% else %}
     No
   {% endif %}

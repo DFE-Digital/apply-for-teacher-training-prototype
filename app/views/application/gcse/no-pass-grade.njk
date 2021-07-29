@@ -16,17 +16,6 @@
 
   <p class="govuk-body">For advice, speak to a <a href="https://adviser-getintoteaching.education.gov.uk">teacher training adviser</a>.</p>
 
-  {% set studyingForQualificationHtml %}
-    {{ govukCharacterCount({
-        label: {
-          classes: "govuk-label--s",
-          html: "Details of the qualification you are studying for"
-        },
-        maxwords: 200,
-        rows: 6
-      } | decorateApplicationAttributes(["gcse", id, "currentlyRetakingDetails"])) }}
-  {% endset %}
-
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -37,8 +26,8 @@
     items: [{
       text: "Yes",
       value: "yes",
-      conditional: {
-        html: studyingForQualificationHtml
+      hint: {
+        text: "This must be completed before you start your teacher training course."
       }
     }, {
       text: "No",

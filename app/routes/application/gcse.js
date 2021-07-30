@@ -24,7 +24,7 @@ const gcseData = (req) => {
 }
 
 const isInternational = (req) => gcseData(req).type === 'Non-UK qualification'
-const isMissing = (req) => gcseData(req).type === 'I don’t have this qualification yet'
+const isMissing = (req) => gcseData(req).type === 'not-yet'
 const isFailGrade = (req) => {
   const grade = enteredGrade(gcseData(req))
   return gcseData(req).type === 'GCSE' && !passGrades.includes(grade)
@@ -89,8 +89,60 @@ module.exports = router => {
     })
   })
 
+  // Render 'no qualification yet' page
+  router.get('/application/:applicationId/gcse/:id/not-yet', (req, res) => {
+    const { id } = req.params
+
+    res.render('application/gcse/not-yet', {
+      id
+    })
+  })
+
+  // Routing for 'Are you currently studying for an {subject} qualification?'
+  router.post('/application/:applicationId/gcse/:id/not-yet', (req, res) => {
+    const { applicationId, id } = req.params
+
+    const answer = utils.applicationData(req).gcse[id].currentlyStudying
+    let path
+    if (answer == 'yes') {
+      path = `/application/${applicationId}/gcse/${id}/review`
+    } else {
+      path = `/application/${applicationId}/gcse/${id}/equivalency`
+    }
+
+    res.redirect(path)
+  })
+
+   // Routing for 'Are you currently retaking your {subject} qualification?'
+  router.post('/application/:applicationId/gcse/:id/currently-retaking', (req, res) => {
+    const { applicationId, id } = req.params
+
+    const answer = utils.applicationData(req).gcse[id].currentlyRetaking
+    let path
+    if (answer == 'yes') {
+      path = `/application/${applicationId}/gcse/${id}/review`
+    } else {
+      path = `/application/${applicationId}/gcse/${id}/equivalency`
+    }
+
+    res.redirect(path)
+  })
+
+
+  // Render equivalency page
+  router.get('/application/:applicationId/gcse/:id/equivalency', (req, res) => {
+    const { applicationId, id } = req.params
+
+    res.render('application/gcse/equivalency', {
+      id
+    })
+  })
+
+
+
   // GCSE type answer branching
   router.post('/application/:applicationId/gcse/:id/answer', (req, res) => {
+
     const { applicationId, id } = req.params
     const { referrer } = req.query
 
@@ -98,7 +150,8 @@ module.exports = router => {
     if (isInternational(req)) {
       path = `/application/${applicationId}/gcse/${id}/country`
     } else if (isMissing(req)) {
-      path = referrer || `/application/${applicationId}/gcse/${id}/review`
+      path = `/application/${applicationId}/gcse/${id}/not-yet`
+      // path = referrer || `/application/${applicationId}/gcse/${id}/review`
     } else {
       path = `/application/${applicationId}/gcse/${id}/grade`
     }

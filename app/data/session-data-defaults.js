@@ -10,6 +10,19 @@ applicationWhereNotMeetingMinimiumDegreeRequirement.choices.FGHIJ.degreeRequired
 applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ZYXWV.degreeRequired = 'third'
 applicationWhereNotMeetingMinimiumDegreeRequirement.degree.abcde.grade = 'Third-class honours'
 
+
+applicationWhereStudyingForGcse =  JSON.parse(JSON.stringify(require('./application')))
+
+applicationWhereStudyingForGcse.gcse.english.type = 'not-yet'
+applicationWhereStudyingForGcse.gcse.english.currentlyStudying = 'yes'
+applicationWhereStudyingForGcse.gcse.english.missing = 'I am currently studying for a GCSE English part-time.'
+
+applicationWithNoGcse =  JSON.parse(JSON.stringify(require('./application')))
+
+applicationWithNoGcse.gcse.english.type = 'not-yet'
+applicationWithNoGcse.gcse.english.currentlyStudying = 'no'
+applicationWithNoGcse.gcse.english.missing = 'I have been working in publishing for 10 years, and can demonstrate my English through an equivalency test'
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -21,7 +34,9 @@ module.exports = {
     GLOBE: require('./application-international'),
     WORLD: require('./application-international-with-choices'),
     21234: internationalApplicationNoRightToStudyYet,
-    52614: applicationWhereNotMeetingMinimiumDegreeRequirement
+    52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
+    21235: applicationWhereStudyingForGcse,
+    21236: applicationWithNoGcse
   },
   findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {

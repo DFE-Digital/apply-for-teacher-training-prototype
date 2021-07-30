@@ -3,9 +3,9 @@
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set type = applicationValue(["gcse", id, "type"]) %}
 {% if type == "GCSE" and id == "english" %}
-  {% set title = "What English GCSE did you do?" %}
+  {% set title = "Which GCSEs in English do you have?" %}
 {% elif type == "GCSE" and id == "science" %}
-  {% set title = "What science GCSEs did you do?" %}
+  {% set title = "Which science GCSEs did you do?" %}
 {% elif type == "GCSE" or type == "O level" or type == "Scottish National 5" %}
   {% set title = "What grade is your " + subject + " " + type + "?" %}
 {% else %}
@@ -135,14 +135,7 @@
         }]
       } | decorateApplicationAttributes(["gcse", id, "exam"])) }}
     {% elif id == "english" %}
-      <p class="govuk-body">An English Language GCSE is preferred.</p>
       {{ govukCheckboxes({
-        fieldset: {
-          legend: {
-            classes: "govuk-fieldset__legend--m",
-            text: "Select the GCSE(s) you did and include your grade"
-          }
-        },
         items: [{
           value: "English",
           text: "English",
@@ -178,8 +171,8 @@
             })
           }
         }, {
-          value: "Other English subject",
-          text: "Other English subject",
+          value: "Another English subject",
+          text: "Another English subject",
           conditional: {
             html: otherEnglishSubjectHtml
           }

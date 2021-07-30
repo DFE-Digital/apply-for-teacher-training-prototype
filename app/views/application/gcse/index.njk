@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 
 {% set action = "edit" if applicationValue(["gcse", id, "type"]) else "add" %}
 {% set subject = (id | capitalize) if id == "english" else id %}
@@ -18,76 +18,82 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
-  {% set otherUkConditionalHtml %}
-    {{ govukInput({
-      label: {
-        text: "Enter type of qualification"
-      }
-    } | decorateApplicationAttributes(["gcse", id, "typeUk"])) }}
-  {% endset %}
+{% block content %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
 
-  {% set nonUkConditionalHtml %}
-    {{ govukInput({
-      label: {
-        text: "Enter type of qualification"
-      },
-      hint: {
-        html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
-      }
-    } | decorateApplicationAttributes(["gcse", id, "typeNonUk"])) }}
-  {% endset %}
+        {% set otherUkConditionalHtml %}
+          {{ govukInput({
+            label: {
+              text: "Type of qualification"
+            }
+          } | decorateApplicationAttributes(["gcse", id, "typeUk"])) }}
+        {% endset %}
 
-  {% set missingConditionalHtml %}
-    <p class="govuk-hint">You can still apply for teacher training if you are missing this qualification or its equivalent. However, it will need to be in place by the start of your course.</p>
-    <p class="govuk-hint">For advice, contact your chosen training provider or <a href="https://getintoteaching.education.gov.uk/get-help-and-support/">Get Into Teaching</a>.</p>
-    {{ govukCharacterCount({
-      label: {
-        classes: "govuk-label--s",
-        html: "If you are working towards this qualification, give us details (optional)"
-      },
-      maxwords: 200,
-      rows: 12
-    } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
-  {% endset -%}
+        {% set nonUkConditionalHtml %}
+          {{ govukInput({
+            label: {
+              text: "Type of qualification"
+            },
+            hint: {
+              html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
+            }
+          } | decorateApplicationAttributes(["gcse", id, "typeNonUk"])) }}
+        {% endset %}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "What type of qualification do you want to add?",
-        classes: "govuk-label--m"
-      },
-      attributes: {
-        "data-module": "clear-hidden"
-      }
-    },
-    items: [{
-      text: "GCSE"
-    }, {
-      text: "O level"
-    }, {
-      text: "Scottish National 5"
-    }, {
-      text: "Other UK qualification",
-      conditional: {
-        html: otherUkConditionalHtml
-      }
-    }, {
-      text: "Non-UK qualification",
-      conditional: {
-        html: nonUkConditionalHtml
-      }
-    }, {
-      divider: "or"
-    }, {
-      text: "I don’t have this qualification yet",
-      conditional: {
-        html: missingConditionalHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["gcse", id, "type"])) }}
+        {% set missingConditionalHtml %}
+          <p class="govuk-hint">You can still apply for teacher training if you are missing this qualification or its equivalent. However, it will need to be in place by the start of your course.</p>
+          <p class="govuk-hint">For advice, contact your chosen training provider or <a href="https://getintoteaching.education.gov.uk/get-help-and-support/">Get Into Teaching</a>.</p>
+          {{ govukCharacterCount({
+            label: {
+              classes: "govuk-label--s",
+              html: "If you are working towards this qualification, give us details (optional)"
+            },
+            maxwords: 200,
+            rows: 12
+          } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
+        {% endset -%}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "What type of qualification in " + subject + " do you have?",
+              classes: "govuk-label--l",
+              isPageTitle: true
+            },
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            text: "GCSE"
+          }, {
+            text: "O level"
+          }, {
+            text: "Scottish National 5"
+          }, {
+            text: "Another UK qualification",
+            conditional: {
+              html: otherUkConditionalHtml
+            }
+          }, {
+            text: "A non-UK qualification",
+            conditional: {
+              html: nonUkConditionalHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            text: "I don’t have " + ("an " + subject if subject == 'English' else 'a ' + subject) + " qualification yet",
+            value: "not-yet"
+          }]
+        } | decorateApplicationAttributes(["gcse", id, "type"])) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
 {% endblock %}

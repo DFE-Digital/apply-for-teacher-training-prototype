@@ -16,7 +16,7 @@ const enteredGrade = (gcse) => {
 
 const gcseData = (req) => {
   const application = utils.applicationData(req)
-  if (application.gcse[req.params.id]) {
+  if (application.gcse && application.gcse[req.params.id]) {
     return application.gcse[req.params.id]
   }
 

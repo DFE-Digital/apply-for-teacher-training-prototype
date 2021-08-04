@@ -3,7 +3,7 @@ const utils = require('./../../utils')
 
 const degreeData = (req) => {
   const application = utils.applicationData(req)
-  if (application.degree[req.params.id]) {
+  if (application.degree && application.degree[req.params.id]) {
     return application.degree[req.params.id]
   }
 

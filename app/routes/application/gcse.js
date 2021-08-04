@@ -104,7 +104,7 @@ module.exports = router => {
 
     const answer = utils.applicationData(req).gcse[id].currentlyStudying
     let path
-    if (answer == 'yes') {
+    if (answer === 'yes') {
       path = `/application/${applicationId}/gcse/${id}/review`
     } else {
       path = `/application/${applicationId}/gcse/${id}/equivalency`
@@ -113,13 +113,13 @@ module.exports = router => {
     res.redirect(path)
   })
 
-   // Routing for 'Are you currently retaking your {subject} qualification?'
+  // Routing for 'Are you currently retaking your {subject} qualification?'
   router.post('/application/:applicationId/gcse/:id/currently-retaking', (req, res) => {
     const { applicationId, id } = req.params
 
     const answer = utils.applicationData(req).gcse[id].currentlyRetaking
     let path
-    if (answer == 'yes') {
+    if (answer === 'yes') {
       path = `/application/${applicationId}/gcse/${id}/review`
     } else {
       path = `/application/${applicationId}/gcse/${id}/equivalency`
@@ -128,23 +128,19 @@ module.exports = router => {
     res.redirect(path)
   })
 
-
   // Render equivalency page
   router.get('/application/:applicationId/gcse/:id/equivalency', (req, res) => {
-    const { applicationId, id } = req.params
+    const { id } = req.params
 
     res.render('application/gcse/equivalency', {
       id
     })
   })
 
-
-
   // GCSE type answer branching
   router.post('/application/:applicationId/gcse/:id/answer', (req, res) => {
-
     const { applicationId, id } = req.params
-    const { referrer } = req.query
+    // const { referrer } = req.query
 
     let path
     if (isInternational(req)) {

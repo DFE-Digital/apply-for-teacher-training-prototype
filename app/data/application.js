@@ -132,6 +132,7 @@ module.exports = {
     addressType: 'domestic',
     address: {
       line1: '5 Claremont Road',
+      line2: '',
       level2: 'Pudsey',
       level1: 'West Yorkshire',
       country: 'United Kingdom',

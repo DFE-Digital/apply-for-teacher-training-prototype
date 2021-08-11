@@ -1,7 +1,7 @@
 
 // Copies dummy application and tweaks some fields
 const internationalApplicationNoRightToStudyYet = JSON.parse(JSON.stringify(require('./application-international')))
-internationalApplicationNoRightToStudyYet.candidate.residencyDisclose = 'I will need to apply for permission to work or study in the UK'
+internationalApplicationNoRightToStudyYet.candidate.residencyDisclose = 'no'
 internationalApplicationNoRightToStudyYet.candidate.residency = ''
 
 const applicationWhereNotMeetingMinimiumDegreeRequirement = JSON.parse(JSON.stringify(require('./application')))

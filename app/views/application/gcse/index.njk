@@ -66,6 +66,9 @@
               "data-module": "clear-hidden"
             }
           },
+          hint: {
+            text: "This should be different from an English as a foreign language qualification."
+          } if subject == "English",
           items: [{
             text: "GCSE"
           }, {
@@ -85,7 +88,7 @@
           }, {
             divider: "or"
           }, {
-            text: "I don’t have " + ("an " + subject if subject == 'English' else 'a ' + subject) + " qualification yet",
+            text: "I do not have a GCSE in " + subject + " (or equivalent) yet",
             value: "not-yet"
           }]
         } | decorateApplicationAttributes(["gcse", id, "type"])) }}

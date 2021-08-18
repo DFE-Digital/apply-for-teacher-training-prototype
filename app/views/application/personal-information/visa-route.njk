@@ -4,7 +4,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/residency")
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/immigration")
   }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@
             },
             maxwords: 200,
             rows: 5
-          } | decorateApplicationAttributes(["candidate", "residencyRouteDetails"])) }}
+          } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
         {% endset -%}
 
         {{ govukRadios({
@@ -48,7 +48,7 @@
               html: otherRouteHtml
             }
           }]
-        } | decorateApplicationAttributes(["candidate", "residencyRoute"])) }}
+        } | decorateApplicationAttributes(["candidate", "visaRoute"])) }}
 
         {{ govukButton({
           text: "Save and continue"

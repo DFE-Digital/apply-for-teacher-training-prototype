@@ -1,8 +1,8 @@
 
 // Copies dummy application and tweaks some fields
 const internationalApplicationNoRightToStudyYet = JSON.parse(JSON.stringify(require('./application-international')))
-internationalApplicationNoRightToStudyYet.candidate.residencyDisclose = 'no'
-internationalApplicationNoRightToStudyYet.candidate.residency = ''
+internationalApplicationNoRightToStudyYet.candidate.immigration = 'Not yet'
+internationalApplicationNoRightToStudyYet.candidate.immigrationStatusDetails = ''
 
 const applicationWhereNotMeetingMinimiumDegreeRequirement = JSON.parse(JSON.stringify(require('./application')))
 applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ABCDE.degreeRequired = '21'
@@ -10,15 +10,12 @@ applicationWhereNotMeetingMinimiumDegreeRequirement.choices.FGHIJ.degreeRequired
 applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ZYXWV.degreeRequired = 'third'
 applicationWhereNotMeetingMinimiumDegreeRequirement.degree.abcde.grade = 'Third-class honours'
 
-
-applicationWhereStudyingForGcse =  JSON.parse(JSON.stringify(require('./application')))
-
+const applicationWhereStudyingForGcse = JSON.parse(JSON.stringify(require('./application')))
 applicationWhereStudyingForGcse.gcse.english.type = 'not-yet'
 applicationWhereStudyingForGcse.gcse.english.currentlyStudying = 'yes'
 applicationWhereStudyingForGcse.gcse.english.missing = 'I am currently studying for a GCSE English part-time.'
 
-applicationWithNoGcse =  JSON.parse(JSON.stringify(require('./application')))
-
+const applicationWithNoGcse = JSON.parse(JSON.stringify(require('./application')))
 applicationWithNoGcse.gcse.english.type = 'not-yet'
 applicationWithNoGcse.gcse.english.currentlyStudying = 'no'
 applicationWithNoGcse.gcse.english.missing = 'I have been working in publishing for 10 years, and can demonstrate my English through an equivalency test'

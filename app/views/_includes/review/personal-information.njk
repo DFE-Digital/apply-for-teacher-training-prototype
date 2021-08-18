@@ -26,23 +26,24 @@
     }
   }) if not completed and showIncomplete }}
 
-  {% set residencyText %}
+  {% set immigrationStatusText %}
     <p class="govuk-body">
-      {% if applicationValue(["candidate", "residencyDisclose"]) == 'yes' %}
-        {{ applicationValue(["candidate", "residency"]) }}
+      {% if applicationValue(["candidate", "immigrationStatusDetails"]) %}
+        {{ applicationValue(["candidate", "immigrationStatusDetails"]) }}
       {% else %}
-        Not yet
+        {{ applicationValue(["candidate", "immigrationStatus"]) }}
       {% endif %}
     </p>
   {% endset %}
 
-  {% set residencyRouteText %}
-
-    {% if applicationValue(["candidate", "residencyRoute"]) == 'sponsorship' %}
-      <p class="govuk-body">A visa sponsored by a course provider</p>
-    {% else %}
-      <p class="govuk-body">{{ applicationValue(["candidate", "residencyRouteDetails"]) }}</p>
-    {% endif %}
+  {% set visaRouteText %}
+    <p class="govuk-body">
+      {% if applicationValue(["candidate", "visaRoute"]) == "sponsorship" %}
+        A visa sponsored by a course provider.
+      {% else %}
+        {{ applicationValue(["candidate", "visaRouteDetails"]) }}
+      {% endif %}
+    </p>
   {% endset %}
 
   {{ appSummaryCard({
@@ -95,31 +96,44 @@
           text: "Do you have the right to work or study in the UK?"
         },
         value: {
-          html: residencyText
+          text: applicationValue(["candidate", "immigration"])
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-information/residency?referrer=" + referrer,
+            href: applicationPath + "/personal-information/immigration?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you have the right to work or study in the UK"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "immigration"]), {
+        key: {
+          text: "Immigration status"
+        },
+        value: {
+          html: immigrationStatusText
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-information/immigration-status?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "immigration status"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "residencyDisclose"]),
-      {
+      } if applicationValue(["candidate", "immigration"]) == "Yes" and applicationValue(["candidate", "immigrationStatus"]), {
         key: {
           text: "How will you gain the right to work or study in the UK?"
         },
         value: {
-          html: residencyRouteText
+          html: visaRouteText
         },
         actions: {
           items: [{
-            href: applicationPath + "/personal-information/residency-sponsorship?referrer=" + referrer,
+            href: applicationPath + "/personal-information/visa-route?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "how you will gain the right to work or study in the UK"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "residencyRoute"])
+      } if applicationValue(["candidate", "immigration"]) == "Not yet" and applicationValue(["candidate", "visaRoute"])
       ]
     })
   }) }}

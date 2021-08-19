@@ -119,7 +119,21 @@
             visuallyHiddenText: "immigration status"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == "Yes" and applicationValue(["candidate", "immigrationStatus"]), {
+      } if applicationValue(["candidate", "immigration"]) == "Yes" and applicationValue(["candidate", "immigrationStatus"]) or applicationValue(["candidate", "immigrationStatusDetails"]), {
+        key: {
+          text: "Date of entry into the UK"
+        },
+        value: {
+          text: applicationValue(["candidate", "dateOfEntry"]) | formatDate or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-information/date-of-entry?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "date of entry into the UK"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "immigration"]) == "Yes", {
         key: {
           text: "How will you gain the right to work or study in the UK?"
         },

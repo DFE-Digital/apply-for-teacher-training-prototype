@@ -19,12 +19,17 @@ module.exports = router => {
     const hasOtherNationality = nationality === 'Other' || nationality[0] === 'Other'
 
     if (hasOtherNationality) {
+      // Delete lengthOfStay if previously entered
+      delete application.candidate.lengthOfStay
+
       res.redirect(`/application/${applicationId}/personal-information/immigration?${utils.queryString(req)}`)
     } else {
       // Delete immigration status if previously entered
       delete application.candidate.immigration
+      delete application.candidate.immigrationStatus
+      delete application.candidate.immigrationStatusDetails
 
-      res.redirect(referrer || `/application/${applicationId}/personal-information/review`)
+      res.redirect(referrer || `/application/${applicationId}/personal-information/length-of-stay`)
     }
   })
 

@@ -93,6 +93,20 @@
         } if canAmend
       }, {
         key: {
+          text: "Have you lived in the UK for 3 years or more?"
+        },
+        value: {
+          html: applicationValue(["candidate", "lengthOfStay"]) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/personal-information/length-of-stay?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if lived in the UK for 3 years or more"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "lengthOfStay"]), {
+        key: {
           text: "Do you have the right to work or study in the UK?"
         },
         value: {

@@ -1,0 +1,36 @@
+{% extends "_form.njk" %}
+
+{% set title = "Will you have you lived in the UK for 3 years or more by the time your teacher training course starts?" %}
+{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer if referrer else "/application/" + applicationId + "/personal-information/nationality"
+  }) }}
+{% endblock %}
+
+{% block formBody %}
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: title,
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      }
+    },
+    hint: {
+      text: 'Something about this also including EEA and abroad temporarily.'
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No"
+    }]
+  } | decorateApplicationAttributes(["candidate", "lengthOfStay"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

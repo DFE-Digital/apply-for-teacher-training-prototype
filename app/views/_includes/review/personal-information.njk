@@ -30,8 +30,10 @@
     <p class="govuk-body">
       {% if applicationValue(["candidate", "immigrationStatusDetails"]) %}
         {{ applicationValue(["candidate", "immigrationStatusDetails"]) }}
-      {% else %}
+      {% elif applicationValue(["candidate", "immigrationStatus"]) %}
         {{ applicationValue(["candidate", "immigrationStatus"]) }}
+      {% else %}
+        Not entered
       {% endif %}
     </p>
   {% endset %}
@@ -93,7 +95,7 @@
         } if canAmend
       }, {
         key: {
-          text: "Have you lived in the UK for 3 years or more?"
+          text: "Lived in the UK in the 3 years before your course starts"
         },
         value: {
           html: applicationValue(["candidate", "lengthOfStay"]) or "Not entered"
@@ -133,7 +135,7 @@
             visuallyHiddenText: "immigration status"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == "Yes" and applicationValue(["candidate", "immigrationStatus"]) or applicationValue(["candidate", "immigrationStatusDetails"]), {
+      } if applicationValue(["candidate", "immigration"]) == "Yes", {
         key: {
           text: "Date of entry into the UK"
         },
@@ -149,7 +151,7 @@
         } if canAmend
       } if applicationValue(["candidate", "immigration"]) == "Yes", {
         key: {
-          text: "How will you gain the right to work or study in the UK?"
+          text: "How will you get the right to work or study in the UK?"
         },
         value: {
           html: visaRouteText

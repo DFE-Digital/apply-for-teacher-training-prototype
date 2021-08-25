@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Will you have you lived in the UK for 3 years or more by the time your teacher training course starts?" %}
+{% set title = "Will you have lived in the UK in the 3 years before your teacher training starts?" %}
 {% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
 
 {% block pageNavigation %}
@@ -19,7 +19,7 @@
       }
     },
     hint: {
-      text: 'Something about this also including EEA and abroad temporarily.'
+      text: 'This includes any time spent temporarily in the EU, EEA or Gibraltar.'
     },
     items: [{
       value: "Yes",

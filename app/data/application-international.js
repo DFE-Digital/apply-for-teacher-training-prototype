@@ -124,8 +124,8 @@ module.exports = {
     },
     nationality: ['Other'],
     otherNationality1: 'French',
-    residencyDisclose: 'I have the right to work or study in the UK',
-    residency: 'I have EU Settled Status'
+    immigration: 'Yes',
+    immigrationStatus: 'EU settled status'
   },
   contactInformation: {
     tel: '07944 386555',

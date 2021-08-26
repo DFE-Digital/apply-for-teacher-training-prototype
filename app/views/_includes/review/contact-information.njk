@@ -59,7 +59,7 @@
         } if canAmend
       } if data.flags.selfAmendEmailAddress, {
         key: {
-          text: "Address" if applicationValue(["contactInformation", "addressType"]) == "In the UK" else "Permanent address"
+          text: "Address"
         },
         value: {
           html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"
@@ -72,48 +72,6 @@
           }]
         } if canAmend
       }, {
-        key: {
-          text: "Have you lived in the UK for longer than 3 years?"
-        },
-        value: {
-          html: applicationValue(["contactInformation", "lengthOfStay"]) or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information/length-of-stay?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if you lived in the UK for longer than 3 years"
-          }]
-        } if canAmend
-      } if applicationValue(["contactInformation", "lengthOfStay"]) and not applicationValue(["contactInformation", "address", "country"]), {
-        key: {
-          text: "Previous country of residence"
-        },
-        value: {
-          html: applicationValue(["contactInformation", "previousAddress", "country"]) or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information/length-of-stay?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "previous country of residence"
-          }]
-        } if canAmend
-      } if applicationValue(["contactInformation", "lengthOfStay"] == "No") and applicationValue(["contactInformation", "previousAddress", "country"]), {
-        key: {
-          text: "What is your contact address?"
-        },
-        value: {
-          html: applicationValue(["contactInformation", "contactAddressIsResidence"]) or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information/contact-address?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "contact address"
-          }]
-        } if canAmend
-      } if applicationValue(["contactInformation", "address", "country"]) and applicationValue(["contactInformation", "contactAddressIsResidence"]), {
         key: {
           text: "Contact address"
         },

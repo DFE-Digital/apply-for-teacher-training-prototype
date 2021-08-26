@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "What is your permanent address?" %}
-{% set formaction = "/application/" + applicationId + "/contact-information/contact-address" %}
+{% set title = "What is your address?" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/review" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,8 +10,6 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body govuk-!-margin-bottom-8">This is the address where you normally live. It may be different from your term-time address.</p>
-
   {{ govukInput({
     label: {
       html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"

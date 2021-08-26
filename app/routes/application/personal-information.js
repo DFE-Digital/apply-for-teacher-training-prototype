@@ -19,26 +19,53 @@ module.exports = router => {
     const hasOtherNationality = nationality === 'Other' || nationality[0] === 'Other'
 
     if (hasOtherNationality) {
-      res.redirect(`/application/${applicationId}/personal-information/residency?${utils.queryString(req)}`)
-    } else {
-      // Delete residency status if previously entered
-      delete application.candidate.residency
+      // Delete lengthOfStay if previously entered
+      delete application.candidate.lengthOfStay
 
-      res.redirect(referrer || `/application/${applicationId}/personal-information/review`)
+      res.redirect(`/application/${applicationId}/personal-information/immigration?${utils.queryString(req)}`)
+    } else {
+      // Delete immigration status if previously entered
+      delete application.candidate.immigration
+      delete application.candidate.immigrationStatus
+      delete application.candidate.immigrationStatusDetails
+
+      res.redirect(referrer || `/application/${applicationId}/personal-information/length-of-stay`)
     }
   })
 
-  // Residency question answer branching
-  router.post('/application/:applicationId/personal-information/residency', (req, res) => {
+  // Immigration question answer branching
+  router.post('/application/:applicationId/personal-information/immigration', (req, res) => {
     const { applicationId } = req.params
     const application = req.session.data.applications[applicationId]
-    const answer = application.candidate.residencyDisclose
+    const answer = application.candidate.immigration
 
-    if (answer === 'yes') {
-      res.redirect(`/application/${applicationId}/personal-information/review`)
+    if (answer === 'Yes') {
+      res.redirect(`/application/${applicationId}/personal-information/immigration-status`)
     } else {
-      res.redirect(`/application/${applicationId}/personal-information/residency-sponsorship`)
+      res.redirect(`/application/${applicationId}/personal-information/visa-route`)
     }
+  })
+
+  // Render immigration status page
+  router.get('/application/:applicationId/personal-information/immigration-status', (req, res) => {
+    const { referrer } = req.query
+    const { applicationId } = req.params
+    const application = req.session.data.applications[applicationId]
+    const { otherNationality1 } = application.candidate
+    const europeanNationalities = [
+      // EU (excluding Ireland)
+      'Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Italian', 'Latvian', 'Lithuanian', 'Luxembourger', 'Maltese', 'Dutch', 'Polish', 'Portuguese', 'Romanian', 'Slovakian', 'Slovenian', 'Spanish', 'Swedish',
+      // EEA
+      'Icelandic', 'Liechtenstein citizen', 'Norwegian',
+      // Switzerland
+      'Swiss'
+    ]
+    const isEuropeanCitizen = europeanNationalities.includes(otherNationality1)
+
+    res.render('application/personal-information/immigration-status', {
+      referrer,
+      isEuropeanCitizen
+    })
   })
 
   // Render other personal information pages

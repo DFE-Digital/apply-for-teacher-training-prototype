@@ -10,14 +10,14 @@ module.exports = router => {
     })
   })
 
-  // Address type answer branching
+  // Contact address type answer branching
   router.all('/application/:applicationId/contact-information/where-do-you-live/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const location = application.contactInformation.addressType
+    const { addressType } = application.contactInformation
     const { addressLookup } = req.session.data.flags
 
-    if (location === 'domestic') {
+    if (addressType === 'domestic') {
       if (addressLookup) {
         res.redirect(`/application/${applicationId}/contact-information/lookup-address`)
       } else {
@@ -25,6 +25,32 @@ module.exports = router => {
       }
     } else {
       res.redirect(`/application/${applicationId}/contact-information/international-address`)
+    }
+  })
+
+  // Second address type answer branching
+  router.all('/application/:applicationId/contact-information/second-address/answer', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+    const { secondAddress } = application.contactInformation
+
+    if (secondAddress === 'contactAddess') {
+      res.redirect(`/application/${applicationId}/contact-information/review`)
+    } else {
+      res.redirect(`/application/${applicationId}/contact-information/where-is-your-permanent-address`)
+    }
+  })
+
+  // Permanent address type answer branching
+  router.all('/application/:applicationId/contact-information/where-is-your-permanent-address/answer', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+    const { permanentAddressType } = application.contactInformation
+
+    if (permanentAddressType === 'domestic') {
+      res.redirect(`/application/${applicationId}/contact-information/uk-permanent-address`)
+    } else {
+      res.redirect(`/application/${applicationId}/contact-information/international-permanent-address`)
     }
   })
 

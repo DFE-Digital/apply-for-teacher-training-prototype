@@ -1,7 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "Where do you currently live?" %}
-{% set formaction = "/application/" + applicationId + "/contact-information/where-do-you-live/answer" %}
+{% set title = "Where is your permanent address?" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/where-is-your-permanent-address/answer" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -17,7 +17,7 @@
         classes: "govuk-label--m"
       },
       items: countries
-    } | decorateApplicationAttributes(["contactInformation", "address", "country"])) }}
+    } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "country"])) }}
   {% endset %}
 
   {{ govukRadios({
@@ -31,7 +31,7 @@
         html: internationalCountryHtml
       }
     }]
-  } | decorateApplicationAttributes(["contactInformation", "addressType"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddressType"])) }}
 
   {{ govukButton({
     text: "Save and continue"
@@ -42,8 +42,8 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#contactInformation-address-country'),
-      defaultValue: '{{ applicationValue(["contactInformation", "address", "country"]) }}'
+      selectElement: document.querySelector('#contactInformation-permanentAddress-country'),
+      defaultValue: '{{ applicationValue(["contactInformation", "permanentAddress", "country"]) }}'
     })
   </script>
 {% endblock %}

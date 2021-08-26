@@ -1,12 +1,7 @@
 {% extends "_form.njk" %}
 
-{% set title = "What is your address?" %}
-
-{% if not referrer and not applicationValue(["contactInformation", "secondAddress"]) %}
-  {% set formaction = "/application/" + applicationId + "/contact-information/second-address" %}
-{% else %}
-  {% set formaction = "/application/" + applicationId + "/contact-information/review" %}
-{% endif %}
+{% set title = "What is your permanent address?" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/review" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -20,14 +15,14 @@
       html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
     },
     autocomplete: "address-line1"
-  } | decorateApplicationAttributes(["contactInformation", "address", "line1"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "line1"])) }}
 
   {{ govukInput({
     label: {
       html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
     },
     autocomplete: "address-line2"
-  } | decorateApplicationAttributes(["contactInformation", "address", "line2"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "line2"])) }}
 
   {{ govukInput({
     label: {
@@ -35,7 +30,7 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level2"
-  } | decorateApplicationAttributes(["contactInformation", "address", "level2"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "level2"])) }}
 
   {{ govukInput({
     label: {
@@ -43,7 +38,7 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "address-level1"
-  } | decorateApplicationAttributes(["contactInformation", "address", "level1"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "level1"])) }}
 
   {{ govukInput({
     label: {
@@ -51,11 +46,11 @@
     },
     classes: "govuk-!-width-two-thirds",
     autocomplete: "postal-code"
-  } | decorateApplicationAttributes(["contactInformation", "address", "postalCode"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddress", "postalCode"])) }}
 
-  {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where do you live’ page #}
+  {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where is your permanent address?’ page #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contactInformation][addressType]",
+    name: "applications[" + applicationId + "][contactInformation][permanentAddressType]",
     type: "hidden",
     value: "international"
   }) }}

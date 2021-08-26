@@ -1,6 +1,14 @@
 {% set completed = applicationValue(["completed", "contactInformation"]) %}
 {% set entered = applicationValue(["contactInformation", "tel"]) %}
 
+{% set permanentAddressHtml %}
+  {% if applicationValue(["contactInformation", "secondAddress"]) == "contactAddess" %}
+    Same as contact address
+  {% else %}
+    {{ applicationValue(["contactInformation", "permanentAddress"]) | formatAddress | nl2br | safe or "Not entered" }}
+  {% endif %}
+{% endset %}
+
 {% if not entered %}
   {{ appSuggestion({
     id: "contactInformation",
@@ -59,7 +67,7 @@
         } if canAmend
       } if data.flags.selfAmendEmailAddress, {
         key: {
-          text: "Address"
+          text: "Contact address"
         },
         value: {
           html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"
@@ -73,19 +81,19 @@
         } if canAmend
       }, {
         key: {
-          text: "Contact address"
+          text: "Permanent address"
         },
         value: {
-          html: applicationValue(["contactInformation", "contactAddress"]) | formatAddress | nl2br | safe or "Not entered"
+          html: permanentAddressHtml
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-information/contact-address?referrer=" + referrer,
+            href: applicationPath + "/contact-information/second-address?referrer=" + referrer,
             text: "Change",
-            visuallyHiddenText: "contact address"
+            visuallyHiddenText: "permanent address"
           }]
         } if canAmend
-      } if applicationValue(["contactInformation", "contactAddress"]) and applicationValue(["contactInformation", "address", "country"]) and applicationValue(["contactInformation", "contactAddressIsResidence"]) == "A different address"]
+      }]
     })
   }) }}
 {% endif %}

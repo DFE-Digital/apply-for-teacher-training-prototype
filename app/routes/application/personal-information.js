@@ -53,8 +53,8 @@ module.exports = router => {
     const application = req.session.data.applications[applicationId]
     const { otherNationality1 } = application.candidate
     const europeanNationalities = [
-      // EU
-      'Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Irish', 'Italian', 'Latvian', 'Lithuanian', 'Luxembourger', 'Maltese', 'Dutch', 'Polish', 'Portuguese', 'Romanian', 'Slovakian', 'Slovenian', 'Spanish', 'Swedish',
+      // EU (excluding Ireland)
+      'Austrian', 'Belgian', 'Bulgarian', 'Croatian', 'Cypriot', 'Czech', 'Danish', 'Estonian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian', 'Italian', 'Latvian', 'Lithuanian', 'Luxembourger', 'Maltese', 'Dutch', 'Polish', 'Portuguese', 'Romanian', 'Slovakian', 'Slovenian', 'Spanish', 'Swedish',
       // EEA
       'Icelandic', 'Liechtenstein citizen', 'Norwegian',
       // Switzerland

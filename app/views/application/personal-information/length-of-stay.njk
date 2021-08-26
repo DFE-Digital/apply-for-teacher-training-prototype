@@ -1,6 +1,11 @@
 {% extends "_form.njk" %}
 
-{% set title = "Will you have lived in the UK in the 3 years before your teacher training starts?" %}
+{% if applicationValue(["candidate", "nationality"]) == "Irish" %}
+  {% set title = "Will you have lived in the UK or Ireland in the 3 years before your teacher training starts?" %}
+{% else %}
+  {% set title = "Will you have lived in the UK in the 3 years before your teacher training starts?" %}
+{% endif %}
+
 {% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
 
 {% block pageNavigation %}

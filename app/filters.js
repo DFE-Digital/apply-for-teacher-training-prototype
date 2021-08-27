@@ -193,8 +193,10 @@ module.exports = (env) => {
     if (obj) {
       const arr = []
       for (const [key, value] of Object.entries(obj)) {
-        value.id = key
-        arr.push(value)
+        if (value) {
+          value.id = key
+          arr.push(value)
+        }
       }
       return arr
     } else {

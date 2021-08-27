@@ -2,7 +2,7 @@
 
 {% set title = "What is your permanent address?" %}
 
-{% set formaction = "/application/" + applicationId + "/contact-information/second-address/answer" %}
+{% set formaction = "/application/" + applicationId + "/contact-information/permanent-address/answer" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -17,15 +17,15 @@
     },
     items: [{
       text: "Same as contact address",
-      value: "contactAddess",
+      value: "contact",
       hint: {
         text: applicationValue(["contactInformation", "address"]) | formatAddress(", ")
       }
     }, {
       text: "A different address",
-      value: "permanentAddess"
+      value: "permanent"
     }]
-  } | decorateApplicationAttributes(["contactInformation", "secondAddress"])) }}
+  } | decorateApplicationAttributes(["contactInformation", "permanentAddressType"])) }}
 
   {{ govukButton({
     text: "Save and continue"

@@ -5,7 +5,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/contact-information/where-do-you-live"
+    href: "/application/" + applicationId + "/contact-information/contact-address"
   }) }}
 {% endblock %}
 
@@ -26,6 +26,6 @@
   }) }}
 
   <p class="govuk-body">
-    <a href="/application/{{ applicationId }}/contact-information/international-address">I live outside the UK</a>
+    <a href="/application/{{ applicationId }}/contact-information/international-contact-address">I live outside the UK</a>
   </p>
 {% endblock %}

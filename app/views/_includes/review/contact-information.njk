@@ -2,7 +2,7 @@
 {% set entered = applicationValue(["contactInformation", "tel"]) %}
 
 {% set permanentAddressHtml %}
-  {% if applicationValue(["contactInformation", "secondAddress"]) == "contactAddess" %}
+  {% if applicationValue(["contactInformation", "permanentAddressType"]) == "contact" %}
     Same as contact address
   {% else %}
     {{ applicationValue(["contactInformation", "permanentAddress"]) | formatAddress | nl2br | safe or "Not entered" }}
@@ -74,7 +74,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
+            href: applicationPath + "/contact-information/contact-address?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "address"
           }]
@@ -88,7 +88,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/contact-information/second-address?referrer=" + referrer,
+            href: applicationPath + "/contact-information/permanent-address?referrer=" + referrer,
             text: "Change",
             visuallyHiddenText: "permanent address"
           }]

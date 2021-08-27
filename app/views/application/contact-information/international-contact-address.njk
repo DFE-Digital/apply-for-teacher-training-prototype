@@ -55,7 +55,7 @@
 
   {# Explictly mark this as an international address if came to this page via a link rather than by form submission on ‘Where do you live’ page #}
   {{ govukInput({
-    name: "applications[" + applicationId + "][contactInformation][addressType]",
+    name: "applications[" + applicationId + "][contactInformation][addressFormat]",
     type: "hidden",
     value: "international"
   }) }}

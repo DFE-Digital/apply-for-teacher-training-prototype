@@ -129,7 +129,7 @@ module.exports = {
   },
   contactInformation: {
     tel: '07944 386555',
-    addressType: 'domestic',
+    addressFormat: 'domestic',
     address: {
       line1: '5 Claremont Road',
       line2: '',
@@ -137,7 +137,8 @@ module.exports = {
       level1: 'West Yorkshire',
       country: 'United Kingdom',
       postalCode: 'LS28 7DQ'
-    }
+    },
+    permanentAddressType: 'contact'
   },
   additionalSupportDisclose: 'No',
   safeguardingDisclose: 'No',

@@ -129,13 +129,14 @@ module.exports = {
   },
   contactInformation: {
     tel: '07944 386555',
-    addressType: 'domestic',
+    addressFormat: 'domestic',
     address: {
       line1: '5 Royal Exchange Square',
       level2: 'Glasgow',
       country: 'United Kingdom',
       postalCode: 'G1 3AH'
-    }
+    },
+    permanentAddressType: 'contact'
   },
   additionalSupportDisclose: 'Yes',
   additionalSupport: 'I currently require the use of a wheelchair.',

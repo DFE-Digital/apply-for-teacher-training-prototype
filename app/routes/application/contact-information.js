@@ -14,10 +14,10 @@ module.exports = router => {
   router.all('/application/:applicationId/contact-information/contact-address/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const { addressType } = application.contactInformation
+    const { addressFormat } = application.contactInformation
     const { addressLookup } = req.session.data.flags
 
-    if (addressType === 'domestic') {
+    if (addressFormat === 'domestic') {
       if (addressLookup) {
         res.redirect(`/application/${applicationId}/contact-information/lookup-address`)
       } else {
@@ -45,9 +45,9 @@ module.exports = router => {
   router.all('/application/:applicationId/contact-information/where-is-your-permanent-address/answer', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const { permanentAddressType } = application.contactInformation
+    const { permanentAddressFormat } = application.contactInformation
 
-    if (permanentAddressType === 'domestic') {
+    if (permanentAddressFormat === 'domestic') {
       res.redirect(`/application/${applicationId}/contact-information/uk-permanent-address`)
     } else {
       res.redirect(`/application/${applicationId}/contact-information/international-permanent-address`)

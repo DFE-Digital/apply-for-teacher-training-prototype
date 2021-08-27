@@ -37,7 +37,7 @@
               text: "Type of qualification"
             },
             hint: {
-              html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
+              html: "For example, <span lang=\"fr\">Baccalauréat Général</span>, Secondary School Certificate (SSC), <span lang=\"es\">Título de Bachiller</span>, West African Senior School Certificate Examination (WASSCE)"
             }
           } | decorateApplicationAttributes(["gcse", id, "typeNonUk"])) }}
         {% endset %}
@@ -67,7 +67,7 @@
             }
           },
           hint: {
-            text: "This should be different from an English as a foreign language qualification."
+            text: "This should be a school qualification, not an English as a foreign language qualification."
           } if subject == "English",
           items: [{
             text: "GCSE"

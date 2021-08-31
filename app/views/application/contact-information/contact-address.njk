@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "Where is your contact address?" %}
+{% set title = "Where do you live currently?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/contact-address/answer" %}
 
 {% block pageNavigation %}
@@ -21,9 +21,6 @@
   {% endset %}
 
   {{ govukRadios({
-    hint: {
-      text: "Providers may send post to this address about your course or interviews."
-    },
     items: [{
       text: "In the UK",
       value: "domestic"

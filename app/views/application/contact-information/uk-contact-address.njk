@@ -1,3 +1,7 @@
+{% from "govuk/components/hint/macro.njk" import govukHint %}
+
+{% set describedBy = "address-hint" %}
+
 {% extends "_form.njk" %}
 
 {% set title = "What is your contact address?" %}
@@ -15,7 +19,9 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Providers may send post to this address about your course or interviews.</p>
+
+
+  {{ govukHint({id: describedBy, text: "Providers may send post to this address about your course or interviews." })}}
 
   {{ govukInput({
     label: {

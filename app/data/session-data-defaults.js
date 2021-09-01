@@ -20,6 +20,27 @@ applicationWithNoGcse.gcse.english.type = 'not-yet'
 applicationWithNoGcse.gcse.english.currentlyStudying = 'no'
 applicationWithNoGcse.gcse.english.missing = 'I have been working in publishing for 10 years, and can demonstrate my English through an equivalency test'
 
+const applicationForTesting = JSON.parse(JSON.stringify(require('./application')))
+applicationForTesting.degree = {}
+applicationForTesting.gcse = {}
+applicationForTesting.otherQualifications = {}
+applicationForTesting.completed.degree = 'false'
+applicationForTesting.completed.english = 'false'
+applicationForTesting.completed.maths = 'false'
+applicationForTesting.completed.science = 'false'
+applicationForTesting.completed.otherQualifications = 'false'
+applicationForTesting.otherQualificationsDisclose = null
+
+applicationForTesting.choices.ABCDE.courseCode = 'X100'
+applicationForTesting.choices.ABCDE.providerCode = 'S31'
+
+applicationForTesting.choices.FGHIJ.courseCode = 'G822'
+applicationForTesting.choices.FGHIJ.providerCode = '222'
+
+applicationForTesting.choices.ZYXWV.courseCode = '2C9N'
+applicationForTesting.choices.ZYXWV.providerCode = 'S95'
+
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -33,7 +54,8 @@ module.exports = {
     21234: internationalApplicationNoRightToStudyYet,
     52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
     21235: applicationWhereStudyingForGcse,
-    21236: applicationWithNoGcse
+    21236: applicationWithNoGcse,
+    test1: applicationForTesting
   },
   findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {

@@ -134,45 +134,85 @@
 
 
 {% set gcseRequirements %}
-  {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
-    {% if item.acceptsPendingGcses %}
-      This provider will consider candidates with pending GCSEs
-    {% else %}
+  {% if (item.acceptsPendingGcses != 'true' and (
+    applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' or
+    applicationValue(["gcse", "maths", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "maths", "currentlyRetaking"]) == 'yes' or
+    applicationValue(["gcse", "science", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "science", "currentlyRetaking"]) == 'yes'
+  )) %}
       This provider does not consider candidates with pending GCSEs
-    {% endif %}
-  {% else %}
-    {% if item.acceptsEquivalencyTests %}
-      This provider will accept equivalency tests in English and maths
-    {% else %}
-      This provider will not accept equivalency tests
-    {% endif %}
+  {% elif (item.acceptsEquivalencyTests != 'true' and (
+    applicationValue(["gcse", "english", "type"]) == "not-yet" or
+    applicationValue(["gcse", "maths", "type"]) == "not-yet" or
+    applicationValue(["gcse", "science", "type"]) == "not-yet"
+  )) %}
+    This provider will not accept equivalency tests
+  {% elif item.acceptsEquivalencyTests == 'true' %}
+      This provider will accept equivalency tests in English, maths and science
+  {% elif item.acceptsPendingGcses == 'true' %}
+      This provider will accept pending GCSEs
   {% endif %}
 {% endset %}
 
 {% set gcseRequirementsHtml %}
-  {% if applicationValue(["gcse", "english", "type"]) == "not-yet" or applicationValue(["gcse", "english", "currentlyRetaking"]) %}
+  {% if (item.acceptsPendingGcses != 'true' and (
+    applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' or
+    applicationValue(["gcse", "maths", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "maths", "currentlyRetaking"]) == 'yes' or
+    applicationValue(["gcse", "science", "currentlyStudying"]) == 'yes' or
+    applicationValue(["gcse", "science", "currentlyRetaking"]) == 'yes'
+  )) or (item.acceptsEquivalencyTests != 'true' and (
+    applicationValue(["gcse", "english", "type"]) == "not-yet" or
+    applicationValue(["gcse", "maths", "type"]) == "not-yet" or
+    applicationValue(["gcse", "science", "type"]) == "not-yet"
+  )) %}
 
     {% set gcseRequirementsWarningHtml %}
       <p class="govuk-heading-s app-inset-text__title">{{ gcseRequirements }}</p>
 
       <p class="govuk-body">
-        You said
-
         {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
-          you’re currently studying for a qualification in English.
+          You said you’re currently studying for a qualification in English.
         {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' %}
-          you’re currently re-taking a GCSE in English.
+          You said you’re currently re-taking a GCSE in English.
         {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'no' %}
-          you do not have grade 4 (C) or above in GCSE English or an equivalent qualification.
-        {% else %}
-          you do not have a qualification in English.
+          you do not have grade 4 (C) or above in GCSE English or an equivalent You said qualification.
+        {% elif applicationValue(["gcse", "english", "type"]) == "not-yet" %}
+          You said you do not have a qualification in English.
+        {% endif %}
+      </p>
+
+      <p class="govuk-body">
+        {% if applicationValue(["gcse", "maths", "currentlyStudying"]) == 'yes' %}
+          You said you’re currently studying for a qualification in Maths.
+        {% elif applicationValue(["gcse", "maths", "currentlyRetaking"]) == 'yes' %}
+          You said you’re currently re-taking a GCSE in Maths.
+        {% elif applicationValue(["gcse", "maths", "currentlyRetaking"]) == 'no' %}
+          You said you do not have grade 4 (C) or above in GCSE Maths or an equivalent qualification.
+        {% elif applicationValue(["gcse", "maths", "type"]) == "not-yet" %}
+          You said you do not have a qualification in Maths.
+        {% endif %}
+      </p>
+
+      <p class="govuk-body">
+        {% if applicationValue(["gcse", "science", "currentlyStudying"]) == 'yes' %}
+          You said you’re currently studying for a qualification in Science.
+        {% elif applicationValue(["gcse", "science", "currentlyRetaking"]) == 'yes' %}
+          You said you’re currently re-taking a GCSE in Science.
+        {% elif applicationValue(["gcse", "science", "currentlyRetaking"]) == 'no' %}
+          You saidyou do not have grade 4 (C) or above in GCSE Science or an equivalent qualification.
+        {% elif applicationValue(["gcse", "science", "type"]) == "not-yet" %}
+          You said you do not have a qualification in Science.
         {% endif %}
       </p>
 
       <p class="govuk-body">You can:</p>
 
       <ul class="govuk-list govuk-list--bullet">
-        <li>find a course that does {{ "accept pending GCSEs" if  applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' else "accept equivalency tests"}} </li>
+        <li>find a course that does {{ "accept pending GCSEs" if (applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' or applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes') else "accept equivalency tests"}} </li>
         <li>contact the provider to see if they’ll still consider your application</li>
       </ul>
 
@@ -189,6 +229,7 @@
   {% endif %}
 
 {% endset %}
+
 
 {{ govukSummaryList({
   rows: [{
@@ -264,7 +305,7 @@
       html: gcseRequirementsHtml,
       classes: "app-summary-list__value--wide"
     }
-  }, {
+  }if (applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' or applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' or applicationValue(["gcse", "english", "type"]) == "not-yet" or applicationValue(["gcse", "maths", "currentlyStudying"]) == 'yes' or applicationValue(["gcse", "maths", "currentlyRetaking"]) == 'yes' or applicationValue(["gcse", "maths", "type"]) == "not-yet" or applicationValue(["gcse", "science", "currentlyStudying"]) == 'yes' or applicationValue(["gcse", "science", "currentlyRetaking"]) == 'yes' or applicationValue(["gcse", "science", "type"]) == "not-yet"), {
     key: {
       text: "Status"
     },

@@ -124,8 +124,8 @@
         href: choicesHref,
         id: "personal-information",
         tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "choices"])),
-          text: tagTextForSection(completed=applicationValue(["completed", "choices"]))
+          classes: tagClassesForSection(completed=applicationValue(["completed", "choices"]),apply2=true),
+          text: tagTextForSection(completed=applicationValue(["completed", "choices"]), apply2=true)
         }
       }]
     }) if not findNotOpen }}

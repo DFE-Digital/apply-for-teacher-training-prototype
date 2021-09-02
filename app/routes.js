@@ -34,6 +34,14 @@ require('./routes/emails')(router)
 require('./routes/send-email')(router)
 require('./routes/survey')(router)
 
+
+router.get('/admin/review-course-choices', function(req, res) {
+  req.session.data.applications.test1.completed.choices = ''
+  req.session.data.applications.test1.review = ['choices']
+  res.redirect('/application/test1')
+
+})
+
 // Clear all data in session if you open /admin/clear-data
 router.post('/admin/clear-data', function (req, res) {
   req.session.data = {}

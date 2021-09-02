@@ -95,7 +95,7 @@
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
-      text: "Prototype"
+      html: "<a href=\"/admin/review-course-choices\" style=\"color: white; text-decoration: none;\">Prototype</a>"
     },
     text: "This is a prototype of a new service. Some parts may not work yet."
   }) if showPhaseBanner != false }}

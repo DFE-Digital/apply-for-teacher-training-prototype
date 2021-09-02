@@ -24,11 +24,11 @@ const applicationForTesting = JSON.parse(JSON.stringify(require('./application')
 applicationForTesting.degree = {}
 applicationForTesting.gcse = {}
 applicationForTesting.otherQualifications = {}
-applicationForTesting.completed.degree = 'false'
-applicationForTesting.completed.english = 'false'
-applicationForTesting.completed.maths = 'false'
-applicationForTesting.completed.science = 'false'
-applicationForTesting.completed.otherQualifications = 'false'
+applicationForTesting.completed.degree = ''
+applicationForTesting.completed.english = ''
+applicationForTesting.completed.maths = ''
+applicationForTesting.completed.science = ''
+applicationForTesting.completed.otherQualifications = ''
 applicationForTesting.otherQualificationsDisclose = null
 
 applicationForTesting.choices.ABCDE.courseCode = 'X100'

@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 
 {% set parent = "Prototype admin" %}
 {% set title = "Clear data?" %}
@@ -10,13 +10,18 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
   {{ govukWarningText({
     text: "This will clear all of the data entered in this session",
     iconFallbackText: "Warning"
   }) }}
 
-  {{ govukButton({
-    text: "Clear the data"
-  }) }}
+  <form action="/admin/clear-data" method="post">
+    {{ govukButton({
+      text: "Clear the data"
+    }) }}
+  </form>
 {% endblock %}

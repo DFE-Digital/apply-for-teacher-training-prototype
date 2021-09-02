@@ -46,7 +46,7 @@ router.get('/admin/review-course-choices', function(req, res) {
 router.post('/admin/clear-data', function (req, res) {
   req.session.data = {}
 
-  res.render('admin/clear-data-success')
+  res.redirect('/admin')
 })
 
 // Show feature flags

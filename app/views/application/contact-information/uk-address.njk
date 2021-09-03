@@ -1,7 +1,10 @@
 {% extends "_form.njk" %}
+{% from "govuk/components/hint/macro.njk" import govukHint %}
 
-{% set title = "What is your address?" %}
+{% set title = "What is your contact address?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/review" %}
+
+{% set describedBy = "address-hint" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,6 +13,8 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukHint({id: describedBy, text: "Enter an address where you'll be able to receive post from providers." })}}
+
   {{ govukInput({
     label: {
       html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"

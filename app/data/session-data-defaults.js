@@ -41,6 +41,10 @@ applicationForTesting.choices.ZYXWV.courseCode = '2C9N'
 applicationForTesting.choices.ZYXWV.providerCode = 'S95'
 
 
+applicationForTestingWithNoPersonalDetails = JSON.parse(JSON.stringify(applicationForTesting))
+applicationForTestingWithNoPersonalDetails.completed.personalInformation = ''
+delete applicationForTestingWithNoPersonalDetails.candidate
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -55,7 +59,8 @@ module.exports = {
     52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
     21235: applicationWhereStudyingForGcse,
     21236: applicationWithNoGcse,
-    test1: applicationForTesting
+    test1: applicationForTesting,
+    test2: applicationForTestingWithNoPersonalDetails
   },
   findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {

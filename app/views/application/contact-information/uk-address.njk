@@ -3,6 +3,8 @@
 {% set title = "What is your address?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/review" %}
 
+{% set describedBy = "address-hint" %}
+
 {% block pageNavigation %}
   {{ govukBackLink({
     href: referrer if referrer else "/application/" + applicationId + "/contact-information/where-do-you-live"
@@ -10,6 +12,8 @@
 {% endblock %}
 
 {% block primary %}
+  {{ govukHint({id: describedBy, text: "Providers may send post to this address about your course or interviews." })}}
+
   {{ govukInput({
     label: {
       html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"

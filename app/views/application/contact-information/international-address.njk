@@ -2,17 +2,13 @@
 
 {% from "govuk/components/hint/macro.njk" import govukHint %}
 
-{% set title = "What is your address?" %}
+{% set title = "What is your contact address?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/review" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
     href: referrer if referrer else "/application/" + applicationId + "/contact-information/where-do-you-live"
   }) }}
-{% endblock %}
-
-{% block beforePageTitle %}
-  <span class="govuk-caption-l">Contact information</span>
 {% endblock %}
 
 {% block primary %}

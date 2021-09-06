@@ -1,5 +1,5 @@
 {% extends "_form.njk" %}
-{% set parent = "Equality and diversity" %}
+{% set parent = "Equality and diversity questionnaire" %}
 {% set title = "What is your sex?" %}
 
 {% block pageNavigation %}
@@ -16,6 +16,10 @@
       text: "Male"
     }, {
       text: "Intersex"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
     }]
   } | decorateApplicationAttributes(["equality-monitoring", "sex"])) }}
 

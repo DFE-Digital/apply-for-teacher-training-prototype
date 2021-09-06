@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Equality and diversity questionnaire" %}
+{% set applicationPath = "/application/" + applicationId %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -17,18 +17,18 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Can you complete a 3-minute questionnaire?",
+        text: "Do you want to answer a few questions about your sex, disability and ethnicity?",
         classes: "govuk-fieldset__legend--m"
       }
     },
     name: "answer",
     items: [{
       value: "yes",
-      text: "Yes, continue to the questionnaire",
+      text: "Yes",
       checked: "checked"
     }, {
       value: "no",
-      text: "No, continue without completing questionnaire"
+      text: "No"
     }]
   }) }}
 

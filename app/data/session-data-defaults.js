@@ -43,7 +43,9 @@ applicationForTesting.choices.ZYXWV.providerCode = 'S95'
 
 applicationForTestingWithNoPersonalDetails = JSON.parse(JSON.stringify(applicationForTesting))
 applicationForTestingWithNoPersonalDetails.completed.personalInformation = ''
+applicationForTestingWithNoPersonalDetails.completed.contactInformation = ''
 delete applicationForTestingWithNoPersonalDetails.candidate
+delete applicationForTestingWithNoPersonalDetails.contactInformation
 
 module.exports = {
   applications: {

@@ -4,7 +4,8 @@
   "version": "9.0.0",
   "private": true,
   "engines": {
-    "node": "^15.0.0"
+    "node": "^16.9.0",
+    "npm": "^7.21.1"
   },
   "scripts": {
     "prestart": "npm install",

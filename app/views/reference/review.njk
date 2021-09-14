@@ -5,18 +5,6 @@
 {% set title = "Check your answers before submitting your reference" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/reference/comments"
-    }) }}
-  {% endif %}
-{% endblock %}
-
 {% block primary %}
   {% if data.reference.relationship.correct == "Yes" %}
     {% set relationshipValue = "Confirmed by referee" %}

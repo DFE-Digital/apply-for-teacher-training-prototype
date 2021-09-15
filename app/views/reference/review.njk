@@ -2,7 +2,7 @@
 
 {% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Check your answers before submitting your reference" %}
+{% set title = "Your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
@@ -63,6 +63,10 @@
       }
     }]
   }) }}
+
+  <p class="govuk-body">Are you ready to submit this reference? Once you’ve submitted it you will no longer be able to edit it.</p>
+
+  <p class="govuk-body">If you need more time you can come back to this reference using the link in your email.</p>
 
   {{ govukButton({
     text: "Submit reference"

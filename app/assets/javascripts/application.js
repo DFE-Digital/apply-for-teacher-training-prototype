@@ -6,6 +6,6 @@ if (window.console && window.console.info) {
 }
 
 $(document).ready(function () {
-  APP.modules.start()
+  // APP.modules.start()
   window.GOVUKFrontend.initAll()
 })

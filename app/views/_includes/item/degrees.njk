@@ -2,7 +2,15 @@
 {% set qualifications = degrees | toArray | selectattr("id") %}
 
 {% for item in qualifications %}
-  {% set degreeType = (item.typeUk or item.typeNonUk) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
+
+  {% set degreeType %}
+    {% if item.otherType %}
+      {{ item.otherType }}
+    {% else %}
+      {{ item.type }}
+    {% endif %}
+  {% endset %}
+
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
     headingLevel: 3,
@@ -16,18 +24,20 @@
     html: govukSummaryList({
       rows: [{
         key: {
-          text: "Degree type"
+          text: "Degree level"
         },
         value: {
-          text: item.typeUk or item.typeNonUk or "Not entered"
+          text: (item.otherLevel if item.level == "other" else item.level)
         },
         actions: {
-          items: [{
-            href: applicationPath + "/degree/" + item.id + "?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "degree type"
-          }]
-        } if canAmend
+          items: [
+            {
+              href: applicationPath + "/degree/" + item.id + "/level?referrer=" + referrer,
+              text: "Change",
+              visuallyHideenText: "degree level"
+            }
+          ]
+        }
       }, {
         key: {
           text: "Subject"
@@ -42,7 +52,23 @@
             visuallyHiddenText: "subject"
           }]
         } if canAmend
-      }, {
+      },
+      {
+        key: {
+          text: "Degree type"
+        },
+        value: {
+          text: degreeType
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/type?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "degree type"
+          }]
+        } if canAmend
+      },
+      {
         key: {
           text: "Institution"
         },

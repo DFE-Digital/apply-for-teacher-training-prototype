@@ -10,6 +10,8 @@
   }) }}
 {% endblock %}
 
+{% set formaction = "/admin/clear-data" %}
+
 {% block primary %}
   {{ govukWarningText({
     text: "This will clear all of the data entered in this session",

@@ -1,12 +1,14 @@
 {% extends "_form.njk" %}
 
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/country" %}
+
 {% set action = "edit" if applicationValue(["degree", id, "type"]) else "add" %}
 {% set degreeCount = applicationValue(["degree"]) | length %}
 {% if degreeCount >= 1 and action == "add" %}
   {% set title = (action | capitalize) + " another degree" %}
   {% set degreeTypes = degree.types.all %}
 {% else %}
-  {% set title = (action | capitalize) + " undergraduate degree" %}
+  {% set title = (action | capitalize) + " degree" %}
   {% set degreeTypes = degree.types.undergraduate %}
 {% endif %}
 {% set allowsFeedback = true %}
@@ -32,9 +34,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% if degreeCount < 1 %}
-    <p class="govuk-body">You need an undergraduate degree to apply for teacher training. If you have further degrees, you can add them after.</p>
-  {% endif %}
+  <p class="govuk-body">You need an undergraduate degree to apply for teacher training.</p>
 
   {% set ukConditionalHtml %}
     <div class="govuk-form-group">
@@ -44,35 +44,31 @@
     </div>
   {% endset %}
 
-  {% set internationalConditionalHtml %}
-    {{ govukInput({
+  {% set countryHtml %}
+    {{ appAutocomplete({
       label: {
-        text: "Type of qualification"
+        text: "Country",
+        classes: "govuk-label--s"
       },
-      hint: {
-        html: intHintHtml
-      }
-    } | decorateApplicationAttributes(["degree", id, "typeNonUk"])) }}
+      items: countries
+    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% endset %}
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of degree do you want to add?",
+        text: "Which country was the degree from?",
         classes: "govuk-label--m"
       }
     },
     items: [{
       value: "domestic",
-      text: "UK degree",
-      conditional: {
-        html: ukConditionalHtml
-      }
+      text: "United Kingdom"
     }, {
       value: "international",
-      text: "Non-UK degree",
+      text: "Another country",
       conditional: {
-        html: internationalConditionalHtml
+        html: countryHtml
       }
     }]
   } | decorateApplicationAttributes(["degree", id, "provenance"])) }}

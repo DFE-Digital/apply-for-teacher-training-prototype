@@ -1,5 +1,7 @@
 const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
+const allDegreeTypes = require('./../../data/degree-types.js')
+const allDegreeLevels = require('./../../data/degree-levels.js')
 
 const degreeData = (req) => {
   const application = utils.applicationData(req)
@@ -19,7 +21,9 @@ const degreePaths = (req) => {
 
   const paths = [
     basePath,
+    `${basePath}/level`,
     `${basePath}/subject`,
+    `${basePath}/type`,
     `${basePath}/institution`,
     ...(international ? [`${basePath}/enic`] : []),
     `${basePath}/completed`,
@@ -40,6 +44,57 @@ module.exports = router => {
     const id = utils.generateRandomString()
     res.redirect(`/application/${req.params.applicationId}/degree/${id}?${utils.queryString(req)}`)
   })
+
+  // Set the country
+  router.post('/application/:applicationId/degree/:id/country', (req, res) => {
+    const { applicationId, id } = req.params
+
+    res.redirect(`/application/${applicationId}/degree/${id}/level`)
+  })
+
+  // Set the degree level (Bachelors, Masters, etc)
+  router.post('/application/:applicationId/degree/:id/level', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/subject`)
+  })
+
+  // Set the degree subject
+  router.post('/application/:applicationId/degree/:id/subject', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/type`)
+  })
+
+  // Set the degree type
+  router.post('/application/:applicationId/degree/:id/type', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/institution`)
+  })
+
+  // Set the degree institution
+  router.post('/application/:applicationId/degree/:id/institution', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/completed`)
+  })
+
+  // Set the degree completed status
+  router.post('/application/:applicationId/degree/:id/completed', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/grade`)
+  })
+
+  // Set the degree grade
+  router.post('/application/:applicationId/degree/:id/grade', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/year`)
+  })
+
+  // Set the degree year
+  router.post('/application/:applicationId/degree/:id/year', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/review`)
+  })
+
+
 
   // Render degree review page
   // Note: Must be defined before next route declaration
@@ -71,13 +126,43 @@ module.exports = router => {
     })
   })
 
-  // Render UK ENIC/grade/year pages
-  router.all('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|enic|year)', (req, res) => {
+  // Render degree type page
+  router.get('/application/:applicationId/degree/:id/type', (req, res) => {
     const completedDegree = degreeData(req).grade && degreeData(req).yearStart
 
     const { id, view } = req.params
     const { referrer } = req.query
     const paths = degreePaths(req)
+    const formaction = completedDegree ? referrer : paths.next
+
+    const degreeLevelNumber = allDegreeLevels.find(level => level.name == utils.applicationData(req).degree[id].level)?.level
+
+    let degreeTypes = []
+
+    if (degreeLevelNumber) {
+      degreeTypes = allDegreeTypes.filter(degree => degree.level == degreeLevelNumber)
+    } else {
+      degreeTypes = allDegreeTypes
+    }
+
+    res.render(`application/degree/type`, {
+      formaction,
+      paths,
+      id,
+      referrer,
+      degreeLevelNumber,
+      degreeTypes
+    })
+  })
+
+  // Render UK ENIC/grade/year pages
+  router.get('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|enic|year|level)', (req, res) => {
+    const completedDegree = degreeData(req).grade && degreeData(req).yearStart
+
+    const { id, view } = req.params
+    const { referrer } = req.query
+    const paths = degreePaths(req)
+
     const formaction = completedDegree ? referrer : paths.next
 
     res.render(`application/degree/${view}`, {

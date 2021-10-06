@@ -90,8 +90,14 @@ module.exports = router => {
     res.redirect(`/application/${applicationId}/degree/${id}/year`)
   })
 
-  // Set the degree year
-  router.post('/application/:applicationId/degree/:id/year', (req, res) => {
+  // Set the degree start year
+  router.post('/application/:applicationId/degree/:id/start-year', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/${id}/graduation-year`)
+  })
+
+  // Set the degree graduation year
+  router.post('/application/:applicationId/degree/:id/graduation-year', (req, res) => {
     const { applicationId, id } = req.params
     res.redirect(`/application/${applicationId}/degree/review`)
   })
@@ -140,7 +146,7 @@ module.exports = router => {
   })
 
   // Render UK ENIC/grade/year pages
-  router.get('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|enic|year|level)', (req, res) => {
+  router.get('/application/:applicationId/degree/:id/:view(subject|institution|completed|grade|enic|start-year|graduation-year|level)', (req, res) => {
     const completedDegree = degreeData(req).grade && degreeData(req).yearStart
 
     const { id, view } = req.params

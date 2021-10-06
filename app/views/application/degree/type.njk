@@ -60,10 +60,6 @@
         }
       }) %}
 
-      {% if degreeLevel == "Bachelor" %}
-        {% set hint = { text: "Do not include ‘Honours‘ or ‘Hons‘" } %}
-      {% endif %}
-
       {{ govukRadios({
         name: "degree-type",
         fieldset: {

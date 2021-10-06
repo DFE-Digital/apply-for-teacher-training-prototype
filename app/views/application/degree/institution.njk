@@ -4,11 +4,8 @@
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/institution" %}
 
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% if international %}
-  {% extends "_form.njk" %}
-{% else %}
-  {% extends "_form-question.njk" %}
-{% endif %}
+
+{% extends "_form-question.njk" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -21,7 +18,8 @@
   {% if international %}
     {{ govukInput({
       label: {
-        text: "Institution name"
+        text: title,
+        classes: "govuk-label--l"
       }
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
   {% else %}

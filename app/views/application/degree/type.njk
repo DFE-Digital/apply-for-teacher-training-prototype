@@ -19,7 +19,16 @@
 
   {% if international %}
 
-    TODO
+    {{ govukInput({
+      label: {
+        text: title,
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: {
+        text: "For example, Bachelor degree, Bachelor of Arts, Diplôme, Licenciatura"
+      }
+    } | decorateApplicationAttributes(["degree", id, "type"])) }}
 
   {% else %}
 

@@ -68,3 +68,13 @@
     </div>
   </div>
 {% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script>
+    accessibleAutocomplete.enhanceSelectElement({
+     selectElement: document.querySelector('#degree-{{ id }}-country'),
+     defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
+    })
+  </script>
+{% endblock %}

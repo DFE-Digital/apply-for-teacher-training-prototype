@@ -52,7 +52,15 @@ module.exports = router => {
   router.post('/application/:applicationId/degree/:id/country', (req, res) => {
     const { applicationId, id } = req.params
 
-    res.redirect(`/application/${applicationId}/degree/${id}/level`)
+    const provenance = req.body.applications[applicationId].degree[id].provenance
+
+    if (provenance == "international") {
+      // Skip to subject
+      res.redirect(`/application/${applicationId}/degree/${id}/subject`)
+    } else {
+      res.redirect(`/application/${applicationId}/degree/${id}/level`)
+    }
+
   })
 
   // Set the degree level (Bachelors, Masters, etc)
@@ -88,7 +96,7 @@ module.exports = router => {
   // Set the degree grade
   router.post('/application/:applicationId/degree/:id/grade', (req, res) => {
     const { applicationId, id } = req.params
-    res.redirect(`/application/${applicationId}/degree/${id}/year`)
+    res.redirect(`/application/${applicationId}/degree/${id}/start-year`)
   })
 
   // Set the degree start year

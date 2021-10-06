@@ -1,6 +1,10 @@
 {% extends "_layout.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/grade" %}
+
+
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% set completed =  applicationValue(["degree", id, "completed"]) == "Yes" %}
 {% set undergraduateDegree = true %}

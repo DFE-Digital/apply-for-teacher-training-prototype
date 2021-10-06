@@ -34,7 +34,10 @@
 
   {% if international %}
     {{ govukInput({
-      label: label,
+      label: {
+        text: title,
+        classes: "govuk-label--l"
+      },
       hint: {
         text: "For example, Liberal Arts, Marine Sciences, Psychology"
       }

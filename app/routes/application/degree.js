@@ -3,6 +3,7 @@ const utils = require('./../../utils')
 const allDegreeTypes = require('./../../data/degree-types.js')
 const allDegreeLevels = require('./../../data/degree-levels.js')
 const allDegreeSubjects = require('./../../data/degree-subjects.js')
+const allDegreeInstitutions = require('./../../data/degree-institutions.js')
 
 
 const degreeData = (req) => {
@@ -160,7 +161,8 @@ module.exports = router => {
       paths,
       id,
       referrer,
-      allDegreeSubjects
+      allDegreeSubjects,
+      allDegreeInstitutions
     })
   })
 }

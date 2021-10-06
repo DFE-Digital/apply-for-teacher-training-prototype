@@ -2,6 +2,8 @@ const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 const allDegreeTypes = require('./../../data/degree-types.js')
 const allDegreeLevels = require('./../../data/degree-levels.js')
+const allDegreeSubjects = require('./../../data/degree-subjects.js')
+
 
 const degreeData = (req) => {
   const application = utils.applicationData(req)
@@ -42,7 +44,7 @@ module.exports = router => {
   // Generate new id and redirect to that degree
   router.get('/application/:applicationId/degree/add', (req, res) => {
     const id = utils.generateRandomString()
-    res.redirect(`/application/${req.params.applicationId}/degree/${id}?${utils.queryString(req)}`)
+    res.redirect(`/application/${req.params.applicationId}/degree/${id}/country?${utils.queryString(req)}`)
   })
 
   // Set the country
@@ -95,34 +97,19 @@ module.exports = router => {
   })
 
 
-
   // Render degree review page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/degree/review', (req, res) => {
-    const { degree } = utils.applicationData(req)
-    const degreeArray = utils.toArray(degree)
-
-    const enteredGrade = degreeArray[0].grade
-
     res.render('application/degree/review', {
-      enteredGrade
     })
   })
 
-  // Render first page
-  router.get('/application/:applicationId/degree/:id', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req).yearStart
+  // Render the country question page
+  router.get('/application/:applicationId/degree/:id/country', (req, res) => {
+    const { id  } = req.params
 
-    const { id } = req.params
-    const { referrer } = req.query
-    const nextPath = `/application/${req.params.applicationId}/degree/${id}/subject?${utils.queryString(req)}`
-    // If completed this section, return to referrer, else next question
-    const formaction = completedDegree ? referrer : nextPath
-
-    res.render('application/degree/index', {
-      formaction,
-      id,
-      referrer
+    res.render('application/degree/country', {
+      id
     })
   })
 
@@ -133,8 +120,6 @@ module.exports = router => {
     const { id, view } = req.params
     const { referrer } = req.query
     const paths = degreePaths(req)
-    const formaction = completedDegree ? referrer : paths.next
-
     const degreeLevelNumber = allDegreeLevels.find(level => level.name == utils.applicationData(req).degree[id].level)?.level
 
     let degreeTypes = []
@@ -146,7 +131,6 @@ module.exports = router => {
     }
 
     res.render(`application/degree/type`, {
-      formaction,
       paths,
       id,
       referrer,
@@ -169,7 +153,8 @@ module.exports = router => {
       formaction,
       paths,
       id,
-      referrer
+      referrer,
+      allDegreeSubjects
     })
   })
 }

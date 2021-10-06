@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block primary %}
-
 <style>
   body .autocomplete__menu {
     top: 20px;
@@ -66,7 +65,7 @@
         minLength: 2,
         placeholder: false,
         source: [
-          {% for item in degree.subjects %}"{{ item }}",{% endfor %}
+          {% for item in allDegreeSubjects %}"{{ item.name }}",{% endfor %}
         ]
       })
     </script>

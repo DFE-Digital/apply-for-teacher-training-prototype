@@ -1,6 +1,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Which institution awarded your degree?" %}
 {% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/institution" %}
+
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% if international %}
   {% extends "_form.njk" %}
@@ -21,13 +23,6 @@
         text: "Institution name"
       }
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
-
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is this institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% else %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--l govuk-!-margin-bottom-8" for="degree-{{ id }}-org">{{ title }}</label>
@@ -44,10 +39,6 @@
   <script src="/public/javascripts/autocomplete.min.js"></script>
   <script>
   {% if international %}
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#degree-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
-    })
   {% else %}
     accessibleAutocomplete({
       element: document.querySelector('#org-autocomplete-container'),

@@ -3,6 +3,8 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What type of degree is it?" %}
 {% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/type" %}
+
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 {% set degreeLevel = applicationValue(["degree", id, "level"]) %}

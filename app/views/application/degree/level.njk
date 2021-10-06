@@ -16,7 +16,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: referrer or "/application/" + applicationId + "/degree/" + id + "/country"
   }) }}
 {% endblock %}
 

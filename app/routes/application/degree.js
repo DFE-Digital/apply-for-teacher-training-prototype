@@ -108,9 +108,19 @@ module.exports = router => {
   // Set the degree graduation year
   router.post('/application/:applicationId/degree/:id/graduation-year', (req, res) => {
     const { applicationId, id } = req.params
-    res.redirect(`/application/${applicationId}/degree/review`)
+
+    if (degreeData(req).provenance == "international" && degreeData(req).completed == "Yes") {
+      res.redirect(`/application/${applicationId}/degree/${id}/enic`)
+    } else {
+      res.redirect(`/application/${applicationId}/degree/review`)
+    }
   })
 
+  // Set the ENIC details
+  router.post('/application/:applicationId/degree/:id/enic', (req, res) => {
+    const { applicationId, id } = req.params
+    res.redirect(`/application/${applicationId}/degree/review`)
+  })
 
   // Render degree review page
   // Note: Must be defined before next route declaration

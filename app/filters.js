@@ -160,6 +160,10 @@ module.exports = (env) => {
     }
   }
 
+  filters.capitaliseFirstLetter = (str) => {
+    return utils.capitaliseFirstLetter(str)
+  }
+
   /**
    * Convert Markdown to HTML
    * @type {String} str

@@ -24,7 +24,7 @@
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
   {% else %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--l govuk-!-margin-bottom-8" for="degree-{{ id }}-org">{{ title }}</label>
+      <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="degree-{{ id }}-org">{{ title }}</label></h1>
       <div id="org-autocomplete-container"></div>
     </div>
   {% endif %}
@@ -48,7 +48,7 @@
       showNoOptionsFound: false,
       placeholder: false,
       source: [
-        {% for item in allDegreeInstitutions %}"{{ item }}",{% endfor %}
+        {% for item in allDegreeInstitutions %}"{{ item.name }}",{% endfor %}
       ]
     })
   {% endif %}

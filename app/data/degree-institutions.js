@@ -2077,7 +2077,7 @@ module.exports = [
   },
   {
     "name": "Manchester Health Academy",
-    "synonyms": null,
+    "synonyms": [],
     "hesa_itt_code": null,
     "dttp_id": "3d0517a7-a441-e811-80fd-3863bb349ac0"
   }

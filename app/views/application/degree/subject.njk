@@ -15,23 +15,6 @@
 {% endblock %}
 
 {% block primary %}
-<style>
-  body .autocomplete__menu {
-    top: 20px;
-    border-top: 2px solid black;
-  }
-
-  body .autocomplete__wrapper ul::before {
-    content: 'Suggestions';
-    padding: 4px 8px;
-    border-bottom: 2px solid black;
-    background-color: #f3f2f1;
-    width: 100%;
-    display: block;
-
-  }
-</style>
-
   {% if international %}
     {{ govukInput({
       label: {
@@ -46,7 +29,7 @@
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--l" for="degree-{{ id }}-subject">{{ title }}</label>
       <span id="degree-{{ id }}-subject-hint" class="govuk-hint">Type your own or select from the suggections. For example, 'French and History' or 'Mathematics'.</span>
-      <div id="subject-autocomplete-container"></div>
+      <div id="subject-autocomplete-container" class="suggestions"></div>
     </div>
   {% endif %}
 
@@ -58,7 +41,13 @@
 {% if not international %}
   {% block pageScripts %}
     <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script src="/public/javascripts/sort.js"></script>
+
     <script>
+      function filter(query, populateResults) {
+        populateResults(sort(query, allDegreeSubjects))
+      }
+
       accessibleAutocomplete({
         element: document.querySelector('#subject-autocomplete-container'),
         id: 'degree-{{ id }}-subject',
@@ -67,9 +56,7 @@
         showNoOptionsFound: false,
         minLength: 2,
         placeholder: false,
-        source: [
-          {% for item in allDegreeSubjects %}"{{ item.name | capitaliseFirstLetter }}",{% endfor %}
-        ]
+        source: filter
       })
     </script>
   {% endblock %}

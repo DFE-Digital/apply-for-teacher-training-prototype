@@ -1,8 +1,17 @@
 const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
-const allDegreeTypes = require('./../../data/degree-types.js')
+const allDegreeTypes = require('./../../data/degree-types.js').map(degreeType => {
+  if (degreeType.abbreviation) {
+    degreeType.name = (degreeType.name + " (" + degreeType.abbreviation + ")")
+    degreeType.synonyms.push(degreeType.abbreviation)
+  }
+  return degreeType
+})
 const allDegreeLevels = require('./../../data/degree-levels.js')
-const allDegreeSubjects = require('./../../data/degree-subjects.js')
+const allDegreeSubjects = require('./../../data/degree-subjects.js').map(subject => {
+  subject.name = utils.capitaliseFirstLetter(subject.name)
+  return subject
+})
 const allDegreeInstitutions = require('./../../data/degree-institutions.js')
 
 

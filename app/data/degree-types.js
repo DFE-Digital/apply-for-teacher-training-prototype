@@ -22,7 +22,7 @@
 module.exports = [
   {
     "priority": 1,
-    "title": "Foundation of Arts",
+    "name": "Foundation of Arts",
     "abbreviation": "FdA",
     "synonyms": [],
     "level": "5",
@@ -30,7 +30,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
-    "title": "Foundation Degree of Education",
+    "name": "Foundation Degree of Education",
     "abbreviation": "FDEd",
     "synonyms": [],
     "level": "5",
@@ -38,7 +38,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
-    "title": "Foundation of Sciences",
+    "name": "Foundation of Sciences",
     "abbreviation": "FdSs",
     "synonyms": [],
     "level": "5",
@@ -47,7 +47,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Bachelor of Arts",
+    "name": "Bachelor of Arts",
     "abbreviation": "BA",
     "synonyms": [],
     "level": "6",
@@ -55,7 +55,7 @@ module.exports = [
     "hesa_itt_code": "51"
   },
   {
-    "title": "Bachelor of Arts Economics",
+    "name": "Bachelor of Arts Economics",
     "abbreviation": "BAEcon",
     "synonyms": [],
     "level": "6",
@@ -63,7 +63,7 @@ module.exports = [
     "hesa_itt_code": "52"
   },
   {
-    "title": "Bachelor of Arts in Architecture",
+    "name": "Bachelor of Arts in Architecture",
     "abbreviation": "BAArch",
     "synonyms": [],
     "level": "6",
@@ -71,7 +71,7 @@ module.exports = [
     "hesa_itt_code": "53"
   },
   {
-    "title": "Bachelor of the Art of Obstetrics",
+    "name": "Bachelor of the Art of Obstetrics",
     "abbreviation": "BAO",
     "synonyms": [],
     "level": "6",
@@ -79,7 +79,7 @@ module.exports = [
     "hesa_itt_code": "54"
   },
   {
-    "title": "Bachelor of Architecture",
+    "name": "Bachelor of Architecture",
     "abbreviation": "BAArch",
     "synonyms": [],
     "level": "6",
@@ -87,7 +87,7 @@ module.exports = [
     "hesa_itt_code": "55"
   },
   {
-    "title": "Bachelor of Applied Science",
+    "name": "Bachelor of Applied Science",
     "abbreviation": "BAsc",
     "synonyms": [],
     "level": "6",
@@ -95,7 +95,7 @@ module.exports = [
     "hesa_itt_code": "56"
   },
   {
-    "title": "Bachelor of Agriculture",
+    "name": "Bachelor of Agriculture",
     "abbreviation": "BAg",
     "synonyms": [],
     "level": "6",
@@ -103,7 +103,7 @@ module.exports = [
     "hesa_itt_code": "57"
   },
   {
-    "title": "Bachelor of Accountancy",
+    "name": "Bachelor of Accountancy",
     "abbreviation": "BAcc",
     "synonyms": [],
     "level": "6",
@@ -111,7 +111,7 @@ module.exports = [
     "hesa_itt_code": "58"
   },
   {
-    "title": "Bachelor of Administration",
+    "name": "Bachelor of Administration",
     "abbreviation": "BAdmin",
     "synonyms": [],
     "level": "6",
@@ -119,7 +119,7 @@ module.exports = [
     "hesa_itt_code": "59"
   },
   {
-    "title": "Bachelor of Business Administration",
+    "name": "Bachelor of Business Administration",
     "abbreviation": "BBA",
     "synonyms": [],
     "level": "6",
@@ -127,7 +127,7 @@ module.exports = [
     "hesa_itt_code": "60"
   },
   {
-    "title": "Bachelor of Combined Studies",
+    "name": "Bachelor of Combined Studies",
     "abbreviation": "BCS",
     "synonyms": [],
     "level": "6",
@@ -135,7 +135,7 @@ module.exports = [
     "hesa_itt_code": "61"
   },
   {
-    "title": "Bachelor of Commerce",
+    "name": "Bachelor of Commerce",
     "abbreviation": "BComm",
     "synonyms": [],
     "level": "6",
@@ -143,7 +143,7 @@ module.exports = [
     "hesa_itt_code": "62"
   },
   {
-    "title": "Bachelor of Divinity",
+    "name": "Bachelor of Divinity",
     "abbreviation": "BD",
     "synonyms": [],
     "level": "6",
@@ -151,7 +151,7 @@ module.exports = [
     "hesa_itt_code": "63"
   },
   {
-    "title": "Bachelor of Dental Surgery",
+    "name": "Bachelor of Dental Surgery",
     "abbreviation": "BDS",
     "synonyms": [],
     "level": "6",
@@ -159,7 +159,7 @@ module.exports = [
     "hesa_itt_code": "64"
   },
   {
-    "title": "Bachelor of Engineering",
+    "name": "Bachelor of Engineering",
     "abbreviation": "BEng",
     "synonyms": [],
     "level": "6",
@@ -167,7 +167,7 @@ module.exports = [
     "hesa_itt_code": "65"
   },
   {
-    "title": "Bachelor of Engineering with Business Studies",
+    "name": "Bachelor of Engineering with Business Studies",
     "abbreviation": "BEng/BS",
     "synonyms": [],
     "level": "6",
@@ -175,7 +175,7 @@ module.exports = [
     "hesa_itt_code": "66"
   },
   {
-    "title": "Bachelor of Fine Art",
+    "name": "Bachelor of Fine Art",
     "abbreviation": "BFA",
     "synonyms": [],
     "level": "6",
@@ -183,7 +183,7 @@ module.exports = [
     "hesa_itt_code": "67"
   },
   {
-    "title": "Bachelor of General Studies",
+    "name": "Bachelor of General Studies",
     "abbreviation": "BGS",
     "synonyms": [],
     "level": "6",
@@ -191,7 +191,7 @@ module.exports = [
     "hesa_itt_code": "68"
   },
   {
-    "title": "Bachelor of Humanities",
+    "name": "Bachelor of Humanities",
     "abbreviation": "BH",
     "synonyms": [],
     "level": "6",
@@ -199,7 +199,7 @@ module.exports = [
     "hesa_itt_code": "69"
   },
   {
-    "title": "Bachelor of Hygiene",
+    "name": "Bachelor of Hygiene",
     "abbreviation": "BHyg",
     "synonyms": [],
     "level": "6",
@@ -207,7 +207,7 @@ module.exports = [
     "hesa_itt_code": "70"
   },
   {
-    "title": "Bachelor of Law",
+    "name": "Bachelor of Law",
     "abbreviation": "LLB",
     "synonyms": [],
     "level": "6",
@@ -215,7 +215,7 @@ module.exports = [
     "hesa_itt_code": "71"
   },
   {
-    "title": "Bachelor of Librarianship",
+    "name": "Bachelor of Librarianship",
     "abbreviation": "BLib",
     "synonyms": [],
     "level": "6",
@@ -223,7 +223,7 @@ module.exports = [
     "hesa_itt_code": "72"
   },
   {
-    "title": "Bachelor of Librarianship and Information Studies",
+    "name": "Bachelor of Librarianship and Information Studies",
     "abbreviation": "BLS",
     "synonyms": [],
     "level": "6",
@@ -231,7 +231,7 @@ module.exports = [
     "hesa_itt_code": "73"
   },
   {
-    "title": "Bachelor of Literature",
+    "name": "Bachelor of Literature",
     "abbreviation": "BLitt",
     "synonyms": [],
     "level": "6",
@@ -239,7 +239,7 @@ module.exports = [
     "hesa_itt_code": "74"
   },
   {
-    "title": "Bachelor of Land Economy",
+    "name": "Bachelor of Land Economy",
     "abbreviation": "BLEcon",
     "synonyms": [],
     "level": "6",
@@ -247,7 +247,7 @@ module.exports = [
     "hesa_itt_code": "75"
   },
   {
-    "title": "Bachelor of Medical Science",
+    "name": "Bachelor of Medical Science",
     "abbreviation": "BMedSc",
     "synonyms": [],
     "level": "6",
@@ -255,7 +255,7 @@ module.exports = [
     "hesa_itt_code": "76"
   },
   {
-    "title": "Bachelor of Medicine",
+    "name": "Bachelor of Medicine",
     "abbreviation": "BM",
     "synonyms": [],
     "level": "6",
@@ -263,7 +263,7 @@ module.exports = [
     "hesa_itt_code": "77"
   },
   {
-    "title": "Bachelor of Metallurgy",
+    "name": "Bachelor of Metallurgy",
     "abbreviation": "BMet",
     "synonyms": [],
     "level": "6",
@@ -271,7 +271,7 @@ module.exports = [
     "hesa_itt_code": "78"
   },
   {
-    "title": "Bachelor of Metallurgy and Engineering",
+    "name": "Bachelor of Metallurgy and Engineering",
     "abbreviation": "BMet/Eng",
     "synonyms": [],
     "level": "6",
@@ -279,7 +279,7 @@ module.exports = [
     "hesa_itt_code": "79"
   },
   {
-    "title": "Bachelor of Music",
+    "name": "Bachelor of Music",
     "abbreviation": "BMus",
     "synonyms": [],
     "level": "6",
@@ -287,7 +287,7 @@ module.exports = [
     "hesa_itt_code": "80"
   },
   {
-    "title": "Bachelor of Nursing",
+    "name": "Bachelor of Nursing",
     "abbreviation": "BN",
     "synonyms": [],
     "level": "6",
@@ -295,7 +295,7 @@ module.exports = [
     "hesa_itt_code": "81"
   },
   {
-    "title": "Bachelor of Pharmacy",
+    "name": "Bachelor of Pharmacy",
     "abbreviation": "BPharm",
     "synonyms": [],
     "level": "6",
@@ -304,7 +304,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Bachelor of Science",
+    "name": "Bachelor of Science",
     "abbreviation": "BSc",
     "synonyms": [],
     "level": "6",
@@ -312,7 +312,7 @@ module.exports = [
     "hesa_itt_code": "83"
   },
   {
-    "title": "Bachelor of Science Economics",
+    "name": "Bachelor of Science Economics",
     "abbreviation": "BScEcon",
     "synonyms": [],
     "level": "6",
@@ -320,7 +320,7 @@ module.exports = [
     "hesa_itt_code": "84"
   },
   {
-    "title": "Bachelor of Science and Engineering",
+    "name": "Bachelor of Science and Engineering",
     "abbreviation": "BScEng",
     "synonyms": [],
     "level": "6",
@@ -328,7 +328,7 @@ module.exports = [
     "hesa_itt_code": "85"
   },
   {
-    "title": "Bachelor of Science and Technology",
+    "name": "Bachelor of Science and Technology",
     "abbreviation": "BScTech",
     "synonyms": [],
     "level": "6",
@@ -336,7 +336,7 @@ module.exports = [
     "hesa_itt_code": "86"
   },
   {
-    "title": "Bachelor of Science in Social Science",
+    "name": "Bachelor of Science in Social Science",
     "abbreviation": "BSc SS",
     "synonyms": [],
     "level": "6",
@@ -344,7 +344,7 @@ module.exports = [
     "hesa_itt_code": "87"
   },
   {
-    "title": "Bachelor of Science in Speech Therapy",
+    "name": "Bachelor of Science in Speech Therapy",
     "abbreviation": "BSc SPT",
     "synonyms": [],
     "level": "6",
@@ -352,7 +352,7 @@ module.exports = [
     "hesa_itt_code": "88"
   },
   {
-    "title": "Bachelor of Social Science",
+    "name": "Bachelor of Social Science",
     "abbreviation": "BSS",
     "synonyms": [],
     "level": "6",
@@ -360,7 +360,7 @@ module.exports = [
     "hesa_itt_code": "89"
   },
   {
-    "title": "Bachelor of Surgery",
+    "name": "Bachelor of Surgery",
     "abbreviation": "BS",
     "synonyms": [],
     "level": "6",
@@ -368,7 +368,7 @@ module.exports = [
     "hesa_itt_code": "90"
   },
   {
-    "title": "Bachelor of Chirurgiae",
+    "name": "Bachelor of Chirurgiae",
     "abbreviation": "BCh",
     "synonyms": [],
     "level": "6",
@@ -376,7 +376,7 @@ module.exports = [
     "hesa_itt_code": "91"
   },
   {
-    "title": "Bachelor of Technology",
+    "name": "Bachelor of Technology",
     "abbreviation": "BTech",
     "synonyms": [],
     "level": "6",
@@ -384,7 +384,7 @@ module.exports = [
     "hesa_itt_code": "92"
   },
   {
-    "title": "Bachelor of Theology",
+    "name": "Bachelor of Theology",
     "abbreviation": "BTheol",
     "synonyms": [],
     "level": "6",
@@ -392,7 +392,7 @@ module.exports = [
     "hesa_itt_code": "93"
   },
   {
-    "title": "Bachelor of Veterinary Medicine",
+    "name": "Bachelor of Veterinary Medicine",
     "abbreviation": "BVMed",
     "synonyms": [],
     "level": "6",
@@ -400,7 +400,7 @@ module.exports = [
     "hesa_itt_code": "94"
   },
   {
-    "title": "Bachelor of Veterinary Medicine and Surgery",
+    "name": "Bachelor of Veterinary Medicine and Surgery",
     "abbreviation": "BVMS",
     "synonyms": [],
     "level": "6",
@@ -408,7 +408,7 @@ module.exports = [
     "hesa_itt_code": "95"
   },
   {
-    "title": "Bachelor of Veterinary Science",
+    "name": "Bachelor of Veterinary Science",
     "abbreviation": "BVsc",
     "synonyms": [],
     "level": "6",
@@ -416,7 +416,7 @@ module.exports = [
     "hesa_itt_code": "96"
   },
   {
-    "title": "Bachelor of Education Scotland and Northern Ireland",
+    "name": "Bachelor of Education Scotland and Northern Ireland",
     "abbreviation": "BEd",
     "synonyms": [],
     "level": "6",
@@ -424,7 +424,7 @@ module.exports = [
     "hesa_itt_code": "97"
   },
   {
-    "title": "Bachelor of Philosophy",
+    "name": "Bachelor of Philosophy",
     "abbreviation": "BPhil",
     "synonyms": [],
     "level": "6",
@@ -433,7 +433,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Bachelor of Education",
+    "name": "Bachelor of Education",
     "abbreviation": "BEd",
     "synonyms": [],
     "level": "6",
@@ -441,7 +441,7 @@ module.exports = [
     "hesa_itt_code": "1"
   },
   {
-    "title": "BSc/Education",
+    "name": "BSc/Education",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -449,7 +449,7 @@ module.exports = [
     "hesa_itt_code": "3"
   },
   {
-    "title": "BTech/Education",
+    "name": "BTech/Education",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -457,7 +457,7 @@ module.exports = [
     "hesa_itt_code": "5"
   },
   {
-    "title": "BA/Education",
+    "name": "BA/Education",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -465,7 +465,7 @@ module.exports = [
     "hesa_itt_code": "7"
   },
   {
-    "title": "BA Combined Studies/Education of the Deaf",
+    "name": "BA Combined Studies/Education of the Deaf",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -473,7 +473,7 @@ module.exports = [
     "hesa_itt_code": "9"
   },
   {
-    "title": "BA with intercalated PGCE",
+    "name": "BA with intercalated PGCE",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -482,7 +482,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Master of Arts",
+    "name": "Master of Arts",
     "abbreviation": "MA",
     "synonyms": [
       "masters of arts"
@@ -492,7 +492,7 @@ module.exports = [
     "hesa_itt_code": "200"
   },
   {
-    "title": "Master of Librarianship",
+    "name": "Master of Librarianship",
     "abbreviation": "MLib",
     "synonyms": [
       "masters of librarianship"
@@ -502,7 +502,7 @@ module.exports = [
     "hesa_itt_code": "201"
   },
   {
-    "title": "Master of Literature",
+    "name": "Master of Literature",
     "abbreviation": "MLitt",
     "synonyms": [
       "masters of literature"
@@ -512,7 +512,7 @@ module.exports = [
     "hesa_itt_code": "202"
   },
   {
-    "title": "Master of Music",
+    "name": "Master of Music",
     "abbreviation": "MMus",
     "synonyms": [
       "masters of music"
@@ -522,7 +522,7 @@ module.exports = [
     "hesa_itt_code": "203"
   },
   {
-    "title": "Master of Philosophy",
+    "name": "Master of Philosophy",
     "abbreviation": "MPhil",
     "synonyms": [
       "masters of philosophy"
@@ -533,7 +533,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Master of Science",
+    "name": "Master of Science",
     "abbreviation": "MSc",
     "synonyms": [
       "masters of science"
@@ -543,7 +543,7 @@ module.exports = [
     "hesa_itt_code": "205"
   },
   {
-    "title": "Master of Theology",
+    "name": "Master of Theology",
     "abbreviation": "MTheol",
     "synonyms": [
       "masters of theology"
@@ -553,7 +553,7 @@ module.exports = [
     "hesa_itt_code": "206"
   },
   {
-    "title": "Certificate of Membership of Cranfield Institute of Technology",
+    "name": "Certificate of Membership of Cranfield Institute of Technology",
     "abbreviation": null,
     "synonyms": [],
     "level": "6",
@@ -562,7 +562,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Master of Education",
+    "name": "Master of Education",
     "abbreviation": "MEd",
     "synonyms": [
       "masters of education"
@@ -572,7 +572,7 @@ module.exports = [
     "hesa_itt_code": "208"
   },
   {
-    "title": "Master of Business Studies",
+    "name": "Master of Business Studies",
     "abbreviation": "MBS",
     "synonyms": [
       "masters of business studies"
@@ -582,7 +582,7 @@ module.exports = [
     "hesa_itt_code": "209"
   },
   {
-    "title": "Master of Social Studies",
+    "name": "Master of Social Studies",
     "abbreviation": "MSS",
     "synonyms": [
       "masters of social studies"
@@ -592,7 +592,7 @@ module.exports = [
     "hesa_itt_code": "210"
   },
   {
-    "title": "Master of Engineering",
+    "name": "Master of Engineering",
     "abbreviation": "MEng",
     "synonyms": [
       "masters of engineering"
@@ -602,7 +602,7 @@ module.exports = [
     "hesa_itt_code": "211"
   },
   {
-    "title": "Master of Law",
+    "name": "Master of Law",
     "abbreviation": "MLaw",
     "synonyms": [
       "masters of law"
@@ -612,7 +612,7 @@ module.exports = [
     "hesa_itt_code": "212"
   },
   {
-    "title": "Master of Business Administration",
+    "name": "Master of Business Administration",
     "abbreviation": "MBA",
     "synonyms": [
       "masters of business administration"
@@ -622,7 +622,7 @@ module.exports = [
     "hesa_itt_code": "213"
   },
   {
-    "title": "Master of Chemistry",
+    "name": "Master of Chemistry",
     "abbreviation": "MChem",
     "synonyms": [
       "masters of chemistry"
@@ -632,7 +632,7 @@ module.exports = [
     "hesa_itt_code": "214"
   },
   {
-    "title": "Master of Physics",
+    "name": "Master of Physics",
     "abbreviation": "MPhys",
     "synonyms": [
       "masters of physics"
@@ -642,7 +642,7 @@ module.exports = [
     "hesa_itt_code": "215"
   },
   {
-    "title": "Doctor of Divinity",
+    "name": "Doctor of Divinity",
     "abbreviation": "DD",
     "synonyms": [],
     "level": "8",
@@ -650,7 +650,7 @@ module.exports = [
     "hesa_itt_code": "300"
   },
   {
-    "title": "Doctor of Civil Law",
+    "name": "Doctor of Civil Law",
     "abbreviation": "DCL",
     "synonyms": [],
     "level": "8",
@@ -658,7 +658,7 @@ module.exports = [
     "hesa_itt_code": "301"
   },
   {
-    "title": "Doctor of Medicine",
+    "name": "Doctor of Medicine",
     "abbreviation": "MD",
     "synonyms": [],
     "level": "8",
@@ -666,7 +666,7 @@ module.exports = [
     "hesa_itt_code": "302"
   },
   {
-    "title": "Doctor of Music",
+    "name": "Doctor of Music",
     "abbreviation": "DMu",
     "synonyms": [],
     "level": "8",
@@ -674,7 +674,7 @@ module.exports = [
     "hesa_itt_code": "303"
   },
   {
-    "title": "Doctor of Science",
+    "name": "Doctor of Science",
     "abbreviation": "DSc",
     "synonyms": [],
     "level": "8",
@@ -682,7 +682,7 @@ module.exports = [
     "hesa_itt_code": "304"
   },
   {
-    "title": "Doctor of Philosophy",
+    "name": "Doctor of Philosophy",
     "abbreviation": "DPhil",
     "synonyms": [],
     "level": "8",
@@ -691,7 +691,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Doctor of Philosophy",
+    "name": "Doctor of Philosophy",
     "abbreviation": "PhD",
     "synonyms": [],
     "level": "8",
@@ -700,7 +700,7 @@ module.exports = [
   },
   {
     "priority": 1,
-    "title": "Doctor of Education",
+    "name": "Doctor of Education",
     "abbreviation": "EdD",
     "synonyms": [],
     "level": "8",

@@ -55,9 +55,7 @@
 
       {% for degreeType in degreeTypes %}
         {% if degreeType.priority == 1 %}
-          {% set displayTitle = degreeType.title %}
-          {% set displayTitle = displayTitle + " (" + degreeType.abbreviation  + ")" if degreeType.abbreviation %}
-          {% set radioItems = radioItems | push({value: degreeType.title, text: displayTitle}) %}
+          {% set radioItems = radioItems | push({value: degreeType.name, text: degreeType.name}) %}
         {% endif %}
       {% endfor %}
 
@@ -105,29 +103,13 @@
 
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script src="/public/javascripts/sort.js"></script>
   <script>
-    function inputTemplate (result) {
-      if (result) {
-        const name = result.split(' - ')
 
-        if (name[1]) {
-          return name[0] && name[0]
-        }
+    var degreeTypes = {{ degreeTypes | dump | safe }};
 
-        return result && result
-      }
-
-      return result && result
-    }
-
-    function suggestionTemplate (result) {
-      const name = result.split(' - ')
-
-      if (name[1]) {
-        return name[0] && `<span class="">${name[1]}</span> (${name[0]})`
-      }
-
-      return result && `${result}`
+    function filter(query, populateResults) {
+      populateResults(sort(query, degreeTypes))
     }
 
     accessibleAutocomplete({
@@ -139,12 +121,7 @@
       showNoOptionsFound: false,
       minLength: 0,
       showAllValues: true,
-      source: [
-        {% for item in degreeTypes %}"{{ item.title }} {{ " (" + item.abbreviation +")" if item.abbreviation else ""}}",{% endfor %}
-      ],
-      templates: {
-        suggestion: suggestionTemplate
-      }
+      source: filter
     })
   </script>
 {% endblock %}

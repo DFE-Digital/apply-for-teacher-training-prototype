@@ -36,9 +36,17 @@
 
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script src="/public/javascripts/sort.js"></script>
   <script>
   {% if international %}
   {% else %}
+
+    var allDegreeInstitutions = {{ allDegreeInstitutions | dump | safe }};
+
+    function filter(query, populateResults) {
+      populateResults(sort(query, allDegreeInstitutions))
+    }
+
     accessibleAutocomplete({
       element: document.querySelector('#org-autocomplete-container'),
       id: 'degree-{{ id }}-org',
@@ -47,9 +55,7 @@
       minLength: 2,
       showNoOptionsFound: false,
       placeholder: false,
-      source: [
-        {% for item in allDegreeInstitutions %}"{{ item.name }}",{% endfor %}
-      ]
+      source: filter
     })
   {% endif %}
   </script>

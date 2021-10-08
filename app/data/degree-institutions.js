@@ -1,3 +1,32 @@
+// UK Higher Education Institutions
+//
+// This file lists all Higher Education Institutions (HEIs) in the UK,
+// including previous ones that have closed (or merged).
+//
+// Not all of these have "University" in the name or are called Universities
+// - as that is a reserved term which HEIs have to apply to be able to use
+// (at least in England).
+//
+// Not all of these have the ability to award 'degrees'. For instance, some
+// are for-profit institutions (sometimes known as 'Alternative') which may
+// only be able to award other types of qualification which aren't degrees.
+//
+// The 'name' field contains the current student-facing name for the institution
+// which may not necessarily be exactly the same as it official name as registered
+// with various official bodies.
+//
+// Where possible, previous names, common abbreviations, and other alternative names
+// are listed in the `synonyms` to aid lookup.
+//
+//
+//
+// The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
+// These are not necessarily unique, as two institutions may map to the same ID.
+//
+// The hesa_itt_code is used for reporting ITT data to the Higher Education Statistics
+// Agency (HESA) in the DEGEST field - see reference here:
+// https://www.hesa.ac.uk/collection/c21053/e/degest
+//
 module.exports = [
   {
     "name": "The Open University",

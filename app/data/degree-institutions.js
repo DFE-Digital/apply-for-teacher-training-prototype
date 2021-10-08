@@ -163,7 +163,7 @@ module.exports = [
     "dttp_id": "dc70f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "University of the Arts, London",
+    "name": "University of the Arts London",
     "synonyms": [],
     "hesa_itt_code": "24",
     "dttp_id": "ca781c39-3fa2-e811-812b-5065f38ba241"
@@ -506,7 +506,7 @@ module.exports = [
   },
   {
     "name": "University of the West of England, Bristol",
-    "synonyms": [],
+    "synonyms": ["UWE Bristol"],
     "hesa_itt_code": "81",
     "dttp_id": "4071f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1895,7 +1895,7 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Royal School of Needlework (The)",
+    "name": "Royal School of Needlework",
     "synonyms": [],
     "hesa_itt_code": "404",
     "dttp_id": null
@@ -1985,13 +1985,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Dartington Hall Trust (The)",
+    "name": "Dartington Hall Trust",
     "synonyms": [],
     "hesa_itt_code": "420",
     "dttp_id": null
   },
   {
-    "name": "New Model Institute for Technology and Engineering (NMITE)",
+    "name": "New Model Institute for Technology and Engineering",
     "synonyms": [],
     "hesa_itt_code": "421",
     "dttp_id": null

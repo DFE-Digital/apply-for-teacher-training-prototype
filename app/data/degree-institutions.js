@@ -1257,7 +1257,10 @@ module.exports = [
   },
   {
     "name": "Cardiff University",
-    "suggestion_synonyms": ["University College Cardiff"],
+    "suggestion_synonyms": [
+      "University College Cardiff",
+      "University of Wales, Cardiff"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "179",
     "dttp_id": "0ff35f0b-7042-e811-80ff-3863bb3640b8"
@@ -2455,13 +2458,6 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Manchester Health Academy",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "3d0517a7-a441-e811-80fd-3863bb349ac0"
-  },
-  {
     "name": "NCG",
     "suggestion_synonyms": [
       "Newcatle College Group",
@@ -2470,16 +2466,6 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": null,
     "dttp_id": "20e5a08c-ee97-e711-80d8-005056ac45bb"
-  },
-  {
-    "name": "City College Norwich",
-    "suggestion_synonyms": [
-      "Norwich City College",
-      "Norwich City College of Further and Higher Education"
-    ],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "3efe7322-e897-e711-80d8-005056ac45bb"
   },
   {
     "name": "University of Wales",
@@ -2504,12 +2490,5 @@ module.exports = [
     "hesa_itt_code": null,
     "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
     "comment": "Constituent colleges gained the ability to award their own degrees in around 2018."
-  },
-  {
-    "name": "West Suffolk College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "82ff7322-e897-e711-80d8-005056ac45bb",
-    "comment": ""
-  }]
+  }
+]

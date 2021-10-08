@@ -59,7 +59,6 @@ module.exports = [
     "name": "The College of Guidance Studies",
     "suggestion_synonyms": [],
     "match_synonyms": [],
-    "match_synonyms": [],
     "hesa_itt_code": "4",
     "dttp_id": null
   },

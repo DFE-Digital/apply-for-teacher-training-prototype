@@ -747,7 +747,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "104",
-    "dttp_id": null
+    "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The University of the West of Scotland",
@@ -2067,14 +2067,14 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "334",
-    "dttp_id": null
+    "dttp_id": "4d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Grŵp NPTC Group",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "335",
-    "dttp_id": null
+    "dttp_id": "4f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Gower College Swansea",
@@ -2214,7 +2214,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "404",
-    "dttp_id": null
+    "dttp_id": "d13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Institute Of Art - London",
@@ -2319,14 +2319,14 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "420",
-    "dttp_id": null
+    "dttp_id": "343e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "New Model Institute for Technology and Engineering",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "421",
-    "dttp_id": null
+    "dttp_id": "a53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Kaplan International Colleges U.K.",

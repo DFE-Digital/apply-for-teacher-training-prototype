@@ -3,7 +3,7 @@ const humanizeDuration = require('humanize-duration')
 const marked = require('marked')
 const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
-const degree = require('./data/degree')()
+const utils = require('./utils')
 
 module.exports = (env) => {
   /**
@@ -13,6 +13,80 @@ module.exports = (env) => {
    * @type {Object}
    */
   const filters = {}
+
+  filters.dateNow = () => {
+    return DateTime.local()
+  }
+
+  /**
+   * Remove empty values from address object and break into new lines
+   *
+   * @type {object} object
+   */
+  filters.formatAddress = (object, separator = '\n') => {
+    if (object) {
+      // Ensure object values are in the correct order before transforming
+      object = {
+        line1: object.line1,
+        line2: object.line2,
+        level2: object.level2,
+        level1: object.level1,
+        postalCode: object.postalCode,
+        country: object.country
+      }
+
+      const array = filters.toArray(object)
+      return array.filter(value => value !== '').join(separator)
+    }
+  }
+
+  /**
+   * Format numeric date into a human readable format
+   *
+   * @type {object} object
+   */
+  filters.formatDate = object => {
+    if (object) {
+      const month = object.month.padStart(2, '0')
+      const day = object.day.padStart(2, '0')
+      const date = `${object.year}-${month}-${day}`
+
+      return filters.date(date, 'd MMMM yyyy')
+    }
+  }
+
+  /**
+   * Format list of nationalities to remove ‘Other’
+   *
+   * @type {object} object
+   */
+  filters.formatNationalities = (object = {}) => {
+    if (object) {
+      // Always return an array of selected nationalities, even if only 1 selected
+      let { nationality } = object
+      nationality = nationality instanceof Array ? nationality : [nationality]
+
+      // Using slice() to shallow-copy the array rather than referencing the original
+      const nationalities = nationality.slice()
+      if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
+      if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
+      if (object.otherNationality3) { nationalities.push(object.otherNationality3) }
+
+      const nationalityList = nationalities.filter(value => value !== 'Other')
+
+      return filters.formatList(nationalityList)
+    }
+  }
+
+  /**
+   * Convert array to readable list format
+   * @param {Array} array Array to convert
+   * @example [A, B, C] => A, B anc C
+   */
+  filters.formatList = (array = []) => {
+    const lf = new Intl.ListFormat('en')
+    return lf.format(array)
+  }
 
   /**
    * Convert str to date
@@ -85,6 +159,10 @@ module.exports = (env) => {
     }
   }
 
+  filters.capitaliseFirstLetter = (str) => {
+    return utils.capitaliseFirstLetter(str)
+  }
+
   /**
    * Convert Markdown to HTML
    * @type {String} str
@@ -111,7 +189,7 @@ module.exports = (env) => {
   }
 
   /**
-   * Convert object to array
+   * Convert object to array, or return empty array.
    * @type {Object} obj
    */
   filters.toArray = (obj) => {
@@ -122,6 +200,8 @@ module.exports = (env) => {
         arr.push(value)
       }
       return arr
+    } else {
+      return []
     }
   }
 
@@ -137,6 +217,10 @@ module.exports = (env) => {
    */
   filters.getCourse = (providerCode, courseCode) => {
     return providers[providerCode].courses[courseCode]
+  }
+
+  filters.getProvider = (providerCode) => {
+    return utils.getProvider(providerCode)
   }
 
   filters.providerCode = (providerAndCode) => {
@@ -175,7 +259,7 @@ module.exports = (env) => {
       case 'Offer withdrawn':
       case 'Conditions not met':
         return `${prefix}--red`
-      case 'Conditions met':
+      case 'Offer confirmed':
         return `${prefix}--green`
       case 'Unsuccessful':
       case 'Application not sent':
@@ -194,6 +278,8 @@ module.exports = (env) => {
         return `${prefix}--yellow`
       case 'Reference given':
         return `${prefix}--green`
+      case 'Reference selected':
+        return `${prefix}--green ${prefix}--filled`
       case 'Request cancelled':
         return `${prefix}--orange`
       case 'Reference declined':

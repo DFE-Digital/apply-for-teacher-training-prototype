@@ -1,5 +1,7 @@
 {% set complete = choices | length > 0 %}
 {% if complete %}
+
+
   {% for item in choices %}
     {% set provider = providers[item.providerCode] %}
     {% set course = provider.courses[item.courseCode] %}
@@ -11,7 +13,7 @@
 
     {% set hasResponded =
       (item.status == "Conditions not met")
-      or (item.status == "Conditions met")
+      or (item.status == "Offer confirmed")
       or (item.status == "Offer declined")
       or (item.status == "Unsuccessful")
       or (item.status == "Offer withdrawn")
@@ -28,6 +30,7 @@
       and (item.status != "Offer withdrawn")
       and (item.status != "Application withdrawn")
       and (item.status != "Conditions not met")
+      and (item.status != nil)
     %}
 
     {{ appSummaryCard({
@@ -51,11 +54,16 @@
   {% endfor %}
 {% else %}
   {% if showIncomplete %}
-    {% set incompleteType = "warning" if errorList %}
-    {% set incompleteId = "choices" %}
-    {% set incompleteText = "Course choices are not marked as completed" %}
-    {% set incompleteLink = "/choices?referrer=" + referrer %}
-    {% set incompleteLinkText = "Complete your course choices" %}
-    {% include "_includes/review/incomplete.njk" %}
+    {{ appSuggestion({
+      id: "choices",
+      title: "Course choices are not marked as completed",
+      warning: true if errorList,
+      actions: {
+        items: [{
+          text: "Complete your course choices",
+          href: applicationPath + "/choices?referrer=" + referrer
+        }]
+      }
+    }) }}
   {% endif %}
 {% endif %}

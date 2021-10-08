@@ -5,6 +5,9 @@
 {% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/subject" %}
+
+
 {% block pageNavigation %}
   {{ govukBackLink({
     href: referrer or paths.back
@@ -12,30 +15,44 @@
 {% endblock %}
 
 {% block primary %}
+
   {% if international %}
     {{ govukInput({
-      label: label,
+      label: {
+        text: title,
+        classes: "govuk-label--l"
+      },
       hint: {
         text: "For example, Liberal Arts, Marine Sciences, Psychology"
       }
     } | decorateApplicationAttributes(["degree", id, "subject"])) }}
   {% else %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-subject">{{ title }}</label>
-      <span id="degree-{{ id }}-subject-hint" class="govuk-hint">For example, History with French, Maths, Film studies</span>
-      <div id="subject-autocomplete-container"></div>
+      <label class="govuk-label govuk-label--l" for="degree-{{ id }}-subject">{{ title }}</label>
+      <span id="degree-{{ id }}-subject-hint" class="govuk-hint">Type your own or select from the suggections. For example, 'French and History' or 'Mathematics'.</span>
+      <div id="subject-autocomplete-container" class="suggestions"></div>
     </div>
   {% endif %}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
+
 {% endblock %}
 
 {% if not international %}
   {% block pageScripts %}
     <script src="/public/javascripts/autocomplete.min.js"></script>
+    <script src="/public/javascripts/sort.js"></script>
+
     <script>
+
+      var allDegreeSubjects = {{ allDegreeSubjects | dump | safe }};
+
+      function filter(query, populateResults) {
+        populateResults(sort(query, allDegreeSubjects))
+      }
+
       accessibleAutocomplete({
         element: document.querySelector('#subject-autocomplete-container'),
         id: 'degree-{{ id }}-subject',
@@ -44,9 +61,7 @@
         showNoOptionsFound: false,
         minLength: 2,
         placeholder: false,
-        source: [
-          {% for item in degree.subjects %}"{{ item }}",{% endfor %}
-        ]
+        source: filter
       })
     </script>
   {% endblock %}

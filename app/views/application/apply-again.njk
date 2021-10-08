@@ -2,6 +2,13 @@
 
 {% set title = "Do you want to apply again?" %}
 
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
+{% endblock %}
+
+
 {% block primary %}
   <p>You could still get a place on a course this year.</p>
 
@@ -20,6 +27,4 @@
     text: "Start now",
     href: "/application/" + applicationId + "/apply2"
   }) }}
-  <p class="govuk-body">or</p>
-  <p class="govuk-body"><a href="/application/{{ applicationId }}">Go to your dashboard</a></p>
 {% endblock %}

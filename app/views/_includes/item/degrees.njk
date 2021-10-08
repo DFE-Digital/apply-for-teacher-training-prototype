@@ -1,0 +1,200 @@
+{% set degrees = applicationValue(["degree"]) %}
+{% set qualifications = degrees | toArray | selectattr("id") %}
+
+{% for item in qualifications %}
+
+  {% set degreeType %}
+    {% if item.otherType %}
+      {{ item.otherType }}
+    {% else %}
+      {{ item.type }}
+    {% endif %}
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: degreeType + " " + item.subject,
+    actions: {
+      items: [{
+        href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,
+        text: "Delete degree"
+      }]
+    } if canAmend,
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Degree level"
+        },
+        value: {
+          text: (item.otherLevel if item.level == "other" else item.level)
+        },
+        actions: {
+          items: [
+            {
+              href: applicationPath + "/degree/" + item.id + "/level?referrer=" + referrer,
+              text: "Change",
+              visuallyHideenText: "degree level"
+            }
+          ]
+        }
+      } if item.provenance == "domestic", {
+        key: {
+          text: "Subject"
+        },
+        value: {
+          text: item.subject or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/subject?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "subject"
+          }]
+        } if canAmend
+      },
+      {
+        key: {
+          text: "Degree type"
+        },
+        value: {
+          text: degreeType
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/type?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "degree type"
+          }]
+        } if canAmend
+      },
+      {
+        key: {
+          text: "Institution"
+        },
+        value: {
+          text: item.org + (", " + item.country if item.country) or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/institution?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "institution"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Do you have a UK ENIC statement of comparability?"
+        },
+        value: {
+          text: item.enic or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/enic?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "UK ENIC statement of comparability"
+          }]
+        } if canAmend
+      } if item.enic, {
+        key: {
+          text: "UK ENIC reference number"
+        },
+        value: {
+          text: item.enicReference or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/enic?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "UK ENIC reference"
+          }]
+        } if canAmend
+      } if item.enic and item.enicReference, {
+        key: {
+          text: "Comparable UK degree"
+        },
+        value: {
+          text: item.enicComparability or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/enic?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "comparable UK degree"
+          }]
+        } if canAmend
+      } if item.enic and item.enicComparability, {
+        key: {
+          text: "Have you completed this degree?"
+        },
+        value: {
+          text: item.completed or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/completed?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if completed degree"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Does this degree give a grade?"
+        },
+        value: {
+          text: item.hasGrade or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if this degree give a grade"
+          }]
+        } if canAmend
+      } if item.hasGrade, {
+        key: {
+          text: "Grade" if item.completed == "Yes" else "Expected grade"
+        },
+        value: {
+          text: item.grade or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/grade?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "grade"
+          }]
+        } if canAmend
+      } if item.grade, {
+        key: {
+          text: "Start year"
+        },
+        value: {
+          text: item.yearStart or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/start-year?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "start year"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Graduation year"
+        },
+        value: {
+          text: item.yearEnd or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/degree/" + item.id + "/graduation-year?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "graduation year"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+{% endfor %}

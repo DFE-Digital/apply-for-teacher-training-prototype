@@ -2,20 +2,8 @@
 
 {% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Check your answers before submitting your reference" %}
+{% set title = "Your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
-
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/reference/comments"
-    }) }}
-  {% endif %}
-{% endblock %}
 
 {% block primary %}
   {% if data.reference.relationship.correct == "Yes" %}
@@ -29,6 +17,8 @@
   {% else %}
     {% set safeguardingValue = data.reference.safeguarding.concern %}
   {% endif %}
+
+  <p class="govuk-body">If you're not ready to submit yet, you can return using the link in your email.</p>
 
   {{ govukSummaryList({
     rows: [{

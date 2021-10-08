@@ -20,13 +20,13 @@
 
 {% block primary %}
   {% if referee.type == "Academic" %}
-    {% set relationshipExample = "He was my course supervisor at university. I’ve known him for a year" %}
+    {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year" %}
   {% elif referee.type == "Professional" %}
-    {% set relationshipExample = "He was my line manager in my last job. I’ve known him for 2 years" %}
+    {% set relationshipExample = "They were my line manager in my last job. I’ve known them for 2 years" %}
   {% elif referee.type == "School-based" %}
-    {% set relationshipExample = "She’s the deputy head at the school where I currently volunteer. I’ve known her for 3 years" %}
+    {% set relationshipExample = "They are the deputy head at the school where I currently volunteer. I’ve known them for 3 years" %}
   {% else %}
-    {% set relationshipExample = "She’s the head coach for my athletics club. I’ve known her for 5 years" %}
+    {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years" %}
   {% endif %}
 
   {{ govukCharacterCount({

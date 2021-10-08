@@ -1,20 +1,51 @@
-const application = require('./application')
-const applicationApplyAgain = require('./application-apply-again')
-const applicationWithChoices = require('./application-with-choices')
-const applicationWithSingleChoice = require('./application-single-choice')
+
+// Copies dummy application and tweaks some fields
+const internationalApplicationNoRightToStudyYet = JSON.parse(JSON.stringify(require('./application-international')))
+internationalApplicationNoRightToStudyYet.candidate.immigration = 'Not yet'
+internationalApplicationNoRightToStudyYet.candidate.immigrationStatusDetails = ''
+
+const applicationWhereNotMeetingMinimiumDegreeRequirement = JSON.parse(JSON.stringify(require('./application')))
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ABCDE.degreeRequired = '21'
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.FGHIJ.degreeRequired = '22'
+applicationWhereNotMeetingMinimiumDegreeRequirement.choices.ZYXWV.degreeRequired = 'third'
+applicationWhereNotMeetingMinimiumDegreeRequirement.degree.abcde.grade = 'Third-class honours'
+
+const applicationWhereStudyingForGcse = JSON.parse(JSON.stringify(require('./application')))
+applicationWhereStudyingForGcse.gcse.english.type = 'not-yet'
+applicationWhereStudyingForGcse.gcse.english.currentlyStudying = 'yes'
+applicationWhereStudyingForGcse.gcse.english.missing = 'I am currently studying for a GCSE English part-time.'
+
+const applicationWithNoGcse = JSON.parse(JSON.stringify(require('./application')))
+applicationWithNoGcse.gcse.english.type = 'not-yet'
+applicationWithNoGcse.gcse.english.currentlyStudying = 'no'
+applicationWithNoGcse.gcse.english.missing = 'I have been working in publishing for 10 years, and can demonstrate my English through an equivalency test'
+
+const applicationWithDegreeSectionNotStarted = JSON.parse(JSON.stringify(require('./application')))
+applicationWithDegreeSectionNotStarted.completed.degree = null
+applicationWithDegreeSectionNotStarted.degree = {}
 
 module.exports = {
   applications: {
-    12345: application,
-    12346: applicationApplyAgain,
-    'ABCDE': applicationWithChoices,
-    45678: applicationWithSingleChoice
+    12345: require('./application'),
+    65432: require('./previous-applications'),
+    12346: require('./application-apply-again'),
+    23456: require('./application-apply-again-with-choice'),
+    ABCDE: require('./application-with-choices'),
+    45678: require('./application-single-choice'),
+    GLOBE: require('./application-international'),
+    WORLD: require('./application-international-with-choices'),
+    DEGREE: applicationWithDegreeSectionNotStarted,
+    21234: internationalApplicationNoRightToStudyYet,
+    52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
+    21235: applicationWhereStudyingForGcse,
+    21236: applicationWithNoGcse
   },
-  find_url: 'http://search-and-compare-ui-pr-442.herokuapp.com',
+  findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {
-    address_lookup: false,
-    self_amend_email_address: false,
-    self_amend_contact_details: false
+    addressLookup: false,
+    selfAmendEmailAddress: false,
+    selfAmendContactDetails: false
   },
-  visits_from_find: 0
+  visitsFromFind: 0,
+  previousApplications: {}
 }

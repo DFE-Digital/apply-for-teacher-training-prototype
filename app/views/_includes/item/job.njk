@@ -1,103 +1,84 @@
-{% set applicationPath = "/application/" + applicationId %}
+{# periodStart = Earliest date in required work history period #}
+{% set periodStart = "now" | date | replace("2019", "2014") %}
+{% set periodStartEpoch = periodStart | date("x") | int %}
 
-{% set jobHtml -%}
-  {% if item.role %}
-    {{ item.role }}
-    {%- if item.org %}
-      <br><span class="govuk-visually-hidden">at</span>{{ item.org }}
+{# firstStart = Start date of first item in work history #}
+{% set firstStart = item.startDate %}
+{% set firstStartEpoch = firstStart | date("x") | int %}
+
+<section class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">
+      {% if item.category == "break" %}
+        Break in work history
+      {% else %}
+        {{ item.org }}
+      {% endif %}
+    </h3>
+
+    <p class="govuk-body govuk-!-margin-bottom-0">
+      {% if item.category == 'break' %}
+        {{ item.description }}
+      {% else %}
+        {{ item.role }}
+        {% if item.type == "Part time" %}(Part time){% endif %}
+      {% endif %}
+    </p>
+
+    <p class="govuk-body">
+      {{ item.startDate | date('LLL yyyy') }}
+
+      {% if item.startDateApprox | length  > 0 %}
+        (estimate)
+      {% endif %}
+
+      to
+      {% if item.endDatePresent == "yes" %}
+        Present
+      {% else %}
+        {{ item.endDate | date("LLL yyyy") if item.endDate else "Present" }}
+
+        {% if item.endDateApprox | length  > 0 %}
+          (estimate)
+        {% endif %}
+      {% endif %}
+    </p>
+
+    {% if item.workedWithChildren == "Yes" %}
+      <p class="govuk-body-s govuk-!-margin-bottom-1">This role used skills relevant to teaching</p>
     {% endif %}
-  {% else %}
-    Not entered
+  </div>
+
+  <div class="govuk-grid-column-one-third govuk-body app-grid-column-one-third--actions">
+    {% set editPath = (applicationPath + "/work-history/break/" + item.id) if item["category"] == "break" else (applicationPath + "/work-history/" + item.id) %}
+    <a class="govuk-link" href="{{ editPath }}">Change</a>&nbsp;&nbsp;&nbsp;
+    <a class="govuk-link" href="{{ applicationPath + "/work-history/" + item.id + "/remove" }}">Delete</a>
+  </div>
+</section>
+
+{% if loop.index != history.length %}
+  <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
+{% endif %}
+
+{# Unexplained break (during work history) #}
+{% set nextItem = history[loop.index] %}
+{% set itemStart = item.endDate %}
+{% set itemStartEpoch = itemStart | date("x") | int %}
+{% set itemEnd = nextItem.startDate if nextItem else "now" %}
+{% set itemEndEpoch = itemEnd | date("x") | int %}
+{% set itemDuration = itemEndEpoch - itemStartEpoch %}
+{% if itemEndEpoch > itemStartEpoch and itemDuration > 2678400000 and item.endDatePresent != 'Yes' %}
+  {% if loop.index == history.length %}
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
   {% endif %}
-{%- endset %}
 
-{% set typeHtml -%}
-  {% if item.type%}
-    {{ item.type }}
-    {% if item['part-time-details'] and item.type == 'Part time' %}
-    <br />{{ item['part-time-details'] }}
-    {% endif %}
-  {% else %}
-    Not entered
+  <div class="govuk-inset-text app-inset-text--important app-inset-text--narrow-border govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">You have a break in your work history ({{ itemDuration | duration }})</h3>
+    <p class="govuk-body"><a href="{{ applicationPath + "/work-history/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">Add another job</a> or
+    <a href="{{ applicationPath + "/work-history/break/" + newId + "?start=" + itemStart | date("yyyy-LL") + "&end=" + itemEnd | date("yyyy-LL") }} ">add a reason for this break</a></p>
+  </div>
+
+  {% if loop.index != history.length %}
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--m ">
   {% endif %}
-{%- endset %}
-
-{% set datesText %}
-  {{ item["start-date"] | date("MMMM yyyy") }} - {{ item["end-date"] | date("MMMM yyyy") if item["end-date"] != "now" else "Present" }}
-{% endset %}
-
-{% set changeHref = applicationPath + "/work-history/job/" + item.id + "?referrer=" + referrer %}
-
-{{ govukSummaryList({
-  rows: [{
-    key: {
-      text: "Job"
-    },
-    value: {
-      html: jobHtml | safe
-    },
-    actions: {
-      items: [{
-        href: changeHref,
-        text: "Change",
-        visuallyHiddenText: "job"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: "Working pattern"
-    },
-    value: {
-      html: typeHtml
-    },
-    actions: {
-      items: [{
-        href: changeHref,
-        text: "Change",
-        visuallyHiddenText: "working pattern"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: "Dates"
-    },
-    value: {
-      text: datesText
-    },
-    actions: {
-      items: [{
-        href: changeHref,
-        text: "Change",
-        visuallyHiddenText: "dates"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: "Description"
-    },
-    value: {
-      text: (item.description or "Not entered") | nl2br | safe
-    },
-    actions: {
-      items: [{
-        href: changeHref,
-        text: "Change",
-        visuallyHiddenText: "description"
-      }]
-    } if canAmend
-  }, {
-    key: {
-      text: "Did this job involve working in a school or with children?"
-    },
-    value: {
-      text: (item["worked-with-children"] or "Not entered")
-    },
-    actions: {
-      items: [{
-        href: changeHref,
-        text: "Change",
-        visuallyHiddenText: "if this job involved working with children"
-      }]
-    } if canAmend
-  }]
-}) }}
+{% endif %}

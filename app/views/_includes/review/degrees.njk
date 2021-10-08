@@ -1,37 +1,30 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set degrees = applicationValue(["degree"]) | toArray %}
+{% set completed = applicationValue(["completed", "degree"]) %}
+{% set entered = applicationValue(["degree"]) | length %}
 
-{% set complete = degrees | length > 0 %}
-{% if complete %}
-  {% set degrees = degrees | selectattr("id") %}
-  {% for item in degrees %}
-    {% set degreeHtml %}
-      {% include "_includes/item/degree.njk" %}
-    {% endset %}
-    {% set degreeType = (item["type-uk"] or item["type-nonuk"]) + (" (Hons)" if (item.grade and item.grade.includes("honours"))) %}
-    {% if item.provenance == "domestic" %}
-      {% set titleText = degreeType + " " + item.subject %}
-    {% else %}
-      {% set titleText = degreeType + ": " + item.subject %}
-    {% endif %}
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: titleText,
-      actions: {
-        items: [{
-          href: applicationPath + "/degree/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete degree"
-        }]
-      } if canAmend,
-      html: degreeHtml
-    }) }}
-  {% endfor %}
+{% if not entered %}
+  {{ appSuggestion({
+    id: "degree",
+    title: "Degree not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your degree",
+        href: applicationPath + "/degree/add"
+      }]
+    }
+  }) }}
 {% else %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "degree" %}
-  {% set incompleteText = "Degree(s) section not marked as completed" %}
-  {% set incompleteLink = "/degree/add?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter your degree(s)" %}
-  {% include "_includes/review/incomplete.njk" %}
+  {{ appSuggestion({
+    id: "degree",
+    title: "Degree section not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete the degree section",
+        href: applicationPath + "/degree/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/degrees.njk" %}
 {% endif %}

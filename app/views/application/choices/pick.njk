@@ -24,30 +24,27 @@
 
 {% block primary %}
   {% if providerOnDfEApply %}
-    {% set courseAutocompleteHtml %}
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="courses-{{ choiceId }}-course">Enter course name and code</label>
-        <div id="course-autocomplete-container"></div>
-      </div>
-    {% endset %}
-
     {% if data.course_from_find and providerCode == data.course_from_find.providerCode %}
-      {% set course = provider.courses[data.course_from_find.courseCode] %}
-      {{ govukRadios({
-        items: [{
-          text: course.name_and_code
-        }, {
-          divider: "or"
-        }, {
-          text: "Another course",
-          value: "another",
-          conditional: {
-            html: courseAutocompleteHtml
-          }
-        }]
-      } | decorateApplicationAttributes(["temporaryChoices", choiceId, "courseFromFind"])) }}
+      {# TODO #}
+
     {% else %}
-      {{ courseAutocompleteHtml | safe }}
+
+      {% set courseItems = [] %}
+      {% for course in courses %}
+        {% set courseItems = courseItems | push({
+          text: course.name_and_code,
+          value: course.name_and_code,
+          hint: {
+            text: course.description
+          }
+        }) %}
+      {% endfor %}
+
+      {{ govukRadios({
+        idPrefix: "course",
+        items: courseItems,
+        name: "applications[" + applicationId + "][temporaryChoices][" + choiceId + "][course]"
+      }) }}
     {% endif %}
 
     {{ govukButton({
@@ -76,42 +73,8 @@
 
     <p class="govuk-body"><a href="https://2020.teachertraining.apply.ucas.com/apply/student/login.do" class="govuk-button govuk-!-margin-bottom-0">Apply on UCAS</a></p>
 
-    {% if not applicationValue('welcomeFlow') %}
-      <p class="govuk-body">or</p>
-      <p class="govuk-body"><a href="{{ applicationPath }}" class="govuk-link">Return to your application</a></p>
-    {% endif %}
-  {% endif %}
-{% endblock %}
+    <p class="govuk-body">or</p>
+    <p class="govuk-body"><a href="{{ applicationPath }}" class="govuk-link">Return to your application</a></p>
 
-{% block pageScripts %}
-  {% if providerOnDfEApply %}
-    <script src="/public/javascripts/autocomplete.min.js"></script>
-    <script>
-      {% if editing %}
-        {% set defaultValue = provider.courses[applicationValue(["choices", choiceId, "courseCode"])].name_and_code %}
-
-        accessibleAutocomplete({
-          element: document.querySelector('#course-autocomplete-container'),
-          id: 'courses-{{ choiceId }}-course',
-          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
-          defaultValue: "",
-          showAllValues: true,
-          source: [
-            {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}
-          ]
-        })
-      {% else %}
-        accessibleAutocomplete({
-          element: document.querySelector('#course-autocomplete-container'),
-          id: 'courses-{{ choiceId }}-course',
-          name: "applications[{{ applicationId }}][temporaryChoices][{{ choiceId }}][course]",
-          defaultValue: '{{ applicationValue(["temporaryChoices", choiceId, "course"]) }}',
-          showAllValues: true,
-          source: [
-            {% for course in courses %}"{{ course.name_and_code }}",{% endfor %}
-          ]
-        })
-      {% endif %}
-    </script>
   {% endif %}
 {% endblock %}

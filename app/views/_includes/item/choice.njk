@@ -8,7 +8,7 @@
   }) }}
   {% if status == "Offer deferred" %}
     <p class="govuk-body govuk-body govuk-!-margin-top-2">Your training will now start in September 2021.</p>
-  {% elif status == "Offer received" or status == "Offer accepted" or status == "Conditions met" %}
+  {% elif status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
     {{ govukDetails({
       classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
       summaryText: "What to do if you’re unable to start training in " + startDate,
@@ -42,40 +42,152 @@
 {% endset %}
 
 {% set feedbackHtml %}
+  {% include "_includes/item/feedback.njk" %}
+{% endset %}
 
-  {% if item.feedback %}
-    {% if item.feedback.course_full %}
-      <h2 class="govuk-heading-s">Course was full</h2>
-      <p class="govuk-body">We're sorry to tell you the course you applied to was full</p>
+{% set visaSponsorshipHtml %}
+  {% if item.canSponsorVisa %}
+    Visas can be sponsored
+  {% else %}
+
+    {% set visaSponsorshipInsetTextHtml %}
+      <p class="govuk-heading-s app-inset-text__title">This provider cannot sponsor Student visas</p>
+
+      <p class="govuk-body">You said that you do not yet have the right to work or study in the UK.</p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that can sponsor student visas</li>
+        <li>find out about <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration" class="govuk-link">other visas that allow you to study in the UK</a></li>
+      </ul>
+    {% endset %}
+
+
+    {{ govukInsetText({
+      html: visaSponsorshipInsetTextHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+
+
+  {% endif %}
+{% endset %}
+
+{% set degreeRequired %}
+  {% if item.degreeRequired == "21" %}
+    2:1 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "22" %}
+    2:2 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "third" %}
+    Third-class degree or higher (or equivalent)
+  {% else %}
+    Any degree grade
+  {% endif %}
+{% endset %}
+
+{% set candidateHighestDegreeGrade = highestDegreeGrade() %}
+
+{% set degreeRequiredHtml %}
+
+  {% if (item.degreeRequired == "21" and (candidateHighestDegreeGrade == "22" or candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "22" and (candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "third" and (candidateHighestDegreeGrade == "pass")) %}
+
+    {% set degreeRequiredWarningHtml %}
+      <p class="govuk-heading-s app-inset-text__title">{{ degreeRequired }}</p>
+
+      {% set firstDegree = applicationValue("degree") | toArray | first %}
+
+      <p class="govuk-body">
+        You said
+
+        {# Ideally this would check the completed status of your highest degree grade #}
+        {% if firstDegree["completed"] == "Yes" %}
+          you have
+        {% else %}
+          you’re expecting
+        {% endif %}
+
+        {% if candidateHighestDegreeGrade == "22" %}
+          a 2:2
+        {% elif candidateHighestDegreeGrade == "third" %}
+          a third-class
+        {% else %}
+          an ordinary (pass)
+        {% endif %}
+      degree.</p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that has a lower degree requirement</li>
+        <li>contact the provider to see if they will still consider your application</li>
+      </ul>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: degreeRequiredWarningHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+  {% else %}
+    {{ degreeRequired }}
+  {% endif %}
+{% endset %}
+
+
+{% set gcseRequirements %}
+  {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
+    {% if item.acceptsPendingGcses %}
+      This provider will consider candidates with pending GCSEs
+    {% else %}
+      This provider does not consider candidates with pending GCSEs
     {% endif %}
-    {% if item.feedback.rejected_by_default %}
-      <p class="govuk-body">Provider did not respond in time</p>
+  {% else %}
+    {% if item.acceptsEquivalencyTests %}
+      This provider will accept equivalency tests in English and maths
+    {% else %}
+      This provider will not accept equivalency tests
     {% endif %}
+  {% endif %}
+{% endset %}
 
-    {% if item.feedback.quality_of_application %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Quality of application</h4>
+{% set gcseRequirementsHtml %}
+  {% if applicationValue(["gcse", "english", "type"]) == "not-yet" or applicationValue(["gcse", "english", "currentlyRetaking"]) %}
 
-      {% if item.feedback.quality_of_application.subject_knowledge %}
-        <p class="govuk-body">Subject knowledge</p>
-        <p class="govuk-body">{{ item.feedback.quality_of_application.subject_knowledge }}</p>
-      {% endif %}
+    {% set gcseRequirementsWarningHtml %}
+      <p class="govuk-heading-s app-inset-text__title">{{ gcseRequirements }}</p>
 
-    {% endif %}
+      <p class="govuk-body">
+        You said
 
-    {% if item.feedback.qualifications %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Qualifications</h4>
+        {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
+          you’re currently studying for a qualification in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' %}
+          you’re currently re-taking a GCSE in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'no' %}
+          you do not have grade 4 (C) or above in GCSE English or an equivalent qualification.
+        {% else %}
+          you do not have a qualification in English.
+        {% endif %}
+      </p>
 
-      {% if item.feedback.qualifications.degree_does_not_meet_requirements %}
-        <p class="govuk-body">Your degree does not meet the course requirements.</p>
-      {% endif %}
-    {% endif %}
+      <p class="govuk-body">You can:</p>
 
-    {% if item.feedback.interested_in_future_applications %}
-      <h4 class="govuk-heading-s govuk-!-margin-bottom-0">Future applications</h4>
-      <p class="govuk-body">The provider would be interested in future applications from you.</p>
-    {% endif %}
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that does {{ "accept pending GCSEs" if  applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' else "accept equivalency tests"}} </li>
+        <li>contact the provider to see if they’ll still consider your application</li>
+      </ul>
 
-  {% endif  %}
+    {% endset %}
+
+
+    {{ govukInsetText({
+      html: gcseRequirementsWarningHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+
+  {% else %}
+    {{ gcseRequirements }}
+  {% endif %}
+
 {% endset %}
 
 {{ govukSummaryList({
@@ -131,6 +243,29 @@
     } if item.starts
   } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
     key: {
+      text: "Degree required"
+    },
+    value: {
+      html: degreeRequiredHtml
+    }
+  }, {
+    key: {
+      text: "Visa sponsorship"
+    },
+    value: {
+      html: visaSponsorshipHtml,
+      classes: "app-summary-list__value--wide"
+    }
+  } if (data.applications[applicationId].candidate.immigration == "Not yet"), {
+    key: {
+      text: "GCSE requirements"
+    },
+    value: {
+      html: gcseRequirementsHtml,
+      classes: "app-summary-list__value--wide"
+    }
+  }, {
+    key: {
       text: "Status"
     },
     value: {
@@ -150,5 +285,5 @@
     value: {
       html: feedbackHtml
     }
-  } if showChoiceFeedback and item.status == "Unsuccessful" and item.hasFeedback]
+  } if showChoiceFeedback and item.status == "Unsuccessful" and item.feedback]
 }) }}

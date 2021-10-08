@@ -1,14 +1,17 @@
 {% extends "_form.njk" %}
 
 {% set title = "Your feedback" %}
-{% set formaction = "/survey/thank-you" %}
+{% set formaction = "/survey" %}
 
 {% block primary %}
+
+  <input type="hidden" name="applicationId" value="{{ applicationId }}" />
+
   {{ govukRadios({
     fieldset: {
       legend: {
         classes: "govuk-fieldset__legend--m",
-        text: "How satisfied are you with this service?"
+        text: "How satisfied are you with this service? (optional)"
       }
     },
     items: [
@@ -23,13 +26,13 @@
   {{ govukCharacterCount({
     label: {
       classes: "govuk-label--m",
-      text: "How could we improve this service?"
+      text: "How could we improve this service? (optional)"
     },
     maxwords: 1200,
     rows: 6
   }) }}
 
   {{ govukButton({
-    text: "Send feedback"
+    text: "Continue"
   }) }}
 {% endblock %}

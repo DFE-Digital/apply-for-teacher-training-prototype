@@ -1,0 +1,108 @@
+{% if item.feedback.course_full %}
+<p class="govuk-body">The course you applied to was full.</p>
+{% endif %}
+
+{% if item.feedback.rejected_by_default %}
+<p class="govuk-body">Provider did not respond in time.</p>
+{% endif %}
+
+{% if item.feedback.behaviour %}
+{% if item.feedback.behaviour.didNotReplyToMessages == true %}
+  <p class="govuk-body">Did not reply to messages.</p>
+{% endif %}
+
+{% if item.feedback.behaviour.other %}
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.behaviour.other | nl2br | safe
+  }) }}
+{% endif %}
+
+{% if item.feedback.behaviour.whatTheyCouldToDoImprove %}
+  <p class="govuk-body">What you could do to improve:</p>
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    text: item.feedback.behaviour.whatTheyCouldToDoImprove | nl2br | safe
+  }) }}
+{% endif %}
+{% endif %}
+
+{% if item.feedback.performanceAtInterview %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Performance at interview</h4>
+
+{{ govukInsetText({
+  classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+  text: item.feedback.performanceAtInterview | nl2br | safe
+}) }}
+{% endif %}
+
+{% if item.feedback.qualityOfApplication %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Quality of application</h4>
+
+  {% set qualityOfApplicaitonFeedback %}
+    {% if item.feedback.qualityOfApplication.personalStatement %}
+      <p class="govuk-body govuk-!-margin-bottom-0">Personal statement could be improved.</p>
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.personalStatement | nl2br | safe }}</p>
+    {% endif %}
+
+    {% if item.feedback.qualityOfApplication.subjectKnowledge %}
+      <p class="govuk-body govuk-!-margin-bottom-0">Subject knowledge could be improved.</p>
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.subjectKnowledge | nl2br | safe }}</p>
+    {% endif %}
+
+    {% if item.feedback.qualityOfApplication.other %}
+      <p class="govuk-body">{{ item.feedback.qualityOfApplication.other | nl2br | safe }} </p>
+    {% endif %}
+  {% endset %}
+
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    html: qualityOfApplicaitonFeedback
+  }) }}
+{% endif %}
+
+{% if item.feedback.qualifications %}
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Qualifications</h4>
+
+  {% set qualificationsFeedbackHtml %}
+
+    {% if item.feedback.qualifications.noMathsGCSEOrEquivalent %}
+      <p class="govuk-body">No maths GCSE grade 4 (C) or above, or accepted equivalent.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noEnglishGCSEOrEquivalent %}
+      <p class="govuk-body">No English GCSE grade 4 (C) or above, or accepted equivalent.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noScienceGCSEOrEquivalent %}
+      <p class="govuk-body">No science GCSE grade 4 (C) or above, or accepted equivalent (for primary applicants).</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.noDegree %}
+      <p class="govuk-body">No degree.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.degree_does_not_meet_requirements %}
+      <p class="govuk-body">Degree does not meet course requirements.</p>
+    {% endif %}
+
+    {% if item.feedback.qualifications.other %}
+      <p class="govuk-body">{{ item.feedback.qualifications.other | nl2br }}</p>
+    {% endif %}
+  {% endset %}
+
+  {{ govukInsetText({
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    html: qualificationsFeedbackHtml | safe
+  }) }}
+
+{% endif %}
+
+{% if item.feedback.additionalFeedback %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Additional feedback</h4>
+
+{{ govukInsetText({
+  classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+  text: item.feedback.additionalFeedback | nl2br | safe
+}) }}
+{% endif %}

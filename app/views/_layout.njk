@@ -39,6 +39,7 @@
 {% from "_components/feedback/macro.njk" import appFeedback %}
 {% from "_components/icon/macro.njk" import appIcon %}
 {% from "_components/related/macro.njk" import appRelated %}
+{% from "_components/suggestion/macro.njk" import appSuggestion %}
 {% from "_components/summary-card/macro.njk" import appSummaryCard %}
 {% from "_components/task-list/macro.njk" import appTaskList %}
 
@@ -79,7 +80,7 @@
     serviceUrl: serviceUrl,
     containerClasses: "govuk-width-container",
     navigation: [{
-      html: "<strong>" + accountEmail + "</strong>"
+      text: accountEmail
     }, {
       href: "/account/sign-out",
       text: "Sign out"
@@ -108,7 +109,6 @@
 
 {% block footer %}
   {% block beforeFooter %}
-    {% include "_includes/feedback.njk" %}
   {% endblock %}
 
   {% set metaHtml %}

@@ -1,0 +1,32 @@
+{% if numberOfOffersReceived == 0 and numberOfChoicesAwaitingDecision > 0 %}
+
+  {% if choices | length > 1 %}
+    <p class="govuk-body">Your applications have been submitted and are with the training providers.</p>
+  {% else %}
+    <p class="govuk-body">Your application has been submitted and is with the training provider.</p>
+  {% endif %}
+
+  <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+
+{% elif numberOfOffersReceived > 0 and numberOfChoicesAwaitingDecision > 0 %}
+
+  <p class="govuk-body">{{ "One" if numberOfOffersReceived == 1 else "Two" }} of your training providers has made a decision on your application.</p>
+
+  <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+
+{% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
+
+  <p class="govuk-body">You’ve accepted the offer from {{ providers[choices[0].providerCode].name }}</p>
+
+  <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
+
+{% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
+
+  <p class="govuk-body">You’ve chosen to defer your course.</p>
+  <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
+
+{% elif choices | length == 1 and choices[0].status == "Offer confirmed" %}
+
+  <p class="govuk-body">Congratulations on joining your teacher training course.</p>
+
+{% endif %}

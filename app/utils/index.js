@@ -4,13 +4,15 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
+let notify
 
 if (process.env.NOTIFYAPIKEY) {
   const NotifyClient = require('notifications-node-client').NotifyClient
-  const notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+  notify = new NotifyClient(process.env.NOTIFYAPIKEY)
 }
 
 const providers = require('./../data/providers')
+const path = require('path')
 
 const applicationData = (req) => {
   const applicationId = req.query.applicationId || req.params.applicationId
@@ -19,6 +21,14 @@ const applicationData = (req) => {
 
 const capitaliseFirstLetter = str => {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+const defaultSessionData = () => {
+  const sessionDataDefaultsFile = path.join(__dirname, '/../data/session-data-defaults.js')
+  const sessionDataDefaults = require(sessionDataDefaultsFile)
+
+  // Return deep copy of session default so that it can always be restored.
+  return JSON.parse(JSON.stringify(sessionDataDefaults))
 }
 
 const generateRandomString = () => {
@@ -44,26 +54,26 @@ const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
   }
 
   // Create ISO 8601 start date
-  const startDay = (req.body[`${id}-start-date-day`] || '1').padStart(2, '0')
-  const startMonth = (req.body[`${id}-start-date-month`]).padStart(2, '0')
-  const startYear = req.body[`${id}-start-date-year`]
-  data[id]['start-date'] = false
+  const startDay = (req.body[`${id}-startDate-day`] || '1').padStart(2, '0')
+  const startMonth = (req.body[`${id}-startDate-month`]).padStart(2, '0')
+  const startYear = req.body[`${id}-startDate-year`]
+  data[id].startDate = false
 
   if (startMonth && startYear) {
-    data[id]['start-date'] = `${startYear}-${startMonth}-${startDay}`
+    data[id].startDate = `${startYear}-${startMonth}-${startDay}`
   }
 
   // Create ISO 8601 end date
-  const endDay = (req.body[`${id}-end-date-day`] || '1').padStart(2, '0')
-  const endMonth = (req.body[`${id}-end-date-month`]).padStart(2, '0')
-  const endYear = req.body[`${id}-end-date-year`]
+  const endDay = (req.body[`${id}-endDate-day`] || '1').padStart(2, '0')
+  const endMonth = (req.body[`${id}-endDate-month`]).padStart(2, '0')
+  const endYear = req.body[`${id}-endDate-year`]
 
   if (blankEqualsNow) {
-    data[id]['end-date'] = 'now' // No date indicates today
+    data[id].endDate = 'now' // No date indicates today
   }
 
   if (endMonth && endYear) {
-    data[id]['end-date'] = `${endYear}-${endMonth}-${endDay}`
+    data[id].endDate = `${endYear}-${endMonth}-${endDay}`
   }
 }
 
@@ -112,32 +122,29 @@ const hasStartedApplications = (req) => {
   }
 }
 
-const hasCompletedSection = key => {
-  if (!key || key === null || Object.keys(key).length === 0) {
-    return false
-  }
-
-  return true
+const hasCompletedSection = section => {
+  return section === 'true'
 }
 
 const hasCompletedApplication = req => {
-  const application = applicationData(req)
+  const { completed } = applicationData(req)
 
   if (
-    module.exports.hasCompletedSection(application.choices) &&
-    module.exports.hasCompletedSection(application.references) &&
-    module.exports.hasCompletedSection(application.candidate) &&
-    module.exports.hasCompletedSection(application['contact-details']) &&
-    module.exports.hasCompletedSection(application['reasonable-adjustments']) &&
-    module.exports.hasCompletedSection(application['work-history']) &&
-    module.exports.hasCompletedSection(application['school-experience']) &&
-    module.exports.hasCompletedSection(application.degree) &&
-    module.exports.hasCompletedSection(application.gcse.maths) &&
-    module.exports.hasCompletedSection(application.gcse.english) &&
-    module.exports.hasCompletedSection(application.gcse.science) &&
-    module.exports.hasCompletedSection(application['personal-statement']) &&
-    module.exports.hasCompletedSection(application['subject-knowledge']) &&
-    module.exports.hasCompletedSection(application.interview)
+    module.exports.hasCompletedSection(completed.choices) &&
+    module.exports.hasCompletedSection(completed.personalInformation) &&
+    module.exports.hasCompletedSection(completed.contactInformation) &&
+    module.exports.hasCompletedSection(completed.english) &&
+    module.exports.hasCompletedSection(completed.maths) &&
+    module.exports.hasCompletedSection(completed.science) &&
+    module.exports.hasCompletedSection(completed.otherQualifications) &&
+    module.exports.hasCompletedSection(completed.degree) &&
+    module.exports.hasCompletedSection(completed.workHistory) &&
+    module.exports.hasCompletedSection(completed.unpaidExperience) &&
+    module.exports.hasCompletedSection(completed.personalStatement) &&
+    module.exports.hasCompletedSection(completed.subjectKnowledge) &&
+    module.exports.hasCompletedSection(completed.additionalSupport) &&
+    module.exports.hasCompletedSection(completed.interviewNeeds) &&
+    module.exports.hasCompletedSection(completed.safeguarding)
   ) {
     return true
   }
@@ -164,6 +171,29 @@ const hasPrimaryChoices = (req) => {
   }
 }
 
+const highestDegreeGrade = (req) => {
+
+  const application = applicationData(req)
+  const degrees = toArray(application.degree)
+
+  const degreeGrades = degrees.map(degree => degree.grade)
+
+  if (degreeGrades.includes("First-class honours")) {
+    return "first"
+  } else if (degreeGrades.includes("Upper second-class honours (2:1)")) {
+    return "21"
+  } else if (degreeGrades.includes("Lower second-class honours (2:2)")) {
+    return "22"
+  } else if (degreeGrades.includes("Third-class honours")) {
+    return "third"
+  } else if (degreeGrades.includes("Pass")) {
+    return "pass"
+  } else {
+    return null
+  }
+}
+
+
 const toArray = (obj) => {
   if (obj) {
     const arr = []
@@ -172,6 +202,8 @@ const toArray = (obj) => {
       arr.push(value)
     }
     return arr
+  } else {
+    return []
   }
 }
 
@@ -191,5 +223,7 @@ module.exports = {
   hasPrimaryChoices,
   hasSubmittedApplications,
   hasStartedApplications,
-  toArray
+  toArray,
+  defaultSessionData,
+  highestDegreeGrade
 }

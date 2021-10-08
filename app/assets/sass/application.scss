@@ -2,6 +2,10 @@
 $govuk-assets-path: "/govuk/assets/";
 $govuk-global-styles: true;
 
+// Enable new link styles (currently opt-in).
+// TODO: remove this when this becomes the default.
+$govuk-new-link-styles: true;
+
 // Import GOV.UK Frontend and any extension styles if configured
 @import "lib/extensions/extensions";
 
@@ -9,6 +13,7 @@ $govuk-global-styles: true;
 @import "components/autocomplete";
 @import "components/button";
 @import "components/cookie-banner";
+@import "components/course-choice";
 @import "components/date";
 @import "components/error-summary";
 @import "components/grid";
@@ -19,10 +24,11 @@ $govuk-global-styles: true;
 @import "components/link";
 @import "components/list";
 @import "components/related";
+@import "components/section";
 @import "components/status-indicator";
 @import "components/styled-content";
 @import "components/summary-card";
-@import "components/table";
+@import "components/summary-list";
 @import "components/tag";
 @import "components/task-list";
 

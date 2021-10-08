@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "Academic and other relevant qualifications" %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set canAmend = true %}
@@ -16,18 +17,26 @@
 
 {% block primary %}
   {% include "_includes/review/other-qualifications.njk" %}
-  {{ govukButton({
-    text: "Add another qualification",
-    href: applicationPath + "/other-qualifications/add",
-    classes: "govuk-button--secondary"
-  }) }}
 
-  {{ govukCheckboxes({
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you completed this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: "Ensure you’ve added all your A levels and other qualifications."
+    } if applicationValue(["otherQualificationsDisclose"] != "No"),
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve completed this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
-  } | decorateApplicationAttributes(["completed", "other-qualifications"])) }}
+  } | decorateApplicationAttributes(["completed", "otherQualifications"])) }}
 
   {{ govukButton({
     text: "Continue"

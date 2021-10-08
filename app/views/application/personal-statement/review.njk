@@ -15,22 +15,38 @@
 {% endblock %}
 
 {% block primary %}
-  {% if applicationValue(["personal-statement"]) %}
-    <p class="govuk-body govuk-!-font-weight-bold">Before you submit your application:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>proofread your answer carefully for spelling and grammar</li>
-      <li>ask someone you trust for their opinion</li>
-      <li>ensure this piece of writing is all your own work – plagiarism will be penalised</li>
-    </ul>
-  {% endif %}
   {% include "_includes/review/personal-statement.njk" %}
 
-  {{ govukCheckboxes({
+  {% set hasFeedbackFromPreviousApplication = false %}
+  {% if applicationValue(["apply2"]) %}
+    {% for previousApplicationId in applicationValue("previousApplications") %}
+      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
+        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+          {% set hasFeedbackFromPreviousApplication = true %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
+    },
     items: [{
       value: "true",
-      text: "I have completed this section"
+      text: "Yes, I’ve " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
     }]
-  } | decorateApplicationAttributes(["completed", "personal-statement"])) }}
+  } | decorateApplicationAttributes(["completed", "personalStatement"])) }}
 
   {{ govukButton({
     text: "Continue"

@@ -1,12 +1,11 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Which institution did you study at?" %}
+{% set title = "Which institution awarded your degree?" %}
 {% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/institution" %}
+
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% if international %}
-  {% extends "_form.njk" %}
-{% else %}
-  {% extends "_form-question.njk" %}
-{% endif %}
+
+{% extends "_form-question.njk" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -15,23 +14,18 @@
 {% endblock %}
 
 {% block primary %}
+
   {% if international %}
     {{ govukInput({
       label: {
-        text: "Institution name"
+        text: title,
+        classes: "govuk-label--l"
       }
     } | decorateApplicationAttributes(["degree", id, "org"])) }}
-
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is this institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["degree", id, "country"])) }}
   {% else %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--xl govuk-!-margin-bottom-8" for="degree-{{ id }}-org">{{ title }}</label>
-      <div id="org-autocomplete-container"></div>
+      <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="degree-{{ id }}-org">{{ title }}</label></h1>
+      <div id="org-autocomplete-container" class="suggestions"></div>
     </div>
   {% endif %}
 
@@ -42,23 +36,26 @@
 
 {% block pageScripts %}
   <script src="/public/javascripts/autocomplete.min.js"></script>
+  <script src="/public/javascripts/sort.js"></script>
   <script>
   {% if international %}
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#degree-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
-    })
   {% else %}
+
+    var allDegreeInstitutions = {{ allDegreeInstitutions | dump | safe }};
+
+    function filter(query, populateResults) {
+      populateResults(sort(query, allDegreeInstitutions))
+    }
+
     accessibleAutocomplete({
       element: document.querySelector('#org-autocomplete-container'),
       id: 'degree-{{ id }}-org',
       name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
       defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
       minLength: 2,
+      showNoOptionsFound: false,
       placeholder: false,
-      source: [
-        {% for item in degree.orgs %}"{{ item }}",{% endfor %}
-      ]
+      source: filter
     })
   {% endif %}
   </script>

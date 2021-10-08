@@ -51,7 +51,7 @@ module.exports = router => {
   router.post('/send-email/:applicationId/application-submitted', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const candidateName = application['given-name'] || 'applicant'
+    const candidateName = application.givenName || 'applicant'
 
     const choices = []
     for (const choice in application.choices) {
@@ -68,7 +68,8 @@ module.exports = router => {
       choiceList: choices.join('\n'),
       amendDate: utils.nowPlusDays(7, 'd MMMM yyyy')
     })
-    res.redirect(`/application/${applicationId}/confirmation`)
+
+    res.redirect(`/survey?applicationId=${applicationId}`)
   })
 
   // Decision: Unsuccessful/Offer received
@@ -133,15 +134,33 @@ module.exports = router => {
         notifyTemplate = '7446b2c8-1bf1-42a8-b325-509b8dabe747'
         choice.status = 'Offer accepted'
 
-        // Set remaining course choice statuses to `withdrawn`
+        // Set remaining course choice statuses to `withdrawn` and move to `previousApplications`
         let { choices } = application
         choices = utils.toArray(choices)
         application.choices = choices.map(choice => {
           if (choice.status === 'Offer received') {
             choice.status = 'Application withdrawn'
           }
+
+          const newApplicationCodeForUnsuccessfulCourses = utils.generateRandomString()
+
+          if (choice.status !== 'Offer accepted') {
+            if (!req.session.data.applications[newApplicationCodeForUnsuccessfulCourses]) {
+              // Copy application to previousApplications
+              req.session.data.applications[newApplicationCodeForUnsuccessfulCourses] = JSON.parse(JSON.stringify(application))
+              req.session.data.applications[newApplicationCodeForUnsuccessfulCourses].choices = {}
+            }
+
+            // console.log(req.session.data.applications[newApplicationCodeForUnsuccessfulCourses])
+            application.previousApplications = [newApplicationCodeForUnsuccessfulCourses]
+            // Add choice to previousApplication
+            req.session.data.applications[newApplicationCodeForUnsuccessfulCourses].choices[choice.id] = choice
+          }
+
           return choice
         })
+
+        application.choices = [choice]
         break
       }
       case 'decline': {
@@ -154,7 +173,7 @@ module.exports = router => {
     // UR: Decision is made on third course choice
     utils.sendEmail(req, notifyTemplate, {
       reference: applicationId,
-      candidateName: application['given-name'] || 'applicant',
+      candidateName: application.givenName || 'applicant',
       providerName: urChoices[2].providerName,
       courseName: urChoices[2].courseName,
       courseDate: urChoices[2].courseDate,

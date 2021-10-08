@@ -3,8 +3,26 @@ const utils = require('./../utils')
 module.exports = router => {
   router.get('/application/:applicationId/:section/:id/delete', (req, res) => {
     const application = utils.applicationData(req)
-    const { id, section } = req.params
     const { referrer } = req.query
+    let { id, section } = req.params
+
+    switch (section) {
+      case 'other-qualifications': {
+        section = 'otherQualifications'
+        break
+      }
+
+      case 'unpaid-experience': {
+        section = 'unpaidExperience'
+        break
+      }
+
+      case 'work-history': {
+        section = 'workHistory'
+        break
+      }
+    }
+
     const item = application[section][id]
 
     let parent
@@ -28,7 +46,7 @@ module.exports = router => {
         break
       }
 
-      case 'school-experience': {
+      case 'unpaid-experience': {
         parent = item.role ? item.role : 'Volunteering with children and young people'
         type = 'role'
         break
@@ -53,8 +71,25 @@ module.exports = router => {
 
   router.post('/application/:applicationId/:section/:id/delete', (req, res) => {
     const application = utils.applicationData(req)
-    const { id, section } = req.params
     const { referrer } = req.query
+    let { id, section } = req.params
+
+    switch (section) {
+      case 'other-qualifications': {
+        section = 'otherQualifications'
+        break
+      }
+
+      case 'unpaid-experience': {
+        section = 'unpaidExperience'
+        break
+      }
+
+      case 'work-history': {
+        section = 'workHistory'
+        break
+      }
+    }
 
     delete application[section][id]
 

@@ -1,0 +1,85 @@
+{% extends "_form-question.njk" %}
+
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/level" %}
+
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "What subject is your degree?" %}
+{% set allowsFeedback = true %}
+{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
+
+{% if degreeCount >= 1 and action == "add" %}
+  {% set title = (action | capitalize) + " another degree" %}
+{% else %}
+  {% set title = (action | capitalize) + " undergraduate degree" %}
+{% endif %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or "/application/" + applicationId + "/degree/" + id + "/country"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% if international %}
+
+  {% else %}
+
+    {% set anotherLevelHtml %}
+
+      {{ govukInput({
+        label: {
+          text: "Degree level"
+        }
+      } | decorateApplicationAttributes(["degree", id, "otherLevel"])) }}
+    {% endset %}
+
+    {{ govukRadios({
+      name: "degree-type",
+      fieldset: {
+        legend: {
+          text: "What level is this degree?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "Foundation",
+          text: "Foundation"
+        },
+        {
+          value: "Bachelor",
+          text: "Bachelor",
+          hint: {
+            text: "Sometimes referred to as an 'undergraduate' or 'first' degree, this is the minimum level required to be eligible for teacher training."
+          }
+        },
+        {
+          value: "Master’s",
+          text: "Master’s"
+        },
+        {
+          value: "Doctorate",
+          text: "Doctorate (PhD)"
+        },
+        {
+          divider: "or"
+        },
+        {
+          value: "other",
+          text: "Another level",
+          conditional: {
+            html: anotherLevelHtml
+          }
+        }
+      ]
+    } | decorateApplicationAttributes(["degree", id, "level"])) }}
+
+
+  {% endif %}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

@@ -12,25 +12,28 @@ function createNewApplication (req) {
     data.applications[code] = {
       status: 'started',
       apply2: false,
+      completed: {},
       choices: {},
       references: {},
       candidate: {},
-      'contact-details': {},
-      'reasonable-adjustments': {},
-      suitability: {},
+      contactInformation: {},
+      additionalSupportDisclose: null,
+      additionalSupport: {},
+      safeguardingDisclose: null,
+      safeguarding: null,
       degree: {},
-      'other-qualifications': {},
+      otherQualifications: {},
       gcse: {
         maths: {},
         english: {},
         science: {}
       },
-      'subject-knowledge': null,
-      'interview-choice': null,
-      interview: null,
-      'personal-statement': null,
-      'work-history': {},
-      'school-experience': {}
+      subjectKnowledge: null,
+      interviewNeedsDisclose: null,
+      interviewNeeds: null,
+      personalStatement: null,
+      workHistory: {},
+      unpaidExperience: {}
     }
   }
 
@@ -52,14 +55,13 @@ module.exports = router => {
   // Generate new applicationID and redirect to that application
   router.get('/application/start', (req, res) => {
     const code = createNewApplication(req)
-    req.session.data.applications[code].welcomeFlow = true
 
     if (req.session.data.course_from_find) {
       // If coming from Find, go straight to course selection
       res.redirect(`/application/${code}/choices/add`)
     } else {
-      // Otherwise, give some context about the Apply pilot
-      res.redirect(`/application/${code}/before-you-start`)
+      // Otherwise, go straight to the Application page
+      res.redirect(`/application/${code}`)
     }
   })
 
@@ -79,35 +81,16 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
-    const thisApplication = utils.applicationData(req)
-    const prevApplication = req.session.data.applications['12345']
-    let { choices } = prevApplication
 
-    // Choices from previous application
-    // Only shown when applying again
-    if (thisApplication.apply2) {
-      choices = utils.toArray(choices)
-      choices[0].hasFeedback = true
-      choices[0].status = 'Unsuccessful'
-      choices[1].hasFeedback = true
-      choices[1].status = 'Unsuccessful'
-      choices[2].status = 'Offer declined'
-    }
-
-    req.session.data.applications[req.params.applicationId].welcomeFlow = false
     res.render('application/index', {
       showCopiedBanner,
-      choices,
-      closed: req.query.closed
+      closed: req.query.closed,
+      findNotOpen: req.query.findNotOpen,
+      cycleNotOpen: req.query.cycleNotOpen
     })
   })
 
-  // Render before you start page
-  router.all('/application/:applicationId/before-you-start', (req, res) => {
-    res.render('application/before-you-start', { showCopiedBanner: req.query.copied })
-  })
-
-  // Generate apply2 application from an existing one
+  // Generate a new application from an existing one
   router.get('/application/:applicationId/apply2', (req, res) => {
     const code = 12346
     const { applications } = req.session.data
@@ -115,11 +98,30 @@ module.exports = router => {
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
-    apply2Application.welcomeFlow = false
-    apply2Application.apply2 = true
+
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+      apply2Application.apply2 = false
+    } else {
+      apply2Application.apply2 = true
+    }
+
     apply2Application.choices = {}
     apply2Application.completed.choices = false
     apply2Application.previousApplications = [existingApplicationId]
+
+    for (const choice of utils.toArray(existingApplication.choices)) {
+      if (choice?.feedback?.qualityOfApplication?.personalStatement) {
+        apply2Application.completed.personalStatement = false
+      }
+
+      if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
+        apply2Application.completed.subjectKnowledge = false
+      }
+
+      if (choice?.feedback?.qualifications?.noMathsGCSEOrEquivalent) {
+        apply2Application.completed.maths = false
+      }
+    }
 
     if (apply2Application.references && apply2Application.references[0]) {
       apply2Application.references[0].status = 'Received'
@@ -131,7 +133,22 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    res.redirect(`/application/${code}/before-you-start?copied=true`)
+    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+      res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
+    } else {
+      res.redirect(`/application/${code}?copied=true`)
+    }
+  })
+
+  // Render course-specific submitted page
+  router.all('/application/:applicationId/submitted/:choiceId', (req, res) => {
+    const { referrer } = req.query
+    const { choiceId } = req.params
+
+    res.render('application/submitted', {
+      referrer,
+      choiceId
+    })
   })
 
   // Render submitted page
@@ -144,20 +161,19 @@ module.exports = router => {
   })
 
   require('./application/choices')(router)
-  require('./application/personal-details')(router)
-  require('./application/contact-details')(router)
+  require('./application/personal-information')(router)
+  require('./application/contact-information')(router)
   require('./application/english-language')(router)
   require('./application/work-history')(router)
-  require('./application/school-experience')(router)
-  require('./application/reasonable-adjustments')(router)
-  require('./application/suitability')(router)
-  require('./application/vocation')(router)
+  require('./application/unpaid-experience')(router)
+  require('./application/additional-support')(router)
+  require('./application/safeguarding')(router)
   require('./application/degree')(router)
   require('./application/gcse')(router)
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
-  require('./application/interview')(router)
+  require('./application/interview-needs')(router)
   require('./application/references')(router)
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)

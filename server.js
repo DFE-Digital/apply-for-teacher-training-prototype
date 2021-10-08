@@ -113,14 +113,12 @@ app.locals.serviceName = config.serviceName
 app.locals.serviceSlug = pkg.name
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
-app.locals.degree = require('./app/data/degree')()
 app.locals.gcse = require('./app/data/gcse')()
 app.locals.aLevel = require('./app/data/a-level')()
 app.locals.asLevel = require('./app/data/as-level')()
 app.locals.countries = require('./app/data/countries')
 app.locals.nationalities = require('./app/data/nationalities')
 app.locals.providers = require('./app/data/providers')
-app.locals.previousApplications = require('./app/data/previous-applications')
 
 // Session uses service name to avoid clashes with other prototypes
 const sessionName = 'govuk-prototype-kit-' + (Buffer.from(config.serviceName, 'utf8')).toString('hex')

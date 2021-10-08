@@ -13,7 +13,6 @@ const pickPaths = (req) => {
     `/application/${applicationId}/choices/${choiceId}/pick`,
     `/application/${applicationId}/choices/${choiceId}/location`,
     `/application/${applicationId}/choices/${choiceId}/create`,
-    `/application/${applicationId}/choices/${choiceId}/another`,
     `/application/${applicationId}/choices`
   ]
 
@@ -81,6 +80,19 @@ const singleLocationCourse = (req) => {
   return locations.length === 1
 }
 
+const randomDegreeRequirement = (seed) => {
+  switch (Math.floor(Math.random(seed) * 5)) {
+    case 0:
+      return '21'
+    case 1:
+      return '22'
+    case 2:
+      return 'third'
+    default:
+      return 'degree'
+  }
+}
+
 module.exports = router => {
   router.all('/application/:applicationId/choices/add', (req, res) => {
     const { applicationId } = req.params
@@ -95,49 +107,40 @@ module.exports = router => {
       started: true
     }
 
-    // Already made one choice, second choice shouldn't be in welcome flow
-    if (application.choices && Object.entries(application.choices).length > 0) {
-      application.welcomeFlow = false
-    }
-
     res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
   })
 
   router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
     const application = utils.applicationData(req)
-    const { choiceId } = req.params
-    const paths = pickPaths(req)
+    const { applicationId, choiceId } = req.params
+
+    const selectedCourseProviderCode = providerCode(req)
+    const selectedCourseCode = courseCode(req)
+    const courseSelected = providers[selectedCourseProviderCode].courses[selectedCourseCode]
+
+    // Randomised for now, until this data is added to Find and the API
+    const canSponsorVisa = (Math.random(choiceId) > 0.5)
+
+    // Adding random degree class requirement
+    const degreeRequired = randomDegreeRequirement(choiceId)
 
     application.choices[choiceId] = {
-      providerCode: providerCode(req),
-      courseCode: courseCode(req),
+      providerCode: selectedCourseProviderCode,
+      courseCode: selectedCourseCode,
       locationName: locationName(req),
       locationAddress: locationAddress(req),
-      singleLocationCourse: singleLocationCourse(req)
+      singleLocationCourse: singleLocationCourse(req),
+      length: '1 year',
+      type: courseSelected.description,
+      starts: '2022-09',
+      canSponsorVisa: canSponsorVisa,
+      degreeRequired: degreeRequired
     }
 
     delete req.session.data.course_from_find
     delete application.temporaryChoices
 
-    res.redirect(req.params.referrer || paths.next)
-  })
-
-  router.all('/application/:applicationId/choices/:choiceId/another', (req, res) => {
-    if (req.body['add-another-course'] === 'yes') {
-      return res.redirect(`/application/${req.params.applicationId}/choices/add`)
-    }
-
-    const application = utils.applicationData(req)
-    const count = Object.keys(application.choices).length
-    const paths = pickPaths(req)
-
-    if (count === 3 || application.apply2 || req.body['add-another-course'] === 'no') {
-      res.redirect(req.params.referrer || paths.next)
-    } else {
-      res.render('application/choices/another', {
-        paths: paths
-      })
-    }
+    res.redirect(`/application/${applicationId}/choices`)
   })
 
   router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {
@@ -152,7 +155,7 @@ module.exports = router => {
         const l = {}
         l.text = loc.name
         l.hint = { text: loc.address }
-        l.label = { classes: 'govuk-label--s' }
+        l.label = { classes: 'z' }
         return l
       })
 
@@ -194,5 +197,16 @@ module.exports = router => {
       paths: pickPaths(req),
       found: temporaryChoice.found
     })
+  })
+
+  router.get('/application/:applicationId/choices', (req, res) => {
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
+
+    if (utils.toArray(application.choices).length === 0) {
+      res.redirect(`/application/${applicationId}/choices/add`)
+    } else {
+      res.render('application/choices/index')
+    }
   })
 }

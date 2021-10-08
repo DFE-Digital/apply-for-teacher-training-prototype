@@ -43,7 +43,7 @@ module.exports = (nunjucksAppEnv, app) => {
       // Prefill qualification values based on previous answers
       if (!storedValue &&
         !sections.includes('completed') &&
-        sections.includes('other-qualifications')) {
+        sections.includes('otherQualifications')) {
         storedValue = prefillPreviousQualificationValues(sections)
       }
 
@@ -120,6 +120,12 @@ module.exports = (nunjucksAppEnv, app) => {
     nunjucksAppEnv.addGlobal('hasPrimaryChoices', () => {
       return utils.hasPrimaryChoices(req)
     })
+
+    nunjucksAppEnv.addGlobal('highestDegreeGrade', () => {
+      return utils.highestDegreeGrade(req)
+    })
+
+
 
     next()
   })

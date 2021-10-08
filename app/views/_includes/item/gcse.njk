@@ -1,10 +1,11 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set missing = item.type == "I don’t have this qualification yet" %}
+{% set item = applicationValue(["gcse", id]) %}
+{% set missingGcse = item.type == "not-yet" %}
 {% set nonUK = item.type == "Non-UK qualification" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
 
 {% set qualificationText -%}
-  {%- if item["type-uk"] or item["type-non-uk"] or item.type %}
-    {{- (item["type-uk"] if item["type-uk"]) or (item["type-non-uk"] if item["type-non-uk"]) or item.type }}
+  {%- if item.typeUk or item.typeNonUk or item.type %}
+    {{- (item.typeUk if item.typeUk) or (item.typeNonUk if item.typeNonUk) or item.type }}
     {%- if nonUK -%}
       {{ item["award-org"] + ", " + item.country if item["award-org"] }}
     {%- endif %}
@@ -14,50 +15,93 @@
 {%- endset %}
 
 {% if item.type == "GCSE" and id == "maths" %}
-  {% set gradeHtml = item["grade-single"] %}
+  {% set gradeHtml = item.gradeSingle %}
 {% elif item.type == "GCSE" and id == "english" %}
   {% set gradeHtml %}
   <ul class="govuk-list">
-    {% if item["grade-english"] %}<li>{{ item["grade-english"] }} (English)</li>{% endif %}
-    {% if item["grade-language"] %}<li>{{ item["grade-language"] }} (English Language)</li>{% endif %}
-    {% if item["grade-literature"] %}<li>{{ item["grade-literature"] }} (English Literature)</li>{% endif %}
-    {% if item["grade-studies"] %}<li>{{ item["grade-studies"] }} (English Studies)</li>{% endif %}
-    {% if item["grade-other"] %}<li>{{ item["grade-other"] }} ({{ item.subject }})</li>{% endif %}
+    {% if item.gradeEnglish %}<li>{{ item.gradeEnglish }} (English)</li>{% endif %}
+    {% if item.gradeLanguage %}<li>{{ item.gradeLanguage }} (English Language)</li>{% endif %}
+    {% if item.gradeLiterature %}<li>{{ item.gradeLiterature }} (English Literature)</li>{% endif %}
+    {% if item.gradeStudies %}<li>{{ item.gradeStudies }} (English Studies)</li>{% endif %}
+    {% if item.gradeOther %}<li>{{ item.gradeOther }} ({{ item.subject }})</li>{% endif %}
   </ul>
   {% endset %}
 {% elif item.type == "GCSE" and id == "science" %}
   {% set gradeHtml %}
-  {% if item["grade-single"] %}{{ item["grade-single"] }} (Single Award){% endif %}
-  {% if item["grade-double"] %}{{ item["grade-double"] }} (Double Award){% endif %}
-  {% if item["grade-biology"] or item["grade-chemistry"] or item["grade-physics"] %}
+  {% if item.gradeSingle %}{{ item.gradeSingle }} (Single Award){% endif %}
+  {% if item.gradeDouble %}{{ item.gradeDouble }} (Double Award){% endif %}
+  {% if item.gradeBiology or item.gradeChemistry or item.gradePhysics %}
   <ul class="govuk-list">
-    <li>{{ item["grade-biology"] }} (Biology)</li>
-    <li>{{ item["grade-chemistry"] }} (Chemistry)</li>
-    <li>{{ item["grade-physics"] }} (Physics)</li>
+    <li>{{ item.gradeBiology }} (Biology)</li>
+    <li>{{ item.gradeChemistry }} (Chemistry)</li>
+    <li>{{ item.gradePhysics }} (Physics)</li>
   </ul>
   {% endif %}
 {% endset %}
 {% else %}
-  {% set gradeHtml = item['grade-other'] or item.grade %}
+  {% set gradeHtml = item.gradeOther or item.grade %}
 {% endif %}
 
-{% if missing %}
+{% set currentlyStudyingHtml %}
+  {% if item.currentlyStudying == 'yes' %}
+    {% if item.currentlyStudyingDetails %}
+      {{ item.currentlyStudyingDetails | nl2br | safe }}
+    {% else %}
+      Yes
+    {% endif %}
+  {% else %}
+    No
+  {% endif %}
+{% endset %}
+
+{% set currentlyRetakingHtml %}
+  {% if item.currentlyRetaking == 'yes' %}
+    Yes
+  {% else %}
+    No
+  {% endif %}
+{% endset %}
+
+{% if missingGcse %}
+
   {{ govukSummaryList({
     rows: [{
-      key: {
-        text: "How I expect to gain this qualification"
-      },
-      value: {
-        html: (item.missing or "No reason given") | nl2br | safe
-      },
+      key: { text: "What type of " + subject + " qualification do you have?" },
+      value: { text: "I don’t have a " + subject + " qualification yet" },
       actions: {
         items: [{
           href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "year"
+          visuallyHiddenText: "whether you have this qualification"
         }]
       } if canAmend
-    }]
+    },
+    {
+      key: { text: "Are you currently studying for this qualification?" },
+      value: { html: currentlyStudyingHtml },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/not-yet",
+          text: "Change",
+          visuallyHiddenText: "whether you are studying for this qualification"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Other evidence I have the skills required"
+      },
+      value: {
+        html: (item.otherEvidence or "Not provided") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      } if canAmend
+    } if (item.currentlyStudying == 'no')
+    ]
   }) }}
 {% else %}
   {{ govukSummaryList({
@@ -91,47 +135,47 @@
       } if canAmend
     } if item.type == "Non-UK qualification", {
       key: {
-        text: "Do you have a UK NARIC statement of comparability?"
+        text: "Do you have a UK ENIC statement of comparability?"
       },
       value: {
-        text: item.naric or "Not entered"
+        text: item.enic or "Not entered"
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "UK NARIC statement of comparability"
+          visuallyHiddenText: "UK ENIC statement of comparability"
         }]
       } if canAmend
-    } if item.type == "Non-UK qualification" and item.naric, {
+    } if item.type == "Non-UK qualification" and item.enic, {
       key: {
-        text: "UK NARIC reference number"
+        text: "UK ENIC reference number"
       },
       value: {
-        text: item["naric-reference"] or "Not entered"
+        text: item.enicReference or "Not entered"
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
-          visuallyHiddenText: "UK NARIC reference"
+          visuallyHiddenText: "UK ENIC reference"
         }]
       } if canAmend
-    } if item.naric and item["naric-reference"], {
+    } if item.enic and item.enicReference, {
       key: {
         text: "Comparable UK qualification"
       },
       value: {
-        text: item["naric-comparability"] or "Not entered"
+        text: item.enicComparability or "Not entered"
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/naric?referrer=" + referrer,
+          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "comparable UK qualification"
         }]
       } if canAmend
-    } if item.naric and item["naric-comparability"], {
+    } if item.enic and item.enicComparability, {
       key: {
         text: "Grade"
       },
@@ -159,6 +203,31 @@
           visuallyHiddenText: "year"
         }]
       } if canAmend
-    }]
+    },
+    {
+      key: { text: "Are you currently studying to retake this qualification?" },
+      value: { html: currentlyRetakingHtml },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/no-pass-grade",
+          text: "Change",
+          visuallyHiddenText: "whether you are re-taking this qualification"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "Other evidence I have the skills required"
+      },
+      value: {
+        html: (item.otherEvidence or "Not provided") | nl2br | safe
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      } if canAmend
+    } if item.currentlyRetaking == 'no']
   }) }}
 {% endif %}

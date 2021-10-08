@@ -1,0 +1,55 @@
+{% set workHistory = applicationValue(["workHistory"]) or {} %}
+{% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
+
+{% set summaryCardHtml %}
+  {% if workHistoryDecision == "No, I have always been in full time education" %}
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Do you have any work history?"
+        },
+        value: {
+          text: "No, I have always been in full time education"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history",
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
+    }) }}
+  {% elif workHistoryDecision == "No, I do not have any work history" %}
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Explanation of why you’ve been out of the workplace"
+        },
+        value: {
+          text: (applicationValue(["workHistory", "missing"]) or "Not entered") | nl2br | safe
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/work-history",
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
+    }) }}
+  {% else %}
+    {% if history.length >= 1 %}
+      {% for item in history %}
+        {% include "_includes/item/job.njk" %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endset %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  html: summaryCardHtml
+}) }}

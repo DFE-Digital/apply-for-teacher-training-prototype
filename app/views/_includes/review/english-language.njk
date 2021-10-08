@@ -1,20 +1,37 @@
-{% set item = applicationValue(["english-language"]) %}
-{% set complete = "true" if applicationValue(["completed", "english-language"]) %}
 
-{% set englishLanguageHtml %}
-  {% include "_includes/item/english-language.njk" %}
-{% endset %}
+{% set completed = applicationValue(["completed", "englishLanguage"]) %}
+{% set entered = applicationValue(["englishLanguage"]) %}
 
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "english-language" %}
-  {% set incompleteText = "English as a foreign language not marked as complete" %}
-  {% set incompleteLink = "/english-language/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Have you done an English as a foreign language assessment?" %}
-  {% include "_includes/review/incomplete.njk" %}
+{% if not entered %}
+  {{ appSuggestion({
+    id: "englishLanguage",
+    title: "English as a foreign language assessment not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your English as a foreign language assessment",
+        href: applicationPath + "/english-language"
+      }]
+    }
+  }) }}
 {% else %}
+  {{ appSuggestion({
+    id: "englishLanguage",
+    title: "English as a foreign language not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Have you done an English as a foreign language assessment?",
+        href: applicationPath + "/english-language/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% set summaryCardHtml %}{% include "_includes/item/english-language.njk" %}{% endset %}
   {{ appSummaryCard({
     classes: "govuk-!-margin-bottom-6",
-    html: englishLanguageHtml
+    headingLevel: 3,
+    titleText: "English as a foreign language assessment",
+    html: summaryCardHtml
   }) }}
 {% endif %}

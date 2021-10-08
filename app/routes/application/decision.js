@@ -12,12 +12,17 @@ module.exports = router => {
     const provider = providers[choice.providerCode]
     const course = provider.courses[choice.courseCode]
 
+    const numberOfOffersReceived = utils.toArray(application.choices).filter(function (choice) {
+      return choice.status === 'Offer received'
+    }).length
+
     res.render(`application/decision/${req.params.view}`, {
       provider,
       course,
       choice,
       choiceId,
-      referrer
+      referrer,
+      numberOfOffersReceived
     })
   })
 

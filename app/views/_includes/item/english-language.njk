@@ -1,7 +1,7 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set na = applicationValue(["english-language", "answer"]) == "No, English is not a foreign language to me" %}
-{% set missing = applicationValue(["english-language", "answer"]) == "No, I do not have an English as a foreign language qualification" %}
-{% set type = item["type-other"] or item.type or "Not entered" %}
+{% set na = applicationValue(["englishLanguage", "answer"]) == "No, English is not a foreign language to me" %}
+{% set missing = applicationValue(["englishLanguage", "answer"]) == "No, I do not have an English as a foreign language qualification" %}
+{% set item = applicationValue(["englishLanguage"]) %}
+{% set type = item.typeOther or item.type or "Not entered" %}
 {% if item.type == "IELTS" %}
   {% set certificateItemText = "Test report form (TRF) number" %}
   {% set gradeItemText = "Overall band score" %}
@@ -13,9 +13,9 @@
 {% endif %}
 
 {% set missingHtml %}
-  <p class="govuk-body">{{ applicationValue(["english-language", "answer"]) }}</p>
-  {% if applicationValue(["english-language", "answer-missing"]) %}
-    <p class="govuk-body">{{ applicationValue(["english-language", "answer-missing"]) | nl2br }}</p>
+  <p class="govuk-body">{{ applicationValue(["englishLanguage", "answer"]) }}</p>
+  {% if applicationValue(["englishLanguage", "answer-missing"]) %}
+    <p class="govuk-body">{{ applicationValue(["englishLanguage", "answer-missing"]) | nl2br }}</p>
   {% endif %}
 {% endset %}
 
@@ -90,7 +90,7 @@
         text: certificateItemText
       },
       value: {
-        text: item['certificate-number'] or "Not entered"
+        text: item.certificateNumber or "Not entered"
       },
       actions: {
         items: [{

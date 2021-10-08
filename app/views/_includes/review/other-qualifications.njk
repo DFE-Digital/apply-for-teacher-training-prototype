@@ -1,39 +1,45 @@
-{% set applicationPath = "/application/" + applicationId %}
-{% set qualifications = applicationValue(["other-qualifications"]) | toArray %}
+{% set completed = applicationValue(["completed", "otherQualifications"]) %}
+{% set entered = applicationValue(["otherQualificationsDisclose"]) %}
 
-{% set otherQualificationContentsHtml %}
-  {% if qualifications.length %}
-    {% set qualifications = qualifications | selectattr("id") %}
-    {% for item in qualifications %}
-      {% set qualificationHtml %}
-        {% include "_includes/item/other-qualification.njk" %}
-      {% endset %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: item.type,
-        actions: {
-          items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
-            text: "Delete qualification"
-          }]
-        } if canAmend,
-        html: qualificationHtml
-      }) }}
-    {% endfor %}
-  {% else %}
-    <p class="govuk-body">No other qualifications entered.</p>
-  {% endif %}
-{% endset %}
-
-{% set complete = "true" if applicationValue(["completed", "other-qualifications"]) %}
-{% if showIncomplete and complete != "true" %}
-  {% set incompleteType = "warning" if errorList %}
-  {% set incompleteId = "other-qualifications" %}
-  {% set incompleteText = "Academic and other qualifications not marked as complete" %}
-  {% set incompleteLink = "/other-qualifications/review?referrer=" + referrer %}
-  {% set incompleteLinkText = "Enter academic and other relevant qualifications" %}
-  {% include "_includes/review/incomplete.njk" %}
+{% if not entered %}
+  {{ appSuggestion({
+    id: "otherQualifications",
+    title: "A levels or other qualifications not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your other qualifications",
+        href: applicationPath + "/other-qualifications/add"
+      }]
+    }
+  }) }}
 {% else %}
-  {{ otherQualificationContentsHtml | safe }}
+  {% set insetTextHtml %}
+    <p class="govuk-body">Adding A levels and other qualifications makes your application stronger. They demonstrate subject knowledge not covered in your degree or work experience.</p>
+    <p class="govuk-body">Training providers usually ask you for them later in the process.</p>
+    {{ govukButton({
+      text: "Add another qualification",
+      classes: "govuk-button--secondary",
+      href: applicationPath + "/other-qualifications/add"
+    }) }}
+  {% endset %}
+
+  {{ govukInsetText({
+    classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
+    html: insetTextHtml
+  }) if applicationValue(["otherQualificationsDisclose"]) == "No" and not showIncomplete }}
+
+  {{ appSuggestion({
+    id: "otherQualifications",
+    title: "A levels and other qualifications not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete your other qualifications",
+        href: applicationPath + "/other-qualifications/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/other-qualifications.njk" %}
 {% endif %}

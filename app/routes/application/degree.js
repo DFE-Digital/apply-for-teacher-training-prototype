@@ -12,7 +12,11 @@ const allDegreeSubjects = require('./../../data/degree-subjects.js').map(subject
   subject.name = utils.capitaliseFirstLetter(subject.name)
   return subject
 })
-const allDegreeInstitutions = require('./../../data/degree-institutions.js')
+const allDegreeInstitutions = require('./../../data/degree-institutions.js').map(degreeInstitution => {
+  // Merge the synonyms into a single list
+  degreeInstitution.synonyms = degreeInstitution.suggestion_synonyms.concat(degreeInstitution.match_synonyms)
+  return degreeInstitution
+})
 
 
 const degreeData = (req) => {

@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block primary %}
+
   {% if international %}
     {{ govukInput({
       label: {
@@ -36,6 +37,7 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
+
 {% endblock %}
 
 {% if not international %}
@@ -44,6 +46,9 @@
     <script src="/public/javascripts/sort.js"></script>
 
     <script>
+
+      var allDegreeSubjects = {{ allDegreeSubjects | dump | safe }};
+
       function filter(query, populateResults) {
         populateResults(sort(query, allDegreeSubjects))
       }

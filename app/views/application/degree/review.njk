@@ -6,6 +6,8 @@
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/degree/review" %}
 {% set canAmend = true %}
+{% set degreeCount = applicationValue(["degree"]) | length %}
+
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -15,35 +17,41 @@
 {% endblock %}
 
 {% block primary %}
+
+  {% if degreeCount == 0 %}
+    <p class="govuk-body">You need an undergraduate degree to be eligible to for teacher training.</p>
+    <p class="govuk-body">You can also add any other degrees you have.</p>
+  {% endif %}
+
   {{ govukButton({
-    text: "Add another degree",
-    classes: "govuk-button--secondary",
+    text: ("Add another degree" if degreeCount > 0 else "Add degree"),
+    classes: ("govuk-button--secondary" if degreeCount > 0 else ""),
     href: applicationPath + "/degree/add"
   }) }}
 
-  {% include "_includes/review/degrees.njk" %}
+  {% if degreeCount > 0 %}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    hint: {
-      text: "Check the entry requirements for your chosen course. Providers usually ask for a degree at 2:2 or above. Contact the training provider if you do not have the right degree level."
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I’ve completed this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", "degree"])) }}
+    {% include "_includes/review/degrees.njk" %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukRadios({
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } | decorateApplicationAttributes(["completed", "degree"])) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  {% endif %}
 {% endblock %}

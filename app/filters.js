@@ -3,7 +3,6 @@ const humanizeDuration = require('humanize-duration')
 const marked = require('marked')
 const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
-const degree = require('./data/degree')()
 const utils = require('./utils')
 
 module.exports = (env) => {
@@ -158,6 +157,10 @@ module.exports = (env) => {
         return true
       }
     }
+  }
+
+  filters.capitaliseFirstLetter = (str) => {
+    return utils.capitaliseFirstLetter(str)
   }
 
   /**

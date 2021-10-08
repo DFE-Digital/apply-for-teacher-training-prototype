@@ -113,7 +113,6 @@ app.locals.serviceName = config.serviceName
 app.locals.serviceSlug = pkg.name
 // extensionConfig sets up variables used to add the scripts and stylesheets to each page.
 app.locals.extensionConfig = extensions.getAppConfig()
-app.locals.degree = require('./app/data/degree')()
 app.locals.gcse = require('./app/data/gcse')()
 app.locals.aLevel = require('./app/data/a-level')()
 app.locals.asLevel = require('./app/data/as-level')()

@@ -1,9 +1,13 @@
 {% extends "_layout.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
+
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/grade" %}
+
+
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 {% set completed =  applicationValue(["degree", id, "completed"]) == "Yes" %}
-{% set undergraduateDegree = applicationValue(["degree", id, "typeUk"]) | isUndergraduateDegree %}
+{% set undergraduateDegree = true %}
 {% if completed %}
   {% if international %}
     {% set title = "Did your degree give a grade?" %}
@@ -54,7 +58,7 @@
               legend: {
                 html: title,
                 isPageHeading: true,
-                classes: "govuk-fieldset__legend--xl"
+                classes: "govuk-fieldset__legend--l"
               }
             },
             hint: {
@@ -77,7 +81,7 @@
               legend: {
                 html: title,
                 isPageHeading: true,
-                classes: "govuk-fieldset__legend--xl"
+                classes: "govuk-fieldset__legend--l"
               }
             },
             hint: {

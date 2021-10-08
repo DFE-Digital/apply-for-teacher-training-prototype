@@ -145,7 +145,8 @@ module.exports = {
     abcde: {
       id: 'kq19m',
       provenance: 'domestic',
-      typeUk: 'BSc',
+      type: 'Bachelor of Science',
+      level: 'Bachelor',
       subject: 'Physics',
       org: 'The University of Edinburgh',
       country: 'United Kingdom',

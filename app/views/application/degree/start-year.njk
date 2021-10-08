@@ -1,0 +1,38 @@
+{% extends "_form-question.njk" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "What year did you start your degree?" %}
+{% set allowsFeedback = true %}
+
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/start-year" %}
+
+{% set graduatingYearExample = "2002" %}
+{% set degreeCount = applicationValue(["degree"]) | length %}
+{% if applicationValue(["degree", id, "grade"]) == "Pending" and degreeCount <= 1 %}
+  {% set pendingFirstDegree = true %}
+  {% set graduatingYearExample = "2020" %}
+{% endif %}
+{% set startYearExample = graduatingYearExample - 3 %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or ("/application/" + applicationId + "/degree/" + id + "/grade")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: title,
+      classes: "govuk-label--l"
+    },
+    hint: {
+      text: "For example, " + startYearExample
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

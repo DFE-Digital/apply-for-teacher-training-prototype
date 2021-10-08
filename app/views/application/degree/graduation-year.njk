@@ -1,7 +1,8 @@
-{% extends "_form.njk" %}
+{% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "When did you study for your degree?" %}
+
+{% set title = "What year will you graduate?" if applicationValue(["degree", id, "grade"]) == "Pending" else "What year did you graduate?" %}
 {% set allowsFeedback = true %}
 
 {% set graduatingYearExample = "2002" %}
@@ -14,29 +15,19 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: referrer or ("/application/" + applicationId + "/degree/" + id + "/start-year")
   }) }}
 {% endblock %}
 
 {% block primary %}
-  {{ govukInput({
-    label: {
-      text: "Year started course",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "For example, " + startYearExample
-    },
-    classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}
 
   {{ govukInput({
     label: {
-      text: "Graduation year",
-      classes: "govuk-label--m"
+      text: title,
+      classes: "govuk-label--l"
     },
     hint: {
-      text: "For example, " + graduatingYearExample + (". You must have successfully graduated by the time you start your course." if pendingFirstDegree)
+      text: "For example, " + graduatingYearExample
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["degree", id, "yearEnd"])) }}

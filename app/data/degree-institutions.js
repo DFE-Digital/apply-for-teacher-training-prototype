@@ -2323,7 +2323,7 @@ module.exports = [
   },
   {
     "name": "New Model Institute for Technology and Engineering",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": ["NMITE"],
     "match_synonyms": [],
     "hesa_itt_code": "421",
     "dttp_id": "a53e182c-1425-ec11-b6e6-000d3adf095a"

@@ -2219,8 +2219,10 @@ module.exports = [
     "dttp_id": "d13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "Institute Of Art - London",
-    "suggestion_synonyms": [],
+    "name": "Sotheby’s Institute of Art",
+    "suggestion_synonyms": [
+      "Institute Of Art - London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "405",
     "dttp_id": "5b3e182c-1425-ec11-b6e6-000d3adf095a"

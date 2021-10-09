@@ -1066,11 +1066,14 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "University of London (Institutes and activities)",
+    "name": "University of London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of London (Institutes and activities)"
+    ],
     "hesa_itt_code": "151",
-    "dttp_id": null
+    "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
+    "comment": "Constituent colleges gained the ability to award their own degrees in around 2018, but some institutions that are part of the 'School of Advanced Study', or 'The University of London Institute in Paris' still award postgraduate degrees from the University of London."
   },
   {
     "name": "Loughborough University",
@@ -2483,13 +2486,5 @@ module.exports = [
     "hesa_itt_code": null,
     "dttp_id": null,
     "comment": "Merged with Newport to become University of South Wales in 2013"
-  },
-  {
-    "name": "University of London",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
-    "comment": "Constituent colleges gained the ability to award their own degrees in around 2018."
   }
 ]

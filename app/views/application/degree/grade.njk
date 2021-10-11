@@ -34,9 +34,11 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% set internationalGradeHtml %}
+
+        {% set gradeLabel = "What grade did you get?" if completed else "What grade do you expect to get?"  %}
           {{ govukInput({
             label: {
-              text: "What grade do you expect to get?"
+              text: gradeLabel
             },
             hint: {
               text: "Your expected grade should be confirmed by an academic referee."

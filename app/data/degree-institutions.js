@@ -93,9 +93,12 @@ module.exports = [
       "Bucks",
       "BNU"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Buckinghamshire Chilterns University College"
+    ],
     "hesa_itt_code": "9",
-    "dttp_id": "bec53e05-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "bec53e05-7042-e811-80ff-3863bb3640b8",
+    "comment": "Name changed in 2007"
   },
   {
     "name": "Royal Central School of Speech and Drama",
@@ -115,7 +118,9 @@ module.exports = [
   },
   {
     "name": "Canterbury Christ Church University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "CCCU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "12",
     "dttp_id": "ce70f34a-2887-e711-80d8-005056ac45bb"
@@ -144,7 +149,9 @@ module.exports = [
   {
     "name": "Edge Hill University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Edge Hill College"
+    ],
     "hesa_itt_code": "16",
     "dttp_id": "d070f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -306,7 +313,7 @@ module.exports = [
     "dttp_id": "0c71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "St Mary's University, Twickenham",
+    "name": "St Mary’s University, Twickenham",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "39",
@@ -363,7 +370,9 @@ module.exports = [
   },
   {
     "name": "Anglia Ruskin University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "ARU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "47",
     "dttp_id": "387af34a-2887-e711-80d8-005056ac45bb"
@@ -376,9 +385,11 @@ module.exports = [
     "dttp_id": "c670f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Bolton",
+    "name": "University of Bolton",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Bolton"
+    ],
     "hesa_itt_code": "49",
     "dttp_id": "dfdb7129-7042-e811-80ff-3863bb3640b8"
   },
@@ -390,16 +401,25 @@ module.exports = [
     "dttp_id": "b1c53e05-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Brighton",
+    "name": "University of Brighton",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Brighton"
+    ],
     "hesa_itt_code": "51",
     "dttp_id": "0071f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Birmingham City University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "BCU",
+      "Birmingham College of Art",
+      "Birmingham Polytechnic"
+    ],
+    "match_synonyms": [
+      "University of Central England in Birmingham",
+      "UCE Birmingham"
+    ],
     "hesa_itt_code": "52",
     "dttp_id": "c870f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -439,9 +459,13 @@ module.exports = [
     "dttp_id": "0e71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of East London",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of East London",
+    "suggestion_synonyms": [
+      "UEL"
+    ],
+    "match_synonyms": [
+      "The University of East London"
+    ],
     "hesa_itt_code": "58",
     "dttp_id": "1471f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -510,7 +534,9 @@ module.exports = [
   },
   {
     "name": "De Montfort University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "DMU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "68",
     "dttp_id": "f30a4e73-a141-e811-80ff-3863bb351d40"
@@ -607,9 +633,12 @@ module.exports = [
     "dttp_id": "4071f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Chichester",
+    "name": "University of Chichester",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Chichester",
+      "University College Chichester"
+    ],
     "hesa_itt_code": "82",
     "dttp_id": "0a71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -658,7 +687,10 @@ module.exports = [
   {
     "name": "Cardiff Metropolitan University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Prifysgol Metropolitan Caerdydd",
+      "University of Wales Institute, Cardiff"
+    ],
     "hesa_itt_code": "89",
     "dttp_id": "07f35f0b-7042-e811-80ff-3863bb3640b8"
   },
@@ -691,11 +723,14 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "University of Abertay Dundee",
+    "name": "Abertay University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Abertay Dundee"
+    ],
     "hesa_itt_code": "95",
-    "dttp_id": null
+    "dttp_id": null,
+    "comment": "Renamed from University of Abertay Dundee in September 2019"
   },
   {
     "name": "Edinburgh College of Art",
@@ -777,9 +812,12 @@ module.exports = [
   {
     "name": "Edinburgh Napier University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Napier University"
+    ],
     "hesa_itt_code": "107",
-    "dttp_id": "43f35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "43f35f0b-7042-e811-80ff-3863bb3640b8",
+    "comment": "Name changed in 2009"
   },
   {
     "name": "Aston University",
@@ -789,44 +827,57 @@ module.exports = [
     "dttp_id": "513e2cff-6f42-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Bath",
+    "name": "University of Bath",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Bath"
+    ],
     "hesa_itt_code": "109",
     "dttp_id": "3e7af34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Birmingham",
+    "name": "University of Birmingham",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Birmingham",
+    ],
     "hesa_itt_code": "110",
     "dttp_id": "fe70f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Bradford",
+    "name": "University of Bradford",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Bradford"
+    ],
     "hesa_itt_code": "111",
     "dttp_id": "7fed6e2f-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Bristol",
+    "name": "University of Bristol",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Bristol"
+    ],
     "hesa_itt_code": "112",
     "dttp_id": "0271f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Brunel University London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Brunel University"
+    ],
     "hesa_itt_code": "113",
-    "dttp_id": "cc70f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "cc70f34a-2887-e711-80d8-005056ac45bb",
+    "comment": "Name changed in 2014"
   },
   {
-    "name": "The University of Cambridge",
+    "name": "University of Cambridge",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Cambridge"
+    ],
     "hesa_itt_code": "114",
     "dttp_id": "0671f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -841,30 +892,41 @@ module.exports = [
     "dttp_id": "293e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "University of Durham",
+    "name": "Durham University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Durham"
+    ],
     "hesa_itt_code": "116",
-    "dttp_id": "1071f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "1071f34a-2887-e711-80d8-005056ac45bb",
+    "comment": "Changed trading name to Durham University in 2005"
   },
   {
-    "name": "The University of East Anglia",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of East Anglia",
+    "suggestion_synonyms": [
+      "UEA"
+    ],
+    "match_synonyms": [
+      "The University of East Anglia"
+    ],
     "hesa_itt_code": "117",
     "dttp_id": "1271f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Essex",
+    "name": "University of Essex",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Essex"
+    ],
     "hesa_itt_code": "118",
     "dttp_id": "5aeb7735-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Exeter",
+    "name": "University of Exeter",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Exeter"
+    ],
     "hesa_itt_code": "119",
     "dttp_id": "1671f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1253,9 +1315,11 @@ module.exports = [
     "dttp_id": "42228041-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Aberdeen",
+    "name": "University of Aberdeen",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Aberdeen"
+    ],
     "hesa_itt_code": "170",
     "dttp_id": "cbdb7129-7042-e811-80ff-3863bb3640b8"
   },
@@ -1267,9 +1331,11 @@ module.exports = [
     "dttp_id": "146e5e11-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Dundee",
+    "name": "University of Dundee",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Dundee"
+    ],
     "hesa_itt_code": "172",
     "dttp_id": "bbed6e2f-7042-e811-80ff-3863bb3640b8"
   },
@@ -1304,24 +1370,36 @@ module.exports = [
   {
     "name": "Aberystwyth University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Prifysgol Aberystwyth"
+    ],
     "hesa_itt_code": "177",
     "dttp_id": "443e2cff-6f42-e811-80ff-3863bb3640b8"
   },
   {
     "name": "Bangor University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "University College of North Wales",
+      "UCNW",
+      "UWB"
+    ],
+    "match_synonyms": [
+      "Prifysgol Bangor",
+      "University of Wales, Bangor"
+    ],
     "hesa_itt_code": "178",
-    "dttp_id": "92c53e05-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "92c53e05-7042-e811-80ff-3863bb3640b8",
+    "comment": "Renamed to Bangor University in 2007"
   },
   {
     "name": "Cardiff University",
     "suggestion_synonyms": [
-      "University College Cardiff",
+      "Prifysgol Caerdydd",
+      "University College Cardiff"
+    ],
+    "match_synonyms": [
       "University of Wales, Cardiff"
     ],
-    "match_synonyms": [],
     "hesa_itt_code": "179",
     "dttp_id": "0ff35f0b-7042-e811-80ff-3863bb3640b8"
   },
@@ -1443,9 +1521,15 @@ module.exports = [
     "dttp_id": "283f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "The Arts University Bournemouth",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Arts University Bournemouth",
+    "suggestion_synonyms": [
+      "AUB"
+    ],
+    "match_synonyms": [
+      "Arts Institute Bournemouth",
+      "Arts University College at Bournemouth",
+      "The Arts University Bournemouth"
+    ],
     "hesa_itt_code": "197",
     "dttp_id": "c6407223-7042-e811-80ff-3863bb3640b8"
   },
@@ -1471,12 +1555,13 @@ module.exports = [
     "dttp_id": "fa70f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "Courtauld Institute of Art",
+    "name": "The Courtauld Institute of Art",
     "suggestion_synonyms": [
       "CIA"
     ],
     "match_synonyms": [
-      "The Courtauld"
+      "The Courtauld",
+      "Courtauld Institute of Art"
     ],
     "hesa_itt_code": "201",
     "dttp_id": "18f35f0b-7042-e811-80ff-3863bb3640b8"
@@ -1489,9 +1574,13 @@ module.exports = [
     "dttp_id": "e070f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Buckingham",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of Buckingham",
+    "suggestion_synonyms": [
+      "UB"
+    ],
+    "match_synonyms": [
+      "The University of Buckingham"
+    ],
     "hesa_itt_code": "203",
     "dttp_id": "0471f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1511,8 +1600,12 @@ module.exports = [
   },
   {
     "name": "University for the Creative Arts",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "UCA"
+    ],
+    "match_synonyms": [
+      "University College for the Creative Arts"
+    ],
     "hesa_itt_code": "206",
     "dttp_id": "354b9247-7042-e811-80ff-3863bb3640b8"
   },
@@ -1561,7 +1654,9 @@ module.exports = [
   {
     "name": "BPP University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "BPP University College of Professional Studies"
+    ],
     "hesa_itt_code": "214",
     "dttp_id": "123e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -1636,9 +1731,12 @@ module.exports = [
     "dttp_id": "b53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "BIMM",
+    "name": "BIMM Institute",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "BIMM Limited",
+      "British and Irish Modern Music Institute"
+    ],
     "hesa_itt_code": "232",
     "dttp_id": "0e3e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2127,7 +2225,9 @@ module.exports = [
   },
   {
     "name": "Arden University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Resource development international"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "333",
     "dttp_id": "043e182c-1425-ec11-b6e6-000d3adf095a"
@@ -2298,9 +2398,12 @@ module.exports = [
   {
     "name": "Hult International Business School",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Ashridge Business School"
+    ],
     "hesa_itt_code": "406",
-    "dttp_id": "553e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "553e182c-1425-ec11-b6e6-000d3adf095a",
+    "comment": "Ashbridge Business School merged with Hult International Business school in 2015"
   },
   {
     "name": "The Sherwood Psychotherapy Training Institute",

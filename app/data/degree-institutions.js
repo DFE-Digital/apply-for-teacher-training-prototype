@@ -282,7 +282,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "35",
-    "dttp_id": "74407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "cf3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Salford College of Technology",
@@ -758,21 +758,21 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "104",
-    "dttp_id": null
+    "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The University of the West of Scotland",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "105",
-    "dttp_id": null
+    "dttp_id": "1a3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Glasgow Caledonian University",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "106",
-    "dttp_id": null
+    "dttp_id": "473e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Edinburgh Napier University",
@@ -838,7 +838,7 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "115",
-    "dttp_id": "7bdb7129-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "293e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University of Durham",
@@ -1017,7 +1017,7 @@ module.exports = [
     "match_synonyms": [
       "London School of Hygiene & Tropical Medicine"],
     "hesa_itt_code": "138",
-    "dttp_id": null
+    "dttp_id": "853e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Queen Mary University of London",
@@ -1026,7 +1026,7 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "139",
-    "dttp_id": "47f3791d-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Royal Free Hospital School of Medicine",
@@ -1124,11 +1124,14 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "University of London (Institutes and activities)",
+    "name": "University of London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of London (Institutes and activities)"
+    ],
     "hesa_itt_code": "151",
-    "dttp_id": null
+    "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
+    "comment": "Constituent colleges gained the ability to award their own degrees in around 2018, but some institutions that are part of the 'School of Advanced Study', or 'The University of London Institute in Paris' still award postgraduate degrees from the University of London."
   },
   {
     "name": "Loughborough University",
@@ -1289,7 +1292,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "175",
-    "dttp_id": null
+    "dttp_id": "d73e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University of Wales Trinity Saint David",
@@ -1314,7 +1317,10 @@ module.exports = [
   },
   {
     "name": "Cardiff University",
-    "suggestion_synonyms": ["University College Cardiff"],
+    "suggestion_synonyms": [
+      "University College Cardiff",
+      "University of Wales, Cardiff"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "179",
     "dttp_id": "0ff35f0b-7042-e811-80ff-3863bb3640b8"
@@ -1378,7 +1384,7 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "188",
-    "dttp_id": null
+    "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Writtle College",
@@ -1413,7 +1419,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "193",
-    "dttp_id": null
+    "dttp_id": "df3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "St Mary's University College",
@@ -1434,7 +1440,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "196",
-    "dttp_id": null
+    "dttp_id": "283f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Arts University Bournemouth",
@@ -1455,7 +1461,7 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "199",
-    "dttp_id": null
+    "dttp_id": "2f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University College Birmingham",
@@ -1550,819 +1556,821 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "213",
-    "dttp_id": null
+    "dttp_id": "fa3d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "BPP University",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "214",
-    "dttp_id": null
+    "dttp_id": "123e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The London Institute of Banking & Finance",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "217",
-    "dttp_id": null
+    "dttp_id": "fe3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The University of Law",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "218",
-    "dttp_id": null
+    "dttp_id": "183f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Richmond, The American International University in London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "219",
-    "dttp_id": null
+    "dttp_id": "c73e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Institute of Contemporary Music Performance",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "220",
-    "dttp_id": null
+    "dttp_id": "5d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Moorlands College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "221",
-    "dttp_id": null
+    "dttp_id": "993e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Mattersey Hall",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "225",
-    "dttp_id": null
+    "dttp_id": "933e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London School of Science and Technology",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "227",
-    "dttp_id": null
+    "dttp_id": "893e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Liverpool School of Tropical Medicine",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "228",
-    "dttp_id": null
+    "dttp_id": "753e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The National Film and Television School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "229",
-    "dttp_id": null
+    "dttp_id": "0b3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Plymouth College of Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "230",
-    "dttp_id": null
+    "dttp_id": "b53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "BIMM",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "232",
-    "dttp_id": null
+    "dttp_id": "0e3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ICON College of Technology and Management",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "236",
-    "dttp_id": null
+    "dttp_id": "593e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Kensington College of Business",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "237",
-    "dttp_id": null
+    "dttp_id": "693e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Bloomsbury Institute",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "238",
-    "dttp_id": null
+    "dttp_id": "103e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Mountview Academy of Theatre Arts",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "239",
-    "dttp_id": null
+    "dttp_id": "9b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Nazarene Theological College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "240",
-    "dttp_id": null
+    "dttp_id": "9f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The London College UCK",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "243",
-    "dttp_id": null
+    "dttp_id": "fc3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Arts Educational Schools",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "244",
-    "dttp_id": null
+    "dttp_id": "083e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Mont Rose College of Management and Sciences",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "246",
-    "dttp_id": null
+    "dttp_id": "973e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Norland College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "247",
-    "dttp_id": null
+    "dttp_id": "aa3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ForMission",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "248",
-    "dttp_id": null
+    "dttp_id": "423e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London Churchill College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "250",
-    "dttp_id": null
+    "dttp_id": "793e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Empire College London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "252",
-    "dttp_id": null
+    "dttp_id": "3a3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Fairfield School of Business",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "254",
-    "dttp_id": null
+    "dttp_id": "403e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London College of Business Studies",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "255",
-    "dttp_id": null
+    "dttp_id": "7b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London School of Management Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "256",
-    "dttp_id": null
+    "dttp_id": "873e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London School of Theology",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "257",
-    "dttp_id": null
+    "dttp_id": "8b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "St Mellitus College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "258",
-    "dttp_id": null
+    "dttp_id": "d93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Nelson College London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "260",
-    "dttp_id": null
+    "dttp_id": "a13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Northern College of Acupuncture",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "261",
-    "dttp_id": null
+    "dttp_id": "ad3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Pearson College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "262",
-    "dttp_id": null
+    "dttp_id": "b33e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Royal Academy of Dance",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "263",
-    "dttp_id": null
+    "dttp_id": "cb3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "SAE Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "265",
-    "dttp_id": null
+    "dttp_id": "d33e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Academy of Live and Recorded Arts",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "269",
-    "dttp_id": null
+    "dttp_id": "f63d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The College of Integrated Chinese Medicine",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "270",
-    "dttp_id": null
+    "dttp_id": "ed3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The City College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "271",
-    "dttp_id": null
+    "dttp_id": "e93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Met Film School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "272",
-    "dttp_id": null
+    "dttp_id": "953e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London Studio Centre",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "274",
-    "dttp_id": null
+    "dttp_id": "8d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London School of Academics",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "276",
-    "dttp_id": null
+    "dttp_id": "813e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Regent College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "278",
-    "dttp_id": null
+    "dttp_id": "bd3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Brit College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "280",
-    "dttp_id": null
+    "dttp_id": "163e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Futureworks",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "281",
-    "dttp_id": null
+    "dttp_id": "443e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London Bridge Business Academy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "282",
-    "dttp_id": null
+    "dttp_id": "773e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "St Patrick's International College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "283",
-    "dttp_id": null
+    "dttp_id": "dd3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Chicken Shed Theatre Company",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "284",
-    "dttp_id": null
+    "dttp_id": "213e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "All Nations Christian College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "285",
-    "dttp_id": null
+    "dttp_id": "fc3d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Bristol Baptist College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "287",
-    "dttp_id": null
+    "dttp_id": "143e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Cambridge Theological Federation",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "288",
-    "dttp_id": null
+    "dttp_id": "e73e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Christie's Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "291",
-    "dttp_id": null
+    "dttp_id": "253e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "City and Guilds of London Art School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "292",
-    "dttp_id": null
+    "dttp_id": "273e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Cliff College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "293",
-    "dttp_id": null
+    "dttp_id": "2b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University College of Estate Management",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "294",
-    "dttp_id": null
+    "dttp_id": "263f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Waverley Abbey College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "295",
-    "dttp_id": null
+    "dttp_id": "2a3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ICOM",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "297",
-    "dttp_id": null
+    "dttp_id": "573e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Islamic College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "298",
-    "dttp_id": null
+    "dttp_id": "fa3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Istituto Marangoni",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "299",
-    "dttp_id": null
+    "dttp_id": "613e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Kaplan Open Learning",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "300",
-    "dttp_id": null
+    "dttp_id": "673e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "KLC School of Design",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "301",
-    "dttp_id": null
+    "dttp_id": "6b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London Film School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "304",
-    "dttp_id": null
+    "dttp_id": "7f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Luther King House Educational Trust",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "306",
-    "dttp_id": null
+    "dttp_id": "8f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Oxford Business College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "308",
-    "dttp_id": null
+    "dttp_id": "b13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Point Blank Music School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "309",
-    "dttp_id": null
+    "dttp_id": "b73e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Spurgeon's College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "310",
-    "dttp_id": null
+    "dttp_id": "d53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "St Nicholas Montessori Training",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "311",
-    "dttp_id": null
+    "dttp_id": "db3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "West Dean College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "312",
-    "dttp_id": null
+    "dttp_id": "2c3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Oak Hill College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "313",
-    "dttp_id": null
+    "dttp_id": "af3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Metanoia Institute",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "314",
-    "dttp_id": null
+    "dttp_id": "073f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Queen's Foundation for Ecumenical Theological Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "315",
-    "dttp_id": null
+    "dttp_id": "0f3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Salvation Army",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "316",
-    "dttp_id": null
+    "dttp_id": "113f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Trinity College Bristol",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "317",
-    "dttp_id": null
+    "dttp_id": "1e3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Matrix College of Counselling and Psychotherapy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "320",
-    "dttp_id": null
+    "dttp_id": "913e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Minster Centre",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "321",
-    "dttp_id": null
+    "dttp_id": "093f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "AA School of Architecture",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "323",
-    "dttp_id": null
+    "dttp_id": "f43d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Court Theatre Training Company",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "326",
-    "dttp_id": null
+    "dttp_id": "323e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Regents Theological College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "327",
-    "dttp_id": null
+    "dttp_id": "bf3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London School of Commerce & IT",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "328",
-    "dttp_id": null
+    "dttp_id": "833e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Apex College London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "329",
-    "dttp_id": null
+    "dttp_id": "003e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "New College of the Humanities",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "330",
-    "dttp_id": null
+    "dttp_id": "a33e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Markfield Institute of Higher Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "331",
-    "dttp_id": null
+    "dttp_id": "053f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Cambridge Arts and Sciences",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "332",
-    "dttp_id": null
+    "dttp_id": "1a3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Arden University",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "333",
-    "dttp_id": null
+    "dttp_id": "043e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Grŵp Llandrillo Menai",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "334",
-    "dttp_id": null
+    "dttp_id": "4d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Grŵp NPTC Group",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "335",
-    "dttp_id": null
+    "dttp_id": "4f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Gower College Swansea",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "336",
-    "dttp_id": null
+    "dttp_id": "4b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The University College of Osteopathy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "337",
-    "dttp_id": null
+    "dttp_id": "163f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Christ the Redeemer College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "342",
-    "dttp_id": null
+    "dttp_id": "233e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Leeds Conservatoire",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "351",
-    "dttp_id": null
+    "dttp_id": "733e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Hartpury University",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "352",
-    "dttp_id": null
+    "dttp_id": "533e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Amity Global Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "353",
-    "dttp_id": null
+    "dttp_id": "fe3d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The London School of Architecture",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "354",
-    "dttp_id": null
+    "dttp_id": "033f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "London College of International Business Studies",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "355",
-    "dttp_id": null
+    "dttp_id": "7d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "LCCM AU UK",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "356",
-    "dttp_id": null
+    "dttp_id": "6f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ACM Guildford",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "357",
-    "dttp_id": null
+    "dttp_id": "f83d182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Film Education Training Trust",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "359",
-    "dttp_id": null
+    "dttp_id": "f43e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Institute of Ismaili Studies",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "360",
-    "dttp_id": null
+    "dttp_id": "f83e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Newbold College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "361",
-    "dttp_id": null
+    "dttp_id": "a83e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Le Cordon Bleu",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "362",
-    "dttp_id": null
+    "dttp_id": "713e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Global Banking School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "363",
-    "dttp_id": null
+    "dttp_id": "493e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "BCNO",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "400",
-    "dttp_id": null
+    "dttp_id": "0c3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "LAMDA",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "401",
-    "dttp_id": null
+    "dttp_id": "6d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Royal Academy of Dramatic Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "402",
-    "dttp_id": null
+    "dttp_id": "cd3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Study Group",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "403",
-    "dttp_id": null
+    "dttp_id": "e13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Royal School of Needlework",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "404",
-    "dttp_id": null
+    "dttp_id": "d13e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "Institute Of Art - London",
-    "suggestion_synonyms": [],
+    "name": "Sotheby’s Institute of Art",
+    "suggestion_synonyms": [
+      "Institute Of Art - London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "405",
-    "dttp_id": null
+    "dttp_id": "5b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Hult International Business School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "406",
-    "dttp_id": null
+    "dttp_id": "553e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Sherwood Psychotherapy Training Institute",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "407",
-    "dttp_id": null
+    "dttp_id": "133f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University Centre Peterborough",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "408",
-    "dttp_id": null
+    "dttp_id": "223f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Central Film School London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "409",
-    "dttp_id": null
+    "dttp_id": "1f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ESCP Europe Business School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "410",
-    "dttp_id": null
+    "dttp_id": "3c3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Council of the Inns of Court",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "412",
-    "dttp_id": null
+    "dttp_id": "f23e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Navitas UK Holdings",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "413",
-    "dttp_id": null
+    "dttp_id": "9d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The Prince's Foundation",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "414",
-    "dttp_id": null
+    "dttp_id": "0d3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Dyson Technical Training",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "415",
-    "dttp_id": null
+    "dttp_id": "383e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Results Consortium",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "416",
-    "dttp_id": null
+    "dttp_id": "c53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "JSA Education Group.",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "417",
-    "dttp_id": null
+    "dttp_id": "633e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University Centre Quayside",
@@ -2371,147 +2379,147 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "418",
-    "dttp_id": null
+    "dttp_id": "243f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "David Game College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "419",
-    "dttp_id": null
+    "dttp_id": "363e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Dartington Hall Trust",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "420",
-    "dttp_id": null
+    "dttp_id": "343e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "New Model Institute for Technology and Engineering",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": ["NMITE"],
     "match_synonyms": [],
     "hesa_itt_code": "421",
-    "dttp_id": null
+    "dttp_id": "a53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Kaplan International Colleges U.K.",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "422",
-    "dttp_id": null
+    "dttp_id": "653e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "INTO University Partnerships",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "423",
-    "dttp_id": null
+    "dttp_id": "5f3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The College of Osteopaths",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "424",
-    "dttp_id": null
+    "dttp_id": "ef3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Regent's University London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "425",
-    "dttp_id": null
+    "dttp_id": "c33e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Backstage Academy (Training)",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "426",
-    "dttp_id": null
+    "dttp_id": "0a3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "British Academy of Jewellery",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "427",
-    "dttp_id": null
+    "dttp_id": "183e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The London Interdisciplinary School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "428",
-    "dttp_id": null
+    "dttp_id": "013f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Raindance Educational Services",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "429",
-    "dttp_id": null
+    "dttp_id": "bb3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "The College of Health",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "430",
-    "dttp_id": null
+    "dttp_id": "eb3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "CEG UFP",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "431",
-    "dttp_id": null
+    "dttp_id": "1d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Applied Business Academy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "432",
-    "dttp_id": null
+    "dttp_id": "023e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Tavistock and Portman NHS Foundation Trust",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "433",
-    "dttp_id": null
+    "dttp_id": "e33e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "University Academy 92",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "434",
-    "dttp_id": null
+    "dttp_id": "203f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "TEDI-London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "435",
-    "dttp_id": null
+    "dttp_id": "e53e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "College of Legal Practice",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "436",
-    "dttp_id": null
+    "dttp_id": "2d3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "ThinkSpace Education",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "437",
-    "dttp_id": null
+    "dttp_id": "1c3f182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "European School of Osteopathy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "7009",
-    "dttp_id": null
+    "dttp_id": "3e3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Council for National Academic Awards",
@@ -2519,13 +2527,6 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "9065",
     "dttp_id": null
-  },
-  {
-    "name": "Manchester Health Academy",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "3d0517a7-a441-e811-80fd-3863bb349ac0"
   },
   {
     "name": "NCG (Newcastle College Group)",
@@ -2537,16 +2538,6 @@ module.exports = [
     ],
     "hesa_itt_code": null,
     "dttp_id": "20e5a08c-ee97-e711-80d8-005056ac45bb"
-  },
-  {
-    "name": "City College Norwich",
-    "suggestion_synonyms": [
-      "Norwich City College",
-      "Norwich City College of Further and Higher Education"
-    ],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "3efe7322-e897-e711-80d8-005056ac45bb"
   },
   {
     "name": "University of Wales",
@@ -2563,20 +2554,5 @@ module.exports = [
     "hesa_itt_code": null,
     "dttp_id": null,
     "comment": "Merged with Newport to become University of South Wales in 2013"
-  },
-  {
-    "name": "University of London",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
-    "comment": "Constituent colleges gained the ability to award their own degrees in around 2018."
-  },
-  {
-    "name": "West Suffolk College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": "82ff7322-e897-e711-80d8-005056ac45bb",
-    "comment": ""
-  }]
+  }
+]

@@ -247,9 +247,11 @@ module.exports = [
     "dttp_id": "4ff3791d-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Roehampton University",
+    "name": "University of Roehampton",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Roehampton University"
+    ],
     "hesa_itt_code": "31",
     "dttp_id": "f270f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -399,9 +401,12 @@ module.exports = [
   {
     "name": "Birmingham City University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Central England in Birmingham"
+    ],
     "hesa_itt_code": "52",
-    "dttp_id": "c870f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "c870f34a-2887-e711-80d8-005056ac45bb",
+    "comment": "Renamed from 'University of Central England in Birmingham' in 2007."
   },
   {
     "name": "The University of Central Lancashire",
@@ -876,9 +881,11 @@ module.exports = [
     "dttp_id": "2071f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Keele",
+    "name": "Keele University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Keele"
+    ],
     "hesa_itt_code": "121",
     "dttp_id": "3a7af34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1148,9 +1155,11 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "University of Newcastle-upon-Tyne",
+    "name": "Newcastle University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Newcastle-upon-Tyne"
+    ],
     "hesa_itt_code": "154",
     "dttp_id": "ea70f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1204,9 +1213,11 @@ module.exports = [
     "dttp_id": "58228041-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Sussex",
+    "name": "University of Sussex",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Sussex"
+    ],
     "hesa_itt_code": "162",
     "dttp_id": "3e71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1538,11 +1549,14 @@ module.exports = [
     "dttp_id": "84db7129-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "University Campus Suffolk",
+    "name": "University of Suffolk",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University Campus Suffolk"
+    ],
     "hesa_itt_code": "210",
-    "dttp_id": "154b9247-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "154b9247-7042-e811-80ff-3863bb3640b8",
+    "comment": "Renamed from University Campus Suffolk to University of Suffolk in 2016"
   },
   {
     "name": "Leeds College of Art",

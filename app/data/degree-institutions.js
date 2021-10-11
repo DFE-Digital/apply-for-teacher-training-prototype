@@ -34,7 +34,9 @@
 module.exports = [
   {
     "name": "The Open University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "OU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "1",
     "dttp_id": "5c9e1d2d-3fa2-e811-812b-5065f38ba241"
@@ -71,7 +73,9 @@ module.exports = [
   },
   {
     "name": "Bishop Grosseteste University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "BGU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "7",
     "dttp_id": "ca70f34a-2887-e711-80d8-005056ac45bb"
@@ -85,14 +89,19 @@ module.exports = [
   },
   {
     "name": "Buckinghamshire New University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Bucks",
+      "BNU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "9",
     "dttp_id": "bec53e05-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The Royal Central School of Speech and Drama",
-    "suggestion_synonyms": [],
+    "name": "Royal Central School of Speech and Drama",
+    "suggestion_synonyms": [
+      "University of London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "10",
     "dttp_id": "d90a4e73-a141-e811-80ff-3863bb351d40"
@@ -253,7 +262,10 @@ module.exports = [
   },
   {
     "name": "Royal Academy of Music",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "RAM",
+      "University of London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "33",
     "dttp_id": "61f3791d-7042-e811-80ff-3863bb3640b8"
@@ -820,7 +832,10 @@ module.exports = [
   },
   {
     "name": "City, University of London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "CUL",
+      "The City University"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "115",
     "dttp_id": "293e182c-1425-ec11-b6e6-000d3adf095a"
@@ -903,9 +918,15 @@ module.exports = [
     "dttp_id": "f58f17b0-a141-e811-80ff-3863bb351d40"
   },
   {
-    "name": "Birkbeck College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Birkbeck, University of London",
+    "suggestion_synonyms": [
+      "BBK",
+      "University of London"
+    ],
+    "match_synonyms": [
+      "Birkbeck College",
+      "Birkbeck College, University of London"
+    ],
     "hesa_itt_code": "127",
     "dttp_id": "9fc53e05-7042-e811-80ff-3863bb3640b8"
   },
@@ -924,9 +945,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Goldsmiths College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Goldsmiths, University of London",
+    "suggestion_synonyms": [
+      "GUL"
+    ],
+    "match_synonyms": [
+      "Goldsmiths College"
+    ],
     "hesa_itt_code": "131",
     "dttp_id": "d270f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -946,14 +971,20 @@ module.exports = [
   },
   {
     "name": "King's College London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "KCL",
+      "University of London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "134",
     "dttp_id": "d470f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "London Business School",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "LBS",
+      "University of London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "135",
     "dttp_id": "6a1c7817-7042-e811-80ff-3863bb3640b8"
@@ -967,21 +998,32 @@ module.exports = [
   },
   {
     "name": "London School of Economics and Political Science",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "LSE",
+      "University of London"
+    ],
+    "match_synonyms": [
+      "London School of Economics"
+    ],
     "hesa_itt_code": "137",
     "dttp_id": "7d1c7817-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "London School of Hygiene and Tropical Medicine",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "LSHTM"
+      "University of London"
+    ],
+    "match_synonyms": [
+      "London School of Hygiene & Tropical Medicine"],
     "hesa_itt_code": "138",
     "dttp_id": "853e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
     "name": "Queen Mary University of London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "QMUL"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "139",
     "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a"
@@ -994,9 +1036,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Royal Holloway and Bedford New College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Royal Holloway, University of London",
+    "suggestion_synonyms": [
+      "RH"
+    ],
+    "match_synonyms": [
+      "Royal Holloway and Bedford New College"
+    ],
     "hesa_itt_code": "141",
     "dttp_id": "6c407223-7042-e811-80ff-3863bb3640b8"
   },
@@ -1008,9 +1054,14 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "The Royal Veterinary College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Royal Veterinary College",
+    "suggestion_synonyms": [
+      "RVC"
+      "University of London"
+    ],
+    "match_synonyms": [
+      "The Royal Veterinary College"
+    ],
     "hesa_itt_code": "143",
     "dttp_id": "b6db7129-7042-e811-80ff-3863bb3640b8"
   },
@@ -1022,16 +1073,22 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "St George's Hospital Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "St George's, University of London",
+    "suggestion_synonyms": [
+      "SGUL"
+    ],
+    "match_synonyms": [
+      "St George's Hospital Medical School"
+    ],
     "hesa_itt_code": "145",
     "dttp_id": "94407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The School of Oriental and African Studies",
+    "name": "SOAS, University of London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The School of Oriental and African Studies"
+    ],
     "hesa_itt_code": "146",
     "dttp_id": "bddb7129-7042-e811-80ff-3863bb3640b8"
   },
@@ -1052,7 +1109,8 @@ module.exports = [
   {
     "name": "University College London",
     "suggestion_synonyms": [
-      "UCL"
+      "UCL",
+      "University of London"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "149",
@@ -1320,7 +1378,10 @@ module.exports = [
   },
   {
     "name": "The Institute of Cancer Research",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "ICR",
+      "University of London"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "188",
     "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a"
@@ -1411,8 +1472,12 @@ module.exports = [
   },
   {
     "name": "Courtauld Institute of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "CIA"
+    ],
+    "match_synonyms": [
+      "The Courtauld"
+    ],
     "hesa_itt_code": "201",
     "dttp_id": "18f35f0b-7042-e811-80ff-3863bb3640b8"
   },
@@ -2309,7 +2374,9 @@ module.exports = [
   },
   {
     "name": "University Centre Quayside",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UCQ"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "418",
     "dttp_id": "243f182c-1425-ec11-b6e6-000d3adf095a"
@@ -2462,12 +2529,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "NCG",
+    "name": "NCG (Newcastle College Group)",
     "suggestion_synonyms": [
-      "Newcatle College Group",
       "Newcastle College"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Newcatle College Group"
+    ],
     "hesa_itt_code": null,
     "dttp_id": "20e5a08c-ee97-e711-80d8-005056ac45bb"
   },

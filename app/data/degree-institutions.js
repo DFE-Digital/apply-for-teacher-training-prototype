@@ -35,7 +35,8 @@ module.exports = [
   {
     "name": "The Open University",
     "suggestion_synonyms": [
-      "OU"
+      "OU",
+      "Open University"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "1",
@@ -65,9 +66,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "The Royal College of Nursing",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Royal College of Nursing",
+    "suggestion_synonyms": [
+      "RCN"
+    ],
+    "match_synonyms": [
+      "The Royal College of Nursing"
+    ],
     "hesa_itt_code": "6",
     "dttp_id": null
   },
@@ -103,6 +108,7 @@ module.exports = [
   {
     "name": "Royal Central School of Speech and Drama",
     "suggestion_synonyms": [
+      "CSSD",
       "University of London"
     ],
     "match_synonyms": [],
@@ -228,18 +234,26 @@ module.exports = [
     "dttp_id": "fc70f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Northampton",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of Northampton",
+    "suggestion_synonyms": [
+      "UON"
+    ],
+    "match_synonyms": [
+      "The University of Northampton"
+    ],
     "hesa_itt_code": "27",
     "dttp_id": "2871f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Newman University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Newman University, Birmingham"
+      "Newman University College"
+    ],
     "hesa_itt_code": "28",
-    "dttp_id": "ec70f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "ec70f34a-2887-e711-80d8-005056ac45bb",
+    "comment": "Name changed in 2013"
   },
   {
     "name": "North Riding College Higher Education Corporation",
@@ -249,9 +263,11 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "Ravensbourne",
+    "name": "Ravensbourne University London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Ravensbourne College of Design and Communication"
+    ],
     "hesa_itt_code": "30",
     "dttp_id": "4ff3791d-7042-e811-80ff-3863bb3640b8"
   },
@@ -267,7 +283,9 @@ module.exports = [
   {
     "name": "Rose Bruford College",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Rose Bruford College of Theatre & Performance"
+    ],
     "hesa_itt_code": "32",
     "dttp_id": "5af3791d-7042-e811-80ff-3863bb3640b8"
   },
@@ -283,14 +301,18 @@ module.exports = [
   },
   {
     "name": "Royal College of Music",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "RCM"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "34",
     "dttp_id": "49e01caa-a141-e811-80ff-3863bb351d40"
   },
   {
     "name": "Royal Northern College of Music",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "RNCM"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "35",
     "dttp_id": "cf3e182c-1425-ec11-b6e6-000d3adf095a"
@@ -564,9 +586,13 @@ module.exports = [
     "dttp_id": "e670f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "Middlesex University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Middlesex University London",
+    "suggestion_synonyms": [
+      "MDX"
+    ],
+    "match_synonyms": [
+      "Middlesex University"
+    ],
     "hesa_itt_code": "67",
     "dttp_id": "e870f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -580,9 +606,11 @@ module.exports = [
     "dttp_id": "f30a4e73-a141-e811-80ff-3863bb351d40"
   },
   {
-    "name": "University of Northumbria at Newcastle",
+    "name": "Northumbria University Newcastle",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Northumbria at Newcastle"
+    ],
     "hesa_itt_code": "69",
     "dttp_id": "2a71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -594,9 +622,13 @@ module.exports = [
     "dttp_id": "235b7f3b-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The Nottingham Trent University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Nottingham Trent University",
+    "suggestion_synonyms": [
+      "NTU"
+    ],
+    "match_synonyms": [
+      "The Nottingham Trent University"
+    ],
     "hesa_itt_code": "71",
     "dttp_id": "ee70f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -615,9 +647,11 @@ module.exports = [
     "dttp_id": "3071f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Portsmouth",
+    "name": "University of Portsmouth",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Portsmouth"
+    ],
     "hesa_itt_code": "74",
     "dttp_id": "3271f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -810,15 +844,24 @@ module.exports = [
   },
   {
     "name": "Queen Margaret University, Edinburgh",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "QMU"
+    ],
+    "match_synonyms": [
+      "Queen Margaret University",
+      "Queen Margaret University College"
+    ],
     "hesa_itt_code": "100",
     "dttp_id": "40f3791d-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "Royal Conservatoire of Scotland",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "RCS"
+    ],
+    "match_synonyms": [
+      "Royal Scottish Academy of Music and Drama"
+    ],
     "hesa_itt_code": "101",
     "dttp_id": null
   },
@@ -837,9 +880,14 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "The Robert Gordon University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Robert Gordon University",
+    "suggestion_synonyms": [
+      "RGU"
+    ],
+    "match_synonyms": [
+      "The Robert Gordon University",
+      "Robert Gordon University, Aberdeen"
+    ],
     "hesa_itt_code": "104",
     "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -1153,9 +1201,12 @@ module.exports = [
   {
     "name": "Queen Mary University of London",
     "suggestion_synonyms": [
-      "QMUL"
+      "QMUL",
+      "QM"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Queen Mary, University of London"
+    ],
     "hesa_itt_code": "139",
     "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -1169,9 +1220,11 @@ module.exports = [
   {
     "name": "Royal Holloway, University of London",
     "suggestion_synonyms": [
-      "RH"
+      "RH",
+      "RHUL"
     ],
     "match_synonyms": [
+      "Royal Holloway",
       "Royal Holloway and Bedford New College"
     ],
     "hesa_itt_code": "141",
@@ -1295,16 +1348,20 @@ module.exports = [
     "dttp_id": "2c71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Oxford",
+    "name": "University of Oxford",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Oxford"
+    ],
     "hesa_itt_code": "156",
     "dttp_id": "2e71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Reading",
+    "name": "University of Reading",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Reading"
+    ],
     "hesa_itt_code": "157",
     "dttp_id": "3471f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1511,9 +1568,13 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "The Queen's University of Belfast",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Queen’s University Belfast",
+    "suggestion_synonyms": [
+      "QUB"
+    ],
+    "match_synonyms": [
+      "The Queen’s University of Belfast"
+    ],
     "hesa_itt_code": "184",
     "dttp_id": "a7db7129-7042-e811-80ff-3863bb3640b8"
   },
@@ -1552,7 +1613,9 @@ module.exports = [
   },
   {
     "name": "Norwich University of the Arts",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "NUA"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "190",
     "dttp_id": "a01c7817-7042-e811-80ff-3863bb3640b8"
@@ -1587,7 +1650,9 @@ module.exports = [
   },
   {
     "name": "Royal Agricultural University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "RAU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "195",
     "dttp_id": null
@@ -1827,7 +1892,9 @@ module.exports = [
   {
     "name": "Plymouth College of Art",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Plymouth College of Art and Design"
+    ],
     "hesa_itt_code": "230",
     "dttp_id": "b53e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2305,8 +2372,13 @@ module.exports = [
   },
   {
     "name": "New College of the Humanities",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "NCH"
+    ],
+    "match_synonyms": [
+      "NCH at Northeastern",
+      "New College of the Humanities at Northeastern"
+    ],
     "hesa_itt_code": "330",
     "dttp_id": "a33e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2631,7 +2703,7 @@ module.exports = [
     "dttp_id": "ef3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "Regent's University London",
+    "name": "Regent’s University London",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "425",

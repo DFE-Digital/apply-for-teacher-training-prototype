@@ -257,7 +257,7 @@ module.exports = [
     "name": "Newman University",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "Newman University, Birmingham"
+      "Newman University, Birmingham",
       "Newman University College"
     ],
     "hesa_itt_code": "28",
@@ -364,7 +364,7 @@ module.exports = [
     "name": "Leeds Trinity University",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "Leeds Trinity & All Saints"
+      "Leeds Trinity & All Saints",
       "Leeds Trinity and All Saints"
     ],
     "hesa_itt_code": "40",
@@ -2548,7 +2548,7 @@ module.exports = [
     "name": "Hartpury University",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "Hartpury College"
+      "Hartpury College",
       "Hartpury University and Hartpury College"
     ],
     "hesa_itt_code": "352",

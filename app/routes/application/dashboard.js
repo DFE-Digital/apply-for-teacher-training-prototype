@@ -89,10 +89,10 @@ module.exports = router => {
             didNotReplyToMessages: true
           },
           qualityOfApplication: {
-            subject_knowledge: 'Understand the purpose of primary education and then learn more about the procedures related to safeguarding.'
+            subjectKnowledge: 'Understand the purpose of primary education and then learn more about the procedures related to safeguarding.'
           },
           qualifications: {
-            degree_does_not_meet_requirements: true
+            degreeDoesNotMeetRequirements: true
           }
         }
         choices.ABCDE.rejectedByDefault = false
@@ -101,7 +101,7 @@ module.exports = router => {
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.hasFeedback = true
         choices.ABCDE.feedback = {
-          course_full: true
+          courseFull: true
         }
         choices.ABCDE.rejectedByDefault = false
         break
@@ -221,7 +221,7 @@ module.exports = router => {
         }]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          course_full: true
+          courseFull: true
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
@@ -284,7 +284,7 @@ module.exports = router => {
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          course_full: true
+          courseFull: true
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false

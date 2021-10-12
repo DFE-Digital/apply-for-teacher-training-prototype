@@ -1,8 +1,8 @@
-{% if item.feedback.course_full %}
+{% if item.feedback.courseFull %}
 <p class="govuk-body">The course you applied to was full.</p>
 {% endif %}
 
-{% if item.feedback.rejected_by_default %}
+{% if item.feedback.rejectedByDefault %}
 <p class="govuk-body">Provider did not respond in time.</p>
 {% endif %}
 
@@ -82,7 +82,7 @@
       <p class="govuk-body">No degree.</p>
     {% endif %}
 
-    {% if item.feedback.qualifications.degree_does_not_meet_requirements %}
+    {% if item.feedback.qualifications.degreeDoesNotMeetRequirements %}
       <p class="govuk-body">Degree does not meet course requirements.</p>
     {% endif %}
 

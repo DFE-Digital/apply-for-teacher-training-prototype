@@ -133,15 +133,20 @@ module.exports = [
   },
   {
     "name": "York St John University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "YSJU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "13",
     "dttp_id": "4c71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Plymouth Marjon University",
-    "suggestion_synonyms": ["University of St Mark and St John"],
-    "match_synonyms": [],
+    "suggestion_synonyms": [],
+    "match_synonyms": [
+      "University of St Mark and St John",
+      "University of Saint Mark and Saint John"
+    ],
     "hesa_itt_code": "14",
     "dttp_id": "3a71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -192,9 +197,11 @@ module.exports = [
     "dttp_id": "2f6e5e11-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Winchester",
+    "name": "University of Winchester",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Winchester"
+    ],
     "hesa_itt_code": "21",
     "dttp_id": "4471f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -214,7 +221,9 @@ module.exports = [
   },
   {
     "name": "University of the Arts London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UAL"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "24",
     "dttp_id": "ca781c39-3fa2-e811-812b-5065f38ba241"
@@ -325,11 +334,15 @@ module.exports = [
     "dttp_id": "81407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Southampton Solent University",
+    "name": "Solent University, Southampton",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Solent University",
+      "Southampton Solent University"
+    ],
     "hesa_itt_code": "37",
-    "dttp_id": "c10b1d33-3fa2-e811-812b-5065f38ba241"
+    "dttp_id": "c10b1d33-3fa2-e811-812b-5065f38ba241",
+    "comment": "Name changed to Solent University in 2018"
   },
   {
     "name": "University of Cumbria",
@@ -341,7 +354,9 @@ module.exports = [
   {
     "name": "St Mary’s University, Twickenham",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Saint Mary’s University, Twickenham"
+    ],
     "hesa_itt_code": "39",
     "dttp_id": "f670f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -358,7 +373,9 @@ module.exports = [
   {
     "name": "Trinity Laban Conservatoire of Music and Dance",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Trinity Laban Conservatoire of Music & Dance"
+    ],
     "hesa_itt_code": "41",
     "dttp_id": "054b9247-7042-e811-80ff-3863bb3640b8"
   },
@@ -657,7 +674,9 @@ module.exports = [
   },
   {
     "name": "Sheffield Hallam University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "SHU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "75",
     "dttp_id": "f470f34a-2887-e711-80d8-005056ac45bb"
@@ -679,9 +698,11 @@ module.exports = [
     "dttp_id": "f870f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Sunderland",
+    "name": "University of Sunderland",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Sunderland"
+    ],
     "hesa_itt_code": "78",
     "dttp_id": "3c71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -693,16 +714,24 @@ module.exports = [
     "dttp_id": "2a96fc9d-a141-e811-80ff-3863bb351d40"
   },
   {
-    "name": "The University of West London",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of West London",
+    "suggestion_synonyms": [
+      "UWL"
+    ],
+    "match_synonyms": [
+      "The University of West London"
+    ],
     "hesa_itt_code": "80",
     "dttp_id": "84228041-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "University of the West of England, Bristol",
-    "suggestion_synonyms": ["UWE Bristol"],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "UWE"
+    ],
+    "match_synonyms": [
+      "UWE Bristol"
+    ],
     "hesa_itt_code": "81",
     "dttp_id": "4071f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -717,23 +746,30 @@ module.exports = [
     "dttp_id": "0a71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Westminster",
+    "name": "University of Westminster",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Westminster"
+    ],
     "hesa_itt_code": "83",
     "dttp_id": "7eda4db6-a141-e811-80ff-3863bb351d40"
   },
   {
-    "name": "Wimbledon School of Art",
+    "name": "Wimbledon College of Arts",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Wimbledon School of Art"
+    ],
     "hesa_itt_code": "84",
-    "dttp_id": "cb23a753-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "cb23a753-7042-e811-80ff-3863bb3640b8",
+    "comment": "Constituent college of UAL - not degree awarding"
   },
   {
-    "name": "The University of Wolverhampton",
+    "name": "University of Wolverhampton",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Wolverhampton"
+    ],
     "hesa_itt_code": "85",
     "dttp_id": "4671f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -778,10 +814,16 @@ module.exports = [
   },
   {
     "name": "University of South Wales",
-    "suggestion_synonyms": ["University of Glamorgan"],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "University of Glamorgan",
+      "University of Wales, Newport"
+    ],
+    "match_synonyms": [
+      "Prifysgol De Cymru"
+    ],
     "hesa_itt_code": "90",
-    "dttp_id": "8723a753-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "8723a753-7042-e811-80ff-3863bb3640b8",
+    "comment": "Formed in 2013 from merger of Universities of Glamorgan and University of Wales, Newport"
   },
   {
     "name": "Swansea Metropolitan University",
@@ -795,7 +837,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "92",
-    "dttp_id": "0e4b9247-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "0e4b9247-7042-e811-80ff-3863bb3640b8",
+    "closed": "2010"
   },
   {
     "name": "Duncan of Jordanstone College of Art",
@@ -892,11 +935,17 @@ module.exports = [
     "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "The University of the West of Scotland",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of the West of Scotland",
+    "suggestion_synonyms": [
+      "UWS"
+    ],
+    "match_synonyms": [
+      "University of Paisley",
+      "The University of the West of Scotland"
+    ],
     "hesa_itt_code": "105",
-    "dttp_id": "1a3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "1a3f182c-1425-ec11-b6e6-000d3adf095a",
+    "comment": "Name changed in 2007"
   },
   {
     "name": "Glasgow Caledonian University",
@@ -1257,12 +1306,12 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "St George's, University of London",
+    "name": "St George’s, University of London",
     "suggestion_synonyms": [
       "SGUL"
     ],
     "match_synonyms": [
-      "St George's Hospital Medical School"
+      "St George’s Hospital Medical School"
     ],
     "hesa_itt_code": "145",
     "dttp_id": "94407223-7042-e811-80ff-3863bb3640b8"
@@ -1271,7 +1320,8 @@ module.exports = [
     "name": "SOAS, University of London",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "The School of Oriental and African Studies"
+      "The School of Oriental and African Studies",
+      "School of Oriental and African Studies"
     ],
     "hesa_itt_code": "146",
     "dttp_id": "bddb7129-7042-e811-80ff-3863bb3640b8"
@@ -1366,30 +1416,43 @@ module.exports = [
     "dttp_id": "3471f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Salford",
+    "name": "University of Salford",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Salford"
+    ],
     "hesa_itt_code": "158",
     "dttp_id": "425b7f3b-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "The University of Sheffield",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "TUOS",
+      "Sheffield University"
+    ],
+    "match_synonyms": [
+      "University of Sheffield"
+    ],
     "hesa_itt_code": "159",
     "dttp_id": "3671f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Southampton",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of Southampton",
+    "suggestion_synonyms": [
+      "SOTON"
+    ],
+    "match_synonyms": [
+      "The University of Southampton"
+    ],
     "hesa_itt_code": "160",
     "dttp_id": "4f5b7f3b-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Surrey",
+    "name": "University of Surrey",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Surrey"
+    ],
     "hesa_itt_code": "161",
     "dttp_id": "58228041-7042-e811-80ff-3863bb3640b8"
   },
@@ -1403,16 +1466,20 @@ module.exports = [
     "dttp_id": "3e71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Warwick",
+    "name": "University of Warwick",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Warwick"
+    ],
     "hesa_itt_code": "163",
     "dttp_id": "4271f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of York",
+    "name": "University of York",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of York"
+    ],
     "hesa_itt_code": "164",
     "dttp_id": "4a71f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1440,9 +1507,12 @@ module.exports = [
     "dttp_id": "6ceb7735-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Strathclyde",
+    "name": "University of Strathclyde",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Strathclyde",
+      "University of Strathclyde, Glasgow"
+    ],
     "hesa_itt_code": "169",
     "dttp_id": "42228041-7042-e811-80ff-3863bb3640b8"
   },
@@ -1474,16 +1544,22 @@ module.exports = [
     "dttp_id": "bbed6e2f-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of St Andrews",
+    "name": "University of St Andrews",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of St Andrews",
+      "The University of Saint Andrews",
+      "University of Saint Andrews"
+    ],
     "hesa_itt_code": "173",
     "dttp_id": "34228041-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Stirling",
+    "name": "University of Stirling",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Stirling"
+    ],
     "hesa_itt_code": "174",
     "dttp_id": "3b228041-7042-e811-80ff-3863bb3640b8"
   },
@@ -1496,8 +1572,13 @@ module.exports = [
   },
   {
     "name": "University of Wales Trinity Saint David",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "UWTSD"
+    ],
+    "match_synonyms": [
+      "Prifysgol Cymru Y Drindod Dewi Sant",
+      "University of Wales Trinity St David"
+    ],
     "hesa_itt_code": "176",
     "dttp_id": "b123a753-7042-e811-80ff-3863bb3640b8"
   },
@@ -1539,10 +1620,11 @@ module.exports = [
   },
   {
     "name": "Swansea University",
-    "suggestion_synonyms": [
+    "suggestion_synonyms": [],
+    "match_synonyms": [
+      "Prifysgol Abertawe",
       "University of Wales, Swansea"
-    ],
-    "match_synonyms": [],
+      ],
     "hesa_itt_code": "180",
     "dttp_id": "b3407223-7042-e811-80ff-3863bb3640b8"
   },
@@ -1579,9 +1661,11 @@ module.exports = [
     "dttp_id": "a7db7129-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "University of Ulster",
+    "name": "Ulster University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Ulster"
+    ],
     "hesa_itt_code": "185",
     "dttp_id": "a823a753-7042-e811-80ff-3863bb3640b8"
   },
@@ -1605,9 +1689,11 @@ module.exports = [
     "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "Writtle College",
+    "name": "Writtle University College",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Writtle College"
+    ],
     "hesa_itt_code": "189",
     "dttp_id": "d723a753-7042-e811-80ff-3863bb3640b8"
   },
@@ -1642,11 +1728,14 @@ module.exports = [
     "dttp_id": "df3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "St Mary's University College",
+    "name": "St Mary’s University College, Belfast",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "St Mary’s University College"
+    ],
     "hesa_itt_code": "194",
-    "dttp_id": "9b407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "9b407223-7042-e811-80ff-3863bb3640b8",
+    "comment": "Does not seem to be degree awarding"
   },
   {
     "name": "Royal Agricultural University",
@@ -1785,7 +1874,9 @@ module.exports = [
   },
   {
     "name": "University of Suffolk",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UOS"
+    ],
     "match_synonyms": [
       "University Campus Suffolk"
     ],
@@ -2190,7 +2281,9 @@ module.exports = [
   },
   {
     "name": "University College of Estate Management",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UCEM"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "294",
     "dttp_id": "263f182c-1425-ec11-b6e6-000d3adf095a"
@@ -2427,9 +2520,13 @@ module.exports = [
     "dttp_id": "4b3e182c-1425-ec11-b6e6-000d3adf095a"
   },
   {
-    "name": "The University College of Osteopathy",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University College of Osteopathy",
+    "suggestion_synonyms": [
+      "UCO"
+    ],
+    "match_synonyms": [
+      "The University College of Osteopathy"
+    ],
     "hesa_itt_code": "337",
     "dttp_id": "163f182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2822,9 +2919,13 @@ module.exports = [
     "name": "University of Wales",
     "suggestion_synonyms": [
     ],
-    "match_synonyms": ["University of Wales (central functions)"],
+    "match_synonyms": [
+      "Prifysgol Cymru",
+      "University of Wales (central functions)"
+    ],
     "hesa_itt_code": null,
-    "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8",
+    "closed": "2017"
   },
   {
     "name": "University of Glamorgan",

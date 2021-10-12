@@ -165,7 +165,9 @@ module.exports = [
   {
     "name": "Harper Adams University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Harper Adams"
+    ],
     "hesa_itt_code": "18",
     "dttp_id": "1b369414-75d9-e911-a863-000d3ab0da57"
   },
@@ -324,7 +326,10 @@ module.exports = [
   {
     "name": "Leeds Trinity University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Leeds Trinity & All Saints"
+      "Leeds Trinity and All Saints"
+    ],
     "hesa_itt_code": "40",
     "dttp_id": "da70f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -427,9 +432,13 @@ module.exports = [
     "comment": "Renamed from 'University of Central England in Birmingham' in 2007."
   },
   {
-    "name": "The University of Central Lancashire",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "University of Central Lancashire",
+    "suggestion_synonyms": [
+      "UCLan"
+    ],
+    "match_synonyms": [
+      "The University of Central Lancashire"
+    ],
     "hesa_itt_code": "53",
     "dttp_id": "59e01caa-a141-e811-80ff-3863bb351d40"
   },
@@ -473,58 +482,84 @@ module.exports = [
     "dttp_id": "1471f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Greenwich",
+    "name": "University of Greenwich",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Greenwich"
+    ],
     "hesa_itt_code": "59",
     "dttp_id": "1a71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "University of Hertfordshire",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UH",
+      "UOH",
+      "Herts"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "60",
     "dttp_id": "1c71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Huddersfield",
+    "name": "University of Huddersfield",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Huddersfield",
+      "Huddersfield University"
+    ],
     "hesa_itt_code": "61",
     "dttp_id": "1e71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Lincoln",
+    "name": "University of Lincoln",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Lincoln"
+    ],
     "hesa_itt_code": "62",
     "dttp_id": "035b7f3b-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "Kingston University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Kingston University London"
+    ],
     "hesa_itt_code": "63",
     "dttp_id": "d670f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Leeds Beckett University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "LBU",
+      "LMU"
+    ],
+    "match_synonyms": [
+      "Leeds Beckett",
+      "Leeds Metropolitan University"
+    ],
     "hesa_itt_code": "64",
-    "dttp_id": "d870f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "d870f34a-2887-e711-80d8-005056ac45bb",
+    "comment": "Name changed from Leeds Metropolitan in 2013"
   },
   {
     "name": "Liverpool John Moores University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "LJMU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "65",
     "dttp_id": "de70f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The Manchester Metropolitan University",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "name": "Manchester Metropolitan University",
+    "suggestion_synonyms": [
+      "MMU"
+    ],
+    "match_synonyms": [
+      "The Manchester Metropolitan University"
+    ],
     "hesa_itt_code": "66",
     "dttp_id": "e670f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -595,7 +630,9 @@ module.exports = [
   },
   {
     "name": "London South Bank University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "LSBU"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "76",
     "dttp_id": "e270f34a-2887-e711-80d8-005056ac45bb"
@@ -674,11 +711,19 @@ module.exports = [
     "dttp_id": "73228041-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Glyndŵr University",
+    "name": "Wrexham Glyndŵr University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Glyndŵr University",
+      "Glyndwr University",
+      "Prifysgol Glyndŵr",
+      "Prifysgol Glyndwr",
+      "Prifysgol Glyndŵr Wrecsam",
+      "Prifysgol Glyndwr Wrecsam"
+      ],
     "hesa_itt_code": "87",
-    "dttp_id": "57f35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "57f35f0b-7042-e811-80ff-3863bb3640b8",
+    "comment": "Name changed from Glyndŵr University in 2016"
   },
   {
     "name": "Coleg Normal",
@@ -807,7 +852,10 @@ module.exports = [
   },
   {
     "name": "Glasgow Caledonian University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "GCU",
+      "Caley"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "106",
     "dttp_id": "473e182c-1425-ec11-b6e6-000d3adf095a"
@@ -934,9 +982,11 @@ module.exports = [
     "dttp_id": "1671f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Hull",
+    "name": "University of Hull",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Hull"
+      ],
     "hesa_itt_code": "120",
     "dttp_id": "2071f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -944,43 +994,54 @@ module.exports = [
     "name": "Keele University",
     "suggestion_synonyms": [],
     "match_synonyms": [
+      "University of Keele",
       "The University of Keele"
     ],
     "hesa_itt_code": "121",
     "dttp_id": "3a7af34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Kent",
+    "name": "University of Kent",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Kent"
+    ],
     "hesa_itt_code": "122",
     "dttp_id": "99eb7735-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Lancaster",
+    "name": "Lancaster University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Lancaster",
+      "The University of Lancaster"
+    ],
     "hesa_itt_code": "123",
     "dttp_id": "a4eb7735-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Leeds",
+    "name": "University of Leeds",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Leeds"],
     "hesa_itt_code": "124",
     "dttp_id": "2271f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Leicester",
+    "name": "University of Leicester",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Leicester"
+    ],
     "hesa_itt_code": "125",
     "dttp_id": "2471f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The University of Liverpool",
+    "name": "University of Liverpool",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Liverpool"
+    ],
     "hesa_itt_code": "126",
     "dttp_id": "f58f17b0-a141-e811-80ff-3863bb351d40"
   },
@@ -1023,9 +1084,12 @@ module.exports = [
     "dttp_id": "d270f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "Imperial College of Science, Technology and Medicine",
+    "name": "Imperial College London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Imperial College of Science, Technology and Medicine",
+      "Imperial College"
+    ],
     "hesa_itt_code": "132",
     "dttp_id": "0b9017b0-a141-e811-80ff-3863bb351d40"
   },
@@ -1037,7 +1101,7 @@ module.exports = [
     "dttp_id": "dcd0c9d6-e897-e711-80d8-005056ac45bb"
   },
   {
-    "name": "King's College London",
+    "name": "King’s College London",
     "suggestion_synonyms": [
       "KCL",
       "University of London"
@@ -1310,9 +1374,11 @@ module.exports = [
     "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The University of Glasgow",
+    "name": "University of Glasgow",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Glasgow"
+    ],
     "hesa_itt_code": "168",
     "dttp_id": "6ceb7735-7042-e811-80ff-3863bb3640b8"
   },
@@ -1335,7 +1401,9 @@ module.exports = [
   {
     "name": "Heriot-Watt University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Heriot Watt University"
+    ],
     "hesa_itt_code": "171",
     "dttp_id": "146e5e11-7042-e811-80ff-3863bb3640b8"
   },
@@ -1469,7 +1537,9 @@ module.exports = [
       "ICR",
       "University of London"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Institute of Cancer Research"
+    ],
     "hesa_itt_code": "188",
     "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -1524,7 +1594,9 @@ module.exports = [
   },
   {
     "name": "University of the Highlands and Islands",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "UHI"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "196",
     "dttp_id": "283f182c-1425-ec11-b6e6-000d3adf095a"
@@ -1578,7 +1650,9 @@ module.exports = [
   {
     "name": "London Metropolitan University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "London Met"
+    ],
     "hesa_itt_code": "202",
     "dttp_id": "e070f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1596,12 +1670,15 @@ module.exports = [
   {
     "name": "The University of Manchester",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of Manchester"
+    ],
     "hesa_itt_code": "204",
     "dttp_id": "2671f34a-2887-e711-80d8-005056ac45bb"
   },
   {
     "name": "Heythrop College",
+    "closed": "2019",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "205",
@@ -1627,7 +1704,9 @@ module.exports = [
   },
   {
     "name": "Guildhall School of Music and Drama",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "GSMD"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "208",
     "dttp_id": "076e5e11-7042-e811-80ff-3863bb3640b8"
@@ -1650,11 +1729,14 @@ module.exports = [
     "comment": "Renamed from University Campus Suffolk to University of Suffolk in 2016"
   },
   {
-    "name": "Leeds College of Art",
+    "name": "Leeds Arts University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Leeds College of Art"
+    ],
     "hesa_itt_code": "211",
-    "dttp_id": "436e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "436e5e11-7042-e811-80ff-3863bb3640b8",
+    "comment": "Became a university and changed name in 2017"
   },
   {
     "name": "AECC University College",
@@ -1674,8 +1756,13 @@ module.exports = [
   },
   {
     "name": "The London Institute of Banking & Finance",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "suggestion_synonyms": [
+      "LIBF"
+    ],
+    "match_synonyms": [
+      "London Institute of Banking and Finance",
+      "London Institute of Banking & Finance"
+    ],
     "hesa_itt_code": "217",
     "dttp_id": "fe3e182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -1723,7 +1810,9 @@ module.exports = [
   },
   {
     "name": "Liverpool School of Tropical Medicine",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "LSTM"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "228",
     "dttp_id": "753e182c-1425-ec11-b6e6-000d3adf095a"
@@ -2289,7 +2378,10 @@ module.exports = [
   {
     "name": "Hartpury University",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Hartpury College"
+      "Hartpury University and Hartpury College"
+    ],
     "hesa_itt_code": "352",
     "dttp_id": "533e182c-1425-ec11-b6e6-000d3adf095a"
   },

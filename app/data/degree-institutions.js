@@ -1073,7 +1073,7 @@ module.exports = [
   {
     "name": "London School of Hygiene and Tropical Medicine",
     "suggestion_synonyms": [
-      "LSHTM"
+      "LSHTM",
       "University of London"
     ],
     "match_synonyms": [
@@ -1118,7 +1118,7 @@ module.exports = [
   {
     "name": "Royal Veterinary College",
     "suggestion_synonyms": [
-      "RVC"
+      "RVC",
       "University of London"
     ],
     "match_synonyms": [

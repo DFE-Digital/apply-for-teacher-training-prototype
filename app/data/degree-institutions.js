@@ -990,7 +990,7 @@ module.exports = [
     "name": "University of Birmingham",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "The University of Birmingham",
+      "The University of Birmingham"
     ],
     "hesa_itt_code": "110",
     "dttp_id": "fe70f34a-2887-e711-80d8-005056ac45bb"

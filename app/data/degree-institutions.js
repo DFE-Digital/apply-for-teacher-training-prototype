@@ -24,13 +24,16 @@
 //
 // Autocompletes, searches or other lookup tools can combine both lists.
 //
-// The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
-// These are not necessarily unique, as two institutions may map to the same ID.
-//
 // The hesa_itt_code is used for reporting ITT data to the Higher Education Statistics
 // Agency (HESA) in the DEGEST field - see reference here:
 // https://www.hesa.ac.uk/collection/c21053/e/degest
 //
+// The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
+// These are not necessarily unique, as two institutions may map to the same ID.
+//
+// Closed refers to where the institution has since closed and is new graduates will no longer get 
+// degrees from it.
+
 module.exports = [
   {
     "name": "The Open University",

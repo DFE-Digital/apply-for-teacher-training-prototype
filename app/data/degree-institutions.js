@@ -1900,7 +1900,9 @@ module.exports = [
   {
     "name": "AECC University College",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Anglo-European College of Chiropractic"
+    ],
     "hesa_itt_code": "213",
     "dttp_id": "fa3d182c-1425-ec11-b6e6-000d3adf095a"
   },

@@ -186,7 +186,10 @@ module.exports = [
     "hesa_itt_code": "20",
     "dttp_id": "2f6e5e11-7042-e811-80ff-3863bb3640b8",
     "closed": "2008",
-    "comment": "Closed in 2008 to become the University for the creative arts"
+    "comment": "Closed in 2008 to become the University for the creative arts",
+    "highest_level_of_degree_awarded": "Not applicable",
+    "ukprn": "10003574",
+    "urn": "133847"
   },
   {
     "name": "University of Winchester",
@@ -332,7 +335,9 @@ module.exports = [
     "hesa_itt_code": "36",
     "dttp_id": "81407223-7042-e811-80ff-3863bb3640b8",
     "closed": "1996",
-    "comment": "Merged with University of Salford in 1996"
+    "comment": "Merged with University of Salford in 1996",
+    "highest_level_of_degree_awarded": "Not applicable",
+    "ukprn": null
   },
   {
     "name": "Solent University, Southampton",
@@ -398,7 +403,8 @@ module.exports = [
     "hesa_itt_code": "44",
     "dttp_id": "c4db7129-7042-e811-80ff-3863bb3640b8",
     "closed": "2005",
-    "comment": "It merged with the Kent Institute of Art & Design on August 1, 2005 to form the University College for the Creative Arts (now University for the Creative Arts)"
+    "comment": "It merged with the Kent Institute of Art & Design on August 1, 2005 to form the University College for the Creative Arts (now University for the Creative Arts)",
+    "ukprn": null
   },
   {
     "name": "University of Worcester",
@@ -504,8 +510,9 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "55",
     "dttp_id": "711c7817-7042-e811-80ff-3863bb3640b8",
-    "closed": "2012",
-    "comment": "On 1 August 2002, it merged with the University of North London to form London Metropolitan University."
+    "closed": "2002",
+    "comment": "On 1 August 2002, it merged with the University of North London to form London Metropolitan University.",
+    "ukprn": null
   },
   {
     "name": "Coventry University",
@@ -679,7 +686,8 @@ module.exports = [
     "hesa_itt_code": "70",
     "dttp_id": "235b7f3b-7042-e811-80ff-3863bb3640b8",
     "closed": "2002",
-    "comment": "UNL existed until 2002, when it merged with London Guildhall University to form London Metropolitan University"
+    "comment": "UNL existed until 2002, when it merged with London Guildhall University to form London Metropolitan University",
+    "ukprn": null
   },
   {
     "name": "Nottingham Trent University",
@@ -839,7 +847,10 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "86",
-    "dttp_id": "73228041-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "73228041-7042-e811-80ff-3863bb3640b8",
+    "closed": "2013",
+    "comment": "Merged with the University of Glamorgan in 2013 to become the University of South Wales",
+    "ukprn": "10007853"
   },
   {
     "name": "Wrexham Glyndŵr University",
@@ -854,7 +865,8 @@ module.exports = [
     ],
     "hesa_itt_code": "87",
     "dttp_id": "57f35f0b-7042-e811-80ff-3863bb3640b8",
-    "comment": "Name changed from Glyndŵr University in 2016"
+    "comment": "Name changed from Glyndŵr University in 2016",
+    "ukprn": "10007833"
   },
   {
     "name": "Cardiff Metropolitan University",
@@ -864,7 +876,8 @@ module.exports = [
       "University of Wales Institute, Cardiff"
     ],
     "hesa_itt_code": "89",
-    "dttp_id": "07f35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "07f35f0b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007854"
   },
   {
     "name": "University of South Wales",
@@ -878,7 +891,8 @@ module.exports = [
     ],
     "hesa_itt_code": "90",
     "dttp_id": "8723a753-7042-e811-80ff-3863bb3640b8",
-    "comment": "Formed in 2013 from merger of Universities of Glamorgan and University of Wales, Newport"
+    "comment": "Formed in 2013 from merger of Universities of Glamorgan and University of Wales, Newport",
+    "ukprn": "10007793"
   },
   {
     "name": "Swansea Metropolitan University",
@@ -887,7 +901,8 @@ module.exports = [
     "hesa_itt_code": "91",
     "dttp_id": null,
     "closed": "2013",
-    "comment": "The university merged with, and became a constituent campus of, the University of Wales Trinity Saint David on 1 August 2013."
+    "comment": "The university merged with, and became a constituent campus of, the University of Wales Trinity Saint David on 1 August 2013.",
+    "ukprn": "10007846"
   },
   {
     "name": "Trinity University College",
@@ -895,7 +910,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "92",
     "dttp_id": "0e4b9247-7042-e811-80ff-3863bb3640b8",
-    "closed": "2010"
+    "closed": "2010",
+    "ukprn": "10007048"
   },
   {
     "name": "Abertay University",
@@ -905,14 +921,16 @@ module.exports = [
     ],
     "hesa_itt_code": "95",
     "dttp_id": null,
-    "comment": "Renamed from University of Abertay Dundee in September 2019"
+    "comment": "Renamed from University of Abertay Dundee in September 2019",
+    "ukprn": "10007849"
   },
   {
     "name": "Glasgow School of Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "97",
-    "dttp_id": "51f35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "51f35f0b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10002681"
   },
   {
     "name": "Queen Margaret University, Edinburgh",
@@ -924,7 +942,8 @@ module.exports = [
       "Queen Margaret University College"
     ],
     "hesa_itt_code": "100",
-    "dttp_id": "40f3791d-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "40f3791d-7042-e811-80ff-3863bb3640b8",
+    "ukrprn": "10005337"
   },
   {
     "name": "Royal Conservatoire of Scotland",
@@ -935,7 +954,8 @@ module.exports = [
       "Royal Scottish Academy of Music and Drama"
     ],
     "hesa_itt_code": "101",
-    "dttp_id": null
+    "dttp_id": null,
+    "ukprn": "10005561"
   },
   {
     "name": "Robert Gordon University",
@@ -947,7 +967,8 @@ module.exports = [
       "Robert Gordon University, Aberdeen"
     ],
     "hesa_itt_code": "104",
-    "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "c93e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10005500"
   },
   {
     "name": "University of the West of Scotland",
@@ -960,7 +981,8 @@ module.exports = [
     ],
     "hesa_itt_code": "105",
     "dttp_id": "1a3f182c-1425-ec11-b6e6-000d3adf095a",
-    "comment": "Name changed in 2007"
+    "comment": "Name changed in 2007",
+    "ukprn": "10007800"
   },
   {
     "name": "Glasgow Caledonian University",
@@ -970,7 +992,8 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "106",
-    "dttp_id": "473e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "473e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10007762"
   },
   {
     "name": "Edinburgh Napier University",
@@ -980,7 +1003,8 @@ module.exports = [
     ],
     "hesa_itt_code": "107",
     "dttp_id": "43f35f0b-7042-e811-80ff-3863bb3640b8",
-    "comment": "Name changed in 2009"
+    "comment": "Name changed in 2009",
+    "ukprn": "10007772"
   },
   {
     "name": "Aston University",
@@ -1247,13 +1271,6 @@ module.exports = [
     "highest_level_of_degree_awarded": "Research"
   },
   {
-    "name": "Institute of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "133",
-    "dttp_id": "dcd0c9d6-e897-e711-80d8-005056ac45bb"
-  },
-  {
     "name": "King’s College London",
     "suggestion_synonyms": [
       "KCL",
@@ -1351,13 +1368,6 @@ module.exports = [
     "dttp_id": "b6db7129-7042-e811-80ff-3863bb3640b8",
     "ukprn": "10007779",
     "highest_level_of_degree_awarded": "Research"
-  },
-  {
-    "name": "St Bartholomew's Hospital Medical College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "144",
-    "dttp_id": null
   },
   {
     "name": "St George’s, University of London",

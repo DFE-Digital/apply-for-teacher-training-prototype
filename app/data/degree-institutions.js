@@ -1759,7 +1759,8 @@ module.exports = [
       "The Queen’s University of Belfast"
     ],
     "hesa_itt_code": "184",
-    "dttp_id": "a7db7129-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "a7db7129-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10005343"
   },
   {
     "name": "Ulster University",
@@ -1768,7 +1769,8 @@ module.exports = [
       "University of Ulster"
     ],
     "hesa_itt_code": "185",
-    "dttp_id": "a823a753-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "a823a753-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007807"
   },
   {
     "name": "The Institute of Cancer Research",
@@ -1812,14 +1814,16 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "192",
     "dttp_id": "2ef35f0b-7042-e811-80ff-3863bb3640b8",
-    "closed": "2017"
+    "closed": "2017",
+    "ukprn": "10001802"
   },
   {
     "name": "Stranmillis University College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "193",
-    "dttp_id": "df3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "df3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10008010"
   },
   {
     "name": "St Mary’s University College, Belfast",
@@ -1829,7 +1833,8 @@ module.exports = [
     ],
     "hesa_itt_code": "194",
     "dttp_id": "9b407223-7042-e811-80ff-3863bb3640b8",
-    "comment": "Does not seem to be degree awarding"
+    "comment": "Does not seem to be degree awarding",
+    "ukprn": "10008026"
   },
   {
     "name": "Royal Agricultural University",

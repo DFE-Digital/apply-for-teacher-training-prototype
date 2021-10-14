@@ -751,12 +751,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "91",
     "dttp_id": null,
-<<<<<<< HEAD
     "closed": "2013",
     "comment": "The university merged with, and became a constituent campus of, the University of Wales Trinity Saint David on 1 August 2013."
-=======
-    "closed": "2013"
->>>>>>> 16ce982b730810111ec121e7d3e32c95f4ad2319
   },
   {
     "name": "Trinity University College",
@@ -878,7 +874,9 @@ module.exports = [
   },
   {
     "name": "University of Bradford",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Leeds Conservatoire"
+    ],
     "match_synonyms": [
       "The University of Bradford"
     ],
@@ -966,7 +964,9 @@ module.exports = [
   },
   {
     "name": "University of Hull",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Leeds Conservatoire"
+    ],
     "match_synonyms": [
       "The University of Hull"
       ],
@@ -985,7 +985,10 @@ module.exports = [
   },
   {
     "name": "University of Kent",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern School of Contemporary Dance",
+      "NSCD"
+    ],
     "match_synonyms": [
       "The University of Kent"
     ],
@@ -1396,7 +1399,9 @@ module.exports = [
   },
   {
     "name": "University of Strathclyde",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Bell College"
+    ],
     "match_synonyms": [
       "The University of Strathclyde",
       "University of Strathclyde, Glasgow"
@@ -1600,18 +1605,12 @@ module.exports = [
     "dttp_id": "a01c7817-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Northern School of Contemporary Dance",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "191",
-    "dttp_id": "9a1c7817-7042-e811-80ff-3863bb3640b8"
-  },
-  {
     "name": "Cumbria Institute of the Arts",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "192",
-    "dttp_id": "2ef35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "2ef35f0b-7042-e811-80ff-3863bb3640b8",
+    "closed": "2017"
   },
   {
     "name": "Stranmillis University College",
@@ -1662,15 +1661,11 @@ module.exports = [
     "dttp_id": "c6407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Bell College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "198",
-    "dttp_id": null
-  },
-  {
     "name": "Conservatoire for Dance and Drama",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern School of Contemporary Dance",
+      "NSCD"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "199",
     "dttp_id": "2f3e182c-1425-ec11-b6e6-000d3adf095a"
@@ -1729,7 +1724,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "205",
-    "dttp_id": "1b6e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "1b6e5e11-7042-e811-80ff-3863bb3640b8",
+    "closed": "2018"
   },
   {
     "name": "University for the Creative Arts",
@@ -1741,13 +1737,6 @@ module.exports = [
     ],
     "hesa_itt_code": "206",
     "dttp_id": "354b9247-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Leeds College of Music",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "207",
-    "dttp_id": "496e5e11-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "Guildhall School of Music and Drama",
@@ -2802,6 +2791,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "9065",
     "dttp_id": null,
+    "closed": "1993",
     "comment": "The Council for National Academic Awards (CNAA) was the national degree-awarding authority in the United Kingdom from 1965 until its dissolution on 20 April 1993"
   },
   {

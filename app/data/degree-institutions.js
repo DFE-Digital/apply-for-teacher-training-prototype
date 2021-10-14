@@ -62,13 +62,6 @@ module.exports = [
     "dttp_id": "64407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The College of Guidance Studies",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "4",
-    "dttp_id": null
-  },
-  {
     "name": "Royal College of Nursing",
     "suggestion_synonyms": [
       "RCN"

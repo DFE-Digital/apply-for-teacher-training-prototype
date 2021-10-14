@@ -1370,13 +1370,6 @@ module.exports = [
     "highest_level_of_degree_awarded": "Research"
   },
   {
-    "name": "St Bartholomew's Hospital Medical College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "144",
-    "dttp_id": null
-  },
-  {
     "name": "St George’s, University of London",
     "suggestion_synonyms": [
       "SGUL"
@@ -1399,13 +1392,6 @@ module.exports = [
     "dttp_id": "bddb7129-7042-e811-80ff-3863bb3640b8",
     "ukprn": "10007780",
     "highest_level_of_degree_awarded": "Research"
-  },
-  {
-    "name": "The School of Pharmacy",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "147",
-    "dttp_id": null
   },
   {
     "name": "University College London",

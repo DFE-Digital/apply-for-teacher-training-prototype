@@ -538,7 +538,9 @@ module.exports = [
   },
   {
     "name": "University of Huddersfield",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern College for Residential and Community Adult Education"
+    ],
     "match_synonyms": [
       "The University of Huddersfield",
       "Huddersfield University"
@@ -838,13 +840,6 @@ module.exports = [
     "closed": "2010"
   },
   {
-    "name": "Duncan of Jordanstone College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "94",
-    "dttp_id": null
-  },
-  {
     "name": "Abertay University",
     "suggestion_synonyms": [],
     "match_synonyms": [
@@ -855,32 +850,11 @@ module.exports = [
     "comment": "Renamed from University of Abertay Dundee in September 2019"
   },
   {
-    "name": "Edinburgh College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "96",
-    "dttp_id": null
-  },
-  {
     "name": "Glasgow School of Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "97",
     "dttp_id": "51f35f0b-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Moray House Institute of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "98",
-    "dttp_id": null
-  },
-  {
-    "name": "Northern College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "99",
-    "dttp_id": null
   },
   {
     "name": "Queen Margaret University, Edinburgh",
@@ -903,20 +877,6 @@ module.exports = [
       "Royal Scottish Academy of Music and Drama"
     ],
     "hesa_itt_code": "101",
-    "dttp_id": null
-  },
-  {
-    "name": "St Andrew's College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "102",
-    "dttp_id": null
-  },
-  {
-    "name": "The Scottish College of Textiles",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "103",
     "dttp_id": null
   },
   {
@@ -1153,20 +1113,6 @@ module.exports = [
     "dttp_id": "9fc53e05-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "British Postgraduate Medical Federation",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "128",
-    "dttp_id": null
-  },
-  {
-    "name": "Charing Cross and Westminster Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "129",
-    "dttp_id": null
-  },
-  {
     "name": "Goldsmiths, University of London",
     "suggestion_synonyms": [
       "GUL"
@@ -1341,7 +1287,8 @@ module.exports = [
     "name": "University College London",
     "suggestion_synonyms": [
       "UCL",
-      "University of London"
+      "University of London",
+      "Institute of Education"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "149",
@@ -1356,7 +1303,9 @@ module.exports = [
   },
   {
     "name": "University of London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Institute of Education"
+    ],
     "match_synonyms": [
       "University of London (Institutes and activities)"
     ],
@@ -1489,7 +1438,10 @@ module.exports = [
   },
   {
     "name": "The University of Edinburgh",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Edinburgh College of Art",
+      "Moray House Institute of Education"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "167",
     "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8"
@@ -1524,7 +1476,9 @@ module.exports = [
   },
   {
     "name": "Heriot-Watt University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "The Scottish College of Textiles"
+    ],
     "match_synonyms": [
       "Heriot Watt University"
     ],
@@ -1533,7 +1487,9 @@ module.exports = [
   },
   {
     "name": "University of Dundee",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Duncan of Jordanstone College of Art"
+    ],
     "match_synonyms": [
       "The University of Dundee"
     ],

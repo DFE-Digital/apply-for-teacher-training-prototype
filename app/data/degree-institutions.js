@@ -31,7 +31,7 @@
 // The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
 // These are not necessarily unique, as two institutions may map to the same ID.
 //
-// Closed refers to where the institution has since closed and is new graduates will no longer get 
+// Closed refers to where the institution has since closed and is new graduates will no longer get
 // degrees from it.
 
 module.exports = [
@@ -736,7 +736,8 @@ module.exports = [
     "name": "University of South Wales",
     "suggestion_synonyms": [
       "University of Glamorgan",
-      "University of Wales, Newport"
+      "University of Wales, Newport",
+      "Royal Welsh College of Music and Drama"
     ],
     "match_synonyms": [
       "Prifysgol De Cymru"
@@ -1093,13 +1094,6 @@ module.exports = [
     "dttp_id": "6a1c7817-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The London Hospital Medical College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "136",
-    "dttp_id": null
-  },
-  {
     "name": "London School of Economics and Political Science",
     "suggestion_synonyms": [
       "LSE",
@@ -1126,20 +1120,15 @@ module.exports = [
     "name": "Queen Mary University of London",
     "suggestion_synonyms": [
       "QMUL",
-      "QM"
+      "QM",
+      "St Bartholomew's Hospital Medical College",
+      "St Barts"
     ],
     "match_synonyms": [
       "Queen Mary, University of London"
     ],
     "hesa_itt_code": "139",
     "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a"
-  },
-  {
-    "name": "Royal Free Hospital School of Medicine",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "140",
-    "dttp_id": null
   },
   {
     "name": "Royal Holloway, University of London",
@@ -1153,13 +1142,6 @@ module.exports = [
     ],
     "hesa_itt_code": "141",
     "dttp_id": "6c407223-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Royal Postgraduate Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "142",
-    "dttp_id": null
   },
   {
     "name": "Royal Veterinary College",
@@ -1209,29 +1191,16 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "United Medical and Dental Schools, Guy's and St Thomas's Hospitals",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "148",
-    "dttp_id": null
-  },
-  {
     "name": "University College London",
     "suggestion_synonyms": [
       "UCL",
       "University of London",
-      "Institute of Education"
+      "Institute of Education",
+      "School of Pharmacy"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "149",
     "dttp_id": "a27af34a-2887-e711-80d8-005056ac45bb"
-  },
-  {
-    "name": "Wye College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "150",
-    "dttp_id": null
   },
   {
     "name": "University of London",
@@ -1255,11 +1224,15 @@ module.exports = [
     "dttp_id": "e470f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The Victoria Manchester University",
-    "suggestion_synonyms": [],
+    "name": "Victoria Manchester University",
+    "suggestion_synonyms": [
+      "University of Manchester Institute of Science and Technology"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "153",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "2004",
+    "comment": "Merged with UMIST (whose degrees it awarded) in 2004 to form University of Manchester"
   },
   {
     "name": "Newcastle University",
@@ -1531,21 +1504,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "181",
-    "dttp_id": null
-  },
-  {
-    "name": "Royal Welsh College of Music and Drama",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "182",
-    "dttp_id": "7b407223-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Welsh Agricultural College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "183",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "2002",
+    "comment": "Re-merged with Cardiff University in 2002"
   },
   {
     "name": "Queen’s University Belfast",
@@ -1566,13 +1527,6 @@ module.exports = [
     ],
     "hesa_itt_code": "185",
     "dttp_id": "a823a753-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Westhill College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "187",
-    "dttp_id": null
   },
   {
     "name": "The Institute of Cancer Research",
@@ -2811,7 +2765,8 @@ module.exports = [
     ],
     "match_synonyms": [
       "Prifysgol Cymru",
-      "University of Wales (central functions)"
+      "University of Wales (central functions)",
+      "Royal Welsh College of Music and Drama"
     ],
     "hesa_itt_code": "86",
     "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8",

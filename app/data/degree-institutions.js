@@ -1263,7 +1263,9 @@ module.exports = [
       "King's College London"
     ],
     "hesa_itt_code": "134",
-    "dttp_id": "d470f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "d470f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10003645",
+    "highest_level_of_degree_awarded": "Research"
   },
   {
     "name": "London Business School",
@@ -1764,7 +1766,9 @@ module.exports = [
       "Institute of Cancer Research"
     ],
     "hesa_itt_code": "188",
-    "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10003324",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Writtle University College",
@@ -1878,7 +1882,9 @@ module.exports = [
       "Courtauld Institute of Art"
     ],
     "hesa_itt_code": "201",
-    "dttp_id": "18f35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "18f35f0b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007761",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London Metropolitan University",
@@ -1953,7 +1959,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "209",
-    "dttp_id": "84db7129-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "84db7129-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10003945",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "University of Suffolk",
@@ -2040,14 +2048,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "220",
-    "dttp_id": "5d3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "5d3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10035638",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Moorlands College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "221",
-    "dttp_id": "993e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "993e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023454",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Mattersey Hall",
@@ -2079,7 +2091,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "229",
-    "dttp_id": "0b3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "0b3f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004511",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Plymouth College of Art",
@@ -2123,21 +2137,27 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "238",
-    "dttp_id": "103e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "103e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004061",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Mountview Academy of Theatre Arts",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "239",
-    "dttp_id": "9b3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "9b3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004450",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Nazarene Theological College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "240",
-    "dttp_id": "9f3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "9f3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004538",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The London College UCK",
@@ -2209,21 +2229,27 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "256",
-    "dttp_id": "873e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "873e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10022285",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London School of Theology",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "257",
-    "dttp_id": "8b3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "8b3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004075",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "St Mellitus College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "258",
-    "dttp_id": "d93e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "d93e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10030776",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Nelson College London",
@@ -2237,7 +2263,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "261",
-    "dttp_id": "ad3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "ad3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004740",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Pearson College",
@@ -2251,7 +2279,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "263",
-    "dttp_id": "cb3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "cb3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10005544",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "SAE Education",
@@ -2265,21 +2295,27 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "269",
-    "dttp_id": "f63d182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "f63d182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10000248",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The College of Integrated Chinese Medicine",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "270",
-    "dttp_id": "ed3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "ed3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10001546",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The City College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "271",
-    "dttp_id": "e93e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "e93e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10010213",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Met Film School",
@@ -2293,14 +2329,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "274",
-    "dttp_id": "8d3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "8d3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004079",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London School of Academics",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "276",
-    "dttp_id": "813e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "813e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10032594",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Regent College",
@@ -2314,21 +2354,27 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "280",
-    "dttp_id": "163e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "163e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10028216",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Futureworks",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "281",
-    "dttp_id": "443e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "443e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10022087",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London Bridge Business Academy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "282",
-    "dttp_id": "773e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "773e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10013109",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "St Patrick's International College",
@@ -2342,7 +2388,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "284",
-    "dttp_id": "213e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "213e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10001386",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "All Nations Christian College",
@@ -2356,14 +2404,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "287",
-    "dttp_id": "143e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "143e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10000894",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The Cambridge Theological Federation",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "288",
-    "dttp_id": "e73e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "e73e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10032072",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Christie's Education",
@@ -2377,14 +2429,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "292",
-    "dttp_id": "273e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "273e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10039082",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Cliff College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "293",
-    "dttp_id": "2b3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "2b3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10007912",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "University College of Estate Management",
@@ -2402,7 +2458,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "295",
-    "dttp_id": "2a3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "2a3f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10007361",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "ICOM",
@@ -2416,14 +2474,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "298",
-    "dttp_id": "fa3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "fa3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10029682",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Istituto Marangoni",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "299",
-    "dttp_id": "613e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "613e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10009527",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Kaplan Open Learning",
@@ -2437,21 +2499,27 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "301",
-    "dttp_id": "6b3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "6b3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10008325",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London Film School",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "304",
-    "dttp_id": "7f3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "7f3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004036",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Luther King House Educational Trust",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "306",
-    "dttp_id": "8f3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "8f3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10009612",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Oxford Business College",
@@ -2465,7 +2533,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "309",
-    "dttp_id": "b73e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "b73e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10019178",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Spurgeon's College",
@@ -2500,7 +2570,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "314",
-    "dttp_id": "073f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "073f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10004320",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The Queen's Foundation for Ecumenical Theological Education",
@@ -2521,7 +2593,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "317",
-    "dttp_id": "1e3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "1e3f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023464",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Matrix College of Counselling and Psychotherapy",
@@ -2535,7 +2609,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "321",
-    "dttp_id": "093f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "093f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10032277",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "AA School of Architecture",
@@ -2558,14 +2634,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "327",
-    "dttp_id": "bf3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "bf3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10021100",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London School of Commerce & IT",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "328",
-    "dttp_id": "833e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "833e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023434",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Apex College London",
@@ -2593,7 +2673,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "331",
-    "dttp_id": "053f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "053f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023452",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Cambridge Arts and Sciences",
@@ -2651,14 +2733,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "342",
-    "dttp_id": "233e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "233e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10026921",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Leeds Conservatoire",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "351",
-    "dttp_id": "733e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "733e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10034449",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Hartpury University",
@@ -2684,7 +2770,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "354",
-    "dttp_id": "033f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "033f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10062810",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "London College of International Business Studies",
@@ -2719,14 +2807,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "360",
-    "dttp_id": "f83e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "f83e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10067388",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Newbold College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "361",
-    "dttp_id": "a83e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "a83e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023456",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Le Cordon Bleu",
@@ -2764,14 +2856,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "402",
-    "dttp_id": "cd3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "cd3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10009292",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Study Group",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "403",
-    "dttp_id": "e13e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "e13e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10008098",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Royal School of Needlework",
@@ -2813,7 +2909,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "408",
-    "dttp_id": "223f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "223f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10068157",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Central Film School London",
@@ -2827,14 +2925,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "410",
-    "dttp_id": "3c3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "3c3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10002313",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "The Council of the Inns of Court",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "412",
-    "dttp_id": "f23e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "f23e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10081618",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Navitas UK Holdings",
@@ -2848,7 +2950,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "414",
-    "dttp_id": "0d3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "0d3f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10083476",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Dyson Technical Training",
@@ -2886,7 +2990,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "419",
-    "dttp_id": "363e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "363e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10015688",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Dartington Hall Trust",
@@ -2923,7 +3029,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "424",
-    "dttp_id": "ef3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "ef3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10023442",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Regent’s University London",
@@ -2989,7 +3097,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "433",
-    "dttp_id": "e33e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "e33e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10020381",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "University Academy 92",
@@ -3019,14 +3129,18 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "437",
-    "dttp_id": "1c3f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "1c3f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10082743",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "European School of Osteopathy",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "7009",
-    "dttp_id": "3e3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "3e3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10002344",
+    "highest_level_of_degree_awarded": "Not applicable"
   },
   {
     "name": "Council for National Academic Awards",

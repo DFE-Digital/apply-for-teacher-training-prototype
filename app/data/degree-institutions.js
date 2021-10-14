@@ -63,7 +63,8 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "3",
-    "dttp_id": "64407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "64407223-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007777"
   },
   {
     "name": "Bishop Grosseteste University",
@@ -276,10 +277,12 @@ module.exports = [
     "name": "Rose Bruford College",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "Rose Bruford College of Theatre & Performance"
+      "Rose Bruford College of Theatre & Performance",
+      "Rose Bruford College of Theatre and Performance"
     ],
     "hesa_itt_code": "32",
-    "dttp_id": "5af3791d-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "5af3791d-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10005523"
   },
   {
     "name": "Royal Academy of Music",
@@ -338,9 +341,12 @@ module.exports = [
   {
     "name": "University of Cumbria",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Cumbria"
+    ],
     "hesa_itt_code": "38",
-    "dttp_id": "0c71f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "0c71f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10007842"
   },
   {
     "name": "St Mary’s University, Twickenham",
@@ -1105,7 +1111,8 @@ module.exports = [
   {
     "name": "University of Hull",
     "suggestion_synonyms": [
-      "Leeds Conservatoire"
+      "Leeds Conservatoire",
+      "Grimsby Institute"
     ],
     "match_synonyms": [
       "The University of Hull"
@@ -1907,9 +1914,12 @@ module.exports = [
     "suggestion_synonyms": [
       "GSMD"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Guildhall School of Music & Drama"
+    ],
     "hesa_itt_code": "208",
-    "dttp_id": "076e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "076e5e11-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007825"
   },
   {
     "name": "The Liverpool Institute for Performing Arts",
@@ -2606,7 +2616,8 @@ module.exports = [
       "The University College of Osteopathy"
     ],
     "hesa_itt_code": "337",
-    "dttp_id": "163f182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "163f182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10000936"
   },
   {
     "name": "Christ the Redeemer College",
@@ -2814,7 +2825,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "415",
-    "dttp_id": "383e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "383e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10067355"
   },
   {
     "name": "Results Consortium",
@@ -2888,7 +2900,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "425",
-    "dttp_id": "c33e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "c33e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10086591"
   },
   {
     "name": "Backstage Academy (Training)",
@@ -3007,7 +3020,8 @@ module.exports = [
       "Newcatle College Group"
     ],
     "hesa_itt_code": null,
-    "dttp_id": "20e5a08c-ee97-e711-80d8-005056ac45bb"
+    "dttp_id": "20e5a08c-ee97-e711-80d8-005056ac45bb",
+    "ukprn": "10004599"
   },
   {
     "name": "University of Wales",
@@ -3029,5 +3043,19 @@ module.exports = [
     "dttp_id": "b49fd8d5-3829-e911-a82f-000d3ab0d976",
     "comment": "Merged with Newport to become University of South Wales in 2013",
     "closed": "2013"
+  },
+  {
+    "name": "TEC Partnership",
+    "suggestion_synonyms": [
+      "GIFHE",
+      "Grimsby Institute",
+      "Grimsby Institute of Further and Higher Education"
+      "Grimsby Institute of Further & Higher Education"
+    ],
+    "match_synonyms": [],
+    "hesa_itt_code": null,
+    "dttp_id": null,
+    "comment": "Given degree awarding powers in 2021",
+    "ukprn": "10007938"
   }
 ]

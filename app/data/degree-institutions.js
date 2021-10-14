@@ -826,7 +826,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "91",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "2013"
   },
   {
     "name": "Trinity University College",
@@ -1573,7 +1574,8 @@ module.exports = [
     ],
     "match_synonyms": [
       "Prifysgol Cymru Y Drindod Dewi Sant",
-      "University of Wales Trinity St David"
+      "University of Wales Trinity St David",
+      "The University of Wales, Lampeter"
     ],
     "hesa_itt_code": "176",
     "dttp_id": "b123a753-7042-e811-80ff-3863bb3640b8"
@@ -1893,7 +1895,9 @@ module.exports = [
   {
     "name": "AECC University College",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Anglo-European College of Chiropractic"
+    ],
     "hesa_itt_code": "213",
     "dttp_id": "fa3d182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2919,7 +2923,7 @@ module.exports = [
       "Prifysgol Cymru",
       "University of Wales (central functions)"
     ],
-    "hesa_itt_code": null,
+    "hesa_itt_code": "86",
     "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8",
     "closed": "2017"
   },
@@ -2927,8 +2931,9 @@ module.exports = [
     "name": "University of Glamorgan",
     "suggestion_synonyms": [],
     "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": null,
-    "comment": "Merged with Newport to become University of South Wales in 2013"
+    "hesa_itt_code": "90",
+    "dttp_id": "b49fd8d5-3829-e911-a82f-000d3ab0d976",
+    "comment": "Merged with Newport to become University of South Wales in 2013",
+    "closed": "2013"
   }
 ]

@@ -31,7 +31,7 @@
 // The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
 // These are not necessarily unique, as two institutions may map to the same ID.
 //
-// Closed refers to where the institution has since closed and is new graduates will no longer get 
+// Closed refers to where the institution has since closed and is new graduates will no longer get
 // degrees from it.
 
 module.exports = [

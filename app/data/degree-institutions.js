@@ -1384,13 +1384,6 @@ module.exports = [
     "highest_level_of_degree_awarded": "Research"
   },
   {
-    "name": "The School of Pharmacy",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "147",
-    "dttp_id": null
-  },
-  {
     "name": "University College London",
     "suggestion_synonyms": [
       "UCL",
@@ -1438,6 +1431,7 @@ module.exports = [
     "hesa_itt_code": "153",
     "dttp_id": null,
     "closed": "2004",
+    "ukprn": null,
     "comment": "Merged with UMIST (whose degrees it awarded) in 2004 to form University of Manchester"
   },
   {
@@ -1577,7 +1571,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "165",
-    "dttp_id": "1b5b7f3b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "1b5b7f3b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": null
   },
   {
     "name": "The University of Edinburgh",
@@ -1587,7 +1582,8 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "167",
-    "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007790"
   },
   {
     "name": "University of Glasgow",
@@ -1596,7 +1592,8 @@ module.exports = [
       "The University of Glasgow"
     ],
     "hesa_itt_code": "168",
-    "dttp_id": "6ceb7735-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "6ceb7735-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007794"
   },
   {
     "name": "University of Strathclyde",
@@ -1608,7 +1605,8 @@ module.exports = [
       "University of Strathclyde, Glasgow"
     ],
     "hesa_itt_code": "169",
-    "dttp_id": "42228041-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "42228041-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007805"
   },
   {
     "name": "University of Aberdeen",
@@ -1617,7 +1615,8 @@ module.exports = [
       "The University of Aberdeen"
     ],
     "hesa_itt_code": "170",
-    "dttp_id": "cbdb7129-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "cbdb7129-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007783"
   },
   {
     "name": "Heriot-Watt University",
@@ -1628,7 +1627,8 @@ module.exports = [
       "Heriot Watt University"
     ],
     "hesa_itt_code": "171",
-    "dttp_id": "146e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "146e5e11-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007764"
   },
   {
     "name": "University of Dundee",
@@ -1639,7 +1639,8 @@ module.exports = [
       "The University of Dundee"
     ],
     "hesa_itt_code": "172",
-    "dttp_id": "bbed6e2f-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "bbed6e2f-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007852"
   },
   {
     "name": "University of St Andrews",
@@ -1650,7 +1651,8 @@ module.exports = [
       "University of Saint Andrews"
     ],
     "hesa_itt_code": "173",
-    "dttp_id": "34228041-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "34228041-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007803"
   },
   {
     "name": "University of Stirling",
@@ -1659,14 +1661,18 @@ module.exports = [
       "The University of Stirling"
     ],
     "hesa_itt_code": "174",
-    "dttp_id": "3b228041-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "3b228041-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007804"
   },
   {
-    "name": "SRUC",
-    "suggestion_synonyms": [],
+    "name": "SRUC (Scotland’s Rural College)",
+    "suggestion_synonyms": [
+      "Scotland’s Rural College"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "175",
-    "dttp_id": "d73e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "d73e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10005700"
   },
   {
     "name": "University of Wales Trinity Saint David",
@@ -1679,16 +1685,20 @@ module.exports = [
       "The University of Wales, Lampeter"
     ],
     "hesa_itt_code": "176",
-    "dttp_id": "b123a753-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "b123a753-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007858"
   },
   {
     "name": "Aberystwyth University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Aber"
+    ],
     "match_synonyms": [
       "Prifysgol Aberystwyth"
     ],
     "hesa_itt_code": "177",
-    "dttp_id": "443e2cff-6f42-e811-80ff-3863bb3640b8"
+    "dttp_id": "443e2cff-6f42-e811-80ff-3863bb3640b8",
+    "ukprn": "10007856"
   },
   {
     "name": "Bangor University",
@@ -1703,7 +1713,8 @@ module.exports = [
     ],
     "hesa_itt_code": "178",
     "dttp_id": "92c53e05-7042-e811-80ff-3863bb3640b8",
-    "comment": "Renamed to Bangor University in 2007"
+    "comment": "Renamed to Bangor University in 2007",
+    "ukprn": "10007857"
   },
   {
     "name": "Cardiff University",
@@ -1715,7 +1726,8 @@ module.exports = [
       "University of Wales, Cardiff"
     ],
     "hesa_itt_code": "179",
-    "dttp_id": "0ff35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "0ff35f0b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007814"
   },
   {
     "name": "Swansea University",
@@ -1725,7 +1737,8 @@ module.exports = [
       "University of Wales, Swansea"
     ],
     "hesa_itt_code": "180",
-    "dttp_id": "b3407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "b3407223-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007855"
   },
   {
     "name": "University of Wales College of Medicine",
@@ -1734,7 +1747,8 @@ module.exports = [
     "hesa_itt_code": "181",
     "dttp_id": null,
     "closed": "2002",
-    "comment": "Re-merged with Cardiff University in 2002"
+    "comment": "Re-merged with Cardiff University in 2002",
+    "ukprn": null
   },
   {
     "name": "Queen’s University Belfast",

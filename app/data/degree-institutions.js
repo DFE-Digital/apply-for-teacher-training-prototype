@@ -3079,7 +3079,7 @@ module.exports = [
     "suggestion_synonyms": [
       "GIFHE",
       "Grimsby Institute",
-      "Grimsby Institute of Further and Higher Education"
+      "Grimsby Institute of Further and Higher Education",
       "Grimsby Institute of Further & Higher Education"
     ],
     "match_synonyms": [],

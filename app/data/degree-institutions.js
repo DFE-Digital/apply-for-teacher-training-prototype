@@ -475,7 +475,9 @@ module.exports = [
   },
   {
     "name": "University of Huddersfield",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern College for Residential and Community Adult Education"
+    ],
     "match_synonyms": [
       "The University of Huddersfield",
       "Huddersfield University"
@@ -749,8 +751,12 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "91",
     "dttp_id": null,
+<<<<<<< HEAD
     "closed": "2013",
     "comment": "The university merged with, and became a constituent campus of, the University of Wales Trinity Saint David on 1 August 2013."
+=======
+    "closed": "2013"
+>>>>>>> 16ce982b730810111ec121e7d3e32c95f4ad2319
   },
   {
     "name": "Trinity University College",
@@ -759,13 +765,6 @@ module.exports = [
     "hesa_itt_code": "92",
     "dttp_id": "0e4b9247-7042-e811-80ff-3863bb3640b8",
     "closed": "2010"
-  },
-  {
-    "name": "Duncan of Jordanstone College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "94",
-    "dttp_id": null
   },
   {
     "name": "Abertay University",
@@ -778,32 +777,11 @@ module.exports = [
     "comment": "Renamed from University of Abertay Dundee in September 2019"
   },
   {
-    "name": "Edinburgh College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "96",
-    "dttp_id": null
-  },
-  {
     "name": "Glasgow School of Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "97",
     "dttp_id": "51f35f0b-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Moray House Institute of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "98",
-    "dttp_id": null
-  },
-  {
-    "name": "Northern College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "99",
-    "dttp_id": null
   },
   {
     "name": "Queen Margaret University, Edinburgh",
@@ -826,20 +804,6 @@ module.exports = [
       "Royal Scottish Academy of Music and Drama"
     ],
     "hesa_itt_code": "101",
-    "dttp_id": null
-  },
-  {
-    "name": "St Andrew's College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "102",
-    "dttp_id": null
-  },
-  {
-    "name": "The Scottish College of Textiles",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "103",
     "dttp_id": null
   },
   {
@@ -1078,20 +1042,6 @@ module.exports = [
     "dttp_id": "9fc53e05-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "British Postgraduate Medical Federation",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "128",
-    "dttp_id": null
-  },
-  {
-    "name": "Charing Cross and Westminster Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "129",
-    "dttp_id": null
-  },
-  {
     "name": "Goldsmiths, University of London",
     "suggestion_synonyms": [
       "GUL"
@@ -1266,7 +1216,8 @@ module.exports = [
     "name": "University College London",
     "suggestion_synonyms": [
       "UCL",
-      "University of London"
+      "University of London",
+      "Institute of Education"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "149",
@@ -1281,7 +1232,9 @@ module.exports = [
   },
   {
     "name": "University of London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Institute of Education"
+    ],
     "match_synonyms": [
       "University of London (Institutes and activities)"
     ],
@@ -1424,7 +1377,10 @@ module.exports = [
   },
   {
     "name": "The University of Edinburgh",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Edinburgh College of Art",
+      "Moray House Institute of Education"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "167",
     "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8"
@@ -1459,7 +1415,9 @@ module.exports = [
   },
   {
     "name": "Heriot-Watt University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "The Scottish College of Textiles"
+    ],
     "match_synonyms": [
       "Heriot Watt University"
     ],
@@ -1468,7 +1426,9 @@ module.exports = [
   },
   {
     "name": "University of Dundee",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Duncan of Jordanstone College of Art"
+    ],
     "match_synonyms": [
       "The University of Dundee"
     ],
@@ -1509,7 +1469,8 @@ module.exports = [
     ],
     "match_synonyms": [
       "Prifysgol Cymru Y Drindod Dewi Sant",
-      "University of Wales Trinity St David"
+      "University of Wales Trinity St David",
+      "The University of Wales, Lampeter"
     ],
     "hesa_itt_code": "176",
     "dttp_id": "b123a753-7042-e811-80ff-3863bb3640b8"
@@ -1829,7 +1790,9 @@ module.exports = [
   {
     "name": "AECC University College",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Anglo-European College of Chiropractic"
+    ],
     "hesa_itt_code": "213",
     "dttp_id": "fa3d182c-1425-ec11-b6e6-000d3adf095a"
   },
@@ -2860,7 +2823,7 @@ module.exports = [
       "Prifysgol Cymru",
       "University of Wales (central functions)"
     ],
-    "hesa_itt_code": null,
+    "hesa_itt_code": "86",
     "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8",
     "closed": "2017"
   },
@@ -2868,8 +2831,9 @@ module.exports = [
     "name": "University of Glamorgan",
     "suggestion_synonyms": [],
     "match_synonyms": [],
-    "hesa_itt_code": null,
-    "dttp_id": null,
-    "comment": "Merged with Newport to become University of South Wales in 2013"
+    "hesa_itt_code": "90",
+    "dttp_id": "b49fd8d5-3829-e911-a82f-000d3ab0d976",
+    "comment": "Merged with Newport to become University of South Wales in 2013",
+    "closed": "2013"
   }
 ]

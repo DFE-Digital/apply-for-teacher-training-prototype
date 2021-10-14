@@ -31,7 +31,7 @@
 // The dttp_id refers to the ID for the type in the Database of Trainee Teachers, where known.
 // These are not necessarily unique, as two institutions may map to the same ID.
 //
-// Closed refers to where the institution has since closed and is new graduates will no longer get 
+// Closed refers to where the institution has since closed and is new graduates will no longer get
 // degrees from it.
 
 module.exports = [
@@ -62,24 +62,6 @@ module.exports = [
     "dttp_id": "64407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The College of Guidance Studies",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "4",
-    "dttp_id": null
-  },
-  {
-    "name": "Royal College of Nursing",
-    "suggestion_synonyms": [
-      "RCN"
-    ],
-    "match_synonyms": [
-      "The Royal College of Nursing"
-    ],
-    "hesa_itt_code": "6",
-    "dttp_id": null
-  },
-  {
     "name": "Bishop Grosseteste University",
     "suggestion_synonyms": [
       "BGU"
@@ -87,13 +69,6 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "7",
     "dttp_id": "ca70f34a-2887-e711-80d8-005056ac45bb"
-  },
-  {
-    "name": "Bretton Hall College of HE",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "8",
-    "dttp_id": null
   },
   {
     "name": "Buckinghamshire New University",
@@ -154,13 +129,6 @@ module.exports = [
     "dttp_id": "3a71f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "Dartington College of Arts",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "15",
-    "dttp_id": "34f35f0b-7042-e811-80ff-3863bb3640b8"
-  },
-  {
     "name": "Edge Hill University",
     "suggestion_synonyms": [],
     "match_synonyms": [
@@ -186,18 +154,13 @@ module.exports = [
     "dttp_id": "1b369414-75d9-e911-a863-000d3ab0da57"
   },
   {
-    "name": "Homerton College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "19",
-    "dttp_id": null
-  },
-  {
     "name": "Kent Institute of Art and Design",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "20",
-    "dttp_id": "2f6e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "2f6e5e11-7042-e811-80ff-3863bb3640b8",
+    "closed": "2008",
+    "comment": "Closed in 2008 to become the University for the creative arts"
   },
   {
     "name": "University of Winchester",
@@ -209,13 +172,6 @@ module.exports = [
     "dttp_id": "4471f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "La Sainte Union College of HE",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "22",
-    "dttp_id": null
-  },
-  {
     "name": "Liverpool Hope University",
     "suggestion_synonyms": [],
     "match_synonyms": [],
@@ -225,18 +181,13 @@ module.exports = [
   {
     "name": "University of the Arts London",
     "suggestion_synonyms": [
-      "UAL"
+      "UAL",
+      "Wimbledon College of Art",
+      "Wimbledon College of Arts"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "24",
     "dttp_id": "ca781c39-3fa2-e811-812b-5065f38ba241"
-  },
-  {
-    "name": "Loughborough College of Art and Design",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "25",
-    "dttp_id": null
   },
   {
     "name": "University of Bedfordshire",
@@ -266,13 +217,6 @@ module.exports = [
     "hesa_itt_code": "28",
     "dttp_id": "ec70f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Name changed in 2013"
-  },
-  {
-    "name": "North Riding College Higher Education Corporation",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "29",
-    "dttp_id": null
   },
   {
     "name": "Ravensbourne University London",
@@ -334,7 +278,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "36",
-    "dttp_id": "81407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "81407223-7042-e811-80ff-3863bb3640b8",
+    "closed": "1996",
+    "comment": "Merged with University of Salford in 1996"
   },
   {
     "name": "Solent University, Southampton",
@@ -382,33 +328,15 @@ module.exports = [
     "hesa_itt_code": "41",
     "dttp_id": "054b9247-7042-e811-80ff-3863bb3640b8"
   },
-  {
-    "name": "Westminster College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "42",
-    "dttp_id": null
-  },
-  {
-    "name": "West London Institute of HE",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "43",
-    "dttp_id": "c323a753-7042-e811-80ff-3863bb3640b8"
-  },
+
   {
     "name": "The Surrey Institute of Art and Design, University College",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "44",
-    "dttp_id": "c4db7129-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Winchester School of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "45",
-    "dttp_id": "d123a753-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "c4db7129-7042-e811-80ff-3863bb3640b8",
+    "closed": "2005",
+    "comment": "It merged with the Kent Institute of Art & Design on August 1, 2005 to form the University College for the Creative Arts (now University for the Creative Arts)"
   },
   {
     "name": "University of Worcester",
@@ -496,7 +424,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "55",
-    "dttp_id": "711c7817-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "711c7817-7042-e811-80ff-3863bb3640b8",
+    "closed": "2012",
+    "comment": "On 1 August 2002, it merged with the University of North London to form London Metropolitan University."
   },
   {
     "name": "Coventry University",
@@ -545,7 +475,9 @@ module.exports = [
   },
   {
     "name": "University of Huddersfield",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern College for Residential and Community Adult Education"
+    ],
     "match_synonyms": [
       "The University of Huddersfield",
       "Huddersfield University"
@@ -639,7 +571,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "70",
-    "dttp_id": "235b7f3b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "235b7f3b-7042-e811-80ff-3863bb3640b8",
+    "closed": "2002",
+    "comment": "UNL existed until 2002, when it merged with London Guildhall University to form London Metropolitan University"
   },
   {
     "name": "Nottingham Trent University",
@@ -758,16 +692,6 @@ module.exports = [
     "dttp_id": "7eda4db6-a141-e811-80ff-3863bb351d40"
   },
   {
-    "name": "Wimbledon College of Arts",
-    "suggestion_synonyms": [],
-    "match_synonyms": [
-      "Wimbledon School of Art"
-    ],
-    "hesa_itt_code": "84",
-    "dttp_id": "cb23a753-7042-e811-80ff-3863bb3640b8",
-    "comment": "Constituent college of UAL - not degree awarding"
-  },
-  {
     "name": "University of Wolverhampton",
     "suggestion_synonyms": [],
     "match_synonyms": [
@@ -799,13 +723,6 @@ module.exports = [
     "comment": "Name changed from Glyndŵr University in 2016"
   },
   {
-    "name": "Coleg Normal",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "88",
-    "dttp_id": null
-  },
-  {
     "name": "Cardiff Metropolitan University",
     "suggestion_synonyms": [],
     "match_synonyms": [
@@ -819,7 +736,8 @@ module.exports = [
     "name": "University of South Wales",
     "suggestion_synonyms": [
       "University of Glamorgan",
-      "University of Wales, Newport"
+      "University of Wales, Newport",
+      "Royal Welsh College of Music and Drama"
     ],
     "match_synonyms": [
       "Prifysgol De Cymru"
@@ -834,7 +752,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "91",
     "dttp_id": null,
-    "closed": "2013"
+    "closed": "2013",
+    "comment": "The university merged with, and became a constituent campus of, the University of Wales Trinity Saint David on 1 August 2013."
   },
   {
     "name": "Trinity University College",
@@ -843,13 +762,6 @@ module.exports = [
     "hesa_itt_code": "92",
     "dttp_id": "0e4b9247-7042-e811-80ff-3863bb3640b8",
     "closed": "2010"
-  },
-  {
-    "name": "Duncan of Jordanstone College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "94",
-    "dttp_id": null
   },
   {
     "name": "Abertay University",
@@ -862,32 +774,11 @@ module.exports = [
     "comment": "Renamed from University of Abertay Dundee in September 2019"
   },
   {
-    "name": "Edinburgh College of Art",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "96",
-    "dttp_id": null
-  },
-  {
     "name": "Glasgow School of Art",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "97",
     "dttp_id": "51f35f0b-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Moray House Institute of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "98",
-    "dttp_id": null
-  },
-  {
-    "name": "Northern College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "99",
-    "dttp_id": null
   },
   {
     "name": "Queen Margaret University, Edinburgh",
@@ -910,20 +801,6 @@ module.exports = [
       "Royal Scottish Academy of Music and Drama"
     ],
     "hesa_itt_code": "101",
-    "dttp_id": null
-  },
-  {
-    "name": "St Andrew's College of Education",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "102",
-    "dttp_id": null
-  },
-  {
-    "name": "The Scottish College of Textiles",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "103",
     "dttp_id": null
   },
   {
@@ -998,7 +875,9 @@ module.exports = [
   },
   {
     "name": "University of Bradford",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Leeds Conservatoire"
+    ],
     "match_synonyms": [
       "The University of Bradford"
     ],
@@ -1016,7 +895,9 @@ module.exports = [
   },
   {
     "name": "Brunel University London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "West London Institute of HE"
+    ],
     "match_synonyms": [
       "Brunel University"
     ],
@@ -1084,7 +965,9 @@ module.exports = [
   },
   {
     "name": "University of Hull",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Leeds Conservatoire"
+    ],
     "match_synonyms": [
       "The University of Hull"
       ],
@@ -1103,7 +986,10 @@ module.exports = [
   },
   {
     "name": "University of Kent",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern School of Contemporary Dance",
+      "NSCD"
+    ],
     "match_synonyms": [
       "The University of Kent"
     ],
@@ -1160,20 +1046,6 @@ module.exports = [
     "dttp_id": "9fc53e05-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "British Postgraduate Medical Federation",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "128",
-    "dttp_id": null
-  },
-  {
-    "name": "Charing Cross and Westminster Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "129",
-    "dttp_id": null
-  },
-  {
     "name": "Goldsmiths, University of London",
     "suggestion_synonyms": [
       "GUL"
@@ -1222,13 +1094,6 @@ module.exports = [
     "dttp_id": "6a1c7817-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "The London Hospital Medical College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "136",
-    "dttp_id": null
-  },
-  {
     "name": "London School of Economics and Political Science",
     "suggestion_synonyms": [
       "LSE",
@@ -1255,20 +1120,15 @@ module.exports = [
     "name": "Queen Mary University of London",
     "suggestion_synonyms": [
       "QMUL",
-      "QM"
+      "QM",
+      "St Bartholomew's Hospital Medical College",
+      "St Barts"
     ],
     "match_synonyms": [
       "Queen Mary, University of London"
     ],
     "hesa_itt_code": "139",
     "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a"
-  },
-  {
-    "name": "Royal Free Hospital School of Medicine",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "140",
-    "dttp_id": null
   },
   {
     "name": "Royal Holloway, University of London",
@@ -1282,13 +1142,6 @@ module.exports = [
     ],
     "hesa_itt_code": "141",
     "dttp_id": "6c407223-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Royal Postgraduate Medical School",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "142",
-    "dttp_id": null
   },
   {
     "name": "Royal Veterinary College",
@@ -1338,32 +1191,22 @@ module.exports = [
     "dttp_id": null
   },
   {
-    "name": "United Medical and Dental Schools, Guy's and St Thomas's Hospitals",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "148",
-    "dttp_id": null
-  },
-  {
     "name": "University College London",
     "suggestion_synonyms": [
       "UCL",
-      "University of London"
+      "University of London",
+      "Institute of Education",
+      "School of Pharmacy"
     ],
     "match_synonyms": [],
     "hesa_itt_code": "149",
     "dttp_id": "a27af34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "Wye College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "150",
-    "dttp_id": null
-  },
-  {
     "name": "University of London",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Institute of Education"
+    ],
     "match_synonyms": [
       "University of London (Institutes and activities)"
     ],
@@ -1373,17 +1216,23 @@ module.exports = [
   },
   {
     "name": "Loughborough University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Loughborough College of Art and Design"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "152",
     "dttp_id": "e470f34a-2887-e711-80d8-005056ac45bb"
   },
   {
-    "name": "The Victoria Manchester University",
-    "suggestion_synonyms": [],
+    "name": "Victoria Manchester University",
+    "suggestion_synonyms": [
+      "University of Manchester Institute of Science and Technology"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "153",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "2004",
+    "comment": "Merged with UMIST (whose degrees it awarded) in 2004 to form University of Manchester"
   },
   {
     "name": "Newcastle University",
@@ -1403,7 +1252,9 @@ module.exports = [
   },
   {
     "name": "University of Oxford",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Westminster College"
+    ],
     "match_synonyms": [
       "The University of Oxford"
     ],
@@ -1421,7 +1272,9 @@ module.exports = [
   },
   {
     "name": "University of Salford",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "University College Salford"
+    ],
     "match_synonyms": [
       "The University of Salford"
     ],
@@ -1443,7 +1296,9 @@ module.exports = [
   {
     "name": "University of Southampton",
     "suggestion_synonyms": [
-      "SOTON"
+      "SOTON",
+      "La Sainte Union College of HE",
+      "Winchester School of Art"
     ],
     "match_synonyms": [
       "The University of Southampton"
@@ -1453,7 +1308,9 @@ module.exports = [
   },
   {
     "name": "University of Surrey",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Wimbledon School of Art"
+    ],
     "match_synonyms": [
       "The University of Surrey"
     ],
@@ -1496,7 +1353,10 @@ module.exports = [
   },
   {
     "name": "The University of Edinburgh",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Edinburgh College of Art",
+      "Moray House Institute of Education"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "167",
     "dttp_id": "d7ed6e2f-7042-e811-80ff-3863bb3640b8"
@@ -1512,7 +1372,9 @@ module.exports = [
   },
   {
     "name": "University of Strathclyde",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Bell College"
+    ],
     "match_synonyms": [
       "The University of Strathclyde",
       "University of Strathclyde, Glasgow"
@@ -1531,7 +1393,9 @@ module.exports = [
   },
   {
     "name": "Heriot-Watt University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "The Scottish College of Textiles"
+    ],
     "match_synonyms": [
       "Heriot Watt University"
     ],
@@ -1540,7 +1404,9 @@ module.exports = [
   },
   {
     "name": "University of Dundee",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Duncan of Jordanstone College of Art"
+    ],
     "match_synonyms": [
       "The University of Dundee"
     ],
@@ -1638,21 +1504,9 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "181",
-    "dttp_id": null
-  },
-  {
-    "name": "Royal Welsh College of Music and Drama",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "182",
-    "dttp_id": "7b407223-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Welsh Agricultural College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "183",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "2002",
+    "comment": "Re-merged with Cardiff University in 2002"
   },
   {
     "name": "Queen’s University Belfast",
@@ -1673,13 +1527,6 @@ module.exports = [
     ],
     "hesa_itt_code": "185",
     "dttp_id": "a823a753-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Westhill College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "187",
-    "dttp_id": null
   },
   {
     "name": "The Institute of Cancer Research",
@@ -1712,18 +1559,12 @@ module.exports = [
     "dttp_id": "a01c7817-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Northern School of Contemporary Dance",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "191",
-    "dttp_id": "9a1c7817-7042-e811-80ff-3863bb3640b8"
-  },
-  {
     "name": "Cumbria Institute of the Arts",
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "192",
-    "dttp_id": "2ef35f0b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "2ef35f0b-7042-e811-80ff-3863bb3640b8",
+    "closed": "2017"
   },
   {
     "name": "Stranmillis University College",
@@ -1774,15 +1615,11 @@ module.exports = [
     "dttp_id": "c6407223-7042-e811-80ff-3863bb3640b8"
   },
   {
-    "name": "Bell College",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "198",
-    "dttp_id": null
-  },
-  {
     "name": "Conservatoire for Dance and Drama",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "Northern School of Contemporary Dance",
+      "NSCD"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "199",
     "dttp_id": "2f3e182c-1425-ec11-b6e6-000d3adf095a"
@@ -1841,7 +1678,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [],
     "hesa_itt_code": "205",
-    "dttp_id": "1b6e5e11-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "1b6e5e11-7042-e811-80ff-3863bb3640b8",
+    "closed": "2018"
   },
   {
     "name": "University for the Creative Arts",
@@ -1853,13 +1691,6 @@ module.exports = [
     ],
     "hesa_itt_code": "206",
     "dttp_id": "354b9247-7042-e811-80ff-3863bb3640b8"
-  },
-  {
-    "name": "Leeds College of Music",
-    "suggestion_synonyms": [],
-    "match_synonyms": [],
-    "hesa_itt_code": "207",
-    "dttp_id": "496e5e11-7042-e811-80ff-3863bb3640b8"
   },
   {
     "name": "Guildhall School of Music and Drama",
@@ -2906,10 +2737,16 @@ module.exports = [
   },
   {
     "name": "Council for National Academic Awards",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "CNAA",
+      "Westminster College",
+      "West London Institute of HE"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "9065",
-    "dttp_id": null
+    "dttp_id": null,
+    "closed": "1993",
+    "comment": "The Council for National Academic Awards (CNAA) was the national degree-awarding authority in the United Kingdom from 1965 until its dissolution on 20 April 1993"
   },
   {
     "name": "NCG (Newcastle College Group)",
@@ -2928,7 +2765,8 @@ module.exports = [
     ],
     "match_synonyms": [
       "Prifysgol Cymru",
-      "University of Wales (central functions)"
+      "University of Wales (central functions)",
+      "Royal Welsh College of Music and Drama"
     ],
     "hesa_itt_code": "86",
     "dttp_id": "6a228041-7042-e811-80ff-3863bb3640b8",

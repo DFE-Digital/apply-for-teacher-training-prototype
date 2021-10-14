@@ -98,9 +98,12 @@ module.exports = [
       "CSSD",
       "University of London"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The Royal Central School of Speech and Drama"
+    ],
     "hesa_itt_code": "10",
-    "dttp_id": "d90a4e73-a141-e811-80ff-3863bb351d40"
+    "dttp_id": "d90a4e73-a141-e811-80ff-3863bb351d40",
+    "ukprn": "10007816"
   },
   {
     "name": "University of Chester",
@@ -212,9 +215,12 @@ module.exports = [
       "Wimbledon College of Art",
       "Wimbledon College of Arts"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "University of the Arts, London"
+    ],
     "hesa_itt_code": "24",
-    "dttp_id": "ca781c39-3fa2-e811-812b-5065f38ba241"
+    "dttp_id": "ca781c39-3fa2-e811-812b-5065f38ba241",
+    "ukprn": "10007162"
   },
   {
     "name": "University of Bedfordshire",
@@ -290,9 +296,12 @@ module.exports = [
       "RAM",
       "University of London"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The Royal Academy of Music"
+    ],
     "hesa_itt_code": "33",
-    "dttp_id": "61f3791d-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "61f3791d-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007835"
   },
   {
     "name": "Royal College of Music",
@@ -407,7 +416,8 @@ module.exports = [
     ],
     "match_synonyms": [],
     "hesa_itt_code": "47",
-    "dttp_id": "387af34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "387af34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10000291"
   },
   {
     "name": "Bath Spa University",
@@ -637,7 +647,8 @@ module.exports = [
       "Middlesex University"
     ],
     "hesa_itt_code": "67",
-    "dttp_id": "e870f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "e870f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10004351"
   },
   {
     "name": "De Montfort University",
@@ -1044,10 +1055,12 @@ module.exports = [
     "name": "University of Cambridge",
     "suggestion_synonyms": [],
     "match_synonyms": [
-      "The University of Cambridge"
+      "The University of Cambridge",
+      "The Chancellor, Masters, and Scholars of the University of Cambridge"
     ],
     "hesa_itt_code": "114",
-    "dttp_id": "0671f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "0671f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10007788"
   },
   {
     "name": "City, University of London",
@@ -1246,7 +1259,9 @@ module.exports = [
       "KCL",
       "University of London"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "King's College London"
+    ],
     "hesa_itt_code": "134",
     "dttp_id": "d470f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -1269,10 +1284,12 @@ module.exports = [
       "University of London"
     ],
     "match_synonyms": [
-      "London School of Economics"
+      "London School of Economics",
+      "The London School of Economics and Political Science"
     ],
     "hesa_itt_code": "137",
-    "dttp_id": "7d1c7817-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "7d1c7817-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10004063"
   },
   {
     "name": "London School of Hygiene and Tropical Medicine",
@@ -1349,7 +1366,8 @@ module.exports = [
       "St George’s Hospital Medical School"
     ],
     "hesa_itt_code": "145",
-    "dttp_id": "94407223-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "94407223-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007782"
   },
   {
     "name": "SOAS, University of London",
@@ -1434,9 +1452,12 @@ module.exports = [
   {
     "name": "University of Nottingham",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The University of Nottingham"
+    ],
     "hesa_itt_code": "155",
-    "dttp_id": "2c71f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "2c71f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10007154"
   },
   {
     "name": "University of Oxford",
@@ -1444,10 +1465,12 @@ module.exports = [
       "Westminster College"
     ],
     "match_synonyms": [
-      "The University of Oxford"
+      "The University of Oxford",
+      "The Chancellor, Masters and Scholars of the University of Oxford"
     ],
     "hesa_itt_code": "156",
-    "dttp_id": "2e71f34a-2887-e711-80d8-005056ac45bb"
+    "dttp_id": "2e71f34a-2887-e711-80d8-005056ac45bb",
+    "ukprn": "10007774"
   },
   {
     "name": "University of Reading",
@@ -1469,7 +1492,8 @@ module.exports = [
       "The University of Salford"
     ],
     "hesa_itt_code": "158",
-    "dttp_id": "425b7f3b-7042-e811-80ff-3863bb3640b8"
+    "dttp_id": "425b7f3b-7042-e811-80ff-3863bb3640b8",
+    "ukprn": "10007156"
   },
   {
     "name": "The University of Sheffield",
@@ -1794,9 +1818,12 @@ module.exports = [
     "suggestion_synonyms": [
       "RAU"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "The Royal Agricultural University"
+    ],
     "hesa_itt_code": "195",
-    "dttp_id": null
+    "dttp_id": null,
+    "ukprn": "10005545"
   },
   {
     "name": "University of the Highlands and Islands",
@@ -2725,9 +2752,12 @@ module.exports = [
   {
     "name": "LAMDA",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Lamda Limited"
+    ],
     "hesa_itt_code": "401",
-    "dttp_id": "6d3e182c-1425-ec11-b6e6-000d3adf095a"
+    "dttp_id": "6d3e182c-1425-ec11-b6e6-000d3adf095a",
+    "ukprn": "10003758"
   },
   {
     "name": "Royal Academy of Dramatic Art",
@@ -3057,5 +3087,17 @@ module.exports = [
     "dttp_id": null,
     "comment": "Given degree awarding powers in 2021",
     "ukprn": "10007938"
+  },
+  {
+    "name": "WCG (Warwickshire College Group)",
+    "suggestion_synonyms": [],
+    "match_synonyms": [
+      "Warwickshire College",
+      "Warwickshire College Group"
+    ],
+    "hesa_itt_code": null,
+    "dttp_id": null,
+    "ukprn": "10007859",
+    "comment": "Given degree awarding powers in 2021"
   }
 ]

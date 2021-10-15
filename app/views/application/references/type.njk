@@ -2,7 +2,7 @@
 
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
-{% set title = "Choose your referee type" %}
+{% set title = "Choose a referee" %}
 {% set allowsFeedback = true %}
 {% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name/" %}
 
@@ -18,13 +18,10 @@
   {% endif %}
 {% endblock %}
 
-
-{% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+{% block primary %}
 
       <h1 class="govuk-heading-l">
-        Choose a referee
+        {{ title }}
       </h1>
 
       <p class="govuk-body">Referees should not be family members, partners or friends.</p>
@@ -38,62 +35,13 @@
 
       <p class="govuk-body govuk-!-margin-bottom-7"><a href="https://getintoteaching.education.gov.uk/#talk-to-us">Talk to a teacher training adviser</a> if you need help choosing a referee.</p>
 
-      <form action="/form-handler" method="post" novalidate>
-
-        {{ govukRadios({
-          idPrefix: "interview-needs",
-          name: "interview-needs",
-          fieldset: {
-            legend: {
-              text: "What type of referee do you want to add?",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "Academic, such as a university tutor",
-              text: "Academic, such as a university tutor",
-              hint: {
-                text: "You need one academic reference if you graduated in the last 5 years or you do not have a grade for your degree yet."
-            }
-            },
-            {
-              value: "Professional, such as a manager",
-              text: "Professional, such as a manager",
-              hint: {
-                text: "If you’re applying for a salaried course, one of your references must be from an employer."
-            }
-            },
-            {
-              value: "Someone you know through experience working in a school",
-              text: "Someone you know through experience working in a school"
-            },{
-              divider: "or"
-            },
-            {
-              value: "Character, such as a mentor or someone you know from volunteering",
-              text: "Character, such as a mentor or someone you know from volunteering",
-              hint: {
-                text: "You can use one character reference if you also have a professional or academic reference."
-            }
-          }
-          ]
-        }) }}
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      </form>
-    </div>
-  </div>
-{% endblock %}
-
-{% block primary %}
 
   {{ govukRadios({
     fieldset: {
-      legend: label,
+      legend: {
+        text: "Choose your referee type",
+        classes: "govuk-fieldset__legend--m"
+      },
       hint: {
         text: "afsdaf"
       }

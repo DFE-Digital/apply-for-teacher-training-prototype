@@ -30,6 +30,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
+    "priority": 1,
     "name": "Foundation Degree of Education",
     "abbreviation": "FDEd",
     "synonyms": [],
@@ -38,6 +39,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
+    "priority": 1,
     "name": "Foundation of Sciences",
     "abbreviation": "FdSs",
     "synonyms": [],

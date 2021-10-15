@@ -161,6 +161,7 @@ module.exports = [
     "hesa_itt_code": "64"
   },
   {
+    "priority": 1,
     "name": "Bachelor of Engineering",
     "abbreviation": "BEng",
     "synonyms": [],
@@ -562,6 +563,7 @@ module.exports = [
     "hesa_itt_code": "210"
   },
   {
+    "priority": 1,
     "name": "Master of Engineering",
     "abbreviation": "MEng",
     "synonyms": [

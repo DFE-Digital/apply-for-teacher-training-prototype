@@ -1,7 +1,7 @@
 {% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "What type of degree is it?" %}
+{% set title = "What type of " + applicationValue(["degree", id, "level"]) +" degree is it?" %}
 {% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/type" %}
 

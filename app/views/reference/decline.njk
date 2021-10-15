@@ -2,7 +2,7 @@
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "You’ve declined to give a reference" %}
+{% set title = "Decline to give a reference" %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
@@ -13,17 +13,17 @@
     fieldset: {
       classes: "govuk-!-margin-top-6",
       legend: {
-        text: "Are you sure you do not want to give " + candidate_name + " a reference?",
+        text: "Can you give " + candidate_name + " a reference?",
         classes: "govuk-fieldset__legend--m"
       }
     },
     name: "answer",
     items: [{
       value: "yes",
-      text: "Yes, I’m sure"
+      text: "No, I decline to give a reference"
     }, {
       value: "no",
-      text: "No, I’ve changed my mind"
+      text: "Yes, I can give a reference"
     }]
   }) }}
 

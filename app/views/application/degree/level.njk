@@ -4,15 +4,9 @@
 
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "What subject is your degree?" %}
+{% set title = "What type of degree is it?" %}
 {% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-
-{% if degreeCount >= 1 and action == "add" %}
-  {% set title = (action | capitalize) + " another degree" %}
-{% else %}
-  {% set title = (action | capitalize) + " undergraduate degree" %}
-{% endif %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -29,7 +23,7 @@
 
       {{ govukInput({
         label: {
-          text: "Degree level"
+          text: "Qualification type"
         }
       } | decorateApplicationAttributes(["degree", id, "otherLevel"])) }}
     {% endset %}
@@ -38,7 +32,7 @@
       name: "degree-type",
       fieldset: {
         legend: {
-          text: "What level is this degree?",
+          text: title,
           isPageHeading: true,
           classes: "govuk-fieldset__legend--l"
         }
@@ -46,29 +40,33 @@
       items: [
         {
           value: "Foundation",
-          text: "Foundation"
+          text: "Foundation degree"
         },
         {
           value: "Bachelor",
-          text: "Bachelor",
+          text: "Bachelor degree",
           hint: {
             text: "Sometimes referred to as an ‘undergraduate’ or ‘first’ degree, this is the minimum level required to be eligible for teacher training."
           }
         },
         {
           value: "Master’s",
-          text: "Master’s"
+          text: "Master’s degree"
         },
         {
           value: "Doctorate",
           text: "Doctorate (PhD)"
         },
         {
+          value: "Level 6 Diploma",
+          text: "Level 6 Diploma"
+        },
+        {
           divider: "or"
         },
         {
           value: "other",
-          text: "Another level",
+          text: "Another qualification equivalent to a degree",
           conditional: {
             html: anotherLevelHtml
           }

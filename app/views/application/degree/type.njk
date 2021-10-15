@@ -1,13 +1,28 @@
 {% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "What type of " + applicationValue(["degree", id, "level"]) +" degree is it?" %}
+
+{% set degreeLevel = applicationValue(["degree", id, "level"]) %}
+
+{% if degreeLevel == "Foundation" %}
+  {% set degreeDescription = "foundation degree" %}
+{% elif degreeLevel == "Bachelor" %}
+  {% set degreeDescription = "bachelor degree" %}
+{% elif degreeLevel == "Master’s" %}
+  {% set degreeDescription = "master’s degree" %}
+{% elif degreeLevel == "Doctorate" %}
+  {% set degreeDescription = "doctorate" %}
+{% else %}
+  {% set degreeDescription = "degree" %}
+{% endif %}
+
+{% set title = "What type of " + degreeDescription + " is it?" %}
+
 {% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/type" %}
 
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
-{% set degreeLevel = applicationValue(["degree", id, "level"]) %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -63,7 +78,7 @@
 
       {% set radioItems = radioItems | push({
         value: "other",
-        text: "Another degree type",
+        text: "Another " + degreeDescription + " type",
         conditional: {
           html: otherDegreeTypeHtml
         }

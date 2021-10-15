@@ -85,7 +85,15 @@ module.exports = router => {
   // Set the degree subject
   router.post('/application/:applicationId/degree/:id/subject', (req, res) => {
     const { applicationId, id } = req.params
-    res.redirect(`/application/${applicationId}/degree/${id}/type`)
+
+    const degree = utils.applicationData(req).degree[id]
+
+    if (degree.level == 'Foundation' || degree.level == 'Bachelor' || degree.level == 'Master’s' || degree.level == 'Doctorate') {
+      // Ask follow-up question about type of degree
+      res.redirect(`/application/${applicationId}/degree/${id}/type`)
+    } else {
+      res.redirect(`/application/${applicationId}/degree/${id}/institution`)
+    }
   })
 
   // Set the degree type

@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "Reference requests" %}
+{% set title = "References" %}
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/references/review" %}
 {% set references = applicationValue(["references"]) | toArray %}
@@ -25,25 +25,56 @@
   }) if messages.length > 0 }}
 {% endblock %}
 
+{% set guidanceHtml %}
+  <p class="govuk-body">When you request a reference, we will email them a link to a form asking them:</p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>to confirm how they know you</li>
+    <li>whether they know of any reason why you should not work with children</li>
+    <li>to write up to 500 words describing your potential to teach</li>
+  </ul>
+
+  <p class="govuk-body govuk-!-margin-bottom-7"><a href="https://getintoteaching.education.gov.uk/tips-on-applying-for-teacher-training" class="govuk-link">Guidance for references (opens in a new tab)</a></p>
+{% endset %}
+
 {% block primary %}
   <div class="govuk-!-width-two-thirds">
-    <div class="govuk-inset-text govuk-!-margin-top-0">
-      {% if references | length < 2 %}
+    {% if references | length == 1 %}
+      <div class="govuk-inset-text govuk-!-margin-top-0">
         <p class="govuk-body">You need to get 2 references back before you can submit your application.</p>
         {{ govukButton({
           text: "Request a second reference",
           href: "/application/" + applicationId + "/references/add?referrer=" + referrer
         }) }}
-      {% else %}
+      </div>
+
+      {{ guidanceHtml | safe }}
+
+    {% elif refences | length > 1 %}
+      <div class="govuk-inset-text govuk-!-margin-top-0">
         <p class="govuk-body">You can request as many references as you like but you can only submit 2 with your application.</p>
         {{ govukButton({
           classes: "govuk-button--secondary",
           text: "Request another reference",
           href: "/application/" + applicationId + "/references/add?referrer=" + referrer
         }) }}
-      {% endif %}
-    </div>
+      </div>
+
+      {{ guidanceHtml | safe }}
+    {% else %}
+      <p class="govuk-body">Your application needs to include 2 references.</p>
+
+      {{ guidanceHtml | safe}}
+
+      {{ govukButton({
+        text: "Add reference",
+        href: "/application/" + applicationId + "/references/add"
+      }) }}
+    {% endif %}
+
+
   </div>
+
 
   {% if readyReferences.length %}
     <h2 class="govuk-heading-m">References that have been given</h2>
@@ -63,7 +94,7 @@
     {% include "_includes/review/references.njk" %}
   {% endif %}
 
-  {{ govukButton({
+  {# {{ govukButton({
     text: "Continue"
-  }) }}
+  }) }} #}
 {% endblock %}

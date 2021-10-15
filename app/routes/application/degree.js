@@ -88,11 +88,11 @@ module.exports = router => {
 
     const degree = utils.applicationData(req).degree[id]
 
-    if (degree.level == 'other') {
-      // Skip type, as that’s already given as part of 'level'
-      res.redirect(`/application/${applicationId}/degree/${id}/institution`)
-    } else {
+    if (degree.level == 'Foundation' || degree.level == 'Bachelor' || degree.level == 'Master’s' || degree.level == 'Doctorate') {
+      // Ask follow-up question about type of degree
       res.redirect(`/application/${applicationId}/degree/${id}/type`)
+    } else {
+      res.redirect(`/application/${applicationId}/degree/${id}/institution`)
     }
   })
 

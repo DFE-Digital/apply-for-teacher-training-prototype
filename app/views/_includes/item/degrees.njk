@@ -24,7 +24,7 @@
     html: govukSummaryList({
       rows: [{
         key: {
-          text: "Degree level"
+          text: "Degree type"
         },
         value: {
           text: (item.otherLevel if item.level == "other" else item.level)
@@ -55,7 +55,7 @@
       },
       {
         key: {
-          text: "Degree type"
+          text: item.level + " type"
         },
         value: {
           text: degreeType
@@ -67,10 +67,10 @@
             visuallyHiddenText: "degree type"
           }]
         } if canAmend
-      },
+      } if item.level == 'Foundation' or item.type == 'Bachelor' or item.type == 'Master’s' or item.type == 'Doctorate',
       {
         key: {
-          text: "Institution"
+          text: "Awarded by"
         },
         value: {
           text: item.org + (", " + item.country if item.country) or "Not entered"

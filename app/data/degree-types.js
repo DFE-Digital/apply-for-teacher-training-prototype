@@ -30,6 +30,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
+    "priority": 1,
     "name": "Foundation Degree of Education",
     "abbreviation": "FDEd",
     "synonyms": [],
@@ -38,6 +39,7 @@ module.exports = [
     "hesa_itt_code": null
   },
   {
+    "priority": 1,
     "name": "Foundation of Sciences",
     "abbreviation": "FdSs",
     "synonyms": [],
@@ -159,6 +161,7 @@ module.exports = [
     "hesa_itt_code": "64"
   },
   {
+    "priority": 1,
     "name": "Bachelor of Engineering",
     "abbreviation": "BEng",
     "synonyms": [],
@@ -441,38 +444,6 @@ module.exports = [
     "hesa_itt_code": "1"
   },
   {
-    "name": "BSc/Education",
-    "abbreviation": null,
-    "synonyms": [],
-    "level": "6",
-    "dqt_id": "c5695652-c197-e711-80d8-005056ac45bb",
-    "hesa_itt_code": "3"
-  },
-  {
-    "name": "BTech/Education",
-    "abbreviation": null,
-    "synonyms": [],
-    "level": "6",
-    "dqt_id": "c9695652-c197-e711-80d8-005056ac45bb",
-    "hesa_itt_code": "5"
-  },
-  {
-    "name": "BA/Education",
-    "abbreviation": null,
-    "synonyms": [],
-    "level": "6",
-    "dqt_id": "c9695652-c197-e711-80d8-005056ac45bb",
-    "hesa_itt_code": "7"
-  },
-  {
-    "name": "BA Combined Studies/Education of the Deaf",
-    "abbreviation": null,
-    "synonyms": [],
-    "level": "6",
-    "dqt_id": "d1695652-c197-e711-80d8-005056ac45bb",
-    "hesa_itt_code": "9"
-  },
-  {
     "name": "BA with intercalated PGCE",
     "abbreviation": null,
     "synonyms": [],
@@ -592,6 +563,7 @@ module.exports = [
     "hesa_itt_code": "210"
   },
   {
+    "priority": 1,
     "name": "Master of Engineering",
     "abbreviation": "MEng",
     "synonyms": [

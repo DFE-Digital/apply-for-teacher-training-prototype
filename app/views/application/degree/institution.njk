@@ -1,5 +1,5 @@
 {% set applicationPath = "/application/" + applicationId %}
-{% set title = "Which institution awarded your degree?" %}
+{% set title = "Which university awarded your degree?" %}
 {% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/institution" %}
 
@@ -25,6 +25,7 @@
   {% else %}
     <div class="govuk-form-group">
       <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="degree-{{ id }}-org">{{ title }}</label></h1>
+      <span id="degree-{{ id }}-org-hint" class="govuk-hint">Type your own or select from the suggestions. For example, 'Open University'.</span>
       <div id="org-autocomplete-container" class="suggestions"></div>
     </div>
   {% endif %}

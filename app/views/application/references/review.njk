@@ -1,4 +1,4 @@
-{% extends "_form-wide.njk" %}
+{% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
@@ -50,47 +50,42 @@
 {% endset %}
 
 {% block primary %}
-  <div class="govuk-!-width-two-thirds">
-    {% if references | length == 1 %}
-      <div class="govuk-inset-text govuk-!-margin-top-0">
-        <p class="govuk-body">You need to get 2 references back before you can submit your application.</p>
-        {{ govukButton({
-          text: "Request a second reference",
-          href: "/application/" + applicationId + "/references/add?referrer=" + referrer
-        }) }}
-      </div>
-
-      {{ govukDetails({
-        summaryHtml: "What your referee is asked to do when you request a reference",
-        html: guidanceHtml
-      }) }}
-
-    {% elif references | length > 1 %}
-      <div class="govuk-inset-text govuk-!-margin-top-0">
-        <p class="govuk-body">You can request as many references as you like but you can only submit 2 with your application.</p>
-        {{ govukButton({
-          classes: "govuk-button--secondary",
-          text: "Request another reference",
-          href: "/application/" + applicationId + "/references/add?referrer=" + referrer
-        }) }}
-      </div>
-
-      {{ govukDetails({
-        summaryHtml: "What your referee is asked to do when you request a reference",
-        html: guidanceHtml
-      }) }}
-    {% else %}
-      {# <h2 class="govuk-heading-m">What your referee is asked to do when you request a reference</h2> #}
-      {{ guidanceHtml | safe}}
-
+  {% if references | length == 1 %}
+    <div class="govuk-inset-text govuk-!-margin-top-0">
+      <p class="govuk-body">You need to get 2 references back before you can submit your application.</p>
       {{ govukButton({
-        text: "Add reference",
-        href: "/application/" + applicationId + "/references/add"
+        text: "Request a second reference",
+        href: "/application/" + applicationId + "/references/add?referrer=" + referrer
       }) }}
-    {% endif %}
+    </div>
 
+    {{ govukDetails({
+      summaryHtml: "What your referee is asked to do when you request a reference",
+      html: guidanceHtml
+    }) }}
 
-  </div>
+  {% elif references | length > 1 %}
+    <div class="govuk-inset-text govuk-!-margin-top-0">
+      <p class="govuk-body">You can request as many references as you like but you can only submit 2 with your application.</p>
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Request another reference",
+        href: "/application/" + applicationId + "/references/add?referrer=" + referrer
+      }) }}
+    </div>
+
+    {{ govukDetails({
+      summaryHtml: "What your referee is asked to do when you request a reference",
+      html: guidanceHtml
+    }) }}
+  {% else %}
+    {{ guidanceHtml | safe}}
+
+    {{ govukButton({
+      text: "Add reference",
+      href: "/application/" + applicationId + "/references/add"
+    }) }}
+  {% endif %}
 
 
   {% if readyReferences.length %}
@@ -111,7 +106,4 @@
     {% include "_includes/review/references.njk" %}
   {% endif %}
 
-  {# {{ govukButton({
-    text: "Continue"
-  }) }} #}
 {% endblock %}

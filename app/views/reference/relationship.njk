@@ -10,6 +10,10 @@
     {{ govukBackLink({
       href: referrer
     }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference"
+    }) }}
   {% endif %}
 {% endblock %}
 

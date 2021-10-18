@@ -1,33 +1,27 @@
-{% extends "_form.njk" %}
+{% extends "_form-question.njk" %}
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Decline to give a reference" %}
+{% set title = "Are you sure you are unable to give " + candidate_name + " a reference?" %}
 {% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/reference"
+    }) }}
+  {% endif %}
+{% endblock %}
 
 {% block primary %}
 
-  <p class="govuk-body">Declining {{ candidate_name }}’s reference request may delay their application and make it harder for them to get onto teacher training.</p>
-
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "Can you give " + candidate_name + " a reference?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    name: "answer",
-    items: [{
-      value: "yes",
-      text: "No, I decline to give a reference"
-    }, {
-      value: "no",
-      text: "Yes, I can give a reference"
-    }]
-  }) }}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
 
   {{ govukButton({
-    text: "Continue"
+    text: "Yes, I am unable to give a reference"
   }) }}
 {% endblock %}

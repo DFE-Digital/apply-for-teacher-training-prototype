@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set formaction = referrer or "/reference/safeguarding" %}
+{% set formaction = "/reference/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "A reference for " + candidate_name + "" %}
 {% set hasAccountLinks = false %}
@@ -15,7 +15,7 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Some content</p>
+  <p class="govuk-body">Some content to explain (again) what’s required.</p>
 
   {{ govukRadios({
     fieldset: {
@@ -28,11 +28,11 @@
     name: "reference-answer",
     items: [{
       value: "Yes",
-      text: "Yes",
+      text: "Yes, I can give them a reference",
       checked: checked("reference.relationship.correct", "Yes")
     }, {
       value: "No",
-      text: "No",
+      text: "No, I am unable to give a reference",
       checked: checked("reference.relationship.correct", "No")
     }]
   }) }}

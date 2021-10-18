@@ -2,7 +2,8 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
-{% set title = "References" %}
+
+
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/references/review" %}
 {% set references = applicationValue(["references"]) | toArray %}
@@ -10,6 +11,13 @@
 {% set readyReferences = references | selectattr("ready") | reverse %}
 {% set otherReferences = references | rejectattr("pending") | rejectattr("ready") | reverse %}
 {% set showReferenceRequestLog = true %}
+
+{% if references | length > 0 %}
+  {% set title = "References" %}
+{% else %}
+  {% set title = "What your referee is asked to do when you request a reference" %}
+{% endif %}
+
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -57,7 +65,7 @@
         html: guidanceHtml
       }) }}
 
-    {% elif refences | length > 1 %}
+    {% elif references | length > 1 %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
         <p class="govuk-body">You can request as many references as you like but you can only submit 2 with your application.</p>
         {{ govukButton({
@@ -72,9 +80,7 @@
         html: guidanceHtml
       }) }}
     {% else %}
-      <p class="govuk-body">Your application needs to include 2 references.</p>
-
-      <h2 class="govuk-heading-m">What your referee is asked to do when you request a reference</h2>
+      {# <h2 class="govuk-heading-m">What your referee is asked to do when you request a reference</h2> #}
       {{ guidanceHtml | safe}}
 
       {{ govukButton({

@@ -26,15 +26,19 @@
 {% endblock %}
 
 {% set guidanceHtml %}
-  <p class="govuk-body">When you request a reference, we will email them a link to a form asking them:</p>
+  <p class="govuk-body">We will ask your referee to complete an online form.</p>
+
+  <p class="govuk-body">We’ll ask them to write up to 500 words about your potential to teach, suggesting they comment on your:</p>
 
   <ul class="govuk-list govuk-list--bullet">
-    <li>to confirm how they know you</li>
-    <li>whether they know of any reason why you should not work with children</li>
-    <li>to write up to 500 words describing your potential to teach</li>
+    <li>academic skills</li>
+    <li>communication skills</li>
+    <li>reliability and professionalism</li>
+    <li>ability to work with children</li>
+    <li>transferable skills</li>
   </ul>
 
-  <p class="govuk-body govuk-!-margin-bottom-7"><a href="https://getintoteaching.education.gov.uk/tips-on-applying-for-teacher-training" class="govuk-link">Guidance for references (opens in a new tab)</a></p>
+  <p class="govuk-body">We’ll also ask them to confirm how they know you, and whether they know of of any reason you should not work with children.</p>
 {% endset %}
 
 {% block primary %}
@@ -48,7 +52,10 @@
         }) }}
       </div>
 
-      {{ guidanceHtml | safe }}
+      {{ govukDetails({
+        summaryHtml: "What your referee is asked to do when you request a reference",
+        html: guidanceHtml
+      }) }}
 
     {% elif refences | length > 1 %}
       <div class="govuk-inset-text govuk-!-margin-top-0">
@@ -60,10 +67,14 @@
         }) }}
       </div>
 
-      {{ guidanceHtml | safe }}
+      {{ govukDetails({
+        summaryHtml: "What your referee is asked to do when you request a reference",
+        html: guidanceHtml
+      }) }}
     {% else %}
       <p class="govuk-body">Your application needs to include 2 references.</p>
 
+      <h2 class="govuk-heading-m">What your referee is asked to do when you request a reference</h2>
       {{ guidanceHtml | safe}}
 
       {{ govukButton({

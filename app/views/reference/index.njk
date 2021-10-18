@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/safeguarding" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Confirm how you know " + candidate_name %}
+{% set title = "A reference for " + candidate_name + "" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -14,33 +14,18 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">{{ candidate_name }} describes your relationship as follows:</p>
-  {{ govukInsetText({
-    text: "He was my course supervisor at university. I’ve known him for a year."
-  }) }}
 
-  {% set correctRelationshipHtml %}
-    {{ govukCharacterCount({
-      id: "reference-relationship-correction",
-      name: "reference[relationship][correction]",
-      value: data.reference.relationship.correction,
-      label: {
-        text: "Tell us what your relationship is to " + candidate_name + " and how long you’ve known them"
-      },
-      maxwords: 50,
-      rows: 5
-    }) }}
-  {% endset %}
+  <p class="govuk-body">Some content</p>
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Is this correct?",
+        text: "Can you give a reference for " + candidate_name + "?",
         classes: "govuk-fieldset__legend--m"
       }
     },
-    idPrefix: "reference-relationship-correct",
-    name: "reference[relationship][correct]",
+    idPrefix: "reference-answer",
+    name: "reference-answer",
     items: [{
       value: "Yes",
       text: "Yes",
@@ -48,10 +33,7 @@
     }, {
       value: "No",
       text: "No",
-      checked: checked("reference.relationship.correct", "No"),
-      conditional: {
-        html: correctRelationshipHtml
-      }
+      checked: checked("reference.relationship.correct", "No")
     }]
   }) }}
 

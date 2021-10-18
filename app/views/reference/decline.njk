@@ -2,28 +2,28 @@
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "You’ve declined to give a reference" %}
+{% set title = "Decline to give a reference" %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
-  <p class="govuk-body">Teacher training courses can fill up quickly, and candidates need 2 references to apply.</p>
-  <p class="govuk-body">{{ candidate_name }} will be able to submit the application quicker if you give a reference.</p>
+
+  <p class="govuk-body">Declining {{ candidate_name }}’s reference request may delay their application and make it harder for them to get onto teacher training.</p>
 
   {{ govukRadios({
     fieldset: {
       classes: "govuk-!-margin-top-6",
       legend: {
-        text: "Are you sure you do not want to give " + candidate_name + " a reference?",
+        text: "Can you give " + candidate_name + " a reference?",
         classes: "govuk-fieldset__legend--m"
       }
     },
     name: "answer",
     items: [{
       value: "yes",
-      text: "Yes, I’m sure"
+      text: "No, I decline to give a reference"
     }, {
       value: "no",
-      text: "No, I’ve changed my mind"
+      text: "Yes, I can give a reference"
     }]
   }) }}
 

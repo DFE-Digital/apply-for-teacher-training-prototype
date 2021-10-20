@@ -1,6 +1,6 @@
 {% extends "_content.njk" %}
 
-{% set title = "Requesting a reference" %}
+{% set title = "What your referee can expect once you've requested a reference" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
@@ -17,21 +17,35 @@
 {% endblock %}
 
 {% block primary %}
-  <h2 class="govuk-heading-m">Who to choose as a referee</h2>
-  <p class="govuk-body">Referees should not be family members, partners or friends.</p>
-  <p class="govuk-body">If you graduated in the last 5 years, or you do not yet have a grade for your degree, choose at least one academic referee.</p>
-  <p class="govuk-body">If you’re applying for a salaried course, one of your references must be from an employer.</p>
-  <p class="govuk-body">Training providers will only accept a character reference if there’s also an academic or professional reference.</p>
-  <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/#talk-to-us">Talk to a teacher training advisor</a> if you need help choosing a referee.</p>
 
-  <h2 class="govuk-heading-m">Contact your referee</h2>
-  <p class="govuk-body">Your referee will receive a link to an online form to complete. References sent to providers by email will not be accepted.</p>
-  <p class="govuk-body">Contact your referee in advance to check that they can:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>type or paste their reference into an online form (with a 500-word limit)</li>
-    <li>submit a reference quickly, so as not to delay your application</li>
-    <li>give you a full reference – providers need to know if you’re suitable to become a teacher</li>
-  </ul>
+    <p class="govuk-body">Your referee will receive an email from the Becoming a Teacher team at the Department for Education with a link to an online form to complete.</p>
+
+    <div class="govuk-inset-text">
+      They must submit their reference using the form we send them. Some referees can only send their references by email, but these are not be accepted.
+    </div>
+
+    <p class="govuk-body">The form asks referees to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>confirm how they know you</li>
+        <li>state whether they know of any reason why you should not work with children</li>
+        <li>write a free-text reference of up to 500 words</li>
+      </ul>
+
+      <h2 class="govuk-heading-s">What they can include in the free text reference</h2>
+
+    <p class="govuk-body">We propose topics to cover such as your:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>academic skills</li>
+        <li>communication skills</li>
+        <li>reliability and professionalism</li>
+        <li>ability to work with children</li>
+        <li>transferable skills</li>
+      </ul>
+
+    <p class="govuk-body">They do not have to comment on all of these.</p>
+
+    <p class="govuk-body">The referee will not be able to see your application or be asked to comment on it.</p>
+
   {{ govukButton({
     text: "Continue",
     href: "/application/" + applicationId + "/references/" + id + "/type/"

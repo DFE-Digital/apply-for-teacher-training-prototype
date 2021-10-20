@@ -48,22 +48,15 @@ module.exports = router => {
     const { applicationId } = req.params
     const id = utils.generateRandomString()
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    res.redirect(`/application/${applicationId}/references/${id}/start${queryString}`)
+    res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
   })
 
   // Render review pages, redirecting to referee start page if no referees added
-  router.get('/application/:applicationId/references/:view?', (req, res) => {
+  router.get('/application/:applicationId/references/review', (req, res) => {
     const { applicationId } = req.params
     const application = utils.applicationData(req)
-    const references = Object.entries(application.references)
-
-    if (references.length) {
-      res.render('application/references/review', {
-        messages: req.flash('success')
-      })
-    } else {
-      res.redirect(`/application/${applicationId}/references/add`)
-    }
+    res.render('application/references/review', {
+    })
   })
 
   // Render action page

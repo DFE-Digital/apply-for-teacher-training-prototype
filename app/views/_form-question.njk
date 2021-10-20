@@ -1,12 +1,12 @@
 {% extends "_layout.njk" %}
 
 {% set labelHtml %}
-  {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
+  {% if parent %}<span class="govuk-caption-l">{{ parent }}</span>{% endif %}
   {{ title }}
 {% endset %}
 
 {% set label = {
-  classes: "govuk-label--xl govuk-!-margin-bottom-8",
+  classes: "govuk-label--l",
   html: labelHtml,
   isPageHeading: true
 } %}

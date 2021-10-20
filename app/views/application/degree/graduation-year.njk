@@ -1,17 +1,13 @@
 {% extends "_form-question.njk" %}
 
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/graduation-year" %}
+
 {% set applicationPath = "/application/" + applicationId %}
 
-{% set title = "What year will you graduate?" if applicationValue(["degree", id, "grade"]) == "Pending" else "What year did you graduate?" %}
-{% set allowsFeedback = true %}
+{% set title = "What year will you graduate?" if applicationValue(["degree", id, "completed"]) == "No" else "What year did you graduate?" %}
+{% set graduatingYearExample = "2022" if applicationValue(["degree", id, "completed"]) == "No" else "2019" %}
 
-{% set graduatingYearExample = "2002" %}
-{% set degreeCount = applicationValue(["degree"]) | length %}
-{% if applicationValue(["degree", id, "grade"]) == "Pending" and degreeCount <= 1 %}
-  {% set pendingFirstDegree = true %}
-  {% set graduatingYearExample = "2020" %}
-{% endif %}
-{% set startYearExample = graduatingYearExample - 3 %}
+{% set allowsFeedback = true %}
 
 {% block pageNavigation %}
   {{ govukBackLink({

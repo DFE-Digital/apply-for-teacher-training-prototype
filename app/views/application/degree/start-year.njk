@@ -6,13 +6,6 @@
 
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/start-year" %}
 
-{% set graduatingYearExample = "2002" %}
-{% set degreeCount = applicationValue(["degree"]) | length %}
-{% if applicationValue(["degree", id, "grade"]) == "Pending" and degreeCount <= 1 %}
-  {% set pendingFirstDegree = true %}
-  {% set graduatingYearExample = "2020" %}
-{% endif %}
-{% set startYearExample = graduatingYearExample - 3 %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -27,7 +20,7 @@
       classes: "govuk-label--l"
     },
     hint: {
-      text: "For example, " + startYearExample
+      text: "For example, 1999"
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}

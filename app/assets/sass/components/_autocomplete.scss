@@ -4,6 +4,10 @@
     border-top: 2px solid black;
   }
 
+  body .suggestions {
+    margin-bottom: 60px;
+  }
+
   body .suggestions .autocomplete__wrapper ul::before {
     content: 'Suggestions';
     padding: 4px 8px;

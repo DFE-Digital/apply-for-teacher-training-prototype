@@ -37,6 +37,8 @@
     maxwords: 50
   } | decorateApplicationAttributes(["references", id, "relationship"])) }}
 
+  <p class="govuk-body">Your referee will see your answer to this question.</p>
+
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"
   }) }}

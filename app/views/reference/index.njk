@@ -28,15 +28,15 @@
     items: [{
       value: "Yes",
       text: "Yes, I can give them a reference",
-      checked: checked("reference.relationship.correct", "Yes")
+      checked: (data["reference-answer"] == "Yes")
     }, {
       value: "No",
       text: "No, I am unable to give a reference",
-      checked: checked("reference.relationship.correct", "No")
+      checked: (data["reference-answer"] == "No")
     }]
   }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_form-question.njk" %}
 
 {% set formaction = "/reference/answer" %}
 {% set candidate_name = "Jane Doe" %}
@@ -15,13 +15,12 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Some content to explain (again) what’s required.</p>
-
   {{ govukRadios({
     fieldset: {
       legend: {
         text: "Can you give a reference for " + candidate_name + "?",
-        classes: "govuk-fieldset__legend--m"
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
       }
     },
     idPrefix: "reference-answer",

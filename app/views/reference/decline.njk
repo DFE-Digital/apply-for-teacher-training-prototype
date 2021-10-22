@@ -1,33 +1,25 @@
-{% extends "_form.njk" %}
+{% extends "_layout.njk" %}
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Decline to give a reference" %}
+{% set title = "Are you sure you are unable to give " + candidate_name + " a reference?" %}
 {% set hasAccountLinks = false %}
 
-{% block primary %}
-
-  <p class="govuk-body">Declining {{ candidate_name }}’s reference request may delay their application and make it harder for them to get onto teacher training.</p>
-
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "Can you give " + candidate_name + " a reference?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    name: "answer",
-    items: [{
-      value: "yes",
-      text: "No, I decline to give a reference"
-    }, {
-      value: "no",
-      text: "Yes, I can give a reference"
-    }]
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/reference"
   }) }}
+{% endblock %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <form action="/reference/thank-you">
+        {{ govukButton({
+          text: "Yes, I am unable to give a reference"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

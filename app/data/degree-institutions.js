@@ -44,8 +44,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "1",
     "dttp_id": "5c9e1d2d-3fa2-e811-812b-5065f38ba241",
-    "ukprn": "10007773",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007773"
   },
   {
     "name": "Cranfield University",
@@ -53,8 +52,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "2",
     "dttp_id": "4e9e1d2d-3fa2-e811-812b-5065f38ba241",
-    "ukprn": "10007822",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007822"
   },
   {
     "name": "Royal College of Art",
@@ -74,8 +72,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "7",
     "dttp_id": "ca70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007811",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10007811"
   },
   {
     "name": "Buckinghamshire New University",
@@ -89,8 +86,7 @@ module.exports = [
     "hesa_itt_code": "9",
     "dttp_id": "bec53e05-7042-e811-80ff-3863bb3640b8",
     "comment": "Name changed in 2007",
-    "ukprn": "10000975",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10000975"
   },
   {
     "name": "Royal Central School of Speech and Drama",
@@ -111,8 +107,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "11",
     "dttp_id": "0871f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007848",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007848"
   },
   {
     "name": "Canterbury Christ Church University",
@@ -122,8 +117,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "12",
     "dttp_id": "ce70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10001143",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10001143"
   },
   {
     "name": "York St John University",
@@ -133,8 +127,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "13",
     "dttp_id": "4c71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007713",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007713"
   },
   {
     "name": "Plymouth Marjon University",
@@ -145,8 +138,7 @@ module.exports = [
     ],
     "hesa_itt_code": "14",
     "dttp_id": "3a71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10037449",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10037449"
   },
   {
     "name": "Edge Hill University",
@@ -156,8 +148,7 @@ module.exports = [
     ],
     "hesa_itt_code": "16",
     "dttp_id": "d070f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007823",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007823"
   },
   {
     "name": "Falmouth University",
@@ -165,8 +156,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "17",
     "dttp_id": "6f955cae-3ea2-e811-812b-5065f38ba241",
-    "ukprn": "10008640",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008640"
   },
   {
     "name": "Harper Adams University",
@@ -176,8 +166,7 @@ module.exports = [
     ],
     "hesa_itt_code": "18",
     "dttp_id": "1b369414-75d9-e911-a863-000d3ab0da57",
-    "ukprn": "10040812",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10040812"
   },
   {
     "name": "Kent Institute of Art and Design",
@@ -197,8 +186,7 @@ module.exports = [
     ],
     "hesa_itt_code": "21",
     "dttp_id": "4471f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003614",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003614"
   },
   {
     "name": "Liverpool Hope University",
@@ -206,8 +194,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "23",
     "dttp_id": "dc70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003956",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003956"
   },
   {
     "name": "University of the Arts London",
@@ -229,8 +216,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "26",
     "dttp_id": "fc70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007152",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007152"
   },
   {
     "name": "University of Northampton",
@@ -242,8 +228,7 @@ module.exports = [
     ],
     "hesa_itt_code": "27",
     "dttp_id": "2871f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007138",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007138"
   },
   {
     "name": "Newman University",
@@ -255,8 +240,7 @@ module.exports = [
     "hesa_itt_code": "28",
     "dttp_id": "ec70f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Name changed in 2013",
-    "ukprn": "10007832",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10007832"
   },
   {
     "name": "Ravensbourne University London",
@@ -266,8 +250,7 @@ module.exports = [
     ],
     "hesa_itt_code": "30",
     "dttp_id": "4ff3791d-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10005389",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10005389"
   },
   {
     "name": "University of Roehampton",
@@ -277,8 +260,7 @@ module.exports = [
     ],
     "hesa_itt_code": "31",
     "dttp_id": "f270f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007776",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007776"
   },
   {
     "name": "Rose Bruford College",
@@ -312,8 +294,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "34",
     "dttp_id": "49e01caa-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10007778",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007778"
   },
   {
     "name": "Royal Northern College of Music",
@@ -323,8 +304,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "35",
     "dttp_id": "cf3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10007837",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10007837"
   },
   {
     "name": "Salford College of Technology",
@@ -346,8 +326,7 @@ module.exports = [
     "hesa_itt_code": "37",
     "dttp_id": "c10b1d33-3fa2-e811-812b-5065f38ba241",
     "comment": "Name changed to Solent University in 2018",
-    "ukprn": "10006022",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006022"
   },
   {
     "name": "University of Cumbria",
@@ -367,8 +346,7 @@ module.exports = [
     ],
     "hesa_itt_code": "39",
     "dttp_id": "f670f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007843",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007843"
   },
   {
     "name": "Leeds Trinity University",
@@ -379,8 +357,7 @@ module.exports = [
     ],
     "hesa_itt_code": "40",
     "dttp_id": "da70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003863",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10003863"
   },
   {
     "name": "Trinity Laban Conservatoire of Music and Dance",
@@ -390,8 +367,7 @@ module.exports = [
     ],
     "hesa_itt_code": "41",
     "dttp_id": "054b9247-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10008017",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008017"
   },
   {
     "name": "The Surrey Institute of Art and Design, University College",
@@ -411,8 +387,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "46",
     "dttp_id": "4871f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007139",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007139"
   },
   {
     "name": "Anglia Ruskin University",
@@ -430,8 +405,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "48",
     "dttp_id": "c670f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10000571",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10000571"
   },
   {
     "name": "University of Bolton",
@@ -441,8 +415,7 @@ module.exports = [
     ],
     "hesa_itt_code": "49",
     "dttp_id": "dfdb7129-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10006841",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006841"
   },
   {
     "name": "Bournemouth University",
@@ -450,8 +423,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "50",
     "dttp_id": "b1c53e05-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10000824",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10000824"
   },
   {
     "name": "University of Brighton",
@@ -461,8 +433,7 @@ module.exports = [
     ],
     "hesa_itt_code": "51",
     "dttp_id": "0071f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10000886",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10000886"
   },
   {
     "name": "Birmingham City University",
@@ -478,8 +449,7 @@ module.exports = [
     "hesa_itt_code": "52",
     "dttp_id": "c870f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Renamed from 'University of Central England in Birmingham' in 2007.",
-    "ukprn": "10007140",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007140"
   },
   {
     "name": "University of Central Lancashire",
@@ -491,8 +461,7 @@ module.exports = [
     ],
     "hesa_itt_code": "53",
     "dttp_id": "59e01caa-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10007141",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007141"
   },
   {
     "name": "University of Gloucestershire",
@@ -500,8 +469,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "54",
     "dttp_id": "1871f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007145",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007145"
   },
   {
     "name": "London Guildhall University",
@@ -519,8 +487,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "56",
     "dttp_id": "1ff35f0b-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10001726",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10001726"
   },
   {
     "name": "University of Derby",
@@ -528,8 +495,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "57",
     "dttp_id": "0e71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007851",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007851"
   },
   {
     "name": "University of East London",
@@ -541,8 +507,7 @@ module.exports = [
     ],
     "hesa_itt_code": "58",
     "dttp_id": "1471f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007144",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007144"
   },
   {
     "name": "University of Greenwich",
@@ -552,8 +517,7 @@ module.exports = [
     ],
     "hesa_itt_code": "59",
     "dttp_id": "1a71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007146",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007146"
   },
   {
     "name": "University of Hertfordshire",
@@ -565,8 +529,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "60",
     "dttp_id": "1c71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007147",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007147"
   },
   {
     "name": "University of Huddersfield",
@@ -579,8 +542,7 @@ module.exports = [
     ],
     "hesa_itt_code": "61",
     "dttp_id": "1e71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007148",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007148"
   },
   {
     "name": "University of Lincoln",
@@ -590,8 +552,7 @@ module.exports = [
     ],
     "hesa_itt_code": "62",
     "dttp_id": "035b7f3b-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007151",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007151"
   },
   {
     "name": "Kingston University",
@@ -601,8 +562,7 @@ module.exports = [
     ],
     "hesa_itt_code": "63",
     "dttp_id": "d670f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003678",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003678"
   },
   {
     "name": "Leeds Beckett University",
@@ -617,8 +577,7 @@ module.exports = [
     "hesa_itt_code": "64",
     "dttp_id": "d870f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Name changed from Leeds Metropolitan in 2013",
-    "ukprn": "10003861",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003861"
   },
   {
     "name": "Liverpool John Moores University",
@@ -628,8 +587,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "65",
     "dttp_id": "de70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003957",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003957"
   },
   {
     "name": "Manchester Metropolitan University",
@@ -641,8 +599,7 @@ module.exports = [
     ],
     "hesa_itt_code": "66",
     "dttp_id": "e670f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004180",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004180"
   },
   {
     "name": "Middlesex University London",
@@ -664,8 +621,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "68",
     "dttp_id": "f30a4e73-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10001883",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10001883"
   },
   {
     "name": "Northumbria University Newcastle",
@@ -675,8 +631,7 @@ module.exports = [
     ],
     "hesa_itt_code": "69",
     "dttp_id": "2a71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10001282",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10001282"
   },
   {
     "name": "The University of North London",
@@ -698,8 +653,7 @@ module.exports = [
     ],
     "hesa_itt_code": "71",
     "dttp_id": "ee70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004797",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004797"
   },
   {
     "name": "Oxford Brookes University",
@@ -707,8 +661,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "72",
     "dttp_id": "f070f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004930",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004930"
   },
   {
     "name": "University of Plymouth",
@@ -716,8 +669,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "73",
     "dttp_id": "3071f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007801",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007801"
   },
   {
     "name": "University of Portsmouth",
@@ -727,8 +679,7 @@ module.exports = [
     ],
     "hesa_itt_code": "74",
     "dttp_id": "3271f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007155",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007155"
   },
   {
     "name": "Sheffield Hallam University",
@@ -738,8 +689,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "75",
     "dttp_id": "f470f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10005790",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10005790"
   },
   {
     "name": "London South Bank University",
@@ -749,8 +699,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "76",
     "dttp_id": "e270f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004078",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004078"
   },
   {
     "name": "Staffordshire University",
@@ -758,8 +707,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "77",
     "dttp_id": "f870f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10006299",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006299"
   },
   {
     "name": "University of Sunderland",
@@ -769,8 +717,7 @@ module.exports = [
     ],
     "hesa_itt_code": "78",
     "dttp_id": "3c71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007159",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007159"
   },
   {
     "name": "Teesside University",
@@ -778,8 +725,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "79",
     "dttp_id": "2a96fc9d-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10007161",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007161"
   },
   {
     "name": "University of West London",
@@ -791,8 +737,7 @@ module.exports = [
     ],
     "hesa_itt_code": "80",
     "dttp_id": "84228041-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10006566",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006566"
   },
   {
     "name": "University of the West of England, Bristol",
@@ -804,8 +749,7 @@ module.exports = [
     ],
     "hesa_itt_code": "81",
     "dttp_id": "4071f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007164",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007164"
   },
   {
     "name": "University of Chichester",
@@ -816,8 +760,7 @@ module.exports = [
     ],
     "hesa_itt_code": "82",
     "dttp_id": "0a71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007137",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007137"
   },
   {
     "name": "University of Westminster",
@@ -827,8 +770,7 @@ module.exports = [
     ],
     "hesa_itt_code": "83",
     "dttp_id": "7eda4db6-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10007165",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007165"
   },
   {
     "name": "University of Wolverhampton",
@@ -838,8 +780,7 @@ module.exports = [
     ],
     "hesa_itt_code": "85",
     "dttp_id": "4671f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007166",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007166"
   },
   {
     "name": "The University of Wales, Newport",
@@ -1013,8 +954,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "108",
     "dttp_id": "513e2cff-6f42-e811-80ff-3863bb3640b8",
-    "ukprn": "10007759",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007759"
   },
   {
     "name": "University of Bath",
@@ -1024,8 +964,7 @@ module.exports = [
     ],
     "hesa_itt_code": "109",
     "dttp_id": "3e7af34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007850",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007850"
   },
   {
     "name": "University of Birmingham",
@@ -1035,8 +974,7 @@ module.exports = [
     ],
     "hesa_itt_code": "110",
     "dttp_id": "fe70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10006840",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006840"
   },
   {
     "name": "University of Bradford",
@@ -1048,8 +986,7 @@ module.exports = [
     ],
     "hesa_itt_code": "111",
     "dttp_id": "7fed6e2f-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007785",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007785"
   },
   {
     "name": "University of Bristol",
@@ -1059,8 +996,7 @@ module.exports = [
     ],
     "hesa_itt_code": "112",
     "dttp_id": "0271f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007786",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007786"
   },
   {
     "name": "Brunel University London",
@@ -1073,8 +1009,7 @@ module.exports = [
     "hesa_itt_code": "113",
     "dttp_id": "cc70f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Name changed in 2014",
-    "ukprn": "10000961",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10000961"
   },
   {
     "name": "University of Cambridge",
@@ -1096,8 +1031,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "115",
     "dttp_id": "293e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10001478",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10001478"
   },
   {
     "name": "Durham University",
@@ -1108,8 +1042,7 @@ module.exports = [
     "hesa_itt_code": "116",
     "dttp_id": "1071f34a-2887-e711-80d8-005056ac45bb",
     "comment": "Changed trading name to Durham University in 2005",
-    "ukprn": "10007143",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007143"
   },
   {
     "name": "University of East Anglia",
@@ -1121,8 +1054,7 @@ module.exports = [
     ],
     "hesa_itt_code": "117",
     "dttp_id": "1271f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007789",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007789"
   },
   {
     "name": "University of Essex",
@@ -1132,8 +1064,7 @@ module.exports = [
     ],
     "hesa_itt_code": "118",
     "dttp_id": "5aeb7735-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007791",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007791"
   },
   {
     "name": "University of Exeter",
@@ -1143,8 +1074,7 @@ module.exports = [
     ],
     "hesa_itt_code": "119",
     "dttp_id": "1671f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007792",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007792"
   },
   {
     "name": "University of Hull",
@@ -1157,8 +1087,7 @@ module.exports = [
     ],
     "hesa_itt_code": "120",
     "dttp_id": "2071f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007149",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007149"
   },
   {
     "name": "Keele University",
@@ -1169,8 +1098,7 @@ module.exports = [
     ],
     "hesa_itt_code": "121",
     "dttp_id": "3a7af34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007767",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007767"
   },
   {
     "name": "University of Kent",
@@ -1183,8 +1111,7 @@ module.exports = [
     ],
     "hesa_itt_code": "122",
     "dttp_id": "99eb7735-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007150",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007150"
   },
   {
     "name": "Lancaster University",
@@ -1195,8 +1122,7 @@ module.exports = [
     ],
     "hesa_itt_code": "123",
     "dttp_id": "a4eb7735-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007768",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007768"
   },
   {
     "name": "University of Leeds",
@@ -1206,8 +1132,7 @@ module.exports = [
     ],
     "hesa_itt_code": "124",
     "dttp_id": "2271f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007795",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007795"
   },
   {
     "name": "University of Leicester",
@@ -1217,8 +1142,7 @@ module.exports = [
     ],
     "hesa_itt_code": "125",
     "dttp_id": "2471f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007796",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007796"
   },
   {
     "name": "University of Liverpool",
@@ -1228,8 +1152,7 @@ module.exports = [
     ],
     "hesa_itt_code": "126",
     "dttp_id": "f58f17b0-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10006842",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10006842"
   },
   {
     "name": "Birkbeck, University of London",
@@ -1243,8 +1166,7 @@ module.exports = [
     ],
     "hesa_itt_code": "127",
     "dttp_id": "9fc53e05-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007760",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007760"
   },
   {
     "name": "Goldsmiths, University of London",
@@ -1256,8 +1178,7 @@ module.exports = [
     ],
     "hesa_itt_code": "131",
     "dttp_id": "d270f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10002718",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10002718"
   },
   {
     "name": "Imperial College London",
@@ -1268,8 +1189,7 @@ module.exports = [
     ],
     "hesa_itt_code": "132",
     "dttp_id": "0b9017b0-a141-e811-80ff-3863bb351d40",
-    "ukprn": "10003270",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003270"
   },
   {
     "name": "King’s College London",
@@ -1282,8 +1202,7 @@ module.exports = [
     ],
     "hesa_itt_code": "134",
     "dttp_id": "d470f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10003645",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003645"
   },
   {
     "name": "London Business School",
@@ -1294,8 +1213,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "135",
     "dttp_id": "6a1c7817-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007769",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007769"
   },
   {
     "name": "London School of Economics and Political Science",
@@ -1322,8 +1240,7 @@ module.exports = [
     ],
     "hesa_itt_code": "138",
     "dttp_id": "853e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10007771",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007771"
   },
   {
     "name": "Queen Mary University of London",
@@ -1338,8 +1255,7 @@ module.exports = [
     ],
     "hesa_itt_code": "139",
     "dttp_id": "b93e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10007775",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007775"
   },
   {
     "name": "Royal Holloway, University of London",
@@ -1353,8 +1269,7 @@ module.exports = [
     ],
     "hesa_itt_code": "141",
     "dttp_id": "6c407223-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10005553",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10005553"
   },
   {
     "name": "Royal Veterinary College",
@@ -1367,8 +1282,7 @@ module.exports = [
     ],
     "hesa_itt_code": "143",
     "dttp_id": "b6db7129-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007779",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007779"
   },
   {
     "name": "St George’s, University of London",
@@ -1391,8 +1305,7 @@ module.exports = [
     ],
     "hesa_itt_code": "146",
     "dttp_id": "bddb7129-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007780",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007780"
   },
   {
     "name": "University College London",
@@ -1405,8 +1318,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "149",
     "dttp_id": "a27af34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007784",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007784"
   },
   {
     "name": "University of London",
@@ -1419,8 +1331,7 @@ module.exports = [
     "hesa_itt_code": "151",
     "dttp_id": "0d791c39-3fa2-e811-812b-5065f38ba241",
     "comment": "Constituent colleges gained the ability to award their own degrees in around 2018, but some institutions that are part of the 'School of Advanced Study', or 'The University of London Institute in Paris' still award postgraduate degrees from the University of London.",
-    "ukprn": "10007797",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007797"
   },
   {
     "name": "Loughborough University",
@@ -1430,8 +1341,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "152",
     "dttp_id": "e470f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004113",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004113"
   },
   {
     "name": "Victoria Manchester University",
@@ -1453,8 +1363,7 @@ module.exports = [
     ],
     "hesa_itt_code": "154",
     "dttp_id": "ea70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007799",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007799"
   },
   {
     "name": "University of Nottingham",
@@ -1487,8 +1396,7 @@ module.exports = [
     ],
     "hesa_itt_code": "157",
     "dttp_id": "3471f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007802",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007802"
   },
   {
     "name": "University of Salford",
@@ -1513,8 +1421,7 @@ module.exports = [
     ],
     "hesa_itt_code": "159",
     "dttp_id": "3671f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007157",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007157"
   },
   {
     "name": "University of Southampton",
@@ -1528,8 +1435,7 @@ module.exports = [
     ],
     "hesa_itt_code": "160",
     "dttp_id": "4f5b7f3b-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007158",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007158"
   },
   {
     "name": "University of Surrey",
@@ -1541,8 +1447,7 @@ module.exports = [
     ],
     "hesa_itt_code": "161",
     "dttp_id": "58228041-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007160",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007160"
   },
   {
     "name": "University of Sussex",
@@ -1552,8 +1457,7 @@ module.exports = [
     ],
     "hesa_itt_code": "162",
     "dttp_id": "3e71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007806",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007806"
   },
   {
     "name": "University of Warwick",
@@ -1563,8 +1467,7 @@ module.exports = [
     ],
     "hesa_itt_code": "163",
     "dttp_id": "4271f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007163",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007163"
   },
   {
     "name": "University of York",
@@ -1574,8 +1477,7 @@ module.exports = [
     ],
     "hesa_itt_code": "164",
     "dttp_id": "4a71f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007167",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007167"
   },
   {
     "name": "The University of Manchester Institute of Science and Technology",
@@ -1795,7 +1697,7 @@ module.exports = [
     "hesa_itt_code": "188",
     "dttp_id": "f63e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10003324",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Writtle University College",
@@ -1805,8 +1707,7 @@ module.exports = [
     ],
     "hesa_itt_code": "189",
     "dttp_id": "d723a753-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10007657",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10007657"
   },
   {
     "name": "Norwich University of the Arts",
@@ -1816,8 +1717,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "190",
     "dttp_id": "a01c7817-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10004775",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10004775"
   },
   {
     "name": "Cumbria Institute of the Arts",
@@ -1881,8 +1781,7 @@ module.exports = [
     ],
     "hesa_itt_code": "197",
     "dttp_id": "c6407223-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10000385",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10000385"
   },
   {
     "name": "Conservatoire for Dance and Drama",
@@ -1893,7 +1792,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "199",
     "dttp_id": "2f3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10001653"
+    "ukprn": "10001653",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "University College Birmingham",
@@ -1901,8 +1801,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "200",
     "dttp_id": "fa70f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10000712",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10000712"
   },
   {
     "name": "The Courtauld Institute of Art",
@@ -1916,7 +1815,7 @@ module.exports = [
     "hesa_itt_code": "201",
     "dttp_id": "18f35f0b-7042-e811-80ff-3863bb3640b8",
     "ukprn": "10007761",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London Metropolitan University",
@@ -1926,8 +1825,7 @@ module.exports = [
     ],
     "hesa_itt_code": "202",
     "dttp_id": "e070f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10004048",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10004048"
   },
   {
     "name": "University of Buckingham",
@@ -1939,8 +1837,7 @@ module.exports = [
     ],
     "hesa_itt_code": "203",
     "dttp_id": "0471f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007787",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007787"
   },
   {
     "name": "The University of Manchester",
@@ -1950,8 +1847,7 @@ module.exports = [
     ],
     "hesa_itt_code": "204",
     "dttp_id": "2671f34a-2887-e711-80d8-005056ac45bb",
-    "ukprn": "10007798",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10007798"
   },
   {
     "name": "Heythrop College",
@@ -1972,8 +1868,7 @@ module.exports = [
     ],
     "hesa_itt_code": "206",
     "dttp_id": "354b9247-7042-e811-80ff-3863bb3640b8",
-    "ukprn": "10006427",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10006427"
   },
   {
     "name": "Guildhall School of Music and Drama",
@@ -1994,7 +1889,7 @@ module.exports = [
     "hesa_itt_code": "209",
     "dttp_id": "84db7129-7042-e811-80ff-3863bb3640b8",
     "ukprn": "10003945",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "University of Suffolk",
@@ -2007,8 +1902,7 @@ module.exports = [
     "hesa_itt_code": "210",
     "dttp_id": "154b9247-7042-e811-80ff-3863bb3640b8",
     "comment": "Renamed from University Campus Suffolk to University of Suffolk in 2016",
-    "ukprn": "10014001",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10014001"
   },
   {
     "name": "Leeds Arts University",
@@ -2019,8 +1913,7 @@ module.exports = [
     "hesa_itt_code": "211",
     "dttp_id": "436e5e11-7042-e811-80ff-3863bb3640b8",
     "comment": "Became a university and changed name in 2017",
-    "ukprn": "10003854",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10003854"
   },
   {
     "name": "AECC University College",
@@ -2030,8 +1923,7 @@ module.exports = [
     ],
     "hesa_itt_code": "213",
     "dttp_id": "fa3d182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10000163",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10000163"
   },
   {
     "name": "BPP University",
@@ -2041,8 +1933,7 @@ module.exports = [
     ],
     "hesa_itt_code": "214",
     "dttp_id": "123e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10031982",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10031982"
   },
   {
     "name": "The London Institute of Banking & Finance",
@@ -2055,8 +1946,7 @@ module.exports = [
     ],
     "hesa_itt_code": "217",
     "dttp_id": "fe3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10008289",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008289"
   },
   {
     "name": "The University of Law",
@@ -2064,8 +1954,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "218",
     "dttp_id": "183f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10039956",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10039956"
   },
   {
     "name": "Richmond, The American International University in London",
@@ -2073,8 +1962,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "219",
     "dttp_id": "c73e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10005470",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10005470"
   },
   {
     "name": "Institute of Contemporary Music Performance",
@@ -2083,7 +1971,7 @@ module.exports = [
     "hesa_itt_code": "220",
     "dttp_id": "5d3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10035638",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Moorlands College",
@@ -2092,7 +1980,7 @@ module.exports = [
     "hesa_itt_code": "221",
     "dttp_id": "993e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023454",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Bible College Missio Dei",
@@ -2104,7 +1992,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "225",
     "dttp_id": "933e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10020416"
+    "ukprn": "10020416",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London School of Science and Technology",
@@ -2123,8 +2012,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "228",
     "dttp_id": "753e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10003958",
-    "highest_level_of_degree_awarded": "Research"
+    "ukprn": "10003958"
   },
   {
     "name": "The National Film and Television School",
@@ -2133,7 +2021,7 @@ module.exports = [
     "hesa_itt_code": "229",
     "dttp_id": "0b3f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004511",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Plymouth College of Art",
@@ -2143,8 +2031,7 @@ module.exports = [
     ],
     "hesa_itt_code": "230",
     "dttp_id": "b53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10005127",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10005127"
   },
   {
     "name": "BIMM Institute",
@@ -2155,8 +2042,7 @@ module.exports = [
     ],
     "hesa_itt_code": "232",
     "dttp_id": "0e3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10037544",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10037544"
   },
   {
     "name": "ICON College of Technology and Management",
@@ -2167,7 +2053,8 @@ module.exports = [
     ],
     "hesa_itt_code": "236",
     "dttp_id": "593e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10003239"
+    "ukprn": "10003239",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Kensington College of Business",
@@ -2185,7 +2072,7 @@ module.exports = [
     "hesa_itt_code": "238",
     "dttp_id": "103e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004061",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Mountview Academy of Theatre Arts",
@@ -2194,7 +2081,7 @@ module.exports = [
     "hesa_itt_code": "239",
     "dttp_id": "9b3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004450",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Nazarene Theological College",
@@ -2203,7 +2090,7 @@ module.exports = [
     "hesa_itt_code": "240",
     "dttp_id": "9f3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004538",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The London College",
@@ -2215,7 +2102,8 @@ module.exports = [
     "hesa_itt_code": "243",
     "dttp_id": "fc3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10015506",
-    "comment": "Not degree awarding"
+    "comment": "Not degree awarding",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Arts Educational Schools",
@@ -2225,7 +2113,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "244",
     "dttp_id": "083e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10000381"
+    "ukprn": "10000381",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Mont Rose College of Management and Sciences",
@@ -2235,7 +2124,8 @@ module.exports = [
     ],
     "hesa_itt_code": "246",
     "dttp_id": "973e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10023777"
+    "ukprn": "10023777",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Norland College",
@@ -2243,8 +2133,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "247",
     "dttp_id": "aa3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10008397",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008397"
   },
   {
     "name": "ForMission",
@@ -2274,7 +2163,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "252",
     "dttp_id": "3a3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10022047"
+    "ukprn": "10022047",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Fairfield School of Business",
@@ -2299,7 +2189,7 @@ module.exports = [
     "hesa_itt_code": "256",
     "dttp_id": "873e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10022285",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London School of Theology",
@@ -2308,7 +2198,7 @@ module.exports = [
     "hesa_itt_code": "257",
     "dttp_id": "8b3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004075",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "St Mellitus College",
@@ -2317,7 +2207,7 @@ module.exports = [
     "hesa_itt_code": "258",
     "dttp_id": "d93e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10030776",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Nelson College London",
@@ -2325,7 +2215,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "260",
     "dttp_id": "a13e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10030129"
+    "ukprn": "10030129",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Northern College of Acupuncture",
@@ -2334,7 +2225,7 @@ module.exports = [
     "hesa_itt_code": "261",
     "dttp_id": "ad3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004740",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Pearson College",
@@ -2342,7 +2233,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "262",
     "dttp_id": "b33e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10042570"
+    "ukprn": "10042570",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Royal Academy of Dance",
@@ -2351,7 +2243,7 @@ module.exports = [
     "hesa_itt_code": "263",
     "dttp_id": "cb3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10005544",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "SAE Education",
@@ -2359,7 +2251,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "265",
     "dttp_id": "d33e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10007839"
+    "ukprn": "10007839",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Academy of Live and Recorded Arts",
@@ -2368,7 +2261,7 @@ module.exports = [
     "hesa_itt_code": "269",
     "dttp_id": "f63d182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10000248",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The College of Integrated Chinese Medicine",
@@ -2377,7 +2270,7 @@ module.exports = [
     "hesa_itt_code": "270",
     "dttp_id": "ed3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10001546",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The City College",
@@ -2386,7 +2279,7 @@ module.exports = [
     "hesa_itt_code": "271",
     "dttp_id": "e93e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10010213",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Met Film School",
@@ -2394,7 +2287,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "272",
     "dttp_id": "953e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10045476"
+    "ukprn": "10045476",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London Studio Centre",
@@ -2403,7 +2297,7 @@ module.exports = [
     "hesa_itt_code": "274",
     "dttp_id": "8d3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004079",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London School of Academics",
@@ -2412,7 +2306,7 @@ module.exports = [
     "hesa_itt_code": "276",
     "dttp_id": "813e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10032594",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Regent College",
@@ -2429,7 +2323,7 @@ module.exports = [
     "hesa_itt_code": "280",
     "dttp_id": "163e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10028216",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Futureworks",
@@ -2438,7 +2332,7 @@ module.exports = [
     "hesa_itt_code": "281",
     "dttp_id": "443e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10022087",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London Bridge Business Academy",
@@ -2447,7 +2341,7 @@ module.exports = [
     "hesa_itt_code": "282",
     "dttp_id": "773e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10013109",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "St Patrick’s International College",
@@ -2466,7 +2360,7 @@ module.exports = [
     "hesa_itt_code": "284",
     "dttp_id": "213e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10001386",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "All Nations Christian College",
@@ -2474,7 +2368,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "285",
     "dttp_id": "fc3d182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10000216"
+    "ukprn": "10000216",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Bristol Baptist College",
@@ -2483,7 +2378,7 @@ module.exports = [
     "hesa_itt_code": "287",
     "dttp_id": "143e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10000894",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Cambridge Theological Federation",
@@ -2492,7 +2387,7 @@ module.exports = [
     "hesa_itt_code": "288",
     "dttp_id": "e73e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10032072",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Christie’s Education",
@@ -2500,7 +2395,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "291",
     "dttp_id": "253e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10001419"
+    "ukprn": "10001419",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "City and Guilds of London Art School",
@@ -2509,7 +2405,7 @@ module.exports = [
     "hesa_itt_code": "292",
     "dttp_id": "273e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10039082",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Cliff College",
@@ -2518,7 +2414,7 @@ module.exports = [
     "hesa_itt_code": "293",
     "dttp_id": "2b3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10007912",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "University College of Estate Management",
@@ -2528,8 +2424,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "294",
     "dttp_id": "263f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10008173",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008173"
   },
   {
     "name": "Waverley Abbey College",
@@ -2538,7 +2433,7 @@ module.exports = [
     "hesa_itt_code": "295",
     "dttp_id": "2a3f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10007361",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "ICOM",
@@ -2555,7 +2450,7 @@ module.exports = [
     "hesa_itt_code": "298",
     "dttp_id": "fa3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10029682",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Istituto Marangoni",
@@ -2564,7 +2459,7 @@ module.exports = [
     "hesa_itt_code": "299",
     "dttp_id": "613e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10009527",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Kaplan Open Learning",
@@ -2572,7 +2467,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "300",
     "dttp_id": "673e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10021682"
+    "ukprn": "10021682",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "KLC School of Design",
@@ -2581,7 +2477,7 @@ module.exports = [
     "hesa_itt_code": "301",
     "dttp_id": "6b3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10008325",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London Film School",
@@ -2590,7 +2486,7 @@ module.exports = [
     "hesa_itt_code": "304",
     "dttp_id": "7f3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004036",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Luther King House Educational Trust",
@@ -2599,7 +2495,7 @@ module.exports = [
     "hesa_itt_code": "306",
     "dttp_id": "8f3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10009612",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Oxford Business College",
@@ -2616,7 +2512,7 @@ module.exports = [
     "hesa_itt_code": "309",
     "dttp_id": "b73e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10019178",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Spurgeon's College",
@@ -2624,7 +2520,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "310",
     "dttp_id": "d53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10006093"
+    "ukprn": "10006093",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "St Nicholas Montessori Training",
@@ -2632,7 +2529,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "311",
     "dttp_id": "db3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10045289"
+    "ukprn": "10045289",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "West Dean College",
@@ -2640,7 +2538,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "312",
     "dttp_id": "2c3f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10032288"
+    "ukprn": "10032288",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Oak Hill College",
@@ -2657,7 +2556,7 @@ module.exports = [
     "hesa_itt_code": "314",
     "dttp_id": "073f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10004320",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Queen's Foundation for Ecumenical Theological Education",
@@ -2665,7 +2564,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "315",
     "dttp_id": "0f3f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10032282"
+    "ukprn": "10032282",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Salvation Army",
@@ -2673,7 +2573,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "316",
     "dttp_id": "113f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10021256"
+    "ukprn": "10021256",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Trinity College Bristol",
@@ -2682,7 +2583,7 @@ module.exports = [
     "hesa_itt_code": "317",
     "dttp_id": "1e3f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023464",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Matrix College of Counselling and Psychotherapy",
@@ -2690,7 +2591,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "320",
     "dttp_id": "913e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10023453"
+    "ukprn": "10023453",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Minster Centre",
@@ -2699,7 +2601,7 @@ module.exports = [
     "hesa_itt_code": "321",
     "dttp_id": "093f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10032277",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "AA School of Architecture",
@@ -2707,8 +2609,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "323",
     "dttp_id": "f43d182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10008071",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008071"
   },
   {
     "name": "Court Theatre Training Company",
@@ -2716,7 +2617,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "326",
     "dttp_id": "323e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10034324"
+    "ukprn": "10034324",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Regents Theological College",
@@ -2725,7 +2627,7 @@ module.exports = [
     "hesa_itt_code": "327",
     "dttp_id": "bf3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10021100",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London School of Commerce & IT",
@@ -2734,7 +2636,7 @@ module.exports = [
     "hesa_itt_code": "328",
     "dttp_id": "833e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023434",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "HY Education Limited",
@@ -2744,7 +2646,8 @@ module.exports = [
     ],
     "hesa_itt_code": "329",
     "dttp_id": "003e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10041898"
+    "ukprn": "10041898",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "New College of the Humanities",
@@ -2757,8 +2660,7 @@ module.exports = [
     ],
     "hesa_itt_code": "330",
     "dttp_id": "a33e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10048199",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10048199"
   },
   {
     "name": "The Markfield Institute of Higher Education",
@@ -2767,7 +2669,7 @@ module.exports = [
     "hesa_itt_code": "331",
     "dttp_id": "053f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023452",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Cambridge School of Visual and Performing Arts",
@@ -2777,7 +2679,8 @@ module.exports = [
     ],
     "hesa_itt_code": "332",
     "dttp_id": "1a3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10010308"
+    "ukprn": "10010308",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Arden University",
@@ -2787,8 +2690,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "333",
     "dttp_id": "043e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10005451",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10005451"
   },
   {
     "name": "Grŵp Llandrillo Menai",
@@ -2840,7 +2742,7 @@ module.exports = [
     "hesa_itt_code": "342",
     "dttp_id": "233e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10026921",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Leeds Conservatoire",
@@ -2849,7 +2751,7 @@ module.exports = [
     "hesa_itt_code": "351",
     "dttp_id": "733e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10034449",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Hartpury University",
@@ -2860,8 +2762,7 @@ module.exports = [
     ],
     "hesa_itt_code": "352",
     "dttp_id": "533e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10080811",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10080811"
   },
   {
     "name": "Amity Global Education",
@@ -2869,7 +2770,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "353",
     "dttp_id": "fe3d182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10032036"
+    "ukprn": "10032036",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The London School of Architecture",
@@ -2878,7 +2780,7 @@ module.exports = [
     "hesa_itt_code": "354",
     "dttp_id": "033f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10062810",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "London College of International Business Studies",
@@ -2902,7 +2804,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "357",
     "dttp_id": "f83d182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067853"
+    "ukprn": "10067853",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Film Education Training Trust",
@@ -2910,7 +2813,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "359",
     "dttp_id": "f43e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10004035"
+    "ukprn": "10004035",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Institute of Ismaili Studies",
@@ -2919,7 +2823,7 @@ module.exports = [
     "hesa_itt_code": "360",
     "dttp_id": "f83e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10067388",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Newbold College",
@@ -2928,7 +2832,7 @@ module.exports = [
     "hesa_itt_code": "361",
     "dttp_id": "a83e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023456",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Le Cordon Bleu",
@@ -2936,7 +2840,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "362",
     "dttp_id": "713e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10003798"
+    "ukprn": "10003798",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Global Banking School",
@@ -2944,7 +2849,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "363",
     "dttp_id": "493e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10042500"
+    "ukprn": "10042500",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "British College Of Osteopathic Medicine",
@@ -2954,7 +2860,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "400",
     "dttp_id": "0c3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10000911"
+    "ukprn": "10000911",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "LAMDA",
@@ -2973,7 +2880,7 @@ module.exports = [
     "hesa_itt_code": "402",
     "dttp_id": "cd3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10009292",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Study Group",
@@ -2982,7 +2889,7 @@ module.exports = [
     "hesa_itt_code": "403",
     "dttp_id": "e13e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10008098",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Royal School of Needlework",
@@ -2990,7 +2897,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "404",
     "dttp_id": "d13e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10020436"
+    "ukprn": "10020436",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Sotheby’s Institute of Art",
@@ -3011,8 +2919,7 @@ module.exports = [
     "hesa_itt_code": "406",
     "dttp_id": "553e182c-1425-ec11-b6e6-000d3adf095a",
     "comment": "Ashbridge Business School merged with Hult International Business school in 2015",
-    "ukprn": "10008899",
-    "highest_level_of_degree_awarded": "Taught"
+    "ukprn": "10008899"
   },
   {
     "name": "The Sherwood Institute",
@@ -3022,7 +2929,8 @@ module.exports = [
     ],
     "hesa_itt_code": "407",
     "dttp_id": "133f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10023458"
+    "ukprn": "10023458",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "University Centre Peterborough",
@@ -3031,7 +2939,7 @@ module.exports = [
     "hesa_itt_code": "408",
     "dttp_id": "223f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10068157",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Central Film School London",
@@ -3039,7 +2947,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "409",
     "dttp_id": "1f3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10024024"
+    "ukprn": "10024024",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "ESCP Europe Business School",
@@ -3048,7 +2957,7 @@ module.exports = [
     "hesa_itt_code": "410",
     "dttp_id": "3c3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10002313",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Council of the Inns of Court",
@@ -3057,7 +2966,7 @@ module.exports = [
     "hesa_itt_code": "412",
     "dttp_id": "f23e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10081618",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Navitas UK Holdings",
@@ -3065,7 +2974,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "413",
     "dttp_id": "9d3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10053304"
+    "ukprn": "10053304",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Prince's Foundation",
@@ -3074,7 +2984,7 @@ module.exports = [
     "hesa_itt_code": "414",
     "dttp_id": "0d3f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10083476",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Dyson Technical Training",
@@ -3090,7 +3000,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "416",
     "dttp_id": "c53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10023871"
+    "ukprn": "10023871",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "JCA | London Fashion Academy",
@@ -3100,7 +3011,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "417",
     "dttp_id": "633e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067601"
+    "ukprn": "10067601",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "University Centre Quayside",
@@ -3110,7 +3022,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "418",
     "dttp_id": "243f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10025197"
+    "ukprn": "10025197",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "David Game College",
@@ -3119,7 +3032,7 @@ module.exports = [
     "hesa_itt_code": "419",
     "dttp_id": "363e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10015688",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Dartington Hall Trust",
@@ -3129,7 +3042,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "420",
     "dttp_id": "343e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10026767"
+    "ukprn": "10026767",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "New Model Institute for Technology and Engineering",
@@ -3139,7 +3053,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "421",
     "dttp_id": "a53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067406"
+    "ukprn": "10067406",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Kaplan International Colleges U.K.",
@@ -3149,7 +3064,8 @@ module.exports = [
     ],
     "hesa_itt_code": "422",
     "dttp_id": "653e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10082570"
+    "ukprn": "10082570",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "INTO University Partnerships",
@@ -3157,7 +3073,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "423",
     "dttp_id": "5f3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10082728"
+    "ukprn": "10082728",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The College of Osteopaths",
@@ -3166,7 +3083,7 @@ module.exports = [
     "hesa_itt_code": "424",
     "dttp_id": "ef3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10023442",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Regent’s University London",
@@ -3182,7 +3099,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "426",
     "dttp_id": "0a3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10036456"
+    "ukprn": "10036456",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "British Academy of Jewellery",
@@ -3190,7 +3108,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "427",
     "dttp_id": "183e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10038772"
+    "ukprn": "10038772",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The London Interdisciplinary School",
@@ -3198,8 +3117,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "428",
     "dttp_id": "013f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067623",
-    "highest_level_of_degree_awarded": "Bachelor's - New DAPs"
+    "ukprn": "10067623"
   },
   {
     "name": "Raindance Educational Services",
@@ -3207,7 +3125,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "429",
     "dttp_id": "bb3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10062833"
+    "ukprn": "10062833",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The College of Health",
@@ -3215,7 +3134,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "430",
     "dttp_id": "eb3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10066502"
+    "ukprn": "10066502",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "CEG UFP",
@@ -3233,7 +3153,8 @@ module.exports = [
     ],
     "hesa_itt_code": "431",
     "dttp_id": "1d3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10057213"
+    "ukprn": "10057213",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Applied Business Academy",
@@ -3241,7 +3162,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "432",
     "dttp_id": "023e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10062759"
+    "ukprn": "10062759",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Tavistock and Portman NHS Foundation Trust",
@@ -3250,7 +3172,7 @@ module.exports = [
     "hesa_itt_code": "433",
     "dttp_id": "e33e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10020381",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "UA92",
@@ -3260,7 +3182,8 @@ module.exports = [
     ],
     "hesa_itt_code": "434",
     "dttp_id": "203f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067648"
+    "ukprn": "10067648",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "TEDI-London",
@@ -3268,8 +3191,7 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "435",
     "dttp_id": "e53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10083403",
-    "highest_level_of_degree_awarded": "Taught - New DAPs"
+    "ukprn": "10083403"
   },
   {
     "name": "College of Legal Practice",
@@ -3278,7 +3200,8 @@ module.exports = [
     "hesa_itt_code": "436",
     "dttp_id": "2d3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10082828",
-    "comment": "Not degree awarding"
+    "comment": "Not degree awarding",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "ThinkSpace Education",
@@ -3287,7 +3210,7 @@ module.exports = [
     "hesa_itt_code": "437",
     "dttp_id": "1c3f182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10082743",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "European School of Osteopathy",
@@ -3296,7 +3219,7 @@ module.exports = [
     "hesa_itt_code": "7009",
     "dttp_id": "3e3e182c-1425-ec11-b6e6-000d3adf095a",
     "ukprn": "10002344",
-    "highest_level_of_degree_awarded": "Not applicable"
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Council for National Academic Awards",

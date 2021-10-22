@@ -33,7 +33,11 @@
 //
 // Closed refers to where the institution has since closed and is new graduates will no longer get
 // degrees from it.
-
+//
+// Where has_never_awarded_degrees is set to `true`, the organisation has never had degree awarding powers, and
+// was previously included in the list by mistake. These can be filtered out when used in interfaces for collecting
+// degree information, but are included below to support any legacy data.
+//
 module.exports = [
   {
     "name": "The Open University",

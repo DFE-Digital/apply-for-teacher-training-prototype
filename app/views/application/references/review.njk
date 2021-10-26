@@ -15,7 +15,7 @@
 {% if references | length > 0 %}
   {% set title = "References" %}
 {% else %}
-  {% set title = "What your referee is asked to do when you request a reference" %}
+  {% set title = "What your referees are asked to do when you request a reference" %}
 {% endif %}
 
 
@@ -35,9 +35,9 @@
 {% endblock %}
 
 {% set guidanceHtml %}
-  <p class="govuk-body">Your referee will receive an email from the Department for Education.</p>
+  <p class="govuk-body">Your referees will receive an email from the Department for Education.</p>
 
-  <p class="govuk-body">We ask them to use an online form to give their reference, as references sent by email are not accepted.</p>
+  <p class="govuk-body">We'll ask them to use an online form to give their reference, as references sent by email are not accepted.</p>
 
   <p class="govuk-body">The form asks referees to write up to 500 words about your potential to teach. It says that they could talk about your:</p>
 
@@ -49,8 +49,6 @@
     <li>transferable skills</li>
   </ul>
 
-  <p class="govuk-body">References which only state when you worked somewhere will not be accepted.</p>
-
   <p class="govuk-body">They’ll also need to:</p>
 
     <ul class="govuk-list govuk-list--bullet">
@@ -60,9 +58,9 @@
 
   <p class="govuk-body">We’ll ask them to give your reference as soon as they can so that your application is not delayed.</p>
 
-  <p class="govuk-body">They also have the option to decline your request for a reference.</p>
-
   <p class="govuk-body">Referees cannot see the content of your application.</p>
+
+  <p class="govuk-body">It's a good idea to contact referees before requesting a reference so they know what to expect.</p>
 
 {% endset %}
 
@@ -77,7 +75,7 @@
     </div>
 
     {{ govukDetails({
-      summaryHtml: "What your referee is asked to do when you request a reference",
+      summaryHtml: "What your referees are asked to do when you request a reference",
       html: guidanceHtml
     }) }}
 
@@ -92,7 +90,7 @@
     </div>
 
     {{ govukDetails({
-      summaryHtml: "What your referee is asked to do when you request a reference",
+      summaryHtml: "What your referees are asked to do when you request a reference",
       html: guidanceHtml
     }) }}
   {% else %}

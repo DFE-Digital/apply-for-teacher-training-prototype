@@ -1,6 +1,6 @@
 {% extends "_form.njk" %}
 
-{% set title = "What is your name?" %}
+{% set title = "What's your name?" %}
 {% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/references/" + id + "/send-request/" %}
 
@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">Tell the referee who the reference is for.</p>
+  <p class="govuk-body">This is so your referee knows who is requesting the reference.</p>
   {{ govukInput({
     label: {
-      text: "First name",
+      text: "Your first name",
       classes: "govuk-label--m"
     },
     hint: {
@@ -34,7 +34,7 @@
 
   {{ govukInput({
     label: {
-      text: "Last name",
+      text: "Your last name",
       classes: "govuk-label--m"
     },
     hint: {

@@ -20,24 +20,25 @@
 
 {% block primary %}
   {% if referee.type == "Academic" %}
-    {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year" %}
+    {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year." %}
   {% elif referee.type == "Professional" %}
-    {% set relationshipExample = "They were my line manager in my last job. I’ve known them for 2 years" %}
+    {% set relationshipExample = "They were my line manager in my last job. I’ve known them for 2 years." %}
   {% elif referee.type == "School-based" %}
-    {% set relationshipExample = "They are the deputy head at the school where I currently volunteer. I’ve known them for 3 years" %}
+    {% set relationshipExample = "They are the deputy head at the school where I currently volunteer. I’ve known them for 3 years." %}
   {% else %}
-    {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years" %}
+    {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years." %}
   {% endif %}
 
   {{ govukCharacterCount({
     label: label,
     hint: {
-      text: "For example, ‘" + relationshipExample + "’."
+      text: "For example, ‘" + relationshipExample + "’"
     },
-    maxwords: 50
+    maxwords: 50,
+    threshold: 85
   } | decorateApplicationAttributes(["references", id, "relationship"])) }}
 
-  <p class="govuk-body">Your referee will see your answer to this question.</p>
+  <p class="govuk-body">We’ll show your answer to this question to your referee and ask them to confirm whether it’s correct.</p>
 
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"

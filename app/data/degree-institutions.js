@@ -123,7 +123,8 @@ module.exports = [
     "suggestion_synonyms": [],
     "match_synonyms": [
       "University of St Mark and St John",
-      "University of Saint Mark and Saint John"
+      "University of Saint Mark and Saint John",
+      "University of St Mark and St John"
     ],
     "hesa_itt_code": "14",
     "dttp_id": "3a71f34a-2887-e711-80d8-005056ac45bb"
@@ -430,7 +431,9 @@ module.exports = [
   },
   {
     "name": "Coventry University",
-    "suggestion_synonyms": [],
+    "suggestion_synonyms": [
+      "University of Coventry"
+    ],
     "match_synonyms": [],
     "hesa_itt_code": "56",
     "dttp_id": "1ff35f0b-7042-e811-80ff-3863bb3640b8"
@@ -614,7 +617,9 @@ module.exports = [
     "suggestion_synonyms": [
       "SHU"
     ],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Sheffield Hallam"
+    ],
     "hesa_itt_code": "75",
     "dttp_id": "f470f34a-2887-e711-80d8-005056ac45bb"
   },
@@ -2640,7 +2645,9 @@ module.exports = [
   {
     "name": "Regent’s University London",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "Regents university"
+    ],
     "hesa_itt_code": "425",
     "dttp_id": "c33e182c-1425-ec11-b6e6-000d3adf095a"
   },

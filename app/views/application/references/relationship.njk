@@ -32,10 +32,13 @@
   {{ govukCharacterCount({
     label: label,
     hint: {
-      text: "We’ll show your answer to this question to your referee and ask them to confirm whether it's correct. You could say something like: ‘" + relationshipExample + "’"
+      text: "For example, ‘" + relationshipExample + "’"
     },
-    maxwords: 50
+    maxwords: 50,
+    threshold: 85
   } | decorateApplicationAttributes(["references", id, "relationship"])) }}
+
+  <p class="govuk-body">We’ll show your answer to this question to your referee and ask them to confirm whether it’s correct.</p>
 
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"

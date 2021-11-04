@@ -1,6 +1,5 @@
 const { DateTime } = require('luxon')
 const humanizeDuration = require('humanize-duration')
-const marked = require('marked')
 const numberToWords = require('number-to-words')
 const providers = require('./data/providers')
 const utils = require('./utils')
@@ -161,18 +160,6 @@ module.exports = (env) => {
 
   filters.capitaliseFirstLetter = (str) => {
     return utils.capitaliseFirstLetter(str)
-  }
-
-  /**
-   * Convert Markdown to HTML
-   * @type {String} str
-   * @type {String} value
-   *
-   */
-  filters.markdown = (str, value) => {
-    if (str) {
-      return marked(str)
-    }
   }
 
   /**

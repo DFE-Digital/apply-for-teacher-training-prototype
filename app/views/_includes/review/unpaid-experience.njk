@@ -16,7 +16,7 @@
 {% else %}
   {{ govukInsetText({
     classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
-    html: "The Department for Education have made it easier for teacher training applicants to gain experience in school.\n\n[Learn about how to get school experience](https://getintoteaching.education.gov.uk/get-school-experience)." | markdown
+    html: '<p class="govuk-body">The Department for Education have made it easier for teacher training applicants to gain experience in school.</p><p><a href="https://getintoteaching.education.gov.uk/get-school-experience">Learn about how to get school experience</a>.</p>'
   }) if applicationValue(["unpaidExperienceDisclose"]) == "No" and not showIncomplete }}
 
   {{ appSuggestion({

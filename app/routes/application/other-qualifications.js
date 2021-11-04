@@ -4,44 +4,50 @@ module.exports = router => {
   // Generate new id and redirect to that qualification
   router.get('/application/:applicationId/other-qualifications/add', (req, res) => {
     const id = utils.generateRandomString()
-    res.redirect(`/application/${req.params.applicationId}/other-qualifications/${id}?${utils.queryString(req)}`)
+    res.redirect(`/application/${req.params.applicationId}/other-qualifications/${id}/type`)
   })
 
   // Render review page
-  // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/other-qualifications/review', (req, res) => {
-    res.render('application/other-qualifications/review')
+
+    const { applicationId } = req.params
+    const { otherQualifications } = utils.applicationData(req)
+    const otherQualificationsDisclose = utils.applicationData(req)["otherQualificationsDisclose"]
+
+    if (otherQualificationsDisclose != "No" && (utils.toArray(otherQualifications).length == 0)) {
+      // Redirect back to guard question if there are no qualifications but they didn't answer No to the guard question
+      res.redirect(`/application/${applicationId}/other-qualifications`)
+    } else {
+      res.render('application/other-qualifications/review')
+    }
+  })
+
+  router.post('/application/:applicationId/other-qualifications/answer', (req, res) => {
+    const { applicationId } = req.params
+    const { otherQualificationsDisclose } = req.body.applications[applicationId]
+
+    if (otherQualificationsDisclose == "Yes") {
+      res.redirect(`/application/${applicationId}/other-qualifications/add`)
+    } else {
+      res.redirect(`/application/${applicationId}/other-qualifications/review`)
+    }
   })
 
   // Render type page
-  router.get('/application/:applicationId/other-qualifications/:id', (req, res) => {
+  router.get('/application/:applicationId/other-qualifications/:id/type', (req, res) => {
     const { id } = req.params
     const { referrer } = req.query
-    let { otherQualifications } = utils.applicationData(req)
 
-    otherQualifications = utils.toArray(otherQualifications)
-    const noQualificationsEntered = !(otherQualifications && otherQualifications.length > 1)
-
-    res.render('application/other-qualifications/index', {
+    res.render('application/other-qualifications/type', {
       id,
-      referrer,
-      noQualificationsEntered
+      referrer
     })
   })
 
-  router.post('/application/:applicationId/other-qualifications/:id', (req, res) => {
+  // Update qualification type
+  router.post('/application/:applicationId/other-qualifications/:id/type', (req, res) => {
     const { applicationId, id } = req.params
-    const { referrer } = req.query
-    const { otherQualifications } = utils.applicationData(req)
-    const { type } = otherQualifications[id]
-
-    if (type === 'None') {
-      req.session.data.applications[applicationId].otherQualificationsDisclose = 'No'
-      res.redirect(referrer || `/application/${applicationId}/other-qualifications/review`)
-    } else {
-      req.session.data.applications[applicationId].otherQualificationsDisclose = 'Yes'
-      res.redirect(`/application/${applicationId}/other-qualifications/${id}/details`)
-    }
+    res.redirect(`/application/${applicationId}/other-qualifications/${id}/details`)
   })
 
   // Render details page

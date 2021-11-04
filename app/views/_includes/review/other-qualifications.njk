@@ -1,5 +1,8 @@
 {% set completed = applicationValue(["completed", "otherQualifications"]) == "Yes" %}
 
+{% set entered = applicationValue(["otherQualificationsDisclose"]) %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+
 {{ appSuggestion({
   id: "otherQualifications",
   title: "A levels and other qualifications not marked as complete",
@@ -12,4 +15,36 @@
   }
 }) if not completed and showIncomplete }}
 
-{% include "_includes/item/other-qualifications.njk" %}
+{% if entered == "No" %}
+
+
+  {% set summaryCardHtml %}
+
+    {{ govukSummaryList({
+      classes: "app-summary",
+      rows: [{
+        key: {
+          text: "Do you have any " + ("A levels and " if not international) + "other qualifications you’d like to add?"
+        },
+        value: {
+          text: "No"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications",
+            text: "Change",
+            visuallyHiddenText: "explanation"
+          }]
+        }
+      }]
+    }) }}
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: summaryCardHtml
+  }) }}
+
+{% else %}
+  {% include "_includes/item/other-qualifications.njk" %}
+{% endif %}

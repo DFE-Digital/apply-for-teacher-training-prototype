@@ -18,14 +18,24 @@
 {% endblock %}
 
 {% block primary %}
-  <div class="govuk-!-width-two-thirds">
-    <p class="govuk-body">Adding A levels and other qualifications makes your application stronger. They demonstrate subject knowledge not covered in your degree or work experience.</p>
-    <p class="govuk-body">Training providers usually ask you for them later in the process.</p>
-  </div>
 
-  {% include "_includes/review/other-qualifications.njk" %}
+    {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
 
-  {{ govukButton({text: "Add qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+      {% include "_includes/review/other-qualifications.njk" %}
+
+    {% else %}
+
+      <div class="govuk-!-width-two-thirds">
+        <p class="govuk-body">Adding A levels and other qualifications makes your application stronger. They demonstrate subject knowledge not covered in your degree or work experience.</p>
+        <p class="govuk-body">Training providers usually ask you for them later in the process.</p>
+      </div>
+
+      {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+
+      {% include "_includes/review/other-qualifications.njk" %}
+
+    {% endif %}
+
 
   {{ govukRadios({
     fieldset: {

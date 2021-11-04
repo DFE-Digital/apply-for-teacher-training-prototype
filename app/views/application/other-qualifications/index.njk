@@ -1,112 +1,51 @@
-{% extends "_form-question.njk" %}
+{% extends "_form.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
-{% set title = "What type of qualification is it?" %}
+{% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
+{% set formaction = applicationPath + "/other-qualifications/answer" %}
 
 {% block pageNavigation %}
-  {{ govukBackLink({
-      href: "/application/" + applicationId + "/other-qualifications/review"
-  }) }}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block primary %}
-  {% set otherUkConditionalHtml %}
-    <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--s" for="otherQualifications-{{ id }}-typeUk">Qualification name</label>
-      <div id="type-uk-autocomplete-container"></div>
-    </div>
-  {% endset %}
 
-  {% set nonUkConditionalHtml %}
-    {{ govukInput({
-      label: {
-        text: "Qualification name",
-        classes: "govuk-label--s"
-      },
-      hint: {
-        html: "For example, High school diploma, Higher Secondary School Certificate, <span lang=\"fr\">Baccalauréat Général</span>, <span lang=\"es\">Título de Bachiller</span>"
-      }
-    } | decorateApplicationAttributes(["otherQualifications", id, "typeNonUk"])) }}
-  {% endset %}
+  <p class="govuk-body">Adding A levels and other qualifications makes your application stronger. They demonstrate subject knowledge not covered in your degree or work experience.</p>
+  <p class="govuk-body">Training providers usually ask you for them later in the process.</p>
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of qualification is it?",
-        classes: "govuk-label--l",
-        isPageHeading: true
+        text: "Do you want to add " + ("a qualficaiton" if international else "an A level or other qualification") + "?",
+        classes: "govuk-label--m"
       },
       attributes: {
         "data-module": "clear-hidden"
       }
     },
     items: [{
-      value: "A level",
-      text: "A level"
+      value: "Yes",
+      text: "Yes"
     }, {
-      value: "AS level",
-      text: "AS level"
-    }, {
-      value: "GCSE",
-      text: "GCSE"
-    }, {
-      value: "Other UK qualification",
-      text: "Another UK qualification",
-      conditional: {
-        html: otherUkConditionalHtml
-      }
-    }, {
-      value: "Non-UK qualification",
-      text: "A non-UK qualification",
-      conditional: {
-        html: nonUkConditionalHtml
-      }
+      value: "No",
+      text: "No, I don’t want to add any other qualifications"
     }]
-  } | decorateApplicationAttributes(["otherQualifications", id, "type"])) }}
-
-  {{ govukInput({
-    value: "Yes",
-    type: "hidden"
   } | decorateApplicationAttributes(["otherQualificationsDisclose"])) }}
 
-  {% set internationalConditionalHtml %}
-    {{ appAutocomplete({
-      label: {
-        text: "In which country is your institution based?"
-      },
-      items: countries
-    } | decorateApplicationAttributes(["otherQualifications", id, "country"])) }}
-  {% endset %}
 
   {{ govukButton({
     text: "Continue"
   }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete({
-      element: document.querySelector('#type-uk-autocomplete-container'),
-      id: 'otherQualifications-{{ id }}-typeUk',
-      name: "applications[{{ applicationId }}][otherQualifications][{{ id }}][typeUk]",
-      defaultValue: '{{ applicationValue(["otherQualifications", id, "typeUk"]) }}',
-      minLength: 2,
-      placeholder: false,
-      showNoOptionsFound: false,
-      source: [
-        'BTEC',
-        'O level',
-        'NVQ',
-        'Scottish National 5',
-        'Scottish Higher',
-        'Scottish Advanced Higher',
-        'SVQ',
-        'VRQ'
-      ]
-    })
-  </script>
 {% endblock %}

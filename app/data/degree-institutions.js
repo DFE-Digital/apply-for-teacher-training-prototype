@@ -2447,10 +2447,13 @@ module.exports = [
   {
     "name": "ICOM",
     "suggestion_synonyms": [],
-    "match_synonyms": [],
+    "match_synonyms": [
+      "International college of Oriental medicine"
+    ],
     "hesa_itt_code": "297",
     "dttp_id": "573e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10023445"
+    "ukprn": "10023445",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Islamic College",
@@ -2556,7 +2559,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "313",
     "dttp_id": "af3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10010227"
+    "ukprn": "10010227",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "The Metanoia Institute",
@@ -2797,7 +2801,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "355",
     "dttp_id": "7d3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10004023"
+    "ukprn": "10004023",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "LCCM AU UK",
@@ -2805,7 +2810,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "356",
     "dttp_id": "6f3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10066551"
+    "ukprn": "10066551",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "ACM Guildford",
@@ -2917,7 +2923,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "405",
     "dttp_id": "5b3e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10007841"
+    "ukprn": "10007841",
+    "has_never_awarded_degrees": true
   },
   {
     "name": "Hult International Business School",
@@ -3001,7 +3008,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "415",
     "dttp_id": "383e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067355"
+    "ukprn": "10067355",
+    "comment": "Given degree awarding powers in 2021"
   },
   {
     "name": "Results Consortium",
@@ -3128,7 +3136,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "428",
     "dttp_id": "013f182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10067623"
+    "ukprn": "10067623",
+    "comment": "Given degree awarding powers in 2021"
   },
   {
     "name": "Raindance Educational Services",
@@ -3202,7 +3211,8 @@ module.exports = [
     "match_synonyms": [],
     "hesa_itt_code": "435",
     "dttp_id": "e53e182c-1425-ec11-b6e6-000d3adf095a",
-    "ukprn": "10083403"
+    "ukprn": "10083403",
+    "comment": "Given degree awarding powers in 2021"
   },
   {
     "name": "College of Legal Practice",

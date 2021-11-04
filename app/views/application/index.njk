@@ -216,7 +216,7 @@
         }
       } if hasPrimaryChoices() or applicationValue(["gcse", "science"]), {
         text: "Other qualifications" if international else "A levels and other qualifications",
-        href: applicationPath + "/other-qualifications" + ("/review" if applicationValue(["otherQualificationsDisclose"]) else "/add"),
+        href: applicationPath + "/other-qualifications" + "/review",
         id: "other-qualifications",
         tag: {
           classes: tagClassesForSection(completed=applicationValue(["completed", "otherQualifications"])),

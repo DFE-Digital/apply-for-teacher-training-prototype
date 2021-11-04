@@ -29,14 +29,14 @@
     or type == "A level"
   %}
     <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--m" for="otherQualifications-{{ id }}-subject">Subject</label>
+      <label class="govuk-label govuk-label--s" for="otherQualifications-{{ id }}-subject">Subject</label>
       <div id="subject-autocomplete-container"></div>
     </div>
   {% else %}
     {{ govukInput({
       label: {
         text: "Subject",
-        classes: "govuk-label--m"
+        classes: "govuk-label--s"
       }
     } | decorateApplicationAttributes(["otherQualifications", id, "subject"])) }}
   {% endif %}
@@ -45,7 +45,7 @@
     {{ appAutocomplete({
       label: {
         text: "Country where you studied",
-        classes: "govuk-label--m"
+        classes: "govuk-label--s"
       },
       items: countries
     } | decorateApplicationAttributes(["otherQualifications", id, "country"])) }}
@@ -54,7 +54,7 @@
   {{ govukInput({
     label: {
       text: "Grade (optional)",
-      classes: "govuk-label--m"
+      classes: "govuk-label--s"
     },
     hint: {
       text: "For example, ‘C’, ‘CD’, ‘4’ or ‘4-3’"
@@ -65,41 +65,13 @@
   {{ govukInput({
     label: {
       text: "Year qualification was awarded",
-      classes: "govuk-label--m"
+      classes: "govuk-label--s"
     },
     hint: {
       text: "For example, 1998"
     },
     classes: "govuk-input--width-4"
   } | decorateApplicationAttributes(["otherQualifications", id, "year"])) }}
-
-  {# Only ask if want to add another if:
-    * not editing an existing item
-    * not referred from a review page (which has an ‘Add another…’ button)
-    * feature flag enabled
-  #}
-  {% if action != "edit" and not referrer %}
-    {{ govukRadios({
-      name: "next",
-      fieldset: {
-        legend: {
-          text: "Do you want to add another qualification?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      items: [{
-        value: "add-type",
-        text: "Yes, add another " + qualificationName + " qualification"
-      }, {
-        value: "add",
-        text: "Yes, add a different qualification"
-      }, {
-        value: "review",
-        text: "No, not at the moment",
-        checked: true
-      }]
-    }) }}
-  {% endif %}
 
   {{ govukButton({
     text: "Save and continue"

@@ -1,22 +1,15 @@
-{% extends "_form.njk" %}
+{% extends "_form-question.njk" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
-{% set title = "Other qualifications" if international else "A levels and other qualifications" %}
+{% set title = "What type of qualification is it?" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 
 {% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+      href: "/application/" + applicationId + "/other-qualifications/review"
+  }) }}
 {% endblock %}
 
 {% block primary %}
@@ -42,8 +35,9 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of qualification do you want to add?",
-        classes: "govuk-label--m"
+        text: "What type of qualification is it?",
+        classes: "govuk-label--l",
+        isPageHeading: true
       },
       attributes: {
         "data-module": "clear-hidden"
@@ -60,25 +54,17 @@
       text: "GCSE"
     }, {
       value: "Other UK qualification",
-      text: "Other UK qualification",
+      text: "Another UK qualification",
       conditional: {
         html: otherUkConditionalHtml
       }
     }, {
       value: "Non-UK qualification",
-      text: "Non-UK qualification",
+      text: "A non-UK qualification",
       conditional: {
         html: nonUkConditionalHtml
       }
-    }, {
-      divider: "or"
-    } if noQualificationsEntered, {
-      value: "None",
-      text: "I do not want to add any " + itemName,
-      hint: {
-        text: "Providers look at " + itemName + " for evidence of subject knowledge not covered in your degree or work history"
-      }
-    } if noQualificationsEntered]
+    }]
   } | decorateApplicationAttributes(["otherQualifications", id, "type"])) }}
 
   {{ govukInput({

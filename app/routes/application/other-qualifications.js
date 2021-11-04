@@ -67,16 +67,6 @@ module.exports = router => {
     const { year, org, type } = application.otherQualifications[id]
     const { typeUk } = application.otherQualifications[id]
 
-    if (next === 'add-type') {
-      application.otherQualifications[nextId] = {
-        year,
-        org,
-        type,
-        typeUk
-      }
-      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${nextId}/details`)
-    } else {
-      res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
-    }
+    res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
   })
 }

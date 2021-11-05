@@ -40,19 +40,19 @@ module.exports = router => {
         break
       }
 
-      case 'other-qualifications': {
+      case 'otherQualifications': {
         parent = item.type ? `${item.type} ${item.subject}` : 'Other qualifications'
         type = 'qualification'
         break
       }
 
-      case 'unpaid-experience': {
+      case 'unpaidExperience': {
         parent = item.role ? item.role : 'Volunteering with children and young people'
         type = 'role'
         break
       }
 
-      case 'work-history': {
+      case 'workHistory': {
         parent = item.role ? item.role : 'Work history'
         type = 'entry'
         break

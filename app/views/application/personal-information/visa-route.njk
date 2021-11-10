@@ -20,6 +20,7 @@
               text: "Give details"
             },
             maxwords: 200,
+            threshold: 90,
             rows: 5
           } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
         {% endset -%}
@@ -40,10 +41,7 @@
             text: "A visa sponsored by a course provider"
           }, {
             value: "other",
-            text: "Another route",
-            hint: {
-              text: "For example, if you are applying for a Family visa or a Graduate visa"
-            },
+            text: "Another route, such as a Family visa or Graduate visa",
             conditional: {
               html: otherRouteHtml
             }

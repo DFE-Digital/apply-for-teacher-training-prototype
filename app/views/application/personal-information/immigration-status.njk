@@ -30,16 +30,16 @@
         text: "EU pre-settled status"
       }, {
         value: "other",
-        text: "Other",
+        text: "Another immigration status",
         conditional: {
           html: govukCharacterCount({
             label: {
-              classes: "govuk-label--s",
-              text: "Give any relevant information"
+              text: "Immigration status"
             },
             hint: {
-              text: "For example, “I have permanent residence”."
+              text: "For example, “Indefinite leave to remain”."
             },
+            threshold: 90,
             maxwords: 200,
             rows: 5
           } | decorateApplicationAttributes(["candidate", "immigrationStatusDetails"]))

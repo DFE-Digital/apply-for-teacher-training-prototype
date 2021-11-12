@@ -2,7 +2,7 @@
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set international = applicationValue(["candidate", "otherNationality1"]) %}
-{% set title = "What type of qualification is it?" %}
+{% set title = "What type of qualification do you want to add?" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 
@@ -35,7 +35,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of qualification is it?",
+        text: "What type of qualification do you want to add?",
         classes: "govuk-label--l",
         isPageHeading: true
       },

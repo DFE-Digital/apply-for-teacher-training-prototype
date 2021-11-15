@@ -1,6 +1,6 @@
 {
   "name": "apply-for-teacher-training",
-  "description": "Prototype for the ‘Apply for postgraduate teacher training’ service"",
+  "description": "Prototype for the ‘Apply for postgraduate teacher training’ service",
   "version": "11.0.0",
   "private": true,
   "engines": {

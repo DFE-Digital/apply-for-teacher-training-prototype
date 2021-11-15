@@ -1,0 +1,34 @@
+{% extends "_form.html" %}
+
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = "You need a GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
+{% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/gcse/" + id + "/review" %}
+
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or "/application/" + applicationId + "/gcse/" + id + "/not-yet"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">You can still apply for teacher training if you do not have a qualification which demonstrates this.</p>
+
+  <p class="govuk-body">Some providers may let you sit an equivalency test to show you have the required skills.</p>
+
+  <p class="govuk-body">For advice, contact your chosen training provider or a <a href="https://adviser-getintoteaching.education.gov.uk" class="govuk-link">teacher training adviser</a>.</p>
+
+  {{ govukCharacterCount({
+    label: {
+      classes: "govuk-label--m",
+      html: "If you have other evidence of having " + subject + " skills at the required standard, give details (optional)"
+    },
+    maxwords: 200,
+    rows: 6
+  } | decorateApplicationAttributes(["gcse", id, "otherEvidence"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

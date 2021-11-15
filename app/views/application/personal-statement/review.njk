@@ -1,4 +1,4 @@
-{% extends "_form-wide.njk" %}
+{% extends "_form-wide.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/personal-statement.njk" %}
+  {% include "_includes/review/personal-statement.html" %}
 
   {% set hasFeedbackFromPreviousApplication = false %}
   {% if applicationValue(["apply2"]) %}

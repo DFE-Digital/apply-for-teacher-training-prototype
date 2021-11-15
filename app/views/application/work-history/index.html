@@ -1,0 +1,66 @@
+{% extends "_layout.html" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "" %}
+{% set formaction = applicationPath + "/work-history/answer" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% set noWorkHistoryHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "Tell us why you’ve been out of the workplace"
+      },
+      hint: {
+        text: "For example, ‘I have been unemployed’, ‘I have been volunteering’ or ‘I have been caring for a child’"
+      },
+      threshold: 90,
+      maxwords: 400
+    } | decorateApplicationAttributes(["workHistory", "missing"])) }}
+  {% endset -%}
+
+  <div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          classes: "govuk-fieldset__legend--xl",
+          text: "Do you have any work history?",
+          isPageHeading: true
+        }
+      },
+      items: [{
+        value: "Yes",
+        text: "Yes"
+      }, {
+        value: "No, I have always been in full time education",
+        text: "No, I have always been in full time education"
+      }, {
+        value: "No, I do not have any work history",
+        text: "No, I do not have any work history",
+        conditional: {
+          html: noWorkHistoryHtml
+        }
+      }]
+    } | decorateApplicationAttributes(["workHistoryDisclose"])
+    ) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  <div>
+  </div>
+{% endblock %}

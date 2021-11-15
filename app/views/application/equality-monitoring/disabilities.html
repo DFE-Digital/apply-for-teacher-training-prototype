@@ -1,0 +1,97 @@
+{% extends "_form.html" %}
+{% set parent = "Equality and diversity questionnaire" %}
+{% set title = "Please select all that apply to you" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% set otherDisabilityHtml %}
+    {{ govukInput({
+      classes: "govuk-!-width-two-thirds",
+      label: {
+        text: "Describe your disability (optional)"
+      }
+    } | decorateApplicationAttributes(["equality-monitoring", "disabilities-other"])) }}
+  {% endset -%}
+
+  {{ govukCheckboxes({
+    fieldset: {
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      text: "Blind",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "or a serious visual impairment which is not corrected by glasses"
+      }
+    }, {
+      text: "Deaf",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "or a serious hearing impairment"
+      }
+    }, {
+      text: "Learning difficulty",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, dyslexia, dyspraxia or ADHD"
+      }
+    }, {
+      text: "Long-standing illness",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, cancer, HIV, diabetes, chronic heart disease or epilepsy"
+      }
+    }, {
+      text: "Mental health condition",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, depression, schizophrenia or anxiety disorder"
+      }
+    }, {
+      text: "Physical disability or mobility issue",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, impaired use of arms or legs, use of a wheelchair or crutches"
+      }
+    }, {
+      text: "Social or communication impairment",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example Asperger’s, or another autistic spectrum disorder"
+      }
+    }, {
+      text: "Other",
+      label: {
+        classes: "govuk-label--s"
+      },
+      conditional: {
+        html: otherDisabilityHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "disabilities"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

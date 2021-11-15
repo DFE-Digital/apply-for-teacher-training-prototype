@@ -1,0 +1,69 @@
+{% set complete = choices | length > 0 %}
+{% if complete %}
+
+
+  {% for item in choices %}
+    {% set provider = providers[item.providerCode] %}
+    {% set course = provider.courses[item.courseCode] %}
+    {% set courseHtml %}
+      {% include "_includes/item/choice.html" %}
+    {% endset %}
+
+    {% set canRespond = item.status == "Offer received" %}
+
+    {% set hasResponded =
+      (item.status == "Conditions not met")
+      or (item.status == "Offer confirmed")
+      or (item.status == "Offer declined")
+      or (item.status == "Unsuccessful")
+      or (item.status == "Offer withdrawn")
+      or (item.status == "Application withdrawn")
+      or (item.status == "Application cancelled")
+    %}
+
+
+    {% set canWithdraw =
+      (item.status != "Offer received")
+      and (item.status != "Offer declined")
+      and (item.status != "Application not sent")
+      and (item.status != "Unsuccessful")
+      and (item.status != "Offer withdrawn")
+      and (item.status != "Application withdrawn")
+      and (item.status != "Conditions not met")
+      and (item.status != nil)
+    %}
+
+    {{ appSummaryCard({
+      classes: "govuk-!-margin-bottom-6",
+      headingLevel: 3,
+      titleText: provider.name,
+      actions: {
+        items: [{
+          href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+          text: "Delete choice"
+        } if canAmend, {
+          href: applicationPath + "/" + item.id + "/withdraw",
+          text: "Withdraw"
+        } if canWithdraw, {
+          href: applicationPath + "/" + item.id + "/view",
+          text: "View and respond to offer"
+        } if canRespond and not hasResponded]
+      } if canAmend or canWithdraw or canRespond,
+      html: courseHtml
+    }) }}
+  {% endfor %}
+{% else %}
+  {% if showIncomplete %}
+    {{ appSuggestion({
+      id: "choices",
+      title: "Course choices are not marked as completed",
+      warning: true if errorList,
+      actions: {
+        items: [{
+          text: "Complete your course choices",
+          href: applicationPath + "/choices?referrer=" + referrer
+        }]
+      }
+    }) }}
+  {% endif %}
+{% endif %}

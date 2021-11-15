@@ -1,9 +1,5 @@
 {% extends "_form.html" %}
 
-{% from "govuk/components/checkboxes/macro.html" import govukCheckboxes %}
-{% from "govuk/components/inset-text/macro.html" import govukInsetText %}
-{% from "govuk/components/details/macro.html" import govukDetails %}
-
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
 {% set action = "edit" if applicationValue(["workHistory", id]) else "add" %}

@@ -1,0 +1,46 @@
+{% extends "_form.html" %}
+
+{% set title = "When did you enter the UK?" %}
+{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer if referrer else "/application/" + applicationId + "/personal-information/immigration-status"
+  }) }}
+{% endblock %}
+
+{% block formBody %}
+  {{ govukDateInput({
+    fieldset: {
+      legend: {
+        text: title,
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      }
+    },
+    hint: {
+      text: "For example, 31 3 2020"
+    },
+    id: "candidate-dateOfEntry",
+    items: [{
+      classes: "govuk-input--width-2",
+      label: "Day",
+      name: "applications[" + applicationId + "][candidate][dateOfEntry][day]",
+      value: applicationValue(["candidate", "dateOfEntry", "day"])
+    }, {
+      classes: "govuk-input--width-2",
+      label: "Month",
+      name: "applications[" + applicationId + "][candidate][dateOfEntry][month]",
+      value: applicationValue(["candidate", "dateOfEntry", "month"])
+    }, {
+      classes: "govuk-input--width-4",
+      label: "Year",
+      name: "applications[" + applicationId + "][candidate][dateOfEntry][year]",
+      value: applicationValue(["candidate", "dateOfEntry", "year"])
+    }]
+  } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

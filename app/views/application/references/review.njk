@@ -1,4 +1,4 @@
-{% extends "_form.njk" %}
+{% extends "_form.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
@@ -106,19 +106,19 @@
   {% if readyReferences.length %}
     <h2 class="govuk-heading-m">References that have been given</h2>
     {% set references = readyReferences %}
-    {% include "_includes/review/references.njk" %}
+    {% include "_includes/review/references.html" %}
   {% endif %}
 
   {% if pendingReferences.length %}
     <h2 class="govuk-heading-m">Requests waiting to be sent</h2>
     {% set references = pendingReferences %}
-    {% include "_includes/review/references.njk" %}
+    {% include "_includes/review/references.html" %}
   {% endif %}
 
   {% if otherReferences.length %}
     <h2 class="govuk-heading-m">Reference requests</h2>
     {% set references = otherReferences %}
-    {% include "_includes/review/references.njk" %}
+    {% include "_includes/review/references.html" %}
   {% endif %}
 
 {% endblock %}

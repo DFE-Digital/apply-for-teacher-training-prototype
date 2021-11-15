@@ -1,0 +1,30 @@
+{% set completed = applicationValue(["completed", "workHistory"]) %}
+{% set entered = applicationValue(["workHistoryDisclose"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "workHistory",
+    title: "Work history not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your work history",
+        href: applicationPath + "/work-history"
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "workHistory",
+    title: "Work history is not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete your work history",
+        href: applicationPath + "/work-history/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/work-history.html" %}
+{% endif %}

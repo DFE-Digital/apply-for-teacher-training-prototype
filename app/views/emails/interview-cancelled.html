@@ -1,0 +1,23 @@
+{% extends "_email.html" %}
+{% set choices = applicationValue(["choices"]) | toArray %}
+{% set choice = choices[0] %}
+{% set provider = providers[choice.providerCode] %}
+{% set course = provider.courses[choice.courseCode] %}
+{% set name = applicationValue(["candidate", "givenName"]) + " " + applicationValue(["candidate", "familyName"]) %}
+
+{% set title = "Interview cancelled - " + provider.name %}
+
+{% block content %}
+  <p class="govuk-body">Dear {{ name }}</p>
+
+  <h2 class="govuk-heading-m">Interview cancelled</h2>
+  <p class="govuk-body">{{ provider.name }} has cancelled the interview on 4 January 2021 at 11am about your application to study {{ course.name_and_code }}.</p>
+  <p class="govuk-body">They’ve given the following reason for cancelling the interview:</p>
+  <div class="govuk-inset-text">
+    <p class="govuk-body">You contacted us to say you didn’t want to apply for this course any more.</p>
+  </div>
+  <p class="govuk-body">Contact {{ provider.name }} if you have any questions.</p>
+
+  <h2 class="govuk-heading-m">Get support</h2>
+  <p class="govuk-body">Contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a> if you have problems applying online or want to give feedback.</p>
+{% endblock %}

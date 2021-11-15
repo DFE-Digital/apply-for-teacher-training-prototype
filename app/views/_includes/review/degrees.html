@@ -1,0 +1,30 @@
+{% set completed = applicationValue(["completed", "degree"]) %}
+{% set entered = applicationValue(["degree"]) | length %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "degree",
+    title: "Degree not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your degree",
+        href: applicationPath + "/degree/add"
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "degree",
+    title: "Degree section not marked as completed",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Complete the degree section",
+        href: applicationPath + "/degree/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% include "_includes/item/degrees.html" %}
+{% endif %}

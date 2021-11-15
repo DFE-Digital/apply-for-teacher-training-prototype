@@ -1,0 +1,24 @@
+{% extends "_form.html" %}
+
+{% set parent = "Prototype admin" %}
+{% set title = "Clear data?" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/admin"
+  }) }}
+{% endblock %}
+
+{% set formaction = "/admin/clear-data" %}
+
+{% block primary %}
+  {{ govukWarningText({
+    text: "This will clear all of the data entered in this session",
+    iconFallbackText: "Warning"
+  }) }}
+
+  {{ govukButton({
+    text: "Clear the data"
+  }) }}
+{% endblock %}

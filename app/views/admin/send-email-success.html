@@ -1,0 +1,16 @@
+{% extends "_content.html" %}
+
+{% set parent = "Prototype admin" %}
+{% set title = "Email sent" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/admin/send-email"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p>The email has been sent.</p>
+  <p><a href="/admin/send-email">Send another email</a></p>
+{% endblock %}

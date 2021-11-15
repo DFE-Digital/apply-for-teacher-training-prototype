@@ -20,7 +20,7 @@ router.all([
 router.get('/find/feedback', (req, res) => {
   const { validate } = req.query
 
-  res.render('find/feedback.njk', {
+  res.render('find/feedback.html', {
     validate
   })
 })

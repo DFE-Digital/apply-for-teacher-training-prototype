@@ -1,0 +1,43 @@
+{% extends "_layout.html" %}
+
+{% set title = "What is your phone number?" %}
+{% set formaction = referrer or "/application/" + applicationId + "/contact-information/where-do-you-live" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form action="{{ formaction }}" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukInput({
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: "Enter a landline or mobile. For non-UK numbers, include the country code"
+          },
+          classes: "govuk-input--width-20",
+          autocomplete: "tel",
+          type: "tel"
+        } | decorateApplicationAttributes(["contactInformation", "tel"])) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

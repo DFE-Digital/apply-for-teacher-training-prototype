@@ -1,0 +1,37 @@
+
+{% set completed = applicationValue(["completed", "englishLanguage"]) %}
+{% set entered = applicationValue(["englishLanguage"]) %}
+
+{% if not entered %}
+  {{ appSuggestion({
+    id: "englishLanguage",
+    title: "English as a foreign language assessment not entered",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Enter your English as a foreign language assessment",
+        href: applicationPath + "/english-language"
+      }]
+    }
+  }) }}
+{% else %}
+  {{ appSuggestion({
+    id: "englishLanguage",
+    title: "English as a foreign language not marked as complete",
+    warning: true if errorList,
+    actions: {
+      items: [{
+        text: "Have you done an English as a foreign language assessment?",
+        href: applicationPath + "/english-language/review"
+      }]
+    }
+  }) if not completed and showIncomplete }}
+
+  {% set summaryCardHtml %}{% include "_includes/item/english-language.html" %}{% endset %}
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: "English as a foreign language assessment",
+    html: summaryCardHtml
+  }) }}
+{% endif %}

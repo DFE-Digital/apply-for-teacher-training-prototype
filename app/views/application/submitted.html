@@ -1,0 +1,113 @@
+{% extends "_content-wide.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set status = applicationValue(["status"]) %}
+{% set title = "Your submitted application" %}
+{% set referrer = referrer or applicationPath + "/review" %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set canAmend = false %}
+{% set showChoiceStatus = true %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/dashboard",
+      text: "Back to application dashboard"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block beforePrimary %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ title | safe }}</h1>
+  <p class="govuk-hint govuk-!-margin-bottom-8">Submitted on {{ "now" | date("d MMMM yyyy") }} at {{ "now" | date("t") }}</p>
+{% endblock %}
+
+{% block primary %}
+  <section class="govuk-!-margin-bottom-8">
+  {% if applicationValue(["apply2"]) or choiceId or (applicationValue(["choices"]) | toArray | length == 1) %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Course</h2>
+  {% else %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+  {% endif %}
+
+    {% if choiceId %}
+      {% set choices = [applicationValue(["choices"])[choiceId]] %}
+    {% else %}
+      {% set choices = applicationValue(["choices"]) | toArray %}
+    {% endif %}
+    {% set showChoiceStatus = true %}
+    {% set showIncomplete = true %}
+    {% include "_includes/review/choices.html" %}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+    {% set references = applicationValue(["references"]) | toArray | selectattr("ready") %}
+    {% include "_includes/review/references.html" %}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
+    <h3 class="govuk-heading-m">Personal information</h3>
+    {% include "_includes/review/personal-information.html" %}
+
+    <h3 class="govuk-heading-m">Contact information</h3>
+    {% include "_includes/review/contact-information.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+
+    <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
+    {% set id = "english" %}
+    {% include "_includes/review/gcse.html" %}
+
+    {% if international %}
+      {% include "_includes/review/english-language.html" %}
+    {% endif %}
+
+    {% set id = "maths" %}
+    {% include "_includes/review/gcse.html" %}
+
+    {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
+      {% set id = "science" %}
+      {% include "_includes/review/gcse.html" %}
+    {% endif %}
+
+    <h3 class="govuk-heading-m">{{ "Other qualifications" if international else "A levels and other qualifications" }}</h3>
+    {% include "_includes/review/other-qualifications.html" %}
+
+    <h3 class="govuk-heading-m">Degree</h3>
+    {% include "_includes/review/degrees.html" %}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
+    <h3 class="govuk-heading-m">Work history</h3>
+    {% include "_includes/review/work-history.html" %}
+
+    <h3 class="govuk-heading-m">Unpaid experience</h3>
+    {% include "_includes/review/unpaid-experience.html" %}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
+    {% include "_includes/review/personal-statement.html" %}
+    {% include "_includes/review/subject-knowledge.html" %}
+  <section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
+    {% include "_includes/review/additional-support.html" %}
+    {% include "_includes/review/interview-needs.html" %}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
+    {% include "_includes/review/safeguarding.html" %}
+  </section>
+{% endblock %}

@@ -7,6 +7,8 @@
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set canAmend = true %}
+{% set otherQualifications = applicationValue(["otherQualifications"]) | toArray %}
+
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -16,7 +18,24 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/review/other-qualifications.njk" %}
+
+    {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
+
+      {% include "_includes/review/other-qualifications.njk" %}
+
+    {% else %}
+
+      <div class="govuk-!-width-two-thirds">
+        <p class="govuk-body">Adding A levels and other qualifications can make your application stronger.</p>
+        <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
+      </div>
+
+      {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+
+      {% include "_includes/review/other-qualifications.njk" %}
+
+    {% endif %}
+
 
   {{ govukRadios({
     fieldset: {

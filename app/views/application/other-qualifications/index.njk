@@ -22,14 +22,14 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Adding A levels and other qualifications can make your application stronger.</p>
+  <p class="govuk-body">Adding {{ "A levels and " if not international }} other qualifications can make your application stronger.</p>
 
   <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
 
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Do you want to add " + ("a qualficaiton" if international else "any A levels or other qualifications") + "?",
+        text: "Do you want to add " + ("a qualification" if international else "any A levels or other qualifications") + "?",
         classes: "govuk-label--m"
       },
       attributes: {
@@ -41,7 +41,7 @@
       text: "Yes"
     }, {
       value: "No",
-      text: "No, I do not want to add any A levels or other qualifications"
+      text: "No, I do not want to add " + ("a qualification" if international else "any A levels or other qualifications") + ""
     }]
   } | decorateApplicationAttributes(["otherQualificationsDisclose"])) }}
 

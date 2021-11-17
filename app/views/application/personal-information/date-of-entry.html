@@ -1,6 +1,6 @@
-{% extends "_form.html" %}
+{% extends "_form-question.html" %}
 
-{% set title = "When did you enter the UK?" %}
+{% set title = "Are you already living in the UK?" %}
 {% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
 
 {% block pageNavigation %}
@@ -9,36 +9,58 @@
   }) }}
 {% endblock %}
 
-{% block formBody %}
-  {{ govukDateInput({
+{% block primary %}
+
+  {% set dateEnteredHtml %}
+    {{ govukDateInput({
+      fieldset: {
+        legend: {
+          text: "When did you enter the UK?",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: "For example, 31 3 2020"
+      },
+      id: "candidate-dateOfEntry",
+      items: [{
+        classes: "govuk-input--width-2",
+        label: "Day",
+        name: "applications[" + applicationId + "][candidate][dateOfEntry][day]",
+        value: applicationValue(["candidate", "dateOfEntry", "day"])
+      }, {
+        classes: "govuk-input--width-2",
+        label: "Month",
+        name: "applications[" + applicationId + "][candidate][dateOfEntry][month]",
+        value: applicationValue(["candidate", "dateOfEntry", "month"])
+      }, {
+        classes: "govuk-input--width-4",
+        label: "Year",
+        name: "applications[" + applicationId + "][candidate][dateOfEntry][year]",
+        value: applicationValue(["candidate", "dateOfEntry", "year"])
+      }]
+    } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
+  {% endset %}
+
+  {{ govukRadios({
     fieldset: {
       legend: {
         text: title,
-        classes: "govuk-fieldset__legend--l",
+        classes: "govuk-label--l",
         isPageHeading: true
       }
     },
-    hint: {
-      text: "For example, 31 3 2020"
-    },
-    id: "candidate-dateOfEntry",
     items: [{
-      classes: "govuk-input--width-2",
-      label: "Day",
-      name: "applications[" + applicationId + "][candidate][dateOfEntry][day]",
-      value: applicationValue(["candidate", "dateOfEntry", "day"])
+      value: "Yes",
+      text: "Yes",
+      conditional: {
+        html: dateEnteredHtml
+      }
     }, {
-      classes: "govuk-input--width-2",
-      label: "Month",
-      name: "applications[" + applicationId + "][candidate][dateOfEntry][month]",
-      value: applicationValue(["candidate", "dateOfEntry", "month"])
-    }, {
-      classes: "govuk-input--width-4",
-      label: "Year",
-      name: "applications[" + applicationId + "][candidate][dateOfEntry][year]",
-      value: applicationValue(["candidate", "dateOfEntry", "year"])
+      value: "No",
+      text: "No"
     }]
-  } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
+  } | decorateApplicationAttributes(["candidate", "alreadyLivingInUk"])) }}
 
   {{ govukButton({
     text: "Save and continue"

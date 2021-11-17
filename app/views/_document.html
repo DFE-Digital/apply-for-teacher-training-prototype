@@ -1,0 +1,25 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+    {% if title %}
+      <h1 class="govuk-heading-xl">
+        {% if parent %}<span class="govuk-caption-xl">{{ parent }}</span>{% endif %}
+        {{ title | safe }}
+      </h1>
+    {% endif %}
+    {% block primary %}
+    <div class="app-styled-content">
+      {{ content | safe }}
+    </div>
+    {% endblock %}
+    </div>
+    {% if hasSecondary %}
+    <div class="govuk-grid-column-one-third">
+      {% block secondary %}
+      {% endblock %}
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}

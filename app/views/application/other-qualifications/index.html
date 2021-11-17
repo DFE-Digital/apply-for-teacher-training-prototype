@@ -1,0 +1,52 @@
+{% extends "_form.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set title = "Other qualifications" if international else "A levels and other qualifications" %}
+{% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
+{% set allowsFeedback = true %}
+{% set formaction = applicationPath + "/other-qualifications/answer" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+  <p class="govuk-body">Adding {{ "A levels and " if not international }} other qualifications can make your application stronger.</p>
+
+  <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Do you want to add " + ("a qualification" if international else "any A levels or other qualifications") + "?",
+        classes: "govuk-label--m"
+      },
+      attributes: {
+        "data-module": "clear-hidden"
+      }
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No, I do not want to add " + ("a qualification" if international else "any A levels or other qualifications") + ""
+    }]
+  } | decorateApplicationAttributes(["otherQualificationsDisclose"])) }}
+
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

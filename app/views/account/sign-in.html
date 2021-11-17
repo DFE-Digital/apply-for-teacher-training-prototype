@@ -1,0 +1,34 @@
+{% extends "_form.html" %}
+
+{% set title = "Sign in" %}
+{% set formaction = "/send-email/sign-in" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body-l">Enter the email address you used to register with, and we will send you a link to sign in.</p>
+
+  {{ govukInput({
+    label: {
+      text: "Email address",
+      classes: "govuk-label--m"
+    },
+    classes: "govuk-!-width-two-thirds",
+    attributes: {
+      spellcheck: "false"
+    },
+    autocomplete: "email",
+    type: "email",
+    id: "account-email",
+    name: "account[email]"
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

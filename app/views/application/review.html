@@ -1,0 +1,124 @@
+{% extends "_form-wide.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath + "/review-complete" %}
+{% set status = applicationValue(["status"]) %}
+{% set title = "Review your application" %}
+{% set referrer = applicationPath + "/review" %}
+{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set canAmend = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block beforePageTitle %}
+  {% if errorList %}
+    {{ govukErrorSummary({
+      titleText: "Your application cannot be submitted because it’s incomplete",
+      errorList: errorList
+    }) }}
+  {% endif %}
+
+  {{ govukNotificationBanner({
+    html: "<h2 class=\"govuk-notification-banner__heading\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body\">Submit your application from 13 October for courses starting in 2021.</p>"
+  }) if closed }}
+{% endblock %}
+
+{% block primary %}
+  {% set showIncomplete = true %}
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">{{ "Course" if applicationValue(["apply2"]) else "Courses" }}</h2>
+    {% if not closed %}
+      {% set choices = applicationValue(["choices"]) | toArray %}
+      {% set showChoiceStatus = false %}
+      {% include "_includes/review/choices.html" %}
+    {% else %}
+      <p>You can apply for courses from 13 October.</p>
+    {% endif %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+    {% set references = applicationValue(["references"]) | toArray | selectattr("ready") %}
+    {% include "_includes/review/references.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
+
+    <h3 class="govuk-heading-m">Personal information</h3>
+    {% include "_includes/review/personal-information.html" %}
+
+    <h3 class="govuk-heading-m">Contact information</h3>
+    {% include "_includes/review/contact-information.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+
+    <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
+    {% set id = "english" %}
+    {% include "_includes/review/gcse.html" %}
+
+    {% if international %}
+      {% include "_includes/review/english-language.html" %}
+    {% endif %}
+
+    {% set id = "maths" %}
+    {% include "_includes/review/gcse.html" %}
+
+    {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
+      {% set id = "science" %}
+      {% include "_includes/review/gcse.html" %}
+    {% endif %}
+
+    <h3 class="govuk-heading-m">{{ "Other qualifications" if international else "A levels and other qualifications" }}</h3>
+    {% include "_includes/review/other-qualifications.html" %}
+
+    <h3 class="govuk-heading-m">Degree</h3>
+    {% include "_includes/review/degrees.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
+
+    <h3 class="govuk-heading-m">Work history</h3>
+    {% include "_includes/review/work-history.html" %}
+
+    <h3 class="govuk-heading-m">Unpaid experience</h3>
+    {% include "_includes/review/unpaid-experience.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
+
+    <h3 class="govuk-heading-m">Why you want to teach</h3>
+    {% include "_includes/review/personal-statement.html" %}
+
+    <h3 class="govuk-heading-m">Your suitability to teach a subject or age group</h3>
+    {% include "_includes/review/subject-knowledge.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
+
+    <h3 class="govuk-heading-m">Ask for support if you’re disabled</h3>
+    {% include "_includes/review/additional-support.html" %}
+
+    <h3 class="govuk-heading-m">Interview needs</h3>
+    {% include "_includes/review/interview-needs.html" %}
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
+    {% include "_includes/review/safeguarding.html" %}
+  </section>
+
+  {{ govukButton({
+    text: "Continue"
+  }) if not closed }}
+{% endblock %}

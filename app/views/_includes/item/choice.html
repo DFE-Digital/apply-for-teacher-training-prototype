@@ -1,0 +1,289 @@
+{% set status = item.status or application.status %}
+{% set startDate = item.starts | date("MMMM yyyy") %}
+
+{% set statusHtml %}
+  {{ govukTag({
+    classes: "app-tag " + status | statusClass,
+    text: status | capitalize
+  }) }}
+  {% if status == "Offer deferred" %}
+    <p class="govuk-body govuk-body govuk-!-margin-top-2">Your training will now start in September 2021.</p>
+  {% elif status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
+    {{ govukDetails({
+      classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
+      summaryText: "What to do if you’re unable to start training in " + startDate,
+      html: "<p>Some providers allow you to defer your offer. This means that you could start your course a year later.</p>
+<p>Every provider is different, so it may or may not be possible to do this. Find out by contacting " + provider.name + ".</p>
+<p>Asking if it’s possible to defer will not affect your existing offer.</p>"
+    }) }}
+  {% endif %}
+{% endset %}
+
+{% macro interviewItem(interview) %}
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ interview.date | date("d MMMM yyyy 'at' h:mma") }}</p>
+  <p class="govuk-body">
+    {{ interview.providerName }}<br>
+    {{ interview.address }}
+  </p>
+{% endmacro %}
+
+{% set interviewHtml %}
+  {% if item.interview | length > 1 %}
+    <ul class="govuk-list govuk-list--number">
+    {% for interview in item.interview %}
+      <li>
+        {{ interviewItem(interview) | safe }}
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    {{ interviewItem(item.interview[0]) | safe }}
+  {% endif %}
+{% endset %}
+
+{% set feedbackHtml %}
+  {% include "_includes/item/feedback.html" %}
+{% endset %}
+
+{% set visaSponsorshipHtml %}
+  {% if item.canSponsorVisa %}
+    Visas can be sponsored
+  {% else %}
+
+    {% set visaSponsorshipInsetTextHtml %}
+      <p class="govuk-heading-s app-inset-text__title">This provider cannot sponsor Student visas</p>
+
+      <p class="govuk-body">You said that you do not yet have the right to work or study in the UK.</p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that can sponsor student visas</li>
+        <li>find out about <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration" class="govuk-link">other visas that allow you to study in the UK</a></li>
+      </ul>
+    {% endset %}
+
+
+    {{ govukInsetText({
+      html: visaSponsorshipInsetTextHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+
+
+  {% endif %}
+{% endset %}
+
+{% set degreeRequired %}
+  {% if item.degreeRequired == "21" %}
+    2:1 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "22" %}
+    2:2 degree or higher (or equivalent)
+  {% elif item.degreeRequired == "third" %}
+    Third-class degree or higher (or equivalent)
+  {% else %}
+    Any degree grade
+  {% endif %}
+{% endset %}
+
+{% set candidateHighestDegreeGrade = highestDegreeGrade() %}
+
+{% set degreeRequiredHtml %}
+
+  {% if (item.degreeRequired == "21" and (candidateHighestDegreeGrade == "22" or candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "22" and (candidateHighestDegreeGrade == "third" or candidateHighestDegreeGrade == "pass")) or (item.degreeRequired == "third" and (candidateHighestDegreeGrade == "pass")) %}
+
+    {% set degreeRequiredWarningHtml %}
+      <p class="govuk-heading-s app-inset-text__title">{{ degreeRequired }}</p>
+
+      {% set firstDegree = applicationValue("degree") | toArray | first %}
+
+      <p class="govuk-body">
+        You said
+
+        {# Ideally this would check the completed status of your highest degree grade #}
+        {% if firstDegree["completed"] == "Yes" %}
+          you have
+        {% else %}
+          you’re expecting
+        {% endif %}
+
+        {% if candidateHighestDegreeGrade == "22" %}
+          a 2:2
+        {% elif candidateHighestDegreeGrade == "third" %}
+          a third-class
+        {% else %}
+          an ordinary (pass)
+        {% endif %}
+      degree.</p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that has a lower degree requirement</li>
+        <li>contact the provider to see if they will still consider your application</li>
+      </ul>
+    {% endset %}
+
+    {{ govukInsetText({
+      html: degreeRequiredWarningHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+  {% else %}
+    {{ degreeRequired }}
+  {% endif %}
+{% endset %}
+
+
+{% set gcseRequirements %}
+  {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
+    {% if item.acceptsPendingGcses %}
+      This provider will consider candidates with pending GCSEs
+    {% else %}
+      This provider does not consider candidates with pending GCSEs
+    {% endif %}
+  {% else %}
+    {% if item.acceptsEquivalencyTests %}
+      This provider will accept equivalency tests in English and maths
+    {% else %}
+      This provider will not accept equivalency tests
+    {% endif %}
+  {% endif %}
+{% endset %}
+
+{% set gcseRequirementsHtml %}
+  {% if applicationValue(["gcse", "english", "type"]) == "not-yet" or applicationValue(["gcse", "english", "currentlyRetaking"]) %}
+
+    {% set gcseRequirementsWarningHtml %}
+      <p class="govuk-heading-s app-inset-text__title">{{ gcseRequirements }}</p>
+
+      <p class="govuk-body">
+        You said
+
+        {% if applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' %}
+          you’re currently studying for a qualification in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'yes' %}
+          you’re currently re-taking a GCSE in English.
+        {% elif applicationValue(["gcse", "english", "currentlyRetaking"]) == 'no' %}
+          you do not have grade 4 (C) or above in GCSE English or an equivalent qualification.
+        {% else %}
+          you do not have a qualification in English.
+        {% endif %}
+      </p>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find a course that does {{ "accept pending GCSEs" if  applicationValue(["gcse", "english", "currentlyStudying"]) == 'yes' else "accept equivalency tests"}} </li>
+        <li>contact the provider to see if they’ll still consider your application</li>
+      </ul>
+
+    {% endset %}
+
+
+    {{ govukInsetText({
+      html: gcseRequirementsWarningHtml,
+      classes: "app-inset-text--narrow-border app-inset-text--important govuk-!-margin-top-0 govuk-!-padding-bottom-1"
+    })}}
+
+  {% else %}
+    {{ gcseRequirements }}
+  {% endif %}
+
+{% endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Course"
+    },
+    value: {
+      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a>"
+    },
+    actions: {
+      items: [{
+        href: "#",
+        href: applicationPath + "/choices/" + item.id + "/pick?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "course"
+      }]
+    } if canAmend
+  }, {
+    key: {
+      text: "Location"
+    },
+    value: {
+      html: item.locationName + "<br>" + item.locationAddress
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/choices/" + item.id + "/location?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "course location"
+      }]
+    } if canAmend and not item.singleLocationCourse
+  }, {
+    key: {
+      text: "Type"
+    },
+    value: {
+      html: item.type
+    } if item.type
+  } if showChoiceDetails !== false, {
+    key: {
+      text: "Course length"
+    },
+    value: {
+      html: item.length
+    } if item.length
+  } if showChoiceDetails !== false, {
+    key: {
+      text: "Date course starts"
+    },
+    value: {
+      html: startDate
+    } if item.starts
+  } if (showChoiceDetails !== false) and (item.status !== "Offer deferred"), {
+    key: {
+      text: "Degree required"
+    },
+    value: {
+      html: degreeRequiredHtml
+    }
+  }, {
+    key: {
+      text: "Visa sponsorship"
+    },
+    value: {
+      html: visaSponsorshipHtml,
+      classes: "app-summary-list__value--wide"
+    }
+  } if (data.applications[applicationId].candidate.immigration == "Not yet"), {
+    key: {
+      text: "GCSE requirements"
+    },
+    value: {
+      html: gcseRequirementsHtml,
+      classes: "app-summary-list__value--wide"
+    }
+  }, {
+    key: {
+      text: "Status"
+    },
+    value: {
+      html: statusHtml
+    }
+  } if showChoiceStatus, {
+    key: {
+      text: "Interviews" if item.interview | length > 1 else "Interview"
+    },
+    value: {
+      html: interviewHtml
+    }
+  } if item.interview, {
+    key: {
+      text: "Feedback"
+    },
+    value: {
+      html: feedbackHtml
+    }
+  } if showChoiceFeedback and item.status == "Unsuccessful" and item.feedback]
+}) }}

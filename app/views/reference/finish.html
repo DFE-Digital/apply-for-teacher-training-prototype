@@ -1,0 +1,12 @@
+{% extends "_content.html" %}
+
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Thank you" %}
+{% set hasAccountLinks = false %}
+
+{% block primary %}
+  {% if research == "true" %}
+    <h2 class="govuk-heading-m">Our user research team will contact you shortly</h2>
+  {% endif %}
+  <p class="govuk-body">If you have any questions about the {{ serviceName }} service, please contact <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a>.</p>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "_form-question.html" %}
+
+{% set formaction = "/reference/answer" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "A reference for " + candidate_name + "" %}
+{% set hasAccountLinks = false %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Can you give a reference for " + candidate_name + "?",
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      }
+    },
+    idPrefix: "reference-answer",
+    name: "reference-answer",
+    items: [{
+      value: "Yes",
+      text: "Yes, I can give them a reference",
+      checked: (data["reference-answer"] == "Yes")
+    }, {
+      value: "No",
+      text: "No, I am unable to give a reference",
+      checked: (data["reference-answer"] == "No")
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

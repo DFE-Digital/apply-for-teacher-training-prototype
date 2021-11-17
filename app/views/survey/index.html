@@ -1,0 +1,38 @@
+{% extends "_form.html" %}
+
+{% set title = "Your feedback" %}
+{% set formaction = "/survey" %}
+
+{% block primary %}
+
+  <input type="hidden" name="applicationId" value="{{ applicationId }}" />
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        classes: "govuk-fieldset__legend--m",
+        text: "How satisfied are you with this service? (optional)"
+      }
+    },
+    items: [
+      { text: "Very satisfied" },
+      { text: "Satisfied" },
+      { text: "Neither satisfied or dissatisfied" },
+      { text: "Dissatisfied" },
+      { text: "Very dissatisfied" }
+    ]
+  }) }}
+
+  {{ govukCharacterCount({
+    label: {
+      classes: "govuk-label--m",
+      text: "How could we improve this service? (optional)"
+    },
+    maxwords: 1200,
+    rows: 6
+  }) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

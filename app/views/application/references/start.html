@@ -1,0 +1,54 @@
+{% extends "_content.html" %}
+
+{% set title = "What your referee can expect once you've requested a reference" %}
+{% set allowsFeedback = true %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+    <p class="govuk-body">Your referee will receive an email from the Becoming a Teacher team at the Department for Education with a link to an online form to complete.</p>
+
+    <div class="govuk-inset-text">
+      They must submit their reference using the form we send them. Some referees can only send their references by email, but these are not be accepted.
+    </div>
+
+    <p class="govuk-body">The form asks referees to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>confirm how they know you</li>
+        <li>state whether they know of any reason why you should not work with children</li>
+        <li>write a free-text reference of up to 500 words</li>
+      </ul>
+
+      <h2 class="govuk-heading-s">What they can include in the free text reference</h2>
+
+    <p class="govuk-body">We propose topics to cover such as your:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>communication skills</li>
+        <li>reliability and professionalism</li>
+        <li>transferable skills</li>
+        <li>ability to work with children</li>
+        <li>academic skills</li>
+      </ul>
+
+    <p class="govuk-body">They do not have to comment on all of these.</p>
+
+    <p class="govuk-body">The referee will not be able to see your application or be asked to comment on it.</p>
+
+  {{ govukButton({
+    text: "Continue",
+    href: "/application/" + applicationId + "/references/" + id + "/type/"
+  }) }}
+
+{% endblock %}

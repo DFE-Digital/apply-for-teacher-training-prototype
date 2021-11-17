@@ -1,0 +1,57 @@
+{% extends "_layout.html" %}
+
+{% set formaction = "/application/" + applicationId + "/personal-information/review" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/immigration")
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        {% set otherRouteHtml %}
+          {{ govukCharacterCount({
+            label: {
+              text: "Give details"
+            },
+            maxwords: 200,
+            threshold: 90,
+            rows: 5
+          } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "Will you need the course provider to sponsor a skilled worker or student visa?",
+              classes: "govuk-label--xl",
+              isPageHeading: true
+            },
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "sponsorship",
+            text: "Yes"
+          }, {
+            value: "other",
+            text: "No, I will get the right to work or study another way, such as through a Family visa or Graduate visa",
+            conditional: {
+              html: otherRouteHtml
+            }
+          }]
+        } | decorateApplicationAttributes(["candidate", "visaRoute"])) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

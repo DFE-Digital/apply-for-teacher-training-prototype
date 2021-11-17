@@ -1,0 +1,63 @@
+{% extends "_form.html" %}
+{% set parent = "Equality and diversity questionnaire" %}
+{% set title = "What is your ethnic group?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Asian or Asian British",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any Asian background, for example, Bangladeshi, Chinese, Indian, Pakistani"
+      }
+    }, {
+      text: "Black, African, Black British or Caribbean",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any Black background"
+      }
+    }, {
+      text: "Mixed or multiple ethnic groups",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any Mixed background"
+      }
+    }, {
+      text: "White",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any White background"
+      }
+    }, {
+      text: "Another ethnic group",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any other ethnic group, for example, Arab"
+      }
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "ethnic-group"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

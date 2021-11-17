@@ -1,4 +1,5 @@
-{% extends "_layout.html" %}
+{% extends "_form-question.html" %}
+{% set title = "Check what type of visa or immigration status you can get" %}
 
 {% set formaction = "/application/" + applicationId + "/personal-information/review" %}
 
@@ -8,50 +9,46 @@
   }) }}
 {% endblock %}
 
-{% block content %}
+{% block primary %}
 
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+  <h1 class="govuk-heading-l">{{ title }}</h1>
 
-        {% set otherRouteHtml %}
-          {{ govukCharacterCount({
-            label: {
-              text: "Give details"
-            },
-            maxwords: 200,
-            threshold: 90,
-            rows: 5
-          } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
-        {% endset -%}
+  <p class="govuk-body"><a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#visa" class="govuk-link">Find out about your eligibility for different types of visa or immigration status.</a></p>
 
-        {{ govukRadios({
-          fieldset: {
-            legend: {
-              text: "Will you need the course provider to sponsor a skilled worker or student visa?",
-              classes: "govuk-label--xl",
-              isPageHeading: true
-            },
-            attributes: {
-              "data-module": "clear-hidden"
-            }
-          },
-          items: [{
-            value: "sponsorship",
-            text: "Yes"
-          }, {
-            value: "other",
-            text: "No, I will get the right to work or study another way, such as through a Family visa or Graduate visa",
-            conditional: {
-              html: otherRouteHtml
-            }
-          }]
-        } | decorateApplicationAttributes(["candidate", "visaRoute"])) }}
+  <p class="govuk-body">Skilled worker or student visas must be sponsored by a teacher training provider. You can <a href="https://www.find-postgraduate-teacher-training.service.gov.uk" class="govuk-link">check course pages to see if the provider can sponsor visas</a>, as only some of them can.</p>
 
-        {{ govukButton({
-          text: "Save and continue"
-        }) }}
-      </div>
-    </div>
-  </form>
+  {% set otherRouteHtml %}
+    {{ govukCharacterCount({
+      label: {
+        text: "What type of visa or immigration status do you think you’ll get?"
+      },
+      maxwords: 200,
+      threshold: 90,
+      rows: 5
+    } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Do you think you’ll need a skilled worker or student visa?",
+        classes: "govuk-label--m"
+      }
+    },
+    items: [{
+      value: "sponsorship",
+      text: "Yes"
+    }, {
+      value: "other",
+      text: "No",
+      conditional: {
+        html: otherRouteHtml
+      }
+    }]
+  } | decorateApplicationAttributes(["candidate", "visaRoute"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+
 {% endblock %}

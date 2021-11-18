@@ -11,15 +11,12 @@
 
 {% block primary %}
 
-  <h1 class="govuk-heading-l">Length of time living in the UK</h1>
-
-  <p class="govuk-body">If you have to pay for your course and you’ve been living in the UK for at least 3 years by the date your course starts you may be eligible for lower tuition fees, sometimes called "home fee status".</p>
-
+  {% set dateEnteredHtml %}
     {{ govukDateInput({
       fieldset: {
         legend: {
           text: "When did you enter the UK?",
-          classes: "govuk-fieldset__legend--m"
+          classes: "govuk-fieldset__legend--s"
         }
       },
       hint: {
@@ -43,6 +40,24 @@
         value: applicationValue(["candidate", "dateOfEntry", "year"])
       }]
     } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
+  {% endset %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: title,
+        classes: "govuk-label--l",
+        isPageHeading: true
+      }
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No"
+    }]
+  } | decorateApplicationAttributes(["candidate", "alreadyLivingInUk"])) }}
 
   {{ govukButton({
     text: "Save and continue"

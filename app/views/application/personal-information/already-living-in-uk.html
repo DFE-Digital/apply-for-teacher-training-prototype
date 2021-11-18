@@ -1,7 +1,7 @@
 {% extends "_form-question.html" %}
 
 {% set title = "Are you already living in the UK?" %}
-{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
+{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/already-living-in-uk" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,37 +10,6 @@
 {% endblock %}
 
 {% block primary %}
-
-  {% set dateEnteredHtml %}
-    {{ govukDateInput({
-      fieldset: {
-        legend: {
-          text: "When did you enter the UK?",
-          classes: "govuk-fieldset__legend--s"
-        }
-      },
-      hint: {
-        text: "For example, 31 3 2020"
-      },
-      id: "candidate-dateOfEntry",
-      items: [{
-        classes: "govuk-input--width-2",
-        label: "Day",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][day]",
-        value: applicationValue(["candidate", "dateOfEntry", "day"])
-      }, {
-        classes: "govuk-input--width-2",
-        label: "Month",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][month]",
-        value: applicationValue(["candidate", "dateOfEntry", "month"])
-      }, {
-        classes: "govuk-input--width-4",
-        label: "Year",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][year]",
-        value: applicationValue(["candidate", "dateOfEntry", "year"])
-      }]
-    } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
-  {% endset %}
 
   {{ govukRadios({
     fieldset: {

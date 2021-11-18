@@ -46,6 +46,19 @@ module.exports = router => {
     }
   })
 
+  // Already living in the UK? filter question
+  router.post('/application/:applicationId/personal-information/already-living-in-uk', (req, res) => {
+    const { applicationId } = req.params
+    const application = req.session.data.applications[applicationId]
+    const answer = application.candidate.alreadyLivingInUk
+
+    if (answer === 'Yes') {
+      res.redirect(`/application/${applicationId}/personal-information/date-of-entry`)
+    } else {
+      res.redirect(`/application/${applicationId}/personal-information/review`)
+    }
+  })
+
   // Render immigration status page
   router.get('/application/:applicationId/personal-information/immigration-status', (req, res) => {
     const { referrer } = req.query
@@ -66,6 +79,13 @@ module.exports = router => {
       referrer,
       isEuropeanCitizen
     })
+  })
+
+  // Update immigration status
+  router.post('/application/:applicationId/personal-information/immigration-status', (req, res) => {
+    const { applicationId } = req.params
+
+    res.redirect(`/application/${applicationId}/personal-information/already-living-in-uk`)
   })
 
   // Render other personal information pages

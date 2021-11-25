@@ -1,0 +1,26 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  {% block beforePageTitle %}{% endblock %}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+    {% block formBody %}
+      {% set legendHtml %}
+        {% if parent %}<span class="govuk-caption-l">{{ parent }}</span>{% endif %}
+        {{ title | safe }}
+      {% endset %}
+      {% call govukFieldset({
+        legend: {
+          html: legendHtml,
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        },
+        attributes: {
+          "data-module": "clear-hidden"
+        }
+      }) %}
+        {% block primary %}
+        {% endblock %}
+      {% endcall %}
+    {% endblock %}
+  </form>
+{% endblock %}

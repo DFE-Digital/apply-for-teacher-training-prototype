@@ -1,0 +1,19 @@
+{% extends "_form.html" %}
+
+{% set title = "Which location are you applying to?" %}
+{% set formaction = paths.next %}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: locationOptions
+  } | decorateApplicationAttributes(["temporaryChoices", choiceId, "location"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

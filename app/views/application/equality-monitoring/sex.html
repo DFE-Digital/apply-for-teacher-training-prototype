@@ -1,0 +1,29 @@
+{% extends "_form.html" %}
+{% set parent = "Equality and diversity questionnaire" %}
+{% set title = "What is your sex?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Female"
+    }, {
+      text: "Male"
+    }, {
+      text: "Intersex"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "sex"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "_form.html" %}
+
+{% set formaction = "/reference/finish/answer" %}
+{% set candidate_name = "Jane Doe" %}
+{% set title = "Your reference for " + candidate_name + " has been&nbsp;submitted" %}
+{% set hasAccountLinks = false %}
+
+{% block content %}
+<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+  {{ govukPanel({
+    classes: "govuk-!-margin-bottom-8",
+    titleText: title | safe
+  }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">Tell us about your experience of giving a&nbsp;reference</h2>
+      <p class="govuk-body">Your feedback will help us to improve our service.</p>
+
+      {% set whyRatingHtml %}
+        {{ govukTextarea({
+          label: {
+            text: "Tell us why you chose that rating"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {% set whyGuidanceRatingHtml %}
+        {{ govukTextarea({
+          label: {
+            text: "Tell us why you chose that rating"
+          },
+          hint: {
+            text: "Did you have questions that were not answered by the guidance?"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "Please rate your experience of giving a reference",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        id: "experience-rating",
+        name: "experience-rating",
+        items: [
+          { text: 'Very poor', conditional: { html: whyRatingHtml } },
+          { text: 'Poor', conditional: { html: whyRatingHtml }  },
+          { text: 'Ok', conditional: { html: whyRatingHtml }  },
+          { text: 'Good', conditional: { html: whyRatingHtml }  },
+          { text: 'Very good', conditional: { html: whyRatingHtml }  }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "Please rate how useful our guidance was",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        id: "guidance-rating",
+        name: "guidance-rating",
+        items: [
+          { text: 'Very poor', conditional: { html: whyGuidanceRatingHtml } },
+          { text: 'Poor', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: 'Ok', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: 'Good', conditional: { html: whyGuidanceRatingHtml }  },
+          { text: 'Very good', conditional: { html: whyGuidanceRatingHtml }  }
+        ]
+      }) }}
+
+      {% set giveReason %}
+        {{ govukTextarea({
+          label: {
+            text: "Please tell us why"
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {% set contactDetails %}
+        {{ govukTextarea({
+          label: {
+            text: "Please let us know when you’re available and give a phone number"
+          },
+          hint: {
+            text: ""
+          }
+        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+      {% endset %}
+
+      {{ govukRadios({
+        idPrefix: "reference-research",
+        name: "reference[research]",
+        value: reference["research"],
+        fieldset: {
+          legend: {
+            html: "Can we contact you about your experience of giving a&nbsp;reference?",
+            classes: "govuk-label--m"
+          }
+        },
+        hint: {
+          text: "We’d ideally like to speak on the phone for half an hour."
+        },
+        items: [{
+          value: "yes",
+          text: "Yes, you can contact me",
+          conditional: {
+            html: contactDetails
+          }
+        }, {
+          value: "no",
+          text: "No, do not contact me"
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Finish"
+      }) }}
+    </div>
+  </div>
+</form>
+{% endblock %}

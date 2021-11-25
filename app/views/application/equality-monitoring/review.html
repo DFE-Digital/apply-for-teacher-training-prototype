@@ -1,0 +1,21 @@
+{% extends "_content-wide.html" %}
+{% set parent = "Equality and diversity questionnaire" %}
+{% set title = "Check your answers" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set referrer = applicationPath + "/equality-monitoring/review" %}
+{% set canAmend = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath + "/review"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review-equality-monitoring.html" %}
+
+  {{ govukButton({
+    text: "Continue",
+    href: applicationPath + "/submit"
+  }) }}
+{% endblock %}

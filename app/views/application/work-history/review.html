@@ -1,0 +1,77 @@
+{% extends "_form-wide.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
+{% set title = "Work history" %}
+{% set canAmend = true %}
+{% set workHistory = applicationValue(["workHistory"]) or {} %}
+{% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
+{% set workHistoryDecision = applicationValue(["workHistoryDisclose"]) %}
+
+{% block pageNavigation %}
+  {% if fromPage == "work-history-question" %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/work-history",
+      text: "Back"
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId,
+      text: "Back to application"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {% if workHistoryDecision == "Yes" %}
+    {% if history.length >= 1 %}
+      {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: "Add another job",
+        href: "/application/" + applicationId + "/work-history/" + newId
+      }) }}
+
+      {# Show list of jobs added, with prompt to add another #}
+      {% include "_includes/review/work-history.html" %}
+    {% else %}
+      {# Introduce work history, with prompt to add first job #}
+      <div class="govuk-!-width-two-thirds">
+        <p class="govuk-body">Enter all the jobs you’ve had since you left school.</p>
+        <p class="govuk-body">Explain any gaps in your work history. For example, raising children, unemployment or illness.</p>
+      </div>
+
+      {{ govukButton({
+        text: "Add a job",
+        href: "/application/" + applicationId + "/work-history/" + newId
+      }) }}
+    {% endif %}
+  {% else %}
+    {% include "_includes/review/work-history.html" %}
+  {% endif %}
+
+  {% if history.length >= 1 or workHistoryDecision != "Yes" %}
+    {{ govukRadios({
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        text: "Ensure you’ve added all the jobs you’ve had since you left school. Remember to explain any gaps in your work history."
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } | decorateApplicationAttributes(["completed", "workHistory"])) }}
+
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  {% endif %}
+{% endblock %}

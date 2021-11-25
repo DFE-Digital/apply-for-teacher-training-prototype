@@ -1,0 +1,52 @@
+{% extends "_form.html" %}
+
+{% set title = "What’s your name?" %}
+{% set allowsFeedback = true %}
+{% set formaction = "/application/" + applicationId + "/references/" + id + "/send-request/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/" + id + "/request/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  <p class="govuk-body">This is so your referee knows who is requesting the reference.</p>
+  {{ govukInput({
+    label: {
+      text: "Your first name",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Or given names"
+    },
+    autocomplete: "given-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "givenName"])) }}
+
+  {{ govukInput({
+    label: {
+      text: "Your last name",
+      classes: "govuk-label--m"
+    },
+    hint: {
+      text: "Or family name"
+    },
+    autocomplete: "family-name",
+    attributes: {
+      spellcheck: "false"
+    }
+  } | decorateApplicationAttributes(["candidate", "familyName"])) }}
+
+  {{ govukButton({
+    text: "Save changes" if referrer else "Save and continue"
+  }) }}
+{% endblock %}

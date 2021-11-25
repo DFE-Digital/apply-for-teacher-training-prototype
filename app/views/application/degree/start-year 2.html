@@ -1,0 +1,31 @@
+{% extends "_form-question.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "What year did you start your degree?" %}
+{% set allowsFeedback = true %}
+
+{% set formaction = "/application/" + applicationId + "/degree/" + id + "/start-year" %}
+
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: referrer or ("/application/" + applicationId + "/degree/" + id + "/grade")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: {
+      text: title,
+      classes: "govuk-label--l"
+    },
+    hint: {
+      text: "For example, 1999"
+    },
+    classes: "govuk-input--width-4"
+  } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

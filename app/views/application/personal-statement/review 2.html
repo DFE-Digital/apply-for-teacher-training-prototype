@@ -1,0 +1,54 @@
+{% extends "_form-wide.html" %}
+
+{% set applicationPath = "/application/" + applicationId %}
+{% set formaction = applicationPath %}
+{% set referrer = applicationPath + "/personal-statement/review" %}
+{% set title = "Why you want to teach" %}
+{% set allowsFeedback = true %}
+{% set canAmend = true %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: applicationPath,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {% include "_includes/review/personal-statement.html" %}
+
+  {% set hasFeedbackFromPreviousApplication = false %}
+  {% if applicationValue(["apply2"]) %}
+    {% for previousApplicationId in applicationValue("previousApplications") %}
+      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
+        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+          {% set hasFeedbackFromPreviousApplication = true %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {{ govukRadios({
+    fieldset: {
+      classes: "govuk-!-width-two-thirds",
+      legend: {
+        text: "Have you " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
+    },
+    items: [{
+      value: "true",
+      text: "Yes, I’ve " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
+    }, {
+      value: "false",
+      text: "No, I’ll come back to it later"
+    }]
+  } | decorateApplicationAttributes(["completed", "personalStatement"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

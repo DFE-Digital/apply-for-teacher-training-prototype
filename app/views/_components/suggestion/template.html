@@ -1,4 +1,5 @@
-{% from "govuk/components/inset-text/njk.html" import govukInsetText %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
 
 {%- macro _actionLink(action) %}
   <a class="govuk-link {%- if action.classes %} {{ action.classes }}{% endif %}" href="{{ action.href }}" {%- for attribute, value in action.attributes %} {{attribute}}="{{value}}"{% endfor %}>

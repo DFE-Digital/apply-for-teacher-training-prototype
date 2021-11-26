@@ -1,7 +1,7 @@
-{% extends "_form.html" %}
+{% extends "_form-question.html" %}
 
 {% set formaction = "/application/" + applicationId + "/personal-information/immigration" %}
-{% set title = "Do you have the right to work or study in the UK for the length of the teacher training course?" %}
+{% set title = "Right to work or study in the UK" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -10,9 +10,17 @@
 {% endblock %}
 
 {% block primary %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  <p class="govuk-body">If you do not know whether you have the right to work or study in the UK, <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#visa" class="govuk-link">find out about visas and immigration statuses</a>.</p>
+
   {{ govukRadios({
-    hint: {
-      html: "To get help with student visas and your immigration status, speak to a <a href=\"https://beta-adviser-getintoteaching.education.gov.uk/\">teacher training adviser</a>."
+    fieldset: {
+      legend: {
+        text: "Do you have the right to work or study in the UK for the length of the teacher training course?",
+        classes: "govuk-fieldset__legend--m"
+      }
     },
     items: [{
       value: "Yes",

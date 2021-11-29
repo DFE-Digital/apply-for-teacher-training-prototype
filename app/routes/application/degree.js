@@ -146,7 +146,16 @@ module.exports = router => {
   // Render degree review page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/degree/review', (req, res) => {
+    const { applicationId } = req.params
+
+    const application = utils.applicationData(req)
+    const degrees = utils.toArray(application.degree)
+
+    // Needs to have at least 1 degree which is not a Foundation degree
+    const meetsMinimumDegreeCriteria = (degrees.length > 0 && !(degrees.every(degree => degree.level == "Foundation")))
+
     res.render('application/degree/review', {
+      meetsMinimumDegreeCriteria
     })
   })
 

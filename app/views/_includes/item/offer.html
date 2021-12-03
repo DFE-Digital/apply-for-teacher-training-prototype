@@ -18,7 +18,7 @@
       },
       value: {
         text: "£8,625",
-        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom govuk-!-padding-bottom-1"
+        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom govuk-!-padding-bottom-1 govuk-!-padding-right-0"
       }
     },
     {
@@ -28,12 +28,18 @@
       },
       value: {
         text: "£20,125",
-        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom  govuk-!-padding-top-1"
+        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom  govuk-!-padding-top-1 govuk-!-padding-right-0"
       }
     }
   ] }) }}
 
   <p class="govuk-body">An additional fee of £625 will apply if candidates take up the option of a PCGE qualification.</p>
+{% endset %}
+
+{% set salaryHtml %}
+  <p class="govuk-body">The school will pay a salary as an unqualified Teacher scale 1 as a minimum.</p>
+
+  <p class="govuk-body">The PGCE route means that the student can decide whether they wish to pay the additional amount to study for the PGCE.</p>
 
 {% endset %}
 
@@ -61,7 +67,14 @@
       html: courseFeesHtml,
       classes: "govuk-!-padding-right-0"
     }
-  },
+  } if not choice.isSalaried, {
+    key: {
+      text: "Salary"
+    },
+    value: {
+      html: salaryHtml
+    }
+  } if choice.isSalaried,
   {
     key: {
       text: "Location"

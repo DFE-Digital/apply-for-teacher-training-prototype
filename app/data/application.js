@@ -33,7 +33,8 @@ module.exports = {
       length: '1 year',
       starts: '2021-09',
       status: 'Awaiting decision',
-      degreeRequired: 'degree'
+      degreeRequired: 'degree',
+      isSalaried: true
     },
     FGHIJ: {
       courseCode: '38PN',
@@ -45,7 +46,8 @@ module.exports = {
       length: '1 year',
       starts: '2021-09',
       status: 'Awaiting decision',
-      degreeRequired: 'degree'
+      degreeRequired: 'degree',
+      isSalaried: false
     },
     ZYXWV: {
       courseCode: '3C2X',
@@ -57,7 +59,8 @@ module.exports = {
       length: '1 year',
       starts: '2021-09',
       status: 'Awaiting decision',
-      degreeRequired: 'third'
+      degreeRequired: 'third',
+      isSalaried: false
     }
   },
   references: {

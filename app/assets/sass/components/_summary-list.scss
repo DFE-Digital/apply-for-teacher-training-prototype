@@ -5,3 +5,8 @@
 .app-summary-list__value--narrow {
   width: 30%;
 }
+
+.app-summary-list__key--no-border-bottom,
+.app-summary-list__value--no-border-bottom {
+  border-bottom-width: 0;
+}

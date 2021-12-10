@@ -18,27 +18,31 @@
 {% endblock %}
 
 {% block primary %}
+
+  {% set getAdviserHtml %}
+    <p class="govuk-body"><a href="https://adviser-getintoteaching.education.gov.uk/" class="govuk-link">Find out if you’re eligible for a teacher training adviser</a> to get advice on your application from an experienced teacher.</p>
+  {% endset %}
+
   {% set guidanceHtml %}
-    <p class="govuk-body">Use this section to showcase your motivation, commitment and teaching potential, backing up your answer with specific examples.</p>
-    <p class="govuk-body">Give providers an insight into your personality by writing honestly and thoughtfully. Avoid cliché and write in clear, correct, concise English.</p>
-    <p class="govuk-body">You can ask your training provider for examples written by successful applicants, or register with <a href="https://getintoteaching.education.gov.uk/">Get Into Teaching</a> for help from a teacher training adviser.</p>
-    <p class="govuk-body govuk-!-font-weight-bold">Suggested topics to cover include:</p>
+    <p class="govuk-body">Explain why you want to be a teacher. You could talk about:</p>
+
     <ul class="govuk-list govuk-list--bullet">
-      <li>why you want to be a teacher</li>
-      <li>your passion for your subject and the age group you’ve chosen to teach</li>
-      <li>the welfare and education of children and/or young people</li>
-      <li>the demands and rewards of the profession</li>
-      <li>personal qualities that will make you a good teacher</li>
-      <li>your contribution to the life of the school outside the classroom  – for example, running extra-curricular activities and clubs</li>
-      <li>if you have school experience or have worked as a volunteer with children or young people, give details of what this has taught you</li>
+      <li>what inspired you to apply</li>
+      <li>your understanding of the demands and rewards of teaching</li>
+      <li>the personal qualities that would make you a good teacher</li>
+      <li>how you could contribute to a school outside of the classroom - for example, running extra-curricular activities and clubs</li>
+      <li>any experience you have working with children and what you learnt</li>
+      <li>your thoughts on children’s wellbeing and the education system</li>
     </ul>
+
+    {{ govukInsetText({html: getAdviserHtml}) }}
   {% endset %}
 
   {{ guidanceHtml | safe }}
 
   {{ govukCharacterCount({
     label: {
-      text: "Tell us why you want to be a teacher",
+      text: "Why do you want to be a teacher?",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
     rows: 20,

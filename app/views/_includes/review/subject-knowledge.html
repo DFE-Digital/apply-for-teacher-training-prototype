@@ -8,7 +8,7 @@
     warning: true if errorList,
     actions: {
       items: [{
-        text: "What you know about the subject you want to teach?",
+        text: "Why are you suited to teach your subjects or age group?",
         href: applicationPath + "/subject-knowledge"
       }]
     }
@@ -72,7 +72,7 @@
     html: govukSummaryList({
       rows: [{
         key: {
-          text: "Your knowledge about the subject you want to teach"
+          text: "Why are you suited to teach your subjects or age group?"
         },
         value: {
           text: (applicationValue(["subjectKnowledge"]) or "Not entered") | nl2br | safe

@@ -92,7 +92,6 @@ module.exports = router => {
           date: now.toISOString()
         })
 
-        req.flash('success', `Reference request cancelled for ${application.references[id].name}`)
       }
 
       if (action === 'deactivate') {
@@ -113,8 +112,6 @@ module.exports = router => {
           note: 'Reminder sent',
           date: now.toISOString()
         })
-
-        req.flash('success', `Reminder sent to ${application.references[id].name}`)
       }
 
       if (action === 'retry') {
@@ -122,8 +119,6 @@ module.exports = router => {
           note: `Request sent to ${application.references[id].email}`,
           date: now.toISOString()
         })
-
-        req.flash('success', `Reference request sent to ${application.references[id].email}`)
       }
 
       res.redirect(referrer)
@@ -163,7 +158,6 @@ module.exports = router => {
         date: now.toISOString()
       })
 
-      req.flash('success', `Reference request sent to ${application.references[id].name}`)
       res.redirect(`/application/${applicationId}/references/review`)
     } else {
       res.redirect(`/application/${applicationId}/references/${id}/candidate`)

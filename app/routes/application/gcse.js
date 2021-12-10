@@ -131,9 +131,11 @@ module.exports = router => {
   // Render equivalency page
   router.get('/application/:applicationId/gcse/:id/equivalency', (req, res) => {
     const { id } = req.params
+    const { gotAdviser } = req.query
 
     res.render('application/gcse/equivalency', {
-      id
+      id,
+      gotAdviser
     })
   })
 

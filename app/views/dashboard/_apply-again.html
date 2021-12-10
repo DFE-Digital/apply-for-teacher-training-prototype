@@ -11,7 +11,13 @@
 
   <p class="govuk-body">If now’s the right time, you can still apply for courses that start this academic year.</p>
 
-  <p class="govuk-body">To talk about your options, get in touch with a <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training adviser</a>.</p>
+  <p class="govuk-body">
+    {% if gotAdviser %}
+      You can talk about your options with your adviser Bob: <br><a href="#">bob.jones@ta-recruit.education.gov.uk</a>.
+    {% else %}
+      To talk about your options, <a href="https://beta-adviser-getintoteaching.education.gov.uk/">get a teacher training adviser</a>.
+    {% endif %}
+  </p>
 
   {{ govukButton({
     text: "Apply again",

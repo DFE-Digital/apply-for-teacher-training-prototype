@@ -4,7 +4,7 @@ const utils = require('./../../utils')
 module.exports = router => {
   router.get('/dashboard/:applicationId/:applicationStatus?', (req, res) => {
     const { applicationId, applicationStatus } = req.params
-    const { confirmation } = req.query
+    const { confirmation, gotAdviser } = req.query
 
     if (applicationStatus) {
       // clear data and reset it from file
@@ -460,7 +460,8 @@ module.exports = router => {
       endedWithoutSuccess,
       numberOfApplicationsWithdrawn,
       numberOfChoicesAwaitingDecision,
-      confirmation
+      confirmation,
+      gotAdviser
     })
   })
 }

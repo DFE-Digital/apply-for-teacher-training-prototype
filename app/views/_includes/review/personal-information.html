@@ -93,21 +93,8 @@
             visuallyHiddenText: "nationality"
           }]
         } if canAmend
-      }, {
-        key: {
-          text: "Lived in the UK in the 3 years before your course starts"
-        },
-        value: {
-          html: applicationValue(["candidate", "lengthOfStay"]) or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/length-of-stay?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if lived in the UK for 3 years or more"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "lengthOfStay"]), {
+      },
+      {
         key: {
           text: "Do you have the right to work or study in the UK?"
         },

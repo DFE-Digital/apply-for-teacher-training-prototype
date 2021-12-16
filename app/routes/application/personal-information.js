@@ -29,7 +29,7 @@ module.exports = router => {
       delete application.candidate.immigrationStatus
       delete application.candidate.immigrationStatusDetails
 
-      res.redirect(referrer || `/application/${applicationId}/personal-information/length-of-stay`)
+      res.redirect(referrer || `/application/${applicationId}/personal-information/review`)
     }
   })
 

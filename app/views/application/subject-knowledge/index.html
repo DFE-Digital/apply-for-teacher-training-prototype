@@ -18,30 +18,24 @@
 {% endblock %}
 
 {% block primary %}
-  {% if hasPrimaryChoices() %}
-    <p class="govuk-body">You can include:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>the abilities and skills you would contribute</li>
-      <li>your A level subjects</li>
-      <li>expertise you’ve gained at work</li>
-      <li>subjects you have a particular interest or talent in (for example, drama, music, art or sport)</li>
-      <li>any familiarity you have with the primary curriculum</li>
-    </ul>
-  {% else %}
-    <p class="govuk-body">Give us detailed evidence for the knowledge and interest you bring to {{ course.name }}.</p>
-    <p class="govuk-body">Evidence can include:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>the subject of your undergraduate degree</li>
-      <li>modules you studied as part of your degree</li>
-      <li>postgraduate degrees (for example, a Masters or PhD)</li>
-      <li>your A level subjects</li>
-      <li>expertise you’ve gained at work</li>
-    </ul>
-  {% endif %}
+  <p class="govuk-body">If you’re applying for secondary teacher training, describe your knowledge of the subjects you’d like to teach.</p>
+
+  <p class="govuk-body">If you’re applying for primary teacher training, say why you’d like to teach this age group.</p>
+
+  <p class="govuk-body">If you're applying for a primary course with a subject specialism, or you're particularly interested in certain primary subjects, you can also talk about that.</p>
+
+  <p class="govuk-body">You could include details about:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>any relevant work experience</li>
+    <li>your degrees and degree modules</li>
+    <li>your other relevant qualifications, such as A levels</li>
+    <li>any relevant skills, interests or achievements</li>
+    <li>your understanding of the national curriculum</li>
+  </ul>
 
   {{ govukCharacterCount({
     label: {
-      text: "Enter knowledge and experience" if hasPrimaryChoices() else "Enter your subject knowledge",
+      text: "Why are you suited to teach your subjects or age group?",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
 

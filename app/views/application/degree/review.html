@@ -18,40 +18,54 @@
 
 {% block primary %}
 
-  {% if degreeCount == 0 %}
-    <p class="govuk-body">You need an undergraduate degree to be eligible for teacher training.</p>
-    <p class="govuk-body">You can also add any other degrees you have.</p>
+  {% set addDegreeButton %}
+    {{ govukButton({
+      text: ("Add another degree" if degreeCount > 0 else "Add degree"),
+      classes: ("govuk-button--secondary" if (meetsMinimumDegreeCriteria) else ""),
+      href: applicationPath + "/degree/add"
+    }) }}
+  {% endset %}
+
+  {% if degreeCount == 0 or not meetsMinimumDegreeCriteria  %}
+    <p class="govuk-body">You need a bachelor’s degree or equivalent to start teacher training.</p>
+    <p class="govuk-body">Add your bachelor’s degree even if you have not got your grade yet.</p>
+    <p class="govuk-body">You can also add any other degrees that you have, or you’re working towards.</p>
+    {{ addDegreeButton | safe }}
+  {% else %}
+    {{ addDegreeButton | safe }}
   {% endif %}
 
-  {{ govukButton({
-    text: ("Add another degree" if degreeCount > 0 else "Add degree"),
-    classes: ("govuk-button--secondary" if degreeCount > 0 else ""),
-    href: applicationPath + "/degree/add"
-  }) }}
+
 
   {% if degreeCount > 0 %}
 
     {% include "_includes/review/degrees.html" %}
 
-    {{ govukRadios({
-      fieldset: {
-        classes: "govuk-!-width-two-thirds",
-        legend: {
-          text: "Have you completed this section?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      items: [{
-        value: "true",
-        text: "Yes, I’ve completed this section"
-      }, {
-        value: "false",
-        text: "No, I’ll come back to it later"
-      }]
-    } | decorateApplicationAttributes(["completed", "degree"])) }}
+    {% if meetsMinimumDegreeCriteria %}
+      {{ govukRadios({
+        fieldset: {
+          classes: "govuk-!-width-two-thirds",
+          legend: {
+            text: "Have you completed this section?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "true",
+          text: "Yes, I’ve completed this section"
+        }, {
+          value: "false",
+          text: "No, I’ll come back to it later"
+        }]
+      } | decorateApplicationAttributes(["completed", "degree"])) }}
 
-    {{ govukButton({
-      text: "Continue"
-    }) }}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+    {% endif %}
+
+
+
   {% endif %}
 {% endblock %}

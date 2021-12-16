@@ -24,6 +24,24 @@ const applicationWithDegreeSectionNotStarted = JSON.parse(JSON.stringify(require
 applicationWithDegreeSectionNotStarted.completed.degree = null
 applicationWithDegreeSectionNotStarted.degree = {}
 
+const applicationWithFoundationDegreeOnly = JSON.parse(JSON.stringify(require('./application')))
+applicationWithFoundationDegreeOnly.completed.degree = null
+applicationWithFoundationDegreeOnly.degree = {
+  abcde: {
+    id: 'abcde',
+    provenance: 'domestic',
+    type: 'Foundation of Arts',
+    level: 'Foundation',
+    subject: 'Art History',
+    org: 'The University of Edinburgh',
+    country: 'United Kingdom',
+    yearStart: '2006',
+    yearEnd: '2009',
+    completed: 'Yes',
+    grade: 'Lower second-class honours (2:2)'
+  }
+}
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -35,6 +53,7 @@ module.exports = {
     GLOBE: require('./application-international'),
     WORLD: require('./application-international-with-choices'),
     DEGREE: applicationWithDegreeSectionNotStarted,
+    FOUNDATION: applicationWithFoundationDegreeOnly,
     21234: internationalApplicationNoRightToStudyYet,
     52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
     21235: applicationWhereStudyingForGcse,

@@ -103,6 +103,14 @@
   {% endblock %}
   {% block pageBanner %}
   {% endblock %}
+
+  <div class="govuk-width-container govuk-!-font-size-16">
+    <nav class="app-secondary-nav">
+      <a href="#">Your application</a>
+      <a href="#">Messages <span class="app-messages-count">1</span></a>
+      <a href="#">Manage account</a>
+    </nav>
+</div>
 {% endblock %}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}

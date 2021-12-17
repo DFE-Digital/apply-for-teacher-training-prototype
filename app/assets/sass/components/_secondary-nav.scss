@@ -1,0 +1,24 @@
+
+
+.app-secondary-nav {
+  border-bottom: 1px solid darkgrey;
+}
+
+.app-secondary-nav a {
+  display: inline-block;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.app-messages-count {
+  background-color: $govuk-brand-colour;
+  color: govuk-colour("white");
+  display: inline-block;
+  width: 26px; height: 26px;
+  border-radius: 13px;
+  line-height: 26px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 3px;
+}

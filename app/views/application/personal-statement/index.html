@@ -40,6 +40,29 @@
     </ul>
 
     {{ govukInsetText({html: getAdviserHtml}) }}
+
+    {% if gotAdviser %}
+      {{ govukRadios({
+        fieldset: {
+          legend: {
+            text: "Do you want to share your answer with your adviser?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "yes",
+            text: "Yes"
+          },
+          {
+            value: "no",
+            text: "No"
+          }
+        ]
+      } | decorateApplicationAttributes(["sharePersonalStatementWithAdviser"])) }}
+
+    {% endif %}
+
   {% endset %}
 
   {{ guidanceHtml | safe }}

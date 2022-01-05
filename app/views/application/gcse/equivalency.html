@@ -15,12 +15,12 @@
 {% block primary %}
   <p class="govuk-body">You can still apply for teacher training if you do not have a qualification which demonstrates this.</p>
 
-  <p class="govuk-body">Some providers may let you sit an equivalency test to show you have the required skills.</p>
+  <p class="govuk-body">Some providers may let you do an equivalency test to show you have the required skills.</p>
 
   {% if gotAdviser %}
-    <p class="govuk-body">Contact your chosen provider or your adviser Bob for advice: <br><a href="#" class="govuk-link">bob.jones@ta-recruit.education.gov.uk</a></p>
+    <p class="govuk-body">Contact your training provider or your adviser Bob at <br><a href="#" class="govuk-link">bob.jones@ta-recruit.education.gov.uk</a>for advice.</p>
   {% else %}
-    <p class="govuk-body">For advice, contact your chosen training provider or <a href="https://adviser-getintoteaching.education.gov.uk" class="govuk-link">get a teacher training adviser</a>.</p>
+    <p class="govuk-body">Contact your training provider or <a href="https://adviser-getintoteaching.education.gov.uk" class="govuk-link">get a teacher training adviser</a> for advice.</p>
   {% endif %}
 
   {{ govukCharacterCount({

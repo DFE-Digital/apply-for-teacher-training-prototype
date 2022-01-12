@@ -6,17 +6,9 @@
 {% set choicesCount = choices | length %}
 {% set choicesRemaining = 3 - choicesCount %}
 {% if choicesCount >= 1 %}
-  {% if applicationValue(["apply2"]) %}
-    {% set title = "Course choice" %}
-  {% else %}
-    {% set title = "Course choices" %}
-  {% endif %}
+  {% set title = "Course choices" %}
 {% else %}
-  {% if applicationValue(["apply2"]) %}
-    {% set title = "Choosing a course" %}
-  {% else %}
-    {% set title = "Choosing courses" %}
-  {% endif %}
+  {% set title = "Choosing courses" %}
 {% endif %}
 
 {% block pageNavigation %}
@@ -35,7 +27,7 @@
 {% block primary %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
-      {% if choicesRemaining != 0 and not applicationValue(["apply2"]) %}
+      {% if choicesRemaining != 0 %}
 
         {% set addAnotherHtml %}
 
@@ -72,7 +64,7 @@
         },
         hint: {
           text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
-        } if not applicationValue(["apply2"]) and choicesRemaining != 0,
+        } if choicesRemaining != 0,
         items: [{
           value: "true",
           text: "Yes, I’ve completed this section"

@@ -96,7 +96,7 @@
       },
       {
         key: {
-          text: "Do you have the right to work or study in the UK?"
+          text: "Do you already have the right to work or study in the UK?"
         },
         value: {
           text: applicationValue(["candidate", "immigration"])
@@ -122,49 +122,7 @@
             visuallyHiddenText: "immigration status"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == "Yes", {
-        key: {
-          text: "Are you already living in the UK?"
-        },
-        value: {
-          text: applicationValue(["candidate", "alreadyLivingInUk"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/already-living-in-uk?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if you are already living in the UK"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == "Yes", {
-        key: {
-          text: "When did you start living in the UK?"
-        },
-        value: {
-          text: applicationValue(["candidate", "dateOfEntry"]) | formatDate or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/date-of-entry?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "date of entry into the UK"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "alreadyLivingInUk"]) == "Yes", {
-        key: {
-          text: "How will you get the right to work or study in the UK?"
-        },
-        value: {
-          html: visaRouteText
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/visa-route?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "how you will gain the right to work or study in the UK"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == "Not yet" and applicationValue(["candidate", "visaRoute"])
+      } if applicationValue(["candidate", "immigration"]) == 'Yes'
       ]
     })
   }) }}

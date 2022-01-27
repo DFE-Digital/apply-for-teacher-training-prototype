@@ -42,7 +42,7 @@ module.exports = router => {
     if (answer === 'Yes') {
       res.redirect(`/application/${applicationId}/personal-information/immigration-status`)
     } else {
-      res.redirect(`/application/${applicationId}/personal-information/visa-route`)
+      res.redirect(`/application/${applicationId}/personal-information/review`)
     }
   })
 
@@ -85,7 +85,7 @@ module.exports = router => {
   router.post('/application/:applicationId/personal-information/immigration-status', (req, res) => {
     const { applicationId } = req.params
 
-    res.redirect(`/application/${applicationId}/personal-information/already-living-in-uk`)
+    res.redirect(`/application/${applicationId}/personal-information/review`)
   })
 
   // Render other personal information pages

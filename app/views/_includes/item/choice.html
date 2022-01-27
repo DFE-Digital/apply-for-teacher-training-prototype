@@ -53,14 +53,11 @@
     {% set visaSponsorshipInsetTextHtml %}
       <p class="govuk-heading-s app-inset-text__title">Visa sponsorship is not available for this course</p>
 
-      <p class="govuk-body">You said that you do not yet have the right to work or study in the UK.</p>
+      <p class="govuk-body">Check your eligibility for different <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#visa" class="govuk-link">visa types and immigration statuses</a>.</p>
 
-      <p class="govuk-body">You can:</p>
+      <p class="govuk-body">If you need a Student or Skilled Worker visa to get the right to work or study in the UK, you should <a href="https://www.find-postgraduate-teacher-training.service.gov.uk" class="govuk-body">find a course</a> where visa sponsorship is available.
 
-      <ul class="govuk-list govuk-list--bullet">
-        <li>find a course where visa sponsorship is available</li>
-        <li>find out about <a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-non-uk-applicants#visas-and-immigration" class="govuk-link">other visas that allow you to study in the UK</a></li>
-      </ul>
+      <p class="govuk-body">Sponsorship is not available for this course.</p>
     {% endset %}
 
 
@@ -256,7 +253,7 @@
       html: visaSponsorshipHtml,
       classes: "app-summary-list__value--wide"
     }
-  } if (data.applications[applicationId].candidate.immigration == "Not yet"), {
+  } if (data.applications[applicationId].candidate.immigration == "No"), {
     key: {
       text: "GCSE requirements"
     },

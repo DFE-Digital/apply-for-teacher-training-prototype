@@ -1,0 +1,109 @@
+{% extends "_form-wide.html" %}
+
+{% set title = "Personal details" %}
+{% set canAmend = true %}
+
+{% block primary %}
+
+  <h2 class="govuk-heading-m">Personal information</h2>
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Name"
+        },
+        value: {
+          text: "Joe Bloggs"
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "name"
+          }]
+        }
+      }, {
+        key: {
+          text: "Date of birth"
+        },
+        value: {
+          text: "2 January 1983"
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "date of birth"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Nationality"
+        },
+        value: {
+          html: "British"
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "nationality"
+          }]
+        } if canAmend
+      }]
+    })
+  }) }}
+
+  <h2 class="govuk-heading-m">Contact details</h2>
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Phone number"
+        },
+        value: {
+          text: "07712 123 456"
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "phone number"
+          }]
+        }
+      }, {
+        key: {
+          text: "Email address"
+        },
+        value: {
+          text: "joe@example.com"
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "email"
+          }]
+        }
+      }, {
+        key: {
+          text: "Address"
+        },
+        value: {
+          html: "XX"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "address"
+          }]
+        }
+      }
+      ]
+    })
+  }) }}
+
+{% endblock %}

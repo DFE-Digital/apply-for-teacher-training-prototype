@@ -76,30 +76,6 @@
   {% endif %}
 
   <section class="govuk-!-margin-bottom-8">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
-    {{ appTaskList({
-      items: [{
-        text: "Personal information",
-        href: applicationPath + "/personal-information" + ("/review" if applicationValue(["candidate"]) | length > 0),
-        id: "personal-information",
-        tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "personalInformation"])),
-          text: tagTextForSection(completed=applicationValue(["completed", "personalInformation"]))
-        }
-      }, {
-        text: "Contact information",
-        href: applicationPath + "/contact-information" + ("/review" if applicationValue(["contactInformation", "address"])),
-        id: "contact-information",
-        tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "contactInformation"])),
-          text: tagTextForSection(completed=applicationValue(["completed", "contactInformation"]))
-        }
-      }]
-    }) }}
-  </section>
-
-
-  <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
     {% if findNotOpen == "true" %}
       <p class="govuk-body">You can apply for courses from 13 October.</p>

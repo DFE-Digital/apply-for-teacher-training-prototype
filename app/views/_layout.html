@@ -78,13 +78,7 @@
     homepageUrl: "https://www.gov.uk",
     serviceName: serviceName,
     serviceUrl: serviceUrl,
-    containerClasses: "govuk-width-container",
-    navigation: [{
-      text: accountEmail
-    }, {
-      href: "/account/sign-out",
-      text: "Sign out"
-    }] if accountEmail and hasAccountLinks != false
+    containerClasses: "govuk-width-container"
   }) }}
 {% endblock %}
 
@@ -104,12 +98,16 @@
   {% block pageBanner %}
   {% endblock %}
 
-  <div class="govuk-width-container govuk-!-font-size-16">
-    <nav class="app-secondary-nav">
-      <a href="#">Your application</a>
-      <a href="#">Messages <span class="app-messages-count">1</span></a>
-      <a href="#">Manage account</a>
+  <div class="govuk-width-container govuk-!-font-size-19 app-secondary-nav">
+    <nav class="app-secondary-nav__nav">
+      <a class="govuk-link govuk-link--no-visited-state" href="/application">Your application</a>
+      <a class="govuk-link govuk-link--no-visited-state" href="/personal-details">Your personal details</a>
+      <a class="govuk-link govuk-link--no-visited-state" href="#">Messages <span class="app-messages-count">1</span></a>
     </nav>
+
+    <div class="app-secondary-nav__sign-out">
+      <a class="govuk-link govuk-link--no-visited-state" href="#">Sign out</a>
+    </div>
 </div>
 {% endblock %}
 

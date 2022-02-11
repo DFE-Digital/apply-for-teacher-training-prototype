@@ -8,7 +8,7 @@ module.exports = router => {
     if (req.query.showErrors === 'true') {
       pageObject.errorList = []
       const sections = {
-        choices: application.apply2 ? 'Course choice not marked as completed' : 'Course choices not marked as completed',
+        choices: 'Course choices not marked as completed',
         // references: 'You need 2 references before you can submit your application',
         personalInformation: 'Personal information not marked as completed',
         contactInformation: 'Contact information not marked as completed',

@@ -9,12 +9,11 @@ module.exports = router => {
 
   // Render review page
   router.get('/application/:applicationId/other-qualifications/review', (req, res) => {
-
     const { applicationId } = req.params
     const { otherQualifications } = utils.applicationData(req)
-    const otherQualificationsDisclose = utils.applicationData(req)["otherQualificationsDisclose"]
+    const otherQualificationsDisclose = utils.applicationData(req).otherQualificationsDisclose
 
-    if (otherQualificationsDisclose != "No" && (utils.toArray(otherQualifications).length == 0)) {
+    if (otherQualificationsDisclose !== 'No' && (utils.toArray(otherQualifications).length === 0)) {
       // Redirect back to guard question if there are no qualifications but they didn't answer No to the guard question
       res.redirect(`/application/${applicationId}/other-qualifications`)
     } else {
@@ -26,7 +25,7 @@ module.exports = router => {
     const { applicationId } = req.params
     const { otherQualificationsDisclose } = req.body.applications[applicationId]
 
-    if (otherQualificationsDisclose == "Yes") {
+    if (otherQualificationsDisclose === 'Yes') {
       res.redirect(`/application/${applicationId}/other-qualifications/add`)
     } else {
       res.redirect(`/application/${applicationId}/other-qualifications/review`)
@@ -65,13 +64,9 @@ module.exports = router => {
   })
 
   router.post('/application/:applicationId/other-qualifications/:id/details', (req, res) => {
-    const application = utils.applicationData(req)
     const next = req.session.data.next || 'review'
-    const nextId = utils.generateRandomString()
-    const { applicationId, id } = req.params
+    const { applicationId } = req.params
     const { referrer } = req.query
-    const { year, org, type } = application.otherQualifications[id]
-    const { typeUk } = application.otherQualifications[id]
 
     res.redirect(referrer || `/application/${applicationId}/other-qualifications/${next}`)
   })

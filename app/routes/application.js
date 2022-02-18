@@ -98,8 +98,7 @@ module.exports = router => {
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
-
-    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
       apply2Application.apply2 = false
     } else {
       apply2Application.apply2 = true
@@ -133,7 +132,7 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
       res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
     } else {
       res.redirect(`/application/${code}?copied=true`)

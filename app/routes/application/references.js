@@ -53,10 +53,7 @@ module.exports = router => {
 
   // Render review pages, redirecting to referee start page if no referees added
   router.get('/application/:applicationId/references/review', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-    res.render('application/references/review', {
-    })
+    res.render('application/references/review')
   })
 
   // Render action page
@@ -91,7 +88,6 @@ module.exports = router => {
           note: 'Request cancelled',
           date: now.toISOString()
         })
-
       }
 
       if (action === 'deactivate') {

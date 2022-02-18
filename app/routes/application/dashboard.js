@@ -240,8 +240,9 @@ module.exports = router => {
         }]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
+          personalStatement: {
+            qualityOfWriting: 'There were a number of spelling and grammar errors throughout the application.',
+            other: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. '
           },
           additionalFeedback: 'It would also strengthen your application if you could get more experience of working within a primary school. '
         }
@@ -305,24 +306,23 @@ module.exports = router => {
       case 'ended-without-success':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'Contained several spelling mistakes and grammatical errors.\n\nThe candidate should describe the impact they want to have on their students in more detail.',
+          personalStatement: {
+            qualityOfWriting: 'Contained several spelling mistakes and grammatical errors.\n\nThe candidate should describe the impact they want to have on their students in more detail.',
             other: 'Candidate was not able to demonstrate sufficient experience of working with children.'
           }
         }
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
+          personalStatement: {
+            other: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
           },
           additionalFeedback: 'It would also strengthen your application if you could get more experience of working within a primary school. '
         }
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'Focus more on why teaching is the career for you.',
-            subjectKnowledge: 'Look at ways to evidence subject knowledge within your application or supporting statement.'
+          personalStatement: {
+            other: 'Focus more on why teaching is the career for you.'
           }
         }
         break
@@ -331,25 +331,23 @@ module.exports = router => {
       case 'ended-without-success-vague-feedback':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'The overall application was weak suggesting that the applicant may not be successful on the course',
-            subjectKnowledge: 'Lack of reference regarding the subject.'
+          personalStatement: {
+            other: 'The overall application was weak suggesting that the applicant may not be successful on the course'
           }
         }
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
           performanceAtInterview: 'You had not made a sufficiently considered and informed decision to train to teach.',
-          qualityOfApplication: {
-            personalStatement: 'The quality of communication in the personal statement could be improved.'
+          personalStatement: {
+            qualityOfWriting: 'The quality of communication in the personal statement could be improved.'
           },
           additionalFeedback: 'There have been limited places for this course and stronger applications received.'
         }
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          qualityOfApplication: {
-            personalStatement: 'Focus more on why teaching is the career for you.',
-            subjectKnowledge: 'Academic record does not look strong enough to cope with the PGCE that is mandatory this year, on top of heavy planning and teaching workload.'
+          personalStatement: {
+            other: 'Focus more on why teaching is the career for you.'
           },
           additionalFeedback: 'You could apply for the unsalaried route that we offer.'
         }

@@ -110,11 +110,8 @@ module.exports = router => {
     apply2Application.previousApplications = [existingApplicationId]
 
     for (const choice of utils.toArray(existingApplication.choices)) {
-      if (choice?.feedback?.qualityOfApplication?.personalStatement) {
+      if (choice?.feedback?.personalStatement?.qualityOfWriting || choice?.feedback?.personalStatement?.other) {
         apply2Application.completed.personalStatement = false
-      }
-
-      if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
         apply2Application.completed.subjectKnowledge = false
       }
 

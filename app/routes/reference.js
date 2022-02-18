@@ -10,15 +10,13 @@ module.exports = router => {
   })
 
   router.post('/reference/answer', (req, res) => {
-
     const answer = req.body['reference-answer']
 
-    if (answer == 'Yes') {
+    if (answer === 'Yes') {
       res.redirect('/reference/relationship')
     } else {
       res.redirect('/reference/decline')
     }
-
   })
 
   router.get('/reference/:view', (req, res) => {

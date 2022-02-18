@@ -215,19 +215,6 @@ module.exports = (env) => {
     return regExp.exec(providerAndCode)[1]
   }
 
-  /**
-   * Check if degree type is an undergraduate degree
-   * @type {String} string
-   */
-  filters.isUndergraduateDegree = (string) => {
-    const degreeTypes = degree.types.all
-    const thisType = degreeTypes.find(type => type.value === string)
-    if (thisType) {
-      return thisType.level === 6
-    }
-    return false
-  }
-
   filters.statusClass = (status, prefix = 'govuk-tag') => {
     switch (status) {
       // Application statuses

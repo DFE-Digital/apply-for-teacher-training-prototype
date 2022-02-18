@@ -125,8 +125,6 @@ module.exports = (nunjucksAppEnv, app) => {
       return utils.highestDegreeGrade(req)
     })
 
-
-
     next()
   })
 }

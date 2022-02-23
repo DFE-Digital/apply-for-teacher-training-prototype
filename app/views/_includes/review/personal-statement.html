@@ -30,10 +30,14 @@
 
             {% set providerFeedback %}
               {% if item.feedback.personalStatement.qualityOfWriting %}
+                <p class="govuk-body">Quality of writing:</p>
                 <p class="govuk-body"> {{ item.feedback.personalStatement.qualityOfWriting | safe }}</p>
               {% endif %}
 
               {% if item.feedback.personalStatement.other %}
+                {% if item.feedback.personalStatement.qualityOfWriting %}
+                  <p class="govuk-body">Other:</p>
+                {% endif %}
                 <p class="govuk-body"> {{ item.feedback.personalStatement.other | safe }}</p>
               {% endif %}
             {% endset %}

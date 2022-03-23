@@ -44,6 +44,7 @@
     "portscanner": "^2.1.1",
     "require-dir": "^1.0.0",
     "sync-request": "^6.0.0",
+    "task-list-component": "github:x-govuk/task-list-component#v0.0.1",
     "universal-analytics": "^0.4.16",
     "uuid": "^8.3.2"
   },

@@ -1,11 +1,11 @@
 {% extends "_form.html" %}
 
-{% set formaction = "/application/" + applicationId + "/personal-information/nationality-answer" %}
+{% set formaction = "/application/" + applicationId + "/nationality-residency/nationality-answer" %}
 {% set title = "What’s your nationality?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/")
+    href: (referrer if referrer else "/application/" + applicationId)
   }) }}
 {% endblock %}
 

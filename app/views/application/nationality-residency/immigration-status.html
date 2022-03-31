@@ -1,16 +1,15 @@
 {% extends "_form.html" %}
 
 {% set title = "What’s your immigration status?" %}
-{% set formaction = "/application/" + applicationId + "/personal-information/immigration-status" %}
+{% set formaction = "/application/" + applicationId + "/nationality-residency/immigration-status" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/immigration/")
+    href: (referrer if referrer else "/application/" + applicationId + "/nationality-residency/immigration/")
   }) }}
 {% endblock %}
 
 {% block formBody %}
-  {% if isEuropeanCitizen == true %}
     {{ govukRadios({
       fieldset: {
         legend: {
@@ -29,6 +28,9 @@
         value: "EU pre-settled status",
         text: "EU pre-settled status"
       }, {
+        value: "Indefinite leave to remain",
+        text: "Indefinite leave to remain"
+      }, {
         value: "other",
         text: "Another immigration status",
         conditional: {
@@ -37,7 +39,7 @@
               text: "Immigration status"
             },
             hint: {
-              text: "For example, “Indefinite leave to remain”."
+              text: "For example, “Student visa”."
             },
             threshold: 90,
             maxwords: 200,
@@ -46,19 +48,7 @@
         }
       }]
     } | decorateApplicationAttributes(["candidate", "immigrationStatus"])) }}
-  {% else %}
-    {{ govukCharacterCount({
-      label: {
-        text: title,
-        classes: "govuk-label--l"
-      },
-      hint: {
-        text: "For example, “I have permanent residence”."
-      },
-      maxwords: 200,
-      rows: 5
-    } | decorateApplicationAttributes(["candidate", "immigrationStatusDetails"])) }}
-  {% endif %}
+
 
   {{ govukButton({
     text: "Save and continue"

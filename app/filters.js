@@ -63,6 +63,7 @@ module.exports = (env) => {
     if (object) {
       // Always return an array of selected nationalities, even if only 1 selected
       let { nationality } = object
+      nationality = nationality || []
       nationality = nationality instanceof Array ? nationality : [nationality]
 
       // Using slice() to shallow-copy the array rather than referencing the original
@@ -74,6 +75,30 @@ module.exports = (env) => {
       const nationalityList = nationalities.filter(value => value !== 'Other')
 
       return filters.formatList(nationalityList)
+    }
+  }
+
+  /**
+   * Return an array of nationalities
+   *
+   * @type {object} object
+   */
+  filters.nationalityList = (object = {}) => {
+    if (object) {
+      // Always return an array of selected nationalities, even if only 1 selected
+      let { nationality } = object
+      nationality = nationality || []
+      nationality = nationality instanceof Array ? nationality : [nationality]
+
+      // Using slice() to shallow-copy the array rather than referencing the original
+      const nationalities = nationality.slice()
+      if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
+      if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
+      if (object.otherNationality3) { nationalities.push(object.otherNationality3) }
+
+      const nationalityList = nationalities.filter(value => value !== 'Other')
+
+      return nationalityList
     }
   }
 

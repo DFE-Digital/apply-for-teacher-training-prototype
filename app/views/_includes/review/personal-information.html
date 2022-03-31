@@ -79,50 +79,7 @@
             visuallyHiddenText: "date of birth"
           }]
         } if canAmend
-      }, {
-        key: {
-          text: "Nationality"
-        },
-        value: {
-          html: applicationValue(["candidate"]) | formatNationalities or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/nationality?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "nationality"
-          }]
-        } if canAmend
-      },
-      {
-        key: {
-          text: "Do you already have the right to work or study in the UK?"
-        },
-        value: {
-          text: applicationValue(["candidate", "immigration"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/immigration?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if you have the right to work or study in the UK"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]), {
-        key: {
-          text: "Immigration status"
-        },
-        value: {
-          html: immigrationStatusText
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/immigration-status?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "immigration status"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == 'Yes'
+      }
       ]
     })
   }) }}

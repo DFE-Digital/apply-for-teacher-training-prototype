@@ -1,0 +1,99 @@
+{% set completed = applicationValue(["completed", "nationalityResidency"]) %}
+  {% set immigrationStatusText %}
+    <p class="govuk-body">
+      {% if applicationValue(["candidate", "immigrationStatusDetails"]) %}
+        {{ applicationValue(["candidate", "immigrationStatusDetails"]) }}
+      {% elif applicationValue(["candidate", "immigrationStatus"]) %}
+        {{ applicationValue(["candidate", "immigrationStatus"]) }}
+      {% else %}
+        Not entered
+      {% endif %}
+    </p>
+  {% endset %}
+
+  {% set visaRouteText %}
+    <p class="govuk-body">
+      {% if applicationValue(["candidate", "visaRoute"]) == "sponsorship" %}
+        A visa sponsored by a course provider.
+      {% else %}
+        {{ applicationValue(["candidate", "visaRouteDetails"]) }}
+      {% endif %}
+    </p>
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Nationality"
+        },
+        value: {
+          html: applicationValue(["candidate"]) | formatNationalities or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/nationality?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "nationality"
+          }]
+        } if canAmend
+      },
+      {
+        key: {
+          text: "Do you already have the right to work or study in the UK?"
+        },
+        value: {
+          text: applicationValue(["candidate", "immigration"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/immigration?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "if you have the right to work or study in the UK"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "immigration"]), {
+        key: {
+          text: "Immigration status"
+        },
+        value: {
+          html: immigrationStatusText
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/immigration-status?referrer=" + referrer,
+            text: "Change",
+            visuallyHiddenText: "immigration status"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "immigration"]) == 'Yes', {
+        key: {
+          text: "Will you have been living in these countries and territories for 3 continuous years before the first day of your course?"
+        },
+        value: {
+          html: applicationValue(["candidate", "living"])
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/living?referrer=" + referrer,
+            text: "Change"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "living"]) and applicationValue(["candidate", "immigration"]) != 'No', {
+        key: {
+          text: "Details of where you’ve been living"
+        },
+        value: {
+          html: applicationValue(["candidate", "livingDetails"]) or "Not answered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/living?referrer=" + referrer,
+            text: "Change"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "living"]) == 'No'
+      ]
+    })
+  }) }}

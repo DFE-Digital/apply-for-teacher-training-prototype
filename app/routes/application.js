@@ -172,6 +172,7 @@ module.exports = router => {
   require('./application/other-qualifications')(router)
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
+  require('./application/nationality-residency')(router)
   require('./application/interview-needs')(router)
   require('./application/references')(router)
   require('./application/review')(router)

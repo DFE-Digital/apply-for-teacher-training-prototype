@@ -79,7 +79,7 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
     {{ appTaskList({
       items: [{
-        text: "Personal information",
+        text: "Name and date of birth",
         href: applicationPath + "/personal-information" + ("/review" if applicationValue(["candidate"]) | length > 0),
         id: "personal-information",
         tag: {
@@ -87,7 +87,16 @@
           text: tagTextForSection(completed=applicationValue(["completed", "personalInformation"]))
         }
       }, {
-        text: "Contact information",
+        text: "Nationality and residency",
+        href: applicationPath + "/nationality-residency/" + ("review" if applicationValue(["completed", "nationalityResidency"]) else "nationality"),
+        id: "nationalityAndResidency",
+        tag: {
+          classes: tagClassesForSection(completed=applicationValue(["completed", "nationalityResidency"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "nationalityResidency"]))
+        }
+      },
+      {
+        text: "Contact details",
         href: applicationPath + "/contact-information" + ("/review" if applicationValue(["contactInformation", "address"])),
         id: "contact-information",
         tag: {

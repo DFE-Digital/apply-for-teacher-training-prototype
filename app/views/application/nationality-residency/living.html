@@ -1,0 +1,78 @@
+{% extends "_form-question.html" %}
+
+{% set formaction = "/application/" + applicationId + "/nationality-residency/review" %}
+{% set title = "Where you’ve been living" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/nationality-residency/nationality/")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  <p class="govuk-body">As a {{ applicationValue(["candidate"]) | formatNationalities }} citizen{% if applicationValue(["candidate", "immigrationStatus"]) == 'EU settled status' or applicationValue(["candidate", "immigrationStatus"]) == 'EU pre-settled status' %} with {{ applicationValue(["candidate", "immigrationStatus"])}}{% endif %}, to qualify for lower course fees and a student loan, you normally need to have been living for 3 continuous years before the first day of your course in these countries and territories:</p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>United Kingdom</li>
+    {% if 'Irish' in applicationValue(["candidate"]) | nationalityList %}
+      <li>Ireland</li>
+    {% endif %}
+    {% if applicationValue(["candidate", "immigrationStatus"]) == 'EU settled status' or applicationValue(["candidate", "immigrationStatus"]) == 'EU pre-settled status' %}
+      <li>The European Union (Austria, Belgium, Bulgaria, Croatia, Republic of Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovakia, Slovenia, Spain and Sweden)</li>
+      <li>Iceland</li>
+      <li>Liechtenstein</li>
+      <li>Norway</li>
+    {% endif %}
+    <li>Jersey, Guernsey, Alderney or Sark</li>
+    <li>Isle of Man</li>
+    <li>Falkland Islands</li>
+    <li>Gibraltor</li>
+  </ul>
+
+  <p>You do not need to consider temporary absences such as going on holiday.</p>
+
+  {% set questionText %}
+    Will you have been living in these countries and territories for 3 continuous years before the first day of your course?
+  {% endset %}
+
+  {% set livingDetails %}
+    {{ govukTextarea({
+      label: {
+        text: "Where have you been living and for how long? (optional)",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, give details of overseas work experience or a ‘gap year’"
+      },
+      maxwords: 200,
+      rows: 5
+    } | decorateApplicationAttributes(["candidate", "livingDetails"])) }}
+  {% endset %}
+
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: questionText,
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No",
+      conditional: {
+        html: livingDetails
+      }
+    }]
+  } | decorateApplicationAttributes(["candidate", "living"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

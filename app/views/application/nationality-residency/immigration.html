@@ -1,11 +1,11 @@
 {% extends "_form-question.html" %}
 
-{% set formaction = "/application/" + applicationId + "/personal-information/immigration" %}
+{% set formaction = "/application/" + applicationId + "/nationality-residency/immigration" %}
 {% set title = "Right to work or study in the UK" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/nationality/")
+    href: (referrer if referrer else "/application/" + applicationId + "/nationality-residency/nationality/")
   }) }}
 {% endblock %}
 

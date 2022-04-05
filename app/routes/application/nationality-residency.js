@@ -79,6 +79,7 @@ module.exports = router => {
 
     if (
       application.candidate.immigrationStatus == 'EU settled status' ||
+      application.candidate.immigrationStatus == 'Indefinite leave to remain' ||
       application.candidate.immigrationStatus == 'EU pre-settled status'
     ) {
       res.redirect(`/application/${applicationId}/nationality-residency/living`)

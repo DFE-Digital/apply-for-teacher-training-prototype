@@ -17,8 +17,12 @@
 
   <p class="govuk-body">You should select ‘yes’ if you've only been away temporarily. For example, for holidays. </p>
 
-  {% set questionText %}
-    Will you have been living in [x places] for 3 years by the time the course starts?
+{% set questionText %}
+    {% if data.applications[applicationId].candidate.immigrationStatus == "EU settled status" %}
+      Will you have been living in [x places] for 3 years by the time the course starts?
+    {% else %}
+      Will you have been living in [y places] for 3 years by the time the course starts?
+    {% endif %}
   {% endset %}
 
   {% set livingDetails %}

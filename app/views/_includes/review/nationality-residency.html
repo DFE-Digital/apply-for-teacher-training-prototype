@@ -69,7 +69,7 @@
         } if canAmend
       } if applicationValue(["candidate", "immigration"]) == 'Yes', {
         key: {
-          text: "Will you have been living in these countries and territories for 3 continuous years before the first day of your course?"
+          text: "Will you have been living in [x places] for 3 continuous years before the first day of your course?"
         },
         value: {
           html: applicationValue(["candidate", "living"])
@@ -82,7 +82,7 @@
         } if canAmend
       } if applicationValue(["candidate", "living"]) and applicationValue(["candidate", "immigration"]) != 'No', {
         key: {
-          text: "Details of where you’ve been living"
+          text: "Details of where you lived"
         },
         value: {
           html: applicationValue(["candidate", "livingDetails"]) or "Not answered"

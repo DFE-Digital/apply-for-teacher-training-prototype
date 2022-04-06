@@ -28,15 +28,15 @@
     {% endif %}
 
     {% if data.applications[applicationId].candidate.nationality == "Other" and data.applications[applicationId].candidate.immigrationStatus == "Indefinite leave to remain" %}
-    Will you have been living in the UK, Channel Islands or Isle of Man, for 3 years by the time the course starts?
+    Will you have been living in the UK, Channel Islands or Isle of Man for 3 years by the time the course starts?
     {% endif %}
 
     {% if data.applications[applicationId].candidate.nationality == "Other" and data.applications[applicationId].candidate.immigrationStatus == "EU settled status" %}
-    Will you have been living in the [EU list] for 3 years by the time the course starts?
+    Will you have been living in the the UK, Channel Islands, Isle of Man, European Economic Area, British Overseas Territories, Switzerland or Gibraltar for 3 years by the time the course starts?
     {% endif %}
 
     {% if data.applications[applicationId].candidate.nationality == "Other" and data.applications[applicationId].candidate.immigrationStatus == "EU pre-settled status" %}
-    Will you have been living in the [EU list] for 3 years by the time the course starts?
+    Will you have been living in the the UK, Channel Islands, Isle of Man, European Economic Area, British Overseas Territories, Switzerland or Gibraltar for 3 years by the time the course starts?
     {% endif %}
 
   {% endset %}

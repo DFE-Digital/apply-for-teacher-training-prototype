@@ -1,4 +1,4 @@
-{% extends "_layout.html" %}
+{% extends "layout.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% if applicationValue(["gcse", id, "completed"]) == "false" %}

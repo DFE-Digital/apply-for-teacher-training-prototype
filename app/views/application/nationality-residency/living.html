@@ -1,6 +1,6 @@
 {% extends "_form-question.html" %}
 
-{% set formaction = "/application/" + applicationId + "/nationality-residency/review" %}
+{% set formaction = "/application/" + applicationId + "/nationality-residency/living-answer" %}
 {% set title = "Residency" %}
 
 {% block pageNavigation %}
@@ -15,36 +15,11 @@
 
   <p class="govuk-body">We ask about your residency because it helps teacher training providers assess whether you’re eligible for ‘home’ or ‘international’ course fees.</p>
 
-  <p class="govuk-body">You should select ‘yes’ if you've only been away temporarily. For example, for holidays. </p>
+  <!-- <p class="govuk-body">You should select ‘yes’ if you've only been away temporarily. For example, for holidays or a gap year. </p> -->
 
   {% set questionText %}
-   {% if "Irish" in data.applications[applicationId].candidate.nationality %}
-     Will you have been living in the UK, Ireland, Channel Islands or Isle of Man for 3 years by the time the course starts?
-   {% elseif "British" in data.applications[applicationId].candidate.nationality %}
-     Will you have been living in the UK, Channel Islands or Isle of Man for 3 years by the time the course starts?
-   {% elseif data.applications[applicationId].candidate.nationality == "Other" %}
-     {% if data.applications[applicationId].candidate.immigrationStatus == "Indefinite leave to remain" %}
-       Will you have been living in the UK, Channel Islands or Isle of Man for 3 years by the time the course starts?
-     {% elseif data.applications[applicationId].candidate.immigrationStatus == "EU settled status" or data.applications[applicationId].candidate.immigrationStatus == "EU pre-settled status" %}
-       Will you have been living in the the UK, Channel Islands, Isle of Man, European Economic Area, British Overseas Territories, Switzerland or Gibraltar for 3 years by the time the course starts?
-     {% endif %}
-   {% endif %}
+    Will you have been living in the UK or Ireland for 3 years by the time the course starts?
  {% endset %}
-
-  {% set livingDetails %}
-    {{ govukTextarea({
-      label: {
-        text: "Give details",
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "Include where you lived, when you lived there, and how long you were there for."
-      },
-      maxwords: 200,
-      rows: 5
-    } | decorateApplicationAttributes(["candidate", "livingDetails"])) }}
-  {% endset %}
-
 
   {{ govukRadios({
     fieldset: {
@@ -55,13 +30,13 @@
     },
     items: [{
       value: "Yes",
-      text: "Yes"
+      text: "Yes",
+      hint: {
+        text: "It’s ok if you’ve been away temporarily, for example for a gap year."
+      }
     }, {
       value: "No",
-      text: "No",
-      conditional: {
-        html: livingDetails
-      }
+      text: "No"
     }]
   } | decorateApplicationAttributes(["candidate", "living"])) }}
 

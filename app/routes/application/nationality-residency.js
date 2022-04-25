@@ -80,7 +80,8 @@ module.exports = router => {
     if (
       application.candidate.immigrationStatus == 'EU settled status' ||
       application.candidate.immigrationStatus == 'Indefinite leave to remain' ||
-      application.candidate.immigrationStatus == 'EU pre-settled status'
+      application.candidate.immigrationStatus == 'EU pre-settled status' ||
+      application.candidate.immigrationStatus == 'Right of abode'
     ) {
       res.redirect(`/application/${applicationId}/nationality-residency/living`)
     } else {
@@ -95,7 +96,12 @@ module.exports = router => {
     const application = req.session.data.applications[applicationId]
     const answer = application.candidate.living
 
-    res.redirect(`/application/${applicationId}/nationality-residency/review`)
+    console.log(answer)
+    if (answer === "No") {
+      res.redirect(`/application/${applicationId}/nationality-residency/living-more`)
+    } else {
+      res.redirect(`/application/${applicationId}/nationality-residency/review`)
+    }
 
   })
 
@@ -103,6 +109,7 @@ module.exports = router => {
   router.get('/application/:applicationId/nationality-residency/:view', (req, res) => {
     const { view } = req.params
     const { referrer } = req.query
+    const { applicationId } = req.params
 
     res.render(`application/nationality-residency/${view}`, {
       referrer

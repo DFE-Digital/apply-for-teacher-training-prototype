@@ -1,0 +1,62 @@
+{% extends "_form-question.html" %}
+
+{% set formaction = "/application/" + applicationId + "/nationality-residency/review" %}
+{% set title = "Residency" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/nationality-residency/living")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+  <!-- <h1 class="govuk-heading-l">{{ title }}</h1> -->
+
+
+{% set questionText %}
+   {% if data.applications[applicationId].candidate.immigrationStatus == "EU pre-settled status" %}
+     Will you have been living in the EU, Switzerland, Iceland, Liechtenstein, Channel Islands or Isle of Man for 3 years by the time the course starts?
+   {% else %}
+    Will you have been living in the EU, Switzerland, Iceland, Liechtenstein, Channel Islands or Isle of Man for 3 years by the time the course starts?
+   {% endif %}
+ {% endset %}
+
+  {% set livingDetails %}
+    {{ govukTextarea({
+      label: {
+        text: "Give details",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Include where you lived, when you lived there, and how long you were there for."
+      },
+      maxwords: 200,
+      rows: 5
+    } | decorateApplicationAttributes(["candidate", "livingDetails"])) }}
+  {% endset %}
+
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: questionText,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No",
+      conditional: {
+        html: livingDetails
+      }
+    }]
+  } | decorateApplicationAttributes(["candidate", "living-more"])) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

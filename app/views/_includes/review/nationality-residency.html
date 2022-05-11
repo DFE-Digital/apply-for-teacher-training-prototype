@@ -93,7 +93,7 @@
             text: "Change"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "living"]) and applicationValue(["candidate", "immigration"]) != 'No', {
+      } if applicationValue(["candidate", "livingMore"]) and applicationValue(["candidate", "living"]) == 'No', {
         key: {
           text: "Details of where you lived"
         },
@@ -106,7 +106,7 @@
             text: "Change"
           }]
         } if canAmend
-      } if applicationValue(["candidate", "living"]) == 'No'
+      } if applicationValue(["candidate", "livingDetails"])
       ]
     })
   }) }}

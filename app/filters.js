@@ -217,6 +217,13 @@ module.exports = (env) => {
     }
   }
 
+  filters.addItems = (array, items) => {
+    for (item of items) {
+      array.push(item)
+    }
+    return array
+  }
+
   filters.push = (array, item) => {
     array.push(item)
     return array

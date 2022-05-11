@@ -11,49 +11,73 @@
 
 {% block primary %}
 
-  <!-- <h1 class="govuk-heading-l">{{ title }}</h1> -->
-
-
-{% set questionText %}
-   {% if data.applications[applicationId].candidate.immigrationStatus == "EU pre-settled status" %}
-     Will you have been living in the EU, Switzerland, Iceland, Liechtenstein, Channel Islands or Isle of Man for 3 years by the time the course starts?
-   {% else %}
-    Will you have been living in the Channel Islands or Isle of Man for 3 years by the time the course starts?
-   {% endif %}
+ {% set questionText %}
+    Where will you have been living for the 3 years before the course starts?
  {% endset %}
 
-  {% set livingDetails %}
-    {{ govukTextarea({
-      label: {
-        text: "Give details",
-        classes: "govuk-label--s"
+ {% set items = [
+    {
+      text: "UK"
+    },
+    {
+      text: "Ireland"
+    }]
+  %}
+
+  <!-- These items only added for people with British or Irish nationality, or EU settled or pre-settled status - ie not those who have indefinite leave to remain or another immigration status -->
+  {% if data.applications[applicationId].candidate.nationality.includes('British') or data.applications[applicationId].candidate.nationality.includes('Irish') or data.applications[applicationId].candidate.immigrationStatus == "EU settled status"  or data.applications[applicationId].candidate.immigrationStatus == "EU pre-settled status" %}
+    {% set items = items | addItems([
+      {
+        text: "European Union"
       },
+      {
+        text: "Iceland"
+      },
+      {
+        text: "Liechtenstein"
+      },
+      {
+        text: "Norway"
+      },
+      {
+        text: "Switzerland"
+      }
+    ]) %}
+  {% endif %}
+
+  <!-- These countries aren’t allowed if you have EU pre-settled status. We’re not sure why. -->
+  {% if data.applications[applicationId].candidate.immigrationStatus != "EU pre-settled status" %}
+    {% set items = items | addItems([{
+        text: "Channel Islands"
+      },
+      {
+        text: "Isle of Man"
+      }
+    ]) %}
+  {% endif %}
+
+  {% set items = items | addItems([
+    {
+      text: "British Overseas Territories"
+    },
+    {
+      text: "Somewhere else",
       hint: {
-        text: "Include where you lived, when you lived there, and how long you were there for."
-      },
-      maxwords: 200,
-      rows: 5
-    } | decorateApplicationAttributes(["candidate", "livingDetails"])) }}
-  {% endset %}
+        text: "Don’t select this if you were just living somewhere else temporarily, for example a gap year."
+      }
+    }]) %}
 
-
-  {{ govukRadios({
+  {{ govukCheckboxes({
     fieldset: {
       legend: {
         text: questionText,
         classes: "govuk-fieldset__legend--l"
       }
     },
-    items: [{
-      value: "Yes",
-      text: "Yes"
-    }, {
-      value: "No",
-      text: "No",
-      conditional: {
-        html: livingDetails
-      }
-    }]
+    hint: {
+      text: "Select all places where you will have lived."
+    },
+    items: items
   } | decorateApplicationAttributes(["candidate", "living-more"])) }}
 
   {{ govukButton({

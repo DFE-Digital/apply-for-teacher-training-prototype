@@ -1,6 +1,6 @@
 {% extends "_form-question.html" %}
 
-{% set formaction = "/application/" + applicationId + "/nationality-residency/review" %}
+{% set formaction = "/application/" + applicationId + "/nationality-residency/living-more-answer" %}
 {% set title = "Residency" %}
 
 {% block pageNavigation %}
@@ -78,7 +78,7 @@
       text: "Select all places where you will have lived."
     },
     items: items
-  } | decorateApplicationAttributes(["candidate", "living-more"])) }}
+  } | decorateApplicationAttributes(["candidate", "livingMore"])) }}
 
   {{ govukButton({
     text: "Save and continue"

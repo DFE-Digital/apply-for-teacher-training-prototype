@@ -1,0 +1,34 @@
+{% extends "_form-question.html" %}
+
+{% set formaction = "/application/" + applicationId + "/nationality-residency/review" %}
+{% set title = "Residency" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + applicationId + "/nationality-residency/living-more")
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+ {% set questionText %}
+    Where will you have been living for the 3 years before the course starts?
+ {% endset %}
+
+
+  {{ govukTextarea({
+    label: {
+      text: questionText,
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    hint: {
+      text: "Include where you lived, how long you lived there and when you went."
+    }
+  } | decorateApplicationAttributes(["candidate", "livingDetails"]))  }}
+
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

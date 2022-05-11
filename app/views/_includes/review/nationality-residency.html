@@ -69,7 +69,7 @@
         } if canAmend
       } if applicationValue(["candidate", "immigration"]) == 'Yes', {
         key: {
-          text: "Will you have been living in [x places] for 3 years by the time the course starts?"
+          text: "Will you have been living in the UK or Ireland for 3 years by the time the course starts?"
         },
         value: {
           html: applicationValue(["candidate", "living"])
@@ -82,6 +82,19 @@
         } if canAmend
       } if applicationValue(["candidate", "living"]) and applicationValue(["candidate", "immigration"]) != 'No', {
         key: {
+          text: "Where will you have been living for the 3 years before the course starts?"
+        },
+        value: {
+          html: (applicationValue(["candidate", "livingMore"]) | formatList)
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/nationality-residency/living-more?referrer=" + referrer,
+            text: "Change"
+          }]
+        } if canAmend
+      } if applicationValue(["candidate", "living"]) and applicationValue(["candidate", "immigration"]) != 'No', {
+        key: {
           text: "Details of where you lived"
         },
         value: {
@@ -89,7 +102,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/nationality-residency/living?referrer=" + referrer,
+            href: applicationPath + "/nationality-residency/living-details?referrer=" + referrer,
             text: "Change"
           }]
         } if canAmend

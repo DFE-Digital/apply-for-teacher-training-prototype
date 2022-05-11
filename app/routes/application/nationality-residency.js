@@ -96,9 +96,22 @@ module.exports = router => {
     const application = req.session.data.applications[applicationId]
     const answer = application.candidate.living
 
-    console.log(answer)
     if (answer === "No") {
       res.redirect(`/application/${applicationId}/nationality-residency/living-more`)
+    } else {
+      res.redirect(`/application/${applicationId}/nationality-residency/review`)
+    }
+
+  })
+
+  // Answer second question about where you’ve been living
+  router.post('/application/:applicationId/nationality-residency/living-more-answer', (req, res) => {
+    const { applicationId } = req.params
+    const application = req.session.data.applications[applicationId]
+    const answer = application.candidate.livingMore
+
+    if (answer.includes('Somewhere else')) {
+      res.redirect(`/application/${applicationId}/nationality-residency/living-details`)
     } else {
       res.redirect(`/application/${applicationId}/nationality-residency/review`)
     }

@@ -37,7 +37,7 @@
     "keypather": "^3.0.0",
     "luxon": "^2.3.0",
     "marked": "^4.0.10",
-    "node-sass": "^6.0.1",
+    "sass": "^1.49.9",
     "notifications-node-client": "^5.1.0",
     "number-to-words": "^1.2.4",
     "nunjucks": "^3.2.1",

@@ -12,7 +12,7 @@
 {% block primary %}
 
  {% set questionText %}
-    Where will you have been living for the 3 years before the course starts?
+    Give details about where you’ll have been living for the 3 years before the course starts
  {% endset %}
 
 
@@ -23,7 +23,7 @@
       isPageHeading: true
     },
     hint: {
-      text: "Include details about how long you lived there and when you went."
+      text: "Include where you’ll have lived and for how long. If you’ll have lived in more than one place, say when you moved."
     }
   } | decorateApplicationAttributes(["candidate", "livingDetails"]))  }}
 

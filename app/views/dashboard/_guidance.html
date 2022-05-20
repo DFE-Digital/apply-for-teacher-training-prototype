@@ -18,8 +18,6 @@
 
   <p class="govuk-body">You’ve accepted the offer from {{ providers[choices[0].providerCode].name }}</p>
 
-  <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
-
 {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
 
   <p class="govuk-body">You’ve chosen to defer your course.</p>

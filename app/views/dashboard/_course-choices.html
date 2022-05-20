@@ -1,4 +1,5 @@
 {% for item in choices %}
+
   {% set canRespond = item.status == "Offer received" %}
 
   {% set hasResponded =
@@ -140,15 +141,37 @@
     }) }}
   {% endset %}
 
-  {{ appSummaryCard({
-    classes: "app-course-choice govuk-!-margin-bottom-6",
-    titleHtml: summaryHeaderHtml,
-    actions: {
-      items: [{
-        href: applicationPath + "/submitted/?referrer=" + referrer,
-        text: "View application"
-      }]
+
+  <h2 class="govuk-heading-m">Conditions</h2>
+
+  <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
+
+  {{ appTaskList({
+    classes: "govuk-!-margin-bottom-5",
+    items: [
+    {
+      text: "References",
+      href: "/application/" + applicationId + "/references/review",
+      tag: {
+        classes: "govuk-tag--grey",
+        text: "Incomplete"
+      }
     },
-    html: summaryBodyHtml
+    {
+      text: "Fitness to train to teach check",
+      tag: {
+        classes: "govuk-tag--grey",
+        text: "Incomplete"
+      }
+    }, {
+      text: "Enhanced Disclosure and barring service (DBS) check",
+      tag: {
+        classes: "govuk-tag--grey",
+        text: "Incomplete"
+      }
+    }]
   }) }}
+
+  <p class="govuk-body govuk-!-margin-bottom-6">Contact the provider to find out more about these conditions.</p>
+
 {% endfor %}

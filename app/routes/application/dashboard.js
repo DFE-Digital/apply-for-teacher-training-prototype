@@ -49,10 +49,11 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check',
+          '2 references',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
+          'Verification of GCSE maths and English certificates',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
         ]
@@ -64,8 +65,9 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          'Fitness to train to teach check',
+          'Disclosure and barring service check',
+          '2 references'
         ]
         break
       case 'offer-received-different-provider':
@@ -76,8 +78,9 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          'Fitness to train to teach check',
+          'Disclosure and barring service check',
+          '2 references'
         ]
         break
 
@@ -140,10 +143,11 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check',
+          '2 references',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
+          'Verification of GCSE maths and English certificates',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
         ]
@@ -156,10 +160,11 @@ module.exports = router => {
         choices.ABCDE.status = 'Offer deferred'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check',
+          '2 references',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
+          'Verification of GCSE maths and English certificates',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
         ]
@@ -172,10 +177,11 @@ module.exports = router => {
         choices.ABCDE.status = 'Conditions not met'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check',
+          '2 references',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
+          'Verification of GCSE maths and English certificates',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
         ]
@@ -225,8 +231,9 @@ module.exports = router => {
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          'Fitness to train to teach check',
+          'Disclosure and barring service check',
+          '2 references'
         ]
 
         break
@@ -264,7 +271,7 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check'
         ]
         break
@@ -277,7 +284,7 @@ module.exports = router => {
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Return completed and signed Suitability Declaration.',
           'Return completed and signed Fee Status Declaration.'
@@ -289,7 +296,7 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
+          'Fitness to train to teach check',
           'Disclosure and barring service check'
         ]
         break
@@ -385,8 +392,9 @@ module.exports = router => {
       case 'pending-conditions':
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          'Fitness to train to teach check',
+          'Disclosure and barring service check',
+          '2 references'
         ]
         application.choices = [choices.ABCDE]
         break
@@ -394,8 +402,9 @@ module.exports = router => {
       case 'offer-deferred':
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          'Fitness to train to teach check',
+          'Disclosure and barring service check',
+          '2 references'
         ]
         application.choices = [choices.ZYXWV]
 

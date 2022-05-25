@@ -128,46 +128,16 @@
 
   <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-    {% set references = applicationValue(["references"]) | toArray %}
-    {% set readyReferences = references | selectattr("ready") | reverse %}
-
-    {% if readyReferences | length >= 2 %}
-      {% set referencesItemText = "Reference requests" %}
-      {% set referencesTagText = completedTagText %}
-      {% set referencesTagClass = tagClass %}
-      <!--p class="govuk-body govuk-!-margin-bottom-2">You have enough references to send your application to training providers.</p>
-      <p class="govuk-body">Select the 2 references you want to include in your application.</p-->
-    {% else %}
-      <p class="govuk-body govuk-!-margin-bottom-2">Your application needs to include 2 references.</p>
-      <p class="govuk-body govuk-!-margin-bottom-2">You can request as many references as you like to increase the chances of getting 2 quickly.</p>
-      <p class="govuk-body">Once you’ve received 2 or more references, you can select the 2 you want to include in your application.</p>
-      {% set referencesItemText = "Request your references" %}
-      {% set referencesTagText = incompleteTagText %}
-      {% set referencesTagClass = incompleteTagClass %}
-    {% endif %}
-
-    {% if references | length > 0 %}
-      <ul class="govuk-list">
-        {% for reference in references %}
-          <li class="govuk-body-s"><span class="app-status-indicator {{ reference.status | statusClass("app-status-indicator") }}"></span> <b>{{ reference.name }}</b>: {{ reference.status }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+    <p class="govuk-body govuk-!-margin-bottom-2">Your application needs to include 2 references.</p>
 
     {{ appTaskList({
       items: [{
-        text: referencesItemText,
+        text: "References",
         href: applicationPath + "/references/review",
-        id: "referees"
-      }, {
-        text: "Select 2 references",
-        href: "#" if readyReferences | length >= 2,
-        id: "references",
+        id: "referees",
         tag: {
-          text: "Completed"
-        } if readyReferences | length >= 2 else {
-          classes: incompleteTagClass,
-          text: "Cannot start yet"
+          text: "Incomplete",
+          classes: incompleteTagClass
         }
       }]
     }) }}

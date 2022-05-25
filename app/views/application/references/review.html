@@ -75,7 +75,7 @@
     </div>
 
     {{ govukDetails({
-      summaryHtml: "What your referees are asked to do when you request a reference",
+      summaryHtml: "What your referees will be asked to do if you accept an offer",
       html: guidanceHtml
     }) }}
 
@@ -90,7 +90,7 @@
     </div>
 
     {{ govukDetails({
-      summaryHtml: "What your referees are asked to do when you request a reference",
+      summaryHtml: "What your referees will be asked to do if you accept an offer",
       html: guidanceHtml
     }) }}
   {% else %}
@@ -102,23 +102,7 @@
     }) }}
   {% endif %}
 
-
-  {% if readyReferences.length %}
-    <h2 class="govuk-heading-m">References that have been given</h2>
-    {% set references = readyReferences %}
-    {% include "_includes/review/references.html" %}
-  {% endif %}
-
-  {% if pendingReferences.length %}
-    <h2 class="govuk-heading-m">Requests waiting to be sent</h2>
-    {% set references = pendingReferences %}
-    {% include "_includes/review/references.html" %}
-  {% endif %}
-
-  {% if otherReferences.length %}
-    <h2 class="govuk-heading-m">Reference requests</h2>
-    {% set references = otherReferences %}
-    {% include "_includes/review/references.html" %}
-  {% endif %}
+  {% set references = otherReferences %}
+  {% include "_includes/review/references.html" %}
 
 {% endblock %}

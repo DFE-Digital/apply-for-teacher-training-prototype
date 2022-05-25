@@ -2,7 +2,7 @@
 
 {% set referee = applicationValue(["references", id]) %}
 {% set parent = referee.name %}
-{% set title = "Check your answers before sending your request" %}
+{% set title = "Check your answers" %}
 {% set allowsFeedback = true %}
 {% set formaction = "/application/" + applicationId + "/references/" + id + "/request/decision" %}
 
@@ -64,26 +64,6 @@
           visuallyHiddenText: "relationship to referee"
         }]
       }
-    }]
-  }) }}
-
-  {{ govukRadios({
-    name: "decision",
-    formGroup: {
-      classes: "govuk-!-margin-top-8"
-    },
-    fieldset: {
-      legend: {
-        text: "Are you ready to send a reference request to " + referee.name + "?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "now",
-      text: "Yes, send a reference request now"
-    }, {
-      value: "later",
-      text: "No, not at the moment"
     }]
   }) }}
 

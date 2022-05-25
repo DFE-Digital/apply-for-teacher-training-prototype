@@ -141,23 +141,7 @@ module.exports = router => {
   router.get('/application/:applicationId/references/:id/send-request', (req, res) => {
     const { applicationId, id } = req.params
     const application = utils.applicationData(req)
-    const now = new Date()
-
-    if (application.candidate.givenName) {
-      application.references[id].nudges = application.references[id].nudges || 0
-      application.references[id].status = 'Awaiting response'
-      application.references[id].pending = false
-      const log = application.references[id].log = application.references[id].log || []
-
-      log.push({
-        note: 'Request sent',
-        date: now.toISOString()
-      })
-
-      res.redirect(`/application/${applicationId}/references/review`)
-    } else {
-      res.redirect(`/application/${applicationId}/references/${id}/candidate`)
-    }
+    res.redirect(`/application/${applicationId}/references/review`)
   })
 
   // Render referee question page

@@ -33,6 +33,8 @@
   </ul>
 {% endset %}
 
+{% set canAmendReferee = true %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -90,25 +92,5 @@
         visuallyHiddenText: "relationship to referee"
       }]
     } if canAmendReferee
-  }, {
-    key: {
-      text: "Status"
-    },
-    value: {
-      html: statusHtml + contextHtml
-    }
-  }, {
-    key: {
-      text: "History"
-    },
-    value: {
-      html: logHtml
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/" + item.id + "/action/nudge?referrer=" + referrer,
-        text: "Send a reminder to this referee"
-      }]
-    } if canNudgeReferee
-  } if item.log and showReferenceRequestLog]
+  }]
 }) }}

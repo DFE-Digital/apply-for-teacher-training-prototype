@@ -11,12 +11,6 @@
   "env": {
     "PASSWORD": {
       "required": true
-    },
-    "USERNAME": {
-      "required": true
-    },
-    "NOTIFYAPIKEY": {
-      "required": true
     }
   },
   "formation": {

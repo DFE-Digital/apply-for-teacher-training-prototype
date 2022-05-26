@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node start.js",
     "lint": "standard",
+    "lint:fix": "standard --fix",
     "rapidtest": "jest --bail",
     "test": "npm run lint && gulp generate-assets && jest"
   },

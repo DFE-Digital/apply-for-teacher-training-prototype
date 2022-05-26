@@ -4,8 +4,10 @@ const path = require('path')
 
 // NPM dependencies
 const express = require('express')
-const marked = require('marked')
 const router = express.Router()
+
+// Local dependencies
+const utils = require('../lib/utils')
 
 // Page routes
 
@@ -26,9 +28,9 @@ router.get('/install/:page', function (req, res) {
     req.params.page = req.params.page.slice(0, -3)
   }
   redirectMarkdown(req.params.page, res)
-  const doc = fs.readFileSync(path.join(__dirname, '/documentation/install/', req.params.page + '.md'), 'utf8')
-  const html = marked(doc)
-  res.render('install_template', { document: html })
+  var doc = fs.readFileSync(path.join(__dirname, '/documentation/install/', req.params.page + '.md'), 'utf8')
+  const renderOptions = utils.getRenderOptions(doc)
+  res.render('install_template', renderOptions)
 })
 
 // When in 'promo mode', redirect to download the current release zip from
@@ -49,6 +51,12 @@ router.get('/download', function (req, res) {
       'https://github.com/alphagov/govuk-prototype-kit/releases/latest'
     )
   }
+})
+
+router.get('/update.sh', function (req, res) {
+  res.redirect(
+    'https://raw.githubusercontent.com/alphagov/govuk-prototype-kit/main/update.sh'
+  )
 })
 
 // Examples - examples post here
@@ -84,7 +92,7 @@ router.get('/templates/check-your-answers', function (req, res) {
 module.exports = router
 
 // Strip off markdown extensions if present and redirect
-const redirectMarkdown = function (requestedPage, res) {
+var redirectMarkdown = function (requestedPage, res) {
   if (requestedPage.slice(-3).toLowerCase() === '.md') {
     res.redirect(requestedPage.slice(0, -3))
   }

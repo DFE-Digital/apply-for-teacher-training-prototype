@@ -1,3 +1,6 @@
+---
+title: Build a basic prototype
+---
 # Build a basic prototype using the Prototype Kit
 
 This tutorial shows you how to prototype a fictional 'Apply for a juggling licence' service that will:
@@ -10,7 +13,12 @@ It will take about an hour to finish this tutorial, after you install the Protot
 
 Our prototype will look a bit like this:
 
-![Overview of pages linked together](/public/images/docs/tutorial-overview.png)
+<figure>
+
+![The first page has the title 'Start page' with the button 'Start now'. This is linked to a second page with the title 'Question 1' and a 'Continue' button. This forks to 2 different pages. 1 is titled 'Ineligible'. 2 is titled Question 2. Question 2 is linked to a page titled 'Check answers'. This links to page 6, titled 'Complete'.](/public/images/docs/tutorial-overview.png)
+
+<figcaption class="govuk-body">Diagram of 6 pages connected together.</figcaption>
+</figure>
 
 ## Before you start
 
@@ -28,6 +36,6 @@ You'll also need a code editor. You can use any editor, but the instructions in 
 
 If you would like to give feedback about this tutorial, or you’ve got a question, get in touch with the GOV.UK Design System team:
 
-- on the <a class="govuk-link" href="https://ukgovernmentdigital.slack.com/app_redirect?channel=prototype-kit" data-hsupport="slack">#prototype-kit channel on cross-government Slack</a>.
+- on the <a class="govuk-link" href="https://ukgovernmentdigital.slack.com/app_redirect?channel=prototype-kit" data-hsupport="slack">#prototype-kit channel on cross-government Slack</a>
 
 - by email at <a class="govuk-link" href="mailto:govuk-design-system-support@digital.cabinet-office.gov.uk" data-hsupport="email">govuk-design-system-support@digital.cabinet-office.gov.uk</a>

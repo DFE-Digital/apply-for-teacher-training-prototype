@@ -21,7 +21,7 @@
   {% if applicationValue(["apply2"]) %}
     {% for previousApplicationId in applicationValue("previousApplications") %}
       {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
           {% set hasFeedbackFromPreviousApplication = true %}
         {% endif %}
       {% endfor %}

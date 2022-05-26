@@ -49,6 +49,7 @@ const byWeightThenAlphabetically = (a, b) => {
   return 0
 }
 
+/* eslint-disable */
 function sort (query, options) {
   // Calculate a weight for each option and multiply by any boost supplied.
   //
@@ -65,3 +66,4 @@ function sort (query, options) {
     .sort(byWeightThenAlphabetically)
     .map(o => o.name)
 }
+/* eslint-enable */

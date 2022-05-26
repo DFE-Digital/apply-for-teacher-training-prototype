@@ -172,27 +172,25 @@ const hasPrimaryChoices = (req) => {
 }
 
 const highestDegreeGrade = (req) => {
-
   const application = applicationData(req)
   const degrees = toArray(application.degree)
 
   const degreeGrades = degrees.map(degree => degree.grade)
 
-  if (degreeGrades.includes("First-class honours")) {
-    return "first"
-  } else if (degreeGrades.includes("Upper second-class honours (2:1)")) {
-    return "21"
-  } else if (degreeGrades.includes("Lower second-class honours (2:2)")) {
-    return "22"
-  } else if (degreeGrades.includes("Third-class honours")) {
-    return "third"
-  } else if (degreeGrades.includes("Pass")) {
-    return "pass"
+  if (degreeGrades.includes('First-class honours')) {
+    return 'first'
+  } else if (degreeGrades.includes('Upper second-class honours (2:1)')) {
+    return '21'
+  } else if (degreeGrades.includes('Lower second-class honours (2:2)')) {
+    return '22'
+  } else if (degreeGrades.includes('Third-class honours')) {
+    return 'third'
+  } else if (degreeGrades.includes('Pass')) {
+    return 'pass'
   } else {
     return null
   }
 }
-
 
 const toArray = (obj) => {
   if (obj) {

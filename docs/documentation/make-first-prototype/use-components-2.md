@@ -1,6 +1,10 @@
+---
+title: Add a textarea to question 2
+caption: Build a basic prototype
+---
 # Add a textarea to question 2
 
-1. Go to the [textarea](https://design-system.service.gov.uk/components/textarea/) page of the Design System.
+1. Go to the [textarea page of the Design System](https://design-system.service.gov.uk/components/textarea/).
 2. Select the **Nunjucks** tab, then **Copy code**.
 3. Open `juggling-trick.html` in your `app/views` folder.
 4. Replace the 2 example `<p>...</p>` paragraphs with the code you copied.
@@ -28,6 +32,11 @@ Your component code should now look like this:
 
 Your page should now look like this:
 
-![Screenshot of the question page with a textarea](/public/images/docs/tutorial-textarea.png)
+<figure>
+
+![Web page with the heading "What is your most impressive juggling trick", a textarea and continue button](/public/images/docs/tutorial-textarea.png)
+
+<figcaption class="govuk-body">Screenshot of how your prototype should look.</figcaption>
+</figure>
 
 [Next (Show the user’s answers on your ‘Check answers’ page)](show-users-answers)

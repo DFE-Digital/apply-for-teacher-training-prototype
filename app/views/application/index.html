@@ -266,24 +266,6 @@
     }) }}
   </section>
 
-<section class="govuk-!-margin-bottom-8">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-
-    <p class="govuk-body govuk-!-margin-bottom-2">Add people who could give a reference if your application is successful.</p>
-
-    {{ appTaskList({
-      items: [{
-        text: "References",
-        href: applicationPath + "/references/review",
-        id: "referees",
-        tag: {
-          classes: tagClassesForSection(completed=applicationValue(["completed", "references"])),
-          text: "Optional"
-        }
-      }]
-    }) }}
-  </section>
-
   <section>
     {% if cycleNotOpen == "true" %}
       <h2 class="govuk-heading-m govuk-!-font-size-27">Review</h2>

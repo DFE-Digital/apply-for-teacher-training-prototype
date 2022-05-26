@@ -1,4 +1,4 @@
-{% extends "_layout.html" %}
+{% extends "layout.html" %}
 
 {% set action = "edit" if applicationValue(["gcse", id, "type"]) else "add" %}
 {% set subject = (id | capitalize) if id == "english" else id %}

@@ -48,7 +48,7 @@ module.exports = router => {
     const { applicationId } = req.params
     const id = utils.generateRandomString()
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
+    res.redirect(`/application/${applicationId}/references/${id}/name${queryString}`)
   })
 
   // Render review pages, redirecting to referee start page if no referees added

@@ -15,7 +15,7 @@
 {% if references | length > 0 %}
   {% set title = "References" %}
 {% else %}
-  {% set title = "What your referees are asked to do when you request a reference" %}
+  {% set title = "What will happen after you add contact details for references" %}
 {% endif %}
 
 
@@ -35,41 +35,26 @@
 {% endblock %}
 
 {% set guidanceHtml %}
-  <p class="govuk-body">Your referees will receive an email from the Department for Education.</p>
+<p class="govuk-body">Training providers will only see the contact details if you accept an offer from them. They’ll contact your referees to ask them to:
+</p>
 
-  <p class="govuk-body">We’ll ask them to use an online form to give their reference, as references sent by email are not accepted.</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>confirm how they know you</li>
+  <li>say whether they know of any reason why you should not work with children</li>
+</ul>
 
-  <p class="govuk-body">The form asks referees to write up to 500 words about your potential to teach. It says that they could talk about your:</p>
+<p class="govuk-body">Referees will not be able to see your application.</p>
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>communication skills</li>
-    <li>reliability and professionalism</li>
-    <li>transferable skills</li>
-    <li>ability to work with children</li>
-    <li>academic skills</li>
-  </ul>
-
-  <p class="govuk-body">They’ll also need to:</p>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>confirm how they know you</li>
-      <li>say whether they know of any reason why you should not work with children</li>
-    </ul>
-
-  <p class="govuk-body">We’ll ask them to give your reference as soon as they can so that your application is not delayed.</p>
-
-  <p class="govuk-body">Referees cannot see the content of your application.</p>
-
-  <p class="govuk-body">It's a good idea to contact referees before requesting a reference so that they know what to expect.</p>
+<p class="govuk-body">It's a good idea to contact referees before you accept an offer so that they know what to expect.</p>
 
 {% endset %}
 
 {% block primary %}
   {% if references | length == 1 %}
     <div class="govuk-inset-text govuk-!-margin-top-0">
-      <p class="govuk-body">You need to get 2 references back before you can submit your application.</p>
+      <p class="govuk-body">You need to give details of 2 referees before you can submit your application.</p>
       {{ govukButton({
-        text: "Request a second reference",
+        text: "Add contact details for a second reference",
         href: "/application/" + applicationId + "/references/add?referrer=" + referrer
       }) }}
     </div>
@@ -97,7 +82,7 @@
     {{ guidanceHtml | safe}}
 
     {{ govukButton({
-      text: "Add reference",
+      text: "Add contact details for a reference",
       href: "/application/" + applicationId + "/references/add"
     }) }}
   {% endif %}

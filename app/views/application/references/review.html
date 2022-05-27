@@ -90,4 +90,28 @@
   {% set references = otherReferences %}
   {% include "_includes/review/references.html" %}
 
+
+  {% if references | length > 1 %}
+    {{ govukRadios({
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } | decorateApplicationAttributes(["completed", "references"])) }}
+
+      {{ govukButton({
+      text: "Continue"
+    }) }}
+  {% endif %}
+
 {% endblock %}

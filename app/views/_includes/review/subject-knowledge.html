@@ -21,19 +21,23 @@
   {% if applicationValue(["apply2"]) %}
     {% for previousApplicationId in applicationValue("previousApplications") %}
       {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-
-        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.subjectKnowledge %}
-
+        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
           {% set hasFeedbackFromPreviousApplication = true %}
           {% set feedbackFromPreviousApplications %}
             {{ feedbackFromPreviousApplications | safe }}
 
             <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ providers[item.providerCode].name }}</h3>
             <blockquote class="govuk-!-margin-left-0 govuk-!-margin-top-0">
-              <p class="govuk-body">“{{ item.feedback.qualityOfApplication.subjectKnowledge | safe }}”</p>
+              {% if item.feedback.personalStatement.qualityOfWriting %}
+              <p class="govuk-body">Quality of writing:</p>
+              <p class="govuk-body">“{{ item.feedback.personalStatement.qualityOfWriting | safe }}”</p>{% endif %}
+
+              {% if item.feedback.personalStatement.other %}
+                {% if item.feedback.personalStatement.qualityOfWriting %}<p class="govuk-body">Other:</p>{% endif %}
+                <p class="govuk-body">“{{ item.feedback.personalStatement.other | safe }}”</p>
+              {% endif %}
             </blockquote>
           {% endset %}
-
         {% endif %}
       {% endfor %}
     {% endfor %}

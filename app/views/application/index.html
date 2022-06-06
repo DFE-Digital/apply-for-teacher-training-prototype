@@ -127,23 +127,6 @@
   </section>
 
   <section class="govuk-!-margin-bottom-8">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
-    <p class="govuk-body govuk-!-margin-bottom-2">You need to give contact details for at least 2 references. They’ll only be contacted if you accept an offer.</p>
-
-    {{ appTaskList({
-      items: [{
-        text: "References",
-        href: applicationPath + "/references/review",
-        id: "referees",
-        tag: {
-          text: "Incomplete",
-          classes: incompleteTagClass
-        }
-      }]
-    }) }}
-  </section>
-
-  <section class="govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
 
     {{ appTaskList({
@@ -278,6 +261,23 @@
         tag: {
           classes: tagClassesForSection(completed=applicationValue(["completed", "safeguarding"])),
           text: tagTextForSection(completed=applicationValue(["completed", "safeguarding"]))
+        }
+      }]
+    }) }}
+  </section>
+
+  <section class="govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+    <p class="govuk-body govuk-!-margin-bottom-2">You need to give contact details for 2 people who can give you a reference. They’ll only be contacted if you accept an offer.</p>
+
+    {{ appTaskList({
+      items: [{
+        text: "References",
+        href: applicationPath + "/references/review",
+        id: "referees",
+        tag: {
+          text: "Incomplete",
+          classes: incompleteTagClass
         }
       }]
     }) }}

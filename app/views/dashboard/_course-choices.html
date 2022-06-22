@@ -143,6 +143,50 @@
 
   {% if item.status == 'Offer accepted'  %}
 
+    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+
+      <p class="govuk-body">You now need to give references.</p>
+      {{ govukButton({
+        text: "Request a reference",
+        href: "/application/" + applicationId + "/references/add?referrer=" + referrer,
+        classes: "xgovuk-button--secondary"
+      }) }}
+
+    {{ appTaskList({
+      items: [{
+        text: "<a href=\"#\">Joseph Bloggs</a><br><span class=\"govuk-!-font-size-16\"><br>Requested on 31 May 2022 – <a href=\"#\">send a reminder</a></span> ",
+        id: "referees",
+        tag: {
+          text: "Request sent"
+        }
+      },{
+        text: "Daniel Evans",
+        href: applicationPath + "/references/review",
+        id: "referees",
+        tag: {
+          text: "Reference received"
+        }
+      },
+      {
+        text: "Jane Goodall",
+        href: applicationPath + "/references/review",
+        id: "referees",
+        tag: {
+          text: "Unable to give reference"
+        }
+      },
+      {
+        text: "Bob Jones",
+        href: applicationPath + "/references/review",
+        id: "referees",
+        tag: {
+          text: "Request cancelled"
+        }
+      }
+      ]
+    }) }}
+
+
     <h2 class="govuk-heading-m">Conditions</h2>
 
     <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
@@ -153,7 +197,6 @@
 
       {% set taskItems = taskItems | push({
         text: condition,
-        href: ("/application/" + applicationId + "/references/review" if condition == '2 references' else null),
         tag: {
           classes: 'govuk-tag--grey',
           text: 'Pending'
@@ -168,6 +211,10 @@
     }) }}
 
     <p class="govuk-body govuk-!-margin-bottom-6">Contact the provider to find out more about these conditions.</p>
+
+    <p class="govuk-body"><a href="#" class="govuk-link">View application</a></p>
+
+    <p class="govuk-body"><a href="#" class="govuk-link">Withdraw this application</a></p>
 
   {% else %}
 

@@ -273,7 +273,8 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
           'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          'Disclosure and barring service check',
+          '2 references, 1 should be professional'
         ]
         break
 
@@ -288,7 +289,8 @@ module.exports = router => {
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          'Return completed and signed Fee Status Declaration.',
+          '2 references'
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
@@ -298,7 +300,8 @@ module.exports = router => {
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
           'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          'Disclosure and barring service check',
+          '2 references, 1 should be academic'
         ]
         break
 

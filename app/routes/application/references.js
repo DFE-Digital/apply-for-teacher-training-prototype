@@ -53,10 +53,7 @@ module.exports = router => {
 
   // Render review pages, redirecting to referee start page if no referees added
   router.get('/application/:applicationId/references/review', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-    res.render('application/references/review', {
-    })
+    res.render('application/references/review')
   })
 
   // Render action page
@@ -91,8 +88,6 @@ module.exports = router => {
           note: 'Request cancelled',
           date: now.toISOString()
         })
-
-        req.flash('success', `Reference request cancelled for ${application.references[id].name}`)
       }
 
       if (action === 'deactivate') {
@@ -113,8 +108,6 @@ module.exports = router => {
           note: 'Reminder sent',
           date: now.toISOString()
         })
-
-        req.flash('success', `Reminder sent to ${application.references[id].name}`)
       }
 
       if (action === 'retry') {
@@ -122,8 +115,6 @@ module.exports = router => {
           note: `Request sent to ${application.references[id].email}`,
           date: now.toISOString()
         })
-
-        req.flash('success', `Reference request sent to ${application.references[id].email}`)
       }
 
       res.redirect(referrer)
@@ -163,7 +154,6 @@ module.exports = router => {
         date: now.toISOString()
       })
 
-      req.flash('success', `Reference request sent to ${application.references[id].name}`)
       res.redirect(`/application/${applicationId}/references/review`)
     } else {
       res.redirect(`/application/${applicationId}/references/${id}/candidate`)

@@ -7,19 +7,19 @@
 // See https://www.gov.uk/what-different-qualification-levels-mean/list-of-qualification-levels
 module.exports = [
   {
-    name: "Foundation",
-    level: "5"
+    name: 'Foundation',
+    level: '5'
   },
   {
-    name: "Bachelor",
-    level: "6"
+    name: 'Bachelor',
+    level: '6'
   },
   {
-    name: "Master’s",
-    level: "7"
+    name: 'Master’s',
+    level: '7'
   },
   {
-    name: "Doctorate",
-    level: "8"
+    name: 'Doctorate',
+    level: '8'
   }
 ]

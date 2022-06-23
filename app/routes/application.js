@@ -98,8 +98,7 @@ module.exports = router => {
     const existingApplication = applications[existingApplicationId]
     const apply2Application = JSON.parse(JSON.stringify(existingApplication))
 
-
-    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
       apply2Application.apply2 = false
     } else {
       apply2Application.apply2 = true
@@ -110,11 +109,8 @@ module.exports = router => {
     apply2Application.previousApplications = [existingApplicationId]
 
     for (const choice of utils.toArray(existingApplication.choices)) {
-      if (choice?.feedback?.qualityOfApplication?.personalStatement) {
+      if (choice?.feedback?.personalStatement?.qualityOfWriting || choice?.feedback?.personalStatement?.other) {
         apply2Application.completed.personalStatement = false
-      }
-
-      if (choice?.feedback?.qualityOfApplication?.subjectKnowledge) {
         apply2Application.completed.subjectKnowledge = false
       }
 
@@ -133,7 +129,7 @@ module.exports = router => {
 
     applications[code] = apply2Application
 
-    if (existingApplication.cycleDeadlinePassed == true || req.query.from === 'unsubmitted') {
+    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
       res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
     } else {
       res.redirect(`/application/${code}?copied=true`)

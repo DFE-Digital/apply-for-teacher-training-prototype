@@ -1,7 +1,4 @@
 {
-  "addons": [
-
-  ],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -11,12 +8,6 @@
   "env": {
     "PASSWORD": {
       "required": true
-    },
-    "USERNAME": {
-      "required": true
-    },
-    "NOTIFYAPIKEY": {
-      "required": true
     }
   },
   "formation": {
@@ -25,8 +16,5 @@
     }
   },
   "name": "Apply (Prototype)",
-  "scripts": {
-    "postdeploy": "node start.js"
-  },
   "stack": "heroku-18"
 }

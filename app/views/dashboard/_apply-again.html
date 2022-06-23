@@ -5,7 +5,7 @@
     {% elif numberOfApplicationsWithdrawn > 0 %}
       You’ve withdrawn your {{ "application" if numberOfApplicationsWithdrawn == 1 else "applications" }}
     {% else %}
-      Your {{ "application was" if (choices | length) == 1 else "applications were"}} unsuccessful
+      Your {{ "application was" if (choices | length) == 1 else "applications were"}} unsuccessful.
     {% endif %}
   </h2>
 

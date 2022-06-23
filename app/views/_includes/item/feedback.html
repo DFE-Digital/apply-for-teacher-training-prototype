@@ -36,22 +36,18 @@
 }) }}
 {% endif %}
 
-{% if item.feedback.qualityOfApplication %}
-<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Quality of application</h4>
+{% if item.feedback.personalStatement %}
+<h4 class="govuk-heading-s govuk-!-margin-bottom-2">Personal statement</h4>
 
   {% set qualityOfApplicaitonFeedback %}
-    {% if item.feedback.qualityOfApplication.personalStatement %}
-      <p class="govuk-body govuk-!-margin-bottom-0">Personal statement could be improved.</p>
-      <p class="govuk-body">{{ item.feedback.qualityOfApplication.personalStatement | nl2br | safe }}</p>
+    {% if item.feedback.personalStatement.qualityOfWriting %}
+      <p class="govuk-body">Quality of writing:</p>
+      <p class="govuk-body">{{ item.feedback.personalStatement.qualityOfWriting | nl2br | safe }}</p>
     {% endif %}
 
-    {% if item.feedback.qualityOfApplication.subjectKnowledge %}
-      <p class="govuk-body govuk-!-margin-bottom-0">Subject knowledge could be improved.</p>
-      <p class="govuk-body">{{ item.feedback.qualityOfApplication.subjectKnowledge | nl2br | safe }}</p>
-    {% endif %}
-
-    {% if item.feedback.qualityOfApplication.other %}
-      <p class="govuk-body">{{ item.feedback.qualityOfApplication.other | nl2br | safe }} </p>
+    {% if item.feedback.personalStatement.other %}
+      {% if item.feedback.personalStatement.qualityOfWriting %}<p class="govuk-body">Other:</p>{% endif %}
+      <p class="govuk-body">{{ item.feedback.personalStatement.other | nl2br | safe }}</p>
     {% endif %}
   {% endset %}
 

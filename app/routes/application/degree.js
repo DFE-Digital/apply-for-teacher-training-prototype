@@ -2,7 +2,7 @@ const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 const allDegreeTypes = require('./../../data/degree-types.js').map(degreeType => {
   if (degreeType.abbreviation) {
-    degreeType.name = (degreeType.name + " (" + degreeType.abbreviation + ")")
+    degreeType.name = (degreeType.name + ' (' + degreeType.abbreviation + ')')
     degreeType.synonyms.push(degreeType.abbreviation)
   }
   return degreeType
@@ -17,7 +17,6 @@ const allDegreeInstitutions = require('./../../data/degree-institutions.js').map
   degreeInstitution.synonyms = degreeInstitution.suggestion_synonyms.concat(degreeInstitution.match_synonyms)
   return degreeInstitution
 })
-
 
 const degreeData = (req) => {
   const application = utils.applicationData(req)
@@ -67,13 +66,12 @@ module.exports = router => {
 
     const provenance = req.body.applications[applicationId].degree[id].provenance
 
-    if (provenance == "international") {
+    if (provenance === 'international') {
       // Skip to subject
       res.redirect(`/application/${applicationId}/degree/${id}/subject`)
     } else {
       res.redirect(`/application/${applicationId}/degree/${id}/level`)
     }
-
   })
 
   // Set the degree level (Bachelors, Masters, etc)
@@ -88,7 +86,7 @@ module.exports = router => {
 
     const degree = utils.applicationData(req).degree[id]
 
-    if (degree.level == 'Foundation' || degree.level == 'Bachelor' || degree.level == 'Master’s' || degree.level == 'Doctorate') {
+    if (degree.level === 'Foundation' || degree.level === 'Bachelor' || degree.level === 'Master’s' || degree.level === 'Doctorate') {
       // Ask follow-up question about type of degree
       res.redirect(`/application/${applicationId}/degree/${id}/type`)
     } else {
@@ -130,7 +128,7 @@ module.exports = router => {
   router.post('/application/:applicationId/degree/:id/graduation-year', (req, res) => {
     const { applicationId, id } = req.params
 
-    if (degreeData(req).provenance == "international" && degreeData(req).completed == "Yes") {
+    if (degreeData(req).provenance === 'international' && degreeData(req).completed === 'Yes') {
       res.redirect(`/application/${applicationId}/degree/${id}/enic`)
     } else {
       res.redirect(`/application/${applicationId}/degree/review`)
@@ -139,20 +137,18 @@ module.exports = router => {
 
   // Set the ENIC details
   router.post('/application/:applicationId/degree/:id/enic', (req, res) => {
-    const { applicationId, id } = req.params
+    const { applicationId } = req.params
     res.redirect(`/application/${applicationId}/degree/review`)
   })
 
   // Render degree review page
   // Note: Must be defined before next route declaration
   router.get('/application/:applicationId/degree/review', (req, res) => {
-    const { applicationId } = req.params
-
     const application = utils.applicationData(req)
     const degrees = utils.toArray(application.degree)
 
     // Needs to have at least 1 degree which is not a Foundation degree
-    const meetsMinimumDegreeCriteria = (degrees.length > 0 && !(degrees.every(degree => degree.level == "Foundation")))
+    const meetsMinimumDegreeCriteria = (degrees.length > 0 && !(degrees.every(degree => degree.level === 'Foundation')))
 
     res.render('application/degree/review', {
       meetsMinimumDegreeCriteria
@@ -161,7 +157,7 @@ module.exports = router => {
 
   // Render the country question page
   router.get('/application/:applicationId/degree/:id/country', (req, res) => {
-    const { id  } = req.params
+    const { id } = req.params
 
     res.render('application/degree/country', {
       id
@@ -170,22 +166,20 @@ module.exports = router => {
 
   // Render degree type page
   router.get('/application/:applicationId/degree/:id/type', (req, res) => {
-    const completedDegree = degreeData(req).grade && degreeData(req).yearStart
-
-    const { id, view } = req.params
+    const { id } = req.params
     const { referrer } = req.query
     const paths = degreePaths(req)
-    const degreeLevelNumber = allDegreeLevels.find(level => level.name == utils.applicationData(req).degree[id].level)?.level
+    const degreeLevelNumber = allDegreeLevels.find(level => level.name === utils.applicationData(req).degree[id].level)?.level
 
     let degreeTypes = []
 
     if (degreeLevelNumber) {
-      degreeTypes = allDegreeTypes.filter(degree => degree.level == degreeLevelNumber)
+      degreeTypes = allDegreeTypes.filter(degree => degree.level === degreeLevelNumber)
     } else {
       degreeTypes = allDegreeTypes
     }
 
-    res.render(`application/degree/type`, {
+    res.render('application/degree/type', {
       paths,
       id,
       referrer,

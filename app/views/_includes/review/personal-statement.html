@@ -21,15 +21,31 @@
   {% if applicationValue(["apply2"]) %}
     {% for previousApplicationId in applicationValue("previousApplications") %}
       {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
           {% set hasFeedbackFromPreviousApplication = true %}
           {% set feedbackFromPreviousApplications %}
             {{ feedbackFromPreviousApplications | safe }}
 
-            <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ providers[item.providerCode].name }}</h3>
-            <blockquote class="govuk-!-margin-left-0 govuk-!-margin-top-0">
-              <p class="govuk-body">“{{ item.feedback.qualityOfApplication.personalStatement | safe }}”</p>
-            </blockquote>
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-4">{{ providers[item.providerCode].name }} feedback</h2>
+
+            {% set providerFeedback %}
+              {% if item.feedback.personalStatement.qualityOfWriting %}
+                <p class="govuk-body">Quality of writing:</p>
+                <p class="govuk-body"> {{ item.feedback.personalStatement.qualityOfWriting | safe }}</p>
+              {% endif %}
+
+              {% if item.feedback.personalStatement.other %}
+                {% if item.feedback.personalStatement.qualityOfWriting %}
+                  <p class="govuk-body">Other:</p>
+                {% endif %}
+                <p class="govuk-body"> {{ item.feedback.personalStatement.other | safe }}</p>
+              {% endif %}
+            {% endset %}
+
+            {{ govukInsetText({
+              text: providerFeedback | safe,
+              classes: "govuk-!-margin-top-0 govuk-!-margin-bottom-2"
+            })}}
           {% endset %}
         {% endif %}
       {% endfor %}
@@ -38,14 +54,16 @@
 
   {% if hasFeedbackFromPreviousApplication %}
     {% set feedbackFromPreviousApplications %}
-      <h2 class="govuk-heading-m">Feedback from previous applications</h2>
-      {{ feedbackFromPreviousApplications | safe }}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {{ feedbackFromPreviousApplications | safe }}
+          <div class="govuk-!-margin-bottom-4">&nbsp;</div>
+        </div>
+      </div>
     {% endset %}
 
-    {{ govukInsetText({
-      classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
-      html: feedbackFromPreviousApplications | safe
-    }) }}
+
+    {{ feedbackFromPreviousApplications | safe }}
   {% endif %}
 
   {{ appSummaryCard({

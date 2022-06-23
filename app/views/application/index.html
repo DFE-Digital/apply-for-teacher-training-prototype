@@ -100,16 +100,11 @@
 
 
   <section class="govuk-!-margin-bottom-8">
-    {% if apply2 %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Course</h2>
-      <p class="govuk-body">You can apply to 1 course at a time at this stage of your application.</p>
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+    {% if findNotOpen == "true" %}
+      <p class="govuk-body">You can apply for courses from 13 October.</p>
     {% else %}
-      <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
-      {% if findNotOpen == "true" %}
-        <p class="govuk-body">You can apply for courses from 13 October.</p>
-      {% else %}
-        <p class="govuk-body">You can apply for up to 3 courses.</p>
-      {% endif %}
+      <p class="govuk-body">You can apply for up to 3 courses.</p>
     {% endif %}
 
     {% if applicationValue("choices") | toArray | length == 0 %}
@@ -120,7 +115,7 @@
 
     {{ appTaskList({
       items: [{
-        text: "Choose your course" if apply2 else "Choose your courses",
+        text: "Choose your courses",
         href: choicesHref,
         id: "personal-information",
         tag: {

@@ -21,7 +21,7 @@
   {% if applicationValue(["apply2"]) %}
     {% for previousApplicationId in applicationValue("previousApplications") %}
       {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.personalStatement %}
+        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
           {% set hasFeedbackFromPreviousApplication = true %}
         {% endif %}
       {% endfor %}
@@ -37,7 +37,7 @@
       }
     },
     hint: {
-      html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
+      html: "Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion. Ensure this is all your own work as plagiarism will be penalised."
     },
     items: [{
       value: "true",

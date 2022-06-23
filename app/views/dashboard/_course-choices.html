@@ -143,12 +143,34 @@
 
   {% if item.status == 'Offer accepted'  %}
 
-    <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
+    {% set taskItems = [] %}
+
+    {% for condition in item.conditions %}
+
+      {% set taskItems = taskItems | push({
+        text: condition,
+        tag: {
+          classes: 'govuk-tag--grey',
+          text: 'Pending'
+        }
+      }) %}
+    {% endfor %}
+
+
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-5",
+      items: taskItems
+    }) }}
 
 
 
-      <p class="govuk-body">You now need to give references.</p>
+    <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
+    <p class="govuk-body">The provider has asked you to provide these references:</p>
+
+    <div class="govuk-inset-text">
+      <p>2 references, one should be an academic reference from Birmingham University.</p>
+    </div>
 
 
       {{ govukButton({
@@ -192,34 +214,10 @@
         }) %}
       {% endfor %}
 
+
     {{ appTaskList({
       items: referenceItems
     }) }}
-
-    <h2 class="govuk-heading-m">Conditions</h2>
-
-    <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
-
-    {% set taskItems = [] %}
-
-    {% for condition in item.conditions %}
-
-      {% set taskItems = taskItems | push({
-        text: condition,
-        tag: {
-          classes: 'govuk-tag--grey',
-          text: 'Pending'
-        }
-      }) %}
-    {% endfor %}
-
-
-    {{ appTaskList({
-      classes: "govuk-!-margin-bottom-5",
-      items: taskItems
-    }) }}
-
-    <p class="govuk-body govuk-!-margin-bottom-6">Contact the provider to find out more about these conditions.</p>
 
     <p class="govuk-body"><a href="#" class="govuk-link">View application</a></p>
 

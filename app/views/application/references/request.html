@@ -1,10 +1,16 @@
 {% extends "_form.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
 {% set title = "Check your answers before sending your request" %}
 {% set allowsFeedback = true %}
 {% set formaction = "/dashboard/" + applicationId + "/references/" + id + "/request/decision" %}
+
+{% block pageNavigation %}
+    {{ govukBackLink({
+      href: "/dashboard/" + applicationId,
+      text: "Back to application"
+    }) }}
+{% endblock %}
 
 {% block primary %}
   {{ govukSummaryList({

@@ -1,8 +1,7 @@
 {% extends "_form-question.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
-{% set title = "How do you know this referee and how long have you known them?" %}
+{% set title = "How do you know " + referee.name + " and how long have you known them?" %}
 {% set allowsFeedback = true %}
 {% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/request/" %}
 
@@ -19,11 +18,11 @@
 {% endblock %}
 
 {% block primary %}
-  {% if referee.type == "Academic" %}
+  {% if referee.type == "Academic, such as a university tutor" %}
     {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year." %}
-  {% elif referee.type == "Professional" %}
+  {% elif referee.type == "Professional, such as a manager" %}
     {% set relationshipExample = "They were my line manager in my last job. I’ve known them for 2 years." %}
-  {% elif referee.type == "School-based" %}
+  {% elif referee.type == "Someone you know through experience working in a school" %}
     {% set relationshipExample = "They are the deputy head at the school where I currently volunteer. I’ve known them for 3 years." %}
   {% else %}
     {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years." %}

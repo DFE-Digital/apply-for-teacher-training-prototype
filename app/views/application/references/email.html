@@ -1,8 +1,7 @@
 {% extends "_form-question.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
-{% set title = "What is the referee’s email address?" %}
+{% set title = "What is " + referee.name + "’s email address?" %}
 {% set allowsFeedback = true %}
 {% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/relationship/" %}
 

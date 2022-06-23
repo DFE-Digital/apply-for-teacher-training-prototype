@@ -111,7 +111,7 @@ module.exports = router => {
         })
       }
 
-      res.redirect(`/dashboard/${applicationId}/references/${id}`)
+      res.redirect(`/dashboard/${applicationId}`)
     }
   })
 

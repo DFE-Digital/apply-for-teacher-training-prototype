@@ -16,7 +16,7 @@
 
 {% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
 
-  <p class="govuk-body">You’ve accepted the offer from {{ providers[choices[0].providerCode].name }}</p>
+  <p class="govuk-body">You’ve accepted the offer from {{ providers[choices[0].providerCode].name }}.</p>
 
 {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
 

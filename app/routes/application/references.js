@@ -51,7 +51,6 @@ module.exports = router => {
     res.redirect(`/dashboard/${applicationId}/references/${id}/intro${queryString}`)
   })
 
-
   // Render action page
   router.get('/dashboard/:applicationId/references/:id/action/:action', (req, res) => {
     const { action, applicationId, id } = req.params
@@ -76,7 +75,6 @@ module.exports = router => {
     application.references[id].status = status || application.references[id].status
 
     if (action === 'request') {
-
       res.redirect(`/dashboard/${applicationId}/references/${id}/send-request`)
     } else {
       if (action === 'cancel') {
@@ -151,7 +149,6 @@ module.exports = router => {
     })
 
     res.redirect(`/dashboard/${applicationId}/`)
-
   })
 
   // Render referee page
@@ -160,13 +157,12 @@ module.exports = router => {
     const { referrer, validate } = req.query
     const application = utils.applicationData(req)
 
-    res.render(`application/references/view`, {
+    res.render('application/references/view', {
       id,
       applicationId,
       application
     })
   })
-
 
   // Render referee question page
   router.get('/dashboard/:applicationId/references/:id/:view', (req, res) => {

@@ -4,7 +4,7 @@
 {% set parent = referee.name %}
 {% set title = "Choose a referee" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name/" %}
+{% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/name" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -13,7 +13,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/review"
+      href: "/dashboard/" + applicationId + "/references/" + id + "/intro"
     }) }}
   {% endif %}
 {% endblock %}
@@ -29,31 +29,17 @@
       }
     },
     items: [{
-      text: "Academic, such as a university tutor",
-      hint: {
-        text: "You need at least one academic reference if you graduated in the last 5 years or you do not  have a grade for your degree yet."
-      }
+      text: "Academic, such as a university tutor"
     }, {
-      text: "Professional, such as a manager",
-      hint: {
-        text: "You need at least one professional reference if you’re applying for a salaried course."
-      }
+      text: "Professional, such as a manager"
     }, {
-      text: "Someone you know through experience working in a school",
-      hint: {
-        text: ""
-      }
+      text: "Someone you know through experience working in a school"
     }, {
-      divider: "or"
-    }, {
-      text: "Character, such as a mentor or someone you know from volunteering",
-      hint: {
-        text: "You can use one character reference if you also have a professional or academic reference."
-      }
+      text: "Character, such as a mentor or someone you know from volunteering"
     }]
   } | decorateApplicationAttributes(["references", id, "type"])) }}
 
   {{ govukButton({
-    text: "Save changes" if referrer else "Save and continue"
+    text: "Continue"
   }) }}
 {% endblock %}

@@ -19,10 +19,10 @@
     {% set canAmendReferee = item.status == "Not requested yet" %}
     {% set canAmendEmailAddress = item.status == "Request failed" %}
     {% set canDelete = (item.status == "Not requested yet") or (item.status == "Request cancelled") or (item.status == "Reference declined") or (item.status == "Request failed") %}
-    {% set canCancelRequest = (item.status == "Awaiting response") or (item.status == "Reference overdue") %}
+    {% set canCancelRequest = (item.status == "Request sent") or (item.status == "Reference overdue") %}
     {% set canMakeRequest = ((item.status == "Not requested yet") or (item.status == "Request cancelled")) and readyReferences.length < 2 %}
     {% set canRetryRequest = (item.status == "Request failed") and readyReferences.length < 2 %}
-    {% set canNudgeReferee = ((item.status == "Awaiting response") or (item.status == "Reference overdue")) and item.nudges < 1 %}
+    {% set canNudgeReferee = ((item.status == "Request sent") or (item.status == "Reference overdue")) and item.nudges < 1 %}
 
     {# Deactivating references is an idea we can return to later #}
     {# set canDeactivateReference = item.status == "Reference given" #}

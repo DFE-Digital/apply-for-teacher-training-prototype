@@ -4,7 +4,7 @@
 {% set parent = referee.name %}
 {% set title = "How do you know this referee and how long have you known them?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/request/" %}
+{% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/request/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -13,7 +13,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/email/"
+      href: "/dashboard/" + applicationId + "/references/" + id + "/email/"
     }) }}
   {% endif %}
 {% endblock %}

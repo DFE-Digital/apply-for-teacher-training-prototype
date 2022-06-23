@@ -35,11 +35,12 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer
+    href: "/dashboard/" + applicationId + "/references/" + id
   }) }}
 {% endblock %}
 
 {% block primary %}
+
   {% if action == "request" %}
     <p class="govuk-body">We’ll send {{ referee.name }} an email asking them to give you a reference.</p>
   {% elif action == "retry" %}
@@ -76,6 +77,6 @@
   }) }}
 
   {% if action != "retry" %}
-    <p class="govuk-body"><a href="{{ referrer }}">No - I’ve changed my mind</a></p>
+    <p class="govuk-body"><a href="/dashboard/{{ applicationId }}/references/{{ id}}">No - I’ve changed my mind</a></p>
   {% endif %}
 {% endblock %}

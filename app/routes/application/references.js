@@ -2,7 +2,7 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   // Mock events in reference request timeline
-  router.get('/application/:applicationId/references/mock/:action', (req, res) => {
+  router.get('/dashboard/:applicationId/references/mock/:action', (req, res) => {
     const { action, applicationId } = req.params
     const application = utils.applicationData(req)
     const references = Object.values(application.references)
@@ -40,24 +40,20 @@ module.exports = router => {
       })
     }
 
-    res.redirect(`/application/${applicationId}/references/review`)
+    res.redirect(`/dashboard/${applicationId}/references/review`)
   })
 
   // Generate new ID and redirect to start of referee flow
-  router.get('/application/:applicationId/references/add', (req, res) => {
+  router.get('/dashboard/:applicationId/references/add', (req, res) => {
     const { applicationId } = req.params
     const id = utils.generateRandomString()
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
+    res.redirect(`/dashboard/${applicationId}/references/${id}/intro${queryString}`)
   })
 
-  // Render review pages, redirecting to referee start page if no referees added
-  router.get('/application/:applicationId/references/review', (req, res) => {
-    res.render('application/references/review')
-  })
 
   // Render action page
-  router.get('/application/:applicationId/references/:id/action/:action', (req, res) => {
+  router.get('/dashboard/:applicationId/references/:id/action/:action', (req, res) => {
     const { action, applicationId, id } = req.params
     const referrer = req.query.referrer
 
@@ -70,7 +66,7 @@ module.exports = router => {
   })
 
   // Handle action request
-  router.post('/application/:applicationId/references/:id/action/:action', (req, res) => {
+  router.post('/dashboard/:applicationId/references/:id/action/:action', (req, res) => {
     const { action, applicationId, id } = req.params
     const { referrer } = req.query
     const { status } = req.session.data
@@ -80,8 +76,8 @@ module.exports = router => {
     application.references[id].status = status || application.references[id].status
 
     if (action === 'request') {
-      // Need to check if candidate has given their name, first
-      res.redirect(`/application/${applicationId}/references/${id}/send-request`)
+
+      res.redirect(`/dashboard/${applicationId}/references/${id}/send-request`)
     } else {
       if (action === 'cancel') {
         application.references[id].log.push({
@@ -117,12 +113,12 @@ module.exports = router => {
         })
       }
 
-      res.redirect(referrer)
+      res.redirect(`/dashboard/${applicationId}/references/${id}`)
     }
   })
 
   // Send now or later?
-  router.post('/application/:applicationId/references/:id/request/decision', (req, res) => {
+  router.post('/dashboard/:applicationId/references/:id/request/decision', (req, res) => {
     const { applicationId, id } = req.params
     const { referrer } = req.query
     const { decision } = req.session.data
@@ -131,45 +127,58 @@ module.exports = router => {
     if (decision === 'later') {
       application.references[id].status = 'Not requested yet'
       application.references[id].pending = true
-      res.redirect(referrer || `/application/${applicationId}/references/review`)
+      res.redirect(referrer || `/dashboard/${applicationId}/references/review`)
     } else {
-      res.redirect(referrer || `/application/${applicationId}/references/${id}/send-request`)
+      res.redirect(referrer || `/dashboard/${applicationId}/references/${id}/send-request`)
     }
   })
 
   // Request reference
-  router.get('/application/:applicationId/references/:id/send-request', (req, res) => {
+  router.get('/dashboard/:applicationId/references/:id/send-request', (req, res) => {
     const { applicationId, id } = req.params
     const application = utils.applicationData(req)
     const now = new Date()
 
-    if (application.candidate.givenName) {
-      application.references[id].nudges = application.references[id].nudges || 0
-      application.references[id].status = 'Awaiting response'
-      application.references[id].pending = false
-      const log = application.references[id].log = application.references[id].log || []
+    application.references[id].nudges = application.references[id].nudges || 0
+    application.references[id].status = 'Request sent'
+    application.references[id].pending = false
 
-      log.push({
-        note: 'Request sent',
-        date: now.toISOString()
-      })
+    const log = application.references[id].log = application.references[id].log || []
 
-      res.redirect(`/application/${applicationId}/references/review`)
-    } else {
-      res.redirect(`/application/${applicationId}/references/${id}/candidate`)
-    }
+    log.push({
+      note: 'Request sent',
+      date: now.toISOString()
+    })
+
+    res.redirect(`/dashboard/${applicationId}/`)
+
   })
 
+  // Render referee page
+  router.get('/dashboard/:applicationId/references/:id', (req, res) => {
+    const { applicationId, id, view } = req.params
+    const { referrer, validate } = req.query
+    const application = utils.applicationData(req)
+
+    res.render(`application/references/view`, {
+      id,
+      applicationId,
+      application
+    })
+  })
+
+
   // Render referee question page
-  router.get('/application/:applicationId/references/:id/:view', (req, res) => {
+  router.get('/dashboard/:applicationId/references/:id/:view', (req, res) => {
     const { applicationId, id, view } = req.params
     const { referrer, validate } = req.query
 
     res.render(`application/references/${view}`, {
       id,
-      formaction: referrer || `/application/${applicationId}/references/review`,
+      formaction: referrer || `/dashboard/${applicationId}/references/review`,
       referrer,
-      validate
+      validate,
+      applicationId
     })
   })
 }

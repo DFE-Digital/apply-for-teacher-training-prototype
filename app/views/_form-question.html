@@ -13,7 +13,7 @@
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post" novalidate>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% block primary %}{% endblock %}

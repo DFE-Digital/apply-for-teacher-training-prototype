@@ -4,7 +4,7 @@
 {% set parent = referee.name %}
 {% set title = "Check your answers before sending your request" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/references/" + id + "/request/decision" %}
+{% set formaction = "/dashboard/" + applicationId + "/references/" + id + "/request/decision" %}
 
 {% block primary %}
   {{ govukSummaryList({
@@ -17,7 +17,7 @@
       },
       actions: {
         items: [{
-          href: "/application/" + applicationId + "/references/" + id + "/name/?referrer=/application/" + applicationId + "/references/" + id + "/request/",
+          href: "/dashboard/" + applicationId + "/references/" + id + "/name/?referrer=/dashboard/" + applicationId + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "name"
         }]
@@ -31,7 +31,7 @@
       },
       actions: {
         items: [{
-          href: "/application/" + applicationId + "/references/" + id + "/email/?referrer=/application/" + applicationId + "/references/" + id + "/request/",
+          href: "/dashboard/" + applicationId + "/references/" + id + "/email/?referrer=/dashboard/" + applicationId + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "email address"
         }]
@@ -45,7 +45,7 @@
       },
       actions: {
         items: [{
-          href: "/application/" + applicationId + "/references/" + id + "/type/?referrer=/application/" + applicationId + "/references/" + id + "/request/",
+          href: "/dashboard/" + applicationId + "/references/" + id + "/type/?referrer=/dashboard/" + applicationId + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "reference type"
         }]
@@ -59,7 +59,7 @@
       },
       actions: {
         items: [{
-          href: "/application/" + applicationId + "/references/" + id + "/relationship/?referrer=/application/" + applicationId + "/references/" + id + "/request/",
+          href: "/dashboard/" + applicationId + "/references/" + id + "/relationship/?referrer=/dashboard/" + applicationId + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "relationship to referee"
         }]
@@ -67,27 +67,8 @@
     }]
   }) }}
 
-  {{ govukRadios({
-    name: "decision",
-    formGroup: {
-      classes: "govuk-!-margin-top-8"
-    },
-    fieldset: {
-      legend: {
-        text: "Are you ready to send a reference request to " + referee.name + "?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "now",
-      text: "Yes, send a reference request now"
-    }, {
-      value: "later",
-      text: "No, not at the moment"
-    }]
-  }) }}
 
   {{ govukButton({
-    text: "Save and continue"
+    text: "Send reference request"
   }) }}
 {% endblock %}

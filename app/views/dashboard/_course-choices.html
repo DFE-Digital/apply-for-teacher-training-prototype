@@ -145,47 +145,56 @@
 
     <h2 class="govuk-heading-m govuk-!-font-size-27">References</h2>
 
+
+
       <p class="govuk-body">You now need to give references.</p>
+
+
+
       {{ govukButton({
         text: "Request a reference",
-        href: "/application/" + applicationId + "/references/add?referrer=" + referrer,
+        href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
         classes: "xgovuk-button--secondary"
       }) }}
 
-    {{ appTaskList({
-      items: [{
-        text: "<a href=\"#\">Joseph Bloggs</a><br><span class=\"govuk-!-font-size-16\"><br>Requested on 31 May 2022 – <a href=\"#\">send a reminder</a></span> ",
-        id: "referees",
-        tag: {
-          text: "Request sent"
-        }
-      },{
-        text: "Daniel Evans",
-        href: applicationPath + "/references/review",
-        id: "referees",
-        tag: {
-          text: "Reference received"
-        }
-      },
-      {
-        text: "Jane Goodall",
-        href: applicationPath + "/references/review",
-        id: "referees",
-        tag: {
-          text: "Unable to give reference"
-        }
-      },
-      {
-        text: "Bob Jones",
-        href: applicationPath + "/references/review",
-        id: "referees",
-        tag: {
-          text: "Request cancelled"
-        }
-      }
-      ]
-    }) }}
+      {% set references = applicationValue(["references"]) | toArray %}
 
+      {% set referenceItems = [] %}
+
+      {% for item in references %}
+
+        {% set itemText %}
+          <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}">{{ item.name }}</a>
+
+          {% if item.status == 'Request sent' %}
+            {% for entry in item.log %}
+              <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                {{ entry.note }} on
+                {{ entry.date | date("DDD") }}
+
+                {% if entry.note == 'Request sent' %}
+                  – <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                {% endif %}
+              </p>
+            {% endfor %}
+          {% endif %}
+
+
+        {% endset %}
+
+
+        {% set referenceItems = referenceItems | push({
+          text: itemText,
+          tag: {
+            text: item.status,
+            classes: item.status | statusClass
+          }
+        }) %}
+      {% endfor %}
+
+    {{ appTaskList({
+      items: referenceItems
+    }) }}
 
     <h2 class="govuk-heading-m">Conditions</h2>
 

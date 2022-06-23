@@ -1,7 +1,23 @@
+{% extends "_form-question.html" %}
+
+{% set reference = applicationValue(["references", id]) %}
+{% set canNudgeReferee = (reference.status == 'Request sent') %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+  {% set item = reference %}
+  <h1 class="govuk-heading-l">Reference request from {{ item.name }}</h1>
+
 {% set statusHtml %}
   {{ govukTag({
-    classes: "app-tag " + status | statusClass,
-    text: status | capitalize
+    classes: item.status | statusClass,
+    text: item.status | capitalize
   }) }}
 {% endset %}
 
@@ -32,6 +48,8 @@
   {% endfor %}
   </ul>
 {% endset %}
+
+
 
 {{ govukSummaryList({
   rows: [{
@@ -85,7 +103,7 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/references/" + item.id + "/relationship?referrer=" + referrer,
+        href: "/dashboard/" + applicationId + "/references/" + item.id + "/relationship?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "relationship to referee"
       }]
@@ -103,12 +121,19 @@
     },
     value: {
       html: logHtml
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/" + item.id + "/action/nudge?referrer=" + referrer,
-        text: "Send a reminder to this referee"
-      }]
-    } if canNudgeReferee
-  } if item.log and showReferenceRequestLog]
+    }
+  }]
 }) }}
+
+  {% if canNudgeReferee %}
+  <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Send a reminder",
+        href: "/dashboard/" + applicationId + "/references/" + item.id + "/action/nudge"
+      }) }}
+
+      <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
+  </div>
+  {% endif %}
+
+{% endblock %}

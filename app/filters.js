@@ -246,7 +246,7 @@ module.exports = (env) => {
       case 'Not requested yet':
       case 'Deactivated':
         return `${prefix}--grey`
-      case 'Awaiting response':
+      case 'Request sent':
         return `${prefix}--purple`
       case 'Reference overdue':
         return `${prefix}--yellow`

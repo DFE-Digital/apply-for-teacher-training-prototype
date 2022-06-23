@@ -2,7 +2,7 @@
 
 {% set title = "What is the referee’s name?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
+{% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/email/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -11,7 +11,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/type/"
+      href: "/dashboard/" + applicationId + "/references/" + id + "/type/"
     }) }}
   {% endif %}
 {% endblock %}
@@ -29,7 +29,7 @@
   },
   id: "name",
   name: "references"
-}) }}
+} | decorateApplicationAttributes(["references", id, "name"])) }}
 
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"

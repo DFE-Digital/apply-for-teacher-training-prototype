@@ -6,6 +6,22 @@
   <p>Contact the provider to find out more about these conditions.</p>
 {% endset %}
 
+{% set courseFeesHtml %}
+
+  <p class="govuk-body">UK students: £8,625</p>
+  <p class="govuk-body">International students: £20,125</p>
+  <p class="govuk-body">An additional fee of £625 will apply if candidates take up the option of a PCGE qualification.</p>
+
+{% endset %}
+
+{% set salaryHtml %}
+  <p class="govuk-body">The school will pay a salary as an unqualified Teacher scale 1 as a minimum.</p>
+
+  <p class="govuk-body">The PGCE route means that the student can decide whether they wish to pay the additional amount to study for the PGCE.</p>
+
+{% endset %}
+
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -22,6 +38,21 @@
       html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
     }
   }, {
+    key: {
+      text: "Fees"
+    },
+    value: {
+      html: courseFeesHtml
+    }
+  } if not choice.isSalaried, {
+    key: {
+      text: "Salary"
+    },
+    value: {
+      html: salaryHtml
+    }
+  } if choice.isSalaried,
+  {
     key: {
       text: "Location"
     },

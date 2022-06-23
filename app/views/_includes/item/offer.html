@@ -8,32 +8,10 @@
 
 {% set courseFeesHtml %}
 
-  {{ govukSummaryList({
-  classes: "govuk-!-margin-bottom-4",
-  rows: [
-    {
-      key: {
-        text: "UK students",
-        classes: "govuk-!-font-weight-regular app-summary-list__key--wide app-summary-list__key--no-border-bottom govuk-!-padding-bottom-1"
-      },
-      value: {
-        text: "£8,625",
-        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom govuk-!-padding-bottom-1 govuk-!-padding-right-0"
-      }
-    },
-    {
-      key: {
-        text: "International students",
-        classes: "govuk-!-font-weight-regular app-summary-list__key--wide app-summary-list__key--no-border-bottom  govuk-!-padding-top-1"
-      },
-      value: {
-        text: "£20,125",
-        classes: "govuk-!-text-align-right app-summary-list__value--narrow app-summary-list__value--no-border-bottom  govuk-!-padding-top-1 govuk-!-padding-right-0"
-      }
-    }
-  ] }) }}
-
+  <p class="govuk-body">UK students: £8,625</p>
+  <p class="govuk-body">International students: £20,125</p>
   <p class="govuk-body">An additional fee of £625 will apply if candidates take up the option of a PCGE qualification.</p>
+
 {% endset %}
 
 {% set salaryHtml %}
@@ -64,8 +42,7 @@
       text: "Fees"
     },
     value: {
-      html: courseFeesHtml,
-      classes: "govuk-!-padding-right-0"
+      html: courseFeesHtml
     }
   } if not choice.isSalaried, {
     key: {

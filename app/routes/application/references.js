@@ -48,6 +48,10 @@ module.exports = router => {
     const { applicationId } = req.params
     const id = utils.generateRandomString()
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
+    const application = utils.applicationData(req)
+
+    application.references[id] = {"status": "Not requested yet"}
+
     res.redirect(`/dashboard/${applicationId}/references/${id}/intro${queryString}`)
   })
 

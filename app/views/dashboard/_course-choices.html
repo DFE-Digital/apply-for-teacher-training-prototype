@@ -184,34 +184,35 @@
       {% set referenceItems = [] %}
 
       {% for item in references %}
+        {% if item.name %}
+          {% set itemText %}
+            <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not requested yet" %}/name{% endif %}">{{ item.name }}</a>
 
-        {% set itemText %}
-          <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}">{{ item.name }}</a>
+            {% if item.status == 'Request sent' %}
+              {% for entry in item.log %}
+                <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                  {{ entry.note }} on
+                  {{ entry.date | date("DDD") }}
 
-          {% if item.status == 'Request sent' %}
-            {% for entry in item.log %}
-              <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
-                {{ entry.note }} on
-                {{ entry.date | date("DDD") }}
-
-                {% if entry.note == 'Request sent' %}
-                  – <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
-                {% endif %}
-              </p>
-            {% endfor %}
-          {% endif %}
-
-
-        {% endset %}
+                  {% if entry.note == 'Request sent' %}
+                    – <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                  {% endif %}
+                </p>
+              {% endfor %}
+            {% endif %}
 
 
-        {% set referenceItems = referenceItems | push({
-          text: itemText,
-          tag: {
-            text: item.status,
-            classes: item.status | statusClass
-          }
-        }) %}
+          {% endset %}
+
+
+          {% set referenceItems = referenceItems | push({
+            text: itemText,
+            tag: {
+              text: item.status,
+              classes: item.status | statusClass
+            }
+          }) %}
+        {% endif %}
       {% endfor %}
 
 

@@ -242,22 +242,23 @@ module.exports = (env) => {
       case 'Application withdrawn':
         return `${prefix}--orange`
 
-      // Reference statuses
-      case 'Not requested yet':
-      case 'Deactivated':
+      // Condition statuses
+      case 'Pending':
         return `${prefix}--grey`
-      case 'Request sent':
-        return `${prefix}--purple`
-      case 'Reference overdue':
-        return `${prefix}--yellow`
-      case 'Reference given':
-        return `${prefix}--green`
-      case 'Reference selected':
-        return `${prefix}--green ${prefix}--filled`
-      case 'Request cancelled':
+      case 'Met':
+        return `${prefix}--blue`
+      case 'Not met':
         return `${prefix}--orange`
-      case 'Reference declined':
-      case 'Request failed':
+
+      // Reference statuses
+      case 'Requested':
+        return `${prefix}--purple`
+      case 'Received':
+        return `${prefix}--green`
+      case 'Cancelled':
+        return `${prefix}--orange`
+      case 'Declined':
+      case 'Failed':
         return `${prefix}--red`
     }
   }

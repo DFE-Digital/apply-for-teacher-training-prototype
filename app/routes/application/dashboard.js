@@ -394,20 +394,121 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          'References',
-          'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          {title: 'References', status: 'Pending'},
+          {title: 'Fitness to train to teach check', status: 'Pending'},
+          {title: 'Disclosure and barring service check', status: 'Pending'}
         ]
         application.choices = [choices.ABCDE]
+        break
+
+      case 'halfway-through-references':
+        application.status = 'Offer accepted'
+        choices.ABCDE.status = 'Offer accepted'
+        choices.ABCDE.conditions = [
+          {title: 'References', status: 'Pending'},
+          {title: 'Fitness to train to teach check', status: 'Pending'},
+          {title: 'Disclosure and barring service check', status: 'Pending'}
+        ]
+        application.choices = [choices.ABCDE]
+
+        application.references = {
+          '1J4g': {
+            status: 'Requested',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [{note:"Request sent",date:"2022-06-27T15:36:51.330Z"}]
+          },
+          '7351': {
+            status: 'Received',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
+              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+            ]
+          },
+          '543636': {
+            status: 'Cancelled',
+            name: 'Miranda Bishop',
+            email: 'mirande@test.com',
+            relationship: 'She is my ex-colleague. I’ve known her 10 years',
+            type: 'Character',
+            log: [
+              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
+              {note:"Cancelled",date:"2022-06-27T15:36:51.330Z"}
+            ]
+          }
+        }
+        break
+
+      case 'references-given-other-conditions-pending':
+        application.status = 'Offer accepted'
+        choices.ABCDE.status = 'Offer accepted'
+        choices.ABCDE.conditions = [
+          {title: 'References', status: 'Met'},
+          {title: 'Fitness to train to teach check', status: 'Pending'},
+          {title: 'Disclosure and barring service check', status: 'Met'}
+        ]
+        application.choices = [choices.ABCDE]
+
+        application.references = {
+          '1J4g': {
+            status: 'Received',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [
+              {note:"Request sent",date:"2022-06-27T15:36:51.330Z"},
+              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+            ]
+          },
+          '7351': {
+            status: 'Received',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
+              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+            ]
+          },
+          '543636': {
+            status: 'Cancelled',
+            name: 'Miranda Bishop',
+            email: 'mirande@test.com',
+            relationship: 'She is my ex-colleague. I’ve known her 10 years',
+            type: 'Character',
+            log: [
+              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
+              {note:"Cancelled",date:"2022-06-27T15:36:51.330Z"}
+            ]
+          },
+          '25235': {
+            status: 'Requested',
+            name: 'Phoebe Taylor',
+            email: 'phoebe@test.com',
+            relationship: 'I worked with her at the Birmingham coffee shop for 2 years.',
+            type: 'Professional',
+            log: [
+              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"}
+            ]
+          }
+        }
         break
 
       case 'offer-deferred':
         application.status = 'Offer deferred'
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          'References',
-          'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          {title: 'References', status: 'Pending'},
+          {title: 'Fitness to train to teach check', status: 'Pending'},
+          {title: 'Disclosure and barring service check', status: 'Pending'}
         ]
         application.choices = [choices.ZYXWV]
 

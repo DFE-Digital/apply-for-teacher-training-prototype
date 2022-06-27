@@ -148,7 +148,7 @@ module.exports = router => {
     const log = application.references[id].log = application.references[id].log || []
 
     log.push({
-      note: 'Request sent',
+      note: 'Requested',
       date: now.toISOString()
     })
 

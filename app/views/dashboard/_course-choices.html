@@ -147,12 +147,12 @@
 
     {% for condition in item.conditions %}
 
-      {% if condition != 'References' %}
+      {% if condition.title != 'References' %}
         {% set taskItems = taskItems | push({
-          text: condition,
+          text: condition.title,
           tag: {
-            classes: 'govuk-tag--grey',
-            text: 'Pending'
+            classes: condition.status | statusClass,
+            text: condition.status
           }
         }) %}
       {% endif %}
@@ -161,11 +161,22 @@
 
     <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
-    <p class="govuk-body govuk-!-margin-bottom-2">The provider has asked you to provide these references:</p>
+    {% set referenceCondition = {} %}
+    {% for condition in item.conditions %}
+      {% if condition.title == 'References' %}
+        {% set referenceCondition = condition %}
+      {% endif %}
+    {% endfor %}
 
-    <div class="govuk-inset-text govuk-!-margin-top-0">
-      <p>2 references, one should be an academic reference from Birmingham University.</p>
-    </div>
+    {% if referenceCondition.status == 'Pending' %}
+
+    {% set acceptedChoice = choices | first %}
+
+      <p class="govuk-body govuk-!-margin-bottom-2">{{ providers[acceptedChoice.providerCode].name }} has asked you to give:</p>
+
+      <div class="govuk-inset-text govuk-!-margin-top-0">
+        <p>2 references, one should be an academic reference from Birmingham University.</p>
+      </div>
 
 
       {{ govukButton({
@@ -173,6 +184,11 @@
         href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
         classes: "xgovuk-button--secondary"
       }) }}
+
+    {% else %}
+      <p class="govuk-body">The provider has checked your references.</p>
+    {% endif %}
+
 
       {% set references = applicationValue(["references"]) | toArray %}
 
@@ -183,14 +199,19 @@
           {% set itemText %}
             <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not requested yet" %}/name{% endif %}">{{ item.name }}</a>
 
-            {% if item.status == 'Request sent' %}
+            {% if item.status == 'Requested' %}
               {% for entry in item.log %}
                 <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
                   {{ entry.note }} on
                   {{ entry.date | date("DDD") }}
 
                   {% if entry.note == 'Request sent' %}
-                    – <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+
+                    –
+                    {% if referenceCondition.status == 'Pending' %}
+                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                    {% endif %}
+                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
                   {% endif %}
                 </p>
               {% endfor %}

@@ -147,28 +147,23 @@
 
     {% for condition in item.conditions %}
 
-      {% set taskItems = taskItems | push({
-        text: condition,
-        tag: {
-          classes: 'govuk-tag--grey',
-          text: 'Pending'
-        }
-      }) %}
+      {% if condition != 'References' %}
+        {% set taskItems = taskItems | push({
+          text: condition,
+          tag: {
+            classes: 'govuk-tag--grey',
+            text: 'Pending'
+          }
+        }) %}
+      {% endif %}
     {% endfor %}
-
-
-    {{ appTaskList({
-      classes: "govuk-!-margin-bottom-5",
-      items: taskItems
-    }) }}
-
 
 
     <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
-    <p class="govuk-body">The provider has asked you to provide these references:</p>
+    <p class="govuk-body govuk-!-margin-bottom-2">The provider has asked you to provide these references:</p>
 
-    <div class="govuk-inset-text">
+    <div class="govuk-inset-text govuk-!-margin-top-0">
       <p>2 references, one should be an academic reference from Birmingham University.</p>
     </div>
 
@@ -216,13 +211,21 @@
       {% endfor %}
 
 
+    {% if references | length > 0 %}
+      {{ appTaskList({
+        items: referenceItems
+      }) }}
+    {% endif %}
+
+    <h2 class="govuk-heading-m">Other conditions</h2>
+
     {{ appTaskList({
-      items: referenceItems
+      classes: "govuk-!-margin-bottom-5",
+      items: taskItems
     }) }}
 
-    <p class="govuk-body"><a href="#" class="govuk-link">View application</a></p>
 
-    <p class="govuk-body"><a href="#" class="govuk-link">Withdraw this application</a></p>
+
 
   {% else %}
 

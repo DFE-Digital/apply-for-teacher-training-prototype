@@ -2,7 +2,9 @@
 
 {% set choices = application.choices | toArray %}
 
-{% if choices | length > 1  %}
+{% if application.status == 'Offer accepted' %}
+  {% set title = "Your teacher training course" %}
+{% elif choices | length > 1  %}
   {% set title = "Your applications" %}
 {% else %}
   {% set title = "Your application" %}
@@ -47,3 +49,14 @@
 
   {% include "dashboard/_previous-applications.html" %}
 {% endblock %}
+
+
+{% if application.status == 'Offer accepted' %}
+  {% block secondary %}
+    {% set acceptedChoice = choices | first %}
+    <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="get-support-title">Your application</h2>
+    <p class="govuk-body-s">You’ve accepted an offer from {{ providers[acceptedChoice.providerCode].name }}.</p>
+    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/dashboard/{{ applicationId }}">View application</a></p>
+    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
+  {% endblock %}
+{% endif %}

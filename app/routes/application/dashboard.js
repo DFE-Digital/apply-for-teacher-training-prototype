@@ -49,7 +49,7 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -65,7 +65,7 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
         ]
@@ -78,7 +78,7 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check'
         ]
@@ -143,7 +143,7 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -160,7 +160,7 @@ module.exports = router => {
         choices.ABCDE.status = 'Offer deferred'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -177,7 +177,7 @@ module.exports = router => {
         choices.ABCDE.status = 'Conditions not met'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Achievement of Degree in BA Ballet Education with 2:1 or above',
@@ -231,7 +231,7 @@ module.exports = router => {
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check'
         ]
@@ -272,7 +272,7 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Request references, 1 should be professional',
+          'References, 1 should be professional',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
         ]
@@ -286,7 +286,7 @@ module.exports = router => {
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Return completed and signed Suitability Declaration.',
@@ -299,7 +299,7 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
-          'Request references, 1 should be academic',
+          'References, 1 should be academic',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
         ]
@@ -391,9 +391,10 @@ module.exports = router => {
         break
 
       case 'pending-conditions':
+        application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
         ]
@@ -401,9 +402,10 @@ module.exports = router => {
         break
 
       case 'offer-deferred':
+        application.status = 'Offer deferred'
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          'Request references',
+          'References',
           'Fitness to train to teach check',
           'Disclosure and barring service check',
         ]
@@ -412,6 +414,7 @@ module.exports = router => {
         break
 
       case 'recruited':
+        application.status = 'Offer confirmed'
         choices.ZYXWV.status = 'Offer confirmed'
         application.choices = [choices.ZYXWV]
         break

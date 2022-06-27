@@ -16,9 +16,8 @@
 
 {% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
 
-  <p class="govuk-body govuk-!-padding-bottom-4">You’ve accepted an offer from {{ providers[choices[0].providerCode].name }}.
-
-    There are still some things you need to do.
+  <p class="govuk-body">
+    You need to give references and meet other conditions before your place is confirmed.
   </p>
 
 {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}

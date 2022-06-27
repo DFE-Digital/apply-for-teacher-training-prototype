@@ -67,7 +67,7 @@ module.exports = router => {
         choices.ABCDE.conditions = [
           'Request references',
           'Fitness to train to teach check',
-          'Disclosure and barring service check',
+          'Disclosure and barring service check'
         ]
         break
       case 'offer-received-different-provider':
@@ -274,7 +274,7 @@ module.exports = router => {
         choices.ZYXWV.conditions = [
           'Request references, 1 should be professional',
           'Fitness to train to teach check',
-          'Disclosure and barring service check',
+          'Disclosure and barring service check'
         ]
         break
 
@@ -290,7 +290,7 @@ module.exports = router => {
           'Fitness to train to teach check',
           'Disclosure and barring service check',
           'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.',
+          'Return completed and signed Fee Status Declaration.'
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
@@ -301,7 +301,7 @@ module.exports = router => {
         choices.ZYXWV.conditions = [
           'Request references, 1 should be academic',
           'Fitness to train to teach check',
-          'Disclosure and barring service check',
+          'Disclosure and barring service check'
         ]
         break
 
@@ -395,7 +395,7 @@ module.exports = router => {
         choices.ABCDE.conditions = [
           'Request references',
           'Fitness to train to teach check',
-          'Disclosure and barring service check',
+          'Disclosure and barring service check'
         ]
         application.choices = [choices.ABCDE]
         break
@@ -405,7 +405,7 @@ module.exports = router => {
         choices.ZYXWV.conditions = [
           'Request references',
           'Fitness to train to teach check',
-          'Disclosure and barring service check',
+          'Disclosure and barring service check'
         ]
         application.choices = [choices.ZYXWV]
 

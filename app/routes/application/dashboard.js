@@ -392,9 +392,9 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         application.choices = [choices.ABCDE]
         break
@@ -403,9 +403,9 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         application.choices = [choices.ABCDE]
 
@@ -416,28 +416,28 @@ module.exports = router => {
             email: 'john@birmingham.ac.uk',
             relationship: 'He was my academic tutor. I’ve known him for 3 years.',
             type: 'Academic',
-            log: [{note:"Request sent",date:"2022-06-27T15:36:51.330Z"}]
+            log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
           },
-          '7351': {
+          7351: {
             status: 'Received',
             name: 'Jane Doe',
             email: 'jane@test.com',
             relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
             type: 'Someone you know through experience working in a school',
             log: [
-              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
-              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
             ]
           },
-          '543636': {
+          543636: {
             status: 'Cancelled',
             name: 'Miranda Bishop',
             email: 'mirande@test.com',
             relationship: 'She is my ex-colleague. I’ve known her 10 years',
             type: 'Character',
             log: [
-              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
-              {note:"Cancelled",date:"2022-06-27T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Cancelled', date: '2022-06-27T15:36:51.330Z' }
             ]
           }
         }
@@ -447,9 +447,9 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Met'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Met'}
+          { title: 'References', status: 'Met' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Met' }
         ]
         application.choices = [choices.ABCDE]
 
@@ -461,40 +461,40 @@ module.exports = router => {
             relationship: 'He was my academic tutor. I’ve known him for 3 years.',
             type: 'Academic',
             log: [
-              {note:"Request sent",date:"2022-06-27T15:36:51.330Z"},
-              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-27T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
             ]
           },
-          '7351': {
+          7351: {
             status: 'Received',
             name: 'Jane Doe',
             email: 'jane@test.com',
             relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
             type: 'Someone you know through experience working in a school',
             log: [
-              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
-              {note:"Reference received",date:"2022-06-27T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
             ]
           },
-          '543636': {
+          543636: {
             status: 'Cancelled',
             name: 'Miranda Bishop',
             email: 'mirande@test.com',
             relationship: 'She is my ex-colleague. I’ve known her 10 years',
             type: 'Character',
             log: [
-              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"},
-              {note:"Cancelled",date:"2022-06-27T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Cancelled', date: '2022-06-27T15:36:51.330Z' }
             ]
           },
-          '25235': {
+          25235: {
             status: 'Requested',
             name: 'Phoebe Taylor',
             email: 'phoebe@test.com',
             relationship: 'I worked with her at the Birmingham coffee shop for 2 years.',
             type: 'Professional',
             log: [
-              {note:"Request sent",date:"2022-06-23T15:36:51.330Z"}
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' }
             ]
           }
         }
@@ -504,9 +504,9 @@ module.exports = router => {
         application.status = 'Offer deferred'
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         application.choices = [choices.ZYXWV]
 

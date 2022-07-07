@@ -143,13 +143,13 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Met'},
-          {title: 'Fitness to train to teach check', status: 'Met'},
-          {title: 'Disclosure and barring service check', status: 'Met'},
-          {title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Met'},
-          {title: 'Verification of GCSE maths and English certificates', status: 'Met'},
-          {title: 'Return completed and signed Suitability Declaration.', status: 'Met'},
-          {title: 'Return completed and signed Fee Status Declaration.', status: 'Met'}
+          { title: 'References', status: 'Met' },
+          { title: 'Fitness to train to teach check', status: 'Met' },
+          { title: 'Disclosure and barring service check', status: 'Met' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Met' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Met' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Met' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Met' }
         ]
         break
       case 'declined':
@@ -160,13 +160,13 @@ module.exports = router => {
         choices.ABCDE.status = 'Offer deferred'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'},
-          {title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending'},
-          {title: 'Verification of GCSE maths and English certificates', status: 'Pending'},
-          {title: 'Return completed and signed Suitability Declaration.', status: 'Pending'},
-          {title: 'Return completed and signed Fee Status Declaration.', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'did-not-respond-to-offer':
@@ -177,13 +177,13 @@ module.exports = router => {
         choices.ABCDE.status = 'Conditions not met'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Not met'},
-          {title: 'Fitness to train to teach check', status: 'Met'},
-          {title: 'Disclosure and barring service check', status: 'Pending'},
-          {title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending'},
-          {title: 'Verification of GCSE maths and English certificates', status: 'Pending'},
-          {title: 'Return completed and signed Suitability Declaration.', status: 'Pending'},
-          {title: 'Return completed and signed Fee Status Declaration.', status: 'Pending'}
+          { title: 'References', status: 'Not met' },
+          { title: 'Fitness to train to teach check', status: 'Met' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'recruited-single':
@@ -231,9 +231,9 @@ module.exports = router => {
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
 
         break
@@ -272,9 +272,9 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 
@@ -286,9 +286,9 @@ module.exports = router => {
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.ABCDE.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
@@ -297,9 +297,9 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
-          {title: 'References', status: 'Pending'},
-          {title: 'Fitness to train to teach check', status: 'Pending'},
-          {title: 'Disclosure and barring service check', status: 'Pending'}
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 

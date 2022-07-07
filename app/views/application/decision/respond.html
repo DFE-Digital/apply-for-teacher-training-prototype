@@ -30,7 +30,7 @@
     <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
     <ul class="govuk-list govuk-list--bullet">
       {% for condition in choice.conditions %}
-        <li>{{ condition }}</li>
+        <li>{{ condition.title }}</li>
       {% endfor %}
     </ul>
 

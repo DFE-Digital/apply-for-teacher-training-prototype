@@ -60,7 +60,7 @@ module.exports = router => {
     const { action, applicationId, id } = req.params
     const referrer = req.query.referrer
 
-    res.render('application/references/action', {
+    res.render('dashboard/references/action', {
       action,
       applicationId,
       id,
@@ -161,7 +161,7 @@ module.exports = router => {
     const { referrer, validate } = req.query
     const application = utils.applicationData(req)
 
-    res.render('application/references/view', {
+    res.render('dashboard/references/view', {
       id,
       applicationId,
       application
@@ -173,7 +173,7 @@ module.exports = router => {
     const { applicationId, id, view } = req.params
     const { referrer, validate } = req.query
 
-    res.render(`application/references/${view}`, {
+    res.render(`dashboard/references/${view}`, {
       id,
       formaction: referrer || `/dashboard/${applicationId}/references/review`,
       referrer,

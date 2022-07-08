@@ -110,7 +110,7 @@ module.exports = router => {
 
       if (action === 'retry') {
         application.references[id].log.push({
-          note: `Request sent to ${application.references[id].email}`,
+          note: `Request sent`,
           date: now.toISOString()
         })
       }
@@ -142,13 +142,13 @@ module.exports = router => {
     const now = new Date()
 
     application.references[id].nudges = application.references[id].nudges || 0
-    application.references[id].status = 'Request sent'
+    application.references[id].status = 'Requested'
     application.references[id].pending = false
 
     const log = application.references[id].log = application.references[id].log || []
 
     log.push({
-      note: 'Requested',
+      note: 'Request sent',
       date: now.toISOString()
     })
 

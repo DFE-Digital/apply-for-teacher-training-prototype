@@ -1,7 +1,7 @@
 {% extends "_form-question.html" %}
 
 {% set reference = applicationValue(["references", id]) %}
-{% set canNudgeReferee = (reference.status == 'Request sent') %}
+{% set canNudgeReferee = (reference.status == 'Requested') %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -22,7 +22,7 @@
 {% endset %}
 
 {% set contextHtml %}
-  {% if status == "Request sent" %}
+  {% if status == "Requested" %}
     <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
   {% elif status == "Reference overdue" %}
     <p class="govuk-body govuk-!-margin-top-2">Your referee has not responded yet. Ask them if they got the email - it may have gone to junk or spam.</p>

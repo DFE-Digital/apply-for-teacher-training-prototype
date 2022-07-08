@@ -206,7 +206,6 @@
                   {{ entry.date | date("DDD") }}
 
                   {% if entry.note == 'Request sent' %}
-
                     –
                     {% if referenceCondition.status == 'Pending' %}
                     <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or

@@ -110,7 +110,7 @@ module.exports = router => {
 
       if (action === 'retry') {
         application.references[id].log.push({
-          note: `Request sent`,
+          note: 'Request sent',
           date: now.toISOString()
         })
       }

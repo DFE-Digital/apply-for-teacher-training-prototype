@@ -49,13 +49,13 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'References',
-          'Fitness to train to teach check',
-          'Disclosure and barring service check',
-          'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of GCSE maths and English certificates',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'offer-received-different-course':
@@ -65,9 +65,9 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'References',
-          'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
       case 'offer-received-different-provider':
@@ -78,9 +78,9 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'References',
-          'Fitness to train to teach check',
-          'Disclosure and barring service check'
+          { title: 'References', status: 'Pending' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 

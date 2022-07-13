@@ -71,7 +71,6 @@ module.exports = router => {
   // Handle action request
   router.post('/dashboard/:applicationId/references/:id/action/:action', (req, res) => {
     const { action, applicationId, id } = req.params
-    const { referrer } = req.query
     const { status } = req.session.data
     const application = utils.applicationData(req)
     const now = new Date()
@@ -157,8 +156,7 @@ module.exports = router => {
 
   // Render referee page
   router.get('/dashboard/:applicationId/references/:id', (req, res) => {
-    const { applicationId, id, view } = req.params
-    const { referrer, validate } = req.query
+    const { applicationId, id } = req.params
     const application = utils.applicationData(req)
 
     res.render('dashboard/references/view', {

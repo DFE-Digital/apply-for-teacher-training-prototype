@@ -33,6 +33,15 @@
   {% endif %}
 {% endset %}
 
+
+{% set householdEarnerOccupationText %}
+  {% if applicationValue(["equality-monitoring", "household-earner-at-14"]) %}
+    {{ applicationValue(["equality-monitoring", "household-earner-at-14"]) }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -74,6 +83,20 @@
         href: path + "ethnic-group?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "ethnic group?"
+      }]
+    }
+  }, {
+    key: {
+      text: "Occupation of your main household earner when you were about aged 14"
+    },
+    value: {
+      text: householdEarnerOccupationText
+    },
+    actions: {
+      items: [{
+        href: path + "household-earner-occupation-at-14?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "occupation of your main household earner when you were about aged 14?"
       }]
     }
   }]

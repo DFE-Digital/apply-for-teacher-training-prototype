@@ -31,6 +31,7 @@ const questionPaths = (req) => {
     ...(hasDisclosedDisability(req) ? [`${basePath}/disabilities`] : []),
     `${basePath}/ethnic-group`,
     ...(hasDisclosedEthnicity(req) ? [`${basePath}/ethnic-background`] : []),
+    `${basePath}/household-earner-occupation-at-14`,
     `${basePath}/review`
   ]
 
@@ -62,6 +63,10 @@ module.exports = router => {
       formaction = `${basePath}/disability-status/answer${referrerPath}`
     }
 
+    if (view === 'ethnic-background') {
+      formaction = `${basePath}/household-earner-occupation-at-14${referrerPath}`
+    }
+
     res.render(`application/equality-monitoring/${view}`, {
       formaction,
       paths,
@@ -79,7 +84,7 @@ module.exports = router => {
     if (hasDisclosedEthnicity(req)) {
       path = `${basePath}/ethnic-background`
     } else {
-      path = referrer || `${basePath}/review`
+      path = referrer || `${basePath}/household-earner-occupation-at-14`
     }
 
     res.redirect(`${path}?${utils.queryString(req)}`)

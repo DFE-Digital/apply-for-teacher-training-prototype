@@ -1,0 +1,97 @@
+{% extends "_form.html" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "What was the occupation of your main household earner when you were about aged 14?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "A professional occupation",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, a teacher, nurse, physiotherapist, social worker, musician, police officer (sergeant or above), software designer, accountant, solicitor, medical practitioner, scientist, civil or mechanical engineer"
+      }
+    }, {
+      text: "A manager or administrator",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, a finance manager, chief executive, large business owner, office manager, retail manager, bank manager, restaurant manager or warehouse manager"
+      }
+    }, {
+      text: "A clerical or intermediate occupation",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, a secretary, personal assistant, call centre agent, clerical worker, or nursery nurse"
+      }
+    }, {
+      text: "A technical or craft occupation",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, a motor mechanic, plumber, printer, electrician, gardener or train driver"
+      }
+    }, {
+      text: "A routine, semi-routine manual or service occupation",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, a postal worker, machine operative, security guard, caretaker, farm worker, catering assistant, sales assistant, HGV driver, cleaner, porter, packer, labourer, waiter/waitress, or bar staff"
+      }
+    }, {
+      text: "Long-term unemployed",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, they claimed Jobseeker’s Allowance or an earlier unemployment benefit for more than a year"
+      }
+    }, {
+      text: "A small business owner who employed less than 25 people ",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, they owned a corner shop, small plumbing company, retail shop, single restaurant or cafe, taxi, or garage"
+      }
+    }, {
+      text: "Another occupation",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, they were retired"
+      }
+    }, {
+      text: "I don’t know",
+      label: {
+        classes: "govuk-label--s"
+      }
+    }, {
+      text: "This question does not apply to me",
+      label: {
+        classes: "govuk-label--s"
+      }
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "household-earner-at-14"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

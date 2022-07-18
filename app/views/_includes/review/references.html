@@ -1,0 +1,101 @@
+{% set references = applicationValue(["references"]) | toArray %}
+
+{% if references | length > 0 %}
+
+  {% for item in references %}
+
+  {% set titleText %}
+    {% if loop.index0 == 0 %}
+      First
+    {% elif loop.index0 == 1 %}
+      Second
+    {% elif loop.index0 == 2 %}
+      Third
+    {% endif %}
+    reference
+  {% endset %}
+
+  {{ appSummaryCard({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: titleText,
+    actions: {
+      items: [{
+        href: "/application/" + applicationId + "/references/" + item.id + "/delete",
+        text: "Delete"
+      }]
+    },
+    html: govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Type"
+          },
+          value: {
+            text: item.type
+          },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/application/" + applicationId + "/references/" + item.id + "/type"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Name"
+          },
+          value: {
+            text: item.name
+          },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/application/" + applicationId + "/references/" + item.id + "/name"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Email"
+          },
+          value: {
+            text: item.email
+          },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/application/" + applicationId + "/references/" + item.id + "/email"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Relationship to you"
+          },
+          value: {
+            text: item.relationship
+          },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
+              }
+            ]
+          }
+        }
+      ]
+    })
+    })
+  }}
+
+  {% endfor %}
+
+{% endif %}

@@ -15,16 +15,16 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">You need to add details of 2 people who could give a reference for you.</p>
+      <p class="govuk-body">You need to add details of 2 people who could give a reference for you. They will only be contacted if you accept an offer on a course.</p>
 
       <p class="govuk-body">You should choose:</p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>an academic tutor if you have not yet graduated or graduated within the past 5 years</li>
-          <li>a headteacher if you have been working in a school</li>
-        </ul>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>an academic tutor if you have not yet graduated or graduated within the past 5 years</li>
+        <li>a headteacher if you have been working in a school</li>
+      </ul>
 
-      <p class="govuk-body">They will only be contacted if you accept an offer on a course.</p>
+      <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
 
       <div class="govuk-body">
         {{ govukButton({
@@ -39,10 +39,21 @@
 
         {% for item in references %}
 
+        {% set titleText %}
+          {% if loop.index0 == 0 %}
+            First
+          {% elif loop.index0 == 1 %}
+            Second
+          {% elif loop.index0 == 2 %}
+            Third
+          {% endif %}
+          reference
+        {% endset %}
+
         {{ appSummaryCard({
           classes: "govuk-!-margin-bottom-6",
           headingLevel: 3,
-          titleText: "Reference",
+          titleText: titleText,
           actions: {
             items: [{
               href: "/application/" + applicationId + "/references/" + item.id + "/delete",
@@ -51,6 +62,22 @@
           },
           html: govukSummaryList({
             rows: [
+              {
+                key: {
+                  text: "Type"
+                },
+                value: {
+                  text: item.type
+                },
+                actions: {
+                  items: [
+                    {
+                      text: "Change",
+                      href: "/application/" + applicationId + "/references/" + item.id + "/type"
+                    }
+                  ]
+                }
+              },
               {
                 key: {
                   text: "Name"
@@ -62,7 +89,7 @@
                   items: [
                     {
                       text: "Change",
-                      href: "#"
+                      href: "/application/" + applicationId + "/references/" + item.id + "/name"
                     }
                   ]
                 }
@@ -78,23 +105,7 @@
                   items: [
                     {
                       text: "Change",
-                      href: "#"
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: "Type"
-                },
-                value: {
-                  text: item.type
-                },
-                actions: {
-                  items: [
-                    {
-                      text: "Change",
-                      href: "#"
+                      href: "/application/" + applicationId + "/references/" + item.id + "/email"
                     }
                   ]
                 }
@@ -110,7 +121,7 @@
                   items: [
                     {
                       text: "Change",
-                      href: "#"
+                      href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
                     }
                   ]
                 }

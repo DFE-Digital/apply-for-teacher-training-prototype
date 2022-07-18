@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 
-{% set title = "Are you sure you want to accept this offer?" %}
+{% set title = "Confirm your reference details and accept the offer" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
@@ -10,7 +10,22 @@
 {% endblock %}
 
 {% block primary %}
-  {% include "_includes/item/offer.html" %}
+
+  <p class="govuk-body">When you accept the offer, we will request your references.</p>
+
+  <p class="govuk-body govuk-!-margin-bottom-2">[providerName] has asked you to give:</p>
+
+  <div class="govuk-inset-text govuk-!-margin-top-0">
+    <p>2 references, one should be an academic reference from Birmingham University.</p>
+  </div>
+
+  {{ govukButton({
+    text: "Add another reference",
+    href: "/application/" + applicationId + "/references/add",
+    classes: "govuk-button--secondary"
+  }) }}
+
+  {% include "_includes/review/references.html" %}
 
   {% if numberOfOffersReceived > 1 %}
     <p class="govuk-body">Your other applications will be withdrawn and any upcoming interviews will be cancelled.</p>

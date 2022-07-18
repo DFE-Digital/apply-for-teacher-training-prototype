@@ -64,39 +64,39 @@ module.exports = {
       isSalaried: false
     }
   },
-   references: {
-     first: {
-       id: 'first',
-       name: 'Joesph Bloggs',
-       relationship: 'They were my tutor at university from 2011 to 2013',
-       email: 'joesph.r.bloggs@example.com',
-       type: 'Academic',
-       status: 'Not requested yet',
-       ready: true,
-       log: []
-     },
-     second: {
-       id: 'second',
-       name: 'Jane Doe',
-       relationship: 'Faith leader who I have known since January 2018',
-       email: 'jane.doe@example.com',
-       type: 'Character',
-       status: 'Not requested yet',
-       nudges: 0,
-       log: []
-     },
-     third: {
-       id: 'third',
-       name: 'Jamie Murphy',
-       relationship: 'They were my tutor at university from 2011 to 2013',
-       email: 'james.m@example.com',
-       type: 'Academic',
-       status: 'Not requested yet',
-       ready: true,
-       nudges: 0,
-       log: []
-     }
-   },
+  references: {
+    first: {
+      id: 'first',
+      name: 'Joesph Bloggs',
+      relationship: 'They were my tutor at university from 2011 to 2013',
+      email: 'joesph.r.bloggs@example.com',
+      type: 'Academic',
+      status: 'Not requested yet',
+      ready: true,
+      log: []
+    },
+    second: {
+      id: 'second',
+      name: 'Jane Doe',
+      relationship: 'Faith leader who I have known since January 2018',
+      email: 'jane.doe@example.com',
+      type: 'Character',
+      status: 'Not requested yet',
+      nudges: 0,
+      log: []
+    },
+    third: {
+      id: 'third',
+      name: 'Jamie Murphy',
+      relationship: 'They were my tutor at university from 2011 to 2013',
+      email: 'james.m@example.com',
+      type: 'Academic',
+      status: 'Not requested yet',
+      ready: true,
+      nudges: 0,
+      log: []
+    }
+  },
   candidate: {
     givenName: 'Janina',
     familyName: 'Doe',

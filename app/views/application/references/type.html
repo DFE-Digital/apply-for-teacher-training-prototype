@@ -1,0 +1,45 @@
+{% extends "_form-question.html" %}
+
+{% set referee = applicationValue(["references", id]) %}
+{% set parent = referee.name %}
+{% set title = "Choose a referee" %}
+{% set allowsFeedback = true %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What type of reference do you want to add?",
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      }
+    },
+    items: [{
+      text: "Academic, such as a university tutor"
+    }, {
+      text: "Professional, such as a manager"
+    }, {
+      text: "Someone you know through experience working in a school"
+    }, {
+      text: "Character, such as a mentor or someone you know from volunteering"
+    }]
+  } | decorateApplicationAttributes(["references", id, "type"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

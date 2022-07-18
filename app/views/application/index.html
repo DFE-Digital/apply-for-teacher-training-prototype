@@ -255,6 +255,15 @@
     <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
     {{ appTaskList({
       items: [{
+        text: "References",
+        href: applicationPath + "/references",
+        id: "references",
+        tag: {
+          classes: tagClassesForSection(completed=applicationValue(["completed", "references"])),
+          text: tagTextForSection(completed=applicationValue(["completed", "references"]))
+        }
+      },
+      {
         text: "Declare any safeguarding issues",
         href: applicationPath + "/safeguarding" + ("/review" if applicationValue("safeguardingDisclose")),
         id: "safeguarding",

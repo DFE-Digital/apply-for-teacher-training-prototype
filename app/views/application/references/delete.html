@@ -1,0 +1,17 @@
+{% extends "_form.html" %}
+
+{% set title = "Are you sure you want to delete the reference from " + reference.name + "?" %}
+{% set formaction = "/application/" + applicationId + "/references/" + id + "/delete" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId + "/references"
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukButton({
+    text: "Yes I’m sure - delete this reference",
+    classes: "govuk-button--warning"
+  }) }}
+{% endblock %}

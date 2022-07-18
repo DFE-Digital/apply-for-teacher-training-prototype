@@ -1,0 +1,34 @@
+{% extends "_form-question.html" %}
+
+{% set referee = applicationValue(["references", id]) %}
+{% set title = "What is " + referee.name + "’s email address?" %}
+{% set allowsFeedback = true %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/relationship/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/" + id + "/name/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+  {{ govukInput({
+    label: label,
+    hint: {
+      text: "In most cases, this should be a work address."
+    },
+    type: "email",
+    autocomplete: "email",
+    spellcheck: false
+  } | decorateApplicationAttributes(["references", id, "email"])) }}
+
+  {{ govukButton({
+    text: "Save changes" if referrer else "Save and continue"
+  }) }}
+{% endblock %}

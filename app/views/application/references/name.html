@@ -1,0 +1,37 @@
+{% extends "_form-question.html" %}
+
+{% set title = "What is the referee’s name?" %}
+{% set allowsFeedback = true %}
+{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/application/" + applicationId + "/references/" + id + "/type/"
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+{{ govukInput({
+  label: {
+    text: "What is the referee’s name?",
+    classes: "govuk-label--l",
+    isPageHeading: true
+  },
+  hint: {
+    text: "You must not use family members, partners or friends as referees."
+  },
+  id: "name",
+  name: "references"
+} | decorateApplicationAttributes(["references", id, "name"])) }}
+
+  {{ govukButton({
+    text: "Save changes" if referrer else "Save and continue"
+  }) }}
+{% endblock %}

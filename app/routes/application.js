@@ -81,12 +81,16 @@ module.exports = router => {
   // Render application page
   router.all('/application/:applicationId', (req, res) => {
     const showCopiedBanner = req.query.copied
+    const { applicationId } = req.params
+    const application = utils.applicationData(req)
 
     res.render('application/index', {
       showCopiedBanner,
       closed: req.query.closed,
       findNotOpen: req.query.findNotOpen,
-      cycleNotOpen: req.query.cycleNotOpen
+      cycleNotOpen: req.query.cycleNotOpen,
+      applicationId,
+      application
     })
   })
 
@@ -170,6 +174,7 @@ module.exports = router => {
   require('./application/personal-statement')(router)
   require('./application/subject-knowledge')(router)
   require('./application/interview-needs')(router)
+  require('./application/references')(router)
   require('./application/review')(router)
   require('./application/equality-monitoring')(router)
   require('./application/confirmation')(router)

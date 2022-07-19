@@ -1,7 +1,6 @@
 const utils = require('./../../utils')
 
 module.exports = router => {
-
   // Generate new ID and redirect to start of referee flow
   router.get('/application/:applicationId/references/add', (req, res) => {
     const { applicationId } = req.params
@@ -14,7 +13,6 @@ module.exports = router => {
     application.references[id] = { status: 'Not requested yet' }
 
     res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
-
   })
 
   router.post('/application/:applicationId/references/:id/delete', (req, res) => {
@@ -33,20 +31,18 @@ module.exports = router => {
     console.log(application.completed)
 
     res.redirect(`/application/${applicationId}/references`)
-
   })
 
   router.get('/application/:applicationId/references/:id/:view(intro|type|name|email|relationship|delete)', (req, res) => {
     const { applicationId, id, view } = req.params
     const application = utils.applicationData(req)
 
-    const reference = application['references'][id]
+    const reference = application.references[id]
 
-   res.render(`application/references/${view}`, {
+    res.render(`application/references/${view}`, {
       applicationId,
       reference,
       id
     })
-
   })
 }

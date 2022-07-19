@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 
-{% set title = "Confirm your reference details and accept the offer" %}
+{% set title = "Confirm your reference details and accept your offer" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
 
 {% block pageNavigation %}
@@ -11,16 +11,18 @@
 
 {% block primary %}
 
-  <p class="govuk-body">When you accept the offer, we will request your references.</p>
+  <p class="govuk-body">When you accept your offer, we’ll send emails to the people you said could give you references.</p>
 
-  <p class="govuk-body govuk-!-margin-bottom-2">[providerName] has asked you to give:</p>
+  <p class="govuk-body">You can change the reference details before you accept the offer.</p>
+
+  <p class="govuk-body govuk-!-margin-bottom-2"> {{ provider.name }} gave details of the references they want you to give.</p>
 
   <div class="govuk-inset-text govuk-!-margin-top-0">
     <p>2 references, one should be an academic reference from Birmingham University.</p>
   </div>
 
   {{ govukButton({
-    text: "Add another reference",
+    text: "Add details for another reference",
     href: "/application/" + applicationId + "/references/add",
     classes: "govuk-button--secondary"
   }) }}

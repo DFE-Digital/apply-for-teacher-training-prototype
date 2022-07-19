@@ -9,7 +9,7 @@ module.exports = router => {
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
     const application = utils.applicationData(req)
 
-    application.references ||= {}
+    application.references = {}
 
     application.references[id] = { status: 'Not requested yet' }
 
@@ -26,7 +26,7 @@ module.exports = router => {
     const remainingReferences = utils.toArray(application.references)
 
     if (remainingReferences.length < 2) {
-      application.completed ||= {}
+      application.completed = {}
       application.completed.references = null
     }
 

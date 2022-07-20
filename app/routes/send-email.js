@@ -55,7 +55,6 @@ module.exports = router => {
 
     const choices = []
     for (const choice in application.choices) {
-
       application.choices[choice].status = 'Awaiting decision'
 
       const { courseCode, providerCode } = application.choices[choice]

@@ -555,7 +555,6 @@ module.exports = router => {
     const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
 
     if (makeMeAnOffer == 'yes') {
-
       for (choiceId in application.choices) {
         application.choices[choiceId].status = 'Offer received'
         application.choices[choiceId].conditions = [
@@ -563,7 +562,6 @@ module.exports = router => {
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
       }
-
     }
 
     res.render('dashboard/index', {

@@ -154,7 +154,6 @@ module.exports = router => {
       }
     }
 
-
     applications[code] = apply2Application
 
     if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {

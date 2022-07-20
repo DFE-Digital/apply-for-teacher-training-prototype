@@ -6,6 +6,8 @@ module.exports = router => {
     const { applicationId, applicationStatus } = req.params
     const { confirmation } = req.query
 
+    const { makeMeAnOffer } = req.query
+
     if (applicationStatus) {
       // clear data and reset it from file
       req.session.data = {}
@@ -49,7 +51,6 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' },
           { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
@@ -65,7 +66,6 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -78,7 +78,6 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -160,7 +159,6 @@ module.exports = router => {
         choices.ABCDE.status = 'Offer deferred'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' },
           { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
@@ -231,7 +229,6 @@ module.exports = router => {
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -272,7 +269,6 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -286,7 +282,6 @@ module.exports = router => {
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -297,7 +292,6 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -392,7 +386,6 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -403,7 +396,6 @@ module.exports = router => {
         application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -504,7 +496,6 @@ module.exports = router => {
         application.status = 'Offer deferred'
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          { title: 'References', status: 'Pending' },
           { title: 'Fitness to train to teach check', status: 'Pending' },
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
@@ -526,7 +517,7 @@ module.exports = router => {
         break
 
       case 'end-of-cycle-unsuccessful':
-        req.session.data.applications['45678'].cycleDeadlinePassed = true
+        req.session.data.applications['84659'].cycleDeadlinePassed = true
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.hasFeedback = true
         choices.ABCDE.feedback = {
@@ -562,6 +553,18 @@ module.exports = router => {
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
 
     const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
+
+    if (makeMeAnOffer == 'yes') {
+
+      for (choiceId in application.choices) {
+        application.choices[choiceId].status = 'Offer received'
+        application.choices[choiceId].conditions = [
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
+        ]
+      }
+
+    }
 
     res.render('dashboard/index', {
       applicationId,

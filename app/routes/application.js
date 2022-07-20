@@ -110,6 +110,7 @@ module.exports = router => {
 
     apply2Application.choices = {}
     apply2Application.completed.choices = false
+    apply2Application.completed.references = false
     apply2Application.previousApplications = [existingApplicationId]
 
     for (const choice of utils.toArray(existingApplication.choices)) {
@@ -123,13 +124,36 @@ module.exports = router => {
       }
     }
 
+    for (referenceId in apply2Application.references) {
+      const reference = apply2Application.references[referenceId]
+
+      if (reference.status == 'Requested') {
+        // Reset back to not requested yet, as will have to be re-requested.
+        reference.status = 'Not requested yet'
+      } else if (reference.status == 'Cancelled' || reference.status == 'Unable to give a reference') {
+        // Remove cancelled or declined references
+        delete application.references.referenceId
+      }
+    }
+
     if (apply2Application.references && apply2Application.references[0]) {
-      apply2Application.references[0].status = 'Received'
+      if (apply2Application.references[0].status != 'Reference received') {
+        apply2Application.references[0].status = 'Not requested yet'
+      }
     }
 
     if (apply2Application.references && apply2Application.references[1]) {
-      apply2Application.references[1].status = 'Received'
+      if (apply2Application.references[1].status != 'Reference received') {
+        apply2Application.references[1].status = 'Not requested yet'
+      }
     }
+
+    if (apply2Application.references && apply2Application.references[2]) {
+      if (apply2Application.references[2].status != 'Received') {
+        apply2Application.references[2].status = 'Not requested yet'
+      }
+    }
+
 
     applications[code] = apply2Application
 

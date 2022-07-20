@@ -172,13 +172,6 @@
 
     {% set acceptedChoice = choices | first %}
 
-      <p class="govuk-body govuk-!-margin-bottom-2">{{ providers[acceptedChoice.providerCode].name }} has asked you to give:</p>
-
-      <div class="govuk-inset-text govuk-!-margin-top-0">
-        <p>2 references, one should be an academic reference from Birmingham University.</p>
-      </div>
-
-
       {{ govukButton({
         text: "Request a reference",
         href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
@@ -237,7 +230,7 @@
       }) }}
     {% endif %}
 
-    <h2 class="govuk-heading-m">Other conditions</h2>
+    <h2 class="govuk-heading-m">Offer conditions</h2>
 
     {{ appTaskList({
       classes: "govuk-!-margin-bottom-5",

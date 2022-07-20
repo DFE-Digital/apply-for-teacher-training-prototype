@@ -253,11 +253,11 @@ module.exports = (env) => {
       // Reference statuses
       case 'Requested':
         return `${prefix}--purple`
-      case 'Received':
+      case 'Reference received':
         return `${prefix}--green`
       case 'Cancelled':
         return `${prefix}--orange`
-      case 'Declined':
+      case 'Unable to give a reference':
       case 'Failed':
         return `${prefix}--red`
     }

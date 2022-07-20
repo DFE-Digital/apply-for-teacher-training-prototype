@@ -27,112 +27,20 @@
       <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
 
       <div class="govuk-body">
+        {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
-          href: "/application/" + applicationId + "/references/add"
+          href: "/application/" + applicationId + "/references/add",
+          classes: referencesButtonClass
         }) }}
       </div>
 
 
 
       {% if references | length > 0 %}
-
         {% for item in references %}
-
-        {% set titleText %}
-          {% if loop.index0 == 0 %}
-            First
-          {% elif loop.index0 == 1 %}
-            Second
-          {% elif loop.index0 == 2 %}
-            Third
-          {% endif %}
-          reference
-        {% endset %}
-
-        {{ appSummaryCard({
-          classes: "govuk-!-margin-bottom-6",
-          headingLevel: 3,
-          titleText: titleText,
-          actions: {
-            items: [{
-              href: "/application/" + applicationId + "/references/" + item.id + "/delete",
-              text: "Delete"
-            }]
-          },
-          html: govukSummaryList({
-            rows: [
-              {
-                key: {
-                  text: "Type"
-                },
-                value: {
-                  text: item.type
-                },
-                actions: {
-                  items: [
-                    {
-                      text: "Change",
-                      href: "/application/" + applicationId + "/references/" + item.id + "/type"
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: "Name"
-                },
-                value: {
-                  text: item.name
-                },
-                actions: {
-                  items: [
-                    {
-                      text: "Change",
-                      href: "/application/" + applicationId + "/references/" + item.id + "/name"
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: "Email"
-                },
-                value: {
-                  text: item.email
-                },
-                actions: {
-                  items: [
-                    {
-                      text: "Change",
-                      href: "/application/" + applicationId + "/references/" + item.id + "/email"
-                    }
-                  ]
-                }
-              },
-              {
-                key: {
-                  text: "Relationship to you"
-                },
-                value: {
-                  text: item.relationship
-                },
-                actions: {
-                  items: [
-                    {
-                      text: "Change",
-                      href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
-                    }
-                  ]
-                }
-              }
-            ]
-          })
-          })
-        }}
-
+          {% include "_includes/item/reference.html" %}
         {% endfor %}
-
       {% endif %}
 
     {% if references | length > 1 %}

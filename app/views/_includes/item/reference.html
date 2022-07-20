@@ -1,0 +1,111 @@
+{% set titleText %}
+  {% if loop.index0 == 0 %}
+    First
+  {% elif loop.index0 == 1 %}
+    Second
+  {% elif loop.index0 == 2 %}
+    Third
+  {% endif %}
+  reference
+{% endset %}
+
+{% if item.status == 'Reference received' %}
+  {% set referenceStatusHtml %}
+    {{ govukTag({
+      text: 'Reference received',
+      classes: item.status | statusClass
+    }) }}
+    <p class="govuk-body govuk-!-margin-top-4">{{ item.name }} will not be asked to give you another reference.</p>
+
+    <p class="govuk-body">If you accept an offer, your previous reference will be shown to the provider.</p>
+  {% endset %}
+{% endif %}
+
+{{ appSummaryCard({
+  classes: "govuk-!-margin-bottom-6",
+  headingLevel: 3,
+  titleText: titleText,
+  actions: {
+    items: [{
+      href: "/application/" + applicationId + "/references/" + item.id + "/delete",
+      text: "Delete"
+    }]
+  },
+  html: govukSummaryList({
+    rows: [
+      {
+        key: {
+          text: "Type"
+        },
+        value: {
+          text: item.type
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/application/" + applicationId + "/references/" + item.id + "/type"
+            } if item.status == 'Not requested yet'
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Name"
+        },
+        value: {
+          text: item.name
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/application/" + applicationId + "/references/" + item.id + "/name"
+            } if item.status == 'Not requested yet'
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Email"
+        },
+        value: {
+          text: item.email
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/application/" + applicationId + "/references/" + item.id + "/email"
+            } if item.status == 'Not requested yet'
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Relationship to you"
+        },
+        value: {
+          text: item.relationship
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
+            } if item.status == 'Not requested yet'
+          ]
+        }
+      },
+      {
+        key: {
+          text: 'Status'
+        },
+        value: {
+          html: referenceStatusHtml
+        }
+      } if item.status == 'Reference received'
+    ]
+  })
+  })
+}}

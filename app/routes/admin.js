@@ -172,6 +172,8 @@ module.exports = router => {
     for (const referenceId in application.references) {
       const reference = application.references[referenceId]
 
+      if (!reference.log) { reference.log = [] }
+
       if (i === 1) {
         reference.status = 'Reference received'
         reference.log.push({ note: 'Reference received', date: timeNow })

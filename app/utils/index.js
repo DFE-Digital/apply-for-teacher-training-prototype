@@ -89,13 +89,14 @@ const sendEmail = (req, template, personalisation) => {
   personalisation = personalisation || {}
   personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
 
-  if (email && (typeof notify !== 'undefined')) {
-    notify.sendEmail(
-      template,
-      email,
-      { personalisation }
-    )
-  }
+  // Turn off email sending for now
+  // if (email && (typeof notify !== 'undefined')) {
+  //   notify.sendEmail(
+  //     template,
+  //     email,
+  //     { personalisation }
+  //   )
+  // }
 }
 
 const nowPlusDays = (days, format = 'yyyy-LL-dd') => {

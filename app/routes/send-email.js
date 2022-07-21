@@ -162,7 +162,7 @@ module.exports = router => {
           return choice
         })
 
-        for (referenceId in application.references) {
+        for (const referenceId in application.references) {
           application.references[referenceId].status = 'Requested'
         }
 

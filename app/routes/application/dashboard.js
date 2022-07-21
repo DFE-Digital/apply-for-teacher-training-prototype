@@ -554,8 +554,8 @@ module.exports = router => {
 
     const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
 
-    if (makeMeAnOffer == 'yes') {
-      for (choiceId in application.choices) {
+    if (makeMeAnOffer === 'yes') {
+      for (const choiceId in application.choices) {
         application.choices[choiceId].status = 'Offer received'
         application.choices[choiceId].conditions = [
           { title: 'Fitness to train to teach check', status: 'Pending' },

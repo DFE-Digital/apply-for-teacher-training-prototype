@@ -16,6 +16,12 @@ const path = require('path')
 
 const applicationData = (req) => {
   const applicationId = req.query.applicationId || req.params.applicationId
+
+  // initialise application with ID if missing
+  if (!req.session.data.applications[applicationId]) {
+    req.session.data.applications[applicationId] = {}
+  }
+
   return req.session.data.applications[applicationId]
 }
 

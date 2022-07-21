@@ -34,18 +34,8 @@ require('./routes/emails')(router)
 require('./routes/send-email')(router)
 require('./routes/survey')(router)
 
-// Clear all data in session if you open /admin/clear-data
-router.post('/admin/clear-data', function (req, res) {
-  req.session.data = {}
+require('./routes/dashboard/references')(router)
 
-  res.render('admin/clear-data-success')
-})
-
-// Show feature flags
-router.get('/admin/flags', (req, res) => {
-  res.render('admin/flags', {
-    flags: req.session.data.flags
-  })
-})
+require('./routes/admin')(router)
 
 module.exports = router

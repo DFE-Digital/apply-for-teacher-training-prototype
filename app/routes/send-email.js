@@ -55,6 +55,8 @@ module.exports = router => {
 
     const choices = []
     for (const choice in application.choices) {
+      application.choices[choice].status = 'Awaiting decision'
+
       const { courseCode, providerCode } = application.choices[choice]
       const provider = utils.getProvider(providerCode)
       const course = utils.getCourse(providerCode, courseCode)
@@ -159,6 +161,14 @@ module.exports = router => {
 
           return choice
         })
+
+        const timeNow = new Date().toISOString()
+
+        for (const referenceId in application.references) {
+          application.references[referenceId].status = 'Requested'
+
+          application.references[referenceId].log = [{ note: 'Request sent', date: timeNow }]
+        }
 
         application.choices = [choice]
         break

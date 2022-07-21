@@ -1,0 +1,35 @@
+{% extends "_form-question.html" %}
+
+{% set referee = applicationValue(["references", id]) %}
+{% set parent = referee.name %}
+{% set title = "Choose a referee" %}
+{% set allowsFeedback = true %}
+{% set formaction = "/dashboard/" + applicationId + "/references/" + id + "/type/" %}
+
+{% block pageNavigation %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% else %}
+    {{ govukBackLink({
+      href: "/dashboard/" + applicationId
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block primary %}
+
+  <h1 class="govuk-heading-l">Request a reference</h1>
+
+  <p class="govuk-body">You should choose people who can:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>confirm how long they have known you</li>
+      <li>say whether they know of any reason why you should not work with children</li>
+    </ul>
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

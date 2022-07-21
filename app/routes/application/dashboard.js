@@ -6,6 +6,8 @@ module.exports = router => {
     const { applicationId, applicationStatus } = req.params
     const { confirmation } = req.query
 
+    const { makeMeAnOffer } = req.query
+
     if (applicationStatus) {
       // clear data and reset it from file
       req.session.data = {}
@@ -49,12 +51,12 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check',
-          'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'offer-received-different-course':
@@ -64,8 +66,8 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
       case 'offer-received-different-provider':
@@ -76,8 +78,8 @@ module.exports = router => {
         choices.ABCDE.feedback = null
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 
@@ -140,12 +142,13 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.feedback = null
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check',
-          'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'References', status: 'Met' },
+          { title: 'Fitness to train to teach check', status: 'Met' },
+          { title: 'Disclosure and barring service check', status: 'Met' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Met' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Met' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Met' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Met' }
         ]
         break
       case 'declined':
@@ -156,12 +159,12 @@ module.exports = router => {
         choices.ABCDE.status = 'Offer deferred'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check',
-          'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'did-not-respond-to-offer':
@@ -172,12 +175,13 @@ module.exports = router => {
         choices.ABCDE.status = 'Conditions not met'
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check',
-          'Achievement of Degree in BA Ballet Education with 2:1 or above',
-          'Verification of original or certified copies of GCSE Maths and English certificates at grade C (4) or above.',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'References', status: 'Not met' },
+          { title: 'Fitness to train to teach check', status: 'Met' },
+          { title: 'Disclosure and barring service check', status: 'Pending' },
+          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
+          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
+          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
+          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
       case 'recruited-single':
@@ -225,8 +229,8 @@ module.exports = router => {
         }
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
 
         break
@@ -265,8 +269,8 @@ module.exports = router => {
         choices.FGHIJ.interview = false
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 
@@ -278,10 +282,8 @@ module.exports = router => {
           address: 'Clifford Moor Road, Boston Spa, West Yorkshire. LS23 6RW'
         }]
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check',
-          'Return completed and signed Suitability Declaration.',
-          'Return completed and signed Fee Status Declaration.'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
@@ -290,8 +292,8 @@ module.exports = router => {
         choices.ZYXWV.status = 'Offer received'
         choices.ZYXWV.interview = false
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
 
@@ -381,25 +383,128 @@ module.exports = router => {
         break
 
       case 'pending-conditions':
+        application.status = 'Offer accepted'
         choices.ABCDE.status = 'Offer accepted'
         choices.ABCDE.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         application.choices = [choices.ABCDE]
         break
 
+      case 'halfway-through-references':
+        application.status = 'Offer accepted'
+        choices.ABCDE.status = 'Offer accepted'
+        choices.ABCDE.conditions = [
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
+        ]
+        application.choices = [choices.ABCDE]
+
+        application.references = {
+          '1J4g': {
+            status: 'Requested',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
+          },
+          7351: {
+            status: 'Reference received',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          },
+          543636: {
+            status: 'Cancelled',
+            name: 'Miranda Bishop',
+            email: 'mirande@test.com',
+            relationship: 'She is my ex-colleague. I’ve known her 10 years',
+            type: 'Character',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Cancelled', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          }
+        }
+        break
+
+      case 'references-given-other-conditions-pending':
+        application.status = 'Offer accepted'
+        choices.ABCDE.status = 'Offer accepted'
+        choices.ABCDE.conditions = [
+          { title: 'References', status: 'Met' },
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Met' }
+        ]
+        application.choices = [choices.ABCDE]
+
+        application.references = {
+          '1J4g': {
+            status: 'Reference received',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [
+              { note: 'Request sent', date: '2022-06-27T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          },
+          7351: {
+            status: 'Reference received',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          },
+          543636: {
+            status: 'Cancelled',
+            name: 'Miranda Bishop',
+            email: 'mirande@test.com',
+            relationship: 'She is my ex-colleague. I’ve known her 10 years',
+            type: 'Character',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Cancelled', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          },
+          25235: {
+            status: 'Requested',
+            name: 'Phoebe Taylor',
+            email: 'phoebe@test.com',
+            relationship: 'I worked with her at the Birmingham coffee shop for 2 years.',
+            type: 'Professional',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' }
+            ]
+          }
+        }
+        break
+
       case 'offer-deferred':
+        application.status = 'Offer deferred'
         choices.ZYXWV.status = 'Offer deferred'
         choices.ZYXWV.conditions = [
-          'Fitness to Teach check',
-          'Disclosure and barring service check'
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         application.choices = [choices.ZYXWV]
 
         break
 
       case 'recruited':
+        application.status = 'Offer confirmed'
         choices.ZYXWV.status = 'Offer confirmed'
         application.choices = [choices.ZYXWV]
         break
@@ -412,7 +517,7 @@ module.exports = router => {
         break
 
       case 'end-of-cycle-unsuccessful':
-        req.session.data.applications['45678'].cycleDeadlinePassed = true
+        req.session.data.applications['84659'].cycleDeadlinePassed = true
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.hasFeedback = true
         choices.ABCDE.feedback = {
@@ -448,6 +553,16 @@ module.exports = router => {
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
 
     const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
+
+    if (makeMeAnOffer === 'yes') {
+      for (const choiceId in application.choices) {
+        application.choices[choiceId].status = 'Offer received'
+        application.choices[choiceId].conditions = [
+          { title: 'Fitness to train to teach check', status: 'Pending' },
+          { title: 'Disclosure and barring service check', status: 'Pending' }
+        ]
+      }
+    }
 
     res.render('dashboard/index', {
       applicationId,

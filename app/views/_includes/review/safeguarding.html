@@ -1,6 +1,9 @@
 {% set completed = applicationValue(["completed", "safeguarding"]) %}
 {% set entered = applicationValue(["safeguardingDisclose"]) %}
 
+
+<h3 class="govuk-heading-m">Declare any safeguarding issues</h3>
+
 {% if not entered %}
   {{ appSuggestion({
     id: "safeguarding",

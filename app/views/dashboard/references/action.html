@@ -1,7 +1,6 @@
 {% extends "_form.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
 {% if action == "delete" %}
   {% set type = "referee" if referee.status == "Not requested yet" else "reference request" %}
   {% set title = "Are you sure you want to delete this " + type + "?" %}
@@ -16,13 +15,13 @@
   {% set buttonText = "Send reference request" %}
   {% set status = "Awaiting response" %}
 {% elif action == "cancel" %}
-  {% set title = "Are you sure you want to cancel this reference request?" %}
-  {% set buttonText = "Yes I’m sure - cancel this reference request" %}
+  {% set title = "Are you sure you want to cancel the request for a reference from " + referee.name + "?" %}
+  {% set buttonText = "Cancel reference request" %}
   {% set status = "Request cancelled" %}
   {% set destructive = true %}
 {% elif action == "nudge" %}
-  {% set title = "Would you like to send a reminder to this referee?" %}
-  {% set buttonText = "Yes I’m sure - send a reminder" %}
+  {% set title = "Would you like to send a reminder to " + referee.name + "?" %}
+  {% set buttonText = "Send a reminder" %}
 {% elif action == "deactivate" %}
   {% set title = "Are you sure you want to deactivate this reference?" %}
   {% set buttonText = "Yes I’m sure - deactivate this reference" %}
@@ -35,11 +34,12 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: referrer
+    href: "/dashboard/" + applicationId + "/references/" + id
   }) }}
 {% endblock %}
 
 {% block primary %}
+
   {% if action == "request" %}
     <p class="govuk-body">We’ll send {{ referee.name }} an email asking them to give you a reference.</p>
   {% elif action == "retry" %}
@@ -53,15 +53,15 @@
       }
     } | decorateApplicationAttributes(["references", id, "email"])) }}
   {% elif action == "cancel" %}
-    <p class="govuk-body">We’ll tell {{ referee.name }} that they no longer need to give a reference.</p>
+    <p class="govuk-body">We’ll tell them that they no longer need to give a reference.</p>
   {% elif action == "nudge" %}
-    {{ govukInsetText({
+    <!-- {{ govukInsetText({
       classes: "govuk-!-margin-top-0",
       text: "You can only send one reminder to this referee."
-    }) }}
+    }) }} -->
     <!-- TODO: Make this use real date (now + 7 days) -->
     <!-- TODO: Only show if there is an upcoming automatic reminder -->
-    <p class="govuk-body">The referee will also get an automatic reminder on 16 September 2020.</p>
+    <p class="govuk-body">They’ll also get an automatic reminder on 16 July 2022.</p>
   {% elif action == "deactivate" %}
     <p class="govuk-body">We will keep your reference but we won’t sent it to any providers.</p>
   {% elif action == "reactivate" %}
@@ -75,7 +75,7 @@
     classes: "govuk-button--warning" if destructive
   }) }}
 
-  {% if action != "retry" %}
-    <p class="govuk-body"><a href="{{ referrer }}">No - I’ve changed my mind</a></p>
-  {% endif %}
+  <!-- {% if action != "retry" %}
+    <p class="govuk-body"><a href="/dashboard/{{ applicationId }}/references/{{ id}}">No - I’ve changed my mind</a></p>
+  {% endif %} -->
 {% endblock %}

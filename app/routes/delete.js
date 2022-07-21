@@ -1,7 +1,7 @@
 const utils = require('./../utils')
 
 module.exports = router => {
-  router.get('/application/:applicationId/:section/:id/delete', (req, res) => {
+  router.get('/application/:applicationId/:section(work-history|unpaid-experience|other-qualifications)/:id/delete', (req, res) => {
     const application = utils.applicationData(req)
     const { referrer } = req.query
     let { id, section } = req.params
@@ -69,7 +69,7 @@ module.exports = router => {
     })
   })
 
-  router.post('/application/:applicationId/:section/:id/delete', (req, res) => {
+  router.post('/application/:applicationId/:section(work-history|unpaid-experience|other-qualifications)/:id/delete', (req, res) => {
     const application = utils.applicationData(req)
     const { referrer } = req.query
     let { id, section } = req.params

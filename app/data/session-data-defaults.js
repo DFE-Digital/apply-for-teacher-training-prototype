@@ -41,6 +41,11 @@ applicationWithFoundationDegreeOnly.degree = {
   }
 }
 
+const applicationWithReceivedReferences = JSON.parse(JSON.stringify(require('./application')))
+applicationWithReceivedReferences.references.first.status = 'Reference received'
+applicationWithReceivedReferences.references.second.status = 'Reference received'
+applicationWithReceivedReferences.references.third.status = 'Requested'
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -49,6 +54,7 @@ module.exports = {
     23456: require('./application-apply-again-with-choice'),
     ABCDE: require('./application-with-choices'),
     45678: require('./application-single-choice'),
+    84659: applicationWithReceivedReferences,
     GLOBE: require('./application-international'),
     WORLD: require('./application-international-with-choices'),
     DEGREE: applicationWithDegreeSectionNotStarted,

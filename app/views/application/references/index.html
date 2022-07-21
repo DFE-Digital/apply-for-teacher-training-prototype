@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% set applicationPath = "/application/" + applicationId %}
+{% set title = "References" %}
+{% set references = applicationValue(["references"]) | toArray %}
+{% set addReferenceButtonText = "Add reference" if references | length == 0 else "Add another reference" %}
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/application/" + applicationId,
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">You need to add details of 2 people who could give a reference for you. They will only be contacted if you accept an offer on a course.</p>
+
+      <p class="govuk-body">You should choose:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>an academic tutor if you have not yet graduated or graduated within the past 5 years</li>
+        <li>a headteacher if you have been working in a school</li>
+      </ul>
+
+      <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
+
+      <div class="govuk-body">
+        {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
+        {{ govukButton({
+          text: addReferenceButtonText,
+          href: "/application/" + applicationId + "/references/add",
+          classes: referencesButtonClass
+        }) }}
+      </div>
+
+
+
+      {% if references | length > 0 %}
+        {% for item in references %}
+          {% include "_includes/item/reference.html" %}
+        {% endfor %}
+      {% endif %}
+
+    {% if references | length > 1 %}
+
+      <form action="/application/{{ applicationId }}" method="get">
+        {{ govukRadios({
+          fieldset: {
+            classes: "govuk-!-width-two-thirds",
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "true",
+            text: "Yes, I’ve completed this section"
+          }, {
+            value: "false",
+            text: "No, I’ll come back to it later"
+          }]
+        } | decorateApplicationAttributes(["completed", "references"])) }}
+
+        {{ govukButton({text: "Continue"}) }}
+      </form>
+    {% endif %}
+    <div>
+  </div>
+{% endblock %}

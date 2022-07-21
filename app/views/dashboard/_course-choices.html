@@ -1,4 +1,5 @@
 {% for item in choices %}
+
   {% set canRespond = item.status == "Offer received" %}
 
   {% set hasResponded =
@@ -128,7 +129,7 @@
         value: {
           html: conditionsHtml | safe
         }
-      } if item.conditions, {
+      } if item.status != 'Awaiting decision' and item.conditions, {
         key: {
           classes: "govuk-visually-hidden",
           text: "Actions"
@@ -140,15 +141,110 @@
     }) }}
   {% endset %}
 
-  {{ appSummaryCard({
-    classes: "app-course-choice govuk-!-margin-bottom-6",
-    titleHtml: summaryHeaderHtml,
-    actions: {
-      items: [{
-        href: applicationPath + "/submitted/?referrer=" + referrer,
-        text: "View application"
-      }]
-    },
-    html: summaryBodyHtml
-  }) }}
+  {% if item.status == 'Offer accepted'  %}
+
+    {% set taskItems = [] %}
+
+    {% for condition in item.conditions %}
+
+      {% if condition.title != 'References' %}
+        {% set taskItems = taskItems | push({
+          text: condition.title,
+          tag: {
+            classes: condition.status | statusClass,
+            text: condition.status
+          }
+        }) %}
+      {% endif %}
+    {% endfor %}
+
+
+    <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
+
+    {% set referenceCondition = {} %}
+    {% for condition in item.conditions %}
+      {% if condition.title == 'References' %}
+        {% set referenceCondition = condition %}
+      {% endif %}
+    {% endfor %}
+
+    {{ govukButton({
+      text: "Request a reference",
+      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+      classes: "xgovuk-button--secondary"
+    }) }}
+
+
+      {% set references = applicationValue(["references"]) | toArray %}
+
+      {% set referenceItems = [] %}
+
+      {% for item in references %}
+        {% if item.name %}
+          {% set itemText %}
+            <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not requested yet" %}/name{% endif %}">{{ item.name }}</a>
+
+            {% if item.status == 'Requested' %}
+              {% for entry in item.log %}
+                <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                  {{ entry.note }} on
+                  {{ entry.date | date("DDD") }}
+
+                  {% if entry.note == 'Request sent' %}
+                    –
+                    {% if referenceCondition.status == 'Pending' %}
+                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                    {% endif %}
+                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                  {% endif %}
+                </p>
+              {% endfor %}
+            {% endif %}
+
+
+          {% endset %}
+
+
+          {% set referenceItems = referenceItems | push({
+            text: itemText,
+            tag: {
+              text: item.status,
+              classes: item.status | statusClass
+            }
+          }) %}
+        {% endif %}
+      {% endfor %}
+
+
+    {% if references | length > 0 %}
+      {{ appTaskList({
+        items: referenceItems
+      }) }}
+    {% endif %}
+
+    <h2 class="govuk-heading-m">Offer conditions</h2>
+
+    {{ appTaskList({
+      classes: "govuk-!-margin-bottom-5",
+      items: taskItems
+    }) }}
+
+
+
+
+  {% else %}
+
+    {{ appSummaryCard({
+      classes: "app-course-choice govuk-!-margin-bottom-6",
+      titleHtml: summaryHeaderHtml,
+      actions: {
+        items: [{
+          href: applicationPath + "/submitted/?referrer=" + referrer,
+          text: "View application"
+        }]
+      },
+      html: summaryBodyHtml
+    }) }}
+
+  {% endif %}
 {% endfor %}

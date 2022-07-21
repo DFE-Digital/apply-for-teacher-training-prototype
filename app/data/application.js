@@ -17,7 +17,8 @@ module.exports = {
     maths: 'true',
     degree: 'true',
     otherQualifications: 'true',
-    personalStatement: 'true'
+    personalStatement: 'true',
+    references: 'true'
   },
   account: {
     email: 'janina.doe@example.com'
@@ -70,18 +71,9 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
       type: 'Academic',
-      status: 'Reference selected',
+      status: 'Not requested yet',
       ready: true,
-      log: [{
-        note: 'Request sent',
-        date: '2021-01-03T17:39:20'
-      }, {
-        note: 'Automated reminder sent',
-        date: '2021-01-10T17:39:20'
-      }, {
-        note: 'Reference given',
-        date: '2021-01-10T21:39:20'
-      }]
+      log: []
     },
     second: {
       id: 'second',
@@ -89,18 +81,9 @@ module.exports = {
       relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
-      status: 'Request cancelled',
+      status: 'Not requested yet',
       nudges: 0,
-      log: [{
-        note: 'Request sent',
-        date: '2021-01-03T17:39:20'
-      }, {
-        note: 'Automated reminder sent',
-        date: '2021-01-10T17:39:20'
-      }, {
-        note: 'Request cancelled',
-        date: '2021-01-10T21:39:20'
-      }]
+      log: []
     },
     third: {
       id: 'third',
@@ -108,16 +91,10 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'james.m@example.com',
       type: 'Academic',
-      status: 'Reference selected',
+      status: 'Not requested yet',
       ready: true,
       nudges: 0,
-      log: [{
-        note: 'Request sent',
-        date: '2021-01-03T17:39:20'
-      }, {
-        note: 'Reference given',
-        date: '2021-01-05T10:12:20'
-      }]
+      log: []
     }
   },
   candidate: {

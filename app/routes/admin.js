@@ -161,15 +161,13 @@ module.exports = router => {
     res.redirect(`/dashboard/${applicationId}`)
   })
 
-
   // This pre-fills most of the applicaiton apart from the sections we want to test.
   router.get('/admin/receive-references', (req, res) => {
     const applicationId = req.query.applicationId
     var application = utils.applicationData(req)
 
-    let i = 1;
+    let i = 1
     const timeNow = new Date().toISOString()
-
 
     for (const referenceId in application.references) {
       const reference = application.references[referenceId]

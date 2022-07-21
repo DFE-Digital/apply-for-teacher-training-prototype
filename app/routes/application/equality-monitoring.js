@@ -31,7 +31,6 @@ const questionPaths = (req) => {
     ...(hasDisclosedDisability(req) ? [`${basePath}/disabilities`] : []),
     `${basePath}/ethnic-group`,
     ...(hasDisclosedEthnicity(req) ? [`${basePath}/ethnic-background`] : []),
-    // `${basePath}/religious-belief`,
     `${basePath}/review`
   ]
 
@@ -68,18 +67,6 @@ module.exports = router => {
       paths,
       referrer
     })
-  })
-
-  // Opt-in answer branching
-  router.post('/application/:applicationId/equality-monitoring/answer', (req, res) => {
-    const { applicationId } = req.params
-    const { answer } = req.session.data
-
-    if (answer === 'yes') {
-      res.redirect(`/application/${applicationId}/equality-monitoring/sex`)
-    }
-
-    res.redirect(`/application/${applicationId}/submit`)
   })
 
   // Ethnic group answer branching

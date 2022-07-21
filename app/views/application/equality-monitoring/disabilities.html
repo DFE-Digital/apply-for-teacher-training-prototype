@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
-{% set parent = "Equality and diversity questionnaire" %}
-{% set title = "Please select all that apply to you" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "What disabilities do you have?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -30,7 +30,7 @@
         classes: "govuk-label--s"
       },
       hint: {
-        text: "or a serious visual impairment which is not corrected by glasses"
+        text: "Or a serious visual impairment which is not corrected by glasses"
       }
     }, {
       text: "Deaf",
@@ -38,7 +38,7 @@
         classes: "govuk-label--s"
       },
       hint: {
-        text: "or a serious hearing impairment"
+        text: "Or a serious hearing impairment"
       }
     }, {
       text: "Learning difficulty",

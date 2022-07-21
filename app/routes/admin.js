@@ -47,7 +47,7 @@ module.exports = router => {
     application.additionalSupportDisclose = 'No'
     application.completed.additionalSupport = 'true'
 
-    application.interviewNeedsDisclose =  'No'
+    application.interviewNeedsDisclose = 'No'
     application.completed.interviewNeeds = 'true'
 
     // Set GCSE
@@ -55,31 +55,31 @@ module.exports = router => {
     application.completed.science = 'true'
     application.completed.maths = 'true'
     application.gcse = {
-        maths: {
-          id: 'maths',
-          type: 'GCSE',
-          gradeSingle: 'A*',
-          year: '2004',
-          country: 'United Kingdom'
-        },
-        english: {
-          id: 'english',
-          type: 'GCSE',
-          exam: ['English Language', 'English Literature'],
-          gradeLanguage: 'C',
-          gradeLiterature: 'B',
-          year: '2004',
-          country: 'United Kingdom'
-        },
-        science: {
-          id: 'science',
-          type: 'GCSE',
-          exam: 'Double (or combined) award',
-          gradeDouble: 'A*A*',
-          year: '2004',
-          country: 'United Kingdom'
-        }
+      maths: {
+        id: 'maths',
+        type: 'GCSE',
+        gradeSingle: 'A*',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      english: {
+        id: 'english',
+        type: 'GCSE',
+        exam: ['English Language', 'English Literature'],
+        gradeLanguage: 'C',
+        gradeLiterature: 'B',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      science: {
+        id: 'science',
+        type: 'GCSE',
+        exam: 'Double (or combined) award',
+        gradeDouble: 'A*A*',
+        year: '2004',
+        country: 'United Kingdom'
       }
+    }
 
     // Set degree
     application.degree = {

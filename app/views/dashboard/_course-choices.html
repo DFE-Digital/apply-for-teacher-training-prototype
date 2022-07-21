@@ -129,7 +129,7 @@
         value: {
           html: conditionsHtml | safe
         }
-      } if item.conditions, {
+      } if item.status != 'Awaiting decision' and item.conditions, {
         key: {
           classes: "govuk-visually-hidden",
           text: "Actions"
@@ -168,19 +168,11 @@
       {% endif %}
     {% endfor %}
 
-    {% if referenceCondition.status == 'Pending' %}
-
-    {% set acceptedChoice = choices | first %}
-
-      {{ govukButton({
-        text: "Request a reference",
-        href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
-        classes: "xgovuk-button--secondary"
-      }) }}
-
-    {% else %}
-      <p class="govuk-body">The provider has checked your references.</p>
-    {% endif %}
+    {{ govukButton({
+      text: "Request a reference",
+      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+      classes: "xgovuk-button--secondary"
+    }) }}
 
 
       {% set references = applicationValue(["references"]) | toArray %}

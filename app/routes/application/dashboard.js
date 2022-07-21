@@ -411,7 +411,7 @@ module.exports = router => {
             log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
           },
           7351: {
-            status: 'Received',
+            status: 'Reference received',
             name: 'Jane Doe',
             email: 'jane@test.com',
             relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
@@ -447,7 +447,7 @@ module.exports = router => {
 
         application.references = {
           '1J4g': {
-            status: 'Received',
+            status: 'Reference received',
             name: 'John Bloggs',
             email: 'john@birmingham.ac.uk',
             relationship: 'He was my academic tutor. I’ve known him for 3 years.',
@@ -458,7 +458,7 @@ module.exports = router => {
             ]
           },
           7351: {
-            status: 'Received',
+            status: 'Reference received',
             name: 'Jane Doe',
             email: 'jane@test.com',
             relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',

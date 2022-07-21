@@ -142,4 +142,52 @@ module.exports = router => {
 
     res.redirect(`/application/${applicationId}`)
   })
+
+  // This lets the candidate receive an offer from all their chocies
+  router.get('/admin/receive-offer', (req, res) => {
+    const applicationId = req.query.applicationId
+    var application = utils.applicationData(req)
+
+    for (const choiceId in application.choices) {
+      const choice = application.choices[choiceId]
+
+      choice.status = 'Offer received'
+      choice.conditions = [
+        { title: 'Fitness to train to teach check', status: 'Pending' },
+        { title: 'Disclosure and barring service check', status: 'Pending' }
+      ]
+    }
+
+    res.redirect(`/dashboard/${applicationId}`)
+  })
+
+
+  // This pre-fills most of the applicaiton apart from the sections we want to test.
+  router.get('/admin/receive-references', (req, res) => {
+    const applicationId = req.query.applicationId
+    var application = utils.applicationData(req)
+
+    let i = 1;
+    const timeNow = new Date().toISOString()
+
+
+    for (const referenceId in application.references) {
+      const reference = application.references[referenceId]
+
+      if (i === 1) {
+        reference.status = 'Reference received'
+        reference.log.push({ note: 'Reference received', date: timeNow })
+      } else if (i === 2) {
+        reference.status = 'Unable to give a reference'
+        reference.log.push({ note: 'They said they were unable to give you a reference', date: timeNow })
+      } else {
+        reference.status = 'Cancelled'
+        reference.log.push({ note: 'You cancelled the reference request', date: timeNow })
+      }
+
+      i += 1
+    }
+
+    res.redirect(`/dashboard/${applicationId}`)
+  })
 }

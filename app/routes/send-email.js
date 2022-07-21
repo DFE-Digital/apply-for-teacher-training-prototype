@@ -162,8 +162,12 @@ module.exports = router => {
           return choice
         })
 
+        const timeNow = new Date().toISOString()
+
         for (const referenceId in application.references) {
           application.references[referenceId].status = 'Requested'
+
+          application.references[referenceId].log = [{ note: 'Request sent', date: timeNow }]
         }
 
         application.choices = [choice]

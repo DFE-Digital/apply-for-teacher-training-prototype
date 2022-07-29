@@ -1,0 +1,31 @@
+{% extends "_form.html" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "If you finished school after 1980, were you eligible for free school meals at any point during your school years?" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukRadios({
+    items: [{
+      text: "Yes"
+    }, {
+      text: "No"
+    }, {
+      text: "Not applicable, I finished school before 1980 or went to school overseas"
+    }, {
+      text: "I don't know"
+    }, {
+      divider: "or"
+    }, {
+      text: "Prefer not to say"
+    }]
+  } | decorateApplicationAttributes(["equality-monitoring", "free-school-meals"])) }}
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+{% endblock %}

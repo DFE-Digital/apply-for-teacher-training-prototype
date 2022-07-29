@@ -42,6 +42,14 @@
   {% endif %}
 {% endset %}
 
+{% set freeSchoolMealsText %}
+  {% if applicationValue(["equality-monitoring", "free-school-meals"]) %}
+    {{ applicationValue(["equality-monitoring", "free-school-meals"]) }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -97,6 +105,20 @@
         href: path + "household-earner-occupation-at-14?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "occupation of your main household earner when you were about 14 years old?"
+      }]
+    }
+  }, {
+    key: {
+      text: "Eligibility for free school meals"
+    },
+    value: {
+      text: freeSchoolMealsText
+    },
+    actions: {
+      items: [{
+        href: path + "free-school-meals?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "eligibility for free school meals"
       }]
     }
   }]

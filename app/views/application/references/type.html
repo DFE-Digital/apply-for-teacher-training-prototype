@@ -23,19 +23,19 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "What type of reference do you want to add?",
+        text: "What type of reference can this person give you?",
         classes: "govuk-fieldset__legend--l",
         isPageHeading: true
       }
     },
     items: [{
-      text: "Academic, such as a university tutor"
+      text: "Academic, such as from a university tutor"
     }, {
-      text: "Professional, such as a manager"
+      text: "Professional, such as from a manager"
     }, {
-      text: "Someone you know through experience working in a school"
+      text: "School experience, such as from the headteacher of a school you’ve been working in"
     }, {
-      text: "Character, such as a mentor or someone you know from volunteering"
+      text: "Character, such as from a mentor or someone you know from volunteering"
     }]
   } | decorateApplicationAttributes(["references", id, "type"])) }}
 

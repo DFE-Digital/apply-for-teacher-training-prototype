@@ -4,12 +4,12 @@ dotenv.config()
 
 const querystring = require('querystring')
 const { DateTime } = require('luxon')
-let notify
+// let notify
 
-if (process.env.NOTIFYAPIKEY) {
-  const NotifyClient = require('notifications-node-client').NotifyClient
-  notify = new NotifyClient(process.env.NOTIFYAPIKEY)
-}
+// if (process.env.NOTIFYAPIKEY) {
+//   const NotifyClient = require('notifications-node-client').NotifyClient
+//   notify = new NotifyClient(process.env.NOTIFYAPIKEY)
+// }
 
 const providers = require('./../data/providers')
 const path = require('path')
@@ -85,9 +85,9 @@ const saveIsoDate = (req, data, id, blankEqualsNow = true) => {
 
 // Emails will only send if the email address has been whitelisted
 const sendEmail = (req, template, personalisation) => {
-  const email = req.session.data.account && req.session.data.account.email
-  personalisation = personalisation || {}
-  personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
+  // const email = req.session.data.account && req.session.data.account.email
+  // personalisation = personalisation || {}
+  // personalisation.url = req.get('origin') || `${req.protocol}://${req.get('host')}`
 
   // Turn off email sending for now
   // if (email && (typeof notify !== 'undefined')) {

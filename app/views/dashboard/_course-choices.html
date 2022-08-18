@@ -161,19 +161,18 @@
 
     <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
+    <p class="govuk-body">
+
+      Contact Portsmouth Teaching School Alliance if you need help getting references.
+
+    </p>
+
     {% set referenceCondition = {} %}
     {% for condition in item.conditions %}
       {% if condition.title == 'References' %}
         {% set referenceCondition = condition %}
       {% endif %}
     {% endfor %}
-
-    {{ govukButton({
-      text: "Request another reference",
-      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
-      classes: "govuk-button--secondary"
-    }) }}
-
 
       {% set references = applicationValue(["references"]) | toArray %}
 
@@ -218,11 +217,24 @@
 
     {% if references | length > 0 %}
       {{ appTaskList({
-        items: referenceItems
+        items: referenceItems,
+        classes: "govuk-!-margin-bottom-4"
       }) }}
     {% endif %}
 
+    <div class="govuk-button-group govuk-!-margin-bottom-6">
+      {{ govukButton({
+        text: "Request another reference",
+        href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+
     <h2 class="govuk-heading-m">Offer conditions</h2>
+
+    <p class="govuk-body">
+      Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
+    </p>
 
     {{ appTaskList({
       classes: "govuk-!-margin-bottom-5",

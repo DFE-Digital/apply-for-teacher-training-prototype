@@ -17,8 +17,19 @@
 {% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
 
   <p class="govuk-body">
-    You need to give references and meet offer conditions before your place is confirmed.
+    You’ve accepted an offer from Portsmouth Teaching School Alliance.
   </p>
+  <p class="govuk-body">
+    Your place will be confirmed once they have:
+  </p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      received your references
+    </li>
+    <li>
+      marked your other offer conditions as met
+    </li>
+  </ul>
 
 {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
 

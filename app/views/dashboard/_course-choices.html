@@ -217,15 +217,18 @@
 
     {% if references | length > 0 %}
       {{ appTaskList({
-        items: referenceItems
+        items: referenceItems,
+        classes: "govuk-!-margin-bottom-4"
       }) }}
     {% endif %}
 
-    {{ govukButton({
-      text: "Request another reference",
-      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
-      classes: "govuk-button--secondary"
-    }) }}
+    <div class="govuk-button-group govuk-!-margin-bottom-6">
+      {{ govukButton({
+        text: "Request another reference",
+        href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
 
     <h2 class="govuk-heading-m">Offer conditions</h2>
 

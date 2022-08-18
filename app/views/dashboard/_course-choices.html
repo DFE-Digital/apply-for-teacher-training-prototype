@@ -161,6 +161,12 @@
 
     <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
+    <p class="govuk-body">
+
+      Contact Portsmouth Teaching School Alliance if you need help getting references.
+
+    </p>
+
     {% set referenceCondition = {} %}
     {% for condition in item.conditions %}
       {% if condition.title == 'References' %}
@@ -223,6 +229,10 @@
     {% endif %}
 
     <h2 class="govuk-heading-m">Offer conditions</h2>
+
+    <p class="govuk-body">
+      Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
+    </p>
 
     {{ appTaskList({
       classes: "govuk-!-margin-bottom-5",

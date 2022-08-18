@@ -174,13 +174,6 @@
       {% endif %}
     {% endfor %}
 
-    {{ govukButton({
-      text: "Request another reference",
-      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
-      classes: "govuk-button--secondary"
-    }) }}
-
-
       {% set references = applicationValue(["references"]) | toArray %}
 
       {% set referenceItems = [] %}
@@ -227,6 +220,12 @@
         items: referenceItems
       }) }}
     {% endif %}
+
+    {{ govukButton({
+      text: "Request another reference",
+      href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+      classes: "govuk-button--secondary"
+    }) }}
 
     <h2 class="govuk-heading-m">Offer conditions</h2>
 

@@ -7,9 +7,11 @@
 
 {% block primary %}
   {% if data.reference.relationship.correct == "Yes" %}
-    {% set relationshipValue = "Confirmed by referee" %}
+    {% set relationshipValue %}
+      You confirmed this as correct.
+    {% endset %}
   {% else %}
-    {% set relationshipValue = "Amended by referee to: " + data.reference.relationship.correction %}
+    {% set relationshipValue = "Amended to: " + data.reference.relationship.correction %}
   {% endif %}
 
   {% if data.reference.safeguarding.concern == "Yes" %}
@@ -26,11 +28,11 @@
         text: "Relationship"
       },
       value: {
-        text: relationshipValue
+        text: relationshipValue | safe
       },
       actions: {
         items: [{
-          href: "/reference?referrer=/reference/review",
+          href: "/reference/relationship?referrer=/reference/review",
           text: "Change",
           visuallyHiddenText: "relationship to candidate"
         }]
@@ -51,10 +53,10 @@
       }
     }, {
       key: {
-        text: "Reference"
+        text: "Further information (optional)"
       },
       value: {
-        html: data.reference.comments
+        html: (data.reference.comments or "Not entered")
       },
       actions: {
         items: [{

@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/review" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Does " + candidate_name + " have the potential to teach?" %}
+{% set title = "Your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -19,30 +19,26 @@
 
 {% block primary %}
 
+  <p class="govuk-body">You can include further factual information, such as:</p>
 
-    <p class="govuk-body">You could comment on things like their:</p>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>communication skills</li>
-      <li>reliability and professionalism</li>
-      <li>transferable skills</li>
-      <li>ability to work with children</li>
-      <li>academic skills</li>
-    </ul>
-
-    <p class="govuk-body">You can write up to 500 words. </p>
-    <p class="govuk-body">If you need more time, save and return later using the link in your email.</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the dates they were employed by you</li>
+    <li>their role and responsibilities</li>
+    <li>predicted grades, if they have not yet completed their course</li>
+    <li>[...]</li>
+  </ul>
 
   {{ govukCharacterCount({
     id: "reference-comments",
     name: "reference[comments]",
     value: data.reference.comments,
     label: {
-      text: "Your reference",
+      text: "Further information (optional)",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
     maxwords: 500,
-    rows: 15
+    threshold: 95,
+    rows: 6
   }) }}
 
   {{ govukButton({

@@ -38,7 +38,7 @@
     "inquirer": "^8.2.0",
     "keypather": "^3.1.0",
     "lodash": "^4.17.21",
-    "luxon": "^2.3.2",
+    "luxon": "^3.0.3",
     "marked": "^4.0.19",
     "notifications-node-client": "^5.1.1",
     "number-to-words": "^1.2.4",

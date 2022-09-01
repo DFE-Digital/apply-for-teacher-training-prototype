@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/review" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Your reference for " + candidate_name %}
+{% set title = "Additional information about " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -19,10 +19,10 @@
 
 {% block primary %}
 
-  <p class="govuk-body">You can include further factual information, such as:</p>
+  <p class="govuk-body">You can give additional information, such as:</p>
 
   <ul class="govuk-list govuk-list--bullet">
-    <li>the dates they were employed by you</li>
+    <li>the dates they worked with you</li>
     <li>their role and responsibilities</li>
     <li>predicted grades, if they have not yet completed their course</li>
     <li>[...]</li>
@@ -33,7 +33,7 @@
     name: "reference[comments]",
     value: data.reference.comments,
     label: {
-      text: "Further information (optional)",
+      text: "Additional information (optional)",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
     maxwords: 500,

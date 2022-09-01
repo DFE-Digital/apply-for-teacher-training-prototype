@@ -32,38 +32,37 @@
           classes: referencesButtonClass
         }) }}
       </div>
-
-
-
-      {% if references | length > 0 %}
-        {% for item in references %}
-          {% include "_includes/item/reference.html" %}
-        {% endfor %}
-      {% endif %}
-
-    {% if references | length > 1 %}
-
-      <form action="/application/{{ applicationId }}" method="get">
-        {{ govukRadios({
-          fieldset: {
-            classes: "govuk-!-width-two-thirds",
-            legend: {
-              text: "Have you completed this section?",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [{
-            value: "true",
-            text: "Yes, I’ve completed this section"
-          }, {
-            value: "false",
-            text: "No, I’ll come back to it later"
-          }]
-        } | decorateApplicationAttributes(["completed", "references"])) }}
-
-        {{ govukButton({text: "Continue"}) }}
-      </form>
-    {% endif %}
-    <div>
+    </div>
   </div>
+
+  {% if references | length > 0 %}
+    {% for item in references %}
+      {% include "_includes/item/reference.html" %}
+    {% endfor %}
+  {% endif %}
+
+{% if references | length > 1 %}
+
+  <form action="/application/{{ applicationId }}" method="get">
+    {{ govukRadios({
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } | decorateApplicationAttributes(["completed", "references"])) }}
+
+    {{ govukButton({text: "Continue"}) }}
+  </form>
+{% endif %}
+
 {% endblock %}

@@ -19,14 +19,31 @@
 
 {% block primary %}
 
-  <p class="govuk-body">You can give additional information, such as:</p>
+  {% if type == 'character' %}
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>the dates they worked with you</li>
-    <li>their role and responsibilities</li>
-    <li>predicted grades, if they have not yet completed their course</li>
-    <li>[...]</li>
-  </ul>
+    <p class="govuk-body">You can give additional information, such as details of:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>volunteering they have done with you</li>
+      <li>mentoring you’ve done for them</li>
+      <li>activities you have done together</li>
+    </ul>
+
+  {% elif type == 'professional' %}
+
+    <p class="govuk-body">You can give additional information, such as:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>the dates they worked with you</li>
+      <li>their role and responsibilities</li>
+    </ul>
+
+  {% else %}
+
+
+    <p class="govuk-body">You can give additional information, such as their predicted grade if they have not yet completed their course.</p>
+
+  {% endif %}
 
   {{ govukCharacterCount({
     id: "reference-comments",
@@ -44,4 +61,11 @@
   {{ govukButton({
     text: "Save"
   }) }}
+
+  <p class="govuk-body">
+    <a href="/reference/comments?referrer=/reference/review&type=academic">academic</a> |
+    <a href="/reference/comments?referrer=/reference/review&type=professional">professional or school based</a> |
+    <a href="/reference/comments?referrer=/reference/review&type=character">character</a>
+  </p>
+
 {% endblock %}

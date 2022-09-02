@@ -6,7 +6,7 @@
   {% elif loop.index0 == 2 %}
     Third
   {% endif %}
-  person who can give a reference
+  reference
 {% endset %}
 
 {% if item.status == 'Reference received' %}
@@ -28,7 +28,7 @@
   actions: {
     items: [{
       href: "/application/" + applicationId + "/references/" + item.id + "/delete",
-      text: "Remove"
+      text: "Delete"
     }]
   },
   html: govukSummaryList({
@@ -83,7 +83,7 @@
       },
       {
         key: {
-          text: "Relationship to you"
+          text: "How you know them and for how long"
         },
         value: {
           text: item.relationship

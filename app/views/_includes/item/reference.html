@@ -1,13 +1,4 @@
-{% set titleText %}
-  {% if loop.index0 == 0 %}
-    First
-  {% elif loop.index0 == 1 %}
-    Second
-  {% elif loop.index0 == 2 %}
-    Third
-  {% endif %}
-  reference
-{% endset %}
+{% set titleText = item.name %}
 
 {% if item.status == 'Reference received' %}
   {% set referenceStatusHtml %}

@@ -18,9 +18,10 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body">{{ candidate_name }} describes how they know you as follows:</p>
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
   {{ govukInsetText({
-    text: "He was my course supervisor at university. I’ve known him for a year."
+    text: "He was my course supervisor at university. I’ve known him for a year.",
+    classes: " govuk-!-margin-top-0"
   }) }}
 
   {% set correctRelationshipHtml %}

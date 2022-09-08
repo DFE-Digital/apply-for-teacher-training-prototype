@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block primary %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how you know them:</p>
   {{ govukInsetText({
     text: "He was my course supervisor at university. I’ve known him for a year.",
     classes: " govuk-!-margin-top-0"
@@ -30,7 +30,7 @@
       name: "reference[relationship][correction]",
       value: data.reference.relationship.correction,
       label: {
-        text: "Tell us what your relationship is to " + candidate_name + " and how long you’ve known them"
+        text: "Say how you know " + candidate_name + " and how long you’ve known them"
       },
       maxwords: 50,
       rows: 5

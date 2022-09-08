@@ -2,6 +2,7 @@
 
 {% set formaction = "/reference/answer" %}
 {% set candidate_name = "Jane Doe" %}
+{% set provider_name = "West Lancashire SCITT" %}
 {% set title = "A reference for " + candidate_name + "" %}
 {% set hasAccountLinks = false %}
 
@@ -15,15 +16,11 @@
 
 {% block primary %}
 
-  <h1 class="govuk-heading-l">Reference for {{ candidate_name }}</h1>
+  <h1 class="govuk-heading-l">Give a reference for {{ candidate_name }}</h1>
 
-  <p class="govuk-body">To give a reference you’ll need to:</p>
+  <p class="govuk-body">{{ candidate_name }} has accepted an offer for a place on a teacher training course.</p>
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>confirm how you know {{ candidate_name }}</li>
-    <li>say whether you know of any reason why they should not train to be a teacher</li>
-    <li>give any additional information</li>
-  </ul>
+  <p class="govuk-body">Your reference will only be sent to {{ provider_name }}. It will not be sent to {{ candidate_name }}.</p>
 
   {{ govukRadios({
     fieldset: {

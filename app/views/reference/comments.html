@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/review" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Additional information about " + candidate_name %}
+{% set title = "Reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -19,16 +19,14 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Give additional information, such as:</p>
+  <p class="govuk-body">Do not give opinions about {{ candidate_name }}. Your reference should be based on facts such as:</p>
 
   {% if type == 'character' %}
 
-    <p class="govuk-body">Give additional information, such as details of:</p>
-
     <ul class="govuk-list govuk-list--bullet">
-      <li>volunteering they have done with you</li>
+      <li>volunteering they’ve done with you</li>
       <li>mentoring you’ve done for them</li>
-      <li>activities you have done together</li>
+      <li>activities you’ve done together</li>
     </ul>
 
   {% elif type == 'professional' %}
@@ -36,26 +34,23 @@
     <ul class="govuk-list govuk-list--bullet">
       <li>the dates they worked with you</li>
       <li>their role and responsibilities</li>
-      <li>the reason they left their role</li>
     </ul>
 
   {% else %}
 
     <ul class="govuk-list govuk-list--bullet">
       <li>their academic performance</li>
-      <li>their predicted grade, if they have not yet completed their course</li>
+      <li>their predicted grade, if they have not completed their course</li>
     </ul>
 
   {% endif %}
-
-  <p class="govuk-body">{{candidate_name }} will not be able to see what you write about them.</p>
 
   {{ govukCharacterCount({
     id: "reference-comments",
     name: "reference[comments]",
     value: data.reference.comments,
     label: {
-      text: "Additional information",
+      text: "Reference",
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
     maxwords: 500,

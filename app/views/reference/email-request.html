@@ -1,22 +1,24 @@
 {% extends "_email.html" %}
 
-{% set title = "Give a reference to support the teacher training application of Jane Doe" %}
+{% set title = "Teacher training reference needed for Jane Doe" %}
 
 {% block content %}
   <p class="govuk-body">Dear Debroah Lueilwitz,</p>
-  <p class="govuk-body">Jane Doe put us in touch with you to get a reference for their teacher training application.</p>
-  <p class="govuk-body">They have applied to the following courses:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>Mallowpond TAFE – Business</li>
-    <li>Mallowpond Technical College – Biomedical Science</li>
-    <li>Falconholt Technical College – Forensic Science</li>
-  </ul>
-  <p class="govuk-body">Please use the link below to give a reference as soon as possible.</p>
-  <p class="govuk-body"><a href="/reference">http://localhost:3000/reference?token=onNYS8Uvzs2nicqd5htb</a></p>
-  <p class="govuk-body">If you won’t give Jane Doe a reference, please let us know by clicking the link below.</p>
-  <p class="govuk-body"><a href="/reference/decline">http://localhost:3000/reference/refuse-feedback?token=onNYS8Uvzs2nicqd5htb</a></p>
+  <p class="govuk-body">Jane Doe has accepted an offer from University College London for a place on a teacher training course. </p>
+  <p class="govuk-body">They’ve said that you can give them a reference. Their place on the course can only be confirmed after University College London has received their references.</p>
 
-  <h2 class="govuk-heading-m">Your data</h2>
-  <p class="govuk-body">We’ll only use your data to process the candidate’s application, unless you agree to be contacted about your experience of giving a reference.</p>
-  <p class="govuk-body">We’ll ask about this before you submit any information.</p>
+  <p class="govuk-body">Use this link to give the reference as soon as you can:</p>
+
+  <p class="govuk-body"><a href="/reference">http://localhost:3000/reference?token=onNYS8Uvzs2nicqd5htb</a></p>
+
+  <p class="govuk-body">You can also use the link to say that you cannot give a reference, so that Jane Doe knows to ask someone else.</p>
+
+  <p class="govuk-body">If you give a reference you’ll need to say: </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>how you know Jane Doe and how long you’ve known them for</li>
+    <li>whether you know of any reason why they should not train to be a teacher</li>
+  </ul>
+
+  <p class="govuk-body">Your reference will not be sent to Jane Doe.</p>
 {% endblock %}

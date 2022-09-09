@@ -4,8 +4,7 @@
 module.exports = router => {
   router.get('/reference', (req, res) => {
     res.render('reference/index', {
-      referrer: req.query.referrer,
-      type: req.query.type
+      referrer: req.query.referrer
     })
   })
 

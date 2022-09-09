@@ -17,10 +17,24 @@
   {% endif %}
 {% endblock %}
 
+{% set type = data['referee_type'] %}
+{% set relationship %}
+  {% if type == 'character' %}
+    She is my mentor. I’ve known her for 4 years.
+  {% elif type == 'school' %}
+    She is the headteacher at the school I work at. I’ve known her for 2 years.
+  {% elif type == 'professional' %}
+    She was my supervisor at work. I’ve known her for 3 years.
+  {% else %}
+    She was my course supervisor at university. I’ve known her for a year.
+  {% endif %}
+{% endset %}
+
+
 {% block primary %}
   <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how you know them:</p>
   {{ govukInsetText({
-    text: "He was my course supervisor at university. I’ve known him for a year.",
+    text: relationship,
     classes: " govuk-!-margin-top-0"
   }) }}
 

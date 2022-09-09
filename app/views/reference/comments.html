@@ -21,6 +21,7 @@
 
   <p class="govuk-body">Do not give opinions about {{ candidate_name }}. Your reference should be based on facts such as:</p>
 
+  {% set type = data['referee_type'] %}
   {% if type == 'character' %}
 
     <ul class="govuk-list govuk-list--bullet">
@@ -29,7 +30,7 @@
       <li>activities you’ve done together</li>
     </ul>
 
-  {% elif type == 'professional' %}
+  {% elif type == 'professional' or type == 'school' %}
 
     <ul class="govuk-list govuk-list--bullet">
       <li>the dates they worked with you</li>
@@ -61,11 +62,5 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
-
-  <p class="govuk-body">
-    <a href="/reference/comments?referrer=/reference/review&type=academic">academic</a> |
-    <a href="/reference/comments?referrer=/reference/review&type=professional">professional or school based</a> |
-    <a href="/reference/comments?referrer=/reference/review&type=character">character</a>
-  </p>
 
 {% endblock %}

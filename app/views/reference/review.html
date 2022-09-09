@@ -11,21 +11,19 @@
       You confirmed their description of how you know them.
     {% endset %}
   {% else %}
-    {% set relationshipValue = "You amended this to: " + data.reference.relationship.correction %}
+    {% set relationshipValue = "You said this is how you know them: <br><br>" + data.reference.relationship.correction %}
   {% endif %}
 
   {% if data.reference.safeguarding.concern == "Yes" %}
     {% set safeguardingValue = data.reference.safeguarding.reason %}
   {% else %}
-    {% set safeguardingValue = data.reference.safeguarding.concern %}
+    {% set safeguardingValue = "You have no concerns." %}
   {% endif %}
-
-  <p class="govuk-body">If you're not ready to submit yet, you can return using the link in your email.</p>
 
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "Confirm how you know " + candidate_name | safe
+        text: "How you know them"
       },
       value: {
         text: relationshipValue | safe
@@ -39,7 +37,7 @@
       }
     }, {
       key: {
-        text: "Do you have concerns about " + candidate_name + " working with children?" | safe
+        text: "Concerns about them  working with children" | safe
       },
       value: {
         text: safeguardingValue

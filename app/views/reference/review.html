@@ -2,42 +2,42 @@
 
 {% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Your reference for " + candidate_name %}
+{% set title = "Check your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
 {% block primary %}
   {% if data.reference.relationship.correct == "Yes" %}
-    {% set relationshipValue = "Confirmed by referee" %}
+    {% set relationshipValue %}
+      You confirmed their description of how you know them.
+    {% endset %}
   {% else %}
-    {% set relationshipValue = "Amended by referee to: " + data.reference.relationship.correction %}
+    {% set relationshipValue = "You said this is how you know them: <br><br>" + data.reference.relationship.correction %}
   {% endif %}
 
   {% if data.reference.safeguarding.concern == "Yes" %}
     {% set safeguardingValue = data.reference.safeguarding.reason %}
   {% else %}
-    {% set safeguardingValue = data.reference.safeguarding.concern %}
+    {% set safeguardingValue = "You have no concerns." %}
   {% endif %}
-
-  <p class="govuk-body">If you're not ready to submit yet, you can return using the link in your email.</p>
 
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "Relationship"
+        text: "How you know them"
       },
       value: {
-        text: relationshipValue
+        text: relationshipValue | safe
       },
       actions: {
         items: [{
-          href: "/reference?referrer=/reference/review",
+          href: "/reference/relationship?referrer=/reference/review",
           text: "Change",
           visuallyHiddenText: "relationship to candidate"
         }]
       }
     }, {
       key: {
-        text: "Concerns about candidate working with children"
+        text: "Concerns about them  working with children" | safe
       },
       value: {
         text: safeguardingValue
@@ -54,7 +54,7 @@
         text: "Reference"
       },
       value: {
-        html: data.reference.comments
+        html: (data.reference.comments or "Not entered")
       },
       actions: {
         items: [{

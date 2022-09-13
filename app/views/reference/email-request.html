@@ -1,17 +1,33 @@
 {% extends "_email.html" %}
 
 {% set title = "Teacher training reference needed for Jane Doe" %}
+{% set type = data['referee_type'] %}
 
 {% block content %}
   <p class="govuk-body">Dear Debroah Lueilwitz,</p>
   <p class="govuk-body">Jane Doe has accepted an offer from West Lancashire SCITT for a place on a teacher training course. </p>
   <p class="govuk-body">They’ve said that you can give them a reference. Their place on the course can only be confirmed after West Lancashire SCITT has received their references.</p>
 
-  <p class="govuk-body">If you give a reference you’ll need to say: </p>
+  <p class="govuk-body">If you give a reference for Jane Doe you’ll need to: </p>
 
   <ul class="govuk-list govuk-list--bullet">
-    <li>how you know Jane Doe and how long you’ve known them for</li>
-    <li>whether you have any concerns about Jane Doe working with children</li>
+    <li>confirm how you know them and how long you’ve known them for</li>
+    <li>whether you have any concerns about them working with children</li>
+
+    {% if type == 'character' %}
+
+      <li>give information which can be used to check their application, for example about activities you’ve done together</li>
+
+    {% elif type == 'professional' or type == 'school' %}
+
+      <li>give information which can be used to check their application, for example about their role and responsibilities at work</li>
+
+    {% else %}
+
+      <li>give information which can be used to check their application, for example about their academic performance</li>
+
+    {% endif %}
+
   </ul>
 
 
@@ -24,3 +40,29 @@
   <p class="govuk-body">Your reference will not be sent to Jane Doe.</p>
 
 {% endblock %}
+
+
+{% set type = data['referee_type'] %}
+{% if type == 'character' %}
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>volunteering they’ve done with you</li>
+    <li>mentoring you’ve done for them</li>
+    <li>activities you’ve done together</li>
+  </ul>
+
+{% elif type == 'professional' or type == 'school' %}
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the dates they worked with you</li>
+    <li>their role and responsibilities</li>
+  </ul>
+
+{% else %}
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>their academic performance</li>
+    <li>their predicted grade, if they have not completed their course</li>
+  </ul>
+
+{% endif %}

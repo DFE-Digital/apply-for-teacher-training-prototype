@@ -2,7 +2,7 @@
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Are you sure you are unable to give " + candidate_name + " a reference?" %}
+{% set title = "Are you sure you’re unable to give " + candidate_name + " a reference?" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -17,7 +17,7 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <form action="/reference/thank-you">
         {{ govukButton({
-          text: "Yes, I am unable to give a reference"
+          text: "Yes, I’m unable to give a reference"
         }) }}
       </form>
     </div>

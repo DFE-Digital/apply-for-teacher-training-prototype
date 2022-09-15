@@ -40,9 +40,6 @@
             label: {
               text: gradeLabel
             },
-            hint: {
-              text: "Your expected grade should be confirmed by an academic referee."
-            } if not completed,
             classes: "govuk-input--width-20"
           } | decorateApplicationAttributes(["degree", id, "grade"])) }}
         {% endset %}
@@ -86,9 +83,6 @@
                 classes: "govuk-fieldset__legend--l"
               }
             },
-            hint: {
-              text: "Your expected grade should be confirmed by an academic referee."
-            } if not completed and not international,
             items: [{
               value: "First-class honours",
               text: "First-class honours"

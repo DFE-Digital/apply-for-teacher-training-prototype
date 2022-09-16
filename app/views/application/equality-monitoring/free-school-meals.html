@@ -1,6 +1,6 @@
-{% extends "_form.html" %}
+{% extends "layout.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "If you finished school after 1980, were you eligible for free school meals at any point during your school years?" %}
+{% set title = "Did you receive free school meals at any point during your school years?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -8,24 +8,43 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukRadios({
-    items: [{
-      text: "Yes"
-    }, {
-      text: "No"
-    }, {
-      text: "Not applicable, I finished school before 1980 or went to school overseas"
-    }, {
-      text: "I don't know"
-    }, {
-      divider: "or"
-    }, {
-      text: "Prefer not to say"
-    }]
-  } | decorateApplicationAttributes(["equality-monitoring", "free-school-meals"])) }}
+{% block content %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post" novalidate>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <span class="govuk-caption-l">{{ parent }}</span>
+        <h1 class="govuk-heading-l">Your background</h1>
+
+        <p class="govuk-body">The Department for Education would like to understand how many trainee teachers come from disadvantaged backgrounds. Asking whether or not you received free school meals helps us assess this.</p>
+
+        <p class="govuk-body">This question is not part of your application and your answer will not be shown to training providers.</p>
+
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: title,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            text: "Yes"
+          }, {
+            text: "No"
+          }, {
+            text: "I don’t know"
+          }, {
+            divider: "or"
+          }, {
+            text: "Prefer not to say"
+          }]
+        } | decorateApplicationAttributes(["equality-monitoring", "free-school-meals"])) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </div>
+    </div>
+  </form>
 {% endblock %}

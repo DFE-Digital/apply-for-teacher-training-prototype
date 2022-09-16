@@ -33,15 +33,6 @@
   {% endif %}
 {% endset %}
 
-
-{% set householdEarnerOccupationText %}
-  {% if applicationValue(["equality-monitoring", "household-earner-at-14"]) %}
-    {{ applicationValue(["equality-monitoring", "household-earner-at-14"]) }}
-  {% else %}
-    Not entered
-  {% endif %}
-{% endset %}
-
 {% set freeSchoolMealsText %}
   {% if applicationValue(["equality-monitoring", "free-school-meals"]) %}
     {{ applicationValue(["equality-monitoring", "free-school-meals"]) }}

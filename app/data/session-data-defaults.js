@@ -42,8 +42,8 @@ applicationWithFoundationDegreeOnly.degree = {
 }
 
 const applicationWithReceivedReferences = JSON.parse(JSON.stringify(require('./application')))
-applicationWithReceivedReferences.references.first.status = 'Reference received'
-applicationWithReceivedReferences.references.second.status = 'Reference received'
+applicationWithReceivedReferences.references.first.status = 'Received by training provider'
+applicationWithReceivedReferences.references.second.status = 'Received by training provider'
 applicationWithReceivedReferences.references.third.status = 'Requested'
 
 module.exports = {

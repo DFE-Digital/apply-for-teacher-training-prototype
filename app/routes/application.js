@@ -129,28 +129,28 @@ module.exports = router => {
 
       if (reference.status === 'Requested') {
         // Reset back to not requested yet, as will have to be re-requested.
-        reference.status = 'Not requested yet'
-      } else if (reference.status === 'Cancelled' || reference.status === 'Unable to give a reference') {
+        reference.status = 'Not sent'
+      } else if (reference.status === 'Request cancelled' || reference.status === 'Cannot give reference') {
         // Remove cancelled or declined references
         delete apply2Application.references.referenceId
       }
     }
 
     if (apply2Application.references && apply2Application.references[0]) {
-      if (apply2Application.references[0].status !== 'Reference received') {
-        apply2Application.references[0].status = 'Not requested yet'
+      if (apply2Application.references[0].status !== 'Received by training provider') {
+        apply2Application.references[0].status = 'Not sent'
       }
     }
 
     if (apply2Application.references && apply2Application.references[1]) {
-      if (apply2Application.references[1].status !== 'Reference received') {
-        apply2Application.references[1].status = 'Not requested yet'
+      if (apply2Application.references[1].status !== 'Received by training provider') {
+        apply2Application.references[1].status = 'Not sent'
       }
     }
 
     if (apply2Application.references && apply2Application.references[2]) {
-      if (apply2Application.references[2].status !== 'Received') {
-        apply2Application.references[2].status = 'Not requested yet'
+      if (apply2Application.references[2].status !== 'Received by training provider') {
+        apply2Application.references[2].status = 'Not sent'
       }
     }
 

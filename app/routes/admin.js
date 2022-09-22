@@ -175,13 +175,13 @@ module.exports = router => {
       if (!reference.log) { reference.log = [] }
 
       if (i === 1) {
-        reference.status = 'Reference received'
+        reference.status = 'Received by training provider'
         reference.log.push({ note: 'Reference received', date: timeNow })
       } else if (i === 2) {
-        reference.status = 'Unable to give a reference'
+        reference.status = 'Cannot give reference'
         reference.log.push({ note: 'They said they were unable to give you a reference', date: timeNow })
       } else {
-        reference.status = 'Cancelled'
+        reference.status = 'Request cancelled'
         reference.log.push({ note: 'You cancelled the reference request', date: timeNow })
       }
 

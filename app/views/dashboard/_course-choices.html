@@ -181,7 +181,7 @@
       {% for item in references %}
         {% if item.name %}
           {% set itemText %}
-            <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not requested yet" %}/name{% endif %}">{{ item.name }}</a>
+            <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
 
             {% if item.status == 'Requested' %}
               {% for entry in item.log %}
@@ -198,6 +198,12 @@
                   {% endif %}
                 </p>
               {% endfor %}
+            {% endif %}
+
+            {% if item.status == 'Request failed' %}
+              <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                Email could not be sent - check email address and send again
+              </p>
             {% endif %}
 
 

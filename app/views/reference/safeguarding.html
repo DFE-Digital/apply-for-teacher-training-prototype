@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Do you know of any reason why " + candidate_name + " should not work with children?" %}
+{% set title = "Do you have any concerns about " + candidate_name + " working with children?" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -24,9 +24,13 @@
       name: "reference[safeguarding][reason]",
       value: data.reference.safeguarding.reason,
       label: {
-        text: "Tell us why you think " + candidate_name + " should not work with children"
+        text: "My concerns about " + candidate_name + " working with children"
       },
-      maxwords: 150,
+      hint: {
+        text: "Give facts, not your opinion."
+      },
+      maxwords: 200,
+      threshold: 95,
       rows: 5
     }) }}
   {% endset %}
@@ -35,16 +39,16 @@
     idPrefix: "reference-safeguarding-concern",
     name: "reference[safeguarding][concern]",
     items: [{
-      value: "No",
-      text: "No",
-      checked: checked("reference.safeguarding.concern", "No")
-    }, {
       value: "Yes",
-      text: "Yes",
+      text: "Yes, I have concerns",
       checked: checked("reference.safeguarding.concern", "Yes"),
       conditional: {
         html: safeguardingConcernHtml
       }
+    },{
+      value: "No",
+      text: "No",
+      checked: checked("reference.safeguarding.concern", "No")
     }]
   }) }}
 

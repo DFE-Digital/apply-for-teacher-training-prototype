@@ -2,6 +2,7 @@
 
 {% set formaction = "/reference/answer" %}
 {% set candidate_name = "Jane Doe" %}
+{% set provider_name = "West Lancashire SCITT" %}
 {% set title = "A reference for " + candidate_name + "" %}
 {% set hasAccountLinks = false %}
 
@@ -15,12 +16,18 @@
 
 {% block primary %}
 
+  <h1 class="govuk-heading-l">Give a reference for {{ candidate_name }}</h1>
+
+  <p class="govuk-body">{{ candidate_name }} has accepted an offer from {{ provider_name }} for a place on a teacher training course. They’ve said that you can give them a reference.</p>
+
+  <p class="govuk-body">Your reference will not be sent to {{ candidate_name }}.</p>
+
   {{ govukRadios({
     fieldset: {
       legend: {
         text: "Can you give a reference for " + candidate_name + "?",
-        classes: "govuk-fieldset__legend--l",
-        isPageHeading: true
+        classes: "govuk-fieldset__legend--s",
+        isPageHeading: false
       }
     },
     idPrefix: "reference-answer",

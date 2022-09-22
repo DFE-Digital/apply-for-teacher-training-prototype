@@ -1,20 +1,7 @@
-{% set titleText %}
-  {% if loop.index0 == 0 %}
-    First
-  {% elif loop.index0 == 1 %}
-    Second
-  {% elif loop.index0 == 2 %}
-    Third
-  {% endif %}
-  reference
-{% endset %}
+{% set titleText = item.name %}
 
-{% if item.status == 'Reference received' %}
+{% if item.status == 'Received by training provider' %}
   {% set referenceStatusHtml %}
-    {{ govukTag({
-      text: 'Reference received',
-      classes: item.status | statusClass
-    }) }}
     <p class="govuk-body govuk-!-margin-top-4">{{ item.name }} will not be asked to give you another reference.</p>
 
     <p class="govuk-body">If you accept an offer, your previous reference will be shown to the provider.</p>
@@ -45,7 +32,7 @@
             {
               text: "Change",
               href: "/application/" + applicationId + "/references/" + item.id + "/type"
-            } if item.status == 'Not requested yet'
+            } if item.status == 'Not sent'
           ]
         }
       },
@@ -61,7 +48,7 @@
             {
               text: "Change",
               href: "/application/" + applicationId + "/references/" + item.id + "/name"
-            } if item.status == 'Not requested yet'
+            } if item.status == 'Not sent'
           ]
         }
       },
@@ -77,7 +64,7 @@
             {
               text: "Change",
               href: "/application/" + applicationId + "/references/" + item.id + "/email"
-            } if item.status == 'Not requested yet'
+            } if item.status == 'Not sent'
           ]
         }
       },
@@ -93,7 +80,7 @@
             {
               text: "Change",
               href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
-            } if item.status == 'Not requested yet'
+            } if item.status == 'Not sent'
           ]
         }
       },
@@ -104,7 +91,7 @@
         value: {
           html: referenceStatusHtml
         }
-      } if item.status == 'Reference received'
+      } if item.status == 'Received by training provider'
     ]
   })
   })

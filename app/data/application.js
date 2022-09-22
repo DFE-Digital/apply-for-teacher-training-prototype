@@ -71,7 +71,7 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'joesph.r.bloggs@example.com',
       type: 'Academic',
-      status: 'Not requested yet',
+      status: 'Not sent',
       ready: true,
       log: []
     },
@@ -81,7 +81,7 @@ module.exports = {
       relationship: 'Faith leader who I have known since January 2018',
       email: 'jane.doe@example.com',
       type: 'Character',
-      status: 'Not requested yet',
+      status: 'Not sent',
       nudges: 0,
       log: []
     },
@@ -91,7 +91,7 @@ module.exports = {
       relationship: 'They were my tutor at university from 2011 to 2013',
       email: 'james.m@example.com',
       type: 'Academic',
-      status: 'Not requested yet',
+      status: 'Not sent',
       ready: true,
       nudges: 0,
       log: []

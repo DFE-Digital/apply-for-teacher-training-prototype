@@ -12,7 +12,7 @@ module.exports = router => {
       application.references = {}
     }
 
-    application.references[id] = { status: 'Not requested yet' }
+    application.references[id] = { status: 'Not sent' }
 
     res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
   })

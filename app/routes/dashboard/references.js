@@ -50,7 +50,7 @@ module.exports = router => {
     const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
     const application = utils.applicationData(req)
 
-    application.references[id] = { status: 'Not requested yet' }
+    application.references[id] = { status: 'Not sent' }
 
     res.redirect(`/dashboard/${applicationId}/references/${id}/intro${queryString}`)
   })
@@ -126,7 +126,7 @@ module.exports = router => {
     const application = utils.applicationData(req)
 
     if (decision === 'later') {
-      application.references[id].status = 'Not requested yet'
+      application.references[id].status = 'Not sent'
       application.references[id].pending = true
       res.redirect(referrer || `/dashboard/${applicationId}/references/review`)
     } else {

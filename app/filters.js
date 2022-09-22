@@ -251,15 +251,18 @@ module.exports = (env) => {
         return `${prefix}--orange`
 
       // Reference statuses
+      case 'Not sent':
+        return `${prefix}--blue`
       case 'Requested':
         return `${prefix}--purple`
-      case 'Reference received':
+      case 'Received by training provider':
         return `${prefix}--green`
-      case 'Cancelled':
+      case 'Request cancelled':
         return `${prefix}--orange`
-      case 'Unable to give a reference':
-      case 'Failed':
+      case 'Cannot give reference':
         return `${prefix}--red`
+      case 'Request failed':
+        return `${prefix}--yellow`
     }
   }
 

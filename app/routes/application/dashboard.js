@@ -411,7 +411,7 @@ module.exports = router => {
             log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
           },
           7351: {
-            status: 'Reference received',
+            status: 'Received by training provider',
             name: 'Jane Doe',
             email: 'jane@test.com',
             relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
@@ -422,10 +422,21 @@ module.exports = router => {
             ]
           },
           543636: {
-            status: 'Cancelled',
+            status: 'Request cancelled',
             name: 'Miranda Bishop',
             email: 'mirande@test.com',
             relationship: 'She is my ex-colleague. I’ve known her 10 years',
+            type: 'Character',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Cancelled', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          },
+          235325: {
+            status: 'Request failed',
+            name: 'Phoebe Jones',
+            email: 'phoebe@test.com',
+            relationship: 'She is an ex-colleague. I’ve known her 12 years',
             type: 'Character',
             log: [
               { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },

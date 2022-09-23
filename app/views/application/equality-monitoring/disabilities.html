@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "What disabilities do you have?" %}
+{% set title = "Disabilities and health conditions" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -13,81 +13,70 @@
     {{ govukInput({
       classes: "govuk-!-width-two-thirds",
       label: {
-        text: "Describe your disability (optional)"
+        text: "Your disability or health condition (optional)"
       }
     } | decorateApplicationAttributes(["equality-monitoring", "disabilities-other"])) }}
   {% endset -%}
 
+  <p class="govuk-body">(Some content here to explain how this information will be used, and that it won't be seen by providers making a decision, and possibly reminding candidates that they can go back and add information about interview needs or any other support needed.)</p>
+
   {{ govukCheckboxes({
     fieldset: {
+      legend: {
+        text: "Do you have any of these disabilities or health conditions?",
+        classes: "govuk-fieldset__legend--m"
+      },
       attributes: {
         "data-module": "clear-hidden"
       }
     },
     items: [{
-      text: "Blind",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "Or a serious visual impairment which is not corrected by glasses"
-      }
+      text: "Blindness or a visual impairment not corrected by glasses"
     }, {
-      text: "Deaf",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "Or a serious hearing impairment"
-      }
+      text: "Deafness or a serious hearing impairment"
     }, {
-      text: "Learning difficulty",
-      label: {
-        classes: "govuk-label--s"
-      },
+      text: "A learning difficulty",
       hint: {
         text: "For example, dyslexia, dyspraxia or ADHD"
       }
     }, {
-      text: "Long-standing illness",
-      label: {
-        classes: "govuk-label--s"
-      },
+      text: "A long-term illness",
       hint: {
         text: "For example, cancer, HIV, diabetes, chronic heart disease or epilepsy"
       }
     }, {
-      text: "Mental health condition",
-      label: {
-        classes: "govuk-label--s"
-      },
+      text: "A mental health condition",
       hint: {
         text: "For example, depression, schizophrenia or anxiety disorder"
       }
     }, {
-      text: "Physical disability or mobility issue",
-      label: {
-        classes: "govuk-label--s"
-      },
+      text: "A physical disability or mobility issue",
       hint: {
         text: "For example, impaired use of arms or legs, use of a wheelchair or crutches"
       }
     }, {
-      text: "Social or communication impairment",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "For example Asperger’s, or another autistic spectrum disorder"
-      }
+      text: "An autistic spectrum disorder, or another social or communication impairment"
     }, {
-      text: "Other",
-      label: {
-        classes: "govuk-label--s"
-      },
+      text: "A development condition that you have had since childhood which affects your motor, cognitive, social and emotional skills, speech or language"
+    },
+     {
+      text: "Another disability, health condition, impairment or learning difference",
       conditional: {
         html: otherDisabilityHtml
       }
+    },
+    {
+      divider: "or"
+    },
+    {
+      text: "I do not have a disability or health condition",
+      behaviour: "exclusive"
+    },
+    {
+      divider: "or"
+    }, {
+      text: "Prefer not to say",
+      behaviour: "exclusive"
     }]
   } | decorateApplicationAttributes(["equality-monitoring", "disabilities"])) }}
 

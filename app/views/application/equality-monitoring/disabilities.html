@@ -18,7 +18,13 @@
     } | decorateApplicationAttributes(["equality-monitoring", "disabilities-other"])) }}
   {% endset -%}
 
-  <p class="govuk-body">(Some content here to explain how this information will be used, and that it won't be seen by providers making a decision, and possibly reminding candidates that they can go back and add information about interview needs or any other support needed.)</p>
+  <p class="govuk-body">Training providers will only see your answer if you accept an offer from them.</p>
+
+  <!-- IF they haven’t put anything in the Ask for support if you’re disabled field -->
+  <p class="govuk-body">
+You can <a href="/application/{{ applicationId }}/additional-support" class="govuk-link">ask for support as part of your application</a> if you want to tell training providers about your needs straight away.    </p>
+  <!-- end if -->
+
 
   {{ govukCheckboxes({
     fieldset: {
@@ -54,10 +60,10 @@
     }, {
       text: "Autistic spectrum disorder or a speech and language impairment"
     }, {
-      text: "A condition that you have had since childhood which affects your motor, cognitive, social and emotional skills, speech or language"
+      text: "A condition affecting motor, cognitive, social and emotional skills, speech or language since childhood"
     },
      {
-      text: "Another disability, health condition, impairment or learning difference",
+      text: "Another disability, health condition, impairment or learning difference affecting day to day activities",
       conditional: {
         html: otherDisabilityHtml
       }
@@ -66,7 +72,7 @@
       divider: "or"
     },
     {
-      text: "I do not have a disability or health condition",
+      text: "I do not have any of these disabilities or health conditions",
       behaviour: "exclusive"
     },
     {

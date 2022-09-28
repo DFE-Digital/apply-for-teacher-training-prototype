@@ -141,23 +141,7 @@
     }) }}
   {% endset %}
 
-  {% if item.status == 'Offer accepted'  %}
-
-    {% set taskItems = [] %}
-
-    {% for condition in item.conditions %}
-
-      {% if condition.title != 'References' %}
-        {% set taskItems = taskItems | push({
-          text: condition.title,
-          tag: {
-            classes: condition.status | statusClass,
-            text: condition.status
-          }
-        }) %}
-      {% endif %}
-    {% endfor %}
-
+  {% if item.status == 'Offer accepted' or item.status == 'Offer confirmed'  %}
 
     <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
@@ -236,19 +220,35 @@
       }) }}
     </div>
 
-    <h2 class="govuk-heading-m">Offer conditions</h2>
+    {% if item.conditions | length > 0 %}
+      <h2 class="govuk-heading-m">Offer conditions</h2>
 
-    <p class="govuk-body">
-      Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
-    </p>
+      {% if item.status == 'Offer accepted' %}
+        <p class="govuk-body">
+          Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
+        </p>
+      {% endif %}
 
-    {{ appTaskList({
-      classes: "govuk-!-margin-bottom-5",
-      items: taskItems
-    }) }}
+      {% set taskItems = [] %}
 
+      {% for condition in item.conditions %}
 
+        {% if condition.title != 'References' %}
+          {% set taskItems = taskItems | push({
+            text: condition.title,
+            tag: {
+              classes: condition.status | statusClass,
+              text: condition.status
+            }
+          }) %}
+        {% endif %}
+      {% endfor %}
 
+      {{ appTaskList({
+        classes: "govuk-!-margin-bottom-5",
+        items: taskItems
+      }) }}
+    {% endif %}
 
   {% else %}
 

@@ -184,9 +184,35 @@ module.exports = router => {
           { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
         ]
         break
-      case 'recruited-single':
+      case 'recruited-conditions-met':
         choices.ABCDE.status = 'Offer confirmed'
         choices.ABCDE.rejectedByDefault = false
+        choices.ABCDE.conditions = [
+          { title: 'Fitness to train to teach check', status: 'Met' },
+          { title: 'Disclosure and barring service check', status: 'Met' },
+          { title: 'Achievement of degree with 2:1 or above', status: 'Met' }
+        ]
+        application.references = {
+          '1J4g': {
+            status: 'Received by training provider',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
+          },
+          7351: {
+            status: 'Received by training provider',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' },
+              { note: 'Reference received', date: '2022-06-27T15:36:51.330Z' }
+            ]
+          }
+        }
         break
 
       // Multiple courses applied for
@@ -514,10 +540,30 @@ module.exports = router => {
 
         break
 
-      case 'recruited':
+      case 'recruited-unconditional':
         application.status = 'Offer confirmed'
         choices.ZYXWV.status = 'Offer confirmed'
         application.choices = [choices.ZYXWV]
+        application.references = {
+          '1J4g': {
+            status: 'Requested',
+            name: 'John Bloggs',
+            email: 'john@birmingham.ac.uk',
+            relationship: 'He was my academic tutor. I’ve known him for 3 years.',
+            type: 'Academic',
+            log: [{ note: 'Request sent', date: '2022-06-27T15:36:51.330Z' }]
+          },
+          7351: {
+            status: 'Requested',
+            name: 'Jane Doe',
+            email: 'jane@test.com',
+            relationship: 'I worked with her a Birmingham School. I’ve know her for 2 years.',
+            type: 'Someone you know through experience working in a school',
+            log: [
+              { note: 'Request sent', date: '2022-06-23T15:36:51.330Z' }
+            ]
+          }
+        }
         break
 
       case 'awaiting-apply-again-response':

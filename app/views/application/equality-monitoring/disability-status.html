@@ -1,6 +1,6 @@
-{% extends "_form.html" %}
+{% extends "layout.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "Are you disabled?" %}
+{% set title = "Did you receive free school meals at any point during your school years?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -8,20 +8,55 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukRadios({
-    items: [{
-      text: "Yes"
-    }, {
-      text: "No"
-    }, {
-      divider: "or"
-    }, {
-      text: "Prefer not to say"
-    }]
-  } | decorateApplicationAttributes(["equality-monitoring", "disability-status"])) }}
+{% block content %}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post" novalidate>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <span class="govuk-caption-l">{{ parent }}</span>
+        <h1 class="govuk-heading-l">Disability</h1>
+
+        <p class="govuk-body">Under the Equality Act 2010, a person has a disability 'if they have a physical or mental impairment, and the impairment has a substantial and long-term adverse effect on his or her ability to carry out normal day-to-day activities'. 'Substantial' is defined by the Act as 'more than minor or trivial'. An impairment is considered to have a long term effect if:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>It has lasted for at least 12 months</li>
+          <li>It is likely to last for at least 12 months, or</li>
+          <li>it is likely to last for the rest of the life of the person.</li>
+        </ul>
+
+        <p class="govuk-body">Normal day-to-day activities are not defined in the Act, but in general they are things people do on a regular or daily basis. The definition has a very wide meaning as both work, study and non –work activities are covered e.g. communicating, reading, writing, using a computer as well as washing, walking and getting dressed. 'Normal' means normal for people generally, rather than for a particular individual.</p>
+
+        <p class="govuk-body">Employment case law has highlighted that work activity does not have to be 'day-to-day' but covers activities that are required to participate in professional life e.g. activities used to select individuals for recruitment and promotion.</p>
+
+        <p class="govuk-body">Only serious visual impairments are covered by the Equality Act 2010. For example, a person whose eyesight can be corrected through the use of prescription lenses is not covered by the Act; neither is an inability to distinguish between red and green. The same logic does not apply to hearing aids. If someone needs to wear a hearing aid, then they are likely to be covered by the Act. However, both hearing and visual impairments have to have a substantial adverse effect on the ability to carry out normal day-to-day activities in order for a person to be covered by the Act.</p>
+
+
+        {{ govukRadios({
+          items: [{
+            text: "Yes"
+          }, {
+            text: "No"
+          }, {
+            divider: "or"
+          }, {
+            text: "Prefer not to say"
+          }],
+          fieldset: {
+            legend: {
+              text: "Considering the above, do you have an impairment, health condition or learning difference that has substantial and long-term impact on your ability to carry out normal day-to-day activities?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          }
+        } | decorateApplicationAttributes(["equality-monitoring", "disability-status"])) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+
+      </div>
+    </div>
+  </form>
+
 {% endblock %}

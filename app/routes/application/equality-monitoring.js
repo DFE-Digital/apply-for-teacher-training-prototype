@@ -84,3 +84,4 @@ module.exports = router => {
 
     res.redirect(`${path}?${utils.queryString(req)}`)
   })
+}

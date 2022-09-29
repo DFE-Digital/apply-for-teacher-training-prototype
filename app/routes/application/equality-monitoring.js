@@ -58,10 +58,6 @@ module.exports = router => {
       formaction = `${basePath}/ethnic-group/answer${referrerPath}`
     }
 
-    if (view === 'disability-status') {
-      formaction = `${basePath}/disability-status/answer${referrerPath}`
-    }
-
     if (view === 'ethnic-background') {
       formaction = `${basePath}/free-school-meals${referrerPath}`
     }
@@ -88,20 +84,3 @@ module.exports = router => {
 
     res.redirect(`${path}?${utils.queryString(req)}`)
   })
-
-  // Disability answer branching
-  router.post('/application/:applicationId/equality-monitoring/disability-status/answer', (req, res) => {
-    const { applicationId } = req.params
-    const basePath = `/application/${applicationId}/equality-monitoring`
-    const { referrer } = req.query
-
-    let path
-    if (hasDisclosedDisability(req)) {
-      path = `${basePath}/disabilities`
-    } else {
-      path = referrer || `${basePath}/ethnic-group`
-    }
-
-    res.redirect(`${path}?${utils.queryString(req)}`)
-  })
-}

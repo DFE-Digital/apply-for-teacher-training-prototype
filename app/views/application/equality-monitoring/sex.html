@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "What is your sex?" %}
+{% set title = "Sex" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,21 +9,32 @@
 {% endblock %}
 
 {% block primary %}
-  {{ govukRadios({
-    items: [{
-      text: "Female"
-    }, {
-      text: "Male"
-    }, {
-      text: "Other"
-    }, {
-      divider: "or"
-    }, {
-      text: "Prefer not to say"
-    }]
-  } | decorateApplicationAttributes(["equality-monitoring", "sex"])) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+  <p class="govuk-body">Training providers will not see your answer to this question when deciding whether to offer you a place.</p>
+
+  <p class="govuk-body">Your answer will only be shared with a training provider if you accept an offer from them.</p>
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "What is your sex?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        text: "Female"
+      }, {
+        text: "Male"
+      }, {
+        text: "Other"
+      }, {
+        divider: "or"
+      }, {
+        text: "Prefer not to say"
+      }]
+    } | decorateApplicationAttributes(["equality-monitoring", "sex"])) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
 {% endblock %}

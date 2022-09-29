@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "What is your ethnic group?" %}
+{% set title = "Ethnicity" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,7 +9,18 @@
 {% endblock %}
 
 {% block primary %}
+
+  <p class="govuk-body">Training providers will not see your answer to this question when deciding whether to offer you a place.</p>
+
+  <p class="govuk-body">Your answer will only be shared with a training provider if you accept an offer from them.</p>
+
   {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What is your ethnic group?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [{
       text: "White",
       label: {

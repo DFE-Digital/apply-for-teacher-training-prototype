@@ -10,15 +10,6 @@ const hasDisclosedEthnicity = (req) => {
   }
 }
 
-const hasDisclosedDisability = (req) => {
-  const application = utils.applicationData(req)
-
-  if (application['equality-monitoring'] && application['equality-monitoring']['disability-status']) {
-    const answer = application['equality-monitoring']['disability-status']
-    return answer === 'Yes'
-  }
-}
-
 const questionPaths = (req) => {
   const { applicationId } = req.params
   const basePath = `/application/${applicationId}/equality-monitoring`

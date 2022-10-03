@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Do you have any concerns about " + candidate_name + " working with children?" %}
+{% set title = "Allegations around child safety" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -18,13 +18,16 @@
 {% endblock %}
 
 {% block primary %}
+
+  <p class="govuk-body">If you know of any substantiated allegation involving {{ candidate_name }} and children you should share it.</p>
+
   {% set safeguardingConcernHtml %}
     {{ govukCharacterCount({
       id: "reference-safeguarding-reason",
       name: "reference[safeguarding][reason]",
       value: data.reference.safeguarding.reason,
       label: {
-        text: "My concerns about " + candidate_name + " working with children"
+        text: "What are your concerns about " + candidate_name + " working with children?"
       },
       hint: {
         text: "Give facts, not your opinion."
@@ -36,11 +39,17 @@
   {% endset %}
 
   {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "Do you have anything to share?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     idPrefix: "reference-safeguarding-concern",
     name: "reference[safeguarding][concern]",
     items: [{
       value: "Yes",
-      text: "Yes, I have concerns",
+      text: "Yes",
       checked: checked("reference.safeguarding.concern", "Yes"),
       conditional: {
         html: safeguardingConcernHtml

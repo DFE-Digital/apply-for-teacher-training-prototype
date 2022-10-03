@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "Did you receive free school meals at any point during your school years in the UK?" %}
+{% set title = "Did you ever get free school meals in the UK?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -19,7 +19,7 @@
 
         <p class="govuk-body">Training providers will not see your answer to this question.</p>
 
-        <p class="govuk-body">This question helps the Department for Education understand the financial background of trainee teachers.</p>
+        <p class="govuk-body">This question helps the Department for Education understand the financial background of trainee teachers. This is because free school meals have generally only been available to children from poorer families.</p>
 
         {{ govukRadios({
           fieldset: {
@@ -33,9 +33,9 @@
           }, {
             text: "No"
           }, {
-            text: "I do not know"
-          }, {
             text: "I did not go to school in the UK"
+          }, {
+            text: "I do not know"
           }, {
             divider: "or"
           }, {

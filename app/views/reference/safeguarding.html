@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Allegations around child safety" %}
+{% set title = "Keeping children safe" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -19,7 +19,9 @@
 
 {% block primary %}
 
-  <p class="govuk-body">If you know of any substantiated allegation involving {{ candidate_name }} and children you should share it.</p>
+  <p class="govuk-body">If you worked with {{ candidate_name }} in a setting that involved children...
+
+    If you know of any substantiated allegation involving {{ candidate_name }} and children you should share it.</p>
 
   {% set safeguardingConcernHtml %}
     {{ govukCharacterCount({

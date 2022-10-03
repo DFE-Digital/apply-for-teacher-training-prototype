@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "Did you receive free school meals at any point during your school years?" %}
+{% set title = "Did you receive free school meals at any point during your school years in the UK?" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -34,6 +34,8 @@
             text: "No"
           }, {
             text: "I do not know"
+          }, {
+            text: "I did not go to school in the UK"
           }, {
             divider: "or"
           }, {

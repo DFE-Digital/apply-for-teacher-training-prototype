@@ -32,7 +32,7 @@
 
 
 {% block primary %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described they know you:</p>
+  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
   {{ govukInsetText({
     text: relationship,
     classes: " govuk-!-margin-top-0"
@@ -54,7 +54,7 @@
   {{ govukRadios({
     fieldset: {
       legend: {
-        text: "Is this accurate?",
+        text: "Is this description accurate?",
         classes: "govuk-fieldset__legend--m"
       }
     },
@@ -66,7 +66,7 @@
       checked: checked("reference.relationship.correct", "Yes")
     }, {
       value: "No",
-      text: "No, I’d like to make a change",
+      text: "No, I’d like to give a different description",
       checked: checked("reference.relationship.correct", "No"),
       conditional: {
         html: correctRelationshipHtml

@@ -11,6 +11,7 @@
   <p class="govuk-body">You’ll need to: </p>
 
   <ul class="govuk-list govuk-list--bullet">
+    <li>say whether you have any concerns about them working with children</li>
 
     {% if type == 'character' %}
 
@@ -25,15 +26,14 @@
       <li>give factual information which can be used to check their application, for example about their academic performance</li>
 
     {% endif %}
-    <li>say whether you have any concerns about them working with children</li>
 
   </ul>
 
 
-  <p class="govuk-body">Use this link to give the reference as soon as you can:</p>
+  <p class="govuk-body">Use this link to give the reference or to say you cannot give one:</p>
 
   <p class="govuk-body"><a href="/reference">http://localhost:3000/reference?token=onNYS8Uvzs2nicqd5htb</a></p>
 
-  <p class="govuk-body">If you cannot give a reference, use the link to tell Jane Doe so they can ask someone else. You will then receive no further emails about this.</p>
+  <p class="govuk-body">If you say you cannot give a reference, Jane Doe will know they should ask someone else. You will receive no further emails.</p>
 
 {% endblock %}

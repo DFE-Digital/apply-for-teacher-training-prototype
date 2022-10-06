@@ -1,11 +1,12 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
+{% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
+
 {% if applicationValue(["equality-monitoring", "ethnic-group"]) == "Another ethnic group" %}
   {% set title = "Which of the following best describes your background?" %}
 {% elif applicationValue(["equality-monitoring", "ethnic-group"]) == "Mixed or multiple ethnic groups" %}
   {% set title = "Which of the following best describes your Mixed or Multiple ethnic groups background?" %}
 {% else %}
-  {% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
   {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}
 {% endif %}
 

@@ -10,15 +10,6 @@ const hasDisclosedEthnicity = (req) => {
   }
 }
 
-const hasDisclosedDisability = (req) => {
-  const application = utils.applicationData(req)
-
-  if (application['equality-monitoring'] && application['equality-monitoring']['disability-status']) {
-    const answer = application['equality-monitoring']['disability-status']
-    return answer === 'Yes'
-  }
-}
-
 const questionPaths = (req) => {
   const { applicationId } = req.params
   const basePath = `/application/${applicationId}/equality-monitoring`
@@ -27,8 +18,7 @@ const questionPaths = (req) => {
     basePath,
     `${basePath}/sex`,
     // `${basePath}/sexual-orientation`,
-    `${basePath}/disability-status`,
-    ...(hasDisclosedDisability(req) ? [`${basePath}/disabilities`] : []),
+    `${basePath}/disabilities`,
     `${basePath}/ethnic-group`,
     ...(hasDisclosedEthnicity(req) ? [`${basePath}/ethnic-background`] : []),
     `${basePath}/free-school-meals`,
@@ -59,10 +49,6 @@ module.exports = router => {
       formaction = `${basePath}/ethnic-group/answer${referrerPath}`
     }
 
-    if (view === 'disability-status') {
-      formaction = `${basePath}/disability-status/answer${referrerPath}`
-    }
-
     if (view === 'ethnic-background') {
       formaction = `${basePath}/free-school-meals${referrerPath}`
     }
@@ -85,22 +71,6 @@ module.exports = router => {
       path = `${basePath}/ethnic-background`
     } else {
       path = referrer || `${basePath}/free-school-meals`
-    }
-
-    res.redirect(`${path}?${utils.queryString(req)}`)
-  })
-
-  // Disability answer branching
-  router.post('/application/:applicationId/equality-monitoring/disability-status/answer', (req, res) => {
-    const { applicationId } = req.params
-    const basePath = `/application/${applicationId}/equality-monitoring`
-    const { referrer } = req.query
-
-    let path
-    if (hasDisclosedDisability(req)) {
-      path = `${basePath}/disabilities`
-    } else {
-      path = referrer || `${basePath}/ethnic-group`
     }
 
     res.redirect(`${path}?${utils.queryString(req)}`)

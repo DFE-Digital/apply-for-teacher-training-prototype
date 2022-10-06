@@ -1,9 +1,12 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
+{% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
+
 {% if applicationValue(["equality-monitoring", "ethnic-group"]) == "Another ethnic group" %}
-  {% set title = "Which of the following best describes your ethnicity?" %}
+  {% set title = "Which of the following best describes your background?" %}
+{% elif applicationValue(["equality-monitoring", "ethnic-group"]) == "Mixed or multiple ethnic groups" %}
+  {% set title = "Which of the following best describes your Mixed or Multiple ethnic groups background?" %}
 {% else %}
-  {% set ethnicGroup = applicationValue(["equality-monitoring", "ethnic-group"]) %}
   {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}
 {% endif %}
 
@@ -14,47 +17,11 @@
 {% endblock %}
 
 {% block primary %}
-  {% set asianOtherHtml %}
+  {% set otherHtml %}
     {{ govukInput({
       classes: "govuk-!-width-two-thirds",
       label: {
-        text: "Your Asian background (optional)"
-      }
-    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
-  {% endset -%}
-
-  {% set blackOtherHtml %}
-    {{ govukInput({
-      classes: "govuk-!-width-two-thirds",
-      label: {
-        text: "Your Black background (optional)"
-      }
-    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
-  {% endset -%}
-
-  {% set mixedOtherHtml %}
-    {{ govukInput({
-      classes: "govuk-!-width-two-thirds",
-      label: {
-        text: "Your Mixed background (optional)"
-      }
-    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
-  {% endset -%}
-
-  {% set whiteOtherHtml %}
-    {{ govukInput({
-      classes: "govuk-!-width-two-thirds",
-      label: {
-        text: "Your White background (optional)"
-      }
-    } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
-  {% endset -%}
-
-  {% set otherOtherHtml %}
-    {{ govukInput({
-      classes: "govuk-!-width-two-thirds",
-      label: {
-        text: "Describe your ethnic background (optional)"
+        text: "How would you describe your background? (optional)"
       }
     } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background-other"])) }}
   {% endset -%}
@@ -67,17 +34,19 @@
         }
       },
       items: [{
+        text: "Indian"
+      },
+      {
+        text: "Pakistani"
+      },
+      {
         text: "Bangladeshi"
       }, {
         text: "Chinese"
       }, {
-        text: "Indian"
-      }, {
-        text: "Pakistani"
-      }, {
-        text: "Another Asian background",
+        text: "Any other Asian background",
         conditional: {
-          html: asianOtherHtml
+          html: otherHtml
         }
       }, {
         divider: "or"
@@ -85,7 +54,7 @@
         text: "Prefer not to say"
       }]
     } | decorateApplicationAttributes(["equality-monitoring", "ethnic-background"])) }}
-  {% elif ethnicGroup == "Black, African, Black British or Caribbean" %}
+  {% elif ethnicGroup == "Black, African, Caribbean or Black British" %}
     {{ govukRadios({
       fieldset: {
         attributes: {
@@ -97,9 +66,9 @@
       }, {
         text: "Caribbean"
       }, {
-        text: "Another Black background",
+        text: "Any other Black, African or Caribbean background",
         conditional: {
-          html: blackOtherHtml
+          html: otherHtml
         }
       }, {
         divider: "or"
@@ -115,15 +84,15 @@
         }
       },
       items: [{
-        text: "Asian and White"
+        text: "White and Black Caribbean"
       }, {
-        text: "Black African and White"
+        text: "White and Black African"
       }, {
-        text: "Black Caribbean and White"
+        text: "White and Asian"
       }, {
-        text: "Another Mixed background",
+        text: "Any other Mixed or Multiple ethnic background",
         conditional: {
-          html: mixedOtherHtml
+          html: otherHtml
         }
       }, {
         divider: "or"
@@ -139,15 +108,17 @@
         }
       },
       items: [{
-        text: "British, English, Northern Irish, Scottish, or Welsh"
+        text: "English, Welsh, Scottish, Northern Irish or British"
       }, {
         text: "Irish"
       }, {
-        text: "Irish Traveller or Gypsy"
+        text: "Gypsy or Irish Traveller"
       }, {
-        text: "Another White background",
+        text: "Roma"
+      }, {
+        text: "Any other White background",
         conditional: {
-          html: whiteOtherHtml
+          html: otherHtml
         }
       }, {
         divider: "or"
@@ -165,9 +136,9 @@
       items: [{
         text: "Arab"
       }, {
-        text: "Another ethnic background",
+        text: "Any other ethnic group",
         conditional: {
-          html: otherOtherHtml
+          html: otherHtml
         }
       }, {
         divider: "or"

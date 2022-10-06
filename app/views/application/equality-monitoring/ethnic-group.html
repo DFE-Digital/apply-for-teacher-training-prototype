@@ -1,6 +1,6 @@
 {% extends "_form.html" %}
 {% set parent = "Equality and diversity questions" %}
-{% set title = "What is your ethnic group?" %}
+{% set title = "Ethnicity" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -9,8 +9,35 @@
 {% endblock %}
 
 {% block primary %}
+
+  <p class="govuk-body">Training providers will not see your answer to this question when deciding whether to offer you a place.</p>
+
+  <p class="govuk-body">They will only see your answer if you accept an offer from them.</p>
+
   {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: "What is your ethnic group?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
     items: [{
+      text: "White",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any White background"
+      }
+    },{
+      text: "Mixed or multiple ethnic groups",
+      label: {
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Includes any Mixed background"
+      }
+    },{
       text: "Asian or Asian British",
       label: {
         classes: "govuk-label--s"
@@ -19,28 +46,12 @@
         text: "Includes any Asian background, for example, Bangladeshi, Chinese, Indian, Pakistani"
       }
     }, {
-      text: "Black, African, Black British or Caribbean",
+      text: "Black, African, Caribbean or Black British",
       label: {
         classes: "govuk-label--s"
       },
       hint: {
         text: "Includes any Black background"
-      }
-    }, {
-      text: "Mixed or multiple ethnic groups",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "Includes any Mixed background"
-      }
-    }, {
-      text: "White",
-      label: {
-        classes: "govuk-label--s"
-      },
-      hint: {
-        text: "Includes any White background"
       }
     }, {
       text: "Another ethnic group",

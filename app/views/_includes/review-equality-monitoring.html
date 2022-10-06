@@ -1,20 +1,13 @@
 {% set path = "/application/" + applicationId + "/equality-monitoring/" %}
 
 {% set disabilityText %}
-  {% if applicationValue(["equality-monitoring", "disability-status"]) == "Yes" %}
-    {{ applicationValue(["equality-monitoring", "disability-status"]) }}
-    {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) | split %}
-    {% if disabilities.length >= 1 %}
-      ({%- for disability in disabilities -%}
-        {{ (" and " if loop.last else ", ") if not loop.first }}{%- if disability == "Other" %}
-          {{ applicationValue(["equality-monitoring", "disabilities-other"]) }}
-        {%- else -%}
-          {{ disability }}
-        {%- endif -%}
-      {%- endfor -%})
-    {% endif %}
-  {% elif applicationValue(["equality-monitoring", "disability-status"]) %}
-    {{ applicationValue(["equality-monitoring", "disability-status"]) }}
+  {% set disabilities = applicationValue(["equality-monitoring", "disabilities"]) | split %}
+  {% if disabilities.length >= 1 %}
+    <ul class="govuk-list">
+      {%- for disability in disabilities -%}
+        <li>{{ disability }}</li>
+      {%- endfor -%}
+    </ul>
   {% else %}
     Not entered
   {% endif %}
@@ -22,10 +15,9 @@
 
 {% set ethnicGroupText %}
   {% if applicationValue(["equality-monitoring", "ethnic-group"]) %}
-    {{ applicationValue(["equality-monitoring", "ethnic-group"]) }}
     {% if applicationValue(["equality-monitoring", "ethnic-group"]) != "Prefer not to say" %}
       {% if applicationValue(["equality-monitoring", "ethnic-background"]) != "Prefer not to say" %}
-        ({{ applicationValue(["equality-monitoring", "ethnic-background-other"]) or applicationValue(["equality-monitoring", "ethnic-background"]) }})
+        {{ applicationValue(["equality-monitoring", "ethnic-background-other"]) or applicationValue(["equality-monitoring", "ethnic-background"]) }}
       {% endif %}
     {% endif %}
   {% else %}
@@ -34,10 +26,14 @@
 {% endset %}
 
 {% set freeSchoolMealsText %}
-  {% if applicationValue(["equality-monitoring", "free-school-meals"]) %}
-    {{ applicationValue(["equality-monitoring", "free-school-meals"]) }}
+  {% if applicationValue(["equality-monitoring", "free-school-meals"]) == "Yes" %}
+    I received free school meals at some point during my school years
+  {% elif applicationValue(["equality-monitoring", "free-school-meals"]) == "No" %}
+    I did not receive free school meals at any point during my school years
+  {% elif applicationValue(["equality-monitoring", "free-school-meals"]) == "I do not know" %}
+    I do not know whether I received free school meals at any point during my school years
   {% else %}
-    Not entered
+    {{ applicationValue(["equality-monitoring", "free-school-meals"]) }}
   {% endif %}
 {% endset %}
 
@@ -58,14 +54,14 @@
     }
   }, {
     key: {
-      text: "Disability"
+      text: "Disabilities or health conditions"
     },
     value: {
       text: disabilityText | safe
     },
     actions: {
       items: [{
-        href: path + "disability-status?referrer=" + referrer,
+        href: path + "disabilities?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "disability status"
       }]
@@ -86,21 +82,7 @@
     }
   }, {
     key: {
-      text: "Occupation of your main household earner when you were about 14 years old"
-    },
-    value: {
-      text: householdEarnerOccupationText
-    },
-    actions: {
-      items: [{
-        href: path + "household-earner-occupation-at-14?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "occupation of your main household earner when you were about 14 years old?"
-      }]
-    }
-  }, {
-    key: {
-      text: "Eligibility for free school meals"
+      text: "Free school meals"
     },
     value: {
       text: freeSchoolMealsText

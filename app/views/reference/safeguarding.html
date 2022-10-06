@@ -19,9 +19,11 @@
 
 {% block primary %}
 
-  <p class="govuk-body">If you worked with {{ candidate_name }} in a setting that involved children...
+  <p class="govuk-body">If you worked with {{ candidate_name }} in a setting that involved children...</p>
 
-    If you know of any substantiated allegation involving {{ candidate_name }} and children you should share it.</p>
+  <p class="govuk-body">If you know of any substantiated allegation, for example...</p>
+
+  <p class="govuk-body">Something about being obliged to share information?</p>
 
   {% set safeguardingConcernHtml %}
     {{ govukCharacterCount({
@@ -51,14 +53,18 @@
     name: "reference[safeguarding][concern]",
     items: [{
       value: "Yes",
-      text: "Yes",
+      text: "Yes, I have something to share",
       checked: checked("reference.safeguarding.concern", "Yes"),
       conditional: {
         html: safeguardingConcernHtml
       }
     },{
       value: "No",
-      text: "No",
+      text: "I have no concerns",
+      checked: checked("reference.safeguarding.concern", "No")
+    },{
+      value: "No",
+      text: "I did not work with them in a setting involving children",
       checked: checked("reference.safeguarding.concern", "No")
     }]
   }) }}

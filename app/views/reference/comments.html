@@ -19,7 +19,7 @@
 
 {% block primary %}
 
-  <p class="govuk-body">Your reference should contain factual information, not opinions.</p>
+  <p class="govuk-body">Your reference should contain facts, not your opinions.</p>
 
   <p class="govuk-body">You could include:</p>
 
@@ -27,15 +27,14 @@
   {% if type == 'character' %}
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>volunteering they’ve done with you</li>
-      <li>mentoring you’ve done for them</li>
-      <li>activities you’ve done together</li>
+      <li>details of how you know Jane Doe</li>
+      <li>things they’ve done or you’ve done together</li>
     </ul>
 
   {% elif type == 'professional' or type == 'school' %}
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>the dates they worked with you</li>
+      <li>when they worked with you</li>
       <li>their role and responsibilities</li>
     </ul>
 

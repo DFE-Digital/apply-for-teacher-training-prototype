@@ -17,7 +17,7 @@
   {% if data.reference.safeguarding.concern == "Yes" %}
     {% set safeguardingValue = data.reference.safeguarding.reason %}
   {% else %}
-    {% set safeguardingValue = "You do not know of any reason why they should not work with children." %}
+    {% set safeguardingValue = "You do not know any reason why they should not work with children." %}
   {% endif %}
 
   {{ govukSummaryList({

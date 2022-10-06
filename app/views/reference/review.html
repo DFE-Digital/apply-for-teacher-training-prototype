@@ -17,7 +17,7 @@
   {% if data.reference.safeguarding.concern == "Yes" %}
     {% set safeguardingValue = data.reference.safeguarding.reason %}
   {% else %}
-    {% set safeguardingValue = "You have no concerns." %}
+    {% set safeguardingValue = "You do not know of any reason why they should not work with children." %}
   {% endif %}
 
   {{ govukSummaryList({
@@ -37,7 +37,7 @@
       }
     }, {
       key: {
-        text: "Concerns about them  working with children" | safe
+        text: "Working with children" | safe
       },
       value: {
         text: safeguardingValue

@@ -19,21 +19,22 @@
 
 {% block primary %}
 
-  <p class="govuk-body">West Lancashire SCITT  will use your reference to check the details in Jane Doe’s application. You could include information such as:</p>
+  <p class="govuk-body">Your reference should contain facts, not your opinions.</p>
+
+  <p class="govuk-body">You could include:</p>
 
   {% set type = data['referee_type'] %}
   {% if type == 'character' %}
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>volunteering they’ve done with you</li>
-      <li>mentoring you’ve done for them</li>
-      <li>activities you’ve done together</li>
+      <li>details of how you know Jane Doe</li>
+      <li>things they’ve done or you’ve done together</li>
     </ul>
 
   {% elif type == 'professional' or type == 'school' %}
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>the dates they worked with you</li>
+      <li>when they worked with you</li>
       <li>their role and responsibilities</li>
     </ul>
 
@@ -41,7 +42,7 @@
 
     <ul class="govuk-list govuk-list--bullet">
       <li>when their course started and ended</li>
-      <li>their academic performance</li>
+      <li>their academic record</li>
     </ul>
 
   {% endif %}
@@ -55,7 +56,7 @@
       classes: "govuk-label--m govuk-!-margin-top-6"
     },
     maxwords: 500,
-    threshold: 95,
+    threshold: 50,
     rows: 6
   }) }}
 

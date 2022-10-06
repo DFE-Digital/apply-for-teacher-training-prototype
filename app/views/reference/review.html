@@ -6,24 +6,44 @@
 {% set hasAccountLinks = false %}
 
 {% block primary %}
+
+  {% set type = data['referee_type'] %}
+  {% set relationship %}
+    {% if type == 'character' %}
+      She is my mentor. I’ve known her for 4 years.
+    {% elif type == 'school' %}
+      She is the headteacher at the school I work at. I’ve known her for 2 years.
+    {% elif type == 'professional' %}
+      She was my supervisor at work. I’ve known her for 3 years.
+    {% else %}
+      She was my course supervisor at university. I’ve known her for a year.
+    {% endif %}
+  {% endset %}
+
+
   {% if data.reference.relationship.correct == "Yes" %}
     {% set relationshipValue %}
-      You confirmed their description of how you know them.
+      You confirmed their description of how they know you:<br><br>
+
+      {{ relationship }}
+
     {% endset %}
   {% else %}
-    {% set relationshipValue = "You said this is how you know them: <br><br>" + data.reference.relationship.correction %}
+    {% set relationshipValue = "You gave this description of how you know them: <br><br>" + data.reference.relationship.correction %}
   {% endif %}
 
   {% if data.reference.safeguarding.concern == "Yes" %}
     {% set safeguardingValue = data.reference.safeguarding.reason %}
   {% else %}
-    {% set safeguardingValue = "You have no concerns." %}
+    {% set safeguardingValue = "You do not know any reason why they should not work with children." %}
   {% endif %}
+
+
 
   {{ govukSummaryList({
     rows: [{
       key: {
-        text: "How you know them"
+        text: ("How they know you" if data.reference.relationship.correct == "Yes" else "How you know them")
       },
       value: {
         text: relationshipValue | safe
@@ -37,7 +57,7 @@
       }
     }, {
       key: {
-        text: "Concerns about them  working with children" | safe
+        text: "Working with children" | safe
       },
       value: {
         text: safeguardingValue

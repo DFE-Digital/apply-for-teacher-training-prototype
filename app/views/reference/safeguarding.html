@@ -2,7 +2,7 @@
 
 {% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
-{% set title = "Do you have any concerns about " + candidate_name + " working with children?" %}
+{% set title = "Do you know any reason why " + candidate_name + " should not work with children?" %}
 {% set hasAccountLinks = false %}
 
 {% block pageNavigation %}
@@ -24,7 +24,7 @@
       name: "reference[safeguarding][reason]",
       value: data.reference.safeguarding.reason,
       label: {
-        text: "My concerns about " + candidate_name + " working with children"
+        text: "Why " + candidate_name + " should not work with children"
       },
       hint: {
         text: "Give facts, not your opinion."
@@ -40,7 +40,7 @@
     name: "reference[safeguarding][concern]",
     items: [{
       value: "Yes",
-      text: "Yes, I have concerns",
+      text: "Yes, I know a reason why they should not work with children",
       checked: checked("reference.safeguarding.concern", "Yes"),
       conditional: {
         html: safeguardingConcernHtml

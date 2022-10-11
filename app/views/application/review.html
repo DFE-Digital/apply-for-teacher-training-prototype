@@ -116,7 +116,37 @@
     {% include "_includes/review/safeguarding.html" %}
   </section>
 
-  {{ govukButton({
-    text: "Continue"
-  }) if not closed }}
+  {% set dateToday = "_" | dateNow | date %}
+  {% set canSubmit = true %}
+  {% set cannotSubmitReasons = [] %}
+
+  {% set choices = applicationValue("choices") | toArray %}
+  {% for choice in choices %}
+    {% set dateCourseOpens = choice.openFrom | date %}
+    {% if dateCourseOpens > dateToday or choice.full == true %}
+      {% set canSubmit = false %}
+      {% set provider = providers[choice.providerCode] %}
+      {% set course = provider.courses[choice.courseCode] %}
+
+      {% if dateCourseOpens > dateToday %}
+        {% set cannotSubmitReasons = cannotSubmitReasons | push(course.name_and_code + " will not open for applications until " + (choice.openFrom | date("DDD"))) %}
+      {% else %}
+        {% set cannotSubmitReasons = cannotSubmitReasons | push(course.name_and_code + " has no vacancies") %}
+      {% endif %}
+
+    {% endif %}
+  {% endfor %}
+
+  {% if canSubmit %}
+    {{ govukButton({
+      text: "Continue"
+    }) if not closed }}
+  {% else %}
+    <p class="govuk-body">You cannot submit this application as:</p>
+    <ul class="govuk-list govuk-list--bullet">
+    {% for reason in cannotSubmitReasons %}
+      <li>{{ reason }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock %}

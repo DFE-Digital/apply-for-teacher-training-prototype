@@ -52,7 +52,7 @@
   {% endset %}
 
   {{ govukInsetText({
-    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0  govuk-!-margin-bottom-1",
     html: qualityOfApplicaitonFeedback
   }) }}
 {% endif %}
@@ -88,7 +88,7 @@
   {% endset %}
 
   {{ govukInsetText({
-    classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+    classes: "app-inset-text--narrow-border govuk-!-margin-top-0  govuk-!-margin-bottom-1",
     html: qualificationsFeedbackHtml | safe
   }) }}
 
@@ -98,7 +98,20 @@
 <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Additional feedback</h4>
 
 {{ govukInsetText({
-  classes: "app-inset-text--narrow-border govuk-!-margin-top-0",
+  classes: "app-inset-text--narrow-border govuk-!-margin-top-0 govuk-!-margin-bottom-1",
   text: item.feedback.additionalFeedback | nl2br | safe
 }) }}
+{% endif %}
+
+{% if item.feedback %}
+  <div class="govuk-button-group app-feedback">
+    <span class="">Is this feedback helpful?</span>
+  <button class="govuk-button govuk-button--secondary govuk-!-margin-left-3" data-feedback="Yes" data-module="govuk-button">
+    Yes
+  </button>
+
+  <button class="govuk-button govuk-button--secondary" data-feedback="No" data-module="govuk-button">
+    No
+  </button>
+</div>
 {% endif %}

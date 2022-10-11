@@ -47,7 +47,7 @@ applicationWithReceivedReferences.references.second.status = 'Received by traini
 applicationWithReceivedReferences.references.third.status = 'Requested'
 
 const dateToday = new Date()
-let dateInOneWeek = dateToday
+const dateInOneWeek = dateToday
 dateInOneWeek.setDate(dateInOneWeek.getDate() + 7)
 
 const applicationWithCourseNotOpenedYet = JSON.parse(JSON.stringify(require('./application')))

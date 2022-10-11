@@ -7,21 +7,19 @@ document.addEventListener('DOMContentLoaded', function () {
   window.GOVUKFrontend.initAll()
 })
 
-
-function setupFeedbackButtons() {
+function setupFeedbackButtons () {
   var feedbackButtons = document.querySelectorAll('*[data-feedback]')
 
   for (feedbackButton of feedbackButtons) {
-    feedbackButton.addEventListener('click', function(event) {
-
+    feedbackButton.addEventListener('click', function (event) {
       var feedbackElement = event.target.parentElement
 
       var feedback = event.target.getAttribute('data-feedback')
 
-      if (feedback == "Yes") {
-        feedbackElement.innerHTML = "You said that this feedback is helpful."
+      if (feedback == 'Yes') {
+        feedbackElement.innerHTML = 'You said that this feedback is helpful.'
       } else {
-        feedbackElement.innerHTML = "You said that this feedback is not helpful."
+        feedbackElement.innerHTML = 'You said that this feedback is not helpful.'
       }
 
       event.preventDefault()
@@ -29,6 +27,6 @@ function setupFeedbackButtons() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   setupFeedbackButtons()
 })

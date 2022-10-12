@@ -96,3 +96,16 @@ $govuk-assets-path: '/govuk/assets/';
 .app-button--link:hover {
   background: transparent;
 }
+
+
+.app-feedback {
+  line-height: 38px;
+}
+
+.app-feedback .govuk-button {
+  margin-bottom: 0;
+}
+
+.app-\!-colour-secondary {
+  color:  $govuk-secondary-text-colour;
+}

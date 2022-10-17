@@ -129,9 +129,9 @@
       {% set course = provider.courses[choice.courseCode] %}
 
       {% if dateCourseOpens > dateToday %}
-        {% set cannotSubmitReasons = cannotSubmitReasons | push(course.name_and_code + " will not open for applications until " + (choice.openFrom | date("DDD"))) %}
+        {% set cannotSubmitReasons = cannotSubmitReasons | push("you can only apply for " + course.name_and_code + " from " + (choice.openFrom | date("DDD"))) %}
       {% else %}
-        {% set cannotSubmitReasons = cannotSubmitReasons | push(course.name_and_code + " has no vacancies") %}
+        {% set cannotSubmitReasons = cannotSubmitReasons | push("there are no places left on the " + course.name_and_code + " course") %}
       {% endif %}
 
     {% endif %}
@@ -142,11 +142,20 @@
       text: "Continue"
     }) if not closed }}
   {% else %}
-    <p class="govuk-body">You cannot submit this application as:</p>
-    <ul class="govuk-list govuk-list--bullet">
-    {% for reason in cannotSubmitReasons %}
-      <li>{{ reason }}</li>
-    {% endfor %}
-    </ul>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if cannotSubmitReasons.length == 1 %}
+        <p class="govuk-body">You cannot submit this application as {{ cannotSubmitReasons[0] }}.</p>
+      {% else %}
+        <p class="govuk-body">You cannot submit this application as:</p>
+        <ul class="govuk-list govuk-list--bullet">
+        {% for reason in cannotSubmitReasons %}
+          <li>{{ reason }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+  </div>
+
+    {% endif %}
   {% endif %}
 {% endblock %}

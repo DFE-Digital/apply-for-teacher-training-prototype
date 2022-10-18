@@ -145,9 +145,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% if cannotSubmitReasons.length == 1 %}
-        <p class="govuk-body">You cannot submit this application as {{ cannotSubmitReasons[0] }}.</p>
+        <p class="govuk-body">You cannot submit this application because {{ cannotSubmitReasons[0] }}.</p>
       {% else %}
-        <p class="govuk-body">You cannot submit this application as:</p>
+        <p class="govuk-body">You cannot submit this application because:</p>
         <ul class="govuk-list govuk-list--bullet">
         {% for reason in cannotSubmitReasons %}
           <li>{{ reason }}</li>
@@ -155,7 +155,6 @@
         </ul>
     </div>
   </div>
-
     {% endif %}
   {% endif %}
 {% endblock %}

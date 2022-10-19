@@ -46,6 +46,14 @@ applicationWithReceivedReferences.references.first.status = 'Received by trainin
 applicationWithReceivedReferences.references.second.status = 'Received by training provider'
 applicationWithReceivedReferences.references.third.status = 'Requested'
 
+const dateToday = new Date()
+const dateInOneWeek = dateToday
+dateInOneWeek.setDate(dateInOneWeek.getDate() + 7)
+
+const applicationWithCourseNotOpenedYet = JSON.parse(JSON.stringify(require('./application')))
+applicationWithCourseNotOpenedYet.choices.ABCDE.openFrom = dateInOneWeek.toISOString()
+applicationWithCourseNotOpenedYet.choices.ZYXWV.full = true
+
 module.exports = {
   applications: {
     12345: require('./application'),
@@ -62,7 +70,8 @@ module.exports = {
     21234: internationalApplicationNoRightToStudyYet,
     52614: applicationWhereNotMeetingMinimiumDegreeRequirement,
     21235: applicationWhereStudyingForGcse,
-    21236: applicationWithNoGcse
+    21236: applicationWithNoGcse,
+    19415: applicationWithCourseNotOpenedYet
   },
   findUrl: 'https://www.find-postgraduate-teacher-training.service.gov.uk',
   flags: {

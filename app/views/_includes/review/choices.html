@@ -31,27 +31,65 @@
       and (item.status != "Application withdrawn")
       and (item.status != "Conditions not met")
       and (item.status != nil)
+      and data.applications[applicationId].status != 'started'
     %}
 
-    {{ appSummaryCard({
-      classes: "govuk-!-margin-bottom-6",
-      headingLevel: 3,
-      titleText: provider.name,
-      actions: {
-        items: [{
-          href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
-          text: "Delete choice"
-        } if canAmend, {
-          href: applicationPath + "/" + item.id + "/withdraw",
-          text: "Withdraw"
-        } if canWithdraw, {
-          href: applicationPath + "/" + item.id + "/view",
-          text: "View and respond to offer"
-        } if canRespond and not hasResponded]
-      } if canAmend or canWithdraw or canRespond,
-      html: courseHtml
-    }) }}
+    {% set courseSummaryCard %}
+      {{ appSummaryCard({
+        classes: "govuk-!-margin-bottom-6",
+        headingLevel: 3,
+        titleText: provider.name,
+        actions: {
+          items: [{
+            href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+            text: "Delete choice"
+          } if canAmend, {
+            href: applicationPath + "/" + item.id + "/withdraw",
+            text: "Withdraw"
+          } if canWithdraw, {
+            href: applicationPath + "/" + item.id + "/view",
+            text: "View and respond to offer"
+          } if canRespond and not hasResponded]
+        } if canAmend or canWithdraw or canRespond,
+        html: courseHtml
+      }) }}
+    {% endset %}
+
+    {% set dateToday = "_" | dateNow | date %}
+    {% set dateCourseOpens = item.openFrom | date %}
+
+    {% if dateCourseOpens > dateToday or item.full == true %}
+      <div class="govuk-inset-text app-inset-text--narrow-border app-inset-text--important govuk-!-padding-top-0 govuk-!-padding-bottom-0">
+        <h2 class="govuk-heading-s app-inset-text__title">
+          {% if dateCourseOpens > dateToday %}
+            You’ll be able to apply for this course from {{ dateCourseOpens | date("DDD") }}
+          {% else %}
+            You cannot apply to this course as there are no places left on it
+          {% endif %}
+        </h2>
+
+          {% if dateCourseOpens > dateToday %}
+            <p class="govuk-body">You need to either:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li class="govuk-body">wait until {{ dateCourseOpens | date("DDD") }} to submit your application</li>
+              <li class="govuk-body">delete or change this course choice</li>
+            </ul>
+          {% else %}
+            <p class="govuk-body">You need to either delete or change this course choice.</p>
+            <p class="govuk-body">{{ provider.name }} may be able to recommend an alternative course.</p>
+          {% endif %}
+
+        {{ courseSummaryCard | safe }}
+      </div>
+    {% else %}
+      {{ courseSummaryCard | safe }}
+    {% endif %}
+
+
+
+
   {% endfor %}
+
 {% else %}
   {% if showIncomplete %}
     {{ appSuggestion({

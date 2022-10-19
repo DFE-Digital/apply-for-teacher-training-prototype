@@ -1,0 +1,19 @@
+{% extends "_form.html" %}
+
+{% set title = "Are you sure you want to delete this course choice?" %}
+{% set formaction = "/application/" + applicationId + "/choices/" + id + "/delete" %}
+{% set backLinkHref = "/application/" + applicationId + "/choices" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: backLinkHref
+  }) }}
+{% endblock %}
+
+{% block primary %}
+  {{ govukButton({
+    text: "Yes I’m sure - delete this course choice",
+    classes: "govuk-button--warning"
+  }) }}
+  <p class="govuk-body"><a href="{{ backLinkHref }}" class="govuk-link">Cancel</a></p>
+{% endblock %}

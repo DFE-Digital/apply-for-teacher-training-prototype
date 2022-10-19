@@ -192,6 +192,22 @@ module.exports = router => {
     }
   })
 
+  router.get('/application/:applicationId/choices/:id/delete', (req, res) => {
+    const { applicationId, id } = req.params
+    res.render('application/choices/delete', {
+      applicationId,
+      id
+    })
+  })
+
+  router.post('/application/:applicationId/choices/:id/delete', (req, res) => {
+    const { applicationId, id } = req.params
+    const application = utils.applicationData(req)
+
+    delete application.choices[id]
+    res.redirect(`/application/${applicationId}/choices`)
+  })
+
   router.all('/application/:applicationId/choices/:choiceId/:view', (req, res) => {
     res.render(`application/choices/${req.params.view}`, {
       paths: pickPaths(req),

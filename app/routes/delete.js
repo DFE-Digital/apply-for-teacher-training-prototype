@@ -28,12 +28,6 @@ module.exports = router => {
     let parent
     let type
     switch (section) {
-      case 'choices': {
-        parent = item.type ? `${item.providerCode} ${item.courseCode}` : 'Course choices'
-        type = 'choice'
-        break
-      }
-
       case 'degree': {
         parent = item.type ? `${item.type} ${item.subject}` : 'Degrees'
         type = 'degree'

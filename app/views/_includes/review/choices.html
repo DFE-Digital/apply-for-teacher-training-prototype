@@ -31,6 +31,7 @@
       and (item.status != "Application withdrawn")
       and (item.status != "Conditions not met")
       and (item.status != nil)
+      and data.applications[applicationId].status != 'started'
     %}
 
     {% set courseSummaryCard %}

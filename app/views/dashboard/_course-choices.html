@@ -98,6 +98,24 @@
     <!--/a-->
   {% endset %}
 
+  {% set skeHtml %}
+    <p class="govuk-body">If you accept this offer, you’ll have to take a 8 or 12 week, 25 hour a week maths course. This is because:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your degree was not in maths</li>
+      <li>you have not used maths for 5 years or more</li>
+    </ul>
+
+    <p class="govuk-body">You’ll need to have completed the course before the teacher training course starts in September 2023.</p>
+
+    <p class="govuk-body">The course will be free and you’ll be paid £175 per week.</p>
+
+    <p class="govuk-body">You can choose any course from <a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link">the list of online and face to face courses</a>.</p>
+
+    <p class="govuk-body">Part time courses are available - these spread the course over a longer period. You’ll be paid the same amount overall, but less per week.</p>
+  {% endset %}
+
+
   {% set summaryBodyHtml %}
     {{ govukSummaryList({
       classes: "govuk-!-margin-bottom-0",
@@ -122,7 +140,15 @@
         value: {
           html: feedbackHtml | safe
         }
-      } if item.feedback, {
+      } if item.feedback,
+      {
+          key: {
+            text: "Study before you start training"
+          },
+          value: {
+            html: skeHtml
+          }
+        } if item.status == 'Offer received', {
         key: {
           text: "Conditions"
         },

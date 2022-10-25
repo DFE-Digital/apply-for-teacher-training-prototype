@@ -18,6 +18,10 @@
 
 {% endset %}
 
+{% set skeHtml %}
+
+{% endset %}
+
 
 {{ govukSummaryList({
   rows: [{
@@ -55,6 +59,13 @@
     },
     value: {
       html: choice.locationName + "<br>" + choice.locationAddress
+    }
+  }, {
+    key: {
+      text: "Subject knowledge enhancment course"
+    },
+    value: {
+      html: skeHtml
     }
   }, {
     key: {

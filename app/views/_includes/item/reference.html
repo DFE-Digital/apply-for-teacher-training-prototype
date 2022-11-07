@@ -2,9 +2,9 @@
 
 {% if item.status == 'Received by training provider' %}
   {% set referenceStatusHtml %}
-    <p class="govuk-body govuk-!-margin-top-4">{{ item.name }} will not be asked to give you another reference.</p>
+    <p class="govuk-body">{{ item.name }} has already given a reference.</p>
 
-    <p class="govuk-body">If you accept an offer, your previous reference will be shown to the provider.</p>
+    <p class="govuk-body">If you accept an offer, the training provider will see the reference.</p>
   {% endset %}
 {% endif %}
 
@@ -86,7 +86,7 @@
       },
       {
         key: {
-          text: 'Status'
+          text: ''
         },
         value: {
           html: referenceStatusHtml

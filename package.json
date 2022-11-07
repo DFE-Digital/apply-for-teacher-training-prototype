@@ -34,7 +34,7 @@
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.2.1",
     "gulp-sass": "^5.0.0",
-    "humanize-duration": "^3.27.1",
+    "humanize-duration": "^3.27.3",
     "inquirer": "^8.2.0",
     "keypather": "^3.1.0",
     "lodash": "^4.17.21",

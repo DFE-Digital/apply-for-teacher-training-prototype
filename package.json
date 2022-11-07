@@ -47,7 +47,7 @@
     "require-dir": "^1.0.0",
     "sass": "^1.52.2",
     "sync-request": "^6.0.0",
-    "universal-analytics": "^0.4.16",
+    "universal-analytics": "^0.5.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
 function setupFeedbackButtons () {
   var feedbackButtons = document.querySelectorAll('*[data-feedback]')
 
-  for (feedbackButton of feedbackButtons) {
+  for (var feedbackButton of feedbackButtons) {
     feedbackButton.addEventListener('click', function (event) {
       var feedbackElement = event.target.parentElement
 
       var feedback = event.target.getAttribute('data-feedback')
 
-      if (feedback == 'Yes') {
+      if (feedback === 'Yes') {
         feedbackElement.innerHTML = 'You said that this feedback is helpful.'
       } else {
         feedbackElement.innerHTML = 'You said that this feedback is not helpful.'

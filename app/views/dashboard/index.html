@@ -1,4 +1,4 @@
-{% extends "_content.html" %}
+{% extends "layout.html" %}
 
 {% set choices = application.choices | toArray %}
 
@@ -19,42 +19,46 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% block beforePrimary %}
-{% if confirmation == "true" %}
-{% include "dashboard/_confirmation_banner.html" %}
-{% endif %}
-  <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
-{% endblock %}
+{% block content %}
 
-{% block primary %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
-  {% if canMakeDecision == true %}
-    {% include "dashboard/_respond-to-offer.html" %}
-  {% elif endedWithoutSuccess == true %}
-    {% if application.cycleDeadlinePassed == true %}
-      {% include "dashboard/_apply-for-next-year.html" %}
-    {% else %}
-      {% include "dashboard/_apply-again.html" %}
+    {% if confirmation == "true" %}
+      {% include "dashboard/_confirmation_banner.html" %}
     {% endif %}
-  {% else %}
-    {% include "dashboard/_guidance.html" %}
-  {% endif %}
 
-  {% include "dashboard/_course-choices.html" %}
+      <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 
-  <!--
-    <h2 class="govuk-heading-m">Updating your contact information</h2>
-    <p class="govuk-body">To update your contact information, email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>
-  -->
+      {% if canMakeDecision == true %}
+        {% include "dashboard/_respond-to-offer.html" %}
+      {% elif endedWithoutSuccess == true %}
+        {% if application.cycleDeadlinePassed == true %}
+          {% include "dashboard/_apply-for-next-year.html" %}
+        {% else %}
+          {% include "dashboard/_apply-again.html" %}
+        {% endif %}
+      {% else %}
+        {% include "dashboard/_guidance.html" %}
+      {% endif %}
 
-  <!-- {% include "dashboard/_previous-applications.html" %} -->
-{% endblock %}
+      {% include "dashboard/_course-choices.html" %}
+
+      <!--
+        <h2 class="govuk-heading-m">Updating your contact information</h2>
+        <p class="govuk-body">To update your contact information, email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>
+      -->
+
+      <!-- {% include "dashboard/_previous-applications.html" %} -->
+    {% endblock %}
 
 
-{% if application.status == 'Offer accepted' %}
-  {% block secondary %}
-    {% set acceptedChoice = choices | first %}
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/dashboard/{{ applicationId }}">View application</a></p>
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
-  {% endblock %}
-{% endif %}
+    {% if application.status == 'Offer accepted' %}
+      {% block secondary %}
+        {% set acceptedChoice = choices | first %}
+        <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/dashboard/{{ applicationId }}">View application</a></p>
+        <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
+      {% endblock %}
+    {% endif %}
+  </div>
+</div>

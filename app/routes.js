@@ -25,6 +25,20 @@ router.get('/find/feedback', (req, res) => {
   })
 })
 
+router.get('/dashboard/select-ske-provider', (req, res) => {
+
+  res.render('dashboard/select-ske-provider.html', {
+
+  })
+})
+
+router.get('/dashboard/confirm-ske-provider', (req, res) => {
+
+  res.render('dashboard/confirm-ske-provider.html', {
+
+  })
+})
+
 require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)

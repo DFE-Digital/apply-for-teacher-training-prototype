@@ -1,0 +1,83 @@
+{% extends "_form.html" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId + "/references/" + id
+  }) }}
+{% endblock %}
+
+{% block primary %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+  <form action="/confirm-ske-provider" method="get">
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: "Which training provider do you want to do your 8 weeks maths course with?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          text: "Leicestershire Secondary SCITT"
+        },
+        {
+          text: "Priory Federation of Academies	"
+        },
+        {
+          text: "University of East London	"
+        },
+        {
+          text: "AAA Eureka MBITT SKE"
+        },
+        {
+          text: "Birmingham City University"
+        },
+        {
+          text: "Bradford College"
+        },
+        {
+          text: "Canterbury Christ Church University"
+        },
+        {
+          text: "Carmel College"
+        },
+        {
+          text: "Delta Academies Trust"
+        },
+        {
+          text: "e-Qualitas"
+        },
+        {
+          text: "Liverpool Hope University"
+        },
+        {
+          text: "Lydiate Learning Trust"
+        },
+        {
+          text: "North East Learning Trust"
+        },
+        {
+          text: "Tes Institute"
+        },
+        {
+          text: "The Polesworth School"
+        },
+        {
+          text: "University of Brighton"
+        },
+        {
+          text: "University of Sussex"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({text: "Select", href: "/dashboard/confirm-ske-provider" })
+    }}
+  </form>
+
+{% endblock %}
+
+

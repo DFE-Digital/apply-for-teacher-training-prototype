@@ -1,43 +1,52 @@
-{% if numberOfOffersReceived == 0 and numberOfChoicesAwaitingDecision > 0 %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-  {% if choices | length > 1 %}
-    <p class="govuk-body">Your applications have been submitted and are with the training providers.</p>
-  {% else %}
-    <p class="govuk-body">Your application has been submitted and is with the training provider.</p>
-  {% endif %}
+    {% if numberOfOffersReceived == 0 and numberOfChoicesAwaitingDecision > 0 %}
 
-  <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+      {% if choices | length > 1 %}
+        <p class="govuk-body">Your applications have been submitted and are with the training providers.</p>
+      {% else %}
+        <p class="govuk-body">Your application has been submitted and is with the training provider.</p>
+      {% endif %}
 
-{% elif numberOfOffersReceived > 0 and numberOfChoicesAwaitingDecision > 0 %}
+      <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
 
-  <p class="govuk-body">{{ "One" if numberOfOffersReceived == 1 else "Two" }} of your training providers has made a decision on your application.</p>
+    {% elif numberOfOffersReceived > 0 and numberOfChoicesAwaitingDecision > 0 %}
 
-  <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+      <p class="govuk-body">{{ "One" if numberOfOffersReceived == 1 else "Two" }} of your training providers has made a decision on your application.</p>
 
-{% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
+      <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
 
-  <p class="govuk-body">
-    You’ve accepted an offer from Portsmouth Teaching School Alliance to study Art (BE434).
-  </p>
-  <p class="govuk-body">
-    Your place will be confirmed once they’ve:
-  </p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>
-      received your references
-    </li>
-    <li>
-      marked your offer conditions as met
-    </li>
-  </ul>
+    {% elif choices | length == 1 and choices[0].status == "Offer accepted" %}
 
-{% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
+      <p class="govuk-body">
+        You’ve accepted an offer from Portsmouth Teaching School Alliance to study Art (BE434).
+      </p>
+      <p class="govuk-body">
+        Your place will be confirmed once they’ve:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          received your references
+        </li>
+        <li>
+          confirmed you’ve completed your 8 weeks course in maths
+        </li>
+        <li>
+          marked your offer conditions as met
+        </li>
+      </ul>
 
-  <p class="govuk-body">You’ve chosen to defer your course.</p>
-  <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
+    {% elif choices | length == 1 and choices[0].status == "Offer deferred" %}
 
-{% elif choices | length == 1 and choices[0].status == "Offer confirmed" %}
+      <p class="govuk-body">You’ve chosen to defer your course.</p>
+      <p class="govuk-body">Before your offer is confirmed, there are some final conditions to meet.</p>
 
-  <p class="govuk-body">You’ve accepted an offer from Portsmouth Teaching School Alliance to study Art (BE434).</p>
+    {% elif choices | length == 1 and choices[0].status == "Offer confirmed" %}
 
-{% endif %}
+      <p class="govuk-body">You’ve accepted an offer from Portsmouth Teaching School Alliance to study Art (BE434).</p>
+
+    {% endif %}
+
+  </div>
+</div>

@@ -169,126 +169,197 @@
 
   {% if item.status == 'Offer accepted' or item.status == 'Offer confirmed'  %}
 
-    <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-    <p class="govuk-body">
+      <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
-      Contact Portsmouth Teaching School Alliance if you need help getting references.
+      <p class="govuk-body">Contact Portsmouth Teaching School Alliance if you need help getting references.</p>
 
-    </p>
+        {% set referenceCondition = {} %}
+        {% for condition in item.conditions %}
+          {% if condition.title == 'References' %}
+            {% set referenceCondition = condition %}
+          {% endif %}
+        {% endfor %}
 
-    {% set referenceCondition = {} %}
-    {% for condition in item.conditions %}
-      {% if condition.title == 'References' %}
-        {% set referenceCondition = condition %}
+          {% set references = applicationValue(["references"]) | toArray %}
+
+          {% set referenceItems = [] %}
+
+          {% for item in references %}
+            {% if item.name %}
+              {% set itemText %}
+                <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
+
+                {% if item.status == 'Requested' %}
+                  {% for entry in item.log %}
+                    <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                      {{ entry.note }} on
+                      {{ entry.date | date("DDD") }}
+
+                      {% if entry.note == 'Request sent' %}
+                        –
+                        {% if referenceCondition.status == 'Pending' %}
+                        <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                        {% endif %}
+                        <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                      {% endif %}
+                    </p>
+                  {% endfor %}
+                {% endif %}
+
+                {% if item.status == 'Request failed' %}
+                  <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                    Email could not be sent - check email address and send again
+                  </p>
+                {% endif %}
+
+
+              {% endset %}
+
+
+              {% set referenceItems = referenceItems | push({
+                text: itemText,
+                tag: {
+                  text: item.status,
+                  classes: item.status | statusClass
+                }
+              }) %}
+            {% endif %}
+          {% endfor %}
+
+
+        {% if references | length > 0 %}
+          {{ appTaskList({
+            items: referenceItems,
+            classes: "govuk-!-margin-bottom-4"
+          }) }}
+        {% endif %}
+
+        <div class="govuk-button-group govuk-!-margin-bottom-6">
+          {{ govukButton({
+            text: "Request another reference",
+            href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+            classes: "govuk-button--secondary"
+          }) }}
+        </div>
+
+        <h2 class="govuk-heading-m">Study before you start training</h2>
+
+
+        {% if data.ske == "started" %}
+
+          {{ appTaskList({
+            classes: "govuk-!-margin-bottom-5",
+            items: [
+              {
+                text: "8 week course in Maths <br><span class=\"govuk-body-s\">You are doing this course with Tes</span>",
+                tag: {
+                  text: "Started",
+                  classes: "govuk-tag--purple"
+                }
+              }
+            ]
+          }) }}
+
+          <p class="govuk-body">Contact Portsmouth Teaching School Alliance if you think you may not finish the course before your teacher training starts.</p>
+
+        {% elif data.ske == "finished" %}
+{{ appTaskList({
+            classes: "govuk-!-margin-bottom-5",
+            items: [
+              {
+                text: "8 week course in Maths",
+                tag: {
+                  text: "Completed",
+                  classes: "govuk-tag--green"
+                }
+              }
+            ]
+          }) }}
+
+        {% else %}
+
+        {{ appTaskList({
+            classes: "govuk-!-margin-bottom-5",
+            items: [
+              {
+                text: "8 week course in Maths",
+                tag: {
+                  text: "Not yet started",
+                  classes: "govuk-tag--blue"
+                }
+              }
+            ]
+          }) }}
+
+
+        <p class="govuk-body">You should start your course as soon as you can to give yourself enough time to finish before your teacher training starts in September 2023.</p>
+
+        <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+
+        <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a provider (opens in a new tab)</a>.</p>
+
+
+        <p class="govuk-body">Contact Portsmouth Teaching School Alliance if you have any questions.</p>
+
+
+
+
+          {{ govukButton({
+            href: "/dashboard/select-ske-provider",
+            text: "Select a training provider",
+            classes: "govuk-button--secondary"
+          }) }}
+      {% endif %}
+
+
+        {% if item.conditions | length > 0 %}
+          <h2 class="govuk-heading-m">Other conditions</h2>
+
+          {% if item.status == 'Offer accepted' %}
+            <p class="govuk-body">
+              Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
+            </p>
+          {% endif %}
+
+          {% set taskItems = [] %}
+
+          {% for condition in item.conditions %}
+
+            {% if condition.title != 'References' %}
+              {% set taskItems = taskItems | push({
+                text: condition.title,
+                tag: {
+                  classes: condition.status | statusClass,
+                  text: condition.status
+                }
+              }) %}
+            {% endif %}
+          {% endfor %}
+
+          {{ appTaskList({
+            classes: "govuk-!-margin-bottom-5",
+            items: taskItems
+          }) }}
+        {% endif %}
+
+      {% else %}
+
+        {{ appSummaryCard({
+          classes: "app-course-choice govuk-!-margin-bottom-6",
+          titleHtml: summaryHeaderHtml,
+          actions: {
+            items: [{
+              href: applicationPath + "/submitted/?referrer=" + referrer,
+              text: "View application"
+            }]
+          },
+          html: summaryBodyHtml
+        }) }}
+
       {% endif %}
     {% endfor %}
-
-      {% set references = applicationValue(["references"]) | toArray %}
-
-      {% set referenceItems = [] %}
-
-      {% for item in references %}
-        {% if item.name %}
-          {% set itemText %}
-            <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
-
-            {% if item.status == 'Requested' %}
-              {% for entry in item.log %}
-                <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
-                  {{ entry.note }} on
-                  {{ entry.date | date("DDD") }}
-
-                  {% if entry.note == 'Request sent' %}
-                    –
-                    {% if referenceCondition.status == 'Pending' %}
-                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
-                    {% endif %}
-                    <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
-                  {% endif %}
-                </p>
-              {% endfor %}
-            {% endif %}
-
-            {% if item.status == 'Request failed' %}
-              <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
-                Email could not be sent - check email address and send again
-              </p>
-            {% endif %}
-
-
-          {% endset %}
-
-
-          {% set referenceItems = referenceItems | push({
-            text: itemText,
-            tag: {
-              text: item.status,
-              classes: item.status | statusClass
-            }
-          }) %}
-        {% endif %}
-      {% endfor %}
-
-
-    {% if references | length > 0 %}
-      {{ appTaskList({
-        items: referenceItems,
-        classes: "govuk-!-margin-bottom-4"
-      }) }}
-    {% endif %}
-
-    <div class="govuk-button-group govuk-!-margin-bottom-6">
-      {{ govukButton({
-        text: "Request another reference",
-        href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
-        classes: "govuk-button--secondary"
-      }) }}
-    </div>
-
-    {% if item.conditions | length > 0 %}
-      <h2 class="govuk-heading-m">Offer conditions</h2>
-
-      {% if item.status == 'Offer accepted' %}
-        <p class="govuk-body">
-          Portsmouth Teaching School Alliance will mark these conditions as met once you’ve completed them.
-        </p>
-      {% endif %}
-
-      {% set taskItems = [] %}
-
-      {% for condition in item.conditions %}
-
-        {% if condition.title != 'References' %}
-          {% set taskItems = taskItems | push({
-            text: condition.title,
-            tag: {
-              classes: condition.status | statusClass,
-              text: condition.status
-            }
-          }) %}
-        {% endif %}
-      {% endfor %}
-
-      {{ appTaskList({
-        classes: "govuk-!-margin-bottom-5",
-        items: taskItems
-      }) }}
-    {% endif %}
-
-  {% else %}
-
-    {{ appSummaryCard({
-      classes: "app-course-choice govuk-!-margin-bottom-6",
-      titleHtml: summaryHeaderHtml,
-      actions: {
-        items: [{
-          href: applicationPath + "/submitted/?referrer=" + referrer,
-          text: "View application"
-        }]
-      },
-      html: summaryBodyHtml
-    }) }}
-
-  {% endif %}
-{% endfor %}
+  </div>
+</div>

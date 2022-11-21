@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layout.html" %}
 
 {% set title = "Details of offer" %}
 {% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
@@ -9,41 +9,51 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
   {% include "_includes/item/offer.html" %}
 
-  <p class="govuk-body">Before you accept:</p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  <ul class="govuk-list govuk-list--bullet">
-    {% if numberOfOffersReceived > 1 %}
-      <li>if you accept this offer, your other {{ "offer" if numberOfOffersReceived == 2 else "offers"}} will be automatically declined</li>
-    {% endif %}
-    <li>if you decline all of your offers, or do not respond in time, you can still apply for courses that start this academic year</li>
-  </ul>
+      <p class="govuk-body">Before you accept:</p>
 
-  <p class="govuk-body">If you need help, you can speak to our <a href="https://beta-adviser-getintoteaching.education.gov.uk" class="govuk-link">teacher training advisers</a>.</p>
+      <ul class="govuk-list govuk-list--bullet">
+        {% if numberOfOffersReceived > 1 %}
+          <li>if you accept this offer, your other {{ "offer" if numberOfOffersReceived == 2 else "offers"}} will be automatically declined</li>
+        {% endif %}
+        <li>if you decline all of your offers, or do not respond in time, you can still apply for courses that start this academic year</li>
+      </ul>
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "How do you want to respond to this offer?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    id: "decision",
-    name: "decision",
-    items: [{
-      value: "accept",
-      hint: "words",
-      text: "Accept offer and conditions"
-    }, {
-      value: "decline",
-      text: "Decline offer"
-    }]
-  }) }}
+      <p class="govuk-body">If you need help, you can speak to our <a href="https://beta-adviser-getintoteaching.education.gov.uk" class="govuk-link">teacher training advisers</a>.</p>
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
-{% endblock %}
+      <form action="{{ formaction }}" method="post" novalidate>
+        {{ govukRadios({
+          fieldset: {
+            classes: "govuk-!-margin-top-6",
+            legend: {
+              text: "How do you want to respond to this offer?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          id: "decision",
+          name: "decision",
+          items: [{
+            value: "accept",
+            hint: "words",
+            text: "Accept offer and conditions"
+          }, {
+            value: "decline",
+            text: "Decline offer"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    {% endblock %}
+  </div>
+</div>

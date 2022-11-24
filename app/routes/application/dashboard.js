@@ -52,11 +52,7 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
           { title: 'Fitness to train to teach check', status: 'Pending' },
-          { title: 'Disclosure and barring service check', status: 'Pending' },
-          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
-          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
-          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
-          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
       case 'offer-received-different-course':

@@ -90,17 +90,6 @@ module.exports = {
       status: 'Not sent',
       nudges: 0,
       log: []
-    },
-    third: {
-      id: 'third',
-      name: 'Jamie Murphy',
-      relationship: 'They were my tutor at university from 2011 to 2013',
-      email: 'james.m@example.com',
-      type: 'Academic',
-      status: 'Not sent',
-      ready: true,
-      nudges: 0,
-      log: []
     }
   },
   candidate: {

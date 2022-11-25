@@ -9,9 +9,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% if applicationStatus %}
-  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
+  {% set referrer = "/accepted/" + applicationId + "/" + applicationStatus %}
 {% else %}
-  {% set referrer = "/dashboard/" + applicationId %}
+  {% set referrer = "/accepted/" + applicationId %}
 {% endif %}
 
 {% set providerName = providers[acceptedChoice.providerCode].name %}
@@ -35,7 +35,7 @@
 
       {% else %}
         <p class="govuk-body">
-          You’ve accepted an offer from {{ providerName }} to study Art (BE434).
+          You’ve accepted an offer from {{ providerName }} to study Mathematics (BE434).
         </p>
       {% endif %}
 
@@ -47,7 +47,7 @@
           received your references
         </li>
         <li>
-          confirmed you’ve completed your 8 week maths course
+          confirmed you’ve completed your 20 week maths course
         </li>
         <li>
           marked your offer conditions as met
@@ -72,7 +72,7 @@
           {% for item in references %}
             {% if item.name %}
               {% set itemText %}
-                <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
+                <a href="/accepted/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
 
                 {% if item.status == 'Requested' %}
                   {% for entry in item.log %}
@@ -83,9 +83,9 @@
                       {% if entry.note == 'Request sent' %}
                         –
                         {% if referenceCondition.status == 'Pending' %}
-                        <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
                         {% endif %}
-                        <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
                       {% endif %}
                     </p>
                   {% endfor %}
@@ -122,7 +122,7 @@
         <div class="govuk-button-group govuk-!-margin-bottom-6">
           {{ govukButton({
             text: "Request another reference",
-            href: "/dashboard/" + applicationId + "/references/add?referrer=" + referrer,
+            href: "/accepted/" + applicationId + "/references/add?referrer=" + referrer,
             classes: "govuk-button--secondary"
           }) }}
         </div>
@@ -130,71 +130,61 @@
 
         <h2 class="govuk-heading-m">Study before you start training</h2>
 
+        {% set skeHtml %}
+          20 week maths course
 
-        {% if data.ske == "started" %}
+          {% if application.skeProvider and application.skeCompleted %}
+            <br><span class="govuk-body-s">You did this course with {{ application.skeProvider }}</span>
+          {% elif application.skeProvider %}
+            <br><span class="govuk-body-s">You’re doing this course with {{ application.skeProvider }}</span>
+          {% endif %}
+        {% endset %}
 
-          {{ appTaskList({
-            classes: "govuk-!-margin-bottom-5",
-            items: [
-              {
-                text: "8 week maths course <br><span class=\"govuk-body-s\">You're doing this course with Tes</span>",
-                tag: {
-                  text: "Started",
-                  classes: "govuk-tag--purple"
-                }
-              }
-            ]
-          }) }}
-
-          <p class="govuk-body">Contact {{ providerName }} if you think you may not finish the course before your teacher training starts.</p>
-
-        {% elif data.ske == "finished" %}
-{{ appTaskList({
-            classes: "govuk-!-margin-bottom-5",
-            items: [
-              {
-                text: "8 week maths course",
-                tag: {
-                  text: "Completed",
-                  classes: "govuk-tag--green"
-                }
-              }
-            ]
-          }) }}
-
+        {% if application.skeCompleted %}
+          {% set skeStatus = "Completed" %}
+          {% set skeStatusClass = "govuk-tag--green" %}
+        {% elif application.skeProvider %}
+          {% set skeStatus = "Started" %}
+          {% set skeStatusClass = "govuk-tag--purple" %}
         {% else %}
-
-        {{ appTaskList({
-            classes: "govuk-!-margin-bottom-5",
-            items: [
-              {
-                text: "8 week maths course",
-                tag: {
-                  text: "Not yet started",
-                  classes: "govuk-tag--blue"
-                }
-              }
-            ]
-          }) }}
+          {% set skeStatus = "Not yet started" %}
+          {% set skeStatusClass = "govuk-tag--blue" %}
         {% endif %}
 
-        <p class="govuk-body">You should start your course as soon as you can to give yourself enough time to finish before your teacher training starts in September 2023.</p>
+        {{ appTaskList({
+          classes: "govuk-!-margin-bottom-5",
+          items: [
+            {
+              text: skeHtml,
+              tag: {
+                text: skeStatus,
+                classes: skeStatusClass
+              }
+            }
+          ]
+        }) }}
 
-        <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+        {% if application.skeCompleted %}
 
-        <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
+        {% elif application.skeProvider %}
+          <p class="govuk-body">Contact {{ providerName }} if you think you may not finish this course before your teacher training starts.</p>
+
+        {% else %}
+          <p class="govuk-body">You should start your course as soon as you can to give yourself enough time to finish before your teacher training starts in September 2023.</p>
+
+          <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+
+          <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
 
 
-        <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
+          <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
 
-
-
-
-          {{ govukButton({
-            href: "/dashboard/select-ske-provider",
-            text: "Select a training provider",
-            classes: "govuk-button--secondary"
-          }) }}
+            {{ govukButton({
+              href: "/accepted/" + applicationId + "/select-ske-provider",
+              text: "Select a training provider",
+              classes: "govuk-button--secondary"
+            }) }}
+        {% endif %}
 
       {% if acceptedChoice.conditions | length > 0 %}
         <h2 class="govuk-heading-m">Other conditions</h2>
@@ -226,7 +216,7 @@
 
   </div>
   <div class="govuk-grid-column-one-third">
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/dashboard/{{ applicationId }}">View application</a></p>
+    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/accepted/{{ applicationId }}">View application</a></p>
     <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
   </div>
 </div>

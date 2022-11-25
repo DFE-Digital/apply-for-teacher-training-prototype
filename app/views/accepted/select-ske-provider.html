@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/dashboard/" + applicationId
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form action="/accepted/{{ applicationId }}/confirm-ske-provider" method="get">
+        {{ govukRadios({
+          name: "skeProvider",
+          fieldset: {
+            legend: {
+              text: "Which training provider do you want to do your 8 week maths course with?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              text: "Leicestershire Secondary SCITT",
+              value: "Leicestershire Secondary SCITT"
+            },
+            {
+              text: "Priory Federation of Academies",
+              value: "Priory Federation of Academies"
+            },
+            {
+              text: "University of East London",
+              value: "University of East London"
+            },
+            {
+              text: "AAA Eureka MBITT SKE",
+              value: "AAA Eureka MBITT SKE"
+            },
+            {
+              text: "Birmingham City University",
+              value: "Birmingham City University"
+            },
+            {
+              text: "Bradford College",
+              value: "Bradford College"
+            },
+            {
+              text: "Canterbury Christ Church University",
+              value: "Canterbury Christ Church University"
+            },
+            {
+              text: "Carmel College",
+              value: "Carmel College"
+            },
+            {
+              text: "Delta Academies Trust",
+              value: "Delta Academies Trust"
+            },
+            {
+              text: "e-Qualitas",
+              value: "e-Qualitas"
+            },
+            {
+              text: "Liverpool Hope University",
+              value: "Liverpool Hope University"
+            },
+            {
+              text: "Lydiate Learning Trust",
+              value: "Lydiate Learning Trust"
+            },
+            {
+              text: "North East Learning Trust",
+              value: "North East Learning Trust"
+            },
+            {
+              text: "Tes Institute",
+              value: "Tes Institute"
+            },
+            {
+              text: "The Polesworth School",
+              value: "The Polesworth School"
+            },
+            {
+              text: "University of Brighton",
+              value: "University of Brighton"
+            },
+            {
+              text: "University of Sussex",
+              value: "University of Sussex"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({text: "Select" })
+        }}
+      </form>
+  </div>
+</div>
+
+{% endblock %}
+
+

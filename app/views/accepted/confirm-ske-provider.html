@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block pageNavigation %}
+  {{ govukBackLink({
+    href: "/accepted/" + applicationId + "/select-ske-provider"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Confirm training provider</h1>
+
+      <p class="govuk-body">You’ve said you want to do your 20 week maths course with {{ data.skeProvider }}.</p>
+
+      <p class="govuk-body">We'll share these details with them:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your name</li>
+        <li>your email address</li>
+        <li>your phone number</li>
+        <li>your degree and A levels</li>
+      </ul>
+
+      <p class="govuk-body">The provider will be in touch about how to complete your course and how they’ll pay you £175 a week.</p>
+
+      <form action="/accepted/{{ applicationId }}/submit-ske-provider" method="post">
+        <input type="hidden" name="skeProvider" value="{{ data.skeProvider}}">
+        {{ govukButton({text: "Continue"}) }}
+      </form>
+  </div>
+</div>
+{% endblock %}
+
+

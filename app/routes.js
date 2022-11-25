@@ -25,17 +25,39 @@ router.get('/find/feedback', (req, res) => {
   })
 })
 
-router.get('/dashboard/select-ske-provider', (req, res) => {
-  res.render('dashboard/select-ske-provider.html', {
+router.get('/accepted/:applicationId/select-ske-provider', (req, res) => {
+  const { applicationId } = req.params
 
+  res.render('accepted/select-ske-provider.html', {
+    applicationId
   })
 })
 
-router.get('/dashboard/confirm-ske-provider', (req, res) => {
-  res.render('dashboard/confirm-ske-provider.html', {
-
+router.get('/accepted/:applicationId/confirm-ske-provider', (req, res) => {
+  const { applicationId } = req.params
+  res.render('accepted/confirm-ske-provider.html', {
+    applicationId
   })
 })
+
+router.get('/accepted/:applicationId/submit-ske-provider', (req, res) => {
+  const { applicationId } = req.params
+  const application = req.session.data.applications[applicationId]
+
+  application.skeProvider = req.session.data.skeProvider
+
+  res.redirect(`/dashboard/${applicationId}`)
+})
+
+router.get('/accepted/:applicationId/complete-ske-course', (req, res) => {
+  const { applicationId } = req.params
+  const application = req.session.data.applications[applicationId]
+
+  application.skeCompleted = true
+
+  res.redirect(`/dashboard/${applicationId}`)
+})
+
 
 require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
@@ -46,7 +68,7 @@ require('./routes/emails')(router)
 require('./routes/send-email')(router)
 require('./routes/survey')(router)
 
-require('./routes/dashboard/references')(router)
+require('./routes/accepted/references')(router)
 
 require('./routes/admin')(router)
 

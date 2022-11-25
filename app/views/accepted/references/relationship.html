@@ -3,7 +3,7 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set title = "How do you know " + referee.name + " and how long have you known them?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/request/" %}
+{% set formaction = referrer or "/accepted/" + applicationId + "/references/" + id + "/request/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -12,7 +12,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/dashboard/" + applicationId + "/references/" + id + "/email/"
+      href: "/accepted/" + applicationId + "/references/" + id + "/email/"
     }) }}
   {% endif %}
 {% endblock %}

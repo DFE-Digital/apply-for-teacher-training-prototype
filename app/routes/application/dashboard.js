@@ -599,9 +599,11 @@ module.exports = router => {
       return choice.status === 'Awaiting decision'
     }).length
 
-    const courseOfferAccepted = utils.toArray(application.choices).filter(function (choice) {
+    const acceptedChoice = utils.toArray(application.choices).find(function (choice) {
       return (choice.status === 'Offer accepted') || (choice.status === 'Offer confirmed') || (choice.status === 'Offer deferred')
-    }).length > 0
+    })
+
+    const courseOfferAccepted = acceptedChoice
 
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
 
@@ -617,16 +619,34 @@ module.exports = router => {
       }
     }
 
-    res.render('dashboard/index', {
-      applicationId,
-      application,
-      canMakeDecision,
-      numberOfOffersReceived,
-      numberOfOffersDeclined,
-      endedWithoutSuccess,
-      numberOfApplicationsWithdrawn,
-      numberOfChoicesAwaitingDecision,
-      confirmation
-    })
+    if (courseOfferAccepted) {
+      res.render('accepted/index', {
+        applicationId,
+        application,
+        acceptedChoice,
+        canMakeDecision,
+        numberOfOffersReceived,
+        numberOfOffersDeclined,
+        endedWithoutSuccess,
+        numberOfApplicationsWithdrawn,
+        numberOfChoicesAwaitingDecision,
+        confirmation
+      })
+
+    } else {
+      res.render('dashboard/index', {
+        applicationId,
+        application,
+        canMakeDecision,
+        numberOfOffersReceived,
+        numberOfOffersDeclined,
+        endedWithoutSuccess,
+        numberOfApplicationsWithdrawn,
+        numberOfChoicesAwaitingDecision,
+        confirmation
+      })
+
+    }
+
   })
 }

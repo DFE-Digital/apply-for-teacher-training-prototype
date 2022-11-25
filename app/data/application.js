@@ -25,17 +25,17 @@ module.exports = {
   },
   choices: {
     ABCDE: {
-      courseCode: '2MH9',
-      providerCode: '1DR',
-      locationName: 'Hillcrest Academy',
-      locationAddress: 'Cowper Street, Leeds. LS7 4DR',
+      courseCode: 'G1X1',
+      providerCode: 'S90',
+      locationName: 'University of Sussex',
+      locationAddress: 'Cowper Street, Sussex, S19 4DR',
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2021-09',
       status: 'Awaiting decision',
       degreeRequired: 'degree',
-      isSalaried: true,
+      isSalaried: false,
       openFrom: '2022-10-11',
       full: false
     },

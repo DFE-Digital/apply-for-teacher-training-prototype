@@ -1,14 +1,3 @@
-.app-course-choice {
-  // background-color: govuk-colour("light-grey");
-  // border: 0 none !important;
-
-  .govuk-summary-list__key {
-    @include govuk-media-query($from: tablet) {
-      width: 20%;
-    }
-  }
-}
-
 .app-course-choice__provider-name {
   @include govuk-font($size: 19, $weight: "bold");
 }

@@ -632,7 +632,6 @@ module.exports = router => {
         numberOfChoicesAwaitingDecision,
         confirmation
       })
-
     } else {
       res.render('dashboard/index', {
         applicationId,
@@ -645,8 +644,6 @@ module.exports = router => {
         numberOfChoicesAwaitingDecision,
         confirmation
       })
-
     }
-
   })
 }

@@ -58,7 +58,6 @@ router.get('/accepted/:applicationId/complete-ske-course', (req, res) => {
   res.redirect(`/dashboard/${applicationId}`)
 })
 
-
 require('./routes/account')(router)
 require('./routes/delete')(router) // Must appear before other routes
 require('./routes/apply')(router)

@@ -4,7 +4,7 @@
 {% set parent = referee.name %}
 {% set title = "Choose a referee" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/dashboard/" + applicationId + "/references/" + id + "/type/" %}
+{% set formaction = "/accepted/" + applicationId + "/references/" + id + "/type/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -13,7 +13,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/dashboard/" + applicationId
+      href: "/accepted/" + applicationId
     }) }}
   {% endif %}
 {% endblock %}

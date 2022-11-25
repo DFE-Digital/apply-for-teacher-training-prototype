@@ -1,0 +1,224 @@
+{% extends "layout.html" %}
+
+{% set title = "Your application" %}
+
+{% set choices = application.choices | toArray %}
+
+
+{% set hasSecondary = true %}
+{% set applicationPath = "/application/" + applicationId %}
+
+{% if applicationStatus %}
+  {% set referrer = "/accepted/" + applicationId + "/" + applicationStatus %}
+{% else %}
+  {% set referrer = "/accepted/" + applicationId %}
+{% endif %}
+
+{% set providerName = providers[acceptedChoice.providerCode].name %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if acceptedChoice.status == "Offer deferred" %}
+
+        <p class="govuk-body">You’ve chosen to defer your course.</p>
+
+      {% else %}
+        <p class="govuk-body">
+          You’ve accepted an offer from {{ providerName }} to study Mathematics (BE434).
+        </p>
+      {% endif %}
+
+      <p class="govuk-body">
+        Your place will be confirmed once they’ve:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          received your references
+        </li>
+        <li>
+          confirmed you’ve completed your 20 week maths course
+        </li>
+        <li>
+          marked your offer conditions as met
+        </li>
+      </ul>
+
+      <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
+
+      <p class="govuk-body">Contact {{ providerName }} if you need help getting references.</p>
+
+      {% set referenceCondition = {} %}
+        {% for condition in item.conditions %}
+          {% if condition.title == 'References' %}
+            {% set referenceCondition = condition %}
+          {% endif %}
+        {% endfor %}
+
+          {% set references = applicationValue(["references"]) | toArray %}
+
+          {% set referenceItems = [] %}
+
+          {% for item in references %}
+            {% if item.name %}
+              {% set itemText %}
+                <a href="/accepted/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
+
+                {% if item.status == 'Requested' %}
+                  {% for entry in item.log %}
+                    <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                      {{ entry.note }} on
+                      {{ entry.date | date("DDD") }}
+
+                      {% if entry.note == 'Request sent' %}
+                        –
+                        {% if referenceCondition.status == 'Pending' %}
+                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                        {% endif %}
+                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                      {% endif %}
+                    </p>
+                  {% endfor %}
+                {% endif %}
+
+                {% if item.status == 'Request failed' %}
+                  <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
+                    Email could not be sent - check email address and send again
+                  </p>
+                {% endif %}
+
+
+              {% endset %}
+
+
+              {% set referenceItems = referenceItems | push({
+                text: itemText,
+                tag: {
+                  text: item.status,
+                  classes: item.status | statusClass
+                }
+              }) %}
+            {% endif %}
+          {% endfor %}
+
+
+        {% if references | length > 0 %}
+          {{ appTaskList({
+            items: referenceItems,
+            classes: "govuk-!-margin-bottom-4"
+          }) }}
+        {% endif %}
+
+        <div class="govuk-button-group govuk-!-margin-bottom-6">
+          {{ govukButton({
+            text: "Request another reference",
+            href: "/accepted/" + applicationId + "/references/add?referrer=" + referrer,
+            classes: "govuk-button--secondary"
+          }) }}
+        </div>
+
+
+        <h2 class="govuk-heading-m">Study before you start training</h2>
+
+        {% set skeHtml %}
+          20 week maths course
+
+          {% if application.skeProvider and application.skeCompleted %}
+            <br><span class="govuk-body-s">You did this course with {{ application.skeProvider }}</span>
+          {% elif application.skeProvider %}
+            <br><span class="govuk-body-s">You’re doing this course with {{ application.skeProvider }}</span>
+          {% endif %}
+        {% endset %}
+
+        {% if application.skeCompleted %}
+          {% set skeStatus = "Completed" %}
+          {% set skeStatusClass = "govuk-tag--green" %}
+        {% elif application.skeProvider %}
+          {% set skeStatus = "Started" %}
+          {% set skeStatusClass = "govuk-tag--purple" %}
+        {% else %}
+          {% set skeStatus = "Not yet started" %}
+          {% set skeStatusClass = "govuk-tag--blue" %}
+        {% endif %}
+
+        {{ appTaskList({
+          classes: "govuk-!-margin-bottom-5",
+          items: [
+            {
+              text: skeHtml,
+              tag: {
+                text: skeStatus,
+                classes: skeStatusClass
+              }
+            }
+          ]
+        }) }}
+
+        {% if application.skeCompleted %}
+
+        {% elif application.skeProvider %}
+          <p class="govuk-body">Contact {{ providerName }} if you think you may not finish this course before your teacher training starts.</p>
+
+        {% else %}
+          <p class="govuk-body">You should start your course as soon as you can to give yourself enough time to finish before your teacher training starts in September 2023.</p>
+
+          <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+
+          <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
+
+
+          <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
+
+            {{ govukButton({
+              href: "/accepted/" + applicationId + "/select-ske-provider",
+              text: "Select a training provider",
+              classes: "govuk-button--secondary"
+            }) }}
+        {% endif %}
+
+      {% if acceptedChoice.conditions | length > 0 %}
+        <h2 class="govuk-heading-m">Other conditions</h2>
+
+          <p class="govuk-body">
+            {{ providerName }} will mark these conditions as met once you’ve completed them.
+          </p>
+
+          {% set taskItems = [] %}
+
+          {% for condition in acceptedChoice.conditions %}
+
+            {% if condition.title != 'References' %}
+              {% set taskItems = taskItems | push({
+                text: condition.title,
+                tag: {
+                  classes: condition.status | statusClass,
+                  text: condition.status
+                }
+              }) %}
+            {% endif %}
+          {% endfor %}
+
+          {{ appTaskList({
+            classes: "govuk-!-margin-bottom-5",
+            items: taskItems
+          }) }}
+        {% endif %}
+
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/accepted/{{ applicationId }}">View application</a></p>
+    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
+  </div>
+</div>
+
+{% endblock %}

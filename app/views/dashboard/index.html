@@ -1,10 +1,8 @@
-{% extends "_content.html" %}
+{% extends "layout.html" %}
 
 {% set choices = application.choices | toArray %}
 
-{% if application.status == 'Offer accepted' %}
-  {% set title = "Your teacher training course" %}
-{% elif choices | length > 1  %}
+{% if choices | length > 1  %}
   {% set title = "Your applications" %}
 {% else %}
   {% set title = "Your application" %}
@@ -19,42 +17,70 @@
   {% set referrer = "/dashboard/" + applicationId %}
 {% endif %}
 
-{% block beforePrimary %}
-{% if confirmation == "true" %}
-{% include "dashboard/_confirmation_banner.html" %}
-{% endif %}
-  <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
-{% endblock %}
+{% block content %}
 
-{% block primary %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  {% if canMakeDecision == true %}
-    {% include "dashboard/_respond-to-offer.html" %}
-  {% elif endedWithoutSuccess == true %}
-    {% if application.cycleDeadlinePassed == true %}
-      {% include "dashboard/_apply-for-next-year.html" %}
-    {% else %}
-      {% include "dashboard/_apply-again.html" %}
+    {% if confirmation == "true" %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Application successfully submitted
+        </h3>
+        <p class="govuk-body"> You will get an email when something changes.</p>
+      {% endset %}
+
+      {{ govukNotificationBanner({
+        html: html,
+        type: 'success'
+      }) }}
     {% endif %}
-  {% else %}
-    {% include "dashboard/_guidance.html" %}
-  {% endif %}
 
-  {% include "dashboard/_course-choices.html" %}
+      <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 
-  <!--
-    <h2 class="govuk-heading-m">Updating your contact information</h2>
-    <p class="govuk-body">To update your contact information, email us at <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher<wbr>@digital.education.gov.uk</a>.</p>
-  -->
+      {% if canMakeDecision == true %}
 
-  <!-- {% include "dashboard/_previous-applications.html" %} -->
-{% endblock %}
+        {% set respondToOfferHtml %}
+          <h2 class="govuk-heading-m">
+            Congratulations on your {{ "offers" if numberOfOffersReceived > 1 else "offer" }}
+          </h2>
+          <p class="govuk-body">You have 14 days (until 4 March 2021) to respond. If you do not respond, your {{ "offers" if numberOfOffersReceived > 1 else "offer" }} will automatically be declined.</p>
+        {% endset %}
+
+        {{ govukInsetText({
+          classes: "govuk-!-margin-top-0",
+          html: respondToOfferHtml
+        }) }}
 
 
-{% if application.status == 'Offer accepted' %}
-  {% block secondary %}
-    {% set acceptedChoice = choices | first %}
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/dashboard/{{ applicationId }}">View application</a></p>
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
-  {% endblock %}
-{% endif %}
+      {% elif endedWithoutSuccess == true %}
+        {% if application.cycleDeadlinePassed == true %}
+          {% include "dashboard/_apply-for-next-year.html" %}
+        {% else %}
+          {% include "dashboard/_apply-again.html" %}
+        {% endif %}
+      {% else %}
+
+        {% if numberOfOffersReceived == 0 and numberOfChoicesAwaitingDecision > 0 %}
+          {% if choices | length > 1 %}
+            <p class="govuk-body">Your applications have been submitted and are with the training providers.</p>
+          {% else %}
+            <p class="govuk-body">Your application has been submitted and is with the training provider.</p>
+          {% endif %}
+
+          <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+
+        {% elif numberOfOffersReceived > 0 and numberOfChoicesAwaitingDecision > 0 %}
+
+          <p class="govuk-body">{{ "One" if numberOfOffersReceived == 1 else "Two" }} of your training providers has made a decision on your application.</p>
+
+          <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+
+        {% endif %}
+      {% endif %}
+
+      {% include "dashboard/_course-choices.html" %}
+    {% endblock %}
+
+  </div>
+</div>

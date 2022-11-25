@@ -44,7 +44,6 @@ applicationWithFoundationDegreeOnly.degree = {
 const applicationWithReceivedReferences = JSON.parse(JSON.stringify(require('./application')))
 applicationWithReceivedReferences.references.first.status = 'Received by training provider'
 applicationWithReceivedReferences.references.second.status = 'Received by training provider'
-applicationWithReceivedReferences.references.third.status = 'Requested'
 
 const dateToday = new Date()
 const dateInOneWeek = dateToday

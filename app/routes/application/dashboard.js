@@ -52,11 +52,7 @@ module.exports = router => {
         choices.ABCDE.rejectedByDefault = false
         choices.ABCDE.conditions = [
           { title: 'Fitness to train to teach check', status: 'Pending' },
-          { title: 'Disclosure and barring service check', status: 'Pending' },
-          { title: 'Achievement of Degree in BA Ballet Education with 2:1 or above', status: 'Pending' },
-          { title: 'Verification of GCSE maths and English certificates', status: 'Pending' },
-          { title: 'Return completed and signed Suitability Declaration.', status: 'Pending' },
-          { title: 'Return completed and signed Fee Status Declaration.', status: 'Pending' }
+          { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
       case 'offer-received-different-course':
@@ -603,9 +599,11 @@ module.exports = router => {
       return choice.status === 'Awaiting decision'
     }).length
 
-    const courseOfferAccepted = utils.toArray(application.choices).filter(function (choice) {
+    const acceptedChoice = utils.toArray(application.choices).find(function (choice) {
       return (choice.status === 'Offer accepted') || (choice.status === 'Offer confirmed') || (choice.status === 'Offer deferred')
-    }).length > 0
+    })
+
+    const courseOfferAccepted = acceptedChoice
 
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
 
@@ -621,16 +619,31 @@ module.exports = router => {
       }
     }
 
-    res.render('dashboard/index', {
-      applicationId,
-      application,
-      canMakeDecision,
-      numberOfOffersReceived,
-      numberOfOffersDeclined,
-      endedWithoutSuccess,
-      numberOfApplicationsWithdrawn,
-      numberOfChoicesAwaitingDecision,
-      confirmation
-    })
+    if (courseOfferAccepted) {
+      res.render('accepted/index', {
+        applicationId,
+        application,
+        acceptedChoice,
+        canMakeDecision,
+        numberOfOffersReceived,
+        numberOfOffersDeclined,
+        endedWithoutSuccess,
+        numberOfApplicationsWithdrawn,
+        numberOfChoicesAwaitingDecision,
+        confirmation
+      })
+    } else {
+      res.render('dashboard/index', {
+        applicationId,
+        application,
+        canMakeDecision,
+        numberOfOffersReceived,
+        numberOfOffersDeclined,
+        endedWithoutSuccess,
+        numberOfApplicationsWithdrawn,
+        numberOfChoicesAwaitingDecision,
+        confirmation
+      })
+    }
   })
 }

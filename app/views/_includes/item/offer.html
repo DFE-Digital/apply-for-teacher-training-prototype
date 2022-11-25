@@ -1,6 +1,15 @@
 {% set conditionsHtml %}
   {% set item = choice %}
-  {% include "dashboard/_course-choice-conditions.html" %}
+
+  {% if item.conditions %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for condition in item.conditions %}
+        <li>{{ condition.title }}</li>
+      {% endfor %}
+    </ul>
+    <p class="govuk-body">Contact the provider to find out more about these conditions.</p>
+    <p class="govuk-body">They’ll confirm your place once you’ve met the conditions and they’ve checked your references.</p>
+  {% endif %}
 {% endset %}
 
 {% set courseFeesHtml %}
@@ -16,6 +25,10 @@
 
   <p class="govuk-body">The PGCE route means that the student can decide whether they wish to pay the additional amount to study for the PGCE.</p>
 
+{% endset %}
+
+{% set skeHtml %}
+  You’ll need to complete a 20&nbsp;week maths course.
 {% endset %}
 
 
@@ -58,7 +71,14 @@
     }
   }, {
     key: {
-      text: "Conditions"
+      text: "Study before you start training"
+    },
+    value: {
+      html: skeHtml
+    }
+  }, {
+    key: {
+      text: "Other conditions"
     },
     value: {
       html: conditionsHtml

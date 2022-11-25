@@ -34,7 +34,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/dashboard/" + applicationId + "/references/" + id
+    href: "/accepted/" + applicationId + "/references/" + id
   }) }}
 {% endblock %}
 
@@ -76,6 +76,6 @@
   }) }}
 
   <!-- {% if action != "retry" %}
-    <p class="govuk-body"><a href="/dashboard/{{ applicationId }}/references/{{ id}}">No - I’ve changed my mind</a></p>
+    <p class="govuk-body"><a href="/accepted/{{ applicationId }}/references/{{ id}}">No - I’ve changed my mind</a></p>
   {% endif %} -->
 {% endblock %}

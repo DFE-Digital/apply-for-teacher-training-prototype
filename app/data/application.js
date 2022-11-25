@@ -25,17 +25,17 @@ module.exports = {
   },
   choices: {
     ABCDE: {
-      courseCode: '2MH9',
-      providerCode: '1DR',
-      locationName: 'Hillcrest Academy',
-      locationAddress: 'Cowper Street, Leeds. LS7 4DR',
+      courseCode: 'G1X1',
+      providerCode: 'S90',
+      locationName: 'University of Sussex',
+      locationAddress: 'Cowper Street, Sussex, S19 4DR',
       studyMode: 'Full time',
       type: 'PGCE with QTS full time',
       length: '1 year',
       starts: '2021-09',
       status: 'Awaiting decision',
       degreeRequired: 'degree',
-      isSalaried: true,
+      isSalaried: false,
       openFrom: '2022-10-11',
       full: false
     },
@@ -88,17 +88,6 @@ module.exports = {
       email: 'jane.doe@example.com',
       type: 'Character',
       status: 'Not sent',
-      nudges: 0,
-      log: []
-    },
-    third: {
-      id: 'third',
-      name: 'Jamie Murphy',
-      relationship: 'They were my tutor at university from 2011 to 2013',
-      email: 'james.m@example.com',
-      type: 'Academic',
-      status: 'Not sent',
-      ready: true,
       nudges: 0,
       log: []
     }

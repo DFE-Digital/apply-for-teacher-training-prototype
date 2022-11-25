@@ -5,7 +5,7 @@
 
 {% block pageNavigation %}
   {{ govukBackLink({
-    href: "/dashboard/" + applicationId
+    href: "/accepted/" + applicationId
   }) }}
 {% endblock %}
 
@@ -103,7 +103,7 @@
     },
     actions: {
       items: [{
-        href: "/dashboard/" + applicationId + "/references/" + item.id + "/relationship?referrer=" + referrer,
+        href: "/accepted/" + applicationId + "/references/" + item.id + "/relationship?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "relationship to referee"
       }]
@@ -129,10 +129,10 @@
   <div class="govuk-button-group">
       {{ govukButton({
         text: "Send a reminder",
-        href: "/dashboard/" + applicationId + "/references/" + item.id + "/action/nudge"
+        href: "/accepted/" + applicationId + "/references/" + item.id + "/action/nudge"
       }) }}
 
-      <a href="/dashboard/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
+      <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
   </div>
   {% endif %}
 

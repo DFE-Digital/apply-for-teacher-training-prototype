@@ -2,7 +2,7 @@
 
 {% set title = "What is the referee’s name?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/dashboard/" + applicationId + "/references/" + id + "/email/" %}
+{% set formaction = referrer or "/accepted/" + applicationId + "/references/" + id + "/email/" %}
 
 {% block pageNavigation %}
   {% if referrer %}
@@ -11,7 +11,7 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/dashboard/" + applicationId + "/references/" + id + "/type/"
+      href: "/accepted/" + applicationId + "/references/" + id + "/type/"
     }) }}
   {% endif %}
 {% endblock %}

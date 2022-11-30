@@ -10,15 +10,24 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+      <h1 class="govuk-heading-l">Selecting a training provider</h1>
+
+      <p class="govuk-body">You can choose which training provider to do your 20 week maths course with.</p>
+
+      <p class="govuk-body">Most are online. Others include face to face learning or a blend of both.</p>
+
+      <p class="govuk-body">Contact University of Sussex if you need advice.</p>
+
+      <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
 
       <form action="/accepted/{{ applicationId }}/confirm-ske-provider" method="get">
         {{ govukRadios({
           name: "skeProvider",
           fieldset: {
             legend: {
-              text: "Which training provider do you want to do your 20 week maths course with?",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--l"
+              text: "Which training provider do you want to do your course with?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
             }
           },
           items: [

@@ -174,15 +174,11 @@
 
           <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
 
-          <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
-
-
           <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
 
             {{ govukButton({
               href: "/accepted/" + applicationId + "/select-ske-provider",
-              text: "Select a training provider",
-              classes: "govuk-button--secondary"
+              text: "Select a training provider"
             }) }}
         {% endif %}
 

@@ -46,12 +46,16 @@
         <li>
           received your references
         </li>
-        <li>
-          confirmed you’ve completed your 20 week maths course
-        </li>
-        <li>
-          marked your offer conditions as met
-        </li>
+        {% if ske %}
+          <li>
+            confirmed you’ve completed your 20 week maths course
+          </li>
+        {% endif %}
+        {% if acceptedChoice.conditions | length > 0 %}
+          <li>
+            marked your offer conditions as met
+          </li>
+        {% endif %}
       </ul>
 
       <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
@@ -127,6 +131,7 @@
           }) }}
         </div>
 
+        {% if ske %}
 
         <h2 class="govuk-heading-m">Study before you start training</h2>
 
@@ -182,6 +187,7 @@
             }) }}
         {% endif %}
 
+      {% endif %}
       {% if acceptedChoice.conditions | length > 0 %}
         <h2 class="govuk-heading-m">Other conditions</h2>
 

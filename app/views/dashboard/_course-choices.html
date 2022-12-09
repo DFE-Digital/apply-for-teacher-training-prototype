@@ -113,6 +113,10 @@
       </ul>
       <p class="govuk-body">Contact the provider to find out more about these conditions.</p>
       <p class="govuk-body">They’ll confirm your place once you’ve met the conditions and they’ve checked your references.</p>
+    {% else %}
+      <p class="govuk-body">Contact the provider to find out more about any conditions.</p>
+      <p class="govuk-body">They’ll confirm your place once you’ve met any conditions and they’ve checked your references.</p>
+
     {% endif %}
   {% endset %}
 
@@ -187,14 +191,14 @@
           value: {
             html: skeHtml
           }
-        } if item.status == 'Offer received', {
+        } if skeCondition, {
         key: {
-          text: "Other conditions"
+          text: "Conditions"
         },
         value: {
           html: conditionsHtml | safe
         }
-      } if item.status != 'Awaiting decision' and item.conditions, {
+      } if item.status != 'Awaiting decision', {
         key: {
           classes: "govuk-visually-hidden",
           text: "Actions"

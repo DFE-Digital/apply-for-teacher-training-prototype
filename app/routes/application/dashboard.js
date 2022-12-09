@@ -55,6 +55,13 @@ module.exports = router => {
           { title: 'Disclosure and barring service check', status: 'Pending' }
         ]
         break
+      case 'offer-received-no-conditions':
+        choices.ABCDE.status = 'Offer received'
+        choices.ABCDE.interview = null
+        choices.ABCDE.feedback = null
+        choices.ABCDE.rejectedByDefault = false
+        choices.ABCDE.conditions = []
+        break
       case 'offer-received-different-course':
         choices.ABCDE.status = 'Offer received'
         choices.ABCDE.offeredCourseId = '3C2X'

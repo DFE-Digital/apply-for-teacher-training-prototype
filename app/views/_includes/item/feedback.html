@@ -27,6 +27,14 @@
 {% endif %}
 {% endif %}
 
+{% if item.feedback.teachingKnowledge %}
+  <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Teaching knowledge and ability</h4>
+  {% if item.feedback.teachingKnowledge.teachingMethod %}
+  <p class="govuk-body">Teaching method knowledge</p>
+  {{item.feedback.teachingKnowledge.teachingMethod}}
+  {% endif %}
+{% endif %}
+
 {% if item.feedback.performanceAtInterview %}
 <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Performance at interview</h4>
 
@@ -75,7 +83,8 @@
     {% endif %}
 
     {% if item.feedback.qualifications.noDegree %}
-      <p class="govuk-body">No degree.</p>
+      <p class="govuk-body">No bachelor’s degree or equivalent.
+</p>
     {% endif %}
 
     {% if item.feedback.qualifications.degreeDoesNotMeetRequirements %}

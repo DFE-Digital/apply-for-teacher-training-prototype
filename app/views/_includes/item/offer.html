@@ -1,7 +1,7 @@
 {% set conditionsHtml %}
   {% set item = choice %}
 
-  {% if item.conditions %}
+  {% if item.conditions | length > 0 %}
     <ul class="govuk-list govuk-list--bullet">
       {% for condition in item.conditions %}
         <li>{{ condition.title }}</li>
@@ -9,6 +9,10 @@
     </ul>
     <p class="govuk-body">Contact the provider to find out more about these conditions.</p>
     <p class="govuk-body">They’ll confirm your place once you’ve met the conditions and they’ve checked your references.</p>
+    {% else %}
+      <p class="govuk-body">Contact the provider to find out more about any conditions.</p>
+      <p class="govuk-body">They’ll confirm your place once you’ve met any conditions and they’ve checked your references.</p>
+
   {% endif %}
 {% endset %}
 
@@ -30,6 +34,8 @@
 {% set skeHtml %}
   You’ll need to complete a 20&nbsp;week maths course.
 {% endset %}
+
+{% set skeCondition = false %}
 
 
 {{ govukSummaryList({
@@ -76,9 +82,9 @@
     value: {
       html: skeHtml
     }
-  }, {
+  } if ske, {
     key: {
-      text: "Other conditions"
+      text: ("Other conditions" if ske else "Conditions")
     },
     value: {
       html: conditionsHtml

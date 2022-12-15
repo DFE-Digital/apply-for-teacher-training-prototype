@@ -612,7 +612,7 @@ module.exports = router => {
 
     const canMakeDecision = (numberOfOffersReceived > 0 && numberOfChoicesAwaitingDecision === 0)
 
-    const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && courseOfferAccepted === false)
+    const endedWithoutSuccess = (numberOfOffersReceived === 0 && numberOfChoicesAwaitingDecision === 0 && !courseOfferAccepted)
 
     if (makeMeAnOffer === 'yes') {
       for (const choiceId in application.choices) {

@@ -337,23 +337,21 @@ module.exports = router => {
       case 'ended-without-success':
         choices.ABCDE.status = 'Unsuccessful'
         choices.ABCDE.feedback = {
-          personalStatement: {
-            qualityOfWriting: 'Contained several spelling mistakes and grammatical errors.\n\nThe candidate should describe the impact they want to have on their students in more detail.',
-            other: 'Candidate was not able to demonstrate sufficient experience of working with children.'
+          qualifications: {
+            noDegree: 'No bachelor’s degree or equivalent'
           }
         }
         choices.FGHIJ.status = 'Unsuccessful'
         choices.FGHIJ.feedback = {
-          personalStatement: {
-            other: 'Your rationale for wanting to teach was strong but your personal statement did not demonstrate that you understand the rewards and challenges of teaching. There were a number of spelling and grammar errors throughout the application.'
-          },
-          additionalFeedback: 'It would also strengthen your application if you could get more experience of working within a primary school. '
+          qualifications: {
+            noDegree: 'No bachelor’s degree or equivalent'
+          }
         }
         choices.ZYXWV.status = 'Unsuccessful'
         choices.ZYXWV.interview = null
         choices.ZYXWV.feedback = {
-          personalStatement: {
-            other: 'Focus more on why teaching is the career for you.'
+          teachingKnowledge: {
+            teachingMethod: 'Did not have adequate teaching skills in their demonstration.'
           }
         }
         break

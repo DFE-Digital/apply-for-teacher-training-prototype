@@ -143,17 +143,17 @@
   {% endset %}
 
   {% set skeHtml %}
-    <p class="govuk-body">If you accept this offer, you’ll have to take a 20&nbsp;week maths course.  This is to help you improve your subject knowledge because your degree subject was not in maths.</p>
+    <p class="govuk-body">If you accept this offer, you’ll have to do a 20&nbsp;week maths SKE course.  This is to help you improve your subject knowledge because your degree subject was not in maths.</p>
 
     <p class="govuk-body">You should complete the course before your teacher training starts in September 2023.</p>
 
-    <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+    <p class="govuk-body">The course will be free and you’ll receive £175 per week. This is usually paid monthly.</p>
 
     <p class="govuk-body">You can choose how you study your course. Courses can be:</p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li>full time (about 25 hours of studying a week)</li>
-      <li>part time</li>
+      <li>part time (the course might take longer than 20 weeks if it's part time)</li>
       <li>online, in person, or a mixture of both</li>
     </ul>
 
@@ -186,7 +186,7 @@
       } if item.feedback,
       {
           key: {
-            text: "Study before you start training"
+            text: "Do a subject knowledge enhancemnet course (SKE) before your training"
           },
           value: {
             html: skeHtml

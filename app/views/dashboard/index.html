@@ -70,13 +70,13 @@
           <p class="govuk-body">You will be emailed when {% if choices | length > 1 %}a provider{% else %}the provider{% endif %} makes a decision.</p>
 
 
-          <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+          <p class="govuk-body">Our <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training advisers</a> can help you prepare for any interviews. Our advisors were teachers and they can give you free, one-to-one support.</p>
 
         {% elif numberOfOffersReceived > 0 and numberOfChoicesAwaitingDecision > 0 %}
 
           <p class="govuk-body">{{ "One" if numberOfOffersReceived == 1 else "Two" }} of your training providers has made a decision on your application.</p>
 
-          <p class="govuk-body">Our <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training advisers</a> can help you prepare for any interviews.</p>
+          <p class="govuk-body">Our <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training advisers</a> can help you prepare for any interviews. Our advisors were teachers and they can give you free, one-to-one support.</p>
 
         {% endif %}
       {% endif %}

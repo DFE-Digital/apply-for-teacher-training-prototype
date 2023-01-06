@@ -18,20 +18,6 @@
 
       {% include "_includes/item/offer.html" %}
 
-      <!-- commented out to match production
-
-      <p class="govuk-body">Before you accept:</p>
-
-      <ul class="govuk-list govuk-list--bullet">
-        {% if numberOfOffersReceived > 1 %}
-          <li>if you accept this offer, your other {{ "offer" if numberOfOffersReceived == 2 else "offers"}} will be automatically declined</li>
-        {% endif %}
-        <li>if you decline all of your offers, or do not respond in time, you can still apply for courses that start this academic year</li>
-      </ul>
-
-      <p class="govuk-body">If you need help, you can speak to our <a href="https://beta-adviser-getintoteaching.education.gov.uk" class="govuk-link">teacher training advisers</a>. Our advisors were teachers and they can give you free, one-to-one support.</p>
-      -->
-
       <form action="{{ formaction }}" method="post" novalidate>
         {{ govukRadios({
           fieldset: {

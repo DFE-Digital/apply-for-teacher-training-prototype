@@ -11,11 +11,9 @@
 
   <p class="govuk-body">If now’s the right time, you can still apply for courses that start this academic year.</p>
 
-  <p class="govuk-body">Here’s what you could do next:</p>
-
   {% set showTrainTeachNoDegree = false %}
   {% set showGetSchoolExperience = false %}
-  
+
   {% for item in choices %}
     {% if item.feedback.qualifications.noDegree %}
       {% set showTrainTeachNoDegree = true %}
@@ -23,19 +21,22 @@
     {% if item.feedback.teachingKnowledge %}
       {% set showGetSchoolExperience = true %}
     {% endif %}
-  {% endfor %} 
+  {% endfor %}
 
+  {% if showTrainTeachNoDegree or showGetSchoolExperience %}
+    <p class="govuk-body">Here’s what you could do next:</p>
 
-<ul class="govuk-list govuk-list--bullet govuk-list--spaced">
- {% if showTrainTeachNoDegree %}
-    <li>Train to teach by doing an <a href="https://getintoteaching.education.gov.uk/train-to-be-a-teacher/if-you-dont-have-a-degree">undergraduate degree in teacher training</a> or becoming a <a href="https://getintoteaching.education.gov.uk/become-a-further-education-teacher">further education teacher</a>.</li>
- {% endif %} 
- {% if showGetSchoolExperience %}
-    <li><a href="https://getintoteaching.education.gov.uk/train-to-be-a-teacher/get-school-experience">Get school experience</a> in a classroom, so you can find out what it’s like to be a teacher and improve your knowledge and skills.</li>
- {% endif %} 
-</ul>
+    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+     {% if showTrainTeachNoDegree %}
+        <li>Train to teach by doing an <a href="https://getintoteaching.education.gov.uk/train-to-be-a-teacher/if-you-dont-have-a-degree">undergraduate degree in teacher training</a> or becoming a <a href="https://getintoteaching.education.gov.uk/become-a-further-education-teacher">further education teacher</a>.</li>
+     {% endif %}
+     {% if showGetSchoolExperience %}
+        <li><a href="https://getintoteaching.education.gov.uk/train-to-be-a-teacher/get-school-experience">Get school experience</a> in a classroom, so you can find out what it’s like to be a teacher and improve your knowledge and skills.</li>
+     {% endif %}
+    </ul>
+  {% endif %}
 
-<p class="govuk-body">To talk about your application and training options, get in touch with a <a href="https://beta-adviser-getintoteaching.education.gov.uk/">teacher training adviser</a>.</p>
+<p class="govuk-body">To talk about your options, get in touch with a <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training adviser</a>. Your adviser can help you improve your next application.</p>
 
   {{ govukButton({
     text: "Apply again",

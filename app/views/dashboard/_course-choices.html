@@ -33,7 +33,8 @@
         classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
         summaryText: "What to do if you’re unable to start training in " + item.starts | date("MMMM yyyy"),
         html: "<p>You can defer your offer which means that you could start your course a year later.</p>
-        <p>Contact " + providers[item.providerCode].name + " to ask if it‘s possible to defer, this will not affect your existing offer. If your provider agrees, you‘ll need to accept the offer on your account first and then defer it.</p>"
+        <p>Contact " + providers[item.providerCode].name + " to ask if it‘s possible to defer, this will not affect your existing offer.</p>
+        <p>If your provider agrees, you‘ll need to accept the offer on your account first and then defer it.</p>"
       }) }}
     {% endif %}
 

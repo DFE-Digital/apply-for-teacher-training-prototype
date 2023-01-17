@@ -1,49 +1,4 @@
-{% set status = item.status or application.status %}
 {% set startDate = item.starts | date("MMMM yyyy") %}
-
-{% set statusHtml %}
-  {{ govukTag({
-    classes: "app-tag " + status | statusClass,
-    text: status | capitalize
-  }) }}
-  {% if status == "Offer deferred" %}
-    <p class="govuk-body govuk-body govuk-!-margin-top-2">Your training will now start in September 2021.</p>
-  {% elif status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
-    {{ govukDetails({
-      classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
-      summaryText: "What to do if you’re unable to start training in " + startDate,
-      html: "<p>Some providers allow you to defer your offer. This means that you could start your course a year later.</p>
-<p>Every provider is different, so it may or may not be possible to do this. Find out by contacting " + provider.name + ".</p>
-<p>Asking if it’s possible to defer will not affect your existing offer.</p>"
-    }) }}
-  {% endif %}
-{% endset %}
-
-{% macro interviewItem(interview) %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ interview.date | date("d MMMM yyyy 'at' h:mma") }}</p>
-  <p class="govuk-body">
-    {{ interview.providerName }}<br>
-    {{ interview.address }}
-  </p>
-{% endmacro %}
-
-{% set interviewHtml %}
-  {% if item.interview | length > 1 %}
-    <ul class="govuk-list govuk-list--number">
-    {% for interview in item.interview %}
-      <li>
-        {{ interviewItem(interview) | safe }}
-      </li>
-    {% endfor %}
-    </ul>
-  {% else %}
-    {{ interviewItem(item.interview[0]) | safe }}
-  {% endif %}
-{% endset %}
-
-{% set feedbackHtml %}
-  {% include "_includes/item/feedback.html" %}
-{% endset %}
 
 {% set visaSponsorshipHtml %}
   {% if item.canSponsorVisa %}
@@ -261,26 +216,5 @@
       html: gcseRequirementsHtml,
       classes: "app-summary-list__value--wide"
     }
-  }, {
-    key: {
-      text: "Status"
-    },
-    value: {
-      html: statusHtml
-    }
-  } if showChoiceStatus, {
-    key: {
-      text: "Interviews" if item.interview | length > 1 else "Interview"
-    },
-    value: {
-      html: interviewHtml
-    }
-  } if item.interview, {
-    key: {
-      text: "Feedback"
-    },
-    value: {
-      html: feedbackHtml
-    }
-  } if showChoiceFeedback and item.status == "Unsuccessful" and item.feedback]
+  }]
 }) }}

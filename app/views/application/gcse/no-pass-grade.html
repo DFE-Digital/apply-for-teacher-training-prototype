@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "You need a GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">You can still apply for teacher training if you do not have this. Providers may allow you to sit an equivalency test, or you can retake your GCSE.</p>
 
   <p class="govuk-body">For advice, speak to a <a href="https://adviser-getintoteaching.education.gov.uk">teacher training adviser</a>.</p>

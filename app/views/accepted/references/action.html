@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
 {% if action == "delete" %}
@@ -38,7 +38,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
   {% if action == "request" %}
     <p class="govuk-body">We’ll send {{ referee.name }} an email asking them to give you a reference.</p>

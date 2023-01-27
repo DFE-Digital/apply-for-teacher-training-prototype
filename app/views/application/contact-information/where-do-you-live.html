@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Where do you live?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/where-do-you-live/answer" %}
@@ -9,7 +9,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% set internationalCountryHtml %}
     {{ appAutocomplete({
       label: {

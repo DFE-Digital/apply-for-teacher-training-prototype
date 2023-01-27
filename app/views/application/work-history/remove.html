@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 {% set applicationPath = "/application/" + applicationId %}
 
 
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukButton({
     text: "Yes I’m sure - delete this " + type,
     classes: "govuk-button--warning"

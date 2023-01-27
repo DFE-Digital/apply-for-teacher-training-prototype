@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set course = providerCode | getCourse(courseCode) %}
 {% if course %}
@@ -15,7 +15,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {# Choice of services available #}
   {% if course and dualRunning %}
     <p class="govuk-body">The course you’ve chosen is available through a new GOV.UK service called {{ serviceName }}.</p>

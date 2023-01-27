@@ -16,7 +16,7 @@
   <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post" novalidate>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {% block primary %}{% endblock %}
+        {% block content %}{% endblock %}
       </div>
       {% if hasSecondary %}
       <div class="govuk-grid-column-one-third">

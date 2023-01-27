@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = referrer or applicationPath + "/interview-needs/review" %}
@@ -17,7 +17,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">Providers do not usually have much flexibility when setting a date and time for interview unless you need adjustments due to a <a href="{{ applicationPath }}/additional-support">health condition or disability</a>.</p>
   <p class="govuk-body">However, if you need flexibility for other reasons you can tell us about it here.</p>
   <p class="govuk-body">For example: you have commitments like caring responsibilities or employment.</p>

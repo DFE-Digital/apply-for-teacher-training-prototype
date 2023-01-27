@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set parent = "Prototype admin" %}
 {% set title = "Clear data?" %}
@@ -12,7 +12,7 @@
 
 {% set formaction = "/admin/clear-data" %}
 
-{% block primary %}
+{% block content %}
   {{ govukWarningText({
     text: "This will clear all of the data entered in this session",
     iconFallbackText: "Warning"

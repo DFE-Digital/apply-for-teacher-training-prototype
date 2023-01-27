@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
 {% set title = "Check your answers before sending your request" %}
@@ -12,7 +12,7 @@
     }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukSummaryList({
     rows: [{
       key: {

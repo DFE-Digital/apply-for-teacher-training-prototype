@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set parent = "Prototype admin" %}
 {% set title = "Feature flags" %}
@@ -10,7 +10,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% set rows = [] %}
   {% for flag, value in flags %}
     {% set result = rows.push({

@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = referrer or "/reference/safeguarding" %}
 {% set candidate_name = "Jane Doe" %}
@@ -31,7 +31,7 @@
 {% endset %}
 
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
   {{ govukInsetText({
     text: relationship,

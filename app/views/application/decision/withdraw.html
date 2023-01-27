@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to withdraw this course choice?" %}
 {% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
@@ -9,7 +9,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% include "_includes/item/offer.html" %}
 
   <p class="govuk-body">If you withdraw this course choice{% if not applicationValue('apply2') %} (and all your other course choices){% endif %} you can still apply for more courses this&nbsp;year.</p>

@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/personal-statement/review" %}
 {% set title = "Why you want to teach" %}
@@ -17,7 +17,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
   {% set getAdviserHtml %}
     <p class="govuk-body"><a href="https://adviser-getintoteaching.education.gov.uk/" class="govuk-link">Find out if you’re eligible for a teacher training adviser</a> to get advice on your application from an experienced teacher.</p>

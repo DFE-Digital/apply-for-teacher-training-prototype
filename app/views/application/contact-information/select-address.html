@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "What is your address?" %}
@@ -10,7 +10,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Postcode</h2>
   <p class="govuk-body">{{ applicationValue(["contactInformation", "address", "postalCode"]) }} &nbsp; <a href="{{ applicationPath }}/contact-information/lookup-address">Change</a></p>
 

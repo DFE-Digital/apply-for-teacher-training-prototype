@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
 {% set title = "Your suitability to teach a subject or age group" %}
@@ -17,7 +17,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">If you’re applying for secondary teacher training, describe your knowledge of the subjects you’d like to teach.</p>
 
   <p class="govuk-body">If you’re applying for primary teacher training, say why you’d like to teach this age group.</p>

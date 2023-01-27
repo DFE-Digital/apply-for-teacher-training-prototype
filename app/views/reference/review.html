@@ -1,11 +1,11 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Check your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
-{% block primary %}
+{% block content %}
 
   {% set type = data['referee_type'] %}
   {% set relationship %}

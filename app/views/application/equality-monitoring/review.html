@@ -1,4 +1,4 @@
-{% extends "_content.html" %}
+{% extends "layouts/main.html" %}
 {% set parent = "Equality and diversity questions" %}
 {% set title = "Check your answers" %}
 {% set applicationPath = "/application/" + applicationId %}
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% include "_includes/review-equality-monitoring.html" %}
 
   {{ govukButton({

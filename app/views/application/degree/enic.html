@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = "/application/" + applicationId + "/degree/" + id + "/enic" %}
@@ -13,7 +13,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">You can get a statement from UK ENIC (the UK agency for international qualifications and skills) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
 
   {% set yesConditionalHtml %}

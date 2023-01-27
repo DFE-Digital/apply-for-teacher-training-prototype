@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Which location are you applying to?" %}
 {% set formaction = paths.next %}
@@ -8,7 +8,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukRadios({
     items: locationOptions
   } | decorateApplicationAttributes(["temporaryChoices", choiceId, "location"])) }}

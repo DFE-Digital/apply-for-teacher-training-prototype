@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 {% set parent = "Equality and diversity questions" %}
 {% set title = "What is your religion?" %}
 
@@ -8,7 +8,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% set otherReligionHtml %}
     {{ govukInput({
       classes: "govuk-!-width-two-thirds",

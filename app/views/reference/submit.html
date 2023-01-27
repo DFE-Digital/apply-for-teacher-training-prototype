@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">You can opt in to being contacted by the Department for Education for research purposes.</p>
 
   {{ govukRadios({

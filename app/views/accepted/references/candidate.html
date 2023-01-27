@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What’s your name?" %}
 {% set allowsFeedback = true %}
@@ -16,7 +16,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">This is so your referee knows who is requesting the reference.</p>
   {{ govukInput({
     label: {

@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to delete this " + type + "?" %}
 
@@ -8,7 +8,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukButton({
     text: "Yes I’m sure - delete this " + type,
     classes: "govuk-button--warning"

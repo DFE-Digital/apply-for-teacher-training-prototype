@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Unpaid experience" %}
@@ -17,7 +17,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">Do not include paid work in a school – enter these roles in ‘Work history’.</p>
   {{ govukInput({
     label: {

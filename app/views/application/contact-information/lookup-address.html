@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What is your address?" %}
 {% set formaction = "/application/" + applicationId + "/contact-information/select-address" %}
@@ -9,7 +9,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">If you live at more than one address (for example, during term time and the holidays) give us the one you’d like us to send important letters to.</p>
 
   {{ govukInput({

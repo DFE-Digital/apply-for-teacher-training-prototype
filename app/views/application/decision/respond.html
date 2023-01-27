@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Your conditional " + ("offers" if choices | length > 1 else "offer") %}
 {% set formaction = "/application/" + applicationId + "/decision" %}
@@ -9,7 +9,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
   <p class="govuk-body-l govuk-!-margin-top-0">
     {% if choices | length > 1  %}

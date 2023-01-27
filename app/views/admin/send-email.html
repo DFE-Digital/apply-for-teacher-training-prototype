@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set parent = "Prototype admin" %}
 {% set title = "Send an email" %}
@@ -10,7 +10,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <h2 class="govuk-heading-m">Make a decision</h2>
   {{ govukInput({
     label: {

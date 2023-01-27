@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set qualificationName =
@@ -22,7 +22,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {# Suggest subjects if GCSE, AS level or A level qualification #}
   {% if type == "GCSE"
     or type == "AS level"

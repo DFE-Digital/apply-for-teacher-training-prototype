@@ -1,0 +1,23 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/applications",
+    serviceName: serviceName,
+    navigation: [{
+      text: data.account.email
+    } if data.account.email, {
+      href: "/account/sign-out",
+      text: "Sign out"
+    } if data.account.email]
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+      tag: {
+        text: "prototype"
+      },
+      html: 'This is a prototype.'
+    }) if showPhaseBanner != false }}
+{% endblock %}

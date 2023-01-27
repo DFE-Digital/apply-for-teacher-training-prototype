@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set type = applicationValue(["gcse", id, "type"]) %}
@@ -19,7 +19,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {# Structured GCSE grade #}
   {% macro gradeHtml(params) %}
     {{ govukInput({

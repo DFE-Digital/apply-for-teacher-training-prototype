@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Have you completed your degree?" %}
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukRadios({
     items: [{
       value: "Yes",

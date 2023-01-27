@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "English as a foreign language" %}
@@ -16,7 +16,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% set missingConditionalHtml %}
     <p class="govuk-hint">If English is a foreign language to you, or if you do not have an English GCSE or equivalent, you may have to give evidence for your level of English.</p>
     <p class="govuk-hint">Contact your provider for advice about showing your level of English.</p>

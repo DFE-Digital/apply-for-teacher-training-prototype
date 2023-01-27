@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
@@ -18,7 +18,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% set roleEndHTML %}
     {{ govukDateInput({
       fieldset: {

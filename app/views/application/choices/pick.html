@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set editing = applicationValue(["choices", choiceId]) %}
 {% if editing %}
@@ -22,7 +22,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% if providerOnDfEApply %}
     {% if data.course_from_find and providerCode == data.course_from_find.providerCode %}
       {# TODO #}

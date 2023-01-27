@@ -1,10 +1,10 @@
-{% extends "_content.html" %}
+{% extends "layouts/main.html" %}
 
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Thank you" %}
 {% set hasAccountLinks = false %}
 
-{% block primary %}
+{% block content %}
   {% if research == "true" %}
     <h2 class="govuk-heading-m">Our user research team will contact you shortly</h2>
   {% endif %}

@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = referrer or "/reference/review" %}
 {% set candidate_name = "Jane Doe" %}
@@ -17,7 +17,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
   <p class="govuk-body">Your reference should contain facts, not your opinions.</p>
 

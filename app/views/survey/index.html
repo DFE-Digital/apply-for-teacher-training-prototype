@@ -1,9 +1,9 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Your feedback" %}
 {% set formaction = "/survey" %}
 
-{% block primary %}
+{% block content %}
 
   <input type="hidden" name="applicationId" value="{{ applicationId }}" />
 

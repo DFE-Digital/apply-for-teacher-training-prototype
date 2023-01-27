@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = referrer or "/application/" + applicationId + "/english-language/review" %}
@@ -38,7 +38,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% if ielts or toefl %}
     {{ govukInput({
       label: {

@@ -1,9 +1,9 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Prototype admin" %}
 {% set hasAccountLinks = false %}
 
-{% block primary %}
+{% block content %}
   <ul class="govuk-list govuk-list--bullet">
     <li><a href="/admin/clear-data">Clear data</a></li>
     <li><a href="/admin/flags">View feature flags</a></li>

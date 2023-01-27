@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to delete this course choice?" %}
 {% set formaction = "/application/" + applicationId + "/choices/" + id + "/delete" %}
@@ -10,7 +10,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukButton({
     text: "Yes I’m sure - delete this course choice",
     classes: "govuk-button--warning"

@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% from "govuk/components/hint/macro.njk" import govukHint %}
 
@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ govukHint({id: describedBy, text: "Enter an address where you'll be able to receive post from providers." })}}
 
   {{ govukInput({

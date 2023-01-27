@@ -16,5 +16,5 @@
     }
   },
   "name": "Apply (Prototype)",
-  "stack": "heroku/nodejs"
+  "stack": "heroku-22"
 }

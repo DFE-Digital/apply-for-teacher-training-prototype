@@ -125,23 +125,23 @@
             href: applicationPath + "/gcse/english",
             id: "english-gcse",
             status: {
-              classes: tagClassesForSection(completed=false, apply2=apply2),
-              text: tagTextForSection(completed=false, apply2=apply2)
+              classes: tagClassesForSection(completed=data.completed.english, apply2=apply2),
+              text: tagTextForSection(completed=data.completed.english, apply2=apply2)
             }
           }, {
             title: { text: "Maths GCSE or equivalent" },
             href: applicationPath + "/gcse/maths",
             id: "maths-gcse",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.maths == 'true'),
+              text: tagTextForSection(completed=data.completed.maths == 'true')
             }
           }, {
             title: { text: "Science GCSE or equivalent" },
             href: applicationPath + "/gcse/science",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.science == 'true'),
+              text: tagTextForSection(completed=data.completed.science == 'true')
             }
           }, {
             title: { text: "Other qualifications" if international else "A levels and other qualifications" },

@@ -1,4 +1,4 @@
-{% set item = applicationValue(["gcse", id]) %}
+{% set item = data.gcse[id] %}
 {% set missingGcse = item.type == "not-yet" %}
 {% set nonUK = item.type == "Non-UK qualification" %}
 {% set subject = (id | capitalize) if id == "english" else id %}
@@ -10,7 +10,7 @@
       {{ item["award-org"] + ", " + item.country if item["award-org"] }}
     {%- endif %}
   {%- else -%}
-    Not entered
+    Not entered {{ item | dump }}
   {%- endif -%}
 {%- endset %}
 
@@ -70,7 +70,7 @@
       value: { text: "I don’t have a " + subject + " qualification yet" },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "whether you have this qualification"
         }]
@@ -81,7 +81,7 @@
       value: { html: currentlyStudyingHtml },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/not-yet",
+          href: "/application" + "/gcse/" + id + "/not-yet",
           text: "Change",
           visuallyHiddenText: "whether you are studying for this qualification"
         }]
@@ -95,7 +95,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
@@ -114,7 +114,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "year"
         }]
@@ -128,7 +128,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/country?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/country?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "country"
         }]
@@ -142,7 +142,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "UK ENIC statement of comparability"
         }]
@@ -156,7 +156,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "UK ENIC reference"
         }]
@@ -170,7 +170,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "comparable UK qualification"
         }]
@@ -184,7 +184,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/grade?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/grade?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "grade"
         }]
@@ -198,7 +198,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/year?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "year"
         }]
@@ -209,7 +209,7 @@
       value: { html: currentlyRetakingHtml },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/no-pass-grade",
+          href: "/application" + "/gcse/" + id + "/no-pass-grade",
           text: "Change",
           visuallyHiddenText: "whether you are re-taking this qualification"
         }]
@@ -223,7 +223,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]

@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set action = "edit" if applicationValue(["gcse", id, "type"]) else "add" %}
+{% set action = "add" %}
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = (action | capitalize) + " " + subject + " GCSE grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+  <form action="/application/gcse/{{ id }}/answer" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 
@@ -28,7 +28,7 @@
             label: {
               text: "Type of qualification"
             }
-          } | decorateApplicationAttributes(["gcse", id, "typeUk"])) }}
+          }) }}
         {% endset %}
 
         {% set nonUkConditionalHtml %}
@@ -39,7 +39,7 @@
             hint: {
               html: "For example, <span lang=\"fr\">Baccalauréat Général</span>, Secondary School Certificate (SSC), <span lang=\"es\">Título de Bachiller</span>, West African Senior School Certificate Examination (WASSCE)"
             }
-          } | decorateApplicationAttributes(["gcse", id, "typeNonUk"])) }}
+          }) }}
         {% endset %}
 
         {% set missingConditionalHtml %}
@@ -52,10 +52,12 @@
             },
             maxwords: 200,
             rows: 12
-          } | decorateApplicationAttributes(["gcse", id, "missing"])) }}
+          }) }}
         {% endset -%}
 
         {{ govukRadios({
+          name: "gcse[" + id + "][type]",
+          value: data.gcse[id].type,
           fieldset: {
             legend: {
               text: "What type of qualification in " + subject + " do you have?",
@@ -70,18 +72,23 @@
             text: "This should be a school qualification, not an English as a foreign language qualification."
           } if subject == "English",
           items: [{
-            text: "GCSE"
+            text: "GCSE",
+            value: "GCSE"
           }, {
-            text: "O level"
+            text: "O level",
+            value: "O level"
           }, {
-            text: "Scottish National 5"
+            text: "Scottish National 5",
+            value: "Scottish National 5"
           }, {
             text: "Another UK qualification",
+            value: "Another UK qualification",
             conditional: {
               html: otherUkConditionalHtml
             }
           }, {
             text: "A non-UK qualification",
+            value: "A non-UK qualification",
             conditional: {
               html: nonUkConditionalHtml
             }
@@ -91,7 +98,7 @@
             text: "I do not have a GCSE in " + subject + " (or equivalent) yet",
             value: "not-yet"
           }]
-        } | decorateApplicationAttributes(["gcse", id, "type"])) }}
+        }) }}
 
         {{ govukButton({
           text: "Save and continue"

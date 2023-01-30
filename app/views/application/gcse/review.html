@@ -1,4 +1,4 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 {% set formaction = applicationPath %}
@@ -15,26 +15,33 @@
 {% endblock %}
 
 {% block content %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
   {% include "_includes/review/gcse.html" %}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I’ve completed this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", id])) }}
+  <form action="/application" method="post">
+    {{ govukRadios({
+      name: "completed[" + id + "]",
+      value: data.completed[id],
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

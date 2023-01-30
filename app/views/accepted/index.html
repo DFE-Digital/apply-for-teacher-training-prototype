@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Your application" %}
 
@@ -11,7 +11,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 
 {% if applicationStatus %}
-  {% set referrer = "/accepted/" + applicationId + "/" + applicationStatus %}
+  {% set referrer = "/accepted/" + "/" + applicationStatus %}
 {% else %}
   {% set referrer = "/accepted/" + applicationId %}
 {% endif %}
@@ -128,7 +128,7 @@
         <div class="govuk-button-group govuk-!-margin-bottom-6">
           {{ govukButton({
             text: "Request another reference",
-            href: "/accepted/" + applicationId + "/references/add?referrer=" + referrer,
+            href: "/accepted/" + "/references/add?referrer=" + referrer,
             classes: "govuk-button--secondary"
           }) }}
         </div>

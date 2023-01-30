@@ -3,7 +3,7 @@
 {% set reference = applicationValue(["references", id]) %}
 {% set canNudgeReferee = (reference.status == 'Requested') %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/accepted/" + applicationId
   }) }}
@@ -103,7 +103,7 @@
     },
     actions: {
       items: [{
-        href: "/accepted/" + applicationId + "/references/" + item.id + "/relationship?referrer=" + referrer,
+        href: "/accepted/" + "/references/" + item.id + "/relationship?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "relationship to referee"
       }]
@@ -129,7 +129,7 @@
   <div class="govuk-button-group">
       {{ govukButton({
         text: "Send a reminder",
-        href: "/accepted/" + applicationId + "/references/" + item.id + "/action/nudge"
+        href: "/accepted/" + "/references/" + item.id + "/action/nudge"
       }) }}
 
       <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>

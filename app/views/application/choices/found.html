@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 {% set hasCourseFromFind = data.course_from_find %}
 {% set choices = applicationValue("choices") | toArray %}
 
@@ -14,10 +14,10 @@
 {% if data["from"] == "application" or (choices | length) == 0 %}
   {% set backLinkHref = "/application/" + applicationId %}
 {% else %}
-  {% set backLinkHref = "/application/" + applicationId + "/choices" %}
+  {% set backLinkHref = "/application/" + "/choices" %}
 {% endif %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: backLinkHref
   }) }}

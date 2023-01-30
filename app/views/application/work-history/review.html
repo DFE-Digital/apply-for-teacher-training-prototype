@@ -8,10 +8,10 @@
 {% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
 {% set workHistoryDecision = applicationValue(["workHistoryDisclose"]) %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if fromPage == "work-history-question" %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/work-history",
+      href: "/application/" + "/work-history",
       text: "Back"
     }) }}
   {% else %}
@@ -28,7 +28,7 @@
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another job",
-        href: "/application/" + applicationId + "/work-history/" + newId
+        href: "/application/" + "/work-history/" + newId
       }) }}
 
       {# Show list of jobs added, with prompt to add another #}
@@ -42,7 +42,7 @@
 
       {{ govukButton({
         text: "Add a job",
-        href: "/application/" + applicationId + "/work-history/" + newId
+        href: "/application/" + "/work-history/" + newId
       }) }}
     {% endif %}
   {% else %}

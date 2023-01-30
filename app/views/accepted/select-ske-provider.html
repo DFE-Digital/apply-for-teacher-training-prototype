@@ -1,6 +1,6 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/dashboard/" + applicationId
   }) }}

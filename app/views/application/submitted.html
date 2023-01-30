@@ -8,7 +8,7 @@
 {% set canAmend = false %}
 {% set showChoiceStatus = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

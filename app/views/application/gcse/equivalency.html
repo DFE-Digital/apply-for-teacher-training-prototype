@@ -3,12 +3,12 @@
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "You need a GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/gcse/" + id + "/review" %}
+{% set formaction = "/application/" + "/gcse/" + id + "/review" %}
 
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or "/application/" + applicationId + "/gcse/" + id + "/not-yet"
+    href: referrer or "/application/" + "/gcse/" + id + "/not-yet"
   }) }}
 {% endblock %}
 

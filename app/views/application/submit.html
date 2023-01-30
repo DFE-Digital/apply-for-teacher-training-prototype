@@ -4,9 +4,9 @@
 {% set status = applicationValue(["status"]) %}
 {% set providerText = "providers" if (applicationValue(["choices"]) | length > 1) else "provider" %}
 {% set title = "Send application to training " + providerText %}
-{% set formaction = "/send-email/" + applicationId + "/application-submitted" %}
+{% set formaction = "/send-email/" + "/application-submitted" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     "href": applicationPath + "/equality-monitoring/review"
   }) }}

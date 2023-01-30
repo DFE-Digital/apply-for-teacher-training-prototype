@@ -5,7 +5,7 @@
 {% set title = "Do you know any reason why " + candidate_name + " should not work with children?" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

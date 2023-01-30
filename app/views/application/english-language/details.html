@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = referrer or "/application/" + applicationId + "/english-language/review" %}
+{% set formaction = referrer or "/application/" + "/english-language/review" %}
 {% set ielts = type == "IELTS" %}
 {% set toefl = type == "TOEFL" %}
 
@@ -26,14 +26,14 @@
 {% set action = "edit" if applicationValue(["englishLanguage", "subject"]) else "your" %}
 {% set title = (action | capitalize) + " " + assessmentName + " result" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/english-language/type"
+      href: "/application/" + "/english-language/type"
     }) }}
   {% endif %}
 {% endblock %}

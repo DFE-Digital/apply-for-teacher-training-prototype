@@ -10,7 +10,7 @@
   {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}
 {% endif %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: paths.back
   }) }}

@@ -4,11 +4,11 @@
 {% set type = applicationValue(["gcse", id, "type"]) %}
 {% set title = "Are you currently studying for a GCSE in " + subject + ", or equivalent?" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/gcse/" + id + "/not-yet" %}
+{% set formaction = "/application/" + "/gcse/" + id + "/not-yet" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/gcse/" + id
+    href: "/application/" + "/gcse/" + id
   }) }}
 {% endblock %}
 

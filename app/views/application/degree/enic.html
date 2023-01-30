@@ -1,13 +1,13 @@
 {% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/enic" %}
+{% set formaction = "/application/" + "/degree/" + id + "/enic" %}
 
 {% set degreeCount = applicationValue(["degree"]) | length %}
 {% set title = "How your degree compares to a UK degree" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

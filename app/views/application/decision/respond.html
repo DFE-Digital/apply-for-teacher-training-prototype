@@ -1,9 +1,9 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Your conditional " + ("offers" if choices | length > 1 else "offer") %}
-{% set formaction = "/application/" + applicationId + "/decision" %}
+{% set formaction = "/application/" + "/decision" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/dashboard/" + applicationId
   }) }}

@@ -1,11 +1,11 @@
 {% extends "_form-question.html" %}
 {% set title = "Student or skilled worker visa" %}
 
-{% set formaction = "/application/" + applicationId + "/personal-information/review" %}
+{% set formaction = "/application/" + "/personal-information/review" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/immigration")
+    href: (referrer if referrer else "/application/" + "/personal-information/immigration")
   }) }}
 {% endblock %}
 

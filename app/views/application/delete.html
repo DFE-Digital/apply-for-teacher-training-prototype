@@ -2,7 +2,7 @@
 
 {% set title = "Are you sure you want to delete this " + type + "?" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer
   }) }}

@@ -11,7 +11,7 @@
   {% set title = "Choosing courses" %}
 {% endif %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

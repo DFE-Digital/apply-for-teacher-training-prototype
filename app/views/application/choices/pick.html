@@ -16,7 +16,7 @@
 {% set formaction = paths.next %}
 {% set applicationPath = "/application/" + applicationId %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: paths.back
   }) }}
@@ -43,7 +43,7 @@
       {{ govukRadios({
         idPrefix: "course",
         items: courseItems,
-        name: "applications[" + applicationId + "][temporaryChoices][" + choiceId + "][course]"
+        name: "applications[" + "][temporaryChoices][" + choiceId + "][course]"
       }) }}
     {% endif %}
 

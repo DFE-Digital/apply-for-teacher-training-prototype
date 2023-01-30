@@ -4,9 +4,9 @@
 {% set parent = "Work history" %}
 {% set action = "edit" if applicationValue(["workHistory", id]) else "add" %}
 {% set title = (action | capitalize) + " job" %}
-{% set formaction = "/application/" + applicationId + "/work-history/" + id %}
+{% set formaction = "/application/" + "/work-history/" + id %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
@@ -157,7 +157,7 @@
 
   {{ govukInput({
     type: "hidden",
-    name: "applications[" + applicationId + "][workHistory][" + id + "][category]",
+    name: "applications[" + "][workHistory][" + id + "][category]",
     value: "job"
   }) }}
 

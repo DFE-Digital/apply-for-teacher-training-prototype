@@ -1,6 +1,6 @@
 {% extends "_form-question.html" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/level" %}
+{% set formaction = "/application/" + "/degree/" + id + "/level" %}
 
 
 {% set applicationPath = "/application/" + applicationId %}
@@ -8,9 +8,9 @@
 {% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or "/application/" + applicationId + "/degree/" + id + "/country"
+    href: referrer or "/application/" + "/degree/" + id + "/country"
   }) }}
 {% endblock %}
 

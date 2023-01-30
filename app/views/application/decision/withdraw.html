@@ -1,9 +1,9 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to withdraw this course choice?" %}
-{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
+{% set formaction = "/send-email/" + "/" + choiceId + "/decision" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/dashboard/" + applicationId
   }) }}

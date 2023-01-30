@@ -1,10 +1,10 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
+{% set formaction = referrer or "/application/" + "/subject-knowledge/review" %}
 {% set title = "Your suitability to teach a subject or age group" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

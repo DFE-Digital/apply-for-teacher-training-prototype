@@ -19,12 +19,12 @@
 {% set title = "What type of " + degreeDescription + " is it?" %}
 
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/type" %}
+{% set formaction = "/application/" + "/degree/" + id + "/type" %}
 
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

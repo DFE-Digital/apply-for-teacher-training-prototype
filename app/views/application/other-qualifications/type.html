@@ -6,9 +6,9 @@
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-      href: "/application/" + applicationId + "/other-qualifications/review"
+      href: "/application/" + "/other-qualifications/review"
   }) }}
 {% endblock %}
 

@@ -2,16 +2,16 @@
 
 {% set title = "What’s your name?" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/references/" + id + "/send-request/" %}
+{% set formaction = "/application/" + "/references/" + id + "/send-request/" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/request/"
+      href: "/application/" + "/references/" + id + "/request/"
     }) }}
   {% endif %}
 {% endblock %}

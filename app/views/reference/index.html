@@ -6,7 +6,7 @@
 {% set title = "A reference for " + candidate_name + "" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

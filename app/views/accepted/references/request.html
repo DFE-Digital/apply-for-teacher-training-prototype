@@ -3,9 +3,9 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set title = "Check your answers before sending your request" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/accepted/" + applicationId + "/references/" + id + "/request/decision" %}
+{% set formaction = "/accepted/" + "/references/" + id + "/request/decision" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
     {{ govukBackLink({
       href: "/accepted/" + applicationId,
       text: "Back to application"
@@ -23,7 +23,7 @@
       },
       actions: {
         items: [{
-          href: "/accepted/" + applicationId + "/references/" + id + "/name/?referrer=/accepted/" + applicationId + "/references/" + id + "/request/",
+          href: "/accepted/" + "/references/" + id + "/name/?referrer=/accepted/" + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "name"
         }]
@@ -37,7 +37,7 @@
       },
       actions: {
         items: [{
-          href: "/accepted/" + applicationId + "/references/" + id + "/email/?referrer=/accepted/" + applicationId + "/references/" + id + "/request/",
+          href: "/accepted/" + "/references/" + id + "/email/?referrer=/accepted/" + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "email address"
         }]
@@ -51,7 +51,7 @@
       },
       actions: {
         items: [{
-          href: "/accepted/" + applicationId + "/references/" + id + "/type/?referrer=/accepted/" + applicationId + "/references/" + id + "/request/",
+          href: "/accepted/" + "/references/" + id + "/type/?referrer=/accepted/" + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "reference type"
         }]
@@ -65,7 +65,7 @@
       },
       actions: {
         items: [{
-          href: "/accepted/" + applicationId + "/references/" + id + "/relationship/?referrer=/accepted/" + applicationId + "/references/" + id + "/request/",
+          href: "/accepted/" + "/references/" + id + "/relationship/?referrer=/accepted/" + "/references/" + id + "/request/",
           text: "Change",
           visuallyHiddenText: "relationship to referee"
         }]

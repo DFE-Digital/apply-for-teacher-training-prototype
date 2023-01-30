@@ -1,18 +1,18 @@
 {% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set formaction = "/application/" + applicationId + "/english-language/details" %}
+{% set formaction = "/application/" + "/english-language/details" %}
 {% set parent = "English as a foreign language" %}
 {% set title = "What English language assessment did you do?" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-       href: "/application/" + applicationId + "/english-language"
+       href: "/application/" + "/english-language"
     }) }}
   {% endif %}
 {% endblock %}

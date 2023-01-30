@@ -3,9 +3,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set parent = "Work history" %}
 {% set title = "Please tell us what you were doing over this period" %}
-{% set formaction = "/application/" + applicationId + "/work-history/break/" + id %}
+{% set formaction = "/application/" + "/work-history/break/" + id %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
       href: applicationPath + "/work-history/review"
     }) }}
@@ -68,7 +68,7 @@
 
   {{ govukInput({
     type: "hidden",
-    name: "applications[" + applicationId + "][workHistory][" + id + "][category]",
+    name: "applications[" + "][workHistory][" + id + "][category]",
     value: "break"
   }) }}
 

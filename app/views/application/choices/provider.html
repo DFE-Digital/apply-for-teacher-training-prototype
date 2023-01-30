@@ -1,8 +1,8 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Which training provider are you applying to?" %}
 {% set formaction = paths.next %}
-{% block pageNavigation %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
+{% block beforeContent %}{{ govukBackLink({ href: paths.back }) }}{% endblock %}
 
 {% block content %}
   {% block beforePageTitle %}{% endblock %}

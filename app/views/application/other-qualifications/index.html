@@ -7,7 +7,7 @@
 {% set allowsFeedback = true %}
 {% set formaction = applicationPath + "/other-qualifications/answer" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

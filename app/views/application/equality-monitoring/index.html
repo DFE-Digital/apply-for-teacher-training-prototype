@@ -1,7 +1,7 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 {% set title = "Equality and diversity questions" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: applicationPath + "/review"
   }) }}
@@ -19,7 +19,7 @@
 
       {{ govukButton({
         text: "Continue",
-        href: "/application/" + applicationId + "/equality-monitoring/sex"
+        href: "/application/" + "/equality-monitoring/sex"
       }) }}
     </div>
   </div>

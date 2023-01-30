@@ -4,7 +4,7 @@
 {% set title = "In which country did you study for your " + subject + " qualification?" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

@@ -4,7 +4,7 @@
 {% set title = "Unpaid experience" %}
 {% set formaction = applicationPath + "/unpaid-experience/answer" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

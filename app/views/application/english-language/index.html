@@ -3,7 +3,7 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "English as a foreign language" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

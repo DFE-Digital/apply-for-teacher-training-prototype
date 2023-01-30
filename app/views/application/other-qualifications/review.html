@@ -10,7 +10,7 @@
 {% set otherQualifications = applicationValue(["otherQualifications"]) | toArray %}
 
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/application/" + applicationId,
     text: "Back to application"

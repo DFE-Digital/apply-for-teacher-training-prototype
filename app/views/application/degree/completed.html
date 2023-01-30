@@ -3,9 +3,9 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Have you completed your degree?" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/completed" %}
+{% set formaction = "/application/" + "/degree/" + id + "/completed" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

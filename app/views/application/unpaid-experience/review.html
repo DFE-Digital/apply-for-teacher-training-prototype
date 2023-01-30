@@ -8,7 +8,7 @@
 {% set unpaidExperience = applicationValue("unpaidExperience") | toArray | selectattr("id") %}
 {% set addButtonText = "Add another role" if unpaidExperience.length >= 1 else "Add a role" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/application/" + applicationId,
     text: "Back to application"

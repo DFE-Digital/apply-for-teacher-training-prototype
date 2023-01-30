@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to delete the reference from " + reference.name + "?" %}
-{% set formaction = "/application/" + applicationId + "/references/" + id + "/delete" %}
+{% set formaction = "/application/" + "/references/" + id + "/delete" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/references"
+    href: "/application/" + "/references"
   }) }}
 {% endblock %}
 

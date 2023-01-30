@@ -10,14 +10,14 @@
 {% set title = (action | capitalize) + " " + qualificationName + " qualification" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/other-qualifications/" + id
+      href: "/application/" + "/other-qualifications/" + id
     }) }}
   {% endif %}
 {% endblock %}

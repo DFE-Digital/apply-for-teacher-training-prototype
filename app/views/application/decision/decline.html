@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to decline this offer?" %}
-{% set formaction = "/send-email/" + applicationId + "/" + choiceId + "/decision" %}
+{% set formaction = "/send-email/" + "/" + choiceId + "/decision" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/" + choiceId + "/view"
+    href: "/application/" + "/" + choiceId + "/view"
   }) }}
 {% endblock %}
 

@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Details of offer" %}
-{% set referrer = "/application/" + applicationId + "/" + choiceId + "/view" %}
+{% set referrer = "/application/" + "/" + choiceId + "/view" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/dashboard/" + applicationId
   }) }}

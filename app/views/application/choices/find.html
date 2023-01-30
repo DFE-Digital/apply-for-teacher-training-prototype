@@ -3,9 +3,9 @@
 {% set title = "Find a course" %}
 {% set formaction = paths.next %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/choices/" + choiceId + "/found"
+    href: "/application/" + "/choices/" + choiceId + "/found"
   }) }}
 {% endblock %}
 

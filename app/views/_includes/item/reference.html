@@ -14,7 +14,7 @@
   titleText: titleText,
   actions: {
     items: [{
-      href: "/application/" + applicationId + "/references/" + item.id + "/delete",
+      href: "/application/" + "/references/" + item.id + "/delete",
       text: "Delete"
     }]
   },
@@ -31,7 +31,7 @@
           items: [
             {
               text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/type"
+              href: "/application/" + "/references/" + item.id + "/type"
             } if item.status == 'Not sent'
           ]
         }
@@ -47,7 +47,7 @@
           items: [
             {
               text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/name"
+              href: "/application/" + "/references/" + item.id + "/name"
             } if item.status == 'Not sent'
           ]
         }
@@ -63,7 +63,7 @@
           items: [
             {
               text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/email"
+              href: "/application/" + "/references/" + item.id + "/email"
             } if item.status == 'Not sent'
           ]
         }
@@ -79,7 +79,7 @@
           items: [
             {
               text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
+              href: "/application/" + "/references/" + item.id + "/relationship"
             } if item.status == 'Not sent'
           ]
         }

@@ -1,11 +1,11 @@
 {% extends "_form-question.html" %}
 
 {% set title = "Do you normally live in the UK?" %}
-{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/already-living-in-uk" %}
+{% set formaction = referrer if referrer else "/application/" + "/personal-information/already-living-in-uk" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer if referrer else "/application/" + applicationId + "/personal-information/immigration-status"
+    href: referrer if referrer else "/application/" + "/personal-information/immigration-status"
   }) }}
 {% endblock %}
 

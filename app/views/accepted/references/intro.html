@@ -4,9 +4,9 @@
 {% set parent = referee.name %}
 {% set title = "Choose a referee" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/accepted/" + applicationId + "/references/" + id + "/type/" %}
+{% set formaction = "/accepted/" + "/references/" + id + "/type/" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

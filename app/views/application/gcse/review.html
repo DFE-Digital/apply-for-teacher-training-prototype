@@ -7,7 +7,7 @@
 {% set allowsFeedback = true %}
 {% set canAmend = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/application/" + applicationId,
     text: "Back to application"

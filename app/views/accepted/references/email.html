@@ -3,16 +3,16 @@
 {% set referee = applicationValue(["references", id]) %}
 {% set title = "What is " + referee.name + "’s email address?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/accepted/" + applicationId + "/references/" + id + "/relationship/" %}
+{% set formaction = referrer or "/accepted/" + "/references/" + id + "/relationship/" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/accepted/" + applicationId + "/references/" + id + "/name/"
+      href: "/accepted/" + "/references/" + id + "/name/"
     }) }}
   {% endif %}
 {% endblock %}

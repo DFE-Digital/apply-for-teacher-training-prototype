@@ -1,11 +1,11 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set formaction = "/reference/decline/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Are you sure you’re unable to give " + candidate_name + " a reference?" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/reference"
   }) }}

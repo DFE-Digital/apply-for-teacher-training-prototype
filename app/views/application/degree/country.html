@@ -1,18 +1,18 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/country" %}
+{% set formaction = "/application/" + "/degree/" + id + "/country" %}
 {% set degreeCount = applicationValue(["degree"]) | length %}
 
 {% set title = "Which country was the degree from?" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer })
     }}
   {% else %}
     {{ govukBackLink({
-      href: referrer or ("/application/" + applicationId + "/degree/review"),
+      href: referrer or ("/application/" + "/degree/review"),
       text: "Back"
     }) }}
   {% endif %}

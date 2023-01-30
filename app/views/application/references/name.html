@@ -2,16 +2,16 @@
 
 {% set title = "What’s the name of the person who can give a reference?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/email/" %}
+{% set formaction = referrer or "/application/" + "/references/" + id + "/email/" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/type/"
+      href: "/application/" + "/references/" + id + "/type/"
     }) }}
   {% endif %}
 {% endblock %}

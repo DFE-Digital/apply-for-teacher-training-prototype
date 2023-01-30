@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "" %}
 {% set formaction = applicationPath + "/work-history/answer" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

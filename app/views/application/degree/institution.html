@@ -1,13 +1,13 @@
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "Which university awarded your degree?" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/institution" %}
+{% set formaction = "/application/" + "/degree/" + id + "/institution" %}
 
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
 {% extends "_form-question.html" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

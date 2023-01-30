@@ -5,7 +5,7 @@
 {% set action = "edit" if applicationValue(["unpaidExperience", id, "role"]) else "add" %}
 {% set title = (action | capitalize) + " role" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

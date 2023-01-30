@@ -1,6 +1,6 @@
 {% extends "_form-question.html" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/graduation-year" %}
+{% set formaction = "/application/" + "/degree/" + id + "/graduation-year" %}
 
 {% set applicationPath = "/application/" + applicationId %}
 
@@ -9,9 +9,9 @@
 
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or ("/application/" + applicationId + "/degree/" + id + "/start-year")
+    href: referrer or ("/application/" + "/degree/" + id + "/start-year")
   }) }}
 {% endblock %}
 

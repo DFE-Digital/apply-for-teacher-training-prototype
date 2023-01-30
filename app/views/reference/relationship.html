@@ -5,7 +5,7 @@
 {% set title = "Confirm how " + candidate_name + " knows you" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

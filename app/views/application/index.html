@@ -81,8 +81,8 @@
             href: applicationPath + "/contact-information",
             id: "contact-information",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.contactInformation == 'true'),
+              text: tagTextForSection(completed=data.completed.contactInformation == 'true')
             }
           }]
         }) }}

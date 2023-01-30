@@ -2,7 +2,7 @@
 
 {% set title = "Ask for support if you’re disabled" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer

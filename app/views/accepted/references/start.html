@@ -3,7 +3,7 @@
 {% set title = "What your referee can expect once you've requested a reference" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
@@ -48,7 +48,7 @@
 
   {{ govukButton({
     text: "Continue",
-    href: "/application/" + applicationId + "/references/" + id + "/type/"
+    href: "/application/" + "/references/" + id + "/type/"
   }) }}
 
 {% endblock %}

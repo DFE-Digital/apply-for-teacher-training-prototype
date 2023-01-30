@@ -4,9 +4,9 @@
 {% set title = "What subject is your degree?" %}
 {% set allowsFeedback = true %}
 {% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/subject" %}
+{% set formaction = "/application/" + "/degree/" + id + "/subject" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}

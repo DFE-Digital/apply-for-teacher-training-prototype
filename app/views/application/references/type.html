@@ -4,16 +4,16 @@
 {% set parent = referee.name %}
 {% set title = "Choose a referee" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/name" %}
+{% set formaction = referrer or "/application/" + "/references/" + id + "/name" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/"
+      href: "/application/" + "/references/"
     }) }}
   {% endif %}
 {% endblock %}

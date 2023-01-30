@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 {% set applicationPath = "/application/" + applicationId %}
 {% set title = "References to be requested if you accept an offer" %}
 {% set references = applicationValue(["references"]) | toArray %}
 {% set addReferenceButtonText = "Add a reference" if references | length == 0 else "Add another reference" %}
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/application/" + applicationId,
     text: "Back to application"
@@ -30,7 +30,7 @@
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
-          href: "/application/" + applicationId + "/references/add",
+          href: "/application/" + "/references/add",
           classes: referencesButtonClass
         }) }}
       </div>

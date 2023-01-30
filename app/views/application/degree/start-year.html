@@ -4,12 +4,12 @@
 {% set title = "What year did you start your degree?" %}
 {% set allowsFeedback = true %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/start-year" %}
+{% set formaction = "/application/" + "/degree/" + id + "/start-year" %}
 
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or ("/application/" + applicationId + "/degree/" + id + "/grade")
+    href: referrer or ("/application/" + "/degree/" + id + "/grade")
   }) }}
 {% endblock %}
 

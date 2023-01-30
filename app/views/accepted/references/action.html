@@ -32,9 +32,9 @@
   {% set status = "Reference given" %}
 {% endif %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/accepted/" + applicationId + "/references/" + id
+    href: "/accepted/" + "/references/" + id
   }) }}
 {% endblock %}
 

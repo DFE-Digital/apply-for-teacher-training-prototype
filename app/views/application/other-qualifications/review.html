@@ -1,25 +1,26 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
+{% set applicationPath = "/application" %}
 {% set formaction = applicationPath %}
-{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set international = data.otherNationality %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
 {% set referrer = applicationPath + "/other-qualifications/review" %}
 {% set canAmend = true %}
-{% set otherQualifications = applicationValue(["otherQualifications"]) | toArray %}
-
+{% set otherQualifications = data.otherQualifications %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
 
 {% block content %}
 
-    {% if applicationValue(["otherQualificationsDisclose"]) == "No" %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+    {% if data.otherQualificationsAdded == "no" %}
 
       {% include "_includes/review/other-qualifications.html" %}
 
@@ -30,34 +31,43 @@
         <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
       </div>
 
-      {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+      {% if data.otherQualifications | length == 0 %}
+        {{ govukButton({text: "Add qualification", href: applicationPath + "/other-qualifications/add"}) }}
+
+      {% else %}
+        {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+      {% endif %}
 
       {% include "_includes/review/other-qualifications.html" %}
 
     {% endif %}
 
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    hint: {
-      text: "Ensure you’ve added all your A levels and other qualifications."
-    } if applicationValue(["otherQualificationsDisclose"] != "No"),
-    items: [{
-      value: "true",
-      text: "Yes, I’ve completed this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", "otherQualifications"])) }}
+    {% if data.otherQualificationsAdded == "no"  or data.otherQualifications | length > 0 %}
+      {{ govukRadios({
+        name: "completed[otherQualifications]",
+        value: data.completed.otherQualifications,
+        fieldset: {
+          classes: "govuk-!-width-two-thirds",
+          legend: {
+            text: "Have you completed this section?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        hint: {
+          text: "Ensure you’ve added all your A levels and other qualifications."
+        } if data.otherQualificationsAdded != "no",
+        items: [{
+          value: "true",
+          text: "Yes, I’ve completed this section"
+        }, {
+          value: "false",
+          text: "No, I’ll come back to it later"
+        }]
+      }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    {% endif %}
 {% endblock %}

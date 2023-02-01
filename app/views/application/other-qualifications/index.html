@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% set applicationPath = "/application/" + applicationId %}
-{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set international = true if data.otherNationality else false %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 {% set allowsFeedback = true %}
@@ -14,39 +14,49 @@
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId,
+      href: "/application",
       text: "Back to application"
     }) }}
   {% endif %}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <p class="govuk-body">Adding {{ "A levels and " if not international }} other qualifications can make your application stronger.</p>
+      <p class="govuk-body">Adding {{ "A levels and " if not international }} other qualifications can make your application stronger.</p>
 
-  <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
+      <p class="govuk-body">Training providers may ask to see them later if you do not include them in your application.</p>
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Do you want to add " + ("a qualification" if international else "any A levels or other qualifications") + "?",
-        classes: "govuk-label--m"
-      },
-      attributes: {
-        "data-module": "clear-hidden"
-      }
-    },
-    items: [{
-      value: "Yes",
-      text: "Yes"
-    }, {
-      value: "No",
-      text: "No, I do not want to add " + ("a qualification" if international else "any A levels or other qualifications") + ""
-    }]
-  } | decorateApplicationAttributes(["otherQualificationsDisclose"])) }}
+      <form action="/application/other-qualifications/answer" method="post">
+
+        {{ govukRadios({
+          name: "otherQualificationsAdded",
+          value: data.otherQualificationsAdded,
+          fieldset: {
+            legend: {
+              text: "Do you want to add " + ("a qualification" if international else "any A levels or other qualifications") + "?",
+              classes: "govuk-label--m"
+            },
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No, I do not want to add " + ("a qualification" if international else "any A levels or other qualifications") + ""
+          }]
+        }) }}
 
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

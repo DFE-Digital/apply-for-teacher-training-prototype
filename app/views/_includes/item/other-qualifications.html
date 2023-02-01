@@ -1,34 +1,50 @@
-{% set otherQualifications = applicationValue(["otherQualifications"]) %}
-{% set qualifications = otherQualifications | toArray | selectattr("id") %}
+{% set otherQualifications = data.otherQualifications %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
 
-{% for item in qualifications %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: item.type,
-    actions: {
-      items: [{
-        href: applicationPath + "/other-qualifications/" + item.id + "/delete?referrer=" + referrer,
-        text: "Delete qualification"
-      }]
-    } if canAmend,
-    html: govukSummaryList({
-      rows: [{
+{% for id, item in otherQualifications %}
+
+  {% set typeText %}
+    {% if item.type == 'non-uk' %}
+      {{ item.nonUkType }}
+    {% elif item.type == 'other-uk' %}
+      {{ item.otherUkType }}
+    {% else %}
+      {{ item.type }}
+    {% endif %}
+  {% endset %}
+
+  {{ govukSummaryList({
+    card: {
+      title: {
+        text: typeText
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/other-qualifications/" + id + "/delete",
+            text: "Delete qualification",
+            visuallyHiddenText: " – " + typeText
+          }
+        ]
+      }
+    },
+    rows: [
+      {
         key: {
           text: "Type of qualification"
         },
         value: {
-          text: item.typeUk or item.typeNonUk or item.type or "Not entered"
+          text: typeText
         },
         actions: {
           items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "?referrer=" + referrer,
+            href: "/application/other-qualifications/" + id + "/type",
             text: "Change",
             visuallyHiddenText: "year"
           }]
         } if canAmend
-      }, {
+      },
+      {
         key: {
           text: "Subject" + (" (optional)" if item.type == "Non-UK qualification")
         },
@@ -37,12 +53,13 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
+            href: "/application/other-qualifications/" + id + "/details",
             text: "Change",
             visuallyHiddenText: "year"
           }]
         } if canAmend
-      }, {
+      },
+      {
         key: {
           text: "Country"
         },
@@ -51,7 +68,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
+            href: "/application/other-qualifications/" + id + "/details",
             text: "Change",
             visuallyHiddenText: "country"
           }]
@@ -65,7 +82,7 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
+            href: "/application/other-qualifications/" + id + "/details",
             text: "Change",
             visuallyHiddenText: "year"
           }]
@@ -79,12 +96,99 @@
         },
         actions: {
           items: [{
-            href: applicationPath + "/other-qualifications/" + item.id + "/details?referrer=" + referrer,
+            href: "/application/other-qualifications/" + id + "/details",
+            text: "Change",
+            visuallyHiddenText: "grade"
+          }]
+        } if canAmend
+      }
+    ]
+
+  })}}
+<!--
+  {{ item | dump }}
+  {{ govukSummaryList({
+    classes: "govuk-!-margin-bottom-6",
+    headingLevel: 3,
+    titleText: item.type,
+    actions: {
+      items: [{
+        href: applicationPath + "/other-qualifications/" + item.id + "/delete",
+        text: "Delete qualification"
+      }]
+    } if canAmend,
+    html: govukSummaryList({
+      rows: [{
+        key: {
+          text: "Type of qualification"
+        },
+        value: {
+          text: item.typeUk or item.typeNonUk or item.type or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "",
+            text: "Change",
+            visuallyHiddenText: "year"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Subject" + (" (optional)" if item.type == "Non-UK qualification")
+        },
+        value: {
+          text: item.subject or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/details",
+            text: "Change",
+            visuallyHiddenText: "year"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Country"
+        },
+        value: {
+          text: item.country
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/details",
+            text: "Change",
+            visuallyHiddenText: "country"
+          }]
+        } if canAmend
+      } if item.country, {
+        key: {
+          text: "Year awarded"
+        },
+        value: {
+          text: item.year or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/details",
+            text: "Change",
+            visuallyHiddenText: "year"
+          }]
+        } if canAmend
+      }, {
+        key: {
+          text: "Grade (optional)"
+        },
+        value: {
+          text: item.grade or "Not entered"
+        },
+        actions: {
+          items: [{
+            href: applicationPath + "/other-qualifications/" + item.id + "/details",
             text: "Change",
             visuallyHiddenText: "grade"
           }]
         } if canAmend
       }]
     })
-  }) if item.type != "None" }}
+  }) if item.type != "None" }} -->
 {% endfor %}

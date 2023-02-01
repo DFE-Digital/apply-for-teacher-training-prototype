@@ -1,7 +1,6 @@
-{% set completed = applicationValue(["completed", "otherQualifications"]) == "Yes" %}
+{% set completed = data.completed.otherQualifications == "true" %}
 
-{% set entered = applicationValue(["otherQualificationsDisclose"]) %}
-{% set international = applicationValue(["candidate", "otherNationality1"]) %}
+{% set international = data.otherNationality %}
 
 {{ appSuggestion({
   id: "otherQualifications",
@@ -15,34 +14,25 @@
   }
 }) if not completed and showIncomplete }}
 
-{% if entered == "No" %}
+{% if data.otherQualificationsAdded == "no" %}
 
-
-  {% set summaryCardHtml %}
-
-    {{ govukSummaryList({
-      classes: "app-summary",
-      rows: [{
-        key: {
-          text: "Do you want to add any " + ("A levels or " if not international) + "other qualifications?"
-        },
-        value: {
-          text: "No"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/other-qualifications",
-            text: "Change",
-            visuallyHiddenText: "explanation"
-          }]
-        }
-      }]
-    }) }}
-  {% endset %}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: summaryCardHtml
+  {{ govukSummaryList({
+    classes: "app-summary",
+    rows: [{
+      key: {
+        text: "Do you want to add any " + ("A levels or " if not international) + "other qualifications?"
+      },
+      value: {
+        text: "No"
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/other-qualifications",
+          text: "Change",
+          visuallyHiddenText: "explanation"
+        }]
+      }
+    }]
   }) }}
 
 {% else %}

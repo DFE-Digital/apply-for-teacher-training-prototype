@@ -16,55 +16,67 @@
 {% endblock %}
 
 {% block content %}
-<p class="govuk-body">Teacher training providers need to check that it’s safe for you to work with children and young people.</p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-<p class="govuk-body">As well as confirming your identity and your right to work in the UK, providers will check:</p>
+      <p class="govuk-body">Teacher training providers need to check that it’s safe for you to work with children and young people.</p>
 
-<ul class="govuk-list govuk-list--bullet">
-  <li>your criminal record in the UK (they'll do an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about#dbs-checks">DBS check)</a> and abroad where relevant</li>
-  <li>whether you’ve been banned from teaching or working with children</li>
-  <li>your professional behaviour, such as whether you’ve been removed from teacher training and what your referees say about you</li>
-</ul>
+      <p class="govuk-body">As well as confirming your identity and your right to work in the UK, providers will check:</p>
 
-<p class="govuk-body">Tell your provider about any potential safeguarding issues, such as offences, cautions, reprimands and final warnings. They can give advice about whether this will affect your application.</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your criminal record in the UK (they'll do an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about#dbs-checks">DBS check)</a> and abroad where relevant</li>
+        <li>whether you’ve been banned from teaching or working with children</li>
+        <li>your professional behaviour, such as whether you’ve been removed from teacher training and what your referees say about you</li>
+      </ul>
 
-<p class="govuk-body">It won’t necessarily stop you becoming a teacher.</p>
+      <p class="govuk-body">Tell your provider about any potential safeguarding issues, such as offences, cautions, reprimands and final warnings. They can give advice about whether this will affect your application.</p>
 
-{% set disabilityConditional %}
-  {{ govukCharacterCount({
-    label: {
-      html: "Give any relevant information",
-      classes: "govuk-label--s"
-    },
-    maxwords: 400,
-    rows: 8
-  } | decorateApplicationAttributes(["safeguarding"])) }}
-{% endset %}
+      <p class="govuk-body">It won’t necessarily stop you becoming a teacher.</p>
 
-{{ govukRadios({
-  fieldset: {
-    classes: "govuk-!-margin-top-7",
-    legend: {
-      text: "Do you want to share any safeguarding issues?",
-      classes: "govuk-fieldset__legend--m"
-    }
-  },
-  items: [{
-    value: "Yes",
-    text: "Yes, I want to share something",
-    hint: {
-      text: "After you have submitted your application, your provider may be in touch to discuss the information you shared. If you prefer, you can contact your provider directly."
-    },
-    conditional: {
-      html: disabilityConditional
-    }
-  }, {
-    value: "No",
-    text: "No"
-  }]
-} | decorateApplicationAttributes(["safeguardingDisclose"])) }}
+      {% set safeguardingHtml %}
+        {{ govukCharacterCount({
+          name: "safeguardingDetail",
+          value: data.safeguardingDetail,
+          label: {
+            html: "Give any relevant information",
+            classes: "govuk-label--s"
+          },
+          maxwords: 400,
+          rows: 8
+        }) }}
+      {% endset %}
 
-{{ govukButton({
-  text: "Continue"
-}) }}
+      <form action="/application/safeguarding/review" method="post">
+        {{ govukRadios({
+          name: "safeguarding",
+          value: data.safeguarding,
+          fieldset: {
+            classes: "govuk-!-margin-top-7",
+            legend: {
+              text: "Do you want to share any safeguarding issues?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes, I want to share something",
+            hint: {
+              text: "After you have submitted your application, your provider may be in touch to discuss the information you shared. If you prefer, you can contact your provider directly."
+            },
+            conditional: {
+              html: safeguardingHtml
+            }
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

@@ -241,8 +241,8 @@
             title: { text: "Declare any safeguarding issues" },
             href: applicationPath + "/safeguarding",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.safeguarding == 'true'),
+              text: tagTextForSection(completed=data.completed.safeguarding == 'true')
             }
           }]
         }) }}

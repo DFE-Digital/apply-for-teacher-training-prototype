@@ -176,7 +176,7 @@ module.exports = router => {
   // require('./application/personal-statement')(router)
   // require('./application/subject-knowledge')(router)
   // require('./application/interview-needs')(router)
-  // require('./application/references')(router)
+  require('./application/references')(router)
   // require('./application/review')(router)
   // require('./application/equality-monitoring')(router)
   // require('./application/confirmation')(router)

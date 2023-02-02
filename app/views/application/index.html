@@ -190,15 +190,15 @@
             title: { text: "Why you want to teach" },
             href: applicationPath + "/personal-statement",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.personalStatement == 'true'),
+              text: tagTextForSection(completed=data.completed.personalStatement == 'true')
             }
           }, {
             title: { text: "Your suitability to teach a subject or age group" },
             href: applicationPath + "/subject-knowledge",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.subjectKnowledge == 'true'),
+              text: tagTextForSection(completed=data.completed.subjectKnowledge == 'true')
             }
           }]
         }) }}

@@ -1,94 +1,17 @@
-{% set completed = applicationValue(["completed", "subjectKnowledge"]) %}
-{% set entered = applicationValue(["subjectKnowledge"]) %}
-
-{% if not entered %}
-  {{ appSuggestion({
-    id: "subjectKnowledge",
-    title: "Subject knowledge not entered",
-    warning: true if errorList,
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Why are you suited to teach your subjects or age group?"
+    },
+    value: {
+      text: (data.subjectKnowledge or "Not entered")
+    },
     actions: {
       items: [{
-        text: "Why are you suited to teach your subjects or age group?",
-        href: applicationPath + "/subject-knowledge"
+        href: "/subject-knowledge",
+        text: "Change" if data.subjectKnowledge else "Add",
+        visuallyHiddenText: "evidence of subject knowledge"
       }]
-    }
-  }) }}
-{% else %}
-
-  {% set hasFeedbackFromPreviousApplication = false %}
-  {% set feedbackFromPreviousApplications = "" %}
-
-  {% if applicationValue(["apply2"]) %}
-    {% for previousApplicationId in applicationValue("previousApplications") %}
-      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
-          {% set hasFeedbackFromPreviousApplication = true %}
-          {% set feedbackFromPreviousApplications %}
-            {{ feedbackFromPreviousApplications | safe }}
-
-            <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ providers[item.providerCode].name }}</h3>
-            <blockquote class="govuk-!-margin-left-0 govuk-!-margin-top-0">
-              {% if item.feedback.personalStatement.qualityOfWriting %}
-              <p class="govuk-body">Quality of writing:</p>
-              <p class="govuk-body">“{{ item.feedback.personalStatement.qualityOfWriting | safe }}”</p>{% endif %}
-
-              {% if item.feedback.personalStatement.other %}
-                {% if item.feedback.personalStatement.qualityOfWriting %}<p class="govuk-body">Other:</p>{% endif %}
-                <p class="govuk-body">“{{ item.feedback.personalStatement.other | safe }}”</p>
-              {% endif %}
-            </blockquote>
-          {% endset %}
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-
-  {% if hasFeedbackFromPreviousApplication %}
-
-    {% set feedbackFromPreviousApplications %}
-      <h2 class="govuk-heading-m">Feedback from previous applications</h2>
-      {{ feedbackFromPreviousApplications | safe }}
-    {% endset %}
-
-    {{ govukInsetText({
-      classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
-      html: feedbackFromPreviousApplications | safe
-    }) }}
-  {% endif %}
-
-  {% if not hasFeedbackFromPreviousApplication %}
-
-    {{ appSuggestion({
-      id: "subjectKnowledge",
-      title: "Subject knowledge not marked as completed",
-      warning: true if errorList,
-      actions: {
-        items: [{
-          text: "Complete Subject knowledge",
-          href: applicationPath + "/subject-knowledge/?referrer=" + referrer
-        }]
-      }
-    }) if not completed and showIncomplete }}
-  {% endif %}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Why are you suited to teach your subjects or age group?"
-        },
-        value: {
-          text: (applicationValue(["subjectKnowledge"]) or "Not entered") | nl2br | safe
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/subject-knowledge?referrer=" + referrer,
-            text: "Change" if applicationValue(["subjectKnowledge"]) else "Add",
-            visuallyHiddenText: "evidence of subject knowledge"
-          }]
-        } if canAmend
-      }]
-    })
-  }) }}
-{% endif %}
+    } if canAmend
+  }]
+}) }}

@@ -1,55 +1,57 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/application/" + "/personal-statement/review" %}
 {% set title = "Why you want to teach" %}
-{% set allowsFeedback = true %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {% set getAdviserHtml %}
-    <p class="govuk-body"><a href="https://adviser-getintoteaching.education.gov.uk/" class="govuk-link">Find out if you’re eligible for a teacher training adviser</a> to get advice on your application from an experienced teacher.</p>
-  {% endset %}
+      {% set getAdviserHtml %}
+        <p class="govuk-body"><a href="https://adviser-getintoteaching.education.gov.uk/" class="govuk-link">Find out if you’re eligible for a teacher training adviser</a> to get advice on your application from an experienced teacher.</p>
+      {% endset %}
 
-  {% set guidanceHtml %}
-    <p class="govuk-body">Explain why you want to be a teacher. You could talk about:</p>
+      {% set guidanceHtml %}
+        <p class="govuk-body">Explain why you want to be a teacher. You could talk about:</p>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>what inspired you to apply</li>
-      <li>your understanding of the demands and rewards of teaching</li>
-      <li>the personal qualities that would make you a good teacher</li>
-      <li>how you could contribute to a school outside of the classroom - for example, running extra-curricular activities and clubs</li>
-      <li>any experience you have working with children and what you learnt</li>
-      <li>your thoughts on children’s wellbeing and the education system</li>
-    </ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>what inspired you to apply</li>
+          <li>your understanding of the demands and rewards of teaching</li>
+          <li>the personal qualities that would make you a good teacher</li>
+          <li>how you could contribute to a school outside of the classroom - for example, running extra-curricular activities and clubs</li>
+          <li>any experience you have working with children and what you learnt</li>
+          <li>your thoughts on children’s wellbeing and the education system</li>
+        </ul>
 
-    {{ govukInsetText({html: getAdviserHtml}) }}
-  {% endset %}
+        {{ govukInsetText({html: getAdviserHtml}) }}
+      {% endset %}
 
-  {{ guidanceHtml | safe }}
+      {{ guidanceHtml | safe }}
 
-  {{ govukCharacterCount({
-    label: {
-      text: "Why do you want to be a teacher?",
-      classes: "govuk-label--m govuk-!-margin-top-6"
-    },
-    rows: 20,
-    maxwords: 600
-  } | decorateApplicationAttributes(["personalStatement"])) }}
+      <form action="/application/personal-statement/review" method="post">
+        {{ govukCharacterCount({
+          name: "personalStatement",
+          value: data.personalStatement,
+          id: "personal-statement",
+          label: {
+            text: "Why do you want to be a teacher?",
+            classes: "govuk-label--m govuk-!-margin-top-6"
+          },
+          rows: 20,
+          maxwords: 600
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

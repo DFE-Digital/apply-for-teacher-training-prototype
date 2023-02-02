@@ -1,89 +1,17 @@
-{% set completed = applicationValue(["completed", "personalStatement"]) %}
-{% set entered = applicationValue(["personalStatement"]) %}
-
-{% if not entered %}
-  {{ appSuggestion({
-    id: "personalStatement",
-    title: "Personal statement not entered",
-    warning: true if errorList,
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Why do you want to be a teacher?"
+    },
+    value: {
+      text: data.personalStatement
+    },
     actions: {
       items: [{
-        text: "Why do you want to be a teacher?",
-        href: applicationPath + "/personal-statement"
+        href: "/application/personal-statement",
+        text: ("Change" if data.personalStatement else "Add"),
+        visuallyHiddenText: "why you want to be a teacher"
       }]
-    }
+    } if canAmend
+  }]
   }) }}
-{% else %}
-
-  {% set hasFeedbackFromPreviousApplication = false %}
-  {% set feedbackFromPreviousApplications = "" %}
-
-  {% if applicationValue(["apply2"]) %}
-    {% for previousApplicationId in applicationValue("previousApplications") %}
-      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.personalStatement and (item.feedback.personalStatement.qualityOfWriting or item.feedback.personalStatement.other) %}
-          {% set hasFeedbackFromPreviousApplication = true %}
-          {% set feedbackFromPreviousApplications %}
-            {{ feedbackFromPreviousApplications | safe }}
-
-            <h2 class="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-4">{{ providers[item.providerCode].name }} feedback</h2>
-
-            {% set providerFeedback %}
-              {% if item.feedback.personalStatement.qualityOfWriting %}
-                <p class="govuk-body">Quality of writing:</p>
-                <p class="govuk-body"> {{ item.feedback.personalStatement.qualityOfWriting | safe }}</p>
-              {% endif %}
-
-              {% if item.feedback.personalStatement.other %}
-                {% if item.feedback.personalStatement.qualityOfWriting %}
-                  <p class="govuk-body">Other:</p>
-                {% endif %}
-                <p class="govuk-body"> {{ item.feedback.personalStatement.other | safe }}</p>
-              {% endif %}
-            {% endset %}
-
-            {{ govukInsetText({
-              text: providerFeedback | safe,
-              classes: "govuk-!-margin-top-0 govuk-!-margin-bottom-2"
-            })}}
-          {% endset %}
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-
-  {% if hasFeedbackFromPreviousApplication %}
-    {% set feedbackFromPreviousApplications %}
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-          {{ feedbackFromPreviousApplications | safe }}
-          <div class="govuk-!-margin-bottom-4">&nbsp;</div>
-        </div>
-      </div>
-    {% endset %}
-
-
-    {{ feedbackFromPreviousApplications | safe }}
-  {% endif %}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Why do you want to be a teacher?"
-        },
-        value: {
-          text: (applicationValue(["personalStatement"]) or "Not entered") | nl2br | safe
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-statement?referrer=" + referrer,
-            text: "Change" if applicationValue(["personalStatement"]) else "Add",
-            visuallyHiddenText: "why you want to be a teacher"
-          }]
-        } if canAmend
-      }]
-    })
-  }) }}
-{% endif %}

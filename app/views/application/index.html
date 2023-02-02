@@ -211,15 +211,15 @@
             title: { text: "Ask for support if you’re disabled" },
             href: applicationPath + "/additional-support",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.additionalSupport == 'true'),
+              text: tagTextForSection(completed=data.completed.additionalSupport == 'true')
             }
           }, {
             title: { text: "Interview needs" },
             href: applicationPath + "/interview-needs",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.interviewNeeds == 'true'),
+              text: tagTextForSection(completed=data.completed.interviewNeeds == 'true')
             }
           }]
         }) }}

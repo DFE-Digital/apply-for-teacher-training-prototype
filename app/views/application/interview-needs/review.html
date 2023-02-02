@@ -1,6 +1,6 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
+{% set applicationPath = "/application" %}
 {% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/interview-needs/review" %}
 {% set title = "Interview needs" %}
@@ -14,26 +14,31 @@
 {% endblock %}
 
 {% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/interview-needs.html" %}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I’ve completed this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", "interviewNeeds"])) }}
+  <form action="/application">
+    {{ govukRadios({
+      name: "completed[interviewNeeds]",
+      value: data.completed.interviewNeeds,
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

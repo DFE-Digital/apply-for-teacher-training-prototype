@@ -1,5 +1,5 @@
-{% set completed = applicationValue(["completed", "interviewNeeds"]) %}
-{% set entered = applicationValue(["interviewNeedsDisclose"]) %}
+{% set completed = data.completed.interviewNeeds == 'true' %}
+{% set entered = data.interviewNeeds %}
 
 {% if not entered %}
   {{ appSuggestion({
@@ -26,38 +26,35 @@
     }
   }) if not completed and showIncomplete }}
 
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Do you have any interview needs?"
-        },
-        value: {
-          text: applicationValue(["interviewNeedsDisclose"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/interview-needs?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "interview needs"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "What are your interview needs?"
-        },
-        value: {
-          text: applicationValue(["interviewNeeds"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/interview-needs?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "interview needs"
-          }]
-        } if canAmend
-      } if applicationValue(["interviewNeedsDisclose"]) == "Yes"]
-    })
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Do you have any interview needs?"
+      },
+      value: {
+        text: ("Yes" if data.interviewNeeds == "yes" else "No")
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/interview-needs?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "interview needs"
+        }]
+      } if canAmend
+    }, {
+      key: {
+        text: "What are your interview needs?"
+      },
+      value: {
+        text: data.interviewNeedsDetail
+      },
+      actions: {
+        items: [{
+          href: applicationPath + "/interview-needs?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "interview needs"
+        }]
+      } if canAmend
+    } if data.interviewNeeds == "yes"]
   }) }}
 {% endif %}

@@ -1,63 +1,34 @@
-{% set completed = applicationValue(["completed", "additionalSupport"]) %}
-{% set entered = applicationValue(["additionalSupportDisclose"]) %}
+{% set completed = data.completed.additionalSupport %}
+{% set entered = data.completed.additionalSupport %}
 
-{% if not entered %}
-  {{ appSuggestion({
-    id: "additionalSupport",
-    title: "Any disability or other needs not entered",
-    warning: true if errorList,
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Do you want to ask for help to become a teacher?"
+    },
+    value: {
+      text: ("Yes" if data.additionalSupportNeeded else "No")
+    },
     actions: {
       items: [{
-        text: "Do you want to ask for help to become a teacher?",
-        href: applicationPath + "/additional-support"
+        href: applicationPath + "/additional-support?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "if you need support to become a teacher"
       }]
-    }
-  }) }}
-{% else %}
-  {{ appSuggestion({
-    id: "additionalSupport",
-    title: "Ask for support if you’re disabled not marked as complete",
-    warning: true if errorList,
+    } if canAmend
+  }, {
+    key: {
+      text: "Relevant information"
+    },
+    value: {
+      html: data.additionalSupportDetail
+    },
     actions: {
       items: [{
-        text: "Complete ask for support if you’re disabled",
-        href: applicationPath + "/additional-support/review"
+        href: applicationPath + "/additional-support?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "your reasonable adjustments"
       }]
-    }
-  }) if not completed and showIncomplete }}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Do you need any adjustments to help you do a course or go to an interview?" if option == "b" else "Do you want to ask for help to become a teacher?"
-        },
-        value: {
-          text: applicationValue(["additionalSupportDisclose"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/additional-support?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if you need support to become a teacher"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "Relevant information"
-        },
-        value: {
-          html: applicationValue(["additionalSupport"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/additional-support?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "your reasonable adjustments"
-          }]
-        } if canAmend
-      } if applicationValue(["additionalSupportDisclose"]) == "Yes"]
-    })
-  }) }}
-{% endif %}
+    } if canAmend
+  } if data.additionalSupportNeeded === "yes"]
+}) }}

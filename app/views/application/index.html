@@ -147,16 +147,16 @@
             title: { text: "Other qualifications" if international else "A levels and other qualifications" },
             href: applicationPath + "/other-qualifications",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.otherQualifications == 'true'),
+              text: tagTextForSection(completed=data.completed.otherQualifications == 'true')
             }
           }, {
             title: { text: "Degree" },
             href: applicationPath + "/degree/review",
             id: "degree",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.degree == 'true'),
+              text: tagTextForSection(completed=data.completed.degree == 'true')
             }
           }]
         }) }}

@@ -1,63 +1,33 @@
-{% set applicationPath = "/application/" + applicationId %}
+{% extends "layouts/main.html" %}
+
 {% set title = "Which university awarded your degree?" %}
-{% set allowsFeedback = true %}
-{% set formaction = "/application/" + "/degree/" + id + "/institution" %}
-
-{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-
-{% extends "_form-question.html" %}
+{% set international = data.degrees[id].uk == "no" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/degree/" + id + "/type"
   }) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/application/degree/{{ id }}/completed" method="post">
 
-  {% if international %}
-    {{ govukInput({
-      label: {
-        text: title,
-        classes: "govuk-label--l"
-      }
-    } | decorateApplicationAttributes(["degree", id, "org"])) }}
-  {% else %}
-    <div class="govuk-form-group">
-      <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="degree-{{ id }}-org">{{ title }}</label></h1>
-      <span id="degree-{{ id }}-org-hint" class="govuk-hint">Type your own or select from the suggestions. For example, 'Open University'.</span>
-      <div id="org-autocomplete-container" class="suggestions"></div>
+        {{ govukInput({
+          name: "degrees[" + id + "][institution]",
+          value: data.degrees[id].institution,
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
     </div>
-  {% endif %}
-
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script src="/public/javascripts/sort.js"></script>
-  <script>
-  {% if international %}
-  {% else %}
-
-    var allDegreeInstitutions = {{ allDegreeInstitutions | dump | safe }};
-
-    function filter(query, populateResults) {
-      populateResults(sort(query, allDegreeInstitutions))
-    }
-
-    accessibleAutocomplete({
-      element: document.querySelector('#org-autocomplete-container'),
-      id: 'degree-{{ id }}-org',
-      name: "applications[{{ applicationId }}][degree][{{ id }}][org]",
-      defaultValue: '{{ applicationValue(["degree", id, "org"]) }}',
-      minLength: 2,
-      showNoOptionsFound: false,
-      placeholder: false,
-      source: filter
-    })
-  {% endif %}
-  </script>
+  </div>
 {% endblock %}

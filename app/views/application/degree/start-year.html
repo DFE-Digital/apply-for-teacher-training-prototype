@@ -1,31 +1,35 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "What year did you start your degree?" %}
-{% set allowsFeedback = true %}
-
-{% set formaction = "/application/" + "/degree/" + id + "/start-year" %}
-
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or ("/application/" + "/degree/" + id + "/grade")
+    href: "/application/degree/" + id + "/grade"
   }) }}
 {% endblock %}
 
 {% block content %}
-  {{ govukInput({
-    label: {
-      text: title,
-      classes: "govuk-label--l"
-    },
-    hint: {
-      text: "For example, 1999"
-    },
-    classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["degree", id, "yearStart"])) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/application/degree/{{id }}/graduation-year" method="post">
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+      {{ govukInput({
+        name: "degrees[" + id + "][startYear]",
+        value: data.degrees[id].startYear,
+        label: {
+          text: title,
+          classes: "govuk-label--l"
+        },
+        hint: {
+          text: "For example, 1999"
+        },
+        classes: "govuk-input--width-4"
+      }) }}
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

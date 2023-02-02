@@ -44,30 +44,32 @@
 
 
     {% if data.otherQualificationsAdded == "no"  or data.otherQualifications | length > 0 %}
-      {{ govukRadios({
-        name: "completed[otherQualifications]",
-        value: data.completed.otherQualifications,
-        fieldset: {
-          classes: "govuk-!-width-two-thirds",
-          legend: {
-            text: "Have you completed this section?",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        hint: {
-          text: "Ensure you’ve added all your A levels and other qualifications."
-        } if data.otherQualificationsAdded != "no",
-        items: [{
-          value: "true",
-          text: "Yes, I’ve completed this section"
-        }, {
-          value: "false",
-          text: "No, I’ll come back to it later"
-        }]
-      }) }}
+      <form action="/application" method="post">
+        {{ govukRadios({
+          name: "completed[otherQualifications]",
+          value: data.completed.otherQualifications,
+          fieldset: {
+            classes: "govuk-!-width-two-thirds",
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "Ensure you’ve added all your A levels and other qualifications."
+          } if data.otherQualificationsAdded != "no",
+          items: [{
+            value: "true",
+            text: "Yes, I’ve completed this section"
+          }, {
+            value: "false",
+            text: "No, I’ll come back to it later"
+          }]
+        }) }}
 
-      {{ govukButton({
-        text: "Continue"
-      }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
     {% endif %}
 {% endblock %}

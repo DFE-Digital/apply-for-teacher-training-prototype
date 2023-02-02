@@ -1,28 +1,35 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Have you completed your degree?" %}
-{% set allowsFeedback = true %}
-{% set formaction = "/application/" + "/degree/" + id + "/completed" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/degree/" + id + "/institution"
   }) }}
 {% endblock %}
 
 {% block content %}
-  {{ govukRadios({
-    items: [{
-      value: "Yes",
-      text: "Yes"
-    }, {
-      value: "No",
-      text: "No, I am studying for my degree"
-    }]
-  } | decorateApplicationAttributes(["degree", id, "completed"])) }}
+  <form action="/application/degree/{{ id }}/grade" method="post">
+    {{ govukRadios({
+      name: "degrees[" + id + "][completed]",
+      value: data.degrees[id].completed,
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        value: "yes",
+        text: "Yes"
+      }, {
+        value: "no",
+        text: "No, I am studying for my degree"
+      }]
+    }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
 {% endblock %}

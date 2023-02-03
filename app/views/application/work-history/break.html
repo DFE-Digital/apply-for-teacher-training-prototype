@@ -15,48 +15,50 @@
       <form action="/application/work-history/review" method="post">
 
         {{ govukDateInput({
+          namePrefix: "",
           fieldset: {
             legend: {
               text: "Start of break",
-              classes: "govuk-fieldset__legend--m"
+              classes: "govuk-fieldset__legend--s"
             }
           },
-          namePrefix: id + "-startDate",
           items: [{
-            classes: "govuk-input--width-2",
             label: "Month",
-            name: "month",
-            value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('L')
+            name: "workHistory[" + id + "][startMonth]",
+            value: data.workHistory[id].startMonth,
+            classes: "govuk-input--width-2"
           }, {
-            classes: "govuk-input--width-4",
             label: "Year",
-            name: "year",
-            value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('yyyy')
+            name: "workHistory[" + id + "][startYear]",
+            value: data.workHistory[id].startYear,
+            classes: "govuk-input--width-4"
           }]
-        } | decorateApplicationAttributes(["workHistory", id, "startDate"])) }}
+        }) }}
 
         {{ govukDateInput({
+          namePrefix: "",
           fieldset: {
             legend: {
               text: "End of break",
-              classes: "govuk-fieldset__legend--m"
+              classes: "govuk-fieldset__legend--s"
             }
           },
-          namePrefix: id + "-endDate",
           items: [{
-            classes: "govuk-input--width-2",
             label: "Month",
-            name: "month",
-            value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('L')
+            name: "workHistory[" + id + "][endMonth]",
+            value: data.workHistory[id].endMonth,
+            classes: "govuk-input--width-2"
           }, {
-            classes: "govuk-input--width-4",
             label: "Year",
-            name: "year",
-            value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('yyyy')
+            name: "workHistory[" + id + "][endYear]",
+            value: data.workHistory[id].endYear,
+            classes: "govuk-input--width-4"
           }]
-        } | decorateApplicationAttributes(["workHistory", id, "endDate"])) }}
+        }) }}
 
         {{ govukCharacterCount({
+          name: "workHistory[" + id + "][breakReason]",
+          value: data.workHistory[id].breakReason,
           label: {
             text: "Enter reasons for break in work history",
             classes: "govuk-label--m"
@@ -66,11 +68,11 @@
           },
           threshold: 90,
           maxwords: 400
-        } | decorateApplicationAttributes(["workHistory", id, "description"])) }}
+        }) }}
 
         {{ govukInput({
           type: "hidden",
-          name: "applications[" + "][workHistory][" + id + "][category]",
+          name: "workHistory[" + id + "][category]",
           value: "break"
         }) }}
 

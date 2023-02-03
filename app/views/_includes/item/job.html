@@ -34,7 +34,7 @@
 
       <p class="govuk-body govuk-!-margin-bottom-0">
         {% if item.category == 'break' %}
-          {{ item.description }}
+          {{ item.breakReason }}
         {% else %}
           {{ item.role }}
           {% if item.type == "Part time" %}(Part time){% endif %}

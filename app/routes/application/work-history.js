@@ -2,14 +2,51 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   // Review page
-  router.get('/application/:applicationId/work-history/review', (req, res) => {
+  router.get('/application/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
-    const fromPage = req.query.from
 
     res.render('application/work-history/review', {
-      newId,
-      fromPage
+      newId
     })
+  })
+
+  // Add a job
+  router.get('/application/work-history/job/add', (req, res) => {
+    const newId = utils.generateRandomString()
+    res.render(`application/work-history/job/${newId}`)
+  })
+
+  // Add a break
+  router.get('/application/work-history/break/add', (req, res) => {
+    const newId = utils.generateRandomString()
+    res.redirect(`/application/work-history/break/${newId}`)
+  })
+
+
+  // Job details page
+  router.get('/application/work-history/job/:id', (req, res) => {
+    const { id } = req.params
+    res.render('application/work-history/job', {
+      id
+    })
+  })
+
+  // remove job page
+  router.get('/application/work-history/job/:id/delete', (req, res) => {
+    const { id } = req.params
+
+    res.render('application/work-history/delete-job', {
+      id
+    })
+  })
+
+  // remove job page
+  router.post('/application/work-history/job/:id/delete', (req, res) => {
+    const { id } = req.params
+
+    delete req.session.data.workHistory[id]
+
+    res.redirect("/application/work-history/review")
   })
 
   // Root path - show branching page if no data yet, otherwise the review page.
@@ -30,15 +67,10 @@ module.exports = router => {
     }
   })
 
-  router.get('/application/:applicationId/work-history/break/:id', (req, res) => {
+  router.get('/application/work-history/break/:id', (req, res) => {
     const { id } = req.params
-    const { start, end } = req.query
 
-    res.render('application/work-history/break', {
-      id,
-      start,
-      end
-    })
+    res.render('application/work-history/break')
   })
 
   router.post('/application/:applicationId/work-history/break/:id', (req, res) => {

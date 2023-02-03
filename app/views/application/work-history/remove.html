@@ -1,6 +1,4 @@
 {% extends "layouts/main.html" %}
-{% set applicationPath = "/application/" + applicationId %}
-
 
 {% set type = "entry" if item["category"] == "break" else "job" %}
 {% set title = "Are you sure you want to delete this " + type + "?" %}
@@ -12,9 +10,11 @@
 {% endblock %}
 
 {% block content %}
-  {{ govukButton({
-    text: "Yes I’m sure - delete this " + type,
-    classes: "govuk-button--warning"
-  }) }}
-  <p class="govuk-body"><a href="{{ applicationPath + "/work-history/review" }}">Cancel</a></p>
+  <form action="/application/work-history/{{ id }}/delete" method="post">
+    {{ govukButton({
+      text: "Yes I’m sure - delete this " + type,
+      classes: "govuk-button--warning"
+    }) }}
+    <p class="govuk-body"><a href="{{ applicationPath + "/work-history/review" }}">Cancel</a></p>
+  </form>
 {% endblock %}

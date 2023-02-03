@@ -169,8 +169,8 @@
             title: { text: "Work history" },
             href: applicationPath + "/work-history",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.workHistory == 'true'),
+              text: tagTextForSection(completed=data.completed.workHistory == 'true')
             }
           }, {
             title: { text: "Unpaid experience" },

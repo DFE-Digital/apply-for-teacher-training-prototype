@@ -1,3 +1,5 @@
+const utils = require('./../../utils')
+
 /**
  * Application: Degree routes
  */
@@ -39,10 +41,18 @@ module.exports = router => {
   // Render degree review page
   // Note: Must be defined before next route declaration
   router.get('/application/degree/review', (req, res) => {
-    const degrees = Object.keys(req.session.data.degrees)
 
-    // Needs to have at least 1 degree which is not a Foundation degree
-    const meetsMinimumDegreeCriteria = (degrees.length > 0 && !(degrees.every(degree => degree.level === 'Foundation')))
+    let meetsMinimumDegreeCriteria
+    if (req.session.data.degrees) {
+      const degrees = Object.keys(req.session.data.degrees)
+
+      // Needs to have at least 1 degree which is not a Foundation degree
+      meetsMinimumDegreeCriteria = (degrees.length > 0 && !(degrees.every(degree => degree.level === 'Foundation')))
+
+    } else {
+      meetsMinimumDegreeCriteria = false
+    }
+
 
     res.render('application/degree/review', {
       meetsMinimumDegreeCriteria

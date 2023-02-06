@@ -1,0 +1,82 @@
+{% extends "layouts/main.html" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "Ethnicity" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">Training providers will not see your answer to this question when deciding whether to offer you a place.</p>
+
+      <p class="govuk-body">They will only see your answer if you accept an offer from them.</p>
+
+      <form action="/equality-monitoring/ethnic-background" method="post">
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "What is your ethnic group?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            text: "White",
+            label: {
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Includes any White background"
+            }
+          },{
+            text: "Mixed or multiple ethnic groups",
+            label: {
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Includes any Mixed background"
+            }
+          },{
+            text: "Asian or Asian British",
+            label: {
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Includes any Asian background, for example, Bangladeshi, Chinese, Indian, Pakistani"
+            }
+          }, {
+            text: "Black, African, Caribbean or Black British",
+            label: {
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Includes any Black background"
+            }
+          }, {
+            text: "Another ethnic group",
+            label: {
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Includes any other ethnic group, for example, Arab"
+            }
+          }, {
+            divider: "or"
+          }, {
+            text: "Prefer not to say"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

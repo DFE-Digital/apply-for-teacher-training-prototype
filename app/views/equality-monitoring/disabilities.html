@@ -1,0 +1,115 @@
+{% extends "layouts/main.html" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "Disabilities and health conditions" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/equality-monitoring/sex"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+
+        {% set otherDisabilityHtml %}
+          {{ govukInput({
+            classes: "govuk-!-width-two-thirds",
+            label: {
+              text: "Your disability or health condition (optional)"
+            }
+          }) }}
+        {% endset -%}
+
+        <p class="govuk-body">Training providers will not see your answer to this question when deciding whether to offer you a place.</p>
+
+        <p class="govuk-body">They will only see your answer if you accept an offer from them.</p>
+
+        {% if data.additionalSupportNeeded == "no" %}
+          <p class="govuk-body">
+            You can <a href="/application/additional-support" class="govuk-link">ask for support as part of your application</a> if you want to tell training providers about your needs straight away.
+          </p>
+        {% endif %}
+
+        <form action="/equality-monitoring/ethnic-group" method="post">
+
+          {{ govukCheckboxes({
+            name: "equalityMonitoring[disabilities]",
+            values: data.equalityMonitoring.disabilities,
+            fieldset: {
+              legend: {
+                text: "Do you have any of these disabilities or health conditions?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+            {
+              value: "Autistic spectrum condition or another condition affecting speech, language, communication or social skills",
+              text: "Autistic spectrum condition or another condition affecting speech, language, communication or social skills"
+            },
+            {
+              value: "Blindness or a visual impairment not corrected by glasses",
+              text: "Blindness or a visual impairment not corrected by glasses"
+            }, {
+              value: "Condition affecting motor, cognitive, social and emotional skills, speech or language since childhood",
+              text: "Condition affecting motor, cognitive, social and emotional skills, speech or language since childhood"
+            }, {
+              value: "Deafness or a serious hearing impairment",
+              text: "Deafness or a serious hearing impairment"
+            }, {
+              value: "Dyslexia, dyspraxia or attention deficit hyperactivity disorder (ADHD) or another learning difference",
+              text: "Dyslexia, dyspraxia or attention deficit hyperactivity disorder (ADHD) or another learning difference"
+            }, {
+              value: "Long-term illness",
+              text: "Long-term illness",
+              hint: {
+                text: "For example, cancer, HIV, diabetes, chronic heart disease or epilepsy"
+              }
+            }, {
+              value: "Mental health condition",
+              text: "Mental health condition",
+              hint: {
+                text: "For example, depression, schizophrenia or anxiety disorder"
+              }
+            }, {
+              value: "Physical disability or mobility issue",
+              text: "Physical disability or mobility issue",
+              hint: {
+                text: "For example, impaired use of arms or legs, use of a wheelchair or crutches"
+              }
+            },
+             {
+              value: "other",
+              text: "Another disability, health condition or impairment affecting daily life",
+              conditional: {
+                html: otherDisabilityHtml
+              }
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not have any of these disabilities or health conditions",
+              behaviour: "exclusive"
+            },
+            {
+              divider: "or"
+            }, {
+              value: "Prefer not to say",
+              text: "Prefer not to say",
+              behaviour: "exclusive"
+            }]
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        </form>
+    </div>
+</div>
+{% endblock %}
+

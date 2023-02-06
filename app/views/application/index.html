@@ -97,10 +97,10 @@
           <p class="govuk-body">You can apply for up to 3 courses.</p>
         {% endif %}
 
-        {% if choices | length == 0 %}
-          {% set choicesHref = applicationPath + "/choices/add?from=application" %}
+        {% if data.choices | length == 0 %}
+          {% set choicesHref = applicationPath + "/choices/add" %}
         {% else %}
-          {% set choicesHref = applicationPath + "/choices" %}
+          {% set choicesHref = applicationPath + "/choices/review" %}
         {% endif %}
 
         {{ govukTaskList({
@@ -109,8 +109,8 @@
             href: choicesHref,
             id: "personal-information",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.choices == 'true'),
+              text: tagTextForSection(completed=data.completed.choices == 'true')
             }
           }]
         }) if not findNotOpen }}

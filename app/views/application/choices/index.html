@@ -1,82 +1,89 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
+{% set hasCourseFromFind = data.course_from_find %}
+{% set choices = data.choices %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set choices = applicationValue("choices") | toArray %}
-{% set choicesCount = choices | length %}
-{% set choicesRemaining = 3 - choicesCount %}
-{% if choicesCount >= 1 %}
-  {% set title = "Course choices" %}
+{% if hasCourseFromFind %}
+  {% set provider = providers[data.course_from_find.providerCode] %}
+  {% set course = provider.courses[data.course_from_find.courseCode] %}
+  {% set title = "You selected a course" %}
 {% else %}
-  {% set title = "Choosing courses" %}
+  {% set title = "Do you know which course you want to apply to?" %}
+{% endif %}
+{% set formaction = paths.current %}
+
+{% if data["from"] == "application" or (choices | length) == 0 %}
+  {% set backLinkHref = "/application/" %}
+{% else %}
+  {% set backLinkHref = "/application/choices" %}
 {% endif %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: backLinkHref
+  }) }}
 {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
-      {% if choicesRemaining != 0 %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
 
-        {% set addAnotherHtml %}
-
-          <p class="govuk-body">
-            {% if choicesRemaining == 1 %}
-              You can add 1 more course.
-            {% else %}
-              You can add {{ choicesRemaining }} more courses.
-            {% endif %}
-          </p>
-
-          {{ govukButton({
-            classes: "govuk-button--secondary",
-            text: "Add another course",
-            href: applicationPath + "/choices/add?from=choices"
-          }) }}
+      {% if hasCourseFromFind %}
+        {% set courseHtml %}
+          <a href="{{ data.findUrl }}/course/T92/X130" target="_blank" class="govuk-!-font-weight-bold" style="text-decoration: none">
+            <span class="govuk-!-font-size-19">
+              {{ provider.name }}
+            </span><br>
+            <span class="search-result-link-name govuk-!-font-size-24" style="text-decoration: underline">
+              {{ course.name_and_code }}
+            </span>
+          </a>
         {% endset %}
 
-        {{ govukInsetText({html: addAnotherHtml}) }}
+
+        {{ govukInsetText({
+            html: courseHtml,
+            classes: "govuk-!-margin-top-0"
+        }) }}
+
+        <h2 class="govuk-heading-m">Do you want to apply to this course?</h2>
+
+        {{ govukRadios({
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        } ) }}
+      {% else %}
+
+        <form action="/application/choices/course-known" method="post">
+          {{ govukRadios({
+            name: "courseKnown",
+            fieldset: {
+              legend: {
+                text: title,
+                isPageTitle: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [{
+              value: "yes",
+              text: "Yes, I know where I want to apply"
+            }, {
+              value: "no",
+              text: "No, I need to find a course"
+            }]
+          }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+        </form>
       {% endif %}
 
-      {% set referrer = applicationPath + "/choices" %}
-      {% set canAmend = true %}
-      {% set showChoiceStatus = false %}
-      {% include "_includes/review/choices.html" %}
 
-      {{ govukRadios({
-        fieldset: {
-          classes: "govuk-!-width-two-thirds",
-          legend: {
-            text: "Have you completed this section?",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        hint: {
-          text: "You can add " + choicesRemaining + (" more courses" if choicesRemaining > 1 else " more course")
-        } if choicesRemaining != 0,
-        items: [{
-          value: "true",
-          text: "Yes, I’ve completed this section"
-        }, {
-          value: "false",
-          text: "No, I’ll come back to it later"
-        }]
-      } | decorateApplicationAttributes(["completed", "choices"])) }}
-
-      {{ govukButton({
-        text: "Continue"
-      }) }}
     </div>
-  </div>
+  </form>
 {% endblock %}

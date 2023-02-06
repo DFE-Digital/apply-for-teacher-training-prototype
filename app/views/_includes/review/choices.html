@@ -1,107 +1,88 @@
-{% set complete = choices | length > 0 %}
-{% if complete %}
+{% set complete = data.choices | length > 0 %}
 
+{% for id, item in choices %}
 
-  {% for item in choices %}
-    {% set provider = providers[item.providerCode] %}
-    {% set course = provider.courses[item.courseCode] %}
-    {% set courseHtml %}
-      {% include "_includes/item/choice.html" %}
-    {% endset %}
-
-    {% set canRespond = item.status == "Offer received" %}
-
-    {% set hasResponded =
-      (item.status == "Conditions not met")
-      or (item.status == "Offer confirmed")
-      or (item.status == "Offer declined")
-      or (item.status == "Unsuccessful")
-      or (item.status == "Offer withdrawn")
-      or (item.status == "Application withdrawn")
-      or (item.status == "Application cancelled")
-    %}
-
-
-    {% set canWithdraw =
-      (item.status != "Offer received")
-      and (item.status != "Offer declined")
-      and (item.status != "Application not sent")
-      and (item.status != "Unsuccessful")
-      and (item.status != "Offer withdrawn")
-      and (item.status != "Application withdrawn")
-      and (item.status != "Conditions not met")
-      and (item.status != nil)
-      and data.applications[applicationId].status != 'started'
-    %}
-
-    {% set courseSummaryCard %}
-      {{ appSummaryCard({
-        classes: "govuk-!-margin-bottom-6",
-        headingLevel: 3,
-        titleText: provider.name,
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: item.providerName
+        },
         actions: {
           items: [{
-            href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
+            href: "/application/choices/" + id + "/delete",
             text: "Delete choice"
-          } if canAmend, {
-            href: applicationPath + "/" + item.id + "/withdraw",
-            text: "Withdraw"
-          } if canWithdraw, {
-            href: applicationPath + "/" + item.id + "/view",
-            text: "View and respond to offer"
-          } if canRespond and not hasResponded]
-        } if canAmend or canWithdraw or canRespond,
-        html: courseHtml
-      }) }}
-    {% endset %}
+          }]
+        }
+      },
+      rows: [
+        {
+          key: {
+            text: "Course"
+          },
+          value: {
+            text: item.course
+          },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/application/choices/" + id + "/course"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Location"
+          },
+          value: {
+            html: "Main Site<br>United Teaching School, Station Road, JS9 8WP"
+          }
+        },
+        {
+          key: {
+            text: "Type"
+          },
+          value: {
+            text: "QTS full time"
+          }
+        },
+        {
+          key: {
+            text: "Course length"
+          },
+          value: {
+            text: "1 year"
+          }
+        },
+        {
+          key: {
+            text: "Date course starts"
+          },
+          value: {
+            text: "September 2023"
+          }
+        },
+        {
+          key: {
+            text: "Degree required"
+          },
+          value: {
+            text: "2:2 degree or higher (or equivalent)"
+          }
+        },
+        {
+          key: {
+            text: "GCSE requirements"
+          },
+          value: {
+            text: "This provider will not accept equivalency tests"
+          }
+        }
 
-    {% set dateToday = "_" | dateNow | date %}
-    {% set dateCourseOpens = item.openFrom | date %}
+      ]
 
-    {% if dateCourseOpens > dateToday or item.full == true %}
-      <div class="govuk-inset-text app-inset-text--narrow-border app-inset-text--important govuk-!-padding-top-0 govuk-!-padding-bottom-0">
-        <h2 class="govuk-heading-s app-inset-text__title">
-          {% if dateCourseOpens > dateToday %}
-            You’ll be able to apply for this course from {{ dateCourseOpens | date("DDD") }}
-          {% else %}
-            You cannot apply to this course as there are no places left on it
-          {% endif %}
-        </h2>
-
-          {% if dateCourseOpens > dateToday %}
-            <p class="govuk-body">You need to either:</p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li class="govuk-body">wait until {{ dateCourseOpens | date("DDD") }} to submit your application</li>
-              <li class="govuk-body">delete or change this course choice</li>
-            </ul>
-          {% else %}
-            <p class="govuk-body">You need to either delete or change this course choice.</p>
-            <p class="govuk-body">{{ provider.name }} may be able to recommend an alternative course.</p>
-          {% endif %}
-
-        {{ courseSummaryCard | safe }}
-      </div>
-    {% else %}
-      {{ courseSummaryCard | safe }}
-    {% endif %}
+    })}}
 
 
-
-
-  {% endfor %}
-
-{% else %}
-  {% if showIncomplete %}
-    {{ appSuggestion({
-      id: "choices",
-      title: "Course choices are not marked as completed",
-      warning: true if errorList,
-      actions: {
-        items: [{
-          text: "Complete your course choices",
-          href: applicationPath + "/choices?referrer=" + referrer
-        }]
-      }
-    }) }}
-  {% endif %}
-{% endif %}
+{% endfor %}

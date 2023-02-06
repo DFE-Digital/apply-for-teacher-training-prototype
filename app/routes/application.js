@@ -162,7 +162,7 @@ module.exports = router => {
     })
   })
 
-  // require('./application/choices')(router)
+  require('./application/choices')(router)
   // require('./application/personal-information')(router)
   require('./application/contact-information')(router)
   // require('./application/english-language')(router)

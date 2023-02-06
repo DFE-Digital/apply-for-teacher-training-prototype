@@ -1,44 +1,21 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath + "/review-complete" %}
-{% set status = applicationValue(["status"]) %}
 {% set title = "Review your application" %}
-{% set referrer = applicationPath + "/review" %}
-{% set international = applicationValue(["candidate", "otherNationality1"]) %}
-{% set canAmend = true %}
+
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
 
-{% block beforePageTitle %}
-  {% if errorList %}
-    {{ govukErrorSummary({
-      titleText: "Your application cannot be submitted because it’s incomplete",
-      errorList: errorList
-    }) }}
-  {% endif %}
-
-  {{ govukNotificationBanner({
-    html: "<h2 class=\"govuk-notification-banner__heading\">Applications for courses starting this year have now closed</h2><p class=\"govuk-body\">Submit your application from 13 October for courses starting in 2021.</p>"
-  }) if closed }}
-{% endblock %}
-
 {% block content %}
-  {% set showIncomplete = true %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">{{ "Course" if applicationValue(["apply2"]) else "Courses" }}</h2>
-    {% if not closed %}
-      {% set choices = applicationValue(["choices"]) | toArray %}
-      {% set showChoiceStatus = false %}
-      {% include "_includes/review/choices.html" %}
-    {% else %}
-      <p>You can apply for courses from 13 October.</p>
-    {% endif %}
+    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+    {% include "_includes/review/choices.html" %}
   </section>
 
   <section class="app-section">
@@ -56,6 +33,7 @@
 
     <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
     {% set id = "english" %}
+    <h4 class="govuk-heading-s">English</h4>
     {% include "_includes/review/gcse.html" %}
 
     {% if international %}
@@ -63,10 +41,19 @@
     {% endif %}
 
     {% set id = "maths" %}
+    <h4 class="govuk-heading-s">Mathematics</h4>
     {% include "_includes/review/gcse.html" %}
 
-    {% if hasPrimaryChoices() or applicationValue(["gcse", "science"]) %}
+    {% set hasPrimaryChoice = false %}
+    {% for id, choice in data.choices %}
+      {% if choice.course == "Primary (7S9D)" %}
+        {% set hasPrimaryChoice = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if hasPrimaryChoice or data.gcse.science %}
       {% set id = "science" %}
+      <h4 class="govuk-heading-s">Science</h4>
       {% include "_includes/review/gcse.html" %}
     {% endif %}
 
@@ -116,45 +103,10 @@
     {% include "_includes/review/safeguarding.html" %}
   </section>
 
-  {% set dateToday = "_" | dateNow | date %}
-  {% set canSubmit = true %}
-  {% set cannotSubmitReasons = [] %}
 
-  {% set choices = applicationValue("choices") | toArray %}
-  {% for choice in choices %}
-    {% set dateCourseOpens = choice.openFrom | date %}
-    {% if dateCourseOpens > dateToday or choice.full == true %}
-      {% set canSubmit = false %}
-      {% set provider = providers[choice.providerCode] %}
-      {% set course = provider.courses[choice.courseCode] %}
 
-      {% if dateCourseOpens > dateToday %}
-        {% set cannotSubmitReasons = cannotSubmitReasons | push("you can only apply for " + course.name_and_code + " from " + (choice.openFrom | date("DDD"))) %}
-      {% else %}
-        {% set cannotSubmitReasons = cannotSubmitReasons | push("there are no places left on the " + course.name_and_code + " course") %}
-      {% endif %}
+  {{ govukButton({
+    text: "Continue"
+  }) }}
 
-    {% endif %}
-  {% endfor %}
-
-  {% if canSubmit %}
-    {{ govukButton({
-      text: "Continue"
-    }) if not closed }}
-  {% else %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      {% if cannotSubmitReasons.length == 1 %}
-        <p class="govuk-body">You cannot submit this application because {{ cannotSubmitReasons[0] }}.</p>
-      {% else %}
-        <p class="govuk-body">You cannot submit this application because:</p>
-        <ul class="govuk-list govuk-list--bullet">
-        {% for reason in cannotSubmitReasons %}
-          <li>{{ reason }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-  </div>
-    {% endif %}
-  {% endif %}
 {% endblock %}

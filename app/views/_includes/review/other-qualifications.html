@@ -2,18 +2,6 @@
 
 {% set international = data.otherNationality %}
 
-{{ appSuggestion({
-  id: "otherQualifications",
-  title: "A levels and other qualifications not marked as complete",
-  warning: true if errorList,
-  actions: {
-    items: [{
-      text: "Complete your other qualifications",
-      href: applicationPath + "/other-qualifications/review"
-    }]
-  }
-}) if not completed and showIncomplete }}
-
 {% if data.otherQualificationsAdded == "no" %}
 
   {{ govukSummaryList({

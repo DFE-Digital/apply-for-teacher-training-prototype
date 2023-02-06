@@ -1,6 +1,6 @@
 {% set complete = data.choices | length > 0 %}
 
-{% for id, item in choices %}
+{% for id, item in data.choices %}
 
     {{ govukSummaryList({
       card: {

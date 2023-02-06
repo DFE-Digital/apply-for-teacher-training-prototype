@@ -1,15 +1,4 @@
-{% from "_components/summary-card/macro.njk" import appSummaryCard %}
-
 {% set completed = data.completed[id] %}
 {% set gcseSubject = id | capitalize %}
 
-{% set summaryCardHtml %}
-
 {% include "_includes/item/gcse.html" %}
-{% endset %}
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  headingLevel: 3,
-  titleText: gcseSubject + " GCSE or equivalent",
-  html: summaryCardHtml
-}) }}

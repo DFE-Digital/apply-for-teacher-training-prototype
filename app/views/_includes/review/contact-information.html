@@ -1,4 +1,3 @@
-{% from "_components/summary-card/macro.njk" import appSummaryCard %}
 
 {% set completed = data.completed.contactInformation %}
 
@@ -24,37 +23,34 @@
 
 {% endset %}
 
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  html: govukSummaryList({
-    rows: [{
-      key: {
-        text: "Phone number"
-      },
-      value: {
-        text: data.phoneNumber
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/contact-information?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "phone number"
-        }]
-      } if canAmend
-    }, {
-      key: {
-        text: "Address"
-      },
-      value: {
-        html: addressHtml
-      },
-      actions: {
-        items: [{
-          href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
-          text: "Change",
-          visuallyHiddenText: "address"
-        }]
-      } if canAmend
-    }]
-  })
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Phone number"
+    },
+    value: {
+      text: data.phoneNumber
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/contact-information?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "phone number"
+      }]
+    }
+  }, {
+    key: {
+      text: "Address"
+    },
+    value: {
+      html: addressHtml
+    },
+    actions: {
+      items: [{
+        href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "address"
+      }]
+    }
+  }]
 }) }}

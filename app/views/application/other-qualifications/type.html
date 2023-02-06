@@ -1,6 +1,5 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set international = data.otherNationality %}
 {% set title = "What type of qualification do you want to add?" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
@@ -8,7 +7,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-      href: "/application/" + "/other-qualifications/review"
+      href: "/application/other-qualifications/review"
   }) }}
 {% endblock %}
 

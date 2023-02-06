@@ -4,15 +4,10 @@
 {% set title = "Choose a referee" %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/dashboard/" + applicationId
+      href: "/application/references"
     }) }}
-  {% endif %}
 {% endblock %}
 
 {% block content %}

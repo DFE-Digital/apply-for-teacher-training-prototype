@@ -1,15 +1,10 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/subject-knowledge/review" %}
 {% set title = "Your suitability to teach a subject or age group" %}
-{% set allowsFeedback = true %}
-{% set canAmend = true %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: applicationPath,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}

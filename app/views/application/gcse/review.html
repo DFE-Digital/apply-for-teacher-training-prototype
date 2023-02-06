@@ -1,15 +1,10 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/gcse/" + id + "/review" %}
 {% set title = (id | capitalize) + " GCSE or equivalent" %}
-{% set allowsFeedback = true %}
-{% set canAmend = true %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}

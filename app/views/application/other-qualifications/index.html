@@ -1,23 +1,14 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set international = true if data.otherNationality else false %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}
-{% set allowsFeedback = true %}
-{% set formaction = applicationPath + "/other-qualifications/answer" %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application",
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block content %}

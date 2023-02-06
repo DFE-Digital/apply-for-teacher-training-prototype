@@ -1,49 +1,50 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "Unpaid experience" %}
-{% set formaction = applicationPath + "/unpaid-experience/answer" %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block content %}
-  <p class="govuk-body">Tell us about any unpaid experience you have working with children or in a school. For example:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>one-off observations in a school</li>
-    <li>volunteering at a children's club</li>
-    <li>being a governor</li>
-  </ul>
-  <p class="govuk-body">You can also tell us about any other volunteering you’ve done, and how this supports your application to become a teacher.</p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">Tell us about any unpaid experience you have working with children or in a school. For example:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>one-off observations in a school</li>
+        <li>volunteering at a children's club</li>
+        <li>being a governor</li>
+      </ul>
+      <p class="govuk-body">You can also tell us about any other volunteering you’ve done, and how this supports your application to become a teacher.</p>
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-margin-top-6",
-      legend: {
-        text: "Do you have any relevant unpaid experience?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "Yes",
-      text: "Yes"
-    }, {
-      value: "No",
-      text: "No"
-    }]
-  } | decorateApplicationAttributes(["unpaidExperienceDisclose"])) }}
+      <form action="/application/unpaid-experience/review" method="post">
+        {{ govukRadios({
+          name: "unpaidExperienceAdded",
+          value: data.unpaidExperienceAdded,
+          fieldset: {
+            classes: "govuk-!-margin-top-6",
+            legend: {
+              text: "Do you have any relevant unpaid experience?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

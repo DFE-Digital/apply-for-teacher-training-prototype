@@ -176,8 +176,8 @@
             title: { text: "Unpaid experience" },
             href: applicationPath + "/unpaid-experience",
             status: {
-              classes: tagClassesForSection(completed=false),
-              text: tagTextForSection(completed=false)
+              classes: tagClassesForSection(completed=data.completed.unpaidExperience == 'true'),
+              text: tagTextForSection(completed=data.completed.unpaidExperience == 'true')
             }
           }]
         }) }}

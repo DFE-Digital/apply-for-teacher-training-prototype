@@ -1,0 +1,28 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Are you sure you want to withdraw this course choice?" %}
+{% set formaction = "/send-email/" + "/" + id + "/decision" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% include "_includes/item/offer.html" %}
+
+      <p class="govuk-body">If you withdraw this course choice  you can still apply for more courses this&nbsp;year.</p>
+
+      {{ govukButton({
+        classes: "govuk-button--warning",
+        text: "Yes I’m sure - withdraw this course choice",
+        name: "decision",
+        value: "withdraw"
+      }) }}
+    </div>
+  </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% for item in choices %}
+{% for id, item in data.choices %}
 
   {% set canRespond = item.status == "Offer received" %}
 
@@ -24,8 +24,8 @@
 
   {% set statusHtml %}
     {{ govukTag({
-      classes: item.status | statusClass,
-      text: item.status
+      classes: "",
+      text: item.status or "Awaiting decision"
     }) }}
 
     {% if item.status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
@@ -132,10 +132,10 @@
 
   {% set actionsHtml %}
     {% if canWithdraw %}
-      <p class="govuk-body"><a href="{{ applicationPath + "/" + item.id + "/withdraw" }}">Withdraw this application</a></p>
+      <p class="govuk-body"><a href="/dashboard/withdraw/{{ id }}">Withdraw this application</a></p>
     {% endif %}
     {% if canRespond and not hasResponded %}
-      <p class="govuk-body"><a href="{{ applicationPath + "/" + item.id + "/view" }}">Respond to offer</a></p>
+      <p class="govuk-body"><a "/dashboard/respond/{{ id }}">Respond to offer</a></p>
 
       <p class="govuk-body">
         {% if numberOfChoicesAwaitingDecision > 0 %}
@@ -148,8 +148,8 @@
   {% endset %}
 
   {% set summaryHeaderHtml %}
-    <span class="app-course-choice__provider-name">{{ providers[item.providerCode]["name"] }}</span>
-    <span class="app-course-choice__course-name">{{ providers[item.providerCode].courses[item.courseCode].name_and_code }}</span>
+    {{ item.providerName }}
+    <div class="govuk-!-font-weight-regular">{{ item.course }}</div>
   {% endset %}
 
   {% set skeHtml %}
@@ -169,8 +169,12 @@
 
   {% endset %}
 
-  {% set summaryBodyHtml %}
     {{ govukSummaryList({
+      card: {
+        title: {
+          html: summaryHeaderHtml
+        }
+      },
       classes: "govuk-!-margin-bottom-0",
       rows: [{
         key: {
@@ -218,19 +222,5 @@
         }
       } or canWithdraw or canRespond]
     }) }}
-  {% endset %}
-
-
-  {{ appSummaryCard({
-    classes: "app-course-choice govuk-!-margin-bottom-6",
-    titleHtml: summaryHeaderHtml,
-    actions: {
-      items: [{
-        href: applicationPath + "/submitted/?referrer=" + referrer,
-        text: "View application"
-      }]
-    },
-    html: summaryBodyHtml
-  }) }}
 
 {% endfor %}

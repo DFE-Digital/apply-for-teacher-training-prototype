@@ -1,5 +1,5 @@
 {% set conditionsHtml %}
-  {% set item = choice %}
+  {% set item = data.choices[id] %}
 
   {% if item.conditions | length > 0 %}
     <ul class="govuk-list govuk-list--bullet">
@@ -47,14 +47,14 @@
       text: "Provider"
     },
     value: {
-      text: provider.name
+      text: item.providerName
     }
   }, {
     key: {
       text: "Course"
     },
     value: {
-      html: "<a href=\"https://find-postgraduate-teacher-training.education.gov.uk/course/" + provider.code + "/" + course.code + "\">" + course.name_and_code + "</a><br>" + course.description
+      html: "<a href=\"#\">" + item.course + "</a>"
     }
   }, {
     key: {
@@ -76,7 +76,7 @@
       text: "Location"
     },
     value: {
-      html: choice.locationName + "<br>" + choice.locationAddress
+      html: "Someplace" + "<br>" + "Sometown"
     }
   }, {
     key: {

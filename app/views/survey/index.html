@@ -4,35 +4,45 @@
 {% set formaction = "/survey" %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <input type="hidden" name="applicationId" value="{{ applicationId }}" />
+      <form action="/dashboard" method="post">
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        classes: "govuk-fieldset__legend--m",
-        text: "How satisfied are you with this service? (optional)"
-      }
-    },
-    items: [
-      { text: "Very satisfied" },
-      { text: "Satisfied" },
-      { text: "Neither satisfied or dissatisfied" },
-      { text: "Dissatisfied" },
-      { text: "Very dissatisfied" }
-    ]
-  }) }}
+        {{ govukRadios({
+          name: "survey[satisfaction]",
+          value: data.survey.satisfaction,
+          fieldset: {
+            legend: {
+              classes: "govuk-fieldset__legend--m",
+              text: "How satisfied are you with this service? (optional)"
+            }
+          },
+          items: [
+            { text: "Very satisfied" },
+            { text: "Satisfied" },
+            { text: "Neither satisfied or dissatisfied" },
+            { text: "Dissatisfied" },
+            { text: "Very dissatisfied" }
+          ]
+        }) }}
 
-  {{ govukCharacterCount({
-    label: {
-      classes: "govuk-label--m",
-      text: "How could we improve this service? (optional)"
-    },
-    maxwords: 1200,
-    rows: 6
-  }) }}
+        {{ govukCharacterCount({
+          name: "survey[suggestions]",
+          value: data.survey.suggestions,
+          label: {
+            classes: "govuk-label--m",
+            text: "How could we improve this service? (optional)"
+          },
+          maxwords: 1200,
+          rows: 6
+        }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

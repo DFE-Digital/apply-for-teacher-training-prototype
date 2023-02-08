@@ -21,6 +21,8 @@
       <p class="govuk-body">This question helps the Department for Education understand the background of trainee teachers. Free school meals have generally only been available to children from  families that receive benefits.</p>
 
       {{ govukRadios({
+        name: "equalityMonitoring[freeSchoolMeals]",
+        value: data.equalityMonitoring.freeSchoolMeals,
         fieldset: {
           legend: {
             text: title,
@@ -28,16 +30,21 @@
           }
         },
         items: [{
+          value: "Yes",
           text: "Yes"
         }, {
+          value: "No",
           text: "No"
         }, {
+          value: "I did not go to school in the UK",
           text: "I did not go to school in the UK"
         }, {
+          value: "I do not know",
           text: "I do not know"
         }, {
           divider: "or"
         }, {
+          value: "Prefer not to say",
           text: "Prefer not to say"
         }]
       }) }}

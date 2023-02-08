@@ -17,7 +17,7 @@
   {% if data.equalityMonitoring.ethnicGroup %}
     {% if data.equalityMonitoring.ethnicGroup != "Prefer not to say" %}
       {% if data.equalityMonitoring.ethnicBackground != "Prefer not to say" %}
-        {{ applicationValue(["equality-monitoring", "ethnic-background-other"]) or data.equalityMonitoring.ethnicBackground }}
+        {{ data.equalityMonitoring.ethnicBackground }}
       {% endif %}
     {% endif %}
   {% else %}

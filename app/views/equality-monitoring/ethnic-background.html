@@ -35,6 +35,8 @@
 
       {% if ethnicGroup == "Asian or Asian British" %}
         {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
           fieldset: {
             attributes: {
               "data-module": "clear-hidden"
@@ -63,6 +65,8 @@
         }) }}
       {% elif ethnicGroup == "Black, African, Caribbean or Black British" %}
         {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
           fieldset: {
             attributes: {
               "data-module": "clear-hidden"
@@ -85,6 +89,8 @@
         }) }}
       {% elif ethnicGroup == "Mixed or multiple ethnic groups" %}
         {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
           fieldset: {
             attributes: {
               "data-module": "clear-hidden"
@@ -109,20 +115,27 @@
         }) }}
       {% elif ethnicGroup == "White" %}
         {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
           fieldset: {
             attributes: {
               "data-module": "clear-hidden"
             }
           },
           items: [{
+            value: "English, Welsh, Scottish, Northern Irish or British",
             text: "English, Welsh, Scottish, Northern Irish or British"
           }, {
+            value: "Irish",
             text: "Irish"
           }, {
+            value: "Gypsy or Irish Traveller",
             text: "Gypsy or Irish Traveller"
           }, {
+            value: "Roma",
             text: "Roma"
           }, {
+            value: "Any other White background",
             text: "Any other White background",
             conditional: {
               html: otherHtml
@@ -130,11 +143,14 @@
           }, {
             divider: "or"
           }, {
+            value: "Prefer not to say",
             text: "Prefer not to say"
           }]
         }) }}
       {% else %}
         {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
           fieldset: {
             attributes: {
               "data-module": "clear-hidden"

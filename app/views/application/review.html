@@ -11,38 +11,66 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="govuk-heading-l">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+    <h2 class="govuk-heading-l">Personal details</h2>
+
+    <h3 class="govuk-heading-m">Personal information</h3>
+   <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/personal-information.html" %}
+      </div>
+   </div>
+
+    <h3 class="govuk-heading-m">Contact information</h3>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+       {% include "_includes/review/contact-information.html" %}
+      </div>
+    </div>
+  </section>
+
+  <section class="app-section">
+    <h2 class="govuk-heading-l">Courses</h2>
     {% include "_includes/review/choices.html" %}
   </section>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
-
-    <h3 class="govuk-heading-m">Personal information</h3>
-    {% include "_includes/review/personal-information.html" %}
-
-    <h3 class="govuk-heading-m">Contact information</h3>
-    {% include "_includes/review/contact-information.html" %}
-  </section>
-
-  <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+    <h2 class="govuk-heading-l">Qualifications</h2>
 
     <h3 class="govuk-heading-m">GCSEs or equivalent</h3>
     {% set id = "english" %}
-    <h4 class="govuk-heading-s">English</h4>
-    {% include "_includes/review/gcse.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h4 class="govuk-summary-card__title">English</h4>
+      </div>
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/gcse.html" %}
+      </div>
+    </div>
 
     {% if international %}
-      {% include "_includes/review/english-language.html" %}
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h4 class="govuk-summary-card__title">English as a foreign language</h4>
+        </div>
+        <div class="govuk-summary-card__content">
+          {% include "_includes/review/english-language.html" %}
+        </div>
+     </div>
     {% endif %}
 
     {% set id = "maths" %}
-    <h4 class="govuk-heading-s">Mathematics</h4>
-    {% include "_includes/review/gcse.html" %}
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h4 class="govuk-summary-card__title">Mathematics</h4>
+      </div>
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/gcse.html" %}
+      </div>
+    </div>
 
     {% set hasPrimaryChoice = false %}
     {% for id, choice in data.choices %}
@@ -53,54 +81,92 @@
 
     {% if hasPrimaryChoice or data.gcse.science %}
       {% set id = "science" %}
-      <h4 class="govuk-heading-s">Science</h4>
-      {% include "_includes/review/gcse.html" %}
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h4 class="govuk-summary-card__title">Science</h4>
+        </div>
+        <div class="govuk-summary-card__content">
+          {% include "_includes/review/gcse.html" %}
+        </div>
+      </div>
     {% endif %}
 
     <h3 class="govuk-heading-m">{{ "Other qualifications" if international else "A levels and other qualifications" }}</h3>
-    {% include "_includes/review/other-qualifications.html" %}
+     {% include "_includes/review/other-qualifications.html" %}
 
     <h3 class="govuk-heading-m">Degree</h3>
     {% include "_includes/review/degrees.html" %}
   </section>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
+    <h2 class="govuk-heading-l">Work experience</h2>
 
     <h3 class="govuk-heading-m">Work history</h3>
-    {% include "_includes/review/work-history.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/work-history.html" %}
+      </div>
+    </div>
 
     <h3 class="govuk-heading-m">Unpaid experience</h3>
-    {% include "_includes/review/unpaid-experience.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/unpaid-experience.html" %}
+      </div>
+    </div>
   </section>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
+    <h2 class="govuk-heading-l">Personal statement</h2>
 
     <h3 class="govuk-heading-m">Why you want to teach</h3>
-    {% include "_includes/review/personal-statement.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/personal-statement.html" %}
+      </div>
+    </div>
 
     <h3 class="govuk-heading-m">Your suitability to teach a subject or age group</h3>
-    {% include "_includes/review/subject-knowledge.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/subject-knowledge.html" %}
+      </div>
+    </div>
   </section>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
+    <h2 class="govuk-heading-l">Adjustments</h2>
 
     <h3 class="govuk-heading-m">Ask for support if you’re disabled</h3>
-    {% include "_includes/review/additional-support.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/additional-support.html" %}
+      </div>
+    </div>
 
     <h3 class="govuk-heading-m">Interview needs</h3>
-    {% include "_includes/review/interview-needs.html" %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/interview-needs.html" %}
+      </div>
+    </div>
   </section>
 
   <section class="app-section">
-    <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
+    <h2 class="govuk-heading-l">Safeguarding</h2>
     <h3 class="govuk-heading-m">References to be requested if you accept an offer</h3>
-    {% include "_includes/review/references.html" %}
+    {% if data.references | length > 0 %}
+      {% for id, item in data.references %}
+        {% include "_includes/item/reference.html" %}
+      {% endfor %}
+    {% endif %}
 
-
-    {% include "_includes/review/safeguarding.html" %}
+    <h3 class="govuk-heading-m">Declare any safeguarding issues</h3>
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        {% include "_includes/review/safeguarding.html" %}
+      </div>
+    </div>
   </section>
 
 

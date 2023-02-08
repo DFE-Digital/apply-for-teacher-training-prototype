@@ -74,7 +74,7 @@
           text: "Change",
           visuallyHiddenText: "whether you have this qualification"
         }]
-      } if canAmend
+      }
     },
     {
       key: { text: "Are you currently studying for this qualification?" },
@@ -85,7 +85,7 @@
           text: "Change",
           visuallyHiddenText: "whether you are studying for this qualification"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Other evidence I have the skills required"
@@ -99,7 +99,7 @@
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
-      } if canAmend
+      }
     } if (item.currentlyStudying == 'no')
     ]
   }) }}
@@ -118,7 +118,7 @@
           text: "Change",
           visuallyHiddenText: "year"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Country"
@@ -132,7 +132,7 @@
           text: "Change",
           visuallyHiddenText: "country"
         }]
-      } if canAmend
+      }
     } if item.type == "Non-UK qualification", {
       key: {
         text: "Do you have a UK ENIC statement of comparability?"
@@ -146,7 +146,7 @@
           text: "Change",
           visuallyHiddenText: "UK ENIC statement of comparability"
         }]
-      } if canAmend
+      }
     } if item.type == "Non-UK qualification" and item.enic, {
       key: {
         text: "UK ENIC reference number"
@@ -160,7 +160,7 @@
           text: "Change",
           visuallyHiddenText: "UK ENIC reference"
         }]
-      } if canAmend
+      }
     } if item.enic and item.enicReference, {
       key: {
         text: "Comparable UK qualification"
@@ -174,7 +174,7 @@
           text: "Change",
           visuallyHiddenText: "comparable UK qualification"
         }]
-      } if canAmend
+      }
     } if item.enic and item.enicComparability, {
       key: {
         text: "Grade"
@@ -188,7 +188,7 @@
           text: "Change",
           visuallyHiddenText: "grade"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Year awarded"
@@ -202,7 +202,7 @@
           text: "Change",
           visuallyHiddenText: "year"
         }]
-      } if canAmend
+      }
     },
     {
       key: { text: "Are you currently studying to retake this qualification?" },
@@ -213,7 +213,7 @@
           text: "Change",
           visuallyHiddenText: "whether you are re-taking this qualification"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Other evidence I have the skills required"
@@ -227,7 +227,7 @@
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
-      } if canAmend
+      }
     } if item.currentlyRetaking == 'no']
   }) }}
 {% endif %}

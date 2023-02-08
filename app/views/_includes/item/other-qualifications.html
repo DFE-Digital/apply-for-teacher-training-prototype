@@ -42,7 +42,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       },
       {
         key: {
@@ -57,7 +57,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       },
       {
         key: {
@@ -72,7 +72,7 @@
             text: "Change",
             visuallyHiddenText: "country"
           }]
-        } if canAmend
+        }
       } if item.country, {
         key: {
           text: "Year awarded"
@@ -86,7 +86,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       }, {
         key: {
           text: "Grade (optional)"
@@ -100,7 +100,7 @@
             text: "Change",
             visuallyHiddenText: "grade"
           }]
-        } if canAmend
+        }
       }
     ]
 
@@ -116,7 +116,7 @@
         href: applicationPath + "/other-qualifications/" + item.id + "/delete",
         text: "Delete qualification"
       }]
-    } if canAmend,
+    },
     html: govukSummaryList({
       rows: [{
         key: {
@@ -131,7 +131,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       }, {
         key: {
           text: "Subject" + (" (optional)" if item.type == "Non-UK qualification")
@@ -145,7 +145,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       }, {
         key: {
           text: "Country"
@@ -159,7 +159,7 @@
             text: "Change",
             visuallyHiddenText: "country"
           }]
-        } if canAmend
+        }
       } if item.country, {
         key: {
           text: "Year awarded"
@@ -173,7 +173,7 @@
             text: "Change",
             visuallyHiddenText: "year"
           }]
-        } if canAmend
+        }
       }, {
         key: {
           text: "Grade (optional)"
@@ -187,7 +187,7 @@
             text: "Change",
             visuallyHiddenText: "grade"
           }]
-        } if canAmend
+        }
       }]
     })
   }) if item.type != "None" }} -->

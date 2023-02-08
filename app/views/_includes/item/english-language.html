@@ -34,7 +34,7 @@
           text: "Change",
           visuallyHiddenText: "answer"
         }]
-      } if canAmend
+      }
     }]
   }) }}
 {% elif missing %}
@@ -52,7 +52,7 @@
           text: "Change",
           visuallyHiddenText: "answer"
         }]
-      } if canAmend
+      }
     }]
   }) }}
 {% else %}
@@ -70,7 +70,7 @@
           text: "Change",
           visuallyHiddenText: "answer"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Type of qualification"
@@ -84,7 +84,7 @@
           text: "Change",
           visuallyHiddenText: "type"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: certificateItemText
@@ -98,7 +98,7 @@
           text: "Change",
           visuallyHiddenText: "certifcate number"
         }]
-      } if canAmend
+      }
     } if item.type != "Other", {
       key: {
         text: "Year awarded"
@@ -112,7 +112,7 @@
           text: "Change",
           visuallyHiddenText: "year"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: gradeItemText
@@ -126,7 +126,7 @@
           text: "Change",
           visuallyHiddenText: "score"
         }]
-      } if canAmend
+      }
     }]
   }) }}
 {% endif %}

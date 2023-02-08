@@ -1,3 +1,5 @@
+const utils = require('./../../utils')
+
 module.exports = router => {
 
   router.post('/application/choices/course-known', (req, res) => {

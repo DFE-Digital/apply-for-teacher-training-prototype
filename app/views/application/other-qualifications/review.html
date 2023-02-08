@@ -38,7 +38,9 @@
         {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
       {% endif %}
 
-      {% include "_includes/review/other-qualifications.html" %}
+      <div class="govuk-!-width-two-thirds">
+        {% include "_includes/review/other-qualifications.html" %}
+      </div>
 
     {% endif %}
 

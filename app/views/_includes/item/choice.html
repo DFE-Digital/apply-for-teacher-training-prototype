@@ -157,7 +157,7 @@
         text: "Change",
         visuallyHiddenText: "course"
       }]
-    } if canAmend
+    }
   }, {
     key: {
       text: "Location"
@@ -171,7 +171,7 @@
         text: "Change",
         visuallyHiddenText: "course location"
       }]
-    } if canAmend and not item.singleLocationCourse
+    } and not item.singleLocationCourse
   }, {
     key: {
       text: "Type"

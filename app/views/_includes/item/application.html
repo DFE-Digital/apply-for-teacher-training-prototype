@@ -12,14 +12,14 @@
       items: [{
         href: applicationPath + "/choices/" + item.id + "/delete?referrer=" + referrer,
         text: "Delete choice"
-      } if canAmend, {
+      }, {
         href: applicationPath + "/" + item.id + "/withdraw",
         text: "Withdraw"
       } if canWithdraw, {
         href: applicationPath + "/" + item.id + "/view",
         text: "View and respond to offer"
       } if canRespond and not hasResponded]
-    } if canAmend or canWithdraw or canRespond,
+    } or canWithdraw or canRespond,
     html: courseHtml
   }) }}
 {% endfor %}

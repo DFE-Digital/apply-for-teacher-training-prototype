@@ -1,4 +1,4 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
 {% set reference = applicationValue(["references", id]) %}
 {% set canNudgeReferee = (reference.status == 'Requested') %}

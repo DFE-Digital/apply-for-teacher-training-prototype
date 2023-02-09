@@ -175,11 +175,8 @@ module.exports = router => {
 
   // This lets the candidate receive an offer from all their chocies
   router.get('/admin/receive-offer', (req, res) => {
-    const applicationId = req.query.applicationId
-    var application = utils.applicationData(req)
 
-    for (const choiceId in application.choices) {
-      const choice = application.choices[choiceId]
+    for (choice of Object.values(req.session.data.choices)) {
 
       choice.status = 'Offer received'
       choice.conditions = [
@@ -188,7 +185,7 @@ module.exports = router => {
       ]
     }
 
-    res.redirect(`/dashboard/${applicationId}`)
+    res.redirect(`/dashboard`)
   })
 
   // This pre-fills most of the applicaiton apart from the sections we want to test.

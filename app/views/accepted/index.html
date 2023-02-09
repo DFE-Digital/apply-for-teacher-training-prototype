@@ -2,8 +2,6 @@
 
 {% set title = "Your application" %}
 
-{% set choices = application.choices | toArray %}
-
 <!-- TODO -->
 {% set ske = true %}
 
@@ -25,13 +23,15 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+      {{ acceptedChoice | dump }}
+
       {% if acceptedChoice.status == "Offer deferred" %}
 
         <p class="govuk-body">You’ve chosen to defer your course.</p>
 
       {% else %}
         <p class="govuk-body">
-          You’ve accepted an offer from {{ providerName }} to study Mathematics (BE434).
+          You’ve accepted an offer from {{ acceptedChoice.providerName }} to study {{ acceptedChoice.course }}.
         </p>
       {% endif %}
 
@@ -56,7 +56,7 @@
 
       <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
-      <p class="govuk-body">Contact {{ providerName }} if you need help getting references.</p>
+      <p class="govuk-body">Contact {{ acceptedChoice.providerName }} if you need help getting references.</p>
 
       {% set referenceCondition = {} %}
         {% for condition in item.conditions %}
@@ -65,11 +65,11 @@
           {% endif %}
         {% endfor %}
 
-          {% set references = applicationValue(["references"]) | toArray %}
+          {% set references = data.references %}
 
           {% set referenceItems = [] %}
 
-          {% for item in references %}
+          {% for id, item in data.references %}
             {% if item.name %}
               {% set itemText %}
                 <a href="/accepted/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
@@ -97,23 +97,23 @@
                   </p>
                 {% endif %}
 
-
               {% endset %}
 
-
-              {% set referenceItems = referenceItems | push({
-                text: itemText,
-                tag: {
-                  text: item.status,
-                  classes: item.status | statusClass
+              {% set referenceItems = (referenceItems.push({
+                title: {
+                  text: item.name
+                },
+                href: "/accepted/references/" + id,
+                status: {
+                  text: (item.status or "Requested"),
+                  classes: item.status
                 }
-              }) %}
+              }), referenceItems) %}
             {% endif %}
           {% endfor %}
 
-
         {% if references | length > 0 %}
-          {{ appTaskList({
+          {{ govukTaskList({
             items: referenceItems,
             classes: "govuk-!-margin-bottom-4"
           }) }}
@@ -131,55 +131,29 @@
 
         <h2 class="govuk-heading-m">Subject knowledge enhancement course</h2>
 
-        {% set skeHtml %}
-          20 week maths course
-
-          {% if application.skeProvider and application.skeCompleted %}
-            <br><span class="govuk-body-s">You did this course with {{ application.skeProvider }}</span>
-          {% elif application.skeProvider %}
-            <br><span class="govuk-body-s">You’re doing this course with {{ application.skeProvider }}</span>
-          {% endif %}
-        {% endset %}
-
-        {% if application.skeCompleted %}
-          {% set skeStatus = "Completed" %}
-          {% set skeStatusClass = "govuk-tag--green" %}
-        {% elif application.skeProvider %}
-          {% set skeStatus = "Started" %}
-          {% set skeStatusClass = "govuk-tag--purple" %}
-        {% else %}
-          {% set skeStatus = "Not completed" %}
-          {% set skeStatusClass = "govuk-tag--blue" %}
-        {% endif %}
-
-        {{ appTaskList({
+        {{ govukTaskList({
           classes: "govuk-!-margin-bottom-5",
           items: [
             {
-              text: skeHtml,
-              tag: {
-                text: skeStatus,
-                classes: skeStatusClass
+              title: {
+                text: "20 week maths course"
+              },
+              status: {
+                text: "Not completed",
+                classes: "govuk-task-list__status--blue"
               }
             }
           ]
         }) }}
 
-        {% if application.skeCompleted %}
+        <p class="govuk-body">Contact {{ acceptedChoice.providerName }} if you think you may not finish this course before your teacher training starts.</p>
+        <p class="govuk-body">You should start this course by April 2023 to give yourself enough time to finish it before your teacher training starts in September 2023.</p>
 
-        {% elif application.skeProvider %}
-          <p class="govuk-body">Contact {{ providerName }} if you think you may not finish this course before your teacher training starts.</p>
+        <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
 
-        {% else %}
-          <p class="govuk-body">You should start this course by April 2023 to give yourself enough time to finish it before your teacher training starts in September 2023.</p>
+        <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory">Choose a provider to do your course with</a>.</p>
 
-          <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
-
-          <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory">Choose a provider to do your course with</a>.</p>
-
-          <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
-
-        {% endif %}
+        <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
 
       {% endif %}
       {% if acceptedChoice.conditions | length > 0 %}
@@ -194,17 +168,19 @@
           {% for condition in acceptedChoice.conditions %}
 
             {% if condition.title != 'References' %}
-              {% set taskItems = taskItems | push({
-                text: condition.title,
-                tag: {
-                  classes: condition.status | statusClass,
+              {% set taskItems = (taskItems.push({
+                title: {
+                  text: condition.title
+                },
+                status: {
+                  classes: "govuk-task-list__status--blue",
                   text: condition.status
                 }
-              }) %}
+              }), taskItems) %}
             {% endif %}
           {% endfor %}
 
-          {{ appTaskList({
+          {{ govukTaskList({
             classes: "govuk-!-margin-bottom-5",
             items: taskItems
           }) }}

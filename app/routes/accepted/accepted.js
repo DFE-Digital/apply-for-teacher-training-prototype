@@ -2,6 +2,16 @@ const utils = require('./../../utils')
 
 module.exports = router => {
 
+  router.get('/accepted', (req, res) => {
+
+    const acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+
+    res.render('accepted/index', {
+      acceptedChoice
+    })
+  })
+
+
   // Generate new ID and redirect to start of referee flow
   router.get('/accepted/references/add', (req, res) => {
     const id = utils.generateRandomString()

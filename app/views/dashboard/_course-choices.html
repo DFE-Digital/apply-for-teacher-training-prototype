@@ -31,9 +31,9 @@
     {% if item.status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
       {{ govukDetails({
         classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
-        summaryText: "What to do if you’re unable to start training in " + item.starts | date("MMMM yyyy"),
+        summaryText: "What to do if you’re unable to start training in September 2023",
         html: "<p>You can defer your offer which means that you could start your course a year later.</p>
-        <p>Contact " + providers[item.providerCode].name + " to ask if it‘s possible to defer, this will not affect your existing offer.</p>
+        <p>Contact " + item.providerName + " to ask if it‘s possible to defer, this will not affect your existing offer.</p>
         <p>If your provider agrees, you‘ll need to accept the offer on your account first and then defer it.</p>"
       }) }}
     {% endif %}
@@ -135,7 +135,7 @@
       <p class="govuk-body"><a href="/dashboard/withdraw/{{ id }}">Withdraw this application</a></p>
     {% endif %}
     {% if canRespond and not hasResponded %}
-      <p class="govuk-body"><a "/dashboard/respond/{{ id }}">Respond to offer</a></p>
+      <p class="govuk-body"><a href="/dashboard/respond/{{ id }}">Respond to offer</a></p>
 
       <p class="govuk-body">
         {% if numberOfChoicesAwaitingDecision > 0 %}

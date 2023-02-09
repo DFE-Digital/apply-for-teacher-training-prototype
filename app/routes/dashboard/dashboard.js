@@ -72,12 +72,18 @@ module.exports = router => {
     })
   })
 
-
   router.post('/dashboard/withdraw/:id', (req, res) => {
     const { id } = req.params
 
     req.session.data.choices[id].status = 'Withdrawn'
-
     res.redirect('/dashboard')
+  })
+
+  router.get('/dashboard/respond/:id', (req, res) => {
+    const { id } = req.params
+
+    res.render('dashboard/respond', {
+      id
+    })
   })
 }

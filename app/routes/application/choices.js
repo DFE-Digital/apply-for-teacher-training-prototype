@@ -2,21 +2,19 @@ const utils = require('./../../utils')
 
 module.exports = router => {
 
+  // Branch based on whether they said they know which course to
+  // apply to.
   router.post('/application/choices/course-known', (req, res) => {
-
     const courseKnown = req.body.courseKnown
 
     if (courseKnown == "yes") {
-
       const choiceId = utils.generateRandomString()
       res.redirect(`/application/choices/${choiceId}/provider`)
-
     } else if (courseKnown == "no") {
-
       res.redirect(`/application/choices/find`)
-
     } else {
-      res.redirect('/application/choices/found')
+      // return to question page
+      res.redirect('/application/choices')
     }
 
   })

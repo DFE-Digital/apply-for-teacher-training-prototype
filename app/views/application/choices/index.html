@@ -14,7 +14,7 @@
 {% if data["from"] == "application" or (choices | length) == 0 %}
   {% set backLinkHref = "/application/" %}
 {% else %}
-  {% set backLinkHref = "/application/choices" %}
+  {% set backLinkHref = "/application/choices/review" %}
 {% endif %}
 
 {% block beforeContent %}

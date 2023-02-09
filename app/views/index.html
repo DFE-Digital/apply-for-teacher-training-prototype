@@ -1,8 +1,5 @@
 {% extends "layouts/main.html" %}
 
-{% from "_components/related/macro.njk" import appRelated %}
-
-
 {% set title = "Apply for teacher training" %}
 {% set hasAccountLinks = false %}
 {% set hasSecondary = true %}
@@ -82,25 +79,20 @@
       <p class="govuk-body">Email <a href="mailto:becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a> if you need extra support with your application.</p>
 
       <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/train-to-teach-with-a-disability">Find out how training providers can support you if you’re disabled</a>. They may be able to make adjustments for the interview stages of the application and throughout the course.</p>
-
-      {{ appRelated({
-        classes: "govuk-!-margin-top-8",
-        title: "Explore the topic",
-        items: [{
-          text: "Universities and higher education",
-          href: "https://www.gov.uk/browse/education/universities-higher-education"
-        }]
-      }) }}
     </div>
 
     <div class="govuk-grid-column-one-third">
-      {{ appRelated({
-        title: "Related content",
-        items: [{
-          text: "Find postgraduate teacher training courses",
-          href: "https://www.gov.uk/find-postgraduate-teacher-training-courses"
-        }]
-      }) }}
+      <div  class="govuk-!-padding-top-4" style="border-top: 2px solid #1d70b8;">
+        <h2 class="govuk-heading-s">Related content</h2>
+
+        <a href="https://www.gov.uk/find-postgraduate-teacher-training-courses" class="govuk-link">Find postgraduate teacher training course</a>
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-bottom-3">
+
+        <h3 class="govuk-body-s">Collection</h3>
+
+        <a href="https://www.gov.uk/government/collections/non-uk-teachers-and-trainees" class="govuk-link govuk-!-font-weight-bold">Non-UK teachers and trainees</a>
+      </div>
     </div>
   </div>
 {% endblock %}

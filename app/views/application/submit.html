@@ -38,7 +38,7 @@
         }) }}
       {% endset -%}
 
-      <form action="/survey" method="post">
+      <form action="/application/submit" method="post">
         {{ govukRadios({
           name: "additionalInformationAdded",
           value: data.additionalInformationAdded,

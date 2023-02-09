@@ -8,7 +8,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/dashboard" method="post">
+      <form action="/dashboard?confirmation=true" method="post">
 
         {{ govukRadios({
           name: "survey[satisfaction]",

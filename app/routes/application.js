@@ -73,73 +73,29 @@ module.exports = router => {
 //     })
 //   })
 
-  // Generate a new application from an existing one
-  router.get('/application/:applicationId/apply2', (req, res) => {
-    const code = 12346
-    const { applications } = req.session.data
-    const existingApplicationId = req.params.applicationId
-    const existingApplication = applications[existingApplicationId]
-    const apply2Application = JSON.parse(JSON.stringify(existingApplication))
+  // Reset application so the user can apply again
+  router.post('/application/apply-again', (req, res) => {
 
-    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
-      apply2Application.apply2 = false
-    } else {
-      apply2Application.apply2 = true
-    }
+    // Remove previous course choices
+    req.session.data.choices = {}
 
-    apply2Application.choices = {}
-    apply2Application.completed.choices = false
-    apply2Application.completed.references = false
-    apply2Application.previousApplications = [existingApplicationId]
+    req.session.data.completed.choices = 'false'
 
-    for (const choice of utils.toArray(existingApplication.choices)) {
-      if (choice?.feedback?.personalStatement?.qualityOfWriting || choice?.feedback?.personalStatement?.other) {
-        apply2Application.completed.personalStatement = false
-        apply2Application.completed.subjectKnowledge = false
-      }
+    res.redirect('/application')
+  })
 
-      if (choice?.feedback?.qualifications?.noMathsGCSEOrEquivalent) {
-        apply2Application.completed.maths = false
+
+  // Submit application action
+  router.post('/application/submit', (req, res) => {
+    // Set status of each choice to 'Awaiting decision'
+    const choices = req.session.data.choices
+    if (choices) {
+      for (id of Object.keys(choices)) {
+        choices[id].status = 'Awaiting decision'
       }
     }
 
-    for (const referenceId in apply2Application.references) {
-      const reference = apply2Application.references[referenceId]
-
-      if (reference.status === 'Requested') {
-        // Reset back to not requested yet, as will have to be re-requested.
-        reference.status = 'Not sent'
-      } else if (reference.status === 'Request cancelled' || reference.status === 'Cannot give reference') {
-        // Remove cancelled or declined references
-        delete apply2Application.references.referenceId
-      }
-    }
-
-    if (apply2Application.references && apply2Application.references[0]) {
-      if (apply2Application.references[0].status !== 'Received by training provider') {
-        apply2Application.references[0].status = 'Not sent'
-      }
-    }
-
-    if (apply2Application.references && apply2Application.references[1]) {
-      if (apply2Application.references[1].status !== 'Received by training provider') {
-        apply2Application.references[1].status = 'Not sent'
-      }
-    }
-
-    if (apply2Application.references && apply2Application.references[2]) {
-      if (apply2Application.references[2].status !== 'Received by training provider') {
-        apply2Application.references[2].status = 'Not sent'
-      }
-    }
-
-    applications[code] = apply2Application
-
-    if (existingApplication.cycleDeadlinePassed === true || req.query.from === 'unsubmitted') {
-      res.redirect(`/application/${code}?findNotOpen=true&cycleNotOpen=true`)
-    } else {
-      res.redirect(`/application/${code}?copied=true`)
-    }
+    res.redirect('/survey')
   })
 
   // Render course-specific submitted page
@@ -153,14 +109,14 @@ module.exports = router => {
     })
   })
 
-  // Render submitted page
-  router.all('/application/:applicationId/submitted', (req, res) => {
-    const { referrer } = req.query
-
-    res.render('application/submitted', {
-      referrer
-    })
-  })
+//   // Render submitted page
+//   router.all('/application/:applicationId/submitted', (req, res) => {
+//     const { referrer } = req.query
+//
+//     res.render('application/submitted', {
+//       referrer
+//     })
+//   })
 
   require('./application/choices')(router)
   // require('./application/personal-information')(router)

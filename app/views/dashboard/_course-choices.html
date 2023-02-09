@@ -25,7 +25,7 @@
   {% set statusHtml %}
     {{ govukTag({
       classes: "",
-      text: item.status or "Awaiting decision"
+      text: item.status
     }) }}
 
     {% if item.status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
@@ -39,7 +39,7 @@
     {% endif %}
 
     {% if item.status == "Awaiting decision" %}
-      <p class="govuk-body govuk-!-margin-top-2">The provider must make a decision by  {{ 14 | nowPlusDays("d MMMM yyyy") }}.</p>
+      <p class="govuk-body govuk-!-margin-top-2">The provider must make a decision by 18 March 2023.</p>
     {% endif %}
 
     {% if item.status == "Application withdrawn" and item.withdrawnByProvider == true %}

@@ -37,7 +37,7 @@
         text: "Nationality"
       },
       value: {
-        html: data.nationalities | join(", ")
+        html: (data.nationalities | join(", ")) if data.nationalities
       },
       actions: {
         items: [{

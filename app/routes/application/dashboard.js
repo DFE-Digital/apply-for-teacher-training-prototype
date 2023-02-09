@@ -5,23 +5,23 @@ module.exports = router => {
   router.get('/dashboard', (req, res) => {
 
     // TODO: refactor these counts
-    const numberOfOffersReceived = Object.keys(req.session.data.choices).filter(function (choice) {
+    const numberOfOffersReceived = Object.values(req.session.data.choices).filter(function (choice) {
       return choice.status === 'Offer received'
     }).length
 
-    const numberOfOffersDeclined = Object.keys(req.session.data.choices).filter(function (choice) {
+    const numberOfOffersDeclined = Object.values(req.session.data.choices).filter(function (choice) {
       return choice.status === 'Offer declined'
     }).length
 
-    const numberOfApplicationsWithdrawn = Object.keys(req.session.data.choices).filter(function (choice) {
+    const numberOfApplicationsWithdrawn = Object.values(req.session.data.choices).filter(function (choice) {
       return choice.status === 'Application withdrawn'
     }).length
 
-    const numberOfChoicesAwaitingDecision = Object.keys(req.session.data.choices).filter(function (choice) {
+    const numberOfChoicesAwaitingDecision = Object.values(req.session.data.choices).filter(function (choice) {
       return choice.status === 'Awaiting decision'
     }).length
 
-    const acceptedChoice = Object.keys(req.session.data.choices).find(function (choice) {
+    const acceptedChoice = Object.values(req.session.data.choices).find(function (choice) {
       return (choice.status === 'Offer accepted') || (choice.status === 'Offer confirmed') || (choice.status === 'Offer deferred')
     })
 
@@ -71,5 +71,14 @@ module.exports = router => {
     res.render('dashboard/withdraw', {
       id
     })
+  })
+
+
+  router.post('/dashboard/withdraw/:id', (req, res) => {
+    const { id } = req.params
+
+    req.session.data.choices[id].status = 'Withdrawn'
+
+    res.redirect('/dashboard')
   })
 }

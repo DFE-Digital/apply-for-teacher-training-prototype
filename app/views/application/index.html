@@ -98,7 +98,7 @@
         {% endif %}
 
         {% if data.choices | length == 0 %}
-          {% set choicesHref = applicationPath + "/choices/add" %}
+          {% set choicesHref = applicationPath + "/choices" %}
         {% else %}
           {% set choicesHref = applicationPath + "/choices/review" %}
         {% endif %}

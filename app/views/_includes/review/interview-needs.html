@@ -1,5 +1,3 @@
-{% set completed = data.completed.interviewNeeds == 'true' %}
-
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -10,7 +8,7 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/interview-needs?referrer=" + referrer,
+        href: "/application/interview-needs?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "interview needs"
       }]
@@ -24,7 +22,7 @@
     },
     actions: {
       items: [{
-        href: applicationPath + "/interview-needs?referrer=" + referrer,
+        href: "/application/interview-needs?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "interview needs"
       }]

@@ -21,3 +21,24 @@
       html: 'This is a prototype.'
     }) if showPhaseBanner != false }}
 {% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: "/manage-prototype",
+          text: "Manage prototype"
+        },
+        {
+          href: "/manage-prototype/clear-data",
+          text: "Clear data"
+        },
+        {
+          href: "/admin/complete-application",
+          text: "Complete the application"
+        }
+      ]
+    }
+  }) }}
+{% endblock %}

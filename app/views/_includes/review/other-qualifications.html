@@ -1,5 +1,3 @@
-{% set completed = data.completed.otherQualifications == "true" %}
-
 {% set international = data.otherNationality %}
 
 {% if data.otherQualificationsAdded == "no" %}
@@ -15,7 +13,7 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/other-qualifications",
+          href: "/application/other-qualifications",
           text: "Change",
           visuallyHiddenText: "explanation"
         }]

@@ -23,7 +23,7 @@
     hint: {
       text: "In most cases, this should be a work address."
     }
-  } | decorateApplicationAttributes(["references", id, "email"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save changes" if referrer else "Save and continue"

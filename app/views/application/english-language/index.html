@@ -21,7 +21,7 @@
       },
       maxwords: 200,
       rows: 6
-    } | decorateApplicationAttributes(["englishLanguage", "answer-missing"])) }}
+    }) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -44,7 +44,7 @@
         html: missingConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["englishLanguage", "answer"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Continue"

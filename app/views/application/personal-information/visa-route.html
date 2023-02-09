@@ -27,7 +27,7 @@
       maxwords: 200,
       threshold: 90,
       rows: 5
-    } | decorateApplicationAttributes(["candidate", "visaRouteDetails"])) }}
+    }) }}
   {% endset -%}
 
   {{ govukRadios({
@@ -47,7 +47,7 @@
         html: otherRouteHtml
       }
     }]
-  } | decorateApplicationAttributes(["candidate", "visaRoute"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

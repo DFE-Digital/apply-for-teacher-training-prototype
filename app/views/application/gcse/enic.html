@@ -23,7 +23,7 @@
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["gcse", id, "enicReference"])) }}
+    }) }}
 
     {{ govukRadios({
       fieldset: {
@@ -44,7 +44,7 @@
       }, {
         text: "GCE Advanced (A) level"
       }]
-    } | decorateApplicationAttributes(["gcse", id, "enicComparability"])) }}
+    }) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
@@ -69,7 +69,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["gcse", id, "enic"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

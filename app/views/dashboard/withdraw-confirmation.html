@@ -20,7 +20,7 @@
           hint: {
             text: "Your provider will not see this feedback."
           }
-        } | decorateApplicationAttributes(["withdrawal-reason"])) }}
+        }) }}
       {% endset %}
 
       {% set contactDetailsHtml %}
@@ -28,7 +28,7 @@
           label: {
             text: "Please let us know when you’re available and give a phone number"
           }
-        } | decorateApplicationAttributes(["withdrawal-contact-details"])) }}
+        }) }}
       {% endset %}
 
       {{ govukRadios({

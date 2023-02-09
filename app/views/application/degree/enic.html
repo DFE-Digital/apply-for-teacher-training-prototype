@@ -21,7 +21,7 @@
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["degree", id, "enicReference"])) }}
+    }) }}
 
     {{ govukRadios({
       fieldset: {
@@ -46,7 +46,7 @@
       } if degreeCount > 1, {
         text: "Post Doctoral award"
       } if degreeCount > 1]
-    } | decorateApplicationAttributes(["degree", id, "enicComparability"])) }}
+    }) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
@@ -71,7 +71,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["degree", id, "enic"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

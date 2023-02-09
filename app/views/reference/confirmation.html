@@ -21,7 +21,7 @@
           label: {
             text: "Tell us why you chose that rating"
           }
-        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+        }) }}
       {% endset %}
 
       {% set whyGuidanceRatingHtml %}
@@ -32,7 +32,7 @@
           hint: {
             text: "Did you have questions that were not answered by the guidance?"
           }
-        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+        }) }}
       {% endset %}
 
       {{ govukRadios({
@@ -78,7 +78,7 @@
           label: {
             text: "Please tell us why"
           }
-        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+        }) }}
       {% endset %}
 
       {% set contactDetails %}
@@ -89,7 +89,7 @@
           hint: {
             text: ""
           }
-        } | decorateApplicationAttributes(["referee-confirmation"])) }}
+        }) }}
       {% endset %}
 
       {{ govukRadios({

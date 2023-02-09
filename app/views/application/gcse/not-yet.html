@@ -22,7 +22,7 @@
         },
         maxwords: 200,
         rows: 6
-      } | decorateApplicationAttributes(["gcse", id, "currentlyStudyingDetails"])) }}
+      }) }}
   {% endset %}
 
   {{ govukRadios({
@@ -37,7 +37,7 @@
       text: "No",
       value: "no"
     }
-    ]} | decorateApplicationAttributes(["gcse", id, "currentlyStudying"])) }}
+    ]}) }}
 
   {{ govukButton({
     text: "Save and continue"

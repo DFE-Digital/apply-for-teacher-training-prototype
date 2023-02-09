@@ -51,7 +51,7 @@
       hint: {
         text: "In most cases, this should be a work address."
       }
-    } | decorateApplicationAttributes(["references", id, "email"])) }}
+    }) }}
   {% elif action == "cancel" %}
     <p class="govuk-body">We’ll tell them that they no longer need to give a reference.</p>
   {% elif action == "nudge" %}

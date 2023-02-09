@@ -1,4 +1,3 @@
-const journeys = require('./../../utils/journeys')
 const utils = require('./../../utils')
 
 const passGrades = [
@@ -30,23 +29,7 @@ const isFailGrade = (req) => {
   return gcseData(req).type === 'GCSE' && !passGrades.includes(grade)
 }
 
-const gcsePaths = (req) => {
-  const { id } = req.params
-  const basePath = `/application/gcse/${req.params.id}`
-  const referrer = req.query.referrer
 
-  const paths = [
-    basePath,
-    ...(isInternational(req) ? [`${basePath}/country`] : []),
-    ...(isInternational(req) ? [`${basePath}/enic`] : []),
-    `${basePath}/grade`,
-    `${basePath}/year`,
-    ...(isFailGrade(req) ? [`${basePath}/no-pass-grade`] : []),
-    ...(referrer ? [referrer] : [`/application/gcse/${id}/review`])
-  ]
-
-  return journeys.nextAndBackPaths(paths, req)
-}
 
 /**
  * Application: GCSE or equivalent routes
@@ -148,12 +131,10 @@ module.exports = router => {
 
     const { id, view } = req.params
     const { referrer } = req.query
-    const paths = gcsePaths(req)
     const formaction = completedGcse ? referrer : paths.next
 
     res.render(`application/gcse/${view}`, {
       formaction,
-      paths,
       id,
       referrer
     })

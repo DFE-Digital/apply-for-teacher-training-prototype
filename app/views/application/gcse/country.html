@@ -20,13 +20,3 @@
     text: "Save and continue"
   }) }}
 {% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#gcse-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}'
-    })
-  </script>
-{% endblock %}

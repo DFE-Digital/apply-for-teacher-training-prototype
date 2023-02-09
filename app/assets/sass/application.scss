@@ -1,13 +1,12 @@
 //
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+//
 
 // Add extra styles here
 
 
 // Components that aren’t in Frontend
-@import "components/autocomplete";
 @import "components/button";
 @import "components/cookie-banner";
 @import "components/course-choice";
@@ -24,10 +23,8 @@
 @import "components/section";
 @import "components/status-indicator";
 @import "components/styled-content";
-@import "components/summary-card";
 @import "components/summary-list";
 @import "components/tag";
-@import "components/task-list";
 
 .govuk-body {
   word-wrap: break-word;

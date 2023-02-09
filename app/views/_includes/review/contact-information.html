@@ -1,18 +1,4 @@
 
-{% set completed = data.completed.contactInformation %}
-
-{{ appSuggestion({
-  id: "contactInformation",
-  title: "Contact information are not marked as completed",
-  warning: true if errorList,
-  actions: {
-    items: [{
-      text: "Complete contact information",
-      href: applicationPath + "/contact-information/review"
-    }]
-  }
-}) if not completed and showIncomplete }}
-
 {% set addressHtml %}
   {{ data.address.line1 }}<br>
   {{ data.address.line2 }}<br>

@@ -27,11 +27,6 @@
     }
   }) if not completed and showIncomplete }}
 
-  {% set summaryCardHtml %}{% include "_includes/item/english-language.html" %}{% endset %}
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    headingLevel: 3,
-    titleText: "English as a foreign language assessment",
-    html: summaryCardHtml
-  }) }}
+  {% include "_includes/item/english-language.html" %}
+
 {% endif %}

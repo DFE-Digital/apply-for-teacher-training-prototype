@@ -8,13 +8,7 @@
 {% set ske = true %}
 
 {% set hasSecondary = true %}
-{% set applicationPath = "/application/" + applicationId %}
-
-{% if applicationStatus %}
-  {% set referrer = "/accepted/" + "/" + applicationStatus %}
-{% else %}
-  {% set referrer = "/accepted/" + applicationId %}
-{% endif %}
+{% set applicationPath = "/application" %}
 
 {% set providerName = providers[acceptedChoice.providerCode].name %}
 
@@ -78,7 +72,7 @@
           {% for item in references %}
             {% if item.name %}
               {% set itemText %}
-                <a href="/accepted/{{ applicationId }}/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
+                <a href="/accepted/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
 
                 {% if item.status == 'Requested' %}
                   {% for entry in item.log %}
@@ -89,9 +83,9 @@
                       {% if entry.note == 'Request sent' %}
                         –
                         {% if referenceCondition.status == 'Pending' %}
-                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/nudge">send a reminder</a> or
+                        <a href="/accepted/references/{{ item.id }}/action/nudge">send a reminder</a> or
                         {% endif %}
-                        <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel">cancel request</a></span>
+                        <a href="/accepted/references/{{ item.id }}/action/cancel">cancel request</a></span>
                       {% endif %}
                     </p>
                   {% endfor %}
@@ -218,8 +212,8 @@
 
   </div>
   <div class="govuk-grid-column-one-third">
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/submitted?referrer=/accepted/{{ applicationId }}">View application</a></p>
-    <p class="govuk-body-s"><a href="/application/{{ applicationId }}/{{ acceptedChoice.id }}/withdraw">Withdraw from the course</a></p>
+    <p class="govuk-body-s"><a href="/application">View application</a></p>
+    <p class="govuk-body-s"><a href="#">Withdraw from the course</a></p>
   </div>
 </div>
 

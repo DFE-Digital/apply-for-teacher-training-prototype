@@ -2,7 +2,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/dashboard/" + applicationId
+    href: "/dashboard"
   }) }}
 {% endblock %}
 
@@ -20,7 +20,7 @@
 
       <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory" class="govuk-link" target="_new">Find a training provider (opens in a new tab)</a>.</p>
 
-      <form action="/accepted/{{ applicationId }}/confirm-ske-provider" method="get">
+      <form action="/accepted/confirm-ske-provider" method="get">
         {{ govukRadios({
           name: "skeProvider",
           fieldset: {

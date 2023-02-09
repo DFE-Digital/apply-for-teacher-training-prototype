@@ -5,7 +5,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/accepted/" + applicationId
+    href: "/accepted"
   }) }}
 {% endblock %}
 
@@ -132,7 +132,7 @@
         href: "/accepted/" + "/references/" + item.id + "/action/nudge"
       }) }}
 
-      <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
+      <a href="/accepted/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
   </div>
   {% endif %}
 

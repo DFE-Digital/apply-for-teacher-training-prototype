@@ -11,12 +11,6 @@
 {% set hasSecondary = true %}
 {% set applicationPath = "/application" %}
 
-{% if applicationStatus %}
-  {% set referrer = "/dashboard/" + "/" + applicationStatus %}
-{% else %}
-  {% set referrer = "/dashboard/" + applicationId %}
-{% endif %}
-
 {% block content %}
 
   <div class="govuk-grid-row">

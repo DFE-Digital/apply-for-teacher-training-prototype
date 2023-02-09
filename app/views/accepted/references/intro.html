@@ -7,15 +7,9 @@
 {% set formaction = "/accepted/" + "/references/" + id + "/type/" %}
 
 {% block beforeContent %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/accepted/" + applicationId
-    }) }}
-  {% endif %}
+  {{ govukBackLink({
+    href: "/accepted"
+  }) }}
 {% endblock %}
 
 {% block content %}

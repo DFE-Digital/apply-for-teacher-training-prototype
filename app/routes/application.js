@@ -44,34 +44,7 @@ function createNewApplication (req) {
  * Application routes
  */
 module.exports = router => {
-//   router.get('/application/start/choice', (req, res) => {
-//     const code = createNewApplication(req)
-//     res.redirect(`/application/${code}/choices/add`)
-//   })
-//
-//   router.all('/application/started', (req, res) => {
-//     const { applications } = req.session.data
-//     const applicationId = Object.entries(applications).filter(a => a[1].status === 'started')[0][0]
-//     if (applicationId) {
-//       res.redirect('/application/' + applicationId)
-//     }
-//   })
-//
-// //   // Render application page
-//   router.all('/application/:applicationId', (req, res) => {
-//     const showCopiedBanner = req.query.copied
-//     const { applicationId } = req.params
-//     const application = utils.applicationData(req)
-//
-//     res.render('application/index', {
-//       showCopiedBanner,
-//       closed: req.query.closed,
-//       findNotOpen: req.query.findNotOpen,
-//       cycleNotOpen: req.query.cycleNotOpen,
-//       applicationId,
-//       application
-//     })
-//   })
+
 
   // Reset application so the user can apply again
   router.post('/application/apply-again', (req, res) => {

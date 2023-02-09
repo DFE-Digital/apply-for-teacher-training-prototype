@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
+{% set applicationPath = "/application" %}
 {% set formaction = applicationPath %}
 {% set title = "English as a foreign language" %}
 {% set referrer = applicationPath + "/english-language/review" %}
@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}

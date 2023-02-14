@@ -190,31 +190,16 @@ module.exports = router => {
 
   // This pre-fills most of the applicaiton apart from the sections we want to test.
   router.get('/admin/receive-references', (req, res) => {
-    const applicationId = req.query.applicationId
-    var application = utils.applicationData(req)
 
-    let i = 1
     const timeNow = new Date().toISOString()
 
-    for (const referenceId in application.references) {
-      const reference = application.references[referenceId]
+    for (const reference of Object.values(req.session.data.references)) {
 
       if (!reference.log) { reference.log = [] }
-
-      if (i === 1) {
-        reference.status = 'Received by training provider'
-        reference.log.push({ note: 'Reference received', date: timeNow })
-      } else if (i === 2) {
-        reference.status = 'Cannot give reference'
-        reference.log.push({ note: 'They said they were unable to give you a reference', date: timeNow })
-      } else {
-        reference.status = 'Request cancelled'
-        reference.log.push({ note: 'You cancelled the reference request', date: timeNow })
-      }
-
-      i += 1
+      reference.status = 'Received by training provider'
+      reference.log.push({ note: 'Reference received', date: timeNow })
     }
 
-    res.redirect(`/dashboard/${applicationId}`)
+    res.redirect(`/accepted`)
   })
 }

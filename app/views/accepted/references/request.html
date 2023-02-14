@@ -1,9 +1,8 @@
 {% extends "layouts/main.html" %}
 
-{% set referee = applicationValue(["references", id]) %}
+{% set reference = data.references[id] %}
 {% set title = "Check your answers before sending your request" %}
 {% set allowsFeedback = true %}
-{% set formaction = "/accepted/" + "/references/" + id + "/request/decision" %}
 
 {% block beforeContent %}
     {{ govukBackLink({
@@ -13,67 +12,76 @@
 {% endblock %}
 
 {% block content %}
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: "Name"
-      },
-      value: {
-        text: referee.name or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: "/accepted/" + "/references/" + id + "/name/?referrer=/accepted/" + "/references/" + id + "/request/",
-          text: "Change",
-          visuallyHiddenText: "name"
-        }]
-      }
-    }, {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: referee.email or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: "/accepted/" + "/references/" + id + "/email/?referrer=/accepted/" + "/references/" + id + "/request/",
-          text: "Change",
-          visuallyHiddenText: "email address"
-        }]
-      }
-    }, {
-      key: {
-        text: "Reference type"
-      },
-      value: {
-        text: referee.type or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: "/accepted/" + "/references/" + id + "/type/?referrer=/accepted/" + "/references/" + id + "/request/",
-          text: "Change",
-          visuallyHiddenText: "reference type"
-        }]
-      }
-    }, {
-      key: {
-        text: "Relationship to referee"
-      },
-      value: {
-        text: referee.relationship or "Not entered"
-      },
-      actions: {
-        items: [{
-          href: "/accepted/" + "/references/" + id + "/relationship/?referrer=/accepted/" + "/references/" + id + "/request/",
-          text: "Change",
-          visuallyHiddenText: "relationship to referee"
-        }]
-      }
-    }]
-  }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {{ govukButton({
-    text: "Send reference request"
-  }) }}
+      <form action="/accepted/references/{{ id }}/request" method="post">
+
+        {{ govukSummaryList({
+          rows: [{
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: reference.name or "Not entered"
+            },
+            actions: {
+              items: [{
+                href: "/accepted/" + "/references/" + id + "/name/?referrer=/accepted/" + "/references/" + id + "/request/",
+                text: "Change",
+                visuallyHiddenText: "name"
+              }]
+            }
+          }, {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: reference.email or "Not entered"
+            },
+            actions: {
+              items: [{
+                href: "/accepted/" + "/references/" + id + "/email/?referrer=/accepted/" + "/references/" + id + "/request/",
+                text: "Change",
+                visuallyHiddenText: "email address"
+              }]
+            }
+          }, {
+            key: {
+              text: "Reference type"
+            },
+            value: {
+              text: reference.type or "Not entered"
+            },
+            actions: {
+              items: [{
+                href: "/accepted/" + "/references/" + id + "/type/?referrer=/accepted/" + "/references/" + id + "/request/",
+                text: "Change",
+                visuallyHiddenText: "reference type"
+              }]
+            }
+          }, {
+            key: {
+              text: "Relationship to referee"
+            },
+            value: {
+              text: reference.relationship or "Not entered"
+            },
+            actions: {
+              items: [{
+                href: "/accepted/" + "/references/" + id + "/relationship/?referrer=/accepted/" + "/references/" + id + "/request/",
+                text: "Change",
+                visuallyHiddenText: "relationship to referee"
+              }]
+            }
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Send reference request"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

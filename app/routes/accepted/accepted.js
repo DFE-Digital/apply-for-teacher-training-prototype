@@ -15,12 +15,9 @@ module.exports = router => {
   // Generate new ID and redirect to start of referee flow
   router.get('/accepted/references/add', (req, res) => {
     const id = utils.generateRandomString()
-    const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    const application = utils.applicationData(req)
+    req.session.data.references[id] = { status: 'Not sent' }
 
-    application.references[id] = { status: 'Not sent' }
-
-    res.redirect(`/accepted/references/${id}/intro${queryString}`)
+    res.redirect(`/accepted/references/${id}/intro`)
   })
 
   // Render action page
@@ -34,80 +31,64 @@ module.exports = router => {
       referrer
     })
   })
-
-  // Handle action request
-  router.post('/accepted/references/:id/action/:action', (req, res) => {
-    const { action, id } = req.params
-    const { status } = req.session.data
-    const now = new Date()
-
-    req.session.data.references[id].status = status || req.session.data.references[id].status
-
-    if (action === 'request') {
-      res.redirect(`/accepted/references/${id}/send-request`)
-    } else {
-      if (action === 'cancel') {
-        application.references[id].log.push({
-          note: 'Request cancelled',
-          date: now.toISOString()
-        })
-      }
-
-      if (action === 'deactivate') {
-        application.references[id].ready = false
-      }
-
-      if (action === 'reactivate') {
-        application.references[id].ready = true
-      }
-
-      if (action === 'delete') {
-        delete application.references[id]
-      }
-
-      if (action === 'nudge') {
-        application.references[id].nudges = 1
-        application.references[id].log.push({
-          note: 'Reminder sent',
-          date: now.toISOString()
-        })
-      }
-
-      if (action === 'retry') {
-        application.references[id].log.push({
-          note: 'Request sent',
-          date: now.toISOString()
-        })
-      }
-
-      res.redirect(`/accepted`)
-    }
-  })
-
-  // Send now or later?
-  router.post('/accepted/references/:id/request/decision', (req, res) => {
-    const { id } = req.params
-    const { referrer } = req.query
-    const { decision } = req.session.data
-    const application = utils.applicationData(req)
-
-    if (decision === 'later') {
-      application.references[id].status = 'Not sent'
-      application.references[id].pending = true
-      res.redirect(referrer || `/accepted/references/review`)
-    } else {
-      res.redirect(referrer || `/accepted/references/${id}/send-request`)
-    }
-  })
+//
+//   // Handle action request
+//   router.post('/accepted/references/:id/:action', (req, res) => {
+//     const { action, id } = req.params
+//     const now = new Date()
+//
+//     req.session.data.references[id].status = status || req.session.data.references[id].status
+//
+//     if (action === 'request') {
+//       req.session.data.references[id].status =
+//       res.redirect(`/accepted/references/${id}/send-request`)
+//     } else {
+//       if (action === 'cancel') {
+//         application.references[id].log.push({
+//           note: 'Request cancelled',
+//           date: now.toISOString()
+//         })
+//       }
+//
+//       if (action === 'deactivate') {
+//         application.references[id].ready = false
+//       }
+//
+//       if (action === 'reactivate') {
+//         application.references[id].ready = true
+//       }
+//
+//       if (action === 'delete') {
+//         delete application.references[id]
+//       }
+//
+//       if (action === 'nudge') {
+//         application.references[id].nudges = 1
+//         application.references[id].log.push({
+//           note: 'Reminder sent',
+//           date: now.toISOString()
+//         })
+//       }
+//
+//       if (action === 'retry') {
+//         application.references[id].log.push({
+//           note: 'Request sent',
+//           date: now.toISOString()
+//         })
+//       }
+//
+//       res.redirect(`/accepted`)
+//     }
+//   })
 
   // Request reference
-  router.get('/accepted/references/:id/send-request', (req, res) => {
-    const { id } = req.params
+  router.post('/accepted/references/:id/request', (req, res) => {
     const now = new Date()
+    const { id } = req.params
 
     const reference = req.session.data.references[id]
 
-    reference.nudges = application.references[id].nudges || 0
+    reference.nudges = reference.nudges || 0
     reference.status = 'Requested'
     reference.pending = false
 

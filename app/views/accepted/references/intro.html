@@ -1,10 +1,7 @@
 {% extends "layouts/main.html" %}
 
-{% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
-{% set title = "Choose a referee" %}
-{% set allowsFeedback = true %}
-{% set formaction = "/accepted/" + "/references/" + id + "/type/" %}
+{% set reference = data.references[id] %}
+{% set title = "Request a referee" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -13,17 +10,18 @@
 {% endblock %}
 
 {% block content %}
+  <form action="/accepted/references/{{ id }}/type" method="post">
+    <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <h1 class="govuk-heading-l">Request a reference</h1>
-
-  <p class="govuk-body">You should choose people who can:</p>
+    <p class="govuk-body">You should choose people who can:</p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li>confirm how long they have known you</li>
       <li>say whether they know of any reason why you should not work with children</li>
     </ul>
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

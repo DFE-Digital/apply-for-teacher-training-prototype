@@ -23,8 +23,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {{ acceptedChoice | dump }}
-
       {% if acceptedChoice.status == "Offer deferred" %}
 
         <p class="govuk-body">You’ve chosen to defer your course.</p>
@@ -78,7 +76,7 @@
                   {% for entry in item.log %}
                     <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-0">
                       {{ entry.note }} on
-                      {{ entry.date | date("DDD") }}
+                      {{ entry.date }}
 
                       {% if entry.note == 'Request sent' %}
                         –
@@ -103,10 +101,13 @@
                 title: {
                   text: item.name
                 },
+                hint: {
+                  html: "<div class=\"govuk-!-font-size-16\">Requested on 14 March 2023 – send a reminder or cancel request</div>"
+                } if item.status == "Requested",
                 href: "/accepted/references/" + id,
                 status: {
                   text: (item.status or "Requested"),
-                  classes: item.status
+                  classes: ("govuk-task-list__status--black" if item.status == "Received by training provider" else "govuk-task-list__status--blue")
                 }
               }), referenceItems) %}
             {% endif %}
@@ -122,7 +123,7 @@
         <div class="govuk-button-group govuk-!-margin-bottom-6">
           {{ govukButton({
             text: "Request another reference",
-            href: "/accepted/" + "/references/add?referrer=" + referrer,
+            href: "/accepted/references/add",
             classes: "govuk-button--secondary"
           }) }}
         </div>
@@ -151,16 +152,12 @@
 
         <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
 
-        <p class="govuk-body"><a href="https://www.gov.uk/government/publications/subject-knowledge-enhancement-course-directory/subject-knowledge-enhancement-ske-course-directory">Choose a provider to do your course with</a>.</p>
-
-        <p class="govuk-body">Contact {{ providerName }} if you have any questions.</p>
-
       {% endif %}
       {% if acceptedChoice.conditions | length > 0 %}
         <h2 class="govuk-heading-m">Other conditions</h2>
 
           <p class="govuk-body">
-            {{ providerName }} will mark these conditions as met once you’ve completed them.
+            {{ acceptedChoice.providerName }} will mark these conditions as met once you’ve completed them.
           </p>
 
           {% set taskItems = [] %}

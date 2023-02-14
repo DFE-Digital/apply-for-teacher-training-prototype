@@ -19,6 +19,8 @@
       {% if data.equalityMonitoring.ethnicBackground != "Prefer not to say" %}
         {{ data.equalityMonitoring.ethnicBackground }}
       {% endif %}
+    {% else %}
+      Prefer not to say
     {% endif %}
   {% else %}
     Not entered

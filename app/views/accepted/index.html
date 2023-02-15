@@ -2,13 +2,8 @@
 
 {% set title = "Your application" %}
 
-<!-- TODO -->
-{% set ske = true %}
-
 {% set hasSecondary = true %}
 {% set applicationPath = "/application" %}
-
-{% set providerName = providers[acceptedChoice.providerCode].name %}
 
 {% block content %}
 
@@ -33,24 +28,26 @@
         </p>
       {% endif %}
 
-      <p class="govuk-body">
-        Your place will be confirmed once they’ve:
-      </p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>
-          received your references
-        </li>
-        {% if ske %}
+      {% if acceptedChoice.status == "Conditions pending" %}
+        <p class="govuk-body">
+          Your place will be confirmed once they’ve:
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
           <li>
-            confirmed you’ve completed your 20 week maths course
+            received your references
           </li>
-        {% endif %}
-        {% if acceptedChoice.conditions | length > 0 %}
-          <li>
-            marked your offer conditions as met
-          </li>
-        {% endif %}
-      </ul>
+          {% if acceptedChoice.skeConditions %}
+            <li>
+              confirmed you’ve completed your 20 week maths course
+            </li>
+          {% endif %}
+          {% if acceptedChoice.conditions | length > 0 %}
+            <li>
+              marked your offer conditions as met
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
 
       <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
 
@@ -128,37 +125,47 @@
           }) }}
         </div>
 
-        {% if ske %}
+        {% if acceptedChoice.skeConditions %}
 
         <h2 class="govuk-heading-m">Subject knowledge enhancement course</h2>
 
+        {% set skeItems = [] %}
+
+        {% for skeCondition in acceptedChoice.skeConditions %}
+          {% set skeItems = (skeItems.push({
+            title: {
+              text: skeCondition.lengthInWeeks + " week " + skeCondition.subject + " course"
+            },
+            status: {
+              text: skeCondition.status,
+              classes: "govuk-task-list__status--blue"
+            }
+          }), skeItems) %}
+
+        {% endfor %}
+
         {{ govukTaskList({
           classes: "govuk-!-margin-bottom-5",
-          items: [
-            {
-              title: {
-                text: "20 week maths course"
-              },
-              status: {
-                text: "Not completed",
-                classes: "govuk-task-list__status--blue"
-              }
-            }
-          ]
+          items: skeItems
         }) }}
 
-        <p class="govuk-body">Contact {{ acceptedChoice.providerName }} if you think you may not finish this course before your teacher training starts.</p>
-        <p class="govuk-body">You should start this course by April 2023 to give yourself enough time to finish it before your teacher training starts in September 2023.</p>
+        {% if skeCondition.status == "Not met" %}
 
-        <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+          <p class="govuk-body">Contact {{ acceptedChoice.providerName }} if you think you may not finish this course before your teacher training starts.</p>
+          <p class="govuk-body">You should start this course by April 2023 to give yourself enough time to finish it before your teacher training starts in September 2023.</p>
+
+          <p class="govuk-body">The course will be free and you’ll receive £175 per week.</p>
+        {% endif %}
 
       {% endif %}
       {% if acceptedChoice.conditions | length > 0 %}
         <h2 class="govuk-heading-m">Other conditions</h2>
 
+        {% if acceptedChoice.status == "Conditions pending" %}
           <p class="govuk-body">
             {{ acceptedChoice.providerName }} will mark these conditions as met once you’ve completed them.
           </p>
+        {% endif %}
 
           {% set taskItems = [] %}
 

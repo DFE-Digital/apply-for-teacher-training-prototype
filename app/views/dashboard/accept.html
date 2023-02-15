@@ -5,21 +5,28 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + "/" + choiceId + "/view"
+    href: "/dashboard"
   }) }}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <p class="govuk-body">When you accept your offer, we’ll send emails to the people you said could give you references.</p>
+      <p class="govuk-body">When you accept your offer, we’ll send emails to the people you said could give you references.</p>
 
-  <p class="govuk-body">You can change the reference details before you accept the offer.</p>
+      <p class="govuk-body">You can change the reference details before you accept the offer.</p>
 
-  {{ govukButton({
-    text: "Add details for another reference",
-    href: "/application/" + "/references/add",
-    classes: "govuk-button--secondary"
-  }) }}
+      {{ govukButton({
+        text: "Add details for another reference",
+        href: "/dashboard/references/add",
+        classes: "govuk-button--secondary"
+      }) }}
+
+    </div>
+  </div>
+
 
   {% include "_includes/review/references.html" %}
 
@@ -27,9 +34,11 @@
     <p class="govuk-body">Your other applications will be withdrawn and any upcoming interviews will be cancelled.</p>
   {%  endif %}
 
-  {{ govukButton({
-    text: "Accept offer",
-    name: "decision",
-    value: "accept"
-  }) }}
+  <form action="/dashboard/accept/{{ id }}" method="post">
+    {{ govukButton({
+      text: "Accept offer",
+      name: "decision",
+      value: "accept"
+    }) }}
+  </form>
 {% endblock %}

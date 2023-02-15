@@ -86,4 +86,12 @@ module.exports = router => {
       id
     })
   })
+
+  router.get('/dashboard/accept/:id', (req, res) => {
+    const { id } = req.params
+
+    res.render('dashboard/accept', {
+      id
+    })
+  })
 }

@@ -4,11 +4,19 @@ module.exports = router => {
 
   router.get('/accepted', (req, res) => {
 
-    const acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+    let acceptedChoice
+    if (req.session.data.choices) {
+      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+    }
 
-    res.render('accepted/index', {
-      acceptedChoice
-    })
+    if (acceptedChoice) {
+      res.render('accepted/index', {
+        acceptedChoice
+      })
+    } else {
+      res.redirect("/application")
+    }
+
   })
 
 

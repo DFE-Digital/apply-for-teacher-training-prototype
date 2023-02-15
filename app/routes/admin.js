@@ -183,6 +183,14 @@ module.exports = router => {
         { title: 'Fitness to train to teach check', status: 'Pending' },
         { title: 'Disclosure and barring service check', status: 'Pending' }
       ]
+      choice.skeConditions = [
+        {
+          subject: 'English',
+          lengthInWeeks: 20,
+          reason: 'degree-subject',
+          status: 'Not met'
+        },
+      ]
     }
 
     res.redirect(`/dashboard`)
@@ -199,6 +207,29 @@ module.exports = router => {
       reference.status = 'Received by training provider'
       reference.log.push({ note: 'Reference received', date: timeNow })
     }
+
+    res.redirect(`/accepted`)
+  })
+
+  // This marks all conditions as met
+  router.get('/admin/meet-conditions', (req, res) => {
+
+    let acceptedChoice
+    if (req.session.data.choices) {
+      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+    }
+
+    if (acceptedChoice) {
+      for (condition of acceptedChoice.conditions) {
+        condition.status = "Met"
+      }
+
+      for (skeCondition of acceptedChoice.skeConditions) {
+        skeCondition.status = "Completed"
+      }
+    }
+
+    acceptedChoice.status = "Offer confirmed"
 
     res.redirect(`/accepted`)
   })

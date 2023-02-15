@@ -53,13 +53,35 @@ module.exports = router => {
     const choice = req.session.data.choices[id]
 
     if (decision == 'accept') {
-      choice.status = 'Pending conditions'
-      res.redirect('/accepted')
+      res.redirect(`/dashboard/accept/${id}`)
     } else if (decision == 'decline') {
       choice.status = 'Declined'
       res.redirect('/dashboard')
     } else {
       res.redirect(`/dashboard/respond/${id}`)
     }
+  })
+
+
+  // Final offer accept point
+  router.post('/dashboard/accept/:id', (req, res) => {
+    const { id } = req.params
+    const choice = req.session.data.choices[id]
+    const now = new Date()
+
+    choice.status = "Pending conditions"
+
+    // Request all the references
+    for (reference of Object.values(req.session.data.references)) {
+      reference.status = "Requested"
+
+      const log = reference.log = reference.log || []
+      log.push({
+        note: 'Request sent',
+        date: now.toISOString()
+      })
+    }
+
+    res.redirect("/accepted")
   })
 }

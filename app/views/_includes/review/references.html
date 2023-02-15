@@ -2,7 +2,7 @@
 
 {% if references | length > 0 %}
 
-  {% for item in references %}
+  {% for id, item in references %}
     {% include "_includes/item/reference.html" %}
   {% endfor %}
 

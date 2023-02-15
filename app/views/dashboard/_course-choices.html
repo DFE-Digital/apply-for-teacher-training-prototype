@@ -112,7 +112,7 @@
     {% endif %}
   {% endset %}
 
-  {% set feedbackHtml %}{% include "_includes/item/feedback.html" %}{% endset %}
+  {% set feedbackHtml %}{% include "dashboard/_feedback.html" %}{% endset %}
 
   {% set conditionsHtml %}
     {% if item.conditions | length > 0 %}

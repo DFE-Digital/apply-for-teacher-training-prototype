@@ -12,23 +12,8 @@
 {% set applicationPath = "/application" %}
 
 {% block content %}
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-    {% if data.confirmation == "true" %}
-      {% set html %}
-        <h3 class="govuk-notification-banner__heading">
-          Application submitted
-        </h3>
-      {% endset %}
-
-      {{ govukNotificationBanner({
-        html: html,
-        type: 'success'
-      }) }}
-    {% endif %}
-
       <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 
       {% if canMakeDecision == true %}

@@ -17,10 +17,8 @@ require('./routes/application/gcse')(router)
 require('./routes/application/other-qualifications')(router)
 require('./routes/application/references')(router)
 
-require('./routes/dashboard/dashboard')(router)
-
-require('./routes/accepted/accepted')(router)
-
+require('./routes/dashboard')(router)
+require('./routes/accepted')(router)
 require('./routes/admin')(router)
 
 // Reset application so the user can apply again

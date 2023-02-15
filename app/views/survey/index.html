@@ -1,14 +1,13 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Your feedback" %}
-{% set formaction = "/survey" %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/dashboard?confirmation=true" method="post">
+      <form action="/dashboard" method="post">
 
         {{ govukRadios({
           name: "survey[satisfaction]",

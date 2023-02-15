@@ -1,4 +1,3 @@
-
 module.exports = router => {
   router.get('/dashboard', (req, res) => {
     // TODO: refactor these counts

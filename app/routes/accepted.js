@@ -1,4 +1,4 @@
-const utils = require('./../../utils')
+const utils = require('./../utils')
 
 module.exports = router => {
   router.get('/accepted', (req, res) => {

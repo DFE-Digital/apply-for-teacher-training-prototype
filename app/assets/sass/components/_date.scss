@@ -1,9 +1,0 @@
-// Date component
-//
-// This is for displaying dates as text, eg ‘1 Jan 2020’ whilst making sure
-// that the date doesn’t wrap across two lines except on small screens.
-.app-date {
-  @include govuk-media-query ($from: tablet) {
-    white-space: nowrap;
-  }
-}

@@ -1,14 +1,13 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Course choice withdrawn" %}
-{% set formaction = "/dashboard %}
 
 {% block content %}
-<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+<form action="/dashboard" method="post">
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
     titleText: title,
-    text: "We will let " + provider.name + " know that you have withdrawn your application for " + course.name_and_code
+    text: "We will let " + data.choices[id].providerName + " know that you have withdrawn your application for " + course.name_and_code
   }) }}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

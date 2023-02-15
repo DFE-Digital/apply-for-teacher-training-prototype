@@ -20,7 +20,6 @@ require('./routes/application/other-qualifications')(router)
 require('./routes/application/references')(router)
 
 require('./routes/dashboard/dashboard')(router)
-require('./routes/dashboard/decision')(router)
 
 require('./routes/accepted/accepted')(router)
 

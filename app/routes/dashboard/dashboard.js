@@ -64,6 +64,63 @@ module.exports = router => {
     }
   })
 
+// Submit decision
+  router.post('/dashboard/decision/:id', (req, res) => {
+    const { id } = req.params
+    const { decision } = req.body
+    const choice = req.session.data.choices[id]
+
+    if (decision == 'accept') {
+      res.redirect(`/dashboard/accept/${id}`)
+    } else if (decision == 'decline') {
+      choice.status = 'Declined'
+      res.redirect(`/dashboard/decline/${id}`)
+    } else {
+      res.redirect(`/dashboard/respond/${id}`)
+    }
+  })
+
+
+  // Final offer accept point
+  router.post('/dashboard/accept/:id', (req, res) => {
+    const { id } = req.params
+    const choice = req.session.data.choices[id]
+    const now = new Date()
+
+    choice.status = "Pending conditions"
+
+    // Request all the references
+    for (reference of Object.values(req.session.data.references)) {
+      reference.status = "Requested"
+
+      const log = reference.log = reference.log || []
+      log.push({
+        note: 'Request sent',
+        date: now.toISOString()
+      })
+    }
+
+    res.redirect("/accepted")
+  })
+
+  // Confirmation page for declining an offer
+  router.get('/dashboard/decline/:id', (req, res) => {
+    const { id } = req.params
+    res.render('dashboard/decline', {
+      id
+    })
+  })
+
+  // Declining an offer
+  router.post('/dashboard/decline/:id', (req, res) => {
+    const { id } = req.params
+    const choice = req.session.data.choices[id]
+    choice.status = "Offer declined"
+
+    res.redirect('/dashboard')
+  })
+
+  // Withdraw an application page
   router.get('/dashboard/withdraw/:id', (req, res) => {
     const { id } = req.params
 
@@ -72,13 +129,24 @@ module.exports = router => {
     })
   })
 
+  // Actually withdraw the application
   router.post('/dashboard/withdraw/:id', (req, res) => {
     const { id } = req.params
 
-    req.session.data.choices[id].status = 'Withdrawn'
-    res.redirect('/dashboard')
+    req.session.data.choices[id].status = 'Application withdrawn'
+    res.redirect(`/dashboard/withdrawn/${id}`)
   })
 
+  // Withdrawn confirmation (and survey) page
+  router.get('/dashboard/withdrawn/:id', (req, res) => {
+    const { id } = req.params
+
+    res.render('dashboard/withdrawn', {
+      id
+    })
+  })
+
+  // Respond to offer page
   router.get('/dashboard/respond/:id', (req, res) => {
     const { id } = req.params
 
@@ -87,6 +155,7 @@ module.exports = router => {
     })
   })
 
+  // Accept offer page (includes references)
   router.get('/dashboard/accept/:id', (req, res) => {
     const { id } = req.params
 

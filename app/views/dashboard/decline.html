@@ -1,23 +1,28 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Are you sure you want to decline this offer?" %}
-{% set formaction = "/send-email/" + "/" + choiceId + "/decision" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + "/" + choiceId + "/view"
+    href: "/dashboard/respond/" + id
   }) }}
 {% endblock %}
 
 {% block content %}
-  {% include "_includes/item/offer.html" %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <p class="govuk-body">If you decline this offer you can still apply again.</p>
+      <p class="govuk-body">If you decline this offer you can still apply again.</p>
 
-  {{ govukButton({
-    classes: "govuk-button--warning",
-    text: "Yes I’m sure - decline this offer",
-    name: "decision",
-    value: "decline"
-  }) }}
+      {% include "dashboard/_choice.html" %}
+
+      <form action="/dashboard/decline/{{ id }}" method="post">
+        {{ govukButton({
+          classes: "govuk-button--warning",
+          text: "Yes I’m sure - decline this offer"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

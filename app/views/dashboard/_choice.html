@@ -1,9 +1,9 @@
 {% set conditionsHtml %}
-  {% set item = data.choices[id] %}
+  {% set choice = data.choices[id] %}
 
-  {% if item.conditions | length > 0 %}
+  {% if choice.conditions | length > 0 %}
     <ul class="govuk-list govuk-list--bullet">
-      {% for condition in item.conditions %}
+      {% for condition in choice.conditions %}
         <li>{{ condition.title }}</li>
       {% endfor %}
     </ul>
@@ -15,9 +15,6 @@
 
   {% endif %}
 {% endset %}
-
-<!-- TODO -->
-{% set ske = true %}
 
 {% set courseFeesHtml %}
 
@@ -34,12 +31,12 @@
 
 {% endset %}
 
-{% set skeHtml %}
-  You’ll need to complete a 20&nbsp;week maths course.
-{% endset %}
-
-{% set skeCondition = false %}
-
+{% if choice.skeConditions %}
+  {% set skeHtml %}
+    {% set firstSkeCondition = choice.skeConditions | first %}
+    You’ll need to complete a {{ firstSkeCondition.lengthInWeeks }}&nbsp;week {{ firstSkeCondition.subject }} course.
+  {% endset %}
+{% endif %}
 
 {{ govukSummaryList({
   rows: [{
@@ -47,14 +44,14 @@
       text: "Provider"
     },
     value: {
-      text: item.providerName
+      text: choice.providerName
     }
   }, {
     key: {
       text: "Course"
     },
     value: {
-      html: "<a href=\"#\">" + item.course + "</a>"
+      html: "<a href=\"#\">" + choice.course + "</a>"
     }
   }, {
     key: {
@@ -85,7 +82,7 @@
     value: {
       html: skeHtml
     }
-  } if ske, {
+  } if choice.skeConditions, {
     key: {
       text: ("Other conditions" if ske else "Conditions")
     },

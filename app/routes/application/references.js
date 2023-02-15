@@ -16,7 +16,7 @@ module.exports = router => {
 
     delete req.session.data.references[id]
 
-    res.redirect(`/application/references`)
+    res.redirect('/application/references')
   })
 
   router.get('/application/references/:id/:view(intro|type|name|email|relationship|delete)', (req, res) => {

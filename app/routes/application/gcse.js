@@ -22,20 +22,10 @@ const gcseData = (req) => {
   return false
 }
 
-const isInternational = (req) => gcseData(req).type === 'Non-UK qualification'
-const isMissing = (req) => gcseData(req).type === 'not-yet'
-const isFailGrade = (req) => {
-  const grade = enteredGrade(gcseData(req))
-  return gcseData(req).type === 'GCSE' && !passGrades.includes(grade)
-}
-
-
-
 /**
  * Application: GCSE or equivalent routes
  */
 module.exports = router => {
-
   // Render GCSE review page
   // Note: Must be defined before next route declaration
   router.get('/application/gcse/:id/review', (req, res) => {
@@ -52,7 +42,6 @@ module.exports = router => {
 
   // Render first page
   router.get('/application/gcse/:id', (req, res) => {
-
     const { id } = req.params
 
     res.render('application/gcse/index', {
@@ -119,7 +108,7 @@ module.exports = router => {
     // } else if (isMissing(req)) {
     //   path = `/application/gcse/${id}/not-yet`
     // } else {
-      path = `/application/gcse/${id}/grade`
+    const path = `/application/gcse/${id}/grade`
     // }
 
     res.redirect(path)
@@ -127,16 +116,10 @@ module.exports = router => {
 
   // Render UK ENIC/grade/year pages
   router.all('/application/gcse/:id/:view(subject|country|grade|no-pass-grade|enic|year)', (req, res) => {
-    const completedGcse = gcseData(req).grade && gcseData(req).year
-
     const { id, view } = req.params
-    const { referrer } = req.query
-    const formaction = completedGcse ? referrer : paths.next
 
     res.render(`application/gcse/${view}`, {
-      formaction,
-      id,
-      referrer
+      id
     })
   })
 }

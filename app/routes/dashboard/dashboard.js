@@ -1,8 +1,6 @@
-const utils = require('./../../utils')
 
 module.exports = router => {
   router.get('/dashboard', (req, res) => {
-
     // TODO: refactor these counts
     const numberOfOffersReceived = Object.values(req.session.data.choices).filter(function (choice) {
       return choice.status === 'Offer received'
@@ -64,15 +62,15 @@ module.exports = router => {
     }
   })
 
-// Submit decision
+  // Submit decision
   router.post('/dashboard/decision/:id', (req, res) => {
     const { id } = req.params
     const { decision } = req.body
     const choice = req.session.data.choices[id]
 
-    if (decision == 'accept') {
+    if (decision === 'accept') {
       res.redirect(`/dashboard/accept/${id}`)
-    } else if (decision == 'decline') {
+    } else if (decision === 'decline') {
       choice.status = 'Declined'
       res.redirect(`/dashboard/decline/${id}`)
     } else {
@@ -80,18 +78,17 @@ module.exports = router => {
     }
   })
 
-
   // Final offer accept point
   router.post('/dashboard/accept/:id', (req, res) => {
     const { id } = req.params
     const choice = req.session.data.choices[id]
     const now = new Date()
 
-    choice.status = "Pending conditions"
+    choice.status = 'Pending conditions'
 
     // Request all the references
-    for (reference of Object.values(req.session.data.references)) {
-      reference.status = "Requested"
+    for (const reference of Object.values(req.session.data.references)) {
+      reference.status = 'Requested'
 
       const log = reference.log = reference.log || []
       log.push({
@@ -100,7 +97,7 @@ module.exports = router => {
       })
     }
 
-    res.redirect("/accepted")
+    res.redirect('/accepted')
   })
 
   // Confirmation page for declining an offer
@@ -115,7 +112,7 @@ module.exports = router => {
   router.post('/dashboard/decline/:id', (req, res) => {
     const { id } = req.params
     const choice = req.session.data.choices[id]
-    choice.status = "Offer declined"
+    choice.status = 'Offer declined'
 
     res.redirect('/dashboard')
   })

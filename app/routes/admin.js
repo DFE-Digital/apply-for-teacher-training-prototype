@@ -1,19 +1,14 @@
-const utils = require('../utils')
-
 /**
  * Admin routes
  */
 module.exports = router => {
-
-
   // This fills out every section of the application
   router.get('/admin/complete-application', (req, res) => {
-
-    let data = req.session.data
+    const data = req.session.data
 
     // Set personal information
-    data.firstName = "Jane"
-    data.lastName = "Smith"
+    data.firstName = 'Jane'
+    data.lastName = 'Smith'
     data.dateOfBirth = {
       day: '1',
       month: '3',
@@ -110,13 +105,11 @@ module.exports = router => {
       }
     }
 
-
     // Set work history
     data.workHistoryAdded = 'no-full-time-education'
 
     // Set unpaid expeerience
     data.unpaidExperienceAdded = 'no'
-
 
     // Set personal statement
     data.personalStatement = 'I’ve wanted to become a teacher since being inspired by passionate and brilliant teachers during my school years. There enthusiasm to get the best out of me and to be the best that I can has led me to applying to become a teacher.\n\nI studed English at GCSE and A level and gained not only high academic grades but also a love for the theatre that I want to pass on to the next generation.\n\nWhile volunteering as a teaching assistant I saw the skills needed to be a great teacher one of which is leadership. I am an adept leader and have shown this in several roles. I volunteered in two schools to get experience in different settings and assisted teachers in Key Stages 1 and 2.\n\nI enjoy reading and learning about contemporary ethics and society, considering how I can use this to benefit the students I teach. While in schools I have seen the rewards and challenges presented to teachers and think I have the qualities to make a difference.'
@@ -146,7 +139,6 @@ module.exports = router => {
       }
     }
 
-
     // Set safeguarding
     data.safeguarding = 'no'
 
@@ -170,14 +162,12 @@ module.exports = router => {
       safeguarding: 'true'
     }
 
-    res.redirect(`/application`)
+    res.redirect('/application')
   })
 
   // This lets the candidate receive an offer from all their chocies
   router.get('/admin/receive-offer', (req, res) => {
-
-    for (choice of Object.values(req.session.data.choices)) {
-
+    for (const choice of Object.values(req.session.data.choices)) {
       choice.status = 'Offer received'
       choice.conditions = [
         { title: 'Fitness to train to teach check', status: 'Pending' },
@@ -189,48 +179,45 @@ module.exports = router => {
           lengthInWeeks: 20,
           reason: 'degree-subject',
           status: 'Not met'
-        },
+        }
       ]
     }
 
-    res.redirect(`/dashboard`)
+    res.redirect('/dashboard')
   })
 
   // This pre-fills most of the applicaiton apart from the sections we want to test.
   router.get('/admin/receive-references', (req, res) => {
-
     const timeNow = new Date().toISOString()
 
     for (const reference of Object.values(req.session.data.references)) {
-
       if (!reference.log) { reference.log = [] }
       reference.status = 'Received by training provider'
       reference.log.push({ note: 'Reference received', date: timeNow })
     }
 
-    res.redirect(`/accepted`)
+    res.redirect('/accepted')
   })
 
   // This marks all conditions as met
   router.get('/admin/meet-conditions', (req, res) => {
-
     let acceptedChoice
     if (req.session.data.choices) {
-      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status === 'Pending conditions' || choice.status === 'Offer confirmed'))
     }
 
     if (acceptedChoice) {
-      for (condition of acceptedChoice.conditions) {
-        condition.status = "Met"
+      for (const condition of acceptedChoice.conditions) {
+        condition.status = 'Met'
       }
 
-      for (skeCondition of acceptedChoice.skeConditions) {
-        skeCondition.status = "Completed"
+      for (const skeCondition of acceptedChoice.skeConditions) {
+        skeCondition.status = 'Completed'
       }
     }
 
-    acceptedChoice.status = "Offer confirmed"
+    acceptedChoice.status = 'Offer confirmed'
 
-    res.redirect(`/accepted`)
+    res.redirect('/accepted')
   })
 }

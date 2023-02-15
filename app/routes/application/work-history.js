@@ -22,7 +22,6 @@ module.exports = router => {
     res.redirect(`/application/work-history/break/${newId}`)
   })
 
-
   // Job details page
   router.get('/application/work-history/job/:id', (req, res) => {
     const { id } = req.params
@@ -46,6 +45,6 @@ module.exports = router => {
 
     delete req.session.data.workHistory[id]
 
-    res.redirect("/application/work-history/review")
+    res.redirect('/application/work-history/review')
   })
 }

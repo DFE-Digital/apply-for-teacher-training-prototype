@@ -6,9 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-
 require('./routes/account')(router)
-
 
 require('./routes/application/choices')(router)
 require('./routes/application/contact-information')(router)
@@ -23,13 +21,10 @@ require('./routes/dashboard/dashboard')(router)
 
 require('./routes/accepted/accepted')(router)
 
-
 require('./routes/admin')(router)
-
 
 // Reset application so the user can apply again
 router.post('/application/apply-again', (req, res) => {
-
   // Remove previous course choices
   req.session.data.choices = {}
 
@@ -38,13 +33,12 @@ router.post('/application/apply-again', (req, res) => {
   res.redirect('/application')
 })
 
-
 // Submit application action
 router.post('/application/submit', (req, res) => {
   // Set status of each choice to 'Awaiting decision'
   const choices = req.session.data.choices
   if (choices) {
-    for (id of Object.keys(choices)) {
+    for (const id of Object.keys(choices)) {
       choices[id].status = 'Awaiting decision'
     }
   }

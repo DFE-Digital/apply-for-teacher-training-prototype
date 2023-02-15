@@ -1,12 +1,10 @@
 const utils = require('./../../utils')
 
 module.exports = router => {
-
   router.get('/accepted', (req, res) => {
-
     let acceptedChoice
     if (req.session.data.choices) {
-      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status == "Pending conditions" || choice.status == "Offer confirmed"))
+      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status === 'Pending conditions' || choice.status === 'Offer confirmed'))
     }
 
     if (acceptedChoice) {
@@ -14,11 +12,9 @@ module.exports = router => {
         acceptedChoice
       })
     } else {
-      res.redirect("/application")
+      res.redirect('/application')
     }
-
   })
-
 
   // Generate new ID and redirect to start of referee flow
   router.get('/accepted/references/add', (req, res) => {
@@ -39,55 +35,55 @@ module.exports = router => {
       referrer
     })
   })
-//
-//   // Handle action request
-//   router.post('/accepted/references/:id/:action', (req, res) => {
-//     const { action, id } = req.params
-//     const now = new Date()
-//
-//     req.session.data.references[id].status = status || req.session.data.references[id].status
-//
-//     if (action === 'request') {
-//       req.session.data.references[id].status =
-//       res.redirect(`/accepted/references/${id}/send-request`)
-//     } else {
-//       if (action === 'cancel') {
-//         application.references[id].log.push({
-//           note: 'Request cancelled',
-//           date: now.toISOString()
-//         })
-//       }
-//
-//       if (action === 'deactivate') {
-//         application.references[id].ready = false
-//       }
-//
-//       if (action === 'reactivate') {
-//         application.references[id].ready = true
-//       }
-//
-//       if (action === 'delete') {
-//         delete application.references[id]
-//       }
-//
-//       if (action === 'nudge') {
-//         application.references[id].nudges = 1
-//         application.references[id].log.push({
-//           note: 'Reminder sent',
-//           date: now.toISOString()
-//         })
-//       }
-//
-//       if (action === 'retry') {
-//         application.references[id].log.push({
-//           note: 'Request sent',
-//           date: now.toISOString()
-//         })
-//       }
-//
-//       res.redirect(`/accepted`)
-//     }
-//   })
+  //
+  //   // Handle action request
+  //   router.post('/accepted/references/:id/:action', (req, res) => {
+  //     const { action, id } = req.params
+  //     const now = new Date()
+  //
+  //     req.session.data.references[id].status = status || req.session.data.references[id].status
+  //
+  //     if (action === 'request') {
+  //       req.session.data.references[id].status =
+  //       res.redirect(`/accepted/references/${id}/send-request`)
+  //     } else {
+  //       if (action === 'cancel') {
+  //         application.references[id].log.push({
+  //           note: 'Request cancelled',
+  //           date: now.toISOString()
+  //         })
+  //       }
+  //
+  //       if (action === 'deactivate') {
+  //         application.references[id].ready = false
+  //       }
+  //
+  //       if (action === 'reactivate') {
+  //         application.references[id].ready = true
+  //       }
+  //
+  //       if (action === 'delete') {
+  //         delete application.references[id]
+  //       }
+  //
+  //       if (action === 'nudge') {
+  //         application.references[id].nudges = 1
+  //         application.references[id].log.push({
+  //           note: 'Reminder sent',
+  //           date: now.toISOString()
+  //         })
+  //       }
+  //
+  //       if (action === 'retry') {
+  //         application.references[id].log.push({
+  //           note: 'Request sent',
+  //           date: now.toISOString()
+  //         })
+  //       }
+  //
+  //       res.redirect(`/accepted`)
+  //     }
+  //   })
 
   // Request reference
   router.post('/accepted/references/:id/request', (req, res) => {
@@ -107,7 +103,7 @@ module.exports = router => {
       date: now.toISOString()
     })
 
-    res.redirect(`/accepted`)
+    res.redirect('/accepted')
   })
 
   // Render referee page
@@ -126,7 +122,7 @@ module.exports = router => {
 
     res.render(`accepted/references/${view}`, {
       id,
-      formaction: referrer || `/accepted/$references/review`,
+      formaction: referrer || '/accepted/$references/review',
       referrer,
       validate
     })

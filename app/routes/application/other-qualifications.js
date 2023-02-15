@@ -11,20 +11,19 @@ module.exports = router => {
   router.get('/application/other-qualifications/review', (req, res) => {
     const data = req.session.data
 
-    if (data.qualificationsAdded == 'yes' && Object.keys(data.otherQualifications).length === 0) {
+    if (data.qualificationsAdded === 'yes' && Object.keys(data.otherQualifications).length === 0) {
       // Redirect back to guard question if there are no qualifications but they didn't answer No to the guard question
-      res.redirect(`/application/other-qualifications`)
+      res.redirect('/application/other-qualifications')
     } else {
       res.render('application/other-qualifications/review')
     }
   })
 
   router.post('/application/other-qualifications/answer', (req, res) => {
-
     if (req.session.data.otherQualificationsAdded === 'yes') {
-      res.redirect(`/application/other-qualifications/add`)
+      res.redirect('/application/other-qualifications/add')
     } else {
-      res.redirect(`/application/other-qualifications/review`)
+      res.redirect('/application/other-qualifications/review')
     }
   })
 
@@ -48,7 +47,7 @@ module.exports = router => {
   router.post('/application/other-qualifications/:id/delete', (req, res) => {
     const { id } = req.params
     delete req.session.data.otherQualifications[id]
-    res.redirect("/application/other-qualifications/review")
+    res.redirect('/application/other-qualifications/review')
   })
 
   // Render details page
@@ -59,5 +58,4 @@ module.exports = router => {
       id
     })
   })
-
 }

@@ -1,6 +1,5 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = "/reference/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set provider_name = "West Lancashire SCITT" %}
 {% set title = "A reference for " + candidate_name + "" %}
@@ -15,35 +14,41 @@
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  <h1 class="govuk-heading-l">Give a reference for {{ candidate_name }}</h1>
+      <h1 class="govuk-heading-l">Give a reference for {{ candidate_name }}</h1>
 
-  <p class="govuk-body">{{ candidate_name }} has accepted an offer from {{ provider_name }} for a place on a teacher training course. They’ve said that you can give them a reference.</p>
+      <p class="govuk-body">{{ candidate_name }} has accepted an offer from {{ provider_name }} for a place on a teacher training course. They’ve said that you can give them a reference.</p>
 
-  <p class="govuk-body">Your reference will not be sent to {{ candidate_name }}.</p>
+      <p class="govuk-body">Your reference will not be sent to {{ candidate_name }}.</p>
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Can you give a reference for " + candidate_name + "?",
-        classes: "govuk-fieldset__legend--m",
-        isPageHeading: false
-      }
-    },
-    idPrefix: "reference-answer",
-    name: "reference-answer",
-    items: [{
-      value: "Yes",
-      text: "Yes, I can give them a reference",
-      checked: (data["reference-answer"] == "Yes")
-    }, {
-      value: "No",
-      text: "No, I’m unable to give a reference",
-      checked: (data["reference-answer"] == "No")
-    }]
-  }) }}
+      <form action="/reference/answer" method="post">
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "Can you give a reference for " + candidate_name + "?",
+              classes: "govuk-fieldset__legend--m",
+              isPageHeading: false
+            }
+          },
+          idPrefix: "reference-answer",
+          name: "reference-answer",
+          items: [{
+            value: "Yes",
+            text: "Yes, I can give them a reference",
+            checked: (data["reference-answer"] == "Yes")
+          }, {
+            value: "No",
+            text: "No, I’m unable to give a reference",
+            checked: (data["reference-answer"] == "No")
+          }]
+        }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

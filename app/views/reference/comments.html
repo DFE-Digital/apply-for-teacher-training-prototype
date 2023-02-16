@@ -1,6 +1,5 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/reference/review" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
@@ -18,50 +17,56 @@
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <p class="govuk-body">Your reference should contain facts, not your opinions.</p>
+      <p class="govuk-body">Your reference should contain facts, not your opinions.</p>
 
-  <p class="govuk-body">You could include:</p>
+      <p class="govuk-body">You could include:</p>
 
-  {% set type = data['referee_type'] %}
-  {% if type == 'character' %}
+      {% set type = data['referee_type'] %}
+      {% if type == 'character' %}
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>details of how you know Jane Doe</li>
-      <li>things they’ve done or you’ve done together</li>
-    </ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>details of how you know Jane Doe</li>
+          <li>things they’ve done or you’ve done together</li>
+        </ul>
 
-  {% elif type == 'professional' or type == 'school' %}
+      {% elif type == 'professional' or type == 'school' %}
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>when they worked with you</li>
-      <li>their role and responsibilities</li>
-    </ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>when they worked with you</li>
+          <li>their role and responsibilities</li>
+        </ul>
 
-  {% else %}
+      {% else %}
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>when their course started and ended</li>
-      <li>their academic record</li>
-    </ul>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>when their course started and ended</li>
+          <li>their academic record</li>
+        </ul>
 
-  {% endif %}
+      {% endif %}
 
-  {{ govukCharacterCount({
-    id: "reference-comments",
-    name: "reference[comments]",
-    value: data.reference.comments,
-    label: {
-      text: "Reference",
-      classes: "govuk-label--m govuk-!-margin-top-6"
-    },
-    maxwords: 500,
-    threshold: 50,
-    rows: 6
-  }) }}
+      <form action="{{ referrer or "/reference/review" }}" method="post">
+        {{ govukCharacterCount({
+          id: "reference-comments",
+          name: "reference[comments]",
+          value: data.reference.comments,
+          label: {
+            text: "Reference",
+            classes: "govuk-label--m govuk-!-margin-top-6"
+          },
+          maxwords: 500,
+          threshold: 50,
+          rows: 6
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

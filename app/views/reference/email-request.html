@@ -1,39 +1,42 @@
-{% extends "_email.html" %}
+{% extends "layouts/email.html" %}
 
 {% set title = "Teacher training reference needed for Jane Doe" %}
 {% set type = data['referee_type'] %}
 
 {% block content %}
-  <p class="govuk-body">Dear Debroah Lueilwitz</p>
-  <p class="govuk-body">Jane Doe has accepted an offer from West Lancashire SCITT for a place on a teacher training course. </p>
-  <p class="govuk-body">They’ve said that you can give them a reference. </p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">Dear Debroah Lueilwitz</p>
+      <p class="govuk-body">Jane Doe has accepted an offer from West Lancashire SCITT for a place on a teacher training course. </p>
+      <p class="govuk-body">They’ve said that you can give them a reference. </p>
 
-  <p class="govuk-body">You’ll need to: </p>
+      <p class="govuk-body">You’ll need to: </p>
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>say whether you have any concerns about them working with children</li>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>say whether you have any concerns about them working with children</li>
 
-    {% if type == 'character' %}
+        {% if type == 'character' %}
 
-      <li>give factual information which can be used to check their application, for example about activities you’ve done together</li>
+          <li>give factual information which can be used to check their application, for example about activities you’ve done together</li>
 
-    {% elif type == 'professional' or type == 'school' %}
+        {% elif type == 'professional' or type == 'school' %}
 
-      <li>give factual information which can be used to check their application, for example about their role and responsibilities at work</li>
+          <li>give factual information which can be used to check their application, for example about their role and responsibilities at work</li>
 
-    {% else %}
+        {% else %}
 
-      <li>give factual information which can be used to check their application, for example about their academic performance</li>
+          <li>give factual information which can be used to check their application, for example about their academic performance</li>
 
-    {% endif %}
+        {% endif %}
 
-  </ul>
+      </ul>
 
 
-  <p class="govuk-body">Use this link to give the reference or to say you cannot give one:</p>
+      <p class="govuk-body">Use this link to give the reference or to say you cannot give one:</p>
 
-  <p class="govuk-body"><a href="/reference">http://localhost:3000/reference?token=onNYS8Uvzs2nicqd5htb</a></p>
+      <p class="govuk-body"><a href="/reference">http://localhost:3000/reference?token=onNYS8Uvzs2nicqd5htb</a></p>
 
-  <p class="govuk-body">If you say you cannot give a reference, Jane Doe will know they should ask someone else. You will receive no further emails.</p>
-
+      <p class="govuk-body">If you say you cannot give a reference, Jane Doe will know they should ask someone else. You will receive no further emails.</p>
+    </div>
+  </div>
 {% endblock %}

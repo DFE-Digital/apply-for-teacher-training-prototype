@@ -1,12 +1,11 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = "/reference/finish/answer" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Your reference for " + candidate_name + " has been&nbsp;submitted" %}
 {% set hasAccountLinks = false %}
 
 {% block content %}
-<form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+<form action="/reference/finish/answer" method="post">
   {{ govukPanel({
     classes: "govuk-!-margin-bottom-8",
     titleText: title | safe

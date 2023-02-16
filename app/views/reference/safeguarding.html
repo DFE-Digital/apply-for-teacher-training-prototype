@@ -1,6 +1,5 @@
 {% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/reference/comments" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Do you know any reason why " + candidate_name + " should not work with children?" %}
 {% set hasAccountLinks = false %}
@@ -18,41 +17,49 @@
 {% endblock %}
 
 {% block content %}
-  {% set safeguardingConcernHtml %}
-    {{ govukCharacterCount({
-      id: "reference-safeguarding-reason",
-      name: "reference[safeguarding][reason]",
-      value: data.reference.safeguarding.reason,
-      label: {
-        text: "Why " + candidate_name + " should not work with children"
-      },
-      hint: {
-        text: "Give facts, not your opinion."
-      },
-      maxwords: 200,
-      threshold: 95,
-      rows: 5
-    }) }}
-  {% endset %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {{ govukRadios({
-    idPrefix: "reference-safeguarding-concern",
-    name: "reference[safeguarding][concern]",
-    items: [{
-      value: "Yes",
-      text: "Yes, I know a reason why they should not work with children",
-      checked: checked("reference.safeguarding.concern", "Yes"),
-      conditional: {
-        html: safeguardingConcernHtml
-      }
-    },{
-      value: "No",
-      text: "No",
-      checked: checked("reference.safeguarding.concern", "No")
-    }]
-  }) }}
+      {% set safeguardingConcernHtml %}
+        {{ govukCharacterCount({
+          id: "reference-safeguarding-reason",
+          name: "reference[safeguarding][reason]",
+          value: data.reference.safeguarding.reason,
+          label: {
+            text: "Why " + candidate_name + " should not work with children"
+          },
+          hint: {
+            text: "Give facts, not your opinion."
+          },
+          maxwords: 200,
+          threshold: 95,
+          rows: 5
+        }) }}
+      {% endset %}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+      <form action="{{ referrer or "/reference/comments" }}" method="post">
+        {{ govukRadios({
+          idPrefix: "reference-safeguarding-concern",
+          name: "reference[safeguarding][concern]",
+          items: [{
+            value: "Yes",
+            text: "Yes, I know a reason why they should not work with children",
+            checked: checked("reference.safeguarding.concern", "Yes"),
+            conditional: {
+              html: safeguardingConcernHtml
+            }
+          },{
+            value: "No",
+            text: "No",
+            checked: checked("reference.safeguarding.concern", "No")
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

@@ -6,11 +6,9 @@
   },
   "name": "apply-for-teacher-training",
   "dependencies": {
-    "@govuk-prototype-kit/step-by-step": "^2.1.0",
     "govuk-frontend": "^4.5.0",
     "govuk-prototype-filters": "^0.1.0",
     "govuk-prototype-kit": "^13.2.4",
-    "notifications-node-client": "^5.2.3",
     "task-list-component": "^0.0.4"
   }
 }

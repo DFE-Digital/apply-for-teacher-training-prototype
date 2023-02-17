@@ -57,7 +57,7 @@
           text: "Email"
         },
         value: {
-          text: item.email
+          html: (item.email if item.email else "<a href=\"/application/references/email\">Enter email address</a>")
         },
         actions: {
           items: [
@@ -66,7 +66,7 @@
               href: "/application/" + applicationId + "/references/" + item.id + "/email"
             } if item.status == 'Not sent'
           ]
-        }
+        } if item.email
       },
       {
         key: {

@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% set choice = data.choices[id] %}
+
+{% set title = "Your offer" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body-l govuk-!-margin-top-0">
+        {{ choice.providerName }} have offered you a conditional place on the <a href="#">{{ choice.course }}</a> course.
+      </p>
+
+      <p class="govuk-body-l">You have 14 days (until 4 March 2021) to accept or decline the offer.</p>
+
+
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        {% for condition in choice.conditions %}
+          <li>{{ condition.title }}</li>
+        {% endfor %}
+      </ul>
+
+      <p class="govuk-body">For help understanding or meeting your conditions, contact {{ "the providers" if choices | length > 1 else "the provider" }} directly.</p>
+
+      <h2 class="govuk-heading-m">Accepting or declining offers</h2>
+
+      <p class="govuk-body">You can only accept one offer, across both Apply for teacher training and UCAS teacher training.</p>
+
+      <p class="govuk-body">You can still apply again for a course this year if you fail to respond or decline your {{ "offers" if choices | length > 1 else "offer" }}.</p>
+
+      <form action="/dashboard/decision/{{ id}}" method="post">
+        {{ govukRadios({
+          fieldset: {
+            classes: "govuk-!-margin-top-6",
+            legend: {
+              text: "How do you want to respond to this offer?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          id: "decision",
+          name: "decision",
+          items: [
+            {
+              value: "accept",
+              text: "Accept offer from " + choice.providerName + " for " + choice.course
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "decline",
+              text: "Decline offer"
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,11 +1,10 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/reference/safeguarding" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Confirm how " + candidate_name + " knows you" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
@@ -31,50 +30,58 @@
 {% endset %}
 
 
-{% block primary %}
-  <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
-  {{ govukInsetText({
-    text: relationship,
-    classes: " govuk-!-margin-top-0"
-  }) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body govuk-!-margin-bottom-2">{{ candidate_name }} has described how they know you:</p>
+      {{ govukInsetText({
+        text: relationship,
+        classes: " govuk-!-margin-top-0"
+      }) }}
 
-  {% set correctRelationshipHtml %}
-    {{ govukCharacterCount({
-      id: "reference-relationship-correction",
-      name: "reference[relationship][correction]",
-      value: data.reference.relationship.correction,
-      label: {
-        text: "How you know " + candidate_name + " and how long you’ve known them"
-      },
-      maxwords: 50,
-      rows: 5
-    }) }}
-  {% endset %}
+      {% set correctRelationshipHtml %}
+        {{ govukCharacterCount({
+          id: "reference-relationship-correction",
+          name: "reference[relationship][correction]",
+          value: data.reference.relationship.correction,
+          label: {
+            text: "How you know " + candidate_name + " and how long you’ve known them"
+          },
+          maxwords: 50,
+          rows: 5
+        }) }}
+      {% endset %}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Is this description accurate?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    idPrefix: "reference-relationship-correct",
-    name: "reference[relationship][correct]",
-    items: [{
-      value: "Yes",
-      text: "Yes",
-      checked: checked("reference.relationship.correct", "Yes")
-    }, {
-      value: "No",
-      text: "No, I’ll give a more accurate description",
-      checked: checked("reference.relationship.correct", "No"),
-      conditional: {
-        html: correctRelationshipHtml
-      }
-    }]
-  }) }}
+      <form action="{{ referrer or "/reference/safeguarding" }}" method="post">
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "Is this description accurate?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          idPrefix: "reference-relationship-correct",
+          name: "reference[relationship][correct]",
+          items: [{
+            value: "Yes",
+            text: "Yes",
+            checked: checked("reference.relationship.correct", "Yes")
+          }, {
+            value: "No",
+            text: "No, I’ll give a more accurate description",
+            checked: checked("reference.relationship.correct", "No"),
+            conditional: {
+              html: correctRelationshipHtml
+            }
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

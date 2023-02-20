@@ -1,19 +1,19 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
+{% set applicationPath = "/application" %}
 {% set formaction = applicationPath %}
 {% set title = "English as a foreign language" %}
 {% set referrer = applicationPath + "/english-language/review" %}
 {% set canAmend = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% include "_includes/review/english-language.html" %}
 
   {{ govukRadios({
@@ -31,7 +31,7 @@
       value: "false",
       text: "No, I’ll come back to it later"
     }]
-  } | decorateApplicationAttributes(["completed", "englishLanguage"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Continue"

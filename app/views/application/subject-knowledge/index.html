@@ -1,50 +1,52 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = referrer or "/application/" + applicationId + "/subject-knowledge/review" %}
 {% set title = "Your suitability to teach a subject or age group" %}
-{% set allowsFeedback = true %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
-{% block primary %}
-  <p class="govuk-body">If you’re applying for secondary teacher training, describe your knowledge of the subjects you’d like to teach.</p>
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">If you’re applying for secondary teacher training, describe your knowledge of the subjects you’d like to teach.</p>
 
-  <p class="govuk-body">If you’re applying for primary teacher training, say why you’d like to teach this age group.</p>
+      <p class="govuk-body">If you’re applying for primary teacher training, say why you’d like to teach this age group.</p>
 
-  <p class="govuk-body">If you're applying for a primary course with a subject specialism, or you're particularly interested in certain primary subjects, you can also talk about that.</p>
+      <p class="govuk-body">If you're applying for a primary course with a subject specialism, or you're particularly interested in certain primary subjects, you can also talk about that.</p>
 
-  <p class="govuk-body">You could include details about:</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>any relevant work experience</li>
-    <li>your degrees and degree modules</li>
-    <li>your other relevant qualifications, such as A levels</li>
-    <li>any relevant skills, interests or achievements</li>
-    <li>your understanding of the national curriculum</li>
-  </ul>
+      <p class="govuk-body">You could include details about:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>any relevant work experience</li>
+        <li>your degrees and degree modules</li>
+        <li>your other relevant qualifications, such as A levels</li>
+        <li>any relevant skills, interests or achievements</li>
+        <li>your understanding of the national curriculum</li>
+      </ul>
 
-  <p class="govuk-body">If you need help, you can speak to our <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training advisers</a>. Our advisors were teachers and they can give you free, one-to-one support with your personal statement.</p>
-  {{ govukCharacterCount({
-    label: {
-      text: "Why are you suited to teach your subjects or age group?",
-      classes: "govuk-label--m govuk-!-margin-top-6"
-    },
+      <p class="govuk-body">If you need help, you can speak to our <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training advisers</a>. Our advisors were teachers and they can give you free, one-to-one support with your personal statement.</p>
 
-    maxwords: 400,
-    rows: 24
-  } | decorateApplicationAttributes(["subjectKnowledge"])) }}
+      <form action="/application/subject-knowledge/review" method="post">
+        {{ govukCharacterCount({
+          name: "subjectKnowledge",
+          value: data.subjectKnowledge,
+          id: "subject-knowledge",
+          label: {
+            text: "Why are you suited to teach your subjects or age group?",
+            classes: "govuk-label--m govuk-!-margin-top-6"
+          },
+          maxwords: 400,
+          rows: 24
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

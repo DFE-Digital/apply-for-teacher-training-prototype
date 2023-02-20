@@ -1,147 +1,165 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set parent = "Unpaid experience" %}
-{% set action = "edit" if applicationValue(["unpaidExperience", id, "role"]) else "add" %}
-{% set title = (action | capitalize) + " role" %}
+{% set title = "Add role" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: applicationPath + "/unpaid-experience"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application/unpaid-experience"
+  }) }}
 {% endblock %}
 
-{% block primary %}
-  <p class="govuk-body">Do not include paid work in a school – enter these roles in ‘Work history’.</p>
-  {{ govukInput({
-    label: {
-      text: "Your role",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["unpaidExperience", id, "role"])) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">Do not include paid work in a school – enter these roles in ‘Work history’.</p>
 
-  {{ govukInput({
-    label: {
-      text: "Organisation where you gained experience or volunteered",
-      classes: "govuk-label--m"
-    }
-  } | decorateApplicationAttributes(["unpaidExperience", id, "org"])) }}
+      <form action="/application/unpaid-experience/review" method="post">
+        {{ govukInput({
+          name: "unpaidExperience[" + id + "][role]",
+          value: data.unpaidExperience[id].role,
+          label: {
+            text: "Your role",
+            classes: "govuk-label--m"
+          }
+        }) }}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Did this role involve working in a school or with children?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      text: "Yes"
-    }, {
-      text: "No"
-    }]
-  } | decorateApplicationAttributes(["unpaidExperience", id, "workedWithChildren"])) }}
+        {{ govukInput({
+          name: "unpaidExperience[" + id + "][employerName]",
+          value: data.unpaidExperience[id].employerName,
+          label: {
+            text: "Organisation where you gained experience or volunteered",
+            classes: "govuk-label--m"
+          }
+        }) }}
 
-  {% set startDate = applicationValue(["unpaidExperience", id, "startDate"]) %}
-  {% set endDate = applicationValue(["unpaidExperience", id, "endDate"]) %}
-  {{ govukDateInput({
-    fieldset: {
-      legend: {
-        text: "When did you start this role?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    hint: {
-      text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
-    },
-    namePrefix: id + "-startDate",
-    items: [{
-      label: "Month",
-      name: "month",
-      value: startDate | date("L"),
-      classes: "govuk-input--width-2"
-    }, {
-      label: "Year",
-      name: "year",
-      value: startDate | date("yyyy"),
-      classes: "govuk-input--width-4"
-    }]
-  } | decorateApplicationAttributes(["unpaidExperience", id, "startDate"])) }}
+        {{ govukRadios({
+          name: "unpaidExperience[" + id + "][involvedWorkingWithChildren]",
+          value: data.unpaidExperience[id].involvedWorkingWithChildren,
+          fieldset: {
+            legend: {
+              text: "Did this role involve working in a school or with children?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            text: "No",
+            value: "no"
+          }]
+        }) }}
 
-  {{ govukCheckboxes({
-    items: [{
-      value: "true",
-      text: "I’m not sure the exact month or year I started"
-    }]
-  } | decorateApplicationAttributes(["unpaidExperience", id, "startDateApprox"])) }}
+        {{ govukDateInput({
+          namePrefix: "",
+          fieldset: {
+            legend: {
+              text: "When did you start this role?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
+          },
+          items: [{
+            label: "Month",
+            name: "unpaidExperience[" + id + "][startMonth]",
+            value: data.unpaidExperience[id].startMonth,
+            classes: "govuk-input--width-2"
+          }, {
+            label: "Year",
+            name: "unpaidExperience[" + id + "][startYear]",
+            value: data.unpaidExperience[id].startYear,
+            classes: "govuk-input--width-4"
+          }]
+        }) }}
 
-  {% set endDateHtml %}
-    {{ govukDateInput({
-      fieldset: {
-        legend: {
-          text: "When did you finish this role?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      hint: {
-        text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
-      },
-      namePrefix: id + "-endDate",
-      items: [{
-        label: "Month",
-        name: "month",
-        value: endDate | date("L"),
-        classes: "govuk-input--width-2"
-      }, {
-        label: "Year",
-        name: "year",
-        value: endDate | date("yyyy"),
-        classes: "govuk-input--width-4"
-      }]
-    } | decorateApplicationAttributes(["unpaidExperience", id, "endDate"])) }}
+        {{ govukCheckboxes({
+          name: "unpaidExperience[" + id + "][startDateApprox]",
+          values: data.unpaidExperience[id].startDateApprox,
+          items: [{
+            value: "true",
+            text: "I’m not sure the exact month or year I started"
+          }]
+        }) }}
 
-    {{ govukCheckboxes({
-      items: [{
-        value: "true",
-        text: "I’m not sure the exact month or year I left"
-      }]
-    } | decorateApplicationAttributes(["unpaidExperience", id, "endDateApprox"])) }}
-  {% endset %}
+        {% set endDateHtml %}
+          {{ govukDateInput({
+            id: "end-date",
+            namePrefix: "",
+            fieldset: {
+              legend: {
+                text: "When did you finish this role?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            hint: {
+              text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
+            },
+            items: [{
+              label: "Month",
+              name: "unpaidExperience[" + id + "][endMonth]",
+              value: data.unpaidExperience[id].endMonth,
+              classes: "govuk-input--width-2"
+            }, {
+              label: "Year",
+              name: "unpaidExperience[" + id + "][endYear]",
+              value: data.unpaidExperience[id].endYear,
+              classes: "govuk-input--width-4"
+            }]
+          }) }}
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "Are you still working in this role?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      text: "Yes"
-    }, {
-      text: "No",
-      conditional: {
-        html: endDateHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["unpaidExperience", id, "endDate"])) }}
+          {{ govukCheckboxes({
+            name: "unpaidExperience[" + id + "][endDateApprox]",
+            values: data.unpaidExperience[id].endDateApprox,
+            items: [{
+              value: "true",
+              text: "I’m not sure the exact month or year I left"
+            }]
+          }) }}
+        {% endset %}
 
-  {{ govukCharacterCount({
-    label: {
-      text: "Enter details of your time commitment and responsibilities",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "For example, ‘I volunteer in the classroom every Friday morning’ or ‘I spent 1 day observing in this school’ or ‘I am a Scout Leader involved in activities throughout the year’"
-    },
-    maxwords: 150
-  } | decorateApplicationAttributes(["unpaidExperience", id, "time-commitment"])) }}
+        {{ govukRadios({
+          id: "still-working-in-role",
+          name: "unpaidExperience[" + id + "][stillWorkingInRole]",
+          value: data.unpaidExperience[id].stillWorkingInRole,
+          fieldset: {
+            legend: {
+              text: "Are you still working in this role?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            text: "Yes",
+            value: "yes"
+          }, {
+            value: "no",
+            text: "No",
+            conditional: {
+              html: endDateHtml
+            }
+          }]
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukCharacterCount({
+          id: "time-and-responsibilities",
+          name: "unpaidExperience[" + id + "][timeCommitmentAndResponsibilities]",
+          value: data.unpaidExperience[id].timeCommitmentAndResponsibilities,
+          label: {
+            text: "Enter details of your time commitment and responsibilities",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "For example, ‘I volunteer in the classroom every Friday morning’ or ‘I spent 1 day observing in this school’ or ‘I am a Scout Leader involved in activities throughout the year’"
+          },
+          maxwords: 150
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

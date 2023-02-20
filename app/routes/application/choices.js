@@ -1,228 +1,285 @@
-const journeys = require('../../utils/journeys')
-const providers = require('../../data/providers')
-const utils = require('../../utils')
-
-const pickPaths = (req) => {
-  const applicationId = req.params.applicationId
-  const choiceId = req.params.choiceId
-
-  const paths = [
-    `/application/${applicationId}/choices`,
-    `/application/${applicationId}/choices/${choiceId}/found`,
-    `/application/${applicationId}/choices/${choiceId}/provider`,
-    `/application/${applicationId}/choices/${choiceId}/pick`,
-    `/application/${applicationId}/choices/${choiceId}/location`,
-    `/application/${applicationId}/choices/${choiceId}/create`,
-    `/application/${applicationId}/choices`
-  ]
-
-  return journeys.nextAndBackPaths(paths, req)
-}
-
-const findPaths = (req) => {
-  const { applicationId } = req.params
-  const { choiceId } = req.params
-
-  const paths = [
-    `/application/${applicationId}`,
-    `/application/${applicationId}/choices/${choiceId}/found`,
-    `/application/${applicationId}/choices/${choiceId}/find`
-  ]
-
-  return journeys.nextAndBackPaths(paths, req)
-}
-
-const temporaryAndSavedChoices = (req) => {
-  const application = utils.applicationData(req)
-  const { choiceId } = req.params
-
-  if (typeof application.choices === 'undefined') {
-    application.choices = {}
-  }
-
-  if (typeof application.temporaryChoices === 'undefined') {
-    application.temporaryChoices = {}
-  }
-
-  const existingChoice = application.choices[choiceId] || {}
-  const temporaryChoice = application.temporaryChoices[choiceId] || {}
-
-  return [existingChoice, temporaryChoice]
-}
-
-const temporaryChoice = (req) => {
-  return temporaryAndSavedChoices(req)[1]
-}
-
-const providerCode = (req) => {
-  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
-  return temporaryChoice.provider ? /\(([^)]+)\)$/.exec(temporaryChoice.provider)[1] : existingChoice.providerCode
-}
-
-const courseCode = (req) => {
-  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
-  return temporaryChoice.course ? /\(([^)]+)\)$/.exec(temporaryChoice.course)[1] : existingChoice.courseCode
-}
-
-const locationName = (req) => {
-  const [existingChoice, temporaryChoice] = temporaryAndSavedChoices(req)
-  return temporaryChoice.location ? temporaryChoice.location : existingChoice.locationName
-}
-
-const locationAddress = (req) => {
-  const locations = providers[providerCode(req)].courses[courseCode(req)].locations
-  const location = locations.filter(l => { return l.name === locationName(req) })
-  return location[0].address || ''
-}
-
-const singleLocationCourse = (req) => {
-  const locations = providers[providerCode(req)].courses[courseCode(req)].locations
-  return locations.length === 1
-}
-
-const randomDegreeRequirement = (seed) => {
-  switch (Math.floor(Math.random(seed) * 5)) {
-    case 0:
-      return '21'
-    case 1:
-      return '22'
-    case 2:
-      return 'third'
-    default:
-      return 'degree'
-  }
-}
+const utils = require('./../../utils')
 
 module.exports = router => {
-  router.all('/application/:applicationId/choices/add', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-    const choiceId = utils.generateRandomString()
+  // Branch based on whether they said they know which course to
+  // apply to.
+  router.post('/application/choices/course-known', (req, res) => {
+    const courseKnown = req.body.courseKnown
 
-    if (typeof application.temporaryChoices === 'undefined') {
-      application.temporaryChoices = {}
-    }
-
-    application.temporaryChoices[choiceId] = {
-      started: true
-    }
-
-    res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
-  })
-
-  router.all('/application/:applicationId/choices/:choiceId/create', (req, res) => {
-    const application = utils.applicationData(req)
-    const { applicationId, choiceId } = req.params
-
-    const selectedCourseProviderCode = providerCode(req)
-    const selectedCourseCode = courseCode(req)
-    const courseSelected = providers[selectedCourseProviderCode].courses[selectedCourseCode]
-
-    // Randomised for now, until this data is added to Find and the API
-    const canSponsorVisa = (Math.random(choiceId) > 0.5)
-
-    // Adding random degree class requirement
-    const degreeRequired = randomDegreeRequirement(choiceId)
-
-    application.choices[choiceId] = {
-      providerCode: selectedCourseProviderCode,
-      courseCode: selectedCourseCode,
-      locationName: locationName(req),
-      locationAddress: locationAddress(req),
-      singleLocationCourse: singleLocationCourse(req),
-      length: '1 year',
-      type: courseSelected.description,
-      starts: '2022-09',
-      canSponsorVisa: canSponsorVisa,
-      degreeRequired: degreeRequired
-    }
-
-    delete req.session.data.course_from_find
-    delete application.temporaryChoices
-
-    res.redirect(`/application/${applicationId}/choices`)
-  })
-
-  router.all('/application/:applicationId/choices/:choiceId/location', (req, res) => {
-    const paths = pickPaths(req)
-    const locations = providers[providerCode(req)].courses[courseCode(req)].locations
-
-    if (locations.length === 1) {
-      temporaryChoice(req).location = locations[0].name
-      res.redirect(paths.next)
+    if (courseKnown === 'yes') {
+      const choiceId = utils.generateRandomString()
+      res.redirect(`/application/choices/${choiceId}/provider`)
+    } else if (courseKnown === 'no') {
+      res.redirect('/application/choices/find')
     } else {
-      const locationOptions = locations.map(function (loc) {
-        const l = {}
-        l.text = loc.name
-        l.hint = { text: loc.address }
-        l.label = { classes: 'z' }
-        return l
-      })
-
-      res.render('application/choices/location', {
-        locationOptions,
-        paths: paths
-      })
+      // return to question page
+      res.redirect('/application/choices')
     }
   })
 
-  router.post('/application/:applicationId/choices/:choiceId/found', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-    const { choiceId } = req.params
-    const { data } = req.session
-    const temporaryChoice = application.temporaryChoices[choiceId]
+  router.get('/application/choices/:id/provider', (req, res) => {
+    const { id } = req.params
 
-    if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'yes') {
-      const provider = providers[data.course_from_find.providerCode]
-      temporaryChoice.provider = provider.name_and_code
-      temporaryChoice.course = provider.courses[data.course_from_find.courseCode].name_and_code
-      res.redirect(`/application/${applicationId}/choices/${choiceId}/location`)
-    } else if (temporaryChoice.fromFind && temporaryChoice.fromFind === 'no') {
-      delete data.course_from_find
-      delete temporaryChoice.fromFind
-      res.redirect(`/application/${applicationId}/choices/${choiceId}/found`)
-    } else {
-      const found = temporaryChoice.found
-      const paths = (found && found === 'know')
-        ? pickPaths(req)
-        : findPaths(req)
+    const providers = [
+      'Alban Federation SCITT',
+      'Ambition Institute',
+      'Anglia Ruskin University',
+      'Bluecoat SCITT Alliance Nottingham',
+      'ARK Teacher Training',
+      'Bath Spa University',
+      'NELTA',
+      'Best Practice Network',
+      'Birmingham City University',
+      'Bishop Challoner Training School',
+      'Bishop Grosseteste University',
+      'London District East SCITT',
+      'Mid Essex Initial Teacher Training',
+      'Bright Futures SCITT',
+      'Bromley Schools’ Collegiate',
+      'Cabot Learning Federation SCITT',
+      'Canterbury Christ Church University',
+      'Cheshire East SCITT',
+      'Chiltern Training Group',
+      'The National Modern Languages SCITT',
+      'Norfolk Teacher Training Centre',
+      'Scarborough Teaching Alliance',
+      'SCITT in East London Schools (SCITTELS)',
+      'Kingsbridge EIP SCITT',
+      'Coventry University',
+      'Mid Somerset Consortium for Teacher Training',
+      'Exchange Teacher Training',
+      'Astra SCITT',
+      'EAST SCITT',
+      'East Midlands Teacher Training Partnership',
+      'Durham SCITT',
+      'Edge Hill University',
+      'Educate Group Initial Teacher Training',
+      'Education South West',
+      'West Essex SCITT',
+      'e-Qualitas',
+      'Essex and Thames SCITT',
+      'Exceed SCITT',
+      'University Centre Farnborough',
+      'Future Teacher Training',
+      'Goldsmiths, University of London',
+      'GORSE SCITT',
+      'AA Teamworks West Yorkshire SCITT',
+      'Harris ITT',
+      'Fareham and Gosport Primary SCITT',
+      'Haybridge Alliance SCITT',
+      'Tes Institute',
+      'Inspiring Future Teachers',
+      'Primary Catholic Partnership SCITT',
+      'i2i Teaching Partnership SCITT',
+      'Chepping View Primary Academy SCITT',
+      'Inspiring Leaders',
+      'The John Taylor SCITT',
+      'King Edward’s Consortium',
+      'King’s College London',
+      'Kingston University',
+      'Leeds Beckett University',
+      'Leeds Trinity University',
+      'Leicestershire Secondary SCITT',
+      'Kent and Medway Training - KMT',
+      'Liverpool Hope University',
+      'Liverpool John Moores University',
+      'London Metropolitan University',
+      'London School of Jewish Studies (LSJS)',
+      'Loughborough University',
+      'Luminate Partnership for ITT',
+      'Associated Merseyside Partnership SCITT',
+      'Manchester Metropolitan University',
+      'Barr Beacon SCITT',
+      'The Cambridge Partnership',
+      'Mersey Boroughs ITT Partnership',
+      'Middlesex University',
+      'Mulberry College of Teaching',
+      'Newman University',
+      'North Lincolnshire SCITT Partnership',
+      'North Tyneside SCITT',
+      'Northampton Teacher Training Partnership',
+      'The Sheffield SCITT',
+      'Nottingham Trent University',
+      'Nottinghamshire Torch SCITT',
+      '2Schools Consortium',
+      'Oxford Brookes University',
+      'Partnership London SCITT (PLS)',
+      'Pioneers Partnership SCITT',
+      'Portsmouth Primary SCITT',
+      'Prestolee SCITT',
+      'REAch Teach Primary Partnership',
+      'Red Kite Teacher Training',
+      'Oxfordshire Teacher Training',
+      'University of Roehampton',
+      'Royal Borough of Windsor & Maidenhead SCITT',
+      'Sacred Heart Newcastle SCITT',
+      'National Institute of Teaching',
+      'Sheffield Hallam University',
+      'Calderdale & Kirklees Teaching School',
+      'Somerset SCITT Consortium',
+      'Huddersfield Horizon SCITT',
+      'Titan Partnership Ltd',
+      'Bradford Birth to 19 SCITT',
+      'St. Joseph’s College Stoke Secondary Partnership',
+      'St Mary’s College',
+      'St Mary’s University',
+      'Staffordshire University',
+      'Star Teachers SCITT',
+      'Stockton Teacher Training Partnership',
+      'Stourport SCITT',
+      'Suffolk and Norfolk Secondary SCITT',
+      'South Birmingham SCITT',
+      'Surrey South Farnham SCITT',
+      'Devon Primary SCITT',
+      'Teach First',
+      'Poole SCITT',
+      'Teaching London: LDBS SCITT',
+      'Teesside University ITT',
+      'Colchester Teacher Training Consortium',
+      'Arthur Terry SCITT',
+      'Gloucestershire Initial Teacher Education Partnership',
+      'Ripley ITT',
+      'Buckingham Partnership',
+      'The Cambridge Teaching Schools Network, CTSN SCITT',
+      'Compton SCITT',
+      'The Coventry SCITT',
+      'Manchester Nexus SCITT',
+      'Ashton on Mersey School SCITT',
+      'The Tommy Flowers SCITT Milton Keynes',
+      'Yorkshire Wolds Teacher Training',
+      'The Grand Union Training Partnership',
+      'TKAT SCITT',
+      'London East Teacher Training Alliance',
+      'University of Cambridge',
+      'Lincolnshire SCITT',
+      'Embrace SCITT',
+      'Keele and North Staffordshire Teacher Education',
+      'George Spencer Academy SCITT',
+      'South West Teacher Training',
+      'Sutton SCITT',
+      'Cornwall School Centred Initial Teacher Training (Cornwall SCITT)',
+      'Teach West London Teaching School Hub',
+      'Bournemouth Poole & Dorset Teacher Training Partnership',
+      'United Teaching National SCITT',
+      'University College London (UCL)',
+      'University of Bedfordshire',
+      'University of Birmingham',
+      'University of Brighton',
+      'University of Bristol',
+      'University of Buckingham',
+      'University of Chester',
+      'University of Chichester',
+      'University of Derby',
+      'University of East London',
+      'University of Exeter',
+      'University of Gloucestershire',
+      'University of Hertfordshire',
+      'University of Huddersfield',
+      'University of Leicester',
+      'University of Manchester',
+      'Newcastle University',
+      'University of Northampton',
+      'University of Northumbria',
+      'University of Nottingham',
+      'University of Oxford',
+      'University of Portsmouth',
+      'University of Reading',
+      'University of Sheffield',
+      'University of Southampton',
+      'Plymouth Marjon University',
+      'University of Sunderland',
+      'University of Warwick',
+      'University of Winchester',
+      'University of Wolverhampton',
+      'University of Worcester',
+      'University of York',
+      'Wandsworth Primary Schools’ Consortium',
+      'One Cumbria',
+      'West Midlands Consortium',
+      'Wildern Partnership',
+      'The National Mathematics and Physics SCITT',
+      'Xavier Teach SouthEast',
+      'York St John University'
+    ]
 
-      res.redirect(paths.next)
-    }
+    const providerItems = providers
+      .sort((a, b) => (a.localeCompare(b)))
+      .map(provider => ({ text: provider, value: provider }))
+
+    res.render('application/choices/provider', {
+      id,
+      providerItems
+    })
   })
 
-  router.get('/application/:applicationId/choices/:id/delete', (req, res) => {
-    const { applicationId, id } = req.params
+  router.get('/application/choices/:id/course', (req, res) => {
+    const { id } = req.params
+
+    const courses = [
+      {
+        title: 'Art and Design (2NJL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Biology (83SL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Chemistry (8FYF)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Computing (20SY)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Design and Technology (1L0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'English (4J7S)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'History (2L5D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Mathematics (8S0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Physics (1A6W)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (7S9D)',
+        qualification: 'QTS full time'
+      }
+    ]
+
+    const courseItems = courses
+      .sort((a, b) => (a.title.localeCompare(b.title)))
+      .map(course => ({ text: course.title, value: course.title, hint: { text: course.qualification } }))
+
+    res.render('application/choices/course', {
+      id,
+      courseItems
+    })
+  })
+
+  router.get('/application/choices/:id/delete', (req, res) => {
+    const { id } = req.params
     res.render('application/choices/delete', {
-      applicationId,
       id
     })
   })
 
-  router.post('/application/:applicationId/choices/:id/delete', (req, res) => {
-    const { applicationId, id } = req.params
-    const application = utils.applicationData(req)
+  router.post('/application/choices/:id/delete', (req, res) => {
+    const { id } = req.params
 
-    delete application.choices[id]
-    res.redirect(`/application/${applicationId}/choices`)
-  })
+    delete req.session.data.choices[id]
 
-  router.all('/application/:applicationId/choices/:choiceId/:view', (req, res) => {
-    res.render(`application/choices/${req.params.view}`, {
-      paths: pickPaths(req),
-      found: temporaryChoice.found
-    })
-  })
-
-  router.get('/application/:applicationId/choices', (req, res) => {
-    const { applicationId } = req.params
-    const application = utils.applicationData(req)
-
-    if (utils.toArray(application.choices).length === 0) {
-      res.redirect(`/application/${applicationId}/choices/add`)
-    } else {
-      res.render('application/choices/index')
-    }
+    res.redirect('/application/choices')
   })
 }

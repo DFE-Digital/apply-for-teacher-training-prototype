@@ -8,91 +8,75 @@
   {% endset %}
 {% endif %}
 
-{{ appSummaryCard({
-  classes: "govuk-!-margin-bottom-6",
-  headingLevel: 3,
-  titleText: titleText,
-  actions: {
-    items: [{
-      href: "/application/" + applicationId + "/references/" + item.id + "/delete",
-      text: "Delete"
-    }]
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: titleText
+    },
+    actions: {
+      items: [{
+        href: "/application/references/" + id + "/delete",
+        text: "Delete"
+      }]
+    }
   },
-  html: govukSummaryList({
-    rows: [
-      {
-        key: {
-          text: "Type"
-        },
-        value: {
-          text: item.type
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/type"
-            } if item.status == 'Not sent'
-          ]
-        }
+  rows: [
+    {
+      key: {
+        text: "Type"
       },
-      {
-        key: {
-          text: "Name"
-        },
-        value: {
-          text: item.name
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/name"
-            } if item.status == 'Not sent'
-          ]
-        }
+      value: {
+        text: item.type | title
+      }
+    },
+    {
+      key: {
+        text: "Email"
       },
-      {
-        key: {
-          text: "Email"
-        },
-        value: {
-          html: (item.email if item.email else "<a href=\"/application/references/email\">Enter email address</a>")
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/email"
-            } if item.status == 'Not sent'
-          ]
-        } if item.email
+      value: {
+        html: (item.email if item.email else "<a href=\"/application/references/" + id + "\/email\">Enter email address</a>")
       },
-      {
-        key: {
-          text: "How you know them and for how long"
-        },
-        value: {
-          text: item.relationship
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/application/" + applicationId + "/references/" + item.id + "/relationship"
-            } if item.status == 'Not sent'
-          ]
-        }
+      actions: {
+        items: [
+          {
+            text: "Change",
+            href: "/application/references/" + id + "/email"
+          }
+        ]
+      } if item.email
+    },
+    {
+      key: {
+        text: "Name"
       },
-      {
-        key: {
-          text: ''
-        },
-        value: {
-          html: referenceStatusHtml
-        }
-      } if item.status == 'Received by training provider'
-    ]
-  })
+      value: {
+        text: item.name
+      },
+      actions: {
+        items: [
+          {
+            text: "Change",
+            href: "/application/references/" + id + "/name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "How you know them and for how long"
+      },
+      value: {
+        text: item.relationship
+      },
+      actions: {
+        items: [
+          {
+            text: "Change",
+            href: "/application/references/" + id + "/relationship"
+          }
+        ]
+      }
+    }
+  ]
   })
 }}

@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Confirm your reference details and accept your offer" %}
+{% set formaction = "/send-email/" + "/" + choiceId + "/decision" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">When you accept your offer, we’ll send emails to the people you said could give you references.</p>
+
+      <p class="govuk-body">You can change the reference details before you accept the offer.</p>
+
+      {{ govukButton({
+        text: "Add details for another reference",
+        href: "/dashboard/references/add",
+        classes: "govuk-button--secondary"
+      }) }}
+
+    </div>
+  </div>
+
+
+  {% include "_includes/review/references.html" %}
+
+  {% if numberOfOffersReceived > 1 %}
+    <p class="govuk-body">Your other applications will be withdrawn and any upcoming interviews will be cancelled.</p>
+  {%  endif %}
+
+  <form action="/dashboard/accept/{{ id }}" method="post">
+    {{ govukButton({
+      text: "Accept offer",
+      name: "decision",
+      value: "accept"
+    }) }}
+  </form>
+{% endblock %}

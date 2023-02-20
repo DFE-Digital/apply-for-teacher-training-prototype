@@ -1,55 +1,38 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "What subject is your degree?" %}
-{% set allowsFeedback = true %}
-{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/subject" %}
+{% set international = data.degrees[id].uk == 'no' %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/degree/" + id + "/level"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-{% set hintExample = "For example, ‘History’ or ‘English literature’." if international else "For example, ‘French and History’ or ‘Mathematics’." %}
+      <form action="/application/degree/{{ id }}/subject-answer" method="post">
+        {% set hintExample = "For example, ‘History’ or ‘English literature’." if international else "For example, ‘French and History’ or ‘Mathematics’." %}
 
+        {{ govukInput({
+          name: "degrees[" + id + "][subject]",
+          value: data.degrees[id].subject,
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: hintExample
+          }
+        }) }}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label govuk-label--l" for="degree-{{ id }}-subject">{{ title }}</label>
-    <span id="degree-{{ id }}-subject-hint" class="govuk-hint">Type your own or select from the suggestions. {{ hintExample }}</span>
-    <div id="subject-autocomplete-container" class="suggestions"></div>
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
   </div>
-
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script src="/public/javascripts/sort.js"></script>
-
-  <script>
-
-    var allDegreeSubjects = {{ allDegreeSubjects | dump | safe }};
-
-    function filter(query, populateResults) {
-      populateResults(sort(query, allDegreeSubjects))
-    }
-
-    accessibleAutocomplete({
-      element: document.querySelector('#subject-autocomplete-container'),
-      id: 'degree-{{ id }}-subject',
-      name: "applications[{{ applicationId }}][degree][{{ id }}][subject]",
-      defaultValue: '{{ applicationValue(["degree", id, "subject"]) }}',
-      showNoOptionsFound: false,
-      minLength: 2,
-      placeholder: false,
-      source: filter
-    })
-  </script>
 {% endblock %}

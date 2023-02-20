@@ -1,129 +1,78 @@
-{% set completed = applicationValue(["completed", "personalInformation"]) %}
-{% set entered = applicationValue(["candidate", "givenName"]) %}
+{% set completed = data.completed.personalInformation %}
+{% set entered = data.firstName %}
 
-{% if not entered %}
-  {{ appSuggestion({
-    id: "personalInformation",
-    title: "Personal information not entered",
-    warning: true if errorList,
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Name"
+    },
+    value: {
+      text: data.firstName + " " + data.lastName
+    },
     actions: {
       items: [{
-        text: "Enter your personal information",
-        href: applicationPath + "/personal-information"
+        href: "/application/personal-information?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "name"
       }]
     }
-  }) }}
-{% else %}
-  {{ appSuggestion({
-    id: "personalInformation",
-    title: "Personal information are not marked as completed",
-    warning: true if errorList,
-    actions: {
-      items: [{
-        text: "Complete personal information",
-        href: applicationPath + "/personal-information/review"
-      }]
-    }
-  }) if not completed and showIncomplete }}
-
-  {% set immigrationStatusText %}
-    <p class="govuk-body">
-      {% if applicationValue(["candidate", "immigrationStatusDetails"]) %}
-        {{ applicationValue(["candidate", "immigrationStatusDetails"]) }}
-      {% elif applicationValue(["candidate", "immigrationStatus"]) %}
-        {{ applicationValue(["candidate", "immigrationStatus"]) }}
-      {% else %}
-        Not entered
-      {% endif %}
-    </p>
-  {% endset %}
-
-  {% set visaRouteText %}
-    <p class="govuk-body">
-      {% if applicationValue(["candidate", "visaRoute"]) == "sponsorship" %}
-        A visa sponsored by a course provider.
-      {% else %}
-        {{ applicationValue(["candidate", "visaRouteDetails"]) }}
-      {% endif %}
-    </p>
-  {% endset %}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Name"
-        },
-        value: {
-          text: applicationValue(["candidate", "givenName"]) + " " + applicationValue(["candidate", "familyName"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "name"
-          }]
-        } if applicationValue(["candidate", "givenName"]) or applicationValue(["candidate", "familyName"]) and canAmend
-      }, {
-        key: {
-          text: "Date of birth"
-        },
-        value: {
-          text: applicationValue(["candidate", "dateOfBirth"]) | formatDate or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "date of birth"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "Nationality"
-        },
-        value: {
-          html: applicationValue(["candidate"]) | formatNationalities or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/nationality?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "nationality"
-          }]
-        } if canAmend
+  }, {
+      key: {
+        text: "Date of birth"
       },
-      {
-        key: {
-          text: "Do you already have the right to work or study in the UK?"
-        },
-        value: {
-          text: applicationValue(["candidate", "immigration"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/immigration?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "if you have the right to work or study in the UK"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]), {
-        key: {
-          text: "Immigration status"
-        },
-        value: {
-          html: immigrationStatusText
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/personal-information/immigration-status?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "immigration status"
-          }]
-        } if canAmend
-      } if applicationValue(["candidate", "immigration"]) == 'Yes'
-      ]
-    })
-  }) }}
-{% endif %}
+      value: {
+        text: data.dateOfBirth.day + "/" + data.dateOfBirth.month + "/" + data.dateOfBirth.year
+      },
+      actions: {
+        items: [{
+          href: "/application/personal-information?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "date of birth"
+        }]
+      }
+    }, {
+      key: {
+        text: "Nationality"
+      },
+      value: {
+        html: (data.nationalities | join(", ")) if data.nationalities
+      },
+      actions: {
+        items: [{
+          href: "/application/personal-information/nationality?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "nationality"
+        }]
+      }
+    },
+    {
+      key: {
+        text: "Do you already have the right to work or study in the UK?"
+      },
+      value: {
+        text: data.immigration
+      },
+      actions: {
+        items: [{
+          href: "/application/personal-information/immigration?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "if you have the right to work or study in the UK"
+        }]
+      }
+    } if data.immigration, {
+      key: {
+        text: "Immigration status"
+      },
+      value: {
+        html: immigrationStatusText
+      },
+      actions: {
+        items: [{
+          href: "/application/personal-information/immigration-status?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "immigration status"
+        }]
+      }
+    } if data.immigration == 'Yes'
+  ]
+}) }}

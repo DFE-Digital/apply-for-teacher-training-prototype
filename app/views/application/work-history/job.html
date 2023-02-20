@@ -1,0 +1,180 @@
+{% extends "layouts/main.html" %}
+{% set title = "Add a job" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application/work-history/review"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <form action="/application/work-history/review" method="post">
+        {% set roleEndHTML %}
+          {{ govukDateInput({
+            namePrefix: "",
+            fieldset: {
+              legend: {
+                text: "When did you leave this job?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "For example, 5 2019. If you cannot remember the exact month or year, enter an estimate."
+            },
+            items: [{
+              label: "Month",
+              name: "workHistory[" + id + "][endMonth]",
+              value: data.workHistory[id].endMonth,
+              classes: "govuk-input--width-2"
+            }, {
+              label: "Year",
+              name: "workHistory[" + id + "][endYear]",
+              value: data.workHistory[id].endYear,
+              classes: "govuk-input--width-4"
+            }]
+          }) }}
+
+          {{ govukCheckboxes({
+            name: "workHistory[" + id + "][endDateApprox]",
+            values: data.workHistory[id].endDateApprox,
+            items: [{
+              value: "yes",
+              text: "I’m not sure of the exact month or year I left"
+            }]
+          }) }}
+        {% endset %}
+
+        {{ govukInput({
+          name: "workHistory[" + id + "][employerName]",
+          value: data.workHistory[id].employerName,
+          label: {
+            text: "Name of employer",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "If you worked for yourself, enter ‘self-employed’."
+          }
+        }) }}
+
+        {{ govukInput({
+          name: "workHistory[" + id + "][role]",
+          value: data.workHistory[id].role,
+          label: {
+            text: "Role",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "If you had more than one role with this employer, enter your last role."
+          }
+        }) }}
+
+        {{ govukRadios({
+          name: "workHistory[" + id + "][fullTimeOrPartTime]",
+          value: data.workHistory[id].fullTimeOrPartTime,
+          fieldset: {
+            legend: {
+              text: "Was this job full time or part time?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            text: "Full time (usually at least 35 hours a week)",
+            value: "full-time"
+          }, {
+            text: "Part time",
+            value: "part-time"
+          }]
+        }) }}
+
+        {{ govukDateInput({
+          namePrefix: "",
+          fieldset: {
+            legend: {
+              text: "When did you start this job?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 5 2018. If you cannot remember the exact month or year, enter an estimate."
+          },
+          items: [{
+            label: "Month",
+            name: "workHistory[" + id + "][startMonth]",
+            value: data.workHistory[id].startMonth,
+            classes: "govuk-input--width-2"
+          },
+          {
+            label: "Year",
+            name: "workHistory[" + id + "][startYear]",
+            value: data.workHistory[id].startYear,
+            classes: "govuk-input--width-4"
+          }]
+        }) }}
+
+        {{ govukCheckboxes({
+          name: "workHistory[" + id + "][startDateApprox]",
+          values: data.workHistory[id].startDateApprox,
+          items: [{
+            value: "yes",
+            text: "I’m not sure of the exact month or year I started"
+          }]
+        }) }}
+
+        {{ govukRadios({
+          name: "workHistory[" + id + "][stillWorkingInJob]",
+          value: data.workHistory[id].stillWorkingInJob,
+          fieldset: {
+            legend: {
+              text: "Are you still working in this job?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No",
+            conditional: {
+              html: roleEndHTML
+            }
+          }]
+        }) }}
+
+        {{ govukRadios({
+          name: "workHistory[" + id + "][skillsRelevantToTeaching]",
+          value: data.workHistory[id].skillsRelevantToTeaching,
+          fieldset: {
+            legend: {
+              text: "Did you use skills relevant to teaching in this job?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "You can go into more detail about this in your personal statement."
+          },
+          items: [{
+            text: "Yes",
+            value: "yes"
+          }, {
+            text: "No",
+            value: "no"
+          }]
+        }) }}
+
+        {{ govukInput({
+          type: "hidden",
+          name: "workHistory[" + id + "][category]",
+          value: "job"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

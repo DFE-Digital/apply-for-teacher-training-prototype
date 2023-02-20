@@ -1,37 +1,38 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What is the referee’s name?" %}
 {% set allowsFeedback = true %}
-{% set formaction = referrer or "/accepted/" + applicationId + "/references/" + id + "/email/" %}
+{% set formaction = referrer or "/accepted/" + "/references/" + id + "/email/" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/accepted/" + applicationId + "/references/" + id + "/type/"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/accepted/references/" + id + "/type/"
+  }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-{{ govukInput({
-  label: {
-    text: "What is the referee’s name?",
-    classes: "govuk-label--l",
-    isPageHeading: true
-  },
-  hint: {
-    text: "You must not use family members, partners or friends as referees."
-  },
-  id: "name",
-  name: "references"
-} | decorateApplicationAttributes(["references", id, "name"])) }}
+      <form action="/accepted/references/{{ id }}/email" method="post">
 
-  {{ govukButton({
-    text: "Save changes" if referrer else "Save and continue"
-  }) }}
+        {{ govukInput({
+          name: "references[" + id + "][name]",
+          value: data.references[id].name,
+          label: {
+            text: "What is the referee’s name?",
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: "You must not use family members, partners or friends as referees."
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

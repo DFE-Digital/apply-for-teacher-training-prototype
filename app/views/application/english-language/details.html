@@ -1,7 +1,7 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = referrer or "/application/" + applicationId + "/english-language/review" %}
+{% set applicationPath = "/application" %}
+{% set formaction = referrer or "/application/" + "/english-language/review" %}
 {% set ielts = type == "IELTS" %}
 {% set toefl = type == "TOEFL" %}
 
@@ -26,19 +26,19 @@
 {% set action = "edit" if applicationValue(["englishLanguage", "subject"]) else "your" %}
 {% set title = (action | capitalize) + " " + assessmentName + " result" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {% if referrer %}
     {{ govukBackLink({
       href: referrer
     }) }}
   {% else %}
     {{ govukBackLink({
-      href: "/application/" + applicationId + "/english-language/type"
+      href: "/application/" + "/english-language/type"
     }) }}
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {% if ielts or toefl %}
     {{ govukInput({
       label: {
@@ -48,7 +48,7 @@
       hint: {
         text: certificateHintText
       }
-    } | decorateApplicationAttributes(["englishLanguage", "certificateNumber"])) }}
+    }) }}
   {% else %}
     {{ govukInput({
       label: {
@@ -58,7 +58,7 @@
       hint: {
         text: "For example, CAE (Cambridge Advanced English), Pearson Test of English"
       }
-    } | decorateApplicationAttributes(["englishLanguage", "typeOther"])) }}
+    }) }}
   {% endif %}
 
   {{ govukInput({
@@ -70,7 +70,7 @@
       text: gradeHintText
     },
     classes: "govuk-input--width-" + (gradeWidth | default(10))
-  } | decorateApplicationAttributes(["englishLanguage", "grade"])) }}
+  }) }}
 
   {{ govukInput({
     label: {
@@ -81,7 +81,7 @@
       text: "Give the year, for example: ‘2020’"
     },
     classes: "govuk-input--width-4"
-  } | decorateApplicationAttributes(["englishLanguage", "year"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

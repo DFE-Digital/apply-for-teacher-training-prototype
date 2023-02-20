@@ -1,78 +1,85 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set parent = "Work history" %}
 {% set title = "Please tell us what you were doing over this period" %}
-{% set formaction = "/application/" + applicationId + "/work-history/break/" + id %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-      href: applicationPath + "/work-history/review"
+      href: "/application/work-history/review"
     }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukDateInput({
-    fieldset: {
-      legend: {
-        text: "Start of break",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    namePrefix: id + "-startDate",
-    items: [{
-      classes: "govuk-input--width-2",
-      label: "Month",
-      name: "month",
-      value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('L')
-    }, {
-      classes: "govuk-input--width-4",
-      label: "Year",
-      name: "year",
-      value: (applicationValue(["workHistory", id, "startDate"]) or start) | date('yyyy')
-    }]
-  } | decorateApplicationAttributes(["workHistory", id, "startDate"])) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <form action="/application/work-history/review" method="post">
 
-  {{ govukDateInput({
-    fieldset: {
-      legend: {
-        text: "End of break",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    namePrefix: id + "-endDate",
-    items: [{
-      classes: "govuk-input--width-2",
-      label: "Month",
-      name: "month",
-      value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('L')
-    }, {
-      classes: "govuk-input--width-4",
-      label: "Year",
-      name: "year",
-      value: (applicationValue(["workHistory", id, "endDate"]) or end) | date('yyyy')
-    }]
-  } | decorateApplicationAttributes(["workHistory", id, "endDate"])) }}
+        {{ govukDateInput({
+          namePrefix: "",
+          fieldset: {
+            legend: {
+              text: "Start of break",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [{
+            label: "Month",
+            name: "workHistory[" + id + "][startMonth]",
+            value: data.workHistory[id].startMonth,
+            classes: "govuk-input--width-2"
+          }, {
+            label: "Year",
+            name: "workHistory[" + id + "][startYear]",
+            value: data.workHistory[id].startYear,
+            classes: "govuk-input--width-4"
+          }]
+        }) }}
 
-  {{ govukCharacterCount({
-    label: {
-      text: "Enter reasons for break in work history",
-      classes: "govuk-label--m"
-    },
-    hint: {
-      text: "For example, ‘I was unemployed’, ‘I had health issues’ or ‘I was caring for a child’"
-    },
-    threshold: 90,
-    maxwords: 400
-  } | decorateApplicationAttributes(["workHistory", id, "description"])) }}
+        {{ govukDateInput({
+          namePrefix: "",
+          fieldset: {
+            legend: {
+              text: "End of break",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [{
+            label: "Month",
+            name: "workHistory[" + id + "][endMonth]",
+            value: data.workHistory[id].endMonth,
+            classes: "govuk-input--width-2"
+          }, {
+            label: "Year",
+            name: "workHistory[" + id + "][endYear]",
+            value: data.workHistory[id].endYear,
+            classes: "govuk-input--width-4"
+          }]
+        }) }}
 
-  {{ govukInput({
-    type: "hidden",
-    name: "applications[" + applicationId + "][workHistory][" + id + "][category]",
-    value: "break"
-  }) }}
+        {{ govukCharacterCount({
+          name: "workHistory[" + id + "][breakReason]",
+          value: data.workHistory[id].breakReason,
+          label: {
+            text: "Enter reasons for break in work history",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "For example, ‘I was unemployed’, ‘I had health issues’ or ‘I was caring for a child’"
+          },
+          threshold: 90,
+          maxwords: 400
+        }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+        {{ govukInput({
+          type: "hidden",
+          name: "workHistory[" + id + "][category]",
+          value: "break"
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

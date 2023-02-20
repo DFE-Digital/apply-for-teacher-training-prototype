@@ -1,19 +1,14 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/enic" %}
-
-{% set degreeCount = applicationValue(["degree"]) | length %}
 {% set title = "How your degree compares to a UK degree" %}
-{% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">You can get a statement from UK ENIC (the UK agency for international qualifications and skills) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
 
   {% set yesConditionalHtml %}
@@ -26,7 +21,7 @@
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["degree", id, "enicReference"])) }}
+    }) }}
 
     {{ govukRadios({
       fieldset: {
@@ -51,7 +46,7 @@
       } if degreeCount > 1, {
         text: "Post Doctoral award"
       } if degreeCount > 1]
-    } | decorateApplicationAttributes(["degree", id, "enicComparability"])) }}
+    }) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
@@ -76,7 +71,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["degree", id, "enic"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

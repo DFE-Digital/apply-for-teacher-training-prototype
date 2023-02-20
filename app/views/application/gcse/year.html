@@ -1,35 +1,38 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
-{% if applicationValue(["gcse", id, "completed"]) == "false" %}
+{% if data.gcse[id].completed == "false" %}
   {% set title = "When will you get your " + subject + " qualification?" %}
 {% else %}
   {% set title = "What year did you get your " + subject + " qualification?" %}
 {% endif %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/gcse/" + id + "/grade"
   }) }}
 {% endblock %}
 
 
 {% block content %}
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+  <form action="/application/gcse/{{ id }}/review" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 
           {{ govukInput({
+            name: "gcse[" + id + "][year]",
             label: {
-              classes: "govuk-label--xl",
-              text: title
+              classes: "govuk-label--l",
+              text: title,
+              isPageHeading: true
             },
             hint: {
               text: "For example, 1996"
             },
+            value: data.gcse[id].year,
             classes: "govuk-input--width-4"
-          } | decorateApplicationAttributes(["gcse", id, "year"])) }}
+          }) }}
 
           {{ govukButton({
             text: "Save and continue"

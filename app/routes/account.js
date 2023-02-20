@@ -1,5 +1,3 @@
-const utils = require('../utils')
-
 /**
  * Account routes
  */
@@ -8,7 +6,6 @@ module.exports = router => {
     const hasAccount = req.session.data['has-account']
 
     if (hasAccount === 'yes') {
-      utils.sendEmail(req, 'c3457068-675e-4ff9-963e-2e7444607bad')
       res.redirect('/account/check-email/sign-in')
     } else {
       res.redirect('/account/create-account')
@@ -22,26 +19,7 @@ module.exports = router => {
     })
   })
 
-  // Update choice status from sign-in link in decision notification
   router.get('/account/sign-in', (req, res) => {
-    const { status } = req.query
-
-    if (status) {
-      // Get most recent application
-      const applications = utils.toArray(req.session.data.applications)
-      const application = applications[applications.length - 1]
-
-      // Get statuses
-      const statuses = status.split(';')
-
-      // Get choices still pending a decision
-      const choices = utils.toArray(application.choices)
-      application.choices = choices.map((choice, i) => {
-        choice.status = statuses[i]
-        return choice
-      })
-    }
-
     res.render('account/sign-in')
   })
 

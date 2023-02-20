@@ -1,8 +1,8 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/accepted/" + applicationId + "/select-ske-provider"
+    href: "/accepted/" + "/select-ske-provider"
   }) }}
 {% endblock %}
 
@@ -25,7 +25,7 @@
 
       <p class="govuk-body">The provider will be in touch about how to complete your course and how they’ll pay you £175 a week.</p>
 
-      <form action="/accepted/{{ applicationId }}/submit-ske-provider" method="post">
+      <form action="/accepted/submit-ske-provider" method="post">
         <input type="hidden" name="skeProvider" value="{{ data.skeProvider}}">
         {{ govukButton({text: "Continue"}) }}
       </form>

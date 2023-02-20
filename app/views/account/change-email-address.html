@@ -1,16 +1,16 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Change your email address" %}
 {% set formaction = "/account/check-email/change-email-address" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body-l">Your new email will become the address you use to sign in to the service.</p>
 
   {{ govukInput({

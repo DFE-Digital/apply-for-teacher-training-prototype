@@ -1,63 +1,31 @@
-{% set completed = applicationValue(["completed", "interviewNeeds"]) %}
-{% set entered = applicationValue(["interviewNeedsDisclose"]) %}
-
-{% if not entered %}
-  {{ appSuggestion({
-    id: "interviewNeeds",
-    title: "Interview needs not entered",
-    warning: true if errorList,
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Do you have any interview needs?"
+    },
+    value: {
+      text: ("Yes" if data.interviewNeeds == "yes" else "No")
+    },
     actions: {
       items: [{
-        text: "Do you have any interview needs?",
-        href: applicationPath + "/interview-needs/?referrer=" + referrer
+        href: "/application/interview-needs?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "interview needs"
       }]
     }
-  }) }}
-{% else %}
-  {{ appSuggestion({
-    id: "interviewNeeds",
-    title: "Interview needs not marked as complete",
-    warning: true if errorList,
+  }, {
+    key: {
+      text: "What are your interview needs?"
+    },
+    value: {
+      text: data.interviewNeedsDetail
+    },
     actions: {
       items: [{
-        text: "Complete interview needs",
-        href: applicationPath + "/interview-needs/review?referrer=" + referrer
+        href: "/application/interview-needs?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "interview needs"
       }]
     }
-  }) if not completed and showIncomplete }}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Do you have any interview needs?"
-        },
-        value: {
-          text: applicationValue(["interviewNeedsDisclose"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/interview-needs?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "interview needs"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "What are your interview needs?"
-        },
-        value: {
-          text: applicationValue(["interviewNeeds"])
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/interview-needs?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "interview needs"
-          }]
-        } if canAmend
-      } if applicationValue(["interviewNeedsDisclose"]) == "Yes"]
-    })
-  }) }}
-{% endif %}
+  } if data.interviewNeeds == "yes"]
+}) }}

@@ -1,4 +1,4 @@
-{% for item in choices %}
+{% for id, item in data.choices %}
 
   {% set canRespond = item.status == "Offer received" %}
 
@@ -24,22 +24,22 @@
 
   {% set statusHtml %}
     {{ govukTag({
-      classes: item.status | statusClass,
+      classes: "",
       text: item.status
     }) }}
 
     {% if item.status == "Offer received" or status == "Offer accepted" or status == "Offer confirmed" %}
       {{ govukDetails({
         classes: "govuk-!-margin-bottom-0 govuk-!-margin-top-2",
-        summaryText: "What to do if you’re unable to start training in " + item.starts | date("MMMM yyyy"),
+        summaryText: "What to do if you’re unable to start training in September 2023",
         html: "<p>You can defer your offer which means that you could start your course a year later.</p>
-        <p>Contact " + providers[item.providerCode].name + " to ask if it‘s possible to defer, this will not affect your existing offer.</p>
+        <p>Contact " + item.providerName + " to ask if it‘s possible to defer, this will not affect your existing offer.</p>
         <p>If your provider agrees, you‘ll need to accept the offer on your account first and then defer it.</p>"
       }) }}
     {% endif %}
 
     {% if item.status == "Awaiting decision" %}
-      <p class="govuk-body govuk-!-margin-top-2">The provider must make a decision by  {{ 14 | nowPlusDays("d MMMM yyyy") }}.</p>
+      <p class="govuk-body govuk-!-margin-top-2">The provider must make a decision by 18 March 2023.</p>
     {% endif %}
 
     {% if item.status == "Application withdrawn" and item.withdrawnByProvider == true %}
@@ -112,7 +112,7 @@
     {% endif %}
   {% endset %}
 
-  {% set feedbackHtml %}{% include "_includes/item/feedback.html" %}{% endset %}
+  {% set feedbackHtml %}{% include "dashboard/_feedback.html" %}{% endset %}
 
   {% set conditionsHtml %}
     {% if item.conditions | length > 0 %}
@@ -132,10 +132,10 @@
 
   {% set actionsHtml %}
     {% if canWithdraw %}
-      <p class="govuk-body"><a href="{{ applicationPath + "/" + item.id + "/withdraw" }}">Withdraw this application</a></p>
+      <p class="govuk-body"><a href="/dashboard/withdraw/{{ id }}">Withdraw this application</a></p>
     {% endif %}
     {% if canRespond and not hasResponded %}
-      <p class="govuk-body"><a href="{{ applicationPath + "/" + item.id + "/view" }}">Respond to offer</a></p>
+      <p class="govuk-body"><a href="/dashboard/respond/{{ id }}">Respond to offer</a></p>
 
       <p class="govuk-body">
         {% if numberOfChoicesAwaitingDecision > 0 %}
@@ -148,29 +148,37 @@
   {% endset %}
 
   {% set summaryHeaderHtml %}
-    <span class="app-course-choice__provider-name">{{ providers[item.providerCode]["name"] }}</span>
-    <span class="app-course-choice__course-name">{{ providers[item.providerCode].courses[item.courseCode].name_and_code }}</span>
+    {{ item.providerName }}
+    <div class="govuk-!-font-weight-regular">{{ item.course }}</div>
   {% endset %}
 
-  {% set skeHtml %}
-    <p class="govuk-body">If you accept this offer, you’ll need to do a 20&nbsp;week maths course.  This is to help you improve your subject knowledge because your degree subject was not in maths.</p>
+  {% if item.skeConditions %}
+    {% set skeHtml %}
+      {% set firstSkeCondition = item.skeConditions | first %}
 
-    <p class="govuk-body">You should complete the course before your teacher training starts in September 2023.</p>
+      <p class="govuk-body">If you accept this offer, you’ll need to do a {{ firstSkeCondition.lengthInWeeks }}&nbsp;week {{ firstSkeCondition.subject }} course.  This is to help you improve your subject knowledge because {% if firstSkeCondition.reason == "degree-subject" %}your degree subject was not in maths{% else %}your degree was more than 5 years ago{% endif %}.</p>
 
-    <p class="govuk-body">The course will be free and you’ll receive £175 per week. How and when this is paid will depend on your provider.</p>
+      <p class="govuk-body">You should complete the course before your teacher training starts in September 2023.</p>
 
-    <p class="govuk-body">You can choose how you study your course. Courses can be:</p>
+      <p class="govuk-body">The course will be free and you’ll receive £175 per week. How and when this is paid will depend on your provider.</p>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>full time (about 25 hours of studying a week)</li>
-      <li>part time (the course might take longer than 20 weeks if it's part time)</li>
-      <li>online, in person, or a mixture of both</li>
-    </ul>
+      <p class="govuk-body">You can choose how you study your course. Courses can be:</p>
 
-  {% endset %}
+      <ul class="govuk-list govuk-list--bullet">
+        <li>full time (about 25 hours of studying a week)</li>
+        <li>part time (the course might take longer than 20 weeks if it's part time)</li>
+        <li>online, in person, or a mixture of both</li>
+      </ul>
 
-  {% set summaryBodyHtml %}
+    {% endset %}
+  {% endif %}
+
     {{ govukSummaryList({
+      card: {
+        title: {
+          html: summaryHeaderHtml
+        }
+      },
       classes: "govuk-!-margin-bottom-0",
       rows: [{
         key: {
@@ -195,13 +203,13 @@
         }
       } if item.feedback,
       {
-          key: {
-            text: "Subject knowledge enhancement course"
-          },
-          value: {
-            html: skeHtml
-          }
-        }, {
+        key: {
+          text: "Subject knowledge enhancement course"
+        },
+        value: {
+          html: skeHtml
+        }
+      } if item.skeConditions, {
         key: {
           text: "Conditions"
         },
@@ -216,21 +224,7 @@
         value: {
           html: actionsHtml | safe
         }
-      } if canAmend or canWithdraw or canRespond]
+      } or canWithdraw or canRespond]
     }) }}
-  {% endset %}
-
-
-  {{ appSummaryCard({
-    classes: "app-course-choice govuk-!-margin-bottom-6",
-    titleHtml: summaryHeaderHtml,
-    actions: {
-      items: [{
-        href: applicationPath + "/submitted/?referrer=" + referrer,
-        text: "View application"
-      }]
-    },
-    html: summaryBodyHtml
-  }) }}
 
 {% endfor %}

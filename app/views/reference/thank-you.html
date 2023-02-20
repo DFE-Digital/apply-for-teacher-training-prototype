@@ -1,7 +1,12 @@
-{% extends "_content.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Thank you" %}
 
-{% block primary %}
-  <p class="govuk-body">If you have any questions about the Apply for teacher training service, please contact <a href="/becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a></p>
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">If you have any questions about the Apply for teacher training service, please contact <a href="/becomingateacher@digital.education.gov.uk">becomingateacher@digital.education.gov.uk</a></p>
+    </div>
+  </div>
 {% endblock %}

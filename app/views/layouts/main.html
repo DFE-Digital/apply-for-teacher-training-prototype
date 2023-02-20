@@ -1,0 +1,60 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/applications",
+    serviceName: serviceName,
+    navigation: [{
+      text: data.account.email
+    } if data.account.email, {
+      href: "/account/sign-out",
+      text: "Sign out"
+    } if data.account.email]
+  }) }}
+{% endblock %}
+
+{% block pageTitle %}
+   {{ title }} - {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+      tag: {
+        text: "prototype"
+      },
+      html: 'This is a prototype.'
+    }) if showPhaseBanner != false }}
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: "/manage-prototype",
+          text: "Manage prototype"
+        },
+        {
+          href: "/manage-prototype/clear-data",
+          text: "Clear data"
+        },
+        {
+          href: "/admin/complete-application",
+          text: "Complete the application"
+        },
+        {
+          href: "/admin/receive-offer",
+          text: "Receive offers"
+        },
+        {
+          href: "/admin/receive-references",
+          text: "Receive references"
+        },
+        {
+          href: "/admin/meet-conditions",
+          text: "Meet conditions"
+        }
+      ]
+    }
+  }) }}
+{% endblock %}

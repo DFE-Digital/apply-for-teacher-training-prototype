@@ -1,0 +1,33 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Which course are you applying to?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application/choices/" + id + "/provider"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <form action="/application/choices/review" method="post">
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      idPrefix: "course",
+      items: courseItems,
+      name: "choices[" + id + "][course]",
+      value: data.choices[id].course
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+
+{% endblock %}

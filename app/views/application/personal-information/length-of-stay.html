@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% if applicationValue(["candidate", "nationality"]) == "Irish" %}
   {% set title = "Will you have lived in the UK or Ireland in the 3 years before your teacher training starts?" %}
@@ -6,11 +6,11 @@
   {% set title = "Will you have lived in the UK in the 3 years before your teacher training starts?" %}
 {% endif %}
 
-{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
+{% set formaction = referrer if referrer else "/application/" + "/personal-information/review" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer if referrer else "/application/" + applicationId + "/personal-information/immigration-status"
+    href: referrer if referrer else "/application/" + "/personal-information/immigration-status"
   }) }}
 {% endblock %}
 
@@ -33,7 +33,7 @@
       value: "No",
       text: "No"
     }]
-  } | decorateApplicationAttributes(["candidate", "lengthOfStay"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

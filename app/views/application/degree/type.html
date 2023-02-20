@@ -1,8 +1,7 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-
-{% set degreeLevel = applicationValue(["degree", id, "level"]) %}
+{% set degreeLevel = data.degrees[id].level %}
+{% set international = data.degrees[id].uk == "no" %}
 
 {% if degreeLevel == "Foundation" %}
   {% set degreeDescription = "foundation degree" %}
@@ -11,81 +10,69 @@
 {% elif degreeLevel == "Master’s" %}
   {% set degreeDescription = "master’s degree" %}
 {% elif degreeLevel == "Doctorate" %}
-  {% set degreeDescription = "doctorate" %}
-{% else %}
   {% set degreeDescription = "degree" %}
 {% endif %}
 
 {% set title = "What type of " + degreeDescription + " is it?" %}
 
-{% set allowsFeedback = true %}
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/type" %}
-
-{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-
-
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/degree/" + id + "/subject"
   }) }}
 {% endblock %}
 
-{% block primary %}
 
-  {% if international %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/application/degree/{{ id }}/institution" method="post">
 
-    {{ govukInput({
-      label: {
-        text: title,
-        isPageHeading: true,
-        classes: "govuk-label--l"
+      {% set otherTypeHtml %}
+        {{ govukInput({
+          name: "degrees[" + id + "][otherType]",
+          value: data.degrees[id].otherType,
+          label: {
+            text: "Degree type"
+          }
+        }) }}
+      {% endset %}
+
+    {% if degreeLevel == "Foundation" %}
+      {% set degreeDescription = "foundation degree" %}
+    {% elif degreeLevel == "Bachelor" %}
+      {% set degreeDescription = "bachelor degree" %}
+      {% set radioItems = [{
+        text: "Bachelor of Arts",
+        value: "BA"
+      }, {
+        text: "Bachelor of Science",
+        value: "BSc"
+      }, {
+        text: "Bachelor of Education",
+        value: "BEd"
       },
-      hint: {
-        text: "For example, Bachelor degree, Bachelor of Arts, Diplôme, Licenciatura"
+      {divider: "or"},
+      {
+        value: "other",
+        text: "Another " + degreeDescription,
+        conditional: {
+          html: otherTypeHtml
+        }
       }
-    } | decorateApplicationAttributes(["degree", id, "type"])) }}
-
-  {% else %}
-
-    {% if degreeLevel == "Bachelor" %}
-      {% set otherLevelsHint = "Bachelor of Engineering (BEng)" %}
-    {% elif degreeLevel == "Foundation" %}
-      {% set otherLevelsHint = "Foundation of Engineering (FdEng)" %}
+      ]
+    %}
     {% elif degreeLevel == "Master’s" %}
-      {% set otherLevelsHint = "Master of Engineering (MEng)" %}
+      {% set degreeDescription = "master’s degree" %}
     {% elif degreeLevel == "Doctorate" %}
-      {% set otherLevelsHint = "Doctor of Science (DSc)" %}
+      {% set degreeDescription = "doctorate" %}
+    {% else %}
+      {% set degreeDescription = "degree" %}
     {% endif %}
 
-    {% set otherDegreeTypeHtml %}
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s" for="degree-{{ id }}-typeUk">Degree type</label>
-        <span id="degree-{{ id }}-typeUk-hint" class="govuk-hint">For example, {{ otherLevelsHint }}</span>
-        <div id="type-uk-autocomplete-container"></div>
-      </div>
-    {% endset %}
-
-    {% if not (degreeLevel == "other")  %}
-      {% set radioItems = [] %}
-
-      {% for degreeType in degreeTypes %}
-        {% if degreeType.priority == 1 %}
-          {% set radioItems = radioItems | push({value: degreeType.name, text: degreeType.name}) %}
-        {% endif %}
-      {% endfor %}
-
-      {% set radioItems = radioItems | push({divider: "or"}) %}
-
-      {% set radioItems = radioItems | push({
-        value: "other",
-        text: "Another " + degreeDescription + " type",
-        conditional: {
-          html: otherDegreeTypeHtml
-        }
-      }) %}
 
       {{ govukRadios({
-        name: "degree-type",
+        name: "degrees[" + id + "][type]",
+        value: data.degrees[id].type,
         fieldset: {
           legend: {
             text: title,
@@ -95,48 +82,11 @@
         },
         hint: hint,
         items: radioItems
-      } | decorateApplicationAttributes(["degree", id, "type"])) }}
-    {% else %}
+      }) }}
 
-      {{ govukInput({
-        label: {
-          text: title,
-          isPageHeading: true,
-          classes: "govuk-label--l"
-        }
-      } | decorateApplicationAttributes(["degree", id, "type"])) }}
-
-    {% endif %}
-
-  {% endif %}
-
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-{% endblock %}
-
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script src="/public/javascripts/sort.js"></script>
-  <script>
-
-    var degreeTypes = {{ degreeTypes | dump | safe }};
-
-    function filter(query, populateResults) {
-      populateResults(sort(query, degreeTypes))
-    }
-
-    accessibleAutocomplete({
-      element: document.querySelector('#type-uk-autocomplete-container'),
-      id: 'degree-{{ id }}-typeUk',
-      name: "applications[{{ applicationId }}][degree][{{ id }}][otherType]",
-      defaultValue: '{{ applicationValue(["degree", id, "otherType"]) }}',
-      placeholder: false,
-      showNoOptionsFound: false,
-      minLength: 0,
-      showAllValues: true,
-      source: filter
-    })
-  </script>
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </div>
+  </div>
 {% endblock %}

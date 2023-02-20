@@ -1,92 +1,97 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = "/reference/confirmation" %}
 {% set candidate_name = "Jane Doe" %}
 {% set title = "Check your reference for " + candidate_name %}
 {% set hasAccountLinks = false %}
 
-{% block primary %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {% set type = data['referee_type'] %}
-  {% set relationship %}
-    {% if type == 'character' %}
-      She is my mentor. I’ve known her for 4 years.
-    {% elif type == 'school' %}
-      She is the headteacher at the school I work at. I’ve known her for 2 years.
-    {% elif type == 'professional' %}
-      She was my supervisor at work. I’ve known her for 3 years.
-    {% else %}
-      She was my course supervisor at university. I’ve known her for a year.
-    {% endif %}
-  {% endset %}
-
-
-  {% if data.reference.relationship.correct == "Yes" %}
-    {% set relationshipValue %}
-      You confirmed their description of how they know you:<br><br>
-
-      {{ relationship }}
-
-    {% endset %}
-  {% else %}
-    {% set relationshipValue = "You gave this description of how you know them: <br><br>" + data.reference.relationship.correction %}
-  {% endif %}
-
-  {% if data.reference.safeguarding.concern == "Yes" %}
-    {% set safeguardingValue = data.reference.safeguarding.reason %}
-  {% else %}
-    {% set safeguardingValue = "You do not know any reason why they should not work with children." %}
-  {% endif %}
+      {% set type = data['referee_type'] %}
+      {% set relationship %}
+        {% if type == 'character' %}
+          She is my mentor. I’ve known her for 4 years.
+        {% elif type == 'school' %}
+          She is the headteacher at the school I work at. I’ve known her for 2 years.
+        {% elif type == 'professional' %}
+          She was my supervisor at work. I’ve known her for 3 years.
+        {% else %}
+          She was my course supervisor at university. I’ve known her for a year.
+        {% endif %}
+      {% endset %}
 
 
+      {% if data.reference.relationship.correct == "Yes" %}
+        {% set relationshipValue %}
+          You confirmed their description of how they know you:<br><br>
 
-  {{ govukSummaryList({
-    rows: [{
-      key: {
-        text: ("How they know you" if data.reference.relationship.correct == "Yes" else "How you know them")
-      },
-      value: {
-        text: relationshipValue | safe
-      },
-      actions: {
-        items: [{
-          href: "/reference/relationship?referrer=/reference/review",
-          text: "Change",
-          visuallyHiddenText: "relationship to candidate"
+          {{ relationship }}
+
+        {% endset %}
+      {% else %}
+        {% set relationshipValue = "You gave this description of how you know them: <br><br>" + data.reference.relationship.correction %}
+      {% endif %}
+
+      {% if data.reference.safeguarding.concern == "Yes" %}
+        {% set safeguardingValue = data.reference.safeguarding.reason %}
+      {% else %}
+        {% set safeguardingValue = "You do not know any reason why they should not work with children." %}
+      {% endif %}
+
+
+
+      {{ govukSummaryList({
+        rows: [{
+          key: {
+            text: ("How they know you" if data.reference.relationship.correct == "Yes" else "How you know them")
+          },
+          value: {
+            text: relationshipValue | safe
+          },
+          actions: {
+            items: [{
+              href: "/reference/relationship?referrer=/reference/review",
+              text: "Change",
+              visuallyHiddenText: "relationship to candidate"
+            }]
+          }
+        }, {
+          key: {
+            text: "Working with children" | safe
+          },
+          value: {
+            text: safeguardingValue
+          },
+          actions: {
+            items: [{
+              href: "/reference/safeguarding?referrer=/reference/review",
+              text: "Change",
+              visuallyHiddenText: "safeguarding answer"
+            }]
+          }
+        }, {
+          key: {
+            text: "Reference"
+          },
+          value: {
+            html: (data.reference.comments or "Not entered")
+          },
+          actions: {
+            items: [{
+              href: "/reference/comments?referrer=/reference/review",
+              text: "Change",
+              visuallyHiddenText: "reference"
+            }]
+          }
         }]
-      }
-    }, {
-      key: {
-        text: "Working with children" | safe
-      },
-      value: {
-        text: safeguardingValue
-      },
-      actions: {
-        items: [{
-          href: "/reference/safeguarding?referrer=/reference/review",
-          text: "Change",
-          visuallyHiddenText: "safeguarding answer"
-        }]
-      }
-    }, {
-      key: {
-        text: "Reference"
-      },
-      value: {
-        html: (data.reference.comments or "Not entered")
-      },
-      actions: {
-        items: [{
-          href: "/reference/comments?referrer=/reference/review",
-          text: "Change",
-          visuallyHiddenText: "reference"
-        }]
-      }
-    }]
-  }) }}
+      }) }}
 
-  {{ govukButton({
-    text: "Submit reference"
-  }) }}
+      {{ govukButton({
+        text: "Submit reference",
+        href: "/reference/confirmation"
+      }) }}
+    </div>
+  </div>
 {% endblock %}

@@ -1,11 +1,11 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What’s your immigration status?" %}
-{% set formaction = "/application/" + applicationId + "/personal-information/immigration-status" %}
+{% set formaction = "/application/personal-information/immigration-status" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/immigration/")
+    href: (referrer if referrer else "/application/personal-information/immigration/")
   }) }}
 {% endblock %}
 
@@ -42,10 +42,10 @@
             threshold: 90,
             maxwords: 200,
             rows: 5
-          } | decorateApplicationAttributes(["candidate", "immigrationStatusDetails"]))
+          })
         }
       }]
-    } | decorateApplicationAttributes(["candidate", "immigrationStatus"])) }}
+    }) }}
   {% else %}
     {{ govukCharacterCount({
       label: {
@@ -57,7 +57,7 @@
       },
       maxwords: 200,
       rows: 5
-    } | decorateApplicationAttributes(["candidate", "immigrationStatusDetails"])) }}
+    }) }}
   {% endif %}
 
   {{ govukButton({

@@ -1,6 +1,6 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% set choices = application.choices | toArray %}
+{% set choices = application.choices %}
 
 {% if choices | length > 1  %}
   {% set title = "Your applications" %}
@@ -9,32 +9,11 @@
 {% endif %}
 
 {% set hasSecondary = true %}
-{% set applicationPath = "/application/" + applicationId %}
-
-{% if applicationStatus %}
-  {% set referrer = "/dashboard/" + applicationId + "/" + applicationStatus %}
-{% else %}
-  {% set referrer = "/dashboard/" + applicationId %}
-{% endif %}
+{% set applicationPath = "/application" %}
 
 {% block content %}
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-    {% if confirmation == "true" %}
-      {% set html %}
-        <h3 class="govuk-notification-banner__heading">
-          Application submitted
-        </h3>
-      {% endset %}
-
-      {{ govukNotificationBanner({
-        html: html,
-        type: 'success'
-      }) }}
-    {% endif %}
-
       <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
 
       {% if canMakeDecision == true %}

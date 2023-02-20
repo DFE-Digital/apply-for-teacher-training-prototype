@@ -38,10 +38,11 @@
 
 <p class="govuk-body">To talk about your options, get in touch with a <a href="https://getintoteaching.education.gov.uk/teacher-training-advisers">teacher training adviser</a>. Your adviser can help you improve your next application.</p>
 
-  {{ govukButton({
-    text: "Apply again",
-    href: "/application/" + applicationId + "/apply2"
-  }) }}
+  <form action="/application/apply-again" method="post">
+    {{ govukButton({
+      text: "Apply again"
+    }) }}
+  </form>
 {% endset %}
 
 {{ govukInsetText({

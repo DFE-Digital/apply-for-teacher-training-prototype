@@ -2,102 +2,49 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   // Review page
-  router.get('/application/:applicationId/work-history/review', (req, res) => {
+  router.get('/application/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
-    const fromPage = req.query.from
 
     res.render('application/work-history/review', {
-      newId,
-      fromPage
+      newId
     })
   })
 
-  // Root path - show branching page if no data yet, otherwise the review page.
-  router.get('/application/:applicationId/work-history', (req, res) => {
-    res.render('application/work-history/index')
+  // Add a job
+  router.get('/application/work-history/job/add', (req, res) => {
+    const newId = utils.generateRandomString()
+    res.render(`application/work-history/job/${newId}`)
   })
 
-  // Answering the initial branching question
-  router.post('/application/:applicationId/work-history/answer', (req, res) => {
-    const { applicationId } = req.params
-
-    const { workHistoryDisclose } = req.body.applications[applicationId]
-
-    if (workHistoryDisclose !== undefined) {
-      res.redirect(`/application/${applicationId}/work-history/review?from=work-history-question`)
-    } else {
-      res.redirect(`/application/${applicationId}/work-history`)
-    }
+  // Add a break
+  router.get('/application/work-history/break/add', (req, res) => {
+    const newId = utils.generateRandomString()
+    res.redirect(`/application/work-history/break/${newId}`)
   })
 
-  router.get('/application/:applicationId/work-history/break/:id', (req, res) => {
+  // Job details page
+  router.get('/application/work-history/job/:id', (req, res) => {
     const { id } = req.params
-    const { start, end } = req.query
-
-    res.render('application/work-history/break', {
-      id,
-      start,
-      end
-    })
-  })
-
-  router.post('/application/:applicationId/work-history/break/:id', (req, res) => {
-    const { applicationId, id } = req.params
-    const { workHistory } = utils.applicationData(req)
-
-    utils.saveIsoDate(req, workHistory, id, false)
-
-    res.redirect(`/application/${applicationId}/work-history/review`)
-  })
-
-  router.get('/application/:applicationId/work-history/:id', (req, res) => {
-    const { id } = req.params
-
-    res.render('application/work-history/add', {
+    res.render('application/work-history/job', {
       id
     })
   })
 
-  // Adding a job
-  router.post('/application/:applicationId/work-history/:id', (req, res) => {
-    const { applicationId, id } = req.params
-    const { workHistory } = utils.applicationData(req)
-
-    utils.saveIsoDate(req, workHistory, id, false)
-
-    res.redirect(`/application/${applicationId}/work-history/review`)
-  })
-
   // remove job page
-  router.get('/application/:applicationId/work-history/:id/remove', (req, res) => {
-    const { applicationId, id } = req.params
-    const item = utils.applicationData(req).workHistory[id]
-    const formaction = `/application/${applicationId}/work-history/${id}/remove`
+  router.get('/application/work-history/job/:id/delete', (req, res) => {
+    const { id } = req.params
 
-    res.render('application/work-history/remove', {
-      id,
-      formaction,
-      item
+    res.render('application/work-history/delete-job', {
+      id
     })
   })
 
-  // Remove a job
-  router.post('/application/:applicationId/work-history/:id/remove', (req, res) => {
-    const { applicationId, id } = req.params
-    const application = utils.applicationData(req)
+  // remove job page
+  router.post('/application/work-history/job/:id/delete', (req, res) => {
+    const { id } = req.params
 
-    delete application.workHistory[id]
+    delete req.session.data.workHistory[id]
 
-    const numberOfJobsLeft = Object.entries(application.workHistory)
-      .filter(function (job) {
-        return job[1].id !== undefined
-      }).length
-
-    if (numberOfJobsLeft > 0) {
-      res.redirect(`/application/${applicationId}/work-history/review`)
-    } else {
-      // Return to branching question if no jobs left
-      res.redirect(`/application/${applicationId}/work-history`)
-    }
+    res.redirect('/application/work-history/review')
   })
 }

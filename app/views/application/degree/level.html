@@ -1,81 +1,74 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/level" %}
-
-
-{% set applicationPath = "/application/" + applicationId %}
 {% set title = "What type of degree is it?" %}
-{% set allowsFeedback = true %}
-{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
 
-{% block pageNavigation %}
+{% set international = data.degrees[id].uk == "no" %}
+
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or "/application/" + applicationId + "/degree/" + id + "/country"
+    href: "/application/degree/" + id + "/country"
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {% if international %}
+{% block content %}
+  <form action="/application/degree/{{ id }}/subject" method="post">
+  {% set anotherLevelHtml %}
 
-  {% else %}
+    {{ govukInput({
+      name: "degrees[" + id + "][otherLevel]",
+      value: data.degrees[id].otherLevel,
+      label: {
+        text: "Qualification type"
+      }
+    }) }}
+  {% endset %}
 
-    {% set anotherLevelHtml %}
-
-      {{ govukInput({
-        label: {
-          text: "Qualification type"
-        }
-      } | decorateApplicationAttributes(["degree", id, "otherLevel"])) }}
-    {% endset %}
-
-    {{ govukRadios({
-      name: "degree-type",
-      fieldset: {
-        legend: {
-          text: title,
-          isPageHeading: true,
-          classes: "govuk-fieldset__legend--l"
+  {{ govukRadios({
+    name: "degrees[" + id + "][level]",
+    value: data.degrees[id].level,
+    fieldset: {
+      legend: {
+        text: title,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    items: [
+      {
+        value: "Foundation",
+        text: "Foundation degree"
+      },
+      {
+        value: "Bachelor",
+        text: "Bachelor degree",
+        hint: {
+          text: "Sometimes referred to as an ‘undergraduate’ or ‘first’ degree, this is the minimum level required to be eligible for teacher training."
         }
       },
-      items: [
-        {
-          value: "Foundation",
-          text: "Foundation degree"
-        },
-        {
-          value: "Bachelor",
-          text: "Bachelor degree",
-          hint: {
-            text: "Sometimes referred to as an ‘undergraduate’ or ‘first’ degree, this is the minimum level required to be eligible for teacher training."
-          }
-        },
-        {
-          value: "Master’s",
-          text: "Master’s degree"
-        },
-        {
-          value: "Doctorate",
-          text: "Doctorate (PhD)"
-        },
-        {
-          value: "Level 6 Diploma",
-          text: "Level 6 Diploma"
-        },
-        {
-          divider: "or"
-        },
-        {
-          value: "other",
-          text: "Another qualification equivalent to a degree",
-          conditional: {
-            html: anotherLevelHtml
-          }
+      {
+        value: "Master’s",
+        text: "Master’s degree"
+      },
+      {
+        value: "Doctorate",
+        text: "Doctorate (PhD)"
+      },
+      {
+        value: "Level 6 Diploma",
+        text: "Level 6 Diploma"
+      },
+      {
+        divider: "or"
+      },
+      {
+        value: "other",
+        text: "Another qualification equivalent to a degree",
+        conditional: {
+          html: anotherLevelHtml
         }
-      ]
-    } | decorateApplicationAttributes(["degree", id, "level"])) }}
-
-
-  {% endif %}
+      }
+    ]
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

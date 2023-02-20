@@ -1,4 +1,4 @@
-{% set item = applicationValue(["gcse", id]) %}
+{% set item = data.gcse[id] %}
 {% set missingGcse = item.type == "not-yet" %}
 {% set nonUK = item.type == "Non-UK qualification" %}
 {% set subject = (id | capitalize) if id == "english" else id %}
@@ -70,22 +70,22 @@
       value: { text: "I don’t have a " + subject + " qualification yet" },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "whether you have this qualification"
         }]
-      } if canAmend
+      }
     },
     {
       key: { text: "Are you currently studying for this qualification?" },
       value: { html: currentlyStudyingHtml },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/not-yet",
+          href: "/application" + "/gcse/" + id + "/not-yet",
           text: "Change",
           visuallyHiddenText: "whether you are studying for this qualification"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Other evidence I have the skills required"
@@ -95,11 +95,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
-      } if canAmend
+      }
     } if (item.currentlyStudying == 'no')
     ]
   }) }}
@@ -114,11 +114,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "year"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Country"
@@ -128,11 +128,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/country?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/country?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "country"
         }]
-      } if canAmend
+      }
     } if item.type == "Non-UK qualification", {
       key: {
         text: "Do you have a UK ENIC statement of comparability?"
@@ -142,11 +142,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "UK ENIC statement of comparability"
         }]
-      } if canAmend
+      }
     } if item.type == "Non-UK qualification" and item.enic, {
       key: {
         text: "UK ENIC reference number"
@@ -156,11 +156,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "UK ENIC reference"
         }]
-      } if canAmend
+      }
     } if item.enic and item.enicReference, {
       key: {
         text: "Comparable UK qualification"
@@ -170,11 +170,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/enic?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/enic?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "comparable UK qualification"
         }]
-      } if canAmend
+      }
     } if item.enic and item.enicComparability, {
       key: {
         text: "Grade"
@@ -184,11 +184,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/grade?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/grade?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "grade"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Year awarded"
@@ -198,22 +198,22 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/year?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/year?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "year"
         }]
-      } if canAmend
+      }
     },
     {
       key: { text: "Are you currently studying to retake this qualification?" },
       value: { html: currentlyRetakingHtml },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/no-pass-grade",
+          href: "/application" + "/gcse/" + id + "/no-pass-grade",
           text: "Change",
           visuallyHiddenText: "whether you are re-taking this qualification"
         }]
-      } if canAmend
+      }
     }, {
       key: {
         text: "Other evidence I have the skills required"
@@ -223,11 +223,11 @@
       },
       actions: {
         items: [{
-          href: applicationPath + "/gcse/" + id + "/equivalency?referrer=" + referrer,
+          href: "/application" + "/gcse/" + id + "/equivalency?referrer=" + referrer,
           text: "Change",
           visuallyHiddenText: "explanation"
         }]
-      } if canAmend
+      }
     } if item.currentlyRetaking == 'no']
   }) }}
 {% endif %}

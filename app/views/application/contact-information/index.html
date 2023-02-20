@@ -1,19 +1,13 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What is your phone number?" %}
-{% set formaction = referrer or "/application/" + applicationId + "/contact-information/where-do-you-live" %}
+{% set formaction = "/application/contact-information/where-do-you-live" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
 {% block content %}
@@ -21,6 +15,7 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {{ govukInput({
+          name: "phoneNumber",
           label: {
             text: title,
             classes: "govuk-label--l",
@@ -31,8 +26,9 @@
           },
           classes: "govuk-input--width-20",
           autocomplete: "tel",
-          type: "tel"
-        } | decorateApplicationAttributes(["contactInformation", "tel"])) }}
+          type: "tel",
+          value: data.phoneNumber
+        }) }}
 
         {{ govukButton({
           text: "Save and continue"

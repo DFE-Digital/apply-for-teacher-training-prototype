@@ -1,139 +1,135 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set reference = applicationValue(["references", id]) %}
+{% set reference = data.references[id] %}
 {% set canNudgeReferee = (reference.status == 'Requested') %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/accepted/" + applicationId
+    href: "/accepted"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  <h1 class="govuk-heading-l">Reference request from {{ reference.name }}</h1>
 
-  {% set item = reference %}
-  <h1 class="govuk-heading-l">Reference request from {{ item.name }}</h1>
+  {% set statusHtml %}
+    {{ govukTag({
+      classes: "",
+      text: reference.status | capitalize
+    }) }}
+  {% endset %}
 
-{% set statusHtml %}
-  {{ govukTag({
-    classes: item.status | statusClass,
-    text: item.status | capitalize
+  {% set contextHtml %}
+    {% if reference.status == "Requested" %}
+      <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
+    {% elif reference.status == "Reference overdue" %}
+      <p class="govuk-body govuk-!-margin-top-2">Your referee has not responded yet. Ask them if they got the email - it may have gone to junk or spam.</p>
+      <p class="govuk-body govuk-!-margin-top-2">You can also add more referees to increase your chances of getting a reference quickly.</p>
+    {% elif reference.status == "Request cancelled" %}
+      <p class="govuk-body govuk-!-margin-top-2">Training providers will not see any information about this reference request.</p>
+    {% elif reference.status == "Request failed" %}
+      <p class="govuk-body govuk-!-margin-top-2">The reference request never reached your referee.</p>
+    {% elif reference.status == "Reference declined" %}
+      <p class="govuk-body govuk-!-margin-top-2">{{ reference.name }} said they will not give a reference.</p>
+    {% elif reference.status == "Deactivated" %}
+      <p class="govuk-body govuk-!-margin-top-2">This reference will not be sent to any provider.</p>
+    {% endif %}
+  {% endset %}
+
+  {% set logHtml %}
+    <ul class="govuk-list">
+    {% for entry in reference.log %}
+      <li>
+        {{ entry.note }}
+        <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endset %}
+
+
+
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Name"
+      },
+      value: {
+        text: reference.name or "Not entered"
+      },
+      actions: {
+        references: [{
+          href: applicationPath + "/references/" + id + "/name?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "name"
+        }]
+      }
+    }, {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: reference.email or "Not entered"
+      },
+      actions: {
+        references: [{
+          href: applicationPath + "/references/" + id + "/email?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "email address"
+        }]
+      }
+    }, {
+      key: {
+        text: "Reference type"
+      },
+      value: {
+        text: reference.type or "Not entered"
+      },
+      actions: {
+        references: [{
+          href: applicationPath + "/references/" + id + "/type?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "reference type"
+        }]
+      }
+    }, {
+      key: {
+        text: "Relationship to referee"
+      },
+      value: {
+        text: (reference.relationship or "Not entered") | nl2br | safe
+      },
+      actions: {
+        references: [{
+          href: "/accepted/" + "/references/" + id + "/relationship?referrer=" + referrer,
+          text: "Change",
+          visuallyHiddenText: "relationship to referee"
+        }]
+      }
+    }, {
+      key: {
+        text: "Status"
+      },
+      value: {
+        html: (statusHtml + contextHtml)
+      }
+    }, {
+      key: {
+        text: "History"
+      },
+      value: {
+        html: logHtml
+      }
+    }]
   }) }}
-{% endset %}
-
-{% set contextHtml %}
-  {% if status == "Requested" %}
-    <p class="govuk-body govuk-!-margin-top-2">We’ve emailed your referee. Keep in touch with them to ensure they’re planning on giving a reference as soon as possible.</p>
-  {% elif status == "Reference overdue" %}
-    <p class="govuk-body govuk-!-margin-top-2">Your referee has not responded yet. Ask them if they got the email - it may have gone to junk or spam.</p>
-    <p class="govuk-body govuk-!-margin-top-2">You can also add more referees to increase your chances of getting a reference quickly.</p>
-  {% elif status == "Request cancelled" %}
-    <p class="govuk-body govuk-!-margin-top-2">Training providers will not see any information about this reference request.</p>
-  {% elif status == "Request failed" %}
-    <p class="govuk-body govuk-!-margin-top-2">The reference request never reached your referee.</p>
-  {% elif status == "Reference declined" %}
-    <p class="govuk-body govuk-!-margin-top-2">{{ item.name }} said they will not give a reference.</p>
-  {% elif status == "Deactivated" %}
-    <p class="govuk-body govuk-!-margin-top-2">This reference will not be sent to any provider.</p>
-  {% endif %}
-{% endset %}
-
-{% set logHtml %}
-  <ul class="govuk-list">
-  {% for entry in item.log %}
-    <li>
-      {{ entry.note }}
-      <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date | date("DDD 'at' T") }}</span>
-    </li>
-  {% endfor %}
-  </ul>
-{% endset %}
-
-
-
-{{ govukSummaryList({
-  rows: [{
-    key: {
-      text: "Name"
-    },
-    value: {
-      text: item.name or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/" + item.id + "/name?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "name"
-      }]
-    } if canAmendReferee
-  }, {
-    key: {
-      text: "Email address"
-    },
-    value: {
-      text: item.email or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/" + item.id + "/email?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "email address"
-      }]
-    } if canAmendReferee
-  }, {
-    key: {
-      text: "Reference type"
-    },
-    value: {
-      text: item.type or "Not entered"
-    },
-    actions: {
-      items: [{
-        href: applicationPath + "/references/" + item.id + "/type?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "reference type"
-      }]
-    } if canAmendReferee
-  }, {
-    key: {
-      text: "Relationship to referee"
-    },
-    value: {
-      text: (item.relationship or "Not entered") | nl2br | safe
-    },
-    actions: {
-      items: [{
-        href: "/accepted/" + applicationId + "/references/" + item.id + "/relationship?referrer=" + referrer,
-        text: "Change",
-        visuallyHiddenText: "relationship to referee"
-      }]
-    } if canAmendReferee
-  }, {
-    key: {
-      text: "Status"
-    },
-    value: {
-      html: statusHtml + contextHtml
-    }
-  }, {
-    key: {
-      text: "History"
-    },
-    value: {
-      html: logHtml
-    }
-  }]
-}) }}
 
   {% if canNudgeReferee %}
-  <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Send a reminder",
-        href: "/accepted/" + applicationId + "/references/" + item.id + "/action/nudge"
-      }) }}
-
-      <a href="/accepted/{{ applicationId }}/references/{{ item.id }}/action/cancel" class="govuk-link">Cancel request</a>
-  </div>
+    <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Send a reminder",
+          href: "/accepted/" + "/references/" + id + "/action/nudge"
+        }) }}
+        <a href="/accepted/references/{{ id }}/action/cancel" class="govuk-link">Cancel request</a>
+    </div>
   {% endif %}
-
 {% endblock %}

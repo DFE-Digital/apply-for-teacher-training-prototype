@@ -1,17 +1,25 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set title = "Are you sure you want to delete the reference from " + reference.name + "?" %}
-{% set formaction = "/application/" + applicationId + "/references/" + id + "/delete" %}
+{% set title = "Are you sure you want to delete the reference from " + data.references[id].name + "?" %}
+{% set formaction = "/application/" + "/references/" + id + "/delete" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId + "/references"
+    href: "/application/references"
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukButton({
-    text: "Yes I’m sure - delete this reference",
-    classes: "govuk-button--warning"
-  }) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/application/references/{{ id }}/delete" method="post" novalidate="true">
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+
+        {{ govukButton({
+          text: "Yes I’m sure - delete this reference",
+          classes: "govuk-button--warning"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

@@ -1,32 +1,22 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "In which country did you study for your " + subject + " qualification?" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   {{ appAutocomplete({
     label: label,
     items: countries
-  } | decorateApplicationAttributes(["gcse", id, "country"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#gcse-{{ id }}-country'),
-      defaultValue: '{{ applicationValue(["gcse", id, "country"]) }}'
-    })
-  </script>
 {% endblock %}

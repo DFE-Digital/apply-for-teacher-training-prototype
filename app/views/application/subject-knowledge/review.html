@@ -1,54 +1,44 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/subject-knowledge/review" %}
 {% set title = "Your suitability to teach a subject or age group" %}
-{% set allowsFeedback = true %}
-{% set canAmend = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: applicationPath,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/subject-knowledge.html" %}
 
-  {% set hasFeedbackFromPreviousApplication = false %}
-  {% if applicationValue(["apply2"]) %}
-    {% for previousApplicationId in applicationValue("previousApplications") %}
-      {% for item in (data.applications[previousApplicationId].choices | toArray) %}
-        {% if item.feedback and item.feedback.qualityOfApplication and item.feedback.qualityOfApplication.subjectKnowledge %}
-          {% set hasFeedbackFromPreviousApplication = true %}
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    hint: {
-      html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I’ve " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", "subjectKnowledge"])) }}
+  <form action="/application" method="post">
+    {{ govukRadios({
+      name: "completed[subjectKnowledge]",
+      value: data.completed.subjectKnowledge,
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        html: "<p class=\"govuk-hint\">Proofread this section carefully for spelling and grammar. Ask someone you trust for their opinion.</p><p class=\"govuk-hint\">Ensure this is all your own work as plagiarism will be penalised."
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve " + ("reviewed" if hasFeedbackFromPreviousApplication else "completed") + " this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    } ) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
 {% endblock %}

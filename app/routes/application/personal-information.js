@@ -11,7 +11,7 @@ module.exports = router => {
   })
 
   // Nationality answer branching
-  router.post('/application/:applicationId/personal-information/nationality-answer', (req, res) => {
+  router.post('/application/personal-information/nationality-answer', (req, res) => {
     const { referrer } = req.session.data
     const { applicationId } = req.params
     const application = req.session.data.applications[applicationId]

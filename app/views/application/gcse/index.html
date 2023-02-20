@@ -72,7 +72,7 @@
           items: [{
             text: "GCSE"
           }, {
-            text: "O level"
+            text: "UK O level (from before 1989)"
           }, {
             text: "Scottish National 5"
           }, {
@@ -81,14 +81,16 @@
               html: otherUkConditionalHtml
             }
           }, {
-            text: "A non-UK qualification",
+            divider: "or"
+          }, {
+            text: "Qualification from outside the UK",
             conditional: {
               html: nonUkConditionalHtml
             }
           }, {
             divider: "or"
           }, {
-            text: "I do not have a GCSE in " + subject + " (or equivalent) yet",
+            text: "I do not have a qualification in " + subject + " yet",
             value: "not-yet"
           }]
         } | decorateApplicationAttributes(["gcse", id, "type"])) }}

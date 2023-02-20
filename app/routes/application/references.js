@@ -11,6 +11,16 @@ module.exports = router => {
     res.redirect(`/application/references/${id}/type`)
   })
 
+  // References review page
+  router.get('/application/references', (req, res) => {
+
+    incompleteReferences = Object.values(req.session.data.references).filter(ref => ref.email == "")
+
+    res.render(`application/references/index`, {
+      incompleteReferences
+    })
+  })
+
   router.post('/application/references/:id/delete', (req, res) => {
     const { id } = req.params
 

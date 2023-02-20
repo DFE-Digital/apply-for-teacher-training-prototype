@@ -1,44 +1,8 @@
-// global styles for <a> and <p> tags
-$govuk-global-styles: true;
-$govuk-new-link-styles: true;
-
-// We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework.
-$govuk-assets-path: '/govuk/assets/';
-
-// Import GOV.UK Frontend and any extension styles if extensions have been configured
-@import "lib/extensions/extensions";
-
-// Patterns that aren't in Frontend
-@import "patterns/step-by-step-header";
-@import "patterns/step-by-step-nav";
-@import "patterns/step-by-step-related";
-@import "patterns/task-list";
-@import "patterns/related-items";
-
-// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
-
-// Components that aren’t in Frontend
-@import "components/autocomplete";
-@import "components/button";
-@import "components/cookie-banner";
-@import "components/course-choice";
-@import "components/date";
-@import "components/error-summary";
+// Custom component and modifiers
 @import "components/grid";
-@import "components/feedback";
 @import "components/hidden-link";
-@import "components/icon";
 @import "components/inset-text";
-@import "components/link";
-@import "components/list";
-@import "components/related";
 @import "components/section";
-@import "components/status-indicator";
-@import "components/styled-content";
-@import "components/summary-card";
-@import "components/summary-list";
-@import "components/tag";
-@import "components/task-list";
 
 .govuk-body {
   word-wrap: break-word;

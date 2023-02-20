@@ -1,16 +1,16 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Sign in" %}
 {% set formaction = "/send-email/sign-in" %}
 {% set hasAccountLinks = false %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: "/"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body-l">Enter the email address you used to register with, and we will send you a link to sign in.</p>
 
   {{ govukInput({

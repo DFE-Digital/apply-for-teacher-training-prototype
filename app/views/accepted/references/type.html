@@ -1,45 +1,48 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set referee = applicationValue(["references", id]) %}
-{% set parent = referee.name %}
-{% set title = "Choose a referee" %}
-{% set allowsFeedback = true %}
-{% set formaction = referrer or "/accepted/" + applicationId + "/references/" + id + "/name" %}
+{% set reference = data.references[id] %}
+{% set title = "What type of reference do you want to add?" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/accepted/" + applicationId + "/references/" + id + "/intro"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/accepted/references/" + id + "/intro"
+  }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  {{ govukRadios({
-    fieldset: {
-      legend: {
-        text: "What type of reference do you want to add?",
-        classes: "govuk-fieldset__legend--l",
-        isPageHeading: true
-      }
-    },
-    items: [{
-      text: "Academic, such as a university tutor"
-    }, {
-      text: "Professional, such as a manager"
-    }, {
-      text: "School experience, such as from the headteacher of a school you’ve been working in"
-    }, {
-      text: "Character, such as a mentor or someone you know from volunteering"
-    }]
-  } | decorateApplicationAttributes(["references", id, "type"])) }}
+      <form action="/accepted/references/{{ id }}/name" method="post">
+        {{ govukRadios({
+          name: "references[" + id + "][type]",
+          value: data.references[id].type,
+          fieldset: {
+            legend: {
+              text: title,
+              classes: "govuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [{
+            value: "academic",
+            text: "Academic, such as a university tutor"
+          }, {
+            value: "professional",
+            text: "Professional, such as a manager"
+          }, {
+            value: "school-experience",
+            text: "School experience, such as from the headteacher of a school you’ve been working in"
+          }, {
+            value: "character",
+            text: "Character, such as a mentor or someone you know from volunteering"
+          }]
+        }) }}
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

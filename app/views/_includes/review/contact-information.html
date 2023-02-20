@@ -1,91 +1,42 @@
-{% set completed = applicationValue(["completed", "contactInformation"]) %}
-{% set entered = applicationValue(["contactInformation", "tel"]) %}
 
-{% if not entered %}
-  {{ appSuggestion({
-    id: "contactInformation",
-    title: "Contact information not entered",
-    warning: true if errorList,
+{% set addressHtml %}
+  {{ data.address.line1 }}<br>
+  {{ data.address.line2 }}<br>
+  {{ data.address.town }}<br>
+  {{ data.address.county }}<br>
+  {{ data.address.postalCode }}
+  {% if not data.livesInUk == 'yes' %}<br>{{ data.address.country }}{% endif %}
+
+{% endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Phone number"
+    },
+    value: {
+      text: data.phoneNumber
+    },
     actions: {
       items: [{
-        text: "Enter your contact information",
-        href: applicationPath + "/contact-information"
+        href: "/application/contact-information?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "phone number"
       }]
     }
-  }) }}
-{% else %}
-  {{ appSuggestion({
-    id: "contactInformation",
-    title: "Contact information are not marked as completed",
-    warning: true if errorList,
+  }, {
+    key: {
+      text: "Address"
+    },
+    value: {
+      html: addressHtml
+    },
     actions: {
       items: [{
-        text: "Complete contact information",
-        href: applicationPath + "/contact-information/review"
+        href: "/application/contact-information/where-do-you-live?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "address"
       }]
     }
-  }) if not completed and showIncomplete }}
-
-  {{ appSummaryCard({
-    classes: "govuk-!-margin-bottom-6",
-    html: govukSummaryList({
-      rows: [{
-        key: {
-          text: "Phone number"
-        },
-        value: {
-          text: applicationValue(["contactInformation", "tel"]) or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "phone number"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "Email address"
-        },
-        value: {
-          text: data["account"]["email"] or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "email"
-          }]
-        } if canAmend
-      } if data.flags.selfAmendEmailAddress, {
-        key: {
-          text: "Address"
-        },
-        value: {
-          html: applicationValue(["contactInformation", "address"]) | formatAddress | nl2br | safe or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information/where-do-you-live?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "address"
-          }]
-        } if canAmend
-      }, {
-        key: {
-          text: "Contact address"
-        },
-        value: {
-          html: applicationValue(["contactInformation", "contactAddress"]) | formatAddress | nl2br | safe or "Not entered"
-        },
-        actions: {
-          items: [{
-            href: applicationPath + "/contact-information/contact-address?referrer=" + referrer,
-            text: "Change",
-            visuallyHiddenText: "contact address"
-          }]
-        } if canAmend
-      } if applicationValue(["contactInformation", "contactAddress"]) and applicationValue(["contactInformation", "address", "country"]) and applicationValue(["contactInformation", "contactAddressIsResidence"]) == "A different address"]
-    })
-  }) }}
-{% endif %}
+  }]
+}) }}

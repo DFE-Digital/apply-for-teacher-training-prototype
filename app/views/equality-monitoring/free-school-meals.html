@@ -1,0 +1,58 @@
+{% extends "layouts/main.html" %}
+{% set parent = "Equality and diversity questions" %}
+{% set title = "Did you ever get free school meals in the UK?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: paths.back
+  }) }}
+{% endblock %}
+
+{% block content %}
+<form action="/equality-monitoring/review" method="post" novalidate>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">{{ parent }}</span>
+      <h1 class="govuk-heading-l">Free school meals</h1>
+
+      <p class="govuk-body">Training providers will not see your answer to this question.</p>
+
+      <p class="govuk-body">This question helps the Department for Education understand the background of trainee teachers. Free school meals have generally only been available to children from  families that receive benefits.</p>
+
+      {{ govukRadios({
+        name: "equalityMonitoring[freeSchoolMeals]",
+        value: data.equalityMonitoring.freeSchoolMeals,
+        fieldset: {
+          legend: {
+            text: title,
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "Yes",
+          text: "Yes"
+        }, {
+          value: "No",
+          text: "No"
+        }, {
+          value: "I did not go to school in the UK",
+          text: "I did not go to school in the UK"
+        }, {
+          value: "I do not know",
+          text: "I do not know"
+        }, {
+          divider: "or"
+        }, {
+          value: "Prefer not to say",
+          text: "Prefer not to say"
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </div>
+  </div>
+</form>
+{% endblock %}

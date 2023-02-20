@@ -1,13 +1,8 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
+{% set completed = data.degrees[id].completed == "yes" %}
+{% set international = data.degrees[id].uk == "no" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/grade" %}
-
-
-{% set international = applicationValue(["degree", id, "provenance"]) == "international" %}
-{% set completed =  applicationValue(["degree", id, "completed"]) == "Yes" %}
-{% set undergraduateDegree = true %}
 {% if completed %}
   {% if international %}
     {% set title = "Did your degree give a grade?" %}
@@ -21,16 +16,15 @@
     {% set title = "What grade do you expect to get?" %}
   {% endif %}
 {% endif %}
-{% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer or paths.back
+    href: "/application/degree/" + id + "/completed"
   }) }}
 {% endblock %}
 
 {% block content %}
-  <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+  <form action="/application/degree/{{ id }}/start-year" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% set internationalGradeHtml %}
@@ -41,7 +35,7 @@
               text: gradeLabel
             },
             classes: "govuk-input--width-20"
-          } | decorateApplicationAttributes(["degree", id, "grade"])) }}
+          }) }}
         {% endset %}
 
         {% set otherUkGradeHtml %}
@@ -53,6 +47,8 @@
 
         {% if international %}
           {{ govukRadios({
+            name: "degrees[" + id + "][gradeGiven]",
+            value: data.degrees[id].gradeGiven,
             fieldset: {
               legend: {
                 html: title,
@@ -64,18 +60,23 @@
               text: 'For example, ‘A’, ‘4.5’, ‘94%’, ‘Distinction’'
             },
             items: [{
+              value: "yes",
               text: "Yes",
               conditional: {
                 html: internationalGradeHtml
               }
             }, {
+              value: "no",
               text: "No"
             }, {
+              value: "not-sure",
               text: "I do not know"
             }]
-          } | decorateApplicationAttributes(["degree", id, "hasGrade"])) }}
+          }) }}
         {% else %}
           {{ govukRadios({
+            name: "degrees[" + id + "][grade]",
+            value: data.degrees[id].grade,
             fieldset: {
               legend: {
                 html: title,
@@ -111,7 +112,7 @@
                 html: otherUkGradeHtml
               }
             }]
-          } | decorateApplicationAttributes(["degree", id, "grade"])) }}
+          }) }}
         {% endif %}
 
         {{ govukButton({
@@ -121,26 +122,3 @@
     </div>
   </form>
 {% endblock %}
-
-{% if not international %}
-  {% block pageScripts %}
-    <script src="/public/javascripts/autocomplete.min.js"></script>
-    <script>
-      accessibleAutocomplete({
-        element: document.querySelector('#grade-autocomplete-container'),
-        id: 'degree-{{ id }}-gradeOther',
-        name: "applications[{{ applicationId }}][degree][{{ id }}][gradeOther]",
-        defaultValue: '{{ applicationValue(["degree", id, "gradeOther"]) }}',
-        placeholder: false,
-        showNoOptionsFound: false,
-        source: [
-          'Aegrotat',
-          'Fourth-class honours',
-          'General degree',
-          'Ordinary degree',
-          'Unclassified'
-        ]
-      })
-    </script>
-  {% endblock %}
-{% endif %}

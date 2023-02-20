@@ -1,27 +1,21 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = "/application/" + applicationId + "/degree/" + id + "/country" %}
-{% set degreeCount = applicationValue(["degree"]) | length %}
+
+{% set degreeCount = data.degrees | length %}
 
 {% set title = "Which country was the degree from?" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer })
-    }}
-  {% else %}
-    {{ govukBackLink({
-      href: referrer or ("/application/" + applicationId + "/degree/review"),
-      text: "Back"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application/degree/review",
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form{% if formaction %} action="{{ formaction }}"{% endif %} method="post">
+      <form action="/application/degree/{{ id }}/country-answer" method="post">
 
         {% set ukConditionalHtml %}
           <div class="govuk-form-group">
@@ -32,16 +26,19 @@
         {% endset %}
 
         {% set countryHtml %}
-          {{ appAutocomplete({
+          {{ govukInput({
+            name: "degrees[" + id + "][country]",
+            value: data.degrees[id].country,
             label: {
               text: "Country",
               classes: "govuk-label--s"
-            },
-            items: countries
-          } | decorateApplicationAttributes(["degree", id, "country"])) }}
+            }
+          }) }}
         {% endset %}
 
         {{ govukRadios({
+          name: "degrees[" + id + "][uk]",
+          value: data.degrees[id].uk,
           fieldset: {
             legend: {
               text: title,
@@ -50,16 +47,16 @@
             }
           },
           items: [{
-            value: "domestic",
+            value: "yes",
             text: "United Kingdom"
           }, {
-            value: "international",
+            value: "no",
             text: "Another country",
             conditional: {
               html: countryHtml
             }
           }]
-        } | decorateApplicationAttributes(["degree", id, "provenance"])) }}
+        }) }}
 
         {{ govukButton({
           text: "Save and continue"
@@ -67,14 +64,4 @@
       </form>
     </div>
   </div>
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-     selectElement: document.querySelector('#degree-{{ id }}-country'),
-     defaultValue: '{{ applicationValue(["degree", id, "country"]) }}'
-    })
-  </script>
 {% endblock %}

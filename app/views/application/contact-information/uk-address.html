@@ -1,59 +1,78 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 {% from "govuk/components/hint/macro.njk" import govukHint %}
 
 {% set title = "What is your contact address?" %}
-{% set formaction = "/application/" + applicationId + "/contact-information/review" %}
+{% set formaction = "/application/contact-information/review" %}
 
 {% set describedBy = "address-hint" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer if referrer else "/application/" + applicationId + "/contact-information/where-do-you-live"
+    href: "/application/contact-information/where-do-you-live"
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukHint({id: describedBy, text: "Enter an address where you'll be able to receive post from providers." })}}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  {{ govukInput({
-    label: {
-      html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
-    },
-    autocomplete: "address-line1"
-  } | decorateApplicationAttributes(["contactInformation", "address", "line1"])) }}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {{ govukInput({
-    label: {
-      html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
-    },
-    autocomplete: "address-line2"
-  } | decorateApplicationAttributes(["contactInformation", "address", "line2"])) }}
+      <form action="{{ formaction }}" method="post">
+        {{ govukHint({id: describedBy, text: "Enter an address where you'll be able to receive post from providers." })}}
 
-  {{ govukInput({
-    label: {
-      text: "Town or city"
-    },
-    classes: "govuk-!-width-two-thirds",
-    autocomplete: "address-level2"
-  } | decorateApplicationAttributes(["contactInformation", "address", "level2"])) }}
+        {{ govukInput({
+          name: "address[line1]",
+          label: {
+            html: "Building and street <span class=\"govuk-visually-hidden\">line 1 of 2</span>"
+          },
+          autocomplete: "address-line1",
+          value: data.address.line1
+        }) }}
 
-  {{ govukInput({
-    label: {
-      text: "County"
-    },
-    classes: "govuk-!-width-two-thirds",
-    autocomplete: "address-level1"
-  } | decorateApplicationAttributes(["contactInformation", "address", "level1"])) }}
+        {{ govukInput({
+          name: "address[line2]",
+          label: {
+            html: "<span class=\"govuk-visually-hidden\">Building and street line 2 of 2</span>"
+          },
+          autocomplete: "address-line2",
+          value: data.address.line2
+        }) }}
 
-  {{ govukInput({
-    label: {
-      text: "Postal code"
-    },
-    classes: "govuk-input--width-10",
-    autocomplete: "postal-code"
-  } | decorateApplicationAttributes(["contactInformation", "address", "postalCode"])) }}
+        {{ govukInput({
+          name: "address[town]",
+          label: {
+            text: "Town or city"
+          },
+          classes: "govuk-!-width-two-thirds",
+          autocomplete: "address-level2",
+          value: data.address.town
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukInput({
+          name: "address[county]",
+          label: {
+            text: "County"
+          },
+          classes: "govuk-!-width-two-thirds",
+          autocomplete: "address-level1",
+          value: data.address.county
+        }) }}
+
+        {{ govukInput({
+          name: "address[postalCode]",
+          label: {
+            text: "Postal code"
+          },
+          classes: "govuk-input--width-10",
+          autocomplete: "postal-code",
+          value: data.address.postalCode
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

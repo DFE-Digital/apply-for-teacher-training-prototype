@@ -1,34 +1,37 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
-{% set referee = applicationValue(["references", id]) %}
-{% set title = "What is " + referee.name + "’s email address?" %}
-{% set allowsFeedback = true %}
-{% set formaction = referrer or "/application/" + applicationId + "/references/" + id + "/relationship/" %}
+{% set title = "What is " + data.references[id].name + "’s email address?" %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId + "/references/" + id + "/name/"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application/references/" + id + "/name"
+  }) }}
 {% endblock %}
 
-{% block primary %}
-  {{ govukInput({
-    label: label,
-    hint: {
-      text: "Give their work email address if they have one."
-    },
-    type: "email",
-    autocomplete: "email",
-    spellcheck: false
-  } | decorateApplicationAttributes(["references", id, "email"])) }}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/application/references/{{ id }}/relationship" method="post" novalidate="true">
+        {{ govukInput({
+          name: "references[" + id + "][email]",
+          value: data.references[id].email,
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: "Give their work email address if they have one."
+          },
+          type: "email",
+          autocomplete: "false",
+          spellcheck: false
+        }) }}
 
-  {{ govukButton({
-    text: "Save changes" if referrer else "Save and continue"
-  }) }}
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

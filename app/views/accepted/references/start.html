@@ -1,22 +1,16 @@
-{% extends "_content.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "What your referee can expect once you've requested a reference" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
-  {% if referrer %}
-    {{ govukBackLink({
-      href: referrer
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
     <p class="govuk-body">Your referee will receive an email from the Becoming a Teacher team at the Department for Education with a link to an online form to complete.</p>
 
@@ -48,7 +42,7 @@
 
   {{ govukButton({
     text: "Continue",
-    href: "/application/" + applicationId + "/references/" + id + "/type/"
+    href: "/application/" + "/references/" + id + "/type/"
   }) }}
 
 {% endblock %}

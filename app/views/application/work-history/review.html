@@ -1,34 +1,23 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
 {% set title = "Work history" %}
-{% set canAmend = true %}
-{% set workHistory = applicationValue(["workHistory"]) or {} %}
-{% set history = workHistory | toArray | selectattr("id") | sort(attribute="startDate") %}
-{% set workHistoryDecision = applicationValue(["workHistoryDisclose"]) %}
 
-{% block pageNavigation %}
-  {% if fromPage == "work-history-question" %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId + "/work-history",
-      text: "Back"
-    }) }}
-  {% else %}
-    {{ govukBackLink({
-      href: "/application/" + applicationId,
-      text: "Back to application"
-    }) }}
-  {% endif %}
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
 {% endblock %}
 
-{% block primary %}
-  {% if workHistoryDecision == "Yes" %}
-    {% if history.length >= 1 %}
+{% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  {% if data.workHistoryAdded == "yes" %}
+    {% if data.workHistory | length >= 1 %}
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another job",
-        href: "/application/" + applicationId + "/work-history/" + newId
+        href: "/application/work-history/job/" + newId
       }) }}
 
       {# Show list of jobs added, with prompt to add another #}
@@ -42,36 +31,40 @@
 
       {{ govukButton({
         text: "Add a job",
-        href: "/application/" + applicationId + "/work-history/" + newId
+        href: "/application/work-history/job/" + newId
       }) }}
     {% endif %}
   {% else %}
     {% include "_includes/review/work-history.html" %}
   {% endif %}
 
-  {% if history.length >= 1 or workHistoryDecision != "Yes" %}
-    {{ govukRadios({
-      fieldset: {
-        classes: "govuk-!-width-two-thirds",
-        legend: {
-          text: "Have you completed this section?",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      hint: {
-        text: "Ensure you’ve added all the jobs you’ve had since you left school. Remember to explain any gaps in your work history."
-      },
-      items: [{
-        value: "true",
-        text: "Yes, I’ve completed this section"
-      }, {
-        value: "false",
-        text: "No, I’ll come back to it later"
-      }]
-    } | decorateApplicationAttributes(["completed", "workHistory"])) }}
+  {% if data.workHistory | length >= 1 or data.workHistoryAdded != "yes" %}
+    <form action="/application" method="post">
+      {{ govukRadios({
+        name: "completed[workHistory]",
+        value: data.completed.workHistory,
+        fieldset: {
+          classes: "govuk-!-width-two-thirds",
+          legend: {
+            text: "Have you completed this section?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        hint: {
+          text: "Ensure you’ve added all the jobs you’ve had since you left school. Remember to explain any gaps in your work history."
+        },
+        items: [{
+          value: "true",
+          text: "Yes, I’ve completed this section"
+        }, {
+          value: "false",
+          text: "No, I’ll come back to it later"
+        }]
+      }) }}
 
-    {{ govukButton({
-      text: "Save and continue"
-    }) }}
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
   {% endif %}
 {% endblock %}

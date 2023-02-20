@@ -1,4 +1,4 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set referee = applicationValue(["references", id]) %}
 {% if action == "delete" %}
@@ -32,13 +32,13 @@
   {% set status = "Reference given" %}
 {% endif %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/accepted/" + applicationId + "/references/" + id
+    href: "/accepted/" + "/references/" + id
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
   {% if action == "request" %}
     <p class="govuk-body">We’ll send {{ referee.name }} an email asking them to give you a reference.</p>
@@ -51,7 +51,7 @@
       hint: {
         text: "In most cases, this should be a work address."
       }
-    } | decorateApplicationAttributes(["references", id, "email"])) }}
+    }) }}
   {% elif action == "cancel" %}
     <p class="govuk-body">We’ll tell them that they no longer need to give a reference.</p>
   {% elif action == "nudge" %}
@@ -75,7 +75,4 @@
     classes: "govuk-button--warning" if destructive
   }) }}
 
-  <!-- {% if action != "retry" %}
-    <p class="govuk-body"><a href="/accepted/{{ applicationId }}/references/{{ id}}">No - I’ve changed my mind</a></p>
-  {% endif %} -->
 {% endblock %}

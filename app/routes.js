@@ -1,74 +1,46 @@
-const express = require('express')
-const router = express.Router()
+//
+// For guidance on how to create routes see:
+// https://prototype-kit.service.gov.uk/docs/routes
+//
 
-// Make `applicationId` available as local variable
-router.all(['/application/:applicationId', '/application/:applicationId/*'], (req, res, next) => {
-  res.locals.applicationId = req.params.applicationId
-  next()
-})
-
-// Make `choiceId` available as local variable
-router.all([
-  '/application/:applicationId/choices/:choiceId',
-  '/application/:applicationId/choices/:choiceId/*'
-], (req, res, next) => {
-  res.locals.choiceId = req.params.choiceId
-  next()
-})
-
-// Make `validate` available as local variable for Find page
-router.get('/find/feedback', (req, res) => {
-  const { validate } = req.query
-
-  res.render('find/feedback.html', {
-    validate
-  })
-})
-
-router.get('/accepted/:applicationId/select-ske-provider', (req, res) => {
-  const { applicationId } = req.params
-
-  res.render('accepted/select-ske-provider.html', {
-    applicationId
-  })
-})
-
-router.get('/accepted/:applicationId/confirm-ske-provider', (req, res) => {
-  const { applicationId } = req.params
-  res.render('accepted/confirm-ske-provider.html', {
-    applicationId
-  })
-})
-
-router.get('/accepted/:applicationId/submit-ske-provider', (req, res) => {
-  const { applicationId } = req.params
-  const application = req.session.data.applications[applicationId]
-
-  application.skeProvider = req.session.data.skeProvider
-
-  res.redirect(`/dashboard/${applicationId}`)
-})
-
-router.get('/accepted/:applicationId/complete-ske-course', (req, res) => {
-  const { applicationId } = req.params
-  const application = req.session.data.applications[applicationId]
-
-  application.skeCompleted = true
-
-  res.redirect(`/dashboard/${applicationId}`)
-})
+const govukPrototypeKit = require('govuk-prototype-kit')
+const router = govukPrototypeKit.requests.setupRouter()
 
 require('./routes/account')(router)
-require('./routes/delete')(router) // Must appear before other routes
-require('./routes/apply')(router)
-require('./routes/application')(router)
-require('./routes/reference')(router)
-require('./routes/emails')(router)
-require('./routes/send-email')(router)
-require('./routes/survey')(router)
 
-require('./routes/accepted/references')(router)
+require('./routes/application/choices')(router)
+require('./routes/application/contact-information')(router)
+require('./routes/application/work-history')(router)
+require('./routes/application/unpaid-experience')(router)
+require('./routes/application/degree')(router)
+require('./routes/application/gcse')(router)
+require('./routes/application/other-qualifications')(router)
+require('./routes/application/references')(router)
 
+require('./routes/dashboard')(router)
+require('./routes/accepted')(router)
 require('./routes/admin')(router)
+require('./routes/reference')(router)
 
-module.exports = router
+// Reset application so the user can apply again
+router.post('/application/apply-again', (req, res) => {
+  // Remove previous course choices
+  req.session.data.choices = {}
+
+  req.session.data.completed.choices = 'false'
+
+  res.redirect('/application')
+})
+
+// Submit application action
+router.post('/application/submit', (req, res) => {
+  // Set status of each choice to 'Awaiting decision'
+  const choices = req.session.data.choices
+  if (choices) {
+    for (const id of Object.keys(choices)) {
+      choices[id].status = 'Awaiting decision'
+    }
+  }
+
+  res.redirect('/survey')
+})

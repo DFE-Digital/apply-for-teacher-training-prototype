@@ -1,108 +1,61 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
-{% set formaction = "/application/" + applicationId + "/personal-information/nationality-answer" %}
+{% set formaction = "/application/" + "/personal-information/nationality-answer" %}
 {% set title = "What’s your nationality?" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/personal-information/")
+    href: (referrer if referrer else "/application/" + "/personal-information/")
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
-  {% set otherHtml %}
-    <div class="app-add-another-nationality">
-      {{ appAutocomplete({
-        label: {
-          text: "Nationality",
-          attributes: {
-            "aria-label": "1st nationality"
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/application/personal-information/review" method="post">
+
+      {% set otherHtml %}
+        <div class="app-add-another-nationality">
+          {{ govukInput({
+            name: "otherNationality",
+            label: {
+              text: "Nationality"
+            },
+            value: data.otherNationality
+          }) }}
+        </div>
+
+      {% endset -%}
+
+      {{ govukCheckboxes({
+        name: "nationalities",
+        hint: {
+          text: "Select all that apply"
+        },
+        values: data.nationalities,
+        items: [{
+          value: "British",
+          text: "British"
+        }, {
+          value: "Irish",
+          text: "Irish"
+        }, {
+          value: "Other",
+          text: "Other",
+          conditional: {
+            html: otherHtml
           }
-        },
-        items: nationalities
-      } | decorateApplicationAttributes(["candidate", "otherNationality1"])) }}
-      {# {{ govukButton({
-        html: "Remove <span class=\"govuk-visually-hidden\">1st nationality</span>",
-        classes: "app-button--link"
-      }) }} #}
-    </div>
-    {# <div class="app-add-another-nationality">
-      {{ appAutocomplete({
-        label: {
-          text: "Nationality"
-        },
-        attributes: {
-          "aria-label": "2nd nationality"
-        },
-        items: nationalities
-      } | decorateApplicationAttributes(["candidate", "otherNationality2"])) }}
-      {{ govukButton({
-        html: "Remove <span class=\"govuk-visually-hidden\">2nd nationality</span>",
-        classes: "app-button--link"
+        }]
       }) }}
-    </div>
-    <div class="app-add-another-nationality">
-      {{ appAutocomplete({
-        label: {
-          text: "Nationality"
-        },
-        attributes: {
-          "aria-label": "3rd nationality"
-        },
-        items: nationalities
-      } | decorateApplicationAttributes(["candidate", "otherNationality3"])) }}
+
       {{ govukButton({
-        html: "Remove <span class=\"govuk-visually-hidden\">3rd nationality</span>",
-        classes: "app-button--link"
+        text: "Save and continue"
       }) }}
-    </div>#}
-    {{ govukButton({
-      text: "Add another nationality",
-      classes: "govuk-button--secondary"
-    }) }}
-  {% endset -%}
-
-  {{ govukCheckboxes({
-    fieldset: {
-      attributes: {
-        "data-module": "clear-hidden"
-      }
-    },
-    hint: {
-      text: "Select all that apply"
-    },
-    items: [{
-      text: "British"
-    }, {
-      text: "Irish"
-    }, {
-      text: "Other",
-      conditional: {
-        html: otherHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["candidate", "nationality"])) }}
-
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-otherNationality1'),
-      defaultValue: '{{ applicationValue(["candidate", "otherNationality1"]) }}'
-    })
-    {# accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-otherNationality2'),
-      defaultValue: '{{ applicationValue(["candidate", "otherNationality2"]) }}'
-    })
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#candidate-otherNationality3'),
-      defaultValue: '{{ applicationValue(["candidate", "otherNationality3"]) }}'
-    }) #}
-  </script>
+      </form>
+    </div>
+  </div>
 {% endblock %}

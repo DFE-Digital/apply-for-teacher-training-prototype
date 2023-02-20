@@ -1,49 +1,53 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Where do you live?" %}
-{% set formaction = "/application/" + applicationId + "/contact-information/where-do-you-live/answer" %}
+{% set formaction = "/application/contact-information/where-do-you-live/answer" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + applicationId + "/contact-information/")
+    text: "Back",
+    href: (referrer if referrer else "/application/contact-information/")
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {% set internationalCountryHtml %}
-    {{ appAutocomplete({
-      label: {
-        text: "Which country?",
-        classes: "govuk-label--m"
+{% block content %}
+  <form action="{{ formaction }}" method="post">
+    {% set internationalCountryHtml %}
+      {{ govukInput({
+        name: "address[country]",
+        classes: "govuk-!-width-two-thirds",
+        label: {
+          text: "Which country?",
+          classes: "govuk-label--m"
+        },
+        value: data.address.country
+      }) }}
+    {% endset %}
+
+    {{ govukRadios({
+      name: "livesInUk",
+      value: data.livesInUk,
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
       },
-      items: countries
-    } | decorateApplicationAttributes(["contactInformation", "address", "country"])) }}
-  {% endset %}
+      items: [{
+        text: "In the UK",
+        value: "yes"
+      }, {
+        text: "Outside the UK",
+        value: "no",
+        conditional: {
+          html: internationalCountryHtml
+        }
+      }]
+    }) }}
 
-  {{ govukRadios({
-    items: [{
-      text: "In the UK",
-      value: "domestic"
-    }, {
-      text: "Outside the UK",
-      value: "international",
-      conditional: {
-        html: internationalCountryHtml
-      }
-    }]
-  } | decorateApplicationAttributes(["contactInformation", "addressType"])) }}
-
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
-{% endblock %}
-
-{% block pageScripts %}
-  <script src="/public/javascripts/autocomplete.min.js"></script>
-  <script>
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.querySelector('#contactInformation-address-country'),
-      defaultValue: '{{ applicationValue(["contactInformation", "address", "country"]) }}'
-    })
-  </script>
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
 {% endblock %}

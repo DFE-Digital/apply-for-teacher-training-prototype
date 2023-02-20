@@ -1,270 +1,73 @@
-const { DateTime } = require('luxon')
-const humanizeDuration = require('humanize-duration')
-const numberToWords = require('number-to-words')
-const providers = require('./data/providers')
-const utils = require('./utils')
+const govukPrototypeKit = require('govuk-prototype-kit')
+const addFilter = govukPrototypeKit.views.addFilter
 
-module.exports = (env) => {
-  /**
-   * Instantiate object used to store the methods registered as a
-   * 'filter' (of the same name) within nunjucks. You can override
-   * gov.uk core filters by creating filter methods of the same name.
-   * @type {Object}
-   */
-  const filters = {}
-
-  filters.dateNow = () => {
-    return DateTime.local()
+function sortedByStartYearAndMonth (itemA, itemB) {
+  if (parseInt(itemA.startYear) < parseInt(itemB.startYear) || (
+    (parseInt(itemA.startYear) === parseInt(itemB.startYear) &&
+    parseInt(itemA.startMonth) < parseInt(itemB.startMonth)
+    )
+  )) {
+    return -1
+  } else {
+    return 1
   }
-
-  /**
-   * Remove empty values from address object and break into new lines
-   *
-   * @type {object} object
-   */
-  filters.formatAddress = (object, separator = '\n') => {
-    if (object) {
-      // Ensure object values are in the correct order before transforming
-      object = {
-        line1: object.line1,
-        line2: object.line2,
-        level2: object.level2,
-        level1: object.level1,
-        postalCode: object.postalCode,
-        country: object.country
-      }
-
-      const array = filters.toArray(object)
-      return array.filter(value => value !== '').join(separator)
-    }
-  }
-
-  /**
-   * Format numeric date into a human readable format
-   *
-   * @type {object} object
-   */
-  filters.formatDate = object => {
-    if (object) {
-      const month = object.month.padStart(2, '0')
-      const day = object.day.padStart(2, '0')
-      const date = `${object.year}-${month}-${day}`
-
-      return filters.date(date, 'd MMMM yyyy')
-    }
-  }
-
-  /**
-   * Format list of nationalities to remove ‘Other’
-   *
-   * @type {object} object
-   */
-  filters.formatNationalities = (object = {}) => {
-    if (object) {
-      // Always return an array of selected nationalities, even if only 1 selected
-      let { nationality } = object
-      nationality = nationality instanceof Array ? nationality : [nationality]
-
-      // Using slice() to shallow-copy the array rather than referencing the original
-      const nationalities = nationality.slice()
-      if (object.otherNationality1) { nationalities.push(object.otherNationality1) }
-      if (object.otherNationality2) { nationalities.push(object.otherNationality2) }
-      if (object.otherNationality3) { nationalities.push(object.otherNationality3) }
-
-      const nationalityList = nationalities.filter(value => value !== 'Other')
-
-      return filters.formatList(nationalityList)
-    }
-  }
-
-  /**
-   * Convert array to readable list format
-   * @param {Array} array Array to convert
-   * @example [A, B, C] => A, B anc C
-   */
-  filters.formatList = (array = []) => {
-    const lf = new Intl.ListFormat('en')
-    return lf.format(array)
-  }
-
-  /**
-   * Convert str to date
-   * @type {String} str
-   * @type {String} format
-   */
-  filters.date = (str, format = 'yyyy-LL-dd') => {
-    if (str) {
-      const date = (str === 'now') ? DateTime.local() : str
-
-      const datetime = DateTime.fromISO(date, {
-        locale: 'en-GB'
-      }).toFormat(format)
-
-      return datetime
-    }
-  }
-
-  /**
-   * Add days to date
-   * @type {Integer} days
-   * @type {String} format
-   */
-  filters.nowPlusDays = (days, format = 'yyyy-LL-dd') => {
-    const date = DateTime.local().plus({ days: days })
-
-    return DateTime.fromISO(date, {
-      locale: 'en-GB'
-    }).toFormat(format)
-  }
-
-  /**
-   * Convert milliseconds to readable duration
-   * @type {String} str
-   */
-  filters.duration = (int) => {
-    if (!isNaN(int)) {
-      const duration = humanizeDuration(int, {
-        delimiter: ' and ',
-        largest: 2,
-        round: true,
-        units: ['y', 'mo']
-      })
-
-      return duration
-    }
-  }
-
-  /**
-   * Convert number to ordinal word
-   * @type {String} str
-   */
-  filters.ordinalWord = (int) => {
-    if (!isNaN(int)) {
-      return numberToWords.toWordsOrdinal(int)
-    }
-  }
-
-  /**
-   * Filter array by value
-   * @type {Array} arr
-   * @type {String} searchString
-   *
-   */
-  filters.includes = (arr, searchString) => {
-    if (arr) {
-      if (arr.includes(searchString)) {
-        return true
-      }
-    }
-  }
-
-  filters.capitaliseFirstLetter = (str) => {
-    return utils.capitaliseFirstLetter(str)
-  }
-
-  /**
-   * Split string into an array
-   * @type {String} str
-   *
-   */
-  filters.split = (str) => {
-    if (str && !Array.isArray(str)) {
-      return str.split()
-    }
-
-    return str
-  }
-
-  /**
-   * Convert object to array, or return empty array.
-   * @type {Object} obj
-   */
-  filters.toArray = (obj) => {
-    if (obj) {
-      const arr = []
-      for (const [key, value] of Object.entries(obj)) {
-        value.id = key
-        arr.push(value)
-      }
-      return arr
-    } else {
-      return []
-    }
-  }
-
-  filters.push = (array, item) => {
-    array.push(item)
-    return array
-  }
-
-  /**
-   * Get course information
-   * @type {String} providerCode
-   * @type {String} courseCode
-   */
-  filters.getCourse = (providerCode, courseCode) => {
-    return providers[providerCode].courses[courseCode]
-  }
-
-  filters.getProvider = (providerCode) => {
-    return utils.getProvider(providerCode)
-  }
-
-  filters.providerCode = (providerAndCode) => {
-    const regExp = /\(([^)]+)\)$/
-    return regExp.exec(providerAndCode)[1]
-  }
-
-  filters.statusClass = (status, prefix = 'govuk-tag') => {
-    switch (status) {
-      // Application statuses
-      case 'Submitted':
-        return `${prefix}--grey`
-      case 'Awaiting decision':
-        return `${prefix}--purple`
-      case 'Offer received':
-        return `${prefix}--turquoise`
-      case 'Offer accepted':
-        return `${prefix}--blue`
-      case 'Offer declined':
-        return `${prefix}--orange`
-      case 'Offer deferred':
-        return `${prefix}--yellow`
-      case 'Offer withdrawn':
-      case 'Conditions not met':
-        return `${prefix}--red`
-      case 'Offer confirmed':
-        return `${prefix}--green`
-      case 'Unsuccessful':
-      case 'Application not sent':
-        return `${prefix}--pink`
-      case 'Application cancelled':
-      case 'Application withdrawn':
-        return `${prefix}--orange`
-
-      // Condition statuses
-      case 'Pending':
-        return `${prefix}--grey`
-      case 'Met':
-        return `${prefix}--blue`
-      case 'Not met':
-        return `${prefix}--orange`
-
-      // Reference statuses
-      case 'Not sent':
-        return `${prefix}--blue`
-      case 'Requested':
-        return `${prefix}--purple`
-      case 'Received by training provider':
-        return `${prefix}--green`
-      case 'Request cancelled':
-        return `${prefix}--orange`
-      case 'Cannot give reference':
-        return `${prefix}--red`
-      case 'Request failed':
-        return `${prefix}--yellow`
-    }
-  }
-
-  return filters
 }
+
+function sortedWorkHistory (workHistory) {
+  let workHistoryArray = []
+
+  for (const key of Object.keys(workHistory)) {
+    const copy = JSON.parse(JSON.stringify(workHistory[key]))
+    copy.id = key
+
+    workHistoryArray.push(copy)
+  }
+
+  workHistoryArray = workHistoryArray.sort(sortedByStartYearAndMonth)
+
+  const numberOfJobs = workHistoryArray.length
+  for (let i = 0; i < (numberOfJobs - 1); i++) {
+    const thisItem = workHistoryArray[i]
+    const nextItem = workHistoryArray[i + 1]
+
+    if (thisItem.endYear && thisItem.endMonth && nextItem.startYear && nextItem.startYear) {
+      const thisItemEndDate = new Date(parseInt(thisItem.endYear), parseInt(thisItem.endMonth) - 1, 1)
+      const nextItemStartDate = new Date(parseInt(nextItem.startYear), parseInt(nextItem.startMonth) - 1, 1)
+
+      const monthAfterEndDate = new Date(thisItemEndDate.getFullYear(), thisItemEndDate.getMonth() + 1, 1)
+
+      if (nextItemStartDate > monthAfterEndDate) {
+        workHistoryArray.push({
+          gap: true,
+          startMonth: monthAfterEndDate.getMonth() + 1,
+          startYear: monthAfterEndDate.getFullYear()
+        })
+      }
+    }
+  }
+
+  return workHistoryArray.sort(sortedByStartYearAndMonth)
+}
+
+addFilter('sortedWorkHistory', sortedWorkHistory)
+
+function monthName (monthNumber) {
+  const monthNames = {
+    1: 'Jan',
+    2: 'Feb',
+    3: 'Mar',
+    4: 'Apr',
+    5: 'May',
+    6: 'Jun',
+    7: 'Jul',
+    8: 'Aug',
+    9: 'Sep',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec'
+  }
+
+  return monthNames[parseInt(monthNumber)]
+}
+
+addFilter('monthName', monthName)

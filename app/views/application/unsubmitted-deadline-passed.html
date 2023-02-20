@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Continue your application" %}
 
@@ -17,7 +17,7 @@
 
       {{ govukButton({
         text: "Continue",
-        href: "/application/" + applicationId + "/apply2?from=unsubmitted"
+        href: "/application/" + "/apply2?from=unsubmitted"
       }) }}
     </div>
   </div>

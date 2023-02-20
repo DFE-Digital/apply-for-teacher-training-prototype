@@ -2,50 +2,27 @@ const utils = require('./../../utils')
 
 module.exports = router => {
   // Generate new ID and redirect to start of referee flow
-  router.get('/application/:applicationId/references/add', (req, res) => {
-    const { applicationId } = req.params
+  router.get('/application/references/add', (req, res) => {
     const id = utils.generateRandomString()
-    const queryString = utils.queryString(req) ? `?${utils.queryString(req)}` : ''
-    const application = utils.applicationData(req)
 
-    if (!application.references) {
-      application.references = {}
-    }
+    req.session.data.references ||= {}
+    req.session.data.references[id] = { status: 'Not sent' }
 
-    application.references[id] = { status: 'Not sent' }
-
-    res.redirect(`/application/${applicationId}/references/${id}/type${queryString}`)
+    res.redirect(`/application/references/${id}/type`)
   })
 
-  router.post('/application/:applicationId/references/:id/delete', (req, res) => {
-    const { applicationId, id } = req.params
-    const application = utils.applicationData(req)
+  router.post('/application/references/:id/delete', (req, res) => {
+    const { id } = req.params
 
-    delete application.references[id]
+    delete req.session.data.references[id]
 
-    const remainingReferences = utils.toArray(application.references)
-
-    if (remainingReferences.length < 2) {
-      if (!application.completed) {
-        application.completed = {}
-      }
-      application.completed.references = null
-    }
-
-    console.log(application.completed)
-
-    res.redirect(`/application/${applicationId}/references`)
+    res.redirect('/application/references')
   })
 
-  router.get('/application/:applicationId/references/:id/:view(intro|type|name|email|relationship|delete)', (req, res) => {
-    const { applicationId, id, view } = req.params
-    const application = utils.applicationData(req)
-
-    const reference = application.references[id]
+  router.get('/application/references/:id/:view(intro|type|name|email|relationship|delete)', (req, res) => {
+    const { id, view } = req.params
 
     res.render(`application/references/${view}`, {
-      applicationId,
-      reference,
       id
     })
   })

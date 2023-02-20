@@ -1,39 +1,48 @@
-{% extends "_form-wide.html" %}
+{% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application/" + applicationId %}
-{% set formaction = applicationPath %}
-{% set referrer = applicationPath + "/personal-information/review" %}
 {% set title = "Personal information" %}
-{% set canAmend = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
 
-{% block primary %}
-  {% include "_includes/review/personal-information.html" %}
+{% block content %}
 
-  {{ govukRadios({
-    fieldset: {
-      classes: "govuk-!-width-two-thirds",
-      legend: {
-        text: "Have you completed this section?",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
-    items: [{
-      value: "true",
-      text: "Yes, I’ve completed this section"
-    }, {
-      value: "false",
-      text: "No, I’ll come back to it later"
-    }]
-  } | decorateApplicationAttributes(["completed", "personalInformation"])) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-  {{ govukButton({
-    text: "Continue"
-  }) }}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {% include "_includes/review/personal-information.html" %}
+
+      <form action="/application" method="post">
+        {{ govukRadios({
+          name: "completed[personalInformation]",
+          fieldset: {
+            classes: "govuk-!-width-two-thirds",
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "true",
+            text: "Yes, I’ve completed this section",
+            checked: (data.completed.personalInformation == 'true')
+          }, {
+            value: "false",
+            text: "No, I’ll come back to it later",
+            checked: (data.completed.personalInformation == 'false')
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

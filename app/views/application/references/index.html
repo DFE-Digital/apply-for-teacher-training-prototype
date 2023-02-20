@@ -1,11 +1,11 @@
-{% extends "layout.html" %}
-{% set applicationPath = "/application/" + applicationId %}
+{% extends "layouts/main.html" %}
 {% set title = "References to be requested if you accept an offer" %}
-{% set references = applicationValue(["references"]) | toArray %}
+{% set references = data.references %}
 {% set addReferenceButtonText = "Add a reference" if references | length == 0 else "Add another reference" %}
-{% block pageNavigation %}
+
+{% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/" + applicationId,
+    href: "/application",
     text: "Back to application"
   }) }}
 {% endblock %}
@@ -30,7 +30,7 @@
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
-          href: "/application/" + applicationId + "/references/add",
+          href: "/application/references/add",
           classes: referencesButtonClass
         }) }}
       </div>
@@ -38,15 +38,17 @@
   </div>
 
   {% if references | length > 0 %}
-    {% for item in references %}
+    {% for id, item in references %}
       {% include "_includes/item/reference.html" %}
     {% endfor %}
   {% endif %}
 
 {% if references | length > 1 %}
 
-  <form action="/application/{{ applicationId }}" method="get">
+  <form action="/application" method="get">
     {{ govukRadios({
+      name: "completed[references]",
+      value: data.completed.references,
       fieldset: {
         classes: "govuk-!-width-two-thirds",
         legend: {
@@ -61,7 +63,7 @@
         value: "false",
         text: "No, I’ll come back to it later"
       }]
-    } | decorateApplicationAttributes(["completed", "references"])) }}
+    }) }}
 
     {{ govukButton({text: "Continue"}) }}
   </form>

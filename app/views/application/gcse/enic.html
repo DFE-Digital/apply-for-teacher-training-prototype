@@ -1,16 +1,16 @@
-{% extends "_form.html" %}
+{% extends "layouts/main.html" %}
 
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "How your " + subject + " qualification compares to a UK qualification" %}
 {% set allowsFeedback = true %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
     href: referrer or paths.back
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
   <p class="govuk-body">You can get a statement from UK ENIC (the UK agency for international qualifications and skills) which shows how your qualifications compare to UK qualifications. Not all providers need this.</p>
 
   {% set yesConditionalHtml %}
@@ -23,7 +23,7 @@
         text: "For example ‘4000228363’"
       },
       classes: "govuk-input--width-20"
-    } | decorateApplicationAttributes(["gcse", id, "enicReference"])) }}
+    }) }}
 
     {{ govukRadios({
       fieldset: {
@@ -44,7 +44,7 @@
       }, {
         text: "GCE Advanced (A) level"
       }]
-    } | decorateApplicationAttributes(["gcse", id, "enicComparability"])) }}
+    }) }}
   {% endset -%}
 
   {% set noConditionalHtml %}
@@ -69,7 +69,7 @@
         html: noConditionalHtml
       }
     }]
-  } | decorateApplicationAttributes(["gcse", id, "enic"])) }}
+  }) }}
 
   {{ govukButton({
     text: "Save and continue"

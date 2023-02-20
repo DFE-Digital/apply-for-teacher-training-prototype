@@ -1,0 +1,93 @@
+{% set conditionsHtml %}
+  {% set choice = data.choices[id] %}
+
+  {% if choice.conditions | length > 0 %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for condition in choice.conditions %}
+        <li>{{ condition.title }}</li>
+      {% endfor %}
+    </ul>
+    <p class="govuk-body">Contact the provider to find out more about these conditions.</p>
+    <p class="govuk-body">They’ll confirm your place once you’ve met the conditions and they’ve checked your references.</p>
+    {% else %}
+      <p class="govuk-body">Contact the provider to find out more about any conditions.</p>
+      <p class="govuk-body">They’ll confirm your place once you’ve met any conditions and they’ve checked your references.</p>
+
+  {% endif %}
+{% endset %}
+
+{% set courseFeesHtml %}
+
+  <p class="govuk-body">UK students: £8,625</p>
+  <p class="govuk-body">International students: £20,125</p>
+  <p class="govuk-body">An additional fee of £625 will apply if candidates take up the option of a PCGE qualification.</p>
+
+{% endset %}
+
+{% set salaryHtml %}
+  <p class="govuk-body">The school will pay a salary as an unqualified Teacher scale 1 as a minimum.</p>
+
+  <p class="govuk-body">The PGCE route means that the student can decide whether they wish to pay the additional amount to study for the PGCE.</p>
+
+{% endset %}
+
+{% if choice.skeConditions %}
+  {% set skeHtml %}
+    {% set firstSkeCondition = choice.skeConditions | first %}
+    You’ll need to complete a {{ firstSkeCondition.lengthInWeeks }}&nbsp;week {{ firstSkeCondition.subject }} course.
+  {% endset %}
+{% endif %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Provider"
+    },
+    value: {
+      text: choice.providerName
+    }
+  }, {
+    key: {
+      text: "Course"
+    },
+    value: {
+      html: "<a href=\"#\">" + choice.course + "</a>"
+    }
+  }, {
+    key: {
+      text: "Fees"
+    },
+    value: {
+      html: courseFeesHtml
+    }
+  } if not choice.isSalaried, {
+    key: {
+      text: "Salary"
+    },
+    value: {
+      html: salaryHtml
+    }
+  } if choice.isSalaried,
+  {
+    key: {
+      text: "Location"
+    },
+    value: {
+      html: "Someplace" + "<br>" + "Sometown"
+    }
+  }, {
+    key: {
+      text: "Subject knowledge enhancement course"
+    },
+    value: {
+      html: skeHtml
+    }
+  } if choice.skeConditions, {
+    key: {
+      text: ("Other conditions" if ske else "Conditions")
+    },
+    value: {
+      html: conditionsHtml
+    }
+  }]
+}) }}

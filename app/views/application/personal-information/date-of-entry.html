@@ -1,15 +1,15 @@
-{% extends "_form-question.html" %}
+{% extends "layouts/main.html" %}
 
 {% set title = "Are you already living in the UK?" %}
-{% set formaction = referrer if referrer else "/application/" + applicationId + "/personal-information/review" %}
+{% set formaction = referrer if referrer else "/application/" + "/personal-information/review" %}
 
-{% block pageNavigation %}
+{% block beforeContent %}
   {{ govukBackLink({
-    href: referrer if referrer else "/application/" + applicationId + "/personal-information/already-living-in-uk"
+    href: referrer if referrer else "/application/" + "/personal-information/already-living-in-uk"
   }) }}
 {% endblock %}
 
-{% block primary %}
+{% block content %}
 
     {{ govukDateInput({
       fieldset: {
@@ -25,20 +25,20 @@
       items: [{
         classes: "govuk-input--width-2",
         label: "Day",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][day]",
+        name: "applications[" + "][candidate][dateOfEntry][day]",
         value: applicationValue(["candidate", "dateOfEntry", "day"])
       }, {
         classes: "govuk-input--width-2",
         label: "Month",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][month]",
+        name: "applications[" + "][candidate][dateOfEntry][month]",
         value: applicationValue(["candidate", "dateOfEntry", "month"])
       }, {
         classes: "govuk-input--width-4",
         label: "Year",
-        name: "applications[" + applicationId + "][candidate][dateOfEntry][year]",
+        name: "applications[" + "][candidate][dateOfEntry][year]",
         value: applicationValue(["candidate", "dateOfEntry", "year"])
       }]
-    } | decorateApplicationAttributes(["candidate", "dateOfEntry"])) }}
+    }) }}
 
   {{ govukButton({
     text: "Save and continue"

@@ -43,7 +43,7 @@
     {% endfor %}
   {% endif %}
 
-{% if references | length > 1 %}
+{% if references | length > 1 and incompleteReferences | length == 0 %}
 
   <form action="/application" method="get">
     {{ govukRadios({

@@ -27,15 +27,23 @@
       },
       value: {
         text: item.type | title
+      }
+    },
+    {
+      key: {
+        text: "Email"
+      },
+      value: {
+        html: (item.email if item.email else "<a href=\"/application/references/" + id + "\/email\">Enter email address</a>")
       },
       actions: {
         items: [
           {
             text: "Change",
-            href: "/application/references/" + id + "/type"
+            href: "/application/references/" + id + "/email"
           }
         ]
-      }
+      } if item.email
     },
     {
       key: {
@@ -49,22 +57,6 @@
           {
             text: "Change",
             href: "/application/references/" + id + "/name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email"
-      },
-      value: {
-        text: item.email
-      },
-      actions: {
-        items: [
-          {
-            text: "Change",
-            href: "/application/references/" + id + "/email"
           }
         ]
       }

@@ -73,3 +73,47 @@
 .app-\!-colour-secondary {
   color:  $govuk-secondary-text-colour;
 }
+
+
+
+
+
+.app-secondary-nav {
+  display: table;
+  width: 100%;
+}
+
+.app-secondary-nav a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.app-secondary-nav__nav {
+  display: table-cell;
+  border-bottom: 1px solid darkgrey;
+}
+
+.app-secondary-nav__nav a {
+  padding: 15px 30px 15px 0;
+}
+
+
+.app-secondary-nav__sign-out {
+  display: table-cell;
+  text-align: right;
+  border-bottom: 1px solid darkgrey;
+}
+
+
+.app-messages-count {
+  background-color: $govuk-brand-colour;
+  color: govuk-colour("white");
+  display: inline-block;
+  width: 26px; height: 26px;
+  border-radius: 13px;
+  line-height: 26px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 3px;
+}

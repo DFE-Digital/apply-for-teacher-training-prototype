@@ -1,0 +1,95 @@
+{% extends "layouts/main.html" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <h1 class="govuk-heading-l">Your applications</h1>
+    <p class="govuk-body">You can apply to up to 4 courses at a time</p>
+    {{ govukButton({
+      text: "Add application"
+    }) }}
+
+    {{ govukSummaryList({
+      card: {
+        title: {
+          html: "University of Devon"
+        },
+        actions: {
+          items: [
+          {
+            href: "#",
+            text: "Remove",
+            visuallyHiddenText: "from University of Gloucestershire",
+            classes: ""
+          }
+        ]
+        }
+      },
+      classes: "govuk-!-margin-bottom-0",
+      rows: [
+      {
+        key: {
+          text: "Course"
+        },
+        value: {
+          html: "History (4D93) <br>PGCE <br>1 year full time"
+        },
+        actions: {
+          items: [
+          {
+            href: "#",
+            text: "Change"
+          }
+        ]
+        }
+      },
+      {
+        key: {
+          text: "Status"
+        },
+        value: {
+          html: "<span class=\"govuk-tag govuk-tag--blue\">Not submitted</span> <div class=\"govuk-!-margin-top-2\"><a href=\"#\">Continue application</a></div>"
+        }
+      }]
+    }) }}
+
+    {{ govukSummaryList({
+      card: {
+        title: {
+          html: "Devon SCITT"
+        },
+        actions: {
+          items: [
+          {
+            href: "#",
+            text: "Withdraw",
+            visuallyHiddenText: "from University of Gloucestershire"
+          }
+        ]
+        }
+      },
+      classes: "govuk-!-margin-bottom-0",
+      rows: [{
+        key: {
+          text: "Course"
+        },
+        value: {
+          html: "History (PD23) <br>PGCE <br>1 year full time"
+        }
+      },
+      {
+        key: {
+          text: "Status"
+        },
+        value: {
+          html: "<span class=\"govuk-tag govuk-tag--purple\">Awaiting decision</span><div class=\"govuk-!-margin-top-2\">You’ll get a decision on your application by 8 May 2023.</div><div class=\"govuk-!-margin-top-2\"><a href=\"#\">View application</a></div>"
+        }
+      }]
+    }) }}
+
+  </div>
+</div>
+{% endblock %}

@@ -11,6 +11,18 @@
       text: "Sign out"
     } if data.account.email]
   }) }}
+
+   <div class="govuk-width-container govuk-!-font-size-19 app-secondary-nav">
+     <nav class="app-secondary-nav__nav">
+       <a class="govuk-link govuk-link--no-visited-state" href="/applications">Your applications</a>
+       <a class="govuk-link govuk-link--no-visited-state" href="/details">Your details</a>
+       <a class="govuk-link govuk-link--no-visited-state" href="#">Messages <span class="app-messages-count">1</span></a>
+     </nav>
+
+     <div class="app-secondary-nav__sign-out">
+       <a class="govuk-link govuk-link--no-visited-state" href="#">Sign out</a>
+     </div>
+ </div>
 {% endblock %}
 
 {% block pageTitle %}

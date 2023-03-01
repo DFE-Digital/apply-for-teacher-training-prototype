@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Your details" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {% if apply2 %}
+        {{ govukDetails({
+          summaryText: "See feedback from your previous application",
+          html: previousApplicationSummaryHtml
+        }) }}
+      {% endif %}
+
+      <h2 class="govuk-heading-m">Personal details</h2>
+      {{ govukTaskList({
+        items: [{
+          title: {
+            text: "Name and date of birth"
+          },
+          href: "#",
+          status: {
+            text: "Incomplete"
+          }
+        },
+        {
+          title: {
+            text: "Contact information"
+          },
+          href: "#",
+          status: {
+            text: "Incomplete"
+          }
+        },
+        {
+          title: {
+            text: "Nationality and right to work or study"
+          },
+          href: "#",
+          status: {
+            text: "Incomplete"
+          }
+        }]
+      }) }}
+
+      <h2 class="govuk-heading-m">??????</h2>
+      {{ govukTaskList({
+        items: [{
+          title: {
+            text: "........................"
+          },
+          href: "#",
+          status: {
+            text: "Incomplete"
+          }
+        },
+        {
+          title: {
+            text: "........................"
+          },
+          href: "#",
+          status: {
+            text: "Incomplete"
+          }
+        }]
+      }) }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block secondary %}
+  {% include "_includes/get-support.html" %}
+{% endblock %}

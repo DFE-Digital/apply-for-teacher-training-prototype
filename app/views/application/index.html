@@ -1,15 +1,4 @@
 {% extends "layouts/main.html" %}
-{% set applicationPath = "/application" %}
-{% set status = "todo" %}
-{% set completedTagText = "Completed" %}
-{% set incompleteTagClass = "govuk-tag--grey" %}
-{% set incompleteTagText = "Incomplete" %}
-{% set inprogressTagClass = "govuk-tag--purple" %}
-{% set inprogressTagText = "In progress" %}
-{% set referrer = applicationPath %}
-{% set international = false %}
-
-{% set apply2 = false %}
 
 {% macro tagClassesForSection(completed=false, apply2=false) %}
   {% if completed %}
@@ -21,11 +10,9 @@
 
 {% macro tagTextForSection(completed=false) %}
   {% if completed %}
-    {{ completedTagText }}
-  {% elif apply2 %}
-    Review
+    Completed
   {% else %}
-    {{ incompleteTagText }}
+    Incomplete
   {% endif %}
 {% endmacro %}
 
@@ -51,7 +38,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">{{ title }}</h1>
+      <h1 class="govuk-heading-l">{{ title }}</h1>
 
       {% if apply2 %}
         {{ govukDetails({
@@ -60,14 +47,14 @@
         }) }}
       {% endif %}
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Personal details</h2>
         {{ govukTaskList({
           items: [{
             title: {
               text: "Personal information"
             },
-            href: applicationPath + "/personal-information",
+            href: "/application/personal-information",
             id: "personal-information",
             status: {
               classes: tagClassesForSection(completed=data.completed.personalInformation == 'true'),
@@ -75,7 +62,7 @@
             }
           }, {
             title: {text: "Contact information"},
-            href: applicationPath + "/contact-information",
+            href: "/application/contact-information",
             id: "contact-information",
             status: {
               classes: tagClassesForSection(completed=data.completed.contactInformation == 'true'),
@@ -86,8 +73,8 @@
       </section>
 
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Courses</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Courses</h2>
         {% if findNotOpen == "true" %}
           <p class="govuk-body">You can apply for courses from 13 October.</p>
         {% else %}
@@ -95,9 +82,9 @@
         {% endif %}
 
         {% if data.choices | length == 0 %}
-          {% set choicesHref = applicationPath + "/choices" %}
+          {% set choicesHref = "/application/choices" %}
         {% else %}
-          {% set choicesHref = applicationPath + "/choices/review" %}
+          {% set choicesHref = "/application/choices/review" %}
         {% endif %}
 
         {{ govukTaskList({
@@ -113,13 +100,13 @@
         }) if not findNotOpen }}
       </section>
 
-        <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+        <section class="app-section">
+        <h2 class="govuk-heading-m">Qualifications</h2>
 
         {{ govukTaskList({
           items: [{
             title: {text: "English GCSE or equivalent"},
-            href: applicationPath + "/gcse/english",
+            href: "/application/gcse/english",
             id: "english-gcse",
             status: {
               classes: tagClassesForSection(completed=data.completed.english, apply2=apply2),
@@ -127,7 +114,7 @@
             }
           }, {
             title: { text: "Maths GCSE or equivalent" },
-            href: applicationPath + "/gcse/maths",
+            href: "/application/gcse/maths",
             id: "maths-gcse",
             status: {
               classes: tagClassesForSection(completed=data.completed.maths == 'true'),
@@ -135,21 +122,21 @@
             }
           }, {
             title: { text: "Science GCSE or equivalent" },
-            href: applicationPath + "/gcse/science",
+            href: "/application/gcse/science",
             status: {
               classes: tagClassesForSection(completed=data.completed.science == 'true'),
               text: tagTextForSection(completed=data.completed.science == 'true')
             }
           }, {
             title: { text: "Other qualifications" if international else "A levels and other qualifications" },
-            href: applicationPath + "/other-qualifications",
+            href: "/application/other-qualifications",
             status: {
               classes: tagClassesForSection(completed=data.completed.otherQualifications == 'true'),
               text: tagTextForSection(completed=data.completed.otherQualifications == 'true')
             }
           }, {
             title: { text: "Degree" },
-            href: applicationPath + "/degree/review",
+            href: "/application/degree/review",
             id: "degree",
             status: {
               classes: tagClassesForSection(completed=data.completed.degree == 'true'),
@@ -159,19 +146,19 @@
         }) }}
       </section>
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Work experience</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Work experience</h2>
         {{ govukTaskList({
           items: [{
             title: { text: "Work history" },
-            href: applicationPath + "/work-history",
+            href: "/application/work-history",
             status: {
               classes: tagClassesForSection(completed=data.completed.workHistory == 'true'),
               text: tagTextForSection(completed=data.completed.workHistory == 'true')
             }
           }, {
             title: { text: "Unpaid experience" },
-            href: applicationPath + "/unpaid-experience",
+            href: "/application/unpaid-experience",
             status: {
               classes: tagClassesForSection(completed=data.completed.unpaidExperience == 'true'),
               text: tagTextForSection(completed=data.completed.unpaidExperience == 'true')
@@ -180,19 +167,19 @@
         }) }}
       </section>
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Personal statement</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Personal statement</h2>
         {{ govukTaskList({
           items: [{
             title: { text: "Why you want to teach" },
-            href: applicationPath + "/personal-statement",
+            href: "/application/personal-statement",
             status: {
               classes: tagClassesForSection(completed=data.completed.personalStatement == 'true'),
               text: tagTextForSection(completed=data.completed.personalStatement == 'true')
             }
           }, {
             title: { text: "Your suitability to teach a subject or age group" },
-            href: applicationPath + "/subject-knowledge",
+            href: "/application/subject-knowledge",
             status: {
               classes: tagClassesForSection(completed=data.completed.subjectKnowledge == 'true'),
               text: tagTextForSection(completed=data.completed.subjectKnowledge == 'true')
@@ -201,8 +188,8 @@
         }) }}
       </section>
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Adjustments</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Adjustments</h2>
         {{ govukTaskList({
           items: [{
             title: { text: "Ask for support if you’re disabled" },
@@ -222,12 +209,12 @@
         }) }}
       </section>
 
-      <section class="govuk-!-margin-bottom-8">
-        <h2 class="govuk-heading-m govuk-!-font-size-27">Safeguarding</h2>
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Safeguarding</h2>
         {{ govukTaskList({
           items: [{
             title: { text: "References to be requested if you accept an offer" },
-            href: applicationPath + "/references",
+            href: "/application/references",
             id: "references",
             status: {
               classes: tagClassesForSection(completed=data.completed.references == 'true'),
@@ -236,7 +223,7 @@
           },
           {
             title: { text: "Declare any safeguarding issues" },
-            href: applicationPath + "/safeguarding",
+            href: "/application/safeguarding",
             status: {
               classes: tagClassesForSection(completed=data.completed.safeguarding == 'true'),
               text: tagTextForSection(completed=data.completed.safeguarding == 'true')
@@ -246,17 +233,12 @@
       </section>
 
       <section>
-        {% if cycleNotOpen == "true" %}
-          <h2 class="govuk-heading-m govuk-!-font-size-27">Review</h2>
-          <p class="govuk-body">You cannot submit your application until 15 June 2022. You can keep making changes to the rest of your application until then.</p>
-        {% else %}
-          <h2 class="govuk-heading-m govuk-!-font-size-27">Review and send</h2>
+          <h2 class="govuk-heading-m">Review and send</h2>
           <p class="govuk-body">Review and send your application to your training providers.</p>
-        {% endif %}
 
         {{ govukButton({
           text: "Review your application",
-          href: applicationPath + "/review"
+          href: "/application/review"
         }) }}
 
       </section>

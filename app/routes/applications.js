@@ -3,11 +3,8 @@ const utils = require('./../utils')
 module.exports = router => {
 
   router.get('/applications/start', (req, res) => {
-    const { id, view } = req.params
 
-    res.render(`applications/start`, {
-      id
-    })
+    res.render('applications/start')
   })
 
 

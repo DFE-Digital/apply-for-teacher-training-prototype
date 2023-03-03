@@ -45,7 +45,7 @@
         } ) }}
       {% else %}
 
-        <form action="/applications/{{ id }}/course-known" method="post">
+        <form action="/applications/course-known" method="post">
           {{ govukRadios({
             name: "courseKnown",
             fieldset: {

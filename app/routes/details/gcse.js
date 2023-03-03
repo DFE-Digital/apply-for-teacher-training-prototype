@@ -28,12 +28,12 @@ const gcseData = (req) => {
 module.exports = router => {
   // Render GCSE review page
   // Note: Must be defined before next route declaration
-  router.get('/application/gcse/:id/review', (req, res) => {
+  router.get('/details/gcse/:id/review', (req, res) => {
     const gcse = gcseData(req)
     const grade = enteredGrade(gcse)
     const hasElligibleGrade = passGrades.includes(grade)
 
-    res.render('application/gcse/review', {
+    res.render('details/gcse/review', {
       grade,
       hasElligibleGrade,
       id: req.params.id
@@ -41,64 +41,64 @@ module.exports = router => {
   })
 
   // Render first page
-  router.get('/application/gcse/:id', (req, res) => {
+  router.get('/details/gcse/:id', (req, res) => {
     const { id } = req.params
 
-    res.render('application/gcse/index', {
+    res.render('details/gcse/index', {
       id
     })
   })
 
   // Render 'no qualification yet' page
-  router.get('/application/gcse/:id/not-yet', (req, res) => {
+  router.get('/details/gcse/:id/not-yet', (req, res) => {
     const { id } = req.params
 
-    res.render('application/gcse/not-yet', {
+    res.render('details/gcse/not-yet', {
       id
     })
   })
 
   // Routing for 'Are you currently studying for an {subject} qualification?'
-  router.post('/application/gcse/:id/not-yet', (req, res) => {
+  router.post('/details/gcse/:id/not-yet', (req, res) => {
     const { id } = req.params
 
     const answer = utils.applicationData(req).gcse[id].currentlyStudying
     let path
     if (answer === 'yes') {
-      path = `/application/gcse/${id}/review`
+      path = `/details/gcse/${id}/review`
     } else {
-      path = `/application/gcse/${id}/equivalency`
+      path = `/details/gcse/${id}/equivalency`
     }
 
     res.redirect(path)
   })
 
   // Routing for 'Are you currently retaking your {subject} qualification?'
-  router.post('/application/gcse/:id/currently-retaking', (req, res) => {
+  router.post('/details/gcse/:id/currently-retaking', (req, res) => {
     const { id } = req.params
 
     const answer = req.session.data.gcse[id].currentlyRetaking
     let path
     if (answer === 'yes') {
-      path = `/application/gcse/${id}/review`
+      path = `/details/gcse/${id}/review`
     } else {
-      path = `/application/gcse/${id}/equivalency`
+      path = `/details/gcse/${id}/equivalency`
     }
 
     res.redirect(path)
   })
 
   // Render equivalency page
-  router.get('/application/gcse/:id/equivalency', (req, res) => {
+  router.get('/details/gcse/:id/equivalency', (req, res) => {
     const { id } = req.params
 
-    res.render('application/gcse/equivalency', {
+    res.render('details/gcse/equivalency', {
       id
     })
   })
 
   // GCSE type answer branching
-  router.post('/application/gcse/:id/answer', (req, res) => {
+  router.post('/details/gcse/:id/answer', (req, res) => {
     const { id } = req.params
     // const { referrer } = req.query
 
@@ -108,17 +108,17 @@ module.exports = router => {
     // } else if (isMissing(req)) {
     //   path = `/application/gcse/${id}/not-yet`
     // } else {
-    const path = `/application/gcse/${id}/grade`
+    const path = `/details/gcse/${id}/grade`
     // }
 
     res.redirect(path)
   })
 
   // Render UK ENIC/grade/year pages
-  router.all('/application/gcse/:id/:view(subject|country|grade|no-pass-grade|enic|year)', (req, res) => {
+  router.all('/details/gcse/:id/:view(subject|country|grade|no-pass-grade|enic|year)', (req, res) => {
     const { id, view } = req.params
 
-    res.render(`application/gcse/${view}`, {
+    res.render(`details/gcse/${view}`, {
       id
     })
   })

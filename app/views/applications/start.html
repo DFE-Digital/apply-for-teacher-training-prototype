@@ -1,25 +1,12 @@
 {% extends "layouts/main.html" %}
-{% set hasCourseFromFind = data.course_from_find %}
-{% set choices = data.choices %}
+{% set section = "applications" %}
 
-{% if hasCourseFromFind %}
-  {% set provider = providers[data.course_from_find.providerCode] %}
-  {% set course = provider.courses[data.course_from_find.courseCode] %}
-  {% set title = "You selected a course" %}
-{% else %}
-  {% set title = "Do you know which course you want to apply to?" %}
-{% endif %}
-{% set formaction = paths.current %}
+{% set title = "Do you know which course you want to apply to?" %}
 
-{% if data["from"] == "application" or (choices | length) == 0 %}
-  {% set backLinkHref = "/application/" %}
-{% else %}
-  {% set backLinkHref = "/application/choices/review" %}
-{% endif %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: backLinkHref
+    href: "/applications"
   }) }}
 {% endblock %}
 
@@ -58,7 +45,7 @@
         } ) }}
       {% else %}
 
-        <form action="/application/choices/course-known" method="post">
+        <form action="/applications/{{ id }}/course-known" method="post">
           {{ govukRadios({
             name: "courseKnown",
             fieldset: {

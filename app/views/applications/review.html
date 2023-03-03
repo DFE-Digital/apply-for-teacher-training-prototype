@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Your application to " + data.applications[id].providerName %}
+{% set section = "applications" %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/applications/{{ id }}/send" method="post">
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: application.course + "<br>PGCE<br>Full time"
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/course"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Personal statement"
+            },
+            value: {
+              text: application.personalStatement
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/personal-statement"
+                }
+              ]
+            }
+          }
+
+        ]
+
+      })}}
+
+      {{ govukButton({
+        text: "Send application"
+      })}}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,16 +1,17 @@
 {% extends "layouts/main.html" %}
+{% set section = "applications" %}
 
 {% set title = "Which course are you applying to?" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/choices/" + id + "/provider"
+    href: "/applications/" + id + "/provider"
   }) }}
 {% endblock %}
 
 {% block content %}
 
-  <form action="/application/choices/review" method="post">
+  <form action="/applications/{{ id }}/personal-statement" method="post">
 
     {{ govukRadios({
       fieldset: {
@@ -21,8 +22,8 @@
       },
       idPrefix: "course",
       items: courseItems,
-      name: "choices[" + id + "][course]",
-      value: data.choices[id].course
+      name: "applications[" + id + "][course]",
+      value: data.applications[id].course
     }) }}
 
     {{ govukButton({

@@ -27,6 +27,20 @@ require('./routes/accepted')(router)
 require('./routes/admin')(router)
 require('./routes/reference')(router)
 
+
+// Messages
+router.get('/messages/:id', (req, res) => {
+
+  const { id } = req.params
+
+  const recipient = "Jeff (teacher training adviser)"
+
+  res.render('messages/show', {
+    id,
+    recipient
+  })
+})
+
 // Reset application so the user can apply again
 router.post('/application/apply-again', (req, res) => {
   // Remove previous course choices

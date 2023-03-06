@@ -1,0 +1,46 @@
+{% extends "layouts/main.html" %}
+{% set section = "messages" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">Messages</h1>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions app-summary-list__row--top-border">
+        <dt class="govuk-summary-list__key govuk-!-width-two-thirds govuk-!-font-weight-regular">
+          <a class="govuk-link" href="/messages/2435">United Teaching SCITT</a>
+        </dt>
+        <dd class="govuk-summary-list__value govuk-!-width-one-third">
+          <b>0</b> unread messages
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key  govuk-!-font-weight-regular">
+          <a class="govuk-link" href="/messages/5251">Jeff (Teacher training adviser)</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <b>1</b> unread message
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key  govuk-!-font-weight-regular">
+         <a class="govuk-link" href="/messages/3634"> University of Manchester</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <b>0</b> unread messages
+        </dd>
+      </div>
+    </dl>
+
+    {{ govukButton({
+      text: "Send a new message",
+      classes: "govuk-button--secondary",
+      href: "#"
+    }) }}
+
+  </div>
+</div>
+{% endblock %}

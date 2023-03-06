@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+{% set section = "messages" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/messages",
+    text: "Back to messages"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{ recipient }}</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukTextarea({
+      name: "message",
+      formGroup: {
+        classes: "govuk-!-margin-bottom-4"
+      },
+      classes: "govuk-!-margin-bottom-0",
+      label: {
+        text: "Your message"
+      }
+    }) }}
+
+    {{ govukButton({ text: "Send", classes: "govuk-!-margin-top-0" }) }}
+
+    <h2 class="govuk-heading-s">Previous messages</h2>
+    <div class="app-message app-message--received">
+      <p class="govuk-body">
+        Do you have any other experience working with children you could draw upon? For example through volunteering, or looking after the children of any family members?
+      </p>
+    </div>
+    <div class="app-message app-message--sent">
+      <p class="govuk-body">
+        I don’t have any experience working in schools. not sure what to put in personal statement?
+      </p>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

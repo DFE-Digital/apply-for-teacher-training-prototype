@@ -136,3 +136,22 @@
   vertical-align: middle;
   margin-left: 3px;
 }
+
+.app-summary-list__row--top-border {
+  border-top: 1px solid $govuk-border-colour;
+}
+
+.app-message {
+  background-color: govuk-colour("light-grey");
+  padding: 20px 20px 1px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.app-message--received {
+  margin-right: 40px;
+}
+
+.app-message--sent {
+  margin-left: 40px;
+}

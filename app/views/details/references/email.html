@@ -4,14 +4,14 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/references/" + id + "/name"
+    href: "/details/references/" + id + "/name"
   }) }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/application/references/{{ id }}/relationship" method="post" novalidate="true">
+      <form action="/details/references/{{ id }}/relationship" method="post" novalidate="true">
         {{ govukInput({
           name: "references[" + id + "][email]",
           value: data.references[id].email,

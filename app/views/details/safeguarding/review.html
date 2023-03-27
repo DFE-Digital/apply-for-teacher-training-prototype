@@ -4,8 +4,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -13,7 +13,7 @@
   <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/safeguarding.html" %}
 
-  <form action="/application">
+  <form action="/details">
     {{ govukRadios({
       name: "completed[safeguarding]",
       value: data.completed.safeguarding,

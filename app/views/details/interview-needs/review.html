@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set applicationPath = "/application" %}
+{% set applicationPath = "/details" %}
 {% set formaction = applicationPath %}
 {% set referrer = applicationPath + "/interview-needs/review" %}
 {% set title = "Interview needs" %}
@@ -9,7 +9,7 @@
 {% block beforeContent %}
   {{ govukBackLink({
     href: applicationPath,
-    text: "Back to application"
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -17,7 +17,7 @@
   <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/interview-needs.html" %}
 
-  <form action="/application">
+  <form action="/details">
     {{ govukRadios({
       name: "completed[interviewNeeds]",
       value: data.completed.interviewNeeds,

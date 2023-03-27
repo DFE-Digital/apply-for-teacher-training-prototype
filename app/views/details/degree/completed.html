@@ -4,12 +4,12 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/institution"
+    href: "/details/degree/" + id + "/institution"
   }) }}
 {% endblock %}
 
 {% block content %}
-  <form action="/application/degree/{{ id }}/grade" method="post">
+  <form action="/details/degree/{{ id }}/grade" method="post">
     {{ govukRadios({
       name: "degrees[" + id + "][completed]",
       value: data.degrees[id].completed,

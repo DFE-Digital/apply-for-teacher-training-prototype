@@ -2,8 +2,8 @@
  * Admin routes
  */
 module.exports = router => {
-  // This fills out every section of the application
-  router.get('/admin/complete-application', (req, res) => {
+  // This fills out every section of your details
+  router.get('/admin/complete-details', (req, res) => {
     const data = req.session.data
 
     // Set personal information
@@ -162,7 +162,7 @@ module.exports = router => {
       safeguarding: 'true'
     }
 
-    res.redirect('/application')
+    res.redirect('/details')
   })
 
   // This lets the candidate receive an offer from all their chocies

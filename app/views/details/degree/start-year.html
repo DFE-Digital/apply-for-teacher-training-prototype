@@ -4,14 +4,14 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/grade"
+    href: "/details/degree/" + id + "/grade"
   }) }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/application/degree/{{id }}/graduation-year" method="post">
+      <form action="/details/degree/{{id }}/graduation-year" method="post">
 
       {{ govukInput({
         name: "degrees[" + id + "][startYear]",

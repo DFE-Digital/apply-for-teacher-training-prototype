@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/other-qualifications/review"
+    href: "/details/other-qualifications/review"
   }) }}
 {% endblock %}
 
@@ -13,7 +13,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/application/other-qualifications/{{ id }}/delete" method="post">
+      <form action="/details/other-qualifications/{{ id }}/delete" method="post">
         {{ govukButton({
           text: "Yes I’m sure - delete this qualification",
           classes: "govuk-button--warning"

@@ -5,7 +5,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/level"
+    href: "/details/degree/" + id + "/level"
   }) }}
 {% endblock %}
 
@@ -13,7 +13,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/application/degree/{{ id }}/subject-answer" method="post">
+      <form action="/details/degree/{{ id }}/subject-answer" method="post">
         {% set hintExample = "For example, ‘History’ or ‘English literature’." if international else "For example, ‘French and History’ or ‘Mathematics’." %}
 
         {{ govukInput({

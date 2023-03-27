@@ -6,12 +6,12 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/country"
+    href: "/details/degree/" + id + "/country"
   }) }}
 {% endblock %}
 
 {% block content %}
-  <form action="/application/degree/{{ id }}/subject" method="post">
+  <form action="/details/degree/{{ id }}/subject" method="post">
   {% set anotherLevelHtml %}
 
     {{ govukInput({

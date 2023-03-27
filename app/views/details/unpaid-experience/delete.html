@@ -4,17 +4,17 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/unpaid-experience/review"
+    href: "/details/unpaid-experience/review"
   }) }}
 {% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
-  <form action="/application/unpaid-experience/role/{{ id }}/delete" method="post">
+  <form action="/details/unpaid-experience/role/{{ id }}/delete" method="post">
     {{ govukButton({
       text: "Yes I’m sure - delete this role",
       classes: "govuk-button--warning"
     }) }}
-    <p class="govuk-body"><a href="/application/work-history/review">Cancel</a></p>
+    <p class="govuk-body"><a href="/details/work-history/review">Cancel</a></p>
   </form>
 {% endblock %}

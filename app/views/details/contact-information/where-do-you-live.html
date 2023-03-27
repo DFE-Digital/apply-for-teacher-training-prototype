@@ -1,12 +1,12 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "Where do you live?" %}
-{% set formaction = "/application/contact-information/where-do-you-live/answer" %}
+{% set formaction = "/details/contact-information/where-do-you-live/answer" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: (referrer if referrer else "/application/contact-information/")
+    href: (referrer if referrer else "/details/contact-information/")
   }) }}
 {% endblock %}
 

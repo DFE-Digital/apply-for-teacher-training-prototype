@@ -5,14 +5,14 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/references"
+    href: "/details/references"
   }) }}
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/application/references/{{ id }}/delete" method="post" novalidate="true">
+      <form action="/details/references/{{ id }}/delete" method="post" novalidate="true">
         <h1 class="govuk-heading-l">{{ title }}</h1>
 
         {{ govukButton({

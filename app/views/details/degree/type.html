@@ -17,7 +17,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/subject"
+    href: "/details/degree/" + id + "/subject"
   }) }}
 {% endblock %}
 
@@ -25,7 +25,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/application/degree/{{ id }}/institution" method="post">
+      <form action="/details/degree/{{ id }}/institution" method="post">
 
       {% set otherTypeHtml %}
         {{ govukInput({

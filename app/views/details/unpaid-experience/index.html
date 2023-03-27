@@ -4,8 +4,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@
       </ul>
       <p class="govuk-body">You can also tell us about any other volunteering you’ve done, and how this supports your application to become a teacher.</p>
 
-      <form action="/application/unpaid-experience/review" method="post">
+      <form action="/details/unpaid-experience/review" method="post">
         {{ govukRadios({
           name: "unpaidExperienceAdded",
           value: data.unpaidExperienceAdded,

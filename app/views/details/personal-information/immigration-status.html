@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "What’s your immigration status?" %}
-{% set formaction = "/application/personal-information/immigration-status" %}
+{% set formaction = "/details/personal-information/immigration-status" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/personal-information/immigration/")
+    href: (referrer if referrer else "/details/personal-information/immigration/")
   }) }}
 {% endblock %}
 

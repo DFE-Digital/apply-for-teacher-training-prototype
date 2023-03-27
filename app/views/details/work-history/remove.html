@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-  <form action="/application/work-history/{{ id }}/delete" method="post">
+  <form action="/details/work-history/{{ id }}/delete" method="post">
     {{ govukButton({
       text: "Yes I’m sure - delete this " + type,
       classes: "govuk-button--warning"

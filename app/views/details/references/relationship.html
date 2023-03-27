@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/references/" + id + "/email"
+    href: "/details/references/" + id + "/email"
   }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@
         {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years." %}
       {% endif %}
 
-      <form action="/application/references" method="post">
+      <form action="/details/references" method="post">
         {{ govukCharacterCount({
           name: "references[" + id + "][relationship]",
           value: data.references[id].relationship,

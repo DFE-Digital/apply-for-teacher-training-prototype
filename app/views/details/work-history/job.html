@@ -3,7 +3,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/work-history/review"
+    href: "/details/work-history/review"
   }) }}
 {% endblock %}
 
@@ -11,7 +11,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
-      <form action="/application/work-history/review" method="post">
+      <form action="/details/work-history/review" method="post">
         {% set roleEndHTML %}
           {{ govukDateInput({
             namePrefix: "",

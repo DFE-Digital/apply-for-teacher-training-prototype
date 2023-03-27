@@ -23,7 +23,7 @@
 
       <p class="govuk-body">For advice, contact your chosen training provider or a <a href="https://adviser-getintoteaching.education.gov.uk" class="govuk-link">teacher training adviser</a>. An adviser can help you understand the qualifications you need and how to get them.</p>
 
-      <form action="/application/gcse/{{ id }}/review" method="post">
+      <form action="/details/gcse/{{ id }}/review" method="post">
         {{ govukCharacterCount({
           name: "gcse[" + id + "][otherEvidence]",
           label: {

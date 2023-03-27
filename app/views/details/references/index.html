@@ -5,8 +5,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -30,7 +30,7 @@
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
-          href: "/application/references/add",
+          href: "/details/references/add",
           classes: referencesButtonClass
         }) }}
       </div>
@@ -45,7 +45,7 @@
 
 {% if references | length > 1 and incompleteReferences | length == 0 %}
 
-  <form action="/application" method="get">
+  <form action="/details" method="get">
     {{ govukRadios({
       name: "completed[references]",
       value: data.completed.references,

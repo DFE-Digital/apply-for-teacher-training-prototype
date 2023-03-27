@@ -5,8 +5,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -19,7 +19,7 @@
         {{ govukButton({
           text: ("Add another degree" if degreeCount > 0 else "Add degree"),
           classes: ("govuk-button--secondary" if (meetsMinimumDegreeCriteria) else ""),
-          href: "/application/degree/add"
+          href: "/details/degree/add"
         }) }}
       {% endset %}
 
@@ -41,7 +41,7 @@
     {% include "_includes/review/degrees.html" %}
 
     {% if meetsMinimumDegreeCriteria %}
-      <form action="/application" method="post">
+      <form action="/details" method="post">
         {{ govukRadios({
           name: "completed[degree]",
           value: data.completed.degree,

@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/review",
+    href: "/details/degree/review",
     text: "Back"
   }) }}
 {% endblock %}
@@ -15,7 +15,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/application/degree/{{ id }}/country-answer" method="post">
+      <form action="/details/degree/{{ id }}/country-answer" method="post">
 
         {% set ukConditionalHtml %}
           <div class="govuk-form-group">

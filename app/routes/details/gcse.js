@@ -104,9 +104,9 @@ module.exports = router => {
 
     // let path
     // if (isInternational(req)) {
-    //   path = `/application/gcse/${id}/country`
+    //   path = `/details/gcse/${id}/country`
     // } else if (isMissing(req)) {
-    //   path = `/application/gcse/${id}/not-yet`
+    //   path = `/details/gcse/${id}/not-yet`
     // } else {
     const path = `/details/gcse/${id}/grade`
     // }

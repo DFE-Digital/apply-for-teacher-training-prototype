@@ -14,7 +14,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/other-qualifications/" + id + "/type"
+    href: "/details/other-qualifications/" + id + "/type"
   }) }}
 {% endblock %}
 
@@ -22,7 +22,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
-        <form action="/application/other-qualifications/review" method="post">
+        <form action="/details/other-qualifications/review" method="post">
 
           {{ govukInput({
             name: "otherQualifications[" + id + "][subject]",

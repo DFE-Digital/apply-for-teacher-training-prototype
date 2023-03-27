@@ -5,8 +5,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -16,7 +16,7 @@
   {% if data.unpaidExperienceAdded != "no" %}
     {{ govukButton({
       text: addButtonText,
-      href: "/application/unpaid-experience/add",
+      href: "/details/unpaid-experience/add",
       classes: "govuk-button--secondary"
     }) }}
   {% endif %}
@@ -30,7 +30,7 @@
 
   {% include "_includes/review/unpaid-experience.html" %}
 
-  <form action="/application" method="post">
+  <form action="/details" method="post">
     {{ govukRadios({
       name: "completed[unpaidExperience]",
       value: data.completed.unpaidExperience,

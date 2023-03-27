@@ -19,12 +19,12 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/degree/" + id + "/completed"
+    href: "/details/degree/" + id + "/completed"
   }) }}
 {% endblock %}
 
 {% block content %}
-  <form action="/application/degree/{{ id }}/start-year" method="post">
+  <form action="/details/degree/{{ id }}/start-year" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {% set internationalGradeHtml %}

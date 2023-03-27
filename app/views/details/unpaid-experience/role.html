@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/unpaid-experience"
+    href: "/details/unpaid-experience"
   }) }}
 {% endblock %}
 
@@ -14,7 +14,7 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <p class="govuk-body">Do not include paid work in a school – enter these roles in ‘Work history’.</p>
 
-      <form action="/application/unpaid-experience/review" method="post">
+      <form action="/details/unpaid-experience/review" method="post">
         {{ govukInput({
           name: "unpaidExperience[" + id + "][role]",
           value: data.unpaidExperience[id].role,

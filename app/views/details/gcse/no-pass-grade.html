@@ -18,7 +18,7 @@
 
       <p class="govuk-body">For advice, speak to a <a href="https://adviser-getintoteaching.education.gov.uk">teacher training adviser</a>.</p>
 
-      <form action="/application/gcse/{{ id }}/currently-retaking" method="post">
+      <form action="/details/gcse/{{ id }}/currently-retaking" method="post">
         {{ govukRadios({
           name: "gcse[" + id + "][currentlyRetaking]",
           value: data.gcse[id][currentlyRetaking],

@@ -10,13 +10,13 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/gcse/" + id + "/grade"
+    href: "/details/gcse/" + id + "/grade"
   }) }}
 {% endblock %}
 
 
 {% block content %}
-  <form action="/application/gcse/{{ id }}/review" method="post">
+  <form action="/details/gcse/{{ id }}/review" method="post">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 

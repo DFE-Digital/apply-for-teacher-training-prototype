@@ -15,7 +15,7 @@
     },
     actions: {
       items: [{
-        href: "/application/references/" + id + "/delete",
+        href: "/details/references/" + id + "/delete",
         text: "Delete"
       }]
     }
@@ -34,13 +34,13 @@
         text: "Email"
       },
       value: {
-        html: (item.email if item.email else "<a href=\"/application/references/" + id + "\/email\">Enter email address</a>")
+        html: (item.email if item.email else "<a href=\"/details/references/" + id + "\/email\">Enter email address</a>")
       },
       actions: {
         items: [
           {
             text: "Change",
-            href: "/application/references/" + id + "/email"
+            href: "/details/references/" + id + "/email"
           }
         ]
       } if item.email
@@ -56,7 +56,7 @@
         items: [
           {
             text: "Change",
-            href: "/application/references/" + id + "/name"
+            href: "/details/references/" + id + "/name"
           }
         ]
       }
@@ -72,7 +72,7 @@
         items: [
           {
             text: "Change",
-            href: "/application/references/" + id + "/relationship"
+            href: "/details/references/" + id + "/relationship"
           }
         ]
       }

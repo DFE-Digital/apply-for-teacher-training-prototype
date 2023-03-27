@@ -7,60 +7,71 @@
   <div class="govuk-grid-column-three-quarters">
 
     <h1 class="govuk-heading-l">Your applications</h1>
-    <p class="govuk-body">You can apply to up to 4 courses at a time</p>
 
-    {{ govukButton({
-      text: "Add application",
-      href: "/applications/start"
-    }) }}
 
-    {% for id, application in data.applications %}
+    {% if data | allSectionsCompleted %}
 
-      {{ govukSummaryList({
-        card: {
-          title: {
-            html: application.providerName
-          },
-          actions: {
-            items: [
-            {
-              href: "/applications/" + id + "/delete",
-              text: "Remove",
-              visuallyHiddenText: "from " + application.providerName,
-              classes: ""
-            }
-          ]
-          }
-        },
-        classes: "govuk-!-margin-bottom-0",
-        rows: [
-        {
-          key: {
-            text: "Course"
-          },
-          value: {
-            html: application.course + "<br>PGCE <br>1 year full time"
-          },
-          actions: {
-            items: [
-            {
-              href: "/applications/" + id + "/course",
-              text: "Change"
-            }
-          ]
-          }
-        },
-        {
-          key: {
-            text: "Status"
-          },
-          value: {
-            html: "<span class=\"govuk-tag govuk-tag--blue\">" + application.status + "</span> <div class=\"govuk-!-margin-top-2\"><a href=\"/applications/" + id + "/review\">Continue application</a></div>"
-          }
-        }]
+      <p class="govuk-body">You can apply to up to 4 courses at a time</p>
+
+      {{ govukButton({
+        text: "Add application",
+        href: "/applications/start"
       }) }}
 
-    {% endfor %}
+      {% for id, application in data.applications %}
+
+        {{ govukSummaryList({
+          card: {
+            title: {
+              html: application.providerName
+            },
+            actions: {
+              items: [
+              {
+                href: "/applications/" + id + "/delete",
+                text: "Remove",
+                visuallyHiddenText: "from " + application.providerName,
+                classes: ""
+              }
+            ]
+            }
+          },
+          classes: "govuk-!-margin-bottom-0",
+          rows: [
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: application.course + "<br>PGCE <br>1 year full time"
+            },
+            actions: {
+              items: [
+              {
+                href: "/applications/" + id + "/course",
+                text: "Change"
+              }
+            ]
+            }
+          },
+          {
+            key: {
+              text: "Status"
+            },
+            value: {
+              html: "<span class=\"govuk-tag govuk-tag--blue\">" + application.status + "</span> <div class=\"govuk-!-margin-top-2\"><a href=\"/applications/" + id + "/review\">Continue application</a></div>"
+            }
+          }]
+        }) }}
+
+      {% endfor %}
+    {% else %}
+
+      <div class="govuk-inset-text">
+        You need to complete <a href="/details" class="govuk-link">your details</a> before you can apply to any courses.
+      </div>
+
+    {% endif %}
 
   </div>
 </div>

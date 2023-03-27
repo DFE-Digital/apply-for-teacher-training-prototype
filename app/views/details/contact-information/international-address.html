@@ -2,13 +2,13 @@
 {% from "govuk/components/hint/macro.njk" import govukHint %}
 
 {% set title = "What is your contact address?" %}
-{% set formaction = "/application/contact-information/review" %}
+{% set formaction = "/details/contact-information/review" %}
 
 {% set describedBy = "address-hint" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/contact-information/where-do-you-live"
+    href: "/details/contact-information/where-do-you-live"
   }) }}
 {% endblock %}
 

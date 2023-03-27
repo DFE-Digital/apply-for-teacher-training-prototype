@@ -17,7 +17,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/gcse/" + id
+    href: "/details/gcse/" + id
   }) }}
 {% endblock %}
 
@@ -25,7 +25,7 @@
 
   <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <form action="/application/gcse/{{ id }}/year" method="post">
+  <form action="/details/gcse/{{ id }}/year" method="post">
 
     {# Structured GCSE grade #}
     {% macro gradeHtml(params) %}

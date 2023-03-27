@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-      href: "/application/other-qualifications/review"
+      href: "/details/other-qualifications/review"
   }) }}
 {% endblock %}
 
@@ -39,7 +39,7 @@
         }) }}
       {% endset %}
 
-      <form action="/application/other-qualifications/{{ id }}/details" method="post">
+      <form action="/details/other-qualifications/{{ id }}/details" method="post">
 
         {{ govukRadios({
           name: "otherQualifications[" + id + "][type]",

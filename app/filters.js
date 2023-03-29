@@ -91,7 +91,11 @@ function allSectionsCompleted (data) {
     'safeguarding'
   ]
 
-  return detailsSections.every((section => data.completed[section] == 'true'))
+  if (data && data.completed) {
+    return detailsSections.every((section => data.completed[section] == 'true'))
+  } else {
+    return false
+  }
 }
 
 addFilter('allSectionsCompleted', allSectionsCompleted)

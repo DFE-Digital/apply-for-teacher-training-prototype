@@ -11,22 +11,31 @@
 
     {% if data | allSectionsCompleted %}
 
-      {% if numberOfApplicationsLeft > 0 %}
+      {% if applicationAccepted %}
 
-        {% if numberOfApplicationsLeft == 4 %}
-          <p class="govuk-body">You can add to up to 4 applications at a time.</p>
-        {% else %}
-          <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
-        {% endif %}
+        <p class="govuk-body">You have accepted an application for {{applicationAccepted.course }} from {{ applicationAccepted.providerName }}.</p>
 
-        {{ govukButton({
-          text: "Add application",
-          href: "/applications/start"
-        }) }}
+        <p class="govuk-body">[conditions, SKE, references, etc...]</p>
+
+        <p class="govuk-body">Option to withdraw</p>
 
       {% else %}
-        <p class="govuk-body">You cannot apply to any more courses as you are awaiting decisions on 4 courses.</p>
-      {% endif %}
+        {% if numberOfApplicationsLeft > 0 %}
+
+          {% if numberOfApplicationsLeft == 4 %}
+            <p class="govuk-body">You can add to up to 4 applications at a time.</p>
+          {% else %}
+            <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
+          {% endif %}
+
+          {{ govukButton({
+            text: "Add application",
+            href: "/applications/start"
+          }) }}
+
+        {% else %}
+          <p class="govuk-body">You cannot apply to any more courses as you are awaiting decisions on 4 courses.</p>
+        {% endif %}
 
 
       {% for id, application in data.applications %}
@@ -132,6 +141,11 @@
         }) }}
 
       {% endfor %}
+
+
+      {% endif %}
+
+
     {% else %}
 
       <div class="govuk-inset-text">
@@ -139,77 +153,80 @@
       </div>
     {% endif %}
 
-    <h2 class="govuk-heading-m">How applications work</h2>
+    {% if applicationAccepted %}
 
-    <p class="govuk-body">Most courses are for 1 year (or 2 years part time) and start in September.</p>
+    {% else %}
+      <h2 class="govuk-heading-m">How applications work</h2>
 
-    <p class="govuk-body">For courses starting in September 2024, the applications process works like this:</p>
+      <p class="govuk-body">Most courses are for 1 year (or 2 years part time) and start in September.</p>
 
-    <h2>Deadline version:</h2>
+      <p class="govuk-body">For courses starting in September 2024, the applications process works like this:</p>
 
-    <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
-      <li><b>10 October 2023</b><br>
-        The list of courses is published.
-      </li>
-      <li><b>17 October 2023 – 19 November 2023</b><br>
-        You can prepare your application and select up to 4 courses
-      </li>
-      <li><b>19 November 2023, 23:59pm</b><br>
-        Application deadline: all applications will be sent to the providers you selected.
-      </li>
-      <li><b>20 November 2023 to 4 January 2024</b><br>
-        Providers will assess applications and run interviews
-      </li>
-      <li><b>5 January 2024</b><br>
-        You will receive the outcome of each of your applications, including any offers
-      </li>
-      <li><b>21 January 2024</b><br>
-        Deadline to accept any offers you have received
-      </li>
-      <li><b>27 January 2024</b><br>
-        The list of courses will be updated to show which ones still have spaces
-      </li>
-      <li><b>27 January 2024 to 17 September 2024</b><br>
-        Applications re-open. You can apply to up to 4 courses at a time, with providers assessing applications on a continual basis.
-      </li>
-      <li>
-        <b>17 September 2024, 6pm</b><br>
-        Final deadline for applications
-      </li>
-    </ol>
+      <h2>Deadline version:</h2>
+
+      <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
+        <li><b>10 October 2023</b><br>
+          The list of courses is published.
+        </li>
+        <li><b>17 October 2023 – 19 November 2023</b><br>
+          You can prepare your application and select up to 4 courses
+        </li>
+        <li><b>19 November 2023, 23:59pm</b><br>
+          Application deadline: all applications will be sent to the providers you selected.
+        </li>
+        <li><b>20 November 2023 to 4 January 2024</b><br>
+          Providers will assess applications and run interviews
+        </li>
+        <li><b>5 January 2024</b><br>
+          You will receive the outcome of each of your applications, including any offers
+        </li>
+        <li><b>21 January 2024</b><br>
+          Deadline to accept any offers you have received
+        </li>
+        <li><b>27 January 2024</b><br>
+          The list of courses will be updated to show which ones still have spaces
+        </li>
+        <li><b>27 January 2024 to 17 September 2024</b><br>
+          Applications re-open. You can apply to up to 4 courses at a time, with providers assessing applications on a continual basis.
+        </li>
+        <li>
+          <b>17 September 2024, 6pm</b><br>
+          Final deadline for applications
+        </li>
+      </ol>
 
 
-    <h2>Pure continuous applications</h2>
+      <h2>Pure continuous applications</h2>
 
-    <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
-      <li><b>10 October 2023</b><br>
-        The list of courses is published.
-      </li>
-      <li><b>17 October 2023 – 1 July 2024</b><br>
-        You can apply to up to 4 providers at a time. Applications are continually assessed and courses can fill up at any time so you should apply as soon as you can.
-        <br>
-        <br>
-        When you apply, providers have 40 working days to make a decision.
-        <br><br>
-        You will have 10 working days to make a decision on any offer.
-        <br><br>
-        If you decline any offers, or withdraw an application, you can continue to apply to other providers.
-      </li>
-      <li>
-        <b>1 July 2024 to 17 September 2024</b><br>
-        Applications are still open, but the time for providers to make a decision on any applications reduces from 40 working days to 20 working days.
-      </li>
+      <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
+        <li><b>10 October 2023</b><br>
+          The list of courses is published.
+        </li>
+        <li><b>17 October 2023 – 1 July 2024</b><br>
+          You can apply to up to 4 providers at a time. Applications are continually assessed and courses can fill up at any time so you should apply as soon as you can.
+          <br>
+          <br>
+          When you apply, providers have 40 working days to make a decision.
+          <br><br>
+          You will have 10 working days to make a decision on any offer.
+          <br><br>
+          If you decline any offers, or withdraw an application, you can continue to apply to other providers.
+        </li>
+        <li>
+          <b>1 July 2024 to 17 September 2024</b><br>
+          Applications are still open, but the time for providers to make a decision on any applications reduces from 40 working days to 20 working days.
+        </li>
 
-      <li>
-        <b>17 September 2024, 6pm</b><br>
-        Final deadline for applications
-      </li>
-      <li>
-        <b>25 September 2024</b><br>
-        A final decision is made on all open applications
-      </li>
-    </ol>
-
+        <li>
+          <b>17 September 2024, 6pm</b><br>
+          Final deadline for applications
+        </li>
+        <li>
+          <b>25 September 2024</b><br>
+          A final decision is made on all open applications
+        </li>
+      </ol>
+    {% endif %}
 
   </div>
 </div>

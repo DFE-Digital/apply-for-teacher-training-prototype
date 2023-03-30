@@ -25,6 +25,11 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
+    {% if data | allSectionsCompleted %}
+      <p class="govuk-body">Your details will be shared with the provider of any course you apply to. You can update your details at any time.</p>
+    {% else %}
+      <p class="govuk-body">Complete these sections so that you can apply to courses.</p>
+    {% endif %}
 
       <section class="app-section">
         <h2 class="govuk-heading-m">Personal details</h2>

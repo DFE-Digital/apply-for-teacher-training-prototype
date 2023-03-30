@@ -1,12 +1,18 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
 
 {% block header %}
-  {{ govukHeader({
-    classes: "app-header--full-width-blue-border",
-    homepageUrl: "/applications",
-    serviceName: serviceName,
-    navigation: []
-  }) }}
+
+  {% if serviceName %}
+    {{ govukHeader({
+      classes: "app-header--full-width-blue-border",
+      serviceUrl: "/details",
+      serviceName: serviceName,
+      navigation: []
+    }) }}
+  {% else %}
+    {{ govukHeader({
+    }) }}
+  {% endif %}
 
   {% if signedIn != false %}
 
@@ -29,15 +35,6 @@
 
 {% block pageTitle %}
    {{ title }} - {{ serviceName }}
-{% endblock %}
-
-{% block beforeContent %}
-  <!-- {{ govukPhaseBanner({
-      tag: {
-        text: "prototype"
-      },
-      html: 'This is a prototype.'
-    }) if showPhaseBanner != false }}-->
 {% endblock %}
 
 {% block footer %}

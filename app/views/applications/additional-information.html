@@ -1,0 +1,58 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Additional information" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/personal-statement",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/applications/{{ id }}/review" method="post">
+        {% set additionalInformationHtml %}
+          {{ govukCharacterCount({
+            id: "additional-information-detail",
+            name: "applications[" + id + "][additionalInformationDetail]",
+            value: data.applications[id].additionalInformationDetail,
+            label: {
+              text: "Enter further information"
+            },
+            maxlength: 300,
+            threshold: 75
+          }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          name: "applications[" + id + "][additionalInformation]",
+          value: data.applications[id].additionalInformation,
+          fieldset: {
+            legend: {
+              classes: "govuk-fieldset__legend--m",
+              text: "Is there anything else you would like to tell us?"
+            }
+          },
+          items: [{
+            text: "Yes",
+            value: "yes",
+            conditional: {
+              html: additionalInformationHtml
+            }
+          }, {
+            text: "No",
+            value: "no"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

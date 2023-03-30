@@ -279,9 +279,88 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/courses-other', (req, res) => {
+    const { id } = req.params
+
+    const courses = [
+      {
+        title: 'Art and Design (2NJL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Biology (83SL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Chemistry (8FYF)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Computing (20SY)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Design and Technology (1L0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'English (4J7S)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'History (2L5D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Mathematics (8S0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Physics (1A6W)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (7S9D)',
+        qualification: 'QTS full time'
+      }
+    ]
+
+    var courseItems = courses
+      .sort((a, b) => (a.title.localeCompare(b.title)))
+      .map(course => ({ text: course.title, value: course.title, hint: { text: course.qualification } }))
+
+    courseItems.push({
+        divider: "or"
+      })
+
+    courseItems.push({
+      text: "No, I’m only interested in " + req.session.data.applications[id].course,
+      value: "no"
+      })
+
+    res.render('applications/courses-other', {
+      id,
+      courseItems
+    })
+  })
+
   router.get('/applications/:id/personal-statement', (req, res) => {
     const { id } = req.params
     res.render('applications/personal_statement', {
+      id
+    })
+  })
+
+  router.get('/applications/:id/interview-needs', (req, res) => {
+    const { id } = req.params
+    res.render('applications/interview-needs', {
+      id
+    })
+  })
+
+  router.get('/applications/:id/additional-information', (req, res) => {
+    const { id } = req.params
+    res.render('applications/additional-information', {
       id
     })
   })
@@ -299,6 +378,30 @@ module.exports = router => {
     res.render('applications/delete', {
       id
     })
+  })
+
+  router.get('/applications/:id/provider-already-selected', (req, res) => {
+    const { id } = req.params
+    res.render('applications/provider-already-selected', {
+      id
+    })
+  })
+
+  router.post('/applications/:id/submit', (req, res) => {
+    const { id } = req.params
+
+    const submitNow = req.body.submitNow
+
+    if (submitNow === 'yes') {
+      req.session.data.applications[id].status = "Awaiting decision"
+      req.session.data.applications[id].submittedAt = new Date()
+      res.redirect('/applications')
+    } else if (submitNow === 'no') {
+      res.redirect('/applications')
+    } else {
+      res.redirect('/applications/' + id + "/review")
+    }
+
   })
 
   router.post('/applications/:id/delete', (req, res) => {

@@ -17,7 +17,20 @@
     <div class="govuk-grid-column-three-quarters">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/applications/{{ id }}/send" method="post">
+      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
+
+      {% set otherCoursesHtml %}
+
+        {% if application.otherCourses | length > 0 %}
+          <ul class="govuk-list">
+          {% for course in application.otherCourses %}
+            <li>{{ course }}</li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          None
+        {% endif %}
+      {% endset %}
 
       {{ govukSummaryList({
         rows: [
@@ -39,6 +52,23 @@
           },
           {
             key: {
+              text: "Other courses you are interested in"
+            },
+            value: {
+              html: otherCoursesHtml
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/courses-other"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
               text: "Personal statement"
             },
             value: {
@@ -52,15 +82,69 @@
                 }
               ]
             }
+          },
+          {
+            key: {
+              text: "Interview needs"
+            },
+            value: {
+              text: (application.interviewNeedsDetail or "None")
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/interview-needs"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Additional information"
+            },
+            value: {
+              text: (application.additionalInformationDetail or "None")
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/additional-information"
+                }
+              ]
+            }
           }
+
 
         ]
 
       })}}
 
-      {{ govukButton({
-        text: "Send application"
-      })}}
+      <form action="/applications/{{ id }}/submit" method="post">
+        {{ govukRadios({
+          name: "submitNow",
+          fieldset: {
+            legend: {
+              text: "Do you want to submit your application?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes, send it now"
+            },
+            {
+              value: "no",
+              text: "No, save it as a draft"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        })}}
 
       </form>
     </div>

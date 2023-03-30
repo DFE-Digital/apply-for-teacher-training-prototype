@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+{% set section = "applications" %}
+
+{% set title = "Other courses offered by " + data.applications[id].providerName %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/provider"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">If you’d like to be considered for alternative courses you can indicate them here. This will be submitted along with your 1 application.</p>
+
+      <form action="/applications/{{ id }}/personal-statement" method="post">
+
+        {{ govukCheckboxes({
+          fieldset: {
+            legend: {
+              text: "Are you interested in any of these other courses?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          idPrefix: "otherCourses",
+          items: courseItems,
+          name: "applications[" + id + "][otherCourses]",
+          values: data.applications[id].otherCourses
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -36,7 +36,7 @@
 
       {{ guidanceHtml | safe }}
 
-      <form action="/applications/{{ id }}/review" method="post">
+      <form action="/applications/{{ id }}/interview-needs" method="post">
         {{ govukCharacterCount({
           name: "applications[" + id + "][personalStatement]",
           value: data.applications[id].personalStatement,

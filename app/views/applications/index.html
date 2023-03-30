@@ -11,14 +11,31 @@
 
     {% if data | allSectionsCompleted %}
 
-      <p class="govuk-body">You can apply to up to 4 courses at a time</p>
+      {% if 1==1 %}
+        <p class="govuk-body">You can apply to up to 4 courses at a time</p>
 
-      {{ govukButton({
-        text: "Add application",
-        href: "/applications/start"
-      }) }}
+        {{ govukButton({
+          text: "Add application",
+          href: "/applications/start"
+        }) }}
+
+      {% else %}
+        <p class="govuk-body">You cannot apply to any more courses as you are awaiting decisions on 4 courses.</p>
+      {% endif %}
+
 
       {% for id, application in data.applications %}
+
+
+        {% set statusHtml %}
+          {% if application.status == "Awaiting decision" %}
+            <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
+            <div class="govuk-!-margin-top-2">The provider must make a decision by 18 May 2023.</div>
+          {% else %}
+            <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
+            <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
+          {% endif %}
+        {% endset %}
 
         {{ govukSummaryList({
           card: {
@@ -29,7 +46,7 @@
               items: [
               {
                 href: "/applications/" + id + "/delete",
-                text: "Remove",
+                text: ("Withdraw" if application.status === "Awaiting decision" else "Remove"),
                 visuallyHiddenText: "from " + application.providerName,
                 classes: ""
               }
@@ -50,7 +67,7 @@
               {
                 href: "/applications/" + id + "/course",
                 text: "Change"
-              }
+              } if application.status != 'Awaiting decision'
             ]
             }
           },
@@ -59,9 +76,17 @@
               text: "Status"
             },
             value: {
-              html: "<span class=\"govuk-tag govuk-tag--blue\">" + application.status + "</span> <div class=\"govuk-!-margin-top-2\"><a href=\"/applications/" + id + "/review\">Continue application</a></div>"
+              html: statusHtml
             }
-          }]
+          },
+          {
+            key: {
+              text: "Interview"
+            },
+            value: {
+              html: "The provider will be in touch if they want to invite you to an interview."
+            }
+          } if application.status === 'Awaiting decision']
         }) }}
 
       {% endfor %}

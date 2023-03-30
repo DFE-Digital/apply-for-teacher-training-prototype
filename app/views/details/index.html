@@ -25,8 +25,9 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-    {% if data | allSectionsCompleted %}
       <p class="govuk-body">Your details will be shared with the provider of any course you apply to. You can update your details at any time.</p>
+
+    {% if data | allSectionsCompleted %}
     {% else %}
       <p class="govuk-body">Complete these sections so that you can apply to courses.</p>
     {% endif %}
@@ -133,13 +134,6 @@
             status: {
               classes: tagClassesForSection(completed=data.completed.additionalSupport == 'true'),
               text: tagTextForSection(completed=data.completed.additionalSupport == 'true')
-            }
-          }, {
-            title: { text: "Interview needs" },
-            href: "/details/interview-needs",
-            status: {
-              classes: tagClassesForSection(completed=data.completed.interviewNeeds == 'true'),
-              text: tagTextForSection(completed=data.completed.interviewNeeds == 'true')
             }
           }]
         }) }}

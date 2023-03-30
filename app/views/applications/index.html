@@ -64,6 +64,18 @@
             <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
           {% elseif application.status == "Offer declined" %}
             <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
+          {% elseif application.status == "Unsuccessful" %}
+            <span class="govuk-tag govuk-tag--orange"> {{ application.status }}</span>
+            <div class="govuk-!-margin-top-2">
+            Feedback from the provider:
+            <br>
+            <div class="govuk-inset-text govuk-!-margin-top-2">
+              {{ application.rejectionFeedback }}
+            </div>
+            Is this feedback helpful? <a href="#">Yes</a> or  <a href="#">No</a>
+            </div>
+          {% else  %}
+            <span class="govuk-tag"> {{ application.status }}</span>
           {% endif %}
         {% endset %}
 
@@ -133,6 +145,8 @@
 
     <p class="govuk-body">For courses starting in September 2024, the applications process works like this:</p>
 
+    <h2>Deadline version:</h2>
+
     <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
       <li><b>10 October 2023</b><br>
         The list of courses is published.
@@ -143,23 +157,59 @@
       <li><b>19 November 2023, 23:59pm</b><br>
         Application deadline: all applications will be sent to the providers you selected.
       </li>
-      <li><b>20 November 2023 to 4 January 2023</b><br>
+      <li><b>20 November 2023 to 4 January 2024</b><br>
         Providers will assess applications and run interviews
       </li>
-      <li><b>5 January 2023</b><br>
+      <li><b>5 January 2024</b><br>
         You will receive the outcome of each of your applications, including any offers
       </li>
-      <li><b>21 January 2023</b><br>
+      <li><b>21 January 2024</b><br>
         Deadline to accept any offers you have received
       </li>
-      <li><b>27 January 2023</b><br>
+      <li><b>27 January 2024</b><br>
         The list of courses will be updated to show which ones still have spaces
       </li>
-      <li><b>27 January 2023 to 28 August 2023</b><br>
-        Applications re-open. You can apply to up to 4 courses at a time, with providers asessing applications on a continual basis.
+      <li><b>27 January 2024 to 17 September 2024</b><br>
+        Applications re-open. You can apply to up to 4 courses at a time, with providers assessing applications on a continual basis.
+      </li>
+      <li>
+        <b>17 September 2024, 6pm</b><br>
+        Final deadline for applications
+      </li>
+    </ol>
+
+
+    <h2>Pure continuous applications</h2>
+
+    <ol class="govuk-list xgovuk-list--number  govuk-list--spaced">
+      <li><b>10 October 2023</b><br>
+        The list of courses is published.
+      </li>
+      <li><b>17 October 2023 – 1 July 2024</b><br>
+        You can apply to up to 4 providers at a time. Applications are continually assessed and courses can fill up at any time so you should apply as soon as you can.
+        <br>
+        <br>
+        When you apply, providers have 40 working days to make a decision.
+        <br><br>
+        You will have 10 working days to make a decision on any offer.
+        <br><br>
+        If you decline any offers, or withdraw an application, you can continue to apply to other providers.
+      </li>
+      <li>
+        <b>1 July 2024 to 17 September 2024</b><br>
+        Applications are still open, but the time for providers to make a decision on any applications reduces from 40 working days to 20 working days.
       </li>
 
+      <li>
+        <b>17 September 2024, 6pm</b><br>
+        Final deadline for applications
+      </li>
+      <li>
+        <b>25 September 2024</b><br>
+        A final decision is made on all open applications
+      </li>
     </ol>
+
 
   </div>
 </div>

@@ -165,7 +165,7 @@ module.exports = router => {
     res.redirect('/details')
   })
 
-  // This lets the candidate receive an offer from all their chocies
+  // This lets the candidate receive an offer on one choice
   router.get('/admin/receive-offer', (req, res) => {
 
     let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
@@ -177,6 +177,20 @@ module.exports = router => {
         { title: 'Fitness to train to teach check', status: 'Pending' },
         { title: 'Disclosure and barring service check', status: 'Pending' }
       ]
+    }
+
+    res.redirect('/applications')
+  })
+
+  // This lets the candidate receive a rejection
+  router.get('/admin/receive-rejection', (req, res) => {
+
+    let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+
+    if (offersAwaitingDecision.length > 0) {
+
+      offersAwaitingDecision[0].status = "Unsuccessful"
+      offersAwaitingDecision[0].rejectionFeedback = "Test"
     }
 
     res.redirect('/applications')

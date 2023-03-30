@@ -293,6 +293,10 @@ module.exports = router => {
         qualification: 'QTS full time'
       },
       {
+        title: 'English (73LS)',
+        qualification: 'QTS full time with salary'
+      },
+      {
         title: 'History (2L5D)',
         qualification: 'QTS full time'
       },
@@ -305,7 +309,28 @@ module.exports = router => {
         qualification: 'QTS full time'
       },
       {
-        title: 'Primary (7S9D)',
+        title: 'Engineers teach physics (83PE)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (3-7) (7S9D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (5-11) (63KD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (3-7) (73LD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (5-11) (945J)',
+        qualification: 'QTS full time'
+      },
+      ,
+      {
+        title: 'Primary with SEND (74U1)',
         qualification: 'QTS full time'
       }
     ]
@@ -349,6 +374,10 @@ module.exports = router => {
         qualification: 'QTS full time'
       },
       {
+        title: 'English (73LS)',
+        qualification: 'QTS full time with salary'
+      },
+      {
         title: 'History (2L5D)',
         qualification: 'QTS full time'
       },
@@ -361,7 +390,28 @@ module.exports = router => {
         qualification: 'QTS full time'
       },
       {
-        title: 'Primary (7S9D)',
+        title: 'Engineers teach physics (83PE)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (3-7) (7S9D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (5-11) (63KD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (3-7) (73LD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (5-11) (945J)',
+        qualification: 'QTS full time'
+      },
+      ,
+      {
+        title: 'Primary with SEND (74U1)',
         qualification: 'QTS full time'
       }
     ]
@@ -473,7 +523,23 @@ module.exports = router => {
     const application = req.session.data.applications[id]
 
     if (decision === 'accept') {
+
       application.status = 'Conditions pending'
+
+      for (applicationId of Object.keys(req.session.data.applications)) {
+
+        if (applicationId != id) {
+          let application = req.session.data.applications[applicationId]
+
+          if (application.status == 'Offer received') {
+            application.status = 'Offer declined'
+          } else if (application.status == 'Awaiting decision') {
+            application.status = 'Withdrawn'
+          }
+
+        }
+      }
+
     } else if (decision == 'decline') {
       application.status = 'Offer declined'
     }

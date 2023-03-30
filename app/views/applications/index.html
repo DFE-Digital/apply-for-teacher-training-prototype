@@ -12,7 +12,12 @@
     {% if data | allSectionsCompleted %}
 
       {% if numberOfApplicationsLeft > 0 %}
-        <p class="govuk-body">You can apply to up to 4 courses at a time</p>
+
+        {% if numberOfApplicationsLeft == 4 %}
+          <p class="govuk-body">You can add to up to 4 applications at a time.</p>
+        {% else %}
+          <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
+        {% endif %}
 
         {{ govukButton({
           text: "Add application",
@@ -39,8 +44,6 @@
               {{ otherCourse }}<br>
             {% endfor %}
           {% endif %}
-
-
         {% endset %}
 
 
@@ -48,9 +51,19 @@
           {% if application.status == "Awaiting decision" %}
             <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
             <div class="govuk-!-margin-top-2">The provider must make a decision by 18 May 2023.</div>
-          {% else %}
+          {% elseif application.status == "Offer received" %}
+            <span class="govuk-tag govuk-tag--green"> {{ application.status }}</span>
+            <div class="govuk-!-margin-top-2">
+              <a href="/applications/{{ id }}/respond">Respond to offer</a>
+            </div>
+            <div class="govuk-!-margin-top-2">
+              You have until 14 May 2023 to respond
+            </div>
+          {% elseif application.status == "Not sent" %}
             <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
             <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
+          {% elseif application.status == "Offer declined" %}
+            <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
           {% endif %}
         {% endset %}
 
@@ -84,7 +97,7 @@
               {
                 href: "/applications/" + id + "/course",
                 text: "Change"
-              } if application.status != 'Awaiting decision'
+              } if application.status == 'Not sent'
             ]
             }
           },

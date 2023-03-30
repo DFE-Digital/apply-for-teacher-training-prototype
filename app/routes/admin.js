@@ -167,23 +167,19 @@ module.exports = router => {
 
   // This lets the candidate receive an offer from all their chocies
   router.get('/admin/receive-offer', (req, res) => {
-    for (const choice of Object.values(req.session.data.choices)) {
-      choice.status = 'Offer received'
-      choice.conditions = [
+
+    let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+
+    if (offersAwaitingDecision.length > 0) {
+
+      offersAwaitingDecision[0].status = "Offer received"
+      offersAwaitingDecision[0].conditions = [
         { title: 'Fitness to train to teach check', status: 'Pending' },
         { title: 'Disclosure and barring service check', status: 'Pending' }
       ]
-      choice.skeConditions = [
-        {
-          subject: 'English',
-          lengthInWeeks: 20,
-          reason: 'degree-subject',
-          status: 'Not met'
-        }
-      ]
     }
 
-    res.redirect('/dashboard')
+    res.redirect('/applications')
   })
 
   // This pre-fills most of the applicaiton apart from the sections we want to test.

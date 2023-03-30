@@ -12,9 +12,9 @@ module.exports = router => {
 
     const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
 
-    const applicationsAwaitingDecision = applications.filter(a => (a.status === 'Awaiting decision'))
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
 
-    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecision.length)
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render('applications/index', {
       numberOfApplicationsLeft
@@ -435,6 +435,13 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/respond', (req, res) => {
+    const { id } = req.params
+    res.render('applications/respond', {
+      id
+    })
+  })
+
   router.post('/applications/:id/submit', (req, res) => {
     const { id } = req.params
 
@@ -456,6 +463,20 @@ module.exports = router => {
     const { id } = req.params
 
     delete req.session.data.applications[id]
+
+    res.redirect('/applications')
+  })
+
+  router.post('/applications/:id/decision', (req, res) => {
+    const { id } = req.params
+    const decision = req.body.decision
+    const application = req.session.data.applications[id]
+
+    if (decision === 'accept') {
+      application.status = 'Conditions pending'
+    } else if (decision == 'decline') {
+      application.status = 'Offer declined'
+    }
 
     res.redirect('/applications')
   })

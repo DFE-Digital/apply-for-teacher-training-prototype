@@ -8,6 +8,19 @@ module.exports = router => {
   })
 
 
+  router.get('/applications', (req, res) => {
+
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+
+    const applicationsAwaitingDecision = applications.filter(a => (a.status === 'Awaiting decision'))
+
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecision.length)
+
+    res.render('applications/index', {
+      numberOfApplicationsLeft
+    })
+  })
+
   // Branch based on whether they said they know which course to
   // apply to.
   router.post('/applications/course-known', (req, res) => {
@@ -223,6 +236,36 @@ module.exports = router => {
     })
   })
 
+  router.post('/applications/:id/provider', (req, res) => {
+    const { id } = req.params
+
+    const providerSelected = req.body.applications[id].providerName;
+
+    let otherApplications = []
+    if (req.session.data.applications){
+      for (otherApplicationId of Object.keys(req.session.data.applications)) {
+        if (id != otherApplicationId) {
+          otherApplications.push(req.session.data.applications[otherApplicationId])
+        }
+      }
+    }
+
+    const providersWaitingOnDecision = otherApplications.filter(application => application.status == 'Awaiting decision').map(application => application.providerName)
+
+    const providersInDraft = otherApplications.filter(application => application.status == 'Not sent').map(application => application.providerName)
+
+    if (providersWaitingOnDecision.includes(providerSelected)) {
+      req.session.data.applications[id].providerName = null
+      res.redirect(`/applications/${id}/provider-already-submitted`)
+    } else if (providersInDraft.includes(providerSelected)) {
+      req.session.data.applications[id].providerName = null
+      res.redirect(`/applications/${id}/provider-already-selected`)
+    } else {
+      res.redirect(`/applications/${id}/course`)
+    }
+
+  })
+
   router.get('/applications/:id/course', (req, res) => {
     const { id } = req.params
 
@@ -383,6 +426,13 @@ module.exports = router => {
   router.get('/applications/:id/provider-already-selected', (req, res) => {
     const { id } = req.params
     res.render('applications/provider-already-selected', {
+      id
+    })
+  })
+
+  router.get('/applications/:id/provider-already-submitted', (req, res) => {
+    const { id } = req.params
+    res.render('applications/provider-already-submitted', {
       id
     })
   })

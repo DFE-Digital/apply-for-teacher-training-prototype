@@ -8,10 +8,9 @@
 
     <h1 class="govuk-heading-l">Your applications</h1>
 
-
     {% if data | allSectionsCompleted %}
 
-      {% if 1==1 %}
+      {% if numberOfApplicationsLeft > 0 %}
         <p class="govuk-body">You can apply to up to 4 courses at a time</p>
 
         {{ govukButton({
@@ -25,7 +24,6 @@
 
 
       {% for id, application in data.applications %}
-
 
         {% set statusHtml %}
           {% if application.status == "Awaiting decision" %}

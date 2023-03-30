@@ -12,10 +12,10 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title}}</h1>
 
-      <form action="/applications/{{ id }}/course" method="post">
+      <form action="/applications/{{ id }}/provider" method="post">
         {{ govukSelect({
           name: "applications[" + id + "][providerName]",
-          value: applications[id].providerName,
+          value: data.applications[id].providerName,
           label: {
             text: "Provider name"
           },

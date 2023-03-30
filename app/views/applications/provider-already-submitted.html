@@ -1,0 +1,22 @@
+{% extends "layouts/main.html" %}
+
+{% set title = "Interview needs for " + data.applications[id].providerName %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/provider",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">You’ve already applied to {{ data.applications[id].providerName }}</h1>
+
+      <p class="govuk-body">Your <a href="#">application to {{ data.applications[id].providerName }} for Chemistry (GS14)</a> is awaiting a decision.</p>
+
+      <p class="govuk-body">Speak to {{ data.applications[id].providerName }} if you would to discuss other courses they offer.</p>
+  </div>
+{% endblock %}

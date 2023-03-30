@@ -8,6 +8,7 @@
 
     <h1 class="govuk-heading-l">Your applications</h1>
 
+
     {% if data | allSectionsCompleted %}
 
       {% if numberOfApplicationsLeft > 0 %}
@@ -24,6 +25,24 @@
 
 
       {% for id, application in data.applications %}
+
+        {% set courseHtml %}
+          {{ application.course }}
+          <br>PGCE <br>1 year full time
+
+          {% if application.otherCourses | first == "no" %}
+          {% else %}
+            <br><br>
+              Also interested in:
+            <br>
+            {% for otherCourse in application.otherCourses %}
+              {{ otherCourse }}<br>
+            {% endfor %}
+          {% endif %}
+
+
+        {% endset %}
+
 
         {% set statusHtml %}
           {% if application.status == "Awaiting decision" %}
@@ -58,7 +77,7 @@
               text: "Course"
             },
             value: {
-              html: application.course + "<br>PGCE <br>1 year full time"
+              html: courseHtml
             },
             actions: {
               items: [

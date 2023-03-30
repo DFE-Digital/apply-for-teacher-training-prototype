@@ -255,10 +255,8 @@ module.exports = router => {
     const providersInDraft = otherApplications.filter(application => application.status == 'Not sent').map(application => application.providerName)
 
     if (providersWaitingOnDecision.includes(providerSelected)) {
-      req.session.data.applications[id].providerName = null
       res.redirect(`/applications/${id}/provider-already-submitted`)
     } else if (providersInDraft.includes(providerSelected)) {
-      req.session.data.applications[id].providerName = null
       res.redirect(`/applications/${id}/provider-already-selected`)
     } else {
       res.redirect(`/applications/${id}/course`)

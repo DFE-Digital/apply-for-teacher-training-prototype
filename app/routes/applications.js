@@ -1,5 +1,73 @@
 const utils = require('./../utils')
 
+const courses = [
+      {
+        title: 'Art and Design (2NJL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Biology (83SL)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Chemistry (8FYF)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Computing (20SY)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Design and Technology (1L0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'English (4J7S)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'English (73LS)',
+        qualification: 'QTS full time with salary'
+      },
+      {
+        title: 'History (2L5D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Mathematics (8S0D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Physics (1A6W)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Engineers teach physics (83PE)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (3-7) (7S9D)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary (5-11) (63KD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (3-7) (73LD)',
+        qualification: 'QTS full time'
+      },
+      {
+        title: 'Primary with mathematics (5-11) (945J)',
+        qualification: 'QTS full time'
+      },
+      ,
+      {
+        title: 'Primary with SEND (74U1)',
+        qualification: 'QTS full time'
+      }
+    ]
+
 module.exports = router => {
 
   router.get('/applications/start', (req, res) => {
@@ -12,11 +80,12 @@ module.exports = router => {
 
     const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
 
-    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    // const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
 
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
 
-    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+    const numberOfApplicationsLeft = 4
+    // - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render('applications/index', {
       applicationAccepted,
@@ -270,74 +339,6 @@ module.exports = router => {
   router.get('/applications/:id/course', (req, res) => {
     const { id } = req.params
 
-    const courses = [
-      {
-        title: 'Art and Design (2NJL)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Biology (83SL)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Chemistry (8FYF)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Computing (20SY)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Design and Technology (1L0D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'English (4J7S)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'English (73LS)',
-        qualification: 'QTS full time with salary'
-      },
-      {
-        title: 'History (2L5D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Mathematics (8S0D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Physics (1A6W)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Engineers teach physics (83PE)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary (3-7) (7S9D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary (5-11) (63KD)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary with mathematics (3-7) (73LD)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary with mathematics (5-11) (945J)',
-        qualification: 'QTS full time'
-      },
-      ,
-      {
-        title: 'Primary with SEND (74U1)',
-        qualification: 'QTS full time'
-      }
-    ]
-
     const courseItems = courses
       .sort((a, b) => (a.title.localeCompare(b.title)))
       .map(course => ({ text: course.title, value: course.title, hint: { text: course.qualification } }))
@@ -351,75 +352,8 @@ module.exports = router => {
   router.get('/applications/:id/courses-other', (req, res) => {
     const { id } = req.params
 
-    const courses = [
-      {
-        title: 'Art and Design (2NJL)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Biology (83SL)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Chemistry (8FYF)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Computing (20SY)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Design and Technology (1L0D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'English (4J7S)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'English (73LS)',
-        qualification: 'QTS full time with salary'
-      },
-      {
-        title: 'History (2L5D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Mathematics (8S0D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Physics (1A6W)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Engineers teach physics (83PE)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary (3-7) (7S9D)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary (5-11) (63KD)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary with mathematics (3-7) (73LD)',
-        qualification: 'QTS full time'
-      },
-      {
-        title: 'Primary with mathematics (5-11) (945J)',
-        qualification: 'QTS full time'
-      },
-      ,
-      {
-        title: 'Primary with SEND (74U1)',
-        qualification: 'QTS full time'
-      }
-    ]
-
     var courseItems = courses
+      .filter(course => course.title != req.session.data.applications[id].course)
       .sort((a, b) => (a.title.localeCompare(b.title)))
       .map(course => ({ text: course.title, value: course.title, hint: { text: course.qualification } }))
 

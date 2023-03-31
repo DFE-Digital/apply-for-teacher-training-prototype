@@ -14,14 +14,14 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">If you’d like to be considered for alternative courses you can indicate them here. This will be submitted along with your 1 application.</p>
+      <p class="govuk-body">You can choose other courses offered by this training provider. Any courses you choose will be included in this application.</p>
 
       <form action="/applications/{{ id }}/personal-statement" method="post">
 
         {{ govukCheckboxes({
           fieldset: {
             legend: {
-              text: "Are you interested in any of these other courses?",
+              text: "Are you interested in any other courses?",
               classes: "govuk-fieldset__legend--m"
             }
           },

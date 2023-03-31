@@ -25,11 +25,11 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">Your details will be shared with the provider of any course you apply to. You can update your details at any time.</p>
+      <p class="govuk-body">Complete these sections so that you can start applying to courses. Your details will be shared with the training provider of any course you apply to.</p>
 
     {% if data | allSectionsCompleted %}
     {% else %}
-      <p class="govuk-body">Complete these sections so that you can apply to courses.</p>
+      <p class="govuk-body">You can update your details at any time.</p>
     {% endif %}
 
       <section class="app-section">
@@ -167,7 +167,12 @@
         {{ govukTaskList({
           items: [{
             title: { text: "Equality and diversity questions" },
-            href: "/equality-monitoring"
+            href: "/equality-monitoring",
+            id: "equality",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.equality == 'true'),
+              text: tagTextForSection(completed=data.completed.equality == 'true')
+            }
           }]
         }) }}
       </section>

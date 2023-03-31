@@ -142,6 +142,14 @@ module.exports = router => {
     // Set safeguarding
     data.safeguarding = 'no'
 
+    // Set equality questions
+    data.equalityMonitoring = {
+      disabilities: ['none'],
+      ethnicGroup: 'Prefer not to say',
+      freeSchoolMeals: 'I do not know',
+      sex: "Prefer not to say"
+    }
+
     // Set completed sections
     data.completed = {
       personalInformation: 'true',
@@ -159,7 +167,8 @@ module.exports = router => {
       additionalSupport: 'true',
       interviewNeeds: 'true',
       references: 'true',
-      safeguarding: 'true'
+      safeguarding: 'true',
+      equalityMonitoring: 'true'
     }
 
     res.redirect('/details')

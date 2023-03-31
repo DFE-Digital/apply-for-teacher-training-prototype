@@ -110,9 +110,29 @@
     }]
   }) }}
 
+    <form action="/details" method="post">
+      {{ govukRadios({
+        name: "completed[equalityMonitoring]",
+        value: data.completed.equalityMonitoring,
+        fieldset: {
+          classes: "govuk-!-width-two-thirds",
+          legend: {
+            text: "Have you completed this section?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [{
+          value: "true",
+          text: "Yes, I’ve completed this section"
+        }, {
+          value: "false",
+          text: "No, I’ll come back to it later"
+        }]
+      }) }}
 
-  {{ govukButton({
-    text: "Continue",
-    href: "/details"
-  }) }}
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </form>
+
 {% endblock %}

@@ -28,13 +28,21 @@
             <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
           {% endif %}
 
+          <div class="govuk-inset-text">
+            <p class="govuk-body">Providers offer places as people apply through the year, and courses stay open until they are full.</p>
+
+            <p class="govuk-body">If you’re keen to join a popular course it’s wise to apply as soon as you’re ready rather than putting it off.</p>
+          </div>
+
           {{ govukButton({
             text: "Add application",
             href: "/applications/start"
           }) }}
 
         {% else %}
-          <p class="govuk-body">You cannot apply to any more courses as you are awaiting decisions on 4 courses.</p>
+          <p class="govuk-body">You cannot add any more applications because you’re waiting for decisions on 4 others.</p>
+          <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
+
         {% endif %}
 
 

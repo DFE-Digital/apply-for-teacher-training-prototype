@@ -13,6 +13,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">Use this section to tell us anything else you think {{ data.applications[id].providerName }} should know about your application.</p>
+      
 
       <form action="/applications/{{ id }}/review" method="post">
         {% set additionalInformationHtml %}
@@ -21,7 +23,7 @@
             name: "applications[" + id + "][additionalInformationDetail]",
             value: data.applications[id].additionalInformationDetail,
             label: {
-              text: "Enter further information"
+              text: "Enter additional information"
             },
             maxlength: 300,
             threshold: 75

@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block pageTitle %}
-   {{ title }} - {{ serviceName }}
+   {% if title %}{{ title }}{% endif %}{% if title and serviceName %} - {% endif %}{% if serviceName %}{{ serviceName }}{% endif %}
 {% endblock %}
 
 {% block footer %}

@@ -120,32 +120,37 @@
 
       })}}
 
-      <form action="/applications/{{ id }}/submit" method="post">
-        {{ govukRadios({
-          name: "submitNow",
-          fieldset: {
-            legend: {
-              text: "Do you want to submit your application?",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes, submit it now"
+      {% if numberOfApplicationsLeft > 0 %}
+
+        <form action="/applications/{{ id }}/submit" method="post">
+          {{ govukRadios({
+            name: "submitNow",
+            fieldset: {
+              legend: {
+                text: "Do you want to submit your application?",
+                classes: "govuk-fieldset__legend--m"
+              }
             },
-            {
-              value: "no",
-              text: "No, save it as a draft"
-            }
-          ]
-        }) }}
+            items: [
+              {
+                value: "yes",
+                text: "Yes, submit it now"
+              },
+              {
+                value: "no",
+                text: "No, save it as a draft"
+              }
+            ]
+          }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        })}}
-
-      </form>
+          {{ govukButton({
+            text: "Continue"
+          })}}
+        </form>
+      {% else %}
+        <p class="govuk-body">You cannot submit this application as you are awaiting decisions on 4 courses.</p>
+        <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

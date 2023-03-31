@@ -80,12 +80,11 @@ module.exports = router => {
 
     const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
 
-    // const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
 
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
 
-    const numberOfApplicationsLeft = 4
-    // - (applicationsAwaitingDecisionOrReceivedOffer.length)
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render('applications/index', {
       applicationAccepted,
@@ -394,9 +393,16 @@ module.exports = router => {
   })
 
   router.get('/applications/:id/review', (req, res) => {
+
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
     const { id } = req.params
     res.render('applications/review', {
-      id
+      id,
+      numberOfApplicationsLeft
     })
   })
 

@@ -13,7 +13,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
-      <p class="govuk-body">Use this section to tell us anything else you think {{ data.applications[id].providerName }} should know about your application.</p>
+      <p class="govuk-body">Use this section to tell {{ data.applications[id].providerName }} anything else about your application.</p>
       
 
       <form action="/applications/{{ id }}/review" method="post">
@@ -36,7 +36,7 @@
           fieldset: {
             legend: {
               classes: "govuk-fieldset__legend--m",
-              text: "Is there anything else you would like to tell us?"
+              text: "Is there anything else you would like to say about your application?"
             }
           },
           items: [{

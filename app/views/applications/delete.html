@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 {% set section = "applications" %}
 
-{% set title = "Are you sure you want to delete this course choice?" %}
+{% set title = "Are you sure you want to delete this application?" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -17,7 +17,7 @@
 
       <form action="/applications/{{ id }}/delete" method="post">
         {{ govukButton({
-          text: "Yes I’m sure - delete this course choice",
+          text: "Yes I’m sure - delete this application",
           classes: "govuk-button--warning"
         }) }}
       </form>

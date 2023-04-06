@@ -205,6 +205,20 @@ module.exports = router => {
     res.redirect('/applications')
   })
 
+    // This makes an application inactive
+    router.get('/admin/receive-inactive', (req, res) => {
+
+      let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+  
+      if (offersAwaitingDecision.length > 0) {
+  
+        offersAwaitingDecision[0].status = "Inactive"
+        offersAwaitingDecision[0].rejectionFeedback = "You can add another application for a different training provider while you wait for a response on this application"
+      }
+  
+      res.redirect('/applications')
+    })
+
   // This pre-fills most of the applicaiton apart from the sections we want to test.
   router.get('/admin/receive-references', (req, res) => {
     const timeNow = new Date().toISOString()

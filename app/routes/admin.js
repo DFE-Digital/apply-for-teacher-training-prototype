@@ -199,7 +199,7 @@ module.exports = router => {
     if (offersAwaitingDecision.length > 0) {
 
       offersAwaitingDecision[0].status = "Unsuccessful"
-      offersAwaitingDecision[0].rejectionFeedback = "Test"
+      offersAwaitingDecision[0].rejectionFeedback = "Unfortunately, the course is now full."
     }
 
     res.redirect('/applications')

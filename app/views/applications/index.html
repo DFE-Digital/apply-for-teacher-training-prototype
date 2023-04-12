@@ -119,7 +119,7 @@
               items: [
               {
                 href: "/applications/" + id + "/delete",
-                text: ("Withdraw" if application.status === "Awaiting decision" else "Remove"),
+                text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  else "Remove"),
                 visuallyHiddenText: "from " + application.providerName,
                 classes: ""
               }

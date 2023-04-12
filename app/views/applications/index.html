@@ -102,9 +102,9 @@
             {% elseif application.status == "Inactive" %}
             <span class="govuk-tag govuk-tag--pink"> {{ application.status }}</span>
             <div class="govuk-!-margin-top-2">
-            The training provider has not responded to you for 20 working days.
+            The training provider has not made a decision within 40 working days.
             <br><br>
-              {{ application.rejectionFeedback }}
+            You can add an application for a different training provider while you wait for a decision on this application
           {% else  %}
             <span class="govuk-tag"> {{ application.status }}</span>
           {% endif %}

@@ -60,14 +60,16 @@
           {{ application.course }}
           <br>PGCE <br>1 year full time
 
-          {% if application.otherCourses | first == "no" %}
-          {% else %}
-            <br><br>
-              Also interested in:
-            <br>
-            {% for otherCourse in application.otherCourses %}
-              {{ otherCourse }}<br>
-            {% endfor %}
+          {% if application.otherCourses %}
+            {% if application.otherCourses | first == "no" %}
+            {% else %}
+              <br><br>
+                Also interested in:
+              <br>
+              {% for otherCourse in application.otherCourses %}
+                {{ otherCourse }}<br>
+              {% endfor %}
+            {% endif %}
           {% endif %}
         {% endset %}
 
@@ -159,7 +161,7 @@
             value: {
               html: "The provider will be in touch if they want to invite you to an interview."
             }
-          } if application.status === 'Awaiting decision']
+          } if application.status === 'Awaiting decision' and 1==2]
         }) }}
 
       {% endfor %}
@@ -294,6 +296,7 @@
 </table>
 -->
     {% endif %}
+
 
   </div>
 </div>

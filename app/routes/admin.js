@@ -1,3 +1,6 @@
+const utils = require('./../utils')
+const data = require('./../utils/data')
+
 /**
  * Admin routes
  */
@@ -229,6 +232,46 @@ module.exports = router => {
     }
 
     res.redirect('/accepted')
+  })
+
+  // This pre-fills most of the applicaiton apart from the sections we want to test.
+  router.get('/admin/add-application', (req, res) => {
+    const timeNow = new Date().toISOString()
+    const id = utils.generateRandomString()
+
+    req.session.data.applications ||= {}
+    let applications = req.session.data.applications
+
+    const applicationsAwaitingDecisionOrReceivedOffer = Object.values(applications).filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const applicationAccepted = Object.values(applications).find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
+
+    if (numberOfApplicationsLeft > 0) {
+
+      const providersAlreadyAppliedTo = Object.values(applications).filter(application =>
+        (application.status == 'Awaiting decision' || application.status == 'Inactive' || application.status == 'Offer received')
+      ).map(application => application.providerName)
+
+
+      const providersNotYetAppliedTo = data.providers.filter(provider =>
+        (!providersAlreadyAppliedTo.includes(provider))
+      )
+
+
+      const course = data.courses[Math.floor(Math.random() * data.courses.length)].title
+      const providerName = providersNotYetAppliedTo[Math.floor(Math.random() * providersNotYetAppliedTo.length)]
+
+      applications[id] = {
+        status: 'Awaiting decision',
+        submittedAt: timeNow,
+        course: course,
+        providerName: providerName,
+        otherCourses: ['no']
+      }
+    }
+
+    res.redirect('/applications')
   })
 
   // This marks all conditions as met

@@ -274,6 +274,54 @@ module.exports = router => {
     res.redirect('/applications')
   })
 
+
+  router.get('/admin/setup-applications', (req, res) => {
+    const timeNow = new Date().toISOString()
+
+    req.session.data.applications = {}
+    let applications = req.session.data.applications
+
+
+    applications['L59DP'] = {
+      status: 'Awaiting decision',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[1],
+      otherCourses: ['no']
+    }
+
+    applications['I61MD'] = {
+      status: 'Inactive',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[2],
+      otherCourses: ['no']
+    }
+
+    applications['H746A'] = {
+      status: 'Unsuccessful',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[3],
+      rejectionFeedback: "Unfortunately, the course is now full.",
+      otherCourses: ['no']
+    }
+
+    applications['Z95LE'] = {
+      status: 'Offer received',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[4],
+      otherCourses: ['no'],
+      conditions: [
+        { title: 'Fitness to train to teach check', status: 'Pending' },
+        { title: 'Disclosure and barring service check', status: 'Pending' }
+      ]
+    }
+
+    res.redirect('/applications')
+  })
+
   // This marks all conditions as met
   router.get('/admin/meet-conditions', (req, res) => {
     let acceptedChoice

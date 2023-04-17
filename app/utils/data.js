@@ -28,6 +28,18 @@ const courses = [
     qualification: 'QTS full time with salary'
   },
   {
+    title: 'French (84TX)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'French with Spanish (94PF)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'French with Italian (09LF)',
+    qualification: 'QTS full time'
+  },
+  {
     title: 'History (2L5D)',
     qualification: 'QTS full time'
   },
@@ -36,7 +48,19 @@ const courses = [
     qualification: 'QTS full time'
   },
   {
+    title: 'Music (M4FP)',
+    qualification: 'QTS full time'
+  },
+  {
     title: 'Physics (1A6W)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'Physical education (94YD)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'Physical education with English (945X)',
     qualification: 'QTS full time'
   },
   {
@@ -61,6 +85,14 @@ const courses = [
   },
   {
     title: 'Primary with SEND (74U1)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'Religious educaiton (94UD)',
+    qualification: 'QTS full time'
+  },
+  {
+    title: 'Spanish (03YD)',
     qualification: 'QTS full time'
   }
 ]

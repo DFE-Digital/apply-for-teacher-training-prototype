@@ -86,10 +86,6 @@
   background-color:  govuk-colour("blue");
 }
 
-.app-header--full-width-blue-border .govuk-header__container {
-  border-bottom-width: 0px;
-}
-
 .app-\!-background-grey {
   background-color: govuk-colour("light-grey");
 }
@@ -97,6 +93,11 @@
 .app-secondary-nav {
   display: table;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.app-secondary-nav__nav {
+  display: table-cell;
 }
 
 .app-secondary-nav a {
@@ -105,13 +106,9 @@
   font-weight: bold;
 }
 
-.app-secondary-nav__nav {
-  display: table-cell;
-}
-
 .app-secondary-nav__nav a {
-  padding: 15px 0 10px 0;
-  margin-right: 30px;
+  padding: 10px 0 5px 0;
+  margin-right: 15px;
 }
 
 .app-secondary-nav__nav a[aria-current] {
@@ -122,6 +119,16 @@
   display: table-cell;
   text-align: right;
 }
+
+
+@include govuk-media-query($from: tablet) {
+  .app-secondary-nav__nav a {
+    padding: 15px 0 10px 0;
+    margin-right: 30px;
+  }
+}
+
+
 
 
 .app-messages-count {

@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 {% set section = "applications" %}
-{% set title = "Cover letter" %}
+{% set title = "Personal statement" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -16,25 +16,23 @@
 
 
       {% set guidanceHtml %}
-
-        <p class="govuk-body">Use this to tell {{ data.applications[id].providerName }} why you want to train to be a teacher with them.</p>
-
-        <p class="govuk-body">You could write about:</p>
+        <p class="govuk-body">You should write between 500 and 1000 words for your personal statement.</p>
+        <p class="govuk-body">Here are some examples you could write about (they are just a guide, you do not need to write about all of them):</p>
 
         <ul class="govuk-list govuk-list--bullet">
+          <li>skills you have that are relevant to teaching</li>
+          <li>any experience of working with young people</li>
+
           {% set primaryRegex = r/^Primary\s.*/g %}
           {% set courseCodeRegex = r/\([^)]+\)/ %}
           {% if primaryRegex.test(data.applications[id].course) %}
           {% else %}
             <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
           {% endif %}
-
-          <li>skills you have that are relevant to teaching</li>
-          <li>any experience of working with young people</li>
           <li>your understanding of why teaching is important</li>
+          <li>your reasons for wanting to train to be a teacher</li>
+          <li>any activities you’ve done that could be relevant to teaching like first aid courses, sports coaching or volunteering</li>
         </ul>
-
-        <p>You can write up to 600 words.</p>
 
       {% endset %}
 
@@ -46,11 +44,11 @@
           value: data.applications[id].personalStatement,
           id: "personal-statement",
           label: {
-            text: "Your cover letter",
+            text: "Your personal statement",
             classes: "govuk-label--m govuk-!-margin-top-6"
           },
-          rows: 10,
-          maxwords: 600
+          rows: 15,
+          maxwords: 1000
         }) }}
 
         {{ govukButton({

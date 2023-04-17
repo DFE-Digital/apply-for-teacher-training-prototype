@@ -84,11 +84,15 @@ const courses = [
     qualification: 'QTS full time'
   },
   {
+    title: 'Primary with science (5-11) (84DP)',
+    qualification: 'QTS full time'
+  },
+  {
     title: 'Primary with SEND (74U1)',
     qualification: 'QTS full time'
   },
   {
-    title: 'Religious educaiton (94UD)',
+    title: 'Religious education (94UD)',
     qualification: 'QTS full time'
   },
   {

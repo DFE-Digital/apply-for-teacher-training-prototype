@@ -74,20 +74,33 @@
   color:  $govuk-secondary-text-colour;
 }
 
-.app-header--full-width-blue-border {
+.app-header--no-border {
   border-bottom-width: 0;
 }
 
+
+.app-header--no-border .govuk-header__container {
+  border-bottom-width: 0;
+  margin-bottom: 0;
+}
+
 .app-header--full-width-blue-border:after {
-  content: '';
-  width: 100%;
-  display: block;
-  height: 10px;
-  background-color:  govuk-colour("blue");
+  // content: '';
+  // width: 100%;
+  // display: block;
+  // height: 10px;
+  // background-color:  govuk-colour("blue");
+}
+
+.app-header--full-width-blue-border .govuk-header__container  {
+  border-bottom-width: 0;
+  margin-bottom: 0;
 }
 
 .app-\!-background-grey {
   background-color: govuk-colour("light-grey");
+  border-bottom: 1px solid $govuk-border-colour;
+  padding-top: 15px;
 }
 
 .app-secondary-nav {
@@ -106,18 +119,70 @@
   font-weight: bold;
 }
 
-.app-secondary-nav__nav a {
+.app-secondary-nav__sign-out a {
   padding: 10px 0 5px 0;
-  margin-right: 15px;
+  margin-left: 30px;
 }
 
-.app-secondary-nav__nav a[aria-current] {
+.app-secondary-nav__sign-out a[aria-current] {
   border-bottom: #1d70b8 5px solid;
 }
 
 .app-secondary-nav__sign-out {
   display: table-cell;
   text-align: right;
+}
+
+.app-one-login-logo {
+  display: inline-block;
+  margin-left: 10px;
+  top: 6px;
+  box-sizing: border-box;
+  content: '';
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border-radius: 11px;
+  position: relative;
+}
+
+.app-one-login-logo-border {
+  display: inline-block;
+  box-sizing: border-box;
+  content: '';
+  width: 32px;
+  height: 32px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 16px;
+  position: absolute;
+  left: -6px;
+  top: -6px;
+}
+
+.app-one-login-logo:before {
+  display: inline-block;
+  box-sizing: border-box;
+  content: '';
+  width: 13px;
+  height: 13px;
+  background-color: govuk-colour("light-blue");
+  border-radius: 6.5px;
+  position: absolute;
+  top: 13px; left: 3.5px;
+}
+
+.app-one-login-logo:after {
+  display: inline-block;
+  box-sizing: border-box;
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: govuk-colour("light-blue");
+  border-radius: 4px;
+  position: absolute;
+  top: 3px; left: 6px;
 }
 
 
@@ -128,7 +193,23 @@
   }
 }
 
+.app-header__content--one-login {
+  text-align: right;
+}
+.app-header__content__link {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  @include govuk-font($size: 19, $weight: 'bold');
+  line-height: 60px;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid white;
+}
 
+.app-header__content__link:visited {
+  color: white;
+}
 
 
 .app-messages-count {

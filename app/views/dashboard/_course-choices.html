@@ -122,10 +122,10 @@
         {% endfor %}
       </ul>
       <p class="govuk-body">Contact the provider to find out more about these conditions.</p>
-      <p class="govuk-body">They’ll confirm your place once you’ve met the conditions and they’ve checked your references.</p>
+      <p class="govuk-body">They’ll confirm your place once you’ve met the conditions.</p>
     {% else %}
       <p class="govuk-body">Contact the provider to find out more about any conditions.</p>
-      <p class="govuk-body">They’ll confirm your place once you’ve met any conditions and they’ve checked your references.</p>
+      <p class="govuk-body">They’ll confirm your place once you’ve met any conditions.</p>
 
     {% endif %}
   {% endset %}
@@ -150,6 +150,13 @@
   {% set summaryHeaderHtml %}
     {{ item.providerName }}
     <div class="govuk-!-font-weight-regular">{{ item.course }}</div>
+  {% endset %}
+  
+  {% set referencesHtml %}
+     
+    <p class="govuk-body">{{ item.providerName }} said:</p>
+
+    <p class="govuk-body">2 references one from your current employer and one from your university professor.</p>
   {% endset %}
 
   {% if item.skeConditions %}
@@ -209,7 +216,15 @@
         value: {
           html: skeHtml
         }
-      } if item.skeConditions, {
+      } if item.skeConditions, 
+      {
+       key: {
+          text: "References"
+        },
+        value: {
+          html: referencesHtml | safe
+        }
+      },{
         key: {
           text: "Conditions"
         },

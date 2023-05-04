@@ -50,8 +50,15 @@
       {% endif %}
 
       <h2 class="govuk-heading-m govuk-!-padding-top-4">References</h2>
+      {% if acceptedChoice.status == "Conditions pending" %}
+      <p class="govuk-body govuk-!-margin-bottom-2">{{ acceptedChoice.providerName }} said:</p>
+
+      <div class="govuk-inset-text govuk-!-margin-top-2">
+        <p class="govuk-body">You need 2 references to be accepted.</p>
+      </div>
 
       <p class="govuk-body">Contact {{ acceptedChoice.providerName }} if you need help getting references.</p>
+      {% endif %}
 
       {% set referenceCondition = {} %}
         {% for condition in item.conditions %}
@@ -117,6 +124,7 @@
           }) }}
         {% endif %}
 
+        {% if acceptedChoice.status == "Conditions pending" %}
         <div class="govuk-button-group govuk-!-margin-bottom-6">
           {{ govukButton({
             text: "Request another reference",
@@ -124,6 +132,7 @@
             classes: "govuk-button--secondary"
           }) }}
         </div>
+        {% endif %}
 
         {% if acceptedChoice.skeConditions %}
 

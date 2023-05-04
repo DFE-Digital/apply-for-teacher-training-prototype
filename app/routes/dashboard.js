@@ -83,7 +83,7 @@ module.exports = router => {
     const choice = req.session.data.choices[id]
     const now = new Date()
 
-    choice.status = 'Pending conditions'
+    choice.status = 'Conditions pending'
 
     // Request all the references
     for (const reference of Object.values(req.session.data.references)) {

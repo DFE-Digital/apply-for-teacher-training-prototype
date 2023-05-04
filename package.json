@@ -9,7 +9,7 @@
     "@govuk-prototype-kit/common-templates": "^1.0.0",
     "govuk-frontend": "^4.5.0",
     "govuk-prototype-filters": "^0.1.0",
-    "govuk-prototype-kit": "^13.4.0",
+    "govuk-prototype-kit": "^13.6.2",
     "task-list-component": "^0.0.4"
   }
 }

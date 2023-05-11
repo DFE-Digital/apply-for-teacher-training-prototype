@@ -1,6 +1,12 @@
 {% set completed = data.completed.personalInformation %}
 {% set entered = data.firstName %}
 
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth.day %}
+    {{ data.dateOfBirth | isoDateFromDateInput | govukDate  }}
+  {% endif %}
+{% endset %}
+
 {{ govukSummaryList({
   rows: [{
     key: {
@@ -21,7 +27,7 @@
         text: "Date of birth"
       },
       value: {
-        text: data.dateOfBirth.day + "/" + data.dateOfBirth.month + "/" + data.dateOfBirth.year
+        text: dateOfBirthHtml
       },
       actions: {
         items: [{

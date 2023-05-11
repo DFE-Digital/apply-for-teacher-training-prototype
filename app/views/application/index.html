@@ -171,18 +171,11 @@
         <h2 class="govuk-heading-m">Personal statement</h2>
         {{ govukTaskList({
           items: [{
-            title: { text: "Why you want to teach" },
+            title: { text: "Your personal statement" },
             href: "/application/personal-statement",
             status: {
               classes: tagClassesForSection(completed=data.completed.personalStatement == 'true'),
               text: tagTextForSection(completed=data.completed.personalStatement == 'true')
-            }
-          }, {
-            title: { text: "Your suitability to teach a subject or age group" },
-            href: "/application/subject-knowledge",
-            status: {
-              classes: tagClassesForSection(completed=data.completed.subjectKnowledge == 'true'),
-              text: tagTextForSection(completed=data.completed.subjectKnowledge == 'true')
             }
           }]
         }) }}

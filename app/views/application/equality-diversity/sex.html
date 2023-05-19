@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/equality-diversity"
   }) }}
 {% endblock %}
 
@@ -17,7 +17,7 @@
 
       <p class="govuk-body">They will only see your answer if you accept an offer from them.</p>
 
-      <form action="/equality-monitoring/disabilities" method="post">
+      <form action="/application/equality-diversity/disabilities" method="post">
         {{ govukRadios({
           name: "equalityMonitoring[sex]",
           value: data.equalityMonitoring.sex,

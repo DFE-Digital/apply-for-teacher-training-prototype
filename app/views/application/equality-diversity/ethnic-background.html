@@ -12,7 +12,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/equality-diversity/ethnic-group"
   }) }}
 {% endblock %}
 
@@ -22,7 +22,7 @@
 
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/equality-monitoring/free-school-meals" method="post">
+      <form action="/application/equality-diversity/free-school-meals" method="post">
 
       {% set otherHtml %}
         {{ govukInput({

@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/equality-monitoring/sex"
+    href: "/application/equality-diversity/sex"
   }) }}
 {% endblock %}
 
@@ -34,7 +34,7 @@
           </p>
         {% endif %}
 
-        <form action="/equality-monitoring/ethnic-group" method="post">
+        <form action="/application/equality-diversity/ethnic-group" method="post">
 
           {{ govukCheckboxes({
             name: "equalityMonitoring[disabilities]",

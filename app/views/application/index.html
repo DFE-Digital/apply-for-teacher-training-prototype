@@ -225,6 +225,21 @@
         }) }}
       </section>
 
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Equality and diversity</h2>
+        <p class="govuk-body">These will only be shared with a provider if you accept an offer from them.</p>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "Equality and diversity questions" },
+            href: "/application/equality-diversity" + ("/review" if data.completed.equalityAndDiversity == 'true'),
+            id: "references",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.equalityAndDiversity == 'true'),
+              text: tagTextForSection(completed=data.completed.equalityAndDiversity == 'true')
+            }
+          }]
+        }) }}
+      </section>
       <section>
           <h2 class="govuk-heading-m">Review and send</h2>
           <p class="govuk-body">Review and send your application to your training providers.</p>

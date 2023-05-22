@@ -15,7 +15,12 @@
   {% if data.equalityMonitoring.ethnicGroup %}
     {% if data.equalityMonitoring.ethnicGroup != "Prefer not to say" %}
       {% if data.equalityMonitoring.ethnicBackground != "Prefer not to say" %}
-        {{ data.equalityMonitoring.ethnicBackground }}
+
+        {% if data.equalityMonitoring.ethnicBackground == "Any other ethnic group" or data.equalityMonitoring.ethnicBackground == "Any other White background" or data.equalityMonitoring.ethnicBackground == "Any other Mixed or Multiple ethnic background" or data.equalityMonitoring.ethnicBackground == "Any other Asian background" or data.equalityMonitoring.ethnicBackground == "Any other Black, African or Caribbean background" %}
+          {{ data.equalityMonitoring.otherEthnicBackground }}
+        {% else %}
+          {{ data.equalityMonitoring.ethnicBackground }}
+        {% endif %}
       {% endif %}
     {% else %}
       Prefer not to say
@@ -47,7 +52,7 @@
     },
     actions: {
       items: [{
-        href: "/equality-monitoring/sex?referrer=" + referrer,
+        href: "/application/equality-diversity/sex?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "sex"
       }]
@@ -61,7 +66,7 @@
     },
     actions: {
       items: [{
-        href: "/equality-monitoring/disabilities?referrer=" + referrer,
+        href: "/application/equality-diversity/disabilities?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "disability status"
       }]
@@ -75,7 +80,7 @@
     },
     actions: {
       items: [{
-        href: "/equality-monitoring/ethnic-group?referrer=" + referrer,
+        href: "/application/equality-diversity/ethnic-group?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "ethnic group?"
       }]
@@ -89,7 +94,7 @@
     },
     actions: {
       items: [{
-        href: "/equality-monitoring/free-school-meals?referrer=" + referrer,
+        href: "/application/equality-diversity/free-school-meals?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "eligibility for free school meals"
       }]

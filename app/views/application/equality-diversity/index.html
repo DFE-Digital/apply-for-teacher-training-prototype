@@ -15,12 +15,45 @@
 
       <p class="govuk-body">These will only be shared with a provider if you accept an offer from them.</p>
 
-      <p class="govuk-body">You can answer ’Prefer not to say’ to any question.</p>
+      {% if data.completed.equalityAndDiversity == 'true' or data.equalityMonitoring.sex %}
 
-      {{ govukButton({
-        text: "Continue",
-        href: "/application/equality-diversity/sex"
-      }) }}
+        {% include "_includes/review/equality-and-diversity.html" %}
+
+        <form action="/application" method="post">
+          {{ govukRadios({
+            name: "completed[equalityAndDiversity]",
+            fieldset: {
+              classes: "govuk-!-width-two-thirds",
+              legend: {
+                text: "Have you completed this section?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [{
+              value: "true",
+              text: "Yes, I’ve completed this section",
+              checked: (data.completed.equalityAndDiversity == 'true')
+            }, {
+              value: "false",
+              text: "No, I’ll come back to it later",
+              checked: (data.completed.equalityAndDiversity == 'false')
+            }]
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        </form>
+
+      {% else %}
+
+        <p class="govuk-body">You can answer ’Prefer not to say’ to any question.</p>
+
+        {{ govukButton({
+          text: "Continue",
+          href: "/application/equality-diversity/sex"
+        }) }}
+      {% endif %}
     </div>
   </div>
 {% endblock %}

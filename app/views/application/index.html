@@ -231,7 +231,7 @@
         {{ govukTaskList({
           items: [{
             title: { text: "Equality and diversity questions" },
-            href: "/application/equality-diversity" + ("/review" if data.completed.equalityAndDiversity == 'true'),
+            href: "/application/equality-diversity",
             id: "references",
             status: {
               classes: tagClassesForSection(completed=data.completed.equalityAndDiversity == 'true'),

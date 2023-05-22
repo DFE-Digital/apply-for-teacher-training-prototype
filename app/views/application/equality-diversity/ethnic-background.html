@@ -26,10 +26,12 @@
 
       {% set otherHtml %}
         {{ govukInput({
+          name: "equalityMonitoring[otherEthnicBackground]",
           classes: "govuk-!-width-two-thirds",
           label: {
             text: "How would you describe your background? (optional)"
-          }
+          },
+          value: data.equalityMonitoring.otherEthnicBackground
         }) }}
       {% endset -%}
 

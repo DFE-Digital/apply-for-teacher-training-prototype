@@ -3,6 +3,9 @@
 @import "components/hidden-link";
 @import "components/inset-text";
 @import "components/section";
+@import "components/phase-banner";
+@import "components/header";
+@import "components/secondary-nav";
 
 .govuk-body {
   word-wrap: break-word;
@@ -73,3 +76,9 @@
 .app-\!-colour-secondary {
   color:  $govuk-secondary-text-colour;
 }
+
+
+.app-\!-background-grey {
+  background-color: govuk-colour("light-grey");
+}
+

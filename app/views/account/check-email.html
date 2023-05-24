@@ -2,6 +2,7 @@
 
 {% set title = "Check your email to sign in" if action == "sign-in" else "Check your email" %}
 {% set hasAccountLinks = false %}
+{% set signedIn = false %}
 
 {% block content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>

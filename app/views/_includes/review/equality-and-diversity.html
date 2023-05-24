@@ -37,8 +37,10 @@
     I did not receive free school meals at any point during my school years
   {% elif data.equalityMonitoring.freeSchoolMeals == "I do not know" %}
     I do not know whether I received free school meals at any point during my school years
-  {% else %}
+  {% elif data.equalityMonitoring.freeSchoolMeals  %}
     {{ data.equalityMonitoring.freeSchoolMeals }}
+  {% else %}
+    Not entered
   {% endif %}
 {% endset %}
 

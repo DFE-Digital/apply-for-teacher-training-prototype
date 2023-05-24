@@ -2,14 +2,10 @@
 
 {% block header %}
   {{ govukHeader({
+    classes: "app-header--full-width-blue-border",
     homepageUrl: "/applications",
     serviceName: serviceName,
-    navigation: [{
-      text: data.account.email
-    } if data.account.email, {
-      href: "/account/sign-out",
-      text: "Sign out"
-    } if data.account.email]
+    navigation: []
   }) }}
 
 
@@ -17,9 +13,9 @@
     {{ govukPhaseBanner({
         classes: "app-phase-banner--no-border",
         tag: {
-          text: "prototype"
+          text: "beta"
         },
-        html: 'This is a prototype.'
+        html: '<a href="#" class="govuk-link">Make a complaint or give feedback</a>'
       }) if showPhaseBanner != false }}
   </div>
   {% if signedIn != false %}
@@ -27,7 +23,14 @@
      <div class="govuk-width-container">
        <div class="app-secondary-nav">
          <nav class="app-secondary-nav__nav">
-          <a class="govuk-link govuk-link--no-visited-state" aria-current="page" href="/applications">Your applications</a>
+
+        {% if (data.submittedAt) and (data.choices | length > 1)  %}
+          {% set applicationTitle = "Your applications" %}
+        {% else %}
+          {% set applicationTitle = "Your application" %}
+        {% endif %}
+
+          <a class="govuk-link govuk-link--no-visited-state" aria-current="page" href="/applications">{{ applicationTitle }}</a>
          </nav>
 
          <div class="app-secondary-nav__sign-out">

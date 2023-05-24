@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set choices = application.choices %}
+{% set choices = data.choices %}
 
 {% if choices | length > 1  %}
   {% set title = "Your applications" %}

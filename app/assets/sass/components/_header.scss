@@ -1,0 +1,12 @@
+
+.app-header--full-width-blue-border {
+  border-bottom-width: 0;
+}
+
+.app-header--full-width-blue-border:after {
+  content: '';
+  width: 100%;
+  display: block;
+  height: 10px;
+  background-color:  govuk-colour("blue");
+}

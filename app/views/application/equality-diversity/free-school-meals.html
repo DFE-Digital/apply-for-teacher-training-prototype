@@ -4,19 +4,19 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/equality-diversity/ethnic-background"
   }) }}
 {% endblock %}
 
 {% block content %}
-<form action="/equality-monitoring/review" method="post" novalidate>
+<form action="/application/equality-diversity" method="post" novalidate>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
       <span class="govuk-caption-l">{{ parent }}</span>
       <h1 class="govuk-heading-l">Free school meals</h1>
 
-      <p class="govuk-body">Training providers will not see your answer to this question.</p>
+      <p class="govuk-body">Training providers will never see your answer to this question.</p>
 
       <p class="govuk-body">This question helps the Department for Education understand the background of trainee teachers. Free school meals have generally only been available to children from  families that receive benefits.</p>
 

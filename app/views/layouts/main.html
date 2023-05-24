@@ -11,6 +11,23 @@
       text: "Sign out"
     } if data.account.email]
   }) }}
+
+  {% if signedIn != false %}
+
+   <div class="govuk-!-font-size-19 app-!-background-grey">
+     <div class="govuk-width-container">
+       <div class="app-secondary-nav">
+         <nav class="app-secondary-nav__nav">
+          <a class="govuk-link govuk-link--no-visited-state" {% if section == "applications" %}aria-current="page"{% endif %} href="/applications">Your applications</a>
+         </nav>
+
+         <div class="app-secondary-nav__sign-out">
+           <a class="govuk-link govuk-link--no-visited-state" href="#">Sign out</a>
+         </div>
+       </div>
+     </div>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}

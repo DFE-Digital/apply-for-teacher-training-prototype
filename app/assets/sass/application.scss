@@ -5,6 +5,7 @@
 @import "components/section";
 @import "components/phase-banner";
 @import "components/header";
+@import "components/secondary-nav";
 
 .govuk-body {
   word-wrap: break-word;
@@ -79,43 +80,5 @@
 
 .app-\!-background-grey {
   background-color: govuk-colour("light-grey");
-}
-
-.app-secondary-nav {
-  display: table;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.app-secondary-nav__nav {
-  display: table-cell;
-}
-
-.app-secondary-nav a {
-  display: inline-block;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.app-secondary-nav__nav a {
-  padding: 10px 0 5px 0;
-  margin-right: 15px;
-}
-
-.app-secondary-nav__nav a[aria-current] {
-  border-bottom: #1d70b8 5px solid;
-}
-
-.app-secondary-nav__sign-out {
-  display: table-cell;
-  text-align: right;
-}
-
-
-@include govuk-media-query($from: tablet) {
-  .app-secondary-nav__nav a {
-    padding: 15px 0 10px 0;
-    margin-right: 30px;
-  }
 }
 

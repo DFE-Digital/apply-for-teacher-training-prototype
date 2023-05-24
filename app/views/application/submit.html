@@ -26,43 +26,9 @@
         html: dbsCheckHtml
       }) }}
 
-      {% set yesConditionalHtml %}
-        {{ govukCharacterCount({
-          id: "additional-information",
-          name: "additionalInformation",
-          value: data.additionalInformation,
-          label: {
-            text: "Enter further information"
-          },
-          maxwords: 300
-        }) }}
-      {% endset -%}
+      <p class="govuk-body">By sending this application to {{ providerText }}, I confirm that the information given is true, complete and accurate.</p>
 
       <form action="/application/submit" method="post">
-        {{ govukRadios({
-          name: "additionalInformationAdded",
-          value: data.additionalInformationAdded,
-          fieldset: {
-            legend: {
-              text: "Is there anything else you would like to tell us about your application?",
-              classes: "govuk-label--m"
-            },
-            attributes: {
-              "data-module": "clear-hidden"
-            }
-          },
-          items: [{
-            text: "Yes",
-            conditional: {
-              html: yesConditionalHtml
-            }
-          }, {
-            text: "No"
-          }]
-        }) }}
-
-        <p class="govuk-body">By sending this application to {{ providerText }}, I confirm that the information given is true, complete and accurate.</p>
-
         {{ govukButton({
           text: "Send application"
         }) }}

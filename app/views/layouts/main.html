@@ -12,8 +12,14 @@
     } if data.account.email]
   }) }}
 
-  {% if signedIn != false %}
 
+  {{ govukPhaseBanner({
+      tag: {
+        text: "prototype"
+      },
+      html: 'This is a prototype.'
+    }) if showPhaseBanner != false }}
+  {% if signedIn != false %}
    <div class="govuk-!-font-size-19 app-!-background-grey">
      <div class="govuk-width-container">
        <div class="app-secondary-nav">
@@ -35,12 +41,6 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-      tag: {
-        text: "prototype"
-      },
-      html: 'This is a prototype.'
-    }) if showPhaseBanner != false }}
 {% endblock %}
 
 {% block footer %}

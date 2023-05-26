@@ -32,18 +32,20 @@
 {% endblock %}
 
 {% block content %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+    {% if apply2 %}
+      {{ govukDetails({
+        summaryText: "See feedback from your previous application",
+        html: previousApplicationSummaryHtml
+      }) }}
+    {% endif %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-
-      {% if apply2 %}
-        {{ govukDetails({
-          summaryText: "See feedback from your previous application",
-          html: previousApplicationSummaryHtml
-        }) }}
-      {% endif %}
-
       <section class="app-section">
+        
         <h2 class="govuk-heading-m">Personal details</h2>
         {{ govukTaskList({
           items: [{
@@ -246,6 +248,24 @@
         }) }}
 
       </section>
+   </div>
+    
+    <div class="govuk-grid-column-one-third">
+      <hr>
+      <aside>
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">The application process</h2>
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>Read how the <a href="/application-process">application process works</a>.</li>
+           </ul>
+
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">Get help</h2>
+          
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>Call 0800 389 2500 or chat online</li>
+            <li>Monday to Friday, 8:30am to 5:30pm (except public holidays)</li>
+            <li>Free of charge</li>
+           </ul>
+      </aside>
     </div>
   </div>
 {% endblock %}

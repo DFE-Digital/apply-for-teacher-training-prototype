@@ -1,6 +1,14 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "How applications work" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/application",
+    text: "Back to application"
+  }) }}
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -24,23 +32,31 @@
             </tr>
             <tr class="govuk-table__row">
              <td class="govuk-table__cell">11&nbsp;October&nbsp;2022 at 9am</td>
-              <td class="govuk-table__cell">You can start submitting your applications to training providers.<br><br>You can add 4 course choices to your application.</td>
+              <td class="govuk-table__cell">You can submit your application to training providers.<br><br>You can apply to 4 courses and each course will be treated as a different application.<br><br>You should make sure each course you choose is to a different training provider so you can have a better chance of success.<br><br>Training providers will have 40 working days to decide to offer you a place on a course you applied to. If they do not respond in time, your application will become unsuccessful automatically.<br><br>If all your applications become unsuccessful, you can apply to any courses again.<br><br>You will have 20 working days to respond to any offers you receive. If you do not respond, the offer will be automatically declined.</td>
             </tr>
             <tr class="govuk-table__row">
-            <td class="govuk-table__cell">11 October 2022 to <br>1 July 2023</td>
-             <td class="govuk-table__cell">Once you submit your application, the providers you apply to will have 40 working days to make a decision.<br><br>You’ll have 20 working days to make a decision on any offer. <br><br>If you decline any offers, or withdraw an application, you can continue to apply to other providers.</td>
+            <td class="govuk-table__cell">9 December 2022 to <br>6 January 2023</td>
+             <td class="govuk-table__cell">This period is not included in the ‘40 working days’ that training providers have to make a decision on your applications.</td>
             </tr>
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">1 July 2024 to <br>17&nbsp;September&nbsp;2024</th>
-              <td class="govuk-table__cell">Applications are still open. The time for training providers to make a decision on any application before it becomes inactive reduces from 40 working days to 20 working days.</td>
+              <td class="govuk-table__cell">27 March 2023 to <br>10&nbsp;April&nbsp;2023</td>
+              <td class="govuk-table__cell">This period is not included in the ‘40 working days’ that training providers have to make a decision on your applications.</td>
             </tr>
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">17 September 2024, 6pm</th>
-              <td class="govuk-table__cell">Application deadline<br>You should submit all your applications by this date to be accepted onto a course starting in September 2024.</td>
+              <td class="govuk-table__cell">1 July 2023</td>
+              <td class="govuk-table__cell">The time training providers have to make a decision about your application is reduced from 40 working days to 20 working days.</td>
             </tr>
-                <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">25 September 2024</th>
-              <td class="govuk-table__cell">A final decision is made on all open applications.</td>
+              <tr class="govuk-table__row">
+              <td class="govuk-table__cell">5 September 2023 at 6pm</td>
+              <td class="govuk-table__cell">If you have not already applied between September 2022 and this date, you will not be able to apply after 5 September 2023.<br><br> If you've already applied, but your applications were unsuccessful, you can continue to submit new applications.</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">19 September 2023 at 6pm</td>
+              <td class="govuk-table__cell">This is the last day you can apply for courses starting in September 2023.</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">27 September 2023 at 11:59pm</td>
+              <td class="govuk-table__cell">Training providers need to make a decision on all applications for courses starting in September 2023.</td>
             </tr>
           </tbody>
         </table>

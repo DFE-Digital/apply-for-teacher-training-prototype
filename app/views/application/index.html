@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set currentUrl = 'Personal' %}
+
 {% macro tagClassesForSection(completed=false, apply2=false) %}
   {% if completed %}
     govuk-task-list__status--black

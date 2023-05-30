@@ -6,7 +6,6 @@
     serviceName: serviceName
   }) }}
 
-
   <div class="govuk-width-container">
     {{ govukPhaseBanner({
         classes: "app-phase-banner--no-border",
@@ -28,13 +27,9 @@
           {% set applicationTitle = "Your application" %}
         {% endif %}
 
-          <a class="govuk-link govuk-link--no-visited-state" aria-current="page" href="/application">{{ applicationTitle }}</a>
+          <a class="govuk-link govuk-link--no-visited-state" {% if currentUrl == "Personal" %} aria-current="page"{% endif %} href="/application">{{ applicationTitle }}</a>
 
-
-          <!-- Included a link to the guidance in the nav bar but left it commented out here
-
-            <a class="govuk-link govuk-link--no-visited-state" {% if section == "applications" %}aria-current="page"{% endif %} href="/application-process">Application process</a>
-          -->
+          <a class="govuk-link govuk-link--no-visited-state" {% if currentUrl == "Process" %} aria-current="page"{% endif %} href="/application-process">Application process</a>
 
          </nav>
 

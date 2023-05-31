@@ -1,5 +1,7 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
 
+{% from "_components/primary-navigation/macro.njk" import appPrimaryNavigation %}
+
 {% block header %}
   {{ govukHeader({
     classes: "app-header--full-width-blue-border",
@@ -16,29 +18,22 @@
       }) if showPhaseBanner != false }}
   </div>
   {% if signedIn != false %}
-   <div class="govuk-!-font-size-19 app-!-background-grey">
-     <div class="govuk-width-container">
-       <div class="app-secondary-nav">
-         <nav class="app-secondary-nav__nav">
 
-        {% if (data.submittedAt) and (data.choices | length > 1)  %}
-          {% set applicationTitle = "Your applications" %}
-        {% else %}
-          {% set applicationTitle = "Your application" %}
-        {% endif %}
+    {{ appPrimaryNavigation({
+      items: [
+        {
+          href: "/application",
+          text: "Your application" + ("s" if (data.submittedAt) and (data.choices | length > 1)),
+          active: primaryNavId == "application"
+        },
+        {
+          href: "/process",
+          text: "Application process",
+          active: primaryNavId == "process"
+        }
+      ]
+    }) }}
 
-          <a class="govuk-link govuk-link--no-visited-state" {% if currentUrl == "Personal" %} aria-current="page"{% endif %} href="/application">{{ applicationTitle }}</a>
-
-          <a class="govuk-link govuk-link--no-visited-state" {% if currentUrl == "Process" %} aria-current="page"{% endif %} href="/application-process">Application process</a>
-
-         </nav>
-
-         <div class="app-secondary-nav__sign-out">
-           <a class="govuk-link govuk-link--no-visited-state" href="/">Sign out</a>
-         </div>
-       </div>
-     </div>
-    </div>
   {% endif %}
 {% endblock %}
 

@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% set title = "You need a GCSE in " + subject + " at grade 4 (C) or above, or equivalent" %}
 {% set allowsFeedback = true %}

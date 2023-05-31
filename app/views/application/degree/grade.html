@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set completed = data.degrees[id].completed == "yes" %}
 {% set international = data.degrees[id].uk == "no" %}
 

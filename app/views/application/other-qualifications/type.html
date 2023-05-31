@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set international = data.otherNationality %}
 {% set title = "What type of qualification do you want to add?" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}

@@ -46,6 +46,9 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      
+      <p class="govuk-body">For courses starting in September 2023, you can start applying in October 2022. <a href="/application-process">Read how the application process works</a>.</p>
+      <br>
       <section class="app-section">
 
         <h2 class="govuk-heading-m">Personal details</h2>
@@ -78,7 +81,7 @@
         {% if findNotOpen == "true" %}
           <p class="govuk-body">You can apply for courses from 13 October.</p>
         {% else %}
-          <p class="govuk-body">You can apply for up to 3 courses.</p>
+          <p class="govuk-body">You can apply for up to 4 courses.</p>
         {% endif %}
 
         {% if data.choices | length == 0 %}
@@ -255,11 +258,13 @@
     <div class="govuk-grid-column-one-third">
       <hr>
       <aside>
+<!--
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">The application process</h2>
-          <ul class="govuk-list govuk-!-font-size-16">
-            <li>Read how the <a href="/application-process">application process works</a>.</li>
-           </ul>
 
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li><a href="/application-process">Read how the application process works</a>.
+           </ul>
+-->
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">Get help</h2>
 
           <ul class="govuk-list govuk-!-font-size-16">

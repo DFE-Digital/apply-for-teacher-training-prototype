@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set choices = data.choices %}
 {% set choicesCount = choices | length %}
 {% set choicesRemaining = 3 - choicesCount %}

@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% macro tagClassesForSection(completed=false, apply2=false) %}
   {% if completed %}
     govuk-task-list__status--black
@@ -32,18 +34,23 @@
 {% endblock %}
 
 {% block content %}
+
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+    {% if apply2 %}
+      {{ govukDetails({
+        summaryText: "See feedback from your previous application",
+        html: previousApplicationSummaryHtml
+      }) }}
+    {% endif %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-
-      {% if apply2 %}
-        {{ govukDetails({
-          summaryText: "See feedback from your previous application",
-          html: previousApplicationSummaryHtml
-        }) }}
-      {% endif %}
-
+      
+      <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you can. <a href="/application-process">Read how the application process works</a>.</p>
+      <br>
       <section class="app-section">
+
         <h2 class="govuk-heading-m">Personal details</h2>
         {{ govukTaskList({
           items: [{
@@ -74,7 +81,7 @@
         {% if findNotOpen == "true" %}
           <p class="govuk-body">You can apply for courses from 13 October.</p>
         {% else %}
-          <p class="govuk-body">You can apply for up to 3 courses.</p>
+          <p class="govuk-body">You can apply for up to 4 courses.</p>
         {% endif %}
 
         {% if data.choices | length == 0 %}
@@ -246,6 +253,26 @@
         }) }}
 
       </section>
+   </div>
+
+    <div class="govuk-grid-column-one-third">
+      <hr>
+      <aside>
+<!--
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">The application process</h2>
+
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li><a href="/application-process">Read how the application process works</a>.
+           </ul>
+-->
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">Get help</h2>
+
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>Call 0800 389 2500 or chat online</li>
+            <li>Monday to Friday, 8:30am to 5:30pm (except public holidays)</li>
+            <li>Free of charge</li>
+           </ul>
+      </aside>
     </div>
   </div>
 {% endblock %}

@@ -6,6 +6,7 @@
 @import "components/phase-banner";
 @import "components/header";
 @import "components/secondary-nav";
+@import "components/primary-navigation";
 
 .govuk-body {
   word-wrap: break-word;
@@ -81,4 +82,3 @@
 .app-\!-background-grey {
   background-color: govuk-colour("light-grey");
 }
-

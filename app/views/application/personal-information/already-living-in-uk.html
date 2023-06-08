@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set title = "Do you normally live in the UK?" %}
 {% set formaction = referrer if referrer else "/application/" + "/personal-information/already-living-in-uk" %}
 

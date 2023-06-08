@@ -14,19 +14,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      {% set dbsCheckHtml %}
-        <p class="govuk-body">As prospective teachers, all candidates must consent to an enhanced DBS check. This will show up any past criminal convictions, both spent and unspent. Some convictions, even if they are spent, will disbar you from teaching.</p>
-        <p class="govuk-body">However, not all past convictions prevent you from training to be a teacher. Talk to your provider about their policy on criminal convictions.</p>
-        <p class="govuk-body"><a href="https://www.gov.uk/exoffenders-and-employment">Learn more about telling an employer about your conviction</a>.</p>
-      {% endset %}
-
-      <p>I understand I will have to undergo an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service">Disclosure and Barring Check</a> as part of my application.</p>
-
-      {{ govukInsetText({
-        html: dbsCheckHtml
-      }) }}
-
-      <p class="govuk-body">By sending this application to {{ providerText }}, I confirm that the information given is true, complete and accurate.</p>
+      <p class="govuk-body">By sending this application, I confirm that the information given is true, complete and accurate.</p>
 
       <form action="/application/submit" method="post">
         {{ govukButton({

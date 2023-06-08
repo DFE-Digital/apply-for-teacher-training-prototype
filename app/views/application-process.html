@@ -2,14 +2,27 @@
 
 {% set title = "How applications work" %}
 
+{% set signedIn = false %}
+
 {% block beforeContent %}
-  {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
-  }) }}
+    {% if data.account.email %}
+
+      {{ govukBackLink({
+        href: "/application",
+        text: "Back to application"
+      }) }}
+
+    {% else %}
+
+      {{ govukBackLink({
+        href: "/account",
+        text: "Back"
+      }) }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">The application process for courses starting in September 2023</h1>

@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set applicationPath = "/application" %}
 {% set formaction = referrer or "/application/" + "/english-language/review" %}
 {% set ielts = type == "IELTS" %}

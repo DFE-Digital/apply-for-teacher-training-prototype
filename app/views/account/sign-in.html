@@ -4,6 +4,8 @@
 {% set title = "Sign in" %}
 {% set formaction = "/send-email/sign-in" %}
 {% set hasAccountLinks = false %}
+{% set signedIn = false %}
+
 
 {% block beforeContent %}
   {{ govukBackLink({

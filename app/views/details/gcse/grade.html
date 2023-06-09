@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set subject = (id | capitalize) if id == "english" else id %}
 
 {% set type = data.gcse[id].type %}

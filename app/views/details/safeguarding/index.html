@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set title = "Declare any safeguarding issues" %}
 
 {% block beforeContent %}
@@ -16,17 +18,19 @@
 
       <p class="govuk-body">Teacher training providers need to check that it’s safe for you to work with children and young people.</p>
 
-      <p class="govuk-body">As well as confirming your identity and your right to work in the UK, providers will check:</p>
+      <!-- <p class="govuk-body">Providers will check:</p>
 
       <ul class="govuk-list govuk-list--bullet">
-        <li>your criminal record in the UK (they'll do an enhanced <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about#dbs-checks">DBS check)</a> and abroad where relevant</li>
+        <li>your criminal record in the UK and any other countries you’ve lived in recently</li>
         <li>whether you’ve been banned from teaching or working with children</li>
-        <li>your professional behaviour, such as whether you’ve been removed from teacher training and what your referees say about you</li>
-      </ul>
+        <li>your professional behaviour, such as by asking for a reference from people you’ve worked with</li>
+      </ul> -->
 
-      <p class="govuk-body">Tell your provider about any potential safeguarding issues, such as offences, cautions, reprimands and final warnings. They can give advice about whether this will affect your application.</p>
+      <p class="govuk-body">If you receive an offer, training providers will check your references and do an enhanced Disclosure and Barring Service (DBS) check. If you’re outside the UK, they’ll ask you to get a criminal record check from your home country.</p>
 
-      <p class="govuk-body">It won’t necessarily stop you becoming a teacher.</p>
+      <p class="govuk-body">Not all convictions or police cautions on a criminal record will stop you from training to be a teacher. <a href="https://www.gov.uk/tell-employer-or-college-about-criminal-record">Learn more about when you need to tell someone about your criminal record</a>.</p>
+
+      <p class="govuk-body">Talk to the providers you’re applying to for advice on whether any safeguarding issues will affect your application.</p>
 
       {% set safeguardingHtml %}
         {{ govukCharacterCount({
@@ -48,16 +52,13 @@
           fieldset: {
             classes: "govuk-!-margin-top-7",
             legend: {
-              text: "Do you want to share any safeguarding issues?",
+              text: "Do you want to declare any safeguarding issues, such as a criminal record or professional misconduct?",
               classes: "govuk-fieldset__legend--m"
             }
           },
           items: [{
             value: "yes",
             text: "Yes, I want to share something",
-            hint: {
-              text: "After you have submitted your application, your provider may be in touch to discuss the information you shared. If you prefer, you can contact your provider directly."
-            },
             conditional: {
               html: safeguardingHtml
             }

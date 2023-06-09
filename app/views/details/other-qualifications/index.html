@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set international = true if data.otherNationality else false %}
 {% set title = "Other qualifications" if international else "A levels and other qualifications" %}
 {% set itemName = "other qualifications" if international else "A levels and other qualifications" %}

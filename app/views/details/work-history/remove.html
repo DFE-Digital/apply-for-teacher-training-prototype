@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set type = "entry" if item["category"] == "break" else "job" %}
 {% set title = "Are you sure you want to delete this " + type + "?" %}
 

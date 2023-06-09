@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set subject = (id | capitalize) if id == "english" else id %}
 {% if data.gcse[id].completed == "false" %}
   {% set title = "When will you get your " + subject + " qualification?" %}

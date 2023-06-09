@@ -4,7 +4,7 @@ module.exports = router => {
   router.get('/accepted', (req, res) => {
     let acceptedChoice
     if (req.session.data.choices) {
-      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status === 'Pending conditions' || choice.status === 'Offer confirmed'))
+      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status === 'Conditions pending' || choice.status === 'Offer confirmed'))
     }
 
     if (acceptedChoice) {

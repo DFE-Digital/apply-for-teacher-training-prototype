@@ -1,0 +1,105 @@
+{% set disabilityText %}
+  {% set disabilities = data.equalityMonitoring.disabilities %}
+  {% if disabilities.length >= 1 %}
+    <ul class="govuk-list">
+      {%- for disability in disabilities -%}
+        <li>{{ disability }}</li>
+      {%- endfor -%}
+    </ul>
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set ethnicGroupText %}
+  {% if data.equalityMonitoring.ethnicGroup %}
+    {% if data.equalityMonitoring.ethnicGroup != "Prefer not to say" %}
+      {% if data.equalityMonitoring.ethnicBackground != "Prefer not to say" %}
+
+        {% if data.equalityMonitoring.ethnicBackground == "Any other ethnic group" or data.equalityMonitoring.ethnicBackground == "Any other White background" or data.equalityMonitoring.ethnicBackground == "Any other Mixed or Multiple ethnic background" or data.equalityMonitoring.ethnicBackground == "Any other Asian background" or data.equalityMonitoring.ethnicBackground == "Any other Black, African or Caribbean background" %}
+          {{ data.equalityMonitoring.otherEthnicBackground }}
+        {% else %}
+          {{ data.equalityMonitoring.ethnicBackground }}
+        {% endif %}
+      {% endif %}
+    {% else %}
+      Prefer not to say
+    {% endif %}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{% set freeSchoolMealsText %}
+  {% if data.equalityMonitoring.freeSchoolMeals == "Yes" %}
+    I received free school meals at some point during my school years
+  {% elif data.equalityMonitoring.freeSchoolMeals == "No" %}
+    I did not receive free school meals at any point during my school years
+  {% elif data.equalityMonitoring.freeSchoolMeals == "I do not know" %}
+    I do not know whether I received free school meals at any point during my school years
+  {% elif data.equalityMonitoring.freeSchoolMeals  %}
+    {{ data.equalityMonitoring.freeSchoolMeals }}
+  {% else %}
+    Not entered
+  {% endif %}
+{% endset %}
+
+{{ govukSummaryList({
+  rows: [{
+    key: {
+      text: "Sex"
+    },
+    value: {
+      text: data.equalityMonitoring.sex or "Not entered"
+    },
+    actions: {
+      items: [{
+        href: "/application/equality-diversity/sex?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "sex"
+      }]
+    }
+  }, {
+    key: {
+      text: "Disabilities or health conditions"
+    },
+    value: {
+      text: disabilityText | safe
+    },
+    actions: {
+      items: [{
+        href: "/application/equality-diversity/disabilities?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "disability status"
+      }]
+    }
+  }, {
+    key: {
+      text: "Ethnicity"
+    },
+    value: {
+      text: ethnicGroupText
+    },
+    actions: {
+      items: [{
+        href: "/application/equality-diversity/ethnic-group?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "ethnic group?"
+      }]
+    }
+  }, {
+    key: {
+      text: "Free school meals"
+    },
+    value: {
+      text: freeSchoolMealsText
+    },
+    actions: {
+      items: [{
+        href: "/application/equality-diversity/free-school-meals?referrer=" + referrer,
+        text: "Change",
+        visuallyHiddenText: "eligibility for free school meals"
+      }]
+    }
+  }]
+}) }}

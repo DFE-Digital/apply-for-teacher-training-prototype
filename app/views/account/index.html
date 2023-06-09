@@ -4,6 +4,8 @@
 
 {% set title = "Create an account or sign in" %}
 {% set hasAccountLinks = false %}
+{% set signedIn = false %}
+
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -55,6 +57,8 @@
           text: "Continue"
         }) }}
       </form>
+      <p class="govuk-body">You can usually start applying for teacher training in October, the year before your course starts. Courses can fill up quickly, so apply as soon as you can. <a href="/application-process">Read how the application process works</a>.</p>
+      <br>
     </div>
   </div>
 {% endblock %}

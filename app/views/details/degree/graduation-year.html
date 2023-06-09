@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set title = "What year will you graduate?" if data.degrees[id].completed == "no" else "What year did you graduate?" %}
 {% set graduatingYearExample = "2022" if data.degrees[id].completed == "no" else "2019" %}
 

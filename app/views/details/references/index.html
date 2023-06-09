@@ -1,4 +1,7 @@
 {% extends "layouts/main.html" %}
+
+{% set primaryNavId = "application" %}
+
 {% set title = "References to be requested if you accept an offer" %}
 {% set references = data.references %}
 {% set addReferenceButtonText = "Add a reference" if references | length == 0 else "Add another reference" %}

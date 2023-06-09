@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "application" %}
+
 {% set subject = ("an " + id | capitalize) if id == "english" else "a " + id %}
 {% set type = applicationValue(["gcse", id, "type"]) %}
 {% set title = "Are you currently studying for a GCSE in " + subject + ", or equivalent?" %}

@@ -36,6 +36,9 @@ router.post('/application/apply-again', (req, res) => {
 
 // Submit application action
 router.post('/application/submit', (req, res) => {
+
+  req.session.data.submittedAt = (new Date()).toISOString()
+
   // Set status of each choice to 'Awaiting decision'
   const choices = req.session.data.choices
   if (choices) {
@@ -45,4 +48,14 @@ router.post('/application/submit', (req, res) => {
   }
 
   res.redirect('/survey')
+})
+
+
+// Submit application action
+router.get('/sign-out', (req, res) => {
+
+  req.session.data.account = {}
+
+
+  res.redirect('/account')
 })

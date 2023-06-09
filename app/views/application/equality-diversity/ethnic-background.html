@@ -1,4 +1,7 @@
 {% extends "layouts/main.html" %}
+
+{% set primaryNavId = "application" %}
+
 {% set parent = "Equality and diversity questions" %}
 {% set ethnicGroup = data.equalityMonitoring.ethnicGroup %}
 
@@ -12,7 +15,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: paths.back
+    href: "/application/equality-diversity/ethnic-group"
   }) }}
 {% endblock %}
 
@@ -22,14 +25,16 @@
 
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/equality-monitoring/free-school-meals" method="post">
+      <form action="/application/equality-diversity/free-school-meals" method="post">
 
       {% set otherHtml %}
         {{ govukInput({
+          name: "equalityMonitoring[otherEthnicBackground]",
           classes: "govuk-!-width-two-thirds",
           label: {
             text: "How would you describe your background? (optional)"
-          }
+          },
+          value: data.equalityMonitoring.otherEthnicBackground
         }) }}
       {% endset -%}
 

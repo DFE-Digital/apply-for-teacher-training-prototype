@@ -19,9 +19,6 @@
         {{ data.applications[id].providerName }} have offered you a conditional place on the <a href="#">{{ data.applications[id].course }}</a> course.
       </p>
 
-      <p class="govuk-body">You have 14 days (until 4 March 2021) to accept or decline the offer.</p>
-
-
       <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
       <ul class="govuk-list govuk-list--bullet">
         {% for condition in data.applications[id].conditions %}

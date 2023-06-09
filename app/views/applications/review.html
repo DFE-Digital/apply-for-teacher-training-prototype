@@ -19,18 +19,6 @@
 
       <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
 
-      {% set otherCoursesHtml %}
-        {% if application.otherCourses | first == "no" %}
-          None
-        {% else %}
-          <ul class="govuk-list">
-          {% for course in application.otherCourses %}
-            <li>{{ course }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endset %}
-
       {{ govukSummaryList({
         rows: [
           {
@@ -45,22 +33,6 @@
                 {
                   text: "Change",
                   href: "/applications/" + id + "/course"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Other courses you’re interested in"
-            },
-            value: {
-              html: otherCoursesHtml
-            },
-            actions: {
-              items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/courses-other"
                 }
               ]
             }

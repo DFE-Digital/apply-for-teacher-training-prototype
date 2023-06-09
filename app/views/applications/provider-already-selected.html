@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "applications" %}
+
 {% block beforeContent %}
   {{ govukBackLink({
     href: "/applications/" + id + "/provider",

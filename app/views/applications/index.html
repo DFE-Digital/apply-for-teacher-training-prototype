@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
-{% set section = "applications" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Your applications" %}
 
 {% block content %}
 
@@ -27,7 +29,7 @@
       {% else %}
         {% if numberOfApplicationsLeft > 0 %}
 
-        <h1 class="govuk-heading-l">Your applications</h1>
+        <h1 class="govuk-heading-l">{{ title }}</h1>
 
           {% if numberOfApplicationsLeft == 4 %}
 
@@ -48,7 +50,7 @@
           }) }}
 
         {% else %}
-          <h1 class="govuk-heading-l">Your applications</h1>
+          <h1 class="govuk-heading-l">{{ title }}</h1>
           <p class="govuk-body">You cannot add any more applications because you’re waiting for decisions on 4 others.</p>
           <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
 

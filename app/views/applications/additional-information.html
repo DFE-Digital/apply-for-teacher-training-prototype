@@ -1,5 +1,6 @@
 {% extends "layouts/main.html" %}
 
+{% set primaryNavId = "applications" %}
 {% set title = "Additional information" %}
 
 {% block beforeContent %}
@@ -14,7 +15,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <p class="govuk-body">Use this section to tell {{ data.applications[id].providerName }} anything else about your application.</p>
-      
+
 
       <form action="/applications/{{ id }}/review" method="post">
         {% set additionalInformationHtml %}

@@ -47,3 +47,13 @@ router.post('/application/submit', (req, res) => {
 
   res.redirect('/survey')
 })
+
+
+// Submit application action
+router.get('/sign-out', (req, res) => {
+
+  req.session.data.account = {}
+
+
+  res.redirect('/account')
+})

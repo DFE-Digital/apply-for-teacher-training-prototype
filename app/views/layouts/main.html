@@ -26,6 +26,12 @@
           text: "Your application" + ("s" if (data.submittedAt) and (data.choices | length > 1)),
           active: primaryNavId == "application"
         }
+      ],
+      items_right: [
+        {
+          href: "/sign-out",
+          text: "Sign out"
+        }
       ]
     }) }}
 

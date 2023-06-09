@@ -1,15 +1,14 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "How applications work" %}
-
-{% set signedIn = false %}
+{% set primaryNavId = "applications" %}
 
 {% block beforeContent %}
     {% if data.account.email %}
 
       {{ govukBackLink({
-        href: "/application",
-        text: "Back to application"
+        href: "/applications",
+        text: "Back to applications"
       }) }}
 
     {% else %}

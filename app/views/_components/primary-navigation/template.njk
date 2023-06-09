@@ -1,35 +1,30 @@
 {% set navigationLabel = params.navigationLabel | default('main menu') %}
 
-<div class="app-primary-navigation {{- ' ' + params.containerClasses if params.containerClasses}}">
+<div class="app-primary-navigation govuk-!-display-none-print {{- ' ' + params.containerClasses if params.containerClasses}}">
 
-  <div class="app-primary-navigation__container">
+  <div class="govuk-width-container app-primary-navigation--justify-between">
+    <nav class="app-primary-navigation {{- ' ' + params.classes if params.classes}}" aria-label="{{ navigationLabel }}" {%- for attribute, value in params.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
 
-    <div class="app-primary-navigation__nav">
+      <ul class="app-primary-navigation__list">
+        {%- for item in params.items %}
+          <li class="app-primary-navigation__item {{- ' ' + item.classes if item.classes }}">
+            <a class="app-primary-navigation__link" {{ 'aria-current="page"' | safe if item.active }} href="{{ item.href }}" {%- for attribute, value in item.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
+              {{- item.html | safe if item.html else item.text -}}
+            </a>
+          </li>
+        {% endfor -%}
+      </ul>
 
-      <nav class="app-primary-navigation {{- ' ' + params.classes if params.classes}}" aria-label="{{ navigationLabel }}" {%- for attribute, value in params.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
+    </nav>
 
-        <ul class="app-primary-navigation__list">
-
-          {%- for item in params.items %}
-            <li class="app-primary-navigation__item {{- ' ' + item.classes if item.classes }}">
-              <a class="app-primary-navigation__link" {{ 'aria-current="page"' | safe if item.active }} href="{{ item.href }}" {%- for attribute, value in item.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
-                {{- item.html | safe if item.html else item.text -}}
-              </a>
-            </li>
-          {% endfor -%}
-
-        </ul>
-
-      </nav>
-
-    </div>
-
-  {%- if params.searchHtml %}
-    <div class="app-primary-navigation__search">
-      {{- params.searchHtml | safe -}}
-    </div>
-  {% endif -%}
-
+    <ul class="app-primary-navigation__list">
+      {%- for item in params.items_right %}
+        <li class="app-primary-navigation__item <%= item.classes %>">
+          <a class="app-primary-navigation__link" {{ 'aria-current="page"' | safe if item.active }} href="{{ item.href }}" {%- for attribute, value in item.attributes -%} {{ attribute }}="{{ value }}"{% endfor %}>
+              {{- item.html | safe if item.html else item.text -}}
+            </a>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
-
 </div>

@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/equality-diversity/disabilities"
+    href: "/details/equality-diversity/disabilities"
   }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@
 
       <p class="govuk-body">Training providers will not see your answer when deciding to offer you a place. They'll only see your answer if you accept an offer from them.</p>
 
-      <form action="/application/equality-diversity/ethnic-background" method="post">
+      <form action="/details/equality-diversity/ethnic-background" method="post">
         {{ govukRadios({
           name: "equalityMonitoring[ethnicGroup]",
           value: data.equalityMonitoring.ethnicGroup,

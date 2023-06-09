@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application/equality-diversity/sex"
+    href: "/details/equality-diversity/sex"
   }) }}
 {% endblock %}
 
@@ -33,11 +33,11 @@
 
         {% if data.additionalSupportNeeded == "no" %}
           <p class="govuk-body">
-            You can <a href="/application/additional-support" class="govuk-link">ask for support as part of your application</a> if you want to tell training providers about your needs straight away.
+            You can <a href="/details/additional-support" class="govuk-link">ask for support as part of your application</a> if you want to tell training providers about your needs straight away.
           </p>
         {% endif %}
 
-        <form action="/application/equality-diversity/ethnic-group" method="post">
+        <form action="/details/equality-diversity/ethnic-group" method="post">
 
           {{ govukCheckboxes({
             name: "equalityMonitoring[disabilities]",

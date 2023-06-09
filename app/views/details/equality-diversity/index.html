@@ -6,7 +6,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -22,7 +23,7 @@
 
         {% include "_includes/review/equality-and-diversity.html" %}
 
-        <form action="/application" method="post">
+        <form action="/details" method="post">
           {{ govukRadios({
             name: "completed[equalityAndDiversity]",
             fieldset: {
@@ -54,7 +55,7 @@
 
         {{ govukButton({
           text: "Continue",
-          href: "/application/equality-diversity/sex"
+          href: "/details/equality-diversity/sex"
         }) }}
       {% endif %}
     </div>

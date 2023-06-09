@@ -7,8 +7,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/application",
-    text: "Back to application"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@
 
       <p class="govuk-body">Training providers will not see your answer when deciding to offer you a place. They'll only see your answer if you accept an offer from them.</p>
 
-      <form action="/application/equality-diversity/disabilities" method="post">
+      <form action="/details/equality-diversity/disabilities" method="post">
         {{ govukRadios({
           name: "equalityMonitoring[sex]",
           value: data.equalityMonitoring.sex,

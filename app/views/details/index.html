@@ -136,6 +136,13 @@
               classes: tagClassesForSection(completed=data.completed.additionalSupport == 'true'),
               text: tagTextForSection(completed=data.completed.additionalSupport == 'true')
             }
+          }, {
+            title: { text: "Interview needs" },
+            href: "/details/interview-needs",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.interviewNeeds == 'true'),
+              text: tagTextForSection(completed=data.completed.interviewNeeds == 'true')
+            }
           }]
         }) }}
       </section>

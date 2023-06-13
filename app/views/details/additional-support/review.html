@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "details" %}
 
-{% set applicationPath = "/application" %}
+{% set applicationPath = "/details" %}
 {% set referrer = applicationPath + "/additional-support/review" %}
 {% set title = "Ask for support if you’re disabled" %}
 {% set canAmend = true %}
@@ -18,7 +18,7 @@
   <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/additional-support.html" %}
 
-  <form action="/application" method="post">
+  <form action="/details" method="post">
     {{ govukRadios({
       name: "completed[additionalSupport]",
       value: data.completed.additionalSupport,

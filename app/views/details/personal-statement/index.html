@@ -16,6 +16,25 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
+
+      {{ govukRadios({
+        fieldset: {
+          legend: {
+            text: "Do you want to start by copying your previous personal statement?",
+            classes: "g"
+          }
+        },
+        items: [
+          {
+            text: "Yes"
+          },
+          {
+            text: "No"
+          }
+        ]
+      }) }}
+
+
       {% set guidanceHtml %}
         <p class="govuk-body">You should write between 500 and 1000 words for your personal statement.</p>
 

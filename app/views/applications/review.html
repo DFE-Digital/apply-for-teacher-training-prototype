@@ -17,7 +17,9 @@
     <div class="govuk-grid-column-three-quarters">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
+      {% if not application.submittedAt %}
+        <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
+      {% endif %}
 
       {{ govukSummaryList({
         rows: [
@@ -26,7 +28,7 @@
               text: "Course"
             },
             value: {
-              html: application.course + "<br>PGCE<br>Full time"
+              html: application.course + "<br>PGCE"
             },
             actions: {
               items: [
@@ -35,31 +37,52 @@
                   href: "/applications/" + id + "/course"
                 }
               ]
-            }
-          }
-          ,
+            } if not application.submittedAt
+          },
           {
             key: {
-              text: "Personal statement"
+              text: "Study mode"
             },
             value: {
-              text: application.personalStatement
+              html: "Full time"
             },
             actions: {
               items: [
                 {
                   text: "Change",
-                  href: "/applications/" + id + "/personal-statement"
+                  href: "/applications/" + id + "/course"
                 }
               ]
-            }
+            } if 1 ==2
           }
 
         ]
 
       })}}
 
-      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
+      <div class="govuk-summary-card govuk-!-margin-bottom-6">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-heading-s">Personal statement</h2>
+    {% if application.personalStatement and not application.submittedAt %}
+      <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Edit your personal statement</a>
+    {% endif %}
+  </div>
+  <div class="govuk-summary-card__content">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters-from-desktop">
+        {% if application.personalStatement %}
+          {{ application.personalStatement | govukMarkdown | safe }}
+        {% else %}
+          <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Add your personal statement</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% if not application.submittedAt %}
+      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) and application.personalStatement %}
         <form action="/applications/{{ id }}/submit" method="post">
           {{ govukRadios({
             name: "submitNow",
@@ -87,7 +110,11 @@
         </form>
       {% else %}
 
-        {% if not (data | allSectionsCompleted) %}
+
+
+        {% if not application.personalStatement %}
+          <p class="govuk-body">You cannot submit this application until you’ve written your personal statement.</p>
+        {% elseif not (data | allSectionsCompleted) %}
 
           <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
 
@@ -96,6 +123,7 @@
           <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>
         {% endif %}
       {% endif %}
+    {% endif %}
     </div>
   </div>
 {% endblock %}

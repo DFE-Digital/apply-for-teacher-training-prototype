@@ -125,6 +125,12 @@
             actions: {
               items: [
               {
+                href: "/applications/" + id + "/review",
+                text: "View application",
+                visuallyHiddenText: "from " + application.providerName,
+                classes: ""
+              } if application.submittedAt,
+              {
                 href: "/applications/" + id + "/delete",
                 text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  else "Remove"),
                 visuallyHiddenText: "from " + application.providerName,

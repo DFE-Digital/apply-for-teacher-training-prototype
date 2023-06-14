@@ -59,8 +59,7 @@
 
       })}}
 
-      {% if numberOfApplicationsLeft > 0 %}
-
+      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
         <form action="/applications/{{ id }}/submit" method="post">
           {{ govukRadios({
             name: "submitNow",
@@ -87,8 +86,15 @@
           })}}
         </form>
       {% else %}
-        <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>
-        <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>
+
+        {% if not (data | allSectionsCompleted) %}
+
+          <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
+
+        {% else %}
+          <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>
+          <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>
+        {% endif %}
       {% endif %}
     </div>
   </div>

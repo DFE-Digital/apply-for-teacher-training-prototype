@@ -27,12 +27,16 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">Complete these sections so that you can start applying to courses. Your details will be shared with the training provider of any course you apply to.</p>
+      <p class="govuk-body">
+        {% if not (data | allSectionsCompleted) %}
+          Complete these sections so that you can start applying to courses.
+        {% endif %}
+        Your details will be shared with the training provider of any course you apply to.
+      </p>
 
-    {% if data | allSectionsCompleted %}
-    {% else %}
-      <p class="govuk-body">You can update your details at any time.</p>
-    {% endif %}
+
+    <p class="govuk-body">You can update your details at any time.</p>
+
       <section class="app-section">
 
         <h2 class="govuk-heading-m">Personal details</h2>

@@ -16,8 +16,11 @@
 
       <h1 class="govuk-heading-l">You’ve already applied to {{ data.applications[id].providerName }}</h1>
 
-      <p class="govuk-body">You submitted an <a href="#">application to {{ data.applications[id].providerName }} for Chemistry (GS14)</a> and it's waiting for a decision.</p>
+      <p class="govuk-body">You submitted an <a href="#">application to {{ data.applications[id].providerName }} for Chemistry (GS14)</a> and it’s waiting for a decision.</p>
 
-      <p class="govuk-body">Speak to {{ data.applications[id].providerName }} if you want to talk about other courses they offer.</p>
+      <p class="govuk-body">If you’d like {{ data.applications[id].providerName }} to consider your application for a different course, speak to them first. They may be able to offer you a place on a different course.</p>
+
+      {{ govukButton({ text: "Continue anyway", href: "/applications/" + id + "/course" })}}
+
   </div>
 {% endblock %}

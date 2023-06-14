@@ -8,7 +8,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 require('./routes/account')(router)
 
-
+require('./routes/details/index')(router)
 require('./routes/details/contact-information')(router)
 require('./routes/details/work-history')(router)
 require('./routes/details/unpaid-experience')(router)

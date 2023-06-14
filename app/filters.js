@@ -71,3 +71,31 @@ function monthName (monthNumber) {
 }
 
 addFilter('monthName', monthName)
+
+
+function allSectionsCompleted (data) {
+
+  const detailsSections = [
+    'personalInformation',
+    'contactInformation',
+    'english',
+    'maths',
+    'science',
+    'otherQualifications',
+    'degree',
+    'workHistory',
+    'unpaidExperience',
+    'additionalSupport',
+    'interviewNeeds',
+    'references',
+    'safeguarding'
+  ]
+
+  if (data && data.completed) {
+    return detailsSections.every((section => data.completed[section] == 'true'))
+  } else {
+    return false
+  }
+}
+
+addFilter('allSectionsCompleted', allSectionsCompleted)

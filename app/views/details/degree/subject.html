@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What subject is your degree?" %}
+{% set international = data.degrees[id].uk == 'no' %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/level"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/details/degree/{{ id }}/subject-answer" method="post">
+        {% set hintExample = "For example, ‘History’ or ‘English literature’." if international else "For example, ‘French and History’ or ‘Mathematics’." %}
+
+        {{ govukInput({
+          name: "degrees[" + id + "][subject]",
+          value: data.degrees[id].subject,
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: hintExample
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

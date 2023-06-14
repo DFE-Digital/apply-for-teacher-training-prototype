@@ -1,0 +1,203 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set parent = "Equality and diversity questions" %}
+{% set ethnicGroup = data.equalityMonitoring.ethnicGroup %}
+
+{% if ethnicGroup == "Another ethnic group" %}
+  {% set title = "Which of the following best describes your background?" %}
+{% elif ethnicGroup == "Mixed or multiple ethnic groups" %}
+  {% set title = "Which of the following best describes your Mixed or Multiple ethnic groups background?" %}
+{% else %}
+  {% set title = "Which of the following best describes your " + ethnicGroup + " background?" %}
+{% endif %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/equality-diversity/ethnic-group"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/details/equality-diversity/free-school-meals" method="post">
+
+      {% set otherHtml %}
+        {{ govukInput({
+          name: "equalityMonitoring[otherEthnicBackground]",
+          classes: "govuk-!-width-two-thirds",
+          label: {
+            text: "How would you describe your background? (optional)"
+          },
+          value: data.equalityMonitoring.otherEthnicBackground
+        }) }}
+      {% endset -%}
+
+      {% if ethnicGroup == "Asian or Asian British" %}
+        {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
+          fieldset: {
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "Indian",
+            text: "Indian"
+          },
+          {
+            value: "Pakistani",
+            text: "Pakistani"
+          },
+          {
+            value: "Bangladeshi",
+            text: "Bangladeshi"
+          }, {
+            value: "Chinese",
+            text: "Chinese"
+          }, {
+            value: "Any other Asian background",
+            text: "Any other Asian background",
+            conditional: {
+              html: otherHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+      {% elif ethnicGroup == "Black, African, Caribbean or Black British" %}
+        {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
+          fieldset: {
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "African",
+            text: "African"
+          }, {
+            value: "Caribbean",
+            text: "Caribbean"
+          }, {
+            value: "Any other Black, African or Caribbean background",
+            text: "Any other Black, African or Caribbean background",
+            conditional: {
+              html: otherHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+      {% elif ethnicGroup == "Mixed or multiple ethnic groups" %}
+        {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
+          fieldset: {
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "White and Black Caribbean",
+            text: "White and Black Caribbean"
+          }, {
+            value: "White and Black African",
+            text: "White and Black African"
+          }, {
+            value: "White and Asian",
+            text: "White and Asian"
+          }, {
+            value: "Any other Mixed or Multiple ethnic background",
+            text: "Any other Mixed or Multiple ethnic background",
+            conditional: {
+              html: otherHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+      {% elif ethnicGroup == "White" %}
+        {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
+          fieldset: {
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "English, Welsh, Scottish, Northern Irish or British",
+            text: "English, Welsh, Scottish, Northern Irish or British"
+          }, {
+            value: "Irish",
+            text: "Irish"
+          }, {
+            value: "Gypsy or Irish Traveller",
+            text: "Gypsy or Irish Traveller"
+          }, {
+            value: "Roma",
+            text: "Roma"
+          }, {
+            value: "Any other White background",
+            text: "Any other White background",
+            conditional: {
+              html: otherHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+      {% else %}
+        {{ govukRadios({
+          name: "equalityMonitoring[ethnicBackground]",
+          value: data.equalityMonitoring.ethnicBackground,
+          fieldset: {
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          items: [{
+            value: "Arab",
+            text: "Arab"
+          }, {
+            value: "Any other ethnic group",
+            text: "Any other ethnic group",
+            conditional: {
+              html: otherHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+      {% endif %}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

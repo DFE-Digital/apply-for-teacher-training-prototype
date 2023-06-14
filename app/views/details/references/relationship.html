@@ -1,0 +1,49 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "How do you know " + data.references[id].name + " and how long have you known them?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/references/" + id + "/email"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if referee.type == "Academic, such as a university tutor" %}
+        {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year." %}
+      {% elif referee.type == "Professional, such as a manager" %}
+        {% set relationshipExample = "They were my line manager in my last job. I’ve known them for 2 years." %}
+      {% elif referee.type == "Someone you know through experience working in a school" %}
+        {% set relationshipExample = "They are the deputy head at the school where I currently volunteer. I’ve known them for 3 years." %}
+      {% else %}
+        {% set relationshipExample = "They are the head coach for my athletics club. I’ve known them for 5 years." %}
+      {% endif %}
+
+      <form action="/details/references" method="post">
+        {{ govukCharacterCount({
+          name: "references[" + id + "][relationship]",
+          value: data.references[id].relationship,
+          label: {
+            text: title,
+            classes: "govuk-label--l"
+          },
+          hint: {
+            text: "For example, ‘" + relationshipExample + "’"
+          },
+          maxwords: 50,
+          threshold: 85
+        }) }}
+
+        <p class="govuk-body">We’ll show your answer to {{referee.name}} and ask them whether it’s correct.</p>
+
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

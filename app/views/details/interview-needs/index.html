@@ -1,0 +1,63 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Interview availability" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/",
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">Tell providers if you cannot be available for interviews at certain times. For example, you have commitments like caring responsibilities, you have a job or are going on holiday.</p>
+      <p class="govuk-body">Contact your provider if you’re concerned about the interview process.</p>
+
+      <form action="/details/interview-needs/review" method="post">
+        {% set interviewHtml %}
+          {{ govukCharacterCount({
+            name: "interviewNeedsDetail",
+            id: "interview-needs-detail",
+            value: data.interviewNeedsDetail,
+            label: {
+              text: "Give details of your interview availability",
+              classes: "govuk-label--s"
+            },
+            maxlength: 150,
+            threshold: 75
+          }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          name: "interviewNeeds",
+          value: data.interviewNeeds,
+          fieldset: {
+            legend: {
+              classes: "govuk-fieldset__legend--m",
+              text: "Do you have any times you cannot be available for interviews?"
+            }
+          },
+          items: [{
+            text: "Yes",
+            value: "yes",
+            conditional: {
+              html: interviewHtml
+            }
+          }, {
+            text: "No",
+            value: "no"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

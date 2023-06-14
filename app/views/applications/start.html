@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Do you know which course you want to apply to?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+      {% if hasCourseFromFind %}
+        {% set courseHtml %}
+          <a href="{{ data.findUrl }}/course/T92/X130" target="_blank" class="govuk-!-font-weight-bold" style="text-decoration: none">
+            <span class="govuk-!-font-size-19">
+              {{ provider.name }}
+            </span><br>
+            <span class="search-result-link-name govuk-!-font-size-24" style="text-decoration: underline">
+              {{ course.name_and_code }}
+            </span>
+          </a>
+        {% endset %}
+
+
+        {{ govukInsetText({
+            html: courseHtml,
+            classes: "govuk-!-margin-top-0"
+        }) }}
+
+        <h2 class="govuk-heading-m">Do you want to apply to this course?</h2>
+
+        {{ govukRadios({
+          items: [{
+            value: "yes",
+            text: "Yes"
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        } ) }}
+      {% else %}
+
+        <form action="/applications/course-known" method="post">
+          {{ govukRadios({
+            name: "courseKnown",
+            fieldset: {
+              legend: {
+                text: title,
+                isPageTitle: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [{
+              value: "yes",
+              text: "Yes, I know where I want to apply"
+            }, {
+              value: "no",
+              text: "No, I need to find a course"
+            }]
+          }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+        </form>
+      {% endif %}
+
+
+    </div>
+  </form>
+{% endblock %}

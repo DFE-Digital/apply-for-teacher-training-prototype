@@ -1,30 +1,30 @@
 {{ govukSummaryList({
   rows: [{
     key: {
-      text: "Do you have any interview needs?"
+      text: "Do you have any times you cannot be available for interviews?"
     },
     value: {
       text: ("Yes" if data.interviewNeeds == "yes" else "No")
     },
     actions: {
       items: [{
-        href: "/application/interview-needs?referrer=" + referrer,
+        href: "/details/interview-needs?referrer=" + referrer,
         text: "Change",
         visuallyHiddenText: "interview needs"
       }]
     }
   }, {
     key: {
-      text: "What are your interview needs?"
+      text: "Give details of your interview availability"
     },
     value: {
       text: data.interviewNeedsDetail
     },
     actions: {
       items: [{
-        href: "/application/interview-needs?referrer=" + referrer,
+        href: "/details/interview-needs?referrer=" + referrer,
         text: "Change",
-        visuallyHiddenText: "interview needs"
+        visuallyHiddenText: "interview availability"
       }]
     }
   } if data.interviewNeeds == "yes"]

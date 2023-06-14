@@ -1,0 +1,207 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% macro tagClassesForSection(completed=false, apply2=false) %}
+  {% if completed %}
+    govuk-task-list__status--black
+  {% else %}
+    govuk-task-list__status--blue
+  {% endif %}
+{% endmacro %}
+
+{% macro tagTextForSection(completed=false) %}
+  {% if completed %}
+    Completed
+  {% else %}
+    Incomplete
+  {% endif %}
+{% endmacro %}
+
+{% set title = "Your details" %}
+{% set hasSecondary = true %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">Complete these sections so that you can start applying to courses. Your details will be shared with the training provider of any course you apply to.</p>
+
+    {% if data | allSectionsCompleted %}
+    {% else %}
+      <p class="govuk-body">You can update your details at any time.</p>
+    {% endif %}
+      <section class="app-section">
+
+        <h2 class="govuk-heading-m">Personal details</h2>
+        {{ govukTaskList({
+          items: [{
+            title: {
+              text: "Personal information"
+            },
+            href: "/details/personal-information",
+            id: "personal-information",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.personalInformation == 'true'),
+              text: tagTextForSection(completed=data.completed.personalInformation == 'true')
+            }
+          }, {
+            title: {text: "Contact information"},
+            href: "/details/contact-information",
+            id: "contact-information",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.contactInformation == 'true'),
+              text: tagTextForSection(completed=data.completed.contactInformation == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+        <section class="app-section">
+        <h2 class="govuk-heading-m">Qualifications</h2>
+
+        {{ govukTaskList({
+          items: [{
+            title: {text: "English GCSE or equivalent"},
+            href: "/details/gcse/english",
+            id: "english-gcse",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.english, apply2=apply2),
+              text: tagTextForSection(completed=data.completed.english, apply2=apply2)
+            }
+          }, {
+            title: { text: "Maths GCSE or equivalent" },
+            href: "/details/gcse/maths",
+            id: "maths-gcse",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.maths == 'true'),
+              text: tagTextForSection(completed=data.completed.maths == 'true')
+            }
+          }, {
+            title: { text: "Science GCSE or equivalent" },
+            href: "/details/gcse/science",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.science == 'true'),
+              text: tagTextForSection(completed=data.completed.science == 'true')
+            }
+          }, {
+            title: { text: "Other qualifications" if international else "A levels and other qualifications" },
+            href: "/details/other-qualifications",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.otherQualifications == 'true'),
+              text: tagTextForSection(completed=data.completed.otherQualifications == 'true')
+            }
+          }, {
+            title: { text: "Degree" },
+            href: "/details/degree/review",
+            id: "degree",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.degree == 'true'),
+              text: tagTextForSection(completed=data.completed.degree == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Work experience</h2>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "Work history" },
+            href: "/details/work-history",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.workHistory == 'true'),
+              text: tagTextForSection(completed=data.completed.workHistory == 'true')
+            }
+          }, {
+            title: { text: "Unpaid experience" },
+            href: "/details/unpaid-experience",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.unpaidExperience == 'true'),
+              text: tagTextForSection(completed=data.completed.unpaidExperience == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Adjustments</h2>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "Ask for support if you’re disabled" },
+            href: "/details/additional-support",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.additionalSupport == 'true'),
+              text: tagTextForSection(completed=data.completed.additionalSupport == 'true')
+            }
+          }, {
+            title: { text: "Interview availability" },
+            href: "/details/interview-needs",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.interviewNeeds == 'true'),
+              text: tagTextForSection(completed=data.completed.interviewNeeds == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Safeguarding</h2>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "References to be requested if you accept an offer" },
+            href: "/details/references",
+            id: "references",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.references == 'true'),
+              text: tagTextForSection(completed=data.completed.references == 'true')
+            }
+          },
+          {
+            title: { text: "Declare any safeguarding issues" },
+            href: "/details/safeguarding",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.safeguarding == 'true'),
+              text: tagTextForSection(completed=data.completed.safeguarding == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Equality and diversity</h2>
+        <p class="govuk-body">Training providers will only see your answers to this section if you accept an offer from them.</p>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "Equality and diversity questions" },
+            href: "/details/equality-diversity/sex",
+            id: "equality",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.equalityMonitoring == 'true'),
+              text: tagTextForSection(completed=data.completed.equalityMonitoring == 'true')
+            }
+          }]
+        }) }}
+      </section>
+   </div>
+
+    <div class="govuk-grid-column-one-third">
+      <hr>
+      <aside>
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">Get help</h2>
+
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>Call 0800 389 2500 or chat online</li>
+            <li>Monday to Friday, 8:30am to 5:30pm (except public holidays)</li>
+            <li>Free of charge</li>
+           </ul>
+      </aside>
+    </div>
+  </div>
+{% endblock %}
+
+{% block secondary %}
+  {% include "_includes/get-support.html" %}
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set completed = data.degrees[id].completed == "yes" %}
+{% set international = data.degrees[id].uk == "no" %}
+
+{% if completed %}
+  {% if international %}
+    {% set title = "Did your degree give a grade?" %}
+  {% else %}
+    {% set title = "What grade is your degree?" %}
+  {% endif %}
+{% else %}
+  {% if international %}
+    {% set title = "Will your degree give a grade?" %}
+  {% else %}
+    {% set title = "What grade do you expect to get?" %}
+  {% endif %}
+{% endif %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/completed"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/details/degree/{{ id }}/start-year" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {% set internationalGradeHtml %}
+
+        {% set gradeLabel = "What grade did you get?" if completed else "What grade do you expect to get?"  %}
+          {{ govukInput({
+            label: {
+              text: gradeLabel
+            },
+            classes: "govuk-input--width-20"
+          }) }}
+        {% endset %}
+
+        {% set otherUkGradeHtml %}
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="degree-{{ id }}-gradeOther">Enter your degree grade</label>
+            <div id="grade-autocomplete-container" class="govuk-input--width-20"></div>
+          </div>
+        {% endset %}
+
+        {% if international %}
+          {{ govukRadios({
+            name: "degrees[" + id + "][gradeGiven]",
+            value: data.degrees[id].gradeGiven,
+            fieldset: {
+              legend: {
+                html: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: 'For example, ‘A’, ‘4.5’, ‘94%’, ‘Distinction’'
+            },
+            items: [{
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: internationalGradeHtml
+              }
+            }, {
+              value: "no",
+              text: "No"
+            }, {
+              value: "not-sure",
+              text: "I do not know"
+            }]
+          }) }}
+        {% else %}
+          {{ govukRadios({
+            name: "degrees[" + id + "][grade]",
+            value: data.degrees[id].grade,
+            fieldset: {
+              legend: {
+                html: title,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            items: [{
+              value: "First-class honours",
+              text: "First-class honours"
+            } if not international, {
+              value: "Upper second-class honours (2:1)",
+              text: "Upper second-class honours (2:1)"
+            } if not international, {
+              value: "Lower second-class honours (2:2)",
+              text: "Lower second-class honours (2:2)"
+            } if not international, {
+              value: "Third-class honours",
+              text: "Third-class honours"
+            } if not international, {
+              text: "Distinction"
+            } if not (undergraduateDegree or international), {
+              text: "Merit"
+            } if not (undergraduateDegree or international), {
+              text: "Pass"
+            } if not international, {
+              text: "Not applicable"
+            } if not undergraduateDegree, {
+              text: "Unknown"
+            } if not undergraduateDegree, {
+              text: "Other",
+              conditional: {
+                html: otherUkGradeHtml
+              }
+            }]
+          }) }}
+        {% endif %}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

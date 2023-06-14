@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Have you completed your degree?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/institution"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/details/degree/{{ id }}/grade" method="post">
+    {{ govukRadios({
+      name: "degrees[" + id + "][completed]",
+      value: data.degrees[id].completed,
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [{
+        value: "yes",
+        text: "Yes"
+      }, {
+        value: "no",
+        text: "No, I am studying for my degree"
+      }]
+    }) }}
+
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
+{% endblock %}

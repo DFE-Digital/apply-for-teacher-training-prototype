@@ -1,0 +1,66 @@
+{% extends "layouts/main.html" %}
+
+{% set choice = data.choices[id] %}
+{% set primaryNavId = "applications" %}
+{% set title = "Details of offer" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body govuk-!-margin-top-0">
+        {{ data.applications[id].providerName }} have offered you a conditional place on the <a href="#">{{ data.applications[id].course }}</a> course.
+      </p>
+
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        {% for condition in data.applications[id].conditions %}
+          <li>{{ condition.title }}</li>
+        {% endfor %}
+      </ul>
+
+
+      <form action="/applications/{{ id}}/decision" method="post">
+        {{ govukRadios({
+          fieldset: {
+            classes: "govuk-!-margin-top-6",
+            legend: {
+              text: "How do you want to respond to this offer?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "If you accept this offer, your other applications will be withdrawn"
+          },
+          id: "decision",
+          name: "decision",
+          items: [
+            {
+              value: "accept",
+              text: "Accept offer from " + data.applications[id].providerName + " for " + data.applications[id].course
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "decline",
+              text: "Decline offer"
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

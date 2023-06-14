@@ -1,0 +1,77 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Declare any safeguarding issues" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/",
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <p class="govuk-body">Teacher training providers need to check that it’s safe for you to work with children and young people.</p>
+
+      <!-- <p class="govuk-body">Providers will check:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your criminal record in the UK and any other countries you’ve lived in recently</li>
+        <li>whether you’ve been banned from teaching or working with children</li>
+        <li>your professional behaviour, such as by asking for a reference from people you’ve worked with</li>
+      </ul> -->
+
+      <p class="govuk-body">If you receive an offer, training providers will check your references and do an enhanced Disclosure and Barring Service (DBS) check. If you’re outside the UK, they’ll ask you to get a criminal record check from your home country.</p>
+
+      <p class="govuk-body">Not all convictions or police cautions on a criminal record will stop you from training to be a teacher. <a href="https://www.gov.uk/tell-employer-or-college-about-criminal-record">Learn more about when you need to tell someone about your criminal record</a>.</p>
+
+      <p class="govuk-body">Talk to the providers you’re applying to for advice on whether any safeguarding issues will affect your application.</p>
+
+      {% set safeguardingHtml %}
+        {{ govukCharacterCount({
+          name: "safeguardingDetail",
+          value: data.safeguardingDetail,
+          label: {
+            html: "Give any relevant information",
+            classes: "govuk-label--s"
+          },
+          maxwords: 400,
+          rows: 8
+        }) }}
+      {% endset %}
+
+      <form action="/details/safeguarding/review" method="post">
+        {{ govukRadios({
+          name: "safeguarding",
+          value: data.safeguarding,
+          fieldset: {
+            classes: "govuk-!-margin-top-7",
+            legend: {
+              text: "Do you want to declare any safeguarding issues, such as a criminal record or professional misconduct?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "Yes, I want to share something",
+            conditional: {
+              html: safeguardingHtml
+            }
+          }, {
+            value: "no",
+            text: "No"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

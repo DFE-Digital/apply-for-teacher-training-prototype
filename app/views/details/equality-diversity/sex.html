@@ -1,0 +1,57 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set parent = "Equality and diversity questions" %}
+{% set title = "Sex" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details",
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">We ask this question to prevent discrimination in teacher recruitment.</p>
+
+      <p class="govuk-body">Training providers will not see your answer when deciding to offer you a place. They'll only see your answer if you accept an offer from them.</p>
+
+      <form action="/details/equality-diversity/disabilities" method="post">
+        {{ govukRadios({
+          name: "equalityMonitoring[sex]",
+          value: data.equalityMonitoring.sex,
+          fieldset: {
+            legend: {
+              text: "What is your sex?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [{
+            value: "Female",
+            text: "Female"
+          }, {
+            value: "Male",
+            text: "Male"
+          }, {
+            value: "Other",
+            text: "Other"
+          }, {
+            divider: "or"
+          }, {
+            value: "Prefer not to say",
+            text: "Prefer not to say"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

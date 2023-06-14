@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What is your phone number?" %}
+{% set formaction = "/details/contact-information/where-do-you-live" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details",
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="{{ formaction }}" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukInput({
+          name: "phoneNumber",
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: "Enter a landline or mobile. For non-UK numbers, include the country code"
+          },
+          classes: "govuk-input--width-20",
+          autocomplete: "tel",
+          type: "tel",
+          value: data.phoneNumber
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

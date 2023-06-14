@@ -8,14 +8,16 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 require('./routes/account')(router)
 
-require('./routes/application/choices')(router)
-require('./routes/application/contact-information')(router)
-require('./routes/application/work-history')(router)
-require('./routes/application/unpaid-experience')(router)
-require('./routes/application/degree')(router)
-require('./routes/application/gcse')(router)
-require('./routes/application/other-qualifications')(router)
-require('./routes/application/references')(router)
+
+require('./routes/details/contact-information')(router)
+require('./routes/details/work-history')(router)
+require('./routes/details/unpaid-experience')(router)
+require('./routes/details/degree')(router)
+require('./routes/details/gcse')(router)
+require('./routes/details/other-qualifications')(router)
+require('./routes/details/references')(router)
+
+require('./routes/applications')(router)
 
 require('./routes/dashboard')(router)
 require('./routes/accepted')(router)

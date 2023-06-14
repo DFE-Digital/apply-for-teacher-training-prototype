@@ -1,0 +1,39 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What is " + data.references[id].name + "’s email address?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/references/" + id + "/name"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/details/references/{{ id }}/relationship" method="post" novalidate="true">
+        {{ govukInput({
+          name: "references[" + id + "][email]",
+          value: data.references[id].email,
+          label: {
+            text: title,
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          hint: {
+            text: "Give their work email address if they have one."
+          },
+          type: "email",
+          autocomplete: "false",
+          spellcheck: false
+        }) }}
+
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set degreeLevel = data.degrees[id].level %}
+{% set international = data.degrees[id].uk == "no" %}
+
+{% if degreeLevel == "Foundation" %}
+  {% set degreeDescription = "foundation degree" %}
+{% elif degreeLevel == "Bachelor" %}
+  {% set degreeDescription = "bachelor degree" %}
+{% elif degreeLevel == "Master’s" %}
+  {% set degreeDescription = "master’s degree" %}
+{% elif degreeLevel == "Doctorate" %}
+  {% set degreeDescription = "degree" %}
+{% endif %}
+
+{% set title = "What type of " + degreeDescription + " is it?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/subject"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/details/degree/{{ id }}/institution" method="post">
+
+      {% set otherTypeHtml %}
+        {{ govukInput({
+          name: "degrees[" + id + "][otherType]",
+          value: data.degrees[id].otherType,
+          label: {
+            text: "Degree type"
+          }
+        }) }}
+      {% endset %}
+
+    {% if degreeLevel == "Foundation" %}
+      {% set degreeDescription = "foundation degree" %}
+    {% elif degreeLevel == "Bachelor" %}
+      {% set degreeDescription = "bachelor degree" %}
+      {% set radioItems = [{
+        text: "Bachelor of Arts",
+        value: "BA"
+      }, {
+        text: "Bachelor of Science",
+        value: "BSc"
+      }, {
+        text: "Bachelor of Education",
+        value: "BEd"
+      },
+      {divider: "or"},
+      {
+        value: "other",
+        text: "Another " + degreeDescription,
+        conditional: {
+          html: otherTypeHtml
+        }
+      }
+      ]
+    %}
+    {% elif degreeLevel == "Master’s" %}
+      {% set degreeDescription = "master’s degree" %}
+    {% elif degreeLevel == "Doctorate" %}
+      {% set degreeDescription = "doctorate" %}
+    {% else %}
+      {% set degreeDescription = "degree" %}
+    {% endif %}
+
+
+      {{ govukRadios({
+        name: "degrees[" + id + "][type]",
+        value: data.degrees[id].type,
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: hint,
+        items: radioItems
+      }) }}
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+    </div>
+  </div>
+{% endblock %}

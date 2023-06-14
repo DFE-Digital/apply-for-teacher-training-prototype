@@ -22,9 +22,14 @@
     {{ appPrimaryNavigation({
       items: [
         {
-          href: "/application",
-          text: "Your application" + ("s" if (data.submittedAt) and (data.choices | length > 1)),
-          active: primaryNavId == "application"
+          href: "/details",
+          text: "Your details",
+          active: primaryNavId == "details"
+        },
+        {
+          href: "/applications",
+          text: "Your applications",
+          active: primaryNavId == "applications"
         }
       ],
       items_right: [
@@ -34,15 +39,11 @@
         }
       ]
     }) }}
-
   {% endif %}
 {% endblock %}
 
 {% block pageTitle %}
    {{ title }} - {{ serviceName }}
-{% endblock %}
-
-{% block beforeContent %}
 {% endblock %}
 
 {% block footer %}
@@ -58,20 +59,28 @@
           text: "Clear data"
         },
         {
-          href: "/admin/complete-application",
-          text: "Complete the application"
+          href: "/admin/complete-details",
+          text: "Complete your details"
+        },
+        {
+          href: "/admin/setup-applications",
+          text: "Setup applications"
+        },
+        {
+          href: "/admin/add-application",
+          text: "Add application"
         },
         {
           href: "/admin/receive-offer",
-          text: "Receive offers"
+          text: "Receive an offer"
         },
         {
-          href: "/admin/receive-references",
-          text: "Receive references"
+          href: "/admin/receive-rejection",
+          text: "Unsuccessful"
         },
         {
-          href: "/admin/meet-conditions",
-          text: "Meet conditions"
+          href: "/admin/receive-inactive",
+          text: "Inactive application"
         }
       ]
     }

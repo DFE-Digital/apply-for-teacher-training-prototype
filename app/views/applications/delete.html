@@ -1,0 +1,26 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Are you sure you want to withdraw this application?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/applications/{{ id }}/delete" method="post">
+        {{ govukButton({
+          text: "Yes I’m sure - withdraw this application",
+          classes: "govuk-button--warning"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

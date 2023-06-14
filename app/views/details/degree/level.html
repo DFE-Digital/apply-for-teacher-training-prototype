@@ -1,0 +1,78 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What type of degree is it?" %}
+
+{% set international = data.degrees[id].uk == "no" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/country"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/details/degree/{{ id }}/subject" method="post">
+  {% set anotherLevelHtml %}
+
+    {{ govukInput({
+      name: "degrees[" + id + "][otherLevel]",
+      value: data.degrees[id].otherLevel,
+      label: {
+        text: "Qualification type"
+      }
+    }) }}
+  {% endset %}
+
+  {{ govukRadios({
+    name: "degrees[" + id + "][level]",
+    value: data.degrees[id].level,
+    fieldset: {
+      legend: {
+        text: title,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    items: [
+      {
+        value: "Foundation",
+        text: "Foundation degree"
+      },
+      {
+        value: "Bachelor",
+        text: "Bachelor degree",
+        hint: {
+          text: "Sometimes referred to as an ‘undergraduate’ or ‘first’ degree, this is the minimum level required to be eligible for teacher training."
+        }
+      },
+      {
+        value: "Master’s",
+        text: "Master’s degree"
+      },
+      {
+        value: "Doctorate",
+        text: "Doctorate (PhD)"
+      },
+      {
+        value: "Level 6 Diploma",
+        text: "Level 6 Diploma"
+      },
+      {
+        divider: "or"
+      },
+      {
+        value: "other",
+        text: "Another qualification equivalent to a degree",
+        conditional: {
+          html: anotherLevelHtml
+        }
+      }
+    ]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

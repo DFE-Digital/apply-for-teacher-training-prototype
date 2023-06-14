@@ -1,0 +1,35 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+
+{% set title = "Which course are you applying to?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/provider"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <form action="/applications/{{ id }}/personal-statement" method="post">
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      idPrefix: "course",
+      items: courseItems,
+      name: "applications[" + id + "][course]",
+      value: data.applications[id].course
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+
+{% endblock %}

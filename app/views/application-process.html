@@ -1,15 +1,14 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "How applications work" %}
-
-{% set signedIn = false %}
+{% set primaryNavId = "applications" %}
 
 {% block beforeContent %}
     {% if data.account.email %}
 
       {{ govukBackLink({
-        href: "/application",
-        text: "Back to application"
+        href: "/applications",
+        text: "Back to applications"
       }) }}
 
     {% else %}
@@ -25,6 +24,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <!--
     <h1 class="govuk-heading-l">The application process for courses starting in September 2023</h1>
 
       <p class="govuk-body">For courses starting in September 2023, you can start applying a year before they start in October 2022.</p>
@@ -61,10 +61,9 @@
           </tbody>
         </table>
 
-<!--
-   <h2>Continuous application process</h2>
+    -->
 
-       <h1 class="govuk-heading-l">The application process for courses starting in September 2024</h1>
+    <h1 class="govuk-heading-l">The application process for courses starting in September 2024</h1>
 
       <p class="govuk-body">For courses starting in September 2024, you can start applying a year before they start in October 2023.</p>
 
@@ -85,15 +84,12 @@
             </tr>
             <tr class="govuk-table__row">
              <td class="govuk-table__cell">10&nbsp;October&nbsp;2023 at 9am</td>
-              <td class="govuk-table__cell">Start applying to courses. You can apply to 4 courses offered by 4 different training providers. Courses can fill up quickly, so you should apply as soon as you can.<br><br>You can withdraw an application at any time and apply to a different course if you want to.<br><br>Training providers will have 30 working days to look at your application and decide to offer you a place on a course. Holiday periods in England over December and March or April are not included in the 30 working days. Each course you apply to will show the date for when providers need to respond by.<br><br>If training providers do not respond in time, you'll be able to apply to another course while you wait for a response. We'll tell you if the provider has not responded in time.<br><br>You’ll get an email if you receive an offer from a training provider.</td>
+              <td class="govuk-table__cell">Start applying to courses. You can apply to 4 courses offered by 4 different training providers. Courses can fill up quickly, so you should apply as soon as you can.<br><br>You can withdraw an application at any time and apply to a different course if you want to.<br><br>Training providers will have a month to look at your application and decide to offer you a place on a course. 
+              <br><br>If training providers do not respond in a month, you'll be able to apply to another course while you wait for a response. We'll tell you if the provider has not responded in time.<br><br>You’ll get an email if you receive an offer from a training provider.</td>
             </tr>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">1 July 2024</td>
-              <td class="govuk-table__cell">The time training providers have to make a decision about your application is reduced from 30 working days to 20 working days.</td>
-            </tr>
-              <tr class="govuk-table__row">
-              <td class="govuk-table__cell">3 September 2024 at 6pm</td>
-              <td class="govuk-table__cell">If you have not already applied for teacher training, you will not be able to apply after 3 September 2024.<br><br>If you've already applied, but your applications were unsuccessful, you can continue to apply for courses until 17 September 2024 at 6pm.</td>
+              <td class="govuk-table__cell">17 September 2024 at 6pm</td>
+              <td class="govuk-table__cell">The last day to submit any applications.</td>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">25 September 2024 at 11:59pm</td>
               <td class="govuk-table__cell">The last day for training providers to make a decision on all applications for courses starting in September 2024.</td>
@@ -101,7 +97,7 @@
           </tbody>
         </table>
 
-    -->
+
     </div>
   </div>
 {% endblock %}

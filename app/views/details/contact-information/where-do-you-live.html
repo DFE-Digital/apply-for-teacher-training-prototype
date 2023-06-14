@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Where do you live?" %}
+{% set formaction = "/details/contact-information/where-do-you-live/answer" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: (referrer if referrer else "/details/contact-information/")
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="{{ formaction }}" method="post">
+    {% set internationalCountryHtml %}
+      {{ govukInput({
+        name: "address[country]",
+        classes: "govuk-!-width-two-thirds",
+        label: {
+          text: "Which country?",
+          classes: "govuk-label--m"
+        },
+        value: data.address.country
+      }) }}
+    {% endset %}
+
+    {{ govukRadios({
+      name: "livesInUk",
+      value: data.livesInUk,
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
+      },
+      items: [{
+        text: "In the UK",
+        value: "yes"
+      }, {
+        text: "Outside the UK",
+        value: "no",
+        conditional: {
+          html: internationalCountryHtml
+        }
+      }]
+    }) }}
+
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
+{% endblock %}

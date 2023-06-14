@@ -1,0 +1,63 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set formaction = "/application/" + "/personal-information/nationality-answer" %}
+{% set title = "What’s your nationality?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: (referrer if referrer else "/application/" + "/personal-information/")
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      <form action="/details/personal-information/review" method="post">
+
+      {% set otherHtml %}
+        <div class="app-add-another-nationality">
+          {{ govukInput({
+            name: "otherNationality",
+            label: {
+              text: "Nationality"
+            },
+            value: data.otherNationality
+          }) }}
+        </div>
+
+      {% endset -%}
+
+      {{ govukCheckboxes({
+        name: "nationalities",
+        hint: {
+          text: "Select all that apply"
+        },
+        values: data.nationalities,
+        items: [{
+          value: "British",
+          text: "British"
+        }, {
+          value: "Irish",
+          text: "Irish"
+        }, {
+          value: "Other",
+          text: "Other",
+          conditional: {
+            html: otherHtml
+          }
+        }]
+      }) }}
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

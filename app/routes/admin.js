@@ -1,9 +1,12 @@
+const utils = require('./../utils')
+const data = require('./../utils/data')
+
 /**
  * Admin routes
  */
 module.exports = router => {
-  // This fills out every section of the application
-  router.get('/admin/complete-application', (req, res) => {
+  // This fills out every section of your details
+  router.get('/admin/complete-details', (req, res) => {
     const data = req.session.data
 
     // Set personal information
@@ -139,6 +142,14 @@ module.exports = router => {
     // Set safeguarding
     data.safeguarding = 'no'
 
+    // Set equality questions
+    data.equalityMonitoring = {
+      disabilities: ['none'],
+      ethnicGroup: 'Prefer not to say',
+      freeSchoolMeals: 'I do not know',
+      sex: "Prefer not to say"
+    }
+
     // Set completed sections
     data.completed = {
       personalInformation: 'true',
@@ -155,32 +166,56 @@ module.exports = router => {
       additionalSupport: 'true',
       interviewNeeds: 'true',
       references: 'true',
-      safeguarding: 'true'
+      safeguarding: 'true',
+      equalityMonitoring: 'true'
     }
 
-    res.redirect('/application')
+    res.redirect('/details')
   })
 
-  // This lets the candidate receive an offer from all their chocies
+  // This lets the candidate receive an offer on one choice
   router.get('/admin/receive-offer', (req, res) => {
-    for (const choice of Object.values(req.session.data.choices)) {
-      choice.status = 'Offer received'
-      choice.conditions = [
+
+    let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+
+    if (offersAwaitingDecision.length > 0) {
+
+      offersAwaitingDecision[0].status = "Offer received"
+      offersAwaitingDecision[0].conditions = [
         { title: 'Fitness to train to teach check', status: 'Pending' },
         { title: 'Disclosure and barring service check', status: 'Pending' }
       ]
-      choice.skeConditions = [
-        {
-          subject: 'English',
-          lengthInWeeks: 20,
-          reason: 'degree-subject',
-          status: 'Not met'
-        }
-      ]
     }
 
-    res.redirect('/dashboard')
+    res.redirect('/applications')
   })
+
+  // This lets the candidate receive a rejection
+  router.get('/admin/receive-rejection', (req, res) => {
+
+    let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+
+    if (offersAwaitingDecision.length > 0) {
+
+      offersAwaitingDecision[0].status = "Unsuccessful"
+      offersAwaitingDecision[0].rejectionFeedback = "Unfortunately, the course is now full."
+    }
+
+    res.redirect('/applications')
+  })
+
+    // This makes an application inactive
+    router.get('/admin/receive-inactive', (req, res) => {
+
+      let offersAwaitingDecision = Object.values(req.session.data.applications).filter(application => application.status === "Awaiting decision")
+
+      if (offersAwaitingDecision.length > 0) {
+
+        offersAwaitingDecision[0].status = "Inactive"
+      }
+
+      res.redirect('/applications')
+    })
 
   // This pre-fills most of the applicaiton apart from the sections we want to test.
   router.get('/admin/receive-references', (req, res) => {
@@ -193,6 +228,94 @@ module.exports = router => {
     }
 
     res.redirect('/accepted')
+  })
+
+  // This pre-fills most of the applicaiton apart from the sections we want to test.
+  router.get('/admin/add-application', (req, res) => {
+    const timeNow = new Date().toISOString()
+    const id = utils.generateRandomString()
+
+    req.session.data.applications ||= {}
+    let applications = req.session.data.applications
+
+    const applicationsAwaitingDecisionOrReceivedOffer = Object.values(applications).filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const applicationAccepted = Object.values(applications).find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
+
+    if (numberOfApplicationsLeft > 0) {
+
+      const providersAlreadyAppliedTo = Object.values(applications).filter(application =>
+        (application.status == 'Awaiting decision' || application.status == 'Inactive' || application.status == 'Offer received')
+      ).map(application => application.providerName)
+
+
+      const providersNotYetAppliedTo = data.providers.filter(provider =>
+        (!providersAlreadyAppliedTo.includes(provider))
+      )
+
+
+      const course = data.courses[Math.floor(Math.random() * data.courses.length)].title
+      const providerName = providersNotYetAppliedTo[Math.floor(Math.random() * providersNotYetAppliedTo.length)]
+
+      applications[id] = {
+        status: 'Awaiting decision',
+        submittedAt: timeNow,
+        course: course,
+        providerName: providerName,
+        otherCourses: ['no']
+      }
+    }
+
+    res.redirect('/applications')
+  })
+
+
+  router.get('/admin/setup-applications', (req, res) => {
+    const timeNow = new Date().toISOString()
+
+    req.session.data.applications = {}
+    let applications = req.session.data.applications
+
+
+    applications['L59DP'] = {
+      status: 'Awaiting decision',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[1],
+      otherCourses: ['no']
+    }
+
+    applications['I61MD'] = {
+      status: 'Inactive',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[2],
+      otherCourses: ['no']
+    }
+
+    applications['H746A'] = {
+      status: 'Unsuccessful',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[3],
+      rejectionFeedback: "Unfortunately, the course is now full.",
+      otherCourses: ['no']
+    }
+
+    applications['Z95LE'] = {
+      status: 'Offer received',
+      submittedAt: timeNow,
+      course: data.courses[1].title,
+      providerName: data.providers[4],
+      otherCourses: ['no'],
+      conditions: [
+        { title: 'Fitness to train to teach check', status: 'Pending' },
+        { title: 'Disclosure and barring service check', status: 'Pending' }
+      ]
+    }
+
+    res.redirect('/applications')
   })
 
   // This marks all conditions as met

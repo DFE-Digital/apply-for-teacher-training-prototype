@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set degreeCount = data.degrees | length %}
+
+{% set title = "Which country was the degree from?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/review",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/details/degree/{{ id }}/country-answer" method="post">
+
+        {% set ukConditionalHtml %}
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="degree-{{ id }}-typeUk">Enter degree type</label>
+            <span id="degree-{{ id }}-typeUk-hint" class="govuk-hint">{{ ukHintText }}</span>
+            <div id="type-uk-autocomplete-container"></div>
+          </div>
+        {% endset %}
+
+        {% set countryHtml %}
+          {{ govukInput({
+            name: "degrees[" + id + "][country]",
+            value: data.degrees[id].country,
+            label: {
+              text: "Country",
+              classes: "govuk-label--s"
+            }
+          }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          name: "degrees[" + id + "][uk]",
+          value: data.degrees[id].uk,
+          fieldset: {
+            legend: {
+              text: title,
+              classes: "govuk-fieldset__legend--l",
+              isPageTitle: true
+            }
+          },
+          items: [{
+            value: "yes",
+            text: "United Kingdom"
+          }, {
+            value: "no",
+            text: "Another country",
+            conditional: {
+              html: countryHtml
+            }
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}{% set primaryNavId = "applications" %}
+{% set title = "Which training provider are you applying to?" %}
+{% set formaction = paths.next %}
+{% block beforeContent %}
+  {{ govukBackLink({ href: "/applications" }) }}
+  {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title}}</h1>
+
+      <form action="/applications/{{ id }}/provider" method="post">
+        {{ govukSelect({
+          name: "applications[" + id + "][providerName]",
+          value: data.applications[id].providerName,
+          label: {
+            text: "Provider name"
+          },
+          items: providerItems
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

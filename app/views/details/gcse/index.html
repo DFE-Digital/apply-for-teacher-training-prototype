@@ -1,0 +1,107 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set action = "add" %}
+{% set subject = (id | capitalize) if id == "english" else id %}
+{% set title = (action | capitalize) + " " + subject + " GCSE grade 4 (C) or above, or equivalent" %}
+{% set allowsFeedback = true %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details",
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form action="/details/gcse/{{ id }}/answer" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        {% set otherUkConditionalHtml %}
+          {{ govukInput({
+            label: {
+              text: "Type of qualification"
+            }
+          }) }}
+        {% endset %}
+
+        {% set nonUkConditionalHtml %}
+          {{ govukInput({
+            label: {
+              text: "Type of qualification"
+            },
+            hint: {
+              html: "For example, <span lang=\"fr\">Baccalauréat Général</span>, Secondary School Certificate (SSC), <span lang=\"es\">Título de Bachiller</span>, West African Senior School Certificate Examination (WASSCE)"
+            }
+          }) }}
+        {% endset %}
+
+        {% set missingConditionalHtml %}
+          <p class="govuk-hint">You can still apply for teacher training if you are missing this qualification or its equivalent. However, it will need to be in place by the start of your course.</p>
+          <p class="govuk-hint">For advice, contact your chosen training provider or <a href="https://getintoteaching.education.gov.uk/get-help-and-support/">Get Into Teaching</a>.</p>
+          {{ govukCharacterCount({
+            label: {
+              classes: "govuk-label--s",
+              html: "If you are working towards this qualification, give us details (optional)"
+            },
+            maxwords: 200,
+            rows: 12
+          }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          name: "gcse[" + id + "][type]",
+          value: data.gcse[id].type,
+          fieldset: {
+            legend: {
+              text: "What type of qualification in " + subject + " do you have?",
+              classes: "govuk-label--l",
+              isPageTitle: true
+            },
+            attributes: {
+              "data-module": "clear-hidden"
+            }
+          },
+          hint: {
+            text: "This should be a school qualification, not an English as a foreign language qualification."
+          } if subject == "English",
+          items: [{
+            text: "GCSE",
+            value: "GCSE"
+          }, {
+            text: "UK O level (from before 1989)",
+            value: "O level"
+          }, {
+            text: "Scottish National 5",
+            value: "Scottish National 5"
+          }, {
+            text: "Another UK qualification",
+            value: "Another UK qualification",
+            conditional: {
+              html: otherUkConditionalHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            text: "Qualification from outside the UK",
+            value: "A non-UK qualification",
+            conditional: {
+              html: nonUkConditionalHtml
+            }
+          }, {
+            divider: "or"
+          }, {
+            text: "I do not have a qualification in " + subject + " yet",
+            value: "not-yet"
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What year will you graduate?" if data.degrees[id].completed == "no" else "What year did you graduate?" %}
+{% set graduatingYearExample = "2022" if data.degrees[id].completed == "no" else "2019" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/start-year"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/details/degree/review" method="post">
+
+      {{ govukInput({
+        name: "degrees[" + id + "][graduationYear]",
+        value: data.degrees[id].graduationYear,
+        label: {
+          text: title,
+          classes: "govuk-label--l"
+        },
+        hint: {
+          text: "For example, " + graduatingYearExample
+        },
+        classes: "govuk-input--width-4"
+      }) }}
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

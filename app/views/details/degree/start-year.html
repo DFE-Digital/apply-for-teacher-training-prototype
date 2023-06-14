@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "What year did you start your degree?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/degree/" + id + "/grade"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/details/degree/{{id }}/graduation-year" method="post">
+
+      {{ govukInput({
+        name: "degrees[" + id + "][startYear]",
+        value: data.degrees[id].startYear,
+        label: {
+          text: title,
+          classes: "govuk-label--l"
+        },
+        hint: {
+          text: "For example, 1999"
+        },
+        classes: "govuk-input--width-4"
+      }) }}
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

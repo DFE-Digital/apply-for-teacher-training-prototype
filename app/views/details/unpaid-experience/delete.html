@@ -1,0 +1,22 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Are you sure you want to delete this role?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/unpaid-experience/review"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+  <form action="/details/unpaid-experience/role/{{ id }}/delete" method="post">
+    {{ govukButton({
+      text: "Yes I’m sure - delete this role",
+      classes: "govuk-button--warning"
+    }) }}
+    <p class="govuk-body"><a href="/details/work-history/review">Cancel</a></p>
+  </form>
+{% endblock %}

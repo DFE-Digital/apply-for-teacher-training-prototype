@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Do you normally live in the UK?" %}
+{% set formaction = referrer if referrer else "/application/" + "/personal-information/already-living-in-uk" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: referrer if referrer else "/application/" + "/personal-information/immigration-status"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  {{ govukRadios({
+    fieldset: {
+      legend: {
+        text: title,
+        classes: "govuk-label--l",
+        isPageHeading: true
+      }
+    },
+    items: [{
+      value: "Yes",
+      text: "Yes"
+    }, {
+      value: "No",
+      text: "No"
+    }]
+  }) }}
+
+  {{ govukButton({
+    text: "Save and continue"
+  }) }}
+{% endblock %}

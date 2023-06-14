@@ -1,0 +1,27 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/provider",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <h1 class="govuk-heading-l">You already have a draft application for {{ data.applications[id].providerName }}</h1>
+
+      <p class="govuk-body">You can:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>add other courses offered by {{ data.applications[id].providerName }} to your <a href="#">existing application</a></li>
+        <li>apply to a <a href="/applications/{{ id }}/provider">different training provider</a></li>
+      </ul>
+
+  </div>
+{% endblock %}

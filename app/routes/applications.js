@@ -19,10 +19,13 @@ module.exports = router => {
 
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
 
+    const applicationsSubmitted = applications.filter(a => a.submittedAt)
+
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render('applications/index', {
       applicationAccepted,
+      applicationsSubmitted,
       numberOfApplicationsLeft
     })
   })
@@ -128,7 +131,19 @@ module.exports = router => {
 
   router.get('/applications/:id/personal-statement', (req, res) => {
     const { id } = req.params
+
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+      .filter(application => application.providerName !== req.session.data.applications[id].providerName)
+
+    var lastApplication
+    if (applications.length > 0) {
+      lastApplication = applications[applications.length - 1]
+    } else {
+      lastApplication = null
+    }
+
     res.render('applications/personal_statement', {
+      lastApplication,
       id
     })
   })

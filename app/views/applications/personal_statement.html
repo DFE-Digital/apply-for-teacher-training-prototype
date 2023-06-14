@@ -16,10 +16,9 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
 
-
       {% set guidanceHtml %}
-        <p class="govuk-body">You should write between 500 and 1000 words for your personal statement.</p>
-        <p class="govuk-body">Here are some examples you could write about (they are just a guide, you do not need to write about all of them):</p>
+        <p class="govuk-body">You should write between 300 and 500 words for your personal statement.</p>
+        <p class="govuk-body">Here are some examples you could write about:</p>
 
         <ul class="govuk-list govuk-list--bullet">
           <li>skills you have that are relevant to teaching</li>
@@ -31,34 +30,13 @@
           {% else %}
             <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
           {% endif %}
-          <li>your understanding of why teaching is important</li>
-          <li>your reasons for wanting to train to be a teacher</li>
-          <li>any activities you’ve done that could be relevant to teaching like first aid courses, sports coaching or volunteering</li>
         </ul>
 
       {% endset %}
 
-      <p class="govuk-body">On your last application you wrote a personal statement for Blah Blah SCITT.</p>
-
-      <!-- {{ guidanceHtml | safe }} -->
+      {{ guidanceHtml | safe }}
 
 
-   {{ govukRadios({
-          fieldset: {
-            legend: {
-              text: "Do you want to start by copying the personal statement from this application?",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              text: "Yes"
-            },
-            {
-              text: "No"
-            }
-          ]
-        }) }}
 
       {% set personalStatementHtml %}
         {{ govukCharacterCount({
@@ -74,40 +52,30 @@
         }) }}
       {% endset %}
 
-      <!-- {{ govukRadios({
-        name: "personal-statement-ready",
-        fieldset: {
-          legend: {
-            text: "Are you ready to write your personal statement now?",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        items: [
-          {
-            text: "Yes",
-            conditional:personalStatementHtml
-          },
-          {
-            text: "No, I’ll do it later"
-          }
-        ]
-      }) }} -->
+
+      {% set hint %}
+        {% if lastApplication %}
+          We’ve copied this from your previous application.
+        {% endif %}
+        You can save as a draft and finish this later.
+      {% endset %}
+
 
       <form action="/applications/{{ id }}/review" method="post">
-        <!-- {{ govukCharacterCount({
+        {{ govukCharacterCount({
           name: "applications[" + id + "][personalStatement]",
-          value: data.applications[id].personalStatement,
+          value: data.application.id.personalStatement or lastApplication.personalStatement,
           id: "personal-statement",
           label: {
-            text: "Your personal statement",
+            text: "Your personal statement ",
             classes: "govuk-label--m govuk-!-margin-top-6"
           },
           hint: {
-            text: "You can save as a draft and finish this later"
+            text: hint
           },
           rows: 15,
-          maxwords: 1000
-        }) }} -->
+          maxwords: 500
+        }) }}
 
         {{ govukButton({
           text: "Continue"

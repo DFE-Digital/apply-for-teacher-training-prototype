@@ -1,6 +1,8 @@
 {% extends "layouts/main.html" %}
 
 {% set title = "What is the referee’s name?" %}
+{% set primaryNavId = "accepted" %}
+
 {% set allowsFeedback = true %}
 {% set formaction = referrer or "/accepted/" + "/references/" + id + "/email/" %}
 

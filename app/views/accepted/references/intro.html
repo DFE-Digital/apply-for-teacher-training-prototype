@@ -1,6 +1,8 @@
 {% extends "layouts/main.html" %}
 
 {% set reference = data.references[id] %}
+{% set primaryNavId = "accepted" %}
+
 {% set title = "Request a referee" %}
 
 {% block beforeContent %}
@@ -21,7 +23,8 @@
     </ul>
 
     {{ govukButton({
-      text: "Continue"
+      text: "Continue",
+      href: "/accepted/references/" + id + "/type"
     }) }}
   </form>
 {% endblock %}

@@ -2,17 +2,19 @@ const utils = require('./../utils')
 
 module.exports = router => {
   router.get('/accepted', (req, res) => {
-    let acceptedChoice
-    if (req.session.data.choices) {
-      acceptedChoice = Object.values(req.session.data.choices).find(choice => (choice.status === 'Conditions pending' || choice.status === 'Offer confirmed'))
+    let acceptedApplication
+
+    if (req.session.data.applications) {
+      acceptedApplication = Object.values(req.session.data.applications)
+        .find(application => (application.status === 'Conditions pending' || application.status === 'Offer confirmed'))
     }
 
-    if (acceptedChoice) {
+    if (acceptedApplication) {
       res.render('accepted/index', {
-        acceptedChoice
+        acceptedApplication
       })
     } else {
-      res.redirect('/application')
+      res.redirect('/applications')
     }
   })
 
@@ -28,62 +30,51 @@ module.exports = router => {
   router.get('/accepted/references/:id/action/:action', (req, res) => {
     const { action, id } = req.params
     const referrer = req.query.referrer
+    const reference = req.session.data.references[id]
 
     res.render('accepted/references/action', {
       action,
       id,
-      referrer
+      referrer,
+      reference
     })
   })
-  //
-  //   // Handle action request
-  //   router.post('/accepted/references/:id/:action', (req, res) => {
-  //     const { action, id } = req.params
-  //     const now = new Date()
-  //
-  //     req.session.data.references[id].status = status || req.session.data.references[id].status
-  //
-  //     if (action === 'request') {
-  //       req.session.data.references[id].status =
-  //       res.redirect(`/accepted/references/${id}/send-request`)
-  //     } else {
-  //       if (action === 'cancel') {
-  //         application.references[id].log.push({
-  //           note: 'Request cancelled',
-  //           date: now.toISOString()
-  //         })
-  //       }
-  //
-  //       if (action === 'deactivate') {
-  //         application.references[id].ready = false
-  //       }
-  //
-  //       if (action === 'reactivate') {
-  //         application.references[id].ready = true
-  //       }
-  //
-  //       if (action === 'delete') {
-  //         delete application.references[id]
-  //       }
-  //
-  //       if (action === 'nudge') {
-  //         application.references[id].nudges = 1
-  //         application.references[id].log.push({
-  //           note: 'Reminder sent',
-  //           date: now.toISOString()
-  //         })
-  //       }
-  //
-  //       if (action === 'retry') {
-  //         application.references[id].log.push({
-  //           note: 'Request sent',
-  //           date: now.toISOString()
-  //         })
-  //       }
-  //
-  //       res.redirect(`/accepted`)
-  //     }
-  //   })
+
+  // Handle action request
+  router.post('/accepted/references/:id/:action(cancel|nudge|retry)', (req, res) => {
+    const { id, action } = req.params
+    const now = new Date()
+
+    const reference = req.session.data.references[id]
+
+    if (action === 'request') {
+      res.redirect(`/accepted/references/${id}/send-request`)
+    } else {
+      if (action === 'cancel') {
+        reference.status = 'Cancelled'
+        reference.log.push({
+          note: 'Request cancelled',
+          date: now.toISOString()
+        })
+      }
+
+      if (action === 'nudge') {
+        reference.log.push({
+          note: 'Reminder sent',
+          date: now.toISOString()
+        })
+      }
+
+      if (action === 'retry') {
+        reference.log.push({
+          note: 'Request sent',
+          date: now.toISOString()
+        })
+      }
+
+      res.redirect(`/accepted`)
+    }
+  })
 
   // Request reference
   router.post('/accepted/references/:id/request', (req, res) => {

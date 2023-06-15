@@ -17,7 +17,27 @@
         html: '<a href="#" class="govuk-link">Make a complaint or give feedback</a>'
       }) if showPhaseBanner != false }}
   </div>
-  {% if signedIn != false %}
+  {% if signedIn == false %}
+    {# No nav needed #}
+  {% elseif primaryNavId == "accepted" %}
+
+   {{ appPrimaryNavigation({
+        items: [
+          {
+            href: "/accepted",
+            text: "Your training course",
+            active: primaryNavId == "accepted"
+          }
+        ],
+        items_right: [
+          {
+            href: "/sign-out",
+            text: "Sign out"
+          }
+        ]
+      }) }}
+
+  {% else %}
 
     {{ appPrimaryNavigation({
       items: [

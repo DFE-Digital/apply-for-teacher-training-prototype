@@ -2,6 +2,7 @@
 
 {% set reference = data.references[id] %}
 {% set title = "What type of reference do you want to add?" %}
+{% set primaryNavId = "accepted" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -13,7 +14,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/accepted/references/{{ id }}/name" method="post">
+      <form action="/accepted/references/{{ id }}/name" method="get">
         {{ govukRadios({
           name: "references[" + id + "][type]",
           value: data.references[id].type,

@@ -2,6 +2,7 @@
 
 {% set reference = data.references[id] %}
 {% set canNudgeReferee = (reference.status == 'Requested') %}
+{% set primaryNavId = "accepted" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -41,7 +42,7 @@
     {% for entry in reference.log %}
       <li>
         {{ entry.note }}
-        <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date }}</span>
+        <span class="govuk-hint govuk-!-margin-bottom-0 govuk-!-font-size-16">{{ entry.date | govukDate }}</span>
       </li>
     {% endfor %}
     </ul>
@@ -127,7 +128,7 @@
     <div class="govuk-button-group">
         {{ govukButton({
           text: "Send a reminder",
-          href: "/accepted/" + "/references/" + id + "/action/nudge"
+          href: "/accepted/references/" + id + "/action/nudge"
         }) }}
         <a href="/accepted/references/{{ id }}/action/cancel" class="govuk-link">Cancel request</a>
     </div>

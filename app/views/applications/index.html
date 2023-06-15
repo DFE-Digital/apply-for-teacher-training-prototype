@@ -9,168 +9,150 @@
   <div class="govuk-grid-column-three-quarters">
 
 
-    {% if applicationAccepted %}
+    {% if numberOfApplicationsLeft > 0 %}
 
-      <h1 class="govuk-heading-l">Your teacher training course</h1>
+    <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">You have accepted an application for {{applicationAccepted.course }} from {{ applicationAccepted.providerName }}.</p>
+      {% if numberOfApplicationsLeft == 4 %}
 
-      <p class="govuk-body">Your place will be confirmed once they've:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>received your references</li>
-          <li>marked your offer conditions as met</li>
-        </ul>
+        <p class="govuk-body">You can add up to 4 applications at a time.</p>
 
-      <p class="govuk-body">[conditions, SKE, references, etc...]</p>
-
-      <p class="govuk-body">Option to withdraw</p>
-
-    {% else %}
-      {% if numberOfApplicationsLeft > 0 %}
-
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-
-        {% if numberOfApplicationsLeft == 4 %}
-
-          <p class="govuk-body">You can add up to 4 applications at a time.</p>
-
-          {% if not (data | allSectionsCompleted) %}
-            <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
-          {% endif %}
-        {% else %}
-          <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
+        {% if not (data | allSectionsCompleted) %}
+          <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
         {% endif %}
-
-        <div class="govuk-inset-text">
-          <p class="govuk-body">Training providers offer places on courses as people apply throughout the year. Courses stay open until they are full.</p>
-
-          <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
-
-          <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
-        </div>
-
-        {{ govukButton({
-          text: "Add application",
-          href: "/applications/start"
-        }) }}
-
       {% else %}
-        <h1 class="govuk-heading-l">{{ title }}</h1>
-        <p class="govuk-body">You cannot add any more applications because you’re waiting for decisions on 4 others.</p>
-        <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
-        <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
-
+        <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
       {% endif %}
 
-      {% for id, application in data.applications %}
+      <div class="govuk-inset-text">
+        <p class="govuk-body">Training providers offer places on courses as people apply throughout the year. Courses stay open until they are full.</p>
 
-        {% set courseHtml %}
-          {{ application.course }}
-          <br>PGCE <br>1 year full time
+        <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
 
-          {% if application.otherCourses %}
-            {% if application.otherCourses | first == "no" %}
-            {% else %}
-              <br><br>
-                Also interested in:
-              <br>
-              {% for otherCourse in application.otherCourses %}
-                {{ otherCourse }}<br>
-              {% endfor %}
-            {% endif %}
-          {% endif %}
-        {% endset %}
+        <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
+      </div>
 
+      {{ govukButton({
+        text: "Add application",
+        href: "/applications/start"
+      }) }}
 
-        {% set statusHtml %}
-          {% if application.status == "Awaiting decision" %}
-            <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
-            <div class="govuk-!-margin-top-2">Application submitted 2 days ago</div>
-            <div class="govuk-!-margin-top-2">If you do not receive a response from this training provider, you can withdraw this application and apply to another provider.</div>
-          {% elseif application.status == "Offer received" %}
-            <span class="govuk-tag govuk-tag--green"> {{ application.status }}</span>
-            <div class="govuk-!-margin-top-2">Offer received 5 days ago</div>
-            <div class="govuk-!-margin-top-2">
-              <a href="/applications/{{ id }}/respond">Respond to offer</a>
-            </div>
-          {% elseif application.status == "Not sent" %}
-            <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
-            <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
-          {% elseif application.status == "Offer declined" %}
-            <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
-          {% elseif application.status == "Unsuccessful" %}
-            <span class="govuk-tag govuk-tag--orange"> {{ application.status }}</span>
-            <div class="govuk-!-margin-top-2">
-            Feedback from the training provider:
-            <br>
-            <div class="govuk-inset-text govuk-!-margin-top-2">
-              {{ application.rejectionFeedback }}
-            </div>
-            Is this feedback helpful? <a href="#">Yes</a> or  <a href="#">No</a>
-            </div>
-            {% elseif application.status == "Inactive" %}
-            <span class="govuk-tag govuk-tag--purple">Awaiting decision</span>
-            <div class="govuk-!-margin-top-2">Application submitted 40 days ago</div>
-            <div class="govuk-!-margin-top-2">You can add an application for a different training provider while you wait for a decision on this application</div>
-          {% else  %}
-            <span class="govuk-tag"> {{ application.status }}</span>
-          {% endif %}
-        {% endset %}
+    {% else %}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">You cannot add any more applications because you’re waiting for decisions on 4 others.</p>
+      <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
+      <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
 
-        {{ govukSummaryList({
-          card: {
-            title: {
-              html: application.providerName
-            },
-            actions: {
-              items: [
-              {
-                href: "/applications/" + id + "/delete",
-                text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  else "Remove"),
-                visuallyHiddenText: "from " + application.providerName,
-                classes: ""
-              }
-            ]
-            }
-          },
-          classes: "govuk-!-margin-bottom-0",
-          rows: [
-          {
-            key: {
-              text: "Course"
-            },
-            value: {
-              html: courseHtml
-            },
-            actions: {
-              items: [
-              {
-                href: "/applications/" + id + "/course",
-                text: "Change"
-              } if application.status == 'Not sent'
-            ]
-            }
-          },
-          {
-            key: {
-              text: "Status"
-            },
-            value: {
-              html: statusHtml
-            }
-          },
-          {
-            key: {
-              text: "Interview"
-            },
-            value: {
-              html: "The provider will be in touch if they want to invite you to an interview."
-            }
-          } if application.status === 'Awaiting decision' and 1==2]
-        }) }}
-
-      {% endfor %}
     {% endif %}
+
+    {% for id, application in data.applications %}
+
+      {% set courseHtml %}
+        {{ application.course }}
+        <br>PGCE <br>1 year full time
+
+        {% if application.otherCourses %}
+          {% if application.otherCourses | first == "no" %}
+          {% else %}
+            <br><br>
+              Also interested in:
+            <br>
+            {% for otherCourse in application.otherCourses %}
+              {{ otherCourse }}<br>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endset %}
+
+
+      {% set statusHtml %}
+        {% if application.status == "Awaiting decision" %}
+          <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
+          <div class="govuk-!-margin-top-2">Application submitted 2 days ago</div>
+          <div class="govuk-!-margin-top-2">If you do not receive a response from this training provider, you can withdraw this application and apply to another provider.</div>
+        {% elseif application.status == "Offer received" %}
+          <span class="govuk-tag govuk-tag--green"> {{ application.status }}</span>
+          <div class="govuk-!-margin-top-2">Offer received 5 days ago</div>
+          <div class="govuk-!-margin-top-2">
+            <a href="/applications/{{ id }}/respond">Respond to offer</a>
+          </div>
+        {% elseif application.status == "Not sent" %}
+          <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
+          <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
+        {% elseif application.status == "Offer declined" %}
+          <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
+        {% elseif application.status == "Unsuccessful" %}
+          <span class="govuk-tag govuk-tag--orange"> {{ application.status }}</span>
+          <div class="govuk-!-margin-top-2">
+          Feedback from the training provider:
+          <br>
+          <div class="govuk-inset-text govuk-!-margin-top-2">
+            {{ application.rejectionFeedback }}
+          </div>
+          Is this feedback helpful? <a href="#">Yes</a> or  <a href="#">No</a>
+          </div>
+          {% elseif application.status == "Inactive" %}
+          <span class="govuk-tag govuk-tag--purple">Awaiting decision</span>
+          <div class="govuk-!-margin-top-2">Application submitted 40 days ago</div>
+          <div class="govuk-!-margin-top-2">You can add an application for a different training provider while you wait for a decision on this application</div>
+        {% else  %}
+          <span class="govuk-tag"> {{ application.status }}</span>
+        {% endif %}
+      {% endset %}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            html: application.providerName
+          },
+          actions: {
+            items: [
+            {
+              href: "/applications/" + id + "/delete",
+              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  else "Remove"),
+              visuallyHiddenText: "from " + application.providerName,
+              classes: ""
+            }
+          ]
+          }
+        },
+        classes: "govuk-!-margin-bottom-0",
+        rows: [
+        {
+          key: {
+            text: "Course"
+          },
+          value: {
+            html: courseHtml
+          },
+          actions: {
+            items: [
+            {
+              href: "/applications/" + id + "/course",
+              text: "Change"
+            } if application.status == 'Not sent'
+          ]
+          }
+        },
+        {
+          key: {
+            text: "Status"
+          },
+          value: {
+            html: statusHtml
+          }
+        },
+        {
+          key: {
+            text: "Interview"
+          },
+          value: {
+            html: "The provider will be in touch if they want to invite you to an interview."
+          }
+        } if application.status === 'Awaiting decision' and 1==2]
+      }) }}
+
+    {% endfor %}
 
   </div>
 </div>

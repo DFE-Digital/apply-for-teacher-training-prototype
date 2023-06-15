@@ -1,6 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% set reference = data.references[id] %}
+{% set primaryNavId = "accepted" %}
 {% set title = "How do you know " + reference.name + " and how long have you known them?" %}
 {% set allowsFeedback = true %}
 {% set formaction = referrer or "/accepted/" + "/references/" + id + "/request/" %}
@@ -21,7 +22,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/accepted/references/{{ id }}/request" method="post">
+      <form action="/accepted/references/{{ id }}/review" method="post">
 
         {% if reference.type == "Academic, such as a university tutor" %}
           {% set relationshipExample = "They were my course supervisor at university. I’ve known them for a year." %}

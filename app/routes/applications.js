@@ -237,26 +237,63 @@ module.exports = router => {
 
     if (decision === 'accept') {
 
-      application.status = 'Conditions pending'
-
-      for (applicationId of Object.keys(req.session.data.applications)) {
-
-        if (applicationId != id) {
-          let application = req.session.data.applications[applicationId]
-
-          if (application.status == 'Offer received') {
-            application.status = 'Offer declined'
-          } else if (application.status == 'Awaiting decision') {
-            application.status = 'Withdrawn'
-          }
-
-        }
-      }
+      res.redirect(`/applications/${id}/confirm`)
 
     } else if (decision == 'decline') {
       application.status = 'Offer declined'
+      res.redirect('/applications')
+    } else {
+      // Didn't select an answer
+      res.redirect(`/applications/${id}/respond`)
     }
 
-    res.redirect('/applications')
+  })
+
+  // Confirm accepting an offer (and references)
+  router.get('/applications/:id/confirm', (req, res) => {
+    const { id } = req.params
+    res.render('applications/confirm', {
+      id
+    })
+  })
+
+  // Accepting an offer - triggers references
+  router.post('/applications/:id/accept', (req, res) => {
+    const { id } = req.params
+    const decision = req.body.decision
+    const application = req.session.data.applications[id]
+    const now = new Date()
+    const references = (req.session.data.references ? Object.values(req.session.data.references) : [])
+
+
+    application.status = 'Conditions pending'
+
+
+    // Request all the references
+    for (const reference of references) {
+      reference.status = 'Requested'
+
+      const log = reference.log = reference.log || []
+      log.push({
+        note: 'Request sent',
+        date: now.toISOString()
+      })
+    }
+
+    // Decline or withdraw all other applications
+    for (applicationId of Object.keys(req.session.data.applications)) {
+
+      if (applicationId != id) {
+        let application = req.session.data.applications[applicationId]
+
+        if (application.status == 'Offer received') {
+          application.status = 'Offer declined'
+        } else if (application.status == 'Awaiting decision') {
+          application.status = 'Withdrawn'
+        }
+      }
+    }
+
+    res.redirect('/accepted')
   })
 }

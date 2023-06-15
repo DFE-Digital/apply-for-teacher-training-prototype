@@ -19,7 +19,6 @@ require('./routes/details/references')(router)
 
 require('./routes/applications')(router)
 
-require('./routes/dashboard')(router)
 require('./routes/accepted')(router)
 require('./routes/admin')(router)
 require('./routes/reference')(router)

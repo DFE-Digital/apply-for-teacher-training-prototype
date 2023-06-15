@@ -3,6 +3,8 @@
 {% set reference = data.references[id] %}
 {% set title = "Check your answers before sending your request" %}
 {% set allowsFeedback = true %}
+{% set primaryNavId = "accepted" %}
+
 
 {% block beforeContent %}
     {{ govukBackLink({
@@ -28,7 +30,7 @@
             },
             actions: {
               items: [{
-                href: "/accepted/" + "/references/" + id + "/name/?referrer=/accepted/" + "/references/" + id + "/request/",
+                href: "/accepted/references/" + id + "/name",
                 text: "Change",
                 visuallyHiddenText: "name"
               }]
@@ -42,7 +44,7 @@
             },
             actions: {
               items: [{
-                href: "/accepted/" + "/references/" + id + "/email/?referrer=/accepted/" + "/references/" + id + "/request/",
+                href: "/accepted/references/" + id + "/email",
                 text: "Change",
                 visuallyHiddenText: "email address"
               }]
@@ -56,7 +58,7 @@
             },
             actions: {
               items: [{
-                href: "/accepted/" + "/references/" + id + "/type/?referrer=/accepted/" + "/references/" + id + "/request/",
+                href: "/accepted/references/" + id + "/type/",
                 text: "Change",
                 visuallyHiddenText: "reference type"
               }]
@@ -70,7 +72,7 @@
             },
             actions: {
               items: [{
-                href: "/accepted/" + "/references/" + id + "/relationship/?referrer=/accepted/" + "/references/" + id + "/request/",
+                href: "/accepted/references/" + id + "/relationship",
                 text: "Change",
                 visuallyHiddenText: "relationship to referee"
               }]

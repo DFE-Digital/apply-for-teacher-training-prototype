@@ -1,8 +1,9 @@
 {% extends "layouts/main.html" %}
 
-{% set referee = applicationValue(["references", id]) %}
+{% set primaryNavId = "accepted" %}
+
 {% if action == "delete" %}
-  {% set type = "referee" if referee.status == "Not sent" else "reference request" %}
+  {% set type = "reference" if reference.status == "Not sent" else "reference request" %}
   {% set title = "Are you sure you want to delete this " + type + "?" %}
   {% set buttonText = "Yes I’m sure - delete this " + type %}
   {% set destructive = true %}
@@ -15,12 +16,12 @@
   {% set buttonText = "Send reference request" %}
   {% set status = "Awaiting response" %}
 {% elif action == "cancel" %}
-  {% set title = "Are you sure you want to cancel the request for a reference from " + referee.name + "?" %}
+  {% set title = "Are you sure you want to cancel the request for a reference from " + reference.name + "?" %}
   {% set buttonText = "Cancel reference request" %}
   {% set status = "Request cancelled" %}
   {% set destructive = true %}
 {% elif action == "nudge" %}
-  {% set title = "Would you like to send a reminder to " + referee.name + "?" %}
+  {% set title = "Would you like to send a reminder to " + reference.name + "?" %}
   {% set buttonText = "Send a reminder" %}
 {% elif action == "deactivate" %}
   {% set title = "Are you sure you want to deactivate this reference?" %}
@@ -29,7 +30,7 @@
 {% elif action == "reactivate" %}
   {% set title = "Are you sure you want to reactivate this reference?" %}
   {% set buttonText = "Yes I’m sure - reactivate this reference" %}
-  {% set status = "Reference given" %}
+  {% set status = "reference given" %}
 {% endif %}
 
 {% block beforeContent %}
@@ -39,40 +40,40 @@
 {% endblock %}
 
 {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  {% if action == "request" %}
-    <p class="govuk-body">We’ll send {{ referee.name }} an email asking them to give you a reference.</p>
-  {% elif action == "retry" %}
-    {{ govukInput({
-      label: {
-        classes: "govuk-label--m",
-        text: "Referee’s email address"
-      },
-      hint: {
-        text: "In most cases, this should be a work address."
-      }
-    }) }}
-  {% elif action == "cancel" %}
-    <p class="govuk-body">We’ll tell them that they no longer need to give a reference.</p>
-  {% elif action == "nudge" %}
-    <!-- {{ govukInsetText({
-      classes: "govuk-!-margin-top-0",
-      text: "You can only send one reminder to this referee."
-    }) }} -->
-    <!-- TODO: Make this use real date (now + 7 days) -->
-    <!-- TODO: Only show if there is an upcoming automatic reminder -->
-    <p class="govuk-body">They’ll also get an automatic reminder on 16 July 2022.</p>
-  {% elif action == "deactivate" %}
-    <p class="govuk-body">We will keep your reference but we won’t sent it to any providers.</p>
-  {% elif action == "reactivate" %}
-    <p class="govuk-body">This reference will be sent to providers.</p>
-  {% endif %}
+      {% if action == "request" %}
+        <p class="govuk-body">We’ll send {{ reference.name }} an email asking them to give you a reference.</p>
+      {% elif action == "retry" %}
+        {{ govukInput({
+          label: {
+            classes: "govuk-label--m",
+            text: "reference’s email address"
+          },
+          hint: {
+            text: "In most cases, this should be a work address."
+          }
+        }) }}
+      {% elif action == "cancel" %}
+        <p class="govuk-body">We’ll tell them that they no longer need to give a reference.</p>
+      {% elif action == "nudge" %}
+        <p class="govuk-body">They’ll also get an automatic reminder on 16 July 2022.</p>
+      {% elif action == "deactivate" %}
+        <p class="govuk-body">We will keep your reference but we won’t sent it to any providers.</p>
+      {% elif action == "reactivate" %}
+        <p class="govuk-body">This reference will be sent to providers.</p>
+      {% endif %}
 
-  {{ govukButton({
-    value: status,
-    name: "status",
-    text: buttonText,
-    classes: "govuk-button--warning" if destructive
-  }) }}
-
+      <form action="/accepted/references/{{ id }}/{{ action }}" method="post">
+        {{ govukButton({
+          value: status,
+          name: "status",
+          text: buttonText,
+          classes: "govuk-button--warning" if destructive
+        }) }}
+      </form>
+    </div>
+  </div>
 {% endblock %}

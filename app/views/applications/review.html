@@ -117,7 +117,7 @@
 
 
         {% if not application.personalStatement %}
-          <p class="govuk-body">You cannot submit this application until you’ve written your personal statement.</p>
+          <p class="govuk-body">You cannot submit this application, it will be saved as a draft until you’ve written your personal statement.</p>
         {% elseif not (data | allSectionsCompleted) %}
 
           <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>

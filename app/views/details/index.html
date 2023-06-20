@@ -189,6 +189,23 @@
           }]
         }) }}
       </section>
+
+      <section class="app-section">
+        <h2 class="govuk-heading-m">Personal statement</h2>
+        {{ govukTaskList({
+          items: [{
+            title: { text: "Your personal statement" },
+            href: "#",
+            id: "personal-statement",
+            status: {
+              classes: tagClassesForSection(completed=data.completed.equalityMonitoring == 'true'),
+              text: tagTextForSection(completed=data.completed.equalityMonitoring == 'true')
+            }
+          }]
+        }) }}
+      </section>
+
+
    </div>
 
     <div class="govuk-grid-column-one-third">

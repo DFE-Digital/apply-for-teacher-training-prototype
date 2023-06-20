@@ -17,7 +17,7 @@
 
 
       {% set guidanceHtml %}
-        <p class="govuk-body">You should write between 500 and 1000 words for your personal statement.</p>
+        <p class="govuk-body">You should write up to 500 words for your personal statement.</p>
         <p class="govuk-body">Here are some examples you could write about (they are just a guide, you do not need to write about all of them):</p>
 
         <ul class="govuk-list govuk-list--bullet">
@@ -32,17 +32,17 @@
 
       {{ guidanceHtml | safe }}
 
-      <form action="/applications/{{ id }}/review" method="post">
+      <form action="/details/personal-statement/review" method="post">
         {{ govukCharacterCount({
-          name: "applications[" + id + "][personalStatement]",
-          value: data.applications[id].personalStatement,
+          name: "personalStatement",
+          value: data.personalStatement,
           id: "personal-statement",
           label: {
             text: "Your personal statement",
             classes: "govuk-label--m govuk-!-margin-top-6"
           },
           rows: 15,
-          maxwords: 1000
+          maxwords: 500
         }) }}
 
         {{ govukButton({

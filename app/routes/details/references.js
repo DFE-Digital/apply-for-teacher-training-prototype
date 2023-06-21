@@ -14,10 +14,9 @@ module.exports = router => {
   // References review page
   router.get('/details/references', (req, res) => {
 
-  let incompleteReferences
-  if (req.session.data?.references) {
-    incompleteReferences = Object.values(req.session.data.references).filter(ref => ref.email === '') 
-}
+    req.session.data.references ||= {}
+    const incompleteReferences = Object.values(req.session.data.references).filter(ref => ref.email === '')
+
     res.render(`details/references/index`, {
       incompleteReferences
     })

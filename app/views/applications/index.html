@@ -18,7 +18,7 @@
         <p class="govuk-body">You can add up to 4 applications at a time.</p>
 
         {% if not (data | allSectionsCompleted) %}
-          <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
+          <p class="govuk-body">You will not be able to submit applications until you have completed <a href="/details">your details</a>.</p>
         {% endif %}
       {% else %}
         <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>

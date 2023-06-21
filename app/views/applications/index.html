@@ -24,6 +24,10 @@
         <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
       {% endif %}
 
+      {% if (applicationsSubmitted | length == 0) %}
+        <p class="govuk-body">You’ll be asked to write a personal statement of 500 words before you submit.</p>
+      {% endif %}
+
       <div class="govuk-inset-text">
          <p class="govuk-body">Training providers offer places on courses throughout the year.</p>
 

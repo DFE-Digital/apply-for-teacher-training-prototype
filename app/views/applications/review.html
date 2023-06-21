@@ -26,7 +26,7 @@
               text: "Course"
             },
             value: {
-              html: application.course + "<br>PGCE<br>Full time"
+              html: application.course + "<br>PGCE"
             },
             actions: {
               items: [
@@ -35,29 +35,52 @@
                   href: "/applications/" + id + "/course"
                 }
               ]
-            }
-          }
-          ,
+            } if not application.submittedAt
+          },
           {
             key: {
-              text: "Personal statement"
+              text: "Study mode"
             },
             value: {
-              text: data.personalStatement
+              html: "Full time"
             },
             actions: {
               items: [
                 {
                   text: "Change",
-                  href: "/applications/" + id + "/personal-statement"
-                }
-              ]
+                  href: "/applications/" + id + "/course"
             }
-          }
-
-        ]
+          ]
+        }
+      }
+    
+    ]
 
       })}}
+
+<div class="govuk-summary-card govuk-!-margin-bottom-6">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">Personal statement</h2>
+    {% if data.personalStatement %}
+      <ul class="govuk-summary-card__actions">
+        <li class="govuk-summary-card__action"> <a class="govuk-link govuk-!-font-weight-regular" href="/applications/{{ id }}/personal-statement">Edit your personal statement</a>
+          </a>
+        </li>
+      </ul>
+    {% endif %}
+  </div>
+  <div class="govuk-summary-card__content">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters-from-desktop">
+        {% if data.personalStatement %}
+          {{ data.personalStatement | govukMarkdown | safe }}
+        {% else %}
+          <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Add your personal statement</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
       {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
         <form action="/applications/{{ id }}/submit" method="post">

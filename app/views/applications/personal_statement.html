@@ -41,15 +41,15 @@
 
       <form action="/applications/{{ id }}/review" method="post">
         {{ govukCharacterCount({
-          name: "applications[" + id + "][personalStatement]",
-          value: data.applications[id].personalStatement,
+          name: "personalStatement",
+          value: data.personalStatement,
           id: "personal-statement",
           label: {
             text: "Your personal statement",
             classes: "govuk-label--m govuk-!-margin-top-6"
           },
           rows: 15,
-          maxwords: 1000
+          maxwords: 500
         }) }}
 
         {{ govukButton({

@@ -115,8 +115,8 @@ module.exports = router => {
     data.unpaidExperienceAdded = 'no'
 
     // Set personal statement
-    data.personalStatement = 'I’ve wanted to become a teacher since being inspired by passionate and brilliant teachers during my school years. There enthusiasm to get the best out of me and to be the best that I can has led me to applying to become a teacher.\n\nI studed English at GCSE and A level and gained not only high academic grades but also a love for the theatre that I want to pass on to the next generation.\n\nWhile volunteering as a teaching assistant I saw the skills needed to be a great teacher one of which is leadership. I am an adept leader and have shown this in several roles. I volunteered in two schools to get experience in different settings and assisted teachers in Key Stages 1 and 2.\n\nI enjoy reading and learning about contemporary ethics and society, considering how I can use this to benefit the students I teach. While in schools I have seen the rewards and challenges presented to teachers and think I have the qualities to make a difference.'
-
+    // data.personalStatement = 'I’ve wanted to become a teacher since being inspired by passionate and brilliant teachers during my school years. There enthusiasm to get the best out of me and to be the best that I can has led me to applying to become a teacher.\n\nI studed English at GCSE and A level and gained not only high academic grades but also a love for the theatre that I want to pass on to the next generation.\n\nWhile volunteering as a teaching assistant I saw the skills needed to be a great teacher one of which is leadership. I am an adept leader and have shown this in several roles. I volunteered in two schools to get experience in different settings and assisted teachers in Key Stages 1 and 2.\n\nI enjoy reading and learning about contemporary ethics and society, considering how I can use this to benefit the students I teach. While in schools I have seen the rewards and challenges presented to teachers and think I have the qualities to make a difference.'
+   
     // Set disability support
     data.additionalSupportNeeded = 'no'
 

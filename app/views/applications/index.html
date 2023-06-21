@@ -15,17 +15,17 @@
       {% endif %}
 
       {% if not (data | allSectionsCompleted) %}
-        <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
+        <p class="govuk-body">You will not be able to submit applications until you have completed <a href="/details">your details</a>.</p>
       {% endif %}
 
       {% if (applicationsSubmitted | length == 0) %}
-        <p class="govuk-body">You’ll be asked to write a personal statement of up to 500 words before you submit</p>
+        <p class="govuk-body">You’ll be asked to write a personal statement of 500 words before you submit.</p>
       {% endif %}
 
       <div class="govuk-inset-text">
-        <p class="govuk-body">Training providers offer places on courses as people apply throughout the year. Courses stay open until they are full.</p>
+        <p class="govuk-body">Training providers offer places on courses throughout the year.</p>
 
-        <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
+        <p class="govuk-body">Courses can fill up quickly, you should apply as soon as you’re ready.</p>
 
         <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
       </div>

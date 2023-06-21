@@ -15,26 +15,47 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-
+    
       {% set guidanceHtml %}
-      <div class="govuk-inset-text">
-        <p class="govuk-body">We've copied your statement from your details. You can edit it further if you want to.</p>
-        <p class="govuk-body">Any changes you make will be saved for this application and on your statement in your details.</p>
-      </div>
-        <p class="govuk-body">You should write 500 words for your personal statement.</p>
-        <p class="govuk-body">Here are some examples you could add (they are just a guide, you do not need to write about all of them):</p>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li>why you're applying to {{ data.applications[id].providerName }}</li>
+        {% if data.completed.personalStatement %}
 
-          {% set primaryRegex = r/^Primary\s.*/g %}
-          {% set courseCodeRegex = r/\([^)]+\)/ %}
-          {% if primaryRegex.test(data.applications[id].course) %}
-          {% else %}
-            <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
-          {% endif %}
-        </ul>
+        <div class="govuk-inset-text">
+          <p class="govuk-body">We've copied your statement from your details. You can edit it further if you want to.</p>
+          <p class="govuk-body">Any changes you make will be saved for this application and on your statement in your details.</p>
+        </div>
+          <p class="govuk-body">You should write 500 words for your personal statement.</p>
+          <p class="govuk-body">Here are some examples you could add (they are just a guide, you do not need to write about all of them):</p>
 
+          <ul class="govuk-list govuk-list--bullet">
+            <li>why you're applying to {{ data.applications[id].providerName }}</li>
+              {% set primaryRegex = r/^Primary\s.*/g %}
+              {% set courseCodeRegex = r/\([^)]+\)/ %}
+              {% if primaryRegex.test(data.applications[id].course) %}
+              {% else %}
+              <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
+              {% endif %}
+          </ul>
+
+        {% else %}
+          <p class="govuk-body">You should write 500 words for your personal statement.</p>
+          <p class="govuk-body">You'll be able edit your statement further for each application you submit.</p>
+          <p class="govuk-body">Here are some examples you could write about (they are just a guide, you do not need to write about all of them):</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>skills you have that are relevant to teaching</li>
+            <li>any experience of working with young people</li>
+             {% set primaryRegex = r/^Primary\s.*/g %}
+              {% set courseCodeRegex = r/\([^)]+\)/ %}
+              {% if primaryRegex.test(data.applications[id].course) %}
+              {% else %}
+              <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
+              {% endif %}
+            <li>your reasons for wanting to train to be a teacher</li>
+            <li>any activities you’ve done that could be relevant to teaching like first aid courses, sports coaching or volunteering</li>
+          </ul>
+
+        {% endif %}
       {% endset %}
 
       {{ guidanceHtml | safe }}

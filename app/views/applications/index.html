@@ -8,14 +8,20 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
 
+
+    {% if numberOfApplicationsLeft > 0 %}
+
     <h1 class="govuk-heading-l">{{ title }}</h1>
 
       {% if numberOfApplicationsLeft == 4 %}
-        <p class="govuk-body">You can add up to 4 applications at a time.</p>
-      {% endif %}
 
-      {% if not (data | allSectionsCompleted) %}
-        <p class="govuk-body">You will not be able to submit applications until you have completed <a href="/details">your details</a>.</p>
+        <p class="govuk-body">You can add up to 4 applications at a time.</p>
+
+        {% if not (data | allSectionsCompleted) %}
+          <p class="govuk-body">You will not be able to submit applications until you have completed <a href="/details">your details</a>.</p>
+        {% endif %}
+      {% else %}
+        <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
       {% endif %}
 
       {% if (applicationsSubmitted | length == 0) %}
@@ -23,24 +29,23 @@
       {% endif %}
 
       <div class="govuk-inset-text">
-        <p class="govuk-body">Training providers offer places on courses throughout the year.</p>
+         <p class="govuk-body">Training providers offer places on courses throughout the year.</p>
 
-        <p class="govuk-body">Courses can fill up quickly, you should apply as soon as you’re ready.</p>
+         <p class="govuk-body">Courses can fill up quickly, you should apply as soon as you’re ready.</p>
 
         <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
       </div>
 
+      {{ govukButton({
+        text: "Add application",
+        href: "/applications/start"
+      }) }}
 
-      {% if numberOfApplicationsLeft > 0 %}
-
-      <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
-        {{ govukButton({
-          text: "Add application",
-          href: "/applications/start"
-        }) }}
     {% else %}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
       <p class="govuk-body">You cannot add any more applications because you’re waiting for decisions on 4 others.</p>
       <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
+      <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
 
     {% endif %}
 

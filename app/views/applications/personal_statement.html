@@ -57,6 +57,10 @@
         {% endif %}
       {% endset %}
 
+      {% set hint %}
+        You can finish your statement later if you're not ready to write it now.
+      {% endset %}
+
       {{ guidanceHtml | safe }}
 
       <form action="/applications/{{ id }}/review" method="post">
@@ -67,6 +71,9 @@
           label: {
             text: "Your personal statement",
             classes: "govuk-label--m govuk-!-margin-top-6"
+          },
+            hint: {
+            text: hint
           },
           rows: 15,
           maxwords: 500

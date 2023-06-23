@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "applications" %}
-{% set title = "Your application to " + data.applications[id].providerName %}
+{% set title = "Your application to 2SchoolsConsortium" %}
 
 {% set application = data.applications[id] %}
 
@@ -17,8 +17,6 @@
     <div class="govuk-grid-column-three-quarters">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
-
       {{ govukSummaryList({
         rows: [
           {
@@ -26,14 +24,10 @@
               text: "Course"
             },
             value: {
-              html: application.course + "<br>PGCE"
+              html: "Chemistry" + "<br>PGCE"
             },
             actions: {
               items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/course"
-                }
               ]
             } if not application.submittedAt
           },
@@ -46,10 +40,7 @@
             },
             actions: {
               items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/course"
-            }
+
           ]
         }
       }
@@ -81,43 +72,4 @@
   </div>
 </div>
 
-      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
-        <form action="/applications/{{ id }}/submit" method="post">
-          {{ govukRadios({
-            name: "submitNow",
-            fieldset: {
-              legend: {
-                text: "Do you want to submit your application?",
-                classes: "govuk-fieldset__legend--m"
-              }
-            },
-            items: [
-              {
-                value: "yes",
-                text: "Yes, submit it now"
-              },
-              {
-                value: "no",
-                text: "No, save it as a draft"
-              }
-            ]
-          }) }}
-
-          {{ govukButton({
-            text: "Continue"
-          })}}
-        </form>
-      {% else %}
-
-        {% if not (data | allSectionsCompleted) %}
-
-          <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
-
-        {% else %}
-          <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>
-          <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>
-        {% endif %}
-      {% endif %}
-    </div>
-  </div>
 {% endblock %}

@@ -17,6 +17,16 @@
 
 
       {% set guidanceHtml %}
+
+        {% if lastApplication %}
+          <div class="govuk-inset-text">
+           <p class="govuk-body">We've copied your personal statement from your previous application.</p>
+
+           <p class="govuk-body">You can make changes to your statement for this application, or leave it the same.</p>
+          </div>
+        {% endif %}
+
+
         <p class="govuk-body">You should write between 500 words for your personal statement.</p>
         <p class="govuk-body">Here are some examples you could write about:</p>
 
@@ -55,9 +65,6 @@
 
 
       {% set hint %}
-        {% if lastApplication %}
-          We’ve copied this from your previous application.
-        {% endif %}
         You can finish your statement later if you're not ready to write it now.
       {% endset %}
 

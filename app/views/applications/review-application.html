@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Your application to 2SchoolsConsortium" %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: "Chemistry" + "<br>PGCE"
+            },
+            actions: {
+              items: [
+              ]
+            } if not application.submittedAt
+          },
+          {
+            key: {
+              text: "Study mode"
+            },
+            value: {
+              html: "Full time"
+            },
+            actions: {
+              items: [
+
+          ]
+        }
+      }
+    
+    ]
+
+      })}}
+
+<div class="govuk-summary-card govuk-!-margin-bottom-6">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">Personal statement</h2>
+    {% if data.applications[id].personalStatement %}
+      <ul class="govuk-summary-card__actions">
+        <li class="govuk-summary-card__action"> <a class="govuk-link govuk-!-font-weight-regular" href="/applications/{{ id }}/personal-statement">Edit your personal statement</a>
+        </li>
+      </ul>
+    {% endif %}
+  </div>
+  <div class="govuk-summary-card__content">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters-from-desktop">
+        {% if data.applications[id].personalStatement %}
+          {{ data.applications[id].personalStatement | govukMarkdown | safe }}
+        {% else %}
+          <p class="govuk-body">This is the personal statement I wrote for my application.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

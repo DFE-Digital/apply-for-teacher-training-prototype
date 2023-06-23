@@ -65,7 +65,7 @@
         {% if data.applications[id].personalStatement %}
           {{ data.applications[id].personalStatement | govukMarkdown | safe }}
         {% else %}
-          <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Add your personal statement</a>
+          <p class="govuk-body">This is the personal statement I wrote for my application.</p>
         {% endif %}
       </div>
     </div>

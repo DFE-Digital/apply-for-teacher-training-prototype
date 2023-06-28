@@ -61,7 +61,7 @@
 <div class="govuk-summary-card govuk-!-margin-bottom-6">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">Personal statement</h2>
-    {% if data.personalStatement %}
+    {% if data.applications[id].personalStatement %}
       <ul class="govuk-summary-card__actions">
         <li class="govuk-summary-card__action"> <a class="govuk-link govuk-!-font-weight-regular" href="/applications/{{ id }}/personal-statement">Edit your personal statement</a>
         </li>
@@ -71,8 +71,8 @@
   <div class="govuk-summary-card__content">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters-from-desktop">
-        {% if data.personalStatement %}
-          {{ data.personalStatement | govukMarkdown | safe }}
+        {% if data.applications[id].personalStatement %}
+          {{ data.applications[id].personalStatement | govukMarkdown | safe }}
         {% else %}
           <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Add your personal statement</a>
         {% endif %}
@@ -81,7 +81,7 @@
   </div>
 </div>
 
-      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
+      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) and data.applications[id].personalStatement %}
         <form action="/applications/{{ id }}/submit" method="post">
           {{ govukRadios({
             name: "submitNow",
@@ -109,7 +109,7 @@
         </form>
       {% else %}
 
-      {% if not data.personalStatement %}
+      {% if not data.applications[id].personalStatement %}
           <p class="govuk-body">You cannot submit this application – it will be saved as a draft until you’ve written your personal statement.</p>
       
       {% elseif not (data | allSectionsCompleted) %}

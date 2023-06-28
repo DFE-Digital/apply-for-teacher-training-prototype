@@ -162,7 +162,7 @@ module.exports = router => {
       degree: 'true',
       workHistory: 'true',
       unpaidExperience: 'true',
-      personalStatement: 'false',
+      personalStatement: 'true',
       additionalSupport: 'true',
       interviewNeeds: 'true',
       references: 'true',

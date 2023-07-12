@@ -16,7 +16,7 @@
     actions: {
       items: [{
         href: "/details/references/" + id + "/delete",
-        text: "Delete"
+        text: ("" if numberOfApplicationsLeft < 4 else "Delete")
       }]
     }
   },
@@ -39,7 +39,7 @@
       actions: {
         items: [
           {
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             href: "/details/references/" + id + "/email"
           }
         ]
@@ -55,7 +55,7 @@
       actions: {
         items: [
           {
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             href: "/details/references/" + id + "/name"
           }
         ]
@@ -71,7 +71,7 @@
       actions: {
         items: [
           {
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             href: "/details/references/" + id + "/relationship"
           }
         ]

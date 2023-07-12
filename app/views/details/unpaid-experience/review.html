@@ -3,7 +3,12 @@
 {% set primaryNavId = "details" %}
 
 {% set title = "Unpaid experience" %}
+
+{% if numberOfApplicationsLeft >= 4 %}
 {% set addButtonText = "Add another role" if data.unpaidExperience.length >= 1 else "Add a role" %}
+{% else %}
+
+{% endif %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -24,14 +29,18 @@
   {% endif %}
 
   {% set completed = data.completed.unpaidExperience %}
-
+{% if numberOfApplicationsLeft >= 4 %}
   {{ govukInsetText({
     classes: "govuk-!-width-two-thirds govuk-!-margin-top-0",
     html: '<p class="govuk-body">The Department for Education have made it easier for teacher training applicants to gain experience in school.</p><p><a href="https://getintoteaching.education.gov.uk/get-school-experience">Learn about how to get school experience</a>.</p>'
   }) if data.unpaidExperienceAdded == "no" }}
+  {% else %}
+  {% endif %}
 
   {% include "_includes/review/unpaid-experience.html" %}
-
+{# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
   <form action="/details" method="post">
     {{ govukRadios({
       name: "completed[unpaidExperience]",
@@ -56,4 +65,12 @@
       text: "Continue"
     }) }}
   </form>
+  {% else %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }}
+{% endif %}
 {% endblock %}

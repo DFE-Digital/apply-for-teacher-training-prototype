@@ -7,6 +7,20 @@ module.exports = router => {
     res.redirect(`/details/other-qualifications/${id}/type`)
   })
 
+     // Unpaid experience review page
+     router.get('/details/other-qualifications/review', (req, res) => {
+
+      req.session.data.references ||= {}
+      const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+      const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+      const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+  
+      res.render(`details/other-qualifications/review`, {
+        id: req.params.id,
+        numberOfApplicationsLeft
+      })
+    })
+
   // Render review page
   router.get('/details/other-qualifications/review', (req, res) => {
     const data = req.session.data

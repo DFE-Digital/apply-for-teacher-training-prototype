@@ -10,7 +10,7 @@
     actions: {
       items: [{
         href: "/application/safeguarding",
-        text: "Change",
+        text: ("" if numberOfApplicationsLeft < 4 else "Change"),
         visuallyHiddenText: "whether you need to share something"
       }]
     }
@@ -24,7 +24,7 @@
     actions: {
       items: [{
         href: "/application/safeguarding",
-        text: "Change",
+        text: ("" if numberOfApplicationsLeft < 4 else "Change"),
         visuallyHiddenText: "the information you are sharing"
       }]
     }

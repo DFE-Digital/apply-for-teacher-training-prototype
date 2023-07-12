@@ -16,7 +16,7 @@ require('./routes/details/degree')(router)
 require('./routes/details/gcse')(router)
 require('./routes/details/other-qualifications')(router)
 require('./routes/details/references')(router)
-
+require('./routes/details/safeguarding')(router)
 require('./routes/applications')(router)
 
 require('./routes/accepted')(router)

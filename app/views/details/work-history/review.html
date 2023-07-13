@@ -16,11 +16,15 @@
 
   {% if data.workHistoryAdded == "yes" %}
     {% if data.workHistory | length >= 1 %}
+      {% if numberOfApplicationsLeft >= 4 %}
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another job",
         href: "/details/work-history/job/" + newId
       }) }}
+      {% else %}
+
+{% endif %}
 
       {# Show list of jobs added, with prompt to add another #}
       {% include "_includes/review/work-history.html" %}

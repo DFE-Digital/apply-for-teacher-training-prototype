@@ -4,7 +4,11 @@
 
 {% set title = "References to be requested if you accept an offer" %}
 {% set references = data.references %}
+{% if numberOfApplicationsLeft >= 4 %}
 {% set addReferenceButtonText = "Add a reference" if references | length == 0 else "Add another reference" %}
+{% else %}
+
+{% endif %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -30,12 +34,16 @@
       <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
 
       <div class="govuk-body">
+        {% if numberOfApplicationsLeft >= 4 %}
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
           href: "/details/references/add",
           classes: referencesButtonClass
         }) }}
+        {% else %}
+
+{% endif %}
       </div>
     </div>
   </div>

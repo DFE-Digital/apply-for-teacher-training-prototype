@@ -33,4 +33,17 @@ module.exports = router => {
     delete req.session.data.unpaidExperience[id]
     res.redirect('/details/unpaid-experience/review')
   })
+
+  router.get('/details/unpaid-experience/review', (req, res) => {
+
+    req.session.data.references ||= {}
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
+    res.render(`details/unpaid-experience/review`, {
+      id: req.params.id,
+      numberOfApplicationsLeft
+    })
+  })
 }

@@ -4,9 +4,14 @@ module.exports = router => {
   // Review page
   router.get('/details/work-history/review', (req, res) => {
     const newId = utils.generateRandomString()
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render('details/work-history/review', {
-      newId
+      newId,
+      id: req.params.id,
+      numberOfApplicationsLeft
     })
   })
 

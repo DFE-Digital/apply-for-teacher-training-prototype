@@ -8,7 +8,7 @@
       actions: {
         items: [{
           href: "/details/degree/" + id + "/delete",
-          text: "Delete degree"
+          text: ("" if numberOfApplicationsLeft < 4 else "Delete degree")
         }]
       }
     },
@@ -24,7 +24,7 @@
           items: [
             {
               href: "/details/degree/" + id + "/country",
-              text: "Change",
+              text: ("" if numberOfApplicationsLeft < 4 else "Change"),
               visuallyHideenText: "degree country"
             }
           ]
@@ -41,7 +41,7 @@
           items: [
             {
               href: "/details/degree/" + id + "/level",
-              text: "Change",
+              text: ("" if numberOfApplicationsLeft < 4 else "Change"),
               visuallyHideenText: "degree level"
             }
           ]
@@ -56,7 +56,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/subject",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "subject"
           }]
         }
@@ -70,7 +70,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/institution",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: " degree awarding body"
           }]
         }
@@ -84,7 +84,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/completed",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: " whether you’ve completed the degree"
           }]
         }
@@ -98,7 +98,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/grade",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: " grade"
           }]
         }
@@ -112,7 +112,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/start-year",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: " start year"
           }]
         }
@@ -126,7 +126,7 @@
         actions: {
           items: [{
             href: "/details/degree/" + id + "/graduation-year",
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: " graduation year"
           }]
         }

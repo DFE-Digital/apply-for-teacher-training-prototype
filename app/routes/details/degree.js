@@ -42,6 +42,10 @@ module.exports = router => {
   // Note: Must be defined before next route declaration
   router.get('/details/degree/review', (req, res) => {
     let meetsMinimumDegreeCriteria
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
     if (req.session.data.degrees) {
       const degrees = Object.keys(req.session.data.degrees)
 
@@ -52,7 +56,9 @@ module.exports = router => {
     }
 
     res.render('details/degree/review', {
-      meetsMinimumDegreeCriteria
+      meetsMinimumDegreeCriteria,
+      id: req.params.id,
+      numberOfApplicationsLeft
     })
   })
 

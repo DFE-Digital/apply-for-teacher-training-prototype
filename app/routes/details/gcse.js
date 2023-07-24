@@ -32,11 +32,14 @@ module.exports = router => {
     const gcse = gcseData(req)
     const grade = enteredGrade(gcse)
     const hasElligibleGrade = passGrades.includes(grade)
-
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
     res.render('details/gcse/review', {
       grade,
       hasElligibleGrade,
-      id: req.params.id
+      id: req.params.id,
+      numberOfApplicationsLeft
     })
   })
 

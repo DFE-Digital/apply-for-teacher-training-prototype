@@ -4,7 +4,11 @@
 
 {% set title = "References to be requested if you accept an offer" %}
 {% set references = data.references %}
+{% if numberOfApplicationsLeft >= 4 %}
 {% set addReferenceButtonText = "Add a reference" if references | length == 0 else "Add another reference" %}
+{% else %}
+
+{% endif %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -30,12 +34,16 @@
       <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
 
       <div class="govuk-body">
+        {% if numberOfApplicationsLeft >= 4 %}
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}
         {{ govukButton({
           text: addReferenceButtonText,
           href: "/details/references/add",
           classes: referencesButtonClass
         }) }}
+        {% else %}
+
+{% endif %}
       </div>
     </div>
   </div>
@@ -47,7 +55,9 @@
   {% endif %}
 
 {% if references | length > 1 and incompleteReferences | length == 0 %}
-
+{# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
   <form action="/details" method="get">
     {{ govukRadios({
       name: "completed[references]",
@@ -70,6 +80,14 @@
 
     {{ govukButton({text: "Continue"}) }}
   </form>
+  {% else %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }}
+{% endif %}
 {% endif %}
 
 {% endblock %}

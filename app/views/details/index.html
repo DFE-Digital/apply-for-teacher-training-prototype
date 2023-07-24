@@ -4,19 +4,33 @@
 
 {% macro tagClassesForSection(completed=false, apply2=false) %}
   {% if completed %}
-    govuk-task-list__status--black
+    {# govuk-task-list__status--black #}
   {% else %}
-    govuk-task-list__status--blue
+    {# govuk-task-list__status--blue #}
   {% endif %}
 {% endmacro %}
 
-{% macro tagTextForSection(completed=false) %}
+{# {% macro tagTextForSection(completed=false) %}
   {% if completed %}
     Completed
   {% else %}
     Incomplete
   {% endif %}
+{% endmacro %} #}
+
+{% macro tagTextForSection(completed=false) %}
+  {% if completed %}
+    {{govukTag({
+          text: "Completed"
+        })}}
+  {% else %}
+   {{govukTag({
+          text: "Incomplete",
+          classes: "govuk-tag--grey"
+        })}}
+  {% endif %}
 {% endmacro %}
+
 
 {% set title = "Your details" %}
 {% set hasSecondary = true %}
@@ -35,7 +49,7 @@
       </p>
 
 
-    <p class="govuk-body">You can update your details at any time.</p>
+    <!-- <p class="govuk-body">You can update your details at any time.</p> -->
 
       <section class="app-section">
 
@@ -65,8 +79,9 @@
 
         <section class="app-section">
         <h2 class="govuk-heading-m">Qualifications</h2>
-
-        {{ govukTaskList({
+  
+ {{ govukTaskList({
+          
           items: [{
             title: {text: "English GCSE or equivalent"},
             href: "/details/gcse/english",
@@ -107,6 +122,7 @@
             }
           }]
         }) }}
+
       </section>
 
       <section class="app-section">

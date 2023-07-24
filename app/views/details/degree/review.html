@@ -16,7 +16,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
-
+{% if numberOfApplicationsLeft >= 4 %}
       {% set addDegreeButton %}
         {{ govukButton({
           text: ("Add another degree" if degreeCount > 0 else "Add degree"),
@@ -24,7 +24,9 @@
           href: "/details/degree/add"
         }) }}
       {% endset %}
+{% else %}
 
+{% endif %}
       {% if degreeCount == 0 or not meetsMinimumDegreeCriteria  %}
         <p class="govuk-body">You need a bachelor’s degree or equivalent to start teacher training.</p>
         <p class="govuk-body">Add your bachelor’s degree even if you have not got your grade yet.</p>
@@ -41,33 +43,45 @@
   {% if degreeCount > 0 %}
 
     {% include "_includes/review/degrees.html" %}
-
+    
     {% if meetsMinimumDegreeCriteria %}
-      <form action="/details" method="post">
-        {{ govukRadios({
-          name: "completed[degree]",
-          value: data.completed.degree,
-          fieldset: {
-            classes: "govuk-!-width-two-thirds",
-            legend: {
-              text: "Have you completed this section?",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [{
-            value: "true",
-            text: "Yes, I’ve completed this section"
-          }, {
-            value: "false",
-            text: "No, I’ll come back to it later"
-          }]
-        } ) }}
+     {# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
+<form action="/details" method="post">
+  {{ govukRadios({
+      name: "completed[" + id + "]",
+      value: data.completed[id],
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-      </form>
+  {{ govukButton({
+      text: "Continue"
+    }) }}
+</form>
+{% else %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }}
+{% endif %}
     {% endif %}
 
   {% endif %}
+  
 {% endblock %}

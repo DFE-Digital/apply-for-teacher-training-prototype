@@ -1,12 +1,12 @@
 {% extends "layouts/main.html" %}
 
-{% set primaryNavId = "applications" %}
+{% set primaryNavId = "details" %}
 {% set title = "Personal statement" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications/" + id + "/course",
-    text: "Back"
+    href: "/details",
+    text: "Back to your details"
   }) }}
 {% endblock %}
 
@@ -23,26 +23,20 @@
         <ul class="govuk-list govuk-list--bullet">
           <li>skills you have that are relevant to teaching</li>
           <li>any experience of working with young people</li>
-
-          {% set primaryRegex = r/^Primary\s.*/g %}
-          {% set courseCodeRegex = r/\([^)]+\)/ %}
-          {% if primaryRegex.test(data.applications[id].course) %}
-          {% else %}
-            <li>your interest in {{ data.applications[id].course | replace(courseCodeRegex, "") | lower }}</li>
-          {% endif %}
+          <li>for secondary teacher training: your interest in the subject you want to teach</li>
           <li>your understanding of why teaching is important</li>
           <li>your reasons for wanting to train to be a teacher</li>
           <li>any activities you’ve done that could be relevant to teaching like first aid courses, sports coaching or volunteering</li>
         </ul>
-
+        <p class="govuk-body">Get support with your personal statement by speaking to our<a class="govuk-link" href="https://getintoteaching.education.gov.uk/teacher-training-advisers"> teacher training advisers</a>.</p>
       {% endset %}
 
       {{ guidanceHtml | safe }}
 
-      <form action="/applications/{{ id }}/review" method="post">
+      <form action="/details/personal-statement/review" method="post">
         {{ govukCharacterCount({
-          name: "applications[" + id + "][personalStatement]",
-          value: data.applications[id].personalStatement,
+          name: "personalStatement",
+          value: data.personalStatement,
           id: "personal-statement",
           label: {
             text: "Your personal statement",

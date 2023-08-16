@@ -2,12 +2,12 @@
 
 {% set primaryNavId = "details" %}
 
-{% set formaction = "/application/" + "/personal-information/immigration" %}
+{% set formaction = "/details/personal-information/immigration/answer" %}
 {% set title = "Right to work or study in the UK" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + "/personal-information/nationality/")
+    href: "/details/personal-information/nationality"
   }) }}
 {% endblock %}
 
@@ -18,7 +18,7 @@
   <p class="govuk-body">You’ll need the right to work or study in the UK for the duration of your course.</p>
 
   <p class="govuk-body"><a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#visa" class="govuk-link">Check if you’ve already got the right to work or study in the UK, or whether you’ll need to apply for a visa</a>.</p>
-
+<form action="{{ formaction }}" method="post">
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -26,16 +26,20 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
+    name: "immigration",
+    value: data.immigration,
     items: [{
       value: "Yes",
       text: "Yes"
     }, {
       value: "No",
-      text: "No"
+      text: "Not yet"
     }]
   }) }}
 
   {{ govukButton({
     text: "Save and continue"
   }) }}
+
+   </form>
 {% endblock %}

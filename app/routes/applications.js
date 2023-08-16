@@ -126,18 +126,6 @@ module.exports = router => {
     })
   })
 
-  // router.get('/applications/:id/personal-statement', (req, res) => {
-  //   const { id } = req.params
-  //   const mainPersonalStatement=req.session.data.personalStatement
-  //   let applicationPersonalStatement=req.session.data.applications[id].personalStatement
-  //   if (mainPersonalStatement && applicationPersonalStatement == undefined){
-  //     req.session.data.applications[id].personalStatement=mainPersonalStatement
-  //   }
-  //   res.render('applications/personal_statement', {
-  //     id
-  //   })
-  // })
-
   router.get('/applications/:id/interview-needs', (req, res) => {
     const { id } = req.params
     res.render('applications/interview-needs', {

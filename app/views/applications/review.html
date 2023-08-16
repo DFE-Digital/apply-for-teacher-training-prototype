@@ -93,6 +93,12 @@
 
           <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
 
+
+        {% elif data.immigration == "Yes" %}
+
+        <p> this course does not offer visa sponsorship </p>
+
+
         {% else %}
           <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>
           <p class="govuk-body">If one of your other applications is unsuccessful, or you withdraw it, you will be able to submit this one.</p>

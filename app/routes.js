@@ -7,7 +7,6 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
 require('./routes/account')(router)
-
 require('./routes/details/index')(router)
 require('./routes/details/contact-information')(router)
 require('./routes/details/work-history')(router)
@@ -18,8 +17,8 @@ require('./routes/details/other-qualifications')(router)
 require('./routes/details/references')(router)
 require('./routes/details/safeguarding')(router)
 require('./routes/details/personal-statement')(router)
+require('./routes/details/personal-information')(router)
 require('./routes/applications')(router)
-
 require('./routes/accepted')(router)
 require('./routes/admin')(router)
 require('./routes/reference')(router)

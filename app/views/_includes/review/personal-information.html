@@ -41,7 +41,7 @@
         text: "Nationality"
       },
       value: {
-        html: (data.nationalities | join(", ")) if data.nationalities
+        html: (data.nationalities | join(", ")) if data.nationalities else data.otherNationality
       },
       actions: {
         items: [{
@@ -65,12 +65,12 @@
           visuallyHiddenText: "if you have the right to work or study in the UK"
         }]
       }
-    } if data.immigration, {
+    } , {
       key: {
         text: "Immigration status"
       },
       value: {
-        html: immigrationStatusText
+        text: data.immigrationStatus
       },
       actions: {
         items: [{

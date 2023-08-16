@@ -2,12 +2,12 @@
 
 {% set primaryNavId = "details" %}
 
-{% set formaction = "/application/" + "/personal-information/nationality-answer" %}
+{% set formaction = "/details/personal-information/nationality/answer" %}
 {% set title = "What’s your nationality?" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + "/personal-information/")
+    href: "/details/personal-information/"
   }) }}
 {% endblock %}
 
@@ -18,8 +18,8 @@
 
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <form action="/details/personal-information/review" method="post">
-
+       <form action="{{ formaction }}" method="post">
+{{ govukHint({id: describedBy, text: "Select all that apply." })}}
       {% set otherHtml %}
         <div class="app-add-another-nationality">
           {{ govukInput({
@@ -31,29 +31,28 @@
           }) }}
         </div>
 
-      {% endset -%}
+      {% endset %}
 
-      {{ govukCheckboxes({
-        name: "nationalities",
-        hint: {
-          text: "Select all that apply"
-        },
-        values: data.nationalities,
-        items: [{
-          value: "British",
-          text: "British"
-        }, {
-          value: "Irish",
-          text: "Irish"
-        }, {
-          value: "Other",
-          text: "Other",
-          conditional: {
-            html: otherHtml
-          }
-        }]
-      }) }}
-
+{{ govukCheckboxes({
+      name: "nationalities",
+      value: data.nationalities,
+      items: [{
+        text: "British",
+        value: "British"
+      },
+      {
+        text: "Irish",
+        value: "Irish"
+      },
+       {
+        text: "Other",
+        value: "Other",
+        conditional: {
+          html: otherHtml
+        }
+      }]
+    }) }}
+   
       {{ govukButton({
         text: "Save and continue"
       }) }}

@@ -12,7 +12,8 @@
 {% endblock %}
 
 {% block content %}
-
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
  <form action="/details/personal-information/review" method="post">
         {{ govukTextarea({
           name: "immigrationStatus",
@@ -31,5 +32,6 @@
           text: "Save and continue"
         }) }}
       </form>
-
+</div>
+</div>
 {% endblock %}

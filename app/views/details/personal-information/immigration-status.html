@@ -7,62 +7,31 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/details/personal-information/immigration/")
+   href: "/details/personal-information/immigration"
   }) }}
 {% endblock %}
 
-{% block formBody %}
-  {% if isEuropeanCitizen == true %}
-    {{ govukRadios({
-      fieldset: {
-        legend: {
-          html: title,
-          classes: "govuk-fieldset__legend--l",
-          isPageHeading: true
-        },
-        attributes: {
-          "data-module": "clear-hidden"
-        }
-      },
-      items: [{
-        value: "EU settled status",
-        text: "EU settled status"
-      }, {
-        value: "EU pre-settled status",
-        text: "EU pre-settled status"
-      }, {
-        value: "other",
-        text: "Another immigration status",
-        conditional: {
-          html: govukCharacterCount({
-            label: {
-              text: "Immigration status"
-            },
-            hint: {
-              text: "For example, “Indefinite leave to remain”."
-            },
-            threshold: 90,
-            maxwords: 200,
-            rows: 5
-          })
-        }
-      }]
-    }) }}
-  {% else %}
-    {{ govukCharacterCount({
-      label: {
-        text: title,
-        classes: "govuk-label--l"
-      },
-      hint: {
-        text: "For example, “I have permanent residence”."
-      },
-      maxwords: 200,
-      rows: 5
-    }) }}
-  {% endif %}
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+ <form action="/details/personal-information/review" method="post">
+        {{ govukTextarea({
+          name: "immigrationStatus",
+          value: data.immigrationStatus,
+          id: "immigration-status",
+          label: {
+            text: "What is your immigration status?",
+            classes: "govuk-label--l"
+          },
+          hint: {
+    text: "For example, 'I have permanent residence'."
+  }
+        }) }}
 
-  {{ govukButton({
-    text: "Save and continue"
-  }) }}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+</div>
+</div>
 {% endblock %}

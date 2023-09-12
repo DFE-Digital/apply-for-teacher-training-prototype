@@ -146,11 +146,13 @@ module.exports = router => {
     const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+    const immigration = (req.session.data.immigration ? Object.values(req.session.data.immigration) : [] )
 
     const { id } = req.params
     res.render('applications/review', {
       id,
-      numberOfApplicationsLeft
+      numberOfApplicationsLeft,
+      immigration
     })
   })
 

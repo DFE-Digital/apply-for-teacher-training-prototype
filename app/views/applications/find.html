@@ -15,22 +15,28 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title}}</h1>
 
-      <p class="govuk-body-l">Search for courses near you on Find postgraduate teacher&nbsp;training.</p>
-      <p class="govuk-body">A <a href="https://adviser-getintoteaching.education.gov.uk/">teacher training adviser</a> can help you understand your course options and support you with your application.</p>
+      <p class="govuk-body">You can find information about training providers and courses, including:</p>
+      <p class="govuk-body">
+        <ul class="govuk-list govuk-list--bullet">
+  <li>entry requirements</li>
+  <li>school placements</li>
+  <li>wether bursaries or salaries are available</li>
+  <li>contact details</li>
+</ul>
+</p>
+      <p class="govuk-body">A <a href="https://adviser-getintoteaching.education.gov.uk/">teacher training adviser</a> can help you understand your course options.</p>
 
       {{ govukButton({
-        html: "Start now <span class=\"govuk-visually-hidden\">(Opens in a new window)</span>",
+        text: "Continue",
         href: "https://www.find-postgraduate-teacher-training.service.gov.uk",
-        isStartButton: true,
-        classes: "govuk-!-margin-bottom-2",
+        classes: "govuk-!-margin-bottom-4",
         attributes: {
           target: "_blank",
           "aria-describedby": "find-new-window"
         }
       }) }}
-      <p class="govuk-body-s govuk-!-margin-bottom-6" id="find-new-window" aria-hidden="true">Opens in a new window</p>
 
-      <p class="govuk-body"><a href="/application">Return to your application</a></p>
+      <p class="govuk-body">Join a <a href="https://getintoteaching.education.gov.uk/events">teacher training event</a> where you can meet local training providers, talk to existing teachers and get expert advice on your application.</p>
     </div>
   </div>
 {% endblock %}

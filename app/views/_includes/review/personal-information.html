@@ -41,7 +41,7 @@
         text: "Nationality"
       },
       value: {
-        html: (data.nationalities | join(", ")) if data.nationalities else data.otherNationality
+        html: data.otherNationality if data.nationalities == "Other" else (data.nationalities | join(", "))
       },
       actions: {
         items: [{
@@ -67,7 +67,7 @@
       }
     } , {
       key: {
-        text: "Immigration status"
+        text: "Visa or immigration status"
       },
       value: {
         text: data.immigrationStatus

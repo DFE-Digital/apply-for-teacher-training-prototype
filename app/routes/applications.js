@@ -146,11 +146,23 @@ module.exports = router => {
     const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+    const immigration = (req.session.data.immigration ? Object.values(req.session.data.immigration) : [] )
 
     const { id } = req.params
     res.render('applications/review', {
       id,
-      numberOfApplicationsLeft
+      numberOfApplicationsLeft,
+      immigration
+    })
+  })
+
+  router.get('/applications/:id/interruption-module', (req, res) => {
+    const { id } = req.params
+    const degree = req.session.data.degrees
+  
+    res.render('applications/interruption-module', {
+    id,
+    degree
     })
   })
 
@@ -185,20 +197,47 @@ module.exports = router => {
 
   router.post('/applications/:id/submit', (req, res) => {
     const { id } = req.params
-
+    const personalStatement = (req.session.data.personalStatement ? Object.values(req.session.data.personalStatement) : [] )
+    const personalstatementl = personalStatement.length
+    const degree = req.session.data.degrees
     const submitNow = req.body.submitNow
+    const submitNowPost = req.body.submitNowPost
 
-    if (submitNow === 'yes') {
+// interruption module for personal 
+    if (submitNow == 'yes' && personalstatementl < 500) {
+      res.redirect('/applications/'+ id + '/interruption-module')
+    }
+    else if (submitNow == 'yes' && degree.G3CL4.grade == "Third-class honours") {
+      res.redirect('/applications/'+ id + '/interruption-module')
+    }
+    else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
       res.redirect('/applications')
-    } else if (submitNow === 'no') {
+    }
+    // function for submitting an application
+    else if (submitNow == 'yes') {
+      req.session.data.applications[id].status = "Awaiting decision"
+      req.session.data.applications[id].submittedAt = new Date()
+      res.redirect('/applications')
+    } 
+    // function to save application as a draft
+    else if (submitNow === 'no') {
       res.redirect('/applications')
     } else {
       res.redirect('/applications/' + id + "/review")
     }
 
   })
+
+  // router.post('/applications/:id/submit', (req, res) => {
+  //   const { id } = req.params
+  //   const submitNow = req.body.submitNow
+  //   req.session.data.applications[id].status = "Awaiting decision"
+  //   req.session.data.applications[id].submittedAt = new Date()
+  
+  //   res.redirect('/applications')
+  // })
 
   router.post('/applications/:id/delete', (req, res) => {
     const { id } = req.params

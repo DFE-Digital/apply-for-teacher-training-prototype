@@ -93,7 +93,7 @@
           text: ("Grade" if item.gradeGiven == 'yes' else "Did your degree give a grade?")
         },
         value: {
-          text: (item.grade if item.gradeGiven == 'yes' else item.gradeGiven | capitalize)
+          text: (data.degrees[id].grade if item.gradeGiven == 'yes' else item.gradeGiven | capitalize)
         },
         actions: {
           items: [{

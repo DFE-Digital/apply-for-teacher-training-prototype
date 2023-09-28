@@ -58,14 +58,14 @@
 
       })}}
 
-        {% if data.immigration == "No"  %}
-        <div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive">Warning</span>
-Visa sponsorship is not available for this course.
-  </strong>
-</div>
+  {% if data.immigration == "No"  %}
+     <div class="govuk-warning-text">
+       <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+       <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+         Visa sponsorship is not available for this course.
+       </strong>
+    </div>
 
 <p class="govuk-body"><a href="https://www.find-postgraduate-teacher-training.service.gov.uk" class="govuk-link">Find a course that has visa sponsorship</a></p>
 
@@ -104,6 +104,12 @@ Visa sponsorship is not available for this course.
         {% if not (data | allSectionsCompleted) %}
 
           <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
+
+
+        {% elif data.immigration == "Yes" %}
+
+        <p> this course does not offer visa sponsorship </p>
+
 
         {% else %}
           <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>

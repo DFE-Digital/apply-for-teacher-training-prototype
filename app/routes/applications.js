@@ -156,16 +156,6 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/interruption-module', (req, res) => {
-    const { id } = req.params
-    const degree = req.session.data.degrees
-  
-    res.render('applications/interruption-module', {
-    id,
-    degree
-    })
-  })
-
 
   router.get('/applications/:id/delete', (req, res) => {
     const { id } = req.params

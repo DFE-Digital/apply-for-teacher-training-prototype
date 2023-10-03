@@ -45,7 +45,7 @@
         {% if not (data | allSectionsCompleted) %}
           Complete these sections so that you can start applying to courses.
         {% endif %}
-        {% if (data | allSectionsCompleted) %}
+        {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
         <p class="govuk-body">You can now <a class="govuk-link" href="/applications">start applying to courses</a>.</p>
         {% endif %}
         <p class="govuk-body">Your details will be shared with the training provider when you apply.</p>
@@ -225,7 +225,7 @@
         }) }}
       </section>
       
-      {% if (data | allSectionsCompleted) %}
+      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
       <div class="app-grid-column--grey">
         <h2 class="govuk-heading-m">You have completed your details</h2>
         <p class="govuk-body">You can now start applying to courses.</p>

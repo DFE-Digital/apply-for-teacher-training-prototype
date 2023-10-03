@@ -18,7 +18,7 @@
         <p class="govuk-body">You can add up to 4 applications at a time.</p>
 
         {% if not (data | allSectionsCompleted) %}
-          <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
+          <p class="govuk-body">You will not be able to submit applications until you have completed <a class="govuk-link" href="/details">your details</a>.</p>
         {% endif %}
       {% else %}
         <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
@@ -29,7 +29,7 @@
 
         <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
 
-        <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
+        <p class="govuk-body"><a class="govuk-link" href="/application-process">Read about how the application process works.</a></p>
       </div>
 
       {{ govukButton({
@@ -41,7 +41,7 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <p class="govuk-body">You cannot add any more applications.</p>
       <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
-      <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
+      <p class="govuk-body"><a class="govuk-link" href="/application-process">Read about how the application process works.</a></p>
 
     {% endif %}
 

@@ -8,7 +8,7 @@
 {% block beforeContent %}
   {{ govukBackLink({
     href: "/applications",
-    text: "Back to applications"
+    text: "Back to your applications"
   }) }}
 {% endblock %}
 
@@ -17,7 +17,7 @@
     <div class="govuk-grid-column-three-quarters">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
+      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }} when you submit your application.</p>
 
       {{ govukSummaryList({
         rows: [
@@ -103,7 +103,14 @@ Visa sponsorship is not available for this course.
 
         {% if not (data | allSectionsCompleted) %}
 
-          <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
+          <p class="govuk-body">You need to <a class="govuk-link" href="/details">complete your details</a> before you can submit this application.</p>
+            <p class="govuk-body">This application will be saved as a draft while you finish your details.</p>
+
+
+        {% elif data.immigration == "Yes" %}
+
+        <p> this course does not offer visa sponsorship </p>
+
 
         {% else %}
           <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>

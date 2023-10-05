@@ -45,7 +45,11 @@
         {% if not (data | allSectionsCompleted) %}
           Complete these sections so that you can start applying to courses.
         {% endif %}
-        Your details will be shared with the training provider of any course you apply to.
+        {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
+        <p class="govuk-body">You can <a class="govuk-link" href="/applications">add your applications</a>.</p>
+        {% endif %}
+        <p class="govuk-body">Your details will be shared with the training provider when you apply.</p>
+        
       </p>
 
 
@@ -220,6 +224,19 @@
           }]
         }) }}
       </section>
+      
+      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
+      <div class="app-grid-column--grey">
+        <h2 class="govuk-heading-m">You have completed your details</h2>
+        <p class="govuk-body">You can now start applying to courses.</p>
+        {{ govukButton({
+          text: "Add applications",
+          href: "/applications/start",
+          preventDoubleClick: true
+        }) }}
+ 
+    </div>
+      {% endif %}
    </div>
 
     <div class="govuk-grid-column-one-third">

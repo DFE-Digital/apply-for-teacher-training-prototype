@@ -173,6 +173,170 @@ module.exports = router => {
     res.redirect('/details')
   })
 
+  // This fills out every section of your details except personal statement
+  router.get('/admin/complete-details-no-ps', (req, res) => {
+    const data = req.session.data
+
+    // Set personal information
+    data.firstName = 'Jane'
+    data.lastName = 'Smith'
+    data.dateOfBirth = {
+      day: '1',
+      month: '3',
+      year: '1987'
+    }
+    data.nationalities = ['British']
+
+    // Set contact information
+    data.phoneNumber = '07700 900 982'
+    data.livesInUk = 'yes'
+    data.address = {
+      line1: '1 Smith Street',
+      line2: 'Someplace',
+      town: 'Sometown',
+      postalCode: 'S12 03L'
+    }
+
+    // Set choices
+    data.choices = {
+      TD37L8: {
+        providerName: 'University of Chester',
+        course: 'Physics (1A6W)'
+      }
+    }
+
+    // Set GCSEs
+    data.gcse = {
+      maths: {
+        id: 'maths',
+        type: 'GCSE',
+        gradeSingle: 'A*',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      english: {
+        id: 'english',
+        type: 'GCSE',
+        exam: ['English Language', 'English Literature'],
+        gradeLanguage: 'C',
+        gradeLiterature: 'B',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      science: {
+        id: 'science',
+        type: 'GCSE',
+        exam: 'Double (or combined) award',
+        gradeDouble: 'A*A*',
+        year: '2004',
+        country: 'United Kingdom'
+      }
+    }
+
+    // Set degree
+    data.degrees = {
+      G3CL4: {
+        provenance: 'domestic',
+        type: 'Bachelor of Arts',
+        level: 'Bachelor',
+        subject: 'Physics',
+        institution: 'The University of Manchester',
+        country: 'United Kingdom',
+        startYear: '2009',
+        graduationYear: '20012',
+        completed: 'Yes',
+        gradeGiven: 'yes',
+        grade: 'Upper second-class honours (2:1)'
+      }
+    }
+
+    // Set other qualifications
+    data.otherQualificationsAdded = 'Yes'
+    data.otherQualifications = {
+      X1C3E: {
+        id: 'X1C3E',
+        type: 'A level',
+        subject: 'English',
+        grade: 'B',
+        year: '2006'
+      },
+      Z4N6P: {
+        id: 'Z4N6P',
+        type: 'A level',
+        subject: 'History',
+        grade: 'C',
+        year: '2006'
+      },
+      Y5L4P: {
+        id: 'Y5L4P',
+        type: 'A level',
+        subject: 'Drama',
+        grade: 'A',
+        year: '2006'
+      }
+    }
+
+    // Set work history
+    data.workHistoryAdded = 'no-full-time-education'
+
+    // Set unpaid expeerience
+    data.unpaidExperienceAdded = 'no'
+
+    // Set disability support
+    data.additionalSupportNeeded = 'no'
+
+    // Set interview needs
+    data.interviewNeeds = 'no'
+
+    // Set references
+    data.references = {
+      a714k: {
+        type: 'academic',
+        name: 'Janet Harper',
+        email: 'janet@example.ac.uk',
+        relationship: 'I’ve known them 4 years. They were my tutor.'
+      },
+      b235: {
+        type: 'professional',
+        name: 'Joseph Banks',
+        email: 'joseph@company.com',
+        relationship: 'I’ve known them 2 years. They were my manager.'
+      }
+    }
+
+    // Set safeguarding
+    data.safeguarding = 'no'
+
+    // Set equality questions
+    data.equalityMonitoring = {
+      disabilities: ['none'],
+      ethnicGroup: 'Prefer not to say',
+      freeSchoolMeals: 'I do not know',
+      sex: "Prefer not to say"
+    }
+
+    // Set completed sections
+    data.completed = {
+      personalInformation: 'true',
+      contactInformation: 'true',
+      choices: 'true',
+      english: 'true',
+      maths: 'true',
+      science: 'true',
+      otherQualifications: 'true',
+      degree: 'true',
+      workHistory: 'true',
+      unpaidExperience: 'true',
+      additionalSupport: 'true',
+      interviewNeeds: 'true',
+      references: 'true',
+      safeguarding: 'true',
+      equalityMonitoring: 'true'
+    }
+
+    res.redirect('/details')
+  })
+
   // This lets the candidate receive an offer on one choice
   router.get('/admin/receive-offer', (req, res) => {
 

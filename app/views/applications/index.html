@@ -100,6 +100,25 @@
         {% endif %}
       {% endset %}
 
+
+      {% if application.status == "Awaiting decision" %}
+          <h2 class="govuk-heading-m">In progress</h2>
+      {% elseif application.status == "Not sent" %}
+          <h2 class="govuk-heading-m">Unsubmitted applications</h2>
+      {% elseif application.status == "Offer declined" %}
+          <h2 class="govuk-heading-m">Declined offers</h2>
+      {% elseif application.status == "Unsuccessful" %}
+          <h2 class="govuk-heading-m">Unsuccessful applications</h2>
+      {% elseif application.status == "Inactive" %}
+         <h2 class="govuk-heading-m">In progress</h2>
+      {% elseif application.status == "Offer received" %}
+         <h2 class="govuk-heading-m">Offers received</h2>
+      {% elseif application.status == "Offer withdrawn" %}
+         <h2 class="govuk-heading-m">Withdrawn applications</h2>
+      {% else  %}
+         <h2 class="govuk-heading-m"></h2>
+      {% endif %}
+
       {{ govukSummaryList({
         card: {
           title: {

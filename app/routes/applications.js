@@ -21,6 +21,19 @@ module.exports = router => {
 
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
+    // const candidateInterface = {
+    //   sortApplicationChoices: {
+    //     one: "Offers received",
+    //     two: "Unsubmitted applications",
+    //     three: "Unsuccessful applications",
+    //     four: "In progress",
+    //     five: "Declined offers",
+    //     six: "Withdrawn applications",
+    //     ten: "Other applications"
+    //   }
+    // };
+    
+
     res.render('applications/index', {
       applicationAccepted,
       numberOfApplicationsLeft

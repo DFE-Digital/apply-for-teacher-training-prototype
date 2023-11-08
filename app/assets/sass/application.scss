@@ -172,13 +172,13 @@
 
 .govuk-tabs__list-item-itt{
   padding-bottom: 0 !important;
-  border: none !important; 
+  border: none !important;
   background-color: transparent !important;
 }
 
 .govuk-tabs__tab-itt {
   padding-bottom: 2px;
-  color: #1e70b8 !important;
+  color: #1d70b8 !important;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -215,7 +215,7 @@
 @media only screen and (max-width: 640px) {
 .govuk-tabs__list-item {
   float: none !important;
-  text-align: left !important; 
+  text-align: left !important;
 }
 
 .govuk-tabs__list-item:before {

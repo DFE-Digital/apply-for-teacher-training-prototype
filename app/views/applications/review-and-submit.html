@@ -1,0 +1,62 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Review your application to " + data.applications[id].providerName %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h2 class="govuk-heading-m govuk-!-font-size-27">Course</h2>
+     {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: application.course + "<br>PGCE"
+            } if not application.submittedAt
+          },
+          {
+            key: {
+              text: "Study mode"
+            },
+            value: {
+              html: "Full time"
+            }
+      }
+    ]
+      })}}
+
+<form action="/applications/{{ id }}/submit" method="post">
+            <h2 class="govuk-heading-m">Do you want to submit your application?</h2>
+            <p class="govuk-body">Before you submit your application, make sure that all the information you’ve added is up to date and correct.</p>
+            <p class="govuk-body">If you still need to make changes, save this application as a draft and submit when you’re ready.</p>
+            <p class="govuk-body">By submitting this application, you confirm that your details are true, complete and accurate.</p>
+
+          <div class="govuk-button-group">
+           {{ govukButton({
+             name: "submitNowPost",
+           value: "yes",
+           text: "Confirm and submit application"
+            }) }}
+
+          <a class="govuk-link" href="/applications">Save as a draft</a>
+          </div>
+        </form>
+
+    </div>
+  </div>
+{% endblock %}
+
+

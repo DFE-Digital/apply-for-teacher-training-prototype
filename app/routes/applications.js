@@ -32,7 +32,7 @@ module.exports = router => {
     //     ten: "Other applications"
     //   }
     // };
-    
+
 
     res.render('applications/index', {
       applicationAccepted,
@@ -172,10 +172,18 @@ module.exports = router => {
   router.get('/applications/:id/interruption-module', (req, res) => {
     const { id } = req.params
     const degree = req.session.data.degrees
-  
+
     res.render('applications/interruption-module', {
     id,
     degree
+    })
+  })
+
+  router.get('/applications/:id/review-and-submit', (req, res) => {
+    const { id } = req.params
+
+    res.render('applications/review-and-submit', {
+    id
     })
   })
 
@@ -216,7 +224,7 @@ module.exports = router => {
     const submitNow = req.body.submitNow
     const submitNowPost = req.body.submitNowPost
 
-// interruption module for personal 
+// interruption module for personal
     if (submitNow == 'yes' && personalstatementl < 500) {
       res.redirect('/applications/'+ id + '/interruption-module')
     }
@@ -233,7 +241,7 @@ module.exports = router => {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
       res.redirect('/applications')
-    } 
+    }
     // function to save application as a draft
     else if (submitNow === 'no') {
       res.redirect('/applications')
@@ -248,7 +256,7 @@ module.exports = router => {
   //   const submitNow = req.body.submitNow
   //   req.session.data.applications[id].status = "Awaiting decision"
   //   req.session.data.applications[id].submittedAt = new Date()
-  
+
   //   res.redirect('/applications')
   // })
 

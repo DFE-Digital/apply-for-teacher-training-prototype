@@ -6,7 +6,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications"
+    href: "/applications",
+    text: "Back to your application"
   }) }}
 {% endblock %}
 
@@ -24,7 +25,7 @@
         {% elif degree.G3CL4.grade == "Third-class honours"%}
           {#------ Degree ------#}
         <p class="govuk-body">For this course, you'll need a degree grade of 2:2 or higher.</p>
-        <p class="govuk-body">{{data.applications[id].providerName}} will still consider your application. To increase your chances of a successful application you can also apply for course matching your degree grade.</p> 
+        <p class="govuk-body">{{data.applications[id].providerName}} will still consider your application. To increase your chances of a successful application you can also apply for course matching your degree grade.</p>
         <p class="govuk-body">Use the degree grade filter to <a class="govuk-link" href="https://www.find-postgraduate-teacher-training.service.gov.uk/">find another course</a>.</p>
 
   {% else%}
@@ -36,7 +37,7 @@
 </div>
 
 <div class="govuk-button-group">
-  <form action="/applications/{{ id }}/submit" method="post">
+  {# <form action="/applications/{{ id }}/submit" method="post">
    <p class="govuk-body govuk-fieldset__legend--s">Are you sure you want to submit your application now?</p>
   {{ govukButton({
     name: "submitNowPost",
@@ -52,6 +53,26 @@
    <a class="govuk-link" href="/details/references">Add references</a>
 
   {% endif %}
+  </form> #}
+  <form action="/applications/{{ id }}/review-and-submit" method="post">
+   <p class="govuk-body govuk-fieldset__legend--s">Would you like to edit your personal statement before submitting your application?</p>
+     {% if data.personalStatement.length < 500 %}
+  {{ govukButton({
+    text: "Edit your personal statement",
+    href: "/details/personal-statement"
+  }) }}
+ {% elif degree.G3CL4.grade == "Third-class honours"%}
+   {{ govukButton({
+    text: "Save as a draft",
+    href: "/applications"
+  }) }}
+  {% else%}
+     {{ govukButton({
+    text: "Add references",
+    href: "/details/references"
+  }) }}
+  {% endif %}
+    <a class="govuk-link" href="/applications/{{ id }}/review-and-submit">Continue without editing</a>
   </form>
 </div>
 </div>

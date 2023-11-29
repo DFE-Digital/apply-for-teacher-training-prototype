@@ -327,7 +327,7 @@ module.exports = router => {
         if (application.status == 'Offer received') {
           application.status = 'Offer declined'
         } else if (application.status == 'Awaiting decision') {
-          application.status = 'Withdrawn'
+          application.status = 'Application withdrawn'
         }
       }
     }

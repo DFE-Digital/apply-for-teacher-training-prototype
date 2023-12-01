@@ -34,11 +34,11 @@
       </div>
 
       {% if data.otherQualifications | length == 0 %}
-        {{ govukButton({text: "Add qualification", href: applicationPath + "/other-qualifications/add"}) }}
+    {{ govukButton({text: "Add qualification", href: "/details" + "/other-qualifications/add"}) }}
 
       {% else %}
        {% if numberOfApplicationsLeft >= 4 %}
-        {{ govukButton({text: "Add another qualification", href: applicationPath + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
+        {{ govukButton({text: "Add another qualification", href: "/details" + "/other-qualifications/add", classes: "govuk-button--secondary"}) }}
        {% else %}
 
 {% endif %}

@@ -31,6 +31,7 @@
    }) }}
   {% endset %}
 
+{% if data.otherNationality == "European" %}
         {{ govukRadios({
   name: "immigrationStatus",
   value: data.immigrationStatus,
@@ -43,9 +44,38 @@
     },
   items: [
     {
-      value: "EU settled and pre-settled status",
-      text: "EU settled and pre-settled status"
+      value: "EU settled status",
+      text: "EU settled status"
     },
+    {
+      value: "Pre-settled status",
+      text: "Pre-settled status"
+    },
+      {
+      divider: "or"
+    },
+    {
+      value: "Other",
+      text: "Other",
+       conditional: {
+              html: nolistHtml
+            }
+      }
+  ]
+}) }}
+
+{% else %}
+        {{ govukRadios({
+  name: "immigrationStatus",
+  value: data.immigrationStatus,
+  id: "immigration-status",
+   fieldset: {
+      legend: {
+        text: "Select your visa or immigration status",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+  items: [
     {
       value: "Indefinite leave to remain in the UK",
       text: "Indefinite leave to remain in the UK"
@@ -114,6 +144,8 @@
       }
   ]
 }) }}
+
+{% endif %}
 
         {{ govukButton({
           text: "Save and continue"

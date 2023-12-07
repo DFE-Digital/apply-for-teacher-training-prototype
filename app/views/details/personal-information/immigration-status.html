@@ -25,23 +25,23 @@
       <form action="/details/personal-information/review" method="post">
 
   {% if data.otherNationality == "European" %}
+
    {% set nolistHtml %}
     {{ govukInput({
-      name: "notOnTheList",
-      value: data.immigrationStatusDetail,
-        label: {
-    text: "Enter immigration status"
-  },
-  classes: "govuk-!-width-three-quarters",
-  id: "three-quarters",
-  name: "threeQuarters"
-   }) }}
+            name: "otherImmigration",
+            label: {
+              text: "Enter immigration status"
+            },
+            value: data.otherImmigration
+          }) }}
   {% endset %}
+
       {% else %}
+
  {% set nolistHtml %}
     {{ govukInput({
-      name: "notOnTheList",
-      value: data.immigrationStatusDetail,
+      name: "otherImmigration",
+      value: data.otherImmigration,
         label: {
     text: "Enter visa type or immigration status"
   },
@@ -50,6 +50,7 @@
   name: "threeQuarters"
    }) }}
   {% endset %}
+
 {% endif %}
 
 {% if data.otherNationality == "European" %}

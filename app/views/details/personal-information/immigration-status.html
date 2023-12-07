@@ -1,8 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "details" %}
-
+ {% if data.otherNationality == "European" %}
+ {% set title = "What is your immigration status?" %}
+    {% else %}
 {% set title = "Visa or immigration status" %}
+{% endif %}
 {% set formaction = "/details/personal-information/immigration-status" %}
 
 {% block beforeContent %}
@@ -14,10 +17,27 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% if data.otherNationality == "European" %}
+     <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% else %}
       <h1 class="govuk-heading-l">{{ title }}</h1>
-
+{% endif %}
       <form action="/details/personal-information/review" method="post">
 
+  {% if data.otherNationality == "European" %}
+   {% set nolistHtml %}
+    {{ govukInput({
+      name: "notOnTheList",
+      value: data.immigrationStatusDetail,
+        label: {
+    text: "Enter immigration status"
+  },
+  classes: "govuk-!-width-three-quarters",
+  id: "three-quarters",
+  name: "threeQuarters"
+   }) }}
+  {% endset %}
+      {% else %}
  {% set nolistHtml %}
     {{ govukInput({
       name: "notOnTheList",
@@ -30,18 +50,13 @@
   name: "threeQuarters"
    }) }}
   {% endset %}
+{% endif %}
 
 {% if data.otherNationality == "European" %}
         {{ govukRadios({
   name: "immigrationStatus",
   value: data.immigrationStatus,
   id: "immigration-status",
-   fieldset: {
-      legend: {
-        text: "Select your visa or immigration status",
-        classes: "govuk-fieldset__legend--m"
-      }
-    },
   items: [
     {
       value: "EU settled status",

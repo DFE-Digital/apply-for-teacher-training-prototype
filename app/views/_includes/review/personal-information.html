@@ -68,10 +68,10 @@
     },
     {
       key: {
-        text: "Immigration status"
+        html: "Immigration status" if data.otherNationality == "European" else "Visa or Immigration status"
       },
       value: {
-        html: data.otherImmigration if data.immigrationStatus == "Other" else (data.nationalities | join(", "))
+        html: data.otherImmigration if data.immigrationStatus == "Other" else data.immigrationStatus
       },
       actions: {
         items: [{

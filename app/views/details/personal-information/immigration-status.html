@@ -1,8 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "details" %}
-
+ {% if data.otherNationality == "European" %}
+ {% set title = "What is your immigration status?" %}
+    {% else %}
 {% set title = "Visa or immigration status" %}
+{% endif %}
 {% set formaction = "/details/personal-information/immigration-status" %}
 
 {% block beforeContent %}
@@ -14,14 +17,31 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% if data.otherNationality == "European" %}
+     <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% else %}
       <h1 class="govuk-heading-l">{{ title }}</h1>
-
+{% endif %}
       <form action="/details/personal-information/review" method="post">
+
+  {% if data.otherNationality == "European" %}
+
+   {% set nolistHtml %}
+    {{ govukInput({
+            name: "otherImmigration",
+            label: {
+              text: "Enter immigration status"
+            },
+            value: data.otherImmigration
+          }) }}
+  {% endset %}
+
+      {% else %}
 
  {% set nolistHtml %}
     {{ govukInput({
-      name: "notOnTheList",
-      value: data.immigrationStatusDetail,
+      name: "otherImmigration",
+      value: data.otherImmigration,
         label: {
     text: "Enter visa type or immigration status"
   },
@@ -31,6 +51,36 @@
    }) }}
   {% endset %}
 
+{% endif %}
+
+{% if data.otherNationality == "European" %}
+        {{ govukRadios({
+  name: "immigrationStatus",
+  value: data.immigrationStatus,
+  id: "immigration-status",
+  items: [
+    {
+      value: "EU settled status",
+      text: "EU settled status"
+    },
+    {
+      value: "EU pre-settled status",
+      text: "EU pre-settled status"
+    },
+      {
+      divider: "or"
+    },
+    {
+      value: "Other",
+      text: "Other",
+       conditional: {
+              html: nolistHtml
+            }
+      }
+  ]
+}) }}
+
+{% else %}
         {{ govukRadios({
   name: "immigrationStatus",
   value: data.immigrationStatus,
@@ -42,10 +92,6 @@
       }
     },
   items: [
-    {
-      value: "EU settled and pre-settled status",
-      text: "EU settled and pre-settled status"
-    },
     {
       value: "Indefinite leave to remain in the UK",
       text: "Indefinite leave to remain in the UK"
@@ -114,6 +160,8 @@
       }
   ]
 }) }}
+
+{% endif %}
 
         {{ govukButton({
           text: "Save and continue"

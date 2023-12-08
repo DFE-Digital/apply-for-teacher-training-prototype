@@ -65,12 +65,13 @@
           visuallyHiddenText: "if you have the right to work or study in the UK"
         }]
       }
-    } , {
+    },
+    {
       key: {
-        text: "Visa or immigration status"
+        html: "Immigration status" if data.otherNationality == "European" else "Visa or Immigration status"
       },
       value: {
-        text: data.immigrationStatus
+        html: data.otherImmigration if data.immigrationStatus == "Other" else data.immigrationStatus
       },
       actions: {
         items: [{

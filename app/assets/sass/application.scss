@@ -151,3 +151,77 @@
   padding: govuk-spacing(6) govuk-spacing(6) govuk-spacing(2) govuk-spacing(6);
   margin-bottom: 20px;
 }
+
+
+
+// For ITT external report only
+
+.itt-report-tabs{
+  // border: 1px solid #b1b4b6;
+  padding: 10px;
+}
+
+.govuk-tabs__list-itt{
+  border-bottom: none !important;
+  background-color: #f3f2f1 !important;
+}
+
+.govuk-tabs__table-itt{
+  border: none !important;
+}
+
+.govuk-tabs__list-item-itt{
+  padding-bottom: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.govuk-tabs__tab-itt {
+  padding-bottom: 2px;
+  color: #1d70b8 !important;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+// .govuk-tabs__tab-itt:active, .govuk-tabs__tab-itt:focus {
+//   border-bottom: 4px solid #1e70b8!important;
+//   color: #1e70b8;
+//   font-weight: 700 !important;
+// }
+
+.govuk-tabs__list-item--selected {
+  position: relative;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  /* padding-top: 0; */
+  padding-right: 0;
+  /* padding-bottom: 0; */
+  padding-left: 19px;
+  border: 1px solid #b1b4b6;
+  border-bottom: 0;
+  font-weight: 700;
+}
+
+.govuk-tabs__list-item {
+  position: relative;
+  margin-right: 0 !important;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: 10px 10px !important;
+  float: left;
+  background-color: #f3f2f1;
+  text-align: center;
+}
+@media only screen and (max-width: 640px) {
+.govuk-tabs__list-item {
+  float: none !important;
+  text-align: left !important;
+}
+
+.govuk-tabs__list-item:before {
+  margin-left: 0 !important;
+}
+}
+.govuk-table{
+font-size: 1rem!important;
+}

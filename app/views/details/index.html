@@ -20,13 +20,11 @@
 
 {% macro tagTextForSection(completed=false) %}
   {% if completed %}
-    {{govukTag({
-          text: "Completed"
-        })}}
+    Completed
   {% else %}
    {{govukTag({
           text: "Incomplete",
-          classes: "govuk-tag--grey"
+          classes: "govuk-tag--blue"
         })}}
   {% endif %}
 {% endmacro %}
@@ -49,11 +47,10 @@
         <p class="govuk-body">You can <a class="govuk-link" href="/applications">add your applications</a>.</p>
         {% endif %}
         <p class="govuk-body">Your details will be shared with the training provider when you apply.</p>
-        
+
       </p>
 
-
-    <!-- <p class="govuk-body">You can update your details at any time.</p> -->
+{% from "govuk/components/task-list/macro.njk" import govukTaskList %}
 
       <section class="app-section">
 
@@ -83,9 +80,9 @@
 
         <section class="app-section">
         <h2 class="govuk-heading-m">Qualifications</h2>
-  
+
  {{ govukTaskList({
-          
+
           items: [{
             title: {text: "English GCSE or equivalent"},
             href: "/details/gcse/english/review" if data.completed.english == 'true' else "/details/gcse/english",
@@ -224,7 +221,7 @@
           }]
         }) }}
       </section>
-      
+
       {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
       <div class="app-grid-column--grey">
         <h2 class="govuk-heading-m">You have completed your details</h2>
@@ -234,7 +231,7 @@
           href: "/applications/start",
           preventDoubleClick: true
         }) }}
- 
+
     </div>
       {% endif %}
    </div>

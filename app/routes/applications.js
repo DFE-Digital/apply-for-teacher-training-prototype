@@ -236,12 +236,12 @@ module.exports = router => {
       req.session.data.applications[id].submittedAt = new Date()
       res.redirect('/applications')
     }
-    // function for submitting an application
-    else if (submitNow == 'yes') {
-      req.session.data.applications[id].status = "Awaiting decision"
-      req.session.data.applications[id].submittedAt = new Date()
-      res.redirect('/applications')
-    }
+       // function for submitting an application
+       else if (submitNow == 'yes') {
+        // req.session.data.applications[id].status = "Awaiting decision"
+        // req.session.data.applications[id].submittedAt = new Date()
+        res.redirect('/applications/' + id + '/review-and-submit')
+      }
     // function to save application as a draft
     else if (submitNow === 'no') {
       res.redirect('/applications')

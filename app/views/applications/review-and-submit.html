@@ -5,6 +5,21 @@
 
 {% set application = data.applications[id] %}
 
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth.day %}
+    {{ data.dateOfBirth | isoDateFromDateInput | govukDate  }}
+  {% endif %}
+{% endset %}
+
+{% set addressHtml %}
+  {{ data.address.line1 }}<br>
+  {{ data.address.line2 }}<br>
+  {{ data.address.town }}<br>
+  {{ data.address.county }}<br>
+  {{ data.address.postalCode }}
+  {% if not data.livesInUk == 'yes' %}<br>{{ data.address.country }}{% endif %}
+{% endset %}
+
 {% block beforeContent %}
   {{ govukBackLink({
     href: "/applications",
@@ -29,7 +44,7 @@
           },
           {
             key: {
-              text: "Study mode"
+              text: "Full time or part time"
             },
             value: {
               html: "Full time"
@@ -37,6 +52,126 @@
       }
     ]
       })}}
+
+      <h2 class="govuk-heading-m govuk-!-font-size-27">Personal details</h2>
+     {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+             text: data.firstName + " " + data.lastName
+            } if not application.submittedAt
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: dateOfBirthHtml
+            }
+      },
+          {
+            key: {
+              text: "Nationality"
+            },
+            value: {
+               html: data.otherNationality if data.nationalities == "Other" else (data.nationalities | join(", "))
+            }
+      },
+          {
+            key: {
+              text: "Phone number"
+            },
+            value: {
+              text: data.phoneNumber
+            }
+      },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+             html: addressHtml
+            }
+      }
+    ]
+      })}}
+
+      <h2 class="govuk-heading-m govuk-!-font-size-27">Qualifications</h2>
+
+{% for id, item in data.degrees %}
+
+  {{ govukSummaryList({
+    card: {
+      title: {
+        text: (item.otherLevel if item.level == "other" else item.level) + " " + item.subject
+      }
+    },
+    rows: [
+      {
+        key: {
+          text: "Country"
+        },
+        value: {
+          text: ("United Kingdom" if item.uk == 'yes' else item.country)
+        }
+      },
+      {
+        key: {
+          text: "Degree type"
+        },
+        value: {
+          text: (item.otherLevel if item.level == "other" else item.level)
+        }
+      }, {
+        key: {
+          text: "Subject"
+        },
+        value: {
+          text: item.subject or "Not entered"
+        }
+      }, {
+        key: {
+          text: "Awarded by"
+        },
+        value: {
+          text: item.institution or "Not entered"
+        }
+      }, {
+        key: {
+          text: "Have you completed this degree?"
+        },
+        value: {
+          text: item.completed | title
+        }
+      }, {
+        key: {
+          text: ("Grade" if item.gradeGiven == 'yes' else "Did your degree give a grade?")
+        },
+        value: {
+          text: (data.degrees[id].grade if item.gradeGiven == 'yes' else item.gradeGiven | capitalize)
+        }
+      }, {
+        key: {
+          text: "Start year"
+        },
+        value: {
+          text: item.startYear
+        }
+      }, {
+        key: {
+          text: "Graduation year"
+        },
+        value: {
+          text: item.graduationYear
+        }
+      }
+    ]
+  }) }}
+{% endfor %}
+
 
 <form action="/applications/{{ id }}/submit" method="post">
             <h2 class="govuk-heading-m">Do you want to submit your application?</h2>

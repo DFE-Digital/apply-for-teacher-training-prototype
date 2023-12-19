@@ -116,6 +116,19 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/school-placement', (req, res) => {
+    const { id } = req.params
+
+    const placementItems = data.placements
+      .sort((a, b) => (a.name.localeCompare(b.name)))
+      .map(placement => ({ text: placement.name, value: placement.name, hint: { text: placement.address } }))
+
+    res.render('applications/school-placement', {
+      id,
+      placementItems
+    })
+  })
+
   router.get('/applications/:id/courses-other', (req, res) => {
     const { id } = req.params
 

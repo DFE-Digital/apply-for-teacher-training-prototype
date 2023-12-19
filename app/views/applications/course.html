@@ -3,6 +3,7 @@
 {% set primaryNavId = "applications" %}
 
 {% set title = "Which course are you applying to?" %}
+{% set application = data.applications[id] %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -12,8 +13,8 @@
 
 {% block content %}
 
-<form action="/applications/{{ id }}/review" method="post">
-
+<form action="/applications/{{ id }}/school-placement" method="post">
+  <span class="govuk-caption-l">{{ application.providerName }}</span>
     {{ govukRadios({
       fieldset: {
         legend: {

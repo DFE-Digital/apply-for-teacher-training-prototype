@@ -93,9 +93,7 @@ module.exports = router => {
 
     const providersInDraft = otherApplications.filter(application => application.status == 'Not sent').map(application => application.providerName)
 
-    if (providersWaitingOnDecision.includes(providerSelected)) {
-      res.redirect(`/applications/${id}/provider-already-submitted`)
-    } else if (providersInDraft.includes(providerSelected)) {
+  if (providersInDraft.includes(providerSelected)) {
       res.redirect(`/applications/${id}/provider-already-selected`)
     } else {
       res.redirect(`/applications/${id}/course`)
@@ -208,6 +206,13 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/withdraw', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw', {
+      id
+    })
+  })
+
   router.get('/applications/:id/provider-already-selected', (req, res) => {
     const { id } = req.params
     res.render('applications/provider-already-selected', {
@@ -273,10 +278,20 @@ module.exports = router => {
   //   res.redirect('/applications')
   // })
 
+  //function to remove application
   router.post('/applications/:id/delete', (req, res) => {
     const { id } = req.params
 
     delete req.session.data.applications[id]
+
+    res.redirect('/applications')
+  })
+
+//function to withdraw application
+  router.post('/applications/:id/withdraw', (req, res) => {
+    const { id } = req.params
+
+    req.session.data.applications[id].status = "Withdrawn"
 
     res.redirect('/applications')
   })

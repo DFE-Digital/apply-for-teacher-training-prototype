@@ -39,7 +39,7 @@
           },
           {
             key: {
-              text: "Study mode"
+              text: "Full time or part time"
             },
             value: {
               html: "Full time"
@@ -49,6 +49,22 @@
                 {
                   text: "Change",
                   href: "/applications/" + id + "/course"
+            }
+          ]
+        }
+      },
+      {
+            key: {
+              text: "Location"
+            },
+            value: {
+              html: application.placement
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/school-placement"
             }
           ]
         }

@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+
+{% set title = "Which location are you interested in?" %}
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/course"
+  }) }}
+{% endblock %}
+
+{% block content %}
+ <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <span class="govuk-caption-l">{{ application.providerName }}</span>
+      <h1 class="govuk-heading-l">School placement location</h1>
+      <p class="govuk-body">During your training, you’ll be placed in at least 2 different schools to give you experience of teaching in a real classroom.</p>
+      <p class="govuk-body">You can choose which location you’re most interested in. Your training provider will do their best to place you at a location you prefer and can travel to.</p>
+
+<form action="/applications/{{ id }}/review" method="post">
+
+    {{ govukRadios({
+      fieldset: {
+        legend: {
+          text: title,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      idPrefix: "placement",
+      items: placementItems,
+      name: "applications[" + id + "][placement]",
+      value: data.applications[id].placement
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+</div>
+</div>
+{% endblock %}

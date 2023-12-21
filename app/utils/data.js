@@ -283,7 +283,35 @@ const providers = [
   'York St John University'
 ]
 
+const placements = [
+  {
+    name: 'Bath Spa University',
+    address: 'Sion Hill, Bath, BA1 5SF'
+  },
+  {
+    name: 'Bristol Cathedral Choir School',
+    address: 'College Square, Bristol, BS1 5TS'
+  },
+  {
+    name: 'John O Gaunt School',
+    address: 'Priory Road, Hungerford, Berkshire, RG17 0AN'
+  },
+  {
+    name: 'Melksham Oak Community School',
+    address: 'Bath Road, Bowerhill, Melksham, Wiltshire, SN12 6QZ'
+  },
+  {
+    name: 'Preston School Academy',
+    address: 'Monks Dale, Yeovil, Somerset, BA21 3JD'
+  },
+  {
+    name: 'St Johns Marlborough',
+    address: 'Granham Hill, Marlborough, Wiltshire, SN8 4AX'
+  }
+]
+
 module.exports = {
   courses,
-  providers
+  providers,
+  placements
 }

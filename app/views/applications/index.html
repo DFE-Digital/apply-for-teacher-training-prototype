@@ -136,13 +136,13 @@
             items: [
             {
               href: "/applications/review-application",
-              text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Unsuccessful" or application.status === "Offer received"),
+              text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Withdrawn" or application.status === "Unsuccessful" or application.status === "Offer received"),
               visuallyHiddenText: "to " + application.providerName,
               classes: ""
             },
             {
-              href: "/applications/" + id + "/delete",
-              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received" else "Remove"),
+              href: ("/applications/" + id + "/withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing"  else "/applications/" + id + "/delete"),
+              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing" else "Remove"),
               visuallyHiddenText: "from " + application.providerName,
               classes: ""
             }

@@ -1,4 +1,9 @@
 {
+  "name": "apply-for-teacher-training-prototype",
+  "description": "A prototype service for candidates to submit an application to their chosen teacher training courses",
+  "engines": {
+    "node": "20.11.0"
+  },
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",

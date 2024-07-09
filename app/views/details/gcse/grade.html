@@ -24,7 +24,8 @@
 {% endblock %}
 
 {% block content %}
-
+ <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
   <h1 class="govuk-heading-l">{{ title }}</h1>
 
   <form action="/details/gcse/{{ id }}/year" method="post">
@@ -204,15 +205,8 @@
         <p class="govuk-body">If you have a combined or triple GCSE in science, enter your total grade.</p>
         {% set hintText = "For example, ‘ABC’, ‘AA’, ‘B’" %}
       {% elif id == "english" %}
-        {{ govukDetails({
-          classes: "govuk-!-margin-bottom-2",
-          summaryText: "If you have an O level in English Literature only",
-          text: "Enter your grade here – but be aware that providers may want further evidence of your abilities in English."
-        }) }}
-        {{ govukDetails({
-          summaryText: "If you have more than one English qualification",
-          text: "Enter any English Literature qualifications under ‘Other qualifications’"
-        }) }}
+        <p class="govuk-body">You need at least a grade C or equivalent.</p>
+        <p class="govuk-body">If you do not have this, contact teacher training providers to discuss your eligibility for their courses. You might be able to do an equivalence test.</p>
         {% set hintText = "For example, ‘C’" %}
       {% else %}
         {# Maximum number of grades: 1 #}
@@ -254,4 +248,6 @@
       text: "Save and continue"
     }) }}
   </form>
+  </div>
+  </div>
 {% endblock %}

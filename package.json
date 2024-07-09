@@ -7,8 +7,8 @@
   "name": "apply-for-teacher-training",
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "^1.2.2",
-    "govuk-frontend": "^4.6.0",
     "@x-govuk/govuk-prototype-filters": "^1.0.0",
+    "govuk-frontend": "5.0.0",
     "govuk-prototype-kit": "^13.8.1",
     "task-list-component": "^0.0.4"
   }

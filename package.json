@@ -1,15 +1,19 @@
 {
+  "name": "apply-for-teacher-training-prototype",
+  "description": "A prototype service for candidates to submit an application to their chosen teacher training courses",
+  "engines": {
+    "node": "20.11.0"
+  },
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
     "start": "govuk-prototype-kit start"
   },
-  "name": "apply-for-teacher-training",
   "dependencies": {
-    "@govuk-prototype-kit/common-templates": "^1.1.1",
-    "@x-govuk/govuk-prototype-filters": "^1.0.0",
+    "@govuk-prototype-kit/common-templates": "^1.2.2",
+    "@x-govuk/govuk-prototype-filters": "^1.1.0",
     "govuk-frontend": "5.4.0",
-    "govuk-prototype-kit": "^13.8.1",
+    "govuk-prototype-kit": "^13.13.2",
     "task-list-component": "^0.0.4"
   }
 }

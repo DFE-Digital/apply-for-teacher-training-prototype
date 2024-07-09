@@ -1,24 +1,27 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "details" %}
-
+{% set item = data.gcse[id] %}
 {% set title = (id | capitalize) + " GCSE or equivalent" %}
 
 {% block beforeContent %}
-  {{ govukBackLink({
+{{ govukBackLink({
     href: "/details",
     text: "Back to your details"
   }) }}
 {% endblock %}
 
 {% block content %}
-
+  
   <h1 class="govuk-heading-l">{{ title }}</h1>
-
-  {% include "_includes/review/gcse.html" %}
-
-  <form action="/details" method="post">
-    {{ govukRadios({
+{# displays the results #}
+{% include "_includes/review/gcse.html" %}
+ 
+{# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
+<form action="/details" method="post">
+  {{ govukRadios({
       name: "completed[" + id + "]",
       value: data.completed[id],
       fieldset: {
@@ -37,8 +40,17 @@
       }]
     }) }}
 
-    {{ govukButton({
+  {{ govukButton({
       text: "Continue"
     }) }}
-  </form>
+</form>
+{% else %}
+<!-- {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }} -->
+{% endif %}
+
 {% endblock %}

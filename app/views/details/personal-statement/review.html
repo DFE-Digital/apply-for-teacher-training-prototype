@@ -1,0 +1,57 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set applicationPath = "/details/" %}
+{% set formaction = applicationPath %}
+{% set referrer = applicationPath + "/personal-statement/review" %}
+{% set title = "Personal statement" %}
+{% set canAmend = true %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: applicationPath,
+    text: "Back to your details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  {% if numberOfApplicationsLeft >= 4 %}
+{% else %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+    {{ govukInsetText({
+       html: 'Any changes you make to your personal statement will not be included in applications you have already submitted.'
+       })
+    }}
+  {% endif %}
+  {% include "_includes/review/personal-statement.html" %}
+
+
+  <form action="/details" method="post">
+    {{ govukRadios({
+      name: "completed[personalStatement]",
+      value: data.completed.personalStatement,
+      fieldset: {
+        classes: "govuk-!-width-two-thirds",
+        legend: {
+          text: "Have you completed this section?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [{
+        value: "true",
+        text: "Yes, I’ve completed this section"
+      }, {
+        value: "false",
+        text: "No, I’ll come back to it later"
+      }]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+{% endblock %}

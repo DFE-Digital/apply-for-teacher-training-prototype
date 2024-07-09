@@ -8,7 +8,7 @@
 {% block beforeContent %}
   {{ govukBackLink({
     href: "/applications",
-    text: "Back to applications"
+    text: "Back to your applications"
   }) }}
 {% endblock %}
 
@@ -17,7 +17,7 @@
     <div class="govuk-grid-column-three-quarters">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }}.</p>
+      <p class="govuk-body">This information and your details will be shared with {{ application.providerName }} when you submit your application.</p>
 
       {{ govukSummaryList({
         rows: [
@@ -39,7 +39,7 @@
           },
           {
             key: {
-              text: "Study mode"
+              text: "Full time or part time"
             },
             value: {
               html: "Full time"
@@ -52,66 +52,60 @@
             }
           ]
         }
+      },
+      {
+            key: {
+              text: "Location"
+            },
+            value: {
+              html: application.placement
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/school-placement"
+            }
+          ]
+        }
       }
-    
     ]
-
       })}}
 
-<div class="govuk-summary-card govuk-!-margin-bottom-6">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">Personal statement</h2>
-    {% if data.applications[id].personalStatement %}
-      <ul class="govuk-summary-card__actions">
-        <li class="govuk-summary-card__action"> <a class="govuk-link govuk-!-font-weight-regular" href="/applications/{{ id }}/personal-statement">Edit your personal statement</a>
-        </li>
-      </ul>
-    {% endif %}
-  </div>
-  <div class="govuk-summary-card__content">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-three-quarters-from-desktop">
-        {% if data.applications[id].personalStatement %}
-          {{ data.applications[id].personalStatement | govukMarkdown | safe }}
-        {% else %}
-          <a class="govuk-link govuk-!-font-size-19" href="/applications/{{ id }}/personal-statement">Add your personal statement</a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+      {% if data.immigration == "No"  %}
+        <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+           Visa sponsorship is not available for this course.
+        </strong>
+        </div>
+        <p class="govuk-body"><a href="https://www.find-postgraduate-teacher-training.service.gov.uk" class="govuk-link" rel="noreferrer noopener" target="_blank">Find a course that has visa sponsorship</a>.</p>
 
-      {% if numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
+      {% elif numberOfApplicationsLeft > 0 and (data | allSectionsCompleted) %}
         <form action="/applications/{{ id }}/submit" method="post">
-          {{ govukRadios({
-            name: "submitNow",
-            fieldset: {
-              legend: {
-                text: "Do you want to submit your application?",
-                classes: "govuk-fieldset__legend--m"
-              }
-            },
-            items: [
-              {
-                value: "yes",
-                text: "Yes, submit it now"
-              },
-              {
-                value: "no",
-                text: "No, save it as a draft"
-              }
-            ]
-          }) }}
+          <h2 class="govuk-heading-m">Review and submit your application</h2>
+            <p class="govuk-body"> You will have the opportunity to review your application in full before you submit it.</p>
+          <div class="govuk-button-group">
+           {{ govukButton({
+          name: "submitNow",
+           value: "yes",
+           text: "Review application"
+            }) }}
 
-          {{ govukButton({
-            text: "Continue"
-          })}}
+          <a class="govuk-link" href="/applications">Save as a draft</a>
+          </div>
         </form>
       {% else %}
 
         {% if not (data | allSectionsCompleted) %}
 
-          <p class="govuk-body">You cannot submit this application until you’ve completed your details.</p>
+          <p class="govuk-body">You need to <a class="govuk-link" href="/details">complete your details</a> before you can submit this application.</p>
+          <p class="govuk-body ">This application will be saved as a draft while you finish your details.</p>
+
+        {% elif data.immigration == "Yes" %}
+
+        <p> this course does not offer visa sponsorship </p>
 
         {% else %}
           <p class="govuk-body">You cannot submit this application because you’re waiting for decisions on 4 others.</p>

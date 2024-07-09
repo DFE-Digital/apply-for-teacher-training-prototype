@@ -67,9 +67,12 @@
   </div>
 
   <div class="govuk-grid-column-one-third govuk-body app-grid-column-one-third--actions">
+    {% if numberOfApplicationsLeft >= 4 %}
     {% set editPath = ("/details/work-history/break/" + item.id) if item["category"] == "break" else ("/details/work-history/job/" + item.id) %}
     <a class="govuk-link" href="{{ editPath }}">Change</a>&nbsp;&nbsp;&nbsp;
     <a class="govuk-link" href="/details/work-history/job/{{ item.id }}/delete" }}">Delete</a>
+    {% else %}
+    {% endif %}
   </div>
 </section>
 

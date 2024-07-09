@@ -21,6 +21,19 @@ module.exports = router => {
 
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
+    // const candidateInterface = {
+    //   sortApplicationChoices: {
+    //     one: "Offers received",
+    //     two: "Unsubmitted applications",
+    //     three: "Unsuccessful applications",
+    //     four: "In progress",
+    //     five: "Declined offers",
+    //     six: "Withdrawn applications",
+    //     ten: "Other applications"
+    //   }
+    // };
+
+
     res.render('applications/index', {
       applicationAccepted,
       numberOfApplicationsLeft
@@ -80,9 +93,7 @@ module.exports = router => {
 
     const providersInDraft = otherApplications.filter(application => application.status == 'Not sent').map(application => application.providerName)
 
-    if (providersWaitingOnDecision.includes(providerSelected)) {
-      res.redirect(`/applications/${id}/provider-already-submitted`)
-    } else if (providersInDraft.includes(providerSelected)) {
+  if (providersInDraft.includes(providerSelected)) {
       res.redirect(`/applications/${id}/provider-already-selected`)
     } else {
       res.redirect(`/applications/${id}/course`)
@@ -100,6 +111,19 @@ module.exports = router => {
     res.render('applications/course', {
       id,
       courseItems
+    })
+  })
+
+  router.get('/applications/:id/school-placement', (req, res) => {
+    const { id } = req.params
+
+    const placementItems = data.placements
+      .sort((a, b) => (a.name.localeCompare(b.name)))
+      .map(placement => ({ text: placement.name, value: placement.name, hint: { text: placement.address } }))
+
+    res.render('applications/school-placement', {
+      id,
+      placementItems
     })
   })
 
@@ -126,13 +150,6 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/personal-statement', (req, res) => {
-    const { id } = req.params
-    res.render('applications/personal_statement', {
-      id
-    })
-  })
-
   router.get('/applications/:id/interview-needs', (req, res) => {
     const { id } = req.params
     res.render('applications/interview-needs', {
@@ -153,11 +170,31 @@ module.exports = router => {
     const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
     const applicationAccepted = applications.find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+    const immigration = (req.session.data.immigration ? Object.values(req.session.data.immigration) : [] )
 
     const { id } = req.params
     res.render('applications/review', {
       id,
-      numberOfApplicationsLeft
+      numberOfApplicationsLeft,
+      immigration
+    })
+  })
+
+  router.get('/applications/:id/interruption-module', (req, res) => {
+    const { id } = req.params
+    const degree = req.session.data.degrees
+
+    res.render('applications/interruption-module', {
+    id,
+    degree
+    })
+  })
+
+  router.get('/applications/:id/review-and-submit', (req, res) => {
+    const { id } = req.params
+
+    res.render('applications/review-and-submit', {
+    id
     })
   })
 
@@ -165,6 +202,13 @@ module.exports = router => {
   router.get('/applications/:id/delete', (req, res) => {
     const { id } = req.params
     res.render('applications/delete', {
+      id
+    })
+  })
+
+  router.get('/applications/:id/withdraw', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw', {
       id
     })
   })
@@ -192,14 +236,32 @@ module.exports = router => {
 
   router.post('/applications/:id/submit', (req, res) => {
     const { id } = req.params
-
+    const personalStatement = (req.session.data.personalStatement ? Object.values(req.session.data.personalStatement) : [] )
+    const personalstatementl = personalStatement.length
+    const degree = req.session.data.degrees
     const submitNow = req.body.submitNow
+    const submitNowPost = req.body.submitNowPost
 
-    if (submitNow === 'yes') {
+// interruption module for personal
+    if (submitNow == 'yes' && personalstatementl < 500) {
+      res.redirect('/applications/'+ id + '/interruption-module')
+    }
+    else if (submitNow == 'yes' && degree.G3CL4.grade == "Third-class honours") {
+      res.redirect('/applications/'+ id + '/interruption-module')
+    }
+    else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
       res.redirect('/applications')
-    } else if (submitNow === 'no') {
+    }
+       // function for submitting an application
+       else if (submitNow == 'yes') {
+        // req.session.data.applications[id].status = "Awaiting decision"
+        // req.session.data.applications[id].submittedAt = new Date()
+        res.redirect('/applications/' + id + '/review-and-submit')
+      }
+    // function to save application as a draft
+    else if (submitNow === 'no') {
       res.redirect('/applications')
     } else {
       res.redirect('/applications/' + id + "/review")
@@ -207,10 +269,29 @@ module.exports = router => {
 
   })
 
+  // router.post('/applications/:id/submit', (req, res) => {
+  //   const { id } = req.params
+  //   const submitNow = req.body.submitNow
+  //   req.session.data.applications[id].status = "Awaiting decision"
+  //   req.session.data.applications[id].submittedAt = new Date()
+
+  //   res.redirect('/applications')
+  // })
+
+  //function to remove application
   router.post('/applications/:id/delete', (req, res) => {
     const { id } = req.params
 
     delete req.session.data.applications[id]
+
+    res.redirect('/applications')
+  })
+
+//function to withdraw application
+  router.post('/applications/:id/withdraw', (req, res) => {
+    const { id } = req.params
+
+    req.session.data.applications[id].status = "Withdrawn"
 
     res.redirect('/applications')
   })
@@ -274,7 +355,7 @@ module.exports = router => {
         if (application.status == 'Offer received') {
           application.status = 'Offer declined'
         } else if (application.status == 'Awaiting decision') {
-          application.status = 'Withdrawn'
+          application.status = 'Application withdrawn'
         }
       }
     }

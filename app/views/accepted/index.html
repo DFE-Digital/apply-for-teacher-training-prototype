@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set title = "Your training course" %}
+{% set title = "Your offer" %}
 {% set primaryNavId = "accepted" %}
 
 {% block content %}
@@ -8,7 +8,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">{{ title | safe }}</h1>
+      <h1 class="govuk-heading-xl">{{ title | safe }} for {{ acceptedApplication.course }}</h1>
 
     </div>
   </div>
@@ -132,7 +132,7 @@
         </div>
         {% endif %}
 
-        {% if acceptedApplication.skeConditions %}
+        <!-- {% if acceptedApplication.skeConditions %} -->
 
         <h2 class="govuk-heading-m">Subject knowledge enhancement course</h2>
 

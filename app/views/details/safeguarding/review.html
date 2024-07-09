@@ -14,11 +14,13 @@
 {% block content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
   {% include "_includes/review/safeguarding.html" %}
-
-  <form action="/details">
-    {{ govukRadios({
-      name: "completed[safeguarding]",
-      value: data.completed.safeguarding,
+{# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
+<form action="/details" method="post">
+  {{ govukRadios({
+      name: "completed[" + id + "]",
+      value: data.completed[id],
       fieldset: {
         classes: "govuk-!-width-two-thirds",
         legend: {
@@ -35,8 +37,16 @@
       }]
     }) }}
 
-    {{ govukButton({
+  {{ govukButton({
       text: "Continue"
     }) }}
-  </form>
+</form>
+{% else %}
+<!-- {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }} -->
+{% endif %}
 {% endblock %}

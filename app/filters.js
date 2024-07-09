@@ -86,6 +86,7 @@ function allSectionsCompleted (data) {
     'workHistory',
     'unpaidExperience',
     'additionalSupport',
+    'personalStatement',
     'interviewNeeds',
     'references',
     'safeguarding'

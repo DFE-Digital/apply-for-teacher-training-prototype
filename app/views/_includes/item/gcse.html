@@ -103,7 +103,73 @@
     } if (item.currentlyStudying == 'no')
     ]
   }) }}
-{% else %}
+
+{% elif numberOfApplicationsLeft < 4 %}
+  {{ govukSummaryList({
+    rows: [{
+      key: {
+        text: "Qualification type"
+      },
+      value: {
+        text: qualificationText | nl2br | safe
+      }
+    }, {
+      key: {
+        text: "Country"
+      },
+      value: {
+        text: item.country or "Not entered"
+      }
+    } if item.type == "Non-UK qualification", {
+      key: {
+        text: "Do you have a UK ENIC statement of comparability?"
+      },
+      value: {
+        text: item.enic or "Not entered"
+      }
+    } if item.type == "Non-UK qualification" and item.enic, {
+      key: {
+        text: "UK ENIC reference number"
+      },
+      value: {
+        text: item.enicReference or "Not entered"
+      }
+    } if item.enic and item.enicReference, {
+      key: {
+        text: "Comparable UK qualification"
+      },
+      value: {
+        text: item.enicComparability or "Not entered"
+      }
+    } if item.enic and item.enicComparability, {
+      key: {
+        text: "Grade"
+      },
+      value: {
+        html: gradeHtml or "Not entered"
+      }
+    }, {
+      key: {
+        text: "Year awarded"
+      },
+      value: {
+        text: item.year or "Not entered"
+      }
+    },
+    {
+      key: { text: "Are you currently studying to retake this qualification?" },
+      value: { html: currentlyRetakingHtml }
+    }, {
+      key: {
+        text: "Other evidence I have the skills required"
+      },
+      value: {
+        html: (item.otherEvidence or "Not provided") | nl2br | safe
+      }
+    } if item.currentlyRetaking == 'no']
+  }) }}
+
+  {% else %}
   {{ govukSummaryList({
     rows: [{
       key: {

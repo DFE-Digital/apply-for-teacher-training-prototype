@@ -2,23 +2,25 @@
 
 {% set primaryNavId = "details" %}
 
-{% set formaction = "/application/" + "/personal-information/immigration" %}
+{% set formaction = "/details/personal-information/immigration/answer" %}
 {% set title = "Right to work or study in the UK" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: (referrer if referrer else "/application/" + "/personal-information/nationality/")
+    href: "/details/personal-information/nationality"
   }) }}
 {% endblock %}
 
 {% block content %}
-
+  <div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
   <h1 class="govuk-heading-l">{{ title }}</h1>
 
-  <p class="govuk-body">You’ll need the right to work or study in the UK for the duration of your course.</p>
-
-  <p class="govuk-body"><a href="https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#visa" class="govuk-link">Check if you’ve already got the right to work or study in the UK, or whether you’ll need to apply for a visa</a>.</p>
-
+  <p class="govuk-body">You need a visa or immigration status that allows you to work or study in the UK while you do your teacher training. You can use a visa which is due to expire before the end of your course, as long as you have the right to renew it.</p>
+  <p class="govuk-body">If you do not have the right to work or study, you can apply for a visa when you’ve been accepted onto a course that sponsors visas.</p>
+  <p class="govuk-body"><a href="https://www.gov.uk/check-uk-visa" class="govuk-link" rel="noreferrer noopener" target="_blank">Check if you need a UK visa</a>.</p>
+  <!-- <p class="govuk-body">Use the ‘Visa sponsorship’ filter to <a href="https://www.find-postgraduate-teacher-training.service.gov.uk/" class="govuk-link" target="_new">find courses that have visa sponsorship available</a>.</p> -->
+<form action="{{ formaction }}" method="post">
   {{ govukRadios({
     fieldset: {
       legend: {
@@ -26,6 +28,8 @@
         classes: "govuk-fieldset__legend--m"
       }
     },
+    name: "immigration",
+    value: data.immigration,
     items: [{
       value: "Yes",
       text: "Yes"
@@ -38,4 +42,8 @@
   {{ govukButton({
     text: "Save and continue"
   }) }}
+
+   </form>
+   </div>
+</div>
 {% endblock %}

@@ -132,9 +132,6 @@
   }
 }
 
-
-
-
 .app-messages-count {
   background-color: $govuk-brand-colour;
   color: govuk-colour("white");
@@ -146,4 +143,15 @@
   text-align: center;
   vertical-align: middle;
   margin-left: 3px;
+}
+
+
+.app-grid-column--grey {
+  background-color: #ebf2f6;
+  padding: govuk-spacing(6) govuk-spacing(6) govuk-spacing(2) govuk-spacing(6);
+  margin-bottom: 20px;
+}
+
+.govuk-tag{
+  max-width: 190px !important;
 }

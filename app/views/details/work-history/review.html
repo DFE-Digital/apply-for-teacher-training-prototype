@@ -16,11 +16,15 @@
 
   {% if data.workHistoryAdded == "yes" %}
     {% if data.workHistory | length >= 1 %}
+      {% if numberOfApplicationsLeft >= 4 %}
       {{ govukButton({
         classes: "govuk-button--secondary",
         text: "Add another job",
         href: "/details/work-history/job/" + newId
       }) }}
+      {% else %}
+
+{% endif %}
 
       {# Show list of jobs added, with prompt to add another #}
       {% include "_includes/review/work-history.html" %}
@@ -41,6 +45,9 @@
   {% endif %}
 
   {% if data.workHistory | length >= 1 or data.workHistoryAdded != "yes" %}
+  {# this statement shows either radio buttons to ask if the section is completed
+or shows an inset with contact details to change this section if at least 1 application is submitted #}
+{% if numberOfApplicationsLeft >= 4 %}
     <form action="/details" method="post">
       {{ govukRadios({
         name: "completed[workHistory]",
@@ -68,5 +75,13 @@
         text: "Save and continue"
       }) }}
     </form>
+    {% else %}
+{# {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{{ govukInsetText({
+  html: 'Contact <a class="govuk-link" href="becomingateacher@education.gov.uk">becomingateacher@education.gov.uk</a> if you need to update this section.'
+}
+      ) }} #}
+{% endif %}
   {% endif %}
 {% endblock %}

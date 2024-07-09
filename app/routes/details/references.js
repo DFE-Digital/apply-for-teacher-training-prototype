@@ -16,9 +16,14 @@ module.exports = router => {
 
     req.session.data.references ||= {}
     const incompleteReferences = Object.values(req.session.data.references).filter(ref => ref.email === '')
+    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
+    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
     res.render(`details/references/index`, {
-      incompleteReferences
+      incompleteReferences,
+      id: req.params.id,
+      numberOfApplicationsLeft
     })
   })
 

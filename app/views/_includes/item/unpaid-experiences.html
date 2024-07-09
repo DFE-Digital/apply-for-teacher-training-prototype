@@ -12,7 +12,7 @@
       actions: {
         items: [{
           href: "/details/unpaid-experience?referrer=" + referrer,
-          text: "Change",
+          text: ("" if numberOfApplicationsLeft < 4 else "Change"),
           visuallyHiddenText: "if you have any unpaid experience"
         }]
       }
@@ -29,7 +29,7 @@
         actions: {
           items: [
             {
-              text: "Delete role",
+              text: ("" if numberOfApplicationsLeft < 4 else "Delete role"),
               href: "/details/unpaid-experience/role/" + id + "/delete"
             }
           ]
@@ -45,7 +45,7 @@
         actions: {
           items: [{
             href: "/details/unpaid-experience/role/" + id,
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "role"
           }]
         }
@@ -59,7 +59,7 @@
         actions: {
           items: [{
             href: "/details/unpaid-experience/role/" + id,
-            text: "Change",
+            text:("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "organisation"
           }]
         }
@@ -73,7 +73,7 @@
         actions: {
           items: [{
             href: "/details/unpaid-experience/role/" + id,
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "if this role involved working with children"
           }]
         }
@@ -87,7 +87,7 @@
         actions: {
           items: [{
             href: "/details/unpaid-experience/role/" + id,
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "dates"
           }]
         }
@@ -101,7 +101,7 @@
         actions: {
           items: [{
             href: "/details/unpaid-experience/role/" + id,
-            text: "Change",
+            text: ("" if numberOfApplicationsLeft < 4 else "Change"),
             visuallyHiddenText: "time commitment and responsibilities"
           }]
         }

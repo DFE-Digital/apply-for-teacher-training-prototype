@@ -1,8 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "details" %}
-
-{% set title = "What’s your immigration status?" %}
+ {% if data.otherNationality == "European" %}
+ {% set title = "What is your immigration status?" %}
+    {% else %}
+{% set title = "Visa or immigration status" %}
+{% endif %}
 {% set formaction = "/details/personal-information/immigration-status" %}
 
 {% block beforeContent %}
@@ -12,26 +15,158 @@
 {% endblock %}
 
 {% block content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
- <form action="/details/personal-information/review" method="post">
-        {{ govukTextarea({
-          name: "immigrationStatus",
-          value: data.immigrationStatus,
-          id: "immigration-status",
-          label: {
-            text: "What is your immigration status?",
-            classes: "govuk-label--l"
-          },
-          hint: {
-    text: "For example, 'I have permanent residence'."
-  }
-        }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if data.otherNationality == "European" %}
+     <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% else %}
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+{% endif %}
+      <form action="/details/personal-information/review" method="post">
+
+  {% if data.otherNationality == "European" %}
+
+   {% set nolistHtml %}
+    {{ govukInput({
+            name: "otherImmigration",
+            label: {
+              text: "Enter immigration status"
+            },
+            value: data.otherImmigration
+          }) }}
+  {% endset %}
+
+      {% else %}
+
+ {% set nolistHtml %}
+    {{ govukInput({
+      name: "otherImmigration",
+      value: data.otherImmigration,
+        label: {
+    text: "Enter visa type or immigration status"
+  },
+  classes: "govuk-!-width-three-quarters",
+  id: "three-quarters",
+  name: "threeQuarters"
+   }) }}
+  {% endset %}
+
+{% endif %}
+
+{% if data.otherNationality == "European" %}
+        {{ govukRadios({
+  name: "immigrationStatus",
+  value: data.immigrationStatus,
+  id: "immigration-status",
+  items: [
+    {
+      value: "EU settled status",
+      text: "EU settled status"
+    },
+    {
+      value: "EU pre-settled status",
+      text: "EU pre-settled status"
+    },
+      {
+      divider: "or"
+    },
+    {
+      value: "Other",
+      text: "Other",
+       conditional: {
+              html: nolistHtml
+            }
+      }
+  ]
+}) }}
+
+{% else %}
+        {{ govukRadios({
+  name: "immigrationStatus",
+  value: data.immigrationStatus,
+  id: "immigration-status",
+   fieldset: {
+      legend: {
+        text: "Select your visa or immigration status",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+  items: [
+    {
+      value: "Indefinite leave to remain in the UK",
+      text: "Indefinite leave to remain in the UK"
+    },
+    {
+      value: "Student visa",
+      text: "Student visa"
+      },
+    {
+      value: "Graduate visa",
+      text: "Graduate visa"
+      },
+    {
+      value: "Skilled Worker visa",
+      text: "Skilled Worker visa"
+      },
+    {
+      value: "Dependent on partner's student visa or dependent on partner's Skilled Worker visa",
+      text: "Dependent on partner's student visa or dependent on partner's Skilled Worker visa"
+      },
+    {
+      value: "Family visa",
+      text: "Family visa"
+      },
+    {
+      value: "British National (Overseas) visa",
+      text: "British National (Overseas) visa"
+      },
+          {
+      value: "UK Ancestry visa",
+      text: "UK Ancestry visa"
+      },
+          {
+      value: "High Potential Individual visa",
+      text: "High Potential Individual visa"
+      },
+          {
+      value: "Youth Mobility Scheme",
+      text: "Youth Mobility Scheme"
+      },
+          {
+      value: "India Young Professionals Scheme visa",
+      text: "India Young Professionals Scheme visa"
+      },
+          {
+      value: "Ukraine Family Scheme or Ukraine Sponsorship Scheme visa",
+      text: "Ukraine Family Scheme or Ukraine Sponsorship Scheme visa"
+      },
+     {
+      value: "Afghan citizens resettlement scheme or Afghan Relocations and Assistance Policy",
+      text: "Afghan citizens resettlement scheme or Afghan Relocations and Assistance Policy"
+      },
+         {
+      value: "Refugee Status",
+      text: "Refugee Status"
+      },
+      {
+      divider: "or"
+    },
+    {
+      value: "Other",
+      text: "Other",
+       conditional: {
+              html: nolistHtml
+            }
+      }
+  ]
+}) }}
+
+{% endif %}
 
         {{ govukButton({
           text: "Save and continue"
         }) }}
       </form>
-</div>
-</div>
+    </div>
+  </div>
 {% endblock %}

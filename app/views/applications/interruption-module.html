@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Your application to " + data.applications[id].providerName %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+    <div class="app-grid-column--grey">
+          <h3 class="govuk-heading-l">Give your application the best chance of success</h3>
+  {% if data.personalStatement.length < 500 %}
+        {#------ Personal Statement ------#}
+        <p class="govuk-body">Your personal statement is {{data.personalStatement.length}} words.</p>
+        <p class="govuk-body">90% of successful candidates write about 500 words or more for their personal statement.</p>
+        <p class="govuk-body">Increase your chances of getting an offer by adding more information to your personal statement.</p>
+
+        {% elif degree.G3CL4.grade == "Third-class honours"%}
+          {#------ Degree ------#}
+        <p class="govuk-body">For this course, you'll need a degree grade of 2:2 or higher.</p>
+        <p class="govuk-body">{{data.applications[id].providerName}} will still consider your application. To increase your chances of a successful application you can also apply for course matching your degree grade.</p>
+        <p class="govuk-body">Use the degree grade filter to <a class="govuk-link" href="https://www.find-postgraduate-teacher-training.service.gov.uk/" rel="noreferrer noopener" target="_blank">find another course</a>.</p>
+
+  {% else%}
+ {# {% elif references | length > 0 %} #}
+  {#------ Character references ------#}
+        {# <p class="govuk-body">You have added 2 character references.</p>
+        <p class="govuk-body">Most providers prefer at least one professional or academic reference, especially if it's related to teaching.</p> #}
+  {% endif %}
+</div>
+
+<div class="govuk-button-group">
+  {# <form action="/applications/{{ id }}/submit" method="post">
+   <p class="govuk-body govuk-fieldset__legend--s">Are you sure you want to submit your application now?</p>
+  {{ govukButton({
+    name: "submitNowPost",
+    value: "yes",
+    text: "Submit application",
+    classes: "govuk-button--inverse"
+  }) }}
+  {% if data.personalStatement.length < 500 %}
+  <a class="govuk-link" href="/details/personal-statement">Edit your personal statement</a>
+ {% elif degree.G3CL4.grade == "Third-class honours"%}
+   <a class="govuk-link" href="/applications">Save as a draft</a>
+  {% else%}
+   <a class="govuk-link" href="/details/references">Add references</a>
+
+  {% endif %}
+  </form> #}
+  <form action="/applications/{{ id }}/review-and-submit" method="post">
+   <p class="govuk-body govuk-fieldset__legend--s">Would you like to edit your personal statement before submitting your application?</p>
+     {% if data.personalStatement.length < 500 %}
+  {{ govukButton({
+    text: "Edit your personal statement",
+    href: "/details/personal-statement"
+  }) }}
+ {% elif degree.G3CL4.grade == "Third-class honours"%}
+   {{ govukButton({
+    text: "Save as a draft",
+    href: "/applications"
+  }) }}
+  {% else%}
+     {{ govukButton({
+    text: "Add references",
+    href: "/details/references"
+  }) }}
+  {% endif %}
+    <a class="govuk-link" href="/applications/{{ id }}/review-and-submit">Continue without editing</a>
+  </form>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% set primaryNavId = "details" %}
 
 {% set formaction = "/details/personal-information/nationality/answer" %}
-{% set title = "What’s your nationality?" %}
+{% set title = "What is your nationality?" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -19,7 +19,7 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
        <form action="{{ formaction }}" method="post">
-{{ govukHint({id: describedBy, text: "Select all that apply." })}}
+{# {{ govukHint({id: describedBy, text: "Select all that apply" })}} #}
       {% set otherHtml %}
         <div class="app-add-another-nationality">
           {{ govukInput({
@@ -28,6 +28,12 @@
               text: "Nationality"
             },
             value: data.otherNationality
+          }) }}
+          <br>
+          {{ govukButton({
+             text: "Add another nationality",
+             href: "#",
+             classes: "govuk-button--secondary"
           }) }}
         </div>
 
@@ -38,21 +44,27 @@
       value: data.nationalities,
       items: [{
         text: "British",
-        value: "British"
+        value: "British",
+        hint: {
+        text: "including English, Scottish, Welsh or from Northern Ireland"
+      }
       },
       {
         text: "Irish",
-        value: "Irish"
+        value: "Irish",
+        hint: {
+        text: "including from Northern Ireland"
+      }
       },
        {
-        text: "Other",
+        text: "Citizen of a different country",
         value: "Other",
         conditional: {
           html: otherHtml
         }
       }]
     }) }}
-   
+
       {{ govukButton({
         text: "Save and continue"
       }) }}

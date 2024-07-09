@@ -18,7 +18,7 @@
         <p class="govuk-body">You can add up to 4 applications at a time.</p>
 
         {% if not (data | allSectionsCompleted) %}
-          <p class="govuk-body">You will not be able to submit applications until you have completed your details.</p>
+          <p class="govuk-body">You will not be able to submit applications until you have completed <a class="govuk-link" href="/details">your details</a>.</p>
         {% endif %}
       {% else %}
         <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
@@ -29,7 +29,7 @@
 
         <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
 
-        <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
+        <p class="govuk-body"><a class="govuk-link" href="/application-process">Read about how the application process works.</a></p>
       </div>
 
       {{ govukButton({
@@ -40,8 +40,13 @@
     {% else %}
       <h1 class="govuk-heading-l">{{ title }}</h1>
       <p class="govuk-body">You cannot add any more applications.</p>
-      <p class="govuk-body">If one of your applications is unsuccessful, or you withdraw it, you will be able to add another application.</p>
-      <p class="govuk-body"><a href="/application-process">Read about how the application process works.</a></p>
+      <p class="govuk-body">You can add more applications if:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li class="govuk-body">one of your submitted applications becomes unsuccessful</li>
+        <li class="govuk-body">you withdraw or remove an application</li>
+      </ul>
+      <p class="govuk-body">Once you have a total of 15 unsuccessful or withdrawn applications, you will not be able to apply for any more courses until October 2024.</p>
+      <p class="govuk-body"><a class="govuk-link" href="/application-process">Read about how the application process works.</a></p>
 
     {% endif %}
 
@@ -95,10 +100,32 @@
           <span class="govuk-tag govuk-tag--purple">Awaiting decision</span>
           <div class="govuk-!-margin-top-2">Application submitted 40 days ago</div>
           <div class="govuk-!-margin-top-2">You can add an application for a different training provider while you wait for a decision on this application</div>
+           {% elseif application.status == "Withdrawn" %}
+          <span class="govuk-tag govuk-tag--orange">Application withdrawn</span>
         {% else  %}
           <span class="govuk-tag"> {{ application.status }}</span>
         {% endif %}
       {% endset %}
+
+      {% if application.status == "Awaiting decision" %}
+          <h2 class="govuk-heading-m">In progress</h2>
+      {% elseif application.status == "Not sent" %}
+          <h2 class="govuk-heading-m">Unsubmitted applications</h2>
+      {% elseif application.status == "Offer declined" %}
+          <h2 class="govuk-heading-m">Declined offers</h2>
+      {% elseif application.status == "Unsuccessful" %}
+          <h2 class="govuk-heading-m">Unsuccessful applications</h2>
+      {% elseif application.status == "Inactive" %}
+         <h2 class="govuk-heading-m">In progress</h2>
+      {% elseif application.status == "Offer received" %}
+         <h2 class="govuk-heading-m">Offers received</h2>
+      {% elseif application.status == "Offer withdrawn" %}
+         <h2 class="govuk-heading-m">Withdrawn applications</h2>
+          {% elseif application.status == "Offer withdrawn" %}
+         <h2 class="govuk-heading-m">Withdrawn applications</h2>
+      {% else  %}
+         <h2 class="govuk-heading-m"></h2>
+      {% endif %}
 
       {{ govukSummaryList({
         card: {
@@ -109,18 +136,18 @@
             items: [
             {
               href: "/applications/review-application",
-              text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Unsuccessful" or application.status === "Offer received"),
+              text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Withdrawn" or application.status === "Unsuccessful" or application.status === "Offer received"),
               visuallyHiddenText: "to " + application.providerName,
               classes: ""
             },
             {
-              href: "/applications/" + id + "/delete",
-              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received" else "Remove"),
+              href: ("/applications/" + id + "/withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing"  else "/applications/" + id + "/delete"),
+              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing" else "Remove"),
               visuallyHiddenText: "from " + application.providerName,
               classes: ""
             }
           ]
-          
+
           }
         },
         classes: "govuk-!-margin-bottom-0",

@@ -62,7 +62,7 @@ router.get('/sign-out', (req, res) => {
 
 // viewing session data
 router.get('*/manage-prototype-data/view-data', function(req, res){
-console.log(req.session);
+
   querystring = '';
   for ( var key in req.session.data )
   {

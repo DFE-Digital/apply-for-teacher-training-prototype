@@ -212,11 +212,11 @@
         {{ govukTaskList({
           items: [{
             title: { text: "Equality and diversity questions" },
-            href: "/details/equality-diversity" if data.completed.equalityMonitoring == 'true' else "/details/equality-diversity/sex",
+            href: "/details/equality-diversity" if data.completed.equalityAndDiversity == 'true' else "/details/equality-diversity/sex",
             id: "equality",
             status: {
-              classes: tagClassesForSection(completed=data.completed.equalityMonitoring == 'true'),
-              text: tagTextForSection(completed=data.completed.equalityMonitoring == 'true')
+              classes: tagClassesForSection(completed=data.completed.equalityAndDiversity == 'true'),
+              text: tagTextForSection(completed=data.completed.equalityAndDiversity == 'true')
             }
           }]
         }) }}

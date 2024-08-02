@@ -43,15 +43,15 @@
   {% if degreeCount > 0 %}
 
     {% include "_includes/review/degrees.html" %}
-    
+
     {% if meetsMinimumDegreeCriteria %}
      {# this statement shows either radio buttons to ask if the section is completed
 or shows an inset with contact details to change this section if at least 1 application is submitted #}
 {% if numberOfApplicationsLeft >= 4 %}
 <form action="/details" method="post">
   {{ govukRadios({
-      name: "completed[" + id + "]",
-      value: data.completed[id],
+      name: "completed[degree]",
+      value: data.completed[degree],
       fieldset: {
         classes: "govuk-!-width-two-thirds",
         legend: {
@@ -83,5 +83,5 @@ or shows an inset with contact details to change this section if at least 1 appl
     {% endif %}
 
   {% endif %}
-  
+
 {% endblock %}

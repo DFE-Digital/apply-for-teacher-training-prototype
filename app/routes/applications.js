@@ -114,18 +114,36 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/school-placement', (req, res) => {
+  router.get('/applications/:id/school-placement(-second)?', (req, res) => {
+    console.log(req.params);
     const { id } = req.params
+    var priority = req.params[0]
+    if ( priority) {
+      priority = priority.substring(1)
+    } else {
+      priority = 'first'
+    }
 
-    const placementItems = data.placements
+    var placementItems = data.placements
       .sort((a, b) => (a.name.localeCompare(b.name)))
       .map(placement => ({ text: placement.name, value: placement.name, hint: { text: placement.address } }))
 
+    placementItems.unshift({'text': 'I have no preference', value: 'I have no preference'})
+
     res.render('applications/school-placement', {
       id,
+      priority,
       placementItems
     })
   })
+
+  router.get('/applications/:id/school-placement-preferences', (req, res) => {
+    const { id } = req.params
+    res.render('applications/school-placement-preferences', {
+      id
+    })
+  })
+
 
   router.get('/applications/:id/courses-other', (req, res) => {
     const { id } = req.params

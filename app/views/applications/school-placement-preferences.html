@@ -1,0 +1,149 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+
+{% set title = "Select your " + priority + " choice placement" %}
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/course"
+  }) }}
+{% endblock %}
+
+{% block content %}
+ <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <span class="govuk-caption-l">{{ application.providerName }}</span>
+      <h1 class="govuk-heading-l">School placement preferences</h1>
+
+      <p class="govuk-body">Your training provider will work with you to select placements that suit your needs.</p>
+      <p class="govuk-body">You can also talk to them at interview about your needs.</p>
+
+      <form action="/applications/{{ id }}/review" method="post">
+
+        {% set locationHtml %}
+        {{ govukInput({
+          id: "other-location",
+          name: "applications[" + id + "][placement][otherLocation]",
+          value: data.applications[id].placement.otherLocation,
+          classes: "govuk-!-width-one-third",
+          label: {
+            text: "Postcode or town name"
+          }
+        }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          name: "applications[" + id + "][placement][location]",
+          value: data.applications[id].placement.location,
+          fieldset: {
+            legend: {
+              text: "Where will you travel to your placement from? (optional)",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "home",
+              text: "My home address (" + ( data.address.postalCode or "KT23 3NW" ) + ")"
+            },
+            {
+              value: "another",
+              text: "Another location",
+              conditional: {
+                html: locationHtml
+              }
+            },
+            {
+              value: "relocating",
+              text: "I am open to relocating"
+            }
+          ]
+        }) }}
+
+        {% set constraintsHtml %}
+        {{ govukTextarea({
+          id: "constraints-details",
+          name: "applications[" + id + "][placement][constraintsDetails]",
+          value: data.applications[id].placement.constraintsDetails,
+          classes: "govuk-!-width-full",
+          label: {
+            text: "Enter more detail"
+          }
+        }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          name: "applications[" + id + "][placement][constraints]",
+          value: data.applications[id].placement.constraints,
+          fieldset: {
+            legend: {
+              text: "Do you have any constraints on your time? (optional)",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, you need to do the school run."
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: constraintsHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {% set otherHtml %}
+        {{ govukTextarea({
+          id: "other-details",
+          name: "applications[" + id + "][placement][otherDetails]",
+          value: data.applications[id].placement.otherDetails,
+          classes: "govuk-!-width-full",
+          label: {
+            text: "Enter more detail"
+          }
+        }) }}
+        {% endset -%}
+
+        {{ govukRadios({
+          name: "applications[" + id + "][placement][other]",
+          value: data.applications[id].placement.other,
+          fieldset: {
+            legend: {
+              text: "Is there anything else we should know when we select your placement schools? (optional)",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: otherHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+</div>
+</div>
+{% endblock %}

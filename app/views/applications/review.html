@@ -19,6 +19,14 @@
 
       <p class="govuk-body">This information and your details will be shared with {{ application.providerName }} when you submit your application.</p>
 
+      {% if application.placement.location == "home" %}
+        {% set locationAnswer = "My home address (" + ( data.address.postalCode or "KT23 3NW" ) + ")" %}
+      {% elseif application.placement.location == "another" %}
+       {% set locationAnswer = application.placement.otherLocation %}
+      {% else %}
+        {% set locationAnswer = "I am open to relocating" %}
+      {% endif %}
+
       {{ govukSummaryList({
         rows: [
           {
@@ -55,10 +63,10 @@
       },
       {
             key: {
-              text: "Location"
+              text: "First choice placement"
             },
             value: {
-              html: application.placement
+              html: application.placement.first
             },
             actions: {
               items: [
@@ -68,7 +76,99 @@
             }
           ]
         }
-      }
+      },
+      {
+            key: {
+              text: "Second choice placement"
+            },
+            value: {
+              html: application.placement.second
+            },
+            actions: {
+              items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/school-placement-second"
+            }
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Where you will travel from"
+        },
+        value: {
+          html: locationAnswer
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/applications/" + id + "/school-placement-preferences"
+            }
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Constraints on your time"
+        },
+        value: {
+          text: ("Yes" if application.placement.constraints == "yes" else "No")
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/applications/" + id + "/school-placement-preferences"
+            }
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Relevant information"
+        },
+        value: {
+          html: application.placement.constraintsDetails
+        },
+        actions: {
+          items: [{
+            text: "Change",
+            href: "/applications/" + id + "/school-placement-preferences"
+          }]
+        }
+      } if application.placement.constraints === "yes",
+      {
+        key: {
+          text: "Anything else"
+        },
+        value: {
+          text: ("Yes" if application.placement.other == "yes" else "No")
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/applications/" + id + "/school-placement-preferences"
+            }
+          ]
+        }
+      },
+      {
+        key: {
+          text: "Relevant information"
+        },
+        value: {
+          html: application.placement.otherDetails
+        },
+        actions: {
+          items: [{
+            text: "Change",
+            href: "/applications/" + id + "/school-placement-preferences"
+          }]
+        }
+      } if application.placement.other === "yes"
     ]
       })}}
 

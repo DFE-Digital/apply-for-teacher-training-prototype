@@ -107,6 +107,7 @@
     {% if type == "GCSE" %}
       {% if id == "science" %}
         {{ govukRadios({
+          name: "award",
           fieldset: {
             legend: {
               classes: "govuk-fieldset__legend--m",

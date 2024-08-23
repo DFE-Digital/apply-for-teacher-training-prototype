@@ -19,8 +19,8 @@ or shows an inset with contact details to change this section if at least 1 appl
 {% if numberOfApplicationsLeft >= 4 %}
 <form action="/details" method="post">
   {{ govukRadios({
-      name: "completed[" + id + "]",
-      value: data.completed[id],
+      name: "completed[safeguarding]",
+      value: data.completed[safeguarding],
       fieldset: {
         classes: "govuk-!-width-two-thirds",
         legend: {

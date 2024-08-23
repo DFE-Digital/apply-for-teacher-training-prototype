@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  View data – {{ serviceName }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      View session data
+    </h1>
+
+
+    <pre class="govuk-!-margin-bottom-9">{{data}}</pre>
+
+
+    <h1 class="govuk-heading-s govuk-!-margin-top-9">
+      Querystring {{ data['gg'] }}
+    </h1>
+    <p>
+      ?{{ querystring }}
+    </p>
+
+
+
+
+
+    <p>
+      <br><br><br><br><br><br>
+    </p>
+
+  </div>
+</div>
+{% endblock %}

@@ -58,3 +58,16 @@ router.get('/sign-out', (req, res) => {
 
   res.redirect('/account')
 })
+
+
+// viewing session data
+router.get('*/manage-prototype-data/view-data', function(req, res){
+
+  querystring = '';
+  for ( var key in req.session.data )
+  {
+      querystring += key +'=' + req.session.data[key] + '&';
+  }
+
+  res.render('manage-prototype-data/view-data', { data: JSON.stringify( req.session, null, 2), querystring: querystring } );
+})

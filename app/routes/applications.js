@@ -117,14 +117,14 @@ module.exports = router => {
   router.get('/applications/:id/school-placement(-second)?', (req, res) => {
     console.log(req.params);
     const { id } = req.params
-    var priority = req.params[0]
+    let priority = req.params[0]
     if ( priority) {
       priority = priority.substring(1)
     } else {
       priority = 'first'
     }
 
-    var placementItems = data.placements
+    let placementItems = data.placements
       .sort((a, b) => (a.name.localeCompare(b.name)))
       .map(placement => ({ text: placement.name, value: placement.name, hint: { text: placement.address } }))
 

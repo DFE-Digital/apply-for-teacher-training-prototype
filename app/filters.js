@@ -1,5 +1,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
+const { prototypeFilters } = require('@x-govuk/govuk-prototype-filters')
+
 const addFilter = govukPrototypeKit.views.addFilter
+
+addFilter(prototypeFilters)
 
 function sortedByStartYearAndMonth (itemA, itemB) {
   if (parseInt(itemA.startYear) < parseInt(itemB.startYear) || (

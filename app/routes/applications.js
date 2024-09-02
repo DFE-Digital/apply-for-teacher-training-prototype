@@ -115,7 +115,7 @@ module.exports = router => {
   })
 
   router.get('/applications/:id/school-placement(-second)?', (req, res) => {
-    console.log(req.params);
+
     const { id } = req.params
     let priority = req.params[0]
     if ( priority) {
@@ -205,6 +205,14 @@ module.exports = router => {
     res.render('applications/interruption-module', {
     id,
     degree
+    })
+  })
+
+  router.get('/applications/:id/review-application', (req, res) => {
+    const { id } = req.params
+
+    res.render('applications/review-application', {
+    id
     })
   })
 

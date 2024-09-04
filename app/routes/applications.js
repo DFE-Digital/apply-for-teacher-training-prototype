@@ -239,6 +239,13 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/withdraw-reason', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-reason', {
+      id
+    })
+  })
+
   router.get('/applications/:id/provider-already-selected', (req, res) => {
     const { id } = req.params
     res.render('applications/provider-already-selected', {
@@ -319,7 +326,14 @@ module.exports = router => {
 
     req.session.data.applications[id].status = "Withdrawn"
 
-    res.redirect('/applications')
+    res.redirect('/applications/' + id + '/withdraw-reason')
+  })
+
+  router.post('/applications/:id/withdraw-reason', (req, res) => {
+    const { id } = req.params
+    const showWithdrawnBanner = true
+
+    res.render('/applications/index', { showWithdrawnBanner, id })
   })
 
   router.post('/applications/:id/decision', (req, res) => {

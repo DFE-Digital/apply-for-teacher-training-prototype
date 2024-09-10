@@ -5,6 +5,20 @@
 
 {% block content %}
 
+{% if showDeclineBanner %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+  {% set application = data.applications[id] %}
+
+  {{ govukNotificationBanner({
+    text: "You have declined your offer for " + application.course + " at " + application.providerName,
+    type: 'success'
+  }) }}
+  </div>
+</div>
+{% endif %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
 

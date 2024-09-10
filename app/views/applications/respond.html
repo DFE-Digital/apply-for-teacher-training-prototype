@@ -1,3 +1,5 @@
+{% from "_components/offer-summary/macro.njk" import appOfferSummary %}
+
 {% extends "layouts/main.html" %}
 
 {% set choice = data.choices[id] %}
@@ -15,17 +17,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body govuk-!-margin-top-0">
-        {{ data.applications[id].providerName }} have offered you a conditional place on the <a href="#">{{ data.applications[id].course }}</a> course.
-      </p>
-
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Conditions of offer</h3>
-      <ul class="govuk-list govuk-list--bullet">
-        {% for condition in data.applications[id].conditions %}
-          <li>{{ condition.title }}</li>
-        {% endfor %}
-      </ul>
-
+      {{ appOfferSummary( data.applications[id] ) }}
 
       <form action="/applications/{{ id}}/decision" method="post">
         {{ govukRadios({
@@ -36,18 +28,12 @@
               classes: "govuk-fieldset__legend--m"
             }
           },
-          hint: {
-            text: "If you accept this offer, your other applications will be withdrawn"
-          },
           id: "decision",
           name: "decision",
           items: [
             {
               value: "accept",
-              text: "Accept offer from " + data.applications[id].providerName + " for " + data.applications[id].course
-            },
-            {
-              divider: "or"
+              text: "Accept offer and conditions"
             },
             {
               value: "decline",

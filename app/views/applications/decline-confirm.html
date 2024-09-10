@@ -1,0 +1,31 @@
+{% from "_components/offer-summary/macro.njk" import appOfferSummary %}
+
+{% extends "layouts/main.html" %}
+
+{% set title = "Are you sure you want to decline this offer?" %}
+{% set primaryNavId = "applications" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications/" + id + "/respond"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+
+      {{ appOfferSummary( data.applications[id] ) }}
+
+      <form action="/applications/{{ id }}/decline-confirm" method="post">
+        {{ govukButton({
+          text: "Yes I’m sure – decline this offer",
+          classes: "govuk-button--warning"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

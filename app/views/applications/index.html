@@ -1,28 +1,42 @@
 {% extends "layouts/main.html" %}
+{% from "_components/application-status/macro.njk" import appApplicationStatus %}
 
 {% set primaryNavId = "applications" %}
 {% set title = "Your applications" %}
 
 {% block content %}
 
-{% if showDeclineBanner %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+{% if showDeclineBanner or showWithdrawnBanner %}
 
   {% set application = data.applications[id] %}
 
-  {{ govukNotificationBanner({
-    text: "You have declined your offer for " + application.course + " at " + application.providerName,
-    type: 'success'
-  }) }}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% if showDeclineBanner %}
+
+        {{ govukNotificationBanner({
+          text: "You have declined your offer for " + application.course + " at " + application.providerName,
+          type: 'success'
+        }) }}
+
+      {% endif %}
+
+      {% if showWithdrawnBanner %}
+
+        {{ govukNotificationBanner({
+          text: "You application for " + application.course + " at " + application.providerName + " has been withdrawn",
+          type: 'success'
+        }) }}
+      {% endif %}
+
+    </div>
   </div>
-</div>
+
 {% endif %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-three-quarters">
-
-
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
     {% if numberOfApplicationsLeft > 0 %}
 
     <h1 class="govuk-heading-l">{{ title }}</h1>
@@ -83,44 +97,6 @@
         {% endif %}
       {% endset %}
 
-
-      {% set statusHtml %}
-        {% if application.status == "Awaiting decision" %}
-          <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
-          <div class="govuk-!-margin-top-2">Application submitted 2 days ago</div>
-          <div class="govuk-!-margin-top-2">If you do not receive a response from this training provider, you can withdraw this application and apply to another provider.</div>
-        {% elseif application.status == "Offer received" %}
-          <span class="govuk-tag govuk-tag--green"> {{ application.status }}</span>
-          <div class="govuk-!-margin-top-2">Offer received 5 days ago</div>
-          <div class="govuk-!-margin-top-2">
-            <a href="/applications/{{ id }}/respond">Respond to offer</a>
-          </div>
-        {% elseif application.status == "Not sent" %}
-          <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
-          <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
-        {% elseif application.status == "Offer declined" %}
-          <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
-        {% elseif application.status == "Unsuccessful" %}
-          <span class="govuk-tag govuk-tag--orange"> {{ application.status }}</span>
-          <div class="govuk-!-margin-top-2">
-          Feedback from the training provider:
-          <br>
-          <div class="govuk-inset-text govuk-!-margin-top-2">
-            {{ application.rejectionFeedback }}
-          </div>
-          Is this feedback helpful? <a href="#">Yes</a> or  <a href="#">No</a>
-          </div>
-          {% elseif application.status == "Inactive" %}
-          <span class="govuk-tag govuk-tag--purple">Awaiting decision</span>
-          <div class="govuk-!-margin-top-2">Application submitted 40 days ago</div>
-          <div class="govuk-!-margin-top-2">You can add an application for a different training provider while you wait for a decision on this application</div>
-           {% elseif application.status == "Withdrawn" %}
-          <span class="govuk-tag govuk-tag--orange">Application withdrawn</span>
-        {% else  %}
-          <span class="govuk-tag"> {{ application.status }}</span>
-        {% endif %}
-      {% endset %}
-
       {% if application.status == "Awaiting decision" %}
           <h2 class="govuk-heading-m">In progress</h2>
       {% elseif application.status == "Not sent" %}
@@ -149,7 +125,7 @@
           actions: {
             items: [
             {
-              href: "/applications/review-application",
+              href: "/applications/" + id + "/review-application",
               text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Withdrawn" or application.status === "Unsuccessful" or application.status === "Offer received"),
               visuallyHiddenText: "to " + application.providerName,
               classes: ""
@@ -179,7 +155,7 @@
             text: "Status"
           },
           value: {
-            html: statusHtml
+            html: appApplicationStatus( application, id, true )
           }
         },
         {

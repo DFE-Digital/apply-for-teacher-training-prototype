@@ -20,54 +20,30 @@
         rows: [
           {
             key: {
-              text: "Course"
+              text: "Provider"
             },
             value: {
-              html: application.course + "<br>PGCE"
-            },
-            actions: {
-              items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/course"
-                }
-              ]
-            } if not application.submittedAt
+              text: application.providerName
+            }
           },
           {
             key: {
-              text: "Full time or part time"
+              text: "Course"
             },
             value: {
-              html: "Full time"
-            },
-            actions: {
-              items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/course"
+              html: application.course
             }
-          ]
-        }
-      },
-      {
+          },
+          {
             key: {
               text: "Location"
             },
             value: {
-              html: application.placement
-            },
-            actions: {
-              items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/school-placement"
+              html: 'Main campus, 123 London Road'
             }
-          ]
-        }
-      }
-    ]
-      })}}
+          }
+        ]
+        })}}
 
       <p class="govuk-body">Once you have a total of 15 unsuccessful or withdrawn applications, you will not be able to apply for any more courses until October 2024.</p>
       <p class="govuk-body">Do not withdraw if you need to change information on your application. Tell your training provider instead.</p>

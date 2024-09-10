@@ -1,0 +1,44 @@
+{% if application.status == "Awaiting decision" %}
+  <span class="govuk-tag govuk-tag--purple"> {{ application.status }}</span>
+  {% if showDetails %}
+  <div class="govuk-!-margin-top-2">Application submitted 2 days ago</div>
+  <div class="govuk-!-margin-top-2">If you do not receive a response from this training provider, you can withdraw this application and apply to another provider.</div>
+  {% endif %}
+{% elseif application.status == "Offer received" %}
+  <span class="govuk-tag govuk-tag--green"> {{ application.status }}</span>
+  {% if showDetails %}
+  <div class="govuk-!-margin-top-2">Offer received 5 days ago</div>
+  <div class="govuk-!-margin-top-2">
+    <a href="/applications/{{ id }}/respond">Respond to offer</a>
+  </div>
+  {% endif %}
+{% elseif application.status == "Not sent" %}
+  <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
+  {% if showDetails %}
+  <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>
+  {% endif %}
+{% elseif application.status == "Offer declined" %}
+  <span class="govuk-tag govuk-tag--red"> {{ application.status }}</span>
+{% elseif application.status == "Unsuccessful" %}
+  <span class="govuk-tag govuk-tag--orange"> {{ application.status }}</span>
+  {% if showDetails %}
+  <div class="govuk-!-margin-top-2">
+  Feedback from the training provider:
+  <br>
+  <div class="govuk-inset-text govuk-!-margin-top-2">
+    {{ application.rejectionFeedback }}
+  </div>
+  Is this feedback helpful? <a href="#">Yes</a> or  <a href="#">No</a>
+  </div>
+  {% endif %}
+{% elseif application.status == "Inactive" %}
+  <span class="govuk-tag govuk-tag--purple">Awaiting decision</span>
+  {% if showDetails %}
+  <div class="govuk-!-margin-top-2">Application submitted 40 days ago</div>
+  <div class="govuk-!-margin-top-2">You can add an application for a different training provider while you wait for a decision on this application</div>
+  {% endif %}
+{% elseif application.status == "Withdrawn" %}
+  <span class="govuk-tag govuk-tag--orange">Application withdrawn</span>
+{% else  %}
+  <span class="govuk-tag"> {{ application.status }}</span>
+{% endif %}

@@ -1,9 +1,12 @@
 {% extends "layouts/main.html" %}
 
+{% from "_components/application-status/macro.njk" import appApplicationStatus %}
+
 {% set primaryNavId = "applications" %}
-{% set title = "Your application to 2SchoolsConsortium" %}
 
 {% set application = data.applications[id] %}
+
+{% set title = "Your application to " + application.providerName %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -21,15 +24,67 @@
         rows: [
           {
             key: {
+              text: "Status"
+            },
+            value: {
+              html: appApplicationStatus( application, false )
+            }
+          },
+          {
+            key: {
+              text: "Application number"
+            },
+            value: {
+              text: range(10000, 99990) | random
+            }
+          },
+          {
+            key: {
+              text: "Application submitted"
+            },
+            value: {
+              html: application.submittedAt | govukDateTime + " (" + application.submittedAt | daysAgo | plural("day")  +" ago)"
+            }
+          },
+          {
+            key: {
               text: "Course"
             },
             value: {
-              html: "Chemistry" + "<br>PGCE"
+              html: '<a href="#">' + application.course + '</a>'
             },
             actions: {
               items: [
+                {
+                  text: "Change",
+                  href: "/applications/" + id + "/course"
+                }
               ]
-            } if not application.submittedAt
+            }
+          },
+          {
+            key: {
+              text: "Course fee"
+            },
+            value: {
+              html: 'UK students: £9,250<br />International students: £16,600'
+            }
+          },
+          {
+            key: {
+              text: "Qualifications"
+            },
+            value: {
+              html: 'QTS with PGCE'
+            }
+          },
+          {
+            key: {
+              text: "Course length"
+            },
+            value: {
+              html: '1 year'
+            }
           },
           {
             key: {
@@ -37,16 +92,43 @@
             },
             value: {
               html: "Full time"
+            }
+          },
+          {
+            key: {
+              text: "Location"
             },
-            actions: {
-              items: [
+            value: {
+              html: 'Main campus, 123 London Road'
+            }
+          },
+          {
+            key: {
+              text: "Personal statement"
+            },
+            value: {
+              html: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin turpis ac dui tincidunt, non molestie dui interdum. Quisque vitae enim lobortis, posuere urna eu, eleifend ante. Donec rutrum, sapien sit amet euismod commodo, magna mi condimentum nulla, quis pulvinar mauris dolor et nisl. Duis in maximus magna. Aliquam erat volutpat. Quisque enim risus, aliquam ac bibendum et, convallis vel erat. Curabitur dolor neque, scelerisque ac lectus non, bibendum rhoncus felis.'
+            }
+          }
 
-          ]
-        }
-      }
-
-    ]
+      ]
 
       })}}
+
+<h2 class="govuk-heading-s">What happens next</h2>
+<p class="govuk-body">The provider will review your application and let you know when they have made a decision. In the meantime you can:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>contact the provider directly if you have any questions</li>
+  <li>find out more about <a href="#" class="govuk-link">funding your training</a></li>
+  <li>get help from a <a href="#" class="govuk-link">teacher training adviser</a></li>
+</ul>
+
+<h2 class="govuk-heading-s">Withdraw your application</h2>
+<p class="govuk-body">You can <a href="/applications/{{ id }}/withdraw" class="govuk-link">withdraw your application</a> if you no longer wish to be considered for this course.</p>
+
+<h2 class="govuk-heading-s">Contact training provider</h2>
+<p class="govuk-body">Contact {{ application.providerName }} if you have any questions about your application.</p>
+<p class="govuk-body">Call us on <a href="tel:01234 567 890" class="govuk-link">01234 567 890</a> or email <a href="#" class="govuk-link">admissions@provider.ac.uk</a>.</p>
 
 {% endblock %}

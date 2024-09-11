@@ -347,13 +347,29 @@ module.exports = router => {
 
     } else if (decision == 'decline') {
       application.status = 'Offer declined'
-      res.redirect('/applications')
+      res.redirect(`/applications/${id}/decline-confirm`)
     } else {
       // Didn't select an answer
       res.redirect(`/applications/${id}/respond`)
     }
 
   })
+
+  // Confirm declining an offer
+  router.get('/applications/:id/decline-confirm', (req, res) => {
+    const { id } = req.params
+    res.render('applications/decline-confirm', {
+      id
+    })
+  })
+
+  router.post('/applications/:id/decline-confirm', (req, res) => {
+    const { id } = req.params
+    const showDeclineBanner = true
+
+    res.render('/applications/index', { showDeclineBanner, id })
+  })
+
 
   // Confirm accepting an offer (and references)
   router.get('/applications/:id/confirm', (req, res) => {

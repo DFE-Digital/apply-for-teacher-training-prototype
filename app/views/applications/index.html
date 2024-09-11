@@ -6,20 +6,34 @@
 
 {% block content %}
 
+{% if showDeclineBanner or showWithdrawnBanner %}
 
-    {% if showWithdrawnBanner %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
+  {% set application = data.applications[id] %}
 
-      {% set application = data.applications[id] %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
-      {{ govukNotificationBanner({
-        text: "You application for " + application.course + " at " + application.providerName + " has been withdrawn",
-        type: 'success'
-      }) }}
-      </div>
+      {% if showDeclineBanner %}
+
+        {{ govukNotificationBanner({
+          text: "You have declined your offer for " + application.course + " at " + application.providerName,
+          type: 'success'
+        }) }}
+
+      {% endif %}
+
+      {% if showWithdrawnBanner %}
+
+        {{ govukNotificationBanner({
+          text: "You application for " + application.course + " at " + application.providerName + " has been withdrawn",
+          type: 'success'
+        }) }}
+      {% endif %}
+
     </div>
-    {% endif %}
+  </div>
+
+{% endif %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
@@ -141,7 +155,7 @@
             text: "Status"
           },
           value: {
-            html: appApplicationStatus( application, true )
+            html: appApplicationStatus( application, id, true )
           }
         },
         {

@@ -31,7 +31,14 @@
         <li>the headteacher if you’ve been working in a school</li>
       </ul>
 
-      <p class="govuk-body">They’ll be asked if they know any reason why you should not work with children.</p>
+      <p class="govuk-body">They’ll be asked:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>whether they know any reason why you should not work with children</li>
+        <li>to give factual information, for example about your role and responsibilities at work</li>
+      </ul>
+
+      <p class="govuk-body">Your referees can decide whether you will be able to view their reference.</p>
 
       <div class="govuk-body">
         {% if numberOfApplicationsLeft >= 4 %}
@@ -41,9 +48,7 @@
           href: "/details/references/add",
           classes: referencesButtonClass
         }) }}
-        {% else %}
-
-{% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

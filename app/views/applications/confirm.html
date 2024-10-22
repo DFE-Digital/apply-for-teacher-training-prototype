@@ -16,24 +16,20 @@
 
       <p class="govuk-body">When you accept your offer, we’ll send emails to the people you said could give you references.</p>
 
-      <div class="govuk-inset-text">
-      <p class="govuk-body">{{ data.applications[id].providerName }} said:</p>
-      <p class="govuk-body">You need 2 references to be accepted.</p>
-      </div>
+      <p class="govuk-body">Your referees can decide whether you will be able to view their reference.</p>
 
       <p class="govuk-body">You can change the reference details before you accept the offer.</p>
 
       {{ govukButton({
-        text: "Add details for another reference",
-        href: "/dashboard/references/add",
+        text: "Add another reference",
+        href: "/details/references/" + id + "/type",
         classes: "govuk-button--secondary"
       }) }}
 
+      {% include "_includes/review/references.html" %}
+
     </div>
   </div>
-
-
-  {% include "_includes/review/references.html" %}
 
   {% if numberOfOffersReceived > 1 %}
     <p class="govuk-body">Your other applications will be withdrawn and any upcoming interviews will be cancelled.</p>

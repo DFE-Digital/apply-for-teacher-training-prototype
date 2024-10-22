@@ -85,6 +85,20 @@
               visuallyHiddenText: "reference"
             }]
           }
+        }, {
+          key: {
+            text: "Can your reference be shared with " + candidate_name + "?"
+          },
+          value: {
+            html: (data['reference-share'])
+          },
+          actions: {
+            items: [{
+              href: "/reference/share?referrer=/reference/review",
+              text: "Change",
+              visuallyHiddenText: "reference"
+            }]
+          }
         }]
       }) }}
 

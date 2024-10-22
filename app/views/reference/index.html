@@ -21,9 +21,9 @@
 
       <p class="govuk-body">{{ candidate_name }} has accepted an offer from {{ provider_name }} for a place on a teacher training course. They’ve said that you can give them a reference.</p>
 
-      <p class="govuk-body">Your reference will not be sent to {{ candidate_name }}.</p>
+      <p class="govuk-body">You can choose whether {{ candidate_name }} should be able to view the reference or not.</p>
 
-      <form action="/reference/answer" method="post">
+      <form action="/reference/share" method="post">
         {{ govukRadios({
           fieldset: {
             legend: {

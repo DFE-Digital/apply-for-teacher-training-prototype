@@ -275,11 +275,26 @@ module.exports = router => {
     const submitNow = req.body.submitNow
     const submitNowPost = req.body.submitNowPost
 
+    const references = (req.session.data.references ? Object.values(req.session.data.references) : [])
+    let referencesPersonalEmail = false
+
+    // Request all the references
+    for (const reference of references) {
+
+      if ( ( reference.email.indexOf('gmail') > 1 || reference.email.indexOf('hotmail') > 1 ) && !( req.session.data.references[id].type == 'character') ) {
+        referencesPersonalEmail = true
+        break
+      }
+    }
+
 // interruption module for personal
     if (submitNow == 'yes' && personalstatementl < 500) {
       res.redirect('/applications/'+ id + '/interruption-module')
     }
     else if (submitNow == 'yes' && degree.G3CL4.grade == "Third-class honours") {
+      res.redirect('/applications/'+ id + '/interruption-module')
+    }
+    else if (submitNow == 'yes' && referencesPersonalEmail ) {
       res.redirect('/applications/'+ id + '/interruption-module')
     }
     else if (submitNowPost == 'yes') {

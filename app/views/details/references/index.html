@@ -22,24 +22,24 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">You need to give the email address of 2 people who can give a reference for you. They’ll only be contacted if you accept an offer on a course.</p>
-
-      <p class="govuk-body">You should include:</p>
-
+      <p class="govuk-body">You need to give the email addresses of at least 2 people who can give a reference for you. They’ll only be contacted if you accept an offer on a course.</p>
+      <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/how-to-apply-for-teacher-training/teacher-training-references">Find out more about providing references</a></p>
+      <p>When you are choosing references you should:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>an academic tutor if you graduated in the past 5 years or are still studying</li>
-        <li>the headteacher if you’ve been working in a school</li>
+        <li>select an academic reference (for example a tutor) if you graduated in the last 5 years, or if you are still studying</li>
+        <li>give the contact details of the headteacher if you’ve been working in a school</li>
+        <li>choose any combination of references if you graduated more than 5 years ago or do not work in a school</li>
       </ul>
 
       <p class="govuk-body">They’ll be asked:</p>
 
       <ul class="govuk-list govuk-list--bullet">
+        <li>to confirm how they know you</li>
         <li>whether they know any reason why you should not work with children</li>
-        <li>to give factual information, for example about your role and responsibilities at work</li>
+        <li>to give factual information, for example course or employment dates</li>
+        <li>whether they want you to be able to see their reference or if it is confidential.</li>
       </ul>
-
-      <p class="govuk-body">Your referees can decide whether you will be able to view their reference.</p>
-
+      <br>
       <div class="govuk-body">
         {% if numberOfApplicationsLeft >= 4 %}
         {% set referencesButtonClass = "govuk-button--secondary" if references | length > 1 else "" %}

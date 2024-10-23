@@ -9,7 +9,7 @@ module.exports = router => {
   })
 
   router.post('/reference/answer', (req, res) => {
-    const answer = req.body['reference-answer']
+    const answer = req.session.data['reference-answer']
 
     if (answer === 'Yes') {
       res.redirect('/reference/relationship')

@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set candidate_name = "Jane Doe" %}
+{% set provider_name = "West Lancashire SCITT" %}
+{% set title = "A reference for " + candidate_name + "" %}
+{% set hasAccountLinks = false %}
+
+{% block beforeContent %}
+  {% if referrer %}
+    {{ govukBackLink({
+      href: referrer
+    }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Can your reference be shared with {{ candidate_name }}?</h1>
+
+      <form action="/reference/answer" method="post">
+        {{ govukRadios({
+          idPrefix: "reference-share",
+          name: "reference-share",
+          items: [{
+            value: "Yes",
+            text: "Yes, if they request it",
+            checked: (data["reference-share"] == "Yes")
+          }, {
+            value: "No",
+            text: "No, it should be treated as confidential",
+            checked: (data["reference-share"] == "No")
+          }]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

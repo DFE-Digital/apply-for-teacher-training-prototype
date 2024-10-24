@@ -38,7 +38,7 @@
           threshold: 85
         }) }}
 
-        <p class="govuk-body">We’ll show your answer to {{referee.name}} and ask them whether it’s correct.</p>
+        <p class="govuk-body">We’ll show your answer to {{ data.references[id].name}} and ask them whether it’s correct.</p>
 
         {{ govukButton({
           text: "Save changes" if referrer else "Save and continue"

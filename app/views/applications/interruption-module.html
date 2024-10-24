@@ -15,8 +15,15 @@
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
     <div class="app-grid-column--grey">
-          <h3 class="govuk-heading-l">Give your application the best chance of success</h3>
-  {% if data.personalStatement.length < 500 %}
+      <h3 class="govuk-heading-l">Give your application the best chance of success</h3>
+
+  {% if data.referencesPersonalEmail %}
+        <p class="govuk-body">At least one of your references looks like it is using a personal email address</p>
+        <p class="govuk-body">Many providers will not accept references from a personal email address (such as gmail.com).</p>
+        <p class="govuk-body">You should ask your references if they have a work email address you can use instead and update your application.</p>
+        <p class="govuk-body">If you cannot get another email address for the reference you can still submit this application. You should explain why you are using a personal email address when you say how you know the person.</p>
+
+  {% elif data.personalStatement.length < 500 %}
         {#------ Personal Statement ------#}
         <p class="govuk-body">Your personal statement is {{data.personalStatement.length}} words.</p>
         <p class="govuk-body">90% of successful candidates write about 500 words or more for their personal statement.</p>
@@ -45,7 +52,10 @@
     text: "Submit application",
     classes: "govuk-button--inverse"
   }) }}
-  {% if data.personalStatement.length < 500 %}
+
+  {% if data.referencesPersonalEmail %}
+  <a class="govuk-link" href="/details/personal-statement">Update your references</a>
+  {% elif data.personalStatement.length < 500 %}
   <a class="govuk-link" href="/details/personal-statement">Edit your personal statement</a>
  {% elif degree.G3CL4.grade == "Third-class honours"%}
    <a class="govuk-link" href="/applications">Save as a draft</a>
@@ -55,22 +65,29 @@
   {% endif %}
   </form> #}
   <form action="/applications/{{ id }}/review-and-submit" method="post">
-   <p class="govuk-body govuk-fieldset__legend--s">Would you like to edit your personal statement before submitting your application?</p>
-     {% if data.personalStatement.length < 500 %}
-  {{ govukButton({
-    text: "Edit your personal statement",
-    href: "/details/personal-statement"
-  }) }}
- {% elif degree.G3CL4.grade == "Third-class honours"%}
+
+   {% if data.referencesPersonalEmail %}
    {{ govukButton({
-    text: "Save as a draft",
-    href: "/applications"
-  }) }}
-  {% else%}
-     {{ govukButton({
-    text: "Add references",
-    href: "/details/references"
-  }) }}
+     text: "Update your references",
+     href: "/details/references"
+   }) }}
+
+   {% elif data.personalStatement.length < 500 %}
+   <p class="govuk-body govuk-fieldset__legend--s">Would you like to edit your personal statement before submitting your application?</p>
+    {{ govukButton({
+      text: "Edit your personal statement",
+      href: "/details/personal-statement"
+    }) }}
+  {% elif degree.G3CL4.grade == "Third-class honours"%}
+    {{ govukButton({
+      text: "Save as a draft",
+      href: "/applications"
+    }) }}
+  {% else %}
+      {{ govukButton({
+      text: "Add references",
+      href: "/details/references"
+    }) }}
   {% endif %}
     <a class="govuk-link" href="/applications/{{ id }}/review-and-submit">Continue without editing</a>
   </form>

@@ -11,6 +11,22 @@ module.exports = router => {
     res.redirect(`/details/references/${id}/type`)
   })
 
+
+  router.post('/details/references/:id/check-email', (req, res) => {
+    const id = req.params.id;
+    const isPersonalEmail = ( req.session.data.references[id].email.indexOf('gmail') > 1 || req.session.data.references[id].email.indexOf('hotmail') > 1 )
+
+    if (isPersonalEmail && !( req.session.data.references[id].type == 'character' ) ) {
+      res.redirect(`/details/references/${id}/email-warning`)
+    } else {
+      res.redirect(`/details/references/${id}/relationship`)
+    }
+  })
+
+  router.get('/details/references/:id/email-warning', (req, res) => {
+    res.render('/details/references/email-warning', { id: req.params.id } )
+  })
+
   // References review page
   router.get('/details/references', (req, res) => {
 

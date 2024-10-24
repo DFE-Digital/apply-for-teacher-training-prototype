@@ -13,7 +13,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/details/references/{{ id }}/relationship" method="post" novalidate="true">
+      <form action="/details/references/{{ id }}/check-email" method="post" novalidate="true">
         {{ govukInput({
           name: "references[" + id + "][email]",
           value: data.references[id].email,
@@ -23,7 +23,7 @@
             isPageHeading: true
           },
           hint: {
-            text: "Give their work email address if they have one."
+            text: "Enter their professional email address if you know it. Many providers will not accept references that come from a personal email address."
           },
           type: "email",
           autocomplete: "false",

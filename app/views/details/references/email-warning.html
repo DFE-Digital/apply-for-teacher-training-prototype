@@ -1,0 +1,32 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "details" %}
+
+{% set title = "Providers may not accept a personal email address" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/details/references/" + id + "/email/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+      <form action="/details/references/{{ id }}/relationship" method="post">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
+          <div class="app-grid-column--grey">
+              <h3 class="govuk-heading-l">{{ data.references[id].email or 'janet@gmail.com' }} looks like a personal email address</h3>
+              <p class="govuk-body">Many providers will not accept references from a personal email address (such as gmail.com).</p>
+              <p class="govuk-body">You should ask {{ data.references[id].name or 'Janet Harper' }} if they have a work email address you can use instead and update your application.</p>
+              <p class="govuk-body">If you cannot get another email address for this reference you can still submit this application. You should explain why you are using a personal email address when you say how you know this person.</p>
+              <p class="govuk-body"><a href="/details/references/{{ id }}/email">Go back and change the email address</a></p>
+          </div>
+          </div>
+        </div>
+
+        {{ govukButton({
+          text: "Save changes" if referrer else "Save and continue"
+        }) }}
+      </form>
+{% endblock %}

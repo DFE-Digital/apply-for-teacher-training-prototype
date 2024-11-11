@@ -12,7 +12,7 @@ module.exports = router => {
     const answer = req.session.data['reference-answer']
 
     if (answer === 'Yes') {
-      res.redirect('/reference/relationship')
+      res.redirect('/reference/share')
     } else {
       res.redirect('/reference/decline')
     }

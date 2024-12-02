@@ -336,15 +336,24 @@ module.exports = router => {
 //function to withdraw application
   router.post('/applications/:id/withdraw', (req, res) => {
     const { id } = req.params
+    const reason = req.body.reason
 
-    req.session.data.applications[id].status = "Withdrawn"
-
-    res.redirect('/applications/' + id + '/withdraw-reason')
+    res.redirect('/applications/' + id + '/withdraw-' + reason )
   })
 
-  router.post('/applications/:id/withdraw-reason', (req, res) => {
+  router.get('/applications/:id/withdraw-confirm', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-confirm', {
+      id
+    })
+  })
+
+  router.post('/applications/:id/withdraw-confirm', (req, res) => {
     const { id } = req.params
     const showWithdrawnBanner = true
+
+    //moved this, check it's working
+    req.session.data.applications[id].status = "Withdrawn"
 
     res.render('/applications/index', { showWithdrawnBanner, id })
   })
@@ -368,12 +377,102 @@ module.exports = router => {
 
   })
 
+  router.get('/applications/:id/withdraw-different-provider', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-different-provider', { id } )
+  })
+
+  router.get('/applications/:id/withdraw-update', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-update', { id } )
+  })
+
+  router.get('/applications/:id/withdraw-future', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-future', { id } )
+  })
+
+  router.get('/applications/:id/withdraw-change-mind', (req, res) => {
+    const { id } = req.params
+    res.render('applications/withdraw-change-mind', { id } )
+  })
+
   // Confirm declining an offer
   router.get('/applications/:id/decline-confirm', (req, res) => {
     const { id } = req.params
     res.render('applications/decline-confirm', {
       id
     })
+  })
+
+
+  router.post('/applications/:id/withdraw-update', (req, res) => {
+    const { id } = req.params
+    req.session.data.applications[id].reason = "I am going to change or update my application with this training provider"
+    req.session.data.applications[id].reasonDetail = req.body['reason-update']
+
+    if ( req.body.personal ) {
+      req.session.data.applications[id].personal = req.body.personal
+    }
+    if ( req.body.moreDetail ) {
+      req.session.data.applications[id].moreDetail = req.body.moreDetail
+    }
+
+    res.render('applications/withdraw-confirm', { id } )
+  })
+
+  router.post('/applications/:id/withdraw-future', (req, res) => {
+    const { id } = req.params
+    req.session.data.applications[id].reason = "I plan to apply for teacher training in the future"
+    req.session.data.applications[id].reasonDetail = req.body['reason-future']
+
+    if ( req.body.personal ) {
+      req.session.data.applications[id].personal = req.body.personal
+    }
+    if ( req.body.personalMoreDetail ) {
+      req.session.data.applications[id].personalMoreDetail = req.body.personalMoreDetail
+    }
+    if ( req.body.moreDetail ) {
+      req.session.data.applications[id].moreDetail = req.body.moreDetail
+    }
+
+    res.render('applications/withdraw-confirm', { id } )
+  })
+
+  router.post('/applications/:id/withdraw-change-mind', (req, res) => {
+    const { id } = req.params
+    req.session.data.applications[id].reason = "I do not want to train to teach anymore"
+    req.session.data.applications[id].reasonDetail = req.body['reason-change-mind']
+
+    if ( req.body.personal ) {
+      req.session.data.applications[id].personal = req.body.personal
+    }
+    if ( req.body.personalMoreDetail ) {
+      req.session.data.applications[id].personalMoreDetail = req.body.personalMoreDetail
+    }
+    if ( req.body.moreDetail ) {
+      req.session.data.applications[id].moreDetail = req.body.moreDetail
+    }
+
+    res.render('applications/withdraw-confirm', { id } )
+  })
+
+  router.post('/applications/:id/withdraw-different-provider', (req, res) => {
+    const { id } = req.params
+    req.session.data.applications[id].reason = "I am going to apply (or have applied) to a different training provider"
+    req.session.data.applications[id].reasonDetail = req.body['reason-different-provider']
+
+    if ( req.body.personal ) {
+      req.session.data.applications[id].personal = req.body.personal
+    }
+    if ( req.body.personalMoreDetail ) {
+      req.session.data.applications[id].personalMoreDetail = req.body.personalMoreDetail
+    }
+    if ( req.body.moreDetail ) {
+      req.session.data.applications[id].moreDetail = req.body.moreDetail
+    }
+
+    res.render('applications/withdraw-confirm', { id } )
   })
 
   router.post('/applications/:id/decline-confirm', (req, res) => {

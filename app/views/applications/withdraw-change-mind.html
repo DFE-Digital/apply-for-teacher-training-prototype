@@ -1,0 +1,104 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Why do you not want to train to teach anymore?" %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/applications/{{ id }}/withdraw-change-mind" method="post">
+
+      {% set personalHtml %}
+
+      {{ govukCheckboxes({
+        name: "personal",
+        items: [
+          {
+            text: "I have concerns about the cost of doing the course",
+            value: "I have concerns about the cost of doing the course"
+          },
+          {
+            text: "I have concerns that I will not have time to train",
+            value: "I have concerns that I will not have time to train"
+          },
+          {
+            text: "I have concerns about training with a disability or health condition",
+            value: "I have concerns about training with a disability or health condition"
+          },
+          {
+            text: "Other",
+            conditional: {
+              html: govukTextarea({
+                name: "personalMoreDetail",
+                id: "personal-more-detail",
+                label: {
+                  text: "Details",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                }
+              })
+            }
+          }
+        ]
+      }) }}
+      {% endset %}
+
+      {{ govukCheckboxes({
+        name: "reason-change-mind",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "Select all that apply"
+        },
+        items: [
+          {
+            text: "My personal circumstances have changed",
+            value: "My personal circumstances have changed",
+            conditional: {
+              html: personalHtml
+            }
+          },
+          {
+            text: "I have decided on another career path or I have accepted a job offer",
+            value: "I have decided on another career path or I have accepted a job offer"
+          },
+          {
+            text: "Other",
+            conditional: {
+              html: govukTextarea({
+                name: "moreDetail",
+                id: "more-detail",
+                label: {
+                  text: "Details",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                }
+              })
+            }
+          }
+        ]
+      }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

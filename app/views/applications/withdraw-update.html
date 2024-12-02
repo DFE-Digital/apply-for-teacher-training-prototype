@@ -1,0 +1,70 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Why are you changing or updating your application with this training provider?" %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/applications/{{ id }}/withdraw-update" method="post">
+
+      {{ govukCheckboxes({
+        name: "reason-update",
+        fieldset: {
+          legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "Select all that apply"
+        },
+        items: [
+          {
+            text: "I want to update my application, for example correct an error or add information",
+            value: "I want to update my application, for example correct an error or add information"
+          },
+          {
+            text: "I want to change my application from full-time to part-time",
+            value: "I want to change my application from full-time to part-time"
+          },
+          {
+            text: "I want to apply for a different subject with the same provider",
+            value: "I want to apply for a different subject with the same provider"
+          },
+          {
+            text: "Other",
+            conditional: {
+              html: govukTextarea({
+                name: "moreDetail",
+                id: "more-detail",
+                label: {
+                  text: "Details",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                }
+              })
+            }
+          }
+        ]
+      }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

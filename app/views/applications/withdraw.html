@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% set primaryNavId = "applications" %}
-{% set title = "Are you sure you want to withdraw this application?" %}
+{% set title = "Reasons for withdrawing" %}
 
 {% set application = data.applications[id] %}
 
@@ -15,42 +15,57 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
-      {{ govukSummaryList({
-        rows: [
+      <form action="/applications/{{ id }}/withdraw" method="post">
+
+      {% set otherHtml %}
+        {{ govukTextarea({
+          name: "moreDetail",
+          id: "more-detail",
+          label: {
+            text: "Details",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          }
+        }) }}
+      {% endset %}
+
+      {{ govukRadios({
+        name: "reason",
+        fieldset: {
+          legend: {
+            text: "Why are you withdrawing this application?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        items: [
           {
-            key: {
-              text: "Provider"
-            },
-            value: {
-              text: application.providerName
-            }
+            text: "I am going to apply (or have applied) to a different training provider",
+            value: "different-provider"
           },
           {
-            key: {
-              text: "Course"
-            },
-            value: {
-              html: application.course
-            }
+            text: "I am going to change or update my application with this training provider",
+            value: "update"
           },
           {
-            key: {
-              text: "Location"
-            },
-            value: {
-              html: 'Main campus, 123 London Road'
+            text: "I plan to apply for teacher training in the future",
+            value: "future"
+          },
+          {
+            text: "I do not want to train to teach anymore",
+            value: "change-mind"
+          },
+          {
+            text: "Other",
+            conditional: {
+              html: otherHtml
             }
           }
         ]
-        })}}
+      }) }}
 
-      <p class="govuk-body">Once you have a total of 15 unsuccessful or withdrawn applications, you will not be able to apply for any more courses until October 2024.</p>
-      <p class="govuk-body">Do not withdraw if you need to change information on your application. Tell your training provider instead.</p>
-      <form action="/applications/{{ id }}/withdraw" method="post">
         {{ govukButton({
-          text: "Yes I’m sure - withdraw this application",
-          classes: "govuk-button--warning"
+          text: "Continue"
         }) }}
       </form>
 

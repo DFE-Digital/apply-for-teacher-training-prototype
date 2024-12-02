@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set primaryNavId = "applications" %}
+{% set title = "Are you sure you want to withdraw this application?" %}
+
+{% set application = data.applications[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% set subReason %}
+        {% for reason in application.reasonDetail %}
+          {% if reason == 'My personal circumstances have changed' %}
+          <p>{{reason}}:</p>
+          {% for personalReason in application.personal %}
+          {% if personalReason != '_unchecked' and personalReason != '' %}
+            <p>{{ personalReason }}</p>
+          {% endif %}
+          {% endfor %}
+          {% if application.personalMoreDetail %}
+            <p>Other: {{application.personalMoreDetail}}</p>
+          {% endif %}
+
+          {% elseif reason != '_unchecked' and reason != '' %}
+            <p>{{reason}}</p>
+          {% endif %}
+
+        {% endfor %}
+        {% if application.moreDetail %}
+          <p>Other: {{application.moreDetail}}</p>
+        {% endif %}
+      {% endset %}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Provider"
+            },
+            value: {
+              text: application.providerName
+            }
+          },
+          {
+            key: {
+              text: "Course"
+            },
+            value: {
+              html: application.course
+            }
+          },
+          {
+            key: {
+              text: "Reason"
+            },
+            value: {
+              html: application.reason
+            }
+          },
+          {
+            key: {
+              text: "Reason details"
+            },
+            value: {
+              html: subReason
+            }
+          }
+        ]
+        })}}
+
+      <p class="govuk-body">Once you have a total of 15 unsuccessful or withdrawn applications, you will not be able to apply for any more courses until October 2024.</p>
+      <p class="govuk-body">Do not withdraw if you need to change information on your application. Tell your training provider instead.</p>
+      <form action="/applications/{{ id }}/withdraw-confirm" method="post">
+        {{ govukButton({
+          text: "Yes I’m sure – withdraw this application",
+          classes: "govuk-button--warning"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

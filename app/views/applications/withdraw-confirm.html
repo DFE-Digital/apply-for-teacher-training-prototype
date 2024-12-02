@@ -19,11 +19,13 @@
         {% for reason in application.reasonDetail %}
           {% if reason == 'My personal circumstances have changed' %}
           <p>{{reason}}:</p>
+          {% if application.personal != '_unchecked' %}
           {% for personalReason in application.personal %}
           {% if personalReason != '_unchecked' and personalReason != '' %}
             <p>{{ personalReason }}</p>
           {% endif %}
           {% endfor %}
+          {% endif %}
           {% if application.personalMoreDetail %}
             <p>Other: {{application.personalMoreDetail}}</p>
           {% endif %}

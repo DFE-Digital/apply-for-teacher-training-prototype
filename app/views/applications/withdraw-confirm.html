@@ -15,6 +15,14 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+      {% set reason %}
+      {% if application.reason == 'Other' %}
+        Other: {{ application.moreDetail }}
+      {% else %}
+        {{ application.reason }}
+      {% endif %}
+      {% endset %}
+
       {% set subReason %}
         {% for reason in application.reasonDetail %}
           {% if reason == 'My personal circumstances have changed' %}
@@ -64,7 +72,7 @@
               text: "Reason"
             },
             value: {
-              html: application.reason
+              html: reason
             }
           },
           {
@@ -74,7 +82,7 @@
             value: {
               html: subReason
             }
-          }
+          } if application.reason != 'Other'
         ]
         })}}
 

@@ -336,7 +336,7 @@ module.exports = router => {
 //function to withdraw application
   router.post('/applications/:id/withdraw', (req, res) => {
     const { id } = req.params
-    const reason = req.body.reason
+    let reason = req.body.reason
 
     res.redirect('/applications/' + id + '/withdraw-' + reason )
   })
@@ -405,6 +405,16 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/withdraw-other', (req, res) => {
+    const { id } = req.params
+    req.session.data.applications[id].reason = "Other"
+
+    if ( req.session.data.moreDetail ) {
+      req.session.data.applications[id].moreDetail = req.session.data.moreDetail
+    }
+
+    res.render('applications/withdraw-confirm', { id } )
+  })
 
   router.post('/applications/:id/withdraw-update', (req, res) => {
     const { id } = req.params

@@ -84,7 +84,15 @@
           {
             text: "Other",
             conditional: {
-              html: otherHtml
+              html: govukTextarea({
+                name: "moreDetail",
+                id: "more-detail",
+                label: {
+                  text: "Details",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                }
+              })
             }
           }
         ]

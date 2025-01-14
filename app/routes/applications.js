@@ -128,8 +128,6 @@ module.exports = router => {
       .sort((a, b) => (a.name.localeCompare(b.name)))
       .map(placement => ({ text: placement.name, value: placement.name, hint: { text: placement.address } }))
 
-    placementItems.unshift({'text': 'I have no preference', value: 'I have no preference'})
-
     res.render('applications/school-placement', {
       id,
       priority,

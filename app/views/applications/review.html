@@ -63,7 +63,7 @@
       },
       {
             key: {
-              text: "First choice placement"
+              text: "Location"
             },
             value: {
               html: application.placement.first
@@ -76,99 +76,7 @@
             }
           ]
         }
-      },
-      {
-            key: {
-              text: "Second choice placement"
-            },
-            value: {
-              html: application.placement.second
-            },
-            actions: {
-              items: [
-                {
-                  text: "Change",
-                  href: "/applications/" + id + "/school-placement-second"
-            }
-          ]
-        }
-      },
-      {
-        key: {
-          text: "Where you will travel from"
-        },
-        value: {
-          html: locationAnswer
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/applications/" + id + "/school-placement-preferences"
-            }
-          ]
-        }
-      },
-      {
-        key: {
-          text: "Constraints on your time"
-        },
-        value: {
-          text: ("Yes" if application.placement.constraints == "yes" else "No")
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/applications/" + id + "/school-placement-preferences"
-            }
-          ]
-        }
-      },
-      {
-        key: {
-          text: "Relevant information"
-        },
-        value: {
-          html: application.placement.constraintsDetails
-        },
-        actions: {
-          items: [{
-            text: "Change",
-            href: "/applications/" + id + "/school-placement-preferences"
-          }]
-        }
-      } if application.placement.constraints === "yes",
-      {
-        key: {
-          text: "Anything else"
-        },
-        value: {
-          text: ("Yes" if application.placement.other == "yes" else "No")
-        },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/applications/" + id + "/school-placement-preferences"
-            }
-          ]
-        }
-      },
-      {
-        key: {
-          text: "Relevant information"
-        },
-        value: {
-          html: application.placement.otherDetails
-        },
-        actions: {
-          items: [{
-            text: "Change",
-            href: "/applications/" + id + "/school-placement-preferences"
-          }]
-        }
-      } if application.placement.other === "yes"
+      }
     ]
       })}}
 

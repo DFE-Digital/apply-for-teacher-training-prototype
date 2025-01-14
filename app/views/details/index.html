@@ -20,12 +20,15 @@
 
 {% macro tagTextForSection(completed=false) %}
   {% if completed %}
-    Completed
+      {{govukTag({
+         text: "Completed",
+         classes: "govuk-tag--blue"
+       })}}
   {% else %}
-   {{govukTag({
-          text: "Incomplete",
-          classes: "govuk-tag--blue"
-        })}}
+      {{govukTag({
+        text: "Incomplete",
+        classes: "govuk-tag--grey"
+      })}}
   {% endif %}
 {% endmacro %}
 

@@ -2,7 +2,7 @@
 
 {% set primaryNavId = "applications" %}
 
-{% set title = "Select your " + priority + " choice placement" %}
+{% set title = "Which location are you interested in?" %}
 {% set application = data.applications[id] %}
 
 {% block beforeContent %}
@@ -15,17 +15,12 @@
  <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
         <span class="govuk-caption-l">{{ application.providerName }}</span>
-      <h1 class="govuk-heading-l">Placement schools</h1>
+      <h1 class="govuk-heading-l">School placement location</h1>
 
-      {% if priority == 'first' %}
-      <p class="govuk-body">Your training provider will select at least 2 different placement schools to give you experience of teaching in a real classroom. They will choose placements based on both your practical needs, such as location and transport, and their knowledge of the different strengths and features of the schools in their network.</p>
-      <p class="govuk-body">You can select the schools that you are most interested in, but this does not guarantee that you will be placed in them.</p>
-      <p class="govuk-body"> The schools that training providers work with can change, so schools may be added or removed from this list at any time.</p>
+      <p class="govuk-body">You can select a preferred placement location, but there is no guarantee you will be placed in the school you choose.</p>
+      <p class="govuk-body">The training provider will contact you to discuss your choice to help them select a location that suits you.</p>
 
-      <form action="/applications/{{ id }}/school-placement-second" method="post">
-      {% else %}
-      <form action="/applications/{{ id }}/school-placement-preferences" method="post">
-      {% endif %}
+      <form action="/applications/{{ id }}/review" method="post">
 
 
     {{ govukRadios({

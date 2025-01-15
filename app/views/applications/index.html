@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if showDeclineBanner or showWithdrawnBanner %}
+{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner %}
 
   {% set application = data.applications[id] %}
 
@@ -26,6 +26,14 @@
 
         {{ govukNotificationBanner({
           text: "You application for " + application.course + " at " + application.providerName + " has been withdrawn",
+          type: 'success'
+        }) }}
+      {% endif %}
+
+      {% if showPoolBanner %}
+
+        {{ govukNotificationBanner({
+          text: ("Other providers can now see your application details" if data['candidatePool'] == "true" else "Other providers can no longer see your application details")          ,
           type: 'success'
         }) }}
       {% endif %}
@@ -169,6 +177,19 @@
       }) }}
 
     {% endfor %}
+
+    {% if data.applications %}
+    <h3 class="govuk-heading-m">Sharing your application details</h3>
+    <p class="govuk-body">
+      {% if data.candidatePool == "true" %}
+      Your application details are visible to training providers that you have not submitted an application to.
+      You can <a href="/applications/candidate-pool" class="govuk-link">change this setting to stop providers viewing your details</a>.
+      {% else %}
+      Your application details are not visible to training providers that you have not submitted an application to.
+      <a href="/applications/candidate-pool" class="govuk-link">You can change this setting to allow providers to view your details</a>.
+      {% endif %}
+    </p>
+    {% endif %}
 
   </div>
 </div>

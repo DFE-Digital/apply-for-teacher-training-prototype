@@ -29,7 +29,7 @@
         <p class="govuk-body">90% of successful candidates write about 500 words or more for their personal statement.</p>
         <p class="govuk-body">Increase your chances of getting an offer by adding more information to your personal statement.</p>
 
-        {% elif degree.G3CL4.grade == "Third-class honours"%}
+  {% elif degree.G3CL4.grade == "Third-class honours"%}
           {#------ Degree ------#}
         <p class="govuk-body">For this course, you'll need a degree grade of 2:2 or higher.</p>
         <p class="govuk-body">{{data.applications[id].providerName}} will still consider your application. To increase your chances of a successful application you can also apply for course matching your degree grade.</p>
@@ -44,26 +44,6 @@
 </div>
 
 <div class="govuk-button-group">
-  {# <form action="/applications/{{ id }}/submit" method="post">
-   <p class="govuk-body govuk-fieldset__legend--s">Are you sure you want to submit your application now?</p>
-  {{ govukButton({
-    name: "submitNowPost",
-    value: "yes",
-    text: "Submit application",
-    classes: "govuk-button--inverse"
-  }) }}
-
-  {% if data.referencesPersonalEmail %}
-  <a class="govuk-link" href="/details/personal-statement">Update your references</a>
-  {% elif data.personalStatement.length < 500 %}
-  <a class="govuk-link" href="/details/personal-statement">Edit your personal statement</a>
- {% elif degree.G3CL4.grade == "Third-class honours"%}
-   <a class="govuk-link" href="/applications">Save as a draft</a>
-  {% else%}
-   <a class="govuk-link" href="/details/references">Add references</a>
-
-  {% endif %}
-  </form> #}
   <form action="/applications/{{ id }}/review-and-submit" method="post">
 
    {% if data.referencesPersonalEmail %}

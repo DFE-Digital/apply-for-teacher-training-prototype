@@ -1,0 +1,57 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Increase your chances of success by allowing other providers to invite you to apply" %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        <div{% if id %} class="app-grid-column--grey"{% endif %}>
+          <h3 class="govuk-heading-l">Increase your chances of success by allowing other providers to invite you to apply</h3>
+          <p class="govuk-body">If this application is unsuccessful, you can allow other providers of similar courses to view your application and if they think you are suitable, invite you to apply.</p>
+        </div>
+
+        <div class="govuk-button-group">
+          <form action="/applications/{{ id }}/candidate-pool" method="post">
+
+            {{ govukRadios({
+              name: "candidatePool",
+              classes: "govuk-radios--inline",
+              fieldset: {
+                legend: {
+                  text: "Do you want to allow other providers to invite you to apply to their courses?",
+                  isPageHeading: true,
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              items: [
+                {
+                  value: "true",
+                  text: "Yes",
+                  checked: ( data.candidatePool == "true")
+                },
+                {
+                  value: "false",
+                  text: "No",
+                  checked: ( data.candidatePool == "false")
+                }
+              ]
+            }) }}
+
+              {{ govukButton({
+              text: ("Continue" if id else "Save")
+            }) }}
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

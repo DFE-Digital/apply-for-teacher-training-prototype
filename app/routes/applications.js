@@ -206,6 +206,16 @@ module.exports = router => {
     })
   })
 
+  router.get('/applications/:id/candidate-pool', (req, res) => {
+    const { id } = req.params
+    const degree = req.session.data.degrees
+
+    res.render('applications/candidate-pool', {
+    id,
+    degree
+    })
+  })
+
   router.get('/applications/:id/review-application', (req, res) => {
     const { id } = req.params
 
@@ -297,13 +307,11 @@ module.exports = router => {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
       res.redirect('/applications')
-    }
-       // function for submitting an application
-       else if (submitNow == 'yes') {
-        // req.session.data.applications[id].status = "Awaiting decision"
-        // req.session.data.applications[id].submittedAt = new Date()
-        res.redirect('/applications/' + id + '/review-and-submit')
-      }
+    } else if (submitNow == 'yes' && !req.session.data.candidatePool ) {
+      res.redirect('/applications/' + id + '/candidate-pool')
+    } else if (submitNow == 'yes' ) {
+    res.redirect('/applications/' + id + '/review-and-submit')
+  }
     // function to save application as a draft
     else if (submitNow === 'no') {
       res.redirect('/applications')
@@ -330,6 +338,20 @@ module.exports = router => {
 
     res.redirect('/applications')
   })
+
+
+  router.post('/applications(/:id)?/candidate-pool', (req, res) => {
+    const { id } = req.params
+
+    if ( id ) {
+      const application = req.session.data.applications[id]
+      res.redirect('/applications/' + id + '/review-and-submit')
+    } else {
+      const showPoolBanner = true
+      res.render('/applications/index', { showPoolBanner, id })
+    }
+  })
+
 
 //function to withdraw application
   router.post('/applications/:id/withdraw', (req, res) => {

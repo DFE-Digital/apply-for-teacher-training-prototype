@@ -20,7 +20,7 @@
         </div>
 
         <div class="govuk-button-group">
-          <form action="/applications/{{ id }}/candidate-pool" method="post">
+          <form action="/applications/{% if id %}{{ id }}/{% endif %}candidate-pool" method="post">
 
             {{ govukRadios({
               name: "candidatePool",

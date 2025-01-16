@@ -49,7 +49,7 @@ module.exports = router => {
       const id = utils.generateRandomString()
 
       req.session.data.applications ||= {}
-      req.session.data.applications[id] = { status: 'Not sent' }
+      req.session.data.applications[id] = { status: 'Draft' }
 
       res.redirect(`/applications/${id}/provider`)
     } else if (courseKnown === 'no') {
@@ -91,7 +91,7 @@ module.exports = router => {
 
     const providersWaitingOnDecision = otherApplications.filter(application => application.status == 'Awaiting decision').map(application => application.providerName)
 
-    const providersInDraft = otherApplications.filter(application => application.status == 'Not sent').map(application => application.providerName)
+    const providersInDraft = otherApplications.filter(application => application.status == 'Draft').map(application => application.providerName)
 
   if (providersInDraft.includes(providerSelected)) {
       res.redirect(`/applications/${id}/provider-already-selected`)

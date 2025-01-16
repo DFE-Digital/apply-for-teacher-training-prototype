@@ -33,7 +33,7 @@
       {% if showPoolBanner %}
 
         {{ govukNotificationBanner({
-          text: ("Other providers can now see your application details" if data['candidatePool'] == "true" else "Other providers can no longer see your application details")          ,
+          text: "Your application details are " + ( "not " if data['candidatePool'] == "false" else "") + "visible to training providers that you have not submitted an application to",
           type: 'success'
         }) }}
       {% endif %}
@@ -60,13 +60,11 @@
         <p class="govuk-body">You can add {{ numberOfApplicationsLeft }} more {{ "applications" if  numberOfApplicationsLeft > 1 else "application" }}.</p>
       {% endif %}
 
-      <div class="govuk-inset-text">
-        <p class="govuk-body">Training providers offer places on courses as people apply throughout the year. Courses stay open until they are full.</p>
+      <p class="govuk-body">Training providers offer places on courses as people apply throughout the year. Courses stay open until they are full.</p>
 
-        <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
+      <p class="govuk-body">Courses can fill up quickly, so you should apply as soon as you’re ready rather than putting it off.</p>
 
-        <p class="govuk-body"><a class="govuk-link" href="/application-process">Read about how the application process works.</a></p>
-      </div>
+      <p class="govuk-body"><a class="govuk-link" href="/application-process">Read how the application process works.</a></p>
 
       {{ govukButton({
         text: "Add application",
@@ -86,97 +84,116 @@
 
     {% endif %}
 
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+    {% set applicationsInProgress = '' %}
+    {% set applicationsUnsubmitted = '' %}
+    {% set applicationsDeclined = '' %}
+    {% set applicationsUnsuccessful = '' %}
+    {% set applicationsOffered = '' %}
+    {% set applicationsWithdrawn = '' %}
+
     {% for id, application in data.applications %}
 
       {% set courseHtml %}
-        {{ application.course }}
-        <br>PGCE <br>1 year full time
-
-        {% if application.otherCourses %}
-          {% if application.otherCourses | first == "no" %}
-          {% else %}
-            <br><br>
-              Also interested in:
-            <br>
-            {% for otherCourse in application.otherCourses %}
-              {{ otherCourse }}<br>
-            {% endfor %}
-          {% endif %}
-        {% endif %}
+      <div class="app-application-item">
+        <a class="govuk-link" href="/applications/{{ id }}/{% if application.status == 'Offer received' %}respond{% else %}review-application{% endif %}">
+          <div class="app-application-item__body">
+            {{ appApplicationStatus( application, id, false ) }}
+            <div class="app-application-item__details">
+              <div class="app-application-item__provider_id">
+                <h2 class="govuk-heading-s">
+                  {{ application.providerName }}
+                </h2>
+                <p class="govuk-body-s">{{ id }}</p>
+              </div>
+              <p class="govuk-body-s">{{ application.course }} - Full time</p>
+            </div>
+          </div>
+        </a>
+      </div>
       {% endset %}
 
       {% if application.status == "Awaiting decision" %}
-          <h2 class="govuk-heading-m">In progress</h2>
-      {% elseif application.status == "Not sent" %}
-          <h2 class="govuk-heading-m">Unsubmitted applications</h2>
+          {% set applicationsInProgress = applicationsInProgress + courseHtml %}
+      {% elseif application.status == "Draft" %}
+          {% set applicationsUnsubmitted = applicationsUnsubmitted + courseHtml %}
       {% elseif application.status == "Offer declined" %}
-          <h2 class="govuk-heading-m">Declined offers</h2>
+          {% set applicationsDeclined = applicationsDeclined + courseHtml %}
       {% elseif application.status == "Unsuccessful" %}
-          <h2 class="govuk-heading-m">Unsuccessful applications</h2>
+          {% set applicationsUnsuccessful = applicationsUnsuccessful + courseHtml %}
       {% elseif application.status == "Inactive" %}
-         <h2 class="govuk-heading-m">In progress</h2>
+         {% set applicationsInProgress = applicationsInProgress + courseHtml %}
       {% elseif application.status == "Offer received" %}
-         <h2 class="govuk-heading-m">Offers received</h2>
-      {% elseif application.status == "Offer withdrawn" %}
-         <h2 class="govuk-heading-m">Withdrawn applications</h2>
+         {% set applicationsOffered = applicationsOffered + courseHtml %}
+      {% elseif application.status == "Withdrawn" %}
+         {% set applicationsWithdrawn = applicationsWithdrawn + courseHtml %}
           {% elseif application.status == "Offer withdrawn" %}
-         <h2 class="govuk-heading-m">Withdrawn applications</h2>
+         {% set applicationsWithdrawn = applicationsWithdrawn + courseHtml %}
       {% else  %}
          <h2 class="govuk-heading-m"></h2>
       {% endif %}
 
-      {{ govukSummaryList({
-        card: {
-          title: {
-            html: application.providerName
-          },
-          actions: {
-            items: [
-            {
-              href: "/applications/" + id + "/review-application",
-              text: ("View application" if application.status === "Awaiting decision" or application.status === "Inactive" or application.status === "Withdrawn" or application.status === "Unsuccessful" or application.status === "Offer received"),
-              visuallyHiddenText: "to " + application.providerName,
-              classes: ""
-            },
-            {
-              href: ("/applications/" + id + "/withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing"  else "/applications/" + id + "/delete"),
-              text: ("Withdraw" if application.status === "Awaiting decision" or application.status === "Inactive"  or application.status === "Offer received"  or application.status === "Interviewing" else "Remove"),
-              visuallyHiddenText: "from " + application.providerName,
-              classes: ""
-            }
-          ]
-
-          }
-        },
-        classes: "govuk-!-margin-bottom-0",
-        rows: [
-        {
-          key: {
-            text: "Course"
-          },
-          value: {
-            html: courseHtml
-          }
-        },
-        {
-          key: {
-            text: "Status"
-          },
-          value: {
-            html: appApplicationStatus( application, id, true )
-          }
-        },
-        {
-          key: {
-            text: "Interview"
-          },
-          value: {
-            html: "The provider will be in touch if they want to invite you to an interview."
-          }
-        } if application.status === 'Awaiting decision' and 1==2]
-      }) }}
-
     {% endfor %}
+
+    {{ govukTabs({
+      classes: 'tabs-custom',
+      items: [
+        {
+          label: "All applications",
+          id: "all",
+          panel: {
+            html: applicationsInProgress + applicationsUnsubmitted + applicationsDeclined + applicationsUnsuccessful + applicationsOffered + applicationsWithdrawn
+          }
+        },
+        {
+          label: "Offers received",
+          id: "offered",
+          panel: {
+            html: applicationsOffered
+          }
+        } if applicationsOffered,
+        {
+          label: "Draft",
+          id: "draft",
+          panel: {
+            html: applicationsUnsubmitted
+          }
+        } if applicationsUnsubmitted,
+        {
+          label: "Unsuccessful",
+          id: "unsuccessful",
+          panel: {
+            html: applicationsUnsuccessful
+          }
+        } if applicationsUnsuccessful,
+        {
+          label: "In progress",
+          id: "in-progress",
+          panel: {
+            html: applicationsInProgress
+          }
+        } if applicationsInProgress,
+        {
+          label: "Withdrawn",
+          id: "withdrawn",
+          panel: {
+            html: applicationsWithdrawn
+          }
+        } if applicationsWithdrawn,
+        {
+          label: "Declined",
+          id: "declined",
+          panel: {
+            html: applicationsDeclined
+          }
+        } if applicationsDeclined
+      ]
+    }) }}
 
     {% if data.applications %}
     <h3 class="govuk-heading-m">Sharing your application details</h3>

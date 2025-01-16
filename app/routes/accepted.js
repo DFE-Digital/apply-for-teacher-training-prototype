@@ -21,7 +21,7 @@ module.exports = router => {
   // Generate new ID and redirect to start of referee flow
   router.get('/accepted/references/add', (req, res) => {
     const id = utils.generateRandomString()
-    req.session.data.references[id] = { status: 'Not sent' }
+    req.session.data.references[id] = { status: 'Draft' }
 
     res.redirect(`/accepted/references/${id}/intro`)
   })

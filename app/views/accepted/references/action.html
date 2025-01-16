@@ -3,7 +3,7 @@
 {% set primaryNavId = "accepted" %}
 
 {% if action == "delete" %}
-  {% set type = "reference" if reference.status == "Not sent" else "reference request" %}
+  {% set type = "reference" if reference.status == "Draft" else "reference request" %}
   {% set title = "Are you sure you want to delete this " + type + "?" %}
   {% set buttonText = "Yes I’m sure - delete this " + type %}
   {% set destructive = true %}

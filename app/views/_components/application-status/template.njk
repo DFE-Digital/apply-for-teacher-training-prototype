@@ -12,7 +12,7 @@
     <a href="/applications/{{ id }}/respond">Respond to offer</a>
   </div>
   {% endif %}
-{% elseif application.status == "Not sent" %}
+{% elseif application.status == "Draft" %}
   <span class="govuk-tag govuk-tag--blue"> {{ application.status }}</span>
   {% if showDetails %}
   <div class="govuk-!-margin-top-2"><a href="/applications/{{ id }}/review">Continue application</a></div>

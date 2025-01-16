@@ -6,7 +6,7 @@ module.exports = router => {
     const id = utils.generateRandomString()
 
     req.session.data.references ||= {}
-    req.session.data.references[id] = { status: 'Not sent' }
+    req.session.data.references[id] = { status: 'Draft' }
 
     res.redirect(`/details/references/${id}/type`)
   })

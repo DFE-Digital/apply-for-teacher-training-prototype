@@ -72,7 +72,7 @@
           {% for id, item in data.references %}
             {% if item.name %}
               {% set itemText %}
-                <a href="/accepted/references/{{ item.id }}{% if item.status == "Not sent" %}/name{% endif %}">{{ item.name }}</a>
+                <a href="/accepted/references/{{ item.id }}{% if item.status == "Draft" %}/name{% endif %}">{{ item.name }}</a>
 
                 {% if item.status == 'Requested' %}
                   {% for entry in item.log %}

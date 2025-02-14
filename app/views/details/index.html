@@ -40,6 +40,20 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+      {% if showAdviserBanner %}
+      {% set html %}
+        <p class="govuk-notification-banner__heading">
+          Your teacher training adviser will contact you by email within 5 working days
+        </p>
+      {% endset %}
+
+      {{ govukNotificationBanner({
+        html: html,
+        type: "success"
+      }) }}
+      {% endif %}
+
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
       <p class="govuk-body">
@@ -242,6 +256,21 @@
     <div class="govuk-grid-column-one-third">
       <hr>
       <aside>
+
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-2">Get a teacher training adviser</h2>
+        <p class="govuk-body-s govuk-!-margin-bottom-2">
+
+          {% if data['adviserSubject'] %}
+            An adviser will contact you by email.
+          {% else %}
+
+          Our advisers have years of teaching experience and can give you free, one-to-one help with your application.
+        </p>
+        <p class="govuk-body-s">
+          <a class="govuk-link" href="/applications/adviser-subject">Get an adviser</a>
+          {% endif %}
+        </p>
+
         <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="support-title">Get help</h2>
 
           <ul class="govuk-list govuk-!-font-size-16">

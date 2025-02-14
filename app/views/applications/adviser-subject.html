@@ -1,0 +1,90 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Increase your chances of success by allowing other providers to invite you to apply" %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        <div{% if id %} class="app-grid-column--grey"{% endif %}>
+          <h3 class="govuk-heading-l">Get a teacher training adviser</h3>
+          <p class="govuk-body">Get free one-to-one support from an adviser with years of teaching experience.</p>
+          <p class="govuk-body">Your adviser can talk you through the application process step by step.</p>
+          <p class="govuk-body">They can support you with:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>writing your personal statement</li>
+            <li>understanding your different training options</li>
+            <li>preparing for interviews</li>
+          </ul>
+        </div>
+
+        <!--
+        <div class="govuk-inset-text">
+          <p class="govuk-body">"The application process went smoothly thanks to the help of my teacher training adviser, Ellie."</p>
+          <p class="govuk-body govuk-!-font-weight-bold">Habiba, teacher with a hearing impairment</p>
+        </div>
+        -->
+
+        <p class="govuk-body">You’ll be matched with your own dedicated adviser. You’ll have the same adviser throughout your journey into teaching.</p>
+        <p class="govuk-body">How often you talk to them is up to you – this could be every week for more than a year, or just a few times for some one-to-one support.</p>
+        <p class="govuk-body">You can chat by phone, or by email, text or WhatsApp.</p>
+
+
+        <form action="/applications/adviser-subject" method="post">
+
+        {% if data['applications'] %}
+
+        <h3 class="govuk-heading-m">Review your selected subject</h3>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Subject"
+              },
+              value: {
+                text: data['adviserSubject'] or "Art and Design"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "adviser-subject-change",
+                    text: "Change",
+                    visuallyHiddenText: "subject"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+        <input type="hidden" name="adviserSubject" value="{{ data['adviserSubject'] or "Art and Design" }}" />
+
+        {% else %}
+
+        {% include "_includes/adviser-subject-list.html" %}
+
+        {% endif %}
+
+        <p class="govuk-body">When you select Request an adviser, we will share your personal details and the status of any applications you have with an teacher training adviser. We will not share your personal statement, qualifications or work history with them.</p>
+
+        <div class="govuk-button-group">
+
+            {{ govukButton({
+              text: ("Request an adviser")
+            }) }}
+
+        </div>
+
+      </form>
+
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Increase your chances of success by allowing other providers to invite you to apply" %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        <form action="/applications/adviser-subject" method="post">
+          {% include "_includes/adviser-subject-list.html" %}
+
+          <div class="govuk-button-group">
+
+              {{ govukButton({
+                text: ("Request an adviser")
+              }) }}
+          </div>
+
+         </form>
+
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{{ govukRadios({
+  name: "adviserSubject",
+  fieldset: {
+    legend: {
+      text: "What subject are you interested in teaching?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  hint: {
+    text: "We're asking this so that a dedicated adviser can be assigned to you."
+  },
+  items: [
+    { text: "Primary", value: "Primary"},
+    { divider: "or" },
+    { text: "Art and design", value: "Art and design" },
+    { text: "Biology", value: "Biology" },
+    { text: "Business studies", value: "Business studies" },
+    { text: "Chemistry", value: "Chemistry" },
+    { text: "Citizenship", value: "Citizenship" },
+    { text: "Classics", value: "Classics" },
+    { text: "Computing", value: "Computing" },
+    { text: "Dance", value: "Dance" },
+    { text: "Design and technology", value: "Design and technology" },
+    { text: "Drama", value: "Drama" },
+    { text: "Economics", value: "Economics" },
+    { text: "English", value: "English" },
+    { text: "French", value: "French" },
+    { text: "Geography", value: "Geography" },
+    { text: "German", value: "German" },
+    { text: "Health and social care", value: "Health and social care" },
+    { text: "History", value: "History" },
+    { text: "Languages (other)", value: "Languages (other)" },
+    { text: "Maths", value: "Maths" },
+    { text: "Music", value: "Music" },
+    { text: "Physical education", value: "Physical education" },
+    { text: "Physics", value: "Physics" },
+    { text: "Psychology", value: "Psychology" },
+    { text: "Religious education", value: "Religious education" },
+    { text: "Science", value: "Science" },
+    { text: "Social services", value: "Social services" },
+    { text: "Spanish", value: "Spanish" }
+  ]
+}) }}

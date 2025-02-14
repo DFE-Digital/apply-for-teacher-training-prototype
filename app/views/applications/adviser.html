@@ -1,0 +1,66 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Your application to " + data.applications[id].providerName %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+    <div class="app-grid-column--grey">
+      <h3 class="govuk-heading-l">A teacher training adviser could support with your application</h3>
+
+      <p class="govuk-body">Because you've said you have a bachelor's degree with a predicted or actual grade higher than a 2:2, you are eligible for a teacher training adviser.</p>
+      <p class="govuk-body">You can get free one-to-one support from an adviser with years of teaching experience, they can talk you through the application process step by step.</p>
+      <p class="govuk-body">They can support you with:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>answering questions about teacher training or being a teacher</li>
+        <li>writing your personal statement</li>
+        <li>understanding your different training options</li>
+        <li>preparing for interviews</li>
+      </ul>
+
+</div>
+
+<div class="govuk-button-group">
+  <form action="/applications/adviser" method="post">
+
+  {{ govukRadios({
+    name: "adviser",
+    classes: "govuk-radios--inline",
+    fieldset: {
+      legend: {
+        text: "Do you want to request a teacher training adviser?",
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [
+      {
+        value: "true",
+        text: "Yes"
+      },
+      {
+        value: "false",
+        text: "No"
+      }
+    ]
+  }) }}
+
+   {{ govukButton({
+     text: "Continue"
+   }) }}
+
+  </form>
+</div>
+</div>
+</div>
+{% endblock %}

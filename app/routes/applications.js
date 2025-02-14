@@ -560,4 +560,25 @@ module.exports = router => {
 
     res.redirect('/accepted')
   })
+
+
+  router.post('/applications/adviser', (req, res) => {
+
+    if ( req.session.data.adviser == "true" ) {
+
+      res.redirect('/applications/adviser-subject')
+    } else {
+
+      res.redirect('/details')
+    }
+  })
+
+  router.post('/applications/adviser-subject', (req, res) => {
+
+    const showAdviserBanner = true
+
+    res.render('/details/index', { showAdviserBanner })
+
+  })
+
 }

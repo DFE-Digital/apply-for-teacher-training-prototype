@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "^2.0.1",
-    "@x-govuk/govuk-prototype-filters": "^1.4.4",
+    "@x-govuk/govuk-prototype-filters": "^1.5.0",
     "govuk-frontend": "5.9.0",
     "govuk-prototype-kit": "^13.13.2",
     "task-list-component": "^0.0.4"

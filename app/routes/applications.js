@@ -218,7 +218,7 @@ module.exports = router => {
 
   router.get('/candidate-pool/locations', (req, res) => {
 
-    // if ( !req.session.data.candidatePool.locations ) {
+    if ( !req.session.data.candidatePool.locations ) {
       req.session.data.candidatePool.locations = []
 
       req.session.data.candidatePool.locations.push({
@@ -238,9 +238,9 @@ module.exports = router => {
 
       }
 
-    // }
+    }
 
-    res.render( 'candidate-pool/locations' )
+    res.render( 'candidate-pool/locations/index' )
   })
 
   router.get('/applications/:id/review-and-submit', (req, res) => {

@@ -33,7 +33,7 @@
       {% if showPoolBanner %}
 
         {{ govukNotificationBanner({
-          text: "Your application details are " + ( "not " if data['candidatePool'] == "false" else "") + "visible to training providers that you have not submitted an application to",
+          text: "You are " + ( "not " if data['candidatePool'] == "false" else "") + " sharing your application details with providers you have not applied to",
           type: 'success'
         }) }}
       {% endif %}
@@ -198,13 +198,14 @@
     {% if data.applications %}
     <h3 class="govuk-heading-m">Sharing your application details</h3>
     <p class="govuk-body">
-      {% if data.candidatePool == "true" %}
-      Your application details are visible to training providers that you have not submitted an application to.
-      You can <a href="/applications/candidate-pool" class="govuk-link">change this setting to stop providers viewing your details</a>.
-      {% else %}
-      Your application details are not visible to training providers that you have not submitted an application to.
-      <a href="/applications/candidate-pool" class="govuk-link">You can change this setting to allow providers to view your details</a>.
-      {% endif %}
+
+      You are {% if data['candidatePool'] == "false" %}not{% endif %} sharing your application details with providers you have not applied to.
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="/applications/candidate-pool" class="govuk-link">Change your sharing and location settings</a></li>
+        <li><a href="/applications/candidate-pool-intro" class="govuk-link">Read about how sharing your application details works</a></li>
+      </ul>
+
     </p>
     {% endif %}
 

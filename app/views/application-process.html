@@ -4,20 +4,12 @@
 {% set primaryNavId = "applications" %}
 
 {% block beforeContent %}
-    {% if data.account.email %}
 
-      {{ govukBackLink({
-        href: "/applications",
-        text: "Back to applications"
-      }) }}
+    {{ govukBackLink({
+      href: "/applications",
+      text: "Back to applications"
+    }) }}
 
-    {% else %}
-
-      {{ govukBackLink({
-        href: "/account",
-        text: "Back"
-      }) }}
-    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -25,9 +17,9 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">The application process for courses starting in September 2024</h1>
+    <h1 class="govuk-heading-l">The application process for courses starting in September 2025</h1>
 
-      <p class="govuk-body">For courses starting in September 2024, you can start applying a year before they start in October 2023.</p>
+      <p class="govuk-body">For courses starting in September 2025, you can start applying a year before they start in October 2024.</p>
 
       <p class="govuk-body">Most teacher training courses are one year and start in September when the academic year in England starts. Part time courses are usually 2 years.</p>
       <br>
@@ -41,19 +33,19 @@
           </thead>
           <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
-             <td class="govuk-table__cell">3&nbsp;October&nbsp;2023 at 9am</td>
+             <td class="govuk-table__cell">1&nbsp;October&nbsp;2024 at 9am</td>
               <td class="govuk-table__cell">Start <a href="https://www.gov.uk/find-postgraduate-teacher-training-courses" class="govuk-link" rel="noreferrer noopener" target="_blank">finding postgraduate teacher training courses</a> you might want to apply to.</td>
             </tr>
             <tr class="govuk-table__row">
-             <td class="govuk-table__cell">10&nbsp;October&nbsp;2023 at 9am</td>
+             <td class="govuk-table__cell">8&nbsp;October&nbsp;2024 at 9am</td>
               <td class="govuk-table__cell">Start applying to courses. You can apply to 4 courses, they can fill up quickly so you should apply as soon as you can.<br><br>You can withdraw an application at any time and apply to a different course if you want to.<br><br>If training providers do not respond to an application within 30 working days, you'll be able to apply to another course while you wait for a response. We'll tell you if the provider has not responded in time.<br><br>You’ll get an email if you receive an offer from a training provider.</td>
             </tr>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">17 September 2024 at 6pm</td>
+              <td class="govuk-table__cell">16 September 2025 at 6pm</td>
               <td class="govuk-table__cell">The last day to submit any applications.</td>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">25 September 2024 at 11:59pm</td>
-              <td class="govuk-table__cell">The last day for training providers to make a decision on all applications for courses starting in September 2024.</td>
+              <td class="govuk-table__cell">24 September 2025 at 11:59pm</td>
+              <td class="govuk-table__cell">The last day for training providers to make a decision on all applications for courses starting in September 2025.</td>
             </tr>
           </tbody>
         </table>

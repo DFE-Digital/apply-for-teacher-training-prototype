@@ -114,15 +114,9 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/school-placement(-second)?', (req, res) => {
+  router.get('/applications/:id/school-placement', (req, res) => {
 
     const { id } = req.params
-    let priority = req.params[0]
-    if ( priority) {
-      priority = priority.substring(1)
-    } else {
-      priority = 'first'
-    }
 
     let placementItems = data.placements
       .sort((a, b) => (a.name.localeCompare(b.name)))
@@ -130,7 +124,6 @@ module.exports = router => {
 
     res.render('applications/school-placement', {
       id,
-      priority,
       placementItems
     })
   })
@@ -201,6 +194,16 @@ module.exports = router => {
     const degree = req.session.data.degrees
 
     res.render('applications/interruption-module', {
+    id,
+    degree
+    })
+  })
+
+  router.get('/applications/:id/candidate-pool-intro', (req, res) => {
+    const { id } = req.params
+    const degree = req.session.data.degrees
+
+    res.render('applications/candidate-pool-intro', {
     id,
     degree
     })
@@ -306,9 +309,7 @@ module.exports = router => {
     else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
-      res.redirect('/applications')
-    } else if (submitNow == 'yes' && !req.session.data.candidatePool ) {
-      res.redirect('/applications/' + id + '/candidate-pool')
+      res.redirect('/applications/' + id + '/candidate-pool-intro')
     } else if (submitNow == 'yes' ) {
     res.redirect('/applications/' + id + '/review-and-submit')
   }
@@ -342,14 +343,9 @@ module.exports = router => {
 
   router.post('/applications(/:id)?/candidate-pool', (req, res) => {
     const { id } = req.params
+    const showPoolBanner = true
+    res.render('/applications/index', { showPoolBanner, id })
 
-    if ( id ) {
-      const application = req.session.data.applications[id]
-      res.redirect('/applications/' + id + '/review-and-submit')
-    } else {
-      const showPoolBanner = true
-      res.render('/applications/index', { showPoolBanner, id })
-    }
   })
 
 

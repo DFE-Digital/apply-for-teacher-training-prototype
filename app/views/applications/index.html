@@ -33,7 +33,7 @@
       {% if showPoolBanner %}
 
         {{ govukNotificationBanner({
-          text: "You are " + ( "not " if data['candidatePool'] == "false" else "") + " sharing your application details with providers you have not applied to",
+          text: "You are " + ( "not " if data['candidatePool']['optedIn'] == "false" else "") + " sharing your application details with providers you have not applied to",
           type: 'success'
         }) }}
       {% endif %}
@@ -199,7 +199,7 @@
     <h3 class="govuk-heading-m">Sharing your application details</h3>
     <p class="govuk-body">
 
-      You are {% if data['candidatePool'] == "false" %}not{% endif %} sharing your application details with providers you have not applied to.
+      You are {% if data['candidatePool']['optedIn'] == "false" %}not{% endif %} sharing your application details with providers you have not applied to.
 
       <ul class="govuk-list govuk-list--bullet">
         <li><a href="/candidate-pool/opt-in" class="govuk-link">Change your sharing and location settings</a></li>

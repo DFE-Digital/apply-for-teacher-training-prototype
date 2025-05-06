@@ -15,7 +15,7 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters">
 
-        {% if not data['candidatePool'] %}
+        {% if not data['candidatePool']['optedIn'] %}
         {{ govukNotificationBanner({
           text: "Application submitted",
           type: "success"
@@ -26,7 +26,7 @@
         <p class="govuk-body">You can choose to make your application details visible to training providers who you have not submitted an application to.</p>
         <p class="govuk-body">They can search a list of candidates and view your application details. If they think you are suitable for their course, they can invite you to apply directly.</p>
 
-        {% if not data['candidatePool'] %}
+        {% if not data['candidatePool']['optedIn'] %}
         <div class="govuk-button-group">
 
               {{ govukButton({
@@ -36,7 +36,7 @@
         </div>
         {% endif %}
 
-        <div{% if not data['candidatePool'] %} class="app-grid-column--grey"{% endif %}>
+        <div{% if not data['candidatePool']['optedIn'] %} class="app-grid-column--grey"{% endif %}>
           <h3 class="govuk-heading-m">How this works with the current application process</h3>
             <p class="govuk-body">This feature should be used alongside <a href="/application-process" class="govuk-link">the current application process</a>. You should continue to choose courses and submit applications yourself.</p>
             <p class="govuk-body">You can still submit up to 4 application choices at a time. If a provider invites you to apply and you submit an application, it will count towards your total.</p>

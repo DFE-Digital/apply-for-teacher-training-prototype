@@ -215,6 +215,34 @@ module.exports = router => {
     })
   })
 
+
+  router.get('/candidate-pool/locations', (req, res) => {
+
+    // if ( !req.session.data.candidatePool.locations ) {
+      req.session.data.candidatePool.locations = []
+
+      req.session.data.candidatePool.locations.push({
+        location: req.session.data.address.postalCode,
+        distance: 10
+      })
+
+      let postcodePart = req.session.data.address.postalCode.substring( 0, req.session.data.address.postalCode.indexOf(' ') )
+      let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+      for ( id in req.session.data.applications ) {
+
+        req.session.data.candidatePool.locations.push({
+          location: postcodePart + ' '+ Math.floor(Math.random() * 10) + letters.charAt(Math.floor(Math.random() * 25 )) + letters.charAt(Math.floor(Math.random() * 25 )) + ' (' + req.session.data.applications[id].providerName + ')',
+          distance: 10
+        })
+
+      }
+
+    // }
+
+    res.render( 'candidate-pool/locations' )
+  })
+
   router.get('/applications/:id/review-and-submit', (req, res) => {
     const { id } = req.params
 
@@ -331,7 +359,7 @@ module.exports = router => {
 
   router.post('/candidate-pool/opt-in', (req, res) => {
     const { id } = req.params
-    let candidatePool = req.body.candidatePool
+    let candidatePool = req.body.candidatePool['optedIn']
 
     if ( candidatePool == 'true' ) {
       res.redirect('/candidate-pool/locations' )

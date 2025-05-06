@@ -199,24 +199,12 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/candidate-pool', (req, res) => {
-    const { id } = req.params
-    const degree = req.session.data.degrees
-
-    res.render('applications/candidate-pool/index', {
-    id,
-    degree
-    })
+  router.get('/candidate-pool', (req, res) => {
+    res.render( 'candidate-pool/index' )
   })
 
-  router.get('/applications/:id/candidate-pool/opt-in', (req, res) => {
-    const { id } = req.params
-    const degree = req.session.data.degrees
-
-    res.render('applications/candidate-pool/opt-in', {
-    id,
-    degree
-    })
+  router.get('/candidate-pool/opt-in', (req, res) => {
+    res.render( 'candidate-pool/opt-in' )
   })
 
   router.get('/applications/:id/review-application', (req, res) => {
@@ -309,7 +297,7 @@ module.exports = router => {
     else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
-      res.redirect('/applications/' + id + '/candidate-pool')
+      res.redirect('/candidate-pool')
     } else if (submitNow == 'yes' ) {
     res.redirect('/applications/' + id + '/review-and-submit')
   }
@@ -341,11 +329,17 @@ module.exports = router => {
   })
 
 
-  router.post('/applications(/:id)?/candidate-pool/opt-in', (req, res) => {
+  router.post('/candidate-pool/opt-in', (req, res) => {
     const { id } = req.params
-    const showPoolBanner = true
-    res.render('/applications/index', { showPoolBanner, id })
+    let candidatePool = req.body.candidatePool
 
+    if ( candidatePool == 'true' ) {
+      res.redirect('/candidate-pool/locations' )
+
+    } else {
+      const showPoolBanner = true
+      res.render('/applications/index', { showPoolBanner, id })
+    }
   })
 
 //function to withdraw application

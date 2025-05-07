@@ -291,9 +291,16 @@ module.exports = router => {
     req.session.data.candidatePool.locations[id].location = req.body['location-update']
     req.session.data.candidatePool.locations[id].distance = req.body['distance-update']
 
-    console.log( req.body )
-    console.log( id)
-    console.log( req.session.data.candidatePool.locations[id] )
+    res.redirect('/candidate-pool/locations')
+
+  })
+
+  router.post('/candidate-pool/locations/add', (req, res) => {
+
+    req.session.data.candidatePool.locations.push({
+      location: req.body['location-update'],
+      distance: req.body['distance-update']
+    })
 
     res.redirect('/candidate-pool/locations')
 

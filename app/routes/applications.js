@@ -440,7 +440,7 @@ module.exports = router => {
 
   router.post('/candidate-pool/check', (req, res) => {
     const showPoolBanner = true
-    res.render('/applications/index', { showPoolBanner, id })
+    res.render('/applications/index', { showPoolBanner })
   })
 
 

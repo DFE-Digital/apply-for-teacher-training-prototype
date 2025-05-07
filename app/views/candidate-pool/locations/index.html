@@ -16,7 +16,7 @@
       <div class="govuk-grid-column-three-quarters">
 
         <div class="govuk-button-group">
-          <form action="/candidate-pool/opt-in" method="post">
+          <form action="/candidate-pool/locations" method="post">
 
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
@@ -38,16 +38,19 @@
 
               {% for location in data.candidatePool.locations %}
 
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">{{ location.location }}</td>
-                <td class="govuk-table__cell">{{ location.distance }} miles</td>
-                <td class="govuk-table__cell">
-                  <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/edit">Change<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
-                </td>
-                <td class="govuk-table__cell">
-                  <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/remove">Remove<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
-                </td>
-              </tr>
+                {% if not location.removed %}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">{{ location.location }}</td>
+                  <td class="govuk-table__cell">{{ location.distance }} miles</td>
+                  <td class="govuk-table__cell">
+                    <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/edit">Change<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
+                  </td>
+                  <td class="govuk-table__cell">
+                    <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/remove">Remove<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
+                  </td>
+                </tr>
+                {% endif %}
+
               {% endfor %}
 
             </tbody>
@@ -63,11 +66,11 @@
 
             {{ govukCheckboxes({
               name: "candidatePool[locationsAddNew]",
-              classes: "govuk-checkboxes--small",
               items: [
                 {
                   value: "true",
-                  text: "Add new course locations to my preferences when I apply to new courses"
+                  text: "Add new course locations to my preferences when I apply to new courses",
+                  checked: ( data.candidatePool['locationsAddNew'] == "true")
                 }
               ]
             }) }}

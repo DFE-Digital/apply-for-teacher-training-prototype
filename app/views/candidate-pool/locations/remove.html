@@ -1,0 +1,45 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Do you want to remove this location?" %}
+{% set location = data.candidatePool.locations[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back to your application"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+
+        <div class="govuk-button-group">
+          <form action="/candidate-pool/locations/{{id}}/remove" method="post">
+
+            <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+              Do you want to remove this location?
+            </h1>
+
+            {{ govukSummaryList({
+              rows: [
+                {
+                  key: {
+                    text: "Location"
+                  },
+                  value: {
+                    text: location.location
+                  }
+                }
+              ]
+            }) }}
+
+              {{ govukButton({
+              text: "Yes, remove location"
+            }) }}
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

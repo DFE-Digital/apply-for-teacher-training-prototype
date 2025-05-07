@@ -32,12 +32,12 @@
                 {
                   value: "true",
                   text: "Yes",
-                  checked: ( data.candidatePool == "true")
+                  checked: ( data.candidatePool['optedIn'] == "true")
                 },
                 {
                   value: "false",
                   text: "No",
-                  checked: ( data.candidatePool == "false")
+                  checked: ( data.candidatePool['optedIn'] == "false")
                 }
               ]
             }) }}

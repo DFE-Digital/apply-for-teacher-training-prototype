@@ -266,6 +266,15 @@ module.exports = router => {
       })
   })
 
+  router.get('/candidate-pool/locations/:id/change', (req, res) => {
+    const { id } = req.params
+
+    res.render('candidate-pool/locations/change', {
+      id
+      })
+  })
+
+
 
   router.post('/candidate-pool/locations/:id/remove', (req, res) => {
     const { id } = req.params
@@ -275,6 +284,20 @@ module.exports = router => {
 
   })
 
+
+  router.post('/candidate-pool/locations/:id/change', (req, res) => {
+    const { id } = req.params
+
+    req.session.data.candidatePool.locations[id].location = req.body['location-update']
+    req.session.data.candidatePool.locations[id].distance = req.body['distance-update']
+
+    console.log( req.body )
+    console.log( id)
+    console.log( req.session.data.candidatePool.locations[id] )
+
+    res.redirect('/candidate-pool/locations')
+
+  })
 
   router.get('/applications/:id/review-and-submit', (req, res) => {
     const { id } = req.params

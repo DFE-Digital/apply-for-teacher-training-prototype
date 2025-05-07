@@ -199,10 +199,10 @@
     <h3 class="govuk-heading-m">Sharing your application details</h3>
     <p class="govuk-body">
 
-      You are {% if data['candidatePool']['optedIn'] == "false" %}not{% endif %} sharing your application details with providers you have not applied to.
+      You are {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} sharing your application details with providers you have not applied to.
 
       <ul class="govuk-list govuk-list--bullet">
-        <li><a href="{% if data['candidatePool']['optedIn'] == "false" %}/candidate-pool/opt-in{% else %}/candidate-pool/check{% endif %} " class="govuk-link">Change your sharing and location settings</a></li>
+        <li><a href="{% if data['candidatePool']['optedIn'] != "true" %}/candidate-pool/opt-in{% else %}/candidate-pool/check{% endif %} " class="govuk-link">Change your sharing and location settings</a></li>
         <li><a href="/candidate-pool" class="govuk-link">Read about how sharing your application details works</a></li>
       </ul>
 

@@ -14,40 +14,36 @@
 {% block content %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters">
-        <div{% if id %} class="app-grid-column--grey"{% endif %}>
-          <h3 class="govuk-heading-l">Increase your chances of success by allowing other providers to invite you to apply</h3>
-          <p class="govuk-body">If this application is unsuccessful, you can allow other providers of similar courses to view your application and if they think you are suitable, invite you to apply.</p>
-        </div>
 
         <div class="govuk-button-group">
-          <form action="/applications/{% if id %}{{ id }}/{% endif %}candidate-pool" method="post">
+          <form action="/candidate-pool/opt-in" method="post">
+
+
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+            Do you want to make your application details visible to other training providers?
+          </h1>
+
+          <p class="govuk-body">When you have no applications that are waiting for a decision from a provider, other providers will be able to see your application details and invite you to apply to their courses.</p>
 
             {{ govukRadios({
-              name: "candidatePool",
+              name: "candidatePool[optedIn]",
               classes: "govuk-radios--inline",
-              fieldset: {
-                legend: {
-                  text: "Do you want to allow other providers to invite you to apply to their courses?",
-                  isPageHeading: true,
-                  classes: "govuk-fieldset__legend--m"
-                }
-              },
               items: [
                 {
                   value: "true",
                   text: "Yes",
-                  checked: ( data.candidatePool == "true")
+                  checked: ( data.candidatePool['optedIn'] == "true")
                 },
                 {
                   value: "false",
                   text: "No",
-                  checked: ( data.candidatePool == "false")
+                  checked: ( data.candidatePool['optedIn'] == "false")
                 }
               ]
             }) }}
 
               {{ govukButton({
-              text: ("Continue" if id else "Save")
+              text: "Continue"
             }) }}
           </form>
         </div>

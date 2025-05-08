@@ -170,6 +170,9 @@ module.exports = router => {
       equalityMonitoring: 'true'
     }
 
+    // flag so we don't do TTA redirect
+    data.autoPopulated = 'true'
+
     res.redirect('/details')
   })
 
@@ -333,6 +336,9 @@ module.exports = router => {
       safeguarding: 'true',
       equalityMonitoring: 'true'
     }
+
+    // flag so we don't do TTA redirect
+    data.autoPopulated = 'true'
 
     res.redirect('/details')
   })

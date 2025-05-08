@@ -5,6 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
+const searchController = require('./controllers/search')
 
 require('./routes/account')(router)
 require('./routes/details/index')(router)
@@ -71,3 +72,6 @@ router.get('*/manage-prototype-data/view-data', function(req, res){
 
   res.render('manage-prototype-data/view-data', { data: JSON.stringify( req.session, null, 2), querystring: querystring } );
 })
+
+
+router.get('/location-suggestions', searchController.location_suggestions_json)

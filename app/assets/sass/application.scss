@@ -7,6 +7,7 @@
 @import "components/header";
 @import "components/secondary-nav";
 @import "components/primary-navigation";
+@import "components/autocomplete";
 
 .govuk-body {
   word-wrap: break-word;
@@ -299,4 +300,13 @@
 
 .app-application-item__body:hover .govuk-heading-s {
   color: #003078
+}
+
+.app-table__row--no-bottom-border .govuk-table__cell, .app-table__row--no-bottom-border .govuk-table__header {
+  border-bottom: 0;
+}
+
+.app-table__row--no-bottom-border td a.govuk-link {
+  margin-top: 0;
+  margin-bottom: 0;
 }

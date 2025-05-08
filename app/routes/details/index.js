@@ -8,7 +8,7 @@ module.exports = router => {
     const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
     const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
-    if ( req.session.data.completed && req.session.data.completed.degree == "true" && req.session.data.adviser != "false" && !req.session.data.adviserSubject ) {
+    if ( req.session.data.completed && req.session.data.completed.degree == "true" && req.session.data.adviser != "false" && !req.session.data.adviserSubject && req.session.data.autoPopulated != "true") {
 
       res.redirect('applications/adviser')
     } else {

@@ -1,0 +1,77 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Change location preference" %}
+{% set location = data.candidatePool.locations[id] %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/candidate-pool/locations",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+
+        <div class="govuk-button-group">
+          <form action="/candidate-pool/locations/add" method="post">
+
+            <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+              Add a location
+            </h1>
+
+            {{ govukInput({
+              label: {
+                text: "Within"
+              },
+              classes: "govuk-input--width-5",
+              name: "distance-update",
+              suffix: {
+                text: "miles"
+              },
+              spellcheck: false,
+              autocomplete: "off",
+              value: location.distance
+            }) }}
+
+            <div class="govuk-form-group">
+              {{ govukInput({
+                id: "location",
+                name: "location-update",
+                label: {
+                  text: "of city, town or postcode"
+                },
+                autocomplete: "off",
+                formGroup: {
+                  classes: "govuk-!-margin-bottom-0"
+                }
+              }) }}
+              <div id="location-autocomplete" class="govuk-body"></div>
+            </div>
+
+              {{ govukButton({
+              text: "Add location"
+            }) }}
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+  <script src="/public/javascripts/debounce.js"></script>
+  <script src="/public/javascripts/init-autocomplete.js"></script>
+
+  <script type="text/javascript">
+  initAutocomplete({
+    element: "location-autocomplete",
+    input: "location",
+    path: "/location-suggestions",
+  });
+
+  </script>
+{% endblock %}

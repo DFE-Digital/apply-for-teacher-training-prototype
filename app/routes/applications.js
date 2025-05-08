@@ -114,15 +114,9 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/school-placement(-second)?', (req, res) => {
+  router.get('/applications/:id/school-placement', (req, res) => {
 
     const { id } = req.params
-    let priority = req.params[0]
-    if ( priority) {
-      priority = priority.substring(1)
-    } else {
-      priority = 'first'
-    }
 
     let placementItems = data.placements
       .sort((a, b) => (a.name.localeCompare(b.name)))
@@ -130,7 +124,6 @@ module.exports = router => {
 
     res.render('applications/school-placement', {
       id,
-      priority,
       placementItems
     })
   })
@@ -206,14 +199,12 @@ module.exports = router => {
     })
   })
 
-  router.get('/applications/:id/candidate-pool', (req, res) => {
-    const { id } = req.params
-    const degree = req.session.data.degrees
+  router.get('/candidate-pool', (req, res) => {
+    res.render( 'candidate-pool/index' )
+  })
 
-    res.render('applications/candidate-pool', {
-    id,
-    degree
-    })
+  router.get('/candidate-pool/opt-in', (req, res) => {
+    res.render( 'candidate-pool/opt-in' )
   })
 
   router.get('/applications/:id/review-application', (req, res) => {
@@ -222,6 +213,97 @@ module.exports = router => {
     res.render('applications/review-application', {
     id
     })
+  })
+
+
+  router.get('/candidate-pool/locations', (req, res) => {
+
+    const postCode = req.session.data.address ? req.session.data.address.postalCode : 'SE1 1AA'
+    req.session.data.candidatePool = req.session.data.candidatePool || {};
+    req.session.data.candidatePool.locations = req.session.data.candidatePool.locations || []
+
+    // add home location
+    if ( !req.session.data.candidatePool || !req.session.data.candidatePool.locations.length ) {
+
+      req.session.data.candidatePool.locations.push({
+        location: postCode,
+        distance: 10,
+        type: 'home'
+      })
+
+    }
+
+    // add course locations
+    if ( req.session.data.candidatePool.locations.length == 1 || req.session.data.candidatePool.locationsAddNew == "true" ) {
+
+      // todo - this will re-add any you've already removed
+      let postcodePart = postCode.substring( 0, postCode.indexOf(' ') )
+      let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+      for ( id in req.session.data.applications ) {
+
+        // check if this application location is already in the locations list
+        if ( !req.session.data.candidatePool.locations.some(item => item.course === id) ) {
+          req.session.data.candidatePool.locations.push({
+            location: postcodePart + ' '+ Math.floor(Math.random() * 10) + letters.charAt(Math.floor(Math.random() * 25 )) + letters.charAt(Math.floor(Math.random() * 25 )) + ' (' + req.session.data.applications[id].providerName + ')',
+            distance: 10,
+            course: id
+          })
+        }
+
+      }
+    }
+
+    res.render( 'candidate-pool/locations/index' )
+  })
+
+
+  router.get('/candidate-pool/locations/:id/remove', (req, res) => {
+    const { id } = req.params
+
+    res.render('candidate-pool/locations/remove', {
+      id
+      })
+  })
+
+  router.get('/candidate-pool/locations/:id/change', (req, res) => {
+    const { id } = req.params
+
+    res.render('candidate-pool/locations/change', {
+      id
+      })
+  })
+
+
+
+  router.post('/candidate-pool/locations/:id/remove', (req, res) => {
+    const { id } = req.params
+    req.session.data.candidatePool.locations[id].removed = 'true'
+
+    res.redirect('/candidate-pool/locations')
+
+  })
+
+
+  router.post('/candidate-pool/locations/:id/change', (req, res) => {
+    const { id } = req.params
+
+    req.session.data.candidatePool.locations[id].location = req.body['location-update']
+    req.session.data.candidatePool.locations[id].distance = req.body['distance-update']
+
+    res.redirect('/candidate-pool/locations')
+
+  })
+
+  router.post('/candidate-pool/locations/add', (req, res) => {
+
+    req.session.data.candidatePool.locations.push({
+      location: req.body['location-update'],
+      distance: req.body['distance-update']
+    })
+
+    res.redirect('/candidate-pool/locations')
+
   })
 
   router.get('/applications/:id/review-and-submit', (req, res) => {
@@ -306,9 +388,13 @@ module.exports = router => {
     else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
-      res.redirect('/applications')
-    } else if (submitNow == 'yes' && !req.session.data.candidatePool ) {
-      res.redirect('/applications/' + id + '/candidate-pool')
+      req.session.data.candidatePool = req.session.data.candidatePool || {};
+      if ( !req.session.data.candidatePool.optedIn ) {
+        res.redirect('/candidate-pool')
+      } else {
+        const showSubmitBanner = true
+        res.render('/applications/index', { showSubmitBanner, id })
+      }
     } else if (submitNow == 'yes' ) {
     res.redirect('/applications/' + id + '/review-and-submit')
   }
@@ -340,16 +426,27 @@ module.exports = router => {
   })
 
 
-  router.post('/applications(/:id)?/candidate-pool', (req, res) => {
+  router.post('/candidate-pool/opt-in', (req, res) => {
     const { id } = req.params
+    let candidatePool = req.body.candidatePool['optedIn']
 
-    if ( id ) {
-      const application = req.session.data.applications[id]
-      res.redirect('/applications/' + id + '/review-and-submit')
+    if ( candidatePool == 'true' ) {
+      res.redirect('/candidate-pool/locations' )
+
     } else {
       const showPoolBanner = true
       res.render('/applications/index', { showPoolBanner, id })
     }
+  })
+
+  router.post('/candidate-pool/locations', (req, res) => {
+    res.redirect('/candidate-pool/check' )
+
+  })
+
+  router.post('/candidate-pool/check', (req, res) => {
+    const showPoolBanner = true
+    res.render('/applications/index', { showPoolBanner })
   })
 
 

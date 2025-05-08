@@ -1,0 +1,100 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "applications" %}
+{% set title = "Check your application sharing preferences" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/applications",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+
+        <div class="govuk-button-group">
+          <form action="/candidate-pool/check" method="post">
+
+
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+            Check your application sharing preferences
+          </h1>
+
+          {% set preferredLocations %}
+          {% endset %}
+
+
+          {% for location in data.candidatePool.locations %}
+
+          {% if not location.removed %}
+          {% set preferredLocations %}
+          {{preferredLocations | safe}}
+          Within {{location.distance}} miles of {{location.location}}<br />
+          {% endset %}
+          {% endif %}
+
+        {% endfor %}
+
+          {{ govukSummaryList({
+            rows: [
+              {
+                key: {
+                  text: "Do you want to share your application details with other training providers?"
+                },
+                value: {
+                  text: "Yes" if data.candidatePool['optedIn'] == "true" else "No"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/candidate-pool/opt-in",
+                      text: "Change"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Preferred locations"
+                },
+                value: {
+                  html: preferredLocations
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/candidate-pool/locations",
+                      text: "Change"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Update my location preferences when I apply to a new course"
+                },
+                value: {
+                  text: "Yes" if data.candidatePool['locationsAddNew'] == "true" else "No"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/candidate-pool/locations",
+                      text: "Change"
+                    }
+                  ]
+                }
+              }
+            ]
+          }) }}
+
+              {{ govukButton({
+              text: "Submit preferences"
+            }) }}
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

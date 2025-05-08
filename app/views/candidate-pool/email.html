@@ -1,0 +1,30 @@
+{% extends "layouts/email.html" %}
+
+{% set title = "Teacher training reference needed for Jane Doe" %}
+{% set type = data['referee_type'] %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">Dear Jim,</p>
+      <p class="govuk-body">OTT SCITT have viewed your application details and are inviting you to submit an application for:</p>
+
+      <h1 class="govuk-heading-s">History (G193)</h1>
+
+      <ul class="govuk-list">
+        <li>Course fee: £9,535 for UK citizens, £15,430 for non-UK citizens</li>
+        <li>Course length: 1 year - full time</li>
+        <li>Age range: 11 to 16 secondary</li>
+        <li>Qualification: QTS with PGCE</li>
+        <li>Provider: OTT SCITT</li>
+        <li>Start date: September 2025</li>
+      </ul>
+
+
+      <p class="govuk-body"><a href="https://find-teacher-training-courses.service.gov.uk/course/24T/G193" class="govuk-link">Review the full course details</a> carefully to decide if you are interested in applying.</p>
+      <p class="govuk-body">If this course is not in a suitable location, you can <a href="/candidate-pool/check" class="govuk-link">update your preferences</a> to appear in more relevant searches.</p>
+      <p class="govuk-body">If you do not want to receive invitations like this, you can <a href="/candidate-pool/opt-in" class="govuk-link">stop providers from viewing your application details</a>.</p>
+
+    </div>
+  </div>
+{% endblock %}

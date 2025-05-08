@@ -6,12 +6,21 @@
 
 {% block content %}
 
-{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner %}
+{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner %}
 
   {% set application = data.applications[id] %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+
+      {% if showSubmitBanner %}
+
+        {{ govukNotificationBanner({
+          text: "Application submitted",
+          type: 'success'
+        }) }}
+
+      {% endif %}
 
       {% if showDeclineBanner %}
 

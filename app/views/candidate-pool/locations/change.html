@@ -34,15 +34,21 @@
               value: location.distance
             }) }}
 
-            {{ govukInput({
-              label: {
-                text: "of city, town or postcode"
-              },
-              classes: "govuk-input--width-10",
-              name: "location-update",
-              spellcheck: false,
-              value: location.location
-            }) }}
+            <div class="govuk-form-group">
+              {{ govukInput({
+                id: "location",
+                name: "location-update",
+                label: {
+                  text: "of city, town or postcode"
+                },
+                value: location.location,
+                autocomplete: "off",
+                formGroup: {
+                  classes: "govuk-!-margin-bottom-0"
+                }
+              }) }}
+              <div id="location-autocomplete" class="govuk-body"></div>
+            </div>
 
               {{ govukButton({
               text: "Update location"
@@ -53,4 +59,20 @@
 
       </div>
     </div>
+{% endblock %}
+
+
+{% block pageScripts %}
+  <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+  <script src="/public/javascripts/debounce.js"></script>
+  <script src="/public/javascripts/init-autocomplete.js"></script>
+
+  <script type="text/javascript">
+  initAutocomplete({
+    element: "location-autocomplete",
+    input: "location",
+    path: "/location-suggestions",
+  });
+
+  </script>
 {% endblock %}

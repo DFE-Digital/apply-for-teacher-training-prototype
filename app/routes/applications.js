@@ -218,12 +218,12 @@ module.exports = router => {
 
   router.get('/candidate-pool/locations', (req, res) => {
 
-    const postCode = req.session.data.address ? req.session.data.address.postalCode : 'SE1 1AA'
+    const postCode = ( req.session.data.address && req.session.data.address.postalCode ) ? req.session.data.address.postalCode : 'SE1 1AA'
     req.session.data.candidatePool = req.session.data.candidatePool || {};
     req.session.data.candidatePool.locations = req.session.data.candidatePool.locations || []
 
     // add home location
-    if ( !req.session.data.candidatePool || !req.session.data.candidatePool.locations.length ) {
+    if ( ( !req.session.data.candidatePool || !req.session.data.candidatePool.locations.length ) && req.session.data.livesInUk == "yes" ) {
 
       req.session.data.candidatePool.locations.push({
         location: postCode,
@@ -234,7 +234,7 @@ module.exports = router => {
     }
 
     // add course locations
-    if ( req.session.data.candidatePool.locations.length == 1 || req.session.data.candidatePool.locationsAddNew == "true" ) {
+    if ( ( req.session.data.candidatePool.locations.length == 1 || ( req.session.data.candidatePool.locations.length == 0 && req.session.data.livesInUk == "no" ) ) || req.session.data.candidatePool.locationsAddNew == "true" ) {
 
       // todo - this will re-add any you've already removed
       let postcodePart = postCode.substring( 0, postCode.indexOf(' ') )

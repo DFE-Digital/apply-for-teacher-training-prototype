@@ -4,7 +4,7 @@
 
 {% from "govuk/components/hint/macro.njk" import govukHint %}
 
-{% set title = "What is your contact address?" %}
+{% set title = "What is your address?" %}
 {% set formaction = "/details/contact-information/review" %}
 
 {% set describedBy = "address-hint" %}
@@ -19,10 +19,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
 
       <form action="{{ formaction }}" method="post">
-        {{ govukHint({id: describedBy, text: "Enter an address where you'll be able to receive post from providers." })}}
 
         {{ govukInput({
           name: "address[line1]",
@@ -55,7 +54,7 @@
         {{ govukInput({
           name: "address[county]",
           label: {
-            text: "County"
+            text: "County (optional)"
           },
           classes: "govuk-!-width-two-thirds",
           autocomplete: "address-level1",
@@ -65,7 +64,7 @@
         {{ govukInput({
           name: "address[postalCode]",
           label: {
-            text: "Postal code"
+            text: "Postcode"
           },
           classes: "govuk-input--width-10",
           autocomplete: "postal-code",

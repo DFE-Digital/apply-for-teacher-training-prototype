@@ -388,6 +388,7 @@ module.exports = router => {
     else if (submitNowPost == 'yes') {
       req.session.data.applications[id].status = "Awaiting decision"
       req.session.data.applications[id].submittedAt = new Date()
+      req.session.data.candidatePool = req.session.data.candidatePool || {};
       if ( !req.session.data.candidatePool.optedIn ) {
         res.redirect('/candidate-pool')
       } else {

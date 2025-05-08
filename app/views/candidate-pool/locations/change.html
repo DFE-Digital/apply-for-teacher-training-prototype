@@ -5,8 +5,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications",
-    text: "Back to your application"
+    href: "/candidate-pool/locations",
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -31,6 +31,7 @@
                 text: "miles"
               },
               spellcheck: false,
+              autocomplete: "off",
               value: location.distance
             }) }}
 

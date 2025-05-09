@@ -315,7 +315,6 @@ module.exports = router => {
     // Set completed sections
     data.completed = {
       personalInformation: 'true',
-      contactInformation: 'false',
       choices: 'true',
       english: 'true',
       maths: 'true',

@@ -1,1 +1,8 @@
-{"serviceName":"Apply for teacher training"}
+{
+  "serviceName":"Apply for teacher training",
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}

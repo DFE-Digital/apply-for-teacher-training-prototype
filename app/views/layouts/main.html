@@ -1,11 +1,14 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+{% set govukRebrand = true %}
+{% set assetPath = '/public/rebrand' %}
 
 {% from "_components/primary-navigation/macro.njk" import appPrimaryNavigation %}
 
 {% block header %}
   {{ govukHeader({
     classes: "app-header--full-width-blue-border",
-    serviceName: serviceName
+    serviceName: serviceName,
+    rebrand: true
   }) }}
 
   <div class="govuk-width-container">
@@ -68,6 +71,7 @@
 
 {% block footer %}
   {{ govukFooter({
+    rebrand: true,
     meta: {
       items: [
         {

@@ -1,12 +1,55 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
 
 {% from "_components/primary-navigation/macro.njk" import appPrimaryNavigation %}
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+
 
 {% block header %}
-  {{ govukHeader({
-    classes: "app-header--full-width-blue-border",
-    serviceName: serviceName
+
+  {% if signedIn == false %}
+
+  {{ govukOneLoginServiceHeader({
+    serviceName: "Apply for teacher training",
+    signOutLink:  "/account"
   }) }}
+
+    {# No nav needed #}
+  {% elseif primaryNavId == "accepted" %}
+
+
+  {{ govukOneLoginServiceHeader({
+    serviceName: "Apply for teacher training",
+    signOutLink:  "/account",
+    navigationItems: [
+    {
+      href: "/accepted",
+      text: "Your offer",
+      active: primaryNavId == "accepted"
+    }]
+  }) }}
+
+
+  {% else %}
+
+  {{ govukOneLoginServiceHeader({
+    serviceName: "Apply for teacher training",
+    signOutLink:  "/account",
+    navigationItems: [
+    {
+      href: "/details",
+      text: "Your details",
+      id: "details"
+    },
+    {
+      href: "/applications",
+      text: "Your applications",
+      id: "applications"
+    }],
+    activeLinkId: primaryNavId
+  }) }}
+
+
+  {% endif %}
 
   <div class="govuk-width-container">
     {{ govukPhaseBanner({
@@ -17,49 +60,7 @@
         html: '<a href="#" class="govuk-link">Make a complaint or give feedback</a>'
       }) if showPhaseBanner != false }}
   </div>
-  {% if signedIn == false %}
-    {# No nav needed #}
-  {% elseif primaryNavId == "accepted" %}
 
-   {{ appPrimaryNavigation({
-        items: [
-          {
-            href: "/accepted",
-            text: "Your offer",
-            active: primaryNavId == "accepted"
-          }
-        ],
-        items_right: [
-          {
-            href: "/sign-out",
-            text: "Sign out"
-          }
-        ]
-      }) }}
-
-  {% else %}
-
-    {{ appPrimaryNavigation({
-      items: [
-        {
-          href: "/details",
-          text: "Your details",
-          active: primaryNavId == "details"
-        },
-        {
-          href: "/applications",
-          text: "Your applications",
-          active: primaryNavId == "applications"
-        }
-      ],
-      items_right: [
-        {
-          href: "/sign-out",
-          text: "Sign out"
-        }
-      ]
-    }) }}
-  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}

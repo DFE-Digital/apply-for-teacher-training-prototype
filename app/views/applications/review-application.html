@@ -37,7 +37,7 @@
             value: {
               text: range(10000, 99990) | random
             }
-          },
+          } if application.submittedAt,
           {
             key: {
               text: "Application submitted"
@@ -45,7 +45,7 @@
             value: {
               html: application.submittedAt | govukDateTime + " (" + application.submittedAt | daysAgo | plural("day")  +" ago)"
             }
-          },
+          } if application.submittedAt,
           {
             key: {
               text: "Course"
@@ -115,6 +115,23 @@
 
       })}}
 
+{% if application.status == 'Draft' %}
+<h2 class="govuk-heading-m">Delete draft application</h2>
+<p class="govuk-body">You can <a href="delete" class="govuk-link">delete your draft application</a> if you no longer want to apply for {{ application.course }} at {{ application.providerName }}.</p>
+
+<form action="/applications/{{ id }}/submit" method="post">
+  <h2 class="govuk-heading-m">Review and submit your application</h2>
+    <p class="govuk-body"> You will have the opportunity to review your application in full before you submit it.</p>
+  <div class="govuk-button-group">
+   {{ govukButton({
+  name: "submitNow",
+   value: "yes",
+   text: "Review application"
+    }) }}
+  </div>
+  </form>
+
+{% else %}
 <h2 class="govuk-heading-s">What happens next</h2>
 <p class="govuk-body">The provider will review your application and let you know when they have made a decision. In the meantime you can:</p>
 
@@ -130,5 +147,7 @@
 <h2 class="govuk-heading-s">Contact training provider</h2>
 <p class="govuk-body">Contact {{ application.providerName }} if you have any questions about your application.</p>
 <p class="govuk-body">Call us on <a href="tel:01234 567 890" class="govuk-link">01234 567 890</a> or email <a href="#" class="govuk-link">admissions@provider.ac.uk</a>.</p>
+
+{% endif %}
 
 {% endblock %}

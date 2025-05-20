@@ -254,6 +254,11 @@ module.exports = router => {
       }
     }
 
+    // temporary fix for May 2025 testing as international candidates will have their home location autopopulated
+    if ( postCode == "S12 03L" ) {
+      req.session.data.candidatePool.locations.shift()
+    }
+
     res.render( 'candidate-pool/locations/index' )
   })
 

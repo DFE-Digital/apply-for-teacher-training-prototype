@@ -75,7 +75,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'
@@ -237,7 +237,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'
@@ -408,7 +408,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'

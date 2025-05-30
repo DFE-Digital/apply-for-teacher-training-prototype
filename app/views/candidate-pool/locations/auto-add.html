@@ -6,8 +6,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications",
-    text: "Back to your application"
+    href: "/candidate-pool/locations/areas",
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -16,28 +16,27 @@
       <div class="govuk-grid-column-three-quarters">
 
         <div class="govuk-button-group">
-          <form action="/candidate-pool/opt-in" method="post">
-
+          <form action="/candidate-pool/locations/auto-add" method="post">
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-            Do you want to make your application details visible to other training providers?
+              Add the locations of courses you apply to
           </h1>
 
-          <p class="govuk-body">When you have no applications that are waiting for a decision from a provider, other providers will be able to see your application details and invite you to apply to their courses.</p>
+          <p class="govuk-body">Each time you apply to a new course, we can add the course location to the places you can train. You will receive invitations for these locations as well.</p>
 
             {{ govukRadios({
-              name: "candidatePool[optedIn]",
-              classes: "govuk-radios--inline",
+              name: "candidatePool[locationsAddNew]",
+              classes: "govuk-radios",
               items: [
                 {
                   value: "true",
                   text: "Yes",
-                  checked: ( data.candidatePool['optedIn'] == "true")
+                  checked: ( data.candidatePool['locationsAddNew'] == "true")
                 },
                 {
                   value: "false",
                   text: "No",
-                  checked: ( data.candidatePool['optedIn'] == "false")
+                  checked: ( data.candidatePool['locationsAddNew'] == "false")
                 }
               ]
             }) }}
@@ -46,6 +45,7 @@
               text: "Continue"
             }) }}
           </form>
+
         </div>
 
       </div>

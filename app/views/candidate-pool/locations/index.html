@@ -1,43 +1,15 @@
 {% extends "layouts/main.html" %}
 {% set primaryNavId = "applications" %}
-{% set title = "Location preferences" %}
+{% set title = "Increase your chances of success by allowing other providers to invite you to apply" %}
 {% set application = data.applications[id] %}
 {% set degreeGrade = data.degrees[id]%}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/candidate-pool/opt-in",
+    href: "/candidate-pool",
     text: "Back"
   }) }}
 {% endblock %}
-
-
-
-{% set htmlLocationRows = '' %}
-{% set countShown = 0 %}
-
-{% for location in data.candidatePool.locations %}
-
-  {% if not location.removed %}
-
-    {% set countShown = countShown+1 %}
-    {% set htmlLocationRows %}
-    {{htmlLocationRows | safe}}
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">{{ location.location }}</td>
-      <td class="govuk-table__cell">{{ location.distance }} miles</td>
-      <td class="govuk-table__cell">
-        <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/change">Change<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
-      </td>
-      <td class="govuk-table__cell">
-        <a class="govuk-link" href="/candidate-pool/locations/{{loop.index-1}}/remove">Remove<span class="govuk-visually-hidden"> {{ location.name }}</span></a>
-      </td>
-    </tr>
-    {% endset %}
-  {% endif %}
-
-{% endfor %}
-
 
 {% block content %}
     <div class="govuk-grid-row">
@@ -48,53 +20,28 @@
 
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-            Location preferences
+            Where can you train?
           </h1>
 
-          <p class="govuk-body">Training providers will use the locations you enter here to search for candidates near their courses. You should add all locations that you can train in.</p>
-
-          <h2 class="govuk-heading-m">Add, change or remove preferred locations</h2>
-
-          {% if countShown > 0 %}
-          <table class="govuk-table app-table__row--no-bottom-border">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Location</th>
-                <th class="govuk-table__header" scope="col">Distance from location</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              {{ htmlLocationRows | safe }}
-            </tbody>
-          </table>
-          {% else %}
-
-            <p class="govuk-body">
-              You have no location preferences.<br />
-              Providers will assume you can train anywhere in England.
-            </p>
-
-          {% endif %}
-
-
-          {{ govukButton({
-            text: ("Add another location" if countShown > 0 else "Add a location"),
-            href: '/candidate-pool/locations/add',
-            classes: "govuk-button--secondary"
-          }) }}
-
-
-            {{ govukCheckboxes({
-              name: "candidatePool[locationsAddNew]",
+            {{ govukRadios({
+              name: "candidatePool[locationPreferences]",
+              classes: "govuk-radios",
               items: [
                 {
+                  value: "false",
+                  text: "Anywhere in England",
+                  checked: ( data.candidatePool['locationPreferences'] == "false")
+                },
+                {
                   value: "true",
-                  text: "Add new course locations to my preferences when I apply to new courses",
-                  checked: ( data.candidatePool['locationsAddNew'] == "true")
+                  text: "In specific locations",
+                  checked: ( data.candidatePool['locationPreferences'] == "true"),
+                  hint: {
+                    text: "Only receive invitations to apply to courses near your chosen locations"
+                  }
                 }
               ]
             }) }}
-
 
               {{ govukButton({
               text: "Continue"

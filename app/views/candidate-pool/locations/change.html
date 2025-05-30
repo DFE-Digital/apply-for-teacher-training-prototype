@@ -18,12 +18,12 @@
           <form action="/candidate-pool/locations/{{id}}/change" method="post">
 
             <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-              Change location preference
+              Update the area where you can train
             </h1>
 
             {{ govukInput({
               label: {
-                text: "Within"
+                text: "I can travel up to"
               },
               classes: "govuk-input--width-5",
               name: "distance-update",
@@ -40,7 +40,7 @@
                 id: "location",
                 name: "location-update",
                 label: {
-                  text: "of city, town or postcode"
+                  text: "from city, town or postcode"
                 },
                 value: location.location,
                 autocomplete: "off",
@@ -52,7 +52,7 @@
             </div>
 
               {{ govukButton({
-              text: "Update location"
+              text: "Update training area"
             }) }}
 
           </form>

@@ -203,9 +203,12 @@ module.exports = router => {
     res.render( 'candidate-pool/index' )
   })
 
-  router.get('/candidate-pool/opt-in', (req, res) => {
-    res.render( 'candidate-pool/opt-in' )
+  router.get('/candidate-pool-change', (req, res) => {
+    const hideBanner = true
+
+    res.render( 'candidate-pool/index', { hideBanner } )
   })
+
 
   router.get('/applications/:id/review-application', (req, res) => {
     const { id } = req.params
@@ -216,7 +219,7 @@ module.exports = router => {
   })
 
 
-  router.get('/candidate-pool/locations', (req, res) => {
+  router.get('/candidate-pool/locations/areas', (req, res) => {
 
     const postCode = ( req.session.data.address && req.session.data.address.postalCode ) ? req.session.data.address.postalCode : 'SE1 1AA'
     req.session.data.candidatePool = req.session.data.candidatePool || {};
@@ -255,11 +258,11 @@ module.exports = router => {
     }
 
     // temporary fix for May 2025 testing as international candidates will have their home location autopopulated
-    if ( postCode == "S12 03L" ) {
-      req.session.data.candidatePool.locations.shift()
-    }
+    // if ( postCode == "S12 03L" ) {
+      // req.session.data.candidatePool.locations.shift()
+    // }
 
-    res.render( 'candidate-pool/locations/index' )
+    res.render( 'candidate-pool/locations/areas' )
   })
 
 
@@ -285,7 +288,7 @@ module.exports = router => {
     const { id } = req.params
     req.session.data.candidatePool.locations[id].removed = 'true'
 
-    res.redirect('/candidate-pool/locations')
+    res.redirect('/candidate-pool/locations/areas')
 
   })
 
@@ -296,7 +299,7 @@ module.exports = router => {
     req.session.data.candidatePool.locations[id].location = req.body['location-update']
     req.session.data.candidatePool.locations[id].distance = req.body['distance-update']
 
-    res.redirect('/candidate-pool/locations')
+    res.redirect('/candidate-pool/locations/areas')
 
   })
 
@@ -307,7 +310,7 @@ module.exports = router => {
       distance: req.body['distance-update']
     })
 
-    res.redirect('/candidate-pool/locations')
+    res.redirect('/candidate-pool/locations/areas')
 
   })
 
@@ -431,7 +434,7 @@ module.exports = router => {
   })
 
 
-  router.post('/candidate-pool/opt-in', (req, res) => {
+  router.post('/candidate-pool', (req, res) => {
     const { id } = req.params
     let candidatePool = req.body.candidatePool['optedIn']
 
@@ -449,8 +452,22 @@ module.exports = router => {
   })
 
   router.post('/candidate-pool/locations', (req, res) => {
-    res.redirect('/candidate-pool/check' )
+    let locationPreferences = req.body.candidatePool['locationPreferences']
 
+    if ( locationPreferences == 'false' ) {
+      res.redirect('/candidate-pool/locations/auto-add' )
+    } else {
+      res.redirect('/candidate-pool/locations/areas' )
+    }
+
+  })
+
+  router.post('/candidate-pool/locations/areas', (req, res) => {
+    res.redirect('/candidate-pool/locations/auto-add' )
+  })
+
+  router.post('/candidate-pool/locations/auto-add', (req, res) => {
+    res.redirect('/candidate-pool/check' )
   })
 
   router.post('/candidate-pool/check', (req, res) => {

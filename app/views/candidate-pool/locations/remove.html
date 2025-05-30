@@ -18,14 +18,14 @@
           <form action="/candidate-pool/locations/{{id}}/remove" method="post">
 
             <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-              Do you want to remove this location?
+              Do you want to remove this training area?
             </h1>
 
             {{ govukSummaryList({
               rows: [
                 {
                   key: {
-                    text: "Location"
+                    text: "Area"
                   },
                   value: {
                     text: location.location
@@ -35,7 +35,7 @@
             }) }}
 
               {{ govukButton({
-              text: "Yes, remove location"
+              text: "Yes, remove training area"
             }) }}
           </form>
         </div>

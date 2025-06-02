@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 {% set primaryNavId = "applications" %}
-{% set title = "Increase your chances of success by allowing other providers to invite you to apply" %}
+{% set title = "How does application sharing work?" %}
 {% set application = data.applications[id] %}
 {% set degreeGrade = data.degrees[id]%}
 
@@ -14,8 +14,6 @@
 {% block content %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters">
-
-        <div class="govuk-button-group">
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
             How does application sharing work?
@@ -119,13 +117,12 @@
             ]
           }) }}
 
-              {{ govukButton({
-              text: "Back",
-              classes: "govuk-button--secondary",
-              href: "/candidate-pool"
-            }) }}
+          {{ govukButton({
+            text: "Back",
+            classes: "govuk-button--secondary",
+            href: "/candidate-pool"
+          }) }}
 
-        </div>
 
       </div>
     </div>

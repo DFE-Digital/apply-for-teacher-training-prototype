@@ -209,6 +209,10 @@ module.exports = router => {
     res.render( 'candidate-pool/index', { hideBanner } )
   })
 
+  router.get('/candidate-pool/info-applications', (req, res) => {
+    const fromApplications = true
+    res.render( 'candidate-pool/info', {fromApplications} )
+  })
 
   router.get('/applications/:id/review-application', (req, res) => {
     const { id } = req.params

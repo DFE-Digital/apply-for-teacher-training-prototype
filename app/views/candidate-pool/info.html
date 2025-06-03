@@ -6,8 +6,8 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications",
-    text: "Back to your applications"
+    href: ( "/applications" if fromApplications else "/candidate-pool-change" ),
+    text: ( "Back to your applications" if fromApplications else "Back" )
   }) }}
 {% endblock %}
 
@@ -120,7 +120,7 @@
           {{ govukButton({
             text: "Back",
             classes: "govuk-button--secondary",
-            href: "/candidate-pool"
+            href: ( "/applications" if fromApplications else "/candidate-pool-change" )
           }) }}
 
 

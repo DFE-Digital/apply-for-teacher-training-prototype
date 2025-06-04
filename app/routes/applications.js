@@ -459,7 +459,7 @@ module.exports = router => {
     let locationPreferences = req.body.candidatePool['locationPreferences']
 
     if ( locationPreferences == 'false' ) {
-      res.redirect('/candidate-pool/locations/auto-add' )
+      res.redirect('/candidate-pool/check' )
     } else {
       res.redirect('/candidate-pool/locations/areas' )
     }

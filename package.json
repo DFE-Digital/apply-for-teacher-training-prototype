@@ -15,7 +15,7 @@
     "got": "^11.8.3",
     "govuk-frontend": "5.11.0",
     "govuk-one-login-service-header": "github:alphagov/di-govuk-one-login-service-header#OLH-2634-pk-probs",
-    "govuk-prototype-kit": "^13.13.2",
+    "govuk-prototype-kit": "^13.17.0",
     "task-list-component": "^0.0.4"
   }
 }

@@ -11,6 +11,7 @@
   {% if signedIn == false %}
 
   {{ govukOneLoginServiceHeader({
+    rebrand: true,
     serviceName: "Apply for teacher training",
     signOutLink:  "/account"
   }) }}
@@ -20,34 +21,47 @@
 
 
   {{ govukOneLoginServiceHeader({
+    rebrand: true,
     serviceName: "Apply for teacher training",
     signOutLink:  "/account",
-    navigationItems: [
-    {
-      href: "/accepted",
-      text: "Your offer",
-      active: primaryNavId == "accepted"
-    }]
+
+    serviceNavigationParams: {
+      rebrand: true,
+      serviceName: "Apply for teacher training",
+      navigation: [
+        {
+          href: "/accepted",
+          text: "Your offer",
+          active: primaryNavId == "accepted"
+        }]
+    }
   }) }}
+
+
 
 
   {% else %}
 
   {{ govukOneLoginServiceHeader({
-    serviceName: "Apply for teacher training",
-    signOutLink:  "/account",
-    navigationItems: [
-    {
-      href: "/details",
-      text: "Your details",
-      id: "details"
+    rebrand: true,
+    serviceNavigationParams: {
+      rebrand: true,
+      serviceName: "Apply for teacher training",
+      navigation: [
+      {
+          href: "/details",
+          text: "Your details",
+          id: "details",
+          active: primaryNavId == "details"
+      },
+      {
+          href: "/applications",
+          text: "Your applications",
+          id: "applications",
+          active: primaryNavId == "applications"
+      }]
     },
-    {
-      href: "/applications",
-      text: "Your applications",
-      id: "applications"
-    }],
-    activeLinkId: primaryNavId
+    signOutLink:  "/account"
   }) }}
 
 

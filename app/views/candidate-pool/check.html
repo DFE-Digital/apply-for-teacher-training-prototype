@@ -30,7 +30,7 @@
           {% if not location.removed %}
           {% set preferredLocations %}
           {{preferredLocations | safe}}
-          Within {{location.distance}} miles of {{location.location}}<br />
+          Up to {{location.distance}} miles from {{location.location}}<br />
           {% endset %}
           {% endif %}
 
@@ -40,7 +40,7 @@
             rows: [
               {
                 key: {
-                  text: "Do you want to share your application details with other training providers?"
+                  text: "Do you want to be invited to apply to similar courses?"
                 },
                 value: {
                   text: "Yes" if data.candidatePool['optedIn'] == "true" else "No"
@@ -48,7 +48,7 @@
                 actions: {
                   items: [
                     {
-                      href: "/candidate-pool/opt-in",
+                      href: "/candidate-pool-change",
                       text: "Change"
                     }
                   ]
@@ -56,7 +56,23 @@
               },
               {
                 key: {
-                  text: "Preferred locations"
+                  text: "Where can you train?"
+                },
+                value: {
+                  text: "In specific locations" if data.candidatePool['locationPreferences'] == "true" else "Anywhere in England"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/candidate-pool/locations",
+                      text: "Change"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Areas you can train in"
                 },
                 value: {
                   html: preferredLocations
@@ -64,15 +80,15 @@
                 actions: {
                   items: [
                     {
-                      href: "/candidate-pool/locations",
+                      href: "/candidate-pool/locations/areas",
                       text: "Change"
                     }
                   ]
                 }
-              },
+              } if data.candidatePool['locationPreferences'] == "true",
               {
                 key: {
-                  text: "Update my location preferences when I apply to a new course"
+                  text: "Add the locations of courses you apply to"
                 },
                 value: {
                   text: "Yes" if data.candidatePool['locationsAddNew'] == "true" else "No"
@@ -80,17 +96,17 @@
                 actions: {
                   items: [
                     {
-                      href: "/candidate-pool/locations",
+                      href: "/candidate-pool/locations/auto-add",
                       text: "Change"
                     }
                   ]
                 }
-              }
+              } if data.candidatePool['locationPreferences'] == "true"
             ]
           }) }}
 
               {{ govukButton({
-              text: "Submit preferences"
+              text: "Save preferences"
             }) }}
           </form>
         </div>

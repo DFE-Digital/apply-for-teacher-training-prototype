@@ -41,8 +41,25 @@
 
       {% if showPoolBanner %}
 
+        {% set html %}
+
+          {% if data['candidatePool']['optedIn'] == "true" %}
+            <h3 class="govuk-notification-banner__heading">
+              Your application details will be visible to other training providers whenever you have no other applications awaiting a decision.
+            </h3>
+            <p class="govuk-body"><a class="govuk-notification-banner__link" href="/candidate-pool/info-applications">More information about how this works</a></p>
+
+          {% else %}
+          <h3 class="govuk-notification-banner__heading">
+            You are not sharing your application details with providers you have not applied to
+          </h3>
+
+          {% endif %}
+
+        {% endset %}
+
         {{ govukNotificationBanner({
-          text: "You are " + ( "not " if data['candidatePool']['optedIn'] == "false" else "") + " sharing your application details with providers you have not applied to",
+          html: html,
           type: 'success'
         }) }}
       {% endif %}
@@ -105,6 +122,7 @@
     {% set applicationsUnsuccessful = '' %}
     {% set applicationsOffered = '' %}
     {% set applicationsWithdrawn = '' %}
+    {% set applicationsOpen = false %}
 
     {% for id, application in data.applications %}
 
@@ -129,6 +147,7 @@
 
       {% if application.status == "Awaiting decision" %}
           {% set applicationsInProgress = applicationsInProgress + courseHtml %}
+          {% set applicationsOpen = true %}
       {% elseif application.status == "Draft" %}
           {% set applicationsUnsubmitted = applicationsUnsubmitted + courseHtml %}
       {% elseif application.status == "Offer declined" %}
@@ -139,6 +158,7 @@
          {% set applicationsInProgress = applicationsInProgress + courseHtml %}
       {% elseif application.status == "Offer received" %}
          {% set applicationsOffered = applicationsOffered + courseHtml %}
+         {% set applicationsOpen = true %}
       {% elseif application.status == "Withdrawn" %}
          {% set applicationsWithdrawn = applicationsWithdrawn + courseHtml %}
           {% elseif application.status == "Offer withdrawn" %}
@@ -205,17 +225,36 @@
     }) }}
 
     {% if data.applications %}
-    <h3 class="govuk-heading-m">Sharing your application details</h3>
-    <p class="govuk-body">
+    <h3 class="govuk-heading-m">Application sharing</h3>
 
-      You are {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} sharing your application details with providers you have not applied to.
+      <h3 class="govuk-heading-s">Your application details are {% if data['candidatePool']['optedIn'] != "true" or applicationsOpen == true %}not{% endif %} visible to other providers</h3>
 
-      <ul class="govuk-list govuk-list--bullet">
-        <li><a href="{% if data['candidatePool']['optedIn'] != "true" %}/candidate-pool/opt-in{% else %}/candidate-pool/check{% endif %} " class="govuk-link">Change your sharing and location settings</a></li>
-        <li><a href="/candidate-pool" class="govuk-link">Read about how sharing your application details works</a></li>
-      </ul>
+      <p class="govuk-body">You have chosen {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} to share your application details with other providers - <a href="/candidate-pool-change" class="govuk-link">Change</a></p>
 
-    </p>
+      {% if data['candidatePool']['optedIn'] == "true" and applicationsOpen == true %}
+      <p class="govuk-body">
+        Your application details are <strong>not</strong> currently visible to other providers.
+        </br />
+        <span class="govuk-hint">
+          You have submitted applications that are waiting for a decision. When all your applications are rejected, withdrawn or inactive, providers will be able to view your application details and invite you to apply.
+        </span>
+      </p>
+
+      {% elseif data['candidatePool']['optedIn'] == "true" and applicationsOpen == false %}
+      <p class="govuk-body">
+        Your application details are currently visible to other providers.
+        </br />
+        <span class="govuk-hint">
+          Because all of your submitted applications are either rejected, withdrawn or inactive, providers can view your application details and invite you to apply. If you submit a new application, you will stop being visible to other providers.
+        </span>
+      </p>
+
+      {% endif %}
+
+
+
+      <p class="govuk-body"><a href="/candidate-pool/info-applications" class="govuk-link">How application sharing works</a></p>
+
     {% endif %}
 
   </div>

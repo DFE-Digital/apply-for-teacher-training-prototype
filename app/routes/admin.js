@@ -5,6 +5,21 @@ const data = require('./../utils/data')
  * Admin routes
  */
 module.exports = router => {
+
+  router.get('/admin/no-open-applications', (req, res) => {
+
+    req.session.data.applications ||= {}
+    let applications = req.session.data.applications
+
+    const openApplications = Object.values(applications).filter(a => (['Awaiting decision', "Offer received", "Inactive"].includes(a.status)))
+
+    for ( i=0; i<openApplications.length; i++ ) {
+      openApplications[i].status = 'Unsuccessful'
+    }
+
+    res.redirect('/applications')
+})
+
   // This fills out every section of your details
   router.get('/admin/complete-details', (req, res) => {
     const data = req.session.data
@@ -75,7 +90,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'
@@ -237,7 +252,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'
@@ -408,7 +423,7 @@ module.exports = router => {
         institution: 'The University of Manchester',
         country: 'United Kingdom',
         startYear: '2009',
-        graduationYear: '20012',
+        graduationYear: '2012',
         completed: 'Yes',
         gradeGiven: 'yes',
         grade: 'Upper second-class honours (2:1)'

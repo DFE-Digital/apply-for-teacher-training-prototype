@@ -456,7 +456,7 @@ module.exports = router => {
     let locationPreferences = req.body.candidatePool['locationPreferences']
 
     if ( locationPreferences == 'false' ) {
-      res.redirect('/candidate-pool/check' )
+      res.redirect('/candidate-pool/fee-funded' )
     } else {
       res.redirect('/candidate-pool/locations/areas' )
     }

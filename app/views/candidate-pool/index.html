@@ -1,13 +1,13 @@
 {% extends "layouts/main.html" %}
-{% set primaryNavId = "applications" %}
+{% set primaryNavId = "application-sharing" %}
 {% set title = "Do you want to be invited to apply to similar courses?" %}
 {% set application = data.applications[id] %}
 {% set degreeGrade = data.degrees[id]%}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/applications",
-    text: "Back to your applications"
+    href: "/application-sharing",
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -26,15 +26,26 @@
           {% endif %}
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-            Do you want to be invited to apply to similar courses?
+            Do you want to make your application details visible to other training providers?
           </h1>
 
-          <p class="govuk-body">You can choose to make your application details visible to other training providers. If they think you are suitable they can invite you to submit an application to their course.</p>
-          <p class="govuk-body">Your details will only be visible when you have no applications waiting for a response from a provider.</p>
+          <p class="govuk-body">When you have no applications that are waiting for a decision from a provider, other providers will be able to see your application details and invite you to apply to their courses.</p>
+
+            {% set reasonHtml %}
+
+            {{ govukTextarea({
+              name: "moreDetail",
+              id: "more-detail",
+              label: {
+                text: "Why do you not want to share your application details with other providers? (Optional)",
+                classes: "govuk-body"
+              }
+            }) }}
+            {% endset %}
 
             {{ govukRadios({
               name: "candidatePool[optedIn]",
-              classes: "govuk-radios--inline",
+              classes: "govuk-radios",
               items: [
                 {
                   value: "true",
@@ -44,7 +55,10 @@
                 {
                   value: "false",
                   text: "No",
-                  checked: ( data.candidatePool['optedIn'] == "false")
+                  checked: ( data.candidatePool['optedIn'] == "false"),
+                  conditional: {
+                    html: reasonHtml
+                  }
                 }
               ]
             }) }}
@@ -54,7 +68,6 @@
             }) }}
           </form>
 
-          <p><a href="/candidate-pool/info" class="govuk-link">How application sharing works</a></p>
         </div>
 
       </div>

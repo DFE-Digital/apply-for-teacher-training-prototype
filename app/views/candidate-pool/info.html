@@ -1,13 +1,13 @@
 {% extends "layouts/main.html" %}
-{% set primaryNavId = "applications" %}
+{% set primaryNavId = "application-sharing" %}
 {% set title = "How does application sharing work?" %}
 {% set application = data.applications[id] %}
 {% set degreeGrade = data.degrees[id]%}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: ( "/applications" if fromApplications else "/candidate-pool-change" ),
-    text: ( "Back to your applications" if fromApplications else "Back" )
+    href: ( "/candidate-pool/sharing" if fromApplications else "/candidate-pool-change" ),
+    text: ( "Back" )
   }) }}
 {% endblock %}
 
@@ -120,7 +120,7 @@
           {{ govukButton({
             text: "Back",
             classes: "govuk-button--secondary",
-            href: ( "/applications" if fromApplications else "/candidate-pool-change" )
+            href: ( "/candidate-pool/sharing" if fromApplications else "/candidate-pool-change" )
           }) }}
 
 

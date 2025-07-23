@@ -447,11 +447,8 @@ module.exports = router => {
 
     } else {
       const showPoolBanner = true
-      const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
-      const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
-      const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
-      res.render('/applications/index', { showPoolBanner, id, numberOfApplicationsLeft })
+      res.render('/candidate-pool/sharing', { showPoolBanner })
     }
   })
 
@@ -471,16 +468,17 @@ module.exports = router => {
   })
 
   router.post('/candidate-pool/locations/auto-add', (req, res) => {
+    res.redirect('/candidate-pool/fee-funded' )
+  })
+
+  router.post('/candidate-pool/fee-funded', (req, res) => {
     res.redirect('/candidate-pool/check' )
   })
 
   router.post('/candidate-pool/check', (req, res) => {
     const showPoolBanner = true
-    const applications = (req.session.data.applications ? Object.values(req.session.data.applications) : [] )
-    const applicationsAwaitingDecisionOrReceivedOffer = applications.filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
-    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
 
-    res.render('/applications/index', { showPoolBanner, numberOfApplicationsLeft })
+    res.render('/candidate-pool/sharing', { showPoolBanner })
   })
 
 

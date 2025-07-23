@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "application-sharing" %}
+{% set title = "Where can you train?" %}
+{% set application = data.applications[id] %}
+{% set degreeGrade = data.degrees[id]%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/candidate-pool",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+
+        <div class="govuk-button-group">
+          <form action="/candidate-pool/fee-funded" method="post">
+
+
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+            Would you consider fee-funded courses?
+          </h1>
+
+          <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+              <span class="govuk-visually-hidden">Warning</span>
+              Salaried courses are in high demand and fill up quickly. You are unlikely to be invited to apply to a salaried course.
+            </strong>
+          </div>
+
+          <p class="govuk-body">Find out more about funding your training and the <a href="https://getintoteaching.education.gov.uk/funding-and-support" class="govuk-link" target="_blank">scholarships and bursaries that are available (opens in new tab)</a></p>
+
+            {{ govukRadios({
+              name: "candidatePool[feeFunded]",
+              classes: "govuk-radios",
+              items: [
+                {
+                  value: "true",
+                  text: "Yes, I would apply to a fee-funded course",
+                  checked: ( data.candidatePool['feeFunded'] == "true")
+                },
+                {
+                  value: "false",
+                  text: "No, I am only interested in salaried or apprenticeship routes into teaching",
+                  checked: ( data.candidatePool['feeFunded'] == "false")
+                }
+              ]
+            }) }}
+
+              {{ govukButton({
+              text: "Continue"
+            }) }}
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

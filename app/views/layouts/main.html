@@ -59,7 +59,14 @@
           text: "Your applications",
           id: "applications",
           active: primaryNavId == "applications"
-      }]
+      },
+      {
+          href: "/candidate-pool/sharing",
+          text: "Application sharing",
+          id: "applicationSharing",
+          active: primaryNavId == "application-sharing"
+      } if data.applications
+      ]
     },
     signOutLink:  "/account"
   }) }}

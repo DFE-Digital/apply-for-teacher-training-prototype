@@ -1,5 +1,5 @@
 {% extends "layouts/main.html" %}
-{% set primaryNavId = "applications" %}
+{% set primaryNavId = "application-sharing" %}
 {% set title = "Check your application sharing preferences" %}
 
 {% block beforeContent %}
@@ -97,6 +97,22 @@
                   items: [
                     {
                       href: "/candidate-pool/locations/auto-add",
+                      text: "Change"
+                    }
+                  ]
+                }
+              } if data.candidatePool['locationPreferences'] == "true",
+              {
+                key: {
+                  text: "Would you consider fee-funded courses?"
+                },
+                value: {
+                  text: "Yes" if data.candidatePool['feeFunded'] == "true" else "No"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/candidate-pool/fee-funded",
                       text: "Change"
                     }
                   ]

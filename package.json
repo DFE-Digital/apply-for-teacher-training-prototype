@@ -14,7 +14,7 @@
     "@x-govuk/govuk-prototype-filters": "^1.5.0",
     "got": "^11.8.3",
     "govuk-frontend": "^5.11.1",
-    "govuk-one-login-service-header": "github:govuk-one-login/service-header#v3.1.0",
+    "govuk-one-login-service-header": "github:govuk-one-login/service-header#v3.1.1",
     "govuk-prototype-kit": "^13.18.0",
     "task-list-component": "^0.0.4"
   }

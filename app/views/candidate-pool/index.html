@@ -26,10 +26,11 @@
           {% endif %}
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-            Do you want to make your application details visible to other training providers?
+            Do you want to be invited to apply to similar courses?
           </h1>
 
-          <p class="govuk-body">When you have no applications that are waiting for a decision from a provider, other providers will be able to see your application details and invite you to apply to their courses.</p>
+          <p class="govuk-body">You can choose to make your application details visible to other training providers. If they think you are suitable they can invite you to submit an application to their course.</p>
+          <p class="govuk-body">Your details will only be visible when you have no applications waiting for a response from a provider..</p>
 
             {% set reasonHtml %}
 
@@ -66,6 +67,10 @@
               {{ govukButton({
               text: "Continue"
             }) }}
+
+            <p class="govuk-body"">
+              <a href="/candidate-pool/info" class="govuk-link">How application sharing works</a>
+            </p>
           </form>
 
         </div>

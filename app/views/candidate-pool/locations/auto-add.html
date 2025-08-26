@@ -19,14 +19,14 @@
           <form action="/candidate-pool/locations/auto-add" method="post">
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-              Add the locations of courses you apply to
+              Add the locations of courses you apply to in future
           </h1>
 
           <p class="govuk-body">Each time you apply to a new course, we can add the course location to the places you can train. You will receive invitations for these locations as well.</p>
 
             {{ govukRadios({
               name: "candidatePool[locationsAddNew]",
-              classes: "govuk-radios--inline",
+              classes: "govuk-radios",
               items: [
                 {
                   value: "true",

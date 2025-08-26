@@ -23,14 +23,6 @@
             Would you consider fee-funded courses?
           </h1>
 
-          <div class="govuk-warning-text">
-            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
-              <span class="govuk-visually-hidden">Warning</span>
-              Salaried courses are in high demand and fill up quickly. You are unlikely to be invited to apply to a salaried course.
-            </strong>
-          </div>
-
           <p class="govuk-body">Find out more about funding your training and the <a href="https://getintoteaching.education.gov.uk/funding-and-support" class="govuk-link" target="_blank">scholarships and bursaries that are available (opens in new tab)</a></p>
 
             {{ govukRadios({
@@ -45,6 +37,9 @@
                 {
                   value: "false",
                   text: "No, I am only interested in salaried or apprenticeship routes into teaching",
+                  hint: {
+                    text: "Salaried courses are in high demand and fill up quickly. You are unlikely to be invited to apply to a salaried course."
+                  },
                   checked: ( data.candidatePool['feeFunded'] == "false")
                 }
               ]

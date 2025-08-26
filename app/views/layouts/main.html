@@ -42,6 +42,8 @@
 
   {% else %}
 
+{# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
+
   {{ govukOneLoginServiceHeader({
     rebrand: true,
     serviceNavigationParams: {
@@ -65,7 +67,7 @@
           text: "Application sharing",
           id: "applicationSharing",
           active: primaryNavId == "application-sharing"
-      } if data.applications
+      } if true or data.applications
       ]
     },
     signOutLink:  "/account"

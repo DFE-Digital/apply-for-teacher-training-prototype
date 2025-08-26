@@ -39,14 +39,15 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-    {% if data.applications %}
+
+    {# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
+    {% if true or data.applications %}
     <h3 class="govuk-heading-m">Sharing your application details</h3>
 
       <p class="govuk-body">
         You are {% if data['candidatePool']['optedIn'] != "true" or applicationsOpen == true %}not{% endif %} sharing your application details with training providers that you have not submitted an application to.
       </p>
 
-<!--
       <p class="govuk-body">You have chosen {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} to share your application details with other providers - <a href="/candidate-pool-change" class="govuk-link">Change</a></p>
 
       {% if data['candidatePool']['optedIn'] == "true" and applicationsOpen == true %}
@@ -68,7 +69,6 @@
       </p>
 
       {% endif %}
--->
 
       <ul class="govuk-list govuk-list--bullet">
         <li><a href="/candidate-pool-change" class="govuk-link">Update your preferences</a></li>

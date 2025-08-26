@@ -477,10 +477,17 @@ module.exports = router => {
 
   router.post('/candidate-pool/check', (req, res) => {
     const showPoolBanner = true
+    const applicationsOpen = true
 
-    res.render('/candidate-pool/sharing', { showPoolBanner })
+    res.render('/candidate-pool/sharing', { showPoolBanner, applicationsOpen })
   })
 
+  router.get('/candidate-pool/sharing/visible', (req, res) => {
+    const showPoolBanner = false
+    const applicationsOpen = false
+
+    res.render('/candidate-pool/sharing', { showPoolBanner, applicationsOpen })
+  })
 
 //function to withdraw application
   router.post('/applications/:id/withdraw', (req, res) => {

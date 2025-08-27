@@ -686,4 +686,25 @@ module.exports = router => {
 
     res.redirect('/accepted')
   })
+
+
+  router.get('/admin/add-invite', (req, res) => {
+
+    req.session.data.invites ||= {}
+    let invites = req.session.data.invites
+
+      const id = utils.generateRandomString()
+
+      const course = data.courses[Math.floor(Math.random() * data.courses.length)].title
+      const providerName = data.providers[Math.floor(Math.random() * data.providers.length)]
+
+      invites[id] = {
+        status: 'New',
+        course: course,
+        providerName: providerName
+      }
+
+    res.redirect('/candidate-pool/sharing')
+  })
+
 }

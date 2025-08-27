@@ -1,0 +1,84 @@
+{% extends "layouts/main.html" %}
+{% set primaryNavId = "application-sharing" %}
+{% set invite = data.invites[id] %}
+{% set title = "Why are you not interested in this course invitation?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/candidate-pool/" + id + "/invite",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+
+        <div class="govuk-button-group">
+          <form action="/candidate-pool/{{ id }}/invite/decline" method="post">
+
+            {{ govukCheckboxes({
+              name: "declineReason",
+              fieldset: {
+                legend: {
+                  text: title,
+                  isPageHeading: true,
+                  classes: "govuk-fieldset__legend--xl"
+                }
+              },
+              hint: {
+                text: "Select all that apply"
+              },
+              items: [
+                {
+                  value: "location",
+                  text: "The course location is not convenient for me"
+                },
+                {
+                  value: "subject",
+                  text: "I do not want to train to teach this subject"
+                },
+                {
+                  value: "salaried",
+                  text: "I am only interested in salaried or apprenticeship courses"
+                },
+                {
+                  value: "provider",
+                  text: "This course training provider is not right for me"
+                },
+                {
+                  value: "visa",
+                  text: "I need visa sponsorship"
+                },
+                {
+                  value: "withdraw",
+                  text: "I no longer want to train to teach"
+                },
+                {
+                  value: "other",
+                  text: "Another reason",
+                  conditional: {
+                    html: govukTextarea({
+                      name: "otherReason",
+                      label: {
+                        text: "Details (optional)",
+                        classes: "govuk-label--s",
+                        isPageHeading: false
+                      }
+                    })
+                  }
+                }
+              ]
+            }) }}
+
+
+              {{ govukButton({
+              text: "Continue"
+            }) }}
+          </form>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

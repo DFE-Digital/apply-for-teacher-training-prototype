@@ -5,16 +5,16 @@
 
 {% block content %}
 
-{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner %}
-
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
+
+{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner or showDeclineBanner %}
+
 
       {% if showPoolBanner %}
 
         {% set html %}
 
-          <h3 class="govuk-notification-banner__heading">
             {% if data['candidatePool']['optedIn'] == "true" %}
           <h3 class="govuk-notification-banner__heading">
             Your application details will be visible to other training providers whenever you have no other applications awaiting a decision.
@@ -33,18 +33,98 @@
         }) }}
       {% endif %}
 
-    </div>
-  </div>
+      {% if showDeclineBanner %}
+
+        {% set html %}
+
+          <h3 class="govuk-notification-banner__heading">
+            You have declined Citizenship at UCL University of London
+          </h3>
+          <p class="govuk-notification-banner__body">If you have changed your mind you can still <a href="https://qa.find-teacher-training-courses.service.gov.uk/course/2AT/3CXF" class="govuk-notification-banner__link">apply to this course</a>.</p>
+        {% endset %}
+
+        {{ govukNotificationBanner({
+          html: html,
+          type: 'success'
+        }) }}
+
+      {% endif %}
 
 {% endif %}
 
       <h1 class="govuk-heading-xl">{{ title }}</h1>
-      <h2 class="govuk-heading-m">Your invitations</h2>
-      <p class="govuk-body">You have no invitations</p>
 
+    {% set invitesNew = '' %}
+    {% set invitesPrevious = '' %}
+
+        {% for id, invite in data.invites %}
+
+          {% set inviteHtml %}
+          <div class="app-application-item invite">
+              <div class="app-application-item__body">
+
+                {% if invite.status == 'New' %}
+                <p class="status">
+                  <a href="/candidate-pool/{{ id }}/invite" class="govuk-link">View and respond</a>
+                </p>
+
+                {% elseif invite.status == 'Accepted' %}
+                <p class="status">
+                  <span class="govuk-tag govuk-tag--green">Accepted</span><br />
+                  <a href="/applications/{{ id }}/review-application" class="govuk-link">View application</a>
+                </p>
+                {% elseif invite.status == 'Declined' %}
+                <p class="status">
+                  <span class="govuk-tag govuk-tag--orange">Declined</span><br />
+                  <a href="https://qa.find-teacher-training-courses.service.gov.uk/course/2AT/3CXF" class="govuk-link">View course</a>
+                </p>
+
+                {% endif %}
+                <div class="app-application-item__details">
+                  <div class="app-application-item__provider_id">
+                    <h2 class="govuk-heading-s">
+                      {{ invite.providerName }}
+                    </h2>
+                  </div>
+                  <p class="govuk-body-s">{{ invite.course }} - Full time</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {% endset %}
+
+          {% if invite.status == 'New' %}
+            {% set invitesNew = invitesNew + inviteHtml %}
+          {% else %}
+            {% set invitesPrevious = invitesPrevious + inviteHtml %}
+          {% endif %}
+
+        {% endfor %}
+
+
+      <h2 class="govuk-heading-m">Invitations awaiting your response</h2>
+      {% if invitesNew %}
+          {{ invitesNew | safe }}
+      {% else %}
+      <p class="govuk-hint">You have no invitations that you need to respond to at the moment.</p>
+      {% endif %}
+
+      <br />
+
+      <h2 class="govuk-heading-m">Previous invitations</h2>
+      {% if invitesPrevious %}
+          {{ invitesPrevious | safe }}
+      {% else %}
+      <p class="govuk-hint">You have no previous invitations.</p>
+      {% endif %}
+
+
+      <br />
+      <br />
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
 
       {# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
@@ -84,4 +164,8 @@
 
   </div>
 </div>
+
+
+    </div>
+  </div>
 {% endblock %}

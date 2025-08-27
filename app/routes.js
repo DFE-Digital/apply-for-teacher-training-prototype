@@ -23,6 +23,7 @@ require('./routes/applications')(router)
 require('./routes/accepted')(router)
 require('./routes/admin')(router)
 require('./routes/reference')(router)
+require('./routes/invites')(router)
 
 // Reset application so the user can apply again
 router.post('/application/apply-again', (req, res) => {

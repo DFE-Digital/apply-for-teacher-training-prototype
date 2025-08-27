@@ -294,6 +294,32 @@
   color: #003078
 }
 
+.app-application-item.invite {
+  border-top: 1px solid #b1b4b6;
+  border-bottom: 0;
+}
+
+.app-application-item.invite .govuk-heading-s {
+  color: unset;
+  text-decoration: unset;
+}
+
+.app-application-item.invite a {
+  text-decoration: underline;
+}
+
+.invite .app-application-item__body {
+  padding-left: 0;
+}
+
+.invite .app-application-item__body:hover {
+  background-color: unset;
+}
+
+.invite .app-application-item__body p.status {
+  text-align: right;
+}
+
 .app-table__row--no-bottom-border .govuk-table__cell, .app-table__row--no-bottom-border .govuk-table__header {
   border-bottom: 0;
 }

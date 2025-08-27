@@ -8,14 +8,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner %}
+{% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner or showDeclineBanner %}
 
 
       {% if showPoolBanner %}
 
         {% set html %}
 
-          <h3 class="govuk-notification-banner__heading">
             {% if data['candidatePool']['optedIn'] == "true" %}
           <h3 class="govuk-notification-banner__heading">
             Your application details will be visible to other training providers whenever you have no other applications awaiting a decision.
@@ -34,6 +33,22 @@
         }) }}
       {% endif %}
 
+      {% if showDeclineBanner %}
+
+        {% set html %}
+
+          <h3 class="govuk-notification-banner__heading">
+            You have declined Citizenship at UCL University of London
+          </h3>
+          <p class="govuk-notification-banner__body">If you have changed your mind you can still <a href="https://qa.find-teacher-training-courses.service.gov.uk/course/2AT/3CXF" class="govuk-notification-banner__link">apply to this course</a>.</p>
+        {% endset %}
+
+        {{ govukNotificationBanner({
+          html: html,
+          type: 'success'
+        }) }}
+
+      {% endif %}
 
 {% endif %}
 
@@ -50,18 +65,18 @@
 
                 {% if invite.status == 'New' %}
                 <p class="status">
-                  <a href="#" class="govuk-link">View and respond</a>
+                  <a href="/candidate-pool/{{ id }}/invite" class="govuk-link">View and respond</a>
                 </p>
 
                 {% elseif invite.status == 'Accepted' %}
                 <p class="status">
                   <span class="govuk-tag govuk-tag--green">Accepted</span><br />
-                  <a href="#" class="govuk-link">View application</a>
+                  <a href="/applications/{{ id }}/review-application" class="govuk-link">View application</a>
                 </p>
                 {% elseif invite.status == 'Declined' %}
                 <p class="status">
                   <span class="govuk-tag govuk-tag--orange">Declined</span><br />
-                  <a href="#" class="govuk-link">View course</a>
+                  <a href="https://qa.find-teacher-training-courses.service.gov.uk/course/2AT/3CXF" class="govuk-link">View course</a>
                 </p>
 
                 {% endif %}
@@ -99,7 +114,7 @@
 
       <h2 class="govuk-heading-m">Previous invitations</h2>
       {% if invitesPrevious %}
-          {{ invitesPrevious }}
+          {{ invitesPrevious | safe }}
       {% else %}
       <p class="govuk-hint">You have no previous invitations.</p>
       {% endif %}

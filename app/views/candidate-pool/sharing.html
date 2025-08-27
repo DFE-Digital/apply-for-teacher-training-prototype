@@ -5,10 +5,11 @@
 
 {% block content %}
 
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
 {% if showDeclineBanner or showWithdrawnBanner or showPoolBanner or showSubmitBanner %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
 
       {% if showPoolBanner %}
 
@@ -33,18 +34,82 @@
         }) }}
       {% endif %}
 
-    </div>
-  </div>
 
 {% endif %}
 
       <h1 class="govuk-heading-xl">{{ title }}</h1>
-      <h2 class="govuk-heading-m">Your invitations</h2>
-      <p class="govuk-body">You have no invitations</p>
 
+    {% set invitesNew = '' %}
+    {% set invitesPrevious = '' %}
+
+        {% for id, invite in data.invites %}
+
+          {% set inviteHtml %}
+          <div class="app-application-item invite">
+              <div class="app-application-item__body">
+
+                {% if invite.status == 'New' %}
+                <p class="status">
+                  <a href="#" class="govuk-link">View and respond</a>
+                </p>
+
+                {% elseif invite.status == 'Accepted' %}
+                <p class="status">
+                  <span class="govuk-tag govuk-tag--green">Accepted</span><br />
+                  <a href="#" class="govuk-link">View application</a>
+                </p>
+                {% elseif invite.status == 'Declined' %}
+                <p class="status">
+                  <span class="govuk-tag govuk-tag--orange">Declined</span><br />
+                  <a href="#" class="govuk-link">View course</a>
+                </p>
+
+                {% endif %}
+                <div class="app-application-item__details">
+                  <div class="app-application-item__provider_id">
+                    <h2 class="govuk-heading-s">
+                      {{ invite.providerName }}
+                    </h2>
+                  </div>
+                  <p class="govuk-body-s">{{ invite.course }} - Full time</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {% endset %}
+
+          {% if invite.status == 'New' %}
+            {% set invitesNew = invitesNew + inviteHtml %}
+          {% else %}
+            {% set invitesPrevious = invitesPrevious + inviteHtml %}
+          {% endif %}
+
+        {% endfor %}
+
+
+      <h2 class="govuk-heading-m">Invitations awaiting your response</h2>
+      {% if invitesNew %}
+          {{ invitesNew | safe }}
+      {% else %}
+      <p class="govuk-hint">You have no invitations that you need to respond to at the moment.</p>
+      {% endif %}
+
+      <br />
+
+      <h2 class="govuk-heading-m">Previous invitations</h2>
+      {% if invitesPrevious %}
+          {{ invitesPrevious }}
+      {% else %}
+      <p class="govuk-hint">You have no previous invitations.</p>
+      {% endif %}
+
+
+      <br />
+      <br />
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
 
       {# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
@@ -84,4 +149,8 @@
 
   </div>
 </div>
+
+
+    </div>
+  </div>
 {% endblock %}

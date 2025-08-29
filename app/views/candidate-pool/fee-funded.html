@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/candidate-pool/locations",
+    href: ( "/candidate-pool/locations/auto-add" if data.candidatePool['locationPreferences'] == "true" else "/candidate-pool/locations" ),
     text: "Back"
   }) }}
 {% endblock %}

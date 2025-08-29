@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    href: "/candidate-pool/fee-funded",
+    href: ( "/candidate-pool/sharing" if updateMode else "/candidate-pool/fee-funded" ),
     text: "Back"
   }) }}
 {% endblock %}

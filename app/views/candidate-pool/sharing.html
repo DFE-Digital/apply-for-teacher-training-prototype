@@ -144,7 +144,7 @@
           Your application details are {% if data['candidatePool']['optedIn'] != "true" or applicationsOpen == true %}not{% endif %} visible to other providers
       </h4>
 
-      <p class="govuk-body">You have chosen {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} to share your application details with other providers - <a href="/candidate-pool/check" class="govuk-link">Change</a></p>
+      <p class="govuk-body">You have chosen {% if data['candidatePool']['optedIn'] != "true" %}not{% endif %} to share your application details with other providers - <a href="/candidate-pool/update" class="govuk-link">Change</a></p>
 
       {% if data['candidatePool']['optedIn'] == "true" and applicationsOpen == true %}
       <p class="govuk-body">

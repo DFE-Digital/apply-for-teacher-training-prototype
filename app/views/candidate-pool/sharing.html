@@ -3,6 +3,17 @@
 {% set primaryNavId = "application-sharing" %}
 {% set title = "Application sharing" %}
 
+{% set applicationsOpen = false %}
+
+{% for id, application in data.applications %}
+
+  {% if application.status == "Awaiting decision" or application.status == "Offer received" %}
+      {% set applicationsOpen = true %}
+  {% endif %}
+
+{% endfor %}
+
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -126,9 +137,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-
-      {# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
-      {% if true or data.applications %}
+      {% if data.applications %}
       <h3 class="govuk-heading-m">Sharing your application details</h3>
 
       <h4 class="govuk-heading-s">

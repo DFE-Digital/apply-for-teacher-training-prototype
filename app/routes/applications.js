@@ -477,16 +477,24 @@ module.exports = router => {
 
   router.post('/candidate-pool/check', (req, res) => {
     const showPoolBanner = true
-    const applicationsOpen = true
 
-    res.render('/candidate-pool/sharing', { showPoolBanner, applicationsOpen })
+    res.render('/candidate-pool/sharing', { showPoolBanner })
   })
 
   router.get('/candidate-pool/sharing/visible', (req, res) => {
     const showPoolBanner = false
-    const applicationsOpen = false
 
-    res.render('/candidate-pool/sharing', { showPoolBanner, applicationsOpen })
+    // close all open apps first
+    req.session.data.applications ||= {}
+    let applications = req.session.data.applications
+
+    const openApplications = Object.values(applications).filter(a => (['Awaiting decision', "Offer received", "Inactive"].includes(a.status)))
+
+    for ( i=0; i<openApplications.length; i++ ) {
+      openApplications[i].status = 'Unsuccessful'
+    }
+
+    res.render('/candidate-pool/sharing', { showPoolBanner })
   })
 
 //function to withdraw application

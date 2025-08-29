@@ -614,7 +614,7 @@ module.exports = router => {
       }
     }
 
-    res.redirect('/applications')
+    res.redirect('/candidate-pool')
   })
 
 
@@ -705,6 +705,236 @@ module.exports = router => {
       }
 
     res.redirect('/candidate-pool/sharing')
+  })
+
+
+  router.get('/admin/add-invite-view', (req, res) => {
+
+    req.session.data.invites ||= {}
+    let invites = req.session.data.invites
+
+      const id = utils.generateRandomString()
+
+      const course = data.courses[Math.floor(Math.random() * data.courses.length)].title
+      const providerName = data.providers[Math.floor(Math.random() * data.providers.length)]
+
+      invites[id] = {
+        status: 'New',
+        course: course,
+        providerName: providerName
+      }
+
+    res.redirect('/candidate-pool/' + id + '/invite')
+  })
+
+
+  // quick test data setup - combines complete-details and add-application
+  // TODO centralise and refernce later
+  router.get('/admin/test-setup', (req, res) => {
+    const dataSession = req.session.data
+
+    // Set personal information
+    dataSession.firstName = 'Jane'
+    dataSession.lastName = 'Smith'
+    dataSession.dateOfBirth = {
+      day: '1',
+      month: '3',
+      year: '1987'
+    }
+    dataSession.nationalities = ['British']
+
+    // Set contact information
+    dataSession.phoneNumber = '07700 900 982'
+    dataSession.livesInUk = 'yes'
+    dataSession.address = {
+      line1: '1 Smith Street',
+      line2: 'Someplace',
+      town: 'Sometown',
+      postalCode: 'S12 03L'
+    }
+
+    // Set choices
+    dataSession.choices = {
+      TD37L8: {
+        providerName: 'University of Chester',
+        course: 'Physics (1A6W)'
+      }
+    }
+
+    // Set GCSEs
+    dataSession.gcse = {
+      maths: {
+        id: 'maths',
+        type: 'GCSE',
+        gradeSingle: 'A*',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      english: {
+        id: 'english',
+        type: 'GCSE',
+        exam: ['English Language', 'English Literature'],
+        gradeLanguage: 'C',
+        gradeLiterature: 'B',
+        year: '2004',
+        country: 'United Kingdom'
+      },
+      science: {
+        id: 'science',
+        type: 'GCSE',
+        exam: 'Double (or combined) award',
+        gradeDouble: 'A*A*',
+        year: '2004',
+        country: 'United Kingdom'
+      }
+    }
+
+    // Set degree
+    dataSession.degrees = {
+      G3CL4: {
+        provenance: 'domestic',
+        type: 'Bachelor of Arts',
+        level: 'Bachelor',
+        subject: 'Physics',
+        institution: 'The University of Manchester',
+        country: 'United Kingdom',
+        startYear: '2009',
+        graduationYear: '2012',
+        completed: 'Yes',
+        gradeGiven: 'yes',
+        grade: 'Upper second-class honours (2:1)'
+      }
+    }
+
+    // Set other qualifications
+    dataSession.otherQualificationsAdded = 'Yes'
+    dataSession.otherQualifications = {
+      X1C3E: {
+        id: 'X1C3E',
+        type: 'A level',
+        subject: 'English',
+        grade: 'B',
+        year: '2006'
+      },
+      Z4N6P: {
+        id: 'Z4N6P',
+        type: 'A level',
+        subject: 'History',
+        grade: 'C',
+        year: '2006'
+      },
+      Y5L4P: {
+        id: 'Y5L4P',
+        type: 'A level',
+        subject: 'Drama',
+        grade: 'A',
+        year: '2006'
+      }
+    }
+
+    // Set work history
+    dataSession.workHistoryAdded = 'no-full-time-education'
+
+    // Set unpaid expeerience
+    dataSession.unpaidExperienceAdded = 'no'
+
+    // Set personal statement
+    dataSession.personalStatement = 'I’ve wanted to become a teacher since being inspired by passionate and brilliant teachers during my school years. There enthusiasm to get the best out of me and to be the best that I can has led me to applying to become a teacher.\n\nI studed English at GCSE and A level and gained not only high academic grades but also a love for the theatre that I want to pass on to the next generation.\n\nWhile volunteering as a teaching assistant I saw the skills needed to be a great teacher one of which is leadership. I am an adept leader and have shown this in several roles. I volunteered in two schools to get experience in different settings and assisted teachers in Key Stages 1 and 2.\n\nI enjoy reading and learning about contemporary ethics and society, considering how I can use this to benefit the students I teach. While in schools I have seen the rewards and challenges presented to teachers and think I have the qualities to make a difference.'
+
+    // Set disability support
+    dataSession.additionalSupportNeeded = 'no'
+
+    // Set interview needs
+    dataSession.interviewNeeds = 'no'
+
+    // Set references
+    dataSession.references = {
+      a714k: {
+        type: 'academic',
+        name: 'Janet Harper',
+        email: 'janet@example.ac.uk',
+        relationship: 'I’ve known them 4 years. They were my tutor.'
+      },
+      b235: {
+        type: 'professional',
+        name: 'Joseph Banks',
+        email: 'joseph@company.com',
+        relationship: 'I’ve known them 2 years. They were my manager.'
+      }
+    }
+
+    // Set safeguarding
+    dataSession.safeguarding = 'no'
+
+    // Set equality questions
+    dataSession.equalityMonitoring = {
+      disabilities: ['none'],
+      ethnicGroup: 'Prefer not to say',
+      freeSchoolMeals: 'I do not know',
+      sex: "Prefer not to say"
+    }
+
+    // Set completed sections
+    dataSession.completed = {
+      personalInformation: 'true',
+      contactInformation: 'true',
+      choices: 'true',
+      english: 'true',
+      maths: 'true',
+      science: 'true',
+      otherQualifications: 'true',
+      degree: 'true',
+      workHistory: 'true',
+      unpaidExperience: 'true',
+      personalStatement: 'true',
+      additionalSupport: 'true',
+      interviewNeeds: 'true',
+      references: 'true',
+      safeguarding: 'true',
+      equalityAndDiversity: 'true'
+    }
+
+    // flag so we don't do TTA redirect
+    dataSession.autoPopulated = 'true'
+
+    const timeNow = new Date().toISOString()
+    const id = utils.generateRandomString()
+
+    req.session.data.applications ||= {}
+    let applications = req.session.data.applications
+
+    const applicationsAwaitingDecisionOrReceivedOffer = Object.values(applications).filter(a => (['Awaiting decision', "Offer received"].includes(a.status)))
+    const applicationAccepted = Object.values(applications).find(a => ['Conditions pending', 'Offer confirmed'].includes(a.status))
+    const numberOfApplicationsLeft = 4 - (applicationsAwaitingDecisionOrReceivedOffer.length)
+
+
+    if (numberOfApplicationsLeft > 0) {
+
+      const providersAlreadyAppliedTo = Object.values(applications).filter(application =>
+        (application.status == 'Awaiting decision' || application.status == 'Inactive' || application.status == 'Offer received')
+      ).map(application => application.providerName)
+
+
+      const providersNotYetAppliedTo = data.providers.filter(provider =>
+        (!providersAlreadyAppliedTo.includes(provider))
+      )
+
+
+      const course = data.courses[Math.floor(Math.random() * data.courses.length)].title
+      const providerName = providersNotYetAppliedTo[Math.floor(Math.random() * providersNotYetAppliedTo.length)]
+
+      applications[id] = {
+        status: 'Awaiting decision',
+        submittedAt: timeNow,
+        course: course,
+        providerName: providerName,
+        otherCourses: ['no']
+      }
+    }
+
+    res.redirect('/candidate-pool')
+
+
   })
 
 }

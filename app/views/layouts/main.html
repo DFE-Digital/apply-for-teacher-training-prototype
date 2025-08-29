@@ -42,8 +42,6 @@
 
   {% else %}
 
-{# REMOVE 'true or' (line 70) AFTER AUGUST FAC TESTING #}
-
   {{ govukOneLoginServiceHeader({
     rebrand: true,
     serviceNavigationParams: {
@@ -67,7 +65,7 @@
           text: "Application sharing",
           id: "applicationSharing",
           active: primaryNavId == "application-sharing"
-      } if true or data.applications
+      } if data.applications
       ]
     },
     signOutLink:  "/account"
@@ -108,6 +106,10 @@
         {
           href: "/manage-prototype-data/view-data",
           text: "View data"
+        },
+        {
+          href: "/admin/test-setup",
+          text: "Test setup (details + app)"
         },
         {
           href: "/admin/complete-details",

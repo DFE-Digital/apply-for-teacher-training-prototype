@@ -209,6 +209,12 @@ module.exports = router => {
     res.render( 'candidate-pool/index', { hideBanner } )
   })
 
+  router.get('/candidate-pool/update', (req, res) => {
+    const updateMode = true
+
+    res.render( 'candidate-pool/check', { updateMode } )
+  })
+
   router.get('/candidate-pool/info-applications', (req, res) => {
     const fromApplications = true
     res.render( 'candidate-pool/info', {fromApplications} )

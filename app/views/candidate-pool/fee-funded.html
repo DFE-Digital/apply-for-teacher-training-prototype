@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 {% set primaryNavId = "application-sharing" %}
-{% set title = "Where can you train?" %}
+{% set title = "What course funding types are you interested in?" %}
 {% set application = data.applications[id] %}
 {% set degreeGrade = data.degrees[id]%}
 
@@ -20,10 +20,8 @@
 
 
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-            Would you consider fee-funded courses?
+            What course funding types are you interested in?
           </h1>
-
-          <p class="govuk-body">Find out more about funding your training and the <a href="https://getintoteaching.education.gov.uk/funding-and-support" class="govuk-link" target="_blank">scholarships and bursaries that are available (opens in new tab)</a></p>
 
             {{ govukRadios({
               name: "candidatePool[feeFunded]",
@@ -31,12 +29,12 @@
               items: [
                 {
                   value: "true",
-                  text: "Yes, I would apply to a fee-funded course",
+                  text: "Both courses with fees to pay and salaried courses",
                   checked: ( data.candidatePool['feeFunded'] == "true")
                 },
                 {
                   value: "false",
-                  text: "No, I am only interested in salaried or apprenticeship routes into teaching",
+                  text: "Only salaried courses or apprenticeships",
                   hint: {
                     text: "Salaried courses are in high demand and fill up quickly. You are unlikely to be invited to apply to a salaried course."
                   },
@@ -48,6 +46,9 @@
               {{ govukButton({
               text: "Continue"
             }) }}
+
+          <p class="govuk-body"><a href="https://getintoteaching.education.gov.uk/funding-and-support" class="govuk-link" target="_blank">Find out more about funding your training (opens in new tab)</a></p>
+
           </form>
         </div>
 

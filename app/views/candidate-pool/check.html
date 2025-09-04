@@ -104,10 +104,10 @@
               } if data.candidatePool['locationPreferences'] == "true",
               {
                 key: {
-                  text: "Would you consider fee-funded courses?"
+                  text: "What course funding types are you interested in?"
                 },
                 value: {
-                  text: "Yes" if data.candidatePool['feeFunded'] == "true" else "No"
+                  text: "Both courses with fees to pay and salaried courses" if data.candidatePool['feeFunded'] == "true" else "Only salaried courses or apprenticeships"
                 },
                 actions: {
                   items: [

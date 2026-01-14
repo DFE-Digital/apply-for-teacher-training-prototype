@@ -13,7 +13,7 @@
     "@govuk-prototype-kit/common-templates": "^2.0.1",
     "@x-govuk/govuk-prototype-filters": "^1.5.0",
     "got": "^11.8.3",
-    "govuk-frontend": "^5.13.0",
+    "govuk-frontend": "^5.14.0",
     "govuk-one-login-service-header": "github:govuk-one-login/service-header#v3.1.0",
     "govuk-prototype-kit": "^13.18.1",
     "task-list-component": "^0.0.4"

@@ -10,7 +10,7 @@
     "start": "govuk-prototype-kit start"
   },
   "dependencies": {
-    "@govuk-prototype-kit/common-templates": "^2.0.1",
+    "@govuk-prototype-kit/common-templates": "^3.0.0",
     "@x-govuk/govuk-prototype-filters": "^1.5.0",
     "got": "^11.8.3",
     "govuk-frontend": "^5.14.0",
